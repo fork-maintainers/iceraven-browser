@@ -2163,4 +2163,25 @@
     <string name="a11y_action_label_read_article">прочитать статью</string>
     <!-- Action label for links to the Firefox Pocket website. Talkback will append this to say "Double tap to open link to learn more". -->
     <string name="a11y_action_label_pocket_learn_more">перейдите по ссылке, чтобы узнать больше</string>
+
+    <!-- Preference for add-ons custom source -->
+    <string name="preferences_addons_customization">Настройка источника пользовательских дополнений</string>
+    <!-- Placeholder text shown in the search bar before a user enters text -->
+    <string name="addons_search_hint">Поиск дополнений</string>
+    <!-- Preference for showing display name instead of email -->
+    <string name="preferences_show_displayname_insteadof_email">Показывать отображаемое имя вместо электронной почты</string>
+    <!-- Title for strip url preference in customization settings -->
+    <string name="preferences_strip_url_title">Удалить HTTP/HTTPS/WWW из URL-адресов</string>
+    <!-- Description for strip url preference in customization settings -->
+    <string name="preferences_strip_url_description">Активирует удаление HTTP/HTTPS/WWW из URL-адресов на панели инструментов и панели вкладок</string>
+    <!-- Label for add-ons custom source account preference -->
+    <string name="addons_custom_source_account">Установить пользовательскую учетную запись дополнений</string>
+    <!-- Label for add-ons custom source collection preference -->
+    <string name="addons_custom_source_collection">Установить собственную коллекцию дополнений</string>
+    <!-- Preference category for system behavior customization -->
+    <string name="preferences_system_behavior">Настройка поведения системы</string>
+    <!-- Title for relinquish memory preference in customization settings -->
+    <string name="preferences_relinquish_memory_title">Приостановить вкладки, чтобы не быть удаленными из-за памяти</string>
+    <!-- Description for relinquish memory preference in customization settings -->
+    <string name="preferences_relinquish_memory_description">Если включено, вкладки будут приостановлены, а состояние страницы потеряно, когда в системе мало памяти</string>
 </resources>
