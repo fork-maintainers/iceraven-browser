@@ -2406,15 +2406,27 @@
     <!-- Title for strip url preference in customization settings -->
     <string name="preferences_strip_url_title">Удалить HTTP/HTTPS/WWW из URL-адресов</string>
     <!-- Description for strip url preference in customization settings -->
-    <string name="preferences_strip_url_description">Активирует удаление HTTP/HTTPS/WWW из URL-адресов на панели инструментов и панели вкладок</string>
+    <string name="preferences_strip_url_description">Удаляет HTTP/HTTPS/WWW из URL-адресов на панели инструментов и панели вкладок</string>
     <!-- Label for add-ons custom source account preference -->
     <string name="addons_custom_source_account">Установить пользовательскую учетную запись дополнений</string>
     <!-- Label for add-ons custom source collection preference -->
-    <string name="addons_custom_source_collection">Установить собственную коллекцию дополнений</string>
+    <string name="addons_custom_source_collection">Установить пользовательскую коллекцию дополнений</string>
     <!-- Preference category for system behavior customization -->
     <string name="preferences_system_behavior">Настройка поведения системы</string>
     <!-- Title for relinquish memory preference in customization settings -->
     <string name="preferences_relinquish_memory_title">Приостановить вкладки, чтобы не быть удаленными из-за памяти</string>
     <!-- Description for relinquish memory preference in customization settings -->
     <string name="preferences_relinquish_memory_description">Если включено, вкладки будут приостановлены, а состояние страницы потеряно, когда в системе мало памяти</string>
+    <!-- Preference for Top Sites show most recent sites or not -->
+    <string name="preferences_show_top_recent_sites">Показать наиболее посещаемые веб-сайты</string>
+    <string name="preferences_dns_over_https">DNS через HTTPS</string>
+    <string name="preferences_dns_over_https_on">Вкл</string>
+    <string name="preferences_dns_over_https_off">Выкл</string>
+    <string name="preferences_dns_over_https_title">Режим DNS через HTTPS</string>
+    <string name="preferences_dns_over_https_summary">Система доменных имен (DNS) через HTTPS отправляет ваш запрос на доменное имя через зашифрованное соединение, создавая безопасный DNS и затрудняя другим возможность увидеть, к какому веб-сайту вы собираетесь получить доступ.</string>
+    <string name="preferences_dns_over_https_custom_server">Пользовательский</string>
+    <string name="addons_delete_cache">Удалить файл кэша метаданных аддонов</string>
+    <string name="confirm_addons_delete_cache">Вы уверены, что хотите удалить файл кэша метаданных аддонов?</string>
+    <string name="confirm_addons_delete_cache_yes">Да</string>
+    <string name="confirm_addons_delete_cache_no">Отмена</string>
 </resources>
