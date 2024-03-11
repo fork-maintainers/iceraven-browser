@@ -2457,6 +2457,8 @@
     <string name="confirm_addons_delete_cache">Вы уверены, что хотите удалить файл кэша метаданных аддонов?</string>
     <string name="confirm_addons_delete_cache_yes">Да</string>
     <string name="confirm_addons_delete_cache_no">Отмена</string>
+    <string name="preferences_search_opened_tabs" >Поиск по открытым вкладкам</string>
+    <string name="preferences_show_success_download_dialog">Диалоговое окно завершения</string>
     <!-- Content description for headings announced by accessibility service. The first parameter is the text of the heading. Talkback will announce the first parameter and then speak the word "Heading" indicating to the user that this text is a heading for a section. -->
     <string name="a11y_heading">%s, Заголовок</string>
 
