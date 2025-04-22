@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" xmlns:moz="http://mozac.org/tools">
   <!-- Preference for add-ons custom source -->
-  <string name="preferences_addons_customization">自定義附加元件收藏集</string>
+  <string name="preferences_addons_customization">自訂附加元件收藏集</string>
   <!-- Placeholder text shown in the search bar before a user enters text -->
   <string name="addons_search_hint">搜尋元件</string>
   <!-- Preference for showing display name instead of email -->
-  <string name="preferences_show_display_name_insteadof_email">在工具欄展示顯示名而不是郵件地址</string>
+  <string name="preferences_show_display_name_insteadof_email">在工具列顯示顯示名稱而不是電子郵件地址</string>
   <!-- Title for strip url preference in customization settings -->
   <string name="preferences_strip_url_title">隱藏 URL 中的 HTTP/HTTPS/WWW 字元</string>
   <!-- Description for strip url preference in customization settings -->
-  <string name="preferences_strip_url_description">開啟後隱藏工具欄和標籤頁 URL 中的 HTTP/HTTPS/WWW 字元</string>
+  <string name="preferences_strip_url_description">開啟後隱藏工具列和分頁 URL 中的 HTTP/HTTPS/WWW 字元</string>
   <!-- Label for add-ons custom source account preference -->
   <string name="addons_custom_source_account">收藏集所有者</string>
   <!-- Label for add-ons custom source collection preference -->
@@ -17,29 +17,29 @@
   <!-- Preference category for system behavior customization -->
   <string name="preferences_system_behavior">設定系統行為</string>
   <!-- Title for relinquish memory preference in customization settings -->
-  <string name="preferences_relinquish_memory_title">系統記憶體不足時掛起標籤頁</string>
+  <string name="preferences_relinquish_memory_title">系統記憶體不足時掛停分頁</string>
   <!-- Description for relinquish memory preference in customization settings -->
-  <string name="preferences_relinquish_memory_description">開啟後，當系統記憶體不足時，標籤頁會被掛起，同時頁面狀態會丟失</string>
+  <string name="preferences_relinquish_memory_description">開啟後，當系統記憶體不足時，分頁會被掛停，同時頁面狀態會遺失</string>
   <!-- Preference for Top Sites show most recent sites or not -->
-  <string name="preferences_show_top_recent_sites">展示經常訪問的網站</string>
+  <string name="preferences_show_top_recent_sites">顯示經常造訪的網站</string>
   <string name="preferences_dns_over_https">DNS over HTTPS</string>
   <string name="preferences_dns_over_https_on">開啟</string>
   <string name="preferences_dns_over_https_off">關閉</string>
   <string name="preferences_dns_over_https_title">DNS over HTTPS</string>
   <string name="preferences_dns_over_https_summary">DNS over HTTPS 會將您的網域名稱查詢請求加密後傳送，使其他人更難得知您要開啟的網站，讓 DNS 查詢變得安全。</string>
-  <string name="preferences_dns_over_https_custom_server">自定義</string>
-  <string name="addons_delete_cache">刪除附加元件元數據緩存檔案</string>
-  <string name="confirm_addons_delete_cache">您確定要刪除附加元件元數據緩存檔案嗎？</string>
+  <string name="preferences_dns_over_https_custom_server">自訂</string>
+  <string name="addons_delete_cache">刪除附加元件中繼資料快取檔案</string>
+  <string name="confirm_addons_delete_cache">您確定要刪除附加元件中繼資料快取檔案嗎？</string>
   <string name="confirm_addons_delete_cache_yes">確定</string>
   <string name="confirm_addons_delete_cache_no">取消</string>
-  <string name="preferences_search_opened_tabs">搜尋已開啟的標籤頁</string>
+  <string name="preferences_search_opened_tabs">搜尋已開啟的分頁</string>
   <string name="preferences_show_success_download_dialog">完成時的對話方塊</string>
   <string name="preferences_show_qr_scan_search">顯示 QR 掃描搜尋</string>
   <string name="preferences_show_reader_mode_btn">顯示閱讀畫面按鈕</string>
   <string name="preferences_other_customization">其他</string>
-  <string name="preferences_show_fullscreen_toast">全屏後的提示框</string>
+  <string name="preferences_show_fullscreen_toast">全螢幕後的提示視窗</string>
   <string name="preferences_suggest_shipped_domains">顯示預設域名建議</string>
-  <string name="preferences_show_home_button">顯示主頁按鈕</string>
+  <string name="preferences_show_home_button">顯示首頁按鈕</string>
   <string name="preferences_show_sign_in_button">顯示登入按鈕</string>
   <string name="preferences_set_homepage">變更首頁</string>
   <string name="preferences_default_homepage">預設首頁</string>
@@ -146,7 +146,7 @@
 
     Text for the info message. %1$s is the name of the app (for example "Firefox").
   -->
-  <string name="open_in_app_cfr_info_message_2">您可以設定使用 %1$s 自動開啟各應用程式當中的鏈結。</string>
+  <string name="open_in_app_cfr_info_message_2">您可以設定使用 %1$s 自動開啟各應用程式當中的連結。</string>
   <!-- Text for the positive action button -->
   <string name="open_in_app_cfr_positive_button_text">開啟設定</string>
   <!-- Text for the negative action button -->
@@ -319,7 +319,7 @@
   <string name="browser_menu_add_app_to_homescreen_2">新增應用程式至裝置主畫面…</string>
   <!-- Text for notifying users that Xiaomi devices require additional permissions to add to home screen -->
   <string name="browser_menu_add_to_homescreen_xiaomi">小米裝置可能需要更多權限才能捷徑到主畫面，請到設定中確認。</string>
-  <!-- Content description (not visible, for screen readers etc.) for the Resync tabs button -->
+  <!-- Content description (not visible, for screen readers etc.): Resync tabs button -->
   <string name="resync_button_content_description">重新同步</string>
   <!-- Browser menu button that opens the find in page menu -->
   <string name="browser_menu_find_in_page">在頁面中搜尋</string>
@@ -348,12 +348,10 @@
   <!--
     Browser menu text shown in custom tabs to indicate this is a Fenix tab
     %1$s is the name of the app (for example "Firefox").
-  -->
-  <string name="browser_menu_powered_by2">Powered by %1$s</string>
-  <!-- Browser menu button to put the current page in reader mode -->
-  <string name="browser_menu_read">閱讀畫面</string>
-  <!-- Browser menu button content description to close reader mode and return the user to the regular browser -->
-  <string name="browser_menu_read_close">關閉閱讀畫面</string>
+  <!-- Title for relinquish memory preference in customization settings -->
+  <string name="preferences_relinquish_memory_title">系統記憶體不足時暫停分頁</string>
+  <!-- Description for relinquish memory preference in customization settings -->
+  <string name="preferences_relinquish_memory_description">開啟後，當系統記憶體不足時，分頁會被暫停，同時頁面狀態會遺失</string>
   <!-- Browser menu button to open the current page in an external app -->
   <string name="browser_menu_open_app_link">在應用程式中開啟</string>
   <!-- Browser menu button to show reader view appearance controls e.g. the used font type and size -->
@@ -398,10 +396,6 @@
   <!-- Content description (not visible, for screen readers etc.) for main menu settings button. -->
   <string name="browser_main_menu_content_description_settings_button">設定</string>
   <!-- Content description (not visible, for screen readers etc.) for bottom sheet handlebar extensions menu. -->
-  <string name="browser_extensions_menu_handlebar_content_description">關閉擴充套件選單表</string>
-  <!-- Content description (not visible, for screen readers etc.) for bottom sheet handlebar save menu. -->
-  <string name="browser_save_menu_handlebar_content_description">關閉儲存選單表</string>
-  <!-- Content description (not visible, for screen readers etc.) for bottom sheet handlebar tools menu. -->
   <string name="browser_tools_menu_handlebar_content_description">關閉工具選單表</string>
   <!-- Content description (not visible, for screen readers etc.) for bottom sheet handlebar custom tab menu. -->
   <string name="browser_custom_tab_menu_handlebar_content_description">關閉自訂分頁選單表</string>
@@ -500,7 +494,7 @@
   <!-- Button in the search view when shortcuts are displayed that takes a user to the search engine settings -->
   <string name="search_shortcuts_engine_settings">搜尋引擎設定</string>
   <!-- Button in the search view that lets a user navigate to the site in their clipboard -->
-  <string name="awesomebar_clipboard_title">開啟剪貼簿中的鏈結</string>
+  <string name="awesomebar_clipboard_title">開啟剪貼簿中的連結</string>
   <!-- Button in the search suggestions onboarding that allows search suggestions in private sessions -->
   <string name="search_suggestions_onboarding_allow_button">允許</string>
   <!-- Button in the search suggestions onboarding that does not allow search suggestions in private sessions -->
@@ -684,21 +678,21 @@
   <string name="onboarding_terms_of_service_sub_header_2">又快又安全地上網</string>
   <!-- Terms of service onboarding page continue button label. -->
   <string name="onboarding_term_of_service_agree_and_continue_button_label">同意並繼續</string>
-  <!-- Line one of the terms of service onboarding page. %1$s is replaced by an active link, using onboarding_term_of_service_line_one_link_text_2 as text (“Firefox Terms of Use”). -->
+  <!-- Line one of the terms of service onboarding page. %1$s is replaced by an active link, using onboarding_term_of_service_line_one_link_text_2 as text ("Firefox Terms of Use"). -->
   <string name="onboarding_term_of_service_line_one" moz:removedIn="136" tools:ignore="BrandUsage, UnusedResources">若繼續，代表您同意 Firefox 的%1$s。</string>
-  <!-- Line one of the terms of service onboarding page. %1$s is replaced by an active link, using onboarding_term_of_service_line_one_link_text_2 as text (“Firefox Terms of Use”). -->
+  <!-- Line one of the terms of service onboarding page. %1$s is replaced by an active link, using onboarding_term_of_service_line_one_link_text_2 as text ("Firefox Terms of Use"). -->
   <string name="onboarding_term_of_service_line_one_2">若繼續，代表您同意 %1$s。</string>
   <!-- Used as text for the link in onboarding_term_of_service_line_one. -->
   <string name="onboarding_term_of_service_line_one_link_text" moz:removedIn="136" tools:ignore="UnusedResources">服務條款</string>
   <!-- Used as text for the link in onboarding_term_of_service_line_one_2. -->
   <string name="onboarding_term_of_service_line_one_link_text_2" tools:ignore="BrandUsage">Firefox 的使用條款</string>
-  <!-- Line two of the terms of service onboarding page. 'Firefox' is intentionally hardcoded. %1$s is replaced by an active link, using onboarding_term_of_service_line_two_link_text as text (“Privacy Notice”). -->
+  <!-- Line two of the terms of service onboarding page. 'Firefox' is intentionally hardcoded. %1$s is replaced by an active link, using onboarding_term_of_service_line_two_link_text as text ("Privacy Notice"). -->
   <string name="onboarding_term_of_service_line_two" moz:removedIn="136" tools:ignore="UnusedResources,BrandUsage">Firefox 關心您的隱私。到我們的 %1$s 閱讀更多資訊。</string>
-  <!-- Line two of the terms of service onboarding page. 'Firefox' is intentionally hardcoded. %1$s is replaced by an active link, using onboarding_term_of_service_line_two_link_text as text (“Privacy Notice”). -->
+  <!-- Line two of the terms of service onboarding page. 'Firefox' is intentionally hardcoded. %1$s is replaced by an active link, using onboarding_term_of_service_line_two_link_text as text ("Privacy Notice"). -->
   <string name="onboarding_term_of_service_line_two_2" tools:ignore="BrandUsage">Firefox 關心您的隱私。到我們的 %1$s 閱讀更多資訊。</string>
   <!-- Used as text for the link in onboarding_term_of_service_line_two. -->
   <string name="onboarding_term_of_service_line_two_link_text">隱私權保護政策</string>
-  <!-- Line three of the terms of service onboarding page. 'Firefox' and 'Mozilla' are intentionally hardcoded. %1$s is replaced by an active link using onboarding_term_of_service_line_three_link_text as text (“Manage”). -->
+  <!-- Line three of the terms of service onboarding page. 'Firefox' and 'Mozilla' are intentionally hardcoded. %1$s is replaced by an active link using onboarding_term_of_service_line_three_link_text as text ("Manage"). -->
   <string name="onboarding_term_of_service_line_three" tools:ignore="BrandUsage">為了幫助改善瀏覽器，Firefox 會將除錯與互動資料傳送回 Mozilla。%1$s</string>
   <!-- Used as text for the link in onboarding_term_of_service_line_three. -->
   <string name="onboarding_term_of_service_line_three_link_text">管理</string>
@@ -712,7 +706,7 @@
   <string name="onboarding_marketing_learn_more" tools:ignore="UnusedResources">我們會如何使用該資料</string>
   <!-- Marketing onboarding page button label. Button to confirm choice and start browsing. -->
   <string name="onboarding_marketing_positive_button" tools:ignore="UnusedResources">確認並開始上網</string>
-  <!-- Marketing onboarding page title variant. “One last thing” refers to the final step or action in the onboarding process that we’re asking users to take before they can start using the browser. -->
+  <!-- Marketing onboarding page title variant. "One last thing" refers to the final step or action in the onboarding process that we're asking users to take before they can start using the browser. -->
   <string name="onboarding_marketing_title_1" tools:ignore="UnusedResources">還有一件事</string>
   <!-- Marketing onboarding page body variant. 'Firefox' is intentionally hardcoded. -->
   <string name="onboarding_marketing_body_1" tools:ignore="BrandUsage,UnusedResources">與 Mozilla 的行銷夥伴分享您如何發現 Firefox 以及是如何使用的，我們絕不會販售此資料。</string>
@@ -821,7 +815,7 @@
   <!-- Preference for private browsing options -->
   <string name="preferences_private_browsing_options">隱私瀏覽模式</string>
   <!-- Preference for opening links in a private tab -->
-  <string name="preferences_open_links_in_a_private_tab">用隱私分頁開啟鏈結</string>
+  <string name="preferences_open_links_in_a_private_tab">用隱私分頁開啟連結</string>
   <!-- Preference for allowing screenshots to be taken while in a private tab -->
   <string name="preferences_allow_screenshots_in_private_mode">允許在隱私瀏覽模式中拍攝畫面擷圖</string>
   <!-- Will inform the user of the risk of activating Allow screenshots in private browsing option -->
@@ -868,7 +862,7 @@
   <string name="preferences_https_only_summary">自動嘗試使用加密過的 HTTPS 通訊協定連線到網站，以增加安全性。</string>
   <!-- Summary of https only preference if https only is set to off -->
   <string name="preferences_https_only_off">關閉</string>
-  <!-- Summary of https only preference if https only is set to on in all tabs -->
+  <!-- Summary of https only preference if https only is set to on all tabs -->
   <string name="preferences_https_only_on_all">對所有分頁開啟</string>
   <!-- Summary of https only preference if https only is set to on in private tabs only -->
   <string name="preferences_https_only_on_private">只對隱私分頁開啟</string>
@@ -961,15 +955,15 @@
   <!-- Preference for link sharing -->
   <string name="preferences_link_sharing">鏈結分享</string>
   <!-- Title for the link sharing toggle. %1$s is replaced by the brand name (e.g. Firefox). -->
-  <string name="link_sharing_toggle_title">在 WhatsApp 分享內容中加入 %1$s 的下載鏈結</string>
+  <string name="link_sharing_toggle_title">在 WhatsApp 分享內容中加入 %1$s 的下載連結</string>
   <!-- Body for the link sharing toggle.  %1$s is replaced by the brand name (e.g. Firefox). -->
-  <string name="link_sharing_toggle_body">當您每次在 WhatsApp 分享鏈結時，都邀請朋友使用 %1$s 更快、更安全地上網。</string>
+  <string name="link_sharing_toggle_body">當您每次在 WhatsApp 分享連結時，都邀請朋友使用 %1$s 更快、更安全地上網。</string>
   <!-- Snackbar message shown when user shares a link -->
   <string name="link_shared_snackbar_message">已分享鏈結</string>
   <!-- Snackbar action label shown when user shares a link -->
   <string name="link_shared_snackbar_action">管理設定</string>
   <!-- Preference for open links in third party apps -->
-  <string name="preferences_open_links_in_apps">用 App 開啟鏈結</string>
+  <string name="preferences_open_links_in_apps">用應用程式開啟連結</string>
   <!-- Preference for open links in third party apps always open in apps option -->
   <string name="preferences_open_links_in_apps_always">總是</string>
   <!-- Preference for open links in third party apps ask before opening option -->
@@ -1052,6 +1046,26 @@
   -->
   <string name="wallpapers_item_name_content_description">背景圖項目: %1$s</string>
   <!-- Snackbar message for when wallpaper is selected -->
+  <string name="wallpapers_selected_snackbar_message">已選擇背景圖</string>
+  <!-- Snackbar action label shown when user shares a link -->
+  <string name="wallpapers_selected_snackbar_action">管理設定</string>
+  <!-- Title for relinquish memory preference in customization settings -->
+  <string name="preferences_relinquish_memory_title">系統記憶體不足時暫停分頁</string>
+  <!-- Description for relinquish memory preference in customization settings -->
+  <string name="preferences_relinquish_memory_description">開啟後，當系統記憶體不足時，分頁會被暫停，同時頁面狀態會丟失</string>
+  <!-- Content description (not visible, for screen readers etc.): "Menu" button. Displays a menu when pressed.-->
+  <string name="content_description_menu">更多選項</string>
+  <!-- Content description (not visible, for screen readers etc.) for bottom sheet handlebar extensions menu. -->
+  <string name="browser_extensions_menu_handlebar_content_description">關閉擴充套件選單列</string>
+  <!-- Content description (not visible, for screen readers etc.) for bottom sheet handlebar save menu. -->
+  <string name="browser_save_menu_handlebar_content_description">關閉儲存選單列</string>
+  <!-- Content description (not visible, for screen readers etc.) for bottom sheet handlebar tools menu. -->
+  <string name="browser_tools_menu_handlebar_content_description">關閉工具選單列</string>
+  <!-- Content description (not visible, for screen readers etc.) for bottom sheet handlebar custom tab menu. -->
+  <string name="browser_custom_tab_menu_handlebar_content_description">關閉自訂分頁選單列</string>
+  <!-- Title of preference that allows a user to set the auto-close settings for open tabs -->
+  <string name="preference_auto_close_tabs" tools:ignore="UnusedResources">自動關閉分頁</string>
+</rewritten_file>
   <string name="wallpaper_updated_snackbar_message">已更換背景圖！</string>
   <!-- Snackbar label for action to view selected wallpaper -->
   <string name="wallpaper_updated_snackbar_action">檢視</string>
@@ -1201,7 +1215,7 @@
   <string name="preferences_marketing_data_description_3" tools:ignore="BrandUsage, UnusedResources" moz:removedIn="136">與 Mozilla 的行銷夥伴分享您如何發現 Firefox 的相關資訊。這能夠幫助我們拓展 Firefox 使用率，打造更好的網際網路環境。</string>
   <!--
     Preference description for marketing data collection.
-    Note: The words "Firefox" and "Mozilla" should NOT be translated. “That you use it” is to mean that the user is opting in to sharing that they are continuing to use Firefox after installing it; not that Firefox is tracking their “usage” or what they’re using it for.
+    Note: The words "Firefox" and "Mozilla" should NOT be translated. "That you use it" is to mean that the user is opting in to sharing that they are continuing to use Firefox after installing it; not that Firefox is tracking their "usage" or what they're using it for.
   -->
   <string name="preferences_marketing_data_description_4" tools:ignore="BrandUsage">與 Mozilla 的行銷技術夥伴分享您如何發現 Firefox 以及是如何使用。</string>
   <!-- Learn more link for marketing data preference -->
@@ -1752,10 +1766,10 @@
     Content description (not visible, for screen readers etc.): Quick settings sheet
     to give users access to site specific information / settings. For example:
     Secure settings status and a button to modify site permissions
-  -->
-  <string name="quick_settings_sheet">快速設定表</string>
-  <!-- Label that indicates that this option it the recommended one -->
-  <string name="phone_feature_recommended">推薦</string>
+  <!-- Title for relinquish memory preference in customization settings -->
+  <string name="preferences_relinquish_memory_title">系統記憶體不足時暫停分頁</string>
+  <!-- Description for relinquish memory preference in customization settings -->
+  <string name="preferences_relinquish_memory_description">開啟後，當系統記憶體不足時，分頁會被暫停，同時頁面狀態會丟失</string>
   <!-- Button label for clearing all the information of site permissions -->
   <string name="clear_permissions">清除權限</string>
   <!-- Text for the OK button on Clear permissions dialog -->
@@ -2595,10 +2609,6 @@
   <string name="addresses_street_address">街道地址</string>
   <!-- The header for the city of an address -->
   <string name="addresses_city">城市</string>
-  <!-- The header for the subregion of an address when "state" should be used -->
-  <string name="addresses_state">州別</string>
-  <!-- The header for the subregion of an address when "province" should be used -->
-  <string name="addresses_province">省分</string>
   <!-- The header for the zip code of an address -->
   <string name="addresses_zip">郵遞區號</string>
   <!-- The header for the country or region of an address -->
@@ -2995,11 +3005,7 @@
   <string name="review_quality_check_no_analysis_link" moz:removedIn="136" tools:ignore="UnusedResources">檢查評論品質</string>
   <!-- Headline for review quality check contextual onboarding card. -->
   <string name="review_quality_check_contextual_onboarding_title" moz:removedIn="136" tools:ignore="UnusedResources">試用我們可信任的商品評論</string>
-  <!-- Description for review quality check contextual onboarding card. %1$s, %3$s and %4$s are for retailer names (e.g. Amazon, Walmart). %2$s% is for the name of the application (for example "Firefox"). -->
-  <string name="review_quality_check_contextual_onboarding_description" moz:removedIn="136" tools:ignore="UnusedResources">購買商品之前，先看看 %1$s 上的商品評論可不可靠。%2$s 的實驗性功能「商品評論檢查器」直接內建於瀏覽器中。此功能也可用於 %3$s 及 %4$s 上的商品評論。</string>
-  <!-- Description for review quality check contextual onboarding card. %1$s is for retailer name (e.g. Amazon). %2$s is for the name of the application (for example "Firefox"). -->
-  <string name="review_quality_check_contextual_onboarding_description_one_vendor" moz:removedIn="136" tools:ignore="UnusedResources">購買商品之前，先看看 %1$s 上的商品評論可不可靠。%2$s 的實驗性功能「商品評論檢查器」直接內建於瀏覽器中。</string>
-  <!-- Paragraph presenting review quality check feature. %1$s is "Fakespot". %2$s is a link using review_quality_check_contextual_onboarding_learn_more_link as text. In the phrase "Fakespot by Mozilla", "by" can be localized. -->
+  <!-- Description for review quality check contextual onboarding card. %1$s is "Fakespot". %2$s is a link using review_quality_check_contextual_onboarding_learn_more_link as text. In the phrase "Fakespot by Mozilla", "by" can be localized. -->
   <string name="review_quality_check_contextual_onboarding_learn_more" moz:removedIn="136" tools:ignore="UnusedResources">透過 %1$s by Mozilla 的威力，我們協助您避免帶有偏見與虛偽的評論。我們會隨您在線上購物，持續改進 AI 模型。%2$s</string>
   <!-- Clickable text from the contextual onboarding card that links to review quality check support article. -->
   <string name="review_quality_check_contextual_onboarding_learn_more_link" moz:removedIn="136" tools:ignore="UnusedResources">了解更多</string>
@@ -3033,7 +3039,7 @@
   <string name="review_quality_check_highlights_type_packaging_appearance" moz:removedIn="136" tools:ignore="UnusedResources">包裝與外觀</string>
   <!-- Text for highlights card competitiveness category header. Reviews shown under this header should refer the product's competitiveness. -->
   <string name="review_quality_check_highlights_type_competitiveness" moz:removedIn="136" tools:ignore="UnusedResources">商品競爭力</string>
-  <!-- Text that is surrounded by quotes. %s is the actual text that is in quotes. An example of that text could be: Excellent craftsmanship, and that is displayed as “Excellent craftsmanship”. The text comes from a buyer's review that the feature is highlighting" -->
+  <!-- Text that is surrounded by quotes. %s is the actual text that is in quotes. An example of that text could be: Excellent craftsmanship, and that is displayed as "Excellent craftsmanship". The text comes from a buyer's review that the feature is highlighting" -->
   <string name="surrounded_with_quotes" moz:removedIn="136" tools:ignore="UnusedResources">「%s」</string>
   <!--
     Accessibility services actions labels. These will be appended to accessibility actions like "Double tap to.." but not by or applications but by services like Talkback.
@@ -3162,16 +3168,6 @@
   <string name="translation_settings_automatic_never_translate_sites">永不翻譯下列網站</string>
   <!-- Button text for the button that will take the user to the download languages dialog. On the download languages dialog, the user can manage which languages they would like to download for translations. -->
   <string name="translation_settings_download_language">下載語言</string>
-  <!--
-    Automatic translation preference screen
-
-    Title of the automatic translation preference screen that will appear on the toolbar.
-  -->
-  <string name="automatic_translation_toolbar_title_preference">自動翻譯</string>
-  <!-- Screen header presenting the automatic translation preference feature. It will appear under the toolbar. -->
-  <string name="automatic_translation_header_preference">請選擇一種語言，來管理該語言的「總是翻譯」與「永不翻譯」偏好設定。</string>
-  <!-- The title of the warning card informs the user that the system could not load languages for translation settings. -->
-  <string name="automatic_translation_error_warning_text">無法載入語言，請稍後再回來。</string>
   <!--
     Automatic translation options preference screen
 
@@ -3511,88 +3507,4 @@
   <string name="debug_drawer_add_new_address">新增所選語系的新地址</string>
   <!-- The title of the button for deleting in the debug drawer all addresses. -->
   <string name="debug_drawer_delete_all_addresses">刪除所有地址</string>
-  <!--
-    Debug drawer "contextual feature recommendation" (CFR) tools
-
-    The title of the CFR Tools feature in the Debug Drawer
-  -->
-  <string name="debug_drawer_cfr_tools_title">CFR 工具</string>
-  <!-- The title of the reset CFR section in CFR Tools -->
-  <string name="debug_drawer_cfr_tools_reset_cfr_title">重設 CFR</string>
-  <!--
-    Glean debug tools
-
-    The title of the glean debugging feature
-  -->
-  <string name="glean_debug_tools_title">Glean 除錯工具</string>
-  <!--
-    Messages explaining how to exit fullscreen mode
-
-    Message shown to explain how to exit fullscreen mode when gesture navigation is enabled.
-
-    Localisation note: this text should be as short as possible, max 68 chars
-  -->
-  <string name="exit_fullscreen_with_gesture_short">從畫面頂端向下拖曳，並使用回到上一頁的手勢離開</string>
-  <!--
-    Message shown to explain how to exit fullscreen mode when using back button navigation.
-
-    Localisation note: this text should be as short as possible, max 68 chars
-  -->
-  <string name="exit_fullscreen_with_back_button_short">從畫面頂端向下拖曳，並點擊返回上一頁的按鈕離開</string>
-  <!--
-    Beta Label Component !
-
-    Text shown as a label or tag to indicate a feature or area is still undergoing active development. Note that here "Beta" should not be translated, as it is used as an icon styled element.
-  -->
-  <string name="beta_feature">BETA</string>
-  <!--
-    Root certificate expiration warnings
-
-    These strings for homepage cards and push notifications to be pushed to users running outdated versions of Firefox. We want to encourage these users to update to the latest version so their extensions and other features don't stop working when Firefox's old root certificate expires on 2025-03-14. For more information, see this SUMO article: https://support.mozilla.org/kb/root-certificate-expiration !
-
-    Homepage card button to open Google Play Store. "Update" is a verb.
-  -->
-  <string name="certificate_warning_homepage_card_update_now_button" tools:ignore="UnusedResources">立即更新</string>
-  <!-- Homepage card title about old Firefox version. "Update" is a verb. Note: The word "Firefox" should NOT be translated. -->
-  <string name="certificate_warning_homepage_card_hca1_title" tools:ignore="BrandUsage,UnusedResources">更新 Firefox 瀏覽器</string>
-  <!-- Homepage card message about old Firefox version -->
-  <string name="certificate_warning_homepage_card_hca1_message" tools:ignore="UnusedResources">有一張根憑證即將過期，將導致某些功能於 3 月 14 日後無法運作。</string>
-  <!-- Homepage card title about old Firefox version. "Update" is a verb. -->
-  <string name="certificate_warning_homepage_card_hcr1_title" tools:ignore="UnusedResources">請於 3 月 14 日前更新</string>
-  <!-- Homepage card message about old Firefox version. Note: The word "Firefox" should NOT be translated. -->
-  <string name="certificate_warning_homepage_card_hcr1_message" tools:ignore="BrandUsage,UnusedResources">有一張根憑證即將過期，將導致您的 Firefox 於 3 月 14 日後無法正常運作。</string>
-  <!-- Homepage card title about old Firefox version -->
-  <string name="certificate_warning_homepage_card_hcw2_title" tools:ignore="UnusedResources">更新時間剩下不到 7 天</string>
-  <!-- Homepage card message about old Firefox version. Note: The word "Firefox" should NOT be translated. -->
-  <string name="certificate_warning_homepage_card_hcw2_message" tools:ignore="BrandUsage,UnusedResources">由於根憑證即將失效，3 月 14 日起，附加元件與其他 Firefox 功能將停止運作。</string>
-  <!-- Homepage card title about old Firefox version. Note: The word "Firefox" should NOT be translated. -->
-  <string name="certificate_warning_homepage_card_hcw3_title" tools:ignore="BrandUsage,UnusedResources">保留 Firefox 的最後機會</string>
-  <!-- Homepage card message about old Firefox version. Note: The word "Firefox" should NOT be translated. -->
-  <string name="certificate_warning_homepage_card_hcw3_message" tools:ignore="BrandUsage,UnusedResources">因為根憑證即將失效，3 月 14 日後，您的 Firefox 版本將無法再正常運作。</string>
-  <!-- Push notification title about old Firefox version. "Update" is a noun. -->
-  <string name="certificate_warning_push_notification_update_recommended_title" tools:ignore="UnusedResources">建議更新</string>
-  <!-- Push notification message about old Firefox version -->
-  <string name="certificate_warning_push_notification_pnr1_message" tools:ignore="UnusedResources">附加元件與部分其他功能，將於 3 月 14 日起停止運作。</string>
-  <!-- Push notification title about old Firefox version. Note: The word "Firefox" should NOT be translated. -->
-  <string name="certificate_warning_push_notification_pnw2_title" tools:ignore="BrandUsage,UnusedResources">您使用的是舊版的 Firefox</string>
-  <!-- Push notification message about old Firefox version. "Update" is a verb. -->
-  <string name="certificate_warning_push_notification_pnw2_message" tools:ignore="UnusedResources">請於 3 月 14 日前更新，以繼續使用附加元件與其他功能。</string>
-  <!-- Push notification message about old Firefox version -->
-  <string name="certificate_warning_push_notification_pnw3_message" tools:ignore="UnusedResources">某些功能將於明天失效。</string>
-  <!--
-    TextField Design System Component
-
-    The default content description for the eye trailing icon button in TextField
-  -->
-  <string name="text_field_eye_trailing_icon_default_content_description">顯示隱藏文字</string>
-  <!-- The default content description for the cross trailing icon button in TextField -->
-  <string name="text_field_cross_trailing_icon_default_content_description">清除文字</string>
-  <!--
-    Setup checklist component
-
-    Accessibility description for a check mark on a completed task
-  -->
-  <string name="a11y_completed_task_description">已完成的任務</string>
-  <!-- Accessibility description for the task icon -->
-  <string name="a11y_task_icon_description">任務圖示</string>
 </resources>
