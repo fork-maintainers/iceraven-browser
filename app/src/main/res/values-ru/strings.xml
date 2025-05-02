@@ -1,39 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" xmlns:moz="http://mozac.org/tools">
-  <!-- Preference for add-ons custom source -->
-  <string name="preferences_addons_customization">Настройка источника пользовательских дополнений</string>
-  <!-- Placeholder text shown in the search bar before a user enters text -->
-  <string name="addons_search_hint">Поиск дополнений</string>
-  <!-- Preference for showing display name instead of email -->
-  <string name="preferences_show_display_name_insteadof_email">Показывать отображаемое имя вместо адреса электронной почты на панели инструментов</string>
-  <!-- Title for strip url preference in customization settings -->
-  <string name="preferences_strip_url_title">Удалить HTTP/HTTPS/WWW из URL-адресов</string>
-  <!-- Description for strip url preference in customization settings -->
-  <string name="preferences_strip_url_description">Удаляет HTTP/HTTPS/WWW из URL-адресов на панели инструментов и панели вкладок</string>
-  <!-- Label for add-ons custom source account preference -->
-  <string name="addons_custom_source_account">Установить пользовательскую учетную запись дополнений</string>
-  <!-- Label for add-ons custom source collection preference -->
-  <string name="addons_custom_source_collection">Установить пользовательскую коллекцию дополнений</string>
-  <!-- Preference category for system behavior customization -->
-  <string name="preferences_system_behavior">Настройка поведения системы</string>
-  <!-- Title for relinquish memory preference in customization settings -->
-  <string name="preferences_relinquish_memory_title">Приостановить вкладки, чтобы не быть удаленными из-за памяти</string>
-  <!-- Description for relinquish memory preference in customization settings -->
-  <string name="preferences_relinquish_memory_description">Если включено, вкладки будут приостановлены, а состояние страницы потеряно, когда в системе мало памяти</string>
-  <!-- Preference for Top Sites show most recent sites or not -->
-  <string name="preferences_show_top_recent_sites">Показать наиболее посещаемые веб-сайты</string>
-  <string name="preferences_dns_over_https">DNS через HTTPS</string>
-  <string name="preferences_dns_over_https_on">Вкл</string>
-  <string name="preferences_dns_over_https_off">Выкл</string>
-  <string name="preferences_dns_over_https_title">Режим DNS через HTTPS</string>
-  <string name="preferences_dns_over_https_summary">Система доменных имен (DNS) через HTTPS отправляет ваш запрос на доменное имя через зашифрованное соединение, создавая безопасный DNS и затрудняя другим возможность увидеть, к какому веб-сайту вы собираетесь получить доступ.</string>
-  <string name="preferences_dns_over_https_custom_server">Пользовательский</string>
-  <string name="addons_delete_cache">Удалить файл кэша метаданных аддонов</string>
-  <string name="confirm_addons_delete_cache">Вы уверены, что хотите удалить файл кэша метаданных аддонов?</string>
-  <string name="confirm_addons_delete_cache_yes">Да</string>
-  <string name="confirm_addons_delete_cache_no">Отмена</string>
-  <string name="preferences_search_opened_tabs" >Поиск по открытым вкладкам</string>
-  <string name="preferences_show_success_download_dialog">Диалоговое окно завершения</string>
 
 
   <!-- App name for private browsing mode. %s is the name of the app (for example "Firefox"). -->
@@ -93,7 +59,7 @@
   <!-- Text for the menu button to remove a recently saved bookmark from the user's home screen -->
   <string name="home_bookmarks_menu_item_remove">Удалить</string>
   <!-- About content. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="about_content">%1$s разработан Mozilla.</string>
+  <string name="about_content">%1$s разработан @fork-maintainers.</string>
   <!--
     Private Browsing
 
@@ -3044,6 +3010,51 @@
   <string name="a11y_action_label_read_article">прочитать статью</string>
   <!-- Action label for links to the Firefox Pocket website. Talkback will append this to say "Double tap to open link to learn more". -->
   <string name="a11y_action_label_pocket_learn_more">перейдите по ссылке, чтобы узнать больше</string>
+  <!-- Preference for add-ons custom source -->
+  <string name="preferences_addons_customization">Настройка источника пользовательских дополнений</string>
+  <!-- Placeholder text shown in the search bar before a user enters text -->
+  <string name="addons_search_hint">Поиск расширений</string>
+  <!-- Preference for showing display name instead of email -->
+  <string name="preferences_show_display_name_insteadof_email">Показывать отображаемое имя вместо адреса электронной почты на панели инструментов</string>
+  <!-- Title for strip url preference in customization settings -->
+  <string name="preferences_strip_url_title">Удалить HTTP/HTTPS/WWW из URL-адресов</string>
+  <!-- Description for strip url preference in customization settings -->
+  <string name="preferences_strip_url_description">Удаляет HTTP/HTTPS/WWW из URL-адресов на панели инструментов и панели вкладок</string>
+  <!-- Label for add-ons custom source account preference -->
+  <string name="addons_custom_source_account">Установить пользовательскую учетную запись дополнений</string>
+  <!-- Label for add-ons custom source collection preference -->
+  <string name="addons_custom_source_collection">Установить пользовательскую коллекцию дополнений</string>
+  <!-- Preference category for system behavior customization -->
+  <string name="preferences_system_behavior">Настройка поведения системы</string>
+  <!-- Title for relinquish memory preference in customization settings -->
+  <string name="preferences_relinquish_memory_title">Приостанавливать вкладки, чтобы избежать их закрытия из-за нехватки памяти</string>
+  <!-- Description for relinquish memory preference in customization settings -->
+  <string name="preferences_relinquish_memory_description">Если эта функция включена, вкладки будут приостановлены, а состояние страницы потеряно, если в системе недостаточно памяти.</string>
+  <!-- Preference for Top Sites show most recent sites or not -->
+  <string name="preferences_show_top_recent_sites">Показать наиболее посещаемые веб-сайты</string>
+  <string name="preferences_dns_over_https">DNS через HTTPS</string>
+  <string name="preferences_dns_over_https_on">Вкл</string>
+  <string name="preferences_dns_over_https_off">Выкл</string>
+  <string name="preferences_dns_over_https_title">Режим DNS через HTTPS</string>
+  <string name="preferences_dns_over_https_summary">Система доменных имен (DNS) через HTTPS отправляет ваш запрос на доменное имя через зашифрованное соединение, создавая безопасный DNS и затрудняя другим возможность увидеть, к какому веб-сайту вы собираетесь получить доступ.</string>
+  <string name="preferences_dns_over_https_custom_server">Пользовательский</string>
+  <string name="addons_delete_cache">Удалить файл кэша метаданных расширений</string>
+  <string name="addons_sideload">Установить расширение из файла</string>
+  <string name="confirm_addons_delete_cache">Вы уверены, что хотите удалить файл кэша метаданных расширений?</string>
+  <string name="confirm_addons_delete_cache_yes">Да</string>
+  <string name="confirm_addons_delete_cache_no">Отмена</string>
+  <string name="preferences_search_opened_tabs" >Поиск по открытым вкладкам</string>
+  <string name="preferences_show_success_download_dialog">Диалоговое окно завершения</string>
+    <string name="preferences_show_qr_scan_search">Показывать поиск QR</string>
+    <string name="preferences_show_reader_mode_btn">Показывать кнопку режима чтения</string>
+    <string name="preferences_other_customization">Другие</string>
+    <string name="preferences_show_fullscreen_toast">Полноэкранное уведомление</string>
+    <string name="preferences_suggest_shipped_domains">Показывать предложения по отправленным доменам</string>
+    <string name="preferences_show_home_button">Показывать кнопку домой</string>
+    <string name="preferences_show_sign_in_button">Показывать кнопку Войти</string>
+    <string name="preferences_set_homepage">Изменить домашнюю страницу</string>
+    <string name="preferences_default_homepage">Домашняя страница по умолчанию</string>
+    <string name="preferences_custom_homepage">Пользовательская домашняя страница</string>
   <!-- Content description for headings announced by accessibility service. %s is the text of the heading. Talkback will announce the text and then speak the word "Heading" indicating to the user that this text is a heading for a section. -->
   <string name="a11y_heading">%s, Заголовок</string>
   <!-- Title for dialog displayed when trying to access links present in a text. -->
