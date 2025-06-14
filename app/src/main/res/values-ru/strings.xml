@@ -29,11 +29,22 @@
   <string name="preferences_dns_over_https_summary">Система доменных имен (DNS) через HTTPS отправляет ваш запрос на доменное имя через зашифрованное соединение, создавая безопасный DNS и затрудняя другим возможность увидеть, к какому веб-сайту вы собираетесь получить доступ.</string>
   <string name="preferences_dns_over_https_custom_server">Пользовательский</string>
   <string name="addons_delete_cache">Удалить файл кэша метаданных аддонов</string>
+  <string name="addons_sideload">Установить дополнение из файла</string>
   <string name="confirm_addons_delete_cache">Вы уверены, что хотите удалить файл кэша метаданных аддонов?</string>
   <string name="confirm_addons_delete_cache_yes">Да</string>
   <string name="confirm_addons_delete_cache_no">Отмена</string>
   <string name="preferences_search_opened_tabs" >Поиск по открытым вкладкам</string>
   <string name="preferences_show_success_download_dialog">Диалоговое окно завершения</string>
+  <string name="preferences_show_qr_scan_search">Показать поиск сканирование QR-кода</string>
+  <string name="preferences_show_reader_mode_btn">Показать кнопку "Режим чтения"</string>
+  <string name="preferences_other_customization">Другое</string>
+  <string name="preferences_show_fullscreen_toast">Полноэкранные уведомления</string>
+  <string name="preferences_suggest_shipped_domains">Показать предложения по отправленным доменам</string>
+  <string name="preferences_show_home_button">Показать кнопку "Дом"</string>
+  <string name="preferences_show_sign_in_button">Показать кнопку "Войти"</string>
+  <string name="preferences_set_homepage">Изменить домашнюю страницуe</string>
+  <string name="preferences_default_homepage">Домашняя страница по умолчанию</string>
+  <string name="preferences_custom_homepage">Пользовательская домашняя страница</string>
 
   <!-- App name for private browsing mode. %s is the name of the app (for example "Firefox"). -->
   <string name="app_name_private_5">Приватный %s</string>
