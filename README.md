@@ -1,3 +1,9 @@
+> **Google has announced that, starting in 2026/2027, all apps on certified Android devices
+> will require the developer to submit personal identity details directly to Google.
+> Since the developers of this app do not agree to this requirement, this app will no longer 
+> work on certified Android devices after that time.**
+> https://keepandroidopen.org/
+
 # Iceraven Browser! [![CI](https://github.com/fork-maintainers/iceraven-browser/actions/workflows/ci.yml/badge.svg)](https://github.com/fork-maintainers/iceraven-browser/actions/workflows/ci.yml) ![Release](https://img.shields.io/github/v/release/fork-maintainers/iceraven-browser)
 
 Definitely not brought to you by Mozilla!
