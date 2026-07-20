@@ -30,7 +30,6 @@ import androidx.compose.ui.semantics.testTag
 import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
-import org.mozilla.fenix.components.appstate.sports.SportsWidgetState
 import org.mozilla.fenix.components.components
 import org.mozilla.fenix.components.toolbar.ToolbarPosition
 import org.mozilla.fenix.home.fake.FakeHomepagePreview
@@ -196,7 +195,6 @@ private fun MiddleSearchHomepagePreview() {
                 longfoxEnabled = true,
                 showLongfoxAnimation = true,
                 trackersBlockedCount = 754,
-                sportsWidgetState = SportsWidgetState(),
                 headerState = HeaderState.Normal,
                 middleSearchState = MiddleSearchState(searchBarVisible = true, searchBarEnabled = true),
                 firstFrameDrawn = true,

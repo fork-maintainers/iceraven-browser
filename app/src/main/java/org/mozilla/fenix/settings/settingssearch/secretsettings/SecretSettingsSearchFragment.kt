@@ -7,9 +7,7 @@ package org.mozilla.fenix.settings.settingssearch.secretsettings
 import androidx.lifecycle.coroutineScope
 import androidx.navigation.fragment.findNavController
 import mozilla.components.lib.state.helpers.StoreProvider.Companion.storeProvider
-import org.mozilla.fenix.R
 import org.mozilla.fenix.e2e.SystemInsetsPaddedFragment
-import org.mozilla.fenix.home.sports.hasWorldCupEnded
 import org.mozilla.fenix.settings.settingssearch.DefaultFenixSettingsIndexer
 import org.mozilla.fenix.settings.settingssearch.FenixRecentSettingsSearchesRepository
 import org.mozilla.fenix.settings.settingssearch.PreferenceFileInformation
@@ -38,13 +36,6 @@ class SecretSettingsSearchFragment : SettingsSearchFragment(), SystemInsetsPadde
                     fenixSettingsIndexer = DefaultFenixSettingsIndexer(
                         context = requireContext(),
                         preferenceFileInformationList = secretPreferenceFileInformationList,
-                        excludedPreferenceKeys = {
-                            if (hasWorldCupEnded()) {
-                                setOf(getString(R.string.pref_key_enable_homepage_sports_widget))
-                            } else {
-                                emptySet()
-                            }
-                        },
                     ),
                     navController = findNavController(),
                     recentSettingsSearchesRepository = FenixRecentSettingsSearchesRepository(

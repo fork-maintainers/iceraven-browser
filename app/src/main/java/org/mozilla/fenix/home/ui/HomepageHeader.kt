@@ -46,9 +46,7 @@ import mozilla.components.ui.icons.R as iconsR
 @Composable
 fun HomepageHeader(
     browsingMode: BrowsingMode,
-    isSportsWidgetEnabled: Boolean,
     browsingModeChanged: (BrowsingMode) -> Unit,
-    onLogoClicked: () -> Unit,
 ) {
     // In normal mode the wordmark and private-browsing button follow the wallpaper text color; in
     // private mode there is no wallpaper, so the wordmark is untinted and the button uses its
@@ -71,10 +69,7 @@ fun HomepageHeader(
             .padding(start = 16.dp, end = 16.dp, top = 18.dp, bottom = 32.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        WordmarkLogo(
-            isSportsWidgetEnabled = isSportsWidgetEnabled,
-            onLogoClicked = onLogoClicked,
-        )
+        WordmarkLogo()
 
         WordmarkText(wordmarkTextColor)
 
@@ -137,9 +132,7 @@ private fun HomepageHeaderPreview(
         Surface {
             HomepageHeader(
                 browsingMode = BrowsingMode.Normal,
-                isSportsWidgetEnabled = true,
                 browsingModeChanged = {},
-                onLogoClicked = {},
             )
         }
     }

@@ -970,17 +970,6 @@
     </issue>
 
     <issue
-        id="VectorRaster"
-        message="Limit vector icons sizes to 200×200 to keep icon drawing fast; see https://developer.android.com/studio/write/vector-asset-studio#when for more"
-        errorLine1="  android:width=&quot;380dp&quot;"
-        errorLine2="                 ~~~~~">
-        <location
-            file="src/main/res/drawable/sports_widget_celebration.xml"
-            line="17"
-            column="18"/>
-    </issue>
-
-    <issue
         id="VisibleForTests"
         message="This method should only be accessed from tests or within private scope"
         errorLine1="                recentTabs = state.recentTabs.filterOutTab(action.recentTab),"
@@ -1365,18 +1354,6 @@
             column="10"/>
     </issue>
 
-
-    <issue
-        id="FrequentlyChangingValue"
-        message="Reading a value annotated with @FrequentlyChangingValue inside composition"
-        errorLine1="    val position = pagerState.currentPage + pagerState.currentPageOffsetFraction"
-        errorLine2="                                                       ~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/java/org/mozilla/fenix/home/sports/ui/SportsCardPager.kt"
-            line="370"
-            column="56"/>
-    </issue>
-
     <issue
         id="Overdraw"
         message="Possible overdraw: Root element paints background `@color/sync_error_background_color` with a theme that also paints a background (inferred theme is `@style/NormalTheme`)"
@@ -1685,21 +1662,14 @@
 
     <issue
         id="IconDensities"
-        message="Missing the following drawables in `drawable-hdpi`: firefox_sport.webp, flag_ar.webp, flag_at.webp, flag_au.webp, flag_ba.webp... (44 more)">
-        <location
-            file="src/main/res/drawable-hdpi"/>
-    </issue>
-
-    <issue
-        id="IconDensities"
-        message="Missing the following drawables in `drawable-mdpi`: fenix_search_widget.webp, firefox_sport.webp, flag_ar.webp, flag_at.webp, flag_au.webp... (45 more)">
+        message="Missing the following drawables in `drawable-mdpi`: fenix_search_widget.webp">
         <location
             file="src/main/res/drawable-mdpi"/>
     </issue>
 
     <issue
         id="IconDensities"
-        message="Missing the following drawables in `drawable-xhdpi`: fenix_search_widget.webp, firefox_sport.webp, flag_ar.webp, flag_at.webp, flag_au.webp... (45 more)">
+        message="Missing the following drawables in `drawable-xhdpi`: fenix_search_widget.webp">
         <location
             file="src/main/res/drawable-xhdpi"/>
     </issue>

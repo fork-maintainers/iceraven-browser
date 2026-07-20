@@ -6,7 +6,6 @@ package org.mozilla.fenix.home
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -38,7 +37,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
-import androidx.core.content.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -88,6 +86,7 @@ import org.mozilla.fenix.browser.BrowserFragmentDirections
 import org.mozilla.fenix.browser.browsingmode.BrowsingMode
 import org.mozilla.fenix.browser.tabstrip.TabStrip
 import org.mozilla.fenix.browser.tabstrip.TabStripColors
+import org.mozilla.fenix.components.Components
 import org.mozilla.fenix.components.HomepageThumbnailIntegration
 import org.mozilla.fenix.components.LensFeature
 import org.mozilla.fenix.components.QrScanFenixFeature
@@ -96,9 +95,9 @@ import org.mozilla.fenix.components.VoiceSearchFeature
 import org.mozilla.fenix.components.accounts.FenixFxAEntryPoint
 import org.mozilla.fenix.components.appstate.AppAction
 import org.mozilla.fenix.components.appstate.AppAction.ContentRecommendationsAction
+import org.mozilla.fenix.components.appstate.AppAction.MessagingAction
 import org.mozilla.fenix.components.appstate.AppAction.MessagingAction.MicrosurveyAction
 import org.mozilla.fenix.components.appstate.AppAction.ReviewPromptAction.CheckIfEligibleForReviewPrompt
-import org.mozilla.fenix.components.appstate.AppAction.SportsWidgetAction
 import org.mozilla.fenix.components.appstate.AppState
 import org.mozilla.fenix.components.components
 import org.mozilla.fenix.components.metrics.installSourcePackage
@@ -107,7 +106,6 @@ import org.mozilla.fenix.compose.snackbar.SnackbarState
 import org.mozilla.fenix.ext.application
 import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.ext.hideToolbar
-import org.mozilla.fenix.ext.isOnline
 import org.mozilla.fenix.ext.nav
 import org.mozilla.fenix.ext.recordEventInNimbus
 import org.mozilla.fenix.ext.requireComponents
@@ -130,8 +128,6 @@ import org.mozilla.fenix.home.sessioncontrol.DefaultSessionControlController
 import org.mozilla.fenix.home.sessioncontrol.SessionControlController
 import org.mozilla.fenix.home.sessioncontrol.SessionControlControllerCallback
 import org.mozilla.fenix.home.sessioncontrol.SessionControlInteractor
-import org.mozilla.fenix.home.sports.DefaultSportsController
-import org.mozilla.fenix.home.sports.SportCardErrorState
 import org.mozilla.fenix.home.store.HomeToolbarStoreBuilder
 import org.mozilla.fenix.home.store.HomepageState
 import org.mozilla.fenix.home.termsofuse.DefaultPrivacyNoticeBannerController
@@ -992,33 +988,16 @@ class HomeFragment : Fragment() {
         // update it manually here.
         components.useCases.sessionUseCases.updateLastAccess()
 
-        val sportsWidgetState = components.appStore.state.sportsWidgetState
-        val needsFetch = sportsWidgetState.hasWorldCupStarted || sportsWidgetState.isOneWeekToWorldCup
-        if (sportsWidgetState.isShown && (needsFetch || sportsWidgetState.isCountdownShown)) {
-            // Fetches the full tournament schedule once we're within seven days of kickoff
-            // or past it. The middleware caches the response so a later team selection
-            // re-derives cards without another network call.
-            //
-            // When offline, skip the fetch and surface ConnectionInterrupted so the widget
-            // shows an error card instead of the countdown / promo flow. Countdown mode
-            // (pre-7-day window) has no data to fetch, but still flips to the error card
-            // when offline so the user knows the widget isn't current. Conversely, when
-            // back online with nothing to fetch (countdown phase), clear any stale error
-            // so the countdown UI returns without requiring a manual Refresh tap.
-            val isOnline = requireContext().getSystemService<ConnectivityManager>()?.isOnline() == true
-            val action = when {
-                !isOnline -> SportsWidgetAction.FetchFailed(SportCardErrorState.ConnectionInterrupted)
-                needsFetch -> SportsWidgetAction.FetchMatches
-                else -> SportsWidgetAction.ErrorStateCleared
-            }
-            components.appStore.dispatch(action)
-        }
+        evaluateMessagesForMicrosurvey(components)
 
         BiometricAuthenticationManager.biometricAuthenticationNeededInfo.shouldShowAuthenticationPrompt =
             true
         BiometricAuthenticationManager.biometricAuthenticationNeededInfo.authenticationStatus =
             AuthenticationStatus.NOT_AUTHENTICATED
     }
+
+    private fun evaluateMessagesForMicrosurvey(components: Components) =
+        components.appStore.dispatch(MessagingAction.Evaluate(FenixMessageSurfaceId.MICROSURVEY))
 
     override fun onPause() {
         super.onPause()
@@ -1366,17 +1345,6 @@ class HomeFragment : Fragment() {
                 longFoxFeature = requireComponents.core.longFoxFeature,
                 context = requireActivity(),
                 longFoxEnabled = requireComponents.settings.longfoxEnabled,
-            ),
-            sportsController = DefaultSportsController(
-                appStore = requireComponents.appStore,
-                settings = requireComponents.settings,
-                navController = findNavController(),
-                fenixBrowserUseCases = requireComponents.useCases.fenixBrowserUseCases,
-                browserStore = requireComponents.core.store,
-                shareUseCases = requireComponents.useCases.shareUseCases,
-                worldCupLabel = getString(R.string.customize_toggle_world_cup),
-                shareCardTitle = getString(R.string.sports_widget_card_title),
-                connectivityManager = requireContext().getSystemService<ConnectivityManager>(),
             ),
         )
     }

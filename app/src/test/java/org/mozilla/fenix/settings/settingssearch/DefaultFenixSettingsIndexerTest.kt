@@ -94,28 +94,17 @@ class DefaultFenixSettingsIndexerTest {
     }
 
     @Test
-    fun `GIVEN an empty excluded set WHEN indexing THEN the sports widget item is present`() = runTest {
-        val sportsWidgetKey = context.getString(R.string.pref_key_show_homepage_sports_widget)
-        val worldCupTitle = context.getString(R.string.customize_toggle_world_cup)
-
-        indexer.indexAllSettings()
-
-        val results = indexer.getSettingsWithQuery(worldCupTitle)
-        assertTrue(results.any { it.preferenceKey == sportsWidgetKey })
-    }
-
-    @Test
     fun `GIVEN a preference key is excluded WHEN indexing THEN that item is absent from results`() = runTest {
-        val sportsWidgetKey = context.getString(R.string.pref_key_show_homepage_sports_widget)
-        val worldCupTitle = context.getString(R.string.customize_toggle_world_cup)
+        val privacyReportKey = context.getString(R.string.pref_key_privacy_report)
+        val privacyReportTitle = context.getString(R.string.customize_toggle_privacy_report)
         val excludingIndexer = DefaultFenixSettingsIndexer(
             context = context,
-            excludedPreferenceKeys = { setOf(sportsWidgetKey) },
+            excludedPreferenceKeys = { setOf(privacyReportKey) },
         )
 
         excludingIndexer.indexAllSettings()
 
-        val results = excludingIndexer.getSettingsWithQuery(worldCupTitle)
-        assertFalse(results.any { it.preferenceKey == sportsWidgetKey })
+        val results = excludingIndexer.getSettingsWithQuery(privacyReportTitle)
+        assertFalse(results.any { it.preferenceKey == privacyReportKey })
     }
 }

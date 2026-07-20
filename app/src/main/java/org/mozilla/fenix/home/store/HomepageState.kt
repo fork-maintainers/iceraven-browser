@@ -11,7 +11,6 @@ import org.mozilla.fenix.browser.browsingmode.BrowsingMode
 import org.mozilla.fenix.browser.browsingmode.BrowsingModeManager
 import org.mozilla.fenix.components.appstate.AppState
 import org.mozilla.fenix.components.appstate.setup.checklist.SetupChecklistState
-import org.mozilla.fenix.components.appstate.sports.SportsWidgetState
 import org.mozilla.fenix.components.components
 import org.mozilla.fenix.components.toolbar.ToolbarPosition
 import org.mozilla.fenix.ext.shouldShowRecentSyncedTabs
@@ -78,7 +77,6 @@ internal sealed class HomepageState {
      * @property longfoxEnabled Whether the longfox game is enabled.
      * @property showLongfoxAnimation Whether to play the fox peek animation on the privacy report card.
      * @property trackersBlockedCount The number of trackers blocked for the privacy report.
-     * @property sportsWidgetState State of the sports widget on the homepage.
      * @property headerState State related to the header of the homepage.
      * @property middleSearchState State of the middle search bar on the homepage.
      * @property firstFrameDrawn Flag indicating whether the first frame of the homescreen has been drawn.
@@ -101,7 +99,6 @@ internal sealed class HomepageState {
         val longfoxEnabled: Boolean,
         val showLongfoxAnimation: Boolean,
         val trackersBlockedCount: Int,
-        val sportsWidgetState: SportsWidgetState,
         override val headerState: HeaderState,
         val middleSearchState: MiddleSearchState = MiddleSearchState(),
         override val firstFrameDrawn: Boolean = false,
@@ -222,7 +219,6 @@ internal sealed class HomepageState {
                 longfoxEnabled = settings.longfoxEnabled,
                 showLongfoxAnimation = settings.longfoxEnabled && longfoxEntryPointReady,
                 trackersBlockedCount = blockedTrackersState.trackersBlockedCount,
-                sportsWidgetState = sportsWidgetState,
                 headerState = buildHeaderState(settings = settings),
                 middleSearchState = MiddleSearchState(
                     searchBarVisible = shouldShowSearchBar(appState = appState),

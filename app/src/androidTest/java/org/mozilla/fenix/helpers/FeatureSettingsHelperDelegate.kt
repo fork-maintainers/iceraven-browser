@@ -8,7 +8,6 @@ import android.util.Log
 import kotlinx.coroutines.runBlocking
 import mozilla.components.feature.sitepermissions.SitePermissionsRules
 import org.mozilla.fenix.R
-import org.mozilla.fenix.components.appstate.AppAction
 import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.ext.getPreferenceKey
 import org.mozilla.fenix.helpers.Constants.TAG
@@ -36,7 +35,6 @@ class FeatureSettingsHelperDelegate : FeatureSettingsHelper {
         isWallpaperOnboardingEnabled = settings.showWallpaperOnboarding,
         isDeleteSitePermissionsEnabled = settings.deleteSitePermissions,
         isOpenInAppBannerEnabled = settings.shouldShowOpenInAppBanner,
-        isHomepageSportsWidgetVisible = settings.showHomepageSportsWidget,
         etpPolicy = getETPPolicy(settings),
         isLocationPermissionEnabled = getFeaturePermission(PhoneFeature.LOCATION, settings),
         isMicrosurveyEnabled = settings.microsurveyFeatureEnabled,
@@ -65,7 +63,6 @@ class FeatureSettingsHelperDelegate : FeatureSettingsHelper {
     override var isRecentlyVisitedFeatureEnabled: Boolean by updatedFeatureFlags::isRecentlyVisitedFeatureEnabled
     override var isPWAsPromptEnabled: Boolean by updatedFeatureFlags::isPWAsPromptEnabled
     override var isOpenInAppBannerEnabled: Boolean by updatedFeatureFlags::isOpenInAppBannerEnabled
-    override var isHomepageSportsWidgetVisible: Boolean by updatedFeatureFlags::isHomepageSportsWidgetVisible
     override var etpPolicy: ETPPolicy by updatedFeatureFlags::etpPolicy
     override var isLocationPermissionEnabled: SitePermissionsRules.Action by updatedFeatureFlags::isLocationPermissionEnabled
     override var isMicrosurveyEnabled: Boolean by updatedFeatureFlags::isMicrosurveyEnabled
@@ -106,8 +103,6 @@ class FeatureSettingsHelperDelegate : FeatureSettingsHelper {
         settings.shouldShowOpenInAppBanner = featureFlags.isOpenInAppBannerEnabled
         settings.microsurveyFeatureEnabled = featureFlags.isMicrosurveyEnabled
         settings.shouldUseBottomToolbar = featureFlags.shouldUseBottomToolbar
-        settings.showHomepageSportsWidget = featureFlags.isHomepageSportsWidgetVisible
-        setSportsWidgetVisibility(featureFlags.isHomepageSportsWidgetVisible)
         setETPPolicy(featureFlags.etpPolicy)
         setPermissions(PhoneFeature.LOCATION, featureFlags.isLocationPermissionEnabled)
         settings.onboardingFeatureEnabled = featureFlags.onboardingFeatureEnabled
@@ -132,7 +127,6 @@ private data class FeatureFlags(
     var isWallpaperOnboardingEnabled: Boolean,
     var isDeleteSitePermissionsEnabled: Boolean,
     var isOpenInAppBannerEnabled: Boolean,
-    var isHomepageSportsWidgetVisible: Boolean,
     var etpPolicy: ETPPolicy,
     var isLocationPermissionEnabled: SitePermissionsRules.Action,
     var isMicrosurveyEnabled: Boolean,
@@ -237,12 +231,5 @@ private fun setPermissions(feature: PhoneFeature, action: SitePermissionsRules.A
         Log.i(TAG, "setPermissions: Trying to set $action permission for $feature.")
         appContext.components.settings.setSitePermissionsPhoneFeatureAction(feature, action)
         Log.i(TAG, "setPermissions: Set $action permission for $feature.")
-    }
-}
-
-private fun setSportsWidgetVisibility(isVisible: Boolean) {
-    runBlocking {
-        appContext.components.appStore
-            .dispatch(AppAction.SportsWidgetAction.VisibilityChanged(isVisible))
     }
 }

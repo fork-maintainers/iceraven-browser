@@ -6,12 +6,10 @@ package org.mozilla.fenix.components
 
 import android.app.Application
 import android.content.Context
-import android.net.ConnectivityManager
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.app.NotificationManagerCompat
-import androidx.core.content.getSystemService
 import com.google.android.play.core.review.ReviewManagerFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -59,7 +57,6 @@ import org.mozilla.fenix.components.appstate.AppAction
 import org.mozilla.fenix.components.appstate.AppState
 import org.mozilla.fenix.components.appstate.setup.checklist.SetupChecklistState
 import org.mozilla.fenix.components.appstate.setup.checklist.getSetupChecklistCollection
-import org.mozilla.fenix.components.appstate.sports.SportsWidgetState
 import org.mozilla.fenix.components.bookmarks.lastSavedFolderCache
 import org.mozilla.fenix.components.ipprotection.IPProtection
 import org.mozilla.fenix.components.ipprotection.IPProtectionAuthSources
@@ -85,11 +82,6 @@ import org.mozilla.fenix.home.middleware.HomeTelemetryMiddleware
 import org.mozilla.fenix.home.setup.store.DefaultSetupChecklistRepository
 import org.mozilla.fenix.home.setup.store.SetupChecklistPreferencesMiddleware
 import org.mozilla.fenix.home.setup.store.SetupChecklistTelemetryMiddleware
-import org.mozilla.fenix.home.sports.SportsWidgetMiddleware
-import org.mozilla.fenix.home.sports.WorldCupMatchesRepository
-import org.mozilla.fenix.home.sports.client.AppServicesWorldCupMatchesClient
-import org.mozilla.fenix.home.sports.client.mockWorldCupBaseHost
-import org.mozilla.fenix.home.sports.hasWorldCupEnded
 import org.mozilla.fenix.ipprotection.store.DefaultIPProtectionPromptRepository
 import org.mozilla.fenix.messaging.state.MessagingMiddleware
 import org.mozilla.fenix.nimbus.FxNimbus
@@ -327,7 +319,6 @@ class Components(private val context: Context) {
                 },
                 recentHistory = emptyList(),
                 setupChecklistState = setupChecklistState(),
-                sportsWidgetState = setupSportsWidgetState(),
             ).run { filterState(blocklistHandler) },
             middlewares = listOf(
                 ProfileMarkerMiddleware(markerName = "AppStore", profiler = core.engine.profiler),
@@ -370,24 +361,6 @@ class Components(private val context: Context) {
                     settings.migrateLastReviewPromptTimePrefIfNeeded(nimbus.events)
                 },
                 AppVisualCompletenessMiddleware(performance.visualCompletenessQueue),
-                SportsWidgetMiddleware(
-                    sportsRepository = WorldCupMatchesRepository(
-                        client = AppServicesWorldCupMatchesClient(
-                            baseHostProvider = {
-                                if (settings.useMockWorldCupServer) {
-                                    mockWorldCupBaseHost(settings.mockWorldCupServerSession)
-                                } else {
-                                    null
-                                }
-                            },
-                        ),
-                    ),
-                    connectivityManager = requireNotNull(context.getSystemService<ConnectivityManager>()) {
-                        "ConnectivityManager unavailable"
-                    },
-                    fetchMinIntervalSeconds = settings.sportsWidgetFetchThrottleSeconds,
-                    bypassThrottle = { settings.useMockWorldCupServer },
-                ),
             ),
         ).also {
             it.dispatch(AppAction.SetupChecklistAction.Init)
@@ -407,15 +380,6 @@ class Components(private val context: Context) {
     } else {
         null
     }
-
-    private fun setupSportsWidgetState() = SportsWidgetState(
-        countriesSelected = settings.sportsSelectedCountries,
-        hasSkippedFollowTeam = settings.hasSkippedSportsFollowTeam,
-        isVisible = settings.showHomepageSportsWidget,
-        isFeatureEnabled = settings.enableHomepageSportsWidget,
-        isCountdownWidgetVisible = settings.showHomepageCountdownWidget,
-        forceOneWeekToWorldCup = settings.forceOneWeekToWorldCup,
-    )
 
     val fxSuggest by lazyMonitored { FxSuggest(context, remoteSettingsService.value, analytics.crashReporter) }
 
@@ -448,13 +412,6 @@ class Components(private val context: Context) {
     val settingsIndexer by lazyMonitored {
         DefaultFenixSettingsIndexer(
             context = context,
-            excludedPreferenceKeys = {
-                if (!settings.enableHomepageSportsWidget || hasWorldCupEnded()) {
-                    setOf(context.getString(R.string.pref_key_show_homepage_sports_widget))
-                } else {
-                    emptySet()
-                }
-            },
             additionalProviders = listOf(
                 DataChoicesSearchProvider,
                 AIControlsSearchProvider,

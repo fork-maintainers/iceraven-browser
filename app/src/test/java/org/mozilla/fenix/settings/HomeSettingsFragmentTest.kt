@@ -26,7 +26,6 @@ import org.mozilla.fenix.components.AppStore
 import org.mozilla.fenix.components.Components
 import org.mozilla.fenix.components.Core
 import org.mozilla.fenix.components.appstate.AppAction.ContentRecommendationsAction
-import org.mozilla.fenix.components.appstate.AppAction.SportsWidgetAction
 import org.mozilla.fenix.ext.getPreferenceKey
 import org.mozilla.fenix.helpers.FenixGleanTestRule
 import org.mozilla.fenix.home.pocket.ContentRecommendationsFeatureHelper
@@ -127,56 +126,6 @@ internal class HomeSettingsFragmentTest {
     }
 
     @Test
-    fun `GIVEN the Homepage Sports Widget feature is disabled WHEN accessing settings THEN the World Cup toggle is not visible`() {
-        every { appSettings.enableHomepageSportsWidget } returns false
-
-        activateFragment()
-
-        assertFalse(getSportsWidgetPreference().isVisible)
-    }
-
-    @Test
-    fun `GIVEN the Homepage Sports Widget feature is enabled WHEN accessing settings THEN the World Cup toggle is visible`() {
-        every { appSettings.enableHomepageSportsWidget } returns true
-        every { appSettings.showHomepageSportsWidget } returns true
-
-        activateFragment()
-
-        assertTrue(getSportsWidgetPreference().isVisible)
-        assertTrue(getSportsWidgetPreference().isChecked)
-    }
-
-    @Test
-    fun `WHEN toggling the World Cup setting off THEN the preference is persisted and a VisibilityChanged action is dispatched`() {
-        activateFragment()
-        val result = getSportsWidgetPreference().callChangeListener(false)
-
-        assertTrue(result)
-        verify {
-            appStore.dispatch(SportsWidgetAction.VisibilityChanged(isVisible = false))
-            appPrefsEditor.putBoolean(
-                homeSettingsFragment.getString(R.string.pref_key_show_homepage_sports_widget),
-                false,
-            )
-        }
-    }
-
-    @Test
-    fun `WHEN toggling the World Cup setting on THEN the preference is persisted and a VisibilityChanged action is dispatched`() {
-        activateFragment()
-        val result = getSportsWidgetPreference().callChangeListener(true)
-
-        assertTrue(result)
-        verify {
-            appStore.dispatch(SportsWidgetAction.VisibilityChanged(isVisible = true))
-            appPrefsEditor.putBoolean(
-                homeSettingsFragment.getString(R.string.pref_key_show_homepage_sports_widget),
-                true,
-            )
-        }
-    }
-
-    @Test
     fun `WHEN toggling the privacy report setting THEN events preference_toggled is recorded with the privacy_report key`() {
         activateFragment()
 
@@ -214,11 +163,6 @@ internal class HomeSettingsFragmentTest {
     private fun getSponsoredStoriesPreference(): CheckBoxPreference =
         homeSettingsFragment.findPreference(
             homeSettingsFragment.getPreferenceKey(R.string.pref_key_pocket_sponsored_stories),
-        )!!
-
-    private fun getSportsWidgetPreference(): SwitchPreferenceCompat =
-        homeSettingsFragment.findPreference(
-            homeSettingsFragment.getPreferenceKey(R.string.pref_key_show_homepage_sports_widget),
         )!!
 
     private fun getPrivacyReportPreference(): SwitchPreferenceCompat =

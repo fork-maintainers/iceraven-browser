@@ -472,9 +472,6 @@
     <string name="pref_key_should_show_custom_tab_extensions" translatable="false">pref_key_should_show_custom_tab_extensions</string>
     <string name="pref_key_enable_homepage_as_new_tab" translatable="false">pref_key_enable_homepage_as_new_tab</string>
     <string name="pref_key_enable_universal_edge_to_edge_wallpapers" translatable="false">pref_key_enable_universal_edge_to_edge_wallpapers</string>
-    <string name="pref_key_enable_homepage_sports_widget" translatable="false">pref_key_enable_homepage_sports_widget</string>
-    <string name="pref_key_show_homepage_sports_widget" translatable="false">pref_key_show_homepage_sports_widget</string>
-    <string name="pref_key_show_homepage_countdown_widget" translatable="false">pref_key_show_homepage_countdown_widget</string>
     <string name="pref_key_enable_ads_client_for_stories" translatable="false">pref_key_enable_ads_client_for_stories</string>
     <string name="pref_key_enable_firefox_labs" translatable="false">pref_key_enable_firefox_labs</string>
     <string name="pref_key_top_sites_pager" translatable="false">pref_key_top_sites_pager</string>
@@ -614,12 +611,6 @@
     <string name="pref_key_enable_longfox" translatable="false">pref_key_enable_longfox</string>
     <string name="pref_key_app_launch_count" translatable="false">pref_key_app_launch_count</string>
     <string name="pref_key_longfox_peek_animation_shown_count" translatable="false">pref_key_longfox_peek_animation_shown_count</string>
-
-    <!-- Sports Widget -->
-    <string name="pref_key_sports_selected_countries" translatable="false">pref_key_sports_selected_countries</string>
-    <string name="pref_key_sports_has_skipped_follow_team" translatable="false">pref_key_sports_has_skipped_follow_team</string>
-    <string name="pref_key_use_mock_world_cup_server" translatable="false">pref_key_use_mock_world_cup_server</string>
-    <string name="pref_key_mock_world_cup_server_session" translatable="false">pref_key_mock_world_cup_server_session</string>
 
     <!-- Google Lens Integration -->
     <string name="pref_key_google_lens_integration" translatable="false">pref_key_google_lens_integration</string>

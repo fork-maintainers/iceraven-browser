@@ -142,8 +142,6 @@
     <string name="preferences_debug_settings_enable_doh_settings" translatable="false">Enable DNS over HTTPS settings</string>
     <!-- Label for enabling the persistent onboarding -->
     <string name="preferences_debug_settings_enable_persistent_onboarding" translatable="false">Show onboarding on each app cold open</string>
-    <!-- Label for enabling Homepage Sports Widget -->
-    <string name="preferences_debug_settings_homepage_sports_widget" translatable="false">Enable Homepage Sports Widget</string>
     <!-- Label for enabling Homepage Customization -->
     <string name="preferences_debug_settings_homepage_customization" translatable="false">Enable Homepage Customization</string>
     <!-- Label for enabling trending and recent searches on the Homepage Search -->
@@ -247,15 +245,6 @@
     <string name="profiler_uploaded_url_to_clipboard">URL copied to clipboard successfully</string>
     <string name="profiler_service_notification_channel_name" translatable="false">App Profiling Status</string>
     <string name="profiler_service_description" translatable="false">App Profiling Status</string>
-
-    <!-- Debug drawer Homepage Sports Widget tool -->
-    <string name="debug_drawer_sports_widget_tool_title">Homepage Sports Widget Tool</string>
-    <string name="debug_drawer_sports_widget_tool_world_cup_started">World Cup has started</string>
-    <string name="debug_drawer_sports_widget_tool_one_week_to_world_cup">One week to World Cup</string>
-    <string name="debug_drawer_sports_widget_tool_skipped_follow_team">Skip follow your team</string>
-    <string name="debug_drawer_sports_widget_tool_use_mock_server">Use mock World Cup server</string>
-    <string name="debug_drawer_sports_widget_tool_mock_server_session">Mock server session</string>
-    <string name="debug_drawer_sports_widget_tool_apply_session">Apply</string>
 
     <!-- Debug drawer Distribution tools -->
     <string name="debug_drawer_distribution_tools_title">Distribution Tools</string>

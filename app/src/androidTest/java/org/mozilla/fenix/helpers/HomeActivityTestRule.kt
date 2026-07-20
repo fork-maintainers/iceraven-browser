@@ -54,7 +54,6 @@ class HomeActivityTestRule(
         isWallpaperOnboardingEnabled: Boolean = settings.showWallpaperOnboarding,
         isDeleteSitePermissionsEnabled: Boolean = settings.deleteSitePermissions,
         isOpenInAppBannerEnabled: Boolean = settings.shouldShowOpenInAppBanner,
-        isHomepageSportsWidgetVisible: Boolean = false,
         etpPolicy: ETPPolicy = getETPPolicy(settings),
         isLocationPermissionEnabled: SitePermissionsRules.Action = getFeaturePermission(PhoneFeature.LOCATION, settings),
         isPageLoadTranslationsPromptEnabled: Boolean = false,
@@ -78,7 +77,6 @@ class HomeActivityTestRule(
         this.isWallpaperOnboardingEnabled = isWallpaperOnboardingEnabled
         this.isDeleteSitePermissionsEnabled = isDeleteSitePermissionsEnabled
         this.isOpenInAppBannerEnabled = isOpenInAppBannerEnabled
-        this.isHomepageSportsWidgetVisible = isHomepageSportsWidgetVisible
         this.etpPolicy = etpPolicy
         this.isLocationPermissionEnabled = isLocationPermissionEnabled
         this.enableOrDisablePageLoadTranslationsPrompt(isPageLoadTranslationsPromptEnabled)
@@ -190,7 +188,6 @@ class HomeActivityIntentTestRule internal constructor(
         isWallpaperOnboardingEnabled: Boolean = settings.showWallpaperOnboarding,
         isDeleteSitePermissionsEnabled: Boolean = settings.deleteSitePermissions,
         isOpenInAppBannerEnabled: Boolean = settings.shouldShowOpenInAppBanner,
-        isHomepageSportsWidgetVisible: Boolean = false,
         etpPolicy: ETPPolicy = getETPPolicy(settings),
         isLocationPermissionEnabled: SitePermissionsRules.Action = getFeaturePermission(PhoneFeature.LOCATION, settings),
         isPageLoadTranslationsPromptEnabled: Boolean = false,
@@ -216,7 +213,6 @@ class HomeActivityIntentTestRule internal constructor(
         this.isWallpaperOnboardingEnabled = isWallpaperOnboardingEnabled
         this.isDeleteSitePermissionsEnabled = isDeleteSitePermissionsEnabled
         this.isOpenInAppBannerEnabled = isOpenInAppBannerEnabled
-        this.isHomepageSportsWidgetVisible = isHomepageSportsWidgetVisible
         this.etpPolicy = etpPolicy
         this.isLocationPermissionEnabled = isLocationPermissionEnabled
         this.enableOrDisablePageLoadTranslationsPrompt(isPageLoadTranslationsPromptEnabled)
@@ -296,7 +292,6 @@ class HomeActivityIntentTestRule internal constructor(
         isWallpaperOnboardingEnabled = settings.showWallpaperOnboarding
         isDeleteSitePermissionsEnabled = settings.deleteSitePermissions
         isOpenInAppBannerEnabled = settings.shouldShowOpenInAppBanner
-        isHomepageSportsWidgetVisible = settings.showHomepageSportsWidget
         etpPolicy = getETPPolicy(settings)
         isLocationPermissionEnabled = getFeaturePermission(PhoneFeature.LOCATION, settings)
         isMicrosurveyEnabled = settings.microsurveyFeatureEnabled

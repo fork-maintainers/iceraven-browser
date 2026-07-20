@@ -48,11 +48,6 @@ import org.mozilla.fenix.home.recentvisits.RecentlyVisitedItem.RecentHistoryHigh
 import org.mozilla.fenix.home.recentvisits.interactor.RecentVisitsInteractor
 import org.mozilla.fenix.home.search.HomeSearchInteractor
 import org.mozilla.fenix.home.sessioncontrol.CollectionInteractor
-import org.mozilla.fenix.home.sports.CountrySelectorSource
-import org.mozilla.fenix.home.sports.LiveMatchRefreshSource
-import org.mozilla.fenix.home.sports.SportsCardImpressionSource
-import org.mozilla.fenix.home.sports.SportsCardType
-import org.mozilla.fenix.home.sports.SportsInteractor
 import org.mozilla.fenix.home.store.NimbusMessageState
 import org.mozilla.fenix.home.termsofuse.PrivacyNoticeBannerInteractor
 import org.mozilla.fenix.home.termsofuse.PrivacyNoticeBannerInteractorNoOp
@@ -83,7 +78,6 @@ internal object FakeHomepagePreview {
             HomeSearchInteractor by homeSearchInteractor,
             CollectionInteractor by collectionInteractor,
             PocketStoriesInteractor by storiesInteractor,
-            SportsInteractor by sportsInteractor,
             PrivacyNoticeBannerInteractor by PrivacyNoticeBannerInteractorNoOp {
             override fun reportSessionMetrics(state: AppState) { /* no op */ }
 
@@ -106,34 +100,6 @@ internal object FakeHomepagePreview {
             override fun onLongfoxEntryPointClicked() { /* no op */ }
 
             override fun onLongfoxEntryPointShown() { /* no op */ }
-        }
-
-    internal val sportsInteractor
-        get() = object : SportsInteractor {
-            override fun onCountriesSelected(countryCodes: Set<String>) { /* no op */ }
-
-            override fun onSkippedFollowTeam() { /* no op */ }
-
-            override fun onSportsWidgetDismissed() { /* no op */ }
-
-            override fun onViewScheduleClicked() { /* no op */ }
-
-            override fun onRefreshClicked(source: LiveMatchRefreshSource) { /* no op */ }
-
-            override fun onCountdownWidgetDismissed() { /* no op */ }
-
-            override fun onGetCustomWallpaperClicked() { /* no op */ }
-
-            override fun onSportsWidgetShareClicked() { /* no op */ }
-
-            override fun onMatchClicked(homeTeam: String?, awayTeam: String?, date: String?) { /* no op */ }
-
-            override fun onSportsWidgetCardShown(
-                cardType: SportsCardType,
-                source: SportsCardImpressionSource,
-            ) { /* no op */ }
-
-            override fun onCountrySelectorShown(source: CountrySelectorSource) { /* no op */ }
         }
 
     internal val storiesInteractor

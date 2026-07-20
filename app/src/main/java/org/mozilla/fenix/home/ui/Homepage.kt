@@ -52,11 +52,9 @@ import org.mozilla.fenix.browser.browsingmode.BrowsingMode
 import org.mozilla.fenix.components.appstate.AppAction
 import org.mozilla.fenix.components.appstate.AppAction.ShortcutAction
 import org.mozilla.fenix.components.appstate.setup.checklist.SetupChecklistState
-import org.mozilla.fenix.components.appstate.sports.SportsWidgetState
 import org.mozilla.fenix.components.components
 import org.mozilla.fenix.compose.MessageCard
 import org.mozilla.fenix.compose.home.HomeSectionHeader
-import org.mozilla.fenix.debugsettings.sportswidget.SportsWidgetDebugTool
 import org.mozilla.fenix.home.bookmarks.Bookmark
 import org.mozilla.fenix.home.bookmarks.interactor.BookmarksInteractor
 import org.mozilla.fenix.home.bookmarks.view.Bookmarks
@@ -80,10 +78,6 @@ import org.mozilla.fenix.home.recentvisits.view.RecentlyVisited
 import org.mozilla.fenix.home.sessioncontrol.CollectionInteractor
 import org.mozilla.fenix.home.sessioncontrol.MessageCardInteractor
 import org.mozilla.fenix.home.setup.ui.SetupChecklist
-import org.mozilla.fenix.home.sports.CountrySelectorSource
-import org.mozilla.fenix.home.sports.hasWorldCupEnded
-import org.mozilla.fenix.home.sports.ui.SportsCountrySelectorBottomSheet
-import org.mozilla.fenix.home.sports.ui.SportsWidget
 import org.mozilla.fenix.home.store.HeaderState
 import org.mozilla.fenix.home.store.HomepageState
 import org.mozilla.fenix.home.store.MiddleSearchState
@@ -128,7 +122,6 @@ internal fun Homepage(
 ) {
     val scrollState = rememberScrollState()
     val browsingModeChanged = interactor::onPrivateModeButtonClicked
-    var showSportsCountrySelector by remember { mutableStateOf(false) }
     var shortcutsDialogState by remember { mutableStateOf<DialogState>(DialogState.Closed) }
 
     BoxWithConstraints(
@@ -165,23 +158,13 @@ internal fun Homepage(
             when (val headerState = state.headerState) {
                 is HeaderState.Experimental.Normal -> {
                     val settings = components.settings
-                    val shouldDisplaySportsLogo =
-                        settings.enableHomepageSportsWidget && settings.showHomepageSportsWidget &&
-                            !hasWorldCupEnded()
 
                     ExperimentalHomepageHeader(
                         showStoriesButton = headerState.showStoriesButton,
                         showButtonAnimation = headerState.showButtonAnimation,
-                        isSportsWidgetEnabled = shouldDisplaySportsLogo,
                         onPrivateModeTapped = { browsingModeChanged(BrowsingMode.Private) },
                         onStoriesTapped = { interactor.onDiscoverMoreClicked() },
                         onNewsAnimationShown = { settings.recordNewsButtonAnimationShown() },
-                        onLogoClicked = {
-                            if (settings.showHomepageSportsWidget) {
-                                interactor.onCountrySelectorShown(CountrySelectorSource.SPORTS_LOGO)
-                                showSportsCountrySelector = true
-                            }
-                        },
                     )
                 }
 
@@ -192,21 +175,9 @@ internal fun Homepage(
                 }
 
                 is HeaderState.Normal -> {
-                    val settings = components.settings
-                    val shouldDisplaySportsLogo =
-                        settings.enableHomepageSportsWidget && settings.showHomepageSportsWidget &&
-                            !hasWorldCupEnded()
-
                     HomepageHeader(
                         browsingMode = state.browsingMode,
                         browsingModeChanged = browsingModeChanged,
-                        isSportsWidgetEnabled = shouldDisplaySportsLogo,
-                        onLogoClicked = {
-                            if (settings.showHomepageSportsWidget) {
-                                interactor.onCountrySelectorShown(CountrySelectorSource.SPORTS_LOGO)
-                                showSportsCountrySelector = true
-                            }
-                        },
                     )
                 }
             }
@@ -264,29 +235,6 @@ internal fun Homepage(
                                     modifier = Modifier.padding(top = 16.dp),
                                     longfoxEnabled = longfoxEnabled,
                                     showLongfoxAnimation = showLongfoxAnimation,
-                                )
-                            }
-
-                            if (sportsWidgetState.isShown) {
-                                SportsWidget(
-                                    sportsWidgetState = sportsWidgetState,
-                                    onDismiss = interactor::onSportsWidgetDismissed,
-                                    onCountdownWidgetDismiss = interactor::onCountdownWidgetDismissed,
-                                    onViewSchedule = interactor::onViewScheduleClicked,
-                                    onFollowTeam = { source ->
-                                        interactor.onCountrySelectorShown(source)
-                                        showSportsCountrySelector = true
-                                    },
-                                    onSkip = interactor::onSkippedFollowTeam,
-                                    onGetCustomWallpaper = interactor::onGetCustomWallpaperClicked,
-                                    onShare = interactor::onSportsWidgetShareClicked,
-                                    onRefresh = { source ->
-                                        interactor.onRefreshClicked(source)
-                                    },
-                                    onMatchClicked = { homeTeam, awayTeam, date ->
-                                        interactor.onMatchClicked(homeTeam, awayTeam, date)
-                                    },
-                                    onCardShown = interactor::onSportsWidgetCardShown,
                                 )
                             }
 
@@ -366,24 +314,6 @@ internal fun Homepage(
 
                             Spacer(Modifier.height(bottomPadding.dp))
 
-                            if (showSportsCountrySelector) {
-                                val selectedCountryCode = sportsWidgetState.countriesSelected.firstOrNull()
-                                SportsCountrySelectorBottomSheet(
-                                    selectedCountryCode = selectedCountryCode,
-                                    eliminatedCountryCodes = sportsWidgetState.eliminatedCountries,
-                                    onCountrySelected = { countryCode ->
-                                        val selection = if (countryCode == selectedCountryCode) {
-                                            emptySet()
-                                        } else {
-                                            setOf(countryCode)
-                                        }
-                                        interactor.onCountriesSelected(selection)
-                                        showSportsCountrySelector = false
-                                    },
-                                    onDismiss = { showSportsCountrySelector = false },
-                                )
-                            }
-
                             when (shortcutsDialogState) {
                                 DialogState.AddShortcutBottomSheet -> {
                                     val merinoManifestProvider = components.core.merinoManifestProvider
@@ -440,13 +370,6 @@ internal fun Homepage(
                                 }
 
                                 DialogState.Closed -> Unit
-                            }
-
-                            if (sportsWidgetState.isDebugToolVisible) {
-                                SportsWidgetDebugTool(
-                                    state = sportsWidgetState,
-                                    appStore = components.appStore,
-                                )
                             }
                         }
                     }
@@ -695,7 +618,6 @@ private fun HomepagePreview() {
                     longfoxEnabled = false,
                     showLongfoxAnimation = false,
                     trackersBlockedCount = 754,
-                    sportsWidgetState = SportsWidgetState(),
                     headerState = HeaderState.Normal,
                     middleSearchState = MiddleSearchState(searchBarVisible = true, searchBarEnabled = false),
                     firstFrameDrawn = true,
@@ -737,7 +659,6 @@ private fun HomepageBannerPreview() {
                     longfoxEnabled = false,
                     showLongfoxAnimation = false,
                     trackersBlockedCount = 754,
-                    sportsWidgetState = SportsWidgetState(),
                     headerState = HeaderState.Normal,
                     middleSearchState = MiddleSearchState(searchBarVisible = true, searchBarEnabled = false),
                     firstFrameDrawn = true,
@@ -770,7 +691,6 @@ private fun HomepagePreviewCollections() {
                     longfoxEnabled = false,
                     showLongfoxAnimation = false,
                     trackersBlockedCount = 754,
-                    sportsWidgetState = SportsWidgetState(),
                     headerState = HeaderState.Normal,
                     middleSearchState = MiddleSearchState(searchBarVisible = true, searchBarEnabled = false),
                     firstFrameDrawn = true,
@@ -806,7 +726,6 @@ private fun MinimalHomepagePreview() {
                     longfoxEnabled = false,
                     showLongfoxAnimation = false,
                     trackersBlockedCount = 754,
-                    sportsWidgetState = SportsWidgetState(),
                     headerState = HeaderState.Normal,
                     firstFrameDrawn = true,
                     setupChecklistState = null,

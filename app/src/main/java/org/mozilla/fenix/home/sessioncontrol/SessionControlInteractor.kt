@@ -29,11 +29,6 @@ import org.mozilla.fenix.home.recentvisits.RecentlyVisitedItem.RecentHistoryGrou
 import org.mozilla.fenix.home.recentvisits.RecentlyVisitedItem.RecentHistoryHighlight
 import org.mozilla.fenix.home.recentvisits.controller.RecentVisitsController
 import org.mozilla.fenix.home.search.HomeSearchController
-import org.mozilla.fenix.home.sports.CountrySelectorSource
-import org.mozilla.fenix.home.sports.LiveMatchRefreshSource
-import org.mozilla.fenix.home.sports.SportsCardImpressionSource
-import org.mozilla.fenix.home.sports.SportsCardType
-import org.mozilla.fenix.home.sports.SportsController
 import org.mozilla.fenix.home.termsofuse.PrivacyNoticeBannerController
 import org.mozilla.fenix.home.toolbar.ToolbarController
 import org.mozilla.fenix.home.topsites.AddShortcutEntryPoint
@@ -211,7 +206,6 @@ class SessionControlInteractor(
     private val privacyNoticeBannerController: PrivacyNoticeBannerController,
     private val trackingProtectionController: TrackingProtectionController,
     private val logoController: LogoController,
-    private val sportsController: SportsController,
 ) : HomepageInteractor {
 
     override fun onCollectionAddTabTapped(collection: TabCollection) {
@@ -446,30 +440,6 @@ class SessionControlInteractor(
         privacyNoticeBannerController.onBannerDisplayed()
     }
 
-    override fun onCountriesSelected(countryCodes: Set<String>) {
-        sportsController.handleCountriesSelected(countryCodes = countryCodes)
-    }
-
-    override fun onSkippedFollowTeam() {
-        sportsController.handleSkippedFollowTeam()
-    }
-
-    override fun onSportsWidgetDismissed() {
-        sportsController.handleSportsWidgetDismissed()
-    }
-
-    override fun onViewScheduleClicked() {
-        sportsController.handleViewScheduleClicked()
-    }
-
-    override fun onRefreshClicked(source: LiveMatchRefreshSource) {
-        sportsController.handleRefreshClicked(source)
-    }
-
-    override fun onCountdownWidgetDismissed() {
-        sportsController.handleCountdownWidgetDismissed()
-    }
-
     override fun onPrivacyReportTapped() {
         trackingProtectionController.handleProtectionStatusPillClicked()
     }
@@ -480,25 +450,5 @@ class SessionControlInteractor(
 
     override fun onLongfoxEntryPointShown() {
         logoController.handleLongfoxEntryPointShown()
-    }
-
-    override fun onGetCustomWallpaperClicked() {
-        sportsController.handleOnGetCustomWallpaperClicked()
-    }
-
-    override fun onSportsWidgetShareClicked() {
-        sportsController.handleSportsWidgetShareClicked()
-    }
-
-    override fun onMatchClicked(homeTeam: String?, awayTeam: String?, date: String?) {
-        sportsController.handleMatchClicked(homeTeam = homeTeam, awayTeam = awayTeam, date = date)
-    }
-
-    override fun onSportsWidgetCardShown(cardType: SportsCardType, source: SportsCardImpressionSource) {
-        sportsController.handleSportsWidgetCardShown(cardType = cardType, source = source)
-    }
-
-    override fun onCountrySelectorShown(source: CountrySelectorSource) {
-        sportsController.handleCountrySelectorShown(source)
     }
 }

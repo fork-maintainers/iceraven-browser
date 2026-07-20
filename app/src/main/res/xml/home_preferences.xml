@@ -24,10 +24,6 @@
         android:title="@string/customize_toggle_jump_back_in" />
 
     <androidx.preference.SwitchPreferenceCompat
-        android:key="@string/pref_key_show_homepage_sports_widget"
-        android:title="@string/customize_toggle_world_cup" />
-
-    <androidx.preference.SwitchPreferenceCompat
         android:key="@string/pref_key_customization_bookmarks"
         android:title="@string/customize_toggle_bookmarks" />
 

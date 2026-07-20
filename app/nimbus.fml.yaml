@@ -1273,41 +1273,6 @@ features:
           enabled: true
 
 
-  homepage-sports-widget:
-    description: Feature to enable Homepage Sports Widget for users on Firefox on Android.
-    variables:
-      enabled:
-        description: If true, Homepage Sports Widget is enabled.
-        type: Boolean
-        default: false
-      force-one-week-to-world-cup:
-        description: >
-          If true, treat the user as being within one week of the World Cup kickoff regardless of the
-          device date. Used to roll out the pre-tournament pager (follow your team + view-schedule cards)
-          ahead of the calendar date for testing or staggered launches. The natural date-based check
-          still applies when this is false (the default).
-        type: Boolean
-        default: false
-      fetch-throttle-seconds:
-        description: >
-          Minimum interval, in seconds, that the client will wait between Sports Widget fetches.
-          Guards the upstream Merino endpoint against refresh-button spam and Home/onResume thrash.
-          The default aligns with the upstream cache TTL — a shorter interval just returns the
-          same payload at the cost of battery and bandwidth. Lower this remotely only if the
-          upstream cache TTL is also lowered, otherwise users will see no fresher data.
-        type: Int
-        default: 60
-    defaults:
-      - channel: developer
-        value:
-          enabled: true
-      - channel: nightly
-        value:
-          enabled: true
-      - channel: beta
-        value:
-          enabled: true
-
   webcompat-reporter-enhancements:
     description: Feature to enable WebCompat Reporter enhancements for users on Firefox Android.
     variables:
