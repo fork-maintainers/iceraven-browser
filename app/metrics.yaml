@@ -8605,8 +8605,6 @@ tab:
     notification_emails:
       - android-probes@mozilla.com
     expires: never
-    no_lint:
-      - COMMON_PREFIX
     metadata:
       tags:
         - Media
@@ -13262,8 +13260,6 @@ wallpapers:
     data_sensitivity:
       - interaction
     expires: never
-    no_lint:
-      - COMMON_PREFIX
     metadata:
       tags:
         - Wallpapers
@@ -13295,8 +13291,6 @@ wallpapers:
     data_sensitivity:
       - interaction
     expires: never
-    no_lint:
-      - COMMON_PREFIX
     metadata:
       tags:
         - Wallpapers
