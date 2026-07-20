@@ -484,40 +484,27 @@ class PrivateBrowsingLockFeatureTest {
         assertFalse(appStore.state.isPrivateScreenLocked)
     }
 
-    // tests for switching between browsing modes
+    // turning the feature on and off tests
     @Test
-    fun `GIVEN the feature is enabled and private tabs exist WHEN switching to normal mode THEN lock private mode`() {
+    fun `GIVEN the feature is on and there are private tabs WHEN switching to normal mode THEN we unlock private tabs and don't lock it`() {
         val isFeatureEnabled = true
-        val appStore = createAppStore(BrowsingMode.Private, isPrivateScreenLocked = false)
+        val mode = BrowsingMode.Private
+
+        val appStore = createAppStore(mode, isPrivateScreenLocked = true)
         val browserStore = createBrowserStore(mixedTabs)
-        val feature = createFeature(appStore, browserStore, createStorage(isFeatureEnabled))
-        val activity = mockk<AppCompatActivity>(relaxed = true)
-        every { activity.isChangingConfigurations } returns false
 
-        assertTrue(appStore.state.mode == BrowsingMode.Private)
-        assertFalse(appStore.state.isPrivateScreenLocked)
+        createFeature(appStore, browserStore, createStorage(isFeatureEnabled))
 
-        appStore.dispatch(AppAction.BrowsingModeManagerModeChanged(mode = BrowsingMode.Normal))
-        feature.onStart(activity)
-
-        assertTrue(appStore.state.mode == BrowsingMode.Normal)
         assertTrue(appStore.state.isPrivateScreenLocked)
-    }
 
-    @Test
-    fun `GIVEN the feature is enabled and private tabs don't exist WHEN switching to normal mode THEN don't lock private mode`() {
-        val isFeatureEnabled = true
-        val appStore = createAppStore(BrowsingMode.Private, isPrivateScreenLocked = false)
-        val browserStore = createBrowserStore(regularTabs)
-        val feature = createFeature(appStore, browserStore, createStorage(isFeatureEnabled))
-        val activity = mockk<AppCompatActivity>(relaxed = true)
-        every { activity.isChangingConfigurations } returns false
+        // imitate user passing auth
+        appStore.dispatch(AppAction.PrivateBrowsingLockAction.UpdatePrivateBrowsingLock(isLocked = false))
 
         assertTrue(appStore.state.mode == BrowsingMode.Private)
         assertFalse(appStore.state.isPrivateScreenLocked)
 
+        // verify that going to normal mode doesn't lock private mode
         appStore.dispatch(AppAction.BrowsingModeManagerModeChanged(mode = BrowsingMode.Normal))
-        feature.onStart(activity)
 
         assertTrue(appStore.state.mode == BrowsingMode.Normal)
         assertFalse(appStore.state.isPrivateScreenLocked)

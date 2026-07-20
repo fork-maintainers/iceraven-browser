@@ -62,7 +62,6 @@ import org.mozilla.fenix.browser.browsingmode.BrowsingModeManager
 import org.mozilla.fenix.components.AppStore
 import org.mozilla.fenix.components.TabCollectionStorage
 import org.mozilla.fenix.components.accounts.FenixFxAEntryPoint
-import org.mozilla.fenix.components.appstate.AppAction
 import org.mozilla.fenix.components.appstate.AppState
 import org.mozilla.fenix.components.bookmarks.BookmarksUseCase
 import org.mozilla.fenix.components.share.ShareSource
@@ -1425,8 +1424,6 @@ class DefaultTabManagerControllerTest {
         )
         trayStore.dispatch(TabsTrayAction.ExitSelectMode)
 
-        every { settings.privateBrowsingLockedFeatureEnabled } returns false
-        every { appStore.state.mode.isPrivate } returns false
         controller.handleTabSelected(tab1, "Tab Manager")
         verify(exactly = 1) { controller.handleTabSelected(tab1, "Tab Manager") }
 
@@ -1701,8 +1698,6 @@ class DefaultTabManagerControllerTest {
 
         assertNull(TabsTray.openedExistingTab.testGetValue())
 
-        every { settings.privateBrowsingLockedFeatureEnabled } returns false
-        every { appStore.state.mode.isPrivate } returns false
         controller.handleTabSelected(tab, source)
 
         assertNotNull(TabsTray.openedExistingTab.testGetValue())
@@ -1731,8 +1726,6 @@ class DefaultTabManagerControllerTest {
 
         assertNull(TabsTray.openedExistingTab.testGetValue())
 
-        every { settings.privateBrowsingLockedFeatureEnabled } returns false
-        every { appStore.state.mode.isPrivate } returns false
         controller.handleTabSelected(tab, source)
 
         assertNotNull(TabsTray.openedExistingTab.testGetValue())
@@ -1760,8 +1753,6 @@ class DefaultTabManagerControllerTest {
 
         assertNull(TabsTray.openedExistingTab.testGetValue())
 
-        every { settings.privateBrowsingLockedFeatureEnabled } returns false
-        every { appStore.state.mode.isPrivate } returns false
         controller.handleTabSelected(tab, null)
 
         assertNotNull(TabsTray.openedExistingTab.testGetValue())
@@ -1804,8 +1795,6 @@ class DefaultTabManagerControllerTest {
             },
         )
 
-        every { settings.privateBrowsingLockedFeatureEnabled } returns false
-        every { appStore.state.mode.isPrivate } returns true
         controller.handleTabSelected(currentTab, "source")
         controller.handleTabDeletion(TabsTrayItem.Tab(tab = privateTabData))
 
@@ -2172,8 +2161,6 @@ class DefaultTabManagerControllerTest {
             every { selectedTabId } returns testHomeTab.id
         }
 
-        every { settings.privateBrowsingLockedFeatureEnabled } returns false
-        every { appStore.state.mode.isPrivate } returns false
         createController().handleNavigationRequested()
 
         verify { navController.navigate(TabManagementFragmentDirections.actionGlobalHome()) }
@@ -2188,8 +2175,6 @@ class DefaultTabManagerControllerTest {
             every { selectedTabId } returns testNormalTab.id
         }
 
-        every { settings.privateBrowsingLockedFeatureEnabled } returns false
-        every { appStore.state.mode.isPrivate } returns false
         createController().handleNavigationRequested()
 
         verify { navController.navigate(R.id.browserFragment) }
@@ -2215,60 +2200,6 @@ class DefaultTabManagerControllerTest {
                 ),
                 navOptions = null,
             )
-        }
-    }
-
-    @Test
-    fun `GIVEN private mode lock feature is enabled and browser mode is normal WHEN navigation is called THEN UpdatePrivateBrowsingLock is called`() {
-        every { settings.privateBrowsingLockedFeatureEnabled } returns true
-        every { appStore.state } returns AppState(mode = BrowsingMode.Normal)
-        every { navController.currentDestination?.id } returns R.id.homeFragment
-        every { navController.popBackStack(R.id.browserFragment, false) } returns false
-        every { browserStore.state } returns mockk {
-            every { tabs } returns listOf(testNormalTab, testHomeTab)
-            every { selectedTabId } returns testNormalTab.id
-        }
-
-        createController().handleNavigationRequested()
-
-        verify {
-            appStore.dispatch(AppAction.PrivateBrowsingLockAction.UpdatePrivateBrowsingLock(isLocked = true))
-        }
-    }
-
-    @Test
-    fun `GIVEN private mode lock feature is enabled and browser mode is private WHEN navigation is called THEN UpdatePrivateBrowsingLock is not called`() {
-        every { settings.privateBrowsingLockedFeatureEnabled } returns true
-        every { appStore.state } returns AppState(mode = BrowsingMode.Private)
-        every { navController.currentDestination?.id } returns R.id.homeFragment
-        every { navController.popBackStack(R.id.browserFragment, false) } returns false
-        every { browserStore.state } returns mockk {
-            every { tabs } returns listOf(testPrivateTab, testHomeTab)
-            every { selectedTabId } returns testPrivateTab.id
-        }
-
-        createController().handleNavigationRequested()
-
-        verify(exactly = 0) {
-            appStore.dispatch(AppAction.PrivateBrowsingLockAction.UpdatePrivateBrowsingLock(isLocked = true))
-        }
-    }
-
-    @Test
-    fun `GIVEN private mode lock feature is not enabled and browser mode is normal WHEN navigation is called THEN UpdatePrivateBrowsingLock is called`() {
-        every { settings.privateBrowsingLockedFeatureEnabled } returns false
-        every { appStore.state } returns AppState(mode = BrowsingMode.Normal)
-        every { navController.currentDestination?.id } returns R.id.homeFragment
-        every { navController.popBackStack(R.id.browserFragment, false) } returns false
-        every { browserStore.state } returns mockk {
-            every { tabs } returns listOf(testNormalTab, testHomeTab)
-            every { selectedTabId } returns testNormalTab.id
-        }
-
-        createController().handleNavigationRequested()
-
-        verify(exactly = 0) {
-            appStore.dispatch(AppAction.PrivateBrowsingLockAction.UpdatePrivateBrowsingLock(isLocked = true))
         }
     }
 

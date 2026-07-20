@@ -13,6 +13,7 @@ import io.mockk.mockk
 import io.mockk.spyk
 import io.mockk.verify
 import mozilla.components.support.test.robolectric.testContext
+import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Before
@@ -20,7 +21,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mozilla.fenix.NavGraphDirections
-import org.mozilla.fenix.components.appstate.AppAction
 import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.helpers.FenixGleanTestRule
 import org.mozilla.fenix.helpers.MockkRetryTestRule
@@ -76,8 +76,6 @@ class TabManagementFragmentTest {
     fun `WHEN dismissTabManager is called THEN it dismisses the tab manager`() {
         val navController: NavController = mockk(relaxed = true)
         every { fragment.recordBreadcrumb(any()) } just Runs
-        every { context.components.appStore.state.mode.isPrivate } returns false
-        every { context.components.settings.privateBrowsingLockedFeatureEnabled } returns false
 
         fragment.dismissTabManager(navController = navController)
 
@@ -230,44 +228,6 @@ class TabManagementFragmentTest {
                 tabState = fakeTab(isPrivate = true),
             ),
         )
-    }
-
-    @Test
-    fun `GIVEN privateBrowsingLockedFeatureEnabled is true and is normal browsing WHEN dismissTabManager is called THEN UpdatePrivateBrowsingLock is dispatched`() {
-        val navController: NavController = mockk(relaxed = true)
-        every { fragment.recordBreadcrumb(any()) } just Runs
-        every { context.components.settings.privateBrowsingLockedFeatureEnabled } returns true
-        every { context.components.appStore.state.mode.isPrivate } returns false
-
-        fragment.dismissTabManager(navController = navController)
-
-        val appStore = context.components.appStore
-        verify(exactly = 1) { appStore.dispatch(AppAction.PrivateBrowsingLockAction.UpdatePrivateBrowsingLock(isLocked = true)) }
-    }
-
-    @Test
-    fun `GIVEN privateBrowsingLockedFeatureEnabled is false and is normal browsing WHEN dismissTabManager is called THEN UpdatePrivateBrowsingLock is not dispatched`() {
-        val navController: NavController = mockk(relaxed = true)
-        every { fragment.recordBreadcrumb(any()) } just Runs
-        every { context.components.settings.privateBrowsingLockedFeatureEnabled } returns false
-        every { context.components.appStore.state.mode.isPrivate } returns false
-
-        fragment.dismissTabManager(navController = navController)
-
-        val appStore = context.components.appStore
-        verify(exactly = 0) { appStore.dispatch(AppAction.PrivateBrowsingLockAction.UpdatePrivateBrowsingLock(isLocked = true)) }
-    }
-
-    fun `GIVEN privateBrowsingLockedFeatureEnabled is true and is private browsing WHEN dismissTabManager is called THEN UpdatePrivateBrowsingLock is not dispatched`() {
-        val navController: NavController = mockk(relaxed = true)
-        every { fragment.recordBreadcrumb(any()) } just Runs
-        every { context.components.settings.privateBrowsingLockedFeatureEnabled } returns true
-        every { context.components.appStore.state.mode.isPrivate } returns true
-
-        fragment.dismissTabManager(navController = navController)
-
-        val appStore = context.components.appStore
-        verify(exactly = 0) { appStore.dispatch(AppAction.PrivateBrowsingLockAction.UpdatePrivateBrowsingLock(isLocked = true)) }
     }
 
     private fun fakeTab(isPrivate: Boolean) = createTab(

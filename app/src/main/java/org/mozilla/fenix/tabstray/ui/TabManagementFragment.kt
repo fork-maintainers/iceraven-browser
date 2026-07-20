@@ -61,7 +61,6 @@ import org.mozilla.fenix.GleanMetrics.PrivateBrowsingLocked
 import org.mozilla.fenix.GleanMetrics.TabsTray
 import org.mozilla.fenix.HomeActivity
 import org.mozilla.fenix.R
-import org.mozilla.fenix.components.appstate.AppAction
 import org.mozilla.fenix.compose.navigation.BottomSheetSceneStrategy
 import org.mozilla.fenix.ext.actualInactiveTabs
 import org.mozilla.fenix.ext.components
@@ -876,14 +875,6 @@ class TabManagementFragment : Fragment() {
         // is guaranteed after that.
         recordBreadcrumb("TabManagementFragment dismissTabManager")
         navController.popBackStack()
-
-        val shouldLockPrivateMode = requireComponents.settings.privateBrowsingLockedFeatureEnabled &&
-            !requireComponents.appStore.state.mode.isPrivate
-        if (shouldLockPrivateMode) {
-            requireComponents.appStore.dispatch(
-                AppAction.PrivateBrowsingLockAction.UpdatePrivateBrowsingLock(isLocked = true),
-            )
-        }
     }
 
     /**
