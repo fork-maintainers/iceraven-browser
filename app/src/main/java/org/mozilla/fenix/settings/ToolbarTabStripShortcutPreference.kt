@@ -13,6 +13,7 @@ import androidx.preference.PreferenceViewHolder
 import org.mozilla.fenix.R
 import org.mozilla.fenix.browser.browsingmode.BrowsingMode.Normal
 import org.mozilla.fenix.ext.components
+import org.mozilla.fenix.nimbus.FxNimbus
 
 const val TAB_STRIP_TOOLBAR_TYPE = "tab_strip"
 
@@ -20,10 +21,12 @@ internal class ToolbarTabStripShortcutPreference @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
 ) : ToolbarShortcutPreference(context, attrs) {
+    var isTranslationsFeatureEnabled: Boolean = false
 
     override val options: List<ShortcutOption>
         get() = tabStripShortcutOptions.filterNot {
-            it.key == ShortcutType.SUMMARIZE && !isSummarizationEnabled
+            (it.key == ShortcutType.SUMMARIZE && !isSummarizationAvailable) ||
+                (it.key == ShortcutType.TRANSLATE && !isTranslationsFeatureAvailable)
         }
 
     // Summarization is unavailable in private browsing, so keep the option visible but disabled.
@@ -58,9 +61,19 @@ internal class ToolbarTabStripShortcutPreference @JvmOverloads constructor(
         return simplePreview.findViewById(R.id.selected_simple_shortcut_icon)
     }
 
-    private val isSummarizationEnabled: Boolean
+    private val isSummarizationAvailable: Boolean
         get() = context.components.core.summarizeFeatureSettings.canShowFeature
 
     private val isBrowsingInNormalMode: Boolean
         get() = context.components.appStore.state.mode == Normal
+
+    private val isTranslationsFeatureAvailable: Boolean
+        get() {
+            val browserStore = this.context.components.core.store
+            val isTranslationEngineSupported = browserStore.state.translationEngine.isEngineSupported ?: false
+
+            return isTranslationEngineSupported &&
+                isTranslationsFeatureEnabled &&
+                FxNimbus.features.translations.value().mainFlowToolbarEnabled
+        }
 }

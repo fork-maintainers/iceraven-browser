@@ -33,6 +33,8 @@ import mozilla.components.browser.state.action.ShareResourceAction
 import mozilla.components.browser.state.action.TabListAction.AddTabAction
 import mozilla.components.browser.state.action.TabListAction.RemoveTabAction
 import mozilla.components.browser.state.action.TrackingProtectionAction
+import mozilla.components.browser.state.action.TranslationsAction
+import mozilla.components.browser.state.action.TranslationsAction.SetEngineSupportedAction
 import mozilla.components.browser.state.engine.EngineMiddleware
 import mozilla.components.browser.state.ext.getUrl
 import mozilla.components.browser.state.search.RegionState
@@ -43,6 +45,7 @@ import mozilla.components.browser.state.state.SearchState
 import mozilla.components.browser.state.state.SecurityInfo
 import mozilla.components.browser.state.state.TabSessionState
 import mozilla.components.browser.state.state.TrackingProtectionState
+import mozilla.components.browser.state.state.TranslationsBrowserState
 import mozilla.components.browser.state.state.content.DownloadState
 import mozilla.components.browser.state.state.content.ShareResourceState
 import mozilla.components.browser.state.state.createTab
@@ -174,6 +177,7 @@ import org.mozilla.fenix.summarization.SummarizationNavigator
 import org.mozilla.fenix.summarization.onboarding.SummarizationFeatureDiscoveryConfiguration
 import org.mozilla.fenix.tabstray.redux.state.Page
 import org.mozilla.fenix.tabstray.ui.AccessPoint
+import org.mozilla.fenix.translations.TranslationsEnabledSettings
 import org.mozilla.fenix.utils.Settings
 import org.mozilla.fenix.utils.Stories.markAsOpenedFromHomeScreen
 import org.mozilla.fenix.utils.Stories.markAsOpenedFromStoriesScreen
@@ -199,7 +203,9 @@ class BrowserToolbarMiddlewareTest {
     private val browserScreenStore: BrowserScreenStore = mockk(relaxed = true) {
         every { state } returns browserScreenState
     }
-    private val browserStore = BrowserStore()
+    private val browserStore = BrowserStore(
+        BrowserState(translationEngine = TranslationsBrowserState(isEngineSupported = true)),
+    )
     private val clipboard: ClipboardHandler = mockk(relaxed = true)
     private val navController: NavController = mockk(relaxed = true)
     private val browsingModeManager = SimpleBrowsingModeManager(Normal)
@@ -215,6 +221,8 @@ class BrowserToolbarMiddlewareTest {
     }
     private val settings = Settings(testContext)
     private val summarizationFeatureSettings: SummarizationFeatureDiscoveryConfiguration = mockk()
+    private val translationsFeatureSettings: TranslationsEnabledSettings =
+        TranslationsEnabledSettings.inMemory(isEnabledInitial = true)
     private val tabId = "test"
     private val tab: TabSessionState = mockk(relaxed = true) {
         every { id } returns tabId
@@ -3414,6 +3422,82 @@ class BrowserToolbarMiddlewareTest {
     }
 
     @Test
+    fun `GIVEN simple toolbar uses the translate shortcut but translations are disabled WHEN initializing toolbar THEN show New Tab in end browser actions`() = runTest(testDispatcher) {
+        settings.toolbarSimpleShortcutKey = ShortcutType.TRANSLATE.value
+        val middleware = buildMiddleware(
+            translationsFeatureSettings = TranslationsEnabledSettings.inMemory(isEnabledInitial = false),
+        )
+
+        val toolbarStore = buildStore(middleware)
+
+        val shortcutButton = toolbarStore.state.displayState.browserActionsEnd[0] as ActionButtonRes
+        assertEquals(expectedNewTabButton(), shortcutButton)
+    }
+
+    @Test
+    fun `GIVEN simple toolbar uses the translate shortcut but the translations engine is not supported WHEN initializing toolbar THEN show New Tab in end browser actions`() = runTest(testDispatcher) {
+        settings.toolbarSimpleShortcutKey = ShortcutType.TRANSLATE.value
+        val middleware = buildMiddleware(
+            browserStore = BrowserStore(
+                BrowserState(translationEngine = TranslationsBrowserState(isEngineSupported = false)),
+            ),
+        )
+
+        val toolbarStore = buildStore(middleware)
+
+        val shortcutButton = toolbarStore.state.displayState.browserActionsEnd[0] as ActionButtonRes
+        assertEquals(expectedNewTabButton(), shortcutButton)
+    }
+
+    @Test
+    fun `GIVEN the translate shortcut is set but the translations feature is disabled WHEN the feature is enabled THEN the end browser actions are updated to show it`() = runTest(testDispatcher) {
+        settings.toolbarSimpleShortcutKey = ShortcutType.TRANSLATE.value
+        val translationsFeatureSettings = TranslationsEnabledSettings.inMemory(isEnabledInitial = false)
+        val toolbarStore = buildStore(
+            buildMiddleware(translationsFeatureSettings = translationsFeatureSettings),
+        )
+        assertEquals(
+            expectedNewTabButton(),
+            toolbarStore.state.displayState.browserActionsEnd[0] as ActionButtonRes,
+        )
+
+        translationsFeatureSettings.setEnabled(true)
+        testDispatcher.scheduler.advanceUntilIdle()
+
+        assertEquals(
+            expectedTranslateButton(),
+            toolbarStore.state.displayState.browserActionsEnd[0] as ActionButtonRes,
+        )
+    }
+
+    @Test
+    fun `GIVEN the translate shortcut is set but the current search engine is not supported WHEN the engine changes THEN the end browser actions are updated to show translations`() = runTest(testDispatcher) {
+        settings.toolbarSimpleShortcutKey = ShortcutType.TRANSLATE.value
+        val browserStore = BrowserStore(
+            BrowserState(translationEngine = TranslationsBrowserState(isEngineSupported = false)),
+        )
+        val translationsFeatureSettings = TranslationsEnabledSettings.inMemory(isEnabledInitial = true)
+        val toolbarStore = buildStore(
+            buildMiddleware(
+                translationsFeatureSettings = translationsFeatureSettings,
+                browserStore = browserStore,
+            ),
+        )
+        assertEquals(
+            expectedNewTabButton(),
+            toolbarStore.state.displayState.browserActionsEnd[0] as ActionButtonRes,
+        )
+
+        browserStore.dispatch(SetEngineSupportedAction(true))
+        testDispatcher.scheduler.advanceUntilIdle()
+
+        assertEquals(
+            expectedTranslateButton(),
+            toolbarStore.state.displayState.browserActionsEnd[0] as ActionButtonRes,
+        )
+    }
+
+    @Test
     fun `GIVEN simple toolbar uses the homepage shortcut WHEN initializing toolbar THEN show Homepage in end browser actions`() = runTest(testDispatcher) {
         settings.toolbarSimpleShortcutKey = ShortcutType.HOMEPAGE.value
 
@@ -3606,6 +3690,31 @@ class BrowserToolbarMiddlewareTest {
     }
 
     @Test
+    fun `GIVEN expanded toolbar uses the translate shortcut but translations is disabled WHEN initializing toolbar THEN show the bookmark button in navigation actions`() = runTest(testDispatcher) {
+        settings.shouldUseExpandedToolbar = true
+        settings.toolbarExpandedShortcutKey = ShortcutType.TRANSLATE.value
+        val middleware = buildMiddleware(
+            translationsFeatureSettings = TranslationsEnabledSettings.inMemory(isEnabledInitial = false),
+        )
+
+        val toolbarStore = buildStore(middleware)
+
+        val primaryButton = toolbarStore.state.displayState.navigationActions.first() as ActionButtonRes
+        assertEquals(expectedBookmarkButton(source = Source.NavigationBar), primaryButton)
+    }
+
+    @Test
+    fun `GIVEN translations is unavailable WHEN mapping the translate shortcut for the navigation bar THEN it falls back to the bookmark action`() = runTest(testDispatcher) {
+        val middleware = buildMiddleware(
+            translationsFeatureSettings = TranslationsEnabledSettings.inMemory(isEnabledInitial = false),
+        )
+
+        val navigationAction = with(middleware) { ShortcutType.TRANSLATE.toToolbarAction(forToolbar = false) }
+
+        assertEquals(ToolbarAction.Bookmark, navigationAction)
+    }
+
+    @Test
     fun `GIVEN expanded toolbar use homepage shortcut WHEN initializing toolbar THEN show Homepage in navigation actions`() = runTest(testDispatcher) {
         settings.shouldUseExpandedToolbar = true
         settings.toolbarExpandedShortcutKey = ShortcutType.HOMEPAGE.value
@@ -3666,6 +3775,17 @@ class BrowserToolbarMiddlewareTest {
         assertEquals(ToolbarAction.Translate, translate)
         assertEquals(ToolbarAction.Homepage, homepage)
         assertEquals(ToolbarAction.Back, back)
+    }
+
+    @Test
+    fun `GIVEN translations is unavailable WHEN mapping the translate shortcut to a toolbar action THEN it falls back to New Tab`() = runTest(testDispatcher) {
+        val middleware = buildMiddleware(
+            translationsFeatureSettings = TranslationsEnabledSettings.inMemory(isEnabledInitial = false),
+        )
+
+        val translate = with(middleware) { ShortcutType.TRANSLATE.toToolbarAction() }
+
+        assertEquals(ToolbarAction.NewTab, translate)
     }
 
     private fun assertEqualsTabCounterButton(expected: TabCounterAction, actual: TabCounterAction) {
@@ -3903,6 +4023,7 @@ class BrowserToolbarMiddlewareTest {
         publicSuffixList: PublicSuffixList = this.publicSuffixList,
         settings: Settings = this.settings,
         summarizationSettingsCache: SummarizationFeatureDiscoveryConfiguration = this.summarizationFeatureSettings,
+        translationsFeatureSettings: TranslationsEnabledSettings = this.translationsFeatureSettings,
         navController: NavController = this.navController,
         summarizationNavigator: SummarizationNavigator = this.summarizationNavigator,
         browsingModeManager: BrowsingModeManager = this.browsingModeManager,
@@ -3928,6 +4049,7 @@ class BrowserToolbarMiddlewareTest {
         publicSuffixList = publicSuffixList,
         settings = settings,
         summarizationFeatureSettings = summarizationSettingsCache,
+        translationsFeatureSettings = translationsFeatureSettings,
         navController = navController,
         summarizationNavigator = summarizationNavigator,
         browsingModeManager = browsingModeManager,

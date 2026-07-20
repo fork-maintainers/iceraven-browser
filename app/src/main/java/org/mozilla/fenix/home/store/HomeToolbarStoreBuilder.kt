@@ -22,6 +22,7 @@ import org.mozilla.fenix.home.toolbar.BrowserToolbarMiddleware
 import org.mozilla.fenix.home.toolbar.BrowserToolbarTelemetryMiddleware
 import org.mozilla.fenix.search.BrowserToolbarSearchMiddleware
 import org.mozilla.fenix.search.BrowserToolbarSearchStatusSyncMiddleware
+import org.mozilla.fenix.translations.TranslationsEnabledSettings
 
 /**
  * Delegate for building the [BrowserToolbarStore] used in the home screen.
@@ -64,6 +65,7 @@ object HomeToolbarStoreBuilder {
                     navController = navController,
                     browsingModeManager = browsingModeManager,
                     settings = context.components.settings,
+                    translationsFeatureSettings = TranslationsEnabledSettings.dataStore(context),
                     isWideScreen = { fragment.isWideWindow() },
                     isTallScreen = { fragment.isTallWindow() },
                     scope = lifecycleScope,

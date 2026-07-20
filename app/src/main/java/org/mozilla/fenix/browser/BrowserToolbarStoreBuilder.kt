@@ -34,6 +34,7 @@ import org.mozilla.fenix.ext.isWideWindow
 import org.mozilla.fenix.search.BrowserToolbarSearchMiddleware
 import org.mozilla.fenix.search.BrowserToolbarSearchStatusSyncMiddleware
 import org.mozilla.fenix.summarization.SummarizationNavigator
+import org.mozilla.fenix.translations.TranslationsEnabledSettings
 
 /**
  * Delegate for building the [BrowserToolbarStore] used in the browser screen.
@@ -103,6 +104,7 @@ object BrowserToolbarStoreBuilder {
                         publicSuffixList = components.publicSuffixList,
                         settings = components.settings,
                         summarizationFeatureSettings = components.core.summarizeFeatureSettings,
+                        translationsFeatureSettings = TranslationsEnabledSettings.dataStore(activity),
                         shareUseCases = components.useCases.shareUseCases,
                         navController = navController,
                         summarizationNavigator = SummarizationNavigator(

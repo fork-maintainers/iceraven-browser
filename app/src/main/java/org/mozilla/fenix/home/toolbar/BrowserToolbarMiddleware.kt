@@ -14,6 +14,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChangedBy
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import mozilla.components.browser.state.search.SearchEngine
 import mozilla.components.browser.state.selector.getNormalOrPrivateTabs
@@ -78,10 +79,12 @@ import org.mozilla.fenix.home.toolbar.TabCounterInteractions.AddNewPrivateTab
 import org.mozilla.fenix.home.toolbar.TabCounterInteractions.AddNewTab
 import org.mozilla.fenix.home.toolbar.TabCounterInteractions.TabCounterClicked
 import org.mozilla.fenix.home.toolbar.TabCounterInteractions.TabCounterLongClicked
+import org.mozilla.fenix.nimbus.FxNimbus
 import org.mozilla.fenix.search.BrowserToolbarSearchMiddleware
 import org.mozilla.fenix.search.ext.searchEngineShortcuts
 import org.mozilla.fenix.settings.ShortcutType
 import org.mozilla.fenix.tabstray.redux.state.Page
+import org.mozilla.fenix.translations.TranslationsEnabledSettings
 import org.mozilla.fenix.utils.Settings
 import mozilla.components.feature.summarize.R as summariesR
 import mozilla.components.lib.state.Action as MVIAction
@@ -120,11 +123,12 @@ internal sealed class PageOriginInteractions : BrowserToolbarEvent {
  * @param navController [NavController] to use for navigating to other in-app destinations.
  * @param browsingModeManager [BrowsingModeManager] for querying the current browsing mode.
  * @param settings [Settings] for accessing application settings.
+ * @param translationsFeatureSettings Web content translations availability status.
  * @param isWideScreen Callback for checking if the screen is wide.
  * @param isTallScreen Callback for checking if the screen is tall.
  * @param scope [CoroutineScope] used for running long running operations in background.
  */
-@Suppress("LongParameterList")
+@Suppress("LongParameterList", "TooManyFunctions")
 class BrowserToolbarMiddleware(
     private val uiContext: Context,
     private val appStore: AppStore,
@@ -134,6 +138,7 @@ class BrowserToolbarMiddleware(
     private val navController: NavController,
     private val browsingModeManager: BrowsingModeManager,
     private val settings: Settings,
+    private val translationsFeatureSettings: TranslationsEnabledSettings,
     private val isWideScreen: () -> Boolean,
     private val isTallScreen: () -> Boolean,
     private val scope: CoroutineScope,
@@ -158,10 +163,14 @@ class BrowserToolbarMiddleware(
                 updatePageOrigin(store)
                 updateEndPageActions(store)
                 updateEndBrowserActions(store)
-                updateNavigationActions(store)
+                scope.launch {
+                    updateNavigationActions(store)
+                }
                 updateToolbarActionsBasedOnOrientation(store)
                 updateTabsCount(store)
                 updateMenuHighlight(store)
+
+                observeTranslationsFeatureAvailabilityUpdates(store)
             }
 
             is EnterEditMode -> {
@@ -368,7 +377,7 @@ class BrowserToolbarMiddleware(
         }
     }
 
-    private fun updateNavigationActions(store: Store<BrowserToolbarState, BrowserToolbarAction>) {
+    private suspend fun updateNavigationActions(store: Store<BrowserToolbarState, BrowserToolbarAction>) {
         store.dispatch(
             NavigationActionsUpdated(
                 buildNavigationActions(),
@@ -388,7 +397,7 @@ class BrowserToolbarMiddleware(
      *   - The navigation bar is hidden. (even If user enabled it)
      *   - The toolbar redesign customization option is also hidden.
      */
-    private fun buildNavigationActions(): List<Action> {
+    private suspend fun buildNavigationActions(): List<Action> {
         val isWideWindow = isWideScreen()
         val isTallWindow = isTallScreen()
         val shouldUseExpandedToolbar = settings.shouldUseExpandedToolbar
@@ -486,6 +495,14 @@ class BrowserToolbarMiddleware(
             appStore.dispatch(
                 AppAction.MenuNotification.RemoveMenuNotification(notification),
             )
+        }
+    }
+
+    private fun observeTranslationsFeatureAvailabilityUpdates(store: Store<BrowserToolbarState, BrowserToolbarAction>) {
+        scope.launch {
+            translationsFeatureSettings.isEnabled.collect {
+                updateEndBrowserActions(store)
+            }
         }
     }
 
@@ -610,17 +627,25 @@ class BrowserToolbarMiddleware(
         )
     }
 
-    companion object {
-        @VisibleForTesting
-        internal fun ShortcutType.toHomeToolbarAction() = when (this) {
-            ShortcutType.NEW_TAB -> HomeToolbarAction.NewTab
-            ShortcutType.SHARE -> HomeToolbarAction.FakeShare
-            ShortcutType.BOOKMARK -> HomeToolbarAction.FakeBookmark
-            ShortcutType.TRANSLATE -> HomeToolbarAction.FakeTranslate
-            ShortcutType.HOMEPAGE -> HomeToolbarAction.FakeHomepage
-            ShortcutType.BACK -> HomeToolbarAction.FakeBack
-            ShortcutType.SUMMARIZE -> HomeToolbarAction.FakeSummarize
-            ShortcutType.NONE -> null
+    private suspend fun isTranslationsFeatureAvailable(): Boolean {
+        val isTranslationEngineSupported = browserStore.state.translationEngine.isEngineSupported ?: false
+        return isTranslationEngineSupported &&
+            FxNimbus.features.translations.value().mainFlowToolbarEnabled &&
+            translationsFeatureSettings.isEnabled.first()
+    }
+
+    @VisibleForTesting
+    internal suspend fun ShortcutType.toHomeToolbarAction() = when (this) {
+        ShortcutType.NEW_TAB -> HomeToolbarAction.NewTab
+        ShortcutType.SHARE -> HomeToolbarAction.FakeShare
+        ShortcutType.BOOKMARK -> HomeToolbarAction.FakeBookmark
+        ShortcutType.TRANSLATE -> when (isTranslationsFeatureAvailable()) {
+            true -> HomeToolbarAction.FakeTranslate
+            false -> HomeToolbarAction.FakeBookmark // the first available option in settings.
         }
+        ShortcutType.HOMEPAGE -> HomeToolbarAction.FakeHomepage
+        ShortcutType.BACK -> HomeToolbarAction.FakeBack
+        ShortcutType.SUMMARIZE -> HomeToolbarAction.FakeSummarize
+        ShortcutType.NONE -> null
     }
 }

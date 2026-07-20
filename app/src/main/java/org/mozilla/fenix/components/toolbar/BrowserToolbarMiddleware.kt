@@ -14,6 +14,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChangedBy
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import mozilla.components.browser.state.action.ContentAction
@@ -142,6 +143,7 @@ import org.mozilla.fenix.summarization.SummarizationNavigator
 import org.mozilla.fenix.summarization.onboarding.SummarizationFeatureDiscoveryConfiguration
 import org.mozilla.fenix.tabstray.ext.isActiveDownload
 import org.mozilla.fenix.tabstray.redux.state.Page
+import org.mozilla.fenix.translations.TranslationsEnabledSettings
 import org.mozilla.fenix.utils.Settings
 import org.mozilla.fenix.utils.Stories.hasUrlOfAHomeScreenStory
 import org.mozilla.fenix.utils.Stories.hasUrlOfAStoriesScreenStory
@@ -221,6 +223,7 @@ internal object BrowserToolbarTestTags {
  * @param publicSuffixList [PublicSuffixList] used to obtain the base domain of the current site.
  * @param settings [Settings] for accessing user preferences.
  * @param summarizationFeatureSettings Web content summarization settings.
+ * @param translationsFeatureSettings Web content translations availability status.
  * @param navController [NavController] to use for navigating to other in-app destinations.
  * @param summarizationNavigator [SummarizationNavigator] used to navigate to the summarization screen.
  * @param browsingModeManager [BrowsingModeManager] for querying the current browsing mode.
@@ -249,6 +252,7 @@ class BrowserToolbarMiddleware(
     private val publicSuffixList: PublicSuffixList,
     private val settings: Settings,
     private val summarizationFeatureSettings: SummarizationFeatureDiscoveryConfiguration,
+    private val translationsFeatureSettings: TranslationsEnabledSettings,
     private val navController: NavController,
     private val summarizationNavigator: SummarizationNavigator,
     private val browsingModeManager: BrowsingModeManager,
@@ -291,6 +295,7 @@ class BrowserToolbarMiddleware(
                 observeSelectedTabBookmarkedUpdates(store)
                 observeReaderModeUpdates(store)
                 observePageTranslationsUpdates(store)
+                observeTranslationsFeatureAvailabilityUpdates(store)
                 observePageRefreshUpdates(store)
                 observePageTrackingProtectionUpdates(store)
                 observePageSecurityUpdates(store)
@@ -820,7 +825,7 @@ class BrowserToolbarMiddleware(
         val isTallWindow = isTallScreen()
         val shouldUseExpandedToolbar = settings.shouldUseExpandedToolbar
         val primarySlotAction = ShortcutType.fromValue(settings.toolbarExpandedShortcutKey)
-            ?.toToolbarAction() ?: getBookmarkAction()
+            ?.toToolbarAction(false) ?: getBookmarkAction()
 
         return listOf(
             ToolbarActionConfig(primarySlotAction) { shouldUseExpandedToolbar && isTallWindow && !isWideWindow },
@@ -959,6 +964,21 @@ class BrowserToolbarMiddleware(
                 .collect {
                     updateStartPageActions(store)
                 }
+        }
+    }
+
+    private fun observeTranslationsFeatureAvailabilityUpdates(store: Store<BrowserToolbarState, BrowserToolbarAction>) {
+        browserStore.observeWhileActive {
+            distinctUntilChangedBy { it.translationEngine.isEngineSupported }
+            .collect {
+                updateEndBrowserActions(store)
+                updateNavigationActions(store)
+            }
+        }
+        scope.launch {
+            translationsFeatureSettings.isEnabled.collect {
+                updateEndBrowserActions(store)
+            }
         }
     }
 
@@ -1391,12 +1411,27 @@ class BrowserToolbarMiddleware(
         return if (isBookmarked) ToolbarAction.EditBookmark else ToolbarAction.Bookmark
     }
 
+    /**
+     * Map the shortcut option to a button to show in the toolbar or the navigation bar.
+     *
+     * @param forToolbar `true` if the button will be used for the toolbar
+     * and `false` if it will be used for the navigation bar.
+     */
     @VisibleForTesting
-    internal suspend fun ShortcutType.toToolbarAction() = when (this) {
+    internal suspend fun ShortcutType.toToolbarAction(
+        forToolbar: Boolean = true,
+    ) = when (this) {
         ShortcutType.NEW_TAB -> ToolbarAction.NewTab
         ShortcutType.SHARE -> ToolbarAction.Share
         ShortcutType.BOOKMARK -> getBookmarkAction()
-        ShortcutType.TRANSLATE -> ToolbarAction.Translate
+        ShortcutType.TRANSLATE -> when (isTranslationsFeatureAvailable()) {
+            true -> ToolbarAction.Translate
+            else -> when (forToolbar) {
+                // The first available options in settings.
+                true -> ToolbarAction.NewTab
+                else -> getBookmarkAction()
+            }
+        }
         ShortcutType.HOMEPAGE -> ToolbarAction.Homepage
         ShortcutType.BACK -> ToolbarAction.Back
         ShortcutType.SUMMARIZE -> when {
@@ -1406,5 +1441,12 @@ class BrowserToolbarMiddleware(
             else -> ToolbarAction.NewTab
         }
         ShortcutType.NONE -> null
+    }
+
+    private suspend fun isTranslationsFeatureAvailable(): Boolean {
+        val isTranslationEngineSupported = browserStore.state.translationEngine.isEngineSupported ?: false
+        return isTranslationEngineSupported &&
+            FxNimbus.features.translations.value().mainFlowToolbarEnabled &&
+            translationsFeatureSettings.isEnabled.first()
     }
 }
