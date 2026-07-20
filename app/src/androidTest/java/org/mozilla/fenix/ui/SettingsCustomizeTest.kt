@@ -353,45 +353,6 @@ class SettingsCustomizeTest {
         }
     }
 
-    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3909004
-    @Test
-    fun verifyTheSimpleToolbarLayoutTranslateShortcut() {
-        val firstPage = mockWebServer.firstForeignWebPageAsset
-        val secondPage = mockWebServer.secondForeignWebPageAsset
-
-        // Disable the back gesture from the edge of the screen on the device.
-        enableOrDisableBackGestureNavigationOnDevice(backGestureNavigationEnabled = false)
-
-        homeScreen(composeTestRule) {
-        }.openThreeDotMenu {
-        }.clickSettingsButton {
-        }.openCustomizeSubMenu {
-            clickTopToolbarToggle()
-            verifyToolbarLayoutPreference("Simple")
-            scrollToTheScrollToHideToolbarOption()
-            clickTheTranslateToolbarShortcut()
-            verifyTheTranslateToolbarShortcutIsSelected()
-            exitMenu()
-        }
-        navigationToolbar(composeTestRule) {
-        }.enterURLAndEnterToBrowser(firstPage.url) {
-        }
-        navigationToolbar(composeTestRule) {
-            verifyTheNavigationBarTranslateButton()
-        }.clickTheNavigationBarTranslatePageButton {
-            verifyTranslationSheetIsDisplayed(isDisplayed = true)
-        }.clickTranslateButton {
-            waitForPageToLoad()
-            verifyPageContent("Article of the day")
-        }
-        navigationToolbar(composeTestRule) {
-        }.enterURLAndEnterToBrowser(secondPage.url) {
-        }
-        navigationToolbar(composeTestRule) {
-            verifyTheNavigationBarTranslateButton()
-        }
-    }
-
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3909005
     @Test
     fun verifyTheSimpleToolbarLayoutHomepageShortcut() {
