@@ -8,6 +8,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.BatteryManager
+import android.os.Build
 import androidx.core.content.ContextCompat
 import mozilla.components.support.base.log.logger.Logger
 import mozilla.components.support.utils.ext.registerReceiverCompat
@@ -52,6 +53,10 @@ object Performance {
             return false
         }
 
+        if (isEmulator()) {
+            return true
+        }
+
         val batteryStatus = context.registerReceiverCompat(
             null,
             IntentFilter(Intent.ACTION_BATTERY_CHANGED),
@@ -74,6 +79,18 @@ object Performance {
         }
         return false
     }
+
+     /** Returns whether Fenix is running on an Android emulator rather
+     * than a physical device. Regular charging checks don't work on a virtual device.
+     */
+    private fun isEmulator(): Boolean =
+        Build.FINGERPRINT.startsWith("generic") ||
+            Build.FINGERPRINT.startsWith("unknown") ||
+            Build.HARDWARE.contains("goldfish") ||
+            Build.HARDWARE.contains("ranchu") ||
+            Build.PRODUCT.contains("sdk") ||
+            Build.PRODUCT.contains("emulator") ||
+            Build.MODEL.contains("Android SDK built for")
 
     /**
      * Bypasses the onboarding screen on launch
