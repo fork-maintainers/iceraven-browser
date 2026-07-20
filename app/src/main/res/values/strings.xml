@@ -2771,8 +2771,6 @@
     <string name="ip_protection_location_section">Location</string>
     <!-- Label for the recommended automatic location option on the browser VPN settings screen -->
     <string name="ip_protection_location_recommended_label">Recommended</string>
-    <!-- Description for the recommended automatic location option on the browser VPN settings screen -->
-    <string name="ip_protection_location_recommended_description">Selects the fastest VPN location for you.</string>
     <!-- Badge label shown in the menu item when the browser VPN is active -->
     <string name="preferences_ip_protection_on">On</string>
     <!-- Badge label shown in the menu item when the browser VPN is off -->
@@ -2839,7 +2837,7 @@
     <!-- Title for the browser VPN location picker screen. -->
     <string name="ip_protection_location_picker_title" tools:ignore="UnusedResources">Choose VPN location</string>
     <!-- Description for what it means to use the Recommended setting and let the app automatically pick the best server location. -->
-    <string name="ip_protection_location_fastest_description" tools:ignore="UnusedResources, BrandUsage">Firefox finds the fastest location</string>
+    <string name="ip_protection_location_fastest_description" tools:ignore="BrandUsage">Firefox finds the fastest location</string>
     <!-- Error message shown when the selected browser VPN location is unavailable. -->
     <string name="ip_protection_location_unavailable" tools:ignore="UnusedResources">Location unavailable. Choose another location.</string>
     <!-- Snackbar (in-app pop-up notification) text shown when the previously selected browser VPN location is unavailable and the recommended location was used instead. -->

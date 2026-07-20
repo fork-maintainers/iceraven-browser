@@ -68,6 +68,7 @@ import mozilla.components.feature.ipprotection.store.state.remainingDataGb
 import mozilla.components.feature.ipprotection.store.state.usedDataGb
 import org.mozilla.fenix.R
 import org.mozilla.fenix.compose.list.TextListItem
+import org.mozilla.fenix.compose.settings.SettingsSectionHeader
 import org.mozilla.fenix.theme.FirefoxTheme
 import org.mozilla.fenix.theme.PreviewThemeProvider
 import org.mozilla.fenix.theme.Theme
@@ -315,19 +316,20 @@ private fun ColumnScope.GetStartedSection(
 
 @Composable
 private fun VpnLocationSection() {
-    Text(
+    SettingsSectionHeader(
         text = stringResource(R.string.ip_protection_location_section),
-        style = FirefoxTheme.typography.headline8,
-        color = MaterialTheme.colorScheme.onSurface,
         modifier = Modifier.padding(
             horizontal = FirefoxTheme.layout.space.dynamic200,
-            vertical = FirefoxTheme.layout.space.static150,
+            vertical = FirefoxTheme.layout.space.static100,
         ),
     )
 
     TextListItem(
         label = stringResource(R.string.ip_protection_location_recommended_label),
-        description = stringResource(R.string.ip_protection_location_recommended_description),
+        description = stringResource(
+            R.string.ip_protection_location_fastest_description,
+            stringResource(R.string.firefox),
+        ),
         maxDescriptionLines = Int.MAX_VALUE,
     )
 }
