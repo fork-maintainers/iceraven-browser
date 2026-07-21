@@ -80,8 +80,6 @@
     <color name="fx_mobile_text_color_action_primary_disabled">@color/photonDarkGrey90A50</color>
 
     <!-- Icon -->
-    <!-- Disabled icon -->
-    <color name="fx_mobile_icon_color_disabled">@color/photonDarkGrey90A40</color>
     <!-- Icon inverted (on color) -->
     <color name="fx_mobile_icon_color_oncolor">@color/photonLightGrey05</color>
     <color name="fx_mobile_icon_color_accent_violet">@color/photonViolet70</color>

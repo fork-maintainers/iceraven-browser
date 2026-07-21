@@ -43,7 +43,6 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.platform.SoftwareKeyboardController
 import androidx.compose.ui.platform.ViewCompositionStrategy
-import androidx.core.content.ContextCompat
 import androidx.core.graphics.toColorInt
 import androidx.core.view.MenuProvider
 import androidx.core.view.isVisible
@@ -88,6 +87,7 @@ import mozilla.components.lib.state.ext.observeAsComposableState
 import mozilla.components.lib.state.helpers.StoreProvider.Companion.fragmentStore
 import mozilla.components.support.base.feature.UserInteractionHandler
 import mozilla.components.support.base.feature.ViewBoundFeatureWrapper
+import mozilla.components.support.ktx.android.content.getColorFromAttr
 import mozilla.components.support.ktx.android.view.hideKeyboard
 import mozilla.components.ui.widgets.withCenterAlignedButtons
 import mozilla.telemetry.glean.private.NoExtras
@@ -132,6 +132,7 @@ import org.mozilla.fenix.search.createInitialSearchFragmentState
 import org.mozilla.fenix.tabstray.redux.state.Page
 import org.mozilla.fenix.theme.FirefoxTheme
 import androidx.appcompat.R as appcompatR
+import com.google.android.material.R as materialR
 import org.mozilla.fenix.GleanMetrics.History as GleanHistory
 
 private const val MATERIAL_DESIGN_SCRIM = "#52000000"
@@ -303,7 +304,7 @@ class HistoryFragment :
         if (!isEnabled && closedTabs == 0) {
             deleteHistory?.isEnabled = false
             deleteHistory?.icon?.setTint(
-                ContextCompat.getColor(requireContext(), R.color.fx_mobile_icon_color_disabled),
+                requireContext().getColorFromAttr(materialR.attr.colorOnSurfaceVariant),
             )
         }
     }
