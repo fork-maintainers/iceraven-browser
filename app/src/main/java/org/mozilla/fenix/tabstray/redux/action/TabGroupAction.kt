@@ -28,6 +28,11 @@ sealed interface TabGroupAction : TabsTrayAction {
     data object NewTabGroupFabClicked : TabGroupAction
 
     /**
+     * Fired when the user clicks the normal tabs menu item to create a starter tab group.
+     */
+    data object NewTabGroupMenuClicked : TabGroupAction
+
+    /**
      * Navigates to the expanded view of a tab group that was created.
      *
      * @property group The newly created [TabsTrayItem.TabGroup] to open.

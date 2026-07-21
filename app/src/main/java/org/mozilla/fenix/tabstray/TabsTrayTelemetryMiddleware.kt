@@ -221,6 +221,7 @@ class TabsTrayTelemetryMiddleware(
 
             is TabGroupAction.AddToNewTabGroup,
             is TabGroupAction.NewTabGroupFabClicked,
+            is TabGroupAction.NewTabGroupMenuClicked,
             is TabGroupAction.DragAndDropInitiated,
                 -> {
                 handleTabGroupCreationAction(store, action)
@@ -299,7 +300,9 @@ class TabsTrayTelemetryMiddleware(
         action: TabGroupAction,
     ) {
         when (action) {
-            is TabGroupAction.AddToNewTabGroup -> {
+            is TabGroupAction.AddToNewTabGroup,
+            is TabGroupAction.NewTabGroupMenuClicked,
+                -> {
                 Metrics.tabGroupCreationMode["menu"].add()
             }
 

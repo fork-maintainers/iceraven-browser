@@ -116,6 +116,9 @@ internal fun TabManagerFloatingToolbar(
                         },
                         onTabSettingsClick = onTabSettingsClick,
                         onRecentlyClosedClick = onRecentlyClosedClick,
+                        onNewTabGroupClick = {
+                            onAction(TabGroupAction.NewTabGroupMenuClicked)
+                        },
                         onAccountSettingsClick = onAccountSettingsClick,
                         onDeleteAllTabsClick = onDeleteAllTabsClick,
                         onSearchClicked = {
@@ -154,6 +157,7 @@ private fun FloatingToolbarActions(
     onSelectAllTabsClick: () -> Unit,
     onTabSettingsClick: () -> Unit,
     onRecentlyClosedClick: () -> Unit,
+    onNewTabGroupClick: () -> Unit,
     onAccountSettingsClick: () -> Unit,
     onDeleteAllTabsClick: () -> Unit,
     onSearchClicked: () -> Unit,
@@ -165,9 +169,11 @@ private fun FloatingToolbarActions(
         selectedPage = state.selectedPage,
         normalTabCount = state.normalTabsState.items.size,
         privateTabCount = state.privateBrowsing.tabs.size,
+        homepageAsNewTabEnabled = state.config.homepageAsNewTabEnabled,
         onAccountSettingsClick = onAccountSettingsClick,
         onTabSettingsClick = onTabSettingsClick,
         onRecentlyClosedClick = onRecentlyClosedClick,
+        onNewTabGroupClick = onNewTabGroupClick,
         onEnterMultiselectModeClick = onEnterMultiselectModeClick,
         onSelectAllTabsClick = onSelectAllTabsClick,
         onDeleteAllTabsClick = { showCloseAllTabsDialog = true },
@@ -356,8 +362,10 @@ private fun generateMenuItems(
     selectedPage: Page,
     normalTabCount: Int,
     privateTabCount: Int,
+    homepageAsNewTabEnabled: Boolean,
     onTabSettingsClick: () -> Unit,
     onRecentlyClosedClick: () -> Unit,
+    onNewTabGroupClick: () -> Unit,
     onEnterMultiselectModeClick: () -> Unit,
     onSelectAllTabsClick: () -> Unit,
     onDeleteAllTabsClick: () -> Unit,
@@ -381,6 +389,12 @@ private fun generateMenuItems(
         testTag = TabsTrayTestTag.RECENTLY_CLOSED_TABS,
         onClick = onRecentlyClosedClick,
     )
+    val newTabGroupItem = MenuItem.IconItem(
+        text = Text.Resource(R.string.add_to_new_tab_group_title),
+        drawableRes = iconsR.drawable.mozac_ic_tab_group_24,
+        testTag = TabsTrayTestTag.NEW_TAB_GROUP,
+        onClick = onNewTabGroupClick,
+    )
     val tabSettingsItem = MenuItem.IconItem(
         text = Text.Resource(R.string.tab_tray_menu_tab_settings),
         drawableRes = iconsR.drawable.mozac_ic_settings_24,
@@ -401,16 +415,22 @@ private fun generateMenuItems(
         onClick = onAccountSettingsClick,
     )
     return when {
-        (selectedPage == Page.NormalTabs && normalTabCount == 0) ||
-            (selectedPage == Page.PrivateTabs && privateTabCount == 0) -> listOf(
+        selectedPage == Page.NormalTabs && normalTabCount == 0 -> listOfNotNull(
+            recentlyClosedTabsItem,
+            newTabGroupItem.takeIf { homepageAsNewTabEnabled },
+            tabSettingsItem,
+        )
+
+        selectedPage == Page.PrivateTabs && privateTabCount == 0 -> listOf(
             recentlyClosedTabsItem,
             tabSettingsItem,
         )
 
-        selectedPage == Page.NormalTabs -> listOf(
+        selectedPage == Page.NormalTabs -> listOfNotNull(
             enterSelectModeItem,
             selectAllTabsItem,
             recentlyClosedTabsItem,
+            newTabGroupItem.takeIf { homepageAsNewTabEnabled },
             tabSettingsItem,
             deleteAllTabsItem,
         )
