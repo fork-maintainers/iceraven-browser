@@ -1,9 +1,5 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
-
-import io.gitlab.arturbosch.detekt.Detekt
-import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
-
 buildscript {
     repositories {
         gradle.configureMavenRepositories(delegate)
@@ -25,7 +21,6 @@ buildscript {
 plugins {
     id "mozac.ConfigPlugin"
     alias(libs.plugins.dependency.analysis)
-    alias(libs.plugins.detekt)
     alias(libs.plugins.kotlin.compose) apply false
     alias(libs.plugins.ksp)
 }
@@ -58,58 +53,6 @@ dependencyAnalysis {
         }
     }
 }
-
-detekt {
-    input = files("$projectDir/app/src")
-    config = files("$projectDir/config/detekt.yml")
-    baseline = file("$projectDir/config/detekt-baseline.xml")
-
-    reports {
-        html {
-            enabled = true
-            destination = file("$projectDir/build/reports/detekt.html")
-        }
-        xml {
-            enabled = false
-        }
-        txt {
-            enabled = false
-        }
-    }
-}
-
-tasks.withType(Detekt).configureEach() {
-    autoCorrect = true
-
-    exclude "**/test/**"
-    exclude "**/androidTest/**"
-    exclude "**/build/**"
-    exclude "**/resources/**"
-    exclude "**/tmp/**"
-
-    reports {
-        custom {
-            reportId = "suppression-count"
-            outputLocation.set(file("$projectDir/build/reports/suppressions.txt"))
-        }
-    }
-}
-
-// Apply same path exclusions as for the main task
-tasks.withType(DetektCreateBaselineTask).configureEach() {
-    exclude "**/test/**"
-    exclude "**/androidTest/**"
-    exclude "**/build/**"
-    exclude "**/resources/**"
-    exclude "**/tmp/**"
-}
-
-dependencies {
-    detekt project(":components:tooling-detekt")
-    detekt project(":mozilla-detekt-rules")
-    detekt libs.detekt.cli
-}
-
 
 tasks.register("listRepositories") {
     def reposData = project.provider {
