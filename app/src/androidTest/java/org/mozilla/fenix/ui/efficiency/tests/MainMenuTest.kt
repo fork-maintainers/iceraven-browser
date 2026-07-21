@@ -262,6 +262,7 @@ class MainMenuTest : BaseTest(
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3080111
     @SmokeTest
+    @Ignore("Failing: https://bugzilla.mozilla.org/show_bug.cgi?id=2056644")
     @Test
     fun verifyTheTranslatePageSubMenuOptionTest() {
         val testPage = mockWebServer.firstForeignWebPageAsset
