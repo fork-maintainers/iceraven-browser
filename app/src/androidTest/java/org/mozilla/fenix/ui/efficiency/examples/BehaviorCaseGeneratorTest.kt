@@ -7,9 +7,9 @@ package org.mozilla.fenix.ui.efficiency.examples
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mozilla.fenix.ui.efficiency.generation.behavior.BehaviorCaseGenerator
+import org.mozilla.fenix.ui.efficiency.generation.behavior.BehaviorMatrixProfile
 import org.mozilla.fenix.ui.efficiency.helpers.BaseTest
-import org.mozilla.fenix.ui.efficiency.navigation.behavior.BehaviorCaseGenerator
-import org.mozilla.fenix.ui.efficiency.navigation.behavior.BehaviorMatrixProfile
 
 @RunWith(AndroidJUnit4::class)
 class BehaviorCaseGeneratorTest : BaseTest() {

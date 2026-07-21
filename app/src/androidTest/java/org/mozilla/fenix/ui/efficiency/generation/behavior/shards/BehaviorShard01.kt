@@ -2,14 +2,14 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-package org.mozilla.fenix.ui.efficiency.navigation.behavior.shards
+package org.mozilla.fenix.ui.efficiency.generation.behavior.shards
 
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
-import org.mozilla.fenix.ui.efficiency.navigation.behavior.BaseBehaviorShardTest
-import org.mozilla.fenix.ui.efficiency.navigation.behavior.BehaviorCase
-import org.mozilla.fenix.ui.efficiency.navigation.behavior.BehaviorShardData
+import org.mozilla.fenix.ui.efficiency.generation.behavior.BaseBehaviorShardTest
+import org.mozilla.fenix.ui.efficiency.generation.behavior.BehaviorCase
+import org.mozilla.fenix.ui.efficiency.generation.behavior.BehaviorShardData
 
 @RunWith(Parameterized::class)
 class BehaviorShard01(
