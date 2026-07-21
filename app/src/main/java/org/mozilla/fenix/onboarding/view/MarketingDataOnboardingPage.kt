@@ -81,7 +81,7 @@ fun MarketingDataOnboardingPage(
     onMarketingDataSkipClick: () -> Unit,
 ) {
     Card(
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceBright),
         elevation = CardDefaults.cardElevation(if (!state.isSmallDevice) 6.dp else 0.dp),
     ) {
         val verticalPadding = if (state.isSmallDevice) 0.dp else FirefoxTheme.layout.space.static300
