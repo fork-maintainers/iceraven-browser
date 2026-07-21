@@ -208,7 +208,7 @@ class ProfilerViewModelTest {
         val settings = ProfilerSettings.Firefox
 
         val collectedStates = mutableListOf<ProfilerUiState>()
-        val collectionJob = launch {
+        backgroundScope.launch {
             viewModel.uiState.toList(collectedStates)
         }
         runCurrent()
@@ -217,8 +217,6 @@ class ProfilerViewModelTest {
         every { mockProfiler.isProfilerActive() } returns true
 
         runCurrent()
-
-        collectionJob.cancel()
 
         val expectedSequence = listOf(
             ProfilerUiState.Idle::class,
@@ -269,14 +267,13 @@ class ProfilerViewModelTest {
         }
 
         val collectedStates = mutableListOf<ProfilerUiState>()
-        val collectionJob = launch {
+        backgroundScope.launch {
             viewModel.uiState.toList(collectedStates)
         }
         runCurrent()
 
         viewModel.stopProfilerAndSave()
         advanceUntilIdle()
-        collectionJob.cancel()
 
         assertTrue(collectedStates.any { it is ProfilerUiState.Idle })
         assertTrue(collectedStates.any { it is ProfilerUiState.Gathering })
@@ -310,14 +307,13 @@ class ProfilerViewModelTest {
         }
 
         val collectedStates = mutableListOf<ProfilerUiState>()
-        val collectionJob = launch {
+        backgroundScope.launch {
             viewModel.uiState.toList(collectedStates)
         }
         runCurrent()
 
         viewModel.stopProfilerAndSave()
         runCurrent()
-        collectionJob.cancel()
 
         assertTrue(collectedStates.any { it is ProfilerUiState.Idle })
         assertTrue(collectedStates.any { it is ProfilerUiState.Gathering })
@@ -353,14 +349,13 @@ class ProfilerViewModelTest {
         } throws saveException
 
         val collectedStates = mutableListOf<ProfilerUiState>()
-        val collectionJob = launch {
+        backgroundScope.launch {
             viewModel.uiState.toList(collectedStates)
         }
         runCurrent()
 
         viewModel.stopProfilerAndSave()
         runCurrent()
-        collectionJob.cancel()
 
         val expectedSequence = listOf(
             ProfilerUiState.Idle::class,
@@ -395,14 +390,13 @@ class ProfilerViewModelTest {
         }
 
         val collectedUiStates = mutableListOf<ProfilerUiState>()
-        val collectionJob = launch {
+        backgroundScope.launch {
             viewModel.uiState.toList(collectedUiStates)
         }
         runCurrent()
 
         viewModel.stopProfilerWithoutSaving()
         runCurrent()
-        collectionJob.cancel()
 
         assertEquals("Expected 3 state emissions: Initial, Stopping, Finished", 3, collectedUiStates.size)
         assertIs<ProfilerUiState.Idle>(collectedUiStates[0], "First collected state should be Idle")

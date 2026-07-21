@@ -152,7 +152,7 @@ class MarketingPageRemovalSupportTest {
         every { prefs.getBoolean("my_key", false) } returns true
 
         val results = mutableListOf<Boolean>()
-        val job = launch {
+        backgroundScope.launch {
             prefs.flowScopedBooleanPreference(lifecycleOwner, testScheduler, "my_key", false)
                 .toList(results)
         }
@@ -161,7 +161,6 @@ class MarketingPageRemovalSupportTest {
         testScheduler.runCurrent()
 
         assertEquals(listOf(true), results)
-        job.cancel()
     }
 
     @Test
@@ -175,7 +174,7 @@ class MarketingPageRemovalSupportTest {
         every { prefs.getBoolean("my_key", false) } returnsMany listOf(true, false)
 
         val results = mutableListOf<Boolean>()
-        val job = launch {
+        backgroundScope.launch {
             prefs.flowScopedBooleanPreference(lifecycleOwner, testScheduler, "my_key", false)
                 .toList(results)
         }
@@ -187,6 +186,5 @@ class MarketingPageRemovalSupportTest {
         testScheduler.runCurrent()
 
         assertEquals(listOf(true, false), results)
-        job.cancel()
     }
 }
