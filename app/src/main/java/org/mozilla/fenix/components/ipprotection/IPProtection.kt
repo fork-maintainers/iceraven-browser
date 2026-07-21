@@ -57,6 +57,7 @@ class IPProtection(
                     messages = snackbarMessages,
                 ),
                 IPProtectionTelemetryMiddleware(),
+                IPProtectionPreferencesMiddleware(DefaultIPProtectionRepository(settings)),
             ),
         )
     }

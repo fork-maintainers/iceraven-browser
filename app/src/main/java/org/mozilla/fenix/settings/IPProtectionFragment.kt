@@ -98,7 +98,6 @@ class IPProtectionFragment : Fragment(), SystemInsetsPaddedFragment {
                 onVpnToggle = { enabled ->
                     if (enabled) {
                         Vpn.settingsTurnedOn.record(NoExtras())
-                        requireComponents.settings.hasAlreadyUsedVpn = true
                     } else {
                         Vpn.settingsTurnedOff.record(NoExtras())
                     }
