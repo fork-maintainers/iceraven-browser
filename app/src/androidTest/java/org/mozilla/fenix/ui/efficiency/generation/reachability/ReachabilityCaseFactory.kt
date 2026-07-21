@@ -1,21 +1,21 @@
-package org.mozilla.fenix.ui.efficiency.navigation.reachability
+package org.mozilla.fenix.ui.efficiency.generation.reachability
 
 import android.util.Log
 import org.mozilla.fenix.ui.efficiency.navigation.planning.NavigationTestPlanner
 import org.mozilla.fenix.ui.efficiency.navigation.planning.ShardUtils
 import org.mozilla.fenix.ui.efficiency.navigation.planning.toDisplayLabel
 
-object NavigationCaseFactory {
+object ReachabilityCaseFactory {
 
-    private const val TAG = "NavigationCaseFactory"
+    private const val TAG = "ReachabilityCaseFactory"
 
     fun buildReachabilityCases(
         runState: String,
-    ): List<NavigationCase> {
+    ): List<ReachabilityCase> {
         val generatedCases = NavigationTestPlanner.buildReachabilityCases()
 
         val cases = generatedCases.map { generated ->
-            NavigationCase(
+            ReachabilityCase(
                 label = generated.propertyName.toDisplayLabel(),
                 testRailId = "TBD",
                 page = generated.page,
@@ -31,7 +31,7 @@ object NavigationCaseFactory {
         runState: String,
         shardIndex: Int,
         shardCount: Int,
-    ): List<NavigationCase> {
+    ): List<ReachabilityCase> {
         val allCases = buildReachabilityCases(runState)
         val shardCases = ShardUtils.filterForShard(
             items = allCases,
