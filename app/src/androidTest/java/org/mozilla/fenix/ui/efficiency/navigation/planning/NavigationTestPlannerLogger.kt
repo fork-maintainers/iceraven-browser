@@ -4,7 +4,6 @@
 
 package org.mozilla.fenix.ui.efficiency.navigation.planning
 
-import android.util.Log
 import org.mozilla.fenix.ui.efficiency.helpers.BasePage
 import org.mozilla.fenix.ui.efficiency.helpers.PageContext
 import org.mozilla.fenix.ui.efficiency.navigation.NavigationRegistry
@@ -14,20 +13,29 @@ object NavigationTestPlannerLogger {
 
     private const val TAG = "NavigationPlanner"
 
-    fun logReachabilityPlan(context: PageContext) {
+    /**
+     * Builds the reachability plan report without emitting it anywhere, so a future consumer
+     * (a debug UI, an export, etc.) can reuse the same computation [logReachabilityPlan] uses.
+     */
+    fun buildReachabilityPlanReport(context: PageContext): DevToolReport {
         val cases = NavigationTestPlanner.buildReachabilityCases()
 
-        Log.i(TAG, "Built ${cases.size} reachability cases")
+        val lines = buildList {
+            add("Built ${cases.size} reachability cases")
 
-        cases.forEachIndexed { index, case ->
-            val page: BasePage = case.page(context)
-            val pageName = page.pageName
-            val pathCount = NavigationRegistry.findAllPaths("AppEntry", pageName).size
+            cases.forEachIndexed { index, case ->
+                val page: BasePage = case.page(context)
+                val pageName = page.pageName
+                val pathCount = NavigationRegistry.findAllPaths("AppEntry", pageName).size
 
-            Log.i(
-                TAG,
-                " ${index + 1}. $pageName (property=${case.propertyName}, paths=$pathCount)",
-            )
+                add(" ${index + 1}. $pageName (property=${case.propertyName}, paths=$pathCount)")
+            }
         }
+
+        return DevToolReport(lines = lines)
+    }
+
+    fun logReachabilityPlan(context: PageContext) {
+        logReport(TAG, buildReachabilityPlanReport(context))
     }
 }

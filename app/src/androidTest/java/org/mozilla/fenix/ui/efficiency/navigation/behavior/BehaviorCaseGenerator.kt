@@ -4,8 +4,10 @@
 
 package org.mozilla.fenix.ui.efficiency.navigation.behavior
 
-import android.util.Log
+import org.mozilla.fenix.ui.efficiency.navigation.planning.DevToolReport
 import org.mozilla.fenix.ui.efficiency.navigation.planning.NavigationGraphBootstrap
+import org.mozilla.fenix.ui.efficiency.navigation.planning.buildBoilerplateReport
+import org.mozilla.fenix.ui.efficiency.navigation.planning.logReport
 
 object BehaviorCaseGenerator {
     private const val TAG = "BehaviorGenerator"
@@ -57,9 +59,14 @@ object BehaviorCaseGenerator {
         logBehaviorMatrixSummary(plans)
     }
 
-    fun logBehaviorMatrixSummary(
+    /**
+     * Builds the behavior matrix summary report without emitting it anywhere, so a future
+     * consumer (a debug UI, an export, etc.) can reuse the same computation
+     * [logBehaviorMatrixSummary] uses.
+     */
+    fun buildBehaviorMatrixSummaryReport(
         plans: List<BehaviorCasePlan>,
-    ) {
+    ): DevToolReport {
         val byContext = plans.groupBy { it.context.toString() }
         val byFeatureEntity = plans.groupBy { "${it.feature}.${it.entity}" }
         val byTemplate = plans.groupBy { it.templateId }
@@ -72,69 +79,6 @@ object BehaviorCaseGenerator {
             }
             .groupBy({ it.first }, { it.second })
 
-        if (skippedByReason.isNotEmpty()) {
-            line("")
-            line("Skipped by context support:")
-            skippedByReason.entries
-                .sortedBy { it.key }
-                .forEach { (reason, automationIds) ->
-                    val distinctAutomationIds = automationIds.distinct().sorted()
-
-                    line("  - $reason")
-                    distinctAutomationIds
-                        .take(10)
-                        .forEach { automationId ->
-                            line("      used by $automationId")
-                        }
-
-                    if (distinctAutomationIds.size > 10) {
-                        line("      ...and ${distinctAutomationIds.size - 10} more")
-                    }
-                }
-        }
-
-        line("Behavior matrix summary")
-        line("--------------------------------------------------")
-        line("Total plans=${plans.size}")
-        line("Runnable=${plans.count { it.isRunnable }}")
-        line("Skipped=${plans.count { !it.isRunnable }}")
-        line("Contexts=${byContext.size}")
-        line("Feature/entities=${byFeatureEntity.size}")
-        line("Templates=${byTemplate.size}")
-
-        line("")
-        line("By context:")
-        byContext.entries
-            .sortedBy { it.key }
-            .forEach { (context, contextPlans) ->
-                line(
-                    "  - $context: " +
-                        "${contextPlans.count { it.isRunnable }}/${contextPlans.size} runnable",
-                )
-            }
-
-        line("")
-        line("By feature/entity:")
-        byFeatureEntity.entries
-            .sortedBy { it.key }
-            .forEach { (key, featurePlans) ->
-                line(
-                    "  - $key: " +
-                        "${featurePlans.count { it.isRunnable }}/${featurePlans.size} runnable",
-                )
-            }
-
-        line("")
-        line("By template:")
-        byTemplate.entries
-            .sortedBy { it.key }
-            .forEach { (templateId, templatePlans) ->
-                line(
-                    "  - $templateId: " +
-                        "${templatePlans.count { it.isRunnable }}/${templatePlans.size} runnable",
-                )
-            }
-
         val missingGroups = plans
             .flatMap { plan ->
                 plan.missingRequirements.map { missing ->
@@ -143,87 +87,184 @@ object BehaviorCaseGenerator {
             }
             .groupBy({ it.first }, { it.second })
 
-        if (missingGroups.isNotEmpty()) {
-            line("")
-            line("Missing requirements:")
-            missingGroups.entries
-                .sortedBy { it.key }
-                .forEach { (missingRequirement, automationIds) ->
-                    line("  - $missingRequirement")
-                    automationIds
-                        .distinct()
-                        .sorted()
-                        .take(10)
-                        .forEach { automationId ->
-                            line("      used by $automationId")
-                        }
+        val lines = buildList {
+            if (skippedByReason.isNotEmpty()) {
+                add("")
+                add("Skipped by context support:")
+                skippedByReason.entries
+                    .sortedBy { it.key }
+                    .forEach { (reason, automationIds) ->
+                        val distinctAutomationIds = automationIds.distinct().sorted()
 
-                    if (automationIds.distinct().size > 10) {
-                        line("      ...and ${automationIds.distinct().size - 10} more")
+                        add("  - $reason")
+                        distinctAutomationIds
+                            .take(10)
+                            .forEach { automationId ->
+                                add("      used by $automationId")
+                            }
+
+                        if (distinctAutomationIds.size > 10) {
+                            add("      ...and ${distinctAutomationIds.size - 10} more")
+                        }
                     }
+            }
+
+            add("Behavior matrix summary")
+            add("--------------------------------------------------")
+            add("Total plans=${plans.size}")
+            add("Runnable=${plans.count { it.isRunnable }}")
+            add("Skipped=${plans.count { !it.isRunnable }}")
+            add("Contexts=${byContext.size}")
+            add("Feature/entities=${byFeatureEntity.size}")
+            add("Templates=${byTemplate.size}")
+
+            add("")
+            add("By context:")
+            byContext.entries
+                .sortedBy { it.key }
+                .forEach { (context, contextPlans) ->
+                    add(
+                        "  - $context: " +
+                            "${contextPlans.count { it.isRunnable }}/${contextPlans.size} runnable",
+                    )
                 }
+
+            add("")
+            add("By feature/entity:")
+            byFeatureEntity.entries
+                .sortedBy { it.key }
+                .forEach { (key, featurePlans) ->
+                    add(
+                        "  - $key: " +
+                            "${featurePlans.count { it.isRunnable }}/${featurePlans.size} runnable",
+                    )
+                }
+
+            add("")
+            add("By template:")
+            byTemplate.entries
+                .sortedBy { it.key }
+                .forEach { (templateId, templatePlans) ->
+                    add(
+                        "  - $templateId: " +
+                            "${templatePlans.count { it.isRunnable }}/${templatePlans.size} runnable",
+                    )
+                }
+
+            if (missingGroups.isNotEmpty()) {
+                add("")
+                add("Missing requirements:")
+                missingGroups.entries
+                    .sortedBy { it.key }
+                    .forEach { (missingRequirement, automationIds) ->
+                        add("  - $missingRequirement")
+                        automationIds
+                            .distinct()
+                            .sorted()
+                            .take(10)
+                            .forEach { automationId ->
+                                add("      used by $automationId")
+                            }
+
+                        if (automationIds.distinct().size > 10) {
+                            add("      ...and ${automationIds.distinct().size - 10} more")
+                        }
+                    }
+            }
+
+            add("--------------------------------------------------")
         }
 
-        line("--------------------------------------------------")
+        return DevToolReport(lines = lines)
+    }
+
+    fun logBehaviorMatrixSummary(
+        plans: List<BehaviorCasePlan>,
+    ) {
+        logReport(TAG, buildBehaviorMatrixSummaryReport(plans))
+    }
+
+    /**
+     * Builds the behavior plan summary report without emitting it anywhere, so a future
+     * consumer (a debug UI, an export, etc.) can reuse the same computation
+     * [logBehaviorPlanSummary] uses.
+     */
+    fun buildBehaviorPlanSummaryReport(
+        plans: List<BehaviorCasePlan>,
+    ): DevToolReport {
+        val grouped = plans.groupBy { it.feature to it.entity }
+
+        val lines = buildList {
+            add("Behavior plan summary")
+            add("--------------------------------------------------")
+
+            grouped.entries
+                .sortedWith(
+                    compareBy(
+                        { it.key.first },
+                        { it.key.second },
+                    ),
+                )
+                .forEach { (featureEntity, featurePlans) ->
+                    val runnable = featurePlans.count { it.isRunnable }
+
+                    add(
+                        "${featureEntity.first}.${featureEntity.second}: " +
+                            "$runnable/${featurePlans.size} runnable",
+                    )
+
+                    featurePlans
+                        .sortedWith(compareBy({ it.templateId }, { it.context.toString() }))
+                        .forEach { plan ->
+                            add(
+                                "  - ${plan.automationId} " +
+                                    "runnable=${plan.isRunnable} " +
+                                    "context=${plan.context} " +
+                                    "missing=${plan.missingRequirements} " +
+                                    "skippedReason=${plan.skippedReason}",
+                            )
+                        }
+                }
+
+            add("--------------------------------------------------")
+        }
+
+        return DevToolReport(lines = lines)
     }
 
     fun logBehaviorPlanSummary(
         plans: List<BehaviorCasePlan>,
     ) {
-        val grouped = plans.groupBy { it.feature to it.entity }
+        logReport(TAG, buildBehaviorPlanSummaryReport(plans))
+    }
 
-        line("Behavior plan summary")
-        line("--------------------------------------------------")
+    /**
+     * Builds the behavior case boilerplate report without emitting it anywhere, so a future
+     * consumer (a debug UI, an export, etc.) can reuse the same computation
+     * [logBehaviorCaseBoilerplate] uses.
+     */
+    fun buildBehaviorCaseBoilerplateReport(
+        plans: List<BehaviorCasePlan>,
+        includeSkipped: Boolean = true,
+    ): DevToolReport {
+        val runnable = plans.count { it.isRunnable }
+        val skipped = plans.size - runnable
 
-        grouped.entries
-            .sortedWith(
-                compareBy(
-                    { it.key.first },
-                    { it.key.second },
-                ),
-            )
-            .forEach { (featureEntity, featurePlans) ->
-                val runnable = featurePlans.count { it.isRunnable }
+        val filteredPlans = plans
+            .filter { includeSkipped || it.isRunnable }
+            .sortedWith(compareBy({ it.feature }, { it.entity }, { it.templateId }, { it.context.toString() }))
 
-                line(
-                    "${featureEntity.first}.${featureEntity.second}: " +
-                        "$runnable/${featurePlans.size} runnable",
-                )
-
-                featurePlans
-                    .sortedWith(compareBy({ it.templateId }, { it.context.toString() }))
-                    .forEach { plan ->
-                        line(
-                            "  - ${plan.automationId} " +
-                                "runnable=${plan.isRunnable} " +
-                                "context=${plan.context} " +
-                                "missing=${plan.missingRequirements} " +
-                                "skippedReason=${plan.skippedReason}",
-                        )
-                    }
-            }
-
-        line("--------------------------------------------------")
+        return buildBoilerplateReport(
+            header = "Generated ${plans.size} behavior case plans: runnable=$runnable skipped=$skipped",
+            items = filteredPlans,
+        ) { plan -> plan.toBoilerplateBlock() }
     }
 
     fun logBehaviorCaseBoilerplate(
         plans: List<BehaviorCasePlan>,
         includeSkipped: Boolean = true,
     ) {
-        val runnable = plans.count { it.isRunnable }
-        val skipped = plans.size - runnable
-
-        line("Generated ${plans.size} behavior case plans: runnable=$runnable skipped=$skipped")
-        line("--------------------------------------------------")
-
-        plans
-            .filter { includeSkipped || it.isRunnable }
-            .sortedWith(compareBy({ it.feature }, { it.entity }, { it.templateId }, { it.context.toString() }))
-            .forEach { plan ->
-                line(plan.toBoilerplateBlock())
-            }
-
-        line("--------------------------------------------------")
+        logReport(TAG, buildBehaviorCaseBoilerplateReport(plans, includeSkipped))
     }
 
     private fun buildPlans(
@@ -328,73 +369,94 @@ object BehaviorCaseGenerator {
         """.trimIndent()
     }
 
-    private fun line(message: String) {
-        Log.i(TAG, message)
-        println(message)
-    }
-
     private fun String.escapeForKotlin(): String {
         return replace("\\", "\\\\")
             .replace("\"", "\\\"")
             .replace("\n", "\\n")
     }
 
-    fun logBehaviorContextManifest() {
-        line("Behavior context manifest")
-        line("--------------------------------------------------")
+    /**
+     * Builds the behavior context manifest report without emitting it anywhere, so a future
+     * consumer (a debug UI, an export, etc.) can reuse the same computation
+     * [logBehaviorContextManifest] uses.
+     */
+    fun buildBehaviorContextManifestReport(): DevToolReport {
+        val lines = buildList {
+            add("Behavior context manifest")
+            add("--------------------------------------------------")
 
-        BehaviorContextManifest.all
-            .sortedWith(compareBy({ it.key }, { it.value }))
-            .forEach { spec ->
-                line(
-                    "${spec.id} " +
-                        "status=${spec.status} " +
-                        "applicationMode=${spec.applicationMode} " +
-                        "reason=${spec.reason}",
-                )
+            BehaviorContextManifest.all
+                .sortedWith(compareBy({ it.key }, { it.value }))
+                .forEach { spec ->
+                    add(
+                        "${spec.id} " +
+                            "status=${spec.status} " +
+                            "applicationMode=${spec.applicationMode} " +
+                            "reason=${spec.reason}",
+                    )
+                }
+
+            add("--------------------------------------------------")
+        }
+
+        return DevToolReport(lines = lines)
+    }
+
+    fun logBehaviorContextManifest() {
+        logReport(TAG, buildBehaviorContextManifestReport())
+    }
+
+    /**
+     * Builds the behavior state machine report without emitting it anywhere, so a future
+     * consumer (a debug UI, an export, etc.) can reuse the same computation
+     * [logBehaviorStateMachine] uses.
+     */
+    fun buildBehaviorStateMachineReport(): DevToolReport {
+        val lines = buildList {
+            add("Behavior state machine")
+            add("--------------------------------------------------")
+
+            BehaviorMatrixProfile.values().forEach { profile ->
+                val contexts = BehaviorContextMatrix.variants(profile)
+                val decisions = contexts.map { context ->
+                    context to BehaviorContextSupportRegistry.evaluate(context)
+                }
+
+                add("Profile=$profile")
+                add("  contexts=${contexts.size}")
+                add("  runnable=${decisions.count { it.second.isSupported }}")
+                add("  todo=${decisions.count { !it.second.isSupported }}")
+
+                decisions.forEach { (context, decision) ->
+                    add(
+                        "    - $context " +
+                            "supported=${decision.isSupported}" +
+                            decision.skippedReason?.let { " reason=$it" }.orEmpty(),
+                    )
+                }
+
+                add("")
             }
 
-        line("--------------------------------------------------")
+            add("Manifest:")
+            BehaviorContextManifest.all
+                .sortedWith(compareBy({ it.key }, { it.value }))
+                .forEach { spec ->
+                    add(
+                        "  - ${spec.id} " +
+                            "status=${spec.status} " +
+                            "applicationMode=${spec.applicationMode} " +
+                            "reason=${spec.reason}",
+                    )
+                }
+
+            add("--------------------------------------------------")
+        }
+
+        return DevToolReport(lines = lines)
     }
 
     fun logBehaviorStateMachine() {
-        line("Behavior state machine")
-        line("--------------------------------------------------")
-
-        BehaviorMatrixProfile.values().forEach { profile ->
-            val contexts = BehaviorContextMatrix.variants(profile)
-            val decisions = contexts.map { context ->
-                context to BehaviorContextSupportRegistry.evaluate(context)
-            }
-
-            line("Profile=$profile")
-            line("  contexts=${contexts.size}")
-            line("  runnable=${decisions.count { it.second.isSupported }}")
-            line("  todo=${decisions.count { !it.second.isSupported }}")
-
-            decisions.forEach { (context, decision) ->
-                line(
-                    "    - $context " +
-                        "supported=${decision.isSupported}" +
-                        decision.skippedReason?.let { " reason=$it" }.orEmpty(),
-                )
-            }
-
-            line("")
-        }
-
-        line("Manifest:")
-        BehaviorContextManifest.all
-            .sortedWith(compareBy({ it.key }, { it.value }))
-            .forEach { spec ->
-                line(
-                    "  - ${spec.id} " +
-                        "status=${spec.status} " +
-                        "applicationMode=${spec.applicationMode} " +
-                        "reason=${spec.reason}",
-                )
-            }
-
-        line("--------------------------------------------------")
+        logReport(TAG, buildBehaviorStateMachineReport())
     }
 }

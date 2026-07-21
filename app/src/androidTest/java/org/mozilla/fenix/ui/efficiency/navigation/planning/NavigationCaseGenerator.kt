@@ -4,7 +4,6 @@
 
 package org.mozilla.fenix.ui.efficiency.navigation.planning
 
-import android.util.Log
 import org.mozilla.fenix.ui.efficiency.helpers.BasePage
 import org.mozilla.fenix.ui.efficiency.helpers.PageContext
 import org.mozilla.fenix.ui.efficiency.navigation.NavigationRegistry
@@ -14,31 +13,35 @@ object NavigationCaseGenerator {
 
     private const val TAG = "NavCaseGenerator"
 
-    fun logNavigationCaseBoilerplate(context: PageContext) {
+    /**
+     * Builds the reachability boilerplate report without emitting it anywhere, so a future
+     * consumer (a debug UI, an export, etc.) can reuse the same computation
+     * [logNavigationCaseBoilerplate] uses.
+     */
+    fun buildNavigationCaseBoilerplateReport(context: PageContext): DevToolReport {
         val cases = NavigationTestPlanner.buildReachabilityCases()
 
-        Log.i(TAG, "Generated ${cases.size} reachability case templates:")
-        Log.i(TAG, "--------------------------------------------------")
-
-        cases.forEach { case ->
+        return buildBoilerplateReport(
+            header = "Generated ${cases.size} reachability case templates:",
+            items = cases,
+        ) { case ->
             val pageObj: BasePage = case.page(context)
             val pageName = pageObj.pageName
             val pathCount = NavigationRegistry.findAllPaths("AppEntry", pageName).size
 
-            Log.i(
-                TAG,
-                """
-                // pageName=$pageName, property=${case.propertyName}, paths=$pathCount
-                Case(
-                    label = "$pageName",
-                    testRailId = "TBD",
-                    page = { ${case.propertyName} },
-                    state = runState.ifBlank { "Navigation Reachability" },
-                ),
-                """.trimIndent(),
-            )
+            """
+            // pageName=$pageName, property=${case.propertyName}, paths=$pathCount
+            Case(
+                label = "$pageName",
+                testRailId = "TBD",
+                page = { ${case.propertyName} },
+                state = runState.ifBlank { "Navigation Reachability" },
+            ),
+            """.trimIndent()
         }
+    }
 
-        Log.i(TAG, "--------------------------------------------------")
+    fun logNavigationCaseBoilerplate(context: PageContext) {
+        logReport(TAG, buildNavigationCaseBoilerplateReport(context))
     }
 }
