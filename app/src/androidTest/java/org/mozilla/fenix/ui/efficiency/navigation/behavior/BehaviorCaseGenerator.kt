@@ -5,6 +5,7 @@
 package org.mozilla.fenix.ui.efficiency.navigation.behavior
 
 import android.util.Log
+import org.mozilla.fenix.ui.efficiency.navigation.planning.NavigationGraphBootstrap
 
 object BehaviorCaseGenerator {
     private const val TAG = "BehaviorGenerator"
@@ -228,7 +229,7 @@ object BehaviorCaseGenerator {
     private fun buildPlans(
         profile: BehaviorMatrixProfile,
     ): List<BehaviorCasePlan> {
-        BehaviorGraphBootstrap.ensureInitialized()
+        NavigationGraphBootstrap.ensureInitialized()
 
         return BehaviorTestPlanner.buildBehaviorCasePlans(
             contexts = BehaviorContextMatrix.variants(profile),

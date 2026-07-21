@@ -4,22 +4,17 @@
 
 package org.mozilla.fenix.ui.efficiency.navigation.behavior
 
+import org.mozilla.fenix.ui.efficiency.navigation.planning.ShardUtils
+
 object BehaviorShardData {
     fun loadShard(
         shardIndex: Int,
         shardCount: Int,
         runStateOverride: String? = null,
-    ): List<Array<Any>> {
-        val runState = runStateOverride
-            ?: System.getProperty("testRunState")?.takeIf { it.isNotBlank() }
-            ?: ""
-
-        return BehaviorCaseFactory
-            .buildBehaviorCasesForShard(
-                runState = runState,
-                shardIndex = shardIndex,
-                shardCount = shardCount,
-            )
-            .map { arrayOf(it as Any) }
-    }
+    ): List<Array<Any>> = ShardUtils.loadShard(
+        shardIndex = shardIndex,
+        shardCount = shardCount,
+        runStateOverride = runStateOverride,
+        buildForShard = BehaviorCaseFactory::buildBehaviorCasesForShard,
+    )
 }

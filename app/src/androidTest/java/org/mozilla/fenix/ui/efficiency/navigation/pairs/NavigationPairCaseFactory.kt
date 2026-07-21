@@ -3,6 +3,7 @@ package org.mozilla.fenix.ui.efficiency.navigation.pairs
 import android.util.Log
 import org.mozilla.fenix.ui.efficiency.navigation.planning.NavigationTestPlanner
 import org.mozilla.fenix.ui.efficiency.navigation.planning.ShardUtils
+import org.mozilla.fenix.ui.efficiency.navigation.planning.toDisplayLabel
 
 object NavigationPairCaseFactory {
 
@@ -47,21 +48,5 @@ object NavigationPairCaseFactory {
         )
 
         return shardCases
-    }
-
-    private fun String.toDisplayLabel(): String {
-        val name = replaceFirstChar { char ->
-            if (char.isLowerCase()) {
-                char.titlecase()
-            } else {
-                char.toString()
-            }
-        }
-
-        return if (name.endsWith("Page") || name.endsWith("Component")) {
-            name
-        } else {
-            "${name}Page"
-        }
     }
 }

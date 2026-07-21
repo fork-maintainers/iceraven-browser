@@ -73,20 +73,4 @@ object NavigationTestPlanner {
             }
         }
     }
-
-    private fun String.toDisplayLabel(): String {
-        val name = replaceFirstChar { char ->
-            if (char.isLowerCase()) {
-                char.titlecase()
-            } else {
-                char.toString()
-            }
-        }
-
-        return if (name.endsWith("Page") || name.endsWith("Component")) {
-            name
-        } else {
-            "${name}Page"
-        }
-    }
 }

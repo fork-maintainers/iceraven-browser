@@ -1,24 +1,26 @@
 package org.mozilla.fenix.ui.efficiency.navigation.pairs
 
+import org.mozilla.fenix.ui.efficiency.navigation.planning.NavigationGraphBootstrap
+import org.mozilla.fenix.ui.efficiency.navigation.planning.ShardUtils
+
 object NavigationPairShardData {
 
     fun loadShard(
         shardIndex: Int,
         shardCount: Int,
         runStateOverride: String? = null,
-    ): List<Array<Any>> {
-        NavigationPairGraphBootstrap.ensureInitialized()
-
-        val runState = runStateOverride
-            ?: System.getProperty("testRunState")?.takeIf { it.isNotBlank() }
-            ?: ""
-
-        return NavigationPairCaseFactory
-            .buildPairCasesForShard(
-                runState = runState,
-                shardIndex = shardIndex,
-                shardCount = shardCount,
-            )
-            .map { arrayOf(it as Any) }
+    ): List<Array<Any>> = ShardUtils.loadShard(
+        shardIndex = shardIndex,
+        shardCount = shardCount,
+        runStateOverride = runStateOverride,
+    ) { runState, shard, count ->
+        // Pairs is the one domain whose shard loading needs to ensure the navigation graph is
+        // bootstrapped first; kept here rather than forced into the shared shell.
+        NavigationGraphBootstrap.ensureInitialized()
+        NavigationPairCaseFactory.buildPairCasesForShard(
+            runState = runState,
+            shardIndex = shard,
+            shardCount = count,
+        )
     }
 }

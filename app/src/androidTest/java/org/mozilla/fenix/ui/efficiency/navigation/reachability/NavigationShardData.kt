@@ -1,6 +1,6 @@
 package org.mozilla.fenix.ui.efficiency.navigation.reachability
 
-import org.mozilla.fenix.ui.efficiency.navigation.reachability.NavigationCaseFactory
+import org.mozilla.fenix.ui.efficiency.navigation.planning.ShardUtils
 
 object NavigationShardData {
 
@@ -8,17 +8,10 @@ object NavigationShardData {
         shardIndex: Int,
         shardCount: Int,
         runStateOverride: String? = null,
-    ): List<Array<Any>> {
-        val runState = runStateOverride
-            ?: System.getProperty("testRunState")?.takeIf { it.isNotBlank() }
-            ?: ""
-
-        return NavigationCaseFactory
-            .buildReachabilityCasesForShard(
-                runState = runState,
-                shardIndex = shardIndex,
-                shardCount = shardCount,
-            )
-            .map { arrayOf(it as Any) }
-    }
+    ): List<Array<Any>> = ShardUtils.loadShard(
+        shardIndex = shardIndex,
+        shardCount = shardCount,
+        runStateOverride = runStateOverride,
+        buildForShard = NavigationCaseFactory::buildReachabilityCasesForShard,
+    )
 }

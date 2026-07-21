@@ -2,20 +2,26 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-package org.mozilla.fenix.ui.efficiency.navigation.behavior
+package org.mozilla.fenix.ui.efficiency.navigation.planning
 
 import android.util.Log
 import org.mozilla.fenix.helpers.HomeActivityIntentTestRule
 import org.mozilla.fenix.ui.efficiency.helpers.PageContext
 import org.mozilla.fenix.ui.efficiency.navigation.NavigationRegistry
-import org.mozilla.fenix.ui.efficiency.navigation.planning.PageCatalog
 import androidx.compose.ui.test.junit4.v2.AndroidComposeTestRule as AndroidComposeTestRuleV2
 
 /**
  * Initializes page objects once so their init blocks register navigation edges before
- * behavior planning runs from static JUnit parameter providers.
+ * planning runs from static JUnit parameter providers (`data()` methods).
+ *
+ * Shared across domains that need `NavigationRegistry` populated ahead of a `Parameterized`
+ * `data()` call (P2b-3 follow-up, 2026-07-17) — previously duplicated identically as
+ * `NavigationPairGraphBootstrap` and `BehaviorGraphBootstrap`.
  */
-object BehaviorGraphBootstrap {
+object NavigationGraphBootstrap {
+
+    private const val TAG = "NavigationGraphBootstrap"
+
     private var initialized = false
 
     fun ensureInitialized() {
@@ -33,7 +39,7 @@ object BehaviorGraphBootstrap {
         PageCatalog.discoverPages().forEach { pageRef ->
             val page = pageRef.getter(pageContext)
             Log.i(
-                "BehaviorGraphBootstrap",
+                TAG,
                 "Initialized page ${page.pageName} from property ${pageRef.propertyName}",
             )
         }

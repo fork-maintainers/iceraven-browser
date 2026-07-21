@@ -4,6 +4,7 @@ import org.mozilla.fenix.ui.efficiency.helpers.BasePage
 import org.mozilla.fenix.ui.efficiency.helpers.PageContext
 import org.mozilla.fenix.ui.efficiency.navigation.NavigationRegistry
 import org.mozilla.fenix.ui.efficiency.navigation.planning.NavigationTestPlanner
+import org.mozilla.fenix.ui.efficiency.navigation.planning.toDisplayLabel
 import kotlin.text.contains
 
 object InteractionTestPlanner {
@@ -52,17 +53,5 @@ object InteractionTestPlanner {
                     }
             }
             .sortedWith(compareBy({ it.pagePropertyName }, { it.interactionSelectorName }))
-    }
-
-    private fun String.toDisplayLabel(): String {
-        val name = replaceFirstChar { char ->
-            if (char.isLowerCase()) char.titlecase() else char.toString()
-        }
-
-        return if (name.endsWith("Page") || name.endsWith("Component")) {
-            name
-        } else {
-            "${name}Page"
-        }
     }
 }

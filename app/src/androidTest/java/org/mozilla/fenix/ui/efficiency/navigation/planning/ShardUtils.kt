@@ -30,4 +30,28 @@ object ShardUtils {
             index % shardCount == zeroBasedShard
         }
     }
+
+    /**
+     * Shared shell for the four domains' `XShardData.loadShard()` entrypoints: resolves the
+     * run-state override (falling back to the `testRunState` system property, then blank),
+     * delegates to [buildForShard] to build that domain's shard, and wraps each case for
+     * JUnit's `Parameterized` `data()` contract.
+     *
+     * Extracted (P2b-3, 2026-07-17) — this wrapper was previously identical, copy-pasted logic
+     * in NavigationShardData, NavigationPairShardData, InteractionShardData, and
+     * BehaviorShardData. Domain-specific setup (e.g. Pairs' graph bootstrap) stays in the
+     * caller's [buildForShard] lambda rather than being forced into this shared shell.
+     */
+    fun <T> loadShard(
+        shardIndex: Int,
+        shardCount: Int,
+        runStateOverride: String? = null,
+        buildForShard: (runState: String, shardIndex: Int, shardCount: Int) -> List<T>,
+    ): List<Array<Any>> {
+        val runState = runStateOverride
+            ?: System.getProperty("testRunState")?.takeIf { it.isNotBlank() }
+            ?: ""
+
+        return buildForShard(runState, shardIndex, shardCount).map { arrayOf(it as Any) }
+    }
 }

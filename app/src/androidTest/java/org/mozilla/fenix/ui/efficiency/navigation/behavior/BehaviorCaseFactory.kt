@@ -5,6 +5,7 @@
 package org.mozilla.fenix.ui.efficiency.navigation.behavior
 
 import android.util.Log
+import org.mozilla.fenix.ui.efficiency.navigation.planning.NavigationGraphBootstrap
 import org.mozilla.fenix.ui.efficiency.navigation.planning.PageCatalog
 import org.mozilla.fenix.ui.efficiency.navigation.planning.ShardUtils
 
@@ -15,7 +16,7 @@ object BehaviorCaseFactory {
         runState: String,
         includeNonRunnable: Boolean = false,
     ): List<BehaviorCase> {
-        BehaviorGraphBootstrap.ensureInitialized()
+        NavigationGraphBootstrap.ensureInitialized()
 
         val plans = BehaviorTestPlanner.buildBehaviorCasePlans()
             .filter { it.isRunnable }
