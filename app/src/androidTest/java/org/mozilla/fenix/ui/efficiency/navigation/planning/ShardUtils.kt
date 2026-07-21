@@ -38,7 +38,7 @@ object ShardUtils {
      * JUnit's `Parameterized` `data()` contract.
      *
      * Extracted (P2b-3, 2026-07-17) — this wrapper was previously identical, copy-pasted logic
-     * in NavigationShardData, NavigationPairShardData, InteractionShardData, and
+     * in ReachabilityShardData, PairShardData, InteractionShardData, and
      * BehaviorShardData. Domain-specific setup (e.g. Pairs' graph bootstrap) stays in the
      * caller's [buildForShard] lambda rather than being forced into this shared shell.
      */

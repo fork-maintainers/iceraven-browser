@@ -1,9 +1,9 @@
-package org.mozilla.fenix.ui.efficiency.navigation.pairs
+package org.mozilla.fenix.ui.efficiency.generation.pairs
 
 import org.mozilla.fenix.ui.efficiency.navigation.planning.NavigationGraphBootstrap
 import org.mozilla.fenix.ui.efficiency.navigation.planning.ShardUtils
 
-object NavigationPairShardData {
+object PairShardData {
 
     fun loadShard(
         shardIndex: Int,
@@ -17,7 +17,7 @@ object NavigationPairShardData {
         // Pairs is the one domain whose shard loading needs to ensure the navigation graph is
         // bootstrapped first; kept here rather than forced into the shared shell.
         NavigationGraphBootstrap.ensureInitialized()
-        NavigationPairCaseFactory.buildPairCasesForShard(
+        PairCaseFactory.buildPairCasesForShard(
             runState = runState,
             shardIndex = shard,
             shardCount = count,

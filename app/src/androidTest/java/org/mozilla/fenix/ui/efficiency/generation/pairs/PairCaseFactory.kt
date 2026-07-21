@@ -1,21 +1,21 @@
-package org.mozilla.fenix.ui.efficiency.navigation.pairs
+package org.mozilla.fenix.ui.efficiency.generation.pairs
 
 import android.util.Log
 import org.mozilla.fenix.ui.efficiency.navigation.planning.NavigationTestPlanner
 import org.mozilla.fenix.ui.efficiency.navigation.planning.ShardUtils
 import org.mozilla.fenix.ui.efficiency.navigation.planning.toDisplayLabel
 
-object NavigationPairCaseFactory {
+object PairCaseFactory {
 
-    private const val TAG = "NavigationPairCaseFactory"
+    private const val TAG = "PairCaseFactory"
 
     fun buildPairCases(
         runState: String,
-    ): List<NavigationPairCase> {
+    ): List<PairCase> {
         val generatedCases = NavigationTestPlanner.buildNavigationPairCases()
 
         val cases = generatedCases.map { generated ->
-            NavigationPairCase(
+            PairCase(
                 label = "${generated.firstPropertyName.toDisplayLabel()} -> " +
                     generated.secondPropertyName.toDisplayLabel(),
                 testRailId = "TBD",
@@ -33,7 +33,7 @@ object NavigationPairCaseFactory {
         runState: String,
         shardIndex: Int,
         shardCount: Int,
-    ): List<NavigationPairCase> {
+    ): List<PairCase> {
         val allCases = buildPairCases(runState)
         val shardCases = ShardUtils.filterForShard(
             items = allCases,

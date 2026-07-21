@@ -1,9 +1,9 @@
-package org.mozilla.fenix.ui.efficiency.navigation.pairs
+package org.mozilla.fenix.ui.efficiency.generation.pairs
 
 import org.mozilla.fenix.ui.efficiency.helpers.BasePage
 import org.mozilla.fenix.ui.efficiency.helpers.PageContext
 
-data class NavigationPairCase(
+data class PairCase(
     val label: String,
     val testRailId: String,
     val firstPage: PageContext.() -> BasePage,

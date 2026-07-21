@@ -1,12 +1,11 @@
-package org.mozilla.fenix.ui.efficiency.navigation.pairs
+package org.mozilla.fenix.ui.efficiency.generation.pairs
 
 import android.util.Log
 import org.mozilla.fenix.ui.efficiency.helpers.BasePage
 import org.mozilla.fenix.ui.efficiency.helpers.BaseTest
-import org.mozilla.fenix.ui.efficiency.navigation.pairs.NavigationPairCase
 
-abstract class BaseNavigationPairShardTest(
-    private val case: NavigationPairCase,
+abstract class BasePairShardTest(
+    private val case: PairCase,
 ) : BaseTest() {
 
     protected fun runNavigationPairCase() {

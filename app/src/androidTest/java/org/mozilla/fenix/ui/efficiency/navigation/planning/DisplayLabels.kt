@@ -9,7 +9,7 @@ package org.mozilla.fenix.ui.efficiency.navigation.planning
  * (e.g. "BookmarksPage"), used for case labels and NavigationRegistry lookups.
  *
  * Shared across all four generator domains (P2b-3, 2026-07-17) — previously copy-pasted
- * identically into NavigationCaseFactory, NavigationPairCaseFactory, NavigationTestPlanner,
+ * identically into ReachabilityCaseFactory, PairCaseFactory, NavigationTestPlanner,
  * and InteractionTestPlanner.
  */
 fun String.toDisplayLabel(): String {
