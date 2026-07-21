@@ -1,4 +1,4 @@
-package org.mozilla.fenix.ui.efficiency.examples
+package org.mozilla.fenix.ui.efficiency.devtools
 
 import android.util.Log
 import org.junit.Test

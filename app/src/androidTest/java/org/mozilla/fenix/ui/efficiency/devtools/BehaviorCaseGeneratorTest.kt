@@ -2,12 +2,11 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-package org.mozilla.fenix.ui.efficiency.examples
+package org.mozilla.fenix.ui.efficiency.devtools
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mozilla.fenix.ui.efficiency.generation.behavior.BehaviorCaseGenerator
 import org.mozilla.fenix.ui.efficiency.generation.behavior.BehaviorMatrixProfile
 import org.mozilla.fenix.ui.efficiency.helpers.BaseTest
 

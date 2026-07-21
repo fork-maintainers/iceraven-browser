@@ -2,12 +2,16 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-package org.mozilla.fenix.ui.efficiency.generation.behavior
+package org.mozilla.fenix.ui.efficiency.devtools
 
 import org.mozilla.fenix.ui.efficiency.generation.NavigationGraphBootstrap
-import org.mozilla.fenix.ui.efficiency.navigation.planning.DevToolReport
-import org.mozilla.fenix.ui.efficiency.navigation.planning.buildBoilerplateReport
-import org.mozilla.fenix.ui.efficiency.navigation.planning.logReport
+import org.mozilla.fenix.ui.efficiency.generation.behavior.BehaviorCasePlan
+import org.mozilla.fenix.ui.efficiency.generation.behavior.BehaviorContextManifest
+import org.mozilla.fenix.ui.efficiency.generation.behavior.BehaviorContextMatrix
+import org.mozilla.fenix.ui.efficiency.generation.behavior.BehaviorContextSupportRegistry
+import org.mozilla.fenix.ui.efficiency.generation.behavior.BehaviorMatrixProfile
+import org.mozilla.fenix.ui.efficiency.generation.behavior.BehaviorRunArguments
+import org.mozilla.fenix.ui.efficiency.generation.behavior.BehaviorTestPlanner
 
 object BehaviorCaseGenerator {
     private const val TAG = "BehaviorGenerator"
