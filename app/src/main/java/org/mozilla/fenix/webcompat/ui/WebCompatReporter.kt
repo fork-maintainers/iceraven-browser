@@ -175,6 +175,7 @@ private fun WebCompatReporterContent(
                     onAction(WebCompatReporterAction.ProblemDescriptionChanged(description))
                 },
                 includeEtpBlockedUrls = state.includeEtpBlockedUrls,
+                problemDescriptionRequiredLabel = state.problemDescriptionRequiredLabel,
                 onIncludeEtpBlockedUrlsChange = { include ->
                     onAction(WebCompatReporterAction.IncludeEtpBlockedUrlsChanged(include))
                 },
@@ -251,6 +252,7 @@ private fun ProblemDetailsSection(
     problemDescription: String,
     hasDescriptionError: Boolean,
     includeEtpBlockedUrls: Boolean,
+    problemDescriptionRequiredLabel: Boolean,
     onProblemDescriptionChange: (String) -> Unit,
     onIncludeEtpBlockedUrlsChange: (Boolean) -> Unit,
     onPreviewReportClick: () -> Unit,
@@ -260,6 +262,7 @@ private fun ProblemDetailsSection(
     ProblemDescriptionInput(
         problemDescription = problemDescription,
         hasDescriptionError = hasDescriptionError,
+        problemDescriptionRequiredLabel = problemDescriptionRequiredLabel,
         onDescriptionChanged = onProblemDescriptionChange,
     )
 
@@ -361,11 +364,17 @@ private fun WebCompatReporterFooter(
 private fun ProblemDescriptionInput(
     problemDescription: String,
     hasDescriptionError: Boolean,
+    problemDescriptionRequiredLabel: Boolean,
     onDescriptionChanged: (String) -> Unit,
 ) {
     Column(modifier = Modifier.fillMaxWidth()) {
+        val labelResId = if (problemDescriptionRequiredLabel) {
+            R.string.webcompat_reporter_label_mandatory_description
+        } else {
+            R.string.webcompat_reporter_label_optional_description
+        }
         Text(
-            text = stringResource(id = R.string.webcompat_reporter_label_mandatory_description),
+            text = stringResource(id = labelResId),
             style = FirefoxTheme.typography.headline7,
             color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier

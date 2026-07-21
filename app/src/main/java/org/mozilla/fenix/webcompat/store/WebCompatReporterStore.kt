@@ -108,6 +108,12 @@ data class WebCompatReporterState(
         get() = reason == null
 
     /**
+     * Whether the problem description label should be mandatory.
+     */
+    val problemDescriptionRequiredLabel: Boolean
+        get() = reason == BrokenSiteReason.Other
+
+    /**
      * Whether the problem description has an error.
      */
     val hasDescriptionError: Boolean
