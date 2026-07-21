@@ -140,6 +140,9 @@ class TabsCleanupFeature(
         if (tabId?.isNotBlank() == true) {
             tabsUseCases.removeTab.invoke(tabId)
         }
+        navController.navigate(
+            HomeFragmentDirections.actionGlobalBrowser(null),
+        )
     }
 
     private fun removeTabAndShowSnackbar(sessionId: String) {

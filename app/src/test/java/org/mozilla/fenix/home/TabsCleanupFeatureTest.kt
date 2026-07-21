@@ -334,16 +334,20 @@ class TabsCleanupFeatureTest {
     }
 
     @Test
-    fun `WHEN undo all tabs removed is called THEN undo tab removal`() {
+    fun `WHEN undo all tabs removed is called THEN undo tab removal and navigate to browser`() {
         feature.onUndoAllTabsRemoved(tabId = "")
 
         verify {
             tabsUseCases.undo.invoke()
+
+            navController.navigate(
+                HomeFragmentDirections.actionGlobalBrowser(null),
+            )
         }
     }
 
     @Test
-    fun `GIVEN a tab ID WHEN undo all tabs removed is called THEN undo tab removal and remove the tab`() {
+    fun `GIVEN a tab ID WHEN undo all tabs removed is called THEN undo tab removal, remove the tab and navigate to browser`() {
         val tabId = "1"
 
         feature.onUndoAllTabsRemoved(tabId = tabId)
@@ -351,6 +355,9 @@ class TabsCleanupFeatureTest {
         verifyOrder {
             tabsUseCases.undo.invoke()
             tabsUseCases.removeTab.invoke(tabId)
+            navController.navigate(
+                HomeFragmentDirections.actionGlobalBrowser(null),
+            )
         }
     }
 
