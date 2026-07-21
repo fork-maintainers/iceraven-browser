@@ -3130,10 +3130,30 @@
   <string name="ip_protection_data_limit_reached_snackbar">%1$d GB VPN kotası kullanıldı. Erişiminiz gelecek ay sıfırlanacak.</string>
   <!-- Snackbar (in-app pop-up notification) action button text that takes the user to the VPN settings screen. -->
   <string name="ip_protection_data_limit_reached_snackbar_action">Ayarlar</string>
+  <!-- Description shown on the browser VPN settings screen prompting the user to turn the VPN on. -->
+  <string name="ip_protection_settings_description" tools:ignore="UnusedResources">Daha gizli ve izlenmesi zor bir gezinti için VPN’i açın.</string>
   <!-- Title shown on the browser VPN settings screen for location selection section. -->
   <string name="ip_protection_location_title" tools:ignore="UnusedResources">Konum</string>
   <!-- Label for the Recommended server location option which is automatically selected by the browser. -->
   <string name="ip_protection_recommended_location" tools:ignore="UnusedResources">Öneriliyor</string>
+  <!-- Headline for the card that promotes the standalone Mozilla VPN product. -->
+  <string name="ip_protection_mozilla_vpn_upsell_headline" tools:ignore="UnusedResources,BrandUsage">Mozilla VPN ile daha fazlasını koruyun</string>
+  <!-- Body for the card that promotes the standalone Mozilla VPN product. -->
+  <string name="ip_protection_mozilla_vpn_upsell_body" tools:ignore="UnusedResources">300’den fazla konum arasından istediğiniz seçin, 5 ayrı cihazdaki tüm uygulamalarınızı koruyun.</string>
+  <!-- Label for the button that takes the user to get the standalone Mozilla VPN product. -->
+  <string name="ip_protection_mozilla_vpn_upsell_button" tools:ignore="UnusedResources,BrandUsage">Mozilla VPN’i edinin</string>
+  <!-- Title for the browser VPN location picker screen. -->
+  <string name="ip_protection_location_picker_title" tools:ignore="UnusedResources">VPN konumunu seçin</string>
+  <!-- Description for what it means to use the Recommended setting and let the app automatically pick the best server location. -->
+  <string name="ip_protection_location_fastest_description" tools:ignore="UnusedResources, BrandUsage">Firefox en hızlı konumu bulur</string>
+  <!-- Error message shown when the selected browser VPN location is unavailable. -->
+  <string name="ip_protection_location_unavailable" tools:ignore="UnusedResources">Bu konum kullanılamıyor. Başka bir konum seçin.</string>
+  <!-- Snackbar (in-app pop-up notification) text shown when the previously selected browser VPN location is unavailable and the recommended location was used instead. -->
+  <string name="ip_protection_location_unavailable_recommended_snackbar" tools:ignore="UnusedResources">Seçilen VPN konumu kullanılamıyor. Önerilen konuma bağlanıldı.</string>
+  <!-- Title for the card shown to the user when we are unable to fetch server locations -->
+  <string name="ip_protection_location_unavailable_title" tools:ignore="UnusedResources">Önceki konum kullanılamıyor</string>
+  <!-- Description for the card shown to the user when we are unable to fetch server locations -->
+  <string name="ip_protection_location_unavailable_recommended_description" tools:ignore="UnusedResources">Önerilen konuma bağlanıldı.</string>
   <!--
     Autofill
 

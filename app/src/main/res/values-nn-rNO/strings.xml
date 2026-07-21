@@ -3116,7 +3116,7 @@
     %1$s is a localized date (for example "Jun 9") indicating the end of the promotional period.
     %2$s is a link using ip_protection_onboarding_body_link_promo (“Learn more”) as text. It links to a support article about VPN on Firefox.
   -->
-  <string name="ip_protection_onboarding_body_promo">Slå det på for å gjere surfinga di meir privat og vanskelegare å spore. Prøv det no for å få uavgrensa bandbreidd gjennom %1$s. %2$s</string>
+  <string name="ip_protection_onboarding_body_promo">Slå han på for å gjere surfinga di meir privat og vanskelegare å spore. Prøv det no for å få uavgrensa bandbreidde fram til %1$s. %2$s</string>
   <!-- Used as text for a link in ip_protection_onboarding_body. Make sure to adapt capitalization if the link is in the middle of the sentence. -->
   <string name="ip_protection_onboarding_body_link_promo">Les meir</string>
   <!-- Label for the dismiss button on the onboarding bottom sheet. -->

@@ -1910,7 +1910,7 @@
   <!-- Text for the header that groups the downloads older than other groups -->
   <string name="download_time_period_older">الأقدم</string>
   <!-- Description of an in progress download item, displayed in the downloads list when the download has just started. -->
-  <string name="download_item_in_progress_description_preparing">جارٍ تحضير التنزيل...</string>
+  <string name="download_item_in_progress_description_preparing">جارٍ تحضير التنزيل…</string>
   <!--
     Description of an in progress download item, displayed in the downloads list when the download time remaining is known.
     %1$s is the current file size that has been downloaded.

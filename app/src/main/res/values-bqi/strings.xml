@@ -3963,7 +3963,7 @@
     Text for the connection security panel when the site uses a QWAC.
     %s is a placeholder for the organization for which the certificate was issued.
   -->
-  <string name="connection_security_panel_issued_to">و در تیجنیڌه وابیڌه و %s</string>
+  <string name="connection_security_panel_issued_to">سادر وابیڌه و %s</string>
   <!-- Text for the connection security panel when the site uses a QWAC. -->
   <string name="connection_security_panel_qualified_certificate">ز ری موقررات (EU) 2024/1183 واجد شرایت هڌ.</string>
   <!--

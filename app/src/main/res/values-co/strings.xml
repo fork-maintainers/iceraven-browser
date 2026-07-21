@@ -31,6 +31,8 @@
   <string name="history_search_hint">Ricercà in a cronolugia</string>
   <!-- Placeholder text shown in search bar when using bookmarks search -->
   <string name="bookmark_search_hint">Ricercà in l’indette</string>
+  <!-- Content description for the toolbar back button while searching bookmarks -->
+  <string name="bookmark_close_search_description">Torna darettu è chjode a ricerca</string>
   <!-- Placeholder text shown in search bar when using tabs search -->
   <string name="tab_search_hint">Ricercà in l’unghjette</string>
   <!-- Placeholder text shown in the search bar when using application search engines -->
@@ -149,6 +151,8 @@
   <string name="home_screen_shortcut_open_new_private_tab_2">Nova unghjetta privata</string>
   <!-- Shortcut action to open Passwords screen -->
   <string name="home_screen_shortcut_passwords">Parolle d’intesa</string>
+  <!-- Shortcut action to open uninstall survey -->
+  <string name="home_screen_shortcut_uninstall_survey">Perchè disinstallà ?</string>
   <!--
     Recent Tabs
 
@@ -643,14 +647,33 @@
     %1$s is replaced by an active link, using nova_onboarding_marketing_body_link_text as text (“How we use the data”).
   -->
   <string name="nova_onboarding_marketing_body_6" tools:ignore="BrandUsage,UnusedResources">Aiutateci à tuccà d’altre persone permittendu à Mozilla di fà sapè à a piattaforma d’induve vo venite chì vo impiegate Firefox. %1$s</string>
+  <!--
+    Marketing onboarding body. 'Firefox' and 'Mozilla' are intentionally hardcoded.
+    “Platform you came from” refers to the external app, website, store, campaign, or other source that directed the user to Firefox.
+    %1$s is replaced by an active link, using nova_onboarding_marketing_body_link_text_1 as text (“Learn More”).
+  -->
+  <string name="nova_onboarding_marketing_body_7" tools:ignore="BrandUsage">Pudete aiutacci à tuccà un publicu più maiò permittendu à Mozilla di dì à a piattaforma d’induve vo venite chì vo impiegate Firefox. %1$s</string>
+  <!-- Marketing onboarding additional body text. 'Firefox' is intentionally hardcoded. -->
+  <string name="nova_onboarding_marketing_body_line_two" tools:ignore="BrandUsage">Firefox hè assai fieru di a so indipendenza è di u so impegnu à difende u Web apertu contr’à i monopolii tecnulogichi.</string>
+  <!--
+    Marketing onboarding additional body text. 'Firefox' is intentionally hardcoded.
+    “Allowing” refers to the main button “Allow and Continue”; the ask for the user is to allow communicating back to the platform.
+  -->
+  <string name="nova_onboarding_marketing_body_line_three" tools:ignore="BrandUsage">Vi dumandemu a vostra autorizazione per cuntribuà à a vittoria di Firefox.</string>
   <!-- Marketing onboarding body link text. -->
   <string name="nova_onboarding_marketing_body_link_text">Cumu no impieghemu i dati</string>
+  <!-- Marketing onboarding body link text. -->
+  <string name="nova_onboarding_marketing_body_link_text_1">Sapene di più</string>
   <!-- Marketing onboarding primary button text. 'Firefox' is intentionally hardcoded. -->
   <string name="nova_onboarding_marketing_primary_button_text" tools:ignore="BrandUsage,UnusedResources">Aiuta Firefox</string>
+  <!-- Marketing onboarding primary button text. -->
+  <string name="nova_onboarding_marketing_primary_button_text_3">Sì</string>
   <!-- Marketing onboarding primary button text. -->
   <string name="nova_onboarding_marketing_primary_button_text_2">Permette è cuntinuà</string>
   <!-- Marketing onboarding secondary button text. -->
   <string name="nova_onboarding_marketing_secondary_button_text" tools:ignore="UnusedResources">Innò, vi ringraziu</string>
+  <!-- Marketing onboarding secondary button text. -->
+  <string name="nova_onboarding_marketing_secondary_button_text_2">Nò</string>
   <!-- Notifications onboarding title. 'Firefox' is intentionally hardcoded. -->
   <string name="nova_onboarding_notifications_title" tools:ignore="BrandUsage,UnusedResources">E nutificazioni vi aiutanu à stà in sicurità cù Firefox</string>
   <!-- Notifications onboarding subtitle. 'Firefox' is intentionally hardcoded. -->
@@ -1016,6 +1039,8 @@
   <string name="customize_toggle_pocket_sponsored">Articuli spunsurizati</string>
   <!-- Title for the opening wallpaper settings screen -->
   <string name="customize_wallpapers">Sfonduli di screnu</string>
+  <!-- Label for the menu item that opens the wallpaper settings screen. -->
+  <string name="browser_menu_change_wallpaper">Cambià u sfondulu di screnu</string>
   <!-- Title for the customize home screen section with sponsored shortcuts. -->
   <string name="customize_toggle_contile">Accurtatoghji spunsurizati</string>
   <!-- Title for the customize home screen section that toggles the Homepage sports widget. -->
@@ -1518,6 +1543,8 @@
   <string name="add_tab">Aghjunghje un’unghjetta</string>
   <!-- Content description (not visible, for screen readers etc.): Add tab button. Adds a news tab when pressed -->
   <string name="add_private_tab">Apre una nova unghjetta privata</string>
+  <!-- Content description (not visible, for screen readers etc.): Create tab group button. Opens the create tab group sheet when pressed -->
+  <string name="create_tab_group_content_description">Creà un gruppu d’unghjette</string>
   <!-- Text for the tab search bar placeholder -->
   <string name="tab_manager_search_bar_placeholder">Ricercà trà e vostre unghjette</string>
   <!-- Text shown in the menu to view recently closed tabs -->
@@ -1943,6 +1970,14 @@
   <!-- The error message of the URL text field when an invalid URL has been entered. -->
   <string name="webcompat_reporter_url_error_invalid">Stampittate un indirizzu web accettevule</string>
   <!-- The label/title of a field in the Web Compat Reporter feature for explaining a high-level reason why the site is broken. -->
+  <string name="webcompat_reporter_label_whats_broken_3">Cosa ùn funziuneghja micca ?</string>
+  <!-- Content description for the icon button that clears the selected broken site reason in the WebCompat Reporter. -->
+  <string name="webcompat_reporter_clear_reason_content_description">Squassà a ragione selezziunata</string>
+  <!-- The error message of the description when the user selects "Something else" as the reason, but left the description empty or too short. -->
+  <string name="webcompat_reporter_description_error">Ci vole à stampittà omancu 10 caratteri</string>
+  <!-- The label/title of a mandatory field in the Web Compat Reporter feature for adding additional information. -->
+  <string name="webcompat_reporter_label_mandatory_description">Discrivite u prublema in detagliu per aiutacci à determinane l’origine</string>
+  <!-- The label/title of a field in the Web Compat Reporter feature for explaining a high-level reason why the site is broken. -->
   <string name="webcompat_reporter_label_whats_broken_2">Cosa hè u prublema ?</string>
   <!-- The placeholder text for the dropdown where a user selects a high-level reason why the site is broken. -->
   <string name="webcompat_reporter_choose_reason_2">Sciglite una ragione</string>
@@ -1954,6 +1989,8 @@
   <string name="webcompat_reporter_add_more_info">Aghjunghje d’altre infurmazioni</string>
   <!-- The button text for the cancel button to leave the Web Compat Reporter feature. -->
   <string name="webcompat_reporter_cancel">Abbandunà</string>
+  <!-- The button text for the send button to submit the provided form data. -->
+  <string name="webcompat_reporter_send_report">Mandà u raportu</string>
   <!-- The button text for the send button to submit the provided form data. -->
   <string name="webcompat_reporter_send">Mandà</string>
   <!-- Text for a snackbar to confirm the successful submission of a WebCompat report. -->
@@ -1968,6 +2005,8 @@
   <string name="webcompat_reporter_preview_bottom_sheet_header">Fighjulata di u signalamentu</string>
   <!-- Label for the “Send” button shown in the WebCompat Report preview panel, which the user taps to submit the report. -->
   <string name="webcompat_reporter_preview_bottom_sheet_send">Mandà</string>
+  <!-- Title for the Edit URL confirmation dialog in the WebCompatReporter -->
+  <string name="webcompat_reporter_edit_url_dialog_title">Mudificà l’indirizzu web di u situ</string>
   <!-- Text shown on the save button for the Edit URL confirmation dialog in the WebCompatReporter. -->
   <string name="webcompat_reporter_edit_url_dialog_save">Arregistrà</string>
   <!-- Text shown on the dismiss button for the Edit URL confirmation dialog in the WebCompatReporter. -->
@@ -1990,6 +2029,10 @@
   <string name="webcompat_reporter_reason_account2">Impussibule di cunnettesi o d’arregistrassi</string>
   <!-- Broken site reason text for site asked to turn off ad blocker -->
   <string name="webcompat_reporter_reason_turn_off_adblocker">U situ dumandeghja di disattivà u blucchime di publicità</string>
+  <!-- Broken site reason text for browser isn’t supported or blocked -->
+  <string name="webcompat_reporter_reason_notsupported_2">U navigatore hè bluccatu o ùn hè micca accettatu</string>
+  <!-- Broken site reason text for the site being deceptive -->
+  <string name="webcompat_reporter_reason_site_is_deceptive">U situ hè ingannadore</string>
   <!-- Broken site reason text for browser isn’t supported or blocked -->
   <string name="webcompat_reporter_reason_notsupported">U navigatore ùn hè micca accettatu o hè bluccatu</string>
   <!-- Broken site reason text for something else -->
@@ -2153,6 +2196,10 @@
   <string name="bookmark_select_folder_new_folder_button_title">Novu cartulare</string>
   <!-- Bookmark snackbar message for moving a single item. %1$s is the title of the item being moved and %2$s is the new parent folder of the bookmark -->
   <string name="bookmark_moved_single_item">Dispiazzamentu di %1$s versu %2$s</string>
+  <!-- Text for bookmark search page when there are no results. -->
+  <string name="bookmark_no_search_results">Ùn si trova alcuna currispundenza.</string>
+  <!-- Additional text for bookmark search page when there are no results. -->
+  <string name="bookmark_no_search_results_additional_text">Pruvate cù un’altra ricerca.</string>
   <!--
     Site Permissions
 
@@ -2410,6 +2457,8 @@
   <string name="preferences_take_survey">Risponde à l’inchiesta</string>
   <!-- Preference for not taking the short survey. -->
   <string name="preferences_not_take_survey">Innò, vi ringraziu</string>
+  <!-- Error message shown in a Toast when the system fails to trigger the device uninstallation prompt. -->
+  <string name="uninstall_survey_error_failed">Impussibule d’apre l’invitu di disinstallazione di u sistema, ci vole à impiegà direttamente l’azzione di disinstallazione di u sistema.</string>
   <!--
     Snackbar
 
@@ -3062,6 +3111,14 @@
   <string name="ip_protection_onboarding_body">%1$s piattendu a vostra pusizione, ancu via un Wi-Fi publicu. Ottinite %2$d Go di rigalu ogni mese.</string>
   <!-- Used as text for a link in ip_protection_onboarding_body. Make sure to adapt capitalization if the link is in the middle of the sentence. -->
   <string name="ip_protection_onboarding_body_link">Navigate cù una prutezzione addiziunale</string>
+  <!--
+    The body of the VPN onboarding card for a promotion that provides unlimited data bandwidth for a certain time.
+    %1$s is a localized date (for example "Jun 9") indicating the end of the promotional period.
+    %2$s is a link using ip_protection_onboarding_body_link_promo (“Learn more”) as text. It links to a support article about VPN on Firefox.
+  -->
+  <string name="ip_protection_onboarding_body_promo">Attivatela per rinfurzà a cunfidenzialità di a vostra navigazione è rendela più difficiule à frattighjà. Pruvatela subitu per ottene una larghezza di striscia à buzeffe fine à u %1$s. %2$s</string>
+  <!-- Used as text for a link in ip_protection_onboarding_body. Make sure to adapt capitalization if the link is in the middle of the sentence. -->
+  <string name="ip_protection_onboarding_body_link_promo">Sapene di più</string>
   <!-- Label for the dismiss button on the onboarding bottom sheet. -->
   <string name="ip_protection_onboarding_not_now_button">Micca subitu</string>
   <!-- Snackbar (in-app pop-up notification) text to signal the browser VPN connection error -->
@@ -3071,6 +3128,32 @@
     %1$d is the total monthly allowance in GB (for example "50").
   -->
   <string name="ip_protection_data_limit_reached_snackbar">Avete impiegatu %1$d Go di dati VPN. L’accessu serà ristabilitu u mese chì vene.</string>
+  <!-- Snackbar (in-app pop-up notification) action button text that takes the user to the VPN settings screen. -->
+  <string name="ip_protection_data_limit_reached_snackbar_action">Parametri</string>
+  <!-- Description shown on the browser VPN settings screen prompting the user to turn the VPN on. -->
+  <string name="ip_protection_settings_description" tools:ignore="UnusedResources">Attivà a VPN per rinfurzà a cunfidenzialità di a vostra navigazione è rendela più difficiule à frattighjà.</string>
+  <!-- Title shown on the browser VPN settings screen for location selection section. -->
+  <string name="ip_protection_location_title" tools:ignore="UnusedResources">Pusizione</string>
+  <!-- Label for the Recommended server location option which is automatically selected by the browser. -->
+  <string name="ip_protection_recommended_location" tools:ignore="UnusedResources">Ricumandatu</string>
+  <!-- Headline for the card that promotes the standalone Mozilla VPN product. -->
+  <string name="ip_protection_mozilla_vpn_upsell_headline" tools:ignore="UnusedResources,BrandUsage">Prutigitevi più cù Mozilla VPN</string>
+  <!-- Body for the card that promotes the standalone Mozilla VPN product. -->
+  <string name="ip_protection_mozilla_vpn_upsell_body" tools:ignore="UnusedResources">Sciglite trà più di 300 lucalizazioni è prutigite e vostre appiecazioni nant’à un massimu di 5 apparechji.</string>
+  <!-- Label for the button that takes the user to get the standalone Mozilla VPN product. -->
+  <string name="ip_protection_mozilla_vpn_upsell_button" tools:ignore="UnusedResources,BrandUsage">Ottene Mozilla VPN</string>
+  <!-- Title for the browser VPN location picker screen. -->
+  <string name="ip_protection_location_picker_title" tools:ignore="UnusedResources">Sceglie a pusizione di a VPN</string>
+  <!-- Description for what it means to use the Recommended setting and let the app automatically pick the best server location. -->
+  <string name="ip_protection_location_fastest_description" tools:ignore="UnusedResources, BrandUsage">Firefox trova a pusizione a più rapida</string>
+  <!-- Error message shown when the selected browser VPN location is unavailable. -->
+  <string name="ip_protection_location_unavailable" tools:ignore="UnusedResources">Pusizione indispunibule. Sciglite un’altra pusizione.</string>
+  <!-- Snackbar (in-app pop-up notification) text shown when the previously selected browser VPN location is unavailable and the recommended location was used instead. -->
+  <string name="ip_protection_location_unavailable_recommended_snackbar" tools:ignore="UnusedResources">A pusizione VPN selezziunata hè indispunibule. A cunnessione hè stata fatta à a pusizione ricumandata.</string>
+  <!-- Title for the card shown to the user when we are unable to fetch server locations -->
+  <string name="ip_protection_location_unavailable_title" tools:ignore="UnusedResources">A pusizione precedente ùn hè micca dispunibule</string>
+  <!-- Description for the card shown to the user when we are unable to fetch server locations -->
+  <string name="ip_protection_location_unavailable_recommended_description" tools:ignore="UnusedResources">A cunnessione hè stata fatta à a pusizione ricumandata.</string>
   <!--
     Autofill
 
@@ -3375,6 +3458,8 @@
   <string name="homepage_shortcuts_add_website">Aghjunghje un situ web</string>
   <!-- Title text for the "Enter a Website URL" dialog for adding a shortcut. -->
   <string name="homepage_shortcuts_add_website_title">Stampittate l’indirizzu d’un situ web</string>
+  <!-- Title for the "Popular sites" section in the "Add to homepage" bottom sheet. -->
+  <string name="homepage_shortcuts_popular_sites">Siti pupulari</string>
   <!-- Title text displayed in the dialog when shortcuts limit is reached. -->
   <string name="shortcut_max_limit_title">Numeru massimu d’accurtatoghji toccu</string>
   <!-- Content description text displayed in the dialog when shortcut limit is reached. -->
@@ -3796,6 +3881,62 @@
   <string name="protection_panel_privacy_and_security_settings_2">Parametri di cunfidenzialità</string>
   <!-- Title text for the protection panel permissions section. -->
   <string name="protection_panel_permissions_title">Permessi</string>
+  <plurals name="trackers_blocked_panel_total_num_trackers_blocked_2">
+    <!--
+      Text for displaying the total number of trackers blocked in the trackers blocked panel.
+      %1$d is a placeholder for the number of trackers blocked.
+    -->
+    <item quantity="one">%1$d perseguitatore bluccatu nant’à stu situ</item>
+    <item quantity="other">%1$d perseguitatori bluccati nant’à stu situ</item>
+  </plurals>
+  <plurals name="trackers_blocked_panel_num_social_media_trackers">
+    <!--
+      Text for displaying in the trackers blocked panel the total number of blocked social media trackers.
+      %1$d is a placeholder for the number of social media trackers blocked.
+    -->
+    <item quantity="one">%1$d perseguitatore di rete suciale</item>
+    <item quantity="other">%1$d perseguitatori di rete suciale</item>
+  </plurals>
+  <plurals name="trackers_blocked_panel_num_cross_site_cookies">
+    <!--
+      Text for displaying in the trackers blocked panel the total number of blocked cross-site tracking cookies.
+      %1$d is a placeholder for the number of cross-site tracking cookies blocked.
+    -->
+    <item quantity="one">%1$d canistrellu di spiunagiu intersiti</item>
+    <item quantity="other">%1$d canistrelli di spiunagiu intersiti</item>
+  </plurals>
+  <plurals name="trackers_blocked_panel_num_cryptominers">
+    <!--
+      Text for displaying in the trackers blocked panel the total number of blocked cryptomining scripts.
+      %1$d is a placeholder for the number of cryptominers blocked.
+    -->
+    <item quantity="one">%1$d minatore di crittomuneta</item>
+    <item quantity="other">%1$d minatori di crittomuneta</item>
+  </plurals>
+  <plurals name="trackers_blocked_panel_num_fingerprinters">
+    <!--
+      Text for displaying in the trackers blocked panel the total number of blocked fingerprinter scripts.
+      %1$d is a placeholder for the number of fingerprinters blocked.
+    -->
+    <item quantity="one">%1$d detettore d’impronta numerica</item>
+    <item quantity="other">%1$d detettori d’impronta numerica</item>
+  </plurals>
+  <plurals name="trackers_blocked_panel_num_trackers_2">
+    <!--
+      Text for displaying in the trackers blocked panel the total number of blocked generic tracking scripts.
+      %1$d is a placeholder for the number of trackers blocked.
+    -->
+    <item quantity="one">%1$d cuntenutu impiegatu per u spiunagiu</item>
+    <item quantity="other">%1$d cuntenuti impiegati per u spiunagiu</item>
+  </plurals>
+  <plurals name="trackers_blocked_panel_num_trackers_blocked_this_week_2">
+    <!--
+      Text for displaying the number of trackers blocked this week in the trackers blocked panel.
+      %1$d is a placeholder for the number of trackers blocked this week.
+    -->
+    <item quantity="one">%1$d perseguitatore bluccatu sta settimana</item>
+    <item quantity="other">%1$d perseguitatori bluccati sta settimana</item>
+  </plurals>
   <!--
     Description text for a dialog confirming whether the user wants to delete all data for current site.
     %s is a placeholder for the base domain of website.
@@ -3816,6 +3957,8 @@
     %s is a placeholder for the name of the certificate authority that issued the certificate.
   -->
   <string name="connection_security_panel_verified_by">Verificatu da %s</string>
+  <!-- Content description (not visible, for screen readers etc.) for the handle used to drag the protections dashboard to the bottom of the screen and close it. -->
+  <string name="tracker_protections_dashboard_close_handlebar_content_description">Chjode a tavula di cundutta</string>
   <!--
     Text for the connection security panel when the site uses a QWAC.
     %s is a placeholder for the organization for which the certificate was issued.
@@ -3939,6 +4082,26 @@
   <string name="microsurvey_sync_title" tools:ignore="BrandUsage,UnusedResources">Quantu site cuntenti di a sincrunizazione in Firefox ?</string>
   <!-- Text shown in the survey title for 'describe your experience so far' microsurvey. Note: The word "Firefox" should NOT be translated. -->
   <string name="microsurvey_describe_your_experience_title" tools:ignore="BrandUsage,UnusedResources">Aiutateci à amendà Firefox. Chì pruposta definisce u megliu a vostra esperienza\u00a0?</string>
+  <!--
+    Uninstall Survey
+
+    Title text for the uninstall survey dialog, asking the user for the reason they are removing the app
+  -->
+  <string name="microsurvey_uninstall_survey_title">U vostru avisu conta. Per chì ragione disinstallate ?</string>
+  <!-- Uninstall survey answer option -->
+  <string name="uninstall_survey_option_1_v2">Hè lentu è micca degnu di cunfidenza</string>
+  <!-- Uninstall survey answer option -->
+  <string name="uninstall_survey_option_2_v2">I siti web ùn funziuneghjanu micca currettamente</string>
+  <!-- Uninstall survey answer option -->
+  <string name="uninstall_survey_option_3_v2">Certe funzioni impurtante sò assente</string>
+  <!-- Uninstall survey answer option -->
+  <string name="uninstall_survey_option_4_v2">Filmetti, scaricamenti o d’altri cuntenuti multimedia ùn funziunavanu micca</string>
+  <!-- Uninstall survey answer option -->
+  <string name="uninstall_survey_option_5_v2">Hè difficiule da impiegà o mal cuncepitu</string>
+  <!-- Uninstall survey answer option -->
+  <string name="uninstall_survey_option_6_v2">Penseri apprupositu di a cunfidenzialità o di a sicurità</string>
+  <!-- Button label shown at the bottom of the uninstall survey -->
+  <string name="uninstall_survey_button_label">Mandà u vostru avisu è disinstallà</string>
   <!--
     Accessibility
 
@@ -4518,6 +4681,44 @@
   <string name="privacy_notice_updated_homepage_message_privacy_notice" tools:ignore="UnusedResources">Pulitica di cunfidenzialità</string>
   <!-- The second active link used in privacy_notice_updated_homepage_message -->
   <string name="privacy_notice_updated_homepage_message_learn_more" tools:ignore="UnusedResources">Sapene di più</string>
+  <!-- Google Lens prototype related strings -->
+  <string name="preferences_debug_settings_google_lens_integration">Attivà l’integrazione cù Google Lens</string>
+  <!-- Lens image search button content description -->
+  <string name="lens_search_content_description">Ricercà cù una fiura</string>
+  <!-- Content description for the gallery picker button in the Lens camera screen -->
+  <string name="content_description_gallery">Sceglie una fiura in a galleria da mandà à Google Lens</string>
+  <!-- Content description for the shutter button in the Lens camera screen -->
+  <string name="content_description_take_photo">Piglià una fotò è mandalla à Google Lens</string>
+  <!-- Image context menu entry that sends the long-pressed image to Google Lens -->
+  <string name="context_menu_open_image_with_google_lens">Circà cù Google Lens</string>
+  <!-- Toast shown when the user denies the camera permission requested by the Lens camera screen -->
+  <string name="lens_camera_permission_denied">Permessu ricusatu</string>
+  <!--
+    Title shown at the top of the camera screen, next to the close button, telling the
+    user that the photo they capture will be sent to Google Lens for a visual search.
+  -->
+  <string name="lens_camera_title_lens">Google Lens</string>
+  <!--
+    Title shown at the top of the camera screen, next to the close button, telling the
+    user that the camera is being used to scan a QR code.
+  -->
+  <string name="lens_camera_title_qr">Codice QR</string>
+  <!-- Title for the Google Lens Search Settings page feature toggle -->
+  <string name="search_settings_google_lens_title">Attivà a ricerca cù Google Lens</string>
+  <!-- Description for the Google Lens Search Settings page feature toggle -->
+  <string name="search_settings_google_lens_description">Manda fiure è fotò à Google per fà una ricerca visuale.</string>
+  <!-- Caption shown under the Google Lens toggle clarifying when the feature is available -->
+  <string name="preferences_google_lens_availability_caption">Dispunibule solu s’è Google hè attivatu quì sopra è definitu cum’è u vostru mutore di ricerca attivu durante a navigazione.</string>
+  <!-- Title for the Google Lens AI feature toggle -->
+  <string name="ai_controls_google_lens_title">Google Lens</string>
+  <!-- Description for the Google Lens AI feature toggle -->
+  <string name="ai_controls_google_lens_description">Manda fiure è fotò à Google per fà una ricerca visuale.</string>
+  <!-- Content description for the Google Lens half of the camera mode toggle -->
+  <string name="lens_camera_mode_lens">Google Lens</string>
+  <!-- Content description for the QR scanner half of the camera mode toggle -->
+  <string name="lens_camera_mode_qr">Analiza di codice QR</string>
+  <!-- Toast shown when the user picks an image from the gallery in QR mode but no QR code is found in it -->
+  <string name="lens_camera_qr_no_code_found">Nisunu codice QR trovu in a fiura</string>
   <!--
     Firefox Labs
 
@@ -4554,6 +4755,8 @@
   <string name="firefox_labs_feature_enable_dialog_message">Per attivà sta funzione, rilanciate %s.</string>
   <!-- The description text that is displayed in the confirmation dialog on the Firefox Labs screen for toggling "off" experimental features. %s is the name of the app (for example "Firefox Nightly") -->
   <string name="firefox_labs_feature_disable_dialog_message">Per disattivà sta funzione, rilanciate %s.</string>
+  <!-- Helper text shown beneath a Firefox Labs item when it is blocked from being turned on. -->
+  <string name="firefox_labs_feature_conflict">Sta funzione ùn hè micca dispunibule à a prova.</string>
   <!-- Text displayed on the Firefox Labs screen when there are no Labs experimental features present. -->
   <string name="firefox_labs_no_labs_available_description">Ora, ùn ci hè alcuna funzione esperimentale da pruvà</string>
 </resources>
