@@ -1,4 +1,4 @@
-package org.mozilla.fenix.ui.efficiency.navigation.planning
+package org.mozilla.fenix.ui.efficiency.generation
 
 /**
  * Utilities for deterministically splitting generated test cases into manual shards.

@@ -4,8 +4,8 @@
 
 package org.mozilla.fenix.ui.efficiency.generation.behavior
 
+import org.mozilla.fenix.ui.efficiency.generation.NavigationGraphBootstrap
 import org.mozilla.fenix.ui.efficiency.navigation.planning.DevToolReport
-import org.mozilla.fenix.ui.efficiency.navigation.planning.NavigationGraphBootstrap
 import org.mozilla.fenix.ui.efficiency.navigation.planning.buildBoilerplateReport
 import org.mozilla.fenix.ui.efficiency.navigation.planning.logReport
 

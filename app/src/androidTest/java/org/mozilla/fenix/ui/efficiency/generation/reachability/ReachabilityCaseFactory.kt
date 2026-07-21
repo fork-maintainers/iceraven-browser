@@ -1,9 +1,9 @@
 package org.mozilla.fenix.ui.efficiency.generation.reachability
 
 import android.util.Log
-import org.mozilla.fenix.ui.efficiency.navigation.planning.NavigationTestPlanner
-import org.mozilla.fenix.ui.efficiency.navigation.planning.ShardUtils
-import org.mozilla.fenix.ui.efficiency.navigation.planning.toDisplayLabel
+import org.mozilla.fenix.ui.efficiency.generation.NavigationTestPlanner
+import org.mozilla.fenix.ui.efficiency.generation.ShardUtils
+import org.mozilla.fenix.ui.efficiency.generation.toDisplayLabel
 
 object ReachabilityCaseFactory {
 

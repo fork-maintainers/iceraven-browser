@@ -5,9 +5,9 @@
 package org.mozilla.fenix.ui.efficiency.generation.behavior
 
 import android.util.Log
-import org.mozilla.fenix.ui.efficiency.navigation.planning.NavigationGraphBootstrap
-import org.mozilla.fenix.ui.efficiency.navigation.planning.PageCatalog
-import org.mozilla.fenix.ui.efficiency.navigation.planning.ShardUtils
+import org.mozilla.fenix.ui.efficiency.generation.NavigationGraphBootstrap
+import org.mozilla.fenix.ui.efficiency.generation.ShardUtils
+import org.mozilla.fenix.ui.efficiency.navigation.PageCatalog
 
 object BehaviorCaseFactory {
     private const val TAG = "BehaviorCaseFactory"

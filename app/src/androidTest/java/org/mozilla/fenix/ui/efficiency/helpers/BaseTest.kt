@@ -28,7 +28,7 @@ import org.mozilla.fenix.helpers.TestHelper.exitMenu
 import org.mozilla.fenix.ui.efficiency.logging.LoggingBridge
 import org.mozilla.fenix.ui.efficiency.logging.TestLogging
 import org.mozilla.fenix.ui.efficiency.navigation.NavigationRegistry
-import org.mozilla.fenix.ui.efficiency.navigation.planning.PageCatalog
+import org.mozilla.fenix.ui.efficiency.navigation.PageCatalog
 import androidx.compose.ui.test.junit4.v2.AndroidComposeTestRule as AndroidComposeTestRuleV2
 
 /**

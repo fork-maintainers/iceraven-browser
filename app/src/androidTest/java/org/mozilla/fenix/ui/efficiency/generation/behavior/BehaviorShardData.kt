@@ -4,7 +4,7 @@
 
 package org.mozilla.fenix.ui.efficiency.generation.behavior
 
-import org.mozilla.fenix.ui.efficiency.navigation.planning.ShardUtils
+import org.mozilla.fenix.ui.efficiency.generation.ShardUtils
 
 object BehaviorShardData {
     fun loadShard(

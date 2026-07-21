@@ -4,6 +4,7 @@
 
 package org.mozilla.fenix.ui.efficiency.navigation.planning
 
+import org.mozilla.fenix.ui.efficiency.generation.NavigationTestPlanner
 import org.mozilla.fenix.ui.efficiency.helpers.BasePage
 import org.mozilla.fenix.ui.efficiency.helpers.PageContext
 import org.mozilla.fenix.ui.efficiency.navigation.NavigationRegistry

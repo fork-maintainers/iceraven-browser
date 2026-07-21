@@ -5,7 +5,7 @@
 package org.mozilla.fenix.ui.efficiency.generation.behavior
 
 import org.mozilla.fenix.ui.efficiency.navigation.NavigationRegistry
-import org.mozilla.fenix.ui.efficiency.navigation.planning.PageCatalog
+import org.mozilla.fenix.ui.efficiency.navigation.PageCatalog
 
 object BehaviorTestPlanner {
     fun buildBehaviorCasePlans(
