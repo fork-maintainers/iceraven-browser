@@ -4,9 +4,9 @@ import android.util.Log
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
+import org.mozilla.fenix.ui.efficiency.generation.interaction.InteractionCase
+import org.mozilla.fenix.ui.efficiency.generation.interaction.InteractionCaseFactory
 import org.mozilla.fenix.ui.efficiency.helpers.BaseTest
-import org.mozilla.fenix.ui.efficiency.navigation.interaction.InteractionCase
-import org.mozilla.fenix.ui.efficiency.navigation.interaction.InteractionCaseFactory
 
 @RunWith(Parameterized::class)
 class InteractionGeneratedCasePrintTest(

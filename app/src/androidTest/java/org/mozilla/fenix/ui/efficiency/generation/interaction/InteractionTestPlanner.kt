@@ -1,4 +1,4 @@
-package org.mozilla.fenix.ui.efficiency.navigation.interaction
+package org.mozilla.fenix.ui.efficiency.generation.interaction
 
 import org.mozilla.fenix.ui.efficiency.helpers.BasePage
 import org.mozilla.fenix.ui.efficiency.helpers.PageContext

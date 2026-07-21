@@ -1,4 +1,4 @@
-package org.mozilla.fenix.ui.efficiency.navigation.interaction
+package org.mozilla.fenix.ui.efficiency.generation.interaction
 
 import android.util.Log
 import org.mozilla.fenix.ui.efficiency.navigation.planning.ShardUtils

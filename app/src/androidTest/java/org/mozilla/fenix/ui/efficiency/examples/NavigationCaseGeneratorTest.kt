@@ -7,8 +7,8 @@ package org.mozilla.fenix.ui.efficiency.examples
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mozilla.fenix.ui.efficiency.generation.interaction.InteractionCaseGenerator
 import org.mozilla.fenix.ui.efficiency.helpers.BaseTest
-import org.mozilla.fenix.ui.efficiency.navigation.interaction.InteractionCaseGenerator
 import org.mozilla.fenix.ui.efficiency.navigation.planning.NavigationCaseGenerator
 
 @RunWith(AndroidJUnit4::class)

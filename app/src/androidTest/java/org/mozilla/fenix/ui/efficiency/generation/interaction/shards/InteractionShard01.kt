@@ -1,11 +1,11 @@
-package org.mozilla.fenix.ui.efficiency.navigation.interaction.shards
+package org.mozilla.fenix.ui.efficiency.generation.interaction.shards
 
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
-import org.mozilla.fenix.ui.efficiency.navigation.interaction.BaseInteractionShardTest
-import org.mozilla.fenix.ui.efficiency.navigation.interaction.InteractionCase
-import org.mozilla.fenix.ui.efficiency.navigation.interaction.InteractionShardData
+import org.mozilla.fenix.ui.efficiency.generation.interaction.BaseInteractionShardTest
+import org.mozilla.fenix.ui.efficiency.generation.interaction.InteractionCase
+import org.mozilla.fenix.ui.efficiency.generation.interaction.InteractionShardData
 
 @RunWith(Parameterized::class)
 class InteractionShard01(
