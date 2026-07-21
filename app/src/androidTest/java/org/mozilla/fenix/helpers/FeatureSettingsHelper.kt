@@ -130,6 +130,11 @@ interface FeatureSettingsHelper {
     var showVoiceSearchInDisplayToolbar: Boolean
 
     /**
+     * Whether trending and recent searches are shown on the Homepage search.
+     */
+    var isHomepageTrendingRecentSearchEnabled: Boolean
+
+    /**
      * Enable or disable the translations prompt after a page that can be translated is loaded.
      */
     fun enableOrDisablePageLoadTranslationsPrompt(enableTranslationsPrompt: Boolean) {

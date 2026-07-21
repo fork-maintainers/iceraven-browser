@@ -17,6 +17,7 @@ import org.mozilla.fenix.benchmark.utils.TARGET_PACKAGE
 import org.mozilla.fenix.benchmark.utils.closeTab
 import org.mozilla.fenix.benchmark.utils.completeOnboarding
 import org.mozilla.fenix.benchmark.utils.dismissWallpaperOnboarding
+import org.mozilla.fenix.benchmark.utils.enterSearchMode
 import org.mozilla.fenix.benchmark.utils.isWallpaperOnboardingShown
 import org.mozilla.fenix.benchmark.utils.loadSite
 import org.mozilla.fenix.benchmark.utils.openNewPrivateTabOnTabsTray
@@ -73,6 +74,7 @@ class PrivateBrowsingBaselineProfileGenerator {
             device.openTabsTray()
             device.openNewPrivateTabOnTabsTray()
             val url = mockRule.url(HtmlAsset.SIMPLE)
+            device.enterSearchMode()
             device.loadSite(url = url)
 
             device.openTabsTray()

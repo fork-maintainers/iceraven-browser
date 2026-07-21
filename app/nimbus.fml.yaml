@@ -1330,6 +1330,13 @@ features:
         description: If true, trending and recent searches are shown on the Homepage Search.
         type: Boolean
         default: false
+    defaults:
+      - channel: nightly
+        value:
+          enabled: true
+      - channel: developer
+        value:
+          enabled: true
 
 types:
   objects:

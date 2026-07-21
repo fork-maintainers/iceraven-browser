@@ -69,6 +69,7 @@ class HomeActivityTestRule(
         shouldUseExpandedToolbar: Boolean = false,
         nativeShareSheetEnabled: Boolean = false,
         showVoiceSearchInDisplayToolbar: Boolean = false,
+        isHomepageTrendingRecentSearchEnabled: Boolean = false,
     ) : this(initialTouchMode, launchActivity, skipOnboarding) {
         this.isPocketEnabled = isPocketEnabled
         this.isRecentTabsFeatureEnabled = isRecentTabsFeatureEnabled
@@ -92,6 +93,7 @@ class HomeActivityTestRule(
         this.shouldUseExpandedToolbar = shouldUseExpandedToolbar
         this.nativeShareSheetEnabled = nativeShareSheetEnabled
         this.showVoiceSearchInDisplayToolbar = showVoiceSearchInDisplayToolbar
+        this.isHomepageTrendingRecentSearchEnabled = isHomepageTrendingRecentSearchEnabled
     }
 
     /**
@@ -205,6 +207,7 @@ class HomeActivityIntentTestRule internal constructor(
         shouldUseExpandedToolbar: Boolean = false,
         nativeShareSheetEnabled: Boolean = false,
         showVoiceSearchInDisplayToolbar: Boolean = false,
+        isHomepageTrendingRecentSearchEnabled: Boolean = false,
     ) : this(initialTouchMode, launchActivity, skipOnboarding) {
         this.isPocketEnabled = isPocketEnabled
         this.isRecentTabsFeatureEnabled = isRecentTabsFeatureEnabled
@@ -230,6 +233,7 @@ class HomeActivityIntentTestRule internal constructor(
         this.shouldUseExpandedToolbar = shouldUseExpandedToolbar
         this.nativeShareSheetEnabled = nativeShareSheetEnabled
         this.showVoiceSearchInDisplayToolbar = showVoiceSearchInDisplayToolbar
+        this.isHomepageTrendingRecentSearchEnabled = isHomepageTrendingRecentSearchEnabled
     }
 
     private val longTapUserPreference = getLongPressTimeout()
@@ -303,6 +307,7 @@ class HomeActivityIntentTestRule internal constructor(
         hasSeenShakeToSummarizeToolbarCfr = settings.shakeToSummarizeToolbarCfrShown
         isPrivateModeAndStoriesEntryPointEnabled = settings.privateModeAndStoriesEntryPointEnabled
         nativeShareSheetEnabled = settings.nativeShareSheetEnabled
+        isHomepageTrendingRecentSearchEnabled = settings.enableHomepageTrendingRecentSearch
     }
 
     companion object {

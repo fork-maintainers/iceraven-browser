@@ -50,6 +50,7 @@ class FeatureSettingsHelperDelegate : FeatureSettingsHelper {
         shouldUseExpandedToolbar = settings.shouldUseExpandedToolbar,
         nativeShareSheetEnabled = settings.nativeShareSheetEnabled,
         showVoiceSearchInDisplayToolbar = settings.showVoiceSearchInDisplayToolbar,
+        isHomepageTrendingRecentSearchEnabled = settings.enableHomepageTrendingRecentSearch,
     )
 
     /**
@@ -78,6 +79,7 @@ class FeatureSettingsHelperDelegate : FeatureSettingsHelper {
     override var shouldUseExpandedToolbar: Boolean by updatedFeatureFlags::shouldUseExpandedToolbar
     override var nativeShareSheetEnabled: Boolean by updatedFeatureFlags::nativeShareSheetEnabled
     override var showVoiceSearchInDisplayToolbar: Boolean by updatedFeatureFlags::showVoiceSearchInDisplayToolbar
+    override var isHomepageTrendingRecentSearchEnabled: Boolean by updatedFeatureFlags::isHomepageTrendingRecentSearchEnabled
 
     override fun applyFlagUpdates() {
         Log.i(TAG, "applyFlagUpdates: Trying to apply the updated feature flags: $updatedFeatureFlags")
@@ -116,6 +118,7 @@ class FeatureSettingsHelperDelegate : FeatureSettingsHelper {
         settings.shouldUseExpandedToolbar = featureFlags.shouldUseExpandedToolbar
         settings.nativeShareSheetEnabled = featureFlags.nativeShareSheetEnabled
         settings.showVoiceSearchInDisplayToolbar = featureFlags.showVoiceSearchInDisplayToolbar
+        settings.enableHomepageTrendingRecentSearch = featureFlags.isHomepageTrendingRecentSearchEnabled
     }
 }
 
@@ -142,6 +145,7 @@ private data class FeatureFlags(
     var shouldUseExpandedToolbar: Boolean,
     var nativeShareSheetEnabled: Boolean,
     var showVoiceSearchInDisplayToolbar: Boolean,
+    var isHomepageTrendingRecentSearchEnabled: Boolean,
 )
 
 internal fun getETPPolicy(settings: Settings): ETPPolicy {
