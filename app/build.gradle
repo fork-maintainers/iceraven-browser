@@ -384,6 +384,7 @@ android.defaultConfig.with {
     } catch (FileNotFoundException ignored) {
         buildConfigField 'String', 'WALLPAPER_URL', '""'
     }
+    buildConfigField 'String', 'SECRET_SETTINGS_OVERRIDES', '""'
 }
 
 android.buildTypes.debug.with {
@@ -405,6 +406,14 @@ android.buildTypes.debug.with {
     } else {
         buildConfigField "boolean", "LEAKCANARY", "true"
     }
+
+    // Read `secretSettings.*` entries from local.properties and pass them to the app.
+    def secretSettingsPrefix = "localProperties.secretSettings."
+    def secretSettingsOverrides = gradle.ext.properties
+            .findAll { it.key.startsWith(secretSettingsPrefix) }
+            .collect { it.key.substring(secretSettingsPrefix.length()) + "=" + it.value.toString().trim().toLowerCase() }
+            .join(";")
+    buildConfigField 'String', 'SECRET_SETTINGS_OVERRIDES', '"' + secretSettingsOverrides + '"'
 }
 
 // Generate Kotlin code for the Fenix Glean metrics.
