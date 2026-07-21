@@ -439,8 +439,8 @@ private fun OnboardingContent(
                     modifier = Modifier
                         .align(Alignment.CenterHorizontally)
                         .padding(bottom = 16.dp),
-                    activeColor = MaterialTheme.colorScheme.onPrimary,
-                    inactiveColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                    activeColor = MaterialTheme.colorScheme.primary,
+                    inactiveColor = MaterialTheme.colorScheme.outlineVariant,
                     leaveTrail = false,
                 )
             }
