@@ -51,6 +51,7 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 import mozilla.components.compose.base.PagerIndicator
 import mozilla.components.compose.base.annotation.FlexibleWindowLightDarkPreview
+import mozilla.components.compose.base.theme.AcornTheme
 import mozilla.components.lib.state.ext.observeAsComposableState
 import org.mozilla.fenix.R
 import org.mozilla.fenix.components.appstate.AppAction
@@ -541,7 +542,9 @@ private fun getOnboardingLayout(scope: BoxWithConstraintsScope): OnboardingLayou
         isLandscape = isLandscape,
     )
 
-    val peek = ((scope.maxWidth - pagerWidth) / 2).coerceAtLeast(8.dp)
+    // Ensure the adjacent card always peeks by 12dp. Since pageSpacing shares the same space, the
+    // configured peek must be at least 24dp to leave a 12dp reveal after 12dp page spacing.
+    val peek = ((scope.maxWidth - pagerWidth) / 2).coerceAtLeast(AcornTheme.layout.size.static300)
 
     val padding = when {
         isSmall && !isLandscape -> PaddingValues(0.dp)
@@ -643,10 +646,11 @@ private fun minWidth(
 private fun isNonLargeScreenLandscape(isLargeScreen: Boolean, isLandscape: Boolean) =
     (isLandscape && !isLargeScreen)
 
+@Composable
 private fun pageSpacing(isLargeScreen: Boolean, isSmallScreen: Boolean, pagePeekWidth: Dp) = when {
     isLargeScreen -> pagePeekWidth
     isSmallScreen -> 0.dp
-    else -> 8.dp
+    else -> AcornTheme.layout.size.static150
 }
 
 private data class OnboardingLayout(
