@@ -122,15 +122,18 @@ class FenixBrowserUseCases(
      *
      * @param private Whether or not the new homepage tab should be private.
      * @param startLoading Whether the new tab should start loading immediately.
+     * @param selectTab Whether the new tab should become the selected tab.
      * @return The ID of the created tab.
      */
     fun addNewHomepageTab(
         private: Boolean = appStore.state.mode.isPrivate,
         startLoading: Boolean = true,
+        selectTab: Boolean = true,
     ): String {
         return tabsUseCases.addTab.invoke(
             url = ABOUT_HOME_URL,
             title = homepageTitle,
+            selectTab = selectTab,
             startLoading = startLoading,
             private = private,
         )

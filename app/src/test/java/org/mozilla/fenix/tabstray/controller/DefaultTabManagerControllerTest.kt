@@ -204,6 +204,9 @@ class DefaultTabManagerControllerTest {
             fenixBrowserUseCases.addNewHomepageTab(
                 private = true,
             )
+            navController.navigate(
+                TabManagementFragmentDirections.actionGlobalHome(),
+            )
             TabsTray.closed.record(NoExtras())
             profiler.addMarker(
                 "DefaultTabManagerController.onNewTabTapped",
@@ -250,6 +253,9 @@ class DefaultTabManagerControllerTest {
             profiler.getProfilerTime()
             fenixBrowserUseCases.addNewHomepageTab(
                 private = false,
+            )
+            navController.navigate(
+                TabManagementFragmentDirections.actionGlobalHome(),
             )
             TabsTray.closed.record(NoExtras())
             profiler.addMarker(
