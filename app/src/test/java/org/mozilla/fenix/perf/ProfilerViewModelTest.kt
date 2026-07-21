@@ -21,6 +21,7 @@ import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.advanceUntilIdle
+import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
 import mozilla.components.concept.base.profiler.Profiler
 import mozilla.components.concept.engine.Engine
@@ -132,7 +133,7 @@ class ProfilerViewModelTest {
             viewModel.isProfilerActive.toList(collectedActiveStates)
         }
 
-        advanceUntilIdle()
+        runCurrent()
         assertEquals(listOf(ProfilerUiState.Idle), collectedUiStates)
         assertEquals(listOf(false), collectedActiveStates)
 
@@ -150,7 +151,7 @@ class ProfilerViewModelTest {
             viewModel.isProfilerActive.toList(collectedActiveStates)
         }
 
-        advanceUntilIdle()
+        runCurrent()
         assertEquals(listOf(ProfilerUiState.Idle), collectedUiStates)
         assertEquals(listOf(true), collectedActiveStates)
 
@@ -167,11 +168,11 @@ class ProfilerViewModelTest {
             mainDispatcher = testDispatcher,
             ioDispatcher = testDispatcher,
         )
-        advanceUntilIdle()
+        runCurrent()
 
         assertEquals(ProfilerUiState.Idle, viewModel.uiState.value)
         viewModel.initiateProfilerStartProcess(ProfilerSettings.Firefox)
-        advanceUntilIdle()
+        runCurrent()
 
         val finalState = viewModel.uiState.value
         assertIs<ProfilerUiState.Error>(finalState)
@@ -189,10 +190,10 @@ class ProfilerViewModelTest {
             mainDispatcher = testDispatcher,
             ioDispatcher = testDispatcher,
         )
-        advanceUntilIdle()
+        runCurrent()
         assertEquals(ProfilerUiState.Idle, viewModel.uiState.value)
         viewModel.initiateProfilerStartProcess(ProfilerSettings.Firefox)
-        advanceUntilIdle()
+        runCurrent()
         assertEquals(ProfilerUiState.Running, viewModel.uiState.value)
         verify(exactly = 0) { mockProfiler.startProfiler(any(), any()) }
     }
@@ -210,12 +211,12 @@ class ProfilerViewModelTest {
         val collectionJob = launch {
             viewModel.uiState.toList(collectedStates)
         }
-        advanceUntilIdle()
+        runCurrent()
 
         viewModel.initiateProfilerStartProcess(settings)
         every { mockProfiler.isProfilerActive() } returns true
 
-        advanceUntilIdle()
+        runCurrent()
 
         collectionJob.cancel()
 
@@ -237,10 +238,10 @@ class ProfilerViewModelTest {
             mainDispatcher = testDispatcher,
             ioDispatcher = testDispatcher,
         )
-        advanceUntilIdle()
+        runCurrent()
 
         viewModel.stopProfilerAndSave()
-        advanceUntilIdle()
+        runCurrent()
 
         val lastState = viewModel.uiState.value
         assertIs<ProfilerUiState.Finished>(lastState)
@@ -271,7 +272,7 @@ class ProfilerViewModelTest {
         val collectionJob = launch {
             viewModel.uiState.toList(collectedStates)
         }
-        advanceUntilIdle()
+        runCurrent()
 
         viewModel.stopProfilerAndSave()
         advanceUntilIdle()
@@ -312,10 +313,10 @@ class ProfilerViewModelTest {
         val collectionJob = launch {
             viewModel.uiState.toList(collectedStates)
         }
-        advanceUntilIdle()
+        runCurrent()
 
         viewModel.stopProfilerAndSave()
-        advanceUntilIdle()
+        runCurrent()
         collectionJob.cancel()
 
         assertTrue(collectedStates.any { it is ProfilerUiState.Idle })
@@ -355,10 +356,10 @@ class ProfilerViewModelTest {
         val collectionJob = launch {
             viewModel.uiState.toList(collectedStates)
         }
-        advanceUntilIdle()
+        runCurrent()
 
         viewModel.stopProfilerAndSave()
-        advanceUntilIdle()
+        runCurrent()
         collectionJob.cancel()
 
         val expectedSequence = listOf(
@@ -397,10 +398,10 @@ class ProfilerViewModelTest {
         val collectionJob = launch {
             viewModel.uiState.toList(collectedUiStates)
         }
-        advanceUntilIdle()
+        runCurrent()
 
         viewModel.stopProfilerWithoutSaving()
-        advanceUntilIdle()
+        runCurrent()
         collectionJob.cancel()
 
         assertEquals("Expected 3 state emissions: Initial, Stopping, Finished", 3, collectedUiStates.size)

@@ -77,7 +77,7 @@ class MarketingPageRemovalSupportTest {
 
         removePage.start()
 
-        testScheduler.advanceUntilIdle()
+        testScheduler.runCurrent()
 
         assertTrue(pages.size == 2)
     }
@@ -96,7 +96,7 @@ class MarketingPageRemovalSupportTest {
 
         removePage.start()
 
-        testScheduler.advanceUntilIdle()
+        testScheduler.runCurrent()
 
         assertTrue(pages.size == 1)
     }
@@ -158,7 +158,7 @@ class MarketingPageRemovalSupportTest {
         }
 
         lifecycleOwner.onResume()
-        testScheduler.advanceUntilIdle()
+        testScheduler.runCurrent()
 
         assertEquals(listOf(true), results)
         job.cancel()
@@ -181,10 +181,10 @@ class MarketingPageRemovalSupportTest {
         }
 
         lifecycleOwner.onResume()
-        testScheduler.advanceUntilIdle()
+        testScheduler.runCurrent()
 
         listenerSlot.captured.onSharedPreferenceChanged(prefs, "my_key")
-        testScheduler.advanceUntilIdle()
+        testScheduler.runCurrent()
 
         assertEquals(listOf(true, false), results)
         job.cancel()
