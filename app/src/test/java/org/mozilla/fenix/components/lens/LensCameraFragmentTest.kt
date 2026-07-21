@@ -10,8 +10,10 @@ import android.graphics.Matrix
 import android.graphics.Point
 import android.graphics.Rect
 import android.hardware.camera2.CameraAccessException
+import android.hardware.camera2.CameraCaptureSession
 import android.hardware.camera2.CameraDevice
 import android.hardware.camera2.CameraManager
+import android.hardware.camera2.CaptureRequest
 import android.media.Image
 import android.media.ImageReader
 import android.net.Uri
@@ -247,6 +249,57 @@ class LensCameraFragmentTest {
             fragment.createCameraPreviewSession()
         } catch (e: NullPointerException) {
             fail("NullPointerException should not have been thrown.")
+        }
+    }
+
+    // --- onSessionConfigured tests ---
+
+    @Test
+    fun `GIVEN cameraDevice is null WHEN onSessionConfigured is called THEN the session is closed and setRepeatingRequest is not called`() {
+        val fragment = LensCameraFragment()
+        fragment.cameraDevice = null
+
+        val session: CameraCaptureSession = mockk(relaxed = true)
+        val request: CaptureRequest = mockk(relaxed = true)
+        val captureCallback = object : CameraCaptureSession.CaptureCallback() {}
+
+        fragment.onSessionConfigured(session, request, captureCallback)
+
+        verify { session.close() }
+        verify(exactly = 0) { session.setRepeatingRequest(any(), any(), any<Handler>()) }
+        assertNull(fragment.captureSession)
+    }
+
+    @Test
+    fun `GIVEN cameraDevice exists WHEN onSessionConfigured is called THEN setRepeatingRequest is called and captureSession is assigned`() {
+        val fragment = LensCameraFragment()
+        fragment.cameraDevice = mockk(relaxed = true)
+
+        val session: CameraCaptureSession = mockk(relaxed = true)
+        val request: CaptureRequest = mockk(relaxed = true)
+        val captureCallback = object : CameraCaptureSession.CaptureCallback() {}
+
+        fragment.onSessionConfigured(session, request, captureCallback)
+
+        assertSame(session, fragment.captureSession)
+        verify { session.setRepeatingRequest(request, captureCallback, any<Handler>()) }
+    }
+
+    @Test
+    fun `GIVEN setRepeatingRequest throws IllegalArgumentException WHEN onSessionConfigured is called THEN it does not crash`() {
+        val fragment = LensCameraFragment()
+        fragment.cameraDevice = mockk(relaxed = true)
+
+        val session: CameraCaptureSession = mockk(relaxed = true)
+        every { session.setRepeatingRequest(any(), any(), any<Handler>()) } throws
+            IllegalArgumentException("CaptureRequest contains unconfigured Input/Output Surface!")
+        val request: CaptureRequest = mockk(relaxed = true)
+        val captureCallback = object : CameraCaptureSession.CaptureCallback() {}
+
+        try {
+            fragment.onSessionConfigured(session, request, captureCallback)
+        } catch (e: IllegalArgumentException) {
+            fail("IllegalArgumentException should have been caught, not propagated.")
         }
     }
 

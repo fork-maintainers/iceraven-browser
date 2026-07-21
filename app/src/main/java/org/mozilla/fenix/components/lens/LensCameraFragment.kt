@@ -417,34 +417,25 @@ class LensCameraFragment : Fragment() {
                     addTarget(qrSurface)
                 }
 
+                previewRequestBuilder.set(
+                    CaptureRequest.CONTROL_AF_MODE,
+                    CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE,
+                )
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM &&
+                    isLowLightBoostSupported
+                ) {
+                    previewRequestBuilder.set(
+                        CaptureRequest.CONTROL_AE_MODE,
+                        CameraMetadata.CONTROL_AE_MODE_ON_LOW_LIGHT_BOOST_BRIGHTNESS_PRIORITY,
+                    )
+                }
+
+                val previewRequest = previewRequestBuilder.build()
                 val captureCallback = object : CameraCaptureSession.CaptureCallback() {}
                 val sessionStateCallback = object : CameraCaptureSession.StateCallback() {
                     override fun onConfigured(session: CameraCaptureSession) {
-                        if (cameraDevice == null) return
-
-                        previewRequestBuilder.set(
-                            CaptureRequest.CONTROL_AF_MODE,
-                            CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE,
-                        )
-
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM &&
-                            isLowLightBoostSupported
-                        ) {
-                            previewRequestBuilder.set(
-                                CaptureRequest.CONTROL_AE_MODE,
-                                CameraMetadata.CONTROL_AE_MODE_ON_LOW_LIGHT_BOOST_BRIGHTNESS_PRIORITY,
-                            )
-                        }
-
-                        captureSession = session
-
-                        handleCaptureException("Failed to request capture") {
-                            session.setRepeatingRequest(
-                                previewRequestBuilder.build(),
-                                captureCallback,
-                                backgroundHandler,
-                            )
-                        }
+                        onSessionConfigured(session, previewRequest, captureCallback)
                     }
 
                     override fun onConfigureFailed(session: CameraCaptureSession) {
@@ -452,6 +443,47 @@ class LensCameraFragment : Fragment() {
                     }
                 }
                 createCaptureSessionCompat(camera, imageSurface, qrSurface, previewSurface, sessionStateCallback)
+            }
+        }
+    }
+
+    @VisibleForTesting
+    internal fun onSessionConfigured(
+        session: CameraCaptureSession,
+        previewRequest: CaptureRequest,
+        captureCallback: CameraCaptureSession.CaptureCallback,
+    ) {
+        // closeCamera() runs on the main thread while this callback runs on the background
+        // thread. Gate the check-and-assign on cameraOpenCloseLock (the lock closeCamera() also
+        // holds) so the session is atomically either stored for a live camera or closed here,
+        // and never assigned after a concurrent closeCamera() has finished tearing down - which
+        // would leave the session unreferenced and never closed. The lock is released before
+        // setRepeatingRequest so a camera call is never made while holding it.
+        try {
+            cameraOpenCloseLock.acquire()
+        } catch (e: InterruptedException) {
+            Thread.currentThread().interrupt()
+            session.close()
+            return
+        }
+        try {
+            if (cameraDevice == null) {
+                session.close()
+                return
+            }
+            captureSession = session
+        } finally {
+            cameraOpenCloseLock.release()
+        }
+
+        // Even under the lock the surfaces can be released between here and setRepeatingRequest,
+        // so the IllegalArgumentException catch remains the safety net for that request targeting
+        // a surface released by closeCamera().
+        handleCaptureException("Failed to request capture") {
+            try {
+                session.setRepeatingRequest(previewRequest, captureCallback, backgroundHandler)
+            } catch (e: IllegalArgumentException) {
+                logger.error("Failed to request capture", e)
             }
         }
     }
