@@ -7,6 +7,7 @@
 package org.mozilla.fenix.components.ipprotection
 
 import mozilla.components.ExperimentalAndroidComponentsApi
+import mozilla.components.concept.engine.ipprotection.ServiceState
 import mozilla.components.feature.ipprotection.store.IPProtectionAction
 import mozilla.components.feature.ipprotection.store.IPProtectionStore
 import mozilla.components.feature.ipprotection.store.state.AccountState
@@ -103,8 +104,30 @@ class IPProtectionTelemetryMiddlewareTest {
         assertEquals(1, events.size)
     }
 
-    private fun createStore(initialStatus: AccountStatus) = IPProtectionStore(
-        initialState = IPProtectionState(accountState = AccountState(status = initialStatus)),
+    @Test
+    fun `GIVEN user has already finished auth flow successfully but service is still unauthenticated WHEN the VPN toggle failed THEN a generic network error telemetry is recorded`() {
+        assertNull(Vpn.entitledAccountUnauthenticated.testGetValue())
+
+        val store = createStore(
+            initialStatus = AccountStatus.EnrolledAndEntitled,
+            serviceStatus = ServiceState.Unauthenticated,
+        )
+
+        store.dispatch(IPProtectionAction.ToggleFailed)
+
+        val events = Vpn.entitledAccountUnauthenticated.testGetValue()
+        assertNotNull(events)
+        assertEquals(1, events.size)
+    }
+
+    private fun createStore(
+        initialStatus: AccountStatus,
+        serviceStatus: ServiceState = ServiceState.Uninitialized,
+    ) = IPProtectionStore(
+        initialState = IPProtectionState(
+            accountState = AccountState(status = initialStatus),
+            serviceStatus = serviceStatus,
+        ),
         middleware = listOf(middleware),
     )
 

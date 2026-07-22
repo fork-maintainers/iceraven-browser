@@ -5,6 +5,8 @@
 package org.mozilla.fenix.components.ipprotection
 
 import android.os.SystemClock
+import mozilla.components.ExperimentalAndroidComponentsApi
+import mozilla.components.concept.engine.ipprotection.ServiceState
 import mozilla.components.feature.ipprotection.store.IPProtectionAction
 import mozilla.components.feature.ipprotection.store.state.AccountStatus
 import mozilla.components.feature.ipprotection.store.state.IPProtectionState
@@ -36,13 +38,14 @@ internal class IPProtectionTelemetryMiddleware(
         next: (IPProtectionAction) -> Unit,
         action: IPProtectionAction,
     ) {
+        // The entitled but unauthenticated error state can be only captured before the reducer processes the action.
+        if (action is IPProtectionAction.ToggleFailed) {
+            handleToggleFailedAction(store.state)
+        }
+
         val previousStatus = store.state.accountState.status
         next(action)
         val currentStatus = store.state.accountState.status
-
-        if (action is IPProtectionAction.ToggleFailed) {
-            Vpn.errorEncountered.record()
-        }
 
         if (previousStatus == currentStatus) {
             return
@@ -107,6 +110,16 @@ internal class IPProtectionTelemetryMiddleware(
                 // no-op
             }
         }
+    }
+
+    @OptIn(ExperimentalAndroidComponentsApi::class)
+    private fun handleToggleFailedAction(state: IPProtectionState) {
+        if (state.accountState.status == AccountStatus.EnrolledAndEntitled &&
+            state.serviceStatus == ServiceState.Unauthenticated
+        ) {
+            Vpn.entitledAccountUnauthenticated.record()
+        }
+        Vpn.errorEncountered.record()
     }
 
     private fun durationSince(startMs: Long?): Int? = startMs?.let { (currentTimeInMillis() - it).toInt() }

@@ -16496,6 +16496,21 @@ vpn:
     notification_emails:
       - android-probes@mozilla.com
     expires: never
+  entitled_account_unauthenticated:
+    type: event
+    description:
+      Triggered when a VPN toggle fails while the account is enrolled and
+      entitled but the IP protection service is still unauthenticated. This
+      indicates a race between the FxA auth flow and account-manager warm-up.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2054812
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D312137
+    data_sensitivity:
+      - technical
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
   proxy_unavailable:
     type: event
     description: >
