@@ -36,6 +36,7 @@ import org.mozilla.fenix.components.appstate.AppAction
 import org.mozilla.fenix.components.appstate.AppAction.ShareAction
 import org.mozilla.fenix.components.appstate.AppAction.SnackbarAction
 import org.mozilla.fenix.components.appstate.AppState
+import org.mozilla.fenix.components.appstate.SupportedMenuNotifications
 import org.mozilla.fenix.components.appstate.snackbar.SnackbarState
 import org.mozilla.fenix.downloads.getCannotOpenFileErrorMessage
 import org.mozilla.fenix.ext.components
@@ -336,7 +337,13 @@ class SnackbarBinding(
                                 contentType = state.downloadState.contentType,
                             )
 
-                            if (!fileWasOpened) {
+                            if (fileWasOpened) {
+                                appStore.dispatch(
+                                    AppAction.MenuNotification.RemoveMenuNotification(
+                                        SupportedMenuNotifications.Downloads,
+                                    ),
+                                )
+                            } else {
                                 appStore.dispatch(
                                     AppAction.DownloadAction.CannotOpenFile(state.downloadState),
                                 )

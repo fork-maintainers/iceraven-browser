@@ -33,7 +33,10 @@ import mozilla.components.feature.accounts.push.SendTabUseCases.SendToDeviceUseC
 import mozilla.components.feature.tabs.TabsUseCases
 import mozilla.components.feature.tabs.TabsUseCases.UndoTabRemovalUseCase
 import mozilla.components.support.test.robolectric.testContext
+import mozilla.components.support.utils.DownloadFileUtils
+import mozilla.components.support.utils.FakeDownloadFileUtils
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -47,6 +50,7 @@ import org.mozilla.fenix.components.appstate.AppAction.ShortcutAction
 import org.mozilla.fenix.components.appstate.AppAction.SnackbarAction
 import org.mozilla.fenix.components.appstate.AppAction.TranslationsAction
 import org.mozilla.fenix.components.appstate.AppAction.WebCompatAction
+import org.mozilla.fenix.components.appstate.SupportedMenuNotifications
 import org.mozilla.fenix.components.appstate.snackbar.SnackbarState.BookmarkAdded
 import org.mozilla.fenix.components.appstate.snackbar.SnackbarState.CopyLinkToClipboard
 import org.mozilla.fenix.components.appstate.snackbar.SnackbarState.CurrentTabClosed
@@ -641,6 +645,49 @@ class SnackbarBindingTest {
     }
 
     @Test
+    fun `WHEN download is completed and user opens file THEN the downloads menu notification is removed`() =
+        runTest(testDispatcher) {
+            val snackbarAction = slot<((v: View) -> Unit)>()
+            appStore.dispatch(AppAction.MenuNotification.AddMenuNotification(SupportedMenuNotifications.Downloads))
+
+            val binding = buildSnackbarBinding()
+            binding.start()
+
+            val downloadState = DownloadState(
+                id = "1",
+                url = "url",
+                fileName = "fileName",
+                contentType = "application/zip",
+                contentLength = 5242880,
+                status = DownloadState.Status.DOWNLOADING,
+                directoryPath = "downloads",
+                private = true,
+                createdTime = 33,
+                etag = "etag",
+            )
+
+            appStore.dispatch(AppAction.DownloadAction.DownloadCompleted(downloadState))
+            waitForStoreToSettle()
+
+            verify {
+                snackbarDelegate.show(
+                    any(),
+                    any(),
+                    any(),
+                    any(),
+                    any(),
+                    any(),
+                    any(),
+                    capture(snackbarAction),
+                )
+            }
+            snackbarAction.captured.invoke(mockk())
+            waitForStoreToSettle()
+
+            assertFalse(appStore.state.supportedMenuNotifications.contains(SupportedMenuNotifications.Downloads))
+        }
+
+    @Test
     fun `WHEN download file can't be open THEN display a snackbar`() = runTest(testDispatcher) {
         val binding = buildSnackbarBinding()
         binding.start()
@@ -745,6 +792,7 @@ class SnackbarBindingTest {
         tabsUseCases: TabsUseCases = this.tabsUseCases,
         sendTabUseCases: SendTabUseCases? = null,
         customTabSessionId: String? = null,
+        downloadFileUtils: DownloadFileUtils = FakeDownloadFileUtils(),
     ) = SnackbarBinding(
         context = context,
         browserStore = browserStore,
@@ -754,6 +802,7 @@ class SnackbarBindingTest {
         tabsUseCases = tabsUseCases,
         sendTabUseCases = sendTabUseCases,
         customTabSessionId = customTabSessionId,
+        downloadFileUtils = downloadFileUtils,
         ioDispatcher = testDispatcher,
         mainDispatcher = testDispatcher,
     )
