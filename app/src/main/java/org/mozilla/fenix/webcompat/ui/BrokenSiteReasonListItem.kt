@@ -31,7 +31,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import mozilla.components.compose.base.theme.AcornCorners
-import mozilla.components.compose.base.theme.surfaceDimVariant
 import org.mozilla.fenix.theme.FirefoxTheme
 import org.mozilla.fenix.theme.PreviewThemeProvider
 import org.mozilla.fenix.theme.Theme
@@ -61,7 +60,7 @@ fun BrokenSiteReasonListItem(
 ) {
     Surface(
         shape = shape,
-        color = MaterialTheme.colorScheme.surfaceDimVariant,
+        color = MaterialTheme.colorScheme.surface,
         modifier = modifier.fillMaxWidth(),
     ) {
         Row(

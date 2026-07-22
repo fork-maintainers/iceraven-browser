@@ -6,11 +6,15 @@ package org.mozilla.fenix.webcompat.ui
 
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.imePadding
@@ -29,6 +33,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -59,6 +64,7 @@ import mozilla.components.compose.base.button.IconButton
 import mozilla.components.compose.base.button.TextButton
 import mozilla.components.compose.base.textfield.TextField
 import mozilla.components.compose.base.theme.AcornCorners
+import mozilla.components.compose.base.theme.layout.AcornWindowSize
 import org.mozilla.fenix.R
 import org.mozilla.fenix.components.components
 import org.mozilla.fenix.ext.getBaseDomainUrl
@@ -111,10 +117,9 @@ fun WebCompatReporter(
                 onCloseClick = {
                     store.dispatch(WebCompatReporterAction.CancelClicked)
                 },
-                scrollState = scrollState,
             )
         },
-        containerColor = MaterialTheme.colorScheme.background,
+        containerColor = MaterialTheme.colorScheme.surfaceBright,
     ) { paddingValues ->
         WebCompatReporterContent(
             state = state,
@@ -146,55 +151,158 @@ private fun WebCompatReporterContent(
     onPreviewReportClick: () -> Unit,
     onAction: (WebCompatReporterAction) -> Unit,
 ) {
+    val isTablet = FirefoxTheme.windowSize != AcornWindowSize.Small
+
     Column(
         modifier = Modifier
-            .verticalScroll(scrollState)
             .padding(paddingValues)
             .imePadding()
-            .padding(horizontal = FirefoxTheme.layout.space.static200)
-            .width(FirefoxTheme.layout.size.containerMaxWidth),
+            .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
+        Column(
+            modifier = Modifier
+                .weight(1f)
+                .verticalScroll(scrollState)
+                .padding(horizontal = FirefoxTheme.layout.space.static200)
+                .width(FirefoxTheme.layout.size.containerMaxWidth),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            ReporterHeader(
+                isTablet = isTablet,
+                state = state,
+                baseDomain = baseDomain,
+                onPreviewReportClick = onPreviewReportClick,
+                onAction = onAction,
+            )
+
+            ReporterForm(
+                isTablet = isTablet,
+                state = state,
+                onPreviewReportClick = onPreviewReportClick,
+                onAction = onAction,
+            )
+
+            WebCompatReporterFooter(
+                onLearnMoreClick = { onAction(WebCompatReporterAction.LearnMoreClicked) },
+            )
+        }
+
+        if (!isTablet) {
+            ActionButtonsSection(
+                isSubmitVisible = state.reason != null,
+                isSubmitEnabled = state.isSubmitEnabled,
+                onSendClick = { onAction(WebCompatReporterAction.SendReportClicked) },
+                modifier = Modifier.width(FirefoxTheme.layout.size.containerMaxWidth),
+            )
+        }
+    }
+}
+
+@Composable
+private fun ReporterForm(
+    isTablet: Boolean,
+    state: WebCompatReporterState,
+    onPreviewReportClick: () -> Unit,
+    onAction: (WebCompatReporterAction) -> Unit,
+) {
+    BrokenSiteReasonSection(
+        selectedReason = state.reason,
+        onReasonSelected = { reason -> onAction(WebCompatReporterAction.ReasonChanged(reason)) },
+        onReasonCleared = { onAction(WebCompatReporterAction.ReasonCleared) },
+    )
+
+    if (state.reason != null) {
+        ProblemDetailsSection(
+            state = state,
+            onPreviewReportClick = onPreviewReportClick,
+            showPreviewButton = !isTablet,
+            problemDescriptionRequiredLabel = state.problemDescriptionRequiredLabel,
+            onAction = onAction,
+        )
+    }
+}
+
+@Composable
+private fun ReporterHeader(
+    isTablet: Boolean,
+    state: WebCompatReporterState,
+    baseDomain: String,
+    onPreviewReportClick: () -> Unit,
+    onAction: (WebCompatReporterAction) -> Unit,
+) {
+    if (isTablet) {
+        TabletHeader(
+            state = state,
+            baseDomain = baseDomain,
+            onPreviewReportClick = onPreviewReportClick,
+            onAction = onAction,
+        )
+    } else {
         UrlSection(
             url = state.enteredUrl,
             baseDomain = baseDomain,
             onEditUrlClick = { onAction(WebCompatReporterAction.EditUrlClicked) },
         )
+    }
+}
 
-        BrokenSiteReasonSection(
-            selectedReason = state.reason,
-            onReasonSelected = { reason -> onAction(WebCompatReporterAction.ReasonChanged(reason)) },
-            onReasonCleared = { onAction(WebCompatReporterAction.ReasonCleared) },
-        )
+@Composable
+private fun TabletHeader(
+    state: WebCompatReporterState,
+    baseDomain: String,
+    onPreviewReportClick: () -> Unit,
+    onAction: (WebCompatReporterAction) -> Unit,
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(IntrinsicSize.Min),
+        horizontalArrangement = Arrangement.spacedBy(FirefoxTheme.layout.space.static200),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Box(modifier = Modifier.weight(2f)) {
+            UrlSection(
+                url = state.enteredUrl,
+                baseDomain = baseDomain,
+                onEditUrlClick = { onAction(WebCompatReporterAction.EditUrlClicked) },
+                showDivider = false,
+            )
+        }
 
         if (state.reason != null) {
-            ProblemDetailsSection(
-                problemDescription = state.problemDescription,
-                hasDescriptionError = state.hasDescriptionError,
-                onProblemDescriptionChange = { description ->
-                    onAction(WebCompatReporterAction.ProblemDescriptionChanged(description))
-                },
-                includeEtpBlockedUrls = state.includeEtpBlockedUrls,
-                problemDescriptionRequiredLabel = state.problemDescriptionRequiredLabel,
-                onIncludeEtpBlockedUrlsChange = { include ->
-                    onAction(WebCompatReporterAction.IncludeEtpBlockedUrlsChanged(include))
-                },
-                onPreviewReportClick = onPreviewReportClick,
+            VerticalDivider(
+                modifier = Modifier
+                    .fillMaxHeight(),
             )
-        }
 
-        ActionButtonsSection(
-            isSubmitVisible = state.reason != null,
-            isSubmitEnabled = state.isSubmitEnabled,
-            onSendClick = { onAction(WebCompatReporterAction.SendReportClicked) },
-        )
+            Column(
+                modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.spacedBy(FirefoxTheme.layout.space.static50),
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                TextButton(
+                    text = stringResource(id = R.string.webcompat_reporter_preview_report),
+                    modifier = Modifier.fillMaxWidth(),
+                    onClick = onPreviewReportClick,
+                )
 
-        if (state.reason == null) {
-            WebCompatReporterFooter(
-                onLearnMoreClick = { onAction(WebCompatReporterAction.LearnMoreClicked) },
-            )
+                ActionButtonsSection(
+                    isSubmitVisible = true,
+                    isSubmitEnabled = state.isSubmitEnabled,
+                    onSendClick = { onAction(WebCompatReporterAction.SendReportClicked) },
+                    modifier = Modifier.fillMaxWidth(),
+                    showDivider = false,
+                )
+            }
         }
     }
+
+    Spacer(modifier = Modifier.height(FirefoxTheme.layout.space.static200))
+
+    HorizontalDivider()
+
+    Spacer(modifier = Modifier.height(FirefoxTheme.layout.space.static200))
 }
 
 @Composable
@@ -231,6 +339,7 @@ private fun UrlSection(
     url: String,
     baseDomain: String,
     onEditUrlClick: () -> Unit,
+    showDivider: Boolean = true,
 ) {
     ReadOnlyUrlField(
         url = url,
@@ -240,11 +349,37 @@ private fun UrlSection(
         baseDomain = baseDomain,
     )
 
-    Spacer(modifier = Modifier.height(FirefoxTheme.layout.space.static200))
+    if (showDivider) {
+        Spacer(modifier = Modifier.height(FirefoxTheme.layout.space.static200))
 
-    HorizontalDivider()
+        HorizontalDivider()
 
-    Spacer(modifier = Modifier.height(FirefoxTheme.layout.space.static200))
+        Spacer(modifier = Modifier.height(FirefoxTheme.layout.space.static200))
+    }
+}
+
+@Composable
+private fun ProblemDetailsSection(
+    state: WebCompatReporterState,
+    onPreviewReportClick: () -> Unit,
+    showPreviewButton: Boolean,
+    problemDescriptionRequiredLabel: Boolean,
+    onAction: (WebCompatReporterAction) -> Unit,
+) {
+    ProblemDetailsSection(
+        problemDescription = state.problemDescription,
+        hasDescriptionError = state.hasDescriptionError,
+        problemDescriptionRequiredLabel = problemDescriptionRequiredLabel,
+        onProblemDescriptionChange = { description ->
+            onAction(WebCompatReporterAction.ProblemDescriptionChanged(description))
+        },
+        includeEtpBlockedUrls = state.includeEtpBlockedUrls,
+        onIncludeEtpBlockedUrlsChange = { include ->
+            onAction(WebCompatReporterAction.IncludeEtpBlockedUrlsChanged(include))
+        },
+        onPreviewReportClick = onPreviewReportClick,
+        showPreviewButton = showPreviewButton,
+    )
 }
 
 @Composable
@@ -256,6 +391,7 @@ private fun ProblemDetailsSection(
     onProblemDescriptionChange: (String) -> Unit,
     onIncludeEtpBlockedUrlsChange: (Boolean) -> Unit,
     onPreviewReportClick: () -> Unit,
+    showPreviewButton: Boolean = true,
 ) {
     Spacer(modifier = Modifier.height(FirefoxTheme.layout.space.static150))
 
@@ -294,14 +430,16 @@ private fun ProblemDetailsSection(
         )
     }
 
-    Spacer(modifier = Modifier.height(FirefoxTheme.layout.space.static200))
+    if (showPreviewButton) {
+        Spacer(modifier = Modifier.height(FirefoxTheme.layout.space.static200))
 
-    TextButton(
-        text = stringResource(id = R.string.webcompat_reporter_preview_report),
-        modifier = Modifier
-            .fillMaxWidth(),
-        onClick = onPreviewReportClick,
-    )
+        TextButton(
+            text = stringResource(id = R.string.webcompat_reporter_preview_report),
+            modifier = Modifier
+                .fillMaxWidth(),
+            onClick = onPreviewReportClick,
+        )
+    }
 }
 
 @Composable
@@ -309,26 +447,37 @@ private fun ActionButtonsSection(
     isSubmitVisible: Boolean,
     isSubmitEnabled: Boolean,
     onSendClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    showDivider: Boolean = true,
 ) {
     if (isSubmitVisible) {
-        Spacer(modifier = Modifier.height(FirefoxTheme.layout.space.static200))
+        Column(modifier = modifier) {
+            if (showDivider) {
+                HorizontalDivider()
 
-        HorizontalDivider()
+                Spacer(modifier = Modifier.height(FirefoxTheme.layout.space.static100))
+            }
 
-        Spacer(modifier = Modifier.height(FirefoxTheme.layout.space.static100))
+            val horizontalPadding = if (showDivider) {
+                FirefoxTheme.layout.space.static200
+            } else {
+                0.dp
+            }
 
-        FilledButton(
-            text = stringResource(id = R.string.webcompat_reporter_send_report),
-            containerColor = MaterialTheme.colorScheme.primary,
-            enabled = isSubmitEnabled,
-            modifier = Modifier
-                .fillMaxWidth()
-                .semantics {
-                    testTagsAsResourceId = true
-                    testTag = BROKEN_SITE_REPORTER_SEND_BUTTON
-                },
-        ) {
-            onSendClick()
+            FilledButton(
+                text = stringResource(id = R.string.webcompat_reporter_send_report),
+                containerColor = MaterialTheme.colorScheme.primary,
+                enabled = isSubmitEnabled,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = horizontalPadding)
+                    .semantics {
+                        testTagsAsResourceId = true
+                        testTag = BROKEN_SITE_REPORTER_SEND_BUTTON
+                    },
+            ) {
+                onSendClick()
+            }
         }
     }
 }
@@ -373,6 +522,7 @@ private fun ProblemDescriptionInput(
         } else {
             R.string.webcompat_reporter_label_optional_description
         }
+
         Text(
             text = stringResource(id = labelResId),
             style = FirefoxTheme.typography.headline7,
@@ -409,7 +559,6 @@ private fun ProblemDescriptionInput(
 @Composable
 private fun TempAppBar(
     onCloseClick: () -> Unit,
-    scrollState: ScrollState,
 ) {
     TopAppBar(
         title = {
@@ -434,11 +583,7 @@ private fun TempAppBar(
             bottom = 0.dp,
         ),
         colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = if (scrollState.canScrollBackward) {
-                MaterialTheme.colorScheme.surfaceContainerHigh
-            } else {
-                MaterialTheme.colorScheme.surface
-            },
+            containerColor = MaterialTheme.colorScheme.surfaceBright,
         ),
     )
 }

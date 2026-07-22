@@ -31,7 +31,6 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewLightDark
-import mozilla.components.compose.base.theme.surfaceDimVariant
 import org.mozilla.fenix.theme.FirefoxTheme
 import mozilla.components.ui.icons.R as iconsR
 
@@ -82,7 +81,7 @@ fun ReadOnlyUrlField(
 
         Surface(
             shape = RoundedCornerShape(FirefoxTheme.layout.space.static100),
-            color = MaterialTheme.colorScheme.surfaceDimVariant,
+            color = MaterialTheme.colorScheme.surface,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = FirefoxTheme.layout.space.static50)
