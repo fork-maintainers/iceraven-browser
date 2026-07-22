@@ -643,7 +643,7 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity, Crash
         )
 
         if (components.settings.showContileFeature) {
-            components.core.contileTopSitesUpdater.startPeriodicWork()
+            components.core.macTopSitesUpdater.startPeriodicWork()
         }
 
         if (!components.settings.hiddenEnginesRestored) {
@@ -934,7 +934,7 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity, Crash
             ),
         )
 
-        components.core.contileTopSitesUpdater.stopPeriodicWork()
+        components.core.macTopSitesUpdater.stopPeriodicWork()
         components.core.pocketStoriesService.stopPeriodicContentRecommendationsRefresh()
         components.core.pocketStoriesService.stopPeriodicSponsoredContentsRefresh()
         privateNotificationObserver?.stop()

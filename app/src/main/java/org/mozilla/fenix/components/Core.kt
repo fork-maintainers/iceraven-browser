@@ -87,9 +87,9 @@ import mozilla.components.service.location.LocationService
 import mozilla.components.service.location.MozillaLocationService
 import mozilla.components.service.mars.MacTopSitesProvider
 import mozilla.components.service.mars.MacTopSitesRequestConfig
+import mozilla.components.service.mars.MacTopSitesUpdater
 import mozilla.components.service.mars.NEW_TAB_TILE_1_PLACEMENT_KEY
 import mozilla.components.service.mars.NEW_TAB_TILE_2_PLACEMENT_KEY
-import mozilla.components.service.mars.contile.ContileTopSitesUpdater
 import mozilla.components.service.merino.manifest.MerinoManifestProvider
 import mozilla.components.service.pocket.ContentRecommendationsRequestConfig
 import mozilla.components.service.pocket.PocketStoriesConfig
@@ -643,8 +643,8 @@ class Core(
     }
 
     @Suppress("MagicNumber")
-    val contileTopSitesUpdater by lazyMonitored {
-        ContileTopSitesUpdater(
+    val macTopSitesUpdater by lazyMonitored {
+        MacTopSitesUpdater(
             context = context,
             provider = macTopSitesProvider,
             frequency = Frequency(3, TimeUnit.HOURS),
