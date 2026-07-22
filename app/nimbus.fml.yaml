@@ -323,17 +323,17 @@ features:
       enabled:
         type: Boolean
         description: If true, shake to summarize will be enabled
-        default: false
+        default: true
     defaults:
       - channel: developer
         value:
-          enabled: false
+          enabled: true
       - channel: nightly
         value:
-          enabled: false
+          enabled: true
       - channel: beta
         value:
-          enabled: false
+          enabled: true
 
   import-bookmarks:
     description: A feature that lets users import bookmarks from another browser.
