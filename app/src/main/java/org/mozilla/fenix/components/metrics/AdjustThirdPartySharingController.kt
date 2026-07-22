@@ -63,5 +63,8 @@ class AdjustThirdPartySharingController : ThirdPartySharingController {
 
         /** Adjust partner ID for X (Twitter). */
         const val X_TWITTER_PARTNER_ID = "32"
+
+        /** Adjust partner ID for Moloco. */
+        const val MOLOCO_PARTNER_ID = "56"
     }
 }

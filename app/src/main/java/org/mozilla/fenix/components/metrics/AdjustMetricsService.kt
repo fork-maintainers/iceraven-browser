@@ -25,6 +25,7 @@ import org.mozilla.fenix.GleanMetrics.Pings
 import org.mozilla.fenix.components.metrics.AdjustThirdPartySharingController.Companion.AURA_PARTNER_ID
 import org.mozilla.fenix.components.metrics.AdjustThirdPartySharingController.Companion.GOOGLE_PARTNER_ID
 import org.mozilla.fenix.components.metrics.AdjustThirdPartySharingController.Companion.META_PARTNER_ID
+import org.mozilla.fenix.components.metrics.AdjustThirdPartySharingController.Companion.MOLOCO_PARTNER_ID
 import org.mozilla.fenix.components.metrics.AdjustThirdPartySharingController.Companion.REDDIT_PARTNER_ID
 import org.mozilla.fenix.components.metrics.AdjustThirdPartySharingController.Companion.TIKTOK_PARTNER_ID
 import org.mozilla.fenix.components.metrics.AdjustThirdPartySharingController.Companion.X_TWITTER_PARTNER_ID
@@ -178,6 +179,7 @@ class AdjustMetricsService(
             isUserTikTokAttributed = settings.isUserTikTokAttributed,
             isUserRedditAttributed = settings.isUserRedditAttributed,
             isUserXTwitterAttributed = settings.isUserXTwitterAttributed,
+            isUserMolocoAttributed = settings.isUserMolocoAttributed,
             controller = thirdPartySharingController,
         )
 
@@ -269,6 +271,7 @@ class AdjustMetricsService(
             isUserTikTokAttributed: Boolean,
             isUserRedditAttributed: Boolean,
             isUserXTwitterAttributed: Boolean,
+            isUserMolocoAttributed: Boolean,
             controller: ThirdPartySharingController = AdjustThirdPartySharingController(),
         ) {
             when (distribution) {
@@ -285,6 +288,8 @@ class AdjustMetricsService(
                             controller.enableThirdPartySharingForPartner(REDDIT_PARTNER_ID)
                         isUserXTwitterAttributed ->
                             controller.enableThirdPartySharingForPartner(X_TWITTER_PARTNER_ID)
+                        isUserMolocoAttributed ->
+                            controller.enableThirdPartySharingForPartner(MOLOCO_PARTNER_ID)
                         else ->
                             controller.enableThirdPartySharingForPartner(GOOGLE_PARTNER_ID)
                     }

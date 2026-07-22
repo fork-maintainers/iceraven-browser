@@ -574,6 +574,88 @@ internal class InstallReferrerHandlingServiceTest {
             val xReferrer = "utm_source=x&utm_medium=paid"
             assertTrue(InstallReferrerHandlingService.shouldShowMarketingOnboarding(xReferrer, distributionIdManager))
         }
+
+    @Test
+    fun `WHEN installReferrerResponse is null or blank THEN isMolocoAttribution returns false`() {
+        assertFalse(InstallReferrerHandlingService.isMolocoAttribution(null))
+        assertFalse(InstallReferrerHandlingService.isMolocoAttribution(""))
+        assertFalse(InstallReferrerHandlingService.isMolocoAttribution(" "))
+    }
+
+    @Test
+    fun `WHEN installReferrerResponse has a Moloco adjust_external_click_id THEN isMolocoAttribution returns true`() {
+        assertTrue(
+            InstallReferrerHandlingService.isMolocoAttribution(
+                "adjust_external_click_id=moloco_9b1deb4d-3b7d-4bad-9bdd-2b0d7b3d41a6",
+            ),
+        )
+    }
+
+    @Test
+    fun `WHEN installReferrerResponse has a mixed-case Moloco adjust_external_click_id THEN isMolocoAttribution returns true`() {
+        assertTrue(InstallReferrerHandlingService.isMolocoAttribution("adjust_external_click_id=Moloco_abc"))
+        assertTrue(InstallReferrerHandlingService.isMolocoAttribution("adjust_external_click_id=MOLOCO_abc"))
+        assertTrue(InstallReferrerHandlingService.isMolocoAttribution("adjust_external_click_id%3Dmoloco_abc"))
+        assertTrue(InstallReferrerHandlingService.isMolocoAttribution("adjust_external_click_id%3DMoLoCo_abc"))
+    }
+
+    @Test
+    fun `WHEN installReferrerResponse has a malformed percent escape THEN isMolocoAttribution falls back to raw parsing`() {
+        assertTrue(
+            InstallReferrerHandlingService.isMolocoAttribution(
+                "adjust_external_click_id=moloco_abc123&malformed=%",
+            ),
+        )
+    }
+
+    @Test
+    fun `WHEN installReferrerResponse has a non-Moloco adjust_external_click_id THEN isMolocoAttribution returns false`() {
+        assertFalse(
+            InstallReferrerHandlingService.isMolocoAttribution(
+                "adjust_external_click_id=reddit_abc123",
+            ),
+        )
+    }
+
+    @Test
+    fun `WHEN installReferrerResponse has no adjust_external_click_id THEN isMolocoAttribution returns false`() {
+        assertFalse(InstallReferrerHandlingService.isMolocoAttribution("utm_source=google&utm_medium=cpc"))
+    }
+
+    @Test
+    fun `GIVEN a Moloco-attributed referrer on OK response WHEN start is called THEN isUserMolocoAttributed is true`() {
+        val referrer = "adjust_external_click_id=moloco_9b1deb4d-3b7d-4bad-9bdd-2b0d7b3d41a6&utm_medium=paid"
+        val service = fakeService(
+            responseCode = InstallReferrerClient.InstallReferrerResponse.OK,
+            referrerResponse = referrer,
+        )
+
+        service.start()
+
+        assertTrue(testContext.components.settings.isUserMolocoAttributed)
+    }
+
+    @Test
+    fun `GIVEN a non-Moloco referrer on OK response WHEN start is called THEN isUserMolocoAttributed is false`() {
+        testContext.components.settings.isUserMolocoAttributed = true
+        val service = fakeService(
+            responseCode = InstallReferrerClient.InstallReferrerResponse.OK,
+            referrerResponse = "utm_source=google&utm_medium=cpc",
+        )
+
+        service.start()
+
+        assertFalse(testContext.components.settings.isUserMolocoAttributed)
+    }
+
+    @Test
+    fun `WHEN installReferrerResponse is a Moloco attribution THEN we should show marketing onboarding`() =
+        runBlocking {
+            val molocoReferrer = "adjust_external_click_id=moloco_9b1deb4d-3b7d-4bad-9bdd-2b0d7b3d41a6&utm_medium=paid"
+            assertTrue(
+                InstallReferrerHandlingService.shouldShowMarketingOnboarding(molocoReferrer, distributionIdManager),
+            )
+        }
 }
 
 private class FakeReferrerClient(

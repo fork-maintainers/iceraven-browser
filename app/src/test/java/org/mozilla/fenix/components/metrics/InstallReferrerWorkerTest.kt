@@ -497,6 +497,39 @@ class InstallReferrerWorkerTest {
 
         assertTrue(settings.isUserXTwitterAttributed)
     }
+
+    @Test
+    fun `WHEN handleSuccess receives a Moloco-attributed referrer THEN isUserMolocoAttributed is set to true`() {
+        val worker = TestListenableWorkerBuilder<InstallReferrerWorker>(context).build()
+        val settings = Settings(context)
+        val referrer = "adjust_external_click_id=moloco_9b1deb4d-3b7d-4bad-9bdd-2b0d7b3d41a6&utm_medium=paid"
+
+        worker.handleSuccess(referrer, InstallReferrerClient.InstallReferrerResponse.OK, settings)
+
+        assertTrue(settings.isUserMolocoAttributed)
+    }
+
+    @Test
+    fun `WHEN handleSuccess receives a non-Moloco referrer THEN isUserMolocoAttributed is set to false`() {
+        val worker = TestListenableWorkerBuilder<InstallReferrerWorker>(context).build()
+        val settings = Settings(context)
+        settings.isUserMolocoAttributed = true
+
+        worker.handleSuccess("utm_source=google&utm_medium=cpc", InstallReferrerClient.InstallReferrerResponse.OK, settings)
+
+        assertFalse(settings.isUserMolocoAttributed)
+    }
+
+    @Test
+    fun `WHEN handleSuccess receives a null referrer THEN isUserMolocoAttributed is not changed`() {
+        val worker = TestListenableWorkerBuilder<InstallReferrerWorker>(context).build()
+        val settings = Settings(context)
+        settings.isUserMolocoAttributed = true
+
+        worker.handleSuccess(null, InstallReferrerClient.InstallReferrerResponse.OK, settings)
+
+        assertTrue(settings.isUserMolocoAttributed)
+    }
 }
 
 private class FakeInstallReferrerClient(
