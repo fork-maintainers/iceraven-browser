@@ -123,38 +123,29 @@ class LensFeature(
             try {
                 // Download and upload the image bytes ourselves; this uses the browser's
                 // User-Agent and cookies, which succeeds for hosts that block Lens's server-side
-                // fetcher. When the client-side upload yields no result, fall back to letting Lens
-                // fetch the image by URL -- but not in private mode, where we must not hand the
-                // source image URL to Google.
+                // fetcher.
                 val uploadResult = try {
                     uploader.uploadFromUrl(imageUrl)
                 } catch (e: IOException) {
-                    logger.debug("Lens image upload failed, falling back to uploadbyurl for $imageUrl", e)
+                    logger.debug("Lens image upload failed for $imageUrl", e)
                     null
                 }
 
-                val isPrivate = appStore.state.mode.isPrivate
-                val clientResultUrl = uploadResult?.resultUrl
-                val resultUrl = clientResultUrl
-                    ?: if (isPrivate) null else uploader.buildUploadByUrl(imageUrl)
-
+                val resultUrl = uploadResult?.resultUrl
+                recordSearchCompleted(
+                    succeeded = resultUrl != null,
+                    source = SOURCE_CONTEXT_MENU,
+                    httpStatusCode = uploadResult?.httpStatusCode,
+                )
                 if (resultUrl != null) {
-                    recordSearchCompleted(
-                        succeeded = true,
-                        source = SOURCE_CONTEXT_MENU,
-                        httpStatusCode = if (clientResultUrl != null) uploadResult.httpStatusCode else null,
-                    )
                     context.components.useCases.tabsUseCases.addTab(
                         url = resultUrl,
                         selectTab = true,
                         startLoading = true,
-                        private = isPrivate,
+                        private = appStore.state.mode.isPrivate,
                     )
                     appStore.dispatch(LensAction.LensResultAvailable(resultUrl))
                 }
-                // resultUrl is null only when we deliberately skip the uploadbyurl fallback in
-                // private mode -- an intentional no-op, not a completed search, so it is not
-                // recorded.
             } finally {
                 appStore.dispatch(LensAction.LensDismissed)
             }

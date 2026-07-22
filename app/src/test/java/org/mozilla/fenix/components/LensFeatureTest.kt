@@ -192,77 +192,19 @@ class LensFeatureTest {
         testDispatcher.scheduler.advanceUntilIdle()
 
         coVerify { uploader.uploadFromUrl("https://example.com/image.jpg") }
-        verify(exactly = 0) { uploader.buildUploadByUrl(any()) }
         verify(exactly = 0) { lensLauncher.launch(any()) }
         verify { appStore.dispatch(LensAction.LensDismissed) }
     }
 
     @Test
-    fun `GIVEN uploadFromImageUrl WHEN download returns null THEN it falls back to the uploadbyurl tab`() = runTest(testDispatcher) {
-        val fallbackUrl = "https://lens.google.com/uploadbyurl?url=fallback"
+    fun `GIVEN uploadFromImageUrl WHEN upload returns null THEN it records a failure and opens no tab`() = runTest(testDispatcher) {
         coEvery { uploader.uploadFromUrl(any()) } returns
             LensImageUploader.UploadResult(resultUrl = null, httpStatusCode = 403)
-        every { uploader.buildUploadByUrl(any()) } returns fallbackUrl
         testDispatcher.scheduler.advanceUntilIdle()
 
         feature.uploadFromImageUrl("https://example.com/image.jpg")
         testDispatcher.scheduler.advanceUntilIdle()
 
-        verify { uploader.buildUploadByUrl("https://example.com/image.jpg") }
-        verify {
-            testContext.components.useCases.tabsUseCases.addTab(
-                url = fallbackUrl,
-                selectTab = true,
-                startLoading = true,
-                private = false,
-            )
-        }
-        verify { appStore.dispatch(LensAction.LensResultAvailable(fallbackUrl)) }
-        verify { appStore.dispatch(LensAction.LensDismissed) }
-        val events = GoogleLens.searchCompleted.testGetValue()
-        assertNotNull(events)
-        assertEquals("true", events.last().extra?.get("succeeded"))
-        assertNull(events.last().extra?.get("http_status_code"))
-        assertEquals("context_menu", events.last().extra?.get("source"))
-    }
-
-    @Test
-    fun `GIVEN uploadFromImageUrl WHEN download throws IOException THEN it falls back to the uploadbyurl tab`() = runTest(testDispatcher) {
-        val fallbackUrl = "https://lens.google.com/uploadbyurl?url=fallback"
-        coEvery { uploader.uploadFromUrl(any()) } throws java.io.IOException("boom")
-        every { uploader.buildUploadByUrl(any()) } returns fallbackUrl
-        testDispatcher.scheduler.advanceUntilIdle()
-
-        feature.uploadFromImageUrl("https://example.com/image.jpg")
-        testDispatcher.scheduler.advanceUntilIdle()
-
-        verify { uploader.buildUploadByUrl("https://example.com/image.jpg") }
-        verify {
-            testContext.components.useCases.tabsUseCases.addTab(
-                url = fallbackUrl,
-                selectTab = true,
-                startLoading = true,
-                private = false,
-            )
-        }
-        verify { appStore.dispatch(LensAction.LensResultAvailable(fallbackUrl)) }
-        verify { appStore.dispatch(LensAction.LensDismissed) }
-        val events = GoogleLens.searchCompleted.testGetValue()
-        assertNotNull(events)
-        assertEquals("context_menu", events.last().extra?.get("source"))
-    }
-
-    @Test
-    fun `GIVEN private browsing mode WHEN download returns null THEN it does not fall back to uploadbyurl and dispatches LensDismissed`() = runTest(testDispatcher) {
-        appStore.dispatch(AppAction.BrowsingModeManagerModeChanged(BrowsingMode.Private))
-        testDispatcher.scheduler.advanceUntilIdle()
-        coEvery { uploader.uploadFromUrl(any()) } returns
-            LensImageUploader.UploadResult(resultUrl = null, httpStatusCode = 500)
-
-        feature.uploadFromImageUrl("https://example.com/image.jpg")
-        testDispatcher.scheduler.advanceUntilIdle()
-
-        verify(exactly = 0) { uploader.buildUploadByUrl(any()) }
         verify(exactly = 0) {
             testContext.components.useCases.tabsUseCases.addTab(
                 url = any(),
@@ -273,8 +215,36 @@ class LensFeatureTest {
         }
         verify(exactly = 0) { appStore.dispatch(any<LensAction.LensResultAvailable>()) }
         verify { appStore.dispatch(LensAction.LensDismissed) }
-        // The private-mode skip is an intentional no-op, so no search_completed is recorded.
-        assertNull(GoogleLens.searchCompleted.testGetValue())
+        val events = GoogleLens.searchCompleted.testGetValue()
+        assertNotNull(events)
+        assertEquals("false", events.last().extra?.get("succeeded"))
+        assertEquals("403", events.last().extra?.get("http_status_code"))
+        assertEquals("context_menu", events.last().extra?.get("source"))
+    }
+
+    @Test
+    fun `GIVEN uploadFromImageUrl WHEN upload throws IOException THEN it records a failure and opens no tab`() = runTest(testDispatcher) {
+        coEvery { uploader.uploadFromUrl(any()) } throws java.io.IOException("boom")
+        testDispatcher.scheduler.advanceUntilIdle()
+
+        feature.uploadFromImageUrl("https://example.com/image.jpg")
+        testDispatcher.scheduler.advanceUntilIdle()
+
+        verify(exactly = 0) {
+            testContext.components.useCases.tabsUseCases.addTab(
+                url = any(),
+                selectTab = any(),
+                startLoading = any(),
+                private = any(),
+            )
+        }
+        verify(exactly = 0) { appStore.dispatch(any<LensAction.LensResultAvailable>()) }
+        verify { appStore.dispatch(LensAction.LensDismissed) }
+        val events = GoogleLens.searchCompleted.testGetValue()
+        assertNotNull(events)
+        assertEquals("false", events.last().extra?.get("succeeded"))
+        assertNull(events.last().extra?.get("http_status_code"))
+        assertEquals("context_menu", events.last().extra?.get("source"))
     }
 
     @Test

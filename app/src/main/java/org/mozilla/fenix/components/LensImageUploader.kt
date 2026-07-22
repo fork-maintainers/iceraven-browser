@@ -56,22 +56,13 @@ class LensImageUploader(
 
     /**
      * Fetches the image at [imageUrl], then scales, compresses, and uploads it to Google Lens.
-     * Preferred over [buildUploadByUrl] because the browser's User-Agent and cookies are used to
-     * fetch the image, which succeeds for hosts that block Lens's own server-side fetcher.
+     * The browser's User-Agent and cookies are used to fetch the image, which succeeds for hosts
+     * that block Lens's own server-side fetcher.
      */
     suspend fun uploadFromUrl(imageUrl: String): UploadResult = withContext(Dispatchers.IO) {
         val bitmap = fetchBitmap(imageUrl) ?: return@withContext UploadResult(resultUrl = null)
         uploadBitmap(bitmap)
     }
-
-    /**
-     * Builds the Google Lens "by URL" search URL for [imageUrl], letting Lens fetch the image
-     * server-side. Loading the returned URL redirects to the Lens results page. Used as a fallback
-     * when [uploadFromUrl] yields no result client-side, whether because the image could not be
-     * downloaded or because the byte upload itself produced no Lens results URL.
-     */
-    fun buildUploadByUrl(imageUrl: String): String =
-        "$UPLOAD_BY_URL_ENDPOINT?url=${Uri.encode(imageUrl)}&ep=$EP_BY_URL&${commonParams()}"
 
     private fun uploadBitmap(bitmap: Bitmap): UploadResult {
         val scaled = scaleBitmap(bitmap)
@@ -274,15 +265,9 @@ class LensImageUploader(
         @VisibleForTesting
         internal const val UPLOAD_ENDPOINT = "https://lens.google.com/upload"
 
-        @VisibleForTesting
-        internal const val UPLOAD_BY_URL_ENDPOINT = "https://lens.google.com/uploadbyurl"
-
-        // Entry-point identifiers assigned to Mozilla by Google for attribution.
+        // Entry-point identifier assigned to Mozilla by Google for attribution.
         @VisibleForTesting
         internal const val EP_BY_BYTES = "fntpubb"
-
-        @VisibleForTesting
-        internal const val EP_BY_URL = "fntpubu"
 
         private const val MAX_IMAGE_DIMENSION = 1000
         private const val JPEG_QUALITY = 40

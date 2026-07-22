@@ -98,17 +98,6 @@ class LensImageUploaderTest {
     }
 
     @Test
-    fun `GIVEN an image url WHEN buildUploadByUrl THEN builds the by-url endpoint with ep fntpubu and encoded url`() {
-        val imageUrl = "https://example.com/a b.jpg?x=1&y=2"
-
-        val result = createUploaderWithMetrics().buildUploadByUrl(imageUrl)
-
-        assertTrue(result.startsWith("${LensImageUploader.UPLOAD_BY_URL_ENDPOINT}?"))
-        assertTrue(result.contains("ep=${LensImageUploader.EP_BY_URL}"))
-        assertTrue(result.contains("url=${Uri.encode(imageUrl)}"))
-    }
-
-    @Test
     fun `GIVEN fetched jpeg with no exif orientation WHEN fetched THEN dimensions are preserved`() {
         val jpegBytes = encodeJpeg(width = 80, height = 40)
 
@@ -197,13 +186,6 @@ class LensImageUploaderTest {
             userAgent = "test",
         )
     }
-
-    private fun createUploaderWithMetrics(): LensImageUploader =
-        LensImageUploader(
-            context = metricsContext(),
-            client = mockk<Client>(),
-            userAgent = "test",
-        )
 
     private fun metricsContext(jpegBytes: ByteArray? = null): Context {
         val context = mockk<Context>()
