@@ -169,11 +169,14 @@ object MainMenuSelectors {
         groups = listOf("homeBanner", "homePageMainMenuItems"),
     )
 
+    // Quit is the last item in the scrollable main menu, so mark it requiresScroll: the framework
+    // then polls/swipes it into view (ensureReachable -> mozSwipeTo) before clicking, instead of
+    // asserting on it one-shot while the menu is still settling or the item is below the fold.
     val QUIT_FIREFOX_BUTTON = Selector(
         strategy = SelectorStrategy.COMPOSE_BY_CONTENT_DESCRIPTION,
         value = "Quit $appName",
         description = "Quit Firefox button",
-        groups = listOf(),
+        groups = listOf("requiresScroll"),
     )
 
     val CHANGE_WALLPAPER_BUTTON = Selector(
