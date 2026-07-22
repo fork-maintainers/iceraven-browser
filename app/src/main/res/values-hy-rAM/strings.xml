@@ -3074,7 +3074,7 @@
   <!-- Badge label shown in the menu item when the browser VPN is off -->
   <string name="preferences_ip_protection_off">Անջ.</string>
   <!-- Badge label shown in the menu item while the browser VPN is connecting -->
-  <string name="ip_protection_menu_connecting">Կապակցում…</string>
+  <string name="ip_protection_menu_connecting">Կապակցում...</string>
   <!-- Badge label shown in the menu item when the browser VPN is paused -->
   <string name="ip_protection_menu_paused">Դադար</string>
   <!-- Badge label shown in the menu item when the browser VPN has an error -->
@@ -3100,7 +3100,7 @@
   <!-- Label for the button that starts the browser VPN authentication or authorization flow on the settings screen -->
   <string name="ip_protection_get_started">Սկսել</string>
   <!-- Label for the "connecting" state of the button that starts the browser VPN authentication or authorization flow on the settings screen -->
-  <string name="ip_protection_connecting">Միանում է…</string>
+  <string name="ip_protection_connecting">Կապակցում…</string>
   <!-- Headline for the browser VPN onboarding card. %s is the name of the app (for example "Firefox"). -->
   <string name="ip_protection_onboarding_card_headline">Փորձեք %s-ի ներկառուցված VPN-ը</string>
   <!--

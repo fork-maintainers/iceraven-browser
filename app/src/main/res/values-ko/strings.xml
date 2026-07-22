@@ -42,7 +42,7 @@
   <!-- The supplementary text displayed on the private tabs page when no private tabs are open. %1$s is the name of the app (for example "Firefox") -->
   <string name="tab_manager_empty_private_tabs_page_description">%1$s는 기록이나 쿠키는 저장하지 않지만 새로운 북마크는 저장합니다.</string>
   <!-- The header text displayed on the normal tabs page when no normal tabs are open -->
-  <string name="tab_manager_empty_normal_tabs_page_header">새 탭을 만들어 검색을 시작하세요</string>
+  <string name="tab_manager_empty_normal_tabs_page_header">새 탭을 열어 검색을 시작해 보세요</string>
   <!-- Tab tray multi select title in app bar. %1$d is the number of tabs selected -->
   <string name="tab_tray_multi_select_title">%1$d개 선택됨</string>
   <!-- Tab tray multi select title in app bar when no tabs are selected -->

@@ -27,4 +27,12 @@
   <string name="back">vissza</string>
   <!-- Share hiscore action label. hiscore is an abbreviation for "Highest Score" -->
   <string name="share_hiscore">Legjobb pontszám megosztása</string>
+  <!--
+    The longest fox is your best game achievement so far (based on your highest score).
+    %1$d is a placeholder for the current highest score.
+    #longfox is a hashtag for sharing on social media and should not be translated.
+    %2$s is a placeholder for a string representation of the longest fox and should not be translated.
+    Example output: My longest fox is 6! #longfox 🦊🟧🟧🟧🟧🟧🟧
+  -->
+  <string name="my_longest_fox_is">A leghosszabb rókám %1$d kockás! #longfox %2$s</string>
 </resources>
