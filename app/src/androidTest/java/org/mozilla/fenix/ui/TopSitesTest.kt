@@ -5,6 +5,7 @@
 package org.mozilla.fenix.ui
 
 import android.util.Log
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.mozilla.fenix.R
@@ -21,6 +22,7 @@ import org.mozilla.fenix.helpers.MockBrowserDataHelper
 import org.mozilla.fenix.helpers.TestAssetHelper.getGenericAsset
 import org.mozilla.fenix.helpers.TestHelper.mDevice
 import org.mozilla.fenix.helpers.TestHelper.verifySnackBarText
+import org.mozilla.fenix.helpers.TestHelper.waitForAppWindowToBeUpdated
 import org.mozilla.fenix.helpers.perf.DetectMemoryLeaksRule
 import org.mozilla.fenix.ui.robots.browserScreen
 import org.mozilla.fenix.ui.robots.homeScreen
@@ -49,6 +51,32 @@ class TopSitesTest {
 
     @get:Rule(order = 2)
     val memoryLeaksRule = DetectMemoryLeaksRule(composeTestRule = { composeTestRule })
+
+    @Before
+    fun setUp() {
+        // Workaround to make sure the Top sites list displayed before starting the tests.
+        for (i in 1..RETRY_COUNT) {
+            Log.i(TAG, "setUp: Started try #$i")
+            try {
+                homeScreen(composeTestRule) {
+                }.openThreeDotMenu {
+                }.clickSettingsButton {
+                }.goBack(composeTestRule) {
+                    defaultTopSitesList.values.forEach { value ->
+                        verifyExistingTopSitesTabs(value)
+                    }
+                }
+
+                break
+            } catch (e: Throwable) {
+                if (i == RETRY_COUNT) {
+                    throw e
+                } else {
+                    waitForAppWindowToBeUpdated()
+                }
+            }
+        }
+    }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/532598
     @Converted(
@@ -216,30 +244,12 @@ class TopSitesTest {
     // Expected for en-us defaults
     @Test
     fun verifyENLocalesDefaultTopSitesListTest() {
-        for (i in 1..RETRY_COUNT) {
-            var sponsoredTilesLoaded = false
-            homeScreen(composeTestRule) {
-                verifyExistingTopSitesList()
-                sponsoredTilesLoaded = sponsoredTopSitesLoaded()
-            }
-            if (sponsoredTilesLoaded) {
-                break
-            }
-            Log.i(TAG, "setUp: Started try #$i")
-
-            homeScreen(composeTestRule) {
-            }.openTabDrawer {
-            }.openNewTab {
-            }.dismissSearchBar {
-            }
-        }
-
         homeScreen(composeTestRule) {
             verifyExistingTopSitesList()
             defaultTopSitesList.values.forEach { value ->
                 verifyExistingTopSitesTabs(value)
             }
-            verifyAddShortcutExists()
+            verifyAddShortcutButtonExists()
         }
     }
 
