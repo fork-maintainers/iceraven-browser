@@ -1065,7 +1065,7 @@ class SettingsTest {
         val settings = spyk(settings)
         every { settings.toolbarPosition } returns ToolbarPosition.TOP
 
-        assertEquals(64, settings.browserToolbarHeight)
+        assertEquals(64, settings.getBrowserToolbarHeight(testContext))
     }
 
     @Test
@@ -1074,7 +1074,7 @@ class SettingsTest {
         every { settings.toolbarPosition } returns ToolbarPosition.BOTTOM
         every { settings.shouldUseExpandedToolbar } returns false
 
-        assertEquals(64, settings.browserToolbarHeight)
+        assertEquals(64, settings.getBrowserToolbarHeight(testContext))
     }
 
     @Test fun `GIVEN bottom composable toolbar is enabled and navigation bar is enabled WHEN querying the toolbar height THEN get the height of the composable toolbar`() {
@@ -1086,7 +1086,7 @@ class SettingsTest {
         every { settings.toolbarPosition } returns ToolbarPosition.BOTTOM
         every { settings.shouldUseExpandedToolbar } returns true
 
-        assertEquals(56, settings.browserToolbarHeight)
+        assertEquals(56, settings.getBrowserToolbarHeight(testContext))
     }
 
     @Test
@@ -1100,7 +1100,7 @@ class SettingsTest {
         every { settings.toolbarPosition } returns ToolbarPosition.BOTTOM
         every { settings.shouldUseExpandedToolbar } returns true
 
-        assertEquals(64, settings.browserToolbarHeight)
+        assertEquals(64, settings.getBrowserToolbarHeight(testContext))
     }
 
     @Test
@@ -1114,7 +1114,7 @@ class SettingsTest {
         every { settings.toolbarPosition } returns ToolbarPosition.BOTTOM
         every { settings.shouldUseExpandedToolbar } returns true
 
-        assertEquals(64, settings.browserToolbarHeight)
+        assertEquals(64, settings.getBrowserToolbarHeight(testContext))
     }
 
     @Test

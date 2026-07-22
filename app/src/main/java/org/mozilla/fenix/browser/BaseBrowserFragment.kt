@@ -2483,7 +2483,7 @@ abstract class BaseBrowserFragment :
                     sessionId = customTabSessionId,
                     view = findInPageBar,
                     engineView = binding.engineView,
-                    findInPageHeight = requireComponents.settings.browserToolbarHeight,
+                    findInPageHeight = requireComponents.settings.getBrowserToolbarHeight(requireContext()),
                     toolbarsHideCallback = {
                         expandBrowserView()
                     },

@@ -282,7 +282,7 @@ fun Fragment.getBottomToolbarHeight(includeNavBarIfEnabled: Boolean = true): Int
     }
 
     val toolbarHeight = if (isToolbarAtBottom) {
-        settings.browserToolbarHeight
+        settings.getBrowserToolbarHeight(requireContext())
     } else {
         0
     }
@@ -312,7 +312,7 @@ fun Fragment.getBottomToolbarHeight(includeNavBarIfEnabled: Boolean = true): Int
 fun Fragment.getTopToolbarHeight(includeTabStripIfAvailable: Boolean = true): Int {
     val settings = requireComponents.settings
     val isToolbarAtTop = settings.toolbarPosition == ToolbarPosition.TOP
-    val toolbarHeight = settings.browserToolbarHeight
+    val toolbarHeight = settings.getBrowserToolbarHeight(requireContext())
 
     return if (includeTabStripIfAvailable && settings.isTabStripEnabled) {
         toolbarHeight + pixelSizeFor(R.dimen.tab_strip_height)
