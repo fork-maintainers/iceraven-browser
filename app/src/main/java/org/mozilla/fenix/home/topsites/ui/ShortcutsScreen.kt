@@ -81,7 +81,7 @@ fun ShortcutsScreen(
                     ) {
                         Icon(
                             painter = painterResource(iconsR.drawable.mozac_ic_back_24),
-                            contentDescription = "",
+                            contentDescription = null,
                         )
                     }
                 },
