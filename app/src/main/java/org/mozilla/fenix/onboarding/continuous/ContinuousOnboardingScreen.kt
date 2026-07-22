@@ -104,7 +104,7 @@ private fun CardContent(
             ) {
                 Image(
                     painter = painterResource(pageState.imageRes),
-                    contentDescription = null,
+                    contentDescription = null, // Decorative only
                 )
             }
 
@@ -121,7 +121,7 @@ private fun CardContent(
             .widthIn(max = maxCardWidth)
             .fillMaxWidth(),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface,
+            containerColor = MaterialTheme.colorScheme.surfaceBright,
         ),
     ) {
         IconButton(
@@ -134,7 +134,7 @@ private fun CardContent(
         ) {
             Icon(
                 painter = painterResource(id = iconsR.drawable.mozac_ic_cross_24),
-                contentDescription = null,
+                contentDescription = null, // Uses the parent content description
             )
         }
 
