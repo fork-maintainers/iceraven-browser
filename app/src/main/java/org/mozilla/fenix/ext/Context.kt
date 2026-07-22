@@ -9,6 +9,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.content.res.Resources
+import android.net.Uri
 import android.provider.Settings
 import android.view.ContextThemeWrapper
 import android.view.View
@@ -102,6 +103,21 @@ fun Context.navigateToNotificationsSettings(
         it.action = Settings.ACTION_APP_NOTIFICATION_SETTINGS
         it.putExtra(Settings.EXTRA_APP_PACKAGE, this.packageName)
     }
+    startExternalActivitySafe(intent, onError)
+}
+
+/**
+ * Used to navigate to the system's "App Info" or "App Details" settings page for this application.
+ *
+ * @param onError Invoked when the activity described by the intent is not present on the device.
+ */
+fun Context.navigateToAppDetailsSettings(
+    onError: () -> Unit,
+) {
+    val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+        data = Uri.fromParts("package", packageName, null)
+    }
+
     startExternalActivitySafe(intent, onError)
 }
 

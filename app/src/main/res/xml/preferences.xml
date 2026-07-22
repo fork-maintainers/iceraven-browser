@@ -241,6 +241,11 @@
             android:key="@string/pref_key_enable_gecko_logs"
             app:iconSpaceReserved="false"
             android:title="@string/preferences_enable_gecko_logs" />
+
+        <androidx.preference.Preference
+            android:key="@string/pref_key_local_network_access"
+            app:iconSpaceReserved="false"
+            android:title="@string/preferences_local_network_access" />
     </PreferenceCategory>
 
     <androidx.preference.PreferenceCategory

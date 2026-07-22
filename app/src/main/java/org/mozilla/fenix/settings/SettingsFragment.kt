@@ -4,9 +4,12 @@
 
 package org.mozilla.fenix.settings
 
+import android.Manifest.permission.ACCESS_LOCAL_NETWORK
 import android.annotation.SuppressLint
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -17,6 +20,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.VisibleForTesting
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -70,6 +74,7 @@ import org.mozilla.fenix.e2e.SystemInsetsPaddedFragment
 import org.mozilla.fenix.ext.application
 import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.ext.getPreferenceKey
+import org.mozilla.fenix.ext.navigateToAppDetailsSettings
 import org.mozilla.fenix.ext.navigateToNotificationsSettings
 import org.mozilla.fenix.ext.openInNewTab
 import org.mozilla.fenix.ext.requireComponents
@@ -103,6 +108,16 @@ class SettingsFragment : PreferenceFragmentCompat(), SystemInsetsPaddedFragment 
         ProfilerViewModelFactory(requireActivity().application)
     }
     private val snackbarBinding = ViewBoundFeatureWrapper<SnackbarBinding>()
+
+    private val requestLocalNetworkPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission(),
+    ) { isGranted ->
+        localNetworkPermissionRequestAttempted = true
+        setupLocalNetworkPreference(isGranted)
+    }
+
+    private var localNetworkPermissionRequestAttempted = false
+
     private val dateTimeProvider: DateTimeProvider by lazy { DefaultDateTimeProvider() }
 
     @VisibleForTesting
@@ -462,6 +477,11 @@ class SettingsFragment : PreferenceFragmentCompat(), SystemInsetsPaddedFragment 
                 null
             }
 
+            resources.getString(R.string.pref_key_local_network_access) -> {
+                handleLocalNetworkPermissionClick()
+                null
+            }
+
             resources.getString(R.string.pref_key_data_choices) -> {
                 SettingsFragmentDirections.actionSettingsFragmentToDataChoicesFragment()
             }
@@ -642,6 +662,17 @@ class SettingsFragment : PreferenceFragmentCompat(), SystemInsetsPaddedFragment 
         setupNotificationPreference(
             NotificationManagerCompat.from(requireContext()).areNotificationsEnabled(),
         )
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.CINNAMON_BUN) {
+            setupLocalNetworkPreference(
+                ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    ACCESS_LOCAL_NETWORK,
+                ) == PackageManager.PERMISSION_GRANTED,
+            )
+        } else {
+            requirePreference<Preference>(R.string.pref_key_local_network_access).isVisible = false
+        }
         setupSearchPreference(
             components.core.store.state.search.selectedOrDefaultSearchEngine?.name,
         )
@@ -747,6 +778,38 @@ class SettingsFragment : PreferenceFragmentCompat(), SystemInsetsPaddedFragment 
                 getString(R.string.notifications_allowed_summary)
             } else {
                 getString(R.string.notifications_not_allowed_summary)
+            }
+        }
+    }
+
+    private fun handleLocalNetworkPermissionClick() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.CINNAMON_BUN) {
+            val isGranted = ContextCompat.checkSelfPermission(
+                requireContext(),
+                ACCESS_LOCAL_NETWORK,
+            ) == PackageManager.PERMISSION_GRANTED
+
+            if (isGranted) {
+                context?.navigateToAppDetailsSettings {}
+            } else {
+                val shouldShowRationale = shouldShowRequestPermissionRationale(ACCESS_LOCAL_NETWORK)
+                if (shouldShowRationale || !localNetworkPermissionRequestAttempted) {
+                    requestLocalNetworkPermissionLauncher.launch(ACCESS_LOCAL_NETWORK)
+                } else {
+                    context?.navigateToAppDetailsSettings {}
+                }
+            }
+        } else {
+            context?.navigateToAppDetailsSettings {}
+        }
+    }
+
+    internal fun setupLocalNetworkPreference(isLocalNetworkAccessAllowed: Boolean) {
+        with(requirePreference<Preference>(R.string.pref_key_local_network_access)) {
+            summary = if (isLocalNetworkAccessAllowed) {
+                getString(R.string.local_network_access_allowed_summary)
+            } else {
+                getString(R.string.local_network_access_not_allowed_summary)
             }
         }
     }
