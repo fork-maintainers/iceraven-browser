@@ -54,6 +54,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.SemanticsPropertyKey
 import androidx.compose.ui.semantics.SemanticsPropertyReceiver
 import androidx.compose.ui.semantics.semantics
@@ -70,6 +71,7 @@ import mozilla.components.compose.base.theme.AcornCorners
 import mozilla.components.compose.base.theme.layout.AcornLayout
 import mozilla.components.support.utils.ext.isLandscape
 import mozilla.components.ui.colors.NovaColors
+import org.mozilla.fenix.R
 import org.mozilla.fenix.tabstray.TabsTrayTestTag
 import org.mozilla.fenix.tabstray.browser.compose.TabItemInteractionState
 import org.mozilla.fenix.tabstray.data.TabsTrayItem
@@ -147,13 +149,6 @@ data class TabListShapeInfo(
     val borderShape: Shape,
     val clipTabToFit: Boolean,
 )
-
-//region placeholder strings
-private const val PLACEHOLDER_EDIT = "Edit"
-private const val PLACEHOLDER_CLOSE = "Close"
-private const val PLACEHOLDER_DELETE = "Delete"
-private const val PLACEHOLDER_THREE_DOT_MENU_CONTENT_DESCRIPTION = "More options"
-//endregion
 
 /**
  * @param isSelected: Whether the tab is selected in multiselect mode
@@ -247,7 +242,7 @@ fun TabGroupMenuButton(
         onClick = {
             showDropdownMenu = true
         },
-        contentDescription = PLACEHOLDER_THREE_DOT_MENU_CONTENT_DESCRIPTION,
+        contentDescription = stringResource(R.string.tab_group_three_dot_button_content_description),
         modifier = modifier
             .testTag(TabsTrayTestTag.TAB_GROUP_THREE_DOT_BUTTON),
         colors = IconButtonDefaults.iconButtonColors(
@@ -298,6 +293,7 @@ fun ListItemDismissButton(
     }
 }
 
+@Composable
 private fun generateTabGroupMenuItems(
     includeCloseOption: Boolean = false,
     editTabGroup: () -> Unit,
@@ -305,19 +301,19 @@ private fun generateTabGroupMenuItems(
     deleteTabGroup: () -> Unit,
 ): List<MenuItem> {
     val editItem = MenuItem.IconItem(
-        text = Text.String(PLACEHOLDER_EDIT),
+        text = Text.Resource(R.string.tab_group_three_dot_menu_edit),
         drawableRes = iconsR.drawable.mozac_ic_edit_24,
         testTag = TabsTrayTestTag.EDIT_TAB_GROUP,
         onClick = editTabGroup,
     )
     val closeItem = MenuItem.IconItem(
-        text = Text.String(PLACEHOLDER_CLOSE),
+        text = Text.Resource(R.string.tab_group_three_dot_menu_close),
         drawableRes = iconsR.drawable.mozac_ic_tab_group_close_24,
         testTag = TabsTrayTestTag.CLOSE_TAB_GROUP,
         onClick = closeTabGroup,
     )
     val deleteItem = MenuItem.IconItem(
-        text = Text.String(PLACEHOLDER_DELETE),
+        text = Text.Resource(R.string.tab_group_three_dot_menu_delete),
         drawableRes = iconsR.drawable.mozac_ic_delete_24,
         testTag = TabsTrayTestTag.DELETE_TAB_GROUP,
         onClick = deleteTabGroup,
