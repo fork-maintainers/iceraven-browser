@@ -24,6 +24,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -45,15 +49,21 @@ val maxCardWidth = 360.dp
 
 /**
  * A screen for displaying continuous onboarding.
+ *
+ * @param pageState The state of the onboarding page.
+ * @param onCloseButtonClicked Executes when the close button is clicked.
+ * @param removeDialogView Removes the dialog's view from the window.
  */
 @Composable
 fun ContinuousOnboardingScreen(
     pageState: OnboardingPageState,
-    onDismissRequest: () -> Unit,
     onCloseButtonClicked: () -> Unit,
+    removeDialogView: () -> Unit,
 ) {
     Dialog(
-        onDismissRequest = onDismissRequest,
+        onDismissRequest = {
+            // Intentionally unused. The dialog can only be dismissed via the close button or page actions.
+        },
         properties = DialogProperties(
             dismissOnBackPress = false,
             dismissOnClickOutside = false,
@@ -68,8 +78,8 @@ fun ContinuousOnboardingScreen(
         ) {
             CardContent(
                 pageState = pageState,
-                onDismissRequest = onDismissRequest,
                 onCloseButtonClicked = onCloseButtonClicked,
+                removeDialogView = removeDialogView,
             )
         }
 
@@ -82,9 +92,12 @@ fun ContinuousOnboardingScreen(
 @Composable
 private fun CardContent(
     pageState: OnboardingPageState,
-    onDismissRequest: () -> Unit,
     onCloseButtonClicked: () -> Unit,
+    removeDialogView: () -> Unit,
 ) {
+    // Disables the buttons after the first click, so a rapid double-tap can't trigger them twice.
+    var isDismissed by remember { mutableStateOf(false) }
+
     @Composable
     fun Content() {
         Column(
@@ -104,7 +117,7 @@ private fun CardContent(
             ) {
                 Image(
                     painter = painterResource(pageState.imageRes),
-                    contentDescription = null, // Decorative only
+                    contentDescription = null, // Decorative only.
                 )
             }
 
@@ -126,15 +139,17 @@ private fun CardContent(
     ) {
         IconButton(
             onClick = {
+                isDismissed = true
                 onCloseButtonClicked()
-                onDismissRequest()
+                removeDialogView()
             },
+            enabled = !isDismissed,
             contentDescription = stringResource(R.string.onboarding_home_content_description_close_button),
             modifier = Modifier.align(Alignment.End),
         ) {
             Icon(
                 painter = painterResource(id = iconsR.drawable.mozac_ic_cross_24),
-                contentDescription = null, // Uses the parent content description
+                contentDescription = null, // Uses the parent content description.
             )
         }
 
@@ -152,9 +167,11 @@ private fun CardContent(
             FilledButton(
                 modifier = Modifier.width(FirefoxTheme.layout.size.maxWidth.small),
                 text = pageState.primaryButton.text,
+                enabled = !isDismissed,
                 onClick = {
+                    isDismissed = true
                     pageState.primaryButton.onClick()
-                    onDismissRequest()
+                    removeDialogView()
                 },
             )
 
@@ -162,9 +179,11 @@ private fun CardContent(
                 OutlinedButton(
                     modifier = Modifier.width(FirefoxTheme.layout.size.maxWidth.small),
                     text = it.text,
+                    enabled = !isDismissed,
                     onClick = {
+                        isDismissed = true
                         it.onClick()
-                        onDismissRequest()
+                        removeDialogView()
                     },
                 )
             }
@@ -197,8 +216,8 @@ private fun ContinuousOnboardingScreenNotificationPreview() {
                     ),
                     onRecordImpressionEvent = { },
                 ),
-                onDismissRequest = { },
                 onCloseButtonClicked = { },
+                removeDialogView = { },
             )
         }
     }
@@ -229,8 +248,8 @@ private fun ContinuousOnboardingScreenSyncPreview() {
                     ),
                     onRecordImpressionEvent = { },
                 ),
-                onDismissRequest = { },
                 onCloseButtonClicked = { },
+                removeDialogView = { },
             )
         }
     }

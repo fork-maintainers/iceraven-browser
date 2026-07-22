@@ -80,6 +80,8 @@ class ContinuousOnboardingFeatureDefault(
     ) {
         if (!shouldShowContinuousOnboarding()) return
 
+        if (isContinuousOnboardingInProgress(activity)) return
+
         when (val stage = stageProvider.getContinuousOnboardingStage()) {
             ContinuousOnboardingStage.DAY_2,
             ContinuousOnboardingStage.DAY_3,
@@ -103,6 +105,28 @@ class ContinuousOnboardingFeatureDefault(
                 logger.info("No continuous onboarding stage to show.")
             }
         }
+    }
+
+    /**
+     * Returns whether the continuous onboarding flow is already active.
+     *
+     * `pendingStage` tracks the period while the Android system role-request Activity
+     * is in progress, and `isContinuousOnboardingDialogShowing()` tracks the
+     * follow-up onboarding dialog shown afterward. Together they prevent the
+     * DAY_2/DAY_3 onboarding flow from being started again if `onResume()` is
+     * invoked multiple times.
+     */
+    private fun isContinuousOnboardingInProgress(activity: Activity): Boolean {
+        if (pendingStage != ContinuousOnboardingStage.NONE || isContinuousOnboardingDialogShowing(activity)) {
+            logger.info("Continuous onboarding already in progress.")
+            return true
+        }
+        return false
+    }
+
+    private fun isContinuousOnboardingDialogShowing(activity: Activity): Boolean {
+        val decorView = activity.window.decorView as? ViewGroup ?: return false
+        return decorView.findViewWithTag<ComposeView>(CONTINUOUS_ONBOARDING_DIALOG_TAG) != null
     }
 
     @VisibleForTesting
@@ -148,7 +172,10 @@ class ContinuousOnboardingFeatureDefault(
         logger.info("Showing sync card dialog.")
 
         val stage = ContinuousOnboardingStage.DAY_7
-        val onDismissCard = {
+        val onCloseButtonClicked = {
+            logger.info("Closed the sync card dialog.")
+            markStageCompleted(stage)
+
             telemetryRecorder.onSkipSignInClick(
                 sequenceId = OnboardingPageUiData.Type.SYNC_SIGN_IN.telemetryId,
                 sequencePosition = "0",
@@ -163,20 +190,23 @@ class ContinuousOnboardingFeatureDefault(
 
         showDialog(
             activity = activity,
-            pageState = getSyncOnboardingPageState(activity),
-            stage = stage,
-            onDismissCard = onDismissCard,
+            pageState = getSyncOnboardingPageState(activity, stage),
+            onCloseButtonClicked = onCloseButtonClicked,
         )
     }
 
     @VisibleForTesting
-    internal fun getSyncOnboardingPageState(activity: Activity) = OnboardingPageState(
+    internal fun getSyncOnboardingPageState(
+        activity: Activity,
+        stage: ContinuousOnboardingStage,
+    ) = OnboardingPageState(
         imageRes = R.drawable.nova_onboarding_sync,
         title = activity.getString(R.string.nova_onboarding_sync_title),
         description = activity.getString(R.string.nova_onboarding_sync_subtitle),
         primaryButton = Action(
             text = activity.getString(R.string.nova_onboarding_sync_button),
             onClick = {
+                logger.info("Sync card dialog primary button click.")
                 navigateToSyncSignIn()
 
                 telemetryRecorder.onSyncSignInClick(
@@ -192,6 +222,9 @@ class ContinuousOnboardingFeatureDefault(
         secondaryButton = Action(
             text = activity.getString(R.string.nova_onboarding_continue_button),
             onClick = {
+                logger.info("Sync card dialog secondary button click.")
+                markStageCompleted(stage)
+
                 telemetryRecorder.onSkipSignInClick(
                     sequenceId = OnboardingPageUiData.Type.SYNC_SIGN_IN.telemetryId,
                     sequencePosition = "0",
@@ -238,7 +271,10 @@ class ContinuousOnboardingFeatureDefault(
         ) {
             logger.info("Showing notification-permission card dialog.")
 
-            val onDismissCard = {
+            val onCloseButtonClicked = {
+                logger.info("Closed the notification-permission card dialog.")
+                markStageCompleted(stage)
+
                 telemetryRecorder.onSkipTurnOnNotificationsClick(
                     sequenceId = OnboardingPageUiData.Type.NOTIFICATION_PERMISSION.telemetryId,
                     sequencePosition = "0",
@@ -248,9 +284,8 @@ class ContinuousOnboardingFeatureDefault(
 
             showDialog(
                 activity = activity,
-                pageState = getNotificationOnboardingPageState(activity),
-                stage = stage,
-                onDismissCard = onDismissCard,
+                pageState = getNotificationOnboardingPageState(activity, stage),
+                onCloseButtonClicked = onCloseButtonClicked,
             )
         } else {
             logger.warn("Unable to show notification-permission card dialog.")
@@ -262,6 +297,7 @@ class ContinuousOnboardingFeatureDefault(
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     internal fun getNotificationOnboardingPageState(
         activity: Activity,
+        stage: ContinuousOnboardingStage,
     ) = OnboardingPageState(
         imageRes = R.drawable.nova_onboarding_notifications,
         title = activity.getString(R.string.nova_onboarding_notifications_title),
@@ -269,16 +305,22 @@ class ContinuousOnboardingFeatureDefault(
         primaryButton = Action(
             text = activity.getString(R.string.nova_onboarding_notifications_button),
             onClick = {
+                logger.info("Notification card dialog primary button click.")
+                activity.components.notificationsDelegate.requestNotificationPermission()
+                markStageCompleted(stage)
+
                 telemetryRecorder.onNotificationPermissionClick(
                     sequenceId = OnboardingPageUiData.Type.NOTIFICATION_PERMISSION.telemetryId,
                     sequencePosition = "0",
                 )
-                activity.components.notificationsDelegate.requestNotificationPermission()
             },
         ),
         secondaryButton = Action(
             text = activity.getString(R.string.nova_onboarding_negative_button),
             onClick = {
+                logger.info("Notification card dialog secondary button click.")
+                markStageCompleted(stage)
+
                 telemetryRecorder.onSkipTurnOnNotificationsClick(
                     sequenceId = OnboardingPageUiData.Type.NOTIFICATION_PERMISSION.telemetryId,
                     sequencePosition = "0",
@@ -297,8 +339,7 @@ class ContinuousOnboardingFeatureDefault(
     private fun showDialog(
         activity: Activity,
         pageState: OnboardingPageState,
-        stage: ContinuousOnboardingStage,
-        onDismissCard: () -> Unit = {},
+        onCloseButtonClicked: () -> Unit = {},
     ) {
         val decorView = activity.window.decorView as? ViewGroup
         if (decorView == null) {
@@ -314,14 +355,9 @@ class ContinuousOnboardingFeatureDefault(
         val composeView = ComposeView(activity).apply {
             tag = CONTINUOUS_ONBOARDING_DIALOG_TAG
         }
-        val onDismissRequest = {
-            logger.info("Dismissing continuous onboarding dialog.")
-            markStageCompleted(stage)
-            // Protect against repeated dismiss calls or odd lifecycle timing.
-            if (composeView.parent === decorView) {
-                logger.info("Removing continuous onboarding dialog.")
-                decorView.removeView(composeView)
-            }
+        val removeDialogView = {
+            logger.info("Removing continuous onboarding dialog.")
+            decorView.removeView(composeView)
         }
 
         composeView.apply {
@@ -330,8 +366,8 @@ class ContinuousOnboardingFeatureDefault(
                 FirefoxTheme {
                     ContinuousOnboardingScreen(
                         pageState = pageState,
-                        onDismissRequest = onDismissRequest,
-                        onCloseButtonClicked = onDismissCard,
+                        onCloseButtonClicked = onCloseButtonClicked,
+                        removeDialogView = removeDialogView,
                     )
                 }
             }

@@ -545,11 +545,6 @@ class HomeFragment : Fragment() {
         initController()
         initInteractor()
 
-        continuousOnboardingFeature.maybeRunContinuousOnboarding(
-            activity = requireActivity(),
-            launcher = continuousOnboardingDefaultBrowserLauncher,
-        )
-
         // DO NOT MOVE ANYTHING BELOW THIS addMarker CALL!
         requireComponents.core.engine.profiler?.addMarker(
             MarkersFragmentLifecycleCallbacks.MARKER_NAME,
@@ -979,6 +974,11 @@ class HomeFragment : Fragment() {
         super.onResume()
 
         hideToolbar()
+
+        continuousOnboardingFeature.maybeRunContinuousOnboarding(
+            activity = requireActivity(),
+            launcher = continuousOnboardingDefaultBrowserLauncher,
+        )
 
         val components = requireComponents
         // Whenever a tab is selected its last access timestamp is automatically updated by A-C.

@@ -211,11 +211,6 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, SystemIns
         }
 
         setupShakeDetection()
-
-        continuousOnboardingFeature.maybeRunContinuousOnboarding(
-            activity = requireActivity(),
-            launcher = continuousOnboardingDefaultBrowserLauncher,
-        )
     }
 
     private fun setupToolbarSwipeBehavior(settings: Settings, components: Components) {
@@ -422,6 +417,11 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, SystemIns
     override fun onResume() {
         super.onResume()
         requireComponents.core.tabCollectionStorage.register(collectionStorageObserver, this)
+
+        continuousOnboardingFeature.maybeRunContinuousOnboarding(
+            activity = requireActivity(),
+            launcher = continuousOnboardingDefaultBrowserLauncher,
+        )
     }
 
     override fun onBackPressed(): Boolean {
