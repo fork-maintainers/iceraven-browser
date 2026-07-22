@@ -27,7 +27,7 @@ private const val MIN_PROBLEM_DESCRIPTION_LENGTH = 10
  * @property editedUrl The temporary Url currently being edited in the dialog.
  * @property problemDescription Description of the encountered problem.
  * @property includeEtpBlockedUrls Checks if the user wants to include ETP-blocked URLs in the report.
- * @property previewJSON The JSON data of the WebCompatReporter to be displayed in the preview.
+ * @property previewReporterItems The list of items to be displayed in the WebCompat report preview.
  */
 data class WebCompatReporterState(
     val tabUrl: String = "",
@@ -37,7 +37,7 @@ data class WebCompatReporterState(
     val editedUrl: String = "",
     val problemDescription: String = "",
     val includeEtpBlockedUrls: Boolean = false,
-    val previewJSON: String = "",
+    val previewReporterItems: List<PreviewReporterItem> = emptyList(),
 ) : State {
 
     /**
@@ -127,6 +127,17 @@ data class WebCompatReporterState(
 }
 
 /**
+ * Represents a single category of data to be displayed in the WebCompat report preview.
+ *
+ * @property title The header or category name for this group of items.
+ * @property data A map of key-value pairs representing the specific data points in this category.
+ */
+data class PreviewReporterItem(
+    val title: String,
+    val data: Map<String, String>,
+)
+
+/**
  * [Action] implementation related to [WebCompatReporterStore].
  */
 sealed class WebCompatReporterAction : Action {
@@ -212,11 +223,13 @@ sealed class WebCompatReporterAction : Action {
     data object OpenPreviewClicked : WebCompatReporterAction()
 
     /**
-     * Dispatched when the preview of the report is opened up.
-     *
-     * @property previewJSON The data of the WebCompat Report as a JSON string.
-     */
-    data class PreviewJSONUpdated(val previewJSON: String) : WebCompatReporterAction()
+    * Dispatched when the preview of the report is opened up.
+    *
+    * @property previewReporterItems The list of items to be displayed in the WebCompat Report preview.
+    */
+    data class PreviewItemsUpdated(
+        val previewReporterItems: List<PreviewReporterItem>,
+    ) : WebCompatReporterAction()
 
     /**
      * Dispatched when the user requests to cancel the report.
@@ -256,8 +269,8 @@ private fun reduce(
     WebCompatReporterAction.Initialized -> state
     is WebCompatReporterAction.StateRestored -> action.restoredState
     is WebCompatReporterAction.OpenPreviewClicked -> state
-    is WebCompatReporterAction.PreviewJSONUpdated -> state.copy(
-        previewJSON = action.previewJSON,
+    is WebCompatReporterAction.PreviewItemsUpdated -> state.copy(
+        previewReporterItems = action.previewReporterItems,
     )
     is WebCompatReporterAction.DeceptiveSiteReportSelected -> state
     is WebCompatReporterAction.NavigationAction -> state

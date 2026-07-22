@@ -594,6 +594,11 @@ class WebCompatReporterSubmissionMiddlewareTest {
     fun `WHEN open preview is clicked AND enteredUrl matches tab url THEN preview contains full raw JSON plus form fields`() = runTest {
         val capture = CaptureActionsMiddleware<WebCompatReporterState, WebCompatReporterAction>()
 
+        val webCompatReporterSubmissionMiddleware = createMiddleware(
+            scope = this,
+            service = FakeWebCompatReporterRetrievalService(),
+        )
+
         val store = WebCompatReporterStore(
             initialState = WebCompatReporterState(
                 tabUrl = "https://www.mozilla.org",
@@ -604,19 +609,16 @@ class WebCompatReporterSubmissionMiddlewareTest {
             ),
             middleware = listOf(
                 capture,
-                createMiddleware(
-                    scope = this,
-                    service = FakeWebCompatReporterRetrievalService(),
-                ),
+                webCompatReporterSubmissionMiddleware,
             ),
         )
 
         store.dispatch(WebCompatReporterAction.OpenPreviewClicked)
         testScheduler.advanceUntilIdle()
 
-        val actual = store.state.previewJSON
+        val actual = store.state.previewReporterItems
         val webCompatInfo = FakeWebCompatReporterRetrievalService().retrieveInfo()
-        val expected = buildJsonObject {
+        val expectedJson = buildJsonObject {
             put(
                 "basic",
                 buildJsonObject {
@@ -627,7 +629,61 @@ class WebCompatReporterSubmissionMiddlewareTest {
             )
         }.addWebCompatInfo(webCompatInfo)
 
-        assertEquals(expected.toString(), actual)
+        val expected = webCompatReporterSubmissionMiddleware.parseWebCompatPreviewJson(expectedJson)
+
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun `GIVEN a complex JsonObject WHEN parseWebCompatPreviewJson is called THEN it returns a list of PreviewReporterItem`() = runTest {
+        val json = buildJsonObject {
+            put(
+                "group1",
+                buildJsonObject {
+                    put("key1", "value1")
+                    put("key2", 2)
+                    put("key3", true)
+                },
+            )
+            put(
+                "group2",
+                buildJsonObject {
+                    put("key4", "value4")
+                },
+            )
+            put("invalid", "not an object")
+        }
+
+        val middleware = createMiddleware(
+            scope = this,
+            service = FakeWebCompatReporterRetrievalService(),
+        )
+        val result = middleware.parseWebCompatPreviewJson(json)
+
+        assertEquals(2, result.size)
+
+        assertEquals("group1", result[0].title)
+        assertEquals(3, result[0].data.size)
+        assertEquals("value1", result[0].data["key1"])
+        assertEquals("2", result[0].data["key2"])
+        assertEquals("true", result[0].data["key3"])
+
+        assertEquals("group2", result[1].title)
+        assertEquals(1, result[1].data.size)
+        assertEquals("value4", result[1].data["key4"])
+    }
+
+    @Test
+    fun `GIVEN an empty JsonObject WHEN parseWebCompatPreviewJson is called THEN it returns an empty list`() = runTest {
+        val json = buildJsonObject { }
+        val middleware = createMiddleware(
+            scope = this,
+            service = FakeWebCompatReporterRetrievalService(),
+        )
+
+        val result = middleware.parseWebCompatPreviewJson(json)
+
+        assertTrue(result.isEmpty())
     }
 
     private fun createStore(

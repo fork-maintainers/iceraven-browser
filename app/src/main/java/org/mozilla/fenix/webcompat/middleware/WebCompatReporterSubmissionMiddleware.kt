@@ -4,10 +4,12 @@
 
 package org.mozilla.fenix.webcompat.middleware
 
+import androidx.annotation.VisibleForTesting
 import androidx.core.net.toUri
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.put
@@ -26,6 +28,7 @@ import org.mozilla.fenix.GleanMetrics.Pings
 import org.mozilla.fenix.components.AppStore
 import org.mozilla.fenix.components.appstate.AppAction
 import org.mozilla.fenix.webcompat.middleware.WebCompatInfoDto.Companion.addWebCompatInfo
+import org.mozilla.fenix.webcompat.store.PreviewReporterItem
 import org.mozilla.fenix.webcompat.store.WebCompatReporterAction
 import org.mozilla.fenix.webcompat.store.WebCompatReporterState
 
@@ -107,8 +110,11 @@ class WebCompatReporterSubmissionMiddleware(
         val webCompatInfo = webCompatReporterRetrievalService.retrieveInfo()
 
         val webCompatJSON = generatePreviewJSON(store.state, webCompatInfo)
-
-        store.dispatch(WebCompatReporterAction.PreviewJSONUpdated(webCompatJSON.toString()))
+        store.dispatch(
+            WebCompatReporterAction.PreviewItemsUpdated(
+                parseWebCompatPreviewJson(webCompatJSON),
+            ),
+        )
     }
 
     private fun generatePreviewJSON(
@@ -285,5 +291,26 @@ class WebCompatReporterSubmissionMiddleware(
         BrokenSiteReportBrowserInfo.experiments.set(
             BrokenSiteReportBrowserInfo.ExperimentsObject(items),
         )
+    }
+
+    /**
+     * Dynamically parses a [JsonObject] into a list of [PreviewReporterItem].
+     * It iterates through each top-level key (e.g., "basic", "app") and
+     * collects its nested fields as a map of String to String.
+     */
+    @VisibleForTesting
+    internal fun parseWebCompatPreviewJson(webCompatJSON: JsonObject): List<PreviewReporterItem> {
+        return webCompatJSON.mapNotNull { (title, element) ->
+            val sectionObject = element as? JsonObject ?: return@mapNotNull null
+            val data = sectionObject.mapValues { (_, value) ->
+                if (value is JsonPrimitive) {
+                    value.content
+                } else {
+                    value.toString()
+                }
+            }
+
+            PreviewReporterItem(title, data)
+        }
     }
 }
