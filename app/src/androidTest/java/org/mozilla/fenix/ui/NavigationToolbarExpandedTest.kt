@@ -59,23 +59,6 @@ class NavigationToolbarExpandedTest {
     @get:Rule(order = 2)
     val memoryLeaksRule = DetectMemoryLeaksRule(composeTestRule = { composeTestRule })
 
-    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3333205
-    @Test
-    fun verifyTheExpandedToolbarHomepageItemsTest() {
-        homeScreen(composeTestRule) {
-            verifyHomeWordmark()
-            verifyToolbarPosition(bottomPosition = false)
-        }
-        navigationToolbar(composeTestRule) {
-            verifyNavBarPosition()
-            verifyTheNavigationBarAddBookmarkButton()
-            verifyTheNavigationBarShareButton()
-            verifyTheNewTabButton()
-            verifyTheTabCounter("0")
-            verifyTheMainMenuButton()
-        }
-    }
-
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3333207
     @Test
     fun verifyTheExpandedToolbarItemsWebsiteViewTest() {
@@ -561,7 +544,7 @@ class NavigationToolbarExpandedTest {
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3911787
     @Test
-    fun verifyTheExpandedToolbarHomepageItemsWithEdgeToEdgeTest() {
+    fun verifyTheExpandedToolbarHomepageItemsTest() {
         homeScreen(composeTestRule) {
             verifyEdgeToEdgeWallpaperApplied(composeTestRule)
             verifyHomeWordmark()
