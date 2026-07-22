@@ -176,24 +176,31 @@ private fun CardContent(
 @Composable
 private fun ContinuousOnboardingScreenNotificationPreview() {
     FirefoxTheme {
-        ContinuousOnboardingScreen(
-            pageState = OnboardingPageState(
-                imageRes = R.drawable.nova_onboarding_notifications,
-                title = stringResource(R.string.nova_onboarding_notifications_title),
-                description = stringResource(R.string.nova_onboarding_notifications_subtitle),
-                primaryButton = Action(
-                    text = stringResource(R.string.nova_onboarding_notifications_button),
-                    onClick = { },
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .systemBarsPadding(),
+            contentAlignment = Alignment.Center,
+        ) {
+            CardContent(
+                pageState = OnboardingPageState(
+                    imageRes = R.drawable.nova_onboarding_notifications,
+                    title = stringResource(R.string.nova_onboarding_notifications_title),
+                    description = stringResource(R.string.nova_onboarding_notifications_subtitle),
+                    primaryButton = Action(
+                        text = stringResource(R.string.nova_onboarding_notifications_button),
+                        onClick = { },
+                    ),
+                    secondaryButton = Action(
+                        text = stringResource(R.string.nova_onboarding_negative_button),
+                        onClick = { },
+                    ),
+                    onRecordImpressionEvent = { },
                 ),
-                secondaryButton = Action(
-                    text = stringResource(R.string.nova_onboarding_negative_button),
-                    onClick = { },
-                ),
-                onRecordImpressionEvent = { },
-            ),
-            onDismissRequest = { },
-            onCloseButtonClicked = { },
-        )
+                onDismissRequest = { },
+                onCloseButtonClicked = { },
+            )
+        }
     }
 }
 
@@ -201,23 +208,30 @@ private fun ContinuousOnboardingScreenNotificationPreview() {
 @Composable
 private fun ContinuousOnboardingScreenSyncPreview() {
     FirefoxTheme {
-        ContinuousOnboardingScreen(
-            pageState = OnboardingPageState(
-                imageRes = R.drawable.nova_onboarding_sync,
-                title = stringResource(R.string.nova_onboarding_sync_title),
-                description = stringResource(R.string.nova_onboarding_sync_subtitle),
-                primaryButton = Action(
-                    text = stringResource(R.string.nova_onboarding_sync_button),
-                    onClick = { },
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .systemBarsPadding(),
+            contentAlignment = Alignment.Center,
+        ) {
+            CardContent(
+                pageState = OnboardingPageState(
+                    imageRes = R.drawable.nova_onboarding_sync,
+                    title = stringResource(R.string.nova_onboarding_sync_title),
+                    description = stringResource(R.string.nova_onboarding_sync_subtitle),
+                    primaryButton = Action(
+                        text = stringResource(R.string.nova_onboarding_sync_button),
+                        onClick = { },
+                    ),
+                    secondaryButton = Action(
+                        text = stringResource(R.string.nova_onboarding_continue_button),
+                        onClick = { },
+                    ),
+                    onRecordImpressionEvent = { },
                 ),
-                secondaryButton = Action(
-                    text = stringResource(R.string.nova_onboarding_continue_button),
-                    onClick = { },
-                ),
-                onRecordImpressionEvent = { },
-            ),
-            onDismissRequest = { },
-            onCloseButtonClicked = { },
-        )
+                onDismissRequest = { },
+                onCloseButtonClicked = { },
+            )
+        }
     }
 }
