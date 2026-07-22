@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
 import mozilla.components.concept.engine.Engine
 import mozilla.components.concept.engine.autofill.AddressStructure
@@ -29,7 +30,6 @@ import org.mozilla.fenix.settings.address.ui.edit.EditAddressScreen
 import org.mozilla.fenix.theme.FirefoxTheme
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
-import kotlin.coroutines.suspendCoroutine
 
 /**
  * Displays an address editor for adding and editing an address.
@@ -87,12 +87,17 @@ class AddressEditorFragment : SecureFragment(), SystemInsetsPaddedFragment {
 
 private suspend fun Engine.getAddressStructure(countryCode: String): AddressStructure {
     return withContext(Dispatchers.Main) {
-        suspendCoroutine { continuation ->
-            getAddressStructure(
+        suspendCancellableCoroutine { continuation ->
+            val operation = getAddressStructure(
                 countryCode = countryCode,
                 onSuccess = { fields -> continuation.resume(fields) },
                 onError = { throwable -> continuation.resumeWithException(throwable) },
             )
+
+            continuation.invokeOnCancellation {
+                @Suppress("DeferredResultUnused")
+                operation.cancel()
+            }
         }
     }
 }
