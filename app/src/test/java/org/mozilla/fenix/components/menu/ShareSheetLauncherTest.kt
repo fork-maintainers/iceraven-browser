@@ -178,7 +178,7 @@ class ShareSheetLauncherTest {
     }
 
     @Test
-    fun `WHEN showSystemShareSheet is called with multiple items THEN share is invoked with urls joined by newlines`() {
+    fun `WHEN showSystemShareSheet is called with multiple items THEN share is invoked with numbered urls joined by newlines`() {
         val items = listOf(
             ShareData(url = "https://mozilla.org", title = "Mozilla"),
             ShareData(url = "https://firefox.com", title = "Firefox"),
@@ -188,7 +188,7 @@ class ShareSheetLauncherTest {
 
         verify {
             mockShareDelegate.share(
-                text = "https://mozilla.org\nhttps://firefox.com",
+                text = "1. https://mozilla.org\n2. https://firefox.com",
                 subject = "Mozilla",
             )
         }
@@ -223,7 +223,7 @@ class ShareSheetLauncherTest {
     }
 
     @Test
-    fun `WHEN showSystemShareSheet is called with multiple items and a subject THEN share is invoked with urls and subject`() {
+    fun `WHEN showSystemShareSheet is called with multiple items and a subject THEN share is invoked with numbered urls joined with new lines and subject`() {
         val items = listOf(
             ShareData(url = "https://mozilla.org", title = "Mozilla"),
             ShareData(url = "https://firefox.com", title = "Firefox"),
@@ -233,7 +233,7 @@ class ShareSheetLauncherTest {
 
         verify {
             mockShareDelegate.share(
-                text = "https://mozilla.org\nhttps://firefox.com",
+                text = "1. https://mozilla.org\n2. https://firefox.com",
                 subject = "My collection",
             )
         }

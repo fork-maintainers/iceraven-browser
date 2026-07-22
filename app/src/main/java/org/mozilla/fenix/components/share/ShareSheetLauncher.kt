@@ -191,7 +191,16 @@ class DefaultShareSheetLauncher(
         isPrivate: Boolean,
         subject: String?,
     ) {
-        val text = items.mapNotNull { it.url }.joinToString("\n")
+        val shareItems = items.mapNotNull { it.url }
+
+        val text = if (shareItems.size == 1) {
+            shareItems[0]
+        } else {
+            shareItems
+                .mapIndexed { i, url -> "${i + 1}. $url" }
+                .joinToString("\n")
+        }
+
         shareDelegate.share(
             text = text,
             subject = subject ?: items.firstOrNull()?.title ?: "",
