@@ -5,7 +5,6 @@
 package org.mozilla.fenix.ui.efficiency.core
 
 import androidx.compose.ui.test.SemanticsNodeInteraction
-import androidx.compose.ui.test.assertExists
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.performClick
 import androidx.test.espresso.ViewInteraction

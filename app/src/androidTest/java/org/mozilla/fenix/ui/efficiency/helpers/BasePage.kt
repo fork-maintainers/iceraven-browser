@@ -24,6 +24,7 @@ import androidx.compose.ui.test.hasSetTextAction
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.AndroidComposeTestRule
+import androidx.compose.ui.test.onAllNodesWithContentDescription
 import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onFirst
@@ -180,6 +181,10 @@ abstract class BasePage(
             return this
         } catch (t: Throwable) {
             rep?.endStep(success = false, message = "Navigation to '$pageName' failed: ${t.message ?: "exception"}")
+            // Navigation failures (esp. a page-arrival timeout on the requiredForPage anchor) previously
+            // produced no screen snapshot, leaving these undebuggable. Dump the current screen so the
+            // failing state (which page we actually landed on, what handles exist) is captured.
+            ScreenDump.dump(composeRule, "navigateToPage failed: $pageName")
             throw t
         }
     }
@@ -409,18 +414,11 @@ abstract class BasePage(
         if (applyPreconditions && requiresScroll(selector.groups)) {
             ensureReachable(selector)
         }
-        // Compose: fetch ALL matches and prefer the displayed one. Handles pagers/lists where a shared
-        // tag or label matches several composed nodes (only the on-screen page is displayed).
-        val composeCollection: SemanticsNodeInteractionCollection? = when (selector.strategy) {
-            SelectorStrategy.COMPOSE_BY_TAG -> composeRule.onAllNodesWithTag(selector.value)
-            SelectorStrategy.COMPOSE_BY_TEXT,
-            SelectorStrategy.COMPOSE_BY_TEXT_MERGED,
-            -> composeRule.onAllNodesWithText(selector.value)
-            else -> null
-        }
-        if (composeCollection != null) {
-            return pickDisplayed(composeCollection)?.let { ComposeUiElement(it) }
-        }
+        // Compose: resolve tag/text/content-description to the displayed match, trying BOTH the
+        // merged and unmerged semantics trees so callers never have to know which one an element
+        // lives in. (The merged/unmerged mismatch on COMPOSE_BY_TEXT is what broke navigation after
+        // the resolve() pilot; content-description had the same latent trap.)
+        resolveComposeNode(selector)?.let { return ComposeUiElement(it) }
         // Everything else (Espresso / UiAutomator, plus exotic compose strategies): reuse the existing
         // single-node fetch (preconditions already applied above) and wrap it in the facade.
         return toUiElement(mozGetElement(selector, applyPreconditions = false))
@@ -444,6 +442,32 @@ abstract class BasePage(
             }
         }
         return collection[0]
+    }
+
+    /**
+     * Resolve a Compose selector (tag / text / content-description) to the displayed match, hiding
+     * the merged-vs-unmerged tree distinction from callers. Tries the strategy's historical primary
+     * tree first (text -> unmerged; tag/content-description -> merged), then the OTHER tree as a
+     * fallback, so a caller just supplies a testTag/text/description and the facade finds it wherever
+     * it lives. Returns null for non-Compose strategies (handled via mozGetElement).
+     */
+    private fun resolveComposeNode(selector: Selector): SemanticsNodeInteraction? {
+        fun candidates(unmerged: Boolean): SemanticsNodeInteractionCollection? = when (selector.strategy) {
+            SelectorStrategy.COMPOSE_BY_TAG ->
+                composeRule.onAllNodesWithTag(selector.value, useUnmergedTree = unmerged)
+            SelectorStrategy.COMPOSE_BY_TEXT,
+            SelectorStrategy.COMPOSE_BY_TEXT_MERGED,
+            -> composeRule.onAllNodesWithText(selector.value, useUnmergedTree = unmerged)
+            SelectorStrategy.COMPOSE_BY_CONTENT_DESCRIPTION ->
+                composeRule.onAllNodesWithContentDescription(selector.value, useUnmergedTree = unmerged)
+            else -> null
+        }
+        // COMPOSE_BY_TEXT historically resolved on the unmerged tree; tag/content-description on the
+        // merged tree. Try each strategy's proven primary tree first (no behavior change), then the
+        // other tree only if the primary yields nothing.
+        val primaryUnmerged = selector.strategy == SelectorStrategy.COMPOSE_BY_TEXT
+        return candidates(primaryUnmerged)?.let { pickDisplayed(it) }
+            ?: candidates(!primaryUnmerged)?.let { pickDisplayed(it) }
     }
 
     /** Wrap a raw located node (from mozGetElement) into the backend-agnostic UiElement facade. */
@@ -1268,26 +1292,36 @@ abstract class BasePage(
     }
 
     private fun mozVerifyElement(selector: Selector, applyPreconditions: Boolean = true): Boolean {
-        val element = mozGetElement(selector, applyPreconditions = applyPreconditions)
+        // This is a *presence check*: it answers "is this element displayed right now?" and must
+        // NEVER throw. Callers rely on that contract — mozIsOnPageNow()/mozWaitForPageToLoad() poll
+        // it before navigation even starts. If it throws (e.g. mozGetElement hits an ambiguous match,
+        // or a backend asserts eagerly), that exception escapes into navigateToPage(), which on real
+        // hardware triggers the failure-screenshot path and a StrictMode penaltyDeath that MASKS the
+        // real error. So we resolve + probe entirely inside try/catch and degrade to `false`.
+        return try {
+            val element = mozGetElement(selector, applyPreconditions = applyPreconditions)
 
-        return when (element) {
-            is ViewInteraction -> {
-                try {
-                    element.check(matches(isDisplayed())); true
-                } catch (_: Exception) {
-                    false
+            when (element) {
+                is ViewInteraction -> {
+                    try {
+                        element.check(matches(isDisplayed())); true
+                    } catch (_: Throwable) {
+                        false
+                    }
                 }
-            }
-            is UiObject -> element.exists()
-            is UiObject2 -> true
-            is SemanticsNodeInteraction -> {
-                try {
-                    element.assertExists(); element.assertIsDisplayed(); true
-                } catch (_: AssertionError) {
-                    false
+                is UiObject -> element.exists()
+                is UiObject2 -> true
+                is SemanticsNodeInteraction -> {
+                    try {
+                        element.assertExists(); element.assertIsDisplayed(); true
+                    } catch (_: Throwable) {
+                        false
+                    }
                 }
+                else -> false
             }
-            else -> false
+        } catch (_: Throwable) {
+            false
         }
     }
 
