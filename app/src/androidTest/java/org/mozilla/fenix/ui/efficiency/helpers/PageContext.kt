@@ -17,6 +17,7 @@ import org.mozilla.fenix.ui.efficiency.pageObjects.HistoryPage
 import org.mozilla.fenix.ui.efficiency.pageObjects.HomePage
 import org.mozilla.fenix.ui.efficiency.pageObjects.MainMenuPage
 import org.mozilla.fenix.ui.efficiency.pageObjects.MicrosurveysPage
+import org.mozilla.fenix.ui.efficiency.pageObjects.OnboardingPage
 import org.mozilla.fenix.ui.efficiency.pageObjects.RecentlyClosedTabsPage
 import org.mozilla.fenix.ui.efficiency.pageObjects.SearchBarComponent
 import org.mozilla.fenix.ui.efficiency.pageObjects.SettingsAboutPage
@@ -66,6 +67,7 @@ class PageContext(val composeRule: AndroidComposeTestRule<HomeActivityIntentTest
     val home = HomePage(composeRule)
     val mainMenu = MainMenuPage(composeRule)
     val microsurveys = MicrosurveysPage(composeRule)
+    val onboarding = OnboardingPage(composeRule)
     val recentlyClosedTabs = RecentlyClosedTabsPage(composeRule)
     val searchBar = SearchBarComponent(composeRule)
     val settings = SettingsPage(composeRule)
