@@ -16,6 +16,7 @@ import android.net.Uri
 import androidx.core.net.toUri
 import kotlinx.coroutines.runBlocking
 import mozilla.components.support.test.robolectric.testContext
+import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -26,6 +27,11 @@ import org.robolectric.Shadows.shadowOf
 @RunWith(RobolectricTestRunner::class)
 class DefaultDistributionProviderCheckerTest {
     private val subject = DefaultDistributionProviderChecker(testContext)
+
+    @After
+    fun tearDown() {
+        TestContentProvider.shouldThrowOnQuery = false
+    }
 
     @Test
     fun `WHEN a content provider exists THEN the provider name is returned`() = runBlocking {
@@ -90,6 +96,20 @@ class DefaultDistributionProviderCheckerTest {
     }
 
     @Test
+    fun `WHEN the content provider throws an exception THEN null is returned without crashing`() =
+        runBlocking {
+            createFakeContentProviderForAdjust(
+                otherAppsPackageName = "some.package",
+                providerName = "myProvider",
+            )
+            TestContentProvider.shouldThrowOnQuery = true
+
+            val provider = subject.queryProvider()
+
+            assertEquals(null, provider)
+        }
+
+    @Test
     fun `WHEN the encrypted_data column does not have a provider string THEN null is returned`() =
         runBlocking {
             createFakeContentProviderForAdjust(
@@ -148,6 +168,10 @@ class DefaultDistributionProviderCheckerTest {
     class TestContentProvider : ContentProvider() {
         private val database = mutableListOf<Pair<String, ContentValues>>()
 
+        companion object {
+            var shouldThrowOnQuery = false
+        }
+
         override fun onCreate(): Boolean = true
 
         override fun insert(uri: Uri, values: ContentValues?): Uri {
@@ -166,6 +190,10 @@ class DefaultDistributionProviderCheckerTest {
             selectionArgs: Array<String>?,
             sortOrder: String?,
         ): Cursor {
+            if (shouldThrowOnQuery) {
+                throw IllegalStateException("Simulated third-party provider failure")
+            }
+
             val cursor = MatrixCursor(projection ?: emptyArray())
 
             val selectionKey = if (selection == "package_name=?") "package_name" else null

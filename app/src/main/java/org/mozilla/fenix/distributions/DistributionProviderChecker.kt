@@ -51,13 +51,21 @@ class DefaultDistributionProviderChecker(private val context: Context) : Distrib
 
             val projection = arrayOf(ENCRYPTED_DATA_COLUMN)
 
-            val contentResolverCursor = contentResolver.query(
-                uri,
-                projection,
-                "package_name=?",
-                arrayOf(context.packageName),
-                null,
-            )
+            @Suppress("TooGenericExceptionCaught")
+            val contentResolverCursor = try {
+                contentResolver.query(
+                    uri,
+                    projection,
+                    "package_name=?",
+                    arrayOf(context.packageName),
+                    null,
+                )
+            } catch (e: Exception) {
+                // Third-party referral providers can throw arbitrary exceptions across the Binder.
+                // Skip the misbehaving provider instead of crashing at startup.
+                logger.error("$classVersion - Failed to query provider $authority", e)
+                continue
+            }
 
             contentResolverCursor?.use { cursor ->
                 cursor.getProvider()?.let { return it }
