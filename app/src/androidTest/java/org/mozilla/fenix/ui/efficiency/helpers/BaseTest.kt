@@ -29,6 +29,7 @@ import org.mozilla.fenix.helpers.TestHelper.appContext
 import org.mozilla.fenix.helpers.TestHelper.exitMenu
 import org.mozilla.fenix.ui.efficiency.logging.LoggingBridge
 import org.mozilla.fenix.ui.efficiency.logging.TestLogging
+import org.mozilla.fenix.ui.efficiency.navigation.LaunchConfig
 import org.mozilla.fenix.ui.efficiency.navigation.NavigationRegistry
 import org.mozilla.fenix.ui.efficiency.navigation.PageCatalog
 import androidx.compose.ui.test.junit4.v2.AndroidComposeTestRule as AndroidComposeTestRuleV2
@@ -59,6 +60,17 @@ abstract class BaseTest(
     private val isRecentlyVisitedFeatureEnabled: Boolean = true,
 ) {
 
+    // Default launch built from the constructor args (back-compat for every existing subclass).
+    private val defaultLaunchConfig = LaunchConfig(
+        skipOnboarding = skipOnboarding,
+        isPageLoadTranslationsPromptEnabled = isPageLoadTranslationsPromptEnabled,
+        isPocketEnabled = isPocketEnabled,
+        isRecentlyVisitedFeatureEnabled = isRecentlyVisitedFeatureEnabled,
+    )
+
+    /** Override to vary the launch per run/case (e.g. the reachability shard uses the case's config). */
+    protected open fun launchConfig(): LaunchConfig = defaultLaunchConfig
+
     @get:Rule(order = 0)
     val fenixTestRule: FenixTestRule = FenixTestRule()
 
@@ -79,12 +91,13 @@ abstract class BaseTest(
         object : Statement() {
             override fun evaluate() {
                 repeat(1 + MAX_RETRIES) { attempt ->
+                    val cfg = launchConfig()
                     _composeRule = AndroidComposeTestRuleV2(
                         HomeActivityIntentTestRule(
-                            skipOnboarding = skipOnboarding,
-                            isPageLoadTranslationsPromptEnabled = isPageLoadTranslationsPromptEnabled,
-                            isPocketEnabled = isPocketEnabled,
-                            isRecentlyVisitedFeatureEnabled = isRecentlyVisitedFeatureEnabled,
+                            skipOnboarding = cfg.skipOnboarding,
+                            isPageLoadTranslationsPromptEnabled = cfg.isPageLoadTranslationsPromptEnabled,
+                            isPocketEnabled = cfg.isPocketEnabled,
+                            isRecentlyVisitedFeatureEnabled = cfg.isRecentlyVisitedFeatureEnabled,
                         ),
                     ) { it.activity }
                     try {

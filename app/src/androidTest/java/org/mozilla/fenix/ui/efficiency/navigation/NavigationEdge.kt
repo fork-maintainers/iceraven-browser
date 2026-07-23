@@ -8,4 +8,5 @@ data class NavigationEdge(
     val from: String,
     val to: String,
     val steps: List<NavigationStep>,
+    val launch: LaunchConfig? = null,
 )

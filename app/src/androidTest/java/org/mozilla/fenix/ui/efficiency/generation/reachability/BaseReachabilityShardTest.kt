@@ -3,6 +3,7 @@ package org.mozilla.fenix.ui.efficiency.generation.reachability
 import android.util.Log
 import org.mozilla.fenix.ui.efficiency.helpers.BasePage
 import org.mozilla.fenix.ui.efficiency.helpers.BaseTest
+import org.mozilla.fenix.ui.efficiency.navigation.LaunchConfig
 
 /**
  * Shared logic for all generated/manual navigation shard entrypoint classes.
@@ -10,6 +11,8 @@ import org.mozilla.fenix.ui.efficiency.helpers.BaseTest
 abstract class BaseReachabilityShardTest(
     private val case: ReachabilityCase,
 ) : BaseTest() {
+
+    override fun launchConfig(): LaunchConfig = case.launch
 
     protected fun runNavigationCase() {
         Log.i(
