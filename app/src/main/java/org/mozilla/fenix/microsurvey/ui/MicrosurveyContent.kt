@@ -46,6 +46,7 @@ import mozilla.components.ui.icons.R as iconsR
  * @param question The survey question text.
  * @param answers The survey answer text options available for the question.
  * @param icon The survey icon, this will represent the feature the survey is for.
+ * @param iconTint The optional tint color to apply to the survey [icon].
  * @param backgroundColor The view background color.
  * @param selectedAnswer The current selected answer. Will be null until user selects an option.
  * @param maxLabelLines The maximum number of lines allowed for each answer text layout to prevent truncation.
@@ -56,6 +57,7 @@ fun MicrosurveyContent(
     question: String,
     answers: List<String>,
     @DrawableRes icon: Int = iconsR.drawable.mozac_ic_print_24,
+    iconTint: Color? = null,
     backgroundColor: Color = MaterialTheme.colorScheme.surfaceBright,
     selectedAnswer: String? = null,
     maxLabelLines: Int = 2,
@@ -71,7 +73,7 @@ fun MicrosurveyContent(
             .padding(horizontal = 16.dp),
     ) {
         Column {
-            Header(icon, question)
+            Header(icon, iconTint, question)
 
             Column(
                 modifier = Modifier
@@ -96,7 +98,7 @@ fun MicrosurveyContent(
 }
 
 @Composable
-private fun Header(icon: Int, question: String) {
+private fun Header(icon: Int, iconTint: Color?, question: String) {
     Row(
         modifier = Modifier.padding(16.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -105,6 +107,7 @@ private fun Header(icon: Int, question: String) {
             painter = painterResource(icon),
             contentDescription = stringResource(id = R.string.microsurvey_feature_icon_content_description),
             modifier = Modifier.size(24.dp),
+            tint = iconTint ?: Color.Unspecified,
         )
 
         Spacer(modifier = Modifier.width(16.dp))
