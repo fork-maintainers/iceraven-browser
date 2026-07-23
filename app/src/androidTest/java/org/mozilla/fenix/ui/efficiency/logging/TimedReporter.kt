@@ -168,10 +168,10 @@ class TimedReporter(private val forwarder: StepLogger? = null) {
             (message.takeIf { it.isNotBlank() } ?: (if (success) "OK" else "FAILED")) + warnText
 
         if (success) {
-            ConsoleLogger.ok(ev.type, ev.level, completionText)
+            ConsoleLogger.ok(ev.level, completionText)
             totals.oks += 1
         } else {
-            ConsoleLogger.err(ev.type, ev.level, completionText)
+            ConsoleLogger.err(ev.level, completionText)
             totals.fails += 1
         }
 
@@ -193,7 +193,7 @@ class TimedReporter(private val forwarder: StepLogger? = null) {
         val ev = stack.removeLastOrNull() ?: return
         val elapsedMs = (System.nanoTime() - ev.startNs) / 1_000_000.0
         val msText = "%.1f".format(elapsedMs)
-        ConsoleLogger.skip(ev.type, ev.level, "$message ($msText ms)")
+        ConsoleLogger.skip(ev.level, "$message ($msText ms)")
         totals.skips += 1
         when (ev.type) {
             Type.STEP -> totals.stepMs += elapsedMs
