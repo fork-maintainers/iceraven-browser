@@ -13,10 +13,13 @@ import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsNotDisplayed
 import androidx.compose.ui.test.filter
+import androidx.compose.ui.test.hasAnyAncestor
 import androidx.compose.ui.test.hasAnyChild
+import androidx.compose.ui.test.hasAnyDescendant
 import androidx.compose.ui.test.hasAnySibling
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.hasText
+import androidx.compose.ui.test.isDialog
 import androidx.compose.ui.test.junit4.AndroidComposeTestRule
 import androidx.compose.ui.test.junit4.ComposeTestRule
 import androidx.compose.ui.test.longClick
@@ -30,10 +33,12 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performScrollToNode
+import androidx.compose.ui.test.performTextReplacement
 import androidx.compose.ui.test.performTouchInput
 import androidx.core.content.ContextCompat
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions
+import androidx.test.espresso.action.ViewActions.swipeUp
 import androidx.test.espresso.assertion.PositionAssertions.isPartiallyBelow
 import androidx.test.espresso.matcher.RootMatchers
 import androidx.test.espresso.matcher.ViewMatchers
@@ -68,6 +73,7 @@ import org.mozilla.fenix.helpers.TestHelper.appName
 import org.mozilla.fenix.helpers.TestHelper.mDevice
 import org.mozilla.fenix.helpers.TestHelper.openMainMenuAndAwaitBottomSheet
 import org.mozilla.fenix.helpers.TestHelper.packageName
+import org.mozilla.fenix.helpers.click
 import org.mozilla.fenix.home.topsites.TopSitesTestTag
 import org.mozilla.fenix.home.topsites.TopSitesTestTag.TOP_SITE_CARD_FAVICON
 import org.mozilla.fenix.home.ui.HomepageTestTag.HOMEPAGE
@@ -663,6 +669,118 @@ class HomeScreenRobot(private val composeTestRule: ComposeTestRule) {
         Log.i(TAG, "swipeRightTheFirefoxSearchWidgetOnboardingCard: Performed swipe right action on the \"Add search widget\" onboarding card")
     }
 
+    @OptIn(ExperimentalTestApi::class)
+    fun verifyAddToHomepageBottomSheet() {
+        composeTestRule.waitUntilAtLeastOneExists(hasText(getStringResource(R.string.homepage_shortcuts_add_to_homepage)), waitingTime)
+
+        Log.i(TAG, "verifyAddToHomepageBottomSheet: Trying to verify the \"Add to homepage\" title is displayed")
+        composeTestRule.onNodeWithText(getStringResource(R.string.homepage_shortcuts_add_to_homepage)).assertIsDisplayed()
+        Log.i(TAG, "verifyAddToHomepageBottomSheet: Verified the \"Add to homepage\" title is displayed")
+
+        Log.i(TAG, "verifyAddToHomepageBottomSheet: Trying to verify the \"Add website\" option is displayed")
+        composeTestRule.onNodeWithTag(TopSitesTestTag.ADD_WEBSITE).assertIsDisplayed()
+        Log.i(TAG, "verifyAddToHomepageBottomSheet: Verified the \"Add website\" option is displayed")
+
+        Log.i(TAG, "verifyAddToHomepageBottomSheet: Trying to verify the \"Popular sites\" section header is displayed")
+        composeTestRule.onNodeWithText(getStringResource(R.string.homepage_shortcuts_popular_sites)).assertIsDisplayed()
+        Log.i(TAG, "verifyAddToHomepageBottomSheet: Verified the \"Popular sites\" section header is displayed")
+
+        Log.i(TAG, "verifyAddToHomepageBottomSheet: Trying to verify the \"Facebook\" popular site item is displayed")
+        composeTestRule.onNodeWithText("Facebook").assertIsDisplayed()
+        Log.i(TAG, "verifyAddToHomepageBottomSheet: Verified the \"Facebook\" popular site item is displayed")
+    }
+
+    fun clickOnPopularWebsite(siteName: String) {
+        Log.i(TAG, "clickOnPopularWebsite: Waiting for bottom sheet animations to settle")
+        composeTestRule.waitForIdle()
+
+        for (i in 1..RETRY_COUNT) {
+            try {
+                Log.i(TAG, "clickOnPopularWebsite: Started try #$i")
+                Log.i(TAG, "clickOnPopularWebsite: Trying to click the '$siteName' popular site item")
+
+                composeTestRule.onNodeWithText(siteName).performClick()
+
+                Log.i(TAG, "clickOnPopularWebsite: Successfully clicked the '$siteName' popular site item")
+                composeTestRule.waitForIdle()
+                break
+            } catch (e: AssertionError) {
+                Log.i(TAG, "clickOnPopularWebsite: AssertionError caught, executing fallback methods")
+                if (i == RETRY_COUNT) {
+                    throw e
+                } else {
+                    Log.i(TAG, "clickOnPopularWebsite: Trying to swipe up the bottom sheet drag handle")
+                    composeTestRule.onNodeWithContentDescription("Drag handle", ignoreCase = true)
+                        .performTouchInput {
+                            swipeUp()
+                        }
+                    Log.i(TAG, "clickOnPopularWebsite: Swiped up the bottom sheet drag handle")
+
+                    Log.i(TAG, "clickOnPopularWebsite: Waiting for device to be idle")
+                    composeTestRule.waitForIdle()
+                    Log.i(TAG, "clickOnPopularWebsite: Waited for device to be idle")
+                }
+            }
+        }
+    }
+
+    @OptIn(ExperimentalTestApi::class)
+    fun verifyEnterAWebsiteUrlDialog() {
+        composeTestRule.waitUntilAtLeastOneExists(hasText(getStringResource(R.string.homepage_shortcuts_add_website_title)), waitingTime)
+
+        Log.i(TAG, "verifyEnterAWebsiteUrlDialog: Trying to verify the \"Enter a Website URL\" title is displayed")
+        composeTestRule.onNodeWithText(getStringResource(R.string.homepage_shortcuts_add_website_title)).assertIsDisplayed()
+        Log.i(TAG, "verifyEnterAWebsiteUrlDialog: Verified the \"Enter a Website URL\" title is displayed")
+
+        Log.i(TAG, "verifyEnterAWebsiteUrlDialog: Trying to verify the \"URL\" input field is displayed")
+        composeTestRule.onNodeWithText("URL").assertIsDisplayed()
+        Log.i(TAG, "verifyEnterAWebsiteUrlDialog: Verified the \"URL\" input field is displayed")
+
+        Log.i(TAG, "verifyEnterAWebsiteUrlDialog: Trying to verify the \"Shortcut name\" input field is displayed")
+        composeTestRule.onNodeWithText(getStringResource(R.string.shortcut_name_hint)).assertIsDisplayed()
+        Log.i(TAG, "verifyEnterAWebsiteUrlDialog: Verified the \"Shortcut name\" input field is displayed")
+
+        Log.i(TAG, "verifyEnterAWebsiteUrlDialog: Trying to verify the \"Cancel\" button is displayed")
+        composeTestRule.addWebsiteDialogCancelButton().assertIsDisplayed()
+        Log.i(TAG, "verifyEnterAWebsiteUrlDialog: Verified the \"Cancel\" button is displayed")
+
+        Log.i(TAG, "verifyEnterAWebsiteUrlDialog: Trying to verify the \"Save\" button is displayed")
+        composeTestRule.addWebsiteDialogSaveButton().assertIsDisplayed()
+        Log.i(TAG, "verifyEnterAWebsiteUrlDialog: Verified the \"Save\" button is displayed")
+    }
+
+    fun enterWebsiteUrl(url: String) {
+        Log.i(TAG, "enterWebsiteUrl: Trying to enter URL '$url' in Enter a Website URL dialog")
+        composeTestRule.onNodeWithText("URL").performTextReplacement(url)
+        Log.i(TAG, "enterWebsiteUrl: Successfully entered URL: $url")
+    }
+
+    fun enterShortcutName(shortcutName: String) {
+        Log.i(TAG, "enterShortcutName: Trying to enter shortcut name '$shortcutName' in Enter a Website URL dialog")
+        composeTestRule.onNodeWithText(getStringResource(R.string.shortcut_name_hint))
+            .performTextReplacement(shortcutName)
+        Log.i(TAG, "enterShortcutName: Successfully entered shortcut name: $shortcutName")
+    }
+
+    fun clickCancelInAddWebsiteDialog() {
+        Log.i(TAG, "clickCancelInAddWebsiteDialog: Trying to click the Enter a Website URL dialog \"Cancel\" button")
+        composeTestRule.addWebsiteDialogCancelButton().performClick()
+        Log.i(TAG, "clickCancelInAddWebsiteDialog: Clicked the Enter a Website URL dialog \"Cancel\" button")
+    }
+
+    fun clickSaveInAddWebsiteDialog() {
+        Log.i(TAG, "clickSaveInAddWebsiteDialog: Clicking the Enter a Website URL dialog \"Save\" button")
+        composeTestRule.addWebsiteDialogSaveButton().performClick()
+        Log.i(TAG, "clickSaveInAddWebsiteDialog: Clicked the Enter a Website URL dialog \"Save\" button")
+    }
+
+    fun verifyInvalidUrlError() {
+        Log.i(TAG, "verifyInvalidUrlError: Verifying the invalid URL error message is displayed")
+        composeTestRule.onNodeWithText(getStringResource(R.string.top_sites_edit_dialog_url_error))
+            .assertIsDisplayed()
+        Log.i(TAG, "verifyInvalidUrlError: Verified the invalid URL error message is displayed")
+    }
+
     class Transition(private val composeTestRule: ComposeTestRule) {
 
         fun openTabDrawerFromRedesignedToolbar(interact: TabDrawerRobot.() -> Unit): TabDrawerRobot.Transition {
@@ -1004,6 +1122,26 @@ class HomeScreenRobot(private val composeTestRule: ComposeTestRule) {
             SettingsSignInToSyncRobot().interact()
             return SettingsSignInToSyncRobot.Transition(composeTestRule)
         }
+
+        @OptIn(ExperimentalTestApi::class)
+        fun clickAddShortcutButton(interact: HomeScreenRobot.() -> Unit): Transition {
+            Log.i(TAG, "clickAddShortcutButton: Trying to click the \"Add shortcut\" shortcut button")
+            composeTestRule.onNodeWithTag(TopSitesTestTag.ADD_SHORTCUT_TITLE, useUnmergedTree = true).performClick()
+            Log.i(TAG, "clickAddShortcutButton: Clicked the \"Add shortcut\" shortcut button")
+
+            HomeScreenRobot(composeTestRule).interact()
+            return Transition(composeTestRule)
+        }
+
+        @OptIn(ExperimentalTestApi::class)
+        fun clickAddWebsiteButton(interact: HomeScreenRobot.() -> Unit): Transition {
+            Log.i(TAG, "clickAddWebsiteButton: Trying to click the \"Add website\" button")
+            composeTestRule.onNodeWithTag(TopSitesTestTag.ADD_WEBSITE, useUnmergedTree = true).performClick()
+            Log.i(TAG, "clickAddWebsiteButton: Clicked the \"Add website\" button")
+
+            HomeScreenRobot(composeTestRule).interact()
+            return Transition(composeTestRule)
+        }
     }
 }
 
@@ -1088,3 +1226,23 @@ private fun ComposeTestRule.contextMenuItemOpenInPrivateTab() = onAllNodesWithTa
 private fun ComposeTestRule.contextMenuItemEdit() = onAllNodesWithTag(TopSitesTestTag.EDIT).onFirst()
 
 private fun ComposeTestRule.contextMenuItemRemove() = onAllNodesWithTag(TopSitesTestTag.REMOVE).onFirst()
+
+private fun ComposeTestRule.addWebsiteDialogCancelButton() = onNode(
+    hasText("Cancel").and(
+        hasAnyAncestor(
+            isDialog().and(
+                hasAnyDescendant(hasText(getStringResource(R.string.homepage_shortcuts_add_website_title))),
+            ),
+        ),
+    ),
+)
+
+private fun ComposeTestRule.addWebsiteDialogSaveButton() = onNode(
+    hasText("Save").and(
+        hasAnyAncestor(
+            isDialog().and(
+                hasAnyDescendant(hasText(getStringResource(R.string.homepage_shortcuts_add_website_title))),
+            ),
+        ),
+    ),
+)

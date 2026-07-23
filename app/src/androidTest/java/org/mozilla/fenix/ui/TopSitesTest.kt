@@ -23,6 +23,7 @@ import org.mozilla.fenix.helpers.TestAssetHelper.getGenericAsset
 import org.mozilla.fenix.helpers.TestHelper.mDevice
 import org.mozilla.fenix.helpers.TestHelper.verifySnackBarText
 import org.mozilla.fenix.helpers.TestHelper.waitForAppWindowToBeUpdated
+import org.mozilla.fenix.helpers.TestHelper.waitUntilSnackbarGone
 import org.mozilla.fenix.helpers.perf.DetectMemoryLeaksRule
 import org.mozilla.fenix.ui.robots.browserScreen
 import org.mozilla.fenix.ui.robots.homeScreen
@@ -275,6 +276,51 @@ class TopSitesTest {
         }.openThreeDotMenu {
         }.clickHistoryButton {
             verifyEmptyHistoryView()
+        }
+    }
+
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/4227423
+    @Test
+    fun addAShortcutFromHomepageTest() {
+        val websiteData = object {
+            val title = "Mozilla"
+            val goodUrl = "https://www.mozilla.org/en-US/"
+            val badUrl = "incorrectURL"
+            val popularSite = "Facebook"
+        }
+
+        homeScreen(composeTestRule) {
+        }.clickAddShortcutButton {
+            verifyAddToHomepageBottomSheet()
+            clickOnPopularWebsite(websiteData.popularSite)
+            verifySnackBarText(getStringResource(R.string.snackbar_added_to_shortcuts))
+            waitUntilSnackbarGone()
+            verifyExistingTopSitesList()
+            verifyExistingTopSitesTabs(websiteData.popularSite)
+        }
+
+        homeScreen(composeTestRule) {
+        }.clickAddShortcutButton {
+        }.clickAddWebsiteButton {
+            verifyEnterAWebsiteUrlDialog()
+            enterWebsiteUrl(websiteData.goodUrl)
+            enterShortcutName(websiteData.title)
+            clickCancelInAddWebsiteDialog()
+        }
+
+        homeScreen(composeTestRule) {
+        }.clickAddShortcutButton {
+        }.clickAddWebsiteButton {
+            verifyEnterAWebsiteUrlDialog()
+            enterWebsiteUrl(websiteData.badUrl)
+            enterShortcutName(websiteData.title)
+            clickSaveInAddWebsiteDialog()
+            verifyInvalidUrlError()
+            enterWebsiteUrl(websiteData.goodUrl)
+            enterShortcutName(websiteData.title)
+            clickSaveInAddWebsiteDialog()
+            verifyExistingTopSitesList()
+            verifyExistingTopSitesTabs(websiteData.title)
         }
     }
 }
