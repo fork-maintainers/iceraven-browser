@@ -127,7 +127,7 @@ class IPProtectionBottomSheetFragment : BottomSheetDialogFragment() {
                             SupportUtils.getSumoURLForTopic(
                                 requireActivity(),
                                 SupportUtils.SumoTopic.VPN,
-                                useMobilePage = false,
+                                useMobilePage = true,
                             ),
                         )
                     },
