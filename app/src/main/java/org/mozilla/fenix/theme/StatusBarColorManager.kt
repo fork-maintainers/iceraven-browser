@@ -23,6 +23,7 @@ import org.mozilla.fenix.components.AppStore
 import org.mozilla.fenix.customtabs.ExternalAppBrowserFragment
 import org.mozilla.fenix.home.HomeFragment
 import org.mozilla.fenix.home.HomepageEdgeToEdgeFeature
+import org.mozilla.fenix.tabstray.ui.TabManagementFragment
 import org.mozilla.fenix.utils.Settings
 import org.mozilla.fenix.wallpapers.Wallpaper
 
@@ -49,10 +50,13 @@ class StatusBarColorManager(
     private var wallpaperScope: CoroutineScope? = null
 
     override fun onFragmentResumed(fragmentManager: FragmentManager, fragment: Fragment) {
-        if (fragment is NavHostFragment ||
-            fragment is DialogFragment ||
-            fragment is ExternalAppBrowserFragment
-        ) {
+        if (fragment is NavHostFragment || fragment is DialogFragment) {
+            return
+        }
+
+        // These fragments theme their own system bars independently of the browsing mode,
+        // so the browsing-mode status bar theming must not run for them.
+        if (fragment is ExternalAppBrowserFragment || fragment is TabManagementFragment) {
             return
         }
 
