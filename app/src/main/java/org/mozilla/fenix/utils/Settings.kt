@@ -2728,6 +2728,12 @@ class Settings(
     )
 
     /**
+     * Indicates if the IPProtection onboarding bottom sheet feature variable is enabled via Nimbus.
+     */
+    val shouldShowIPProtectionOnboardingBottomSheet: Boolean
+        get() = FxNimbus.features.ipProtection.value().showOnboardingBottomSheet
+
+    /**
      * Indicates if the IPProtection feature is available for the user.
      *
      * The flag is backed by a Nimbus `ip-protection` feature, with an option to override it through secret settings.

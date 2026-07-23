@@ -1127,7 +1127,7 @@ features:
       show-onboarding-bottom-sheet:
         description: If true, the IP Protection onboarding bottom sheet is shown to the user.
         type: Boolean
-        default: false
+        default: true
       data-limit-gigabyte:
         description: Specifies the VPN data limit for unpaid users in GB (e.g. 50 GB).
         type: Int
