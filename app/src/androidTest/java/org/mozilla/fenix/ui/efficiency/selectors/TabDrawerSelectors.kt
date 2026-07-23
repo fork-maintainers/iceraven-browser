@@ -177,6 +177,21 @@ object TabDrawerSelectors {
         groups = listOf("createTabGroupView"),
     )
 
+    val ADD_TO_NEW_TAB_GROUP_BUTTON = Selector(
+        strategy = SelectorStrategy.COMPOSE_BY_TAG,
+        value = TabsTrayTestTag.ADD_TO_NEW_TAB_GROUP,
+        description = "Add to new tab group button",
+        groups = listOf("addToTabGroupView"),
+    )
+
+    @Suppress("ktlint:standard:function-naming")
+    fun ADD_TO_EXISTING_TAB_GROUP_BUTTON(title: String = "") = Selector(
+        strategy = SelectorStrategy.COMPOSE_BY_TEXT,
+        value = title,
+        description = "Add to existing tab group button",
+        groups = listOf("addToTabGroupView"),
+    )
+
     @Suppress("ktlint:standard:function-naming")
     fun TAB_GROUP_ITEM(
         tabGroupTitle: String = "",
@@ -330,5 +345,7 @@ object TabDrawerSelectors {
         TAB_ITEM_CLOSE,
         TAB_ITEM_THUMBNAIL,
         TAB_ITEM_WITH_TITLE(),
+        ADD_TO_NEW_TAB_GROUP_BUTTON,
+        ADD_TO_EXISTING_TAB_GROUP_BUTTON(),
     )
 }
