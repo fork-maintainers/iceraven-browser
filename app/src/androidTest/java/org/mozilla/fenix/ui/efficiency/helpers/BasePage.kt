@@ -73,6 +73,11 @@ import org.mozilla.fenix.helpers.HomeActivityIntentTestRule
 import org.mozilla.fenix.helpers.TestAssetHelper
 import org.mozilla.fenix.helpers.TestHelper.mDevice
 import org.mozilla.fenix.helpers.TestHelper.packageName
+import org.mozilla.fenix.ui.efficiency.core.ComposeUiElement
+import org.mozilla.fenix.ui.efficiency.core.EspressoUiElement
+import org.mozilla.fenix.ui.efficiency.core.UiElement
+import org.mozilla.fenix.ui.efficiency.core.UiObject2UiElement
+import org.mozilla.fenix.ui.efficiency.core.UiObjectUiElement
 import org.mozilla.fenix.ui.efficiency.navigation.NavigationRegistry
 import org.mozilla.fenix.ui.efficiency.navigation.NavigationStep
 import androidx.compose.ui.test.longClick as composeLongClick
@@ -304,6 +309,7 @@ abstract class BasePage(
             SystemClock.sleep(interval)
         }
         rep?.endCmd(success = false, message = "'${selector.description}' not found after ${timeout}ms")
+        ScreenDump.dump(composeRule, "mozVerify failed: ${selector.description}")
         throw AssertionError("'${selector.description}' not found on screen after ${timeout}ms")
     }
 
@@ -369,38 +375,84 @@ abstract class BasePage(
         rep?.startCmd(safeId("click", selector.description), "Attempting to click '${selector.description}'...", 1)
         rep?.startLoc(safeId("loc", selector.description), "Attempting to locate '${selector.description}'...", 2)
 
-        val element = mozGetElement(selector)
+        composeRule.waitForIdle()
+        val element = resolve(selector)
         if (element == null) {
             rep?.endLoc(success = false, message = notFound(selector.description))
             rep?.endCmd(success = false, message = "Click '${selector.description}' failed: element not found")
+            ScreenDump.dump(composeRule, "mozClick target not found: ${selector.description}")
             throw AssertionError("Element not found for selector: ${selector.description} (${selector.strategy} -> ${selector.value})")
-        } else {
-            rep?.endLoc(success = true, message = found(selector.description))
         }
+        rep?.endLoc(success = true, message = found(selector.description))
 
         try {
-            when (element) {
-                is ViewInteraction -> element.perform(click())
-                is UiObject -> {
-                    if (!element.exists()) throw AssertionError("UiObject does not exist for selector: ${selector.description}")
-                    if (!element.click()) throw AssertionError("Failed to click UiObject for selector: ${selector.description}")
-                }
-                is UiObject2 -> element.click()
-                is SemanticsNodeInteraction -> {
-                    composeRule.waitForIdle()
-                    element.assertExists()
-                    element.assertIsDisplayed()
-                    element.performClick()
-                }
-                else -> throw AssertionError("Unsupported element type (${element::class.simpleName}) for selector: ${selector.description}")
-            }
-
+            element.click()
             rep?.endCmd(success = true, message = "Clicked '${selector.description}'")
             return this
         } catch (e: Throwable) {
             rep?.endCmd(success = false, message = "Click '${selector.description}' failed: ${e.message ?: "exception"}")
+            ScreenDump.dump(composeRule, "mozClick failed: ${selector.description}")
             throw e
         }
+    }
+
+    // --- Resolution facade (pilot: used by mozClick; other verbs migrate onto this over time) -------
+    //
+    // resolve() is the single seam between "locate" and "interact": it fetches the candidate node(s)
+    // for a selector and applies ONE consistent selection policy — prefer the *displayed* match, else
+    // the first — then returns a backend-agnostic UiElement. Verbs just call element.click()/etc. and
+    // never switch on the underlying Compose/Espresso/UiAutomator node type. This replaces the
+    // one-off, text-only mozClickDisplayed with a general rule that works for tag and text selectors
+    // (and is easy to extend to more strategies).
+    private fun resolve(selector: Selector, applyPreconditions: Boolean = true): UiElement? {
+        if (selector.value.isBlank()) return null
+        if (applyPreconditions && requiresScroll(selector.groups)) {
+            ensureReachable(selector)
+        }
+        // Compose: fetch ALL matches and prefer the displayed one. Handles pagers/lists where a shared
+        // tag or label matches several composed nodes (only the on-screen page is displayed).
+        val composeCollection: SemanticsNodeInteractionCollection? = when (selector.strategy) {
+            SelectorStrategy.COMPOSE_BY_TAG -> composeRule.onAllNodesWithTag(selector.value)
+            SelectorStrategy.COMPOSE_BY_TEXT,
+            SelectorStrategy.COMPOSE_BY_TEXT_MERGED,
+            -> composeRule.onAllNodesWithText(selector.value)
+            else -> null
+        }
+        if (composeCollection != null) {
+            return pickDisplayed(composeCollection)?.let { ComposeUiElement(it) }
+        }
+        // Everything else (Espresso / UiAutomator, plus exotic compose strategies): reuse the existing
+        // single-node fetch (preconditions already applied above) and wrap it in the facade.
+        return toUiElement(mozGetElement(selector, applyPreconditions = false))
+    }
+
+    /** Return the first *displayed* node in the collection, else the first node, else null. */
+    private fun pickDisplayed(collection: SemanticsNodeInteractionCollection): SemanticsNodeInteraction? {
+        val count = try {
+            collection.fetchSemanticsNodes().size
+        } catch (_: Throwable) {
+            0
+        }
+        if (count == 0) return null
+        for (i in 0 until count) {
+            val node = collection[i]
+            try {
+                node.assertIsDisplayed()
+                return node
+            } catch (_: AssertionError) {
+                // not the on-screen match; keep looking
+            }
+        }
+        return collection[0]
+    }
+
+    /** Wrap a raw located node (from mozGetElement) into the backend-agnostic UiElement facade. */
+    private fun toUiElement(any: Any?): UiElement? = when (any) {
+        is SemanticsNodeInteraction -> ComposeUiElement(any)
+        is ViewInteraction -> EspressoUiElement(any)
+        is UiObject -> UiObjectUiElement(any)
+        is UiObject2 -> UiObject2UiElement(any)
+        else -> null
     }
 
     fun mozLongClick(selector: Selector): BasePage {
