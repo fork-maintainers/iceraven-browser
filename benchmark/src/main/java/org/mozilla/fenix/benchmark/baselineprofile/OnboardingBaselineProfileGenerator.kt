@@ -14,7 +14,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mozilla.fenix.benchmark.utils.TARGET_PACKAGE
 import org.mozilla.fenix.benchmark.utils.clearPackageData
-import org.mozilla.fenix.benchmark.utils.completeOnboarding
+import org.mozilla.fenix.benchmark.utils.onboardingJourney
 import org.mozilla.fenix.benchmark.utils.revokeNotificationPermission
 
 /**
@@ -56,8 +56,7 @@ class OnboardingBaselineProfileGenerator {
         ) {
             device.clearPackageData(packageName = packageName)
             device.revokeNotificationPermission(packageName = packageName)
-            startActivityAndWait()
-            device.completeOnboarding()
+            onboardingJourney()
         }
     }
 }

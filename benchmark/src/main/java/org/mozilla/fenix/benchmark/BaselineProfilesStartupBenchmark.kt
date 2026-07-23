@@ -15,6 +15,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mozilla.fenix.benchmark.utils.measureRepeatedDefault
+import org.mozilla.fenix.benchmark.utils.startupOnlyJourney
 
 /**
  * This test class benchmarks the speed of app startup. Run this benchmark to verify how effective
@@ -62,7 +63,7 @@ class BaselineProfilesStartupBenchmark {
                 pressHome()
             },
         ) {
-            startActivityAndWait()
+            startupOnlyJourney()
 
             SystemClock.sleep(1000)
             killProcess()

@@ -4,7 +4,6 @@
 
 package org.mozilla.fenix.benchmark
 
-import android.content.Intent
 import androidx.benchmark.macro.BaselineProfileMode
 import androidx.benchmark.macro.CompilationMode
 import androidx.benchmark.macro.StartupMode
@@ -12,18 +11,11 @@ import androidx.benchmark.macro.StartupTimingMetric
 import androidx.benchmark.macro.junit4.MacrobenchmarkRule
 import org.junit.Rule
 import org.junit.Test
-import org.mozilla.fenix.benchmark.utils.FENIX_HOME_DEEP_LINK
 import org.mozilla.fenix.benchmark.utils.HtmlAsset
 import org.mozilla.fenix.benchmark.utils.MockWebServerRule
 import org.mozilla.fenix.benchmark.utils.TARGET_PACKAGE
-import org.mozilla.fenix.benchmark.utils.closeTab
-import org.mozilla.fenix.benchmark.utils.completeOnboarding
-import org.mozilla.fenix.benchmark.utils.dismissWallpaperOnboarding
-import org.mozilla.fenix.benchmark.utils.isWallpaperOnboardingShown
-import org.mozilla.fenix.benchmark.utils.loadSite
 import org.mozilla.fenix.benchmark.utils.measureRepeatedDefault
-import org.mozilla.fenix.benchmark.utils.openNewPrivateTabOnTabsTray
-import org.mozilla.fenix.benchmark.utils.openTabsTray
+import org.mozilla.fenix.benchmark.utils.privateBrowsingJourney
 import org.mozilla.fenix.benchmark.utils.url
 
 /**
@@ -78,23 +70,7 @@ class BaselineProfilesPrivateBrowsingBenchmark {
                 pressHome()
             },
         ) {
-            val intent = Intent(Intent.ACTION_VIEW, FENIX_HOME_DEEP_LINK)
-
-            startActivityAndWait(intent = intent)
-            device.completeOnboarding()
-
-            if (device.isWallpaperOnboardingShown()) {
-                device.dismissWallpaperOnboarding()
-            }
-
-            device.openTabsTray()
-            device.openNewPrivateTabOnTabsTray()
-            val url = mockRule.url(HtmlAsset.SIMPLE)
-            device.loadSite(url = url)
-
-            device.openTabsTray()
-            device.closeTab(siteName = HtmlAsset.SIMPLE.title, siteUrl = url)
-
+            privateBrowsingJourney(url = mockRule.url(HtmlAsset.SIMPLE))
             killProcess()
         }
 }

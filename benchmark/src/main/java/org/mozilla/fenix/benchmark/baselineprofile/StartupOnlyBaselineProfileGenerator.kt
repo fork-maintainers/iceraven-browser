@@ -12,6 +12,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mozilla.fenix.benchmark.utils.TARGET_PACKAGE
+import org.mozilla.fenix.benchmark.utils.startupOnlyJourney
 
 /**
  * This test class generates a basic startup baseline profile for the target package.
@@ -48,7 +49,7 @@ class StartupOnlyBaselineProfileGenerator {
         rule.collect(
             packageName = TARGET_PACKAGE,
         ) {
-            startActivityAndWait()
+            startupOnlyJourney()
         }
     }
 }

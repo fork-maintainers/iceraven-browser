@@ -123,6 +123,7 @@ class TabsTrayBenchmark {
 
         device.openTabsTray()
         device.openNewTabOnTabsTray()
+        device.enterSearchMode()
         device.loadSite(url = mockRule.url(HtmlAsset.LONG))
     }
 }

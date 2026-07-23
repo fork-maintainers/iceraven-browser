@@ -4,7 +4,6 @@
 
 package org.mozilla.fenix.benchmark
 
-import android.content.Intent
 import androidx.benchmark.macro.BaselineProfileMode
 import androidx.benchmark.macro.CompilationMode
 import androidx.benchmark.macro.StartupMode
@@ -14,12 +13,8 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mozilla.fenix.benchmark.utils.FENIX_HOME_DEEP_LINK
 import org.mozilla.fenix.benchmark.utils.TARGET_PACKAGE
-import org.mozilla.fenix.benchmark.utils.completeOnboarding
-import org.mozilla.fenix.benchmark.utils.dismissWallpaperOnboarding
-import org.mozilla.fenix.benchmark.utils.flingToEnd
-import org.mozilla.fenix.benchmark.utils.isWallpaperOnboardingShown
+import org.mozilla.fenix.benchmark.utils.homepageScrollJourney
 import org.mozilla.fenix.benchmark.utils.measureRepeatedDefault
 
 /**
@@ -70,20 +65,7 @@ class BaselineProfilesHomepageScrollBenchmark {
                 pressHome()
             },
         ) {
-            val intent = Intent(Intent.ACTION_VIEW, FENIX_HOME_DEEP_LINK)
-
-            startActivityAndWait(intent = intent)
-            device.completeOnboarding()
-
-            if (device.isWallpaperOnboardingShown()) {
-                device.dismissWallpaperOnboarding()
-            }
-
-            device.flingToEnd(
-                scrollableId = "$packageName:id/rootContainer",
-                maxSwipes = Int.MAX_VALUE,
-            )
-
+            homepageScrollJourney()
             killProcess()
         }
 }

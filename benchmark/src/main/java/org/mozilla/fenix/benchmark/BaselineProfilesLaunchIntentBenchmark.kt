@@ -4,8 +4,6 @@
 
 package org.mozilla.fenix.benchmark
 
-import android.content.Intent
-import android.net.Uri
 import androidx.benchmark.macro.BaselineProfileMode
 import androidx.benchmark.macro.CompilationMode
 import androidx.benchmark.macro.StartupMode
@@ -17,7 +15,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mozilla.fenix.benchmark.utils.HtmlAsset
 import org.mozilla.fenix.benchmark.utils.MockWebServerRule
-import org.mozilla.fenix.benchmark.utils.TARGET_PACKAGE
+import org.mozilla.fenix.benchmark.utils.launchIntentJourney
 import org.mozilla.fenix.benchmark.utils.measureRepeatedDefault
 import org.mozilla.fenix.benchmark.utils.uri
 
@@ -73,11 +71,7 @@ class BaselineProfilesLaunchIntentBenchmark {
                 killProcess()
             },
         ) {
-            val intent = Intent(Intent.ACTION_VIEW)
-            intent.data = mockRule.uri(HtmlAsset.SIMPLE)
-            intent.setPackage(TARGET_PACKAGE)
-
-            startActivityAndWait(intent = intent)
+            launchIntentJourney(intentData = mockRule.uri(HtmlAsset.SIMPLE))
             killProcess()
         }
 }
