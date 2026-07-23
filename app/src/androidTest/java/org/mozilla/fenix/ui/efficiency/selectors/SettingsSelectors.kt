@@ -84,7 +84,7 @@ object SettingsSelectors {
     )
 
     val PASSWORDS_BUTTON = Selector(
-        strategy = SelectorStrategy.ESPRESSO_BY_TEXT,
+        strategy = SelectorStrategy.UIAUTOMATOR_WITH_TEXT,
         value = "Passwords",
         description = "the Passwords button",
         groups = listOf("generalSettingsSection"),
