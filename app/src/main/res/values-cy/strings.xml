@@ -2005,6 +2005,8 @@
   <string name="webcompat_reporter_description_error">Rhowch o leiaf 10 nod</string>
   <!-- The label/title of a mandatory field in the Web Compat Reporter feature for adding additional information. -->
   <string name="webcompat_reporter_label_mandatory_description">Disgrifiwch y broblem yn fanwl i\'n helpu ni i ymchwilio i\'r mater</string>
+  <!-- The label/title of a optional field in the Web Compat Reporter feature for adding additional information. -->
+  <string name="webcompat_reporter_label_optional_description">Disgrifiwch y broblem yn fanwl i\'n helpu ni i ymchwilio i\'r mater (dewisol)</string>
   <!-- The label/title of a field in the Web Compat Reporter feature for explaining a high-level reason why the site is broken. -->
   <string name="webcompat_reporter_label_whats_broken_2">Beth sydd wedi torri?</string>
   <!-- The placeholder text for the dropdown where a user selects a high-level reason why the site is broken. -->
@@ -3177,7 +3179,7 @@
   <!-- Title for the browser VPN location picker screen. -->
   <string name="ip_protection_location_picker_title" tools:ignore="UnusedResources">Dewiswch leoliad VPN</string>
   <!-- Description for what it means to use the Recommended setting and let the app automatically pick the best server location. -->
-  <string name="ip_protection_location_fastest_description" tools:ignore="UnusedResources, BrandUsage">Bydd Firefox yn dod o hyd i\'r lleoliad cyflymaf</string>
+  <string name="ip_protection_location_fastest_description" tools:ignore="BrandUsage">Bydd Firefox yn dod o hyd i\'r lleoliad cyflymaf</string>
   <!-- Error message shown when the selected browser VPN location is unavailable. -->
   <string name="ip_protection_location_unavailable" tools:ignore="UnusedResources">Dyw\'r lleoliad ddim ar gael. Dewiswch leoliad arall.</string>
   <!-- Snackbar (in-app pop-up notification) text shown when the previously selected browser VPN location is unavailable and the recommended location was used instead. -->

@@ -1977,6 +1977,8 @@
   <string name="webcompat_reporter_description_error">Please enter at least 10 characters</string>
   <!-- The label/title of a mandatory field in the Web Compat Reporter feature for adding additional information. -->
   <string name="webcompat_reporter_label_mandatory_description">Describe the problem in detail to help us investigate the issue</string>
+  <!-- The label/title of a optional field in the Web Compat Reporter feature for adding additional information. -->
+  <string name="webcompat_reporter_label_optional_description">Describe the problem in detail to help us investigate the issue (optional)</string>
   <!-- The label/title of a field in the Web Compat Reporter feature for explaining a high-level reason why the site is broken. -->
   <string name="webcompat_reporter_label_whats_broken_2">What’s broken?</string>
   <!-- The placeholder text for the dropdown where a user selects a high-level reason why the site is broken. -->
@@ -3145,7 +3147,7 @@
   <!-- Title for the browser VPN location picker screen. -->
   <string name="ip_protection_location_picker_title" tools:ignore="UnusedResources">Choose VPN location</string>
   <!-- Description for what it means to use the Recommended setting and let the app automatically pick the best server location. -->
-  <string name="ip_protection_location_fastest_description" tools:ignore="UnusedResources, BrandUsage">Firefox finds the fastest location</string>
+  <string name="ip_protection_location_fastest_description" tools:ignore="BrandUsage">Firefox finds the fastest location</string>
   <!-- Error message shown when the selected browser VPN location is unavailable. -->
   <string name="ip_protection_location_unavailable" tools:ignore="UnusedResources">Location unavailable. Choose another location.</string>
   <!-- Snackbar (in-app pop-up notification) text shown when the previously selected browser VPN location is unavailable and the recommended location was used instead. -->

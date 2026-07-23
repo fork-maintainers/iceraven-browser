@@ -3137,7 +3137,7 @@
   <!-- Title for the browser VPN location picker screen. -->
   <string name="ip_protection_location_picker_title" tools:ignore="UnusedResources">Chọn địa điểm VPN</string>
   <!-- Description for what it means to use the Recommended setting and let the app automatically pick the best server location. -->
-  <string name="ip_protection_location_fastest_description" tools:ignore="UnusedResources, BrandUsage">Firefox sẽ tìm kiếm địa điểm nhanh nhất có thể</string>
+  <string name="ip_protection_location_fastest_description" tools:ignore="BrandUsage">Firefox sẽ tìm kiếm địa điểm nhanh nhất có thể</string>
   <!-- Error message shown when the selected browser VPN location is unavailable. -->
   <string name="ip_protection_location_unavailable" tools:ignore="UnusedResources">Địa điểm không khả dụng. Vui lòng chọn địa điểm khác.</string>
   <!-- Snackbar (in-app pop-up notification) text shown when the previously selected browser VPN location is unavailable and the recommended location was used instead. -->

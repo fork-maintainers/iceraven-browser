@@ -3153,7 +3153,7 @@
   <!-- Title for the browser VPN location picker screen. -->
   <string name="ip_protection_location_picker_title" tools:ignore="UnusedResources">בחירת מיקום VPN</string>
   <!-- Description for what it means to use the Recommended setting and let the app automatically pick the best server location. -->
-  <string name="ip_protection_location_fastest_description" tools:ignore="UnusedResources, BrandUsage">‏Firefox מוצא את המיקום המהיר ביותר</string>
+  <string name="ip_protection_location_fastest_description" tools:ignore="BrandUsage">‏Firefox מוצא את המיקום המהיר ביותר</string>
   <!-- Error message shown when the selected browser VPN location is unavailable. -->
   <string name="ip_protection_location_unavailable" tools:ignore="UnusedResources">המיקום אינו זמין. נא לבחור במיקום אחר.</string>
   <!-- Snackbar (in-app pop-up notification) text shown when the previously selected browser VPN location is unavailable and the recommended location was used instead. -->

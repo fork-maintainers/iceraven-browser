@@ -1614,7 +1614,7 @@
   <!-- Title for introducing tab groups via an onboarding card shown in the tab manager. -->
   <string name="tab_group_onboarding_item_title">탭 그룹 만들기</string>
   <!-- Description for tab groups onboarding shown in the tab manager when in grid view. -->
-  <string name="tab_group_onboarding_grid_item_description">그룹화하려면 탭을 다른 탭 위로 드래그하세요.</string>
+  <string name="tab_group_onboarding_grid_item_description">그룹화하려면 탭을 다른 탭 위로 끌어다 놓으세요.</string>
   <!-- Description for tab groups onboarding shown in the tab manager when in list view. -->
   <string name="tab_group_onboarding_list_item_description">여러 탭을 선택하여 그룹을 만드세요.</string>
   <!-- Content description (accessibility label) for button to dismiss the tab group onboarding item. -->
@@ -1970,6 +1970,8 @@
   <string name="webcompat_reporter_description_error">10자 이상 입력하세요</string>
   <!-- The label/title of a mandatory field in the Web Compat Reporter feature for adding additional information. -->
   <string name="webcompat_reporter_label_mandatory_description">조사에 도움이 되도록 문제를 자세히 설명해 주세요</string>
+  <!-- The label/title of a optional field in the Web Compat Reporter feature for adding additional information. -->
+  <string name="webcompat_reporter_label_optional_description">조사에 도움이 되도록 문제를 자세히 설명해 주세요 (선택 사항)</string>
   <!-- The label/title of a field in the Web Compat Reporter feature for explaining a high-level reason why the site is broken. -->
   <string name="webcompat_reporter_label_whats_broken_2">어떤 문제인가요?</string>
   <!-- The placeholder text for the dropdown where a user selects a high-level reason why the site is broken. -->
@@ -3137,7 +3139,7 @@
   <!-- Title for the browser VPN location picker screen. -->
   <string name="ip_protection_location_picker_title" tools:ignore="UnusedResources">VPN 위치 선택</string>
   <!-- Description for what it means to use the Recommended setting and let the app automatically pick the best server location. -->
-  <string name="ip_protection_location_fastest_description" tools:ignore="UnusedResources, BrandUsage">Firefox가 가장 빠른 위치를 찾습니다</string>
+  <string name="ip_protection_location_fastest_description" tools:ignore="BrandUsage">Firefox가 가장 빠른 위치를 찾습니다</string>
   <!-- Error message shown when the selected browser VPN location is unavailable. -->
   <string name="ip_protection_location_unavailable" tools:ignore="UnusedResources">위치를 사용할 수 없습니다. 다른 위치를 선택해 주세요.</string>
   <!-- Snackbar (in-app pop-up notification) text shown when the previously selected browser VPN location is unavailable and the recommended location was used instead. -->
@@ -4187,13 +4189,13 @@
 
     Localisation note: this text should be as short as possible, max 68 chars
   -->
-  <string name="exit_fullscreen_with_gesture_short">전체 화면에서 나가려면, 화면 상단를 아래로 내리고 뒤로가기 제스처를 사용하세요</string>
+  <string name="exit_fullscreen_with_gesture_short">상단을 아래로 밀고 뒤로 가기로 종료</string>
   <!--
     Message shown to explain how to exit fullscreen mode when using back button navigation.
 
     Localisation note: this text should be as short as possible, max 68 chars
   -->
-  <string name="exit_fullscreen_with_back_button_short">전체 화면에서 나가려면, 화면 상단를 아래로 내리고 뒤로가기를 누르세요</string>
+  <string name="exit_fullscreen_with_back_button_short">상단을 아래로 밀고 뒤로 가기로 종료</string>
   <!--
     Beta Label Component !
 

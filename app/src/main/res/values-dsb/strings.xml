@@ -1991,6 +1991,8 @@
   <string name="webcompat_reporter_description_error">Pšosym zapódajśo nanejmjenjej 10 znamuškow</string>
   <!-- The label/title of a mandatory field in the Web Compat Reporter feature for adding additional information. -->
   <string name="webcompat_reporter_label_mandatory_description">Wopišćo problem nadrobnje, aby nam pomagał, problem pśespytowaś</string>
+  <!-- The label/title of a optional field in the Web Compat Reporter feature for adding additional information. -->
+  <string name="webcompat_reporter_label_optional_description">Wopišćo problem nadrobnje, aby nam pomagał, problem pśespytowaś (na žycenje)</string>
   <!-- The label/title of a field in the Web Compat Reporter feature for explaining a high-level reason why the site is broken. -->
   <string name="webcompat_reporter_label_whats_broken_2">Co jo wobškóźone?</string>
   <!-- The placeholder text for the dropdown where a user selects a high-level reason why the site is broken. -->
@@ -3161,7 +3163,7 @@
   <!-- Title for the browser VPN location picker screen. -->
   <string name="ip_protection_location_picker_title" tools:ignore="UnusedResources">Stojnišćo VPN wubraś</string>
   <!-- Description for what it means to use the Recommended setting and let the app automatically pick the best server location. -->
-  <string name="ip_protection_location_fastest_description" tools:ignore="UnusedResources, BrandUsage">Firefox namakajo nejmalsnjejše stojnišćo</string>
+  <string name="ip_protection_location_fastest_description" tools:ignore="BrandUsage">Firefox namakajo nejmalsnjejše stojnišćo</string>
   <!-- Error message shown when the selected browser VPN location is unavailable. -->
   <string name="ip_protection_location_unavailable" tools:ignore="UnusedResources">Stojnišćo njejo k dispoziciji. Wubjeŕśo druge stojnišćo.</string>
   <!-- Snackbar (in-app pop-up notification) text shown when the previously selected browser VPN location is unavailable and the recommended location was used instead. -->
