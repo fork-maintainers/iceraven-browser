@@ -458,6 +458,11 @@ class MainMenuTest {
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3080118
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.MainMenuTest#verifyTheSaveAsPDFSubMenuOptionTest"],
+        bug = 2053797,
+        since = "2026-07",
+    )
     @SmokeTest
     @Test
     fun verifyTheSaveAsPDFSubMenuOptionTest() {

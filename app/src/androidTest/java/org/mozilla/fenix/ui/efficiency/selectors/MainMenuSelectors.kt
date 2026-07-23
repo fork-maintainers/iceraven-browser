@@ -214,6 +214,13 @@ object MainMenuSelectors {
         groups = listOf("moreMenuItems"),
     )
 
+    val SAVE_AS_PDF_BUTTON = Selector(
+        strategy = SelectorStrategy.COMPOSE_BY_CONTENT_DESCRIPTION,
+        value = getStringResource(R.string.browser_menu_save_as_pdf_2),
+        description = "Main menu save as PDF button",
+        groups = listOf("moreMenuItems"),
+    )
+
     val REMOVE_FROM_SHORTCUTS_BUTTON = Selector(
         strategy = SelectorStrategy.COMPOSE_BY_CONTENT_DESCRIPTION,
         value = getStringResource(R.string.browser_menu_remove_from_shortcuts),
@@ -257,6 +264,7 @@ object MainMenuSelectors {
         ADD_TO_SHORTCUTS_BUTTON,
         TRANSLATE_BUTTON,
         TRANSLATED_BUTTON,
+        SAVE_AS_PDF_BUTTON,
         REMOVE_FROM_SHORTCUTS_BUTTON,
         ADD_TO_HOMESCREEN_BUTTON,
     )

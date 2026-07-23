@@ -68,6 +68,7 @@ import androidx.test.uiautomator.UiSelector
 import org.hamcrest.CoreMatchers.allOf
 import org.hamcrest.CoreMatchers.not
 import org.hamcrest.Matchers.containsString
+import org.mozilla.fenix.helpers.AppAndSystemHelper
 import org.mozilla.fenix.helpers.HomeActivityIntentTestRule
 import org.mozilla.fenix.helpers.TestAssetHelper
 import org.mozilla.fenix.helpers.TestHelper.mDevice
@@ -1292,6 +1293,22 @@ abstract class BasePage(
     fun mozClearAndEnterText(text: String, selector: Selector): BasePage {
         mozClear(selector)
         return mozEnterText(text, selector)
+    }
+
+    fun mozVerifyFileOpensInExternalApp(appPackageName: String): BasePage {
+        val rep = rep()
+        rep?.startCmd(
+            safeId("verify_file_opens_in_external_app", appPackageName),
+            "Verifying external app '$appPackageName' opens...",
+        )
+        try {
+            AppAndSystemHelper.assertExternalAppOpens(appPackageName)
+            rep?.endCmd(success = true, message = "Asserted external app '$appPackageName' open flow")
+        } catch (e: Throwable) {
+            rep?.endCmd(success = false, message = "External app assertion failed for '$appPackageName': ${e.message}")
+            throw e
+        }
+        return this
     }
 
     private fun ensureReachable(selector: Selector) {
