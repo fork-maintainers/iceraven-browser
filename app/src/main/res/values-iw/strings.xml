@@ -1984,6 +1984,8 @@
   <string name="webcompat_reporter_description_error">נא להכניס לפחות 10 תווים</string>
   <!-- The label/title of a mandatory field in the Web Compat Reporter feature for adding additional information. -->
   <string name="webcompat_reporter_label_mandatory_description">נא לתאר את הבעיה בפירוט כדי שנוכל לחקור אותה</string>
+  <!-- The label/title of a optional field in the Web Compat Reporter feature for adding additional information. -->
+  <string name="webcompat_reporter_label_optional_description">נא לתאר את הבעיה בפירוט כדי שנוכל לחקור אותה (אופציונלי)</string>
   <!-- The label/title of a field in the Web Compat Reporter feature for explaining a high-level reason why the site is broken. -->
   <string name="webcompat_reporter_label_whats_broken_2">מה שבור או לא עובד?</string>
   <!-- The placeholder text for the dropdown where a user selects a high-level reason why the site is broken. -->

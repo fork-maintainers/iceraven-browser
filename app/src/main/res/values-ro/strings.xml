@@ -1984,6 +1984,8 @@
   <string name="webcompat_reporter_description_error">Te rugăm să introduci cel puțin 10 caractere</string>
   <!-- The label/title of a mandatory field in the Web Compat Reporter feature for adding additional information. -->
   <string name="webcompat_reporter_label_mandatory_description">Descrie problema detaliat pentru a ne ajuta să o investigăm</string>
+  <!-- The label/title of a optional field in the Web Compat Reporter feature for adding additional information. -->
+  <string name="webcompat_reporter_label_optional_description">Descrie problema în detaliu pentru a ne ajuta să o investigăm (opțional)</string>
   <!-- The label/title of a field in the Web Compat Reporter feature for explaining a high-level reason why the site is broken. -->
   <string name="webcompat_reporter_label_whats_broken_2">Ce nu merge?</string>
   <!-- The placeholder text for the dropdown where a user selects a high-level reason why the site is broken. -->

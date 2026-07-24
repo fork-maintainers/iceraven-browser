@@ -1996,6 +1996,8 @@
   <string name="webcompat_reporter_description_error">يُرجى إدخال 10 أحرف على الأقل</string>
   <!-- The label/title of a mandatory field in the Web Compat Reporter feature for adding additional information. -->
   <string name="webcompat_reporter_label_mandatory_description">صف المشكلة بالتفصيل لمساعدتنا في التحقيق فيها</string>
+  <!-- The label/title of a optional field in the Web Compat Reporter feature for adding additional information. -->
+  <string name="webcompat_reporter_label_optional_description">صف المشكلة بالتفصيل لمساعدتنا في التحقيق في الأمر (اختياري)</string>
   <!-- The label/title of a field in the Web Compat Reporter feature for explaining a high-level reason why the site is broken. -->
   <string name="webcompat_reporter_label_whats_broken_2">ما الخلل؟</string>
   <!-- The placeholder text for the dropdown where a user selects a high-level reason why the site is broken. -->

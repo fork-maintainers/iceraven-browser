@@ -1978,7 +1978,7 @@
   <!-- The label/title of a mandatory field in the Web Compat Reporter feature for adding additional information. -->
   <string name="webcompat_reporter_label_mandatory_description">Beschreiben Sie das Problem im Detail, damit wir es untersuchen können.</string>
   <!-- The label/title of a optional field in the Web Compat Reporter feature for adding additional information. -->
-  <string name="webcompat_reporter_label_optional_description">Beschreiben Sie das Problem im Detail, damit wir es untersuchen können. (freiwillig)</string>
+  <string name="webcompat_reporter_label_optional_description">Beschreiben Sie das Problem ausführlich, damit wir es untersuchen können (optional)</string>
   <!-- The label/title of a field in the Web Compat Reporter feature for explaining a high-level reason why the site is broken. -->
   <string name="webcompat_reporter_label_whats_broken_2">Was funktioniert nicht?</string>
   <!-- The placeholder text for the dropdown where a user selects a high-level reason why the site is broken. -->
