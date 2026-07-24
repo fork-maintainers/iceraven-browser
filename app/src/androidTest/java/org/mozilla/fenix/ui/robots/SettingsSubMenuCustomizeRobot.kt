@@ -132,9 +132,11 @@ class SettingsSubMenuCustomizeRobot {
     }
 
     fun verifyPullToRefreshGesturePrefState(isEnabled: Boolean) {
-        Log.i(TAG, "verifyPullToRefreshGesturePrefState: Trying to verify that the \"Pull to refresh\" toggle is checked: $isEnabled")
+        Log.i(TAG, "verifyPullToRefreshGesturePrefState: Trying to scroll to the end of the Customize setting sub menu")
+        UiScrollable(UiSelector().resourceId("$packageName:id/recycler_view")).scrollToEnd(LISTS_MAXSWIPES)
+        Log.i(TAG, "verifyPullToRefreshGesturePrefState: Scrolled to the end of the Customize setting sub menu")
 
-        scrollToElementByText("Pull to refresh")
+        Log.i(TAG, "verifyPullToRefreshGesturePrefState: Trying to verify that the \"Pull to refresh\" toggle is checked: $isEnabled")
         pullToRefreshToggle()
             .check(
                 matches(
