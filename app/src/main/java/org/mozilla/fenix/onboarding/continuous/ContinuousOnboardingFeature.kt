@@ -14,6 +14,9 @@ import androidx.annotation.RequiresApi
 import androidx.annotation.VisibleForTesting
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.fragment.app.Fragment
+import mozilla.components.support.base.feature.LifecycleAwareFeature
+import mozilla.components.support.base.feature.ViewBoundFeatureWrapper
 import mozilla.components.support.base.log.logger.Logger
 import mozilla.components.support.utils.DateTimeProvider
 import mozilla.components.support.utils.DefaultDateTimeProvider
@@ -36,63 +39,32 @@ import org.mozilla.fenix.utils.Settings
  * - show a notification-permission onboarding card once the default-browser step is satisfied, or
  * - show a Firefox Sync sign-in card on day 7.
  */
-interface ContinuousOnboardingFeature {
-    /**
-     * Evaluates whether continuous onboarding should run and triggers the appropriate onboarding
-     * action for the current stage.
-     *
-     * @param activity The [Activity] used for launching UI and system interactions.
-     * @param launcher The [ActivityResultLauncher] used to request system roles.
-     */
-    fun maybeRunContinuousOnboarding(activity: Activity, launcher: ActivityResultLauncher<Intent>)
-
-    /**
-     * Continues the onboarding flow after the default-browser role request has returned.
-     *
-     * Invoked with the result of the system role request. Depending on the result code and device
-     * capabilities, this may show the notification-permission onboarding card or mark the stage
-     * as completed.
-     *
-     * @param activity The [Activity] used for launching UI and system interactions.
-     * @param resultCode The result code returned by the system role request.
-     */
-    fun onDefaultBrowserStepCompleted(activity: Activity, resultCode: Int)
-}
-
-/**
- * Default implementation of [ContinuousOnboardingFeature].
- */
-class ContinuousOnboardingFeatureDefault(
+class ContinuousOnboardingFeature(
+    private val activity: Activity,
+    private val launcher: ActivityResultLauncher<Intent>,
     private val settings: Settings,
     private val telemetryRecorder: OnboardingTelemetryRecorder,
     private val stageProvider: ContinuousOnboardingStageProvider,
     private val navigateToSyncSignIn: () -> Unit,
     private val dateTimeProvider: DateTimeProvider = DefaultDateTimeProvider(),
-) : ContinuousOnboardingFeature {
+) : LifecycleAwareFeature {
     private val logger = Logger("ContinuousOnboardingFeatureDefault")
 
     @VisibleForTesting
     internal var pendingStage: ContinuousOnboardingStage = ContinuousOnboardingStage.NONE
 
-    override fun maybeRunContinuousOnboarding(
-        activity: Activity,
-        launcher: ActivityResultLauncher<Intent>,
-    ) {
+    override fun start() {
         if (!shouldShowContinuousOnboarding()) return
 
-        if (isContinuousOnboardingInProgress(activity)) return
+        if (isContinuousOnboardingInProgress()) return
 
         when (val stage = stageProvider.getContinuousOnboardingStage()) {
             ContinuousOnboardingStage.DAY_2,
             ContinuousOnboardingStage.DAY_3,
-                -> maybeRequestDefaultBrowserRole(
-                activity = activity,
-                launcher = launcher,
-                stage = stage,
-            )
+                -> maybeRequestDefaultBrowserRole(stage)
 
             ContinuousOnboardingStage.DAY_7 -> if (!settings.signedInFxaAccount) {
-                showSyncCardDialog(activity)
+                showSyncCardDialog()
             } else {
                 telemetryRecorder.onOnboardingComplete(
                     sequenceId = OnboardingPageUiData.Type.SYNC_SIGN_IN.telemetryId,
@@ -107,24 +79,26 @@ class ContinuousOnboardingFeatureDefault(
         }
     }
 
+    override fun stop() = Unit
+
     /**
      * Returns whether the continuous onboarding flow is already active.
      *
      * `pendingStage` tracks the period while the Android system role-request Activity
      * is in progress, and `isContinuousOnboardingDialogShowing()` tracks the
      * follow-up onboarding dialog shown afterward. Together they prevent the
-     * DAY_2/DAY_3 onboarding flow from being started again if `onResume()` is
+     * DAY_2/DAY_3 onboarding flow from being started again if `start()` is
      * invoked multiple times.
      */
-    private fun isContinuousOnboardingInProgress(activity: Activity): Boolean {
-        if (pendingStage != ContinuousOnboardingStage.NONE || isContinuousOnboardingDialogShowing(activity)) {
+    private fun isContinuousOnboardingInProgress(): Boolean {
+        if (pendingStage != ContinuousOnboardingStage.NONE || isContinuousOnboardingDialogShowing()) {
             logger.info("Continuous onboarding already in progress.")
             return true
         }
         return false
     }
 
-    private fun isContinuousOnboardingDialogShowing(activity: Activity): Boolean {
+    private fun isContinuousOnboardingDialogShowing(): Boolean {
         val decorView = activity.window.decorView as? ViewGroup ?: return false
         return decorView.findViewWithTag<ComposeView>(CONTINUOUS_ONBOARDING_DIALOG_TAG) != null
     }
@@ -137,11 +111,7 @@ class ContinuousOnboardingFeatureDefault(
         return settings.continuousOnboardingFeatureEnabled && !continuousOnboardingCompleted
     }
 
-    private fun maybeRequestDefaultBrowserRole(
-        activity: Activity,
-        launcher: ActivityResultLauncher<Intent>,
-        stage: ContinuousOnboardingStage,
-    ) {
+    private fun maybeRequestDefaultBrowserRole(stage: ContinuousOnboardingStage) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             val roleManager = activity.getSystemService(RoleManager::class.java)
             if (roleManager == null) {
@@ -160,7 +130,7 @@ class ContinuousOnboardingFeatureDefault(
                 )
             } else {
                 logger.info("Default-browser role is already held or is unavailable.")
-                maybeShowNotificationCardDialog(activity, stage)
+                maybeShowNotificationCardDialog(stage)
             }
         } else {
             logger.warn("Unable to show default-browser role request dialog.")
@@ -168,7 +138,7 @@ class ContinuousOnboardingFeatureDefault(
         }
     }
 
-    private fun showSyncCardDialog(activity: Activity) {
+    private fun showSyncCardDialog() {
         logger.info("Showing sync card dialog.")
 
         val stage = ContinuousOnboardingStage.DAY_7
@@ -189,15 +159,13 @@ class ContinuousOnboardingFeatureDefault(
         }
 
         showDialog(
-            activity = activity,
-            pageState = getSyncOnboardingPageState(activity, stage),
+            pageState = getSyncOnboardingPageState(stage),
             onCloseButtonClicked = onCloseButtonClicked,
         )
     }
 
     @VisibleForTesting
     internal fun getSyncOnboardingPageState(
-        activity: Activity,
         stage: ContinuousOnboardingStage,
     ) = OnboardingPageState(
         imageRes = R.drawable.nova_onboarding_sync,
@@ -245,10 +213,16 @@ class ContinuousOnboardingFeatureDefault(
         },
     )
 
-    override fun onDefaultBrowserStepCompleted(
-        activity: Activity,
-        resultCode: Int,
-    ) {
+    /**
+     * Continues the onboarding flow after the default-browser role request has returned.
+     *
+     * Invoked with the result of the system role request. Depending on the result code and device
+     * capabilities, this may show the notification-permission onboarding card or mark the stage
+     * as completed.
+     *
+     * @param resultCode The result code returned by the system role request.
+     */
+    fun onDefaultBrowserStepCompleted(resultCode: Int) {
         if (resultCode == Activity.RESULT_OK) {
             telemetryRecorder.onSetToDefaultClick(
                 sequenceId = OnboardingPageUiData.Type.DEFAULT_BROWSER.telemetryId,
@@ -256,16 +230,13 @@ class ContinuousOnboardingFeatureDefault(
             )
         }
 
-        maybeShowNotificationCardDialog(activity, pendingStage)
+        maybeShowNotificationCardDialog(pendingStage)
 
         // Reset the pending stage
         pendingStage = ContinuousOnboardingStage.NONE
     }
 
-    private fun maybeShowNotificationCardDialog(
-        activity: Activity,
-        stage: ContinuousOnboardingStage,
-    ) {
+    private fun maybeShowNotificationCardDialog(stage: ContinuousOnboardingStage) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
             !activity.components.notificationsDelegate.hasPostNotificationsPermission()
         ) {
@@ -283,8 +254,7 @@ class ContinuousOnboardingFeatureDefault(
             }
 
             showDialog(
-                activity = activity,
-                pageState = getNotificationOnboardingPageState(activity, stage),
+                pageState = getNotificationOnboardingPageState(stage),
                 onCloseButtonClicked = onCloseButtonClicked,
             )
         } else {
@@ -296,7 +266,6 @@ class ContinuousOnboardingFeatureDefault(
     @VisibleForTesting
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     internal fun getNotificationOnboardingPageState(
-        activity: Activity,
         stage: ContinuousOnboardingStage,
     ) = OnboardingPageState(
         imageRes = R.drawable.nova_onboarding_notifications,
@@ -337,7 +306,6 @@ class ContinuousOnboardingFeatureDefault(
     )
 
     private fun showDialog(
-        activity: Activity,
         pageState: OnboardingPageState,
         onCloseButtonClicked: () -> Unit = {},
     ) {
@@ -388,7 +356,41 @@ class ContinuousOnboardingFeatureDefault(
         }
     }
 
-    private companion object {
-        const val CONTINUOUS_ONBOARDING_DIALOG_TAG = "continuous_onboarding_dialog"
+    companion object {
+        private const val CONTINUOUS_ONBOARDING_DIALOG_TAG = "continuous_onboarding_dialog"
+
+        /**
+         * Convenience method to register [ContinuousOnboardingFeature] with a [Fragment].
+         * Upon destruction of the fragment's view, the binding will be unregistered and all
+         * references cleared.
+         *
+         * @param fragment The [Fragment] to register with.
+         * @param binding The [ViewBoundFeatureWrapper] to bind the feature to.
+         * @param launcher The [ActivityResultLauncher] used to request system roles.
+         * @param telemetryRecorder Used to record onboarding telemetry.
+         * @param navigateToSyncSignIn Invoked when the user chooses to sign in to Firefox Sync.
+         */
+        fun register(
+            fragment: Fragment,
+            binding: ViewBoundFeatureWrapper<ContinuousOnboardingFeature>,
+            launcher: ActivityResultLauncher<Intent>,
+            telemetryRecorder: OnboardingTelemetryRecorder,
+            navigateToSyncSignIn: () -> Unit,
+        ) {
+            val settings = fragment.requireContext().components.settings
+
+            binding.set(
+                feature = ContinuousOnboardingFeature(
+                    activity = fragment.requireActivity(),
+                    launcher = launcher,
+                    settings = settings,
+                    telemetryRecorder = telemetryRecorder,
+                    stageProvider = ContinuousOnboardingStageProviderDefault(settings),
+                    navigateToSyncSignIn = navigateToSyncSignIn,
+                ),
+                owner = fragment.viewLifecycleOwner,
+                view = fragment.requireView(),
+            )
+        }
     }
 }

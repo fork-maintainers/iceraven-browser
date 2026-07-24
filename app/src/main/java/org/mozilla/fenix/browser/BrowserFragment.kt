@@ -70,8 +70,7 @@ import org.mozilla.fenix.nimbus.FxNimbus
 import org.mozilla.fenix.onboarding.OnboardingFragmentDirections
 import org.mozilla.fenix.onboarding.OnboardingReason
 import org.mozilla.fenix.onboarding.OnboardingTelemetryRecorder
-import org.mozilla.fenix.onboarding.continuous.ContinuousOnboardingFeatureDefault
-import org.mozilla.fenix.onboarding.continuous.ContinuousOnboardingStageProviderDefault
+import org.mozilla.fenix.onboarding.continuous.ContinuousOnboardingFeature
 import org.mozilla.fenix.settings.downloads.DownloadLocationManager
 import org.mozilla.fenix.shortcut.PwaOnboardingObserver
 import org.mozilla.fenix.summarization.SummarizationNavigator
@@ -89,6 +88,7 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, SystemIns
     private val translationsBinding = ViewBoundFeatureWrapper<TranslationsBinding>()
     private val translationsBannerIntegration = ViewBoundFeatureWrapper<TranslationsBannerIntegration>()
     private val ipProtectionOnboardingPrompt = ViewBoundFeatureWrapper<IPProtectionOnboardingPrompt>()
+    private val continuousOnboardingFeature = ViewBoundFeatureWrapper<ContinuousOnboardingFeature>()
     private var qrScanFenixFeature: ViewBoundFeatureWrapper<QrScanFenixFeature>? =
         ViewBoundFeatureWrapper<QrScanFenixFeature>()
     private val qrScanLauncher: ActivityResultLauncher<Intent> =
@@ -118,10 +118,7 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, SystemIns
 
     private val continuousOnboardingDefaultBrowserLauncher: ActivityResultLauncher<Intent> =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            continuousOnboardingFeature.onDefaultBrowserStepCompleted(
-                activity = requireActivity(),
-                resultCode = result.resultCode,
-            )
+            continuousOnboardingFeature.get()?.onDefaultBrowserStepCompleted(result.resultCode)
         }
 
     private val summarizationNavigator by lazy {
@@ -146,23 +143,6 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, SystemIns
         )
     }
 
-    private val continuousOnboardingFeature by lazy {
-        val settings = requireComponents.settings
-        ContinuousOnboardingFeatureDefault(
-            settings = settings,
-            telemetryRecorder = telemetryRecorder,
-            stageProvider = ContinuousOnboardingStageProviderDefault(settings),
-            navigateToSyncSignIn = {
-                findNavController().nav(
-                    id = R.id.browserFragment,
-                    directions = OnboardingFragmentDirections.actionGlobalTurnOnSync(
-                        entrypoint = FenixFxAEntryPoint.NewUserOnboarding,
-                    ),
-                )
-            },
-        )
-    }
-
     private var pwaOnboardingObserver: PwaOnboardingObserver? = null
 
     override fun initializeUI(view: View, tab: SessionState) {
@@ -177,6 +157,7 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, SystemIns
         initBrowserToolbarComposableUpdates(view)
         initTranslationsUpdates(context = context, rootView = view)
         initIPProtectionOnboarding(context, view)
+        initContinuousOnboardingFeature()
 
         thumbnailsFeature.set(
             feature = BrowserThumbnails(context, binding.engineView, components.core.store),
@@ -350,6 +331,23 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, SystemIns
         )
     }
 
+    private fun initContinuousOnboardingFeature() {
+        ContinuousOnboardingFeature.register(
+            fragment = this,
+            binding = continuousOnboardingFeature,
+            launcher = continuousOnboardingDefaultBrowserLauncher,
+            telemetryRecorder = telemetryRecorder,
+            navigateToSyncSignIn = {
+                findNavController().nav(
+                    id = R.id.browserFragment,
+                    directions = OnboardingFragmentDirections.actionGlobalTurnOnSync(
+                        entrypoint = FenixFxAEntryPoint.NewUserOnboarding,
+                    ),
+                )
+            },
+        )
+    }
+
     private fun openTranslationsDialogFromToolbar() {
         Translations.action.record(Translations.ActionExtra("main_flow_toolbar"))
         requireComponents.appStore.dispatch(SnackbarAction.SnackbarDismissed)
@@ -417,11 +415,6 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, SystemIns
     override fun onResume() {
         super.onResume()
         requireComponents.core.tabCollectionStorage.register(collectionStorageObserver, this)
-
-        continuousOnboardingFeature.maybeRunContinuousOnboarding(
-            activity = requireActivity(),
-            launcher = continuousOnboardingDefaultBrowserLauncher,
-        )
     }
 
     override fun onBackPressed(): Boolean {

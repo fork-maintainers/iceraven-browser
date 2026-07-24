@@ -153,8 +153,7 @@ import org.mozilla.fenix.nimbus.FxNimbus
 import org.mozilla.fenix.onboarding.OnboardingFragmentDirections
 import org.mozilla.fenix.onboarding.OnboardingReason
 import org.mozilla.fenix.onboarding.OnboardingTelemetryRecorder
-import org.mozilla.fenix.onboarding.continuous.ContinuousOnboardingFeatureDefault
-import org.mozilla.fenix.onboarding.continuous.ContinuousOnboardingStageProviderDefault
+import org.mozilla.fenix.onboarding.continuous.ContinuousOnboardingFeature
 import org.mozilla.fenix.pbmlock.NavigationOrigin
 import org.mozilla.fenix.pbmlock.observePrivateModeLock
 import org.mozilla.fenix.perf.MarkersFragmentLifecycleCallbacks
@@ -262,6 +261,7 @@ class HomeFragment : Fragment() {
     private val trackersBlockedFeature = ViewBoundFeatureWrapper<TrackersBlockedFeature>()
     private val ipProtectionWarningBinding = ViewBoundFeatureWrapper<IPProtectionWarningBinding>()
     private val ipProtectionOnboardingPrompt = ViewBoundFeatureWrapper<IPProtectionOnboardingPrompt>()
+    private val continuousOnboardingFeature = ViewBoundFeatureWrapper<ContinuousOnboardingFeature>()
 
     private val homepageEdgeToEdgeFeature = ViewBoundFeatureWrapper<HomepageEdgeToEdgeFeature>()
     private var qrScanFenixFeature: ViewBoundFeatureWrapper<QrScanFenixFeature>? =
@@ -314,10 +314,7 @@ class HomeFragment : Fragment() {
 
     private val continuousOnboardingDefaultBrowserLauncher: ActivityResultLauncher<Intent> =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            continuousOnboardingFeature.onDefaultBrowserStepCompleted(
-                activity = requireActivity(),
-                resultCode = result.resultCode,
-            )
+            continuousOnboardingFeature.get()?.onDefaultBrowserStepCompleted(result.resultCode)
         }
 
     private val telemetryRecorder by lazy {
@@ -331,23 +328,6 @@ class HomeFragment : Fragment() {
                 packageManager = requireContext().application.packageManager,
                 packageName = requireContext().application.packageName,
             ),
-        )
-    }
-
-    private val continuousOnboardingFeature by lazy {
-        val settings = requireComponents.settings
-        ContinuousOnboardingFeatureDefault(
-            settings = settings,
-            telemetryRecorder = telemetryRecorder,
-            stageProvider = ContinuousOnboardingStageProviderDefault(settings),
-            navigateToSyncSignIn = {
-                findNavController().nav(
-                    id = R.id.homeFragment,
-                    directions = OnboardingFragmentDirections.actionGlobalTurnOnSync(
-                        entrypoint = FenixFxAEntryPoint.NewUserOnboarding,
-                    ),
-                )
-            },
         )
     }
 
@@ -529,6 +509,7 @@ class HomeFragment : Fragment() {
         initTabsCleanupFeature(view = view)
         initSnackbarBinding(view = view)
         initIpProtectionBindings(view = view)
+        initContinuousOnboardingFeature()
 
         privacyNoticeBannerStore = PrivacyNoticeBannerStore(
             initialState = PrivacyNoticeBannerState(
@@ -975,11 +956,6 @@ class HomeFragment : Fragment() {
 
         hideToolbar()
 
-        continuousOnboardingFeature.maybeRunContinuousOnboarding(
-            activity = requireActivity(),
-            launcher = continuousOnboardingDefaultBrowserLauncher,
-        )
-
         val components = requireComponents
         // Whenever a tab is selected its last access timestamp is automatically updated by A-C.
         // However, in the case of resuming the app to the home fragment, we already have an
@@ -1275,6 +1251,23 @@ class HomeFragment : Fragment() {
             ),
             owner = this,
             view = view,
+        )
+    }
+
+    private fun initContinuousOnboardingFeature() {
+        ContinuousOnboardingFeature.register(
+            fragment = this,
+            binding = continuousOnboardingFeature,
+            launcher = continuousOnboardingDefaultBrowserLauncher,
+            telemetryRecorder = telemetryRecorder,
+            navigateToSyncSignIn = {
+                findNavController().nav(
+                    id = R.id.homeFragment,
+                    directions = OnboardingFragmentDirections.actionGlobalTurnOnSync(
+                        entrypoint = FenixFxAEntryPoint.NewUserOnboarding,
+                    ),
+                )
+            },
         )
     }
 

@@ -50,7 +50,7 @@ class ContinuousOnboardingFeatureTest {
     private lateinit var telemetryRecorder: OnboardingTelemetryRecorder
     private lateinit var stageProvider: ContinuousOnboardingStageProvider
     private lateinit var dateTimeProvider: DateTimeProvider
-    private lateinit var feature: ContinuousOnboardingFeatureDefault
+    private lateinit var feature: ContinuousOnboardingFeature
 
     @Before
     fun setup() {
@@ -62,7 +62,9 @@ class ContinuousOnboardingFeatureTest {
         )
         dateTimeProvider = FakeDateTimeProvider()
         stageProvider = FakeContinuousOnboardingStageProvider()
-        feature = ContinuousOnboardingFeatureDefault(
+        feature = ContinuousOnboardingFeature(
+            activity = activity,
+            launcher = FakeActivityResultLauncher(),
             settings = settings,
             telemetryRecorder = telemetryRecorder,
             stageProvider = stageProvider,
@@ -146,7 +148,7 @@ class ContinuousOnboardingFeatureTest {
                 )
             },
         )
-        val actualState = feature.getSyncOnboardingPageState(activity, ContinuousOnboardingStage.DAY_7)
+        val actualState = feature.getSyncOnboardingPageState(ContinuousOnboardingStage.DAY_7)
 
         assertEquals(expectedState.imageRes, actualState.imageRes)
         assertEquals(expectedState.title, actualState.title)
@@ -157,7 +159,7 @@ class ContinuousOnboardingFeatureTest {
 
     @Test
     fun `WHEN sync primary button is clicked THEN sign-in telemetry is recorded`() {
-        val pageState = feature.getSyncOnboardingPageState(activity, ContinuousOnboardingStage.DAY_7)
+        val pageState = feature.getSyncOnboardingPageState(ContinuousOnboardingStage.DAY_7)
 
         pageState.primaryButton.onClick()
 
@@ -181,14 +183,16 @@ class ContinuousOnboardingFeatureTest {
     fun `WHEN sync primary button is clicked THEN navigateToSyncSignIn is invoked`() {
         var navigateToSyncSignInInvoked = false
         val navigateToSyncSignIn = { navigateToSyncSignInInvoked = true }
-        val feature = ContinuousOnboardingFeatureDefault(
+        val feature = ContinuousOnboardingFeature(
+            activity = activity,
+            launcher = FakeActivityResultLauncher(),
             settings = settings,
             telemetryRecorder = telemetryRecorder,
             stageProvider = stageProvider,
             dateTimeProvider = dateTimeProvider,
             navigateToSyncSignIn = navigateToSyncSignIn,
         )
-        val pageState = feature.getSyncOnboardingPageState(activity, ContinuousOnboardingStage.DAY_7)
+        val pageState = feature.getSyncOnboardingPageState(ContinuousOnboardingStage.DAY_7)
 
         pageState.primaryButton.onClick()
 
@@ -197,7 +201,7 @@ class ContinuousOnboardingFeatureTest {
 
     @Test
     fun `WHEN sync secondary button is clicked THEN skip sign-in telemetry is recorded`() {
-        val pageState = feature.getSyncOnboardingPageState(activity, ContinuousOnboardingStage.DAY_7)
+        val pageState = feature.getSyncOnboardingPageState(ContinuousOnboardingStage.DAY_7)
 
         pageState.secondaryButton!!.onClick()
 
@@ -219,7 +223,7 @@ class ContinuousOnboardingFeatureTest {
 
     @Test
     fun `WHEN sync impression event fires THEN sign-in card telemetry is recorded`() {
-        val pageState = feature.getSyncOnboardingPageState(activity, ContinuousOnboardingStage.DAY_7)
+        val pageState = feature.getSyncOnboardingPageState(ContinuousOnboardingStage.DAY_7)
 
         pageState.onRecordImpressionEvent()
 
@@ -231,7 +235,7 @@ class ContinuousOnboardingFeatureTest {
 
     @Test
     fun `WHEN no sync button is clicked THEN no sign-in telemetry is recorded`() {
-        feature.getSyncOnboardingPageState(activity, ContinuousOnboardingStage.DAY_7)
+        feature.getSyncOnboardingPageState(ContinuousOnboardingStage.DAY_7)
 
         assertNull(Onboarding.signIn.testGetValue())
         assertNull(Onboarding.skipSignIn.testGetValue())
@@ -275,7 +279,7 @@ class ContinuousOnboardingFeatureTest {
             },
         )
 
-        val actualState = feature.getNotificationOnboardingPageState(activity, ContinuousOnboardingStage.DAY_2)
+        val actualState = feature.getNotificationOnboardingPageState(ContinuousOnboardingStage.DAY_2)
 
         assertEquals(expectedState.imageRes, actualState.imageRes)
         assertEquals(expectedState.title, actualState.title)
@@ -287,7 +291,7 @@ class ContinuousOnboardingFeatureTest {
     @SdkSuppress(minSdkVersion = 33)
     @Test
     fun `WHEN notification primary button is clicked THEN turn on notification telemetry is recorded`() {
-        val pageState = feature.getNotificationOnboardingPageState(activity, ContinuousOnboardingStage.DAY_2)
+        val pageState = feature.getNotificationOnboardingPageState(ContinuousOnboardingStage.DAY_2)
 
         pageState.primaryButton.onClick()
 
@@ -302,7 +306,7 @@ class ContinuousOnboardingFeatureTest {
     @SdkSuppress(minSdkVersion = 33)
     @Test
     fun `WHEN notification secondary button is clicked THEN skip notification telemetry is recorded`() {
-        val pageState = feature.getNotificationOnboardingPageState(activity, ContinuousOnboardingStage.DAY_2)
+        val pageState = feature.getNotificationOnboardingPageState(ContinuousOnboardingStage.DAY_2)
 
         pageState.secondaryButton!!.onClick()
 
@@ -317,7 +321,7 @@ class ContinuousOnboardingFeatureTest {
     @SdkSuppress(minSdkVersion = 33)
     @Test
     fun `WHEN notification impression event fires THEN notification card telemetry is recorded`() {
-        val pageState = feature.getNotificationOnboardingPageState(activity, ContinuousOnboardingStage.DAY_2)
+        val pageState = feature.getNotificationOnboardingPageState(ContinuousOnboardingStage.DAY_2)
 
         pageState.onRecordImpressionEvent()
 
@@ -330,7 +334,7 @@ class ContinuousOnboardingFeatureTest {
     @SdkSuppress(minSdkVersion = 33)
     @Test
     fun `WHEN no notification button is clicked THEN no notification telemetry is recorded`() {
-        feature.getNotificationOnboardingPageState(activity, ContinuousOnboardingStage.DAY_2)
+        feature.getNotificationOnboardingPageState(ContinuousOnboardingStage.DAY_2)
 
         assertNull(Onboarding.turnOnNotifications.testGetValue())
         assertNull(Onboarding.skipTurnOnNotifications.testGetValue())
@@ -379,7 +383,7 @@ class ContinuousOnboardingFeatureTest {
 
     @Test
     fun `WHEN default browser step completed with RESULT_OK THEN set-to-default telemetry is recorded`() {
-        feature.onDefaultBrowserStepCompleted(activity, Activity.RESULT_OK)
+        feature.onDefaultBrowserStepCompleted(Activity.RESULT_OK)
 
         assertNotNull(Onboarding.setToDefault.testGetValue())
         val event = Onboarding.setToDefault.testGetValue()!!.single()
@@ -389,7 +393,7 @@ class ContinuousOnboardingFeatureTest {
 
     @Test
     fun `WHEN default browser step completed without RESULT_OK THEN no set-to-default telemetry is recorded`() {
-        feature.onDefaultBrowserStepCompleted(activity, Activity.RESULT_CANCELED)
+        feature.onDefaultBrowserStepCompleted(Activity.RESULT_CANCELED)
 
         assertNull(Onboarding.setToDefault.testGetValue())
     }
@@ -398,7 +402,7 @@ class ContinuousOnboardingFeatureTest {
     fun `WHEN default browser step completed without RESULT_OK THEN pending stage is reset`() {
         feature.pendingStage = ContinuousOnboardingStage.DAY_2
 
-        feature.onDefaultBrowserStepCompleted(activity, Activity.RESULT_CANCELED)
+        feature.onDefaultBrowserStepCompleted(Activity.RESULT_CANCELED)
 
         assertEquals(ContinuousOnboardingStage.NONE, feature.pendingStage)
     }
@@ -407,18 +411,20 @@ class ContinuousOnboardingFeatureTest {
     fun `WHEN default browser step completed with RESULT_OK THEN pending stage is reset`() {
         feature.pendingStage = ContinuousOnboardingStage.DAY_2
 
-        feature.onDefaultBrowserStepCompleted(activity, Activity.RESULT_OK)
+        feature.onDefaultBrowserStepCompleted(Activity.RESULT_OK)
 
         assertEquals(ContinuousOnboardingStage.NONE, feature.pendingStage)
     }
 
-    // maybeRunContinuousOnboarding re-entrancy guard
+    // start() re-entrancy guard
 
     @Test
-    fun `WHEN pendingStage is not none THEN maybeRunContinuousOnboarding does not evaluate the stage`() {
+    fun `WHEN pendingStage is not none THEN start does not evaluate the stage`() {
         settings.continuousOnboardingFeatureEnabled = true
         val fakeStageProvider = FakeContinuousOnboardingStageProvider(ContinuousOnboardingStage.DAY_7)
-        val feature = ContinuousOnboardingFeatureDefault(
+        val feature = ContinuousOnboardingFeature(
+            activity = activity,
+            launcher = FakeActivityResultLauncher(),
             settings = settings,
             telemetryRecorder = telemetryRecorder,
             stageProvider = fakeStageProvider,
@@ -427,16 +433,18 @@ class ContinuousOnboardingFeatureTest {
         )
         feature.pendingStage = ContinuousOnboardingStage.DAY_2
 
-        feature.maybeRunContinuousOnboarding(activity, FakeActivityResultLauncher())
+        feature.start()
 
         assertEquals(0, fakeStageProvider.callCount)
     }
 
     @Test
-    fun `WHEN a continuous onboarding dialog is already showing THEN maybeRunContinuousOnboarding does not evaluate the stage`() {
+    fun `WHEN a continuous onboarding dialog is already showing THEN start does not evaluate the stage`() {
         settings.continuousOnboardingFeatureEnabled = true
         val fakeStageProvider = FakeContinuousOnboardingStageProvider(ContinuousOnboardingStage.DAY_7)
-        val feature = ContinuousOnboardingFeatureDefault(
+        val feature = ContinuousOnboardingFeature(
+            activity = activity,
+            launcher = FakeActivityResultLauncher(),
             settings = settings,
             telemetryRecorder = telemetryRecorder,
             stageProvider = fakeStageProvider,
@@ -450,7 +458,7 @@ class ContinuousOnboardingFeatureTest {
             },
         )
 
-        feature.maybeRunContinuousOnboarding(activity, FakeActivityResultLauncher())
+        feature.start()
 
         assertEquals(0, fakeStageProvider.callCount)
     }
