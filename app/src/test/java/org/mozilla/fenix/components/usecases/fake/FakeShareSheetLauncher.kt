@@ -15,6 +15,8 @@ class FakeShareSheetLauncher : ShareSheetLauncher {
         val title: String?,
         val isPrivate: Boolean,
         val isCustomTab: Boolean,
+        val text: String = "",
+        val subject: String? = null,
     )
 
     data class ItemsShare(
@@ -30,10 +32,12 @@ class FakeShareSheetLauncher : ShareSheetLauncher {
         id: String?,
         url: String,
         title: String?,
+        text: String,
+        subject: String?,
         isPrivate: Boolean,
         isCustomTab: Boolean,
     ) {
-        urlShares += UrlShare(id, url, title, isPrivate, isCustomTab)
+        urlShares += UrlShare(id, url, title, isPrivate, isCustomTab, text, subject)
     }
 
     override fun showSystemShareSheet(

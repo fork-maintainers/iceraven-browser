@@ -90,6 +90,9 @@ interface ShareSheetLauncher {
      * @param id The session id of the tab to share from.
      * @param url The url to share.
      * @param title The title of the page to share.
+     * @param text Optional text to share alongside the url. When non-empty it is prepended to the
+     * shared text.
+     * @param subject Optional subject for the share. When `null` or empty, defaults to the title.
      * @param isPrivate Whether the tab is in private browsing mode.
      * @param isCustomTab Whether the share is being initiated from a custom tab,
      * used to determine the correct destination to pop up to when navigating to the share fragment.
@@ -98,6 +101,8 @@ interface ShareSheetLauncher {
         id: String?,
         url: String,
         title: String?,
+        text: String = "",
+        subject: String? = null,
         isPrivate: Boolean = false,
         isCustomTab: Boolean = false,
     )
@@ -154,6 +159,9 @@ class DefaultShareSheetLauncher(
      * @param id The session id of the tab to share from.
      * @param url The url to share.
      * @param title The title of the page to share.
+     * @param text Optional text to share alongside the url. When non-empty it is prepended to the
+     * shared text.
+     * @param subject Optional subject for the share. When `null` or empty, defaults to the title.
      * @param isPrivate Whether the tab is in private browsing mode.
      * @param isCustomTab Whether the share is being initiated from a custom tab.
      */
@@ -161,18 +169,22 @@ class DefaultShareSheetLauncher(
         id: String?,
         url: String,
         title: String?,
+        text: String,
+        subject: String?,
         isPrivate: Boolean,
         isCustomTab: Boolean,
     ) {
         val displayUrl = url.trimmed()
+        val shareText = listOf(text, displayUrl).filter { it.isNotEmpty() }.joinToString("\n")
+        val shareSubject = subject?.ifEmpty { null } ?: title ?: ""
         if (id != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
             scope.launch {
                 val qrCodeAction = withContext(ioDispatcher) {
                     sendQRCodeChooserAction(applicationContext, id, displayUrl)
                 }
                 shareDelegate.shareWithChooserActions(
-                    text = displayUrl,
-                    subject = title ?: "",
+                    text = shareText,
+                    subject = shareSubject,
                     actions = listOfNotNull(
                         savePDFChooserAction(applicationContext, id),
                         printAction(applicationContext, id),
@@ -182,7 +194,7 @@ class DefaultShareSheetLauncher(
                 )
             }
         } else {
-            shareDelegate.share(text = displayUrl, subject = title ?: "")
+            shareDelegate.share(text = shareText, subject = shareSubject)
         }
     }
 

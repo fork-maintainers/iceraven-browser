@@ -33,6 +33,8 @@ class ShareUseCases(
      * @param url The url to share.
      * @param title The title of the page to share.
      * @param source The surface from which the share was initiated, used for telemetry.
+     * @param text Optional text to share alongside the url, e.g. supplied by the share deep link.
+     * @param subject Optional subject for the share. When `null` or empty, defaults to the title.
      * @param isPrivate Whether the tab is in private browsing mode.
      * @param isCustomTab Whether the share is being initiated from a custom tab.
      * @param navigateToShareFragment Lambda provided by the caller that provides navigation to the
@@ -44,6 +46,8 @@ class ShareUseCases(
         url: String?,
         title: String?,
         source: ShareSource,
+        text: String = "",
+        subject: String? = null,
         isPrivate: Boolean = false,
         isCustomTab: Boolean = false,
         navigateToShareFragment: () -> Unit,
@@ -61,6 +65,8 @@ class ShareUseCases(
                     id = id,
                     url = url,
                     title = title,
+                    text = text,
+                    subject = subject,
                     isPrivate = isPrivate,
                     isCustomTab = isCustomTab,
                 )

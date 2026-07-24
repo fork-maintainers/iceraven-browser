@@ -262,6 +262,8 @@ class HomeDeepLinkIntentProcessorTest {
                 url = "https://example.com",
                 title = "TestTitle",
                 source = ShareSource.DEEP_LINK,
+                text = "TestText",
+                subject = "TestSubject",
                 navigateToShareFragment = capture(fallbackLambda),
             )
         } just Runs
@@ -274,6 +276,8 @@ class HomeDeepLinkIntentProcessorTest {
                 url = "https://example.com",
                 title = "TestTitle",
                 source = ShareSource.DEEP_LINK,
+                text = "TestText",
+                subject = "TestSubject",
                 navigateToShareFragment = any(),
             )
         }

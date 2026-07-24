@@ -117,6 +117,36 @@ class ShareUseCasesTest {
 
     @Config(sdk = [34])
     @Test
+    fun `GIVEN text and subject WHEN shareUrl is called THEN they are forwarded to the system share sheet`() {
+        shareUseCases.shareUrl(
+            id = null,
+            url = "https://mozilla.org",
+            title = "Mozilla",
+            source = ShareSource.DEEP_LINK,
+            text = "Check this out",
+            subject = "A subject",
+            navigateToShareFragment = navigateToShareFragment,
+        )
+
+        assertEquals(
+            listOf(
+                FakeShareSheetLauncher.UrlShare(
+                    id = null,
+                    longUrl = "https://mozilla.org",
+                    title = "Mozilla",
+                    isPrivate = false,
+                    isCustomTab = false,
+                    text = "Check this out",
+                    subject = "A subject",
+                ),
+            ),
+            shareSheetLauncher.urlShares,
+        )
+        assertFalse(navigatedToShareFragment)
+    }
+
+    @Config(sdk = [34])
+    @Test
     fun `GIVE CUSTOM_TAB_MENU source WHEN shareUrl is called THEN telemetry is recorded`() {
         assertNull(NativeShareSheet.shown.testGetValue())
 

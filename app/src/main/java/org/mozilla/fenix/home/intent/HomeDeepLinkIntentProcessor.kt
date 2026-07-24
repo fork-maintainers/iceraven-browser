@@ -175,11 +175,13 @@ class HomeDeepLinkIntentProcessor(
             url = url,
             title = title,
             source = ShareSource.DEEP_LINK,
+            text = text,
+            subject = subject,
             navigateToShareFragment = {
                 navController.navigate(
                     NavGraphDirections.actionGlobalShareFragment(
                         data = arrayOf(ShareData(url = url, title = title, text = text)),
-                        shareSubject = subject,
+                        shareSubject = subject.ifEmpty { title },
                         showPage = false,
                         sessionId = null,
                     ),
