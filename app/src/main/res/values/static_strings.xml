@@ -393,6 +393,10 @@
 
     <!-- Label for the secret settings preference to enable Import Passwords -->
     <string name="preferences_debug_settings_import_passwords">Enable Import Passwords</string>
+
+    <!-- Summary for secret settings that are still being developed and not recommended to be enabled by nightly users. -->
+    <string name="preferences_debug_settings_development_phase_summary" translatable="false">In development phase</string>
+
     <!--  Firefox brand name  -->
     <string name="app_name_firefox" tools:ignore="BrandUsage">Firefox</string>
 </resources>
