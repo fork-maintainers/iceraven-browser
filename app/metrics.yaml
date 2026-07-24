@@ -5677,6 +5677,58 @@ error_page:
     metadata:
       tags:
         - ErrorMessages
+  archived_version_opened:
+    type: event
+    description: |
+      Recorded when a user opens an archived version of an unreachable page from
+      an error page, via the Wayback Machine "View archived version" action.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2049844
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D308394
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+    metadata:
+      tags:
+        - ErrorMessages
+  archive_search_web_selected:
+    type: event
+    description: |
+      Recorded when a user chooses to search the web for an unreachable page from
+      an error page, after no archived version of it was found.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2049844
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D308394
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+    metadata:
+      tags:
+        - ErrorMessages
+  archive_button_clicked:
+    type: event
+    description: |
+      Recorded when a user clicks the "View archived version" button on an error
+      page to look up an archived copy, regardless of the lookup outcome. Measures
+      overall usage of the archive action.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2049844
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D308394
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+    metadata:
+      tags:
+        - ErrorMessages
 
 sync_auth:
   opened:

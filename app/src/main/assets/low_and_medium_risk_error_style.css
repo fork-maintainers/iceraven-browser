@@ -9,7 +9,68 @@
   --primary-button-text-color: #ffffff;
   --secondary-button-color: #e0e0e6;
   --secondary-button-text-color: #20123a;
+  /* Acorn / Material 3 color roles used by the archived-copy action. */
+  --outline-color: #817f84;
+  --primary-color: #3e2976;
+  --warning-container-color: #fff9e2;
+  --on-warning-container-color: #180e30;
   --header-color: #312a65;
+}
+
+/* Hidden by default; shown from JS only when an archived copy is applicable. Uses an ID
+   selector so it outranks the base `button { display: block }` rule. */
+#viewArchivedButton {
+  display: none;
+}
+
+/* Outlined button for the archived-copy action: a 1px Material 3 "outline" border with the
+   label in the "primary" color, instead of a filled background. */
+.buttonTertiary {
+  background-color: transparent;
+  color: var(--primary-color);
+}
+
+.buttonTertiary::after {
+  background-color: transparent;
+  border: 1px solid var(--outline-color);
+}
+
+/* Spinner shown to the left of the label while the archive is queried. */
+.spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-inline-end: 8px;
+  vertical-align: middle;
+  border: 2px solid var(--primary-color);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: archiveSpin 0.8s linear infinite;
+}
+
+@keyframes archiveSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Material 3 "warning container" shown when no archived copy exists. */
+.warningContainer {
+  max-width: 550px;
+  box-sizing: border-box;
+  margin: 16px auto;
+  padding: 12px 16px;
+  border-radius: 5px;
+  background-color: var(--warning-container-color);
+  color: var(--on-warning-container-color);
+  line-height: 20px;
+  text-align: center;
+}
+
+.warningContainer a {
+  color: inherit;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 #badCertTechnicalInfo {
@@ -30,6 +91,10 @@
     --primary-button-text-color: #ffffff;
     --secondary-button-color: #e0e0e6;
     --secondary-button-text-color: #312a65;
+    --outline-color: #817f84;
+    --primary-color: #cdb7ff;
+    --warning-container-color: #5f3100;
+    --on-warning-container-color: #f2f0f8;
     --header-color: #fbfbfe;
   }
 }

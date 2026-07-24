@@ -122,6 +122,7 @@
     <string name="pref_key_onboarding_completed_timestamp" translatable="false">pref_key_onboarding_completed_timestamp</string>
     <string name="pref_key_onboarding_current_page_index" translatable="false">pref_key_onboarding_current_page_index</string>
     <string name="pref_key_enable_import_passwords" translatable="false">pref_key_enable_import_passwords</string>
+    <string name="pref_key_enable_wayback_machine" translatable="false">pref_key_enable_wayback_machine</string>
 
     <!-- Continuous onboarding -->
     <string name="pref_key_continuous_onboarding_enabled" translatable="false">pref_key_continuous_onboarding_enabled</string>

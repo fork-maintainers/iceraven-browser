@@ -181,6 +181,12 @@ class SecretSettingsFragment : PreferenceFragmentCompat(), SystemInsetsPaddedFra
             onPreferenceChangeListener = SharedPreferenceUpdater()
         }
 
+        requirePreference<SwitchPreferenceCompat>(R.string.pref_key_enable_wayback_machine).apply {
+            isVisible = Config.channel.isNightlyOrDebug
+            isChecked = settings.isWaybackMachineEnabled
+            onPreferenceChangeListener = SharedPreferenceUpdater()
+        }
+
         requirePreference<SwitchPreferenceCompat>(R.string.pref_key_should_show_custom_tab_extensions).apply {
             isVisible = Config.channel.isNightlyOrDebug
             isChecked = settings.shouldShowCustomTabExtensions
