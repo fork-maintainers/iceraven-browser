@@ -6,6 +6,7 @@ package org.mozilla.fenix.home
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Rect
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -35,6 +36,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.boundsInRoot
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
@@ -180,6 +183,7 @@ import org.mozilla.fenix.utils.showAddSearchWidgetPromptIfSupported
 import org.mozilla.fenix.wallpapers.LocalWallpaperState
 import org.mozilla.fenix.wallpapers.Wallpaper
 import java.lang.ref.WeakReference
+import kotlin.math.roundToInt
 import org.mozilla.fenix.ipprotection.store.Surface as IPProtectionSurface
 
 /**
@@ -242,6 +246,9 @@ class HomeFragment : Fragment() {
 
     private val toolbarView: FenixHomeToolbar
         get() = nullableToolbarView!!
+
+    // Bounds of the homepage content (excluding the toolbar and system bar padding) used to crop the tab thumbnail.
+    private var homepageContentBounds: Rect? = null
 
     @VisibleForTesting
     internal val messagingFeatureHomescreen = ViewBoundFeatureWrapper<MessagingFeature>()
@@ -694,7 +701,16 @@ class HomeFragment : Fragment() {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(innerPadding),
+                .padding(innerPadding)
+                .onGloballyPositioned { coordinates ->
+                    val bounds = coordinates.boundsInRoot()
+                    homepageContentBounds = Rect(
+                        bounds.left.roundToInt(),
+                        bounds.top.roundToInt(),
+                        bounds.right.roundToInt(),
+                        bounds.bottom.roundToInt(),
+                    )
+                },
         ) {
             Homepage(
                 state = HomepageState.build(
@@ -1162,6 +1178,7 @@ class HomeFragment : Fragment() {
                 view = view,
                 store = requireComponents.core.store,
                 appStore = requireComponents.appStore,
+                homepageContentBounds = { homepageContentBounds },
             ),
             owner = this,
             view = view,
