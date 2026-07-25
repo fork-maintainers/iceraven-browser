@@ -19,6 +19,7 @@ import mozilla.components.feature.summarize.ReceivedParsedDocument
 import mozilla.components.feature.summarize.SettingsBackClicked
 import mozilla.components.feature.summarize.SettingsClicked
 import mozilla.components.feature.summarize.ShakeConsentRequested
+import mozilla.components.feature.summarize.SignInSummarizationContentAction
 import mozilla.components.feature.summarize.SummarizationAction
 import mozilla.components.feature.summarize.SummarizationCompleted
 import mozilla.components.feature.summarize.SummarizationFailed
@@ -112,49 +113,15 @@ class SummarizationTelemetryMiddleware(
             is ReceivedParsedDocument -> handleReceivedParsedDocument()
             is SummarizationCompleted -> recordSummarizationCompleted()
             is SummarizationFailed -> recordSummarizationCompleted(success = false, action.exception)
-            is ViewDismissed -> {
-                AiSummarize.closed.record(
-                    AiSummarize.ClosedExtra(
-                        model = sessionTelemetry.model,
-                        engineAvailable = action.isEngineAvailable,
-                        sessionId = sessionTelemetry.sessionId,
-                    ),
-                )
-
-                if (
-                    stateBefore is SummarizationState.ShakeConsentRequired ||
-                    stateBefore is SummarizationState.ShakeConsentWithDownloadRequired
-                ) {
-                    AiSummarize.consentDisplayed.record(
-                        AiSummarize.ConsentDisplayedExtra(
-                            agreed = false,
-                            sessionId = sessionTelemetry.sessionId,
-                        ),
-                    )
-                }
-            }
+            is ViewDismissed -> handleViewDismissed(stateBefore, action)
 
             is OnDeviceSummarizationShakeConsentAction.AllowClicked,
             is OffDeviceSummarizationShakeConsentAction.AllowClicked,
-            -> {
-                AiSummarize.consentDisplayed.record(
-                    AiSummarize.ConsentDisplayedExtra(
-                        agreed = true,
-                        sessionId = sessionTelemetry.sessionId,
-                    ),
-                )
-            }
+            -> recordConsentDisplayed(agreed = true)
 
             is OnDeviceSummarizationShakeConsentAction.CancelClicked,
             is OffDeviceSummarizationShakeConsentAction.CancelClicked,
-            -> {
-                AiSummarize.consentDisplayed.record(
-                    AiSummarize.ConsentDisplayedExtra(
-                        agreed = false,
-                        sessionId = sessionTelemetry.sessionId,
-                    ),
-                )
-            }
+            -> recordConsentDisplayed(agreed = false)
 
             DownloadConsentAction.AllowClicked,
             DownloadConsentAction.CancelClicked,
@@ -173,6 +140,9 @@ class SummarizationTelemetryMiddleware(
             SettingsBackClicked,
             SettingsClicked,
             ShakeConsentRequested,
+            SignInSummarizationContentAction.DismissClicked,
+            SignInSummarizationContentAction.LearnMoreClicked,
+            SignInSummarizationContentAction.SignInClicked,
             -> {}
         }
     }
@@ -196,6 +166,32 @@ class SummarizationTelemetryMiddleware(
             ),
         )
         timerId = AiSummarize.duration.start()
+    }
+
+    private fun handleViewDismissed(stateBefore: SummarizationState, action: ViewDismissed) {
+        AiSummarize.closed.record(
+            AiSummarize.ClosedExtra(
+                model = sessionTelemetry.model,
+                engineAvailable = action.isEngineAvailable,
+                sessionId = sessionTelemetry.sessionId,
+            ),
+        )
+
+        if (
+            stateBefore is SummarizationState.ShakeConsentRequired ||
+            stateBefore is SummarizationState.ShakeConsentWithDownloadRequired
+        ) {
+            recordConsentDisplayed(agreed = false)
+        }
+    }
+
+    private fun recordConsentDisplayed(agreed: Boolean) {
+        AiSummarize.consentDisplayed.record(
+            AiSummarize.ConsentDisplayedExtra(
+                agreed = agreed,
+                sessionId = sessionTelemetry.sessionId,
+            ),
+        )
     }
 
     private fun handleExtractedContent(content: Content) {
