@@ -110,6 +110,7 @@ class SummarizationTelemetryMiddleware(
             }
             is ContentExtracted -> handleExtractedContent(action.content)
             is LlmProviderAction.ProviderInitialized -> recordProviderInitialized()
+            is LlmProviderAction.SignInRequired -> recordSummarizationCompleted(success = false, action.reason)
             is ReceivedParsedDocument -> handleReceivedParsedDocument()
             is SummarizationCompleted -> recordSummarizationCompleted()
             is SummarizationFailed -> recordSummarizationCompleted(success = false, action.exception)
@@ -132,7 +133,6 @@ class SummarizationTelemetryMiddleware(
             DownloadInProgressAction.CancelClicked,
             ErrorAction.ErrorDismissed,
             ErrorAction.LearnMoreClicked,
-            LlmProviderAction.ProviderAvailable,
             OffDeviceSummarizationShakeConsentAction.LearnMoreClicked,
             OnDeviceSummarizationShakeConsentAction.LearnMoreClicked,
             PageLoadStarted,

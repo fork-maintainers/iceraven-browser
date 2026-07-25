@@ -1650,6 +1650,9 @@
             android:defaultValue="false"
             app:nullable="false"
             app:argType="boolean" />
+        <action
+            android:id="@+id/action_summarizationFragment_to_turnOnSyncFragment"
+            app:destination="@id/turnOnSyncFragment" />
     </dialog>
 
     <fragment
