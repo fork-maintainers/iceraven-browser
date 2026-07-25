@@ -980,6 +980,12 @@
   <string name="notifications_allowed_summary">Moneĩmbyre</string>
   <!-- Summary for notification preference indicating notifications are not allowed -->
   <string name="notifications_not_allowed_summary">Oñemoneĩ’ỹva</string>
+  <!-- Preference for local network access / nearby devices in Android 17 -->
+  <string name="preferences_local_network_access">Ñandutípe jeike / Mba’e’okáita ag̃uiva</string>
+  <!-- Summary for local network access preference indicating access is allowed -->
+  <string name="local_network_access_allowed_summary">Moneĩmbyre</string>
+  <!-- Summary for local network access preference indicating access is not allowed -->
+  <string name="local_network_access_not_allowed_summary">Oñemoneĩ’ỹva</string>
   <!--
     Add-on Permissions
 
@@ -1702,6 +1708,14 @@
   <string name="close_tab_and_delete_group_confirmation_dialog_confirm">Emboguete aty</string>
   <!-- Text shown on the cancel button in the Close last tab and delete tab group confirmation dialog. -->
   <string name="close_tab_and_delete_group_confirmation_dialog_cancel">Eheja</string>
+  <!-- Content description for the three dot button next to a tab group" -->
+  <string name="tab_group_three_dot_button_content_description">Jeporavorãve</string>
+  <!-- Text shown on the edit button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_edit">Mbosako’i</string>
+  <!-- Text shown on the delete button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_delete">Mboguete</string>
+  <!-- Text shown on the close button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_close">Mboty</string>
   <!--
     Color labels for tab groups, used for accessibility and selection UI.
 

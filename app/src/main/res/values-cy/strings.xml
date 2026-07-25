@@ -984,6 +984,12 @@
   <string name="notifications_allowed_summary">Caniatawyd</string>
   <!-- Summary for notification preference indicating notifications are not allowed -->
   <string name="notifications_not_allowed_summary">Dim caniatáu</string>
+  <!-- Preference for local network access / nearby devices in Android 17 -->
+  <string name="preferences_local_network_access">Mynediad Rhwydwaith Lleol / Dyfeisiau Cyfagos</string>
+  <!-- Summary for local network access preference indicating access is allowed -->
+  <string name="local_network_access_allowed_summary">Caniatawyd</string>
+  <!-- Summary for local network access preference indicating access is not allowed -->
+  <string name="local_network_access_not_allowed_summary">Dim caniatáu</string>
   <!--
     Add-on Permissions
 
@@ -1726,6 +1732,14 @@
   <string name="close_tab_and_delete_group_confirmation_dialog_confirm">Dileu grŵp</string>
   <!-- Text shown on the cancel button in the Close last tab and delete tab group confirmation dialog. -->
   <string name="close_tab_and_delete_group_confirmation_dialog_cancel">Diddymu</string>
+  <!-- Content description for the three dot button next to a tab group" -->
+  <string name="tab_group_three_dot_button_content_description">Rhagor o ddewisiadau</string>
+  <!-- Text shown on the edit button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_edit">Golygu</string>
+  <!-- Text shown on the delete button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_delete">Dileu</string>
+  <!-- Text shown on the close button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_close">Cau</string>
   <!--
     Color labels for tab groups, used for accessibility and selection UI.
 
@@ -3183,7 +3197,7 @@
   <!-- Error message shown when the selected browser VPN location is unavailable. -->
   <string name="ip_protection_location_unavailable" tools:ignore="UnusedResources">Dyw\'r lleoliad ddim ar gael. Dewiswch leoliad arall.</string>
   <!-- Snackbar (in-app pop-up notification) text shown when the previously selected browser VPN location is unavailable and the recommended location was used instead. -->
-  <string name="ip_protection_location_unavailable_recommended_snackbar" tools:ignore="UnusedResources">Dyw\'r lleoliad VPN dewiswyd ddim ar gael. Wedi\'i gysylltu â\'r lleoliad sy\'n cael ei argymell.</string>
+  <string name="ip_protection_location_unavailable_recommended_snackbar" tools:ignore="UnusedResources">Dyw\'r lleoliad VPN dewiswyd ddim ar gael. Wedi\'i gysylltu â\'r lleoliad cywir.</string>
   <!-- Title for the card shown to the user when we are unable to fetch server locations -->
   <string name="ip_protection_location_unavailable_title" tools:ignore="UnusedResources">Dyw\'r lleoliad blaenorol ddim ar gael</string>
   <!-- Description for the card shown to the user when we are unable to fetch server locations -->

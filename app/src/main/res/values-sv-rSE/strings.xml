@@ -980,6 +980,12 @@
   <string name="notifications_allowed_summary">Tillåten</string>
   <!-- Summary for notification preference indicating notifications are not allowed -->
   <string name="notifications_not_allowed_summary">Inte tillåtet</string>
+  <!-- Preference for local network access / nearby devices in Android 17 -->
+  <string name="preferences_local_network_access">Lokal nätverksåtkomst / Enheter i närheten</string>
+  <!-- Summary for local network access preference indicating access is allowed -->
+  <string name="local_network_access_allowed_summary">Tillåten</string>
+  <!-- Summary for local network access preference indicating access is not allowed -->
+  <string name="local_network_access_not_allowed_summary">Inte tillåten</string>
   <!--
     Add-on Permissions
 
@@ -1702,6 +1708,14 @@
   <string name="close_tab_and_delete_group_confirmation_dialog_confirm">Ta bort grupp</string>
   <!-- Text shown on the cancel button in the Close last tab and delete tab group confirmation dialog. -->
   <string name="close_tab_and_delete_group_confirmation_dialog_cancel">Avbryt</string>
+  <!-- Content description for the three dot button next to a tab group" -->
+  <string name="tab_group_three_dot_button_content_description">Fler alternativ</string>
+  <!-- Text shown on the edit button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_edit">Redigera</string>
+  <!-- Text shown on the delete button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_delete">Ta bort</string>
+  <!-- Text shown on the close button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_close">Stäng</string>
   <!--
     Color labels for tab groups, used for accessibility and selection UI.
 
@@ -1978,7 +1992,7 @@
   <!-- The label/title of a mandatory field in the Web Compat Reporter feature for adding additional information. -->
   <string name="webcompat_reporter_label_mandatory_description">Beskriv problemet i detalj för att hjälpa oss undersöka problemet</string>
   <!-- The label/title of a optional field in the Web Compat Reporter feature for adding additional information. -->
-  <string name="webcompat_reporter_label_optional_description">Beskriv problemet i detalj för att hjälpa oss undersöka problemet (valfritt)</string>
+  <string name="webcompat_reporter_label_optional_description">Beskriv problemet i detalj för att hjälpa oss att undersöka problemet (valfritt)</string>
   <!-- The label/title of a field in the Web Compat Reporter feature for explaining a high-level reason why the site is broken. -->
   <string name="webcompat_reporter_label_whats_broken_2">Vad är trasigt?</string>
   <!-- The placeholder text for the dropdown where a user selects a high-level reason why the site is broken. -->

@@ -1977,6 +1977,8 @@
   <string name="webcompat_reporter_description_error">Խնդրում ենք մուտքագրել առնվազն 10 նիշ</string>
   <!-- The label/title of a mandatory field in the Web Compat Reporter feature for adding additional information. -->
   <string name="webcompat_reporter_label_mandatory_description">Մանրամասն նկարագրեք խնդիրը, որպեսզի մենք կարողանանք այն ուսումնասիրել</string>
+  <!-- The label/title of a optional field in the Web Compat Reporter feature for adding additional information. -->
+  <string name="webcompat_reporter_label_optional_description">Մանրամասն նկարագրեք խնդիրը, որպեսզի մենք կարողանանք այն ուսումնասիրել (լրացուցիչ):</string>
   <!-- The label/title of a field in the Web Compat Reporter feature for explaining a high-level reason why the site is broken. -->
   <string name="webcompat_reporter_label_whats_broken_2">Ի՞նչն է խոտանվել:</string>
   <!-- The placeholder text for the dropdown where a user selects a high-level reason why the site is broken. -->
@@ -2625,8 +2627,8 @@
 
       Text shown on the trackers blocked card. %d is the number of trackers blocked.
     -->
-    <item quantity="one">%d հետագծիչն արգելափակված է</item>
-    <item quantity="other">%d հետագծիչներն արգելափակված են</item>
+    <item quantity="one">%d հետագծիչ արգելափակված է</item>
+    <item quantity="other">%d հետագծիչներ արգելափակված են</item>
   </plurals>
   <!-- Text shown on the trackers blocked card when no trackers have been blocked yet -->
   <string name="trackers_blocked_empty">Դուք պաշտպանված եք</string>
