@@ -478,7 +478,7 @@
   <string name="startup_crash_restart">گۊشیڌن دووارته %s</string>
   <!-- Title for the usage data option in the privacy preferences dialog shown during onboarding. Note: The word "Mozilla" should NOT be translated. -->
   <string name="onboarding_preferences_dialog_usage_data_title" tools:ignore="BrandUsage">فشناڌن داده یل فنی وو تعامولا و Mozilla</string>
-  <string name="onboarding_preferences_dialog_usage_data_description_2" tools:ignore="BrandUsage">دووسمندیا زبار دسگا ایسا، سامووا سخت ٱفزار وو بارت و کار گرؽڌن ایسا ز Firefox و بؽڌر وابیڌن ویژیی یل، کارایی وو پایداری پوی هیاری اده.</string>
+  <string name="onboarding_preferences_dialog_usage_data_description_2" tools:ignore="BrandUsage">دووسمندیا زبار دسگا ایسا، کانفیگ سخت ٱفزار وو بارت و کار گرؽڌن ایسا ز Firefox و بؽڌر وابیڌن ویژیی یل، کارایی وو پایداری پوی هیاری اده.</string>
   <string name="onboarding_preferences_dialog_usage_data_learn_more_2">قلوه دووسته بۊین</string>
   <!-- Positive button label for the privacy preferences dialog shown during onboarding. -->
   <string name="onboarding_preferences_dialog_positive_button">ٱنجوم وابی</string>
@@ -1260,7 +1260,7 @@
   <!-- Preference switch for usage and technical learn more link in new compose -->
   <string name="preference_usage_data_learn_more_2">زبار داده یل فنی قلوه دووسته بۊین</string>
   <!-- Preference description for marketing data collection. Note: The words "Firefox" should NOT be translated -->
-  <string name="preferences_usage_data_description_1" tools:ignore="BrandUsage">دووسمندیا زبار دسگا ایسا، سامووا سخت ٱفزار وو بارت و کار گرؽڌن ایسا و ایما هیاری اده تا ویژیی یل، کارایی وو پایداری Firefox ن بؽڌر کۊنیم.</string>
+  <string name="preferences_usage_data_description_1" tools:ignore="BrandUsage">دووسمندیا زبار دسگا ایسا، کانفیگ سخت ٱفزار وو بارت و کار گرؽڌن ایسا و ایما هیاری اده تا ویژیی یل، کارایی وو پایداری Firefox ن بؽڌر کۊنیم.</string>
   <!-- Preference switch for daily usage ping data collection -->
   <string name="preferences_daily_usage_ping_title">پینگ و کار گرؽڌن رۊزووه</string>
   <string name="preferences_daily_usage_ping_description" tools:ignore="BrandUsage">یو Mozilla ن هیاری اده تا منتورا رۊزووه ن بشماره.</string>

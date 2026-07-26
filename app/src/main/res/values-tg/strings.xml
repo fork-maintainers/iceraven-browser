@@ -978,6 +978,10 @@
   <string name="notifications_allowed_summary">Иҷозат дода мешавад</string>
   <!-- Summary for notification preference indicating notifications are not allowed -->
   <string name="notifications_not_allowed_summary">Иҷозат дода намешавад</string>
+  <!-- Summary for local network access preference indicating access is allowed -->
+  <string name="local_network_access_allowed_summary">Иҷозат дода мешавад</string>
+  <!-- Summary for local network access preference indicating access is not allowed -->
+  <string name="local_network_access_not_allowed_summary">Иҷозат дода намешавад</string>
   <!--
     Add-on Permissions
 
@@ -1700,6 +1704,14 @@
   <string name="close_tab_and_delete_group_confirmation_dialog_confirm">Нест кардани гурӯҳ</string>
   <!-- Text shown on the cancel button in the Close last tab and delete tab group confirmation dialog. -->
   <string name="close_tab_and_delete_group_confirmation_dialog_cancel">Бекор кардан</string>
+  <!-- Content description for the three dot button next to a tab group" -->
+  <string name="tab_group_three_dot_button_content_description">Имконоти бештар</string>
+  <!-- Text shown on the edit button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_edit">Таҳрир кардан</string>
+  <!-- Text shown on the delete button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_delete">Нест кардан</string>
+  <!-- Text shown on the close button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_close">Пӯшидан</string>
   <!--
     Color labels for tab groups, used for accessibility and selection UI.
 
@@ -1975,6 +1987,8 @@
   <string name="webcompat_reporter_description_error">Лутфан, ақаллан 10 аломатро ворид намоед</string>
   <!-- The label/title of a mandatory field in the Web Compat Reporter feature for adding additional information. -->
   <string name="webcompat_reporter_label_mandatory_description">Мушкилотро ба таври муфассал тавсиф кунед, то ин маълумот ба мо дар таҳқиқи масъала кумак кунад</string>
+  <!-- The label/title of a optional field in the Web Compat Reporter feature for adding additional information. -->
+  <string name="webcompat_reporter_label_optional_description">Мушкилотро ба таври муфассал тавсиф кунед, то ин маълумот ба мо дар таҳқиқи масъала кумак кунад (ихтиёрӣ)</string>
   <!-- The label/title of a field in the Web Compat Reporter feature for explaining a high-level reason why the site is broken. -->
   <string name="webcompat_reporter_label_whats_broken_2">Чӣ вайрон шудааст?</string>
   <!-- The placeholder text for the dropdown where a user selects a high-level reason why the site is broken. -->
@@ -2194,6 +2208,10 @@
   <string name="bookmark_select_folder_new_folder_button_title">Ҷузвдони нав</string>
   <!-- Bookmark snackbar message for moving a single item. %1$s is the title of the item being moved and %2$s is the new parent folder of the bookmark -->
   <string name="bookmark_moved_single_item">«%1$s» ба «%2$s» интиқол дода шуд</string>
+  <!-- Text for bookmark search page when there are no results. -->
+  <string name="bookmark_no_search_results">Ягон мутобиқат ёфт нашуд.</string>
+  <!-- Additional text for bookmark search page when there are no results. -->
+  <string name="bookmark_no_search_results_additional_text">Ҷустуҷӯи дигареро кӯшиш кунед!</string>
   <!--
     Site Permissions
 
@@ -3124,6 +3142,14 @@
   <string name="ip_protection_data_limit_reached_snackbar">%1$d ГБ-и маълумоти «VPN» истифода шуд. Дастрасӣ дар моҳи оянда аз нав танзим карда мешавад.</string>
   <!-- Snackbar (in-app pop-up notification) action button text that takes the user to the VPN settings screen. -->
   <string name="ip_protection_data_limit_reached_snackbar_action">Танзимот</string>
+  <!-- Title shown on the browser VPN settings screen for location selection section. -->
+  <string name="ip_protection_location_title" tools:ignore="UnusedResources">Ҷойгиршавӣ</string>
+  <!-- Label for the Recommended server location option which is automatically selected by the browser. -->
+  <string name="ip_protection_recommended_location" tools:ignore="UnusedResources">Тавсияшуда</string>
+  <!-- Label for the button that takes the user to get the standalone Mozilla VPN product. -->
+  <string name="ip_protection_mozilla_vpn_upsell_button" tools:ignore="UnusedResources,BrandUsage">Ба даст овардани «Mozilla VPN»</string>
+  <!-- Title for the browser VPN location picker screen. -->
+  <string name="ip_protection_location_picker_title" tools:ignore="UnusedResources">Интихоби ҷойгиршавии «VPN»</string>
   <!--
     Autofill
 

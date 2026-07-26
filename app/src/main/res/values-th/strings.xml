@@ -977,6 +977,10 @@
   <string name="notifications_allowed_summary">อนุญาต</string>
   <!-- Summary for notification preference indicating notifications are not allowed -->
   <string name="notifications_not_allowed_summary">ไม่อนุญาต</string>
+  <!-- Summary for local network access preference indicating access is allowed -->
+  <string name="local_network_access_allowed_summary">อนุญาต</string>
+  <!-- Summary for local network access preference indicating access is not allowed -->
+  <string name="local_network_access_not_allowed_summary">ไม่อนุญาต</string>
   <!--
     Add-on Permissions
 
@@ -1694,6 +1698,14 @@
   <string name="close_tab_and_delete_group_confirmation_dialog_confirm">ลบกลุ่ม</string>
   <!-- Text shown on the cancel button in the Close last tab and delete tab group confirmation dialog. -->
   <string name="close_tab_and_delete_group_confirmation_dialog_cancel">ยกเลิก</string>
+  <!-- Content description for the three dot button next to a tab group" -->
+  <string name="tab_group_three_dot_button_content_description">ตัวเลือกเพิ่มเติม</string>
+  <!-- Text shown on the edit button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_edit">แก้ไข</string>
+  <!-- Text shown on the delete button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_delete">ลบ</string>
+  <!-- Text shown on the close button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_close">ปิด</string>
   <!--
     Color labels for tab groups, used for accessibility and selection UI.
 
@@ -4570,6 +4582,16 @@
   <string name="context_menu_open_image_with_google_lens">ค้นหาด้วย Google Lens</string>
   <!-- Toast shown when the user denies the camera permission requested by the Lens camera screen -->
   <string name="lens_camera_permission_denied">การอนุญาตถูกปฏิเสธ</string>
+  <!--
+    Title shown at the top of the camera screen, next to the close button, telling the
+    user that the photo they capture will be sent to Google Lens for a visual search.
+  -->
+  <string name="lens_camera_title_lens">Google Lens</string>
+  <!--
+    Title shown at the top of the camera screen, next to the close button, telling the
+    user that the camera is being used to scan a QR code.
+  -->
+  <string name="lens_camera_title_qr">คิวอาร์โค้ด</string>
   <!-- Title for the Google Lens AI feature toggle -->
   <string name="ai_controls_google_lens_title">Google Lens</string>
   <!-- Content description for the Google Lens half of the camera mode toggle -->

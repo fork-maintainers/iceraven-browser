@@ -3116,6 +3116,8 @@
   <string name="ip_protection_data_limit_reached_snackbar">%1$d GB VPN 流量已用完，使用权限将于下个月重置。</string>
   <!-- Snackbar (in-app pop-up notification) action button text that takes the user to the VPN settings screen. -->
   <string name="ip_protection_data_limit_reached_snackbar_action">设置</string>
+  <!-- Description shown on the browser VPN settings screen prompting the user to turn the VPN on. -->
+  <string name="ip_protection_settings_description" tools:ignore="UnusedResources">开启 VPN，让您的浏览更加隐私，更难跟踪。</string>
   <!--
     Autofill
 

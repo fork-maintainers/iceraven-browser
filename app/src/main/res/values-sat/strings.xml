@@ -981,6 +981,12 @@
   <string name="notifications_allowed_summary">ᱦᱮᱥᱟᱹᱨᱤᱭᱟᱹ</string>
   <!-- Summary for notification preference indicating notifications are not allowed -->
   <string name="notifications_not_allowed_summary">ᱢᱟᱱᱟ ᱜᱮᱭᱟ</string>
+  <!-- Preference for local network access / nearby devices in Android 17 -->
+  <string name="preferences_local_network_access">ᱞᱚᱠᱟᱞ ᱱᱮᱴᱣᱟᱨᱠ ᱟᱫᱮᱨ/ ᱥᱩᱨ ᱨᱮᱭᱟᱜ ᱥᱟᱫᱷᱚᱱ</string>
+  <!-- Summary for local network access preference indicating access is allowed -->
+  <string name="local_network_access_allowed_summary">ᱦᱮᱥᱟᱹᱨᱤᱭᱟᱹ</string>
+  <!-- Summary for local network access preference indicating access is not allowed -->
+  <string name="local_network_access_not_allowed_summary">ᱢᱟᱱᱟ ᱜᱮᱭᱟ</string>
   <!--
     Add-on Permissions
 
@@ -1708,6 +1714,14 @@
   <string name="close_tab_and_delete_group_confirmation_dialog_confirm">ᱜᱟᱫᱮᱞ ᱢᱮᱴᱟᱣ ᱢᱮ</string>
   <!-- Text shown on the cancel button in the Close last tab and delete tab group confirmation dialog. -->
   <string name="close_tab_and_delete_group_confirmation_dialog_cancel">ᱵᱟᱹᱰᱨᱟᱹ</string>
+  <!-- Content description for the three dot button next to a tab group" -->
+  <string name="tab_group_three_dot_button_content_description">ᱰᱷᱮᱨ ᱢᱚᱱᱮᱛᱮᱭᱟᱜ</string>
+  <!-- Text shown on the edit button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_edit">ᱥᱟᱯᱲᱟᱣ</string>
+  <!-- Text shown on the delete button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_delete">ᱢᱮᱴᱟᱣ ᱢᱮ</string>
+  <!-- Text shown on the close button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_close">ᱵᱚᱸᱫᱚᱭ ᱢᱮ</string>
   <!--
     Color labels for tab groups, used for accessibility and selection UI.
 
@@ -1984,6 +1998,8 @@
   <string name="webcompat_reporter_description_error">ᱫᱟᱭᱟ ᱠᱟᱛᱮ ᱠᱚᱢ ᱥᱮ ᱠᱚᱢ 10 ᱜᱚᱴᱟᱝ ᱪᱤᱠᱤ ᱟᱫᱮᱨ ᱢᱮ</string>
   <!-- The label/title of a mandatory field in the Web Compat Reporter feature for adding additional information. -->
   <string name="webcompat_reporter_label_mandatory_description">ᱮᱴᱠᱮᱴᱚᱬᱮ ᱨᱮᱭᱟᱜ ᱛᱚᱞᱟᱥ ᱞᱟᱹᱜᱤᱫ ᱟᱞᱮ ᱜᱚᱲᱚ ᱞᱟᱹᱜᱤᱫ ᱮᱴᱠᱮᱴᱚᱬᱮ ᱵᱤᱵᱨᱚᱬ ᱛᱮ ᱞᱟᱹᱭ ᱢᱮ</string>
+  <!-- The label/title of a optional field in the Web Compat Reporter feature for adding additional information. -->
+  <string name="webcompat_reporter_label_optional_description">ᱮᱴᱠᱮᱴᱚᱬᱮ ᱨᱮᱭᱟᱜ ᱛᱚᱞᱟᱥ ᱞᱟᱹᱜᱤᱫ ᱟᱞᱮ ᱜᱚᱲᱚ ᱞᱟᱹᱜᱤᱫ ᱮᱴᱠᱮᱴᱚᱬᱮ ᱵᱤᱵᱨᱚᱬ ᱛᱮ ᱞᱟᱹᱭ ᱢᱮ (ᱩᱱᱟᱹᱜ ᱵᱟᱝ ᱡᱟᱹᱨᱩᱲ)</string>
   <!-- The label/title of a field in the Web Compat Reporter feature for explaining a high-level reason why the site is broken. -->
   <string name="webcompat_reporter_label_whats_broken_2">ᱪᱮᱫ ᱨᱟᱹᱯᱩᱫ ᱮᱱᱟ ?</string>
   <!-- The placeholder text for the dropdown where a user selects a high-level reason why the site is broken. -->
@@ -2306,7 +2322,7 @@
   <!-- Category header of a preference that allows a user to alter settings related to web content. -->
   <string name="preferences_category_content">ᱡᱤᱱᱤᱥ</string>
   <!-- Preference for altering the default browsing mode. When enabled, the desktop site will always be requested. -->
-  <string name="preference_feature_desktop_mode_default">ᱰᱮᱥᱠᱴᱚᱯ ᱥᱟᱤᱴ ᱱᱮᱦᱚᱨ ᱢᱮ</string>
+  <string name="preference_feature_desktop_mode_default">ᱰᱮᱥᱠᱴᱚᱯ ᱥᱟᱭᱤᱴ ᱱᱮᱦᱚᱨ ᱢᱮ</string>
   <!--
     Collections
 

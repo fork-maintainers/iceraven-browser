@@ -983,9 +983,9 @@
   <!-- Preference for local network access / nearby devices in Android 17 -->
   <string name="preferences_local_network_access">Accès au réseau local / Appareils à proximité</string>
   <!-- Summary for local network access preference indicating access is allowed -->
-  <string name="local_network_access_allowed_summary">Autorisés</string>
+  <string name="local_network_access_allowed_summary">Autorisé</string>
   <!-- Summary for local network access preference indicating access is not allowed -->
-  <string name="local_network_access_not_allowed_summary">Non autorisées</string>
+  <string name="local_network_access_not_allowed_summary">Non autorisé</string>
   <!--
     Add-on Permissions
 
