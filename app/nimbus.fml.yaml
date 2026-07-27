@@ -44,7 +44,7 @@ import:
             enabled: true
         - channel: beta
           value:
-            enabled: false
+            enabled: true
         - channel: release
           value:
             enabled: false
