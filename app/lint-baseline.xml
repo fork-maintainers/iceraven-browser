@@ -134,50 +134,6 @@
     </issue>
 
     <issue
-        id="NoSystemCurrentTimeMillis"
-        message="`System.currentTimeMillis()` must be injectable. Only permitted as a default value of a parameter on a top-level function or on a class."
-        errorLine1="    fun onAcceptTermsButtonClicked(nowMillis: Long = System.currentTimeMillis()) = Unit"
-        errorLine2="                                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/java/org/mozilla/fenix/onboarding/view/OnboardingPageState.kt"
-            line="123"
-            column="54"/>
-    </issue>
-
-    <issue
-        id="NoSystemCurrentTimeMillis"
-        message="`System.currentTimeMillis()` must be injectable. Only permitted as a default value of a parameter on a top-level function or on a class."
-        errorLine1="    fun updatePrivacyNoticeBannerDisplayedPreference(nowMillis: Long = System.currentTimeMillis())"
-        errorLine2="                                                                       ~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/java/org/mozilla/fenix/termsofuse/store/PrivacyNoticeBannerRepository.kt"
-            line="17"
-            column="72"/>
-    </issue>
-
-    <issue
-        id="NoSystemCurrentTimeMillis"
-        message="`System.currentTimeMillis()` must be injectable. Only permitted as a default value of a parameter on a top-level function or on a class."
-        errorLine1="    fun updateHasAcceptedTermsOfUsePreference(nowMillis: Long = System.currentTimeMillis())"
-        errorLine2="                                                                ~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/java/org/mozilla/fenix/termsofuse/store/TermsOfUsePromptRepository.kt"
-            line="42"
-            column="65"/>
-    </issue>
-
-    <issue
-        id="NoSystemCurrentTimeMillis"
-        message="`System.currentTimeMillis()` must be injectable. Only permitted as a default value of a parameter on a top-level function or on a class."
-        errorLine1="    fun updateLastTermsOfUsePromptTimeInMillis(currentTimeInMillis: Long = System.currentTimeMillis())"
-        errorLine2="                                                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/java/org/mozilla/fenix/termsofuse/store/TermsOfUsePromptRepository.kt"
-            line="54"
-            column="76"/>
-    </issue>
-
-    <issue
         id="UseFragmentContent"
         message="Prefer content {} instead of manually constructing a ComposeView in onCreateView()."
         errorLine1="        return ComposeView(requireContext()).apply {"

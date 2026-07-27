@@ -32,7 +32,7 @@ class TermsOfUsePromptRepositoryTest {
     @Before
     fun setup() {
         settings = Settings(testContext)
-        repository = DefaultTermsOfUsePromptRepository(settings)
+        repository = DefaultTermsOfUsePromptRepository(settings, currentTimeMillisProvider = { TIME_IN_MILLIS })
     }
 
     @Test
@@ -189,7 +189,7 @@ class TermsOfUsePromptRepositoryTest {
         assertEquals(0, settings.termsOfUseAcceptedVersion)
         assertEquals(0L, settings.termsOfUseAcceptedTimeInMillis)
 
-        repository.updateHasAcceptedTermsOfUsePreference(nowMillis = TIME_IN_MILLIS)
+        repository.updateHasAcceptedTermsOfUsePreference()
 
         assertTrue(settings.hasAcceptedTermsOfService)
         assertEquals(5, settings.termsOfUseAcceptedVersion)

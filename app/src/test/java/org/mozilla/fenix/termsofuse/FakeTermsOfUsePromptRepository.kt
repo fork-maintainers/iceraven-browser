@@ -17,8 +17,8 @@ class FakeTermsOfUsePromptRepository(
     override fun userPostponedAndWithinCooldownPeriod(currentTimeMillis: Long) =
         userPostponedAndWithinCooldownPeriod
 
-    override fun updateHasAcceptedTermsOfUsePreference(nowMillis: Long) {}
+    override fun updateHasAcceptedTermsOfUsePreference() {}
     override fun updateHasPostponedAcceptingTermsOfUsePreference() {}
-    override fun updateLastTermsOfUsePromptTimeInMillis(currentTimeInMillis: Long) {}
+    override fun updateLastTermsOfUsePromptTimeInMillis() {}
     override fun incrementTermsOfUsePromptDisplayedCount() {}
 }
