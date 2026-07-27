@@ -5,6 +5,7 @@
 package org.mozilla.fenix.utils
 
 import android.view.View
+import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.appcompat.widget.Toolbar
@@ -17,7 +18,7 @@ import org.mozilla.fenix.R
  */
 object AccessibilityUtils {
 
-    private var lastAnnouncementTime = 0L
+    private val debouncer = AnnouncementDebouncer()
 
     /**
      * This function attempts to move focus to the back button on the navigation bar as a generic
@@ -52,7 +53,7 @@ object AccessibilityUtils {
     /**
      * Sends an accessibility event. The announcement is only triggered after a minimum time interval.
      */
-    fun View.announcePrivateModeForAccessibility() = debounceAnnouncement {
+    fun View.announcePrivateModeForAccessibility() = debouncer.debounce {
         // Using the deprecated method instead of recommended setStateDescription()
         // due to limited support when called on binding.root
         @Suppress("Deprecation")
@@ -60,6 +61,18 @@ object AccessibilityUtils {
             context.getString(R.string.private_browsing_a11y_session_announcement),
         )
     }
+}
+
+/**
+ * Debounces accessibility announcements so they fire at most once per [debounce] delay window.
+ *
+ * @param currentTimeMillis provider for the current time in milliseconds, injectable for testing.
+ */
+@VisibleForTesting
+internal class AnnouncementDebouncer(
+    private val currentTimeMillis: () -> Long = { System.currentTimeMillis() },
+) {
+    private var lastAnnouncementTime = 0L
 
     /**
      * Executes the given [action] only if the time since the last invocation is at least [delay].
@@ -67,8 +80,8 @@ object AccessibilityUtils {
      * @param delay Minimum interval in milliseconds between allowed executions.
      * @param action The action to execute.
      */
-    private fun debounceAnnouncement(delay: Long = 2000, action: () -> Unit) {
-        val currentTime = System.currentTimeMillis()
+    fun debounce(delay: Long = 2000, action: () -> Unit) {
+        val currentTime = currentTimeMillis()
         if (currentTime - lastAnnouncementTime >= delay) {
             lastAnnouncementTime = currentTime
             action()
