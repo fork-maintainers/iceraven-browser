@@ -530,6 +530,39 @@ class InstallReferrerWorkerTest {
 
         assertTrue(settings.isUserMolocoAttributed)
     }
+
+    @Test
+    fun `WHEN handleSuccess receives a Rakuten-attributed referrer THEN isUserRakutenAttributed is set to true`() {
+        val worker = TestListenableWorkerBuilder<InstallReferrerWorker>(context).build()
+        val settings = Settings(context)
+        val referrer = "utm_source=Rakuten&utm_medium=paid"
+
+        worker.handleSuccess(referrer, InstallReferrerClient.InstallReferrerResponse.OK, settings)
+
+        assertTrue(settings.isUserRakutenAttributed)
+    }
+
+    @Test
+    fun `WHEN handleSuccess receives a non-Rakuten referrer THEN isUserRakutenAttributed is set to false`() {
+        val worker = TestListenableWorkerBuilder<InstallReferrerWorker>(context).build()
+        val settings = Settings(context)
+        settings.isUserRakutenAttributed = true
+
+        worker.handleSuccess("utm_source=google&utm_medium=cpc", InstallReferrerClient.InstallReferrerResponse.OK, settings)
+
+        assertFalse(settings.isUserRakutenAttributed)
+    }
+
+    @Test
+    fun `WHEN handleSuccess receives a null referrer THEN isUserRakutenAttributed is not changed`() {
+        val worker = TestListenableWorkerBuilder<InstallReferrerWorker>(context).build()
+        val settings = Settings(context)
+        settings.isUserRakutenAttributed = true
+
+        worker.handleSuccess(null, InstallReferrerClient.InstallReferrerResponse.OK, settings)
+
+        assertTrue(settings.isUserRakutenAttributed)
+    }
 }
 
 private class FakeInstallReferrerClient(

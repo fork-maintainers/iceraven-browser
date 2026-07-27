@@ -32,6 +32,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mozilla.fenix.components.metrics.AdjustThirdPartySharingController.Companion.AURA_PARTNER_ID
+import org.mozilla.fenix.components.metrics.AdjustThirdPartySharingController.Companion.DYNAMIC_CALLBACK_ID
 import org.mozilla.fenix.components.metrics.AdjustThirdPartySharingController.Companion.GOOGLE_PARTNER_ID
 import org.mozilla.fenix.components.metrics.AdjustThirdPartySharingController.Companion.META_PARTNER_ID
 import org.mozilla.fenix.components.metrics.AdjustThirdPartySharingController.Companion.MOLOCO_PARTNER_ID
@@ -246,6 +247,7 @@ internal class AdjustMetricsServiceTest {
             isUserRedditAttributed = false,
             isUserXTwitterAttributed = false,
             isUserMolocoAttributed = false,
+            isUserRakutenAttributed = false,
             controller = thirdPartySharingController,
         )
 
@@ -253,7 +255,7 @@ internal class AdjustMetricsServiceTest {
     }
 
     @Test
-    fun `WHEN the distribution is DEFAULT AND the user has no Meta, TikTok, Reddit, or X attribution THEN sharing is enabled for Google`() {
+    fun `WHEN the distribution is DEFAULT AND the user has no Meta, TikTok, Reddit, X, or Rakuten attribution THEN sharing is enabled for Google`() {
         AdjustMetricsService.applyThirdPartySharingSettings(
             distribution = DistributionIdManager.Distribution.DEFAULT,
             isUserMetaAttributed = false,
@@ -261,6 +263,7 @@ internal class AdjustMetricsServiceTest {
             isUserRedditAttributed = false,
             isUserXTwitterAttributed = false,
             isUserMolocoAttributed = false,
+            isUserRakutenAttributed = false,
             controller = thirdPartySharingController,
         )
 
@@ -276,6 +279,7 @@ internal class AdjustMetricsServiceTest {
             isUserRedditAttributed = false,
             isUserXTwitterAttributed = false,
             isUserMolocoAttributed = false,
+            isUserRakutenAttributed = false,
             controller = thirdPartySharingController,
         )
 
@@ -291,6 +295,7 @@ internal class AdjustMetricsServiceTest {
             isUserRedditAttributed = true,
             isUserXTwitterAttributed = false,
             isUserMolocoAttributed = false,
+            isUserRakutenAttributed = false,
             controller = thirdPartySharingController,
         )
 
@@ -306,6 +311,7 @@ internal class AdjustMetricsServiceTest {
             isUserRedditAttributed = false,
             isUserXTwitterAttributed = true,
             isUserMolocoAttributed = false,
+            isUserRakutenAttributed = false,
             controller = thirdPartySharingController,
         )
 
@@ -321,10 +327,27 @@ internal class AdjustMetricsServiceTest {
             isUserRedditAttributed = false,
             isUserXTwitterAttributed = false,
             isUserMolocoAttributed = true,
+            isUserRakutenAttributed = false,
             controller = thirdPartySharingController,
         )
 
         verify { thirdPartySharingController.enableThirdPartySharingForPartner(MOLOCO_PARTNER_ID) }
+    }
+
+    @Test
+    fun `WHEN the distribution is DEFAULT AND the user is Rakuten attributed THEN sharing is enabled for Rakuten`() {
+        AdjustMetricsService.applyThirdPartySharingSettings(
+            distribution = DistributionIdManager.Distribution.DEFAULT,
+            isUserMetaAttributed = false,
+            isUserTikTokAttributed = false,
+            isUserRedditAttributed = false,
+            isUserXTwitterAttributed = false,
+            isUserMolocoAttributed = false,
+            isUserRakutenAttributed = true,
+            controller = thirdPartySharingController,
+        )
+
+        verify { thirdPartySharingController.enableThirdPartySharingForPartner(DYNAMIC_CALLBACK_ID) }
     }
 
     @Test
@@ -336,6 +359,7 @@ internal class AdjustMetricsServiceTest {
             isUserRedditAttributed = false,
             isUserXTwitterAttributed = false,
             isUserMolocoAttributed = false,
+            isUserRakutenAttributed = false,
             controller = thirdPartySharingController,
         )
 
@@ -351,6 +375,7 @@ internal class AdjustMetricsServiceTest {
             isUserRedditAttributed = false,
             isUserXTwitterAttributed = false,
             isUserMolocoAttributed = false,
+            isUserRakutenAttributed = false,
             controller = thirdPartySharingController,
         )
 
@@ -366,6 +391,7 @@ internal class AdjustMetricsServiceTest {
             isUserRedditAttributed = false,
             isUserXTwitterAttributed = false,
             isUserMolocoAttributed = false,
+            isUserRakutenAttributed = false,
             controller = thirdPartySharingController,
         )
 
@@ -381,6 +407,7 @@ internal class AdjustMetricsServiceTest {
             isUserRedditAttributed = false,
             isUserXTwitterAttributed = false,
             isUserMolocoAttributed = false,
+            isUserRakutenAttributed = false,
             controller = thirdPartySharingController,
         )
 
@@ -396,6 +423,7 @@ internal class AdjustMetricsServiceTest {
             isUserRedditAttributed = false,
             isUserXTwitterAttributed = false,
             isUserMolocoAttributed = false,
+            isUserRakutenAttributed = false,
             controller = thirdPartySharingController,
         )
 
@@ -411,6 +439,7 @@ internal class AdjustMetricsServiceTest {
             isUserRedditAttributed = false,
             isUserXTwitterAttributed = false,
             isUserMolocoAttributed = false,
+            isUserRakutenAttributed = false,
             controller = thirdPartySharingController,
         )
 

@@ -102,6 +102,9 @@ class InstallReferrerWorker(
             settings.isUserMolocoAttributed =
                 InstallReferrerHandlingService.isMolocoAttribution(installReferrerResponse)
 
+            settings.isUserRakutenAttributed =
+                InstallReferrerHandlingService.isRakutenAttribution(installReferrerResponse)
+
             utmParams.recordInstallReferrer(settings)
         }
 

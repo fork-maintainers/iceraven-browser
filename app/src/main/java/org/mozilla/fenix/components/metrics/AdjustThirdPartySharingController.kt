@@ -66,5 +66,8 @@ class AdjustThirdPartySharingController : ThirdPartySharingController {
 
         /** Adjust partner ID for Moloco. */
         const val MOLOCO_PARTNER_ID = "56"
+
+        /** Adjust partner ID for dynamic callback partners. */
+        const val DYNAMIC_CALLBACK_ID = "dynamic_callbacks"
     }
 }

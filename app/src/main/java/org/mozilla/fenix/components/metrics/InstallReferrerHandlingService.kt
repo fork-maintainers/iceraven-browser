@@ -79,6 +79,8 @@ class InstallReferrerHandlingService(
                                     isXTwitterAttribution(installReferrerResponse)
                                 context.components.settings.isUserMolocoAttributed =
                                     isMolocoAttribution(installReferrerResponse)
+                                context.components.settings.isUserRakutenAttributed =
+                                    isRakutenAttribution(installReferrerResponse)
                                 distributionIdManager.updateDistributionIdFromUtmParams(
                                     UTMParams.parseUTMParameters(installReferrerResponse),
                                 )
@@ -158,6 +160,7 @@ class InstallReferrerHandlingService(
         private const val REDDIT_UTM_SOURCE = "reddit"
         private const val X_TWITTER_UTM_SOURCE = "x"
         private const val MOLOCO_EXTERNAL_CLICK_ID_PREFIX = "moloco_"
+        private const val RAKUTEN_UTM_SOURCE = "rakuten"
 
         private fun decodeInstallReferrer(installReferrerResponse: String): String =
             try {
@@ -213,6 +216,14 @@ class InstallReferrerHandlingService(
             return clickId.startsWith(MOLOCO_EXTERNAL_CLICK_ID_PREFIX, ignoreCase = true)
         }
 
+        @VisibleForTesting
+        internal fun isRakutenAttribution(installReferrerResponse: String?): Boolean {
+            if (installReferrerResponse.isNullOrBlank()) return false
+            val decoded = decodeInstallReferrer(installReferrerResponse)
+
+            return UTMParams.parseUTMParameters(decoded).source.equals(RAKUTEN_UTM_SOURCE, ignoreCase = true)
+        }
+
         @Suppress("ReturnCount")
         @VisibleForTesting
         internal suspend fun shouldShowMarketingOnboarding(
@@ -248,6 +259,10 @@ class InstallReferrerHandlingService(
             }
 
             if (isMolocoAttribution(installReferrerResponse)) {
+                return true
+            }
+
+            if (isRakutenAttribution(installReferrerResponse)) {
                 return true
             }
 

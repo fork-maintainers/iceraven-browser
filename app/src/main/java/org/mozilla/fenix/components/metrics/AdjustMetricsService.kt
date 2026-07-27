@@ -23,6 +23,7 @@ import org.mozilla.fenix.Config
 import org.mozilla.fenix.GleanMetrics.AdjustAttribution
 import org.mozilla.fenix.GleanMetrics.Pings
 import org.mozilla.fenix.components.metrics.AdjustThirdPartySharingController.Companion.AURA_PARTNER_ID
+import org.mozilla.fenix.components.metrics.AdjustThirdPartySharingController.Companion.DYNAMIC_CALLBACK_ID
 import org.mozilla.fenix.components.metrics.AdjustThirdPartySharingController.Companion.GOOGLE_PARTNER_ID
 import org.mozilla.fenix.components.metrics.AdjustThirdPartySharingController.Companion.META_PARTNER_ID
 import org.mozilla.fenix.components.metrics.AdjustThirdPartySharingController.Companion.MOLOCO_PARTNER_ID
@@ -180,6 +181,7 @@ class AdjustMetricsService(
             isUserRedditAttributed = settings.isUserRedditAttributed,
             isUserXTwitterAttributed = settings.isUserXTwitterAttributed,
             isUserMolocoAttributed = settings.isUserMolocoAttributed,
+            isUserRakutenAttributed = settings.isUserRakutenAttributed,
             controller = thirdPartySharingController,
         )
 
@@ -272,6 +274,7 @@ class AdjustMetricsService(
             isUserRedditAttributed: Boolean,
             isUserXTwitterAttributed: Boolean,
             isUserMolocoAttributed: Boolean,
+            isUserRakutenAttributed: Boolean,
             controller: ThirdPartySharingController = AdjustThirdPartySharingController(),
         ) {
             when (distribution) {
@@ -290,6 +293,8 @@ class AdjustMetricsService(
                             controller.enableThirdPartySharingForPartner(X_TWITTER_PARTNER_ID)
                         isUserMolocoAttributed ->
                             controller.enableThirdPartySharingForPartner(MOLOCO_PARTNER_ID)
+                        isUserRakutenAttributed ->
+                            controller.enableThirdPartySharingForPartner(DYNAMIC_CALLBACK_ID)
                         else ->
                             controller.enableThirdPartySharingForPartner(GOOGLE_PARTNER_ID)
                     }
