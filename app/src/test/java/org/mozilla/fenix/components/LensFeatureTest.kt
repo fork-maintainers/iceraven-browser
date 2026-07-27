@@ -76,7 +76,7 @@ class LensFeatureTest {
 
     @Test
     fun `GIVEN a successful image result WHEN upload succeeds THEN dispatches LensResultAvailable`() = runTest(testDispatcher) {
-        coEvery { uploader.upload(any()) } returns
+        coEvery { uploader.upload(any(), any()) } returns
             LensImageUploader.UploadResult(resultUrl = "https://lens.google.com/results", httpStatusCode = 200)
         testDispatcher.scheduler.advanceUntilIdle()
 
@@ -87,7 +87,7 @@ class LensFeatureTest {
         feature.handleImageResult(Activity.RESULT_OK, resultData)
         testDispatcher.scheduler.advanceUntilIdle()
 
-        coVerify { uploader.upload(Uri.parse("content://test/image.jpg")) }
+        coVerify { uploader.upload(Uri.parse("content://test/image.jpg"), isPrivate = false) }
         verify { appStore.dispatch(LensAction.LensResultAvailable("https://lens.google.com/results")) }
         val events = GoogleLens.searchCompleted.testGetValue()
         assertNotNull(events)
@@ -97,8 +97,25 @@ class LensFeatureTest {
     }
 
     @Test
+    fun `GIVEN private browsing mode WHEN a camera image is uploaded THEN the upload runs in the private context`() = runTest(testDispatcher) {
+        appStore.dispatch(AppAction.BrowsingModeManagerModeChanged(BrowsingMode.Private))
+        testDispatcher.scheduler.advanceUntilIdle()
+        coEvery { uploader.upload(any(), any()) } returns
+            LensImageUploader.UploadResult(resultUrl = "https://lens.google.com/results", httpStatusCode = 200)
+
+        val resultData = mockk<Intent> {
+            every { data } returns Uri.parse("content://test/image.jpg")
+            every { getStringExtra(LensCameraActivity.EXTRA_IMAGE_SOURCE) } returns "camera"
+        }
+        feature.handleImageResult(Activity.RESULT_OK, resultData)
+        testDispatcher.scheduler.advanceUntilIdle()
+
+        coVerify { uploader.upload(Uri.parse("content://test/image.jpg"), isPrivate = true) }
+    }
+
+    @Test
     fun `GIVEN a photo picker image result WHEN upload succeeds THEN records the photo_picker source`() = runTest(testDispatcher) {
-        coEvery { uploader.upload(any()) } returns
+        coEvery { uploader.upload(any(), any()) } returns
             LensImageUploader.UploadResult(resultUrl = "https://lens.google.com/results", httpStatusCode = 200)
         testDispatcher.scheduler.advanceUntilIdle()
 
@@ -116,7 +133,7 @@ class LensFeatureTest {
 
     @Test
     fun `GIVEN a missing source extra WHEN upload succeeds THEN records the unknown source`() = runTest(testDispatcher) {
-        coEvery { uploader.upload(any()) } returns
+        coEvery { uploader.upload(any(), any()) } returns
             LensImageUploader.UploadResult(resultUrl = "https://lens.google.com/results", httpStatusCode = 200)
         testDispatcher.scheduler.advanceUntilIdle()
 
@@ -134,7 +151,7 @@ class LensFeatureTest {
 
     @Test
     fun `GIVEN a successful image result WHEN upload returns null THEN dispatches LensDismissed`() = runTest(testDispatcher) {
-        coEvery { uploader.upload(any()) } returns
+        coEvery { uploader.upload(any(), any()) } returns
             LensImageUploader.UploadResult(resultUrl = null, httpStatusCode = 400)
         testDispatcher.scheduler.advanceUntilIdle()
 
@@ -184,21 +201,21 @@ class LensFeatureTest {
 
     @Test
     fun `GIVEN uploadFromImageUrl WHEN upload succeeds THEN the camera is not launched and LensDismissed is dispatched`() = runTest(testDispatcher) {
-        coEvery { uploader.uploadFromUrl(any()) } returns
+        coEvery { uploader.uploadFromUrl(any(), any()) } returns
             LensImageUploader.UploadResult(resultUrl = "https://lens.google.com/results", httpStatusCode = 200)
         testDispatcher.scheduler.advanceUntilIdle()
 
         feature.uploadFromImageUrl("https://example.com/image.jpg")
         testDispatcher.scheduler.advanceUntilIdle()
 
-        coVerify { uploader.uploadFromUrl("https://example.com/image.jpg") }
+        coVerify { uploader.uploadFromUrl("https://example.com/image.jpg", isPrivate = false) }
         verify(exactly = 0) { lensLauncher.launch(any()) }
         verify { appStore.dispatch(LensAction.LensDismissed) }
     }
 
     @Test
     fun `GIVEN uploadFromImageUrl WHEN upload returns null THEN it records a failure and opens no tab`() = runTest(testDispatcher) {
-        coEvery { uploader.uploadFromUrl(any()) } returns
+        coEvery { uploader.uploadFromUrl(any(), any()) } returns
             LensImageUploader.UploadResult(resultUrl = null, httpStatusCode = 403)
         testDispatcher.scheduler.advanceUntilIdle()
 
@@ -224,7 +241,7 @@ class LensFeatureTest {
 
     @Test
     fun `GIVEN uploadFromImageUrl WHEN upload throws IOException THEN it records a failure and opens no tab`() = runTest(testDispatcher) {
-        coEvery { uploader.uploadFromUrl(any()) } throws java.io.IOException("boom")
+        coEvery { uploader.uploadFromUrl(any(), any()) } throws java.io.IOException("boom")
         testDispatcher.scheduler.advanceUntilIdle()
 
         feature.uploadFromImageUrl("https://example.com/image.jpg")
@@ -261,12 +278,13 @@ class LensFeatureTest {
         val resultUrl = "https://lens.google.com/results?private"
         appStore.dispatch(AppAction.BrowsingModeManagerModeChanged(BrowsingMode.Private))
         testDispatcher.scheduler.advanceUntilIdle()
-        coEvery { uploader.uploadFromUrl(any()) } returns
+        coEvery { uploader.uploadFromUrl(any(), any()) } returns
             LensImageUploader.UploadResult(resultUrl = resultUrl, httpStatusCode = 200)
 
         feature.uploadFromImageUrl("https://example.com/image.jpg")
         testDispatcher.scheduler.advanceUntilIdle()
 
+        coVerify { uploader.uploadFromUrl("https://example.com/image.jpg", isPrivate = true) }
         verify {
             testContext.components.useCases.tabsUseCases.addTab(
                 url = resultUrl,
@@ -279,13 +297,13 @@ class LensFeatureTest {
 
     @Test
     fun `GIVEN LensRequestedWithImageUrl is dispatched WHEN the flow observer fires THEN uploadFromUrl runs and camera is not launched`() = runTest(testDispatcher) {
-        coEvery { uploader.uploadFromUrl(any()) } returns
+        coEvery { uploader.uploadFromUrl(any(), any()) } returns
             LensImageUploader.UploadResult(resultUrl = "https://lens.google.com/results?from-observer", httpStatusCode = 200)
 
         appStore.dispatch(LensAction.LensRequestedWithImageUrl("https://example.com/image.jpg"))
         testDispatcher.scheduler.advanceUntilIdle()
 
-        coVerify { uploader.uploadFromUrl("https://example.com/image.jpg") }
+        coVerify { uploader.uploadFromUrl("https://example.com/image.jpg", isPrivate = false) }
         verify(exactly = 0) { lensLauncher.launch(any()) }
         verify { appStore.dispatch(LensAction.LensRequestConsumed) }
     }
@@ -296,7 +314,7 @@ class LensFeatureTest {
         testDispatcher.scheduler.advanceUntilIdle()
 
         verify { lensLauncher.launch(any()) }
-        coVerify(exactly = 0) { uploader.uploadFromUrl(any()) }
+        coVerify(exactly = 0) { uploader.uploadFromUrl(any(), any()) }
         verify { appStore.dispatch(LensAction.LensRequestConsumed) }
     }
 
@@ -338,13 +356,13 @@ class LensFeatureTest {
 
         verify { appStore.dispatch(LensAction.LensDismissed) }
         verify { qrFeature.handleToolbarQrScanResults(Activity.RESULT_OK, qrIntent) }
-        coVerify(exactly = 0) { uploader.upload(any()) }
+        coVerify(exactly = 0) { uploader.upload(any(), any()) }
     }
 
     @Test
     fun `GIVEN an image intent WHEN handleCameraActivityResult is called THEN it delegates to handleImageResult`() = runTest(testDispatcher) {
         val qrFeature: QrScanFenixFeature = mockk(relaxed = true)
-        coEvery { uploader.upload(any()) } returns
+        coEvery { uploader.upload(any(), any()) } returns
             LensImageUploader.UploadResult(resultUrl = "https://lens.google.com/results", httpStatusCode = 200)
         testDispatcher.scheduler.advanceUntilIdle()
 
@@ -357,7 +375,7 @@ class LensFeatureTest {
         feature.handleCameraActivityResult(Activity.RESULT_OK, imageIntent, qrFeature)
         testDispatcher.scheduler.advanceUntilIdle()
 
-        coVerify { uploader.upload(Uri.parse("content://test/image.jpg")) }
+        coVerify { uploader.upload(Uri.parse("content://test/image.jpg"), isPrivate = false) }
         verify { appStore.dispatch(LensAction.LensResultAvailable("https://lens.google.com/results")) }
         verify(exactly = 0) { qrFeature.handleToolbarQrScanResults(any(), any()) }
     }
@@ -371,7 +389,7 @@ class LensFeatureTest {
         feature.handleCameraActivityResult(Activity.RESULT_OK, qrIntent, qrScanFeature = null)
 
         verify { appStore.dispatch(LensAction.LensDismissed) }
-        coVerify(exactly = 0) { uploader.upload(any()) }
+        coVerify(exactly = 0) { uploader.upload(any(), any()) }
     }
 
     @Test
@@ -389,12 +407,13 @@ class LensFeatureTest {
         val resultUrl = "https://lens.google.com/results?normal"
         appStore.dispatch(AppAction.BrowsingModeManagerModeChanged(BrowsingMode.Normal))
         testDispatcher.scheduler.advanceUntilIdle()
-        coEvery { uploader.uploadFromUrl(any()) } returns
+        coEvery { uploader.uploadFromUrl(any(), any()) } returns
             LensImageUploader.UploadResult(resultUrl = resultUrl, httpStatusCode = 200)
 
         feature.uploadFromImageUrl("https://example.com/image.jpg")
         testDispatcher.scheduler.advanceUntilIdle()
 
+        coVerify { uploader.uploadFromUrl("https://example.com/image.jpg", isPrivate = false) }
         verify {
             testContext.components.useCases.tabsUseCases.addTab(
                 url = resultUrl,

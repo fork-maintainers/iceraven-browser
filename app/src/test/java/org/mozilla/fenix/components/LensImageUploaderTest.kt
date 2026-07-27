@@ -101,7 +101,7 @@ class LensImageUploaderTest {
     fun `GIVEN fetched jpeg with no exif orientation WHEN fetched THEN dimensions are preserved`() {
         val jpegBytes = encodeJpeg(width = 80, height = 40)
 
-        val bitmap = createUploaderWithFetch(jpegBytes).fetchBitmap("https://example.com/i.jpg")
+        val bitmap = createUploaderWithFetch(jpegBytes).fetchBitmap("https://example.com/i.jpg", isPrivate = false)
 
         assertNotNull(bitmap)
         assertEquals(80, bitmap.width)
@@ -113,7 +113,7 @@ class LensImageUploaderTest {
         val jpegBytes = encodeJpeg(width = 80, height = 40)
             .withExifOrientation(ExifInterface.ORIENTATION_ROTATE_90)
 
-        val bitmap = createUploaderWithFetch(jpegBytes).fetchBitmap("https://example.com/i.jpg")
+        val bitmap = createUploaderWithFetch(jpegBytes).fetchBitmap("https://example.com/i.jpg", isPrivate = false)
 
         assertNotNull(bitmap)
         assertEquals(40, bitmap.width)
@@ -125,7 +125,7 @@ class LensImageUploaderTest {
         val jpegBytes = encodeJpeg(width = 80, height = 40)
             .withExifOrientation(ExifInterface.ORIENTATION_ROTATE_180)
 
-        val bitmap = createUploaderWithFetch(jpegBytes).fetchBitmap("https://example.com/i.jpg")
+        val bitmap = createUploaderWithFetch(jpegBytes).fetchBitmap("https://example.com/i.jpg", isPrivate = false)
 
         assertNotNull(bitmap)
         assertEquals(80, bitmap.width)
@@ -137,7 +137,7 @@ class LensImageUploaderTest {
         val jpegBytes = encodeJpeg(width = 80, height = 40)
             .withExifOrientation(ExifInterface.ORIENTATION_ROTATE_270)
 
-        val bitmap = createUploaderWithFetch(jpegBytes).fetchBitmap("https://example.com/i.jpg")
+        val bitmap = createUploaderWithFetch(jpegBytes).fetchBitmap("https://example.com/i.jpg", isPrivate = false)
 
         assertNotNull(bitmap)
         assertEquals(40, bitmap.width)
@@ -162,12 +162,59 @@ class LensImageUploaderTest {
             userAgent = "test",
         )
 
-        uploader.upload(mockk())
+        uploader.upload(mockk(), isPrivate = false)
 
         val request = requestSlot.captured
         assertTrue(request.url.startsWith("${LensImageUploader.UPLOAD_ENDPOINT}?"))
         assertTrue(request.url.contains("ep=${LensImageUploader.EP_BY_BYTES}"))
         assertEquals(Request.Method.POST, request.method)
+        assertEquals(false, request.private)
+    }
+
+    @Test
+    fun `GIVEN a private upload WHEN upload THEN the request runs in the private context`() = runTest {
+        val requestSlot = slot<Request>()
+        val client = mockk<Client>()
+        every { client.fetch(capture(requestSlot)) } answers {
+            Response(
+                url = "https://lens.google.com/search?results",
+                status = 200,
+                headers = MutableHeaders(),
+                body = Response.Body(ByteArrayInputStream(ByteArray(0))),
+            )
+        }
+        val uploader = LensImageUploader(
+            context = metricsContext(jpegBytes = encodeJpeg(width = 80, height = 40)),
+            client = client,
+            userAgent = "test",
+        )
+
+        uploader.upload(mockk(), isPrivate = true)
+
+        assertEquals(true, requestSlot.captured.private)
+    }
+
+    @Test
+    fun `GIVEN a private uploadFromUrl WHEN fetching the image THEN the request runs in the private context`() {
+        val requestSlot = slot<Request>()
+        val client = mockk<Client>()
+        every { client.fetch(capture(requestSlot)) } answers {
+            Response(
+                url = "https://example.com/i.jpg",
+                status = 200,
+                headers = MutableHeaders(),
+                body = Response.Body(ByteArrayInputStream(encodeJpeg(width = 80, height = 40))),
+            )
+        }
+        val uploader = LensImageUploader(
+            context = mockk<Context>(),
+            client = client,
+            userAgent = "test",
+        )
+
+        uploader.fetchBitmap("https://example.com/i.jpg", isPrivate = true)
+
+        assertEquals(true, requestSlot.captured.private)
     }
 
     private fun createUploaderWithFetch(jpegBytes: ByteArray): LensImageUploader {
