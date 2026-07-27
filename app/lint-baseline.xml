@@ -46,17 +46,6 @@
     </issue>
 
     <issue
-        id="NoSystemCurrentTimeMillis"
-        message="`System.currentTimeMillis()` must be injectable. Only permitted as a default value of a parameter on a top-level function or on a class."
-        errorLine1="            val imageFile = File(imageDir, &quot;lens_capture_${System.currentTimeMillis()}.jpg&quot;)"
-        errorLine2="                                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/java/org/mozilla/fenix/components/lens/LensCameraFragment.kt"
-            line="564"
-            column="60"/>
-    </issue>
-
-    <issue
         id="UseFragmentContent"
         message="Prefer content {} instead of manually constructing a ComposeView in onCreateView()."
         errorLine1="        return ComposeView(requireContext()).apply {"

@@ -582,6 +582,9 @@ class LensCameraFragment : Fragment() {
         }
     }
 
+    // The timestamp here only makes the captured image filename unique; there is no time-dependent
+    // behavior to inject, so a real clock is fine.
+    @Suppress("NoSystemCurrentTimeMillis")
     @VisibleForTesting
     internal fun processImage(reader: ImageReader) {
         val image = reader.acquireLatestImage() ?: return
