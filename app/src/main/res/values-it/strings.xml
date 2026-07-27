@@ -3019,7 +3019,7 @@
   <!-- Title for Accessibility Force Enable Zoom Preference -->
   <string name="preference_accessibility_force_enable_zoom">Zoom su tutti i siti web</string>
   <!-- Summary for Accessibility Force Enable Zoom Preference -->
-  <string name="preference_accessibility_force_enable_zoom_summary">Attiva per consentire la funzione “Pizzica per lo zoom“, anche sui siti web che impediscono questo gesto.</string>
+  <string name="preference_accessibility_force_enable_zoom_summary">Attiva per consentire la funzione “Pizzica per lo zoom”, anche sui siti web che impediscono questo gesto.</string>
   <!-- Saved logins sorting strategy menu item -by name- (if selected, it will sort saved logins alphabetically) -->
   <string name="saved_logins_sort_strategy_alphabetically">Nome (A-Z)</string>
   <!-- Saved logins sorting strategy menu item -by last used- (if selected, it will sort saved logins by last used) -->
@@ -3713,7 +3713,7 @@
   -->
   <string name="automatic_translation_toolbar_title_preference">Traduzione automatica</string>
   <!-- Screen header presenting the automatic translation preference feature. It will appear under the toolbar. -->
-  <string name="automatic_translation_header_preference">Seleziona una lingua per gestire le preferenze “Traduci sempre” e “Non tradurre mai“.</string>
+  <string name="automatic_translation_header_preference">Seleziona una lingua per gestire le preferenze “Traduci sempre” e “Non tradurre mai”.</string>
   <!-- The title of the warning card informs the user that the system could not load languages for translation settings. -->
   <string name="automatic_translation_error_warning_text">Impossibile caricare le lingue. Ricontrolla più tardi.</string>
   <!--

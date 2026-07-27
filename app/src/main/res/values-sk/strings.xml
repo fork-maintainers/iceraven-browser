@@ -982,6 +982,12 @@
   <string name="notifications_allowed_summary">Povolené</string>
   <!-- Summary for notification preference indicating notifications are not allowed -->
   <string name="notifications_not_allowed_summary">Zakázané</string>
+  <!-- Preference for local network access / nearby devices in Android 17 -->
+  <string name="preferences_local_network_access">Prístup k lokálnej sieti / Zariadenia v blízkosti</string>
+  <!-- Summary for local network access preference indicating access is allowed -->
+  <string name="local_network_access_allowed_summary">Povolené</string>
+  <!-- Summary for local network access preference indicating access is not allowed -->
+  <string name="local_network_access_not_allowed_summary">Zakázané</string>
   <!--
     Add-on Permissions
 
@@ -1714,6 +1720,14 @@
   <string name="close_tab_and_delete_group_confirmation_dialog_confirm">Odstrániť skupinu</string>
   <!-- Text shown on the cancel button in the Close last tab and delete tab group confirmation dialog. -->
   <string name="close_tab_and_delete_group_confirmation_dialog_cancel">Zrušiť</string>
+  <!-- Content description for the three dot button next to a tab group" -->
+  <string name="tab_group_three_dot_button_content_description">Ďalšie možnosti</string>
+  <!-- Text shown on the edit button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_edit">Upraviť</string>
+  <!-- Text shown on the delete button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_delete">Odstrániť</string>
+  <!-- Text shown on the close button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_close">Zavrieť</string>
   <!--
     Color labels for tab groups, used for accessibility and selection UI.
 
@@ -1991,6 +2005,8 @@
   <string name="webcompat_reporter_description_error">Zadajte aspoň 10 znakov</string>
   <!-- The label/title of a mandatory field in the Web Compat Reporter feature for adding additional information. -->
   <string name="webcompat_reporter_label_mandatory_description">Podrobne opíšte problém, aby sme ho mohli preskúmať</string>
+  <!-- The label/title of a optional field in the Web Compat Reporter feature for adding additional information. -->
+  <string name="webcompat_reporter_label_optional_description">Podrobne opíšte problém, aby sme ho mohli preskúmať (voliteľné)</string>
   <!-- The label/title of a field in the Web Compat Reporter feature for explaining a high-level reason why the site is broken. -->
   <string name="webcompat_reporter_label_whats_broken_2">Čo je nefunkčné?</string>
   <!-- The placeholder text for the dropdown where a user selects a high-level reason why the site is broken. -->
@@ -2014,9 +2030,9 @@
   <!-- Label of the checkbox on the “Report broken site” screen for sending URLS blocked by Enhanced Tracking Protection. -->
   <string name="webcompat_reporter_etp_checkbox_text_2">Odoslať zoznam položiek blokovaných ochranou sledovania</string>
   <!-- The button text for the preview report button to view a preview of the report. -->
-  <string name="webcompat_reporter_preview_report">Ukážka správy</string>
+  <string name="webcompat_reporter_preview_report">Ukážka hlásenia</string>
   <!-- The title shown at the top of the WebCompat Report preview panel. This appears after the user taps the “Preview” button before sending a report. -->
-  <string name="webcompat_reporter_preview_bottom_sheet_header">Ukážka správy</string>
+  <string name="webcompat_reporter_preview_bottom_sheet_header">Ukážka hlásenia</string>
   <!-- Label for the “Send” button shown in the WebCompat Report preview panel, which the user taps to submit the report. -->
   <string name="webcompat_reporter_preview_bottom_sheet_send">Odoslať</string>
   <!-- Title for the Edit URL confirmation dialog in the WebCompatReporter -->

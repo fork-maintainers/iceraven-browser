@@ -943,6 +943,10 @@
   <string name="notifications_allowed_summary">يول قويغان</string>
   <!-- Summary for notification preference indicating notifications are not allowed -->
   <string name="notifications_not_allowed_summary">يول قويمايدۇ</string>
+  <!-- Summary for local network access preference indicating access is allowed -->
+  <string name="local_network_access_allowed_summary">يول قويغان</string>
+  <!-- Summary for local network access preference indicating access is not allowed -->
+  <string name="local_network_access_not_allowed_summary">يول قويمايدۇ</string>
   <!--
     Add-on Permissions
 
@@ -1506,6 +1510,8 @@
   <string name="add_tab">بەتكۈچ قوش</string>
   <!-- Content description (not visible, for screen readers etc.): Add tab button. Adds a news tab when pressed -->
   <string name="add_private_tab">شەخسىي بەتكۈچ قوش</string>
+  <!-- Content description (not visible, for screen readers etc.): Create tab group button. Opens the create tab group sheet when pressed -->
+  <string name="create_tab_group_content_description">بەتكۈچ گۇرۇپپىسى قۇر</string>
   <!-- Text for the tab search bar placeholder -->
   <string name="tab_manager_search_bar_placeholder">بەتكۈچ ئىزدەيدۇ</string>
   <!-- Text shown in the menu to view recently closed tabs -->
@@ -1663,6 +1669,14 @@
   <string name="close_tab_and_delete_group_confirmation_dialog_confirm">گۇرۇپپا ئۆچۈر</string>
   <!-- Text shown on the cancel button in the Close last tab and delete tab group confirmation dialog. -->
   <string name="close_tab_and_delete_group_confirmation_dialog_cancel">ۋاز كەچ</string>
+  <!-- Content description for the three dot button next to a tab group" -->
+  <string name="tab_group_three_dot_button_content_description">تېخىمۇ كۆپ تاللانما</string>
+  <!-- Text shown on the edit button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_edit">تەھرىر</string>
+  <!-- Text shown on the delete button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_delete">ئۆچۈر</string>
+  <!-- Text shown on the close button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_close">ياپ</string>
   <!--
     Color labels for tab groups, used for accessibility and selection UI.
 
@@ -1936,12 +1950,18 @@
   <string name="webcompat_reporter_clear_reason_content_description">تاللانغان سەۋەبنى تازىلا</string>
   <!-- The error message of the description when the user selects "Something else" as the reason, but left the description empty or too short. -->
   <string name="webcompat_reporter_description_error">كەم دېگەندە 10 ھەرپ كىرگۈزۈڭ</string>
+  <!-- The label/title of a mandatory field in the Web Compat Reporter feature for adding additional information. -->
+  <string name="webcompat_reporter_label_mandatory_description">مەسىلىنى تەكشۈرۈشىمىزگە ياردەم بېرىش ئۈچۈن مەسىلىنى تەپسىلىي چۈشەندۈرۈڭ</string>
+  <!-- The label/title of a optional field in the Web Compat Reporter feature for adding additional information. -->
+  <string name="webcompat_reporter_label_optional_description">مەسىلىنى تەكشۈرۈشىمىزگە ياردەم بېرىش ئۈچۈن مەسىلىنى تەپسىلىي چۈشەندۈرۈڭ (تاللاشچان)</string>
   <!-- The label/title of a field in the Web Compat Reporter feature for explaining a high-level reason why the site is broken. -->
   <string name="webcompat_reporter_label_whats_broken_2">نېمە بۇزۇلدى؟</string>
   <!-- The placeholder text for the dropdown where a user selects a high-level reason why the site is broken. -->
   <string name="webcompat_reporter_choose_reason_2">سەۋەب تاللىنىدۇ</string>
   <!-- The error message of the dropdown, prompting the user to select a high-level reason why the site is broken. -->
   <string name="webcompat_reporter_choose_reason_error">سەۋەبىنى تاللاڭ</string>
+  <!-- The label/title of an optional field in the Web Compat Reporter feature for adding additional information. -->
+  <string name="webcompat_reporter_label_description_2">مەسىلىنى تەكشۈرۈشىمىزگە ياردەم بېرىش ئۈچۈن مەسىلىنى تەپسىلىي چۈشەندۈرۈڭ (تاللاشچان)</string>
   <!-- The button text for navigating away from the feature to provide more information on the broken site's bug report. -->
   <string name="webcompat_reporter_add_more_info">تېخىمۇ كۆپ ئۇچۇر قوش</string>
   <!-- The button text for the cancel button to leave the Web Compat Reporter feature. -->
@@ -1952,6 +1972,10 @@
   <string name="webcompat_reporter_send">يوللا</string>
   <!-- Text for a snackbar to confirm the successful submission of a WebCompat report. -->
   <string name="webcompat_reporter_success_snackbar_text_2">دوكلات يوللاندى</string>
+  <!-- Placeholder text for the description field to prompt the user on what they should type. -->
+  <string name="webcompat_reporter_problem_description_placeholder_text_2">نېمە ئىش يۈز بەردى؟ نېمە ئىش بولۇشىنى ئۈمىد قىلغان ئىدىڭىز؟ مەسىلە قايتا كۆرۈلىدىغان قەدەم باسقۇچنى تەمىنلەڭ.</string>
+  <!-- Label of the checkbox on the “Report broken site” screen for sending URLS blocked by Enhanced Tracking Protection. -->
+  <string name="webcompat_reporter_etp_checkbox_text_2">ئىزلاشتىن قوغداشتا توسۇلغان تۈر تىزىمىنى يوللايدۇ</string>
   <!-- The button text for the preview report button to view a preview of the report. -->
   <string name="webcompat_reporter_preview_report">دوكلاتنى ئالدىن كۆزەت</string>
   <!-- The title shown at the top of the WebCompat Report preview panel. This appears after the user taps the “Preview” button before sending a report. -->
@@ -3005,22 +3029,84 @@
   <string name="ip_protection_learn_more">تەپسىلاتى</string>
   <!-- Label for the monthly data allowance section on the browser VPN settings screen -->
   <string name="ip_protection_data_limit_label">ئايلىق سانلىق مەلۇمات چەكلىمىسى</string>
+  <!--
+    Data usage shown on the browser VPN settings screen.
+    %1$.1f is the data remaining in GB (for example "8.3").
+    %2$.1f is the total monthly allowance in GB (for example "50.0").
+  -->
+  <string name="ip_protection_data_limit_value">%1$.1f GB /%2$.1f GB قالدى</string>
+  <!--
+    Text shown below the data usage bar describing when the monthly allowance resets.
+    %1$.0f is the total monthly data allowance in GB (for example "50").
+  -->
+  <string name="ip_protection_data_reset_info">ھەر ئاينىڭ بېشىدا %1$.0f GB غا ئەسلىگە قايتۇرۇلىدۇ.</string>
   <!-- Header for the browser VPN `location` section -->
   <string name="ip_protection_location_section">ئورنى</string>
   <!-- Label for the recommended automatic location option on the browser VPN settings screen -->
   <string name="ip_protection_location_recommended_label">تەۋسىيەلەندى</string>
+  <!-- Description for the recommended automatic location option on the browser VPN settings screen -->
+  <string name="ip_protection_location_recommended_description">سىز ئۈچۈن ئەڭ تېز مەۋھۇم شەخسىي تور يەنى VPN نى تاللايدۇ.</string>
   <!-- Badge label shown in the menu item when the browser VPN is active -->
   <string name="preferences_ip_protection_on">ئوچۇق</string>
   <!-- Badge label shown in the menu item when the browser VPN is off -->
   <string name="preferences_ip_protection_off">تاقاق</string>
+  <!-- Badge label shown in the menu item while the browser VPN is connecting -->
+  <string name="ip_protection_menu_connecting">باغلىنىۋاتىدۇ…</string>
+  <!-- Badge label shown in the menu item when the browser VPN is paused -->
+  <string name="ip_protection_menu_paused">ۋاقىتلىق توختىدى</string>
   <!-- Badge label shown in the menu item when the browser VPN has an error -->
   <string name="ip_protection_menu_error">خاتالىق</string>
+  <!-- Badge label shown in the menu item when the user is eligible to use the browser VPN but should authenticate or authorize it first. -->
+  <string name="ip_protection_menu_auth_required">سىنا</string>
+  <!-- Content description for the chevron button that opens the browser VPN settings screen -->
+  <string name="ip_protection_navigate_settings">VPN تەڭشەكنى ئاچ</string>
+  <!--
+    Subtitle shown below the VPN label in menus when the monthly data allowance is exhausted.
+    %1$d is the total monthly allowance in GB (for example "50").
+  -->
+  <string name="ip_protection_menu_limit_reached">%1$d GB چېكىگە يەتتى</string>
+  <!--
+    Error message shown on the browser VPN settings screen when the monthly data allowance is exhausted.
+    %1$d is the total monthly allowance in GB (for example "50").
+  -->
+  <string name="ip_protection_data_limit_reached_description">سىز %1$d GB مەۋھۇم شەخسىي تور يەنى VPN سانلىق مەلۇماتىڭىزنىڭ ھەممىنى ئىشلىتىپ بولدىڭىز. زىيارەت ئىجازىتىڭىز كېيىنكى ئايدا ئەسلىگە قايتۇرۇلىدۇ.</string>
+  <!-- Label shown next to the browser protection icon in the address bar when the browser VPN is active -->
+  <string name="ip_protection_toolbar_pill_label">VPN ئوچۇق</string>
+  <!-- Accessibility description for the browser VPN pill in the address bar when the VPN has been activated -->
+  <string name="ip_protection_toolbar_pill_description">VPN ئاكتىپ.</string>
+  <!-- Label for the button that starts the browser VPN authentication or authorization flow on the settings screen -->
+  <string name="ip_protection_get_started">باشلا</string>
   <!-- Label for the "connecting" state of the button that starts the browser VPN authentication or authorization flow on the settings screen -->
   <string name="ip_protection_connecting">باغلىنىۋاتىدۇ…</string>
+  <!-- Headline for the browser VPN onboarding card. %s is the name of the app (for example "Firefox"). -->
+  <string name="ip_protection_onboarding_card_headline">%s نىڭ ئىچىدىكى VPN نى سىناڭ</string>
+  <!--
+    The body of the VPN onboarding card.
+    %1$s is a link using ip_protection_onboarding_body_link (“Browse with extra protection”) as text. It links to a support article about VPN on Firefox.
+    %2$d is the total monthly allowance in GB (for example "50").
+  -->
+  <string name="ip_protection_onboarding_body">ئاممىۋى Wi-Fi بولغان تەقدىردىمۇ %1$s ئارقىلىق ھەقىقىي ئورنىڭىزنى يوشۇرىدۇ. ھەر ئايدا %2$d GB ھەقسىز ئېقىمغا ئېرىشەلەيسىز.</string>
+  <!-- Used as text for a link in ip_protection_onboarding_body. Make sure to adapt capitalization if the link is in the middle of the sentence. -->
+  <string name="ip_protection_onboarding_body_link">تور زىيارىتىدە قوشۇمچە قوغداشقا ئېرىشىدۇ</string>
+  <!--
+    The body of the VPN onboarding card for a promotion that provides unlimited data bandwidth for a certain time.
+    %1$s is a localized date (for example "Jun 9") indicating the end of the promotional period.
+    %2$s is a link using ip_protection_onboarding_body_link_promo (“Learn more”) as text. It links to a support article about VPN on Firefox.
+  -->
+  <string name="ip_protection_onboarding_body_promo">زىيارەتنى تېخىمۇ مەخپىي ۋە ئىزلاشنى تەسلەشتۈرۈش ئۈچۈن ئۇنى ئېچىڭ. %1$s غىچە چەكسىز تور ئېقىمىغا ئېرىشىش ئۈچۈن ھازىر سىناڭ. %2$s</string>
   <!-- Used as text for a link in ip_protection_onboarding_body. Make sure to adapt capitalization if the link is in the middle of the sentence. -->
   <string name="ip_protection_onboarding_body_link_promo">تەپسىلاتى</string>
   <!-- Label for the dismiss button on the onboarding bottom sheet. -->
   <string name="ip_protection_onboarding_not_now_button">ھازىر ئەمەس</string>
+  <!-- Snackbar (in-app pop-up notification) text to signal the browser VPN connection error -->
+  <string name="ip_protection_connection_error_snackbar">مەۋھۇم شەخسىي تور يەنى VPN غا باغلىنالمىدى. بىر قانچە مىنۇتتىن كېيىن قايتا سىناڭ.</string>
+  <!--
+    Snackbar (in-app pop-up notification) text to signal the browser VPN has reached the monthly data limit.
+    %1$d is the total monthly allowance in GB (for example "50").
+  -->
+  <string name="ip_protection_data_limit_reached_snackbar">مەۋھۇم شەخسىي تور ئېقىم سانلىق مەلۇماتىدىن %1$d GB ئىشلەتتى. زىيارەت ئىجازىتىڭىز كېيىنكى ئايدا ئەسلىگە قايتۇرۇلىدۇ.</string>
+  <!-- Snackbar (in-app pop-up notification) action button text that takes the user to the VPN settings screen. -->
+  <string name="ip_protection_data_limit_reached_snackbar_action">تەڭشەك</string>
   <!-- Description shown on the browser VPN settings screen prompting the user to turn the VPN on. -->
   <string name="ip_protection_settings_description" tools:ignore="UnusedResources">ئىزلاشنى قىيىنلاشتۇرۇپ ۋە تور زىيارىتىنى تېخىمۇ مەخپىي قىلىش ئۈچۈن VPN نى ئېچىڭ.</string>
   <!-- Title shown on the browser VPN settings screen for location selection section. -->
@@ -3029,6 +3115,22 @@
   <string name="ip_protection_recommended_location" tools:ignore="UnusedResources">تەۋسىيەلەندى</string>
   <!-- Headline for the card that promotes the standalone Mozilla VPN product. -->
   <string name="ip_protection_mozilla_vpn_upsell_headline" tools:ignore="UnusedResources,BrandUsage">Mozilla VPN بىلەن تېخىمۇ كۆپ قوغدايدۇ</string>
+  <!-- Body for the card that promotes the standalone Mozilla VPN product. -->
+  <string name="ip_protection_mozilla_vpn_upsell_body" tools:ignore="UnusedResources">300 دىن ئارتۇق ئورۇندىن تاللاپ، ئەڭ كۆپ بولغاندا 5 ئۈسكۈنىدە ھەممە ئەپنى قوغدىيالايسىز.</string>
+  <!-- Label for the button that takes the user to get the standalone Mozilla VPN product. -->
+  <string name="ip_protection_mozilla_vpn_upsell_button" tools:ignore="UnusedResources,BrandUsage">Mozilla VPN غا ئېرىش</string>
+  <!-- Title for the browser VPN location picker screen. -->
+  <string name="ip_protection_location_picker_title" tools:ignore="UnusedResources">VPN ئورنى تاللىنىدۇ</string>
+  <!-- Description for what it means to use the Recommended setting and let the app automatically pick the best server location. -->
+  <string name="ip_protection_location_fastest_description" tools:ignore="BrandUsage">Firefox ئەڭ تېز ئورۇننى ئىزدەيدۇ</string>
+  <!-- Error message shown when the selected browser VPN location is unavailable. -->
+  <string name="ip_protection_location_unavailable" tools:ignore="UnusedResources">ئورۇننى ئىشلەتكىلى بولمايدۇ. باشقا ئورۇننى تاللاڭ.</string>
+  <!-- Snackbar (in-app pop-up notification) text shown when the previously selected browser VPN location is unavailable and the recommended location was used instead. -->
+  <string name="ip_protection_location_unavailable_recommended_snackbar" tools:ignore="UnusedResources">تاللىغان VPN نى ئىشلەتكىلى بولمايدۇ. تەۋسىيە قىلىنغان ئورۇنغا باغلاندى.</string>
+  <!-- Title for the card shown to the user when we are unable to fetch server locations -->
+  <string name="ip_protection_location_unavailable_title" tools:ignore="UnusedResources">ئالدىنقى ئورۇننى ئىشلەتكىلى بولمايدۇ</string>
+  <!-- Description for the card shown to the user when we are unable to fetch server locations -->
+  <string name="ip_protection_location_unavailable_recommended_description" tools:ignore="UnusedResources">تەۋسىيە قىلىنغان ئورۇنغا باغلاندى.</string>
   <!--
     Autofill
 
@@ -3756,6 +3858,62 @@
   <string name="protection_panel_privacy_and_security_settings_2">شەخسىيەت تەڭشىكى</string>
   <!-- Title text for the protection panel permissions section. -->
   <string name="protection_panel_permissions_title">ئىجازەت</string>
+  <plurals name="trackers_blocked_panel_total_num_trackers_blocked_2">
+    <!--
+      Text for displaying the total number of trackers blocked in the trackers blocked panel.
+      %1$d is a placeholder for the number of trackers blocked.
+    -->
+    <item quantity="one">بۇ تور بېكەتتە %1$d ئىزلىغۇچ توسۇلغان</item>
+    <item quantity="other">بۇ تور بېكەتتە %1$d ئىزلىغۇچ توسۇلغان</item>
+  </plurals>
+  <plurals name="trackers_blocked_panel_num_social_media_trackers">
+    <!--
+      Text for displaying in the trackers blocked panel the total number of blocked social media trackers.
+      %1$d is a placeholder for the number of social media trackers blocked.
+    -->
+    <item quantity="one">%1$d ئىجتىمائىي تاراتقۇ ئىزلىغۇچ</item>
+    <item quantity="other">%1$d ئىجتىمائىي تاراتقۇ ئىزلىغۇچ</item>
+  </plurals>
+  <plurals name="trackers_blocked_panel_num_cross_site_cookies">
+    <!--
+      Text for displaying in the trackers blocked panel the total number of blocked cross-site tracking cookies.
+      %1$d is a placeholder for the number of cross-site tracking cookies blocked.
+    -->
+    <item quantity="one">%1$d بېكەت ھالقىغان ئىزلاش ساقلانمىسى</item>
+    <item quantity="other">%1$d بېكەت ھالقىغان ئىزلاش ساقلانمىسى</item>
+  </plurals>
+  <plurals name="trackers_blocked_panel_num_cryptominers">
+    <!--
+      Text for displaying in the trackers blocked panel the total number of blocked cryptomining scripts.
+      %1$d is a placeholder for the number of cryptominers blocked.
+    -->
+    <item quantity="one">%1$d شىفىرلىق پۇل قازغۇچ</item>
+    <item quantity="other">%1$d شىفىرلىق پۇل قازغۇچ</item>
+  </plurals>
+  <plurals name="trackers_blocked_panel_num_fingerprinters">
+    <!--
+      Text for displaying in the trackers blocked panel the total number of blocked fingerprinter scripts.
+      %1$d is a placeholder for the number of fingerprinters blocked.
+    -->
+    <item quantity="one">%1$d بارماق ئىزى ئىزلىغۇچ</item>
+    <item quantity="other">%1$d بارماق ئىزى ئىزلىغۇچ</item>
+  </plurals>
+  <plurals name="trackers_blocked_panel_num_trackers_2">
+    <!--
+      Text for displaying in the trackers blocked panel the total number of blocked generic tracking scripts.
+      %1$d is a placeholder for the number of trackers blocked.
+    -->
+    <item quantity="one">%1$d ئىز قوغلاش مەزمۇنى</item>
+    <item quantity="other">%1$d ئىز قوغلاش مەزمۇنى</item>
+  </plurals>
+  <plurals name="trackers_blocked_panel_num_trackers_blocked_this_week_2">
+    <!--
+      Text for displaying the number of trackers blocked this week in the trackers blocked panel.
+      %1$d is a placeholder for the number of trackers blocked this week.
+    -->
+    <item quantity="one">بۇ ھەپتە %1$d ئىزلىغۇچ توسۇلغان</item>
+    <item quantity="other">بۇ ھەپتە %1$d ئىزلىغۇچ توسۇلغان</item>
+  </plurals>
   <!--
     Description text for a dialog confirming whether the user wants to delete all data for current site.
     %s is a placeholder for the base domain of website.
@@ -3776,6 +3934,8 @@
     %s is a placeholder for the name of the certificate authority that issued the certificate.
   -->
   <string name="connection_security_panel_verified_by">دەلىللىگۈچى %s</string>
+  <!-- Content description (not visible, for screen readers etc.) for the handle used to drag the protections dashboard to the bottom of the screen and close it. -->
+  <string name="tracker_protections_dashboard_close_handlebar_content_description">باشقۇرۇش تاختىسىنى تاقاش</string>
   <!--
     Text for the connection security panel when the site uses a QWAC.
     %s is a placeholder for the organization for which the certificate was issued.
@@ -3899,6 +4059,26 @@
   <string name="microsurvey_sync_title" tools:ignore="BrandUsage,UnusedResources">Firefox نىڭ قەدەمداش كەچمىشىگە بولغان رازىمەنلىكىڭىز قانداق؟</string>
   <!-- Text shown in the survey title for 'describe your experience so far' microsurvey. Note: The word "Firefox" should NOT be translated. -->
   <string name="microsurvey_describe_your_experience_title" tools:ignore="BrandUsage,UnusedResources">Firefox نى ياخشىلىشىمىزغا ياردەم بېرىڭ. ھازىرغىچە ئىشلەتكەن تەسىراتىڭىزغا تۆۋەندىكىلەردىن قايسىسى ئەڭ ماس كېلىدۇ؟</string>
+  <!--
+    Uninstall Survey
+
+    Title text for the uninstall survey dialog, asking the user for the reason they are removing the app
+  -->
+  <string name="microsurvey_uninstall_survey_title">قايتۇرما ئىنكاسىڭىز بىز ئۈچۈن بەك مۇھىم. نېمە ئۈچۈن سۆكۈۋېتىسىز؟</string>
+  <!-- Uninstall survey answer option -->
+  <string name="uninstall_survey_option_1_v2">ئاستا ياكى ئىشەنچسىز</string>
+  <!-- Uninstall survey answer option -->
+  <string name="uninstall_survey_option_2_v2">تور بېكەت ئادەتتىكىدەك ئىشلىمىدى</string>
+  <!-- Uninstall survey answer option -->
+  <string name="uninstall_survey_option_3_v2">ماڭا كېرەكلىك ئىقتىدار يوق</string>
+  <!-- Uninstall survey answer option -->
+  <string name="uninstall_survey_option_4_v2">سىن، چۈشۈرۈش ياكى ۋاسىتە ئىشلىمىدى</string>
+  <!-- Uninstall survey answer option -->
+  <string name="uninstall_survey_option_5_v2">ئىشلىتىش تەس ياكى لايىھەسى ناچار</string>
+  <!-- Uninstall survey answer option -->
+  <string name="uninstall_survey_option_6_v2">شەخسىيەت ياكى بىخەتەرلىك مەسىلىسى</string>
+  <!-- Button label shown at the bottom of the uninstall survey -->
+  <string name="uninstall_survey_button_label">قايتۇرما ئىنكاس يوللاپ ئاندىن سۆك</string>
   <!--
     Accessibility
 
@@ -4261,18 +4441,38 @@
   <string name="sports_widget_confederation_africa">ئافرىقا</string>
   <!-- Section header for the Asia confederation group in the sports widget country selector. -->
   <string name="sports_widget_confederation_asia">ئاسىيا</string>
+  <!-- Section header for the CONCACAF confederation group in the sports widget country selector. "CONCACAF" is the abbreviation for "Confederation of North, Central America and Caribbean Association Football". -->
+  <string name="sports_widget_confederation_concacaf">شىمالىي، ئوتتۇرا ئامېرىكا ۋە كارىب دېڭىزى پۇتبول بىرلەشمىسى</string>
   <!-- Section header for the Europe confederation group in the sports widget country selector. -->
   <string name="sports_widget_confederation_europe">ياۋروپا</string>
+  <!-- Section header for the Oceania confederation group in the sports widget country selector. -->
+  <string name="sports_widget_confederation_oceania">ئوكيانىيە</string>
   <!-- Section header for the South America confederation group in the sports widget country selector. -->
   <string name="sports_widget_confederation_south_america">جەنۇبىي ئامېرىكا</string>
   <!-- Country name for England in the sports widget. England cannot be resolved with the Android Intl APIs so it needs an explicit string. -->
   <string name="sports_widget_country_england">ئەنگلىيە</string>
+  <!-- Country name for Scotland in the sports widget. Scotland cannot be resolved with the Android Intl APIs so it needs an explicit string. -->
+  <string name="sports_widget_country_scotland">شوتلاندىيە</string>
+  <!-- Label shown on the sports widget scoreboard when a match is currently being played live. -->
+  <string name="sports_widget_match_live">شۇئان</string>
   <!-- Title shown on the sports widget champion scoreboard row celebrating the soccer tournament winner. -->
   <string name="sports_widget_champions_title">2026-يىللىق دۇنيا لوڭقىسى چېمپىيونى</string>
   <!-- Title shown on the sports widget champion scoreboard celebrating the soccer tournament runners-up. Runners-up means second place. -->
   <string name="sports_widget_runner_up_title" tools:ignore="UnusedResources">ئىككىنچىلەر</string>
   <!-- Title shown on the sports widget champion scoreboard celebrating the soccer tournament third place winners. -->
   <string name="sports_widget_third_place_title">ئۈچىنچىلەر</string>
+  <!-- Round name shown on the sports widget for the Round of 32 stage in the soccer tournament. -->
+  <string name="sports_widget_round_of_32">32 كۈچلۈك ئايلانما مۇسابىقىسى</string>
+  <!-- Round name shown on the sports widget for the Round of 16 stage in the soccer tournament. -->
+  <string name="sports_widget_round_of_16">16 كۈچلۈك ئايلانما مۇسابىقىسى</string>
+  <!-- Round name shown on the sports widget for the quarter-finals stage in the soccer tournament. -->
+  <string name="sports_widget_quarter_final">چارەك ھەل قىلغۇچ مۇسابىقە</string>
+  <!-- Round name shown on the sports widget for the semi-finals stage in the soccer tournament. -->
+  <string name="sports_widget_semi_final">يېرىم ھەل قىلغۇچ مۇسابىقە</string>
+  <!-- Round name shown on the sports widget for the final stage in the soccer tournament. -->
+  <string name="sports_widget_final">ھەل قىلغۇچ مۇسابىقە</string>
+  <!-- Round name shown on the sports widget for the bronze final stage in the soccer tournament. -->
+  <string name="sports_widget_bronze_final">مىس مېدال ھەل قىلغۇچ مۇسابىقىسى</string>
   <!-- Sports widget action label to refresh match data after an error. -->
   <string name="sports_widget_error_refresh">يېڭىلا</string>
   <!-- Sports widget group stage label for group A in the soccer tournament. -->
