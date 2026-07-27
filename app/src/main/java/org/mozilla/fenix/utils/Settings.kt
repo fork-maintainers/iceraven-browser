@@ -925,6 +925,13 @@ class Settings(
     )
 
     /**
+     * Records the current time as the last time the user interacted with the [BrowserFragment].
+     */
+    fun recordLastBrowseActivity() {
+        lastBrowseActivity = currentTimeMillis()
+    }
+
+    /**
      * Indicates the last time when the user was interacting with the [HomeFragment],
      * This is useful to determine if the user has to start on the [HomeFragment]
      * or it should go directly to the [BrowserFragment].
@@ -936,6 +943,13 @@ class Settings(
         appContext.getPreferenceKey(R.string.pref_key_last_home_activity_time),
         default = 0L,
     )
+
+    /**
+     * Records the current time as the last time the user interacted with the [HomeFragment].
+     */
+    fun recordLastHomeActivity() {
+        lastHomeActivity = currentTimeMillis()
+    }
 
     private val openingScreenDefault: OpeningScreenOption
         get() = FxNimbus.features.homepageOpeningScreenDefault.value().defaultOption
@@ -2302,6 +2316,13 @@ class Settings(
     )
 
     /**
+     * Records the current time as the completion timestamp of the initial onboarding flow.
+     */
+    fun recordOnboardingCompleted() {
+        onboardingCompletedTimestamp = currentTimeMillis()
+    }
+
+    /**
      * Indicates if the continuous onboarding feature is enabled.
      */
     var continuousOnboardingFeatureEnabled by booleanPreference(
@@ -2795,6 +2816,13 @@ class Settings(
     )
 
     /**
+     * Records the current time as the last time the Set as default Browser prompt was shown.
+     */
+    fun recordSetAsDefaultPromptShownTime() {
+        lastSetAsDefaultPromptShownTimeInMillis = currentTimeMillis()
+    }
+
+    /**
      * Number of times the Set as default Browser prompt has been displayed to the user.
      */
     var numberOfSetAsDefaultPromptShownTimes by intPreference(
@@ -2869,7 +2897,7 @@ class Settings(
      */
     fun setAsDefaultPromptCalled() {
         numberOfSetAsDefaultPromptShownTimes += 1
-        lastSetAsDefaultPromptShownTimeInMillis = currentTimeMillis()
+        recordSetAsDefaultPromptShownTime()
         coldStartsBetweenSetAsDefaultPrompts = 0
     }
 

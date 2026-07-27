@@ -59,17 +59,6 @@
     <issue
         id="NoSystemCurrentTimeMillis"
         message="`System.currentTimeMillis()` must be injectable. Only permitted as a default value of a parameter on a top-level function or on a class."
-        errorLine1="        requireComponents.settings.lastBrowseActivity = System.currentTimeMillis()"
-        errorLine2="                                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/java/org/mozilla/fenix/browser/BrowserFragment.kt"
-            line="550"
-            column="57"/>
-    </issue>
-
-    <issue
-        id="NoSystemCurrentTimeMillis"
-        message="`System.currentTimeMillis()` must be injectable. Only permitted as a default value of a parameter on a top-level function or on a class."
         errorLine1="                        System.currentTimeMillis() - Core.HISTORY_METADATA_MAX_AGE_IN_MS,"
         errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
@@ -92,45 +81,12 @@
     <issue
         id="NoSystemCurrentTimeMillis"
         message="`System.currentTimeMillis()` must be injectable. Only permitted as a default value of a parameter on a top-level function or on a class."
-        errorLine1="        requireComponents.settings.lastHomeActivity = System.currentTimeMillis()"
-        errorLine2="                                                      ~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/java/org/mozilla/fenix/home/HomeFragment.kt"
-            line="1418"
-            column="55"/>
-    </issue>
-
-    <issue
-        id="NoSystemCurrentTimeMillis"
-        message="`System.currentTimeMillis()` must be injectable. Only permitted as a default value of a parameter on a top-level function or on a class."
         errorLine1="            val imageFile = File(imageDir, &quot;lens_capture_${System.currentTimeMillis()}.jpg&quot;)"
         errorLine2="                                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/java/org/mozilla/fenix/components/lens/LensCameraFragment.kt"
             line="564"
             column="60"/>
-    </issue>
-
-    <issue
-        id="NoSystemCurrentTimeMillis"
-        message="`System.currentTimeMillis()` must be injectable. Only permitted as a default value of a parameter on a top-level function or on a class."
-        errorLine1="        settings.onboardingCompletedTimestamp = System.currentTimeMillis()"
-        errorLine2="                                                ~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/java/org/mozilla/fenix/onboarding/OnboardingFragment.kt"
-            line="377"
-            column="49"/>
-    </issue>
-
-    <issue
-        id="NoSystemCurrentTimeMillis"
-        message="`System.currentTimeMillis()` must be injectable. Only permitted as a default value of a parameter on a top-level function or on a class."
-        errorLine1="        requireComponents.settings.lastSetAsDefaultPromptShownTimeInMillis = System.currentTimeMillis()"
-        errorLine2="                                                                             ~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/java/org/mozilla/fenix/onboarding/OnboardingFragment.kt"
-            line="443"
-            column="78"/>
     </issue>
 
     <issue

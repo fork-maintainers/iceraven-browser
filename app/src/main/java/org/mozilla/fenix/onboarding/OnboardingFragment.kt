@@ -388,7 +388,7 @@ class OnboardingFragment : Fragment() {
         requireComponents.fenixOnboarding.finish()
 
         val settings = requireComponents.settings
-        settings.onboardingCompletedTimestamp = System.currentTimeMillis()
+        settings.recordOnboardingCompleted()
         settings.onboardingCurrentPageIndex = 0
 
         // Telemetry and daily usage ping get enabled after ToU acceptance.
@@ -454,7 +454,7 @@ class OnboardingFragment : Fragment() {
     private fun promptToSetAsDefaultBrowser() {
         activity?.openSetDefaultBrowserOption(useCustomTab = true)
         requireComponents.settings.coldStartsBetweenSetAsDefaultPrompts = 0
-        requireComponents.settings.lastSetAsDefaultPromptShownTimeInMillis = System.currentTimeMillis()
+        requireComponents.settings.recordSetAsDefaultPromptShownTime()
         telemetryRecorder.onSetToDefaultClick(
             sequenceId = pagesToDisplay.telemetrySequenceId(),
             sequencePosition = pagesToDisplay.sequencePosition(OnboardingPageUiData.Type.DEFAULT_BROWSER),

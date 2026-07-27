@@ -1449,7 +1449,7 @@ class HomeFragment : Fragment() {
      */
     @VisibleForTesting
     internal fun updateLastHomeActivity() {
-        requireComponents.settings.lastHomeActivity = System.currentTimeMillis()
+        requireComponents.settings.recordLastHomeActivity()
     }
 
     companion object {

@@ -1437,4 +1437,14 @@ class SettingsTest {
         val result = settings.deleteDownloadBehavior
         assertEquals(Settings.DeleteDownloadBehavior.REMOVE_FROM_HISTORY, result)
     }
+
+    @Test
+    fun `WHEN recordLastBrowseActivity is called THEN it stores the injected current time`() {
+        val fixedTime = 1234L
+        val settings = Settings(testContext, currentTimeMillis = { fixedTime })
+
+        settings.recordLastBrowseActivity()
+
+        assertEquals(fixedTime, settings.lastBrowseActivity)
+    }
 }

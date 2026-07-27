@@ -383,6 +383,6 @@ class BrowserFragmentTest {
 
         browserFragment.updateLastBrowseActivity()
 
-        verify(exactly = 1) { settings.lastBrowseActivity = any() }
+        verify(exactly = 1) { settings.recordLastBrowseActivity() }
     }
 }

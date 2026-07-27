@@ -540,6 +540,6 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, SystemIns
      */
     @VisibleForTesting
     internal fun updateLastBrowseActivity() {
-        requireComponents.settings.lastBrowseActivity = System.currentTimeMillis()
+        requireComponents.settings.recordLastBrowseActivity()
     }
 }
