@@ -236,6 +236,7 @@ interface TabManagerController :
  * @param showBookmarkSnackbar Lambda used to display a snackbar upon saving tabs as bookmarks.
  * @param showCollectionSnackbar Lambda used to display a snackbar upon successfully saving tabs
  * to a collection.
+ * @param currentTimeMillis provider for the current time in milliseconds, injectable for testing.
  */
 @Suppress("TooManyFunctions", "LongParameterList")
 class DefaultTabManagerController(
@@ -266,6 +267,7 @@ class DefaultTabManagerController(
         tabSize: Int,
         isNewCollection: Boolean,
     ) -> Unit,
+    private val currentTimeMillis: () -> Long = { System.currentTimeMillis() },
 ) : TabManagerController {
 
     override fun handleNormalTabsFabClick() {
@@ -468,7 +470,7 @@ class DefaultTabManagerController(
         tabs
             .filterNot { it.id == currentTabId }
             .forEach { tab ->
-                val daysSince = System.currentTimeMillis() - TimeUnit.DAYS.toMillis(numDays)
+                val daysSince = currentTimeMillis() - TimeUnit.DAYS.toMillis(numDays)
                 browserStore.apply {
                     dispatch(LastAccessAction.UpdateLastAccessAction(tab.id, daysSince))
                     dispatch(DebugAction.UpdateCreatedAtAction(tab.id, daysSince))

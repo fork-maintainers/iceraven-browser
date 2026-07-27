@@ -32,6 +32,7 @@ class LensImageUploader(
     private val context: Context,
     private val client: Client,
     private val userAgent: String,
+    private val currentTimeMillis: () -> Long = { System.currentTimeMillis() },
 ) {
 
     /**
@@ -242,7 +243,7 @@ class LensImageUploader(
         return "hl=${Locale.getDefault().language}" +
             "&vpw=${metrics.widthPixels}" +
             "&vph=${metrics.heightPixels}" +
-            "&st=${System.currentTimeMillis()}"
+            "&st=${currentTimeMillis()}"
     }
 
     private fun scaleBitmap(bitmap: Bitmap): Bitmap {

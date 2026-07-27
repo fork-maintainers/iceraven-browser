@@ -86,10 +86,12 @@ enum class ConnectionType {
  * @param connectionType current network [ConnectionType].
  * @param sessionId A UUID identifying this summarization session, shared across every event
  * recorded during the session. Defaults to a randomly generated UUID.
+ * @param currentTimeMillis provider for the current time in milliseconds, injectable for testing.
  */
 class SummarizationTelemetryMiddleware(
     private val connectionType: ConnectionType,
     sessionId: String = UUID.randomUUID().toString(),
+    private val currentTimeMillis: () -> Long = { System.currentTimeMillis() },
 ) : Middleware<SummarizationState, SummarizationAction> {
 
     private var sessionTelemetry = SummarizationSessionTelemetry(sessionId = sessionId)
@@ -269,7 +271,7 @@ class SummarizationTelemetryMiddleware(
                 model = sessionTelemetry.model,
                 sessionId = sessionTelemetry.sessionId,
                 success = success,
-                summarizeDurationMs = (System.currentTimeMillis() - sessionTelemetry.startTimeMillis).toInt(),
+                summarizeDurationMs = (currentTimeMillis() - sessionTelemetry.startTimeMillis).toInt(),
             ),
         )
     }

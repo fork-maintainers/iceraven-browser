@@ -26,6 +26,7 @@ import org.mozilla.fenix.utils.Settings
  * @param dismissByHiding Whether or not to hide the banner when dismissed.
  * @property dismissAction  Optional callback invoked when the user dismisses the banner.
  * @param actionToPerform The action to be performed on action button press.
+ * @param currentTimeMillis provider for the current time in milliseconds, injectable for testing.
  */
 open class InfoBanner(
     private val context: Context,
@@ -37,6 +38,7 @@ open class InfoBanner(
     private val dismissByHiding: Boolean = false,
     internal val dismissAction: (() -> Unit)? = null,
     private val actionToPerform: (() -> Unit)? = null,
+    private val currentTimeMillis: () -> Long = { System.currentTimeMillis() },
 ) {
     @SuppressLint("InflateParams")
     @VisibleForTesting
@@ -63,7 +65,7 @@ open class InfoBanner(
             actionToPerform?.invoke()
         }
 
-        settings.lastCfrShownTimeInMillis = System.currentTimeMillis()
+        settings.lastCfrShownTimeInMillis = currentTimeMillis()
     }
 
     internal fun dismiss() {

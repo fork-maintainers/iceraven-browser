@@ -34,6 +34,7 @@ class PwaOnboardingObserver(
     private val settings: Settings,
     private val webAppUseCases: WebAppUseCases,
     private val dispatcher: CoroutineDispatcher = Dispatchers.Main,
+    private val currentTimeMillis: () -> Long = { System.currentTimeMillis() },
 ) {
 
     private var scope: CoroutineScope? = null
@@ -55,7 +56,7 @@ class PwaOnboardingObserver(
                         settings.incrementVisitedInstallableCount()
                         if (settings.shouldShowPwaCfr) {
                             navigateToPwaOnboarding()
-                            settings.lastCfrShownTimeInMillis = System.currentTimeMillis()
+                            settings.lastCfrShownTimeInMillis = currentTimeMillis()
                             settings.userKnowsAboutPwas = true
                         }
                     }

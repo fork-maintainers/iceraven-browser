@@ -89,6 +89,7 @@ private const val MAX_ANIMATION_FOREGROUND = 5
  * @param packageName Package name of the application.
  * @param packageManagerCompatHelper Helper for accessing [android.content.pm.PackageManager] methods.
  * @param isBenchmarkBuild Boolean that will be true only when the app is built for Baseline Profile or Macrobenchmark.
+ * @param currentTimeMillis provider for the current time in milliseconds, injectable for testing.
  */
 @Suppress("LargeClass", "TooManyFunctions")
 class Settings(
@@ -96,6 +97,7 @@ class Settings(
     private val packageName: String = appContext.packageName,
     private val packageManagerCompatHelper: PackageManagerCompatHelper = appContext.packageManagerCompatHelper,
     private val isBenchmarkBuild: Boolean = BuildConfig.IS_BENCHMARK_BUILD,
+    private val currentTimeMillis: () -> Long = { System.currentTimeMillis() },
 ) : PreferencesHolder {
     companion object {
         const val FENIX_PREFERENCES = "fenix_preferences"
@@ -384,7 +386,7 @@ class Settings(
     )
 
     val canShowCfr: Boolean
-        get() = (System.currentTimeMillis() - lastCfrShownTimeInMillis) > THREE_DAYS_MS
+        get() = (currentTimeMillis() - lastCfrShownTimeInMillis) > THREE_DAYS_MS
 
     val cfrPopupsEnabled by booleanPreference(
         appContext.getPreferenceKey(R.string.pref_cfr_popups_enabled),
@@ -1066,7 +1068,7 @@ class Settings(
     )
 
     @VisibleForTesting
-    internal fun timeNowInMillis(): Long = System.currentTimeMillis()
+    internal fun timeNowInMillis(): Long = currentTimeMillis()
 
     fun getTabTimeout(): Long = when {
         closeTabsAfterOneDay -> ONE_DAY_MS
@@ -2841,7 +2843,7 @@ class Settings(
     ): Boolean {
         if (!nimbusFeature.enabled) return false
 
-        val now = System.currentTimeMillis()
+        val now = currentTimeMillis()
 
         val daysOk = nimbusFeature.daysBetweenPrompts?.let { intervalDays ->
             (now - lastSetAsDefaultPromptShownTimeInMillis) > intervalDays * ONE_DAY_MS
@@ -2867,7 +2869,7 @@ class Settings(
      */
     fun setAsDefaultPromptCalled() {
         numberOfSetAsDefaultPromptShownTimes += 1
-        lastSetAsDefaultPromptShownTimeInMillis = System.currentTimeMillis()
+        lastSetAsDefaultPromptShownTimeInMillis = currentTimeMillis()
         coldStartsBetweenSetAsDefaultPrompts = 0
     }
 
@@ -3108,7 +3110,7 @@ class Settings(
      */
     fun shouldShowNewsButtonAnimation(): Boolean {
         return (newsButtonForegroundCount % MAX_ANIMATION_FOREGROUND == 0) &&
-            (System.currentTimeMillis() - newsButtonAnimationLastShownMillis >= ONE_WEEK_MS)
+            (currentTimeMillis() - newsButtonAnimationLastShownMillis >= ONE_WEEK_MS)
     }
 
     /**
@@ -3116,7 +3118,7 @@ class Settings(
      * and resetting [newsButtonForegroundCount].
      */
     fun recordNewsButtonAnimationShown() {
-        newsButtonAnimationLastShownMillis = System.currentTimeMillis()
+        newsButtonAnimationLastShownMillis = currentTimeMillis()
         newsButtonForegroundCount = 0
     }
 

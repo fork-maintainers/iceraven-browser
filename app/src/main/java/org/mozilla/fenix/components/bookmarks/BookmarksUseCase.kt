@@ -144,10 +144,12 @@ class BookmarksUseCase(
      * @param bookmarksStorage [BookmarksStorage] to retrieve the bookmark data.
      * @param historyStorage Optional [HistoryStorage] to retrieve the preview image of a visited
      * page associated with a bookmark.
+     * @param currentTimeMillis provider for the current time in milliseconds, injectable for testing.
      */
     class RetrieveRecentBookmarksUseCase internal constructor(
         private val bookmarksStorage: BookmarksStorage,
         private val historyStorage: HistoryStorage? = null,
+        private val currentTimeMillis: () -> Long = { System.currentTimeMillis() },
     ) {
         /**
          * Retrieves a list of recently added bookmarks, if any, up to maximum.
@@ -160,7 +162,7 @@ class BookmarksUseCase(
             count: Int = DEFAULT_BOOKMARKS_TO_RETRIEVE,
             previewImageMaxAgeMs: Long = TimeUnit.DAYS.toMillis(DEFAULT_BOOKMARKS_LENGTH_DAYS_PREVIEW_IMAGE_SEARCH),
         ): List<Bookmark> {
-            val currentTime = System.currentTimeMillis()
+            val currentTime = currentTimeMillis()
 
             // Fetch visit information within the time range of now and the specified maximum age.
             val history = historyStorage?.getDetailedVisits(

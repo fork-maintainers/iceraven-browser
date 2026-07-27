@@ -27,6 +27,7 @@ interface PrivacyNoticeBannerRepository {
  */
 class DefaultPrivacyNoticeBannerRepository(
     private val settings: Settings,
+    private val currentTimeMillis: () -> Long = { System.currentTimeMillis() },
 ) : PrivacyNoticeBannerRepository {
     override fun updatePrivacyNoticeBannerDisplayedPreference(nowMillis: Long) {
         settings.privacyNoticeBannerLastDisplayedTimeInMillis = nowMillis
@@ -34,7 +35,7 @@ class DefaultPrivacyNoticeBannerRepository(
 
     override fun shouldShowPrivacyNoticeBanner(): Boolean {
         val termsOfUseTime = if (settings.isTermsOfUsePublishedDebugDateEnabled) {
-            System.currentTimeMillis()
+            currentTimeMillis()
         } else {
             TOU_TIME_IN_MILLIS
         }
