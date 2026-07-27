@@ -17,6 +17,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.toMutableStateList
 import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.compose.content
@@ -73,7 +74,7 @@ import org.mozilla.fenix.utils.maybeShowAddSearchWidgetPrompt
 class OnboardingFragment : Fragment() {
     private val logger = Logger("OnboardingFragment")
 
-    private val removeMarketingFeature = ViewBoundFeatureWrapper<MarketingPageRemovalSupport>()
+    private val addMarketingFeature = ViewBoundFeatureWrapper<MarketingPageAdditionSupport>()
 
     private val rtamoAttributionHandler by lazy {
         RtamoAttributionHandler(requireContext(), requireComponents.settings, requireComponents.addonsProvider)
@@ -89,7 +90,7 @@ class OnboardingFragment : Fragment() {
         )
     }
 
-    private val pagesToDisplay by lazy {
+    private val allOnboardingPages by lazy {
         with(requireContext()) {
             val appWidgetManager = AppWidgetManager.getInstance(this)
             pagesToDisplay(
@@ -97,8 +98,21 @@ class OnboardingFragment : Fragment() {
                 showNotificationPage = canShowNotificationPage(this),
                 showAddWidgetPage = !BuildManufacturerChecker().isXiaomi() &&
                     canShowAddSearchWidgetPrompt(appWidgetManager),
-            ).toMutableList()
+            )
         }
+    }
+
+    private val marketingPage by lazy {
+        allOnboardingPages.find { it.type == OnboardingPageUiData.Type.MARKETING_DATA }
+    }
+
+    private val pagesToDisplay by lazy {
+        allOnboardingPages
+            .filterNot {
+                it.type == OnboardingPageUiData.Type.MARKETING_DATA &&
+                    !requireComponents.settings.shouldShowMarketingOnboarding
+            }
+            .toMutableStateList()
     }
 
     private fun displayDefaultBrowserPage(context: Context): Boolean = isNotDefaultBrowser(context)
@@ -177,10 +191,11 @@ class OnboardingFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        removeMarketingFeature.set(
-            feature = MarketingPageRemovalSupport(
+        addMarketingFeature.set(
+            feature = MarketingPageAdditionSupport(
                 prefKey = requireContext().getString(R.string.pref_key_should_show_marketing_onboarding),
                 pagesToDisplay = pagesToDisplay,
+                marketingPage = marketingPage,
                 settings = requireComponents.settings,
                 lifecycleOwner = viewLifecycleOwner,
             ),
@@ -322,7 +337,6 @@ class OnboardingFragment : Fragment() {
                 telemetryRecorder.onMarketingDataSkipClicked()
             },
             currentIndex = { index ->
-                removeMarketingFeature.withFeature { it.currentPageIndex = index }
                 requireComponents.settings.onboardingCurrentPageIndex = index
             },
             onNavigateToNextPage = {

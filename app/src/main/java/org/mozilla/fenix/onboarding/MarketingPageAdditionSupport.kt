@@ -24,25 +24,25 @@ import org.mozilla.fenix.utils.Settings
 import kotlin.coroutines.CoroutineContext
 
 /**
- * Handles removing the marketing page from onboarding if certain conditions are met
+ * Handles adding the marketing page to onboarding if certain conditions are met.
  *
  * @param prefKey the pref key identifier for the "should show marketing page" pref
  * @param pagesToDisplay the mutable list of onboarding pages we display
+ * @param marketingPage the marketing page to add, or null if it's not eligible to be shown
  * @param settings settings class that holds shared preferences
  * @param mainContext the coroutine context for UI
  * @param ioContext the coroutine context for IO
  * @param lifecycleOwner the lifecycle owner
  */
-class MarketingPageRemovalSupport(
+class MarketingPageAdditionSupport(
     private val prefKey: String,
     private val pagesToDisplay: MutableList<OnboardingPageUiData>,
+    private val marketingPage: OnboardingPageUiData?,
     private val settings: Settings,
     private val mainContext: CoroutineContext = Dispatchers.Main,
     private val ioContext: CoroutineContext = Dispatchers.IO,
     private val lifecycleOwner: LifecycleOwner,
 ) : LifecycleAwareFeature {
-
-    var currentPageIndex: Int = 0
 
     private var job: Job? = null
 
@@ -56,8 +56,10 @@ class MarketingPageRemovalSupport(
             )
                 .distinctUntilChanged()
                 .collect { shouldShowMarketingOnboarding ->
-                    if (!shouldShowMarketingOnboarding) {
-                        pagesToDisplay.removeIfPageNotReached(currentPageIndex)
+                    if (shouldShowMarketingOnboarding) {
+                        marketingPage?.let {
+                            pagesToDisplay.addMarketingPageIfAbsent(it)
+                        }
                     }
                 }
         }
@@ -68,11 +70,9 @@ class MarketingPageRemovalSupport(
     }
 }
 
-internal fun MutableList<OnboardingPageUiData>.removeIfPageNotReached(index: Int) {
-    val marketingIndex = indexOfFirst { it.type == OnboardingPageUiData.Type.MARKETING_DATA }
-
-    if (index < marketingIndex) {
-        removeAt(marketingIndex)
+internal fun MutableList<OnboardingPageUiData>.addMarketingPageIfAbsent(marketingPage: OnboardingPageUiData) {
+    if (none { it.type == OnboardingPageUiData.Type.MARKETING_DATA }) {
+        add(marketingPage)
     }
 }
 

@@ -2336,7 +2336,7 @@ class Settings(
      */
     var shouldShowMarketingOnboarding by booleanPreference(
         appContext.getPreferenceKey(R.string.pref_key_should_show_marketing_onboarding),
-        default = true,
+        default = false,
     )
 
     var shouldUseMinimalBottomToolbarWhenEnteringText by booleanPreference(

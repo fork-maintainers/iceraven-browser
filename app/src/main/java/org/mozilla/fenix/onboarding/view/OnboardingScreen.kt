@@ -401,9 +401,7 @@ private fun OnboardingContent(
                 key = { pagesToDisplay[it].type },
                 overscrollEffect = null,
             ) { pageIndex ->
-                // protect against a rare case where the user goes to the marketing screen at the same
-                // moment it gets removed by [MarketingPageRemovalSupport]
-                val pageUiState = pagesToDisplay.getOrElse(pageIndex) { pagesToDisplay[it.dec()] }
+                val pageUiState = pagesToDisplay[pageIndex]
                 val onboardingPageState = mapToOnboardingPageState(
                     onboardingPageUiData = pageUiState,
                     onMakeFirefoxDefaultClick = onMakeFirefoxDefaultClick,

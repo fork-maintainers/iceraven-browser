@@ -27,15 +27,24 @@ import org.mozilla.fenix.onboarding.view.OnboardingPageUiData
 import org.mozilla.fenix.utils.Settings
 
 @RunWith(AndroidJUnit4::class)
-class MarketingPageRemovalSupportTest {
+class MarketingPageAdditionSupportTest {
 
     private lateinit var pages: MutableList<OnboardingPageUiData>
+    private lateinit var marketingPage: OnboardingPageUiData
     private lateinit var settings: Settings
     private lateinit var mockedLifecycleOwner: TestLifecycleOwner
     private lateinit var prefKey: String
 
     @Before
     fun setup() {
+        marketingPage = OnboardingPageUiData(
+            type = OnboardingPageUiData.Type.MARKETING_DATA,
+            imageRes = 0,
+            title = "marketing title",
+            description = "notification body",
+            primaryButtonLabel = "notification primary button text",
+            secondaryButtonLabel = "notification secondary button text",
+        )
         pages = mutableListOf<OnboardingPageUiData>().apply {
             add(
                 OnboardingPageUiData(
@@ -47,16 +56,6 @@ class MarketingPageRemovalSupportTest {
                     secondaryButtonLabel = "sync secondary button text",
                 ),
             )
-            add(
-                OnboardingPageUiData(
-                    type = OnboardingPageUiData.Type.MARKETING_DATA,
-                    imageRes = 0,
-                    title = "marketing title",
-                    description = "notification body",
-                    primaryButtonLabel = "notification primary button text",
-                    secondaryButtonLabel = "notification secondary button text",
-                ),
-            )
         }
         settings = Settings(testContext)
         mockedLifecycleOwner = TestLifecycleOwner(Lifecycle.State.CREATED)
@@ -65,9 +64,10 @@ class MarketingPageRemovalSupportTest {
 
     @Test
     fun `we should show marketing`() = runTest {
-        val removePage = MarketingPageRemovalSupport(
+        val addPage = MarketingPageAdditionSupport(
             prefKey = prefKey,
             pagesToDisplay = pages,
+            marketingPage = marketingPage,
             settings = settings,
             mainContext = testScheduler,
             ioContext = testScheduler,
@@ -75,7 +75,7 @@ class MarketingPageRemovalSupportTest {
         )
         settings.shouldShowMarketingOnboarding = true
 
-        removePage.start()
+        addPage.start()
 
         testScheduler.runCurrent()
 
@@ -84,9 +84,10 @@ class MarketingPageRemovalSupportTest {
 
     @Test
     fun `we should not show marketing`() = runTest {
-        val removePage = MarketingPageRemovalSupport(
+        val addPage = MarketingPageAdditionSupport(
             prefKey = prefKey,
             pagesToDisplay = pages,
+            marketingPage = marketingPage,
             settings = settings,
             mainContext = testScheduler,
             ioContext = testScheduler,
@@ -94,7 +95,7 @@ class MarketingPageRemovalSupportTest {
         )
         settings.shouldShowMarketingOnboarding = false
 
-        removePage.start()
+        addPage.start()
 
         testScheduler.runCurrent()
 
@@ -102,45 +103,17 @@ class MarketingPageRemovalSupportTest {
     }
 
     @Test
-    fun `remove page`() {
-        pages.removeIfPageNotReached(0)
-
-        assertTrue(pages.size == 1)
-    }
-
-    @Test
-    fun `do not remove page`() {
-        pages.removeIfPageNotReached(1)
+    fun `add page`() {
+        pages.addMarketingPageIfAbsent(marketingPage)
 
         assertTrue(pages.size == 2)
     }
 
     @Test
-    fun `do not remove page if marketing does not exist`() {
-        val pages = mutableListOf<OnboardingPageUiData>().apply {
-            add(
-                OnboardingPageUiData(
-                    type = OnboardingPageUiData.Type.SYNC_SIGN_IN,
-                    imageRes = 0,
-                    title = "sync title",
-                    description = "sync body",
-                    primaryButtonLabel = "sync primary button text",
-                    secondaryButtonLabel = "sync secondary button text",
-                ),
-            )
-            add(
-                OnboardingPageUiData(
-                    type = OnboardingPageUiData.Type.NOTIFICATION_PERMISSION,
-                    imageRes = 0,
-                    title = "notification title",
-                    description = "notification body",
-                    primaryButtonLabel = "notification primary button text",
-                    secondaryButtonLabel = "notification secondary button text",
-                ),
-            )
-        }
+    fun `do not add page if already present`() {
+        pages.add(marketingPage)
 
-        pages.removeIfPageNotReached(0)
+        pages.addMarketingPageIfAbsent(marketingPage)
 
         assertTrue(pages.size == 2)
     }
