@@ -1384,9 +1384,10 @@ class BrowserToolbarMiddleware(
                 highlighted = highlighted,
                 onClick = onClick,
                 testTag = testTag,
-            ).also {
-                ipProtectionStore.dispatch(IPProtectionAction.ProxyActiveShown)
-            }
+                onAnimationStarted = {
+                    ipProtectionStore.dispatch(IPProtectionAction.ProxyActiveShown)
+                },
+            )
         } else {
             ActionButtonRes(
                 drawableResId = drawableResId,
