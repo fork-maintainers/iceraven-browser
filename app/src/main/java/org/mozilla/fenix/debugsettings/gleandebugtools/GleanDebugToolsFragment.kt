@@ -50,7 +50,7 @@ class GleanDebugToolsFragment : Fragment(), SystemInsetsPaddedFragment {
             initialState = it,
             middlewares = listOf(
                 GleanDebugToolsMiddleware(
-                    gleanDebugToolsStorage = DefaultGleanDebugToolsStorage(),
+                    gleanDebugToolsStorage = DefaultGleanDebugToolsStorage(requireComponents.settings),
                     clipboardHandler = requireComponents.clipboardHandler,
                     openDebugView = { debugViewLink ->
                         val intent = Intent(Intent.ACTION_VIEW)

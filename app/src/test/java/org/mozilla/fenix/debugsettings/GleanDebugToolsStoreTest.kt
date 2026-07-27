@@ -127,6 +127,21 @@ class GleanDebugToolsStoreTest {
     }
 
     @Test
+    fun `WHEN the change debug view tag action is dispatched THEN any persisted debug view tag is cleared`() {
+        val store = GleanDebugToolsStore(
+            initialState = initializeGleanDebugToolsState(),
+            middlewares = listOf(
+                createMiddleware(
+                    gleanDebugToolsStorage = gleanDebugToolsStorage,
+                ),
+            ),
+        )
+        assertFalse(gleanDebugToolsStorage.persistedDebugViewTagCleared)
+        store.dispatch(GleanDebugToolsAction.DebugViewTagChanged(newTag = "test"))
+        assertTrue(gleanDebugToolsStorage.persistedDebugViewTagCleared)
+    }
+
+    @Test
     fun `WHEN the send ping action is dispatched THEN the corresponding ping should be sent`() {
         val initialState = initializeGleanDebugToolsState()
         val store = GleanDebugToolsStore(
@@ -283,6 +298,7 @@ class GleanDebugToolsStoreTest {
     ) : GleanDebugToolsStorage {
 
         var pingSent = false
+        var persistedDebugViewTagCleared = false
 
         override fun setLogPings(enabled: Boolean) {
             isSetLogPingsEnabled = enabled
@@ -290,6 +306,10 @@ class GleanDebugToolsStoreTest {
 
         override fun sendPing(pingType: String, debugViewTag: String) {
             pingSent = true
+        }
+
+        override fun clearPersistedDebugViewTag() {
+            persistedDebugViewTagCleared = true
         }
     }
 }

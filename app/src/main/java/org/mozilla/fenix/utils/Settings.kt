@@ -423,6 +423,15 @@ class Settings(
         default = "",
     )
 
+    /**
+     * The Glean debug view tag that may be persisted across app restarts. Empty when no tag is persisted. Only
+     * captured from a tag set through Glean's debug intent using `persistDebugViewTag` at startup.
+     */
+    var gleanDebugViewTag by stringPreference(
+        appContext.getPreferenceKey(R.string.pref_key_glean_debug_view_tag),
+        default = "",
+    )
+
     var nimbusExperimentsFetched by booleanPreference(
         appContext.getPreferenceKey(R.string.pref_key_nimbus_experiments_fetched),
         default = false,

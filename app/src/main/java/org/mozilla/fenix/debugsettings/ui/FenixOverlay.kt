@@ -103,7 +103,7 @@ fun FenixOverlay(
             ),
             middlewares = listOf(
                 GleanDebugToolsMiddleware(
-                    gleanDebugToolsStorage = DefaultGleanDebugToolsStorage(),
+                    gleanDebugToolsStorage = DefaultGleanDebugToolsStorage(context.components.settings),
                     clipboardHandler = context.components.clipboardHandler,
                     openDebugView = { debugViewLink ->
                         val intent = Intent(Intent.ACTION_VIEW)

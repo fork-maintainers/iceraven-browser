@@ -49,7 +49,11 @@ class GleanDebugToolsMiddleware(
                 )
                 clipboardHandler.text = debugViewLink
             }
-            is GleanDebugToolsAction.DebugViewTagChanged -> {} // No-op
+            is GleanDebugToolsAction.DebugViewTagChanged -> {
+                // A tag can only be persisted through the adb persistDebugViewTag intent,
+                // so changing it here should also clear this persisted tag.
+                gleanDebugToolsStorage.clearPersistedDebugViewTag()
+            }
             is GleanDebugToolsAction.SendPing -> {
                 gleanDebugToolsStorage.sendPing(
                     pingType = store.state.pingType,
