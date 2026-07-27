@@ -138,8 +138,11 @@ fun TabGroupTools(
     }
 }
 
-private fun generateTabGroup(counter: Int, isClosed: Boolean = false): TabGroup {
-    val timestamp = System.currentTimeMillis()
+private fun generateTabGroup(
+    counter: Int,
+    isClosed: Boolean = false,
+    timestamp: Long = System.currentTimeMillis(),
+): TabGroup {
     return TabGroup(
         title = "Tab Group $counter",
         theme = TabGroupTheme.entries.random().name,
@@ -156,10 +159,12 @@ private fun generateTabGroup(counter: Int, isClosed: Boolean = false): TabGroup 
  *
  * @param tabGroupRepository [TabGroupRepository] used to save the generated tab groups to the database.
  * @param browserStore [BrowserStore] used to dispatch the created tabs into the live session.
+ * @param now The current time in milliseconds, applied as the last-modified time of the generated groups.
  */
 private suspend fun autoPopulateTabGroupsUseCase(
     tabGroupRepository: TabGroupRepository,
     browserStore: BrowserStore,
+    now: Long = System.currentTimeMillis(),
 ) {
     val scenarios = listOf(
         Triple("Work", TAB_GROUP_COLORS.random(), 8),
@@ -182,7 +187,7 @@ private suspend fun autoPopulateTabGroupsUseCase(
             title = title,
             theme = theme,
             closed = false,
-            lastModified = System.currentTimeMillis(),
+            lastModified = now,
         )
 
         tabGroupRepository.createTabGroupWithTabs(
