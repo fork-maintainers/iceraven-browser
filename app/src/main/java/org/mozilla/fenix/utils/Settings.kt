@@ -1180,15 +1180,6 @@ class Settings(
             appContext.getString(R.string.remote_settings_server_dev) -> {
                 appContext.getString(R.string.preferences_remote_settings_server_dev_label)
             }
-            appContext.getString(R.string.remote_settings_server_prod_v2) -> {
-                appContext.getString(R.string.preferences_remote_settings_server_prod_label_v2)
-            }
-            appContext.getString(R.string.remote_settings_server_stage_v2) -> {
-                appContext.getString(R.string.preferences_remote_settings_server_stage_label_v2)
-            }
-            appContext.getString(R.string.remote_settings_server_dev_v2) -> {
-                appContext.getString(R.string.preferences_remote_settings_server_dev_label_v2)
-            }
             else -> {
                 appContext.getString(R.string.preferences_remote_settings_server_prod_label)
             }

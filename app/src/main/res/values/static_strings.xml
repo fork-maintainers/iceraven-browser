@@ -50,12 +50,6 @@
     <string name="preferences_remote_settings_server_stage_label" translatable="false">Staging</string>
     <!-- Label for Development server option -->
     <string name="preferences_remote_settings_server_dev_label" translatable="false">Development</string>
-    <!-- Label for Production server with v2 route option -->
-    <string name="preferences_remote_settings_server_prod_label_v2" translatable="false">Production V2</string>
-    <!-- Label for Staging server with v2 route option -->
-    <string name="preferences_remote_settings_server_stage_label_v2" translatable="false">Staging V2</string>
-    <!-- Label for Development server with v2 route option -->
-    <string name="preferences_remote_settings_server_dev_label_v2" translatable="false">Development V2</string>
     <!-- Toast message shown when starting to sync remote settings -->
     <string name="preferences_remote_settings_syncing" translatable="false">Syncing remote settings…</string>
     <!-- Toast message shown when remote settings sync completes successfully -->

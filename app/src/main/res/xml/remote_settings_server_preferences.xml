@@ -7,18 +7,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <org.mozilla.fenix.settings.RadioButtonPreference
-        android:key="@string/pref_key_remote_settings_server_prod_v2"
-        android:title="@string/preferences_remote_settings_server_prod_label_v2" />
-
-    <org.mozilla.fenix.settings.RadioButtonPreference
-        android:key="@string/pref_key_remote_settings_server_stage_v2"
-        android:title="@string/preferences_remote_settings_server_stage_label_v2" />
-
-    <org.mozilla.fenix.settings.RadioButtonPreference
-        android:key="@string/pref_key_remote_settings_server_dev_v2"
-        android:title="@string/preferences_remote_settings_server_dev_label_v2" />
-
-    <org.mozilla.fenix.settings.RadioButtonPreference
         android:key="@string/pref_key_remote_settings_server_prod"
         android:title="@string/preferences_remote_settings_server_prod_label" />
 
