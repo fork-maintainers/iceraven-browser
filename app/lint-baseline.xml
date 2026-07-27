@@ -48,17 +48,6 @@
     <issue
         id="NoSystemCurrentTimeMillis"
         message="`System.currentTimeMillis()` must be injectable. Only permitted as a default value of a parameter on a top-level function or on a class."
-        errorLine1="                val current = System.currentTimeMillis()"
-        errorLine2="                              ~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/java/org/mozilla/fenix/settings/account/AccountSettingsFragment.kt"
-            line="540"
-            column="31"/>
-    </issue>
-
-    <issue
-        id="NoSystemCurrentTimeMillis"
-        message="`System.currentTimeMillis()` must be injectable. Only permitted as a default value of a parameter on a top-level function or on a class."
         errorLine1="                        System.currentTimeMillis() - Core.HISTORY_METADATA_MAX_AGE_IN_MS,"
         errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location

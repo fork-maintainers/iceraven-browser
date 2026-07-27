@@ -537,9 +537,7 @@ class AccountSettingsFragment : PreferenceFragmentCompat(), SystemInsetsPaddedFr
             return if (lastSyncedTime != 0L) {
                 lastSyncedTime
             } else {
-                val current = System.currentTimeMillis()
-                setLastSynced(requireContext(), current)
-                current
+                setLastSynced(requireContext())
             }
         }
     }
