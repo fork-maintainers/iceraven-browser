@@ -26,7 +26,7 @@ class GrowthDataWorker(
         val settings = applicationContext.components.settings
         val metrics = applicationContext.components.analytics.metrics
 
-        if (!System.currentTimeMillis().isAfterFirstWeekFromInstall(applicationContext) ||
+        if (!isAfterFirstWeekFromInstall(applicationContext) ||
             settings.growthUserActivatedSent
         ) {
             return Result.success()
@@ -39,8 +39,6 @@ class GrowthDataWorker(
 
     companion object {
         private const val GROWTH_USER_ACTIVATED_WORK_NAME = "org.mozilla.fenix.growth.work"
-        private const val DAY_MILLIS: Long = 1000 * 60 * 60 * 24
-        private const val FULL_WEEK_MILLIS: Long = DAY_MILLIS * 7
 
         /**
          * Schedules the Activated User event if needed.
@@ -62,17 +60,20 @@ class GrowthDataWorker(
                 growthSignalWork,
             ).enqueue()
         }
-
-        /**
-         * Returns [Boolean] value signaling if current time is after the first week after install.
-         */
-        private fun Long.isAfterFirstWeekFromInstall(context: Context): Boolean {
-            val timeDifference = this - getInstalledTime(context)
-            return (FULL_WEEK_MILLIS <= timeDifference)
-        }
-
-        private fun getInstalledTime(context: Context): Long = context.packageManagerCompatHelper
-            .getPackageInfoCompat(context.packageName, 0)
-            .firstInstallTime
     }
 }
+
+private const val DAY_MILLIS: Long = 1000 * 60 * 60 * 24
+private const val FULL_WEEK_MILLIS: Long = DAY_MILLIS * 7
+
+/**
+ * Returns whether [now] is at least a full week after the application was first installed.
+ */
+internal fun isAfterFirstWeekFromInstall(
+    context: Context,
+    now: Long = System.currentTimeMillis(),
+): Boolean = FULL_WEEK_MILLIS <= now - getInstalledTime(context)
+
+private fun getInstalledTime(context: Context): Long = context.packageManagerCompatHelper
+    .getPackageInfoCompat(context.packageName, 0)
+    .firstInstallTime

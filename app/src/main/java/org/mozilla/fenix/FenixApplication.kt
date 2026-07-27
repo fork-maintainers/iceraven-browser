@@ -527,9 +527,7 @@ open class FenixApplication : Application(), Provider, ThemeProvider {
                     // it's safe to touch `historyStorage. By 'safe', we mainly mean that underlying
                     // places library will be able to load, which requires first running Megazord.init().
                     // The visual completeness tasks are scheduled after the Megazord.init() call.
-                    components.core.historyMetadataService.cleanup(
-                        System.currentTimeMillis() - Core.HISTORY_METADATA_MAX_AGE_IN_MS,
-                    )
+                    components.core.historyMetadataService.cleanup(historyMetadataCleanupCutoff())
 
                     // If Firefox Suggest is enabled, register a worker to periodically ingest
                     // new search suggestions. The worker requires us to have called
@@ -1324,3 +1322,9 @@ open class FenixApplication : Application(), Provider, ThemeProvider {
         }
     }
 }
+
+/**
+ * Returns the cutoff timestamp (in milliseconds) before which history metadata should be cleaned up.
+ */
+internal fun historyMetadataCleanupCutoff(now: Long = System.currentTimeMillis()): Long =
+    now - Core.HISTORY_METADATA_MAX_AGE_IN_MS

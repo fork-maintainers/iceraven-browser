@@ -48,28 +48,6 @@
     <issue
         id="NoSystemCurrentTimeMillis"
         message="`System.currentTimeMillis()` must be injectable. Only permitted as a default value of a parameter on a top-level function or on a class."
-        errorLine1="                        System.currentTimeMillis() - Core.HISTORY_METADATA_MAX_AGE_IN_MS,"
-        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/java/org/mozilla/fenix/FenixApplication.kt"
-            line="499"
-            column="25"/>
-    </issue>
-
-    <issue
-        id="NoSystemCurrentTimeMillis"
-        message="`System.currentTimeMillis()` must be injectable. Only permitted as a default value of a parameter on a top-level function or on a class."
-        errorLine1="        if (!System.currentTimeMillis().isAfterFirstWeekFromInstall(applicationContext) ||"
-        errorLine2="             ~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/java/org/mozilla/fenix/components/metrics/GrowthDataWorker.kt"
-            line="29"
-            column="14"/>
-    </issue>
-
-    <issue
-        id="NoSystemCurrentTimeMillis"
-        message="`System.currentTimeMillis()` must be injectable. Only permitted as a default value of a parameter on a top-level function or on a class."
         errorLine1="            val imageFile = File(imageDir, &quot;lens_capture_${System.currentTimeMillis()}.jpg&quot;)"
         errorLine2="                                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
