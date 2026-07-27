@@ -32,7 +32,6 @@ class FakeBookmarksStorage() : BookmarksStorage {
     override suspend fun getRecentBookmarks(
         limit: Int,
         maxAge: Long?,
-        currentTime: Long,
     ): Result<List<BookmarkNode>> {
         return Result.runCatching {
             bookmarkMap.values.toList()

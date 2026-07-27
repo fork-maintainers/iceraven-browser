@@ -260,7 +260,6 @@ class BookmarksUseCaseTest {
             bookmarksStorage.getRecentBookmarks(
                 any(),
                 any(),
-                any(),
             )
         }.coAnswers { Result.success(listOf(bookmarkNode)) }
 
@@ -287,7 +286,6 @@ class BookmarksUseCaseTest {
             bookmarksStorage.getRecentBookmarks(
                 BookmarksUseCase.DEFAULT_BOOKMARKS_TO_RETRIEVE,
                 null,
-                any(),
             )
         }
     }
@@ -299,7 +297,7 @@ class BookmarksUseCaseTest {
         val lastSavedFolderCache = mockk<LastSavedFolderCache>(relaxed = true)
         val useCase = BookmarksUseCase(bookmarksStorage, historyStorage, lastSavedFolderCache)
 
-        coEvery { bookmarksStorage.getRecentBookmarks(any(), any(), any()) }.coAnswers { Result.success(listOf()) }
+        coEvery { bookmarksStorage.getRecentBookmarks(any(), any()) }.coAnswers { Result.success(listOf()) }
 
         val result = useCase.retrieveRecentBookmarks(BookmarksUseCase.DEFAULT_BOOKMARKS_TO_RETRIEVE)
 
@@ -309,7 +307,6 @@ class BookmarksUseCaseTest {
             bookmarksStorage.getRecentBookmarks(
                 BookmarksUseCase.DEFAULT_BOOKMARKS_TO_RETRIEVE,
                 null,
-                any(),
             )
         }
     }
