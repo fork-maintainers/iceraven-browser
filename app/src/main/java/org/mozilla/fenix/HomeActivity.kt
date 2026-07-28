@@ -14,6 +14,7 @@ import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
+import android.os.Parcelable
 import android.os.StrictMode
 import android.text.format.DateUtils
 import android.util.AttributeSet
@@ -34,6 +35,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.compose.runtime.mutableStateOf
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.net.toUri
+import androidx.core.os.BundleCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.text.layoutDirection
 import androidx.core.view.doOnLayout
@@ -52,6 +54,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlinx.parcelize.Parcelize
 import mozilla.appservices.places.BookmarkRoot
 import mozilla.components.browser.state.action.MediaSessionAction
 import mozilla.components.browser.state.action.SearchAction
@@ -64,6 +67,9 @@ import mozilla.components.browser.state.state.WebExtensionState
 import mozilla.components.concept.engine.EngineSession
 import mozilla.components.concept.engine.EngineView
 import mozilla.components.concept.storage.HistoryMetadataKey
+import mozilla.components.concept.sync.AccountObserver
+import mozilla.components.concept.sync.AuthType
+import mozilla.components.concept.sync.OAuthAccount
 import mozilla.components.feature.contextmenu.DefaultSelectionActionDelegate
 import mozilla.components.feature.customtabs.isCustomTabIntent
 import mozilla.components.feature.media.ext.findActiveMediaTab
@@ -95,6 +101,7 @@ import org.mozilla.fenix.GleanMetrics.Metrics
 import org.mozilla.fenix.GleanMetrics.NativeShareSheet
 import org.mozilla.fenix.GleanMetrics.SplashScreen
 import org.mozilla.fenix.GleanMetrics.StartOnHome
+import org.mozilla.fenix.GleanMetrics.SyncAccount
 import org.mozilla.fenix.addons.ExtensionsProcessDisabledBackgroundController
 import org.mozilla.fenix.addons.ExtensionsProcessDisabledForegroundController
 import org.mozilla.fenix.bindings.ExternalAppLinkStatusBinding
@@ -105,6 +112,7 @@ import org.mozilla.fenix.browser.browsingmode.BrowsingMode
 import org.mozilla.fenix.browser.browsingmode.BrowsingModeManager
 import org.mozilla.fenix.browser.browsingmode.DefaultBrowsingModeManager
 import org.mozilla.fenix.components.DefaultShortcutManagerCompatWrapper
+import org.mozilla.fenix.components.accounts.FenixFxAEntryPoint
 import org.mozilla.fenix.components.appstate.AppAction
 import org.mozilla.fenix.components.appstate.AppAction.ShareAction
 import org.mozilla.fenix.components.appstate.OrientationMode
@@ -693,7 +701,28 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity, Crash
             uninstallSurveyManager.showUninstallSurvey(intent, navHost.navController)
         }
 
+        restorePendingSendToDevicesTab(savedInstanceState)
+
         StartupTimeline.onActivityCreateEndHome(this) // DO NOT MOVE ANYTHING BELOW HERE.
+    }
+
+    @VisibleForTesting
+    internal fun restorePendingSendToDevicesTab(savedInstanceState: Bundle?) {
+        val pending = savedInstanceState?.let {
+            BundleCompat.getParcelable(it, PENDING_SEND_TO_DEVICES_TAB_KEY, PendingSendToDevicesTab::class.java)
+        } ?: return
+        pendingSendToDevicesTab = pending
+        // Recreated mid sign-in; re-arm so onResume can show it once authenticated.
+        if (components.backgroundServices.accountManager.authenticatedAccount() == null) {
+            beginAwaitingSignInForSendTab()
+        }
+    }
+
+    final override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        pendingSendToDevicesTab?.let {
+            outState.putParcelable(PENDING_SEND_TO_DEVICES_TAB_KEY, it)
+        }
     }
 
     @VisibleForTesting
@@ -807,6 +836,8 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity, Crash
         // and the user changes the system language
         // More details here: https://github.com/mozilla-mobile/fenix/pull/27793#discussion_r1029892536
         components.core.store.dispatch(SearchAction.RefreshSearchEnginesAction)
+
+        showPendingSendToDevicesIfPossible()
     }
 
     override fun onRestart() {
@@ -1010,11 +1041,12 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity, Crash
             val isPrivate = intent.getStringExtra(SendToDevicesDialogFragment.EXTRA_PRIVACY) ==
                 SendToDevicesDialogFragment.PRIVACY_PRIVATE
 
-            if (supportFragmentManager.findFragmentByTag(SendToDevicesDialogFragment.TAG) == null) {
-                SendToDevicesDialogFragment.newInstance(url, title, isPrivate).showNow(
-                    supportFragmentManager,
-                    SendToDevicesDialogFragment.TAG,
-                )
+            if (components.backgroundServices.accountManager.authenticatedAccount() == null) {
+                // Send to Device needs an account, so sign in first and resume once authenticated.
+                pendingSendToDevicesTab = PendingSendToDevicesTab(url, title, isPrivate)
+                navigateToSignInForSendTab()
+            } else {
+                showSendToDevicesDialog(url, title, isPrivate)
             }
 
             return
@@ -1053,6 +1085,100 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity, Crash
                 ) + externalSourceIntentProcessors
             intentProcessors.forEach { it.process(intent, navHost.navController, this.intent, components.settings) }
             browsingModeManager.updateMode(intent)
+        }
+    }
+
+    // A Send to Device tab waiting on sign-in, shown once the user is authenticated.
+    @VisibleForTesting
+    internal var pendingSendToDevicesTab: PendingSendToDevicesTab? = null
+
+    private var sendTabAuthObserver: AccountObserver? = null
+    private var sendTabSignInDestinationListener: NavController.OnDestinationChangedListener? = null
+    private var enteredSignInFlowForSendTab = false
+
+    @Parcelize
+    @VisibleForTesting
+    internal data class PendingSendToDevicesTab(
+        val url: String,
+        val title: String?,
+        val isPrivate: Boolean,
+    ) : Parcelable
+
+    @VisibleForTesting
+    internal fun navigateToSignInForSendTab() {
+        SyncAccount.signInToSendTab.record(NoExtras())
+        beginAwaitingSignInForSendTab()
+        navHost.navController.navigate(
+            NavGraphDirections.actionGlobalTurnOnSync(entrypoint = FenixFxAEntryPoint.DeepLink),
+        )
+    }
+
+    // Sign-in finishes asynchronously (in a separate web flow), so watch both the account state and
+    // whether the user leaves the sign-in flow before authenticating.
+    private fun beginAwaitingSignInForSendTab() {
+        if (sendTabAuthObserver == null) {
+            val observer = object : AccountObserver {
+                override fun onAuthenticated(account: OAuthAccount, authType: AuthType) {
+                    runOnUiThread { showPendingSendToDevicesIfPossible() }
+                }
+            }
+            sendTabAuthObserver = observer
+            components.backgroundServices.accountManager.register(
+                observer,
+                owner = this,
+                autoPause = false,
+            )
+        }
+
+        if (sendTabSignInDestinationListener == null) {
+            val listener = NavController.OnDestinationChangedListener { _, destination, _ ->
+                onSendTabSignInDestinationChanged(destination.id)
+            }
+            sendTabSignInDestinationListener = listener
+            navHost.navController.addOnDestinationChangedListener(listener)
+        }
+    }
+
+    @VisibleForTesting
+    internal fun onSendTabSignInDestinationChanged(destinationId: Int) {
+        if (destinationId in SEND_TAB_SIGN_IN_DESTINATIONS) {
+            enteredSignInFlowForSendTab = true
+        } else if (enteredSignInFlowForSendTab &&
+            components.backgroundServices.accountManager.authenticatedAccount() == null
+        ) {
+            // Left sign-in without an account, so drop the tab rather than let it pop up on a later sign-in.
+            pendingSendToDevicesTab = null
+            stopAwaitingSignInForSendTab()
+        }
+    }
+
+    private fun stopAwaitingSignInForSendTab() {
+        sendTabAuthObserver?.let { components.backgroundServices.accountManager.unregister(it) }
+        sendTabAuthObserver = null
+        sendTabSignInDestinationListener?.let { navHost.navController.removeOnDestinationChangedListener(it) }
+        sendTabSignInDestinationListener = null
+        enteredSignInFlowForSendTab = false
+    }
+
+    @VisibleForTesting
+    internal fun showPendingSendToDevicesIfPossible() {
+        val pending = pendingSendToDevicesTab ?: return
+        if (components.backgroundServices.accountManager.authenticatedAccount() != null &&
+            !supportFragmentManager.isStateSaved
+        ) {
+            pendingSendToDevicesTab = null
+            stopAwaitingSignInForSendTab()
+            showSendToDevicesDialog(pending.url, pending.title, pending.isPrivate)
+        }
+    }
+
+    @VisibleForTesting
+    internal fun showSendToDevicesDialog(url: String, title: String?, isPrivate: Boolean) {
+        if (supportFragmentManager.findFragmentByTag(SendToDevicesDialogFragment.TAG) == null) {
+            SendToDevicesDialogFragment.newInstance(url, title, isPrivate).showNow(
+                supportFragmentManager,
+                SendToDevicesDialogFragment.TAG,
+            )
         }
     }
 
@@ -1697,6 +1823,14 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity, Crash
             R.id.addonInternalSettingsFragment,
             R.id.addonDetailsFragment,
             R.id.addonPermissionsDetailFragment,
+        )
+
+        @VisibleForTesting
+        internal const val PENDING_SEND_TO_DEVICES_TAB_KEY = "pending_send_to_devices_tab"
+
+        private val SEND_TAB_SIGN_IN_DESTINATIONS = setOf(
+            R.id.turnOnSyncFragment,
+            R.id.pairFragment,
         )
     }
 }

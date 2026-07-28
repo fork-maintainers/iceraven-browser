@@ -4,7 +4,6 @@
 
 package org.mozilla.fenix.components.share
 
-import android.content.Intent
 import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,7 +12,6 @@ import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.compose.runtime.collectAsState
 import androidx.core.content.getSystemService
-import androidx.core.net.toUri
 import androidx.fragment.app.viewModels
 import androidx.fragment.compose.content
 import androidx.lifecycle.ViewModel
@@ -22,18 +20,11 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.launch
-import mozilla.components.concept.sync.AccountObserver
-import mozilla.components.concept.sync.AuthType
-import mozilla.components.concept.sync.OAuthAccount
 import mozilla.components.concept.sync.TabData
 import mozilla.components.concept.sync.TabPrivacy
 import mozilla.components.feature.accounts.push.SendTabUseCases
 import mozilla.components.feature.share.RecentAppsStorage
-import mozilla.components.service.fxa.manager.FxaAccountManager
 import mozilla.components.support.utils.ext.packageManagerCompatHelper
-import mozilla.telemetry.glean.private.NoExtras
-import org.mozilla.fenix.BuildConfig
-import org.mozilla.fenix.GleanMetrics.SyncAccount
 import org.mozilla.fenix.R
 import org.mozilla.fenix.ext.requireComponents
 import org.mozilla.fenix.share.DefaultShareController.Companion.ACTION_COPY_LINK_TO_CLIPBOARD
@@ -73,13 +64,6 @@ class SendToDevicesDialogFragment : BottomSheetDialogFragment() {
     private var tabUrl: String? = null
     private var tabTitle: String? = null
     private var tabPrivacy: TabPrivacy = TabPrivacy.Normal
-    private var hasNavigatedToSignIn = false
-
-    private val accountObserver = object : AccountObserver {
-        override fun onAuthenticated(account: OAuthAccount, authType: AuthType) {
-            onAuthenticated()
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -104,11 +88,6 @@ class SendToDevicesDialogFragment : BottomSheetDialogFragment() {
     override fun onStart() {
         super.onStart()
         loadTabData(arguments)
-        requireComponents.backgroundServices.accountManager.register(
-            accountObserver,
-            owner = this,
-            autoPause = false,
-        )
     }
 
     internal fun loadTabData(bundle: Bundle?) {
@@ -123,33 +102,8 @@ class SendToDevicesDialogFragment : BottomSheetDialogFragment() {
 
     override fun onResume() {
         super.onResume()
-        checkAuthAndNavigate(requireComponents.backgroundServices.accountManager)
-    }
-
-    internal fun onAuthenticated() {
+        // HomeActivity only shows this once signed in, so we can load the device list straight away.
         model.initDataLoad()
-    }
-
-    internal fun checkAuthAndNavigate(accountManager: FxaAccountManager) {
-        if (accountManager.authenticatedAccount() != null) {
-            onAuthenticated()
-        } else if (!hasNavigatedToSignIn) {
-            hasNavigatedToSignIn = true
-            navigateToSignIn()
-        }
-    }
-
-    internal fun navigateToSignIn() {
-        SyncAccount.signInToSendTab.record(NoExtras())
-        requireActivity().startActivity(
-            Intent(
-                Intent.ACTION_VIEW,
-                "${BuildConfig.DEEP_LINK_SCHEME}://turn_on_sync".toUri(),
-            ).apply {
-                setPackage(requireActivity().packageName)
-                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            },
-        )
     }
 
     private fun getCopyApp(): AppShareOption? {
