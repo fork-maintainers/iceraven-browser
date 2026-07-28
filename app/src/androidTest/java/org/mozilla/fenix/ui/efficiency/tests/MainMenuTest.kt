@@ -360,4 +360,22 @@ class MainMenuTest : BaseTest(
             .mozClick(DownloadsSelectors.DOWNLOAD_SNACK_BAR_OPEN_BUTTON)
             .mozVerifyFileOpensInExternalApp(Constants.PackageName.GOOGLE_DOCS)
     }
+
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3080128
+    @SmokeTest
+    @Test
+    fun verifyTheShareButtonTest() {
+        val testPage = mockWebServer.getGenericAsset(1)
+
+        on.browserPage.navigateToPage(testPage.url.toString())
+        on.mainMenu.navigateToPage()
+            .mozClick(MainMenuSelectors.SHARE_BUTTON)
+        on.shareOverlay.mozVerifyElementsByGroup("shareTabLayout")
+        on.shareOverlay.verifySharingWithSelectedApp(
+            appName = Constants.GMAIL_APP_NAME,
+            appPackageName = Constants.PackageName.GMAIL_APP,
+            content = testPage.url.toString(),
+            subject = testPage.title,
+        )
+    }
 }

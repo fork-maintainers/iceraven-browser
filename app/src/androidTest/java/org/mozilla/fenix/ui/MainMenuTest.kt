@@ -20,6 +20,7 @@ import org.mozilla.fenix.helpers.AppAndSystemHelper.assertExternalAppOpens
 import org.mozilla.fenix.helpers.AppAndSystemHelper.assertNativeAppOpens
 import org.mozilla.fenix.helpers.AppAndSystemHelper.assertYoutubeAppOpens
 import org.mozilla.fenix.helpers.AppAndSystemHelper.clickSystemHomeScreenShortcutAddButton
+import org.mozilla.fenix.helpers.Constants
 import org.mozilla.fenix.helpers.Constants.PackageName.GOOGLE_DOCS
 import org.mozilla.fenix.helpers.Constants.PackageName.PRINT_SPOOLER
 import org.mozilla.fenix.helpers.DataGenerationHelper.createCustomTabIntent
@@ -511,6 +512,11 @@ class MainMenuTest {
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3080128
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.MainMenuTest#verifyTheShareButtonTest"],
+        bug = 2057218,
+        since = "2026-07",
+    )
     @SmokeTest
     @Test
     fun verifyTheShareButtonTest() {
@@ -523,7 +529,7 @@ class MainMenuTest {
         }.clickShareButton {
             verifyShareTabLayout()
             verifySharingWithSelectedApp(
-                appName = "Gmail",
+                appName = Constants.GMAIL_APP_NAME,
                 content = testPage.url.toString(),
                 subject = testPage.title,
             )

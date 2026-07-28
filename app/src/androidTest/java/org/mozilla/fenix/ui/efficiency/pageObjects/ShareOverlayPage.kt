@@ -37,14 +37,19 @@ class ShareOverlayPage(composeRule: AndroidComposeTestRule<HomeActivityIntentTes
         return ShareOverlaySelectors.all.filter { it.groups.contains(group) }
     }
 
-    fun verifySharingWithSelectedApp(appName: String, content: String, subject: String): ShareOverlayPage {
+    fun verifySharingWithSelectedApp(
+        appName: String,
+        appPackageName: String,
+        content: String,
+        subject: String,
+    ): ShareOverlayPage {
         val sharingApp = mDevice.findObject(UiSelector().text(appName))
         assertTrue("Sharing app '$appName' not found on device", sharingApp.exists())
         sharingApp.clickAndWaitForNewWindow()
         val urlMatchers = content.split("\n\n").map { IntentMatchers.hasExtra(Intent.EXTRA_TEXT, containsString(it)) }
         val subjectMatchers = subject.split(", ").map { IntentMatchers.hasExtra(Intent.EXTRA_SUBJECT, containsString(it)) }
         Intents.intended(allOf(*(urlMatchers + subjectMatchers).toTypedArray()))
-        forceCloseApp(appName)
+        forceCloseApp(appPackageName)
         return this
     }
 }
