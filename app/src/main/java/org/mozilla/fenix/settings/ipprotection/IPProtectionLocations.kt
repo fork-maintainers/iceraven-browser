@@ -2,6 +2,8 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
+@file:OptIn(ExperimentalAndroidComponentsApi::class)
+
 package org.mozilla.fenix.settings.ipprotection
 
 import androidx.compose.foundation.Image
@@ -45,6 +47,7 @@ import mozilla.components.ExperimentalAndroidComponentsApi
 import mozilla.components.compose.base.annotation.FlexibleWindowPreview
 import mozilla.components.compose.base.button.IconButton
 import mozilla.components.compose.base.theme.AcornCorners
+import mozilla.components.concept.engine.ipprotection.IPProtectionHandler
 import org.mozilla.fenix.R
 import org.mozilla.fenix.compose.list.TextListItem
 import org.mozilla.fenix.theme.FirefoxTheme
@@ -58,7 +61,7 @@ import mozilla.components.ui.icons.R as iconsR
  * The IP Protection location selection screen.
  *
  * @param selectedRegion The currently selected region, or `null` for recommended location.
- * @param regions A list of regions.
+ * @param countries A list of countries available in the proxy server-list.
  * @param snackbarHostState The [SnackbarHostState] used to display snackbars.
  * @param onNavigateBack Called when the back navigation icon is tapped.
  * @param onLocationSelected Called with the user taps on a location.
@@ -66,7 +69,7 @@ import mozilla.components.ui.icons.R as iconsR
 @Composable
 fun IPProtectionLocationsScreen(
     selectedRegion: String?,
-    regions: List<String>,
+    countries: List<IPProtectionHandler.Country>,
     snackbarHostState: SnackbarHostState,
     onNavigateBack: () -> Unit,
     onLocationSelected: (String?) -> Unit,
@@ -95,7 +98,7 @@ fun IPProtectionLocationsScreen(
         ) {
             LocationList(
                 selectedRegion = selectedRegion,
-                regions = regions,
+                countries = countries,
                 onLocationSelected = onLocationSelected,
             )
         }
@@ -105,7 +108,7 @@ fun IPProtectionLocationsScreen(
 @Composable
 private fun LocationList(
     selectedRegion: String?,
-    regions: List<String>,
+    countries: List<IPProtectionHandler.Country>,
     onLocationSelected: (String?) -> Unit,
 ) {
     Column(
@@ -125,16 +128,17 @@ private fun LocationList(
             onClick = { onLocationSelected(null) }, // this should look nicer once we have real data objects
         )
 
-        if (regions.isNotEmpty()) {
+        if (countries.isNotEmpty()) {
             // There is rounded container around the whole list AND
             // individual elements have rounded (small) corners.
             RoundedContainer(AcornCorners.extraLarge) {
-                regions.forEach { region ->
+                countries.forEach { country ->
                     LocationOption(
-                        label = regionDisplayName(region),
-                        isSelected = region == selectedRegion,
+                        label = regionDisplayName(country.code),
+                        isSelected = country.code == selectedRegion,
+                        enabled = country.available,
                         cornerSize = AcornCorners.extraSmall,
-                        onClick = { onLocationSelected(region) },
+                        onClick = { onLocationSelected(country.code) },
                     )
                 }
             }
@@ -206,6 +210,7 @@ private fun LocationOption(
     description: String? = null,
     isSelected: Boolean,
     cornerSize: Dp,
+    enabled: Boolean = true,
     onClick: () -> Unit,
 ) {
     RoundedContainer(cornerSize = cornerSize) {
@@ -218,6 +223,9 @@ private fun LocationOption(
                 }
                 .background(color = MaterialTheme.colorScheme.surfaceBright),
             description = description,
+            // We should have alternative design for unavailable items,
+            // tracked in https://bugzilla.mozilla.org/show_bug.cgi?id=2056379
+            enabled = enabled,
             // next two lines should look nicer once we have real data objects
             iconPainter = if (isSelected) {
                 painterResource(iconsR.drawable.mozac_ic_checkmark_24)
@@ -275,7 +283,6 @@ private fun regionDisplayName(regionCode: String): String {
     return displayName.ifBlank { normalizedCode }
 }
 
-@OptIn(ExperimentalAndroidComponentsApi::class)
 @FlexibleWindowPreview
 @Composable
 private fun IPProtectionLocationsRecommendedPreview(
@@ -284,7 +291,7 @@ private fun IPProtectionLocationsRecommendedPreview(
     FirefoxTheme(theme = theme) {
         IPProtectionLocationsScreen(
             selectedRegion = null,
-            regions = listOf("dk", "fr", "gb", "us"),
+            countries = SAMPLE_COUNTRIES,
             snackbarHostState = SnackbarHostState(),
             onNavigateBack = {},
             onLocationSelected = {},
@@ -292,16 +299,15 @@ private fun IPProtectionLocationsRecommendedPreview(
     }
 }
 
-@OptIn(ExperimentalAndroidComponentsApi::class)
 @FlexibleWindowPreview
 @Composable
-private fun IPProtectionLocationsRegionSelectedPreview(
+private fun IPProtectionLocationsCountrySelectedPreview(
     @PreviewParameter(PreviewThemeProvider::class) theme: Theme,
 ) {
     FirefoxTheme(theme = theme) {
         IPProtectionLocationsScreen(
             selectedRegion = "fr",
-            regions = listOf("dk", "fr", "gb", "us"),
+            countries = SAMPLE_COUNTRIES,
             snackbarHostState = SnackbarHostState(),
             onNavigateBack = {},
             onLocationSelected = {},
@@ -309,7 +315,6 @@ private fun IPProtectionLocationsRegionSelectedPreview(
     }
 }
 
-@OptIn(ExperimentalAndroidComponentsApi::class)
 @FlexibleWindowPreview
 @Composable
 private fun IPProtectionLocationsEmptyPreview(
@@ -318,10 +323,17 @@ private fun IPProtectionLocationsEmptyPreview(
     FirefoxTheme(theme = theme) {
         IPProtectionLocationsScreen(
             selectedRegion = null,
-            regions = emptyList(),
+            countries = emptyList(),
             snackbarHostState = SnackbarHostState(),
             onNavigateBack = {},
             onLocationSelected = {},
         )
     }
 }
+
+private val SAMPLE_COUNTRIES = listOf(
+    IPProtectionHandler.Country(code = "dk", available = true),
+    IPProtectionHandler.Country(code = "fr", available = true),
+    IPProtectionHandler.Country(code = "gb", available = false),
+    IPProtectionHandler.Country(code = "us", available = true),
+)

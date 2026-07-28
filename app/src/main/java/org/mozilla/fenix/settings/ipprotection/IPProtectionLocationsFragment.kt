@@ -2,6 +2,8 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
+@file:OptIn(ExperimentalAndroidComponentsApi::class)
+
 package org.mozilla.fenix.settings.ipprotection
 
 import android.os.Bundle
@@ -15,6 +17,9 @@ import androidx.compose.runtime.setValue
 import androidx.fragment.app.Fragment
 import androidx.fragment.compose.content
 import androidx.navigation.fragment.findNavController
+import mozilla.components.ExperimentalAndroidComponentsApi
+import mozilla.components.lib.state.ext.observeAsComposableState
+import org.mozilla.fenix.components.components
 import org.mozilla.fenix.e2e.SystemInsetsPaddedFragment
 import org.mozilla.fenix.theme.FirefoxTheme
 
@@ -31,23 +36,16 @@ class IPProtectionLocationsFragment : Fragment(), SystemInsetsPaddedFragment {
         savedInstanceState: Bundle?,
     ) = content {
         var selectedRegion by rememberSaveable { mutableStateOf<String?>(null) }
+        val countries = components.ipProtection.store.observeAsComposableState { it.countries }.value
 
         FirefoxTheme {
             IPProtectionLocationsScreen(
                 selectedRegion = selectedRegion,
-                regions = SAMPLE_REGIONS,
+                countries = countries,
                 snackbarHostState = snackbarHostState,
                 onNavigateBack = { findNavController().popBackStack() },
                 onLocationSelected = { selectedRegion = it },
             )
         }
-    }
-
-    companion object {
-        // Placeholder region codes until the location data source is available.
-        private val SAMPLE_REGIONS = listOf(
-            "AU", "AT", "BE", "BG", "CA", "CL", "CO", "DK", "FI", "FR", "DE", "IE", "IT", "JP", "MY", "MX",
-                   "NL", "NZ", "NO", "PL", "PT", "SG", "ZA", "ES", "SE", "CH", "TH", "GB", "US",
-        )
     }
 }
