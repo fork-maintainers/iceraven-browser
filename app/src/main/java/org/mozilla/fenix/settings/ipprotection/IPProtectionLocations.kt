@@ -4,11 +4,16 @@
 
 package org.mozilla.fenix.settings.ipprotection
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -23,6 +28,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
@@ -119,8 +125,6 @@ private fun LocationList(
             onClick = { onLocationSelected(null) }, // this should look nicer once we have real data objects
         )
 
-        // regions could be empty, empty state design is not ready yet. Tracked in:
-        // https://bugzilla.mozilla.org/show_bug.cgi?id=2054588
         if (regions.isNotEmpty()) {
             // There is rounded container around the whole list AND
             // individual elements have rounded (small) corners.
@@ -133,6 +137,50 @@ private fun LocationList(
                         onClick = { onLocationSelected(region) },
                     )
                 }
+            }
+        } else {
+            LocationsEmptyState()
+        }
+    }
+}
+
+@Composable
+private fun LocationsEmptyState() {
+    RoundedContainer(cornerSize = AcornCorners.extraLarge) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(color = MaterialTheme.colorScheme.surfaceBright)
+                .padding(
+                    paddingValues = PaddingValues(
+                        horizontal = FirefoxTheme.layout.space.dynamic200,
+                        vertical = FirefoxTheme.layout.space.static150,
+                    ),
+                ),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Image(
+                painter = painterResource(R.drawable.kit_search_error),
+                contentDescription = null, // Decorative only
+            )
+
+            Spacer(modifier = Modifier.height(FirefoxTheme.layout.space.static200))
+
+            Column(
+                verticalArrangement = Arrangement.spacedBy(FirefoxTheme.layout.space.static50),
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                Text(
+                    text = stringResource(R.string.ip_protection_locations_unavailable_title),
+                    color = MaterialTheme.colorScheme.onSurface,
+                    style = FirefoxTheme.typography.headline7,
+                )
+
+                Text(
+                    text = stringResource(R.string.ip_protection_locations_unavailable_description),
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    style = FirefoxTheme.typography.caption,
+                )
             }
         }
     }
@@ -254,6 +302,23 @@ private fun IPProtectionLocationsRegionSelectedPreview(
         IPProtectionLocationsScreen(
             selectedRegion = "fr",
             regions = listOf("dk", "fr", "gb", "us"),
+            snackbarHostState = SnackbarHostState(),
+            onNavigateBack = {},
+            onLocationSelected = {},
+        )
+    }
+}
+
+@OptIn(ExperimentalAndroidComponentsApi::class)
+@FlexibleWindowPreview
+@Composable
+private fun IPProtectionLocationsEmptyPreview(
+    @PreviewParameter(PreviewThemeProvider::class) theme: Theme,
+) {
+    FirefoxTheme(theme = theme) {
+        IPProtectionLocationsScreen(
+            selectedRegion = null,
+            regions = emptyList(),
             snackbarHostState = SnackbarHostState(),
             onNavigateBack = {},
             onLocationSelected = {},
