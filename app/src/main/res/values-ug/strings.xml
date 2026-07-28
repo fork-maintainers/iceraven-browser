@@ -631,8 +631,6 @@
   <string name="nova_onboarding_marketing_primary_button_text" tools:ignore="BrandUsage,UnusedResources">Firefox ياردەم</string>
   <!-- Marketing onboarding primary button text. -->
   <string name="nova_onboarding_marketing_primary_button_text_3">ھەئە</string>
-  <!-- Marketing onboarding primary button text. -->
-  <string name="nova_onboarding_marketing_primary_button_text_2">يول قويۇپ ۋە داۋاملاشتۇر</string>
   <!-- Marketing onboarding secondary button text. -->
   <string name="nova_onboarding_marketing_secondary_button_text" tools:ignore="UnusedResources">ياق رەھمەت</string>
   <!-- Marketing onboarding secondary button text. -->
@@ -4533,6 +4531,8 @@
   <string name="sports_widget_more_options_content_description">تېخىمۇ كۆپ تاللانما</string>
   <!-- Sports widget error card description shown when the user is offline. -->
   <string name="sports_widget_error_connection_offline_description">ئىنتېرنېت باغلىنىشىڭىزنى تەكشۈرۈپ ئاندىن قايتا سىناڭ.</string>
+  <!-- Sports widget general group stage label in the soccer tournament. -->
+  <string name="sports_widget_group_stage">گۇرۇپپا باسقۇچى</string>
   <!-- Sports widget error card title shown when match data fails to load. -->
   <string name="sports_widget_error_load_failed_title">ھازىرچە مۇسابىقە ئۇچۇرى يوق.</string>
   <!-- Sports widget error card description shown when match data fails to load. -->
@@ -4551,4 +4551,23 @@
   <string name="privacy_notice_updated_homepage_message_privacy_notice" tools:ignore="UnusedResources">شەخسىيەت ئۇقتۇرۇشى</string>
   <!-- The second active link used in privacy_notice_updated_homepage_message -->
   <string name="privacy_notice_updated_homepage_message_learn_more" tools:ignore="UnusedResources">مول بىلىم</string>
+  <!-- Toast shown when the user denies the camera permission requested by the Lens camera screen -->
+  <string name="lens_camera_permission_denied">ئىجازەت رەت قىلىندى</string>
+  <!--
+    Title shown at the top of the camera screen, next to the close button, telling the
+    user that the photo they capture will be sent to Google Lens for a visual search.
+  -->
+  <string name="lens_camera_title_lens">Google Lens</string>
+  <!-- Title for the Google Lens AI feature toggle -->
+  <string name="ai_controls_google_lens_title">Google Lens</string>
+  <!-- Content description for the Google Lens half of the camera mode toggle -->
+  <string name="lens_camera_mode_lens">Google Lens</string>
+  <!-- Content description for the QR scanner half of the camera mode toggle -->
+  <string name="lens_camera_mode_qr">QR تارىغۇچ</string>
+  <!-- Toast shown when the user picks an image from the gallery in QR mode but no QR code is found in it -->
+  <string name="lens_camera_qr_no_code_found">سۈرەتتە ھېچقانداق QR كودى تېپىلمىدى</string>
+  <!-- The link text shown when a feedback URL for a Firefox Labs feature is available. The feedback URL page will allow users to provide opinions and suggestions. -->
+  <string name="firefox_labs_share_feedback">قايتۇرما ئىنكاس ھەمبەھىر</string>
+  <!-- The text on the dialog on the Firefox Labs screen for the negative button when toggling "on" and "off" experimental features. This is used to cancel the action and return to the previous screen. -->
+  <string name="firefox_labs_dialog_cancel_button">ۋاز كەچ</string>
 </resources>

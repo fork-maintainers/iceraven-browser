@@ -565,8 +565,6 @@
   <string name="nova_onboarding_marketing_primary_button_text" tools:ignore="BrandUsage,UnusedResources">ഫയർഫോക്സിനെ പിന്തുണയ്ക്കുക</string>
   <!-- Marketing onboarding primary button text. -->
   <string name="nova_onboarding_marketing_primary_button_text_3">അതെ</string>
-  <!-- Marketing onboarding primary button text. -->
-  <string name="nova_onboarding_marketing_primary_button_text_2">സമ്മതിച്ചു തുടരുക</string>
   <!-- Marketing onboarding secondary button text. -->
   <string name="nova_onboarding_marketing_secondary_button_text" tools:ignore="UnusedResources">വേണ്ട, നന്ദി</string>
   <!-- Marketing onboarding secondary button text. -->

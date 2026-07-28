@@ -647,8 +647,6 @@
   <string name="nova_onboarding_marketing_body_link_text">How we use the data</string>
   <!-- Marketing onboarding primary button text. 'Firefox' is intentionally hardcoded. -->
   <string name="nova_onboarding_marketing_primary_button_text" tools:ignore="BrandUsage,UnusedResources">Help Firefox</string>
-  <!-- Marketing onboarding primary button text. -->
-  <string name="nova_onboarding_marketing_primary_button_text_2">Allow and Continue</string>
   <!-- Marketing onboarding secondary button text. -->
   <string name="nova_onboarding_marketing_secondary_button_text" tools:ignore="UnusedResources">No Thanks</string>
   <!-- Notifications onboarding title. 'Firefox' is intentionally hardcoded. -->

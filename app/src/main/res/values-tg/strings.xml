@@ -31,6 +31,8 @@
   <string name="history_search_hint">Ҷустуҷӯ дар таърих</string>
   <!-- Placeholder text shown in search bar when using bookmarks search -->
   <string name="bookmark_search_hint">Ҷустуҷӯ дар хатбаракҳо</string>
+  <!-- Content description for the toolbar back button while searching bookmarks -->
+  <string name="bookmark_close_search_description">Бозгашт ва пӯшидани ҷустуҷӯ</string>
   <!-- Placeholder text shown in search bar when using tabs search -->
   <string name="tab_search_hint">Ҷустуҷӯ дар варақаҳо</string>
   <!-- Placeholder text shown in the search bar when using application search engines -->
@@ -666,8 +668,6 @@
   <string name="nova_onboarding_marketing_primary_button_text" tools:ignore="BrandUsage,UnusedResources">«Firefox»-ро дастгирӣ намоед</string>
   <!-- Marketing onboarding primary button text. -->
   <string name="nova_onboarding_marketing_primary_button_text_3">Ҳа</string>
-  <!-- Marketing onboarding primary button text. -->
-  <string name="nova_onboarding_marketing_primary_button_text_2">Иҷозат дода, идома диҳед</string>
   <!-- Marketing onboarding secondary button text. -->
   <string name="nova_onboarding_marketing_secondary_button_text" tools:ignore="UnusedResources">Не, ташаккур</string>
   <!-- Marketing onboarding secondary button text. -->
@@ -978,6 +978,8 @@
   <string name="notifications_allowed_summary">Иҷозат дода мешавад</string>
   <!-- Summary for notification preference indicating notifications are not allowed -->
   <string name="notifications_not_allowed_summary">Иҷозат дода намешавад</string>
+  <!-- Preference for local network access / nearby devices in Android 17 -->
+  <string name="preferences_local_network_access">Дастрасӣ ба шабакаи маҳаллӣ / Дастгоҳҳои наздик</string>
   <!-- Summary for local network access preference indicating access is allowed -->
   <string name="local_network_access_allowed_summary">Иҷозат дода мешавад</string>
   <!-- Summary for local network access preference indicating access is not allowed -->
@@ -3150,6 +3152,14 @@
   <string name="ip_protection_mozilla_vpn_upsell_button" tools:ignore="UnusedResources,BrandUsage">Ба даст овардани «Mozilla VPN»</string>
   <!-- Title for the browser VPN location picker screen. -->
   <string name="ip_protection_location_picker_title" tools:ignore="UnusedResources">Интихоби ҷойгиршавии «VPN»</string>
+  <!-- Description for what it means to use the Recommended setting and let the app automatically pick the best server location. -->
+  <string name="ip_protection_location_fastest_description" tools:ignore="BrandUsage">«Firefox» ҷойгиршавии зудтаринро пайдо мекунад</string>
+  <!-- Error message shown when the selected browser VPN location is unavailable. -->
+  <string name="ip_protection_location_unavailable" tools:ignore="UnusedResources">Ҷойгиршавӣ дастнорас аст. Ҷойгиршавии дигареро интихоб кунед.</string>
+  <!-- Title for the card shown to the user when we are unable to fetch server locations -->
+  <string name="ip_protection_location_unavailable_title" tools:ignore="UnusedResources">Ҷойгиршавии қаблӣ дастнорас аст</string>
+  <!-- Description for the card shown to the user when we are unable to fetch server locations -->
+  <string name="ip_protection_location_unavailable_recommended_description" tools:ignore="UnusedResources">Ба ҷойгиршавии тавсияшуда пайваст шуд.</string>
   <!--
     Autofill
 

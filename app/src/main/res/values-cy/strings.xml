@@ -668,8 +668,6 @@
   <string name="nova_onboarding_marketing_primary_button_text" tools:ignore="BrandUsage,UnusedResources">Helpu Firefox</string>
   <!-- Marketing onboarding primary button text. -->
   <string name="nova_onboarding_marketing_primary_button_text_3">Iawn</string>
-  <!-- Marketing onboarding primary button text. -->
-  <string name="nova_onboarding_marketing_primary_button_text_2">Caniatáu a Pharhau</string>
   <!-- Marketing onboarding secondary button text. -->
   <string name="nova_onboarding_marketing_secondary_button_text" tools:ignore="UnusedResources">Dim Diolch</string>
   <!-- Marketing onboarding secondary button text. -->
@@ -989,7 +987,7 @@
   <!-- Summary for local network access preference indicating access is allowed -->
   <string name="local_network_access_allowed_summary">Caniatawyd</string>
   <!-- Summary for local network access preference indicating access is not allowed -->
-  <string name="local_network_access_not_allowed_summary">Dim caniatáu</string>
+  <string name="local_network_access_not_allowed_summary">Dim caniatâd</string>
   <!--
     Add-on Permissions
 
