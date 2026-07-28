@@ -60,6 +60,7 @@ class IPProtectionScreenTest {
                     showDebugAction = false,
                     onDebugActionClick = {},
                     onNavigateBack = {},
+                    onLocationClicked = {},
                 )
             }
         }
@@ -114,6 +115,7 @@ class IPProtectionScreenTest {
                     showDebugAction = false,
                     onDebugActionClick = {},
                     onNavigateBack = {},
+                    onLocationClicked = {},
                 )
             }
         }
@@ -150,6 +152,7 @@ class IPProtectionScreenTest {
                     showDebugAction = false,
                     onDebugActionClick = {},
                     onNavigateBack = {},
+                    onLocationClicked = {},
                 )
             }
         }

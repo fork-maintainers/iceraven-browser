@@ -895,6 +895,18 @@
         <argument
             android:name="entrypoint"
             app:argType="org.mozilla.fenix.components.accounts.FenixFxAEntryPoint" />
+        <action
+          android:id="@+id/action_ipProtectionFragment_to_ipProtectionLocationFragment"
+          app:destination="@id/ipProtectionLocationsFragment"
+          app:enterAnim="@anim/slide_in_right"
+          app:exitAnim="@anim/slide_out_left"
+          app:popEnterAnim="@anim/slide_in_left"
+          app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+      android:id="@+id/ipProtectionLocationsFragment"
+      android:name="org.mozilla.fenix.settings.ipprotection.IPProtectionLocationsFragment"
+      android:label="@string/ip_protection_locations_title" >
     </fragment>
     <fragment
         android:id="@+id/aiControlsFragment"

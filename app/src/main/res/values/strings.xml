@@ -2872,6 +2872,10 @@
     <string name="ip_protection_location_unavailable_title" tools:ignore="UnusedResources">Previous location is unavailable</string>
     <!-- Description for the card shown to the user when we are unable to fetch server locations -->
     <string name="ip_protection_location_unavailable_recommended_description" tools:ignore="UnusedResources">Connected to the recommended location.</string>
+    <!-- Title for the browser VPN location selection screen (displayed in the app bar) -->
+    <string name="ip_protection_locations_title">Choose VPN Location</string>
+    <!-- Content description for the browser VPN location selection screen top bar back button -->
+    <string name="ip_protection_locations_navigate_back_button_content_description">Navigate back</string>
 
     <!-- Autofill -->
     <!-- Preference and title for managing the autofill settings -->

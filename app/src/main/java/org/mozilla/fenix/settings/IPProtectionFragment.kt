@@ -121,6 +121,8 @@ class IPProtectionFragment : Fragment(), SystemInsetsPaddedFragment {
                 showDebugAction = requireComponents.settings.showSecretDebugMenuThisSession,
                 onDebugActionClick = { showDebugDialog = true },
                 onNavigateBack = { findNavController().popBackStack() },
+                onLocationClicked = { handleOnLocationClicked() },
+                isLocationSelectionEnabled = requireComponents.settings.isIPProtectionLocationsEnabled,
             )
 
             if (showDebugDialog) {
@@ -178,6 +180,14 @@ class IPProtectionFragment : Fragment(), SystemInsetsPaddedFragment {
             owner = this,
             view = view,
         )
+    }
+
+    private fun handleOnLocationClicked() {
+        if (requireComponents.settings.isIPProtectionLocationsEnabled) {
+            findNavController().navigate(
+                IPProtectionFragmentDirections.actionIpProtectionFragmentToIpProtectionLocationFragment(),
+            )
+        }
     }
 
     /**
