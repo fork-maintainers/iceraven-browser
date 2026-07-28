@@ -5,9 +5,11 @@
 package org.mozilla.fenix.components.share
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
@@ -19,6 +21,7 @@ import androidx.fragment.compose.content
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.launch
@@ -30,6 +33,7 @@ import mozilla.components.concept.sync.TabPrivacy
 import mozilla.components.feature.accounts.push.SendTabUseCases
 import mozilla.components.feature.share.RecentAppsStorage
 import mozilla.components.service.fxa.manager.FxaAccountManager
+import mozilla.components.support.utils.ext.isLandscape
 import mozilla.components.support.utils.ext.packageManagerCompatHelper
 import mozilla.telemetry.glean.private.NoExtras
 import org.mozilla.fenix.BuildConfig
@@ -40,6 +44,7 @@ import org.mozilla.fenix.share.DefaultShareController.Companion.ACTION_COPY_LINK
 import org.mozilla.fenix.share.ShareViewModel
 import org.mozilla.fenix.share.listadapters.AppShareOption
 import org.mozilla.fenix.share.listadapters.SyncShareOption
+import com.google.android.material.R as materialR
 
 /**
  * A [BottomSheetDialogFragment] that allows the user to send a tab to their other devices.
@@ -103,12 +108,28 @@ class SendToDevicesDialogFragment : BottomSheetDialogFragment() {
 
     override fun onStart() {
         super.onStart()
+        updateSheetHeight()
         loadTabData(arguments)
         requireComponents.backgroundServices.accountManager.register(
             accountObserver,
             owner = this,
             autoPause = false,
         )
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        updateSheetHeight()
+    }
+
+    private fun updateSheetHeight() {
+        val bottomSheet = dialog?.findViewById<View>(materialR.id.design_bottom_sheet) ?: return
+        BottomSheetBehavior.from(bottomSheet).peekHeight =
+            if (requireContext().isLandscape()) {
+                resources.displayMetrics.heightPixels
+            } else {
+                BottomSheetBehavior.PEEK_HEIGHT_AUTO
+            }
     }
 
     internal fun loadTabData(bundle: Bundle?) {
