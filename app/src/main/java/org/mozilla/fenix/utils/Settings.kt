@@ -2271,11 +2271,19 @@ class Settings(
      *
      * @param hasUserBeenOnboarded Boolean to indicate whether the user has been onboarded.
      * @param featureEnabled Boolean to indicate whether the feature is enabled.
+     * @param forceOnboardingForBenchmark Boolean that opts a Baseline Profile generator back into
+     * onboarding. In benchmark builds onboarding is suppressed by default so generators don't spend
+     * emulator time dismissing it; ignored in every shipped build.
      */
     fun shouldShowOnboarding(
         hasUserBeenOnboarded: Boolean,
         featureEnabled: Boolean = onboardingFeatureEnabled,
+        forceOnboardingForBenchmark: Boolean = false,
     ): Boolean {
+        if (isBenchmarkBuild && !forceOnboardingForBenchmark) {
+            return false
+        }
+
         val shouldShowByDefaultConditions = featureEnabled && !hasUserBeenOnboarded
 
         val shouldShow = shouldShowByDefaultConditions || enablePersistentOnboarding

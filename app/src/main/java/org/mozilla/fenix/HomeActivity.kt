@@ -479,7 +479,10 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity, Crash
 
         val shouldShowOnboarding = !intent.isAllowedDuringOnboardingIntent(packageName) &&
             with(components) {
-                settings.shouldShowOnboarding(fenixOnboarding.userHasBeenOnboarded())
+                settings.shouldShowOnboarding(
+                    hasUserBeenOnboarded = fenixOnboarding.userHasBeenOnboarded(),
+                    forceOnboardingForBenchmark = intent.getBooleanExtra(EXTRA_FORCE_ONBOARDING, false),
+                )
             }
 
         SplashScreenManager(
@@ -1684,6 +1687,9 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity, Crash
         const val OPEN_PASSWORD_MANAGER = "open_password_manager"
         const val UNINSTALL_SURVEY = "uninstall_survey"
         const val APP_ICON = "APP_ICON"
+
+        // Intent extra to force onboarding to show in the benchmark build, where it is otherwise suppressed
+        const val EXTRA_FORCE_ONBOARDING = "EXTRA_FORCE_ONBOARDING"
 
         // PWA must have been used within last 30 days to be considered "recently used" for the
         // telemetry purposes.

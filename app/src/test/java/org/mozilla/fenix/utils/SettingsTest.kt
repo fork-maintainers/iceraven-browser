@@ -879,6 +879,45 @@ class SettingsTest {
     }
 
     @Test
+    fun `GIVEN a benchmark build WHEN onboarding is not forced THEN shouldShowOnboarding returns false`() {
+        val settings = Settings(appContext = testContext, isBenchmarkBuild = true)
+
+        assertFalse(
+            settings.shouldShowOnboarding(
+                featureEnabled = true,
+                hasUserBeenOnboarded = false,
+                forceOnboardingForBenchmark = false,
+            ),
+        )
+    }
+
+    @Test
+    fun `GIVEN a benchmark build WHEN onboarding is forced THEN shouldShowOnboarding returns true`() {
+        val settings = Settings(appContext = testContext, isBenchmarkBuild = true)
+
+        assertTrue(
+            settings.shouldShowOnboarding(
+                featureEnabled = true,
+                hasUserBeenOnboarded = false,
+                forceOnboardingForBenchmark = true,
+            ),
+        )
+    }
+
+    @Test
+    fun `GIVEN a benchmark build WHEN onboarding is forced and user is already onboarded THEN shouldShowOnboarding returns false`() {
+        val settings = Settings(appContext = testContext, isBenchmarkBuild = true)
+
+        assertFalse(
+            settings.shouldShowOnboarding(
+                featureEnabled = true,
+                hasUserBeenOnboarded = true,
+                forceOnboardingForBenchmark = true,
+            ),
+        )
+    }
+
+    @Test
     fun `GIVEN Https-only mode is disabled THEN the engine mode is HttpsOnlyMode#DISABLED`() {
         settings.shouldUseHttpsOnly = false
 

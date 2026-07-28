@@ -13,7 +13,6 @@ fun MacrobenchmarkScope.browserPageScrollJourney(url: String) {
     intent.setPackage(packageName)
 
     startActivityAndWait(intent = intent)
-    device.completeOnboarding()
 
     if (device.isWallpaperOnboardingShown()) {
         device.dismissWallpaperOnboarding()
@@ -37,7 +36,6 @@ fun MacrobenchmarkScope.homepageScrollJourney() {
     val intent = Intent(Intent.ACTION_VIEW, FENIX_HOME_DEEP_LINK)
 
     startActivityAndWait(intent = intent)
-    device.completeOnboarding()
 
     if (device.isWallpaperOnboardingShown()) {
         device.dismissWallpaperOnboarding()
@@ -60,7 +58,6 @@ fun MacrobenchmarkScope.launchIntentJourney(intentData: Uri) {
 fun MacrobenchmarkScope.normalBrowsingJourney(url: String) {
     val intent = Intent(Intent.ACTION_VIEW, FENIX_HOME_DEEP_LINK)
     startActivityAndWait(intent = intent)
-    device.completeOnboarding()
 
     if (device.isWallpaperOnboardingShown()) {
         device.dismissWallpaperOnboarding()
@@ -71,7 +68,10 @@ fun MacrobenchmarkScope.normalBrowsingJourney(url: String) {
 }
 
 fun MacrobenchmarkScope.onboardingJourney() {
-    startActivityAndWait()
+    val intent = Intent(Intent.ACTION_VIEW).apply {
+        putExtra(EXTRA_FORCE_ONBOARDING, true)
+    }
+    startActivityAndWait(intent = intent)
     device.completeOnboarding()
     device.waitForHomepage()
 }
@@ -80,7 +80,6 @@ fun MacrobenchmarkScope.privateBrowsingJourney(url: String) {
     val intent = Intent(Intent.ACTION_VIEW, FENIX_HOME_DEEP_LINK)
 
     startActivityAndWait(intent = intent)
-    device.completeOnboarding()
 
     if (device.isWallpaperOnboardingShown()) {
         device.dismissWallpaperOnboarding()
@@ -104,7 +103,6 @@ fun MacrobenchmarkScope.switchTabsJourney(simpleHtmlUrl: String, longHtmlUrl: St
     intent.setPackage(packageName)
 
     startActivityAndWait(intent = intent)
-    device.completeOnboarding()
 
     device.enterSearchMode()
     device.loadSite(url = simpleHtmlUrl)
