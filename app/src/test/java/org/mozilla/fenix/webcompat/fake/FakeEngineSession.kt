@@ -30,19 +30,6 @@ internal class FakeEngineSession(
         onResult(JSONObject(jsonString))
     }
 
-    override fun sendGleanBrokenSiteReport(
-        details: JSONObject?,
-        description: String?,
-        reason: String,
-        url: String,
-        sendTabSpecificInfo: Boolean,
-        sendBlockedUrls: Boolean,
-        onResult: () -> Unit,
-        onException: (Throwable) -> Unit,
-    ) {
-         onResult()
-    }
-
     override fun getWebCompatInfo(
         onResult: (JSONObject) -> Unit,
         onException: (Throwable) -> Unit,
