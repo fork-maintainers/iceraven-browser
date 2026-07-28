@@ -55,7 +55,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlinx.serialization.json.Json
 import mozilla.components.browser.state.selector.findCustomTab
 import mozilla.components.browser.state.selector.selectedTab
 import mozilla.components.browser.state.state.SessionState
@@ -128,7 +127,6 @@ import org.mozilla.fenix.utils.exitMenu
 import org.mozilla.fenix.utils.exitSubmenu
 import org.mozilla.fenix.webcompat.DefaultWebCompatReporterMoreInfoSender
 import org.mozilla.fenix.webcompat.middleware.DefaultWebCompatReporterRetrievalService
-import org.mozilla.fenix.webcompat.middleware.WebCompatInfoDeserializer
 import com.google.android.material.R as materialR
 
 private const val EXPANDED_OFFSET = 56
@@ -980,12 +978,6 @@ class MenuDialogFragment : BottomSheetDialogFragment() {
                 webCompatReporterRetrievalService =
                     DefaultWebCompatReporterRetrievalService(
                         browserStore = browserStore,
-                        webCompatInfoDeserializer = WebCompatInfoDeserializer(
-                            json = Json {
-                                ignoreUnknownKeys = true
-                                useAlternativeNames = false
-                            },
-                        ),
                     ),
             )
 

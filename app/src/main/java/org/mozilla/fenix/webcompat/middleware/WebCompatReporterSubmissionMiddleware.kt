@@ -5,29 +5,25 @@
 package org.mozilla.fenix.webcompat.middleware
 
 import androidx.annotation.VisibleForTesting
-import androidx.core.net.toUri
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonNull
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.booleanOrNull
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
 import kotlinx.serialization.json.put
 import mozilla.components.lib.state.Middleware
 import mozilla.components.lib.state.Store
-import org.mozilla.fenix.GleanMetrics.BrokenSiteReport
-import org.mozilla.fenix.GleanMetrics.BrokenSiteReportBrowserInfo
-import org.mozilla.fenix.GleanMetrics.BrokenSiteReportBrowserInfoApp
-import org.mozilla.fenix.GleanMetrics.BrokenSiteReportBrowserInfoGraphics
-import org.mozilla.fenix.GleanMetrics.BrokenSiteReportBrowserInfoPrefs
-import org.mozilla.fenix.GleanMetrics.BrokenSiteReportBrowserInfoSystem
-import org.mozilla.fenix.GleanMetrics.BrokenSiteReportTabInfo
-import org.mozilla.fenix.GleanMetrics.BrokenSiteReportTabInfoAntitracking
-import org.mozilla.fenix.GleanMetrics.BrokenSiteReportTabInfoFrameworks
-import org.mozilla.fenix.GleanMetrics.Pings
+import mozilla.components.support.ktx.kotlin.tryGetHostFromUrl
+import org.json.JSONArray
+import org.json.JSONObject
 import org.mozilla.fenix.components.AppStore
 import org.mozilla.fenix.components.appstate.AppAction
-import org.mozilla.fenix.webcompat.middleware.WebCompatInfoDto.Companion.addWebCompatInfo
+import org.mozilla.fenix.webcompat.GleanBrokenSiteReportSender
 import org.mozilla.fenix.webcompat.store.PreviewReporterItem
 import org.mozilla.fenix.webcompat.store.WebCompatReporterAction
 import org.mozilla.fenix.webcompat.store.WebCompatReporterState
@@ -37,12 +33,14 @@ import org.mozilla.fenix.webcompat.store.WebCompatReporterState
  *
  * @param appStore [AppStore] used to dispatch [AppAction]s.
  * @param webCompatReporterRetrievalService The service that handles submission requests.
+ * @param gleanBrokenSiteReportSender The service that handles sending reports via Glean.
  * @param scope The [CoroutineScope] for launching coroutines.
  * @param nimbusExperimentsProvider A [NimbusExperimentsProvider] used to get active experiments.
  */
 class WebCompatReporterSubmissionMiddleware(
     private val appStore: AppStore,
     private val webCompatReporterRetrievalService: WebCompatReporterRetrievalService,
+    private val gleanBrokenSiteReportSender: GleanBrokenSiteReportSender,
     private val scope: CoroutineScope,
     private val nimbusExperimentsProvider: NimbusExperimentsProvider,
 ) : Middleware<WebCompatReporterState, WebCompatReporterAction> {
@@ -70,36 +68,20 @@ class WebCompatReporterSubmissionMiddleware(
     }
 
     private suspend fun handleSendReport(store: Store<WebCompatReporterState, WebCompatReporterAction>) {
-        val webCompatInfo = webCompatReporterRetrievalService.retrieveInfo()
+        val webCompatJSON = webCompatReporterRetrievalService.retrieveInfo()
+        val sendTabSpecificInfo = checkReportedURLHostMatchesTab(store.state, webCompatJSON)
 
-        webCompatInfo?.let {
-            val tabUrlHost = webCompatInfo.tabInfo.url.value.toUri().host
-            val enteredUrlHost = store.state.enteredUrl.toUri().host
-            val sendTabSpecificData = tabUrlHost == enteredUrlHost
+        val finalDetails = webCompatJSON?.addActiveExperimentsToWebCompatInfo(nimbusExperimentsProvider)
 
-            if (sendTabSpecificData) {
-                setTabInfoMetrics(tabInfo = webCompatInfo.tabInfo)
-                setTabFrameworksMetrics(frameworks = webCompatInfo.frameworks)
-            }
+        gleanBrokenSiteReportSender.sendGleanBrokenSiteReport(
+            details = finalDetails,
+            description = store.state.problemDescription,
+            reason = store.state.reason ?: WebCompatReporterState.BrokenSiteReason.Other,
+            url = store.state.enteredUrl,
+            sendTabSpecificInfo = sendTabSpecificInfo,
+            sendBlockedUrls = store.state.includeEtpBlockedUrls,
+        )
 
-            setTabAntiTrackingMetrics(
-                antiTracking = webCompatInfo.antitracking,
-                sendBlockedUrls = store.state.includeEtpBlockedUrls,
-                sendTabSpecificData = sendTabSpecificData,
-            )
-
-            setAppMetrics(appInfo = webCompatInfo.app)
-            setBrowserInfoMetrics(browserInfo = webCompatInfo.browserInfo)
-            setGraphicsMetrics(graphicsInfo = webCompatInfo.graphics)
-            setPrefsMetrics(prefsInfo = webCompatInfo.prefs)
-            setSystemMetrics(systemInfo = webCompatInfo.system)
-        }
-        setUrlMetrics(url = store.state.enteredUrl)
-        setReasonMetrics(reason = store.state.reason)
-        setDescriptionMetrics(description = store.state.problemDescription)
-        setExperimentMetrics()
-
-        Pings.brokenSiteReport.submit()
         store.dispatch(WebCompatReporterAction.ReportSubmitted)
         appStore.dispatch(AppAction.WebCompatAction.WebCompatReportSent)
     }
@@ -117,9 +99,19 @@ class WebCompatReporterSubmissionMiddleware(
         )
     }
 
+    private fun checkReportedURLHostMatchesTab(
+        state: WebCompatReporterState,
+        webCompatJSON: JSONObject?,
+    ): Boolean {
+        val tabUrl = webCompatJSON?.getJSONObject("tabInfo")?.getJSONObject("url")
+        val tabUrlHost = tabUrl?.getString("value")?.tryGetHostFromUrl()
+        val enteredUrlHost = state.enteredUrl.tryGetHostFromUrl()
+        return tabUrlHost == enteredUrlHost
+    }
+
     private fun generatePreviewJSON(
         state: WebCompatReporterState,
-        webCompatInfo: WebCompatInfoDto?,
+        webCompatJSON: JSONObject?,
     ): JsonObject {
         val preview = buildJsonObject {
             put(
@@ -132,15 +124,12 @@ class WebCompatReporterSubmissionMiddleware(
             )
         }
 
-        if (webCompatInfo == null) {
+        if (webCompatJSON == null) {
             return preview
         }
 
-        val tabUrlHost = webCompatInfo.tabInfo.url.value.toUri().host
-        val enteredUrlHost = state.enteredUrl.toUri().host
-        val noTabSpecificData = tabUrlHost != enteredUrlHost
-
-        val webCompatPreview = preview.addWebCompatInfo(webCompatInfo, noTabSpecificData)
+        val noTabSpecificData = !checkReportedURLHostMatchesTab(state, webCompatJSON)
+        val webCompatPreview = preview.addWebCompatInfo(webCompatJSON, noTabSpecificData)
 
         if (state.includeEtpBlockedUrls) {
             return webCompatPreview
@@ -167,130 +156,82 @@ class WebCompatReporterSubmissionMiddleware(
         return JsonObject(values)
     }
 
-    private fun setTabAntiTrackingMetrics(
-        antiTracking: WebCompatInfoDto.WebCompatAntiTrackingDto,
-        sendBlockedUrls: Boolean,
-        sendTabSpecificData: Boolean,
-    ) {
-        BrokenSiteReportTabInfoAntitracking.blockList.set(antiTracking.blockList.value)
-        BrokenSiteReportTabInfoAntitracking.etpCategory.set(antiTracking.etpCategory.value)
-        if (sendTabSpecificData) {
-            if (sendBlockedUrls) {
-                BrokenSiteReportTabInfoAntitracking.blockedOrigins.set(antiTracking.blockedOrigins.value)
+    companion object {
+        /**
+         * Returns the given WebCompat JSON object with the active Nimbus experiments updated to match the ones specified in the given provider.
+         *
+         * @param nimbusExperimentsProvider A [NimbusExperimentsProvider] used to get active experiments.
+         */
+        @Suppress("MaxLineLength")
+        fun JSONObject.addActiveExperimentsToWebCompatInfo(nimbusExperimentsProvider: NimbusExperimentsProvider): JSONObject {
+            val experiments = JSONArray()
+            for (experiment in nimbusExperimentsProvider.activeExperiments) {
+                experiments.put(
+                    JSONObject().apply {
+                        put("branch", nimbusExperimentsProvider.getExperimentBranch(experiment.slug))
+                        put("kind", "nimbusExperiment")
+                        put("slug", experiment.slug)
+                    },
+                )
             }
-            BrokenSiteReportTabInfoAntitracking.btpHasPurgedSite.set(antiTracking.btpHasPurgedSite.value)
-            BrokenSiteReportTabInfoAntitracking.hasMixedActiveContentBlocked.set(
-                antiTracking.hasMixedActiveContentBlocked.value,
-            )
-            BrokenSiteReportTabInfoAntitracking.hasMixedDisplayContentBlocked.set(
-                antiTracking.hasMixedDisplayContentBlocked.value,
-            )
-            BrokenSiteReportTabInfoAntitracking.hasTrackingContentBlocked.set(
-                antiTracking.hasTrackingContentBlocked.value,
-            )
-            BrokenSiteReportTabInfoAntitracking.isPrivateBrowsing.set(antiTracking.isPrivateBrowsing.value)
-        }
-    }
 
-    private fun setAppMetrics(appInfo: WebCompatInfoDto.WebCompatAppDto) {
-        BrokenSiteReportBrowserInfoApp.defaultUseragentString.set(appInfo.defaultUseragentString.value)
-        BrokenSiteReportBrowserInfoApp.defaultLocales.set(appInfo.defaultLocales.value)
-        BrokenSiteReportBrowserInfoApp.fissionEnabled.set(appInfo.fissionEnabled.value)
-    }
-
-    private fun setBrowserInfoMetrics(browserInfo: WebCompatInfoDto.WebCompatBrowserInfoDto) {
-        val addons = BrokenSiteReportBrowserInfo.AddonsObject()
-        for (addon in browserInfo.addons.value) {
-            addons.add(
-                BrokenSiteReportBrowserInfo.AddonsObjectItem(
-                    id = addon.id,
-                    name = addon.name,
-                    temporary = addon.temporary,
-                    version = addon.version,
-                ),
-            )
-        }
-        BrokenSiteReportBrowserInfo.addons.set(addons)
-    }
-
-    private fun setGraphicsMetrics(graphicsInfo: WebCompatInfoDto.WebCompatGraphicsDto) {
-        graphicsInfo.devices.value?.let { devices ->
-            BrokenSiteReportBrowserInfoGraphics.devicesJson.set(devices.toString())
+            return this.apply {
+                put(
+                    "browserInfo",
+                    optJSONObject("browserInfo")?.apply {
+                        put(
+                            "experiments",
+                            optJSONObject("experiments")?.apply {
+                                put("value", experiments)
+                            },
+                        )
+                    },
+                )
+            }
         }
 
-        BrokenSiteReportBrowserInfoGraphics.devicePixelRatio.set(graphicsInfo.devicePixelRatio.value.toString())
+        /**
+         * Adds a WebCompat JSONObject's contents to a JSON object meant for Report Broken Site preview feature.
+         *
+         * @param webCompatJSON the WebCompat JSONObject to add
+         * @param noTabSpecificData whether or not to avoid tab-specific data
+         */
+        @Suppress("MaxLineLength")
+        fun JsonObject.addWebCompatInfo(
+            webCompatJSON: JSONObject?,
+            noTabSpecificData: Boolean = false,
+        ): JsonObject {
+            if (webCompatJSON == null) {
+              return this
+            }
 
-        BrokenSiteReportBrowserInfoGraphics.driversJson.set(graphicsInfo.drivers.value.toString())
+            // Filter out the screenshot and other not-to-be-previewed data, as well as
+            // any data which is tab-specific if the user has changed the URL enough to
+            // make it unlikely to be the URL for the tab we recorded.
+            val webCompatJson = Json.parseToJsonElement(webCompatJSON.toString()).jsonObject
 
-        graphicsInfo.features.value?.let { features ->
-            BrokenSiteReportBrowserInfoGraphics.featuresJson.set(features.toString())
+            val webCompatPreview = webCompatJson.mapNotNull { (groupName, groupElement) ->
+                    val items = groupElement.jsonObject
+                    if (noTabSpecificData && items["isTabSpecific"]?.jsonPrimitive?.booleanOrNull == true) {
+                        return@mapNotNull null
+                    }
+
+                    val values = items
+                        .filterKeys { it != "isTabSpecific" }
+                        .filterNot { (_, itemElement) ->
+                            val item = itemElement.jsonObject
+                            val doNotPreview = item["doNotPreview"]?.jsonPrimitive?.booleanOrNull == true
+                            doNotPreview || (noTabSpecificData && item["isTabSpecific"]?.jsonPrimitive?.booleanOrNull == true)
+                        }
+                        .mapValues { (_, itemElement) ->
+                            itemElement.jsonObject["value"] ?: JsonNull
+                        }
+
+                    groupName to JsonObject(values)
+                }.toMap()
+
+            return JsonObject(this + webCompatPreview)
         }
-
-        graphicsInfo.hasTouchScreen.value?.let { hasTouchScreen ->
-            BrokenSiteReportBrowserInfoGraphics.hasTouchScreen.set(hasTouchScreen)
-        }
-
-        graphicsInfo.monitors.value?.let { monitors ->
-            BrokenSiteReportBrowserInfoGraphics.monitorsJson.set(monitors.toString())
-        }
-    }
-
-    @Suppress("MaxLineLength")
-    private fun setPrefsMetrics(prefsInfo: WebCompatInfoDto.WebCompatPrefsDto) {
-        BrokenSiteReportBrowserInfoPrefs.cookieBehavior.set(prefsInfo.cookieBehavior.value)
-        BrokenSiteReportBrowserInfoPrefs.forcedAcceleratedLayers.set(prefsInfo.forcedAcceleratedLayers.value)
-        BrokenSiteReportBrowserInfoPrefs.globalPrivacyControlEnabled.set(prefsInfo.globalPrivacyControlEnabled.value)
-        BrokenSiteReportBrowserInfoPrefs.installtriggerEnabled.set(prefsInfo.installtriggerEnabled.value)
-        BrokenSiteReportBrowserInfoPrefs.opaqueResponseBlocking.set(prefsInfo.opaqueResponseBlocking.value)
-        BrokenSiteReportBrowserInfoPrefs.resistFingerprintingEnabled.set(prefsInfo.resistFingerprintingEnabled.value)
-        BrokenSiteReportBrowserInfoPrefs.softwareWebrender.set(prefsInfo.softwareWebrender.value)
-        BrokenSiteReportBrowserInfoPrefs.thirdPartyCookieBlockingEnabled.set(prefsInfo.thirdPartyCookieBlockingEnabled.value)
-        BrokenSiteReportBrowserInfoPrefs.thirdPartyCookieBlockingEnabledInPbm.set(prefsInfo.thirdPartyCookieBlockingEnabledInPbm.value)
-    }
-
-    private fun setSystemMetrics(systemInfo: WebCompatInfoDto.WebCompatSystemDto) {
-        BrokenSiteReportBrowserInfoSystem.memory.set(systemInfo.memory.value)
-        BrokenSiteReportBrowserInfoSystem.isTablet.set(systemInfo.isTablet.value)
-    }
-
-    private fun setTabFrameworksMetrics(frameworks: WebCompatInfoDto.WebCompatFrameworksDto) {
-        BrokenSiteReportTabInfoFrameworks.fastclick.set(frameworks.fastclick.value)
-        BrokenSiteReportTabInfoFrameworks.marfeel.set(frameworks.marfeel.value)
-        BrokenSiteReportTabInfoFrameworks.mobify.set(frameworks.mobify.value)
-    }
-
-    private fun setTabInfoMetrics(tabInfo: WebCompatInfoDto.WebCompatTabInfoDto) {
-        BrokenSiteReportTabInfo.languages.set(tabInfo.languages.value)
-        BrokenSiteReportTabInfo.useragentString.set(tabInfo.useragentString.value)
-    }
-
-    private fun setUrlMetrics(url: String) {
-        BrokenSiteReport.url.set(url)
-    }
-
-    private fun setReasonMetrics(reason: WebCompatReporterState.BrokenSiteReason?) {
-        reason?.let {
-            BrokenSiteReport.breakageCategory.set(reason.name.lowercase())
-        }
-    }
-
-    private fun setDescriptionMetrics(description: String) {
-        BrokenSiteReport.description.set(description)
-    }
-
-    private fun setExperimentMetrics() {
-        val items = mutableListOf<BrokenSiteReportBrowserInfo.ExperimentsObjectItem>()
-        nimbusExperimentsProvider.activeExperiments.mapTo(items) { experiment ->
-            BrokenSiteReportBrowserInfo.ExperimentsObjectItem(
-                branch = nimbusExperimentsProvider.getExperimentBranch(experiment.slug),
-                slug = experiment.slug,
-                kind = "nimbusExperiment",
-            )
-        }
-
-        BrokenSiteReportBrowserInfo.experiments.set(
-            BrokenSiteReportBrowserInfo.ExperimentsObject(items),
-        )
     }
 
     /**
