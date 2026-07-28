@@ -2778,6 +2778,16 @@ class Settings(
         get() = FxNimbus.features.ipProtection.value().enabled || isIPProtectionEnabled
 
     /**
+     * Persists IPProtection locations state set through Secret Settings.
+     *
+     * `true` makes the IPProtection location UI elements interactable.
+     */
+    var isIPProtectionLocationsEnabled by booleanPreference(
+        key = appContext.getPreferenceKey(R.string.pref_key_enable_ip_protection_locations),
+        default = Config.channel.isDebug,
+    )
+
+    /**
      * Tracks how many times the summarize menu item has been shown.
      * Used to control highlight/badge visibility for feature discovery.
      */
