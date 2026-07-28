@@ -316,7 +316,9 @@ class MainMenuTest : BaseTest(
         on.home.navigateToPage()
             .mozVerify(HomeSelectors.TOP_SITE_ITEM(testPage.title))
             .mozClick(HomeSelectors.TOP_SITE_ITEM(testPage.title))
-        on.browserPage.navigateToPage()
+        on.browserPage
+            .mozVerify(BrowserPageSelectors.ENGINE_VIEW)
+            .navigateToPage()
         on.mainMenu.navigateToPage()
             .mozClick(MainMenuSelectors.MORE_BUTTON)
             .mozClick(MainMenuSelectors.REMOVE_FROM_SHORTCUTS_BUTTON)

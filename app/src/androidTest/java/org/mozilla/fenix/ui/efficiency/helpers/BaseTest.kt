@@ -22,6 +22,7 @@ import org.junit.rules.TestRule
 import org.junit.runners.model.Statement
 import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.helpers.AppAndSystemHelper.deleteBookmarksStorage
+import org.mozilla.fenix.helpers.AppAndSystemHelper.deletePinnedSitesStorage
 import org.mozilla.fenix.helpers.FenixTestRule
 import org.mozilla.fenix.helpers.HomeActivityIntentTestRule
 import org.mozilla.fenix.helpers.IdlingResourceHelper.unregisterAllIdlingResources
@@ -104,6 +105,7 @@ abstract class BaseTest(
                         Log.i("BaseTest", "RetryTestRule: Started try #${attempt + 1}.")
                         runBlocking {
                             deleteBookmarksStorage()
+                            deletePinnedSitesStorage()
                             withContext(Dispatchers.IO) {
                                 appContext.components.core.sessionStorage.clear()
                             }
