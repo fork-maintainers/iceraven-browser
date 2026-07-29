@@ -92,11 +92,14 @@ class BrowserPage(composeRule: AndroidComposeTestRule<HomeActivityIntentTestRule
             ),
         )
 
-        // Use UIAutomator selector to avoid Compose sync hanging when GeckoView is active.
+        // UIAutomator (Compose sync can hang while GeckoView is active) AND the content-description
+        // variant rather than the testTag: with shouldUseExpandedToolbar the counter moves to the bottom
+        // navigation bar, where it carries no tag. NOTE: TabDrawerPage registers this same edge — keep the
+        // two in step until the duplicate is removed.
         NavigationRegistry.register(
             from = pageName,
             to = "TabDrawerPage",
-            steps = listOf(NavigationStep.Click(ToolbarSelectors.TAB_COUNTER_UIAUTOMATOR)),
+            steps = listOf(NavigationStep.Click(ToolbarSelectors.TAB_COUNTER_ANY_LAYOUT)),
         )
     }
 

@@ -9,6 +9,7 @@ package org.mozilla.fenix.ui
 import android.content.pm.ActivityInfo
 import org.junit.Rule
 import org.junit.Test
+import org.mozilla.fenix.customannotations.Converted
 import org.mozilla.fenix.customannotations.SmokeTest
 import org.mozilla.fenix.helpers.AppAndSystemHelper.enableOrDisableBackGestureNavigationOnDevice
 import org.mozilla.fenix.helpers.AppAndSystemHelper.setScreenOrientation
@@ -151,6 +152,10 @@ class NavigationToolbarExpandedTest {
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3333214
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.ToolbarTest#verifyTheExpandedToolbarTabTrayButtonTest"],
+        since = "2026-07",
+    )
     @SmokeTest
     @Test
     fun verifyTheExpandedToolbarTabTrayButtonTest() {
@@ -165,6 +170,10 @@ class NavigationToolbarExpandedTest {
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3333215
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.ToolbarTest#verifyTheExpandedToolbarMainMenuButtonTest"],
+        since = "2026-07",
+    )
     @SmokeTest
     @Test
     fun verifyTheExpandedToolbarMainMenuButtonTest() {

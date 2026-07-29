@@ -70,8 +70,11 @@ object MainMenuSelectors {
         groups = listOf("requiredForPage", "homePageMainMenuItems", "browserViewMainMenuItems"),
     )
 
+    // UIAutomator, not Compose: with shouldUseExpandedToolbar the menu renders differently and the Compose
+    // content-description lookup finds nothing, while the device-level one resolves in both layouts. This
+    // mirrors what the legacy ThreeDotMenuMainRobot.verifyPageMainMenuItems does (itemWithDescription).
     val BOOKMARK_THIS_PAGE_BUTTON = Selector(
-        strategy = SelectorStrategy.COMPOSE_BY_CONTENT_DESCRIPTION,
+        strategy = SelectorStrategy.UIAUTOMATOR_WITH_DESCRIPTION_CONTAINS,
         value = getStringResource(R.string.browser_menu_bookmark_this_page_2),
         description = "Bookmark this page button",
         groups = listOf("bookmarkActions", "browserViewMainMenuItems"),

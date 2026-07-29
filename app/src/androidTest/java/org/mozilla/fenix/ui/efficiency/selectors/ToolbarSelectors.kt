@@ -49,6 +49,19 @@ object ToolbarSelectors {
         groups = listOf(),
     )
 
+    // Layout-agnostic tab counter. The TABS_COUNTER testTag only exists on the address-bar counter: with
+    // shouldUseExpandedToolbar the counter moves into the bottom navigation bar and exposes no tag at all,
+    // only this content-description. The description is present in BOTH layouts, so navigation edges that
+    // must work either way should use this rather than the tag variants. Matching on the "Tabs Open:"
+    // fragment covers the normal ("Non-private Tabs Open: N") and private ("Private Tabs Open: N") forms
+    // and is independent of the tab count.
+    val TAB_COUNTER_ANY_LAYOUT = Selector(
+        strategy = SelectorStrategy.UIAUTOMATOR_WITH_DESCRIPTION_CONTAINS,
+        value = "Tabs Open:",
+        description = "Tab counter button (either toolbar layout)",
+        groups = listOf(),
+    )
+
     val NEW_TAB_BUTTON = Selector(
         strategy = SelectorStrategy.UIAUTOMATOR_WITH_DESCRIPTION_CONTAINS,
         value = "New tab",
@@ -75,6 +88,7 @@ object ToolbarSelectors {
         TOOLBAR,
         TAB_COUNTER,
         TAB_COUNTER_UIAUTOMATOR,
+        TAB_COUNTER_ANY_LAYOUT,
         TOOLBAR_URL_BOX,
         TOOLBAR_URL_BOX_UIAUTOMATOR,
         NEW_TAB_BUTTON,

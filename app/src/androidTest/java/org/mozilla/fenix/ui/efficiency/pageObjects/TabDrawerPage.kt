@@ -26,6 +26,18 @@ class TabDrawerPage(composeRule: AndroidComposeTestRule<HomeActivityIntentTestRu
             ),
         )
 
+        // The tab counter is reachable from the browser too, so this edge is generally useful. It has to be
+        // the content-description variant: UIAutomator (not Compose, which can hang while GeckoView is
+        // active) AND not the testTag, because with shouldUseExpandedToolbar the counter moves to the bottom
+        // navigation bar and carries no tag there.
+        NavigationRegistry.register(
+            from = "BrowserPage",
+            to = pageName,
+            steps = listOf(
+                NavigationStep.Click(ToolbarSelectors.TAB_COUNTER_ANY_LAYOUT),
+            ),
+        )
+
         NavigationRegistry.register(
             from = pageName,
             to = "HomePage",

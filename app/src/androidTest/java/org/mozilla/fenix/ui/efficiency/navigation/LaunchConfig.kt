@@ -14,4 +14,5 @@ data class LaunchConfig(
     val isPageLoadTranslationsPromptEnabled: Boolean = false,
     val isPocketEnabled: Boolean = true,
     val isRecentlyVisitedFeatureEnabled: Boolean = true,
+    val shouldUseExpandedToolbar: Boolean = false,
 )

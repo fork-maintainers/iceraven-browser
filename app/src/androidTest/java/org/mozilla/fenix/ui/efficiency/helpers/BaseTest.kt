@@ -59,6 +59,7 @@ abstract class BaseTest(
     private val isPageLoadTranslationsPromptEnabled: Boolean = false,
     private val isPocketEnabled: Boolean = true,
     private val isRecentlyVisitedFeatureEnabled: Boolean = true,
+    private val shouldUseExpandedToolbar: Boolean = false,
 ) {
 
     // Default launch built from the constructor args (back-compat for every existing subclass).
@@ -67,6 +68,7 @@ abstract class BaseTest(
         isPageLoadTranslationsPromptEnabled = isPageLoadTranslationsPromptEnabled,
         isPocketEnabled = isPocketEnabled,
         isRecentlyVisitedFeatureEnabled = isRecentlyVisitedFeatureEnabled,
+        shouldUseExpandedToolbar = shouldUseExpandedToolbar,
     )
 
     /** Override to vary the launch per run/case (e.g. the reachability shard uses the case's config). */
@@ -99,6 +101,7 @@ abstract class BaseTest(
                             isPageLoadTranslationsPromptEnabled = cfg.isPageLoadTranslationsPromptEnabled,
                             isPocketEnabled = cfg.isPocketEnabled,
                             isRecentlyVisitedFeatureEnabled = cfg.isRecentlyVisitedFeatureEnabled,
+                            shouldUseExpandedToolbar = cfg.shouldUseExpandedToolbar,
                         ),
                     ) { it.activity }
                     try {
