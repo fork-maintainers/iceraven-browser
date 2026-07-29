@@ -158,11 +158,13 @@ abstract class BasePage(
             path.forEach { step ->
                 when (step) {
                     is NavigationStep.Click -> mozClick(step.selector)
+                    is NavigationStep.LongClick -> mozLongClick(step.selector)
                     is NavigationStep.ClickIfPresent -> mozClickIfPresent(step.selector)
                     is NavigationStep.Swipe -> mozSwipeTo(step.selector, step.direction)
                     is NavigationStep.OpenNotificationsTray -> mozOpenNotificationsTray()
                     is NavigationStep.Action -> step.action()
                     is NavigationStep.EnterText -> mozEnterText(url, step.selector)
+                    is NavigationStep.EnterTextValue -> mozEnterText(step.text, step.selector)
                     is NavigationStep.PressEnter -> mozPressEnter(step.selector)
                     is NavigationStep.PressBack -> {
                         mDevice.pressBack()

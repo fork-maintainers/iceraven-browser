@@ -34,6 +34,7 @@ import org.mozilla.fenix.ui.efficiency.selectors.MainMenuSelectors.DESKTOP_SITE_
 import org.mozilla.fenix.ui.efficiency.selectors.MainMenuSelectors.DESKTOP_SITE_ON
 import org.mozilla.fenix.ui.efficiency.selectors.MainMenuSelectors.EDIT_BOOKMARK_BUTTON
 import org.mozilla.fenix.ui.efficiency.selectors.MainMenuSelectors.FORWARD_BUTTON
+import org.mozilla.fenix.ui.efficiency.selectors.TabHistorySelectors
 
 class MainMenuTest : BaseTest(
     isPageLoadTranslationsPromptEnabled = false,
@@ -408,5 +409,49 @@ class MainMenuTest : BaseTest(
             .mozClick(MainMenuSelectors.MORE_BUTTON)
             .mozClick(MainMenuSelectors.PRINT_BUTTON)
             .mozVerifyNativeAppOpens(PRINT_SPOOLER)
+    }
+
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/4245654
+    @SmokeTest
+    @Test
+    fun verifyTheMainMenuBackButtonLongPressTest() {
+        val firstWebPage = mockWebServer.getGenericAsset(1)
+        val nextWebPage = mockWebServer.getGenericAsset(2)
+
+        on.browserPage
+            .navigateToPage(firstWebPage.url.toString())
+            .navigateToPage(nextWebPage.url.toString(), forceNavigation = true)
+
+        on.mainMenu.navigateToPage()
+            .mozLongClick(MainMenuSelectors.BACK_BUTTON)
+
+        on.tabHistory
+            .mozVerify(TabHistorySelectors.TAB_HISTORY_LIST)
+            .mozVerify(TabHistorySelectors.TAB_HISTORY_ITEM(nextWebPage.url.toString()))
+            .mozVerify(TabHistorySelectors.TAB_HISTORY_ITEM(firstWebPage.url.toString()))
+    }
+
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/4245662
+    @SmokeTest
+    @Test
+    fun verifyTheMainMenuForwardButtonLongPressTest() {
+        val firstWebPage = mockWebServer.getGenericAsset(1)
+        val nextWebPage = mockWebServer.getGenericAsset(2)
+
+        on.browserPage
+            .navigateToPage(firstWebPage.url.toString())
+            .navigateToPage(nextWebPage.url.toString(), forceNavigation = true)
+
+        on.mainMenu.navigateToPage()
+            .mozClick(MainMenuSelectors.BACK_BUTTON)
+
+        on.browserPage.navigateToPage()
+
+        on.mainMenu.navigateToPage()
+            .mozLongClick(MainMenuSelectors.FORWARD_BUTTON)
+        on.tabHistory
+            .mozVerify(TabHistorySelectors.TAB_HISTORY_LIST)
+            .mozVerify(TabHistorySelectors.TAB_HISTORY_ITEM(nextWebPage.url.toString()))
+            .mozVerify(TabHistorySelectors.TAB_HISTORY_ITEM(firstWebPage.url.toString()))
     }
 }

@@ -1233,6 +1233,12 @@ class MainMenuTest {
         }
     }
 
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/4245654
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.MainMenuTest#verifyTheMainMenuBackButtonLongPressTest"],
+        bug = 2058469,
+        since = "2026-06",
+    )
     @SmokeTest
     @Test
     fun verifyTheMainMenuBackButtonLongPressTest() {
@@ -1283,6 +1289,12 @@ class MainMenuTest {
         }
     }
 
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/4245662
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.MainMenuTest#verifyTheMainMenuForwardButtonLongPressTest"],
+        bug = 2058469,
+        since = "2026-06",
+    )
     @SmokeTest
     @Test
     fun verifyTheMainMenuForwardButtonLongPressTest() {
@@ -1431,6 +1443,7 @@ class MainMenuTest {
         }
     }
 
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/4245663
     @SmokeTest
     @Test
     fun verifyTheMainMenuBackButtonLongClickFromCustomTabTest() {
