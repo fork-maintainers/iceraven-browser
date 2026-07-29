@@ -661,6 +661,7 @@ class MenuDialogFragment : BottomSheetDialogFragment() {
                                             isOpenInAppMenuHighlighted = isOpenInAppMenuHighlighted,
                                             translationInfo = translationInfo,
                                             showShortcuts = settings.showTopSitesFeature,
+                                            showSaveToCollection = settings.collections,
                                             isAndroidAutomotiveAvailable = context.isAndroidAutomotiveAvailable(),
                                             summarizationMenuState = summarizationMenuState,
                                             onWebCompatReporterClick = {

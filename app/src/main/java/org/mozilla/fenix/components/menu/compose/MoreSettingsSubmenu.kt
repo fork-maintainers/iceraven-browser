@@ -37,6 +37,7 @@ internal fun MoreSettingsSubmenu(
     isOpenInAppMenuHighlighted: Boolean,
     translationInfo: TranslationInfo,
     showShortcuts: Boolean,
+    showSaveToCollection: Boolean,
     isAndroidAutomotiveAvailable: Boolean,
     summarizationMenuState: SummarizationMenuState,
     isPrivate: Boolean,
@@ -82,6 +83,7 @@ internal fun MoreSettingsSubmenu(
             onAddToHomeScreenMenuClick = onAddToHomeScreenMenuClick,
         )
         SaveToCollectionMenuItem(
+            showSaveToCollection = showSaveToCollection,
             onSaveToCollectionMenuClick = onSaveToCollectionMenuClick,
         )
         OpenInAppMenuItem(
@@ -161,13 +163,16 @@ private fun AddToHomeScreenMenuItem(
 
 @Composable
 private fun SaveToCollectionMenuItem(
+    showSaveToCollection: Boolean,
     onSaveToCollectionMenuClick: () -> Unit,
 ) {
-    MenuItem(
-        label = stringResource(id = R.string.browser_menu_save_to_collection_2),
-        beforeIconPainter = painterResource(id = iconsR.drawable.mozac_ic_collection_24),
-        onClick = onSaveToCollectionMenuClick,
-    )
+    if (showSaveToCollection) {
+        MenuItem(
+            label = stringResource(id = R.string.browser_menu_save_to_collection_2),
+            beforeIconPainter = painterResource(id = iconsR.drawable.mozac_ic_collection_24),
+            onClick = onSaveToCollectionMenuClick,
+        )
+    }
 }
 
 @Composable
@@ -318,6 +323,7 @@ private fun MoreSettingsSubmenuPreview(
                         onTranslatePageMenuClick = {},
                     ),
                     showShortcuts = true,
+                    showSaveToCollection = true,
                     isAndroidAutomotiveAvailable = false,
                     summarizationMenuState = SummarizationMenuState.Default.copy(
                         visible = true,
@@ -370,6 +376,7 @@ private fun MoreSettingsSubmenuDisabledOpenPreview(
                         onTranslatePageMenuClick = {},
                     ),
                     showShortcuts = true,
+                    showSaveToCollection = true,
                     isAndroidAutomotiveAvailable = false,
                     summarizationMenuState = SummarizationMenuState.Default,
                     isPrivate = false,

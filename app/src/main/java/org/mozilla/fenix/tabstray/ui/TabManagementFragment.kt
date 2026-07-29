@@ -672,6 +672,7 @@ class TabManagementFragment : Fragment() {
                 isInDebugMode = Config.channel.isDebug || requireComponents.settings.showSecretDebugMenuThisSession,
                 showTabAutoCloseBanner = settings.shouldShowAutoCloseTabsBanner &&
                     settings.canShowCfr && settings.cfrPopupsEnabled,
+                collectionsEnabled = settings.collections,
             ),
         )
     }
