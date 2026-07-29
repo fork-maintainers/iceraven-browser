@@ -182,6 +182,7 @@ class AdjustMetricsService(
             isUserXTwitterAttributed = settings.isUserXTwitterAttributed,
             isUserMolocoAttributed = settings.isUserMolocoAttributed,
             isUserRakutenAttributed = settings.isUserRakutenAttributed,
+            isUserSkyflagAttributed = settings.isUserSkyflagAttributed,
             controller = thirdPartySharingController,
         )
 
@@ -266,6 +267,7 @@ class AdjustMetricsService(
         /**
          * Sets third party sharing settings based on distribution and attribution.
          */
+        @Suppress("LongParameterList")
         @VisibleForTesting
         internal fun applyThirdPartySharingSettings(
             distribution: DistributionIdManager.Distribution,
@@ -275,6 +277,7 @@ class AdjustMetricsService(
             isUserXTwitterAttributed: Boolean,
             isUserMolocoAttributed: Boolean,
             isUserRakutenAttributed: Boolean,
+            isUserSkyflagAttributed: Boolean,
             controller: ThirdPartySharingController = AdjustThirdPartySharingController(),
         ) {
             when (distribution) {
@@ -295,6 +298,9 @@ class AdjustMetricsService(
                             controller.enableThirdPartySharingForPartner(MOLOCO_PARTNER_ID)
                         isUserRakutenAttributed ->
                             controller.enableThirdPartySharingForPartner(DYNAMIC_CALLBACK_ID)
+                        isUserSkyflagAttributed -> {
+                            // no-op
+                        }
                         else ->
                             controller.enableThirdPartySharingForPartner(GOOGLE_PARTNER_ID)
                     }

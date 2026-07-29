@@ -81,6 +81,8 @@ class InstallReferrerHandlingService(
                                     isMolocoAttribution(installReferrerResponse)
                                 context.components.settings.isUserRakutenAttributed =
                                     isRakutenAttribution(installReferrerResponse)
+                                context.components.settings.isUserSkyflagAttributed =
+                                    isSkyflagAttribution(installReferrerResponse)
                                 distributionIdManager.updateDistributionIdFromUtmParams(
                                     UTMParams.parseUTMParameters(installReferrerResponse),
                                 )
@@ -161,6 +163,7 @@ class InstallReferrerHandlingService(
         private const val X_TWITTER_UTM_SOURCE = "x"
         private const val MOLOCO_EXTERNAL_CLICK_ID_PREFIX = "moloco_"
         private const val RAKUTEN_UTM_SOURCE = "rakuten"
+        private const val SKYFLAG_UTM_SOURCE = "skyflag"
 
         private fun decodeInstallReferrer(installReferrerResponse: String): String =
             try {
@@ -224,6 +227,14 @@ class InstallReferrerHandlingService(
             return UTMParams.parseUTMParameters(decoded).source.equals(RAKUTEN_UTM_SOURCE, ignoreCase = true)
         }
 
+        @VisibleForTesting
+        internal fun isSkyflagAttribution(installReferrerResponse: String?): Boolean {
+            if (installReferrerResponse.isNullOrBlank()) return false
+            val decoded = decodeInstallReferrer(installReferrerResponse)
+
+            return UTMParams.parseUTMParameters(decoded).source.equals(SKYFLAG_UTM_SOURCE, ignoreCase = true)
+        }
+
         @Suppress("ReturnCount")
         @VisibleForTesting
         internal suspend fun shouldShowMarketingOnboarding(
@@ -263,6 +274,10 @@ class InstallReferrerHandlingService(
             }
 
             if (isRakutenAttribution(installReferrerResponse)) {
+                return true
+            }
+
+            if (isSkyflagAttribution(installReferrerResponse)) {
                 return true
             }
 

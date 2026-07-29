@@ -563,6 +563,39 @@ class InstallReferrerWorkerTest {
 
         assertTrue(settings.isUserRakutenAttributed)
     }
+
+    @Test
+    fun `WHEN handleSuccess receives a Skyflag-attributed referrer THEN isUserSkyflagAttributed is set to true`() {
+        val worker = TestListenableWorkerBuilder<InstallReferrerWorker>(context).build()
+        val settings = Settings(context)
+        val referrer = "utm_source=skyflag&utm_medium=paid"
+
+        worker.handleSuccess(referrer, InstallReferrerClient.InstallReferrerResponse.OK, settings)
+
+        assertTrue(settings.isUserSkyflagAttributed)
+    }
+
+    @Test
+    fun `WHEN handleSuccess receives a non-Skyflag referrer THEN isUserSkyflagAttributed is set to false`() {
+        val worker = TestListenableWorkerBuilder<InstallReferrerWorker>(context).build()
+        val settings = Settings(context)
+        settings.isUserSkyflagAttributed = true
+
+        worker.handleSuccess("utm_source=google&utm_medium=cpc", InstallReferrerClient.InstallReferrerResponse.OK, settings)
+
+        assertFalse(settings.isUserSkyflagAttributed)
+    }
+
+    @Test
+    fun `WHEN handleSuccess receives a null referrer THEN isUserSkyflagAttributed is not changed`() {
+        val worker = TestListenableWorkerBuilder<InstallReferrerWorker>(context).build()
+        val settings = Settings(context)
+        settings.isUserSkyflagAttributed = true
+
+        worker.handleSuccess(null, InstallReferrerClient.InstallReferrerResponse.OK, settings)
+
+        assertTrue(settings.isUserSkyflagAttributed)
+    }
 }
 
 private class FakeInstallReferrerClient(

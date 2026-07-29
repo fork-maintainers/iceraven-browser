@@ -248,6 +248,7 @@ internal class AdjustMetricsServiceTest {
             isUserXTwitterAttributed = false,
             isUserMolocoAttributed = false,
             isUserRakutenAttributed = false,
+            isUserSkyflagAttributed = false,
             controller = thirdPartySharingController,
         )
 
@@ -264,6 +265,7 @@ internal class AdjustMetricsServiceTest {
             isUserXTwitterAttributed = false,
             isUserMolocoAttributed = false,
             isUserRakutenAttributed = false,
+            isUserSkyflagAttributed = false,
             controller = thirdPartySharingController,
         )
 
@@ -280,6 +282,7 @@ internal class AdjustMetricsServiceTest {
             isUserXTwitterAttributed = false,
             isUserMolocoAttributed = false,
             isUserRakutenAttributed = false,
+            isUserSkyflagAttributed = false,
             controller = thirdPartySharingController,
         )
 
@@ -296,6 +299,7 @@ internal class AdjustMetricsServiceTest {
             isUserXTwitterAttributed = false,
             isUserMolocoAttributed = false,
             isUserRakutenAttributed = false,
+            isUserSkyflagAttributed = false,
             controller = thirdPartySharingController,
         )
 
@@ -312,6 +316,7 @@ internal class AdjustMetricsServiceTest {
             isUserXTwitterAttributed = true,
             isUserMolocoAttributed = false,
             isUserRakutenAttributed = false,
+            isUserSkyflagAttributed = false,
             controller = thirdPartySharingController,
         )
 
@@ -328,6 +333,7 @@ internal class AdjustMetricsServiceTest {
             isUserXTwitterAttributed = false,
             isUserMolocoAttributed = true,
             isUserRakutenAttributed = false,
+            isUserSkyflagAttributed = false,
             controller = thirdPartySharingController,
         )
 
@@ -344,10 +350,29 @@ internal class AdjustMetricsServiceTest {
             isUserXTwitterAttributed = false,
             isUserMolocoAttributed = false,
             isUserRakutenAttributed = true,
+            isUserSkyflagAttributed = false,
             controller = thirdPartySharingController,
         )
 
         verify { thirdPartySharingController.enableThirdPartySharingForPartner(DYNAMIC_CALLBACK_ID) }
+    }
+
+    @Test
+    fun `WHEN the distribution is DEFAULT AND the user is Skyflag attributed THEN all sharing is disabled and no partner is enabled`() {
+        AdjustMetricsService.applyThirdPartySharingSettings(
+            distribution = DistributionIdManager.Distribution.DEFAULT,
+            isUserMetaAttributed = false,
+            isUserTikTokAttributed = false,
+            isUserRedditAttributed = false,
+            isUserXTwitterAttributed = false,
+            isUserMolocoAttributed = false,
+            isUserRakutenAttributed = false,
+            isUserSkyflagAttributed = true,
+            controller = thirdPartySharingController,
+        )
+
+        verify { thirdPartySharingController.disableAllThirdPartySharing() }
+        verify(exactly = 0) { thirdPartySharingController.enableThirdPartySharingForPartner(any()) }
     }
 
     @Test
@@ -360,6 +385,7 @@ internal class AdjustMetricsServiceTest {
             isUserXTwitterAttributed = false,
             isUserMolocoAttributed = false,
             isUserRakutenAttributed = false,
+            isUserSkyflagAttributed = false,
             controller = thirdPartySharingController,
         )
 
@@ -376,6 +402,7 @@ internal class AdjustMetricsServiceTest {
             isUserXTwitterAttributed = false,
             isUserMolocoAttributed = false,
             isUserRakutenAttributed = false,
+            isUserSkyflagAttributed = false,
             controller = thirdPartySharingController,
         )
 
@@ -392,6 +419,7 @@ internal class AdjustMetricsServiceTest {
             isUserXTwitterAttributed = false,
             isUserMolocoAttributed = false,
             isUserRakutenAttributed = false,
+            isUserSkyflagAttributed = false,
             controller = thirdPartySharingController,
         )
 
@@ -408,6 +436,7 @@ internal class AdjustMetricsServiceTest {
             isUserXTwitterAttributed = false,
             isUserMolocoAttributed = false,
             isUserRakutenAttributed = false,
+            isUserSkyflagAttributed = false,
             controller = thirdPartySharingController,
         )
 
@@ -424,6 +453,7 @@ internal class AdjustMetricsServiceTest {
             isUserXTwitterAttributed = false,
             isUserMolocoAttributed = false,
             isUserRakutenAttributed = false,
+            isUserSkyflagAttributed = false,
             controller = thirdPartySharingController,
         )
 
@@ -440,6 +470,7 @@ internal class AdjustMetricsServiceTest {
             isUserXTwitterAttributed = false,
             isUserMolocoAttributed = false,
             isUserRakutenAttributed = false,
+            isUserSkyflagAttributed = false,
             controller = thirdPartySharingController,
         )
 

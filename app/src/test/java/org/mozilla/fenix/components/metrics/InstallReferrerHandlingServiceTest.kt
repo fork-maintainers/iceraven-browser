@@ -729,6 +729,69 @@ internal class InstallReferrerHandlingServiceTest {
                 InstallReferrerHandlingService.shouldShowMarketingOnboarding(rakutenReferrer, distributionIdManager),
             )
         }
+
+    @Test
+    fun `WHEN installReferrerResponse is null or blank THEN isSkyflagAttribution returns false`() {
+        assertFalse(InstallReferrerHandlingService.isSkyflagAttribution(null))
+        assertFalse(InstallReferrerHandlingService.isSkyflagAttribution(""))
+        assertFalse(InstallReferrerHandlingService.isSkyflagAttribution(" "))
+    }
+
+    @Test
+    fun `WHEN installReferrerResponse has utm_source skyflag THEN isSkyflagAttribution returns true`() {
+        assertTrue(InstallReferrerHandlingService.isSkyflagAttribution("utm_source=skyflag&utm_medium=paid"))
+    }
+
+    @Test
+    fun `WHEN installReferrerResponse has a mixed-case utm_source skyflag THEN isSkyflagAttribution returns true`() {
+        assertTrue(InstallReferrerHandlingService.isSkyflagAttribution("utm_source=Skyflag&utm_medium=paid"))
+        assertTrue(InstallReferrerHandlingService.isSkyflagAttribution("utm_source%3Dskyflag&utm_medium=paid"))
+    }
+
+    @Test
+    fun `WHEN installReferrerResponse has a non-Skyflag utm_source THEN isSkyflagAttribution returns false`() {
+        assertFalse(InstallReferrerHandlingService.isSkyflagAttribution("utm_source=google&utm_medium=cpc"))
+    }
+
+    @Test
+    fun `WHEN installReferrerResponse has a utm_source that merely starts with skyflag THEN isSkyflagAttribution returns false`() {
+        assertFalse(InstallReferrerHandlingService.isSkyflagAttribution("utm_source=skyflagged&utm_medium=cpc"))
+    }
+
+    @Test
+    fun `GIVEN a Skyflag-attributed referrer on OK response WHEN start is called THEN isUserSkyflagAttributed is true`() {
+        val referrer = "utm_source=skyflag&utm_medium=paid"
+        val service = fakeService(
+            responseCode = InstallReferrerClient.InstallReferrerResponse.OK,
+            referrerResponse = referrer,
+        )
+
+        service.start()
+
+        assertTrue(testContext.components.settings.isUserSkyflagAttributed)
+    }
+
+    @Test
+    fun `GIVEN a non-Skyflag referrer on OK response WHEN start is called THEN isUserSkyflagAttributed is false`() {
+        testContext.components.settings.isUserSkyflagAttributed = true
+        val service = fakeService(
+            responseCode = InstallReferrerClient.InstallReferrerResponse.OK,
+            referrerResponse = "utm_source=google&utm_medium=cpc",
+        )
+
+        service.start()
+
+        assertFalse(testContext.components.settings.isUserSkyflagAttributed)
+    }
+
+    @Test
+    fun `WHEN installReferrerResponse is a Skyflag attribution THEN we should show marketing onboarding`() =
+        runBlocking {
+            val skyflagReferrer = "utm_source=skyflag&utm_medium=paid"
+            assertTrue(
+                InstallReferrerHandlingService.shouldShowMarketingOnboarding(skyflagReferrer, distributionIdManager),
+            )
+        }
 }
 
 private class FakeReferrerClient(
