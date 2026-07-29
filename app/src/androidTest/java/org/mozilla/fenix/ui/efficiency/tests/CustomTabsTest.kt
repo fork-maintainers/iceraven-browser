@@ -46,4 +46,36 @@ class CustomTabsTest : BaseTest() {
         on.browserPage.verifyPageContent(customTabPage.content)
         on.browserPage.mozVerify(ToolbarSelectors.TAB_COUNTER_WITH_COUNT("1"))
     }
+
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3080096
+    // Converted from legacy MainMenuTest.verifyTheMainMenuBackButtonFromCustomTabTest
+    @SmokeTest
+    @Test
+    fun verifyTheMainMenuBackButtonFromCustomTabTest() {
+        val customTabPage = mockWebServer.getGenericAsset(4)
+
+        on.customTabs.launchCustomTab(customTabPage.url.toString(), "TestMenuItem")
+        on.customTabs.clickWebContent("Link 1")
+        on.customTabs.openMainMenu()
+            .mozClick(CustomTabsSelectors.MENU_BACK)
+        on.customTabs.verifyWebContent(customTabPage.content)
+    }
+
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3080097
+    // Converted from legacy MainMenuTest.verifyTheMainMenuForwardButtonFromCustomTabTest
+    @SmokeTest
+    @Test
+    fun verifyTheMainMenuForwardButtonFromCustomTabTest() {
+        val firstCustomTabPage = mockWebServer.getGenericAsset(4)
+        val secondCustomTabPage = mockWebServer.getGenericAsset(1)
+
+        on.customTabs.launchCustomTab(firstCustomTabPage.url.toString(), "TestMenuItem")
+        on.customTabs.clickWebContent("Link 1")
+        on.customTabs.openMainMenu()
+            .mozClick(CustomTabsSelectors.MENU_BACK)
+        on.customTabs.verifyWebContent(firstCustomTabPage.content)
+        on.customTabs.openMainMenu()
+            .mozClick(CustomTabsSelectors.MENU_FORWARD)
+        on.customTabs.verifyWebContent(secondCustomTabPage.content)
+    }
 }

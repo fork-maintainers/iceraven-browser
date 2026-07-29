@@ -13,6 +13,7 @@ import org.mozilla.fenix.helpers.HomeActivityIntentTestRule
 import org.mozilla.fenix.ui.efficiency.helpers.BasePage
 import org.mozilla.fenix.ui.efficiency.helpers.PageStateTracker
 import org.mozilla.fenix.ui.efficiency.helpers.Selector
+import org.mozilla.fenix.ui.efficiency.selectors.BrowserPageSelectors
 import org.mozilla.fenix.ui.efficiency.selectors.CustomTabsSelectors
 
 class CustomTabsPage(composeRule: AndroidComposeTestRule<HomeActivityIntentTestRule, *>) : BasePage(composeRule) {
@@ -36,6 +37,18 @@ class CustomTabsPage(composeRule: AndroidComposeTestRule<HomeActivityIntentTestR
 
     fun openMainMenu(): CustomTabsPage {
         mozClick(CustomTabsSelectors.MAIN_MENU_BUTTON)
+        return this
+    }
+
+    // Web content is rendered by GeckoView and matched device-wide (UIAutomator text), so the BrowserPage
+    // page-content locator works inside a custom tab too.
+    fun clickWebContent(text: String): CustomTabsPage {
+        mozClick(BrowserPageSelectors.PAGE_CONTENT(text))
+        return this
+    }
+
+    fun verifyWebContent(text: String): CustomTabsPage {
+        mozVerify(BrowserPageSelectors.PAGE_CONTENT(text))
         return this
     }
 

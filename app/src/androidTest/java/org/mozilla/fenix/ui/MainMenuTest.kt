@@ -1398,6 +1398,10 @@ class MainMenuTest {
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3080096
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.CustomTabsTest#verifyTheMainMenuBackButtonFromCustomTabTest"],
+        since = "2026-07",
+    )
     @SmokeTest
     @Test
     fun verifyTheMainMenuBackButtonFromCustomTabTest() {
@@ -1452,6 +1456,10 @@ class MainMenuTest {
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3080097
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.CustomTabsTest#verifyTheMainMenuForwardButtonFromCustomTabTest"],
+        since = "2026-07",
+    )
     @SmokeTest
     @Test
     fun verifyTheMainMenuForwardButtonFromCustomTabTest() {
