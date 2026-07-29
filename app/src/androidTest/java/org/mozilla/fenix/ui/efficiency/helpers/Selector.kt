@@ -52,4 +52,15 @@ enum class SelectorStrategy {
     UIAUTOMATOR_WITH_TEXT,
     UIAUTOMATOR_WITH_DESCRIPTION_CONTAINS,
     UIAUTOMATOR_WITH_RES_ID_AND_TEXT,
+
+    // Package-prefixed app res-id ("$packageName:id/<value>") whose text merely CONTAINS
+    // secondaryValue. Mirrors the legacy MatcherHelper.itemWithResIdContainingText — needed when an
+    // app view (e.g. an autofill suggestion row) carries a longer label than the substring we key on.
+    UIAUTOMATOR_WITH_RES_ID_CONTAINING_TEXT,
+
+    // Raw (un-prefixed) res-id matched together with an exact text. The res-id is a web DOM id
+    // (GeckoView content), not an app resource — so it is used verbatim, like UIAUTOMATOR_WITH_COMPOSE_TAG,
+    // but additionally asserts the element's text equals secondaryValue. Mirrors the legacy
+    // MatcherHelper.itemWithResIdAndText applied to a web form field (e.g. verifying an autofilled value).
+    UIAUTOMATOR_WITH_WEB_ID_AND_TEXT,
 }

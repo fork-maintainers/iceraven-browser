@@ -313,9 +313,47 @@ abstract class BasePage(
             }
             SystemClock.sleep(interval)
         }
+        // A known blocking overlay (e.g. the stylus prompt) may be covering the target — dismiss and
+        // re-probe once before declaring it absent.
+        if (dismissKnownOverlaysIfPresent() && mozVerifyElement(selector, applyPreconditions = false)) {
+            rep?.endCmd(success = true, message = "'${selector.description}' verified after dismissing an overlay")
+            return this
+        }
         rep?.endCmd(success = false, message = "'${selector.description}' not found after ${timeout}ms")
         ScreenDump.dump(composeRule, "mozVerify failed: ${selector.description}")
         throw AssertionError("'${selector.description}' not found on screen after ${timeout}ms")
+    }
+
+    /**
+     * Detect any known blocking overlay ([OverlayRegistry]) covering the app and dismiss it. Returns
+     * true if one was DETECTED and a dismiss was attempted — not that the dismiss succeeded; callers
+     * re-probe for their own target rather than trusting this. No-op (false) when none are present.
+     *
+     * Called automatically by mozClick/mozVerify on a locate miss so an OEM/system popup (stylus
+     * prompt, etc.) in a separate window can't masquerade as "element not found". Also callable
+     * explicitly from a page-object flow that knows an overlay is likely.
+     *
+     * Every known overlay is checked on each call, and each overlay's dismiss selectors are tried in
+     * order until the overlay stops being detected. That is adequate for the single seeded overlay but
+     * has not been exercised with several registered at once — see the OverlayRegistry KDoc for the
+     * open design questions before adding more.
+     */
+    fun dismissKnownOverlaysIfPresent(): Boolean {
+        var handled = false
+        for (overlay in OverlayRegistry.known) {
+            if (mozVerifyElement(overlay.presence, applyPreconditions = false)) {
+                Log.i("BasePage", "⚠ Blocking overlay detected: '${overlay.name}' — attempting dismiss")
+                for (dismiss in overlay.dismiss) {
+                    mozClickIfPresent(dismiss, timeout = 1_000)
+                    // Stop at the first control that actually cleared it. Continuing would click the
+                    // remaining selectors through to whatever is now underneath the dismissed overlay.
+                    if (!mozVerifyElement(overlay.presence, applyPreconditions = false)) break
+                }
+                handled = true
+            }
+        }
+        if (handled) composeRule.waitForIdle()
+        return handled
     }
 
     fun mozVerifyAnyContainsText(selector: Selector, text: String, timeout: Long = TestAssetHelper.waitingTime, interval: Long = 500): BasePage {
@@ -381,7 +419,12 @@ abstract class BasePage(
         rep?.startLoc(safeId("loc", selector.description), "Attempting to locate '${selector.description}'...", 2)
 
         composeRule.waitForIdle()
-        val element = resolve(selector)
+        var element = resolve(selector)
+        if (element == null && dismissKnownOverlaysIfPresent()) {
+            // A known blocking overlay (e.g. the stylus prompt) was covering the target — retry once.
+            composeRule.waitForIdle()
+            element = resolve(selector)
+        }
         if (element == null) {
             rep?.endLoc(success = false, message = notFound(selector.description))
             rep?.endCmd(success = false, message = "Click '${selector.description}' failed: element not found")
@@ -1299,6 +1342,20 @@ abstract class BasePage(
 
                 val obj = mDevice.findObject(UiSelector().resourceId(fullResId).text(textToMatch))
 
+                if (!obj.exists()) null else obj
+            }
+
+            SelectorStrategy.UIAUTOMATOR_WITH_RES_ID_CONTAINING_TEXT -> {
+                val textToMatch = selector.secondaryValue ?: ""
+                val fullResId = packageName + ":id/" + selector.value
+                val obj = mDevice.findObject(UiSelector().resourceId(fullResId).textContains(textToMatch))
+                if (!obj.exists()) null else obj
+            }
+
+            SelectorStrategy.UIAUTOMATOR_WITH_WEB_ID_AND_TEXT -> {
+                val textToMatch = selector.secondaryValue ?: ""
+                // Raw web DOM id (no package prefix), matched together with exact text.
+                val obj = mDevice.findObject(UiSelector().resourceId(selector.value).text(textToMatch))
                 if (!obj.exists()) null else obj
             }
 
