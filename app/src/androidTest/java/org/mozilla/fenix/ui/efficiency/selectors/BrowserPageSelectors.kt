@@ -37,7 +37,10 @@ object BrowserPageSelectors {
         strategy = SelectorStrategy.UIAUTOMATOR_WITH_DESCRIPTION_CONTAINS,
         value = getStringResource(R.string.content_description_menu),
         description = "Three Dot Menu",
-        groups = listOf("requiredForPage"),
+        // NOT an arrival anchor: the menu button lives on the top toolbar in the default layout but moves to
+        // the bottom navigation bar when shouldUseExpandedToolbar is on — so it's layout-dependent (gotcha B7).
+        // ENGINE_VIEW (the web content) is the layout-invariant "browser is loaded" signal for requiredForPage.
+        groups = listOf(),
     )
 
     val TAB_CRASH_REPORTER_IMAGE = Selector(
@@ -129,9 +132,74 @@ object BrowserPageSelectors {
         groups = listOf(),
     )
 
+    // --- Address autofill on a web form (GeckoView content + the app's autofill prompt) ---
+
+    // Web DOM ids on the address form page. Not Compose tags — GeckoView exposes web element ids
+    // unprefixed in the accessibility tree, so UIAUTOMATOR_WITH_COMPOSE_TAG's un-namespaced resourceId
+    // lookup is what matches them (same mechanism as SUBMIT_LOGIN_BUTTON above).
+    val ADDRESS_STREET_WEB_FIELD = Selector(
+        strategy = SelectorStrategy.UIAUTOMATOR_WITH_COMPOSE_TAG,
+        value = "streetAddress",
+        description = "Web address form: street address field",
+        groups = listOf(),
+    )
+
+    val ADDRESS_CITY_WEB_FIELD = Selector(
+        strategy = SelectorStrategy.UIAUTOMATOR_WITH_COMPOSE_TAG,
+        value = "city",
+        description = "Web address form: city field",
+        groups = listOf(),
+    )
+
+    val ADDRESS_COUNTRY_WEB_FIELD = Selector(
+        strategy = SelectorStrategy.UIAUTOMATOR_WITH_COMPOSE_TAG,
+        value = "country",
+        description = "Web address form: country field",
+        groups = listOf(),
+    )
+
+    // NOTE: the Android stylus-handwriting prompt that can cover this page is handled centrally via
+    // OverlayRegistry + BasePage.dismissKnownOverlaysIfPresent(), not with a per-page selector here.
+
+    // The "Select address" header of the autofill prompt (an app View, package-prefixed res-id).
+    val SELECT_ADDRESS_HEADER = Selector(
+        strategy = SelectorStrategy.UIAUTOMATOR_WITH_RES_ID,
+        value = "select_address_header",
+        description = "Autofill prompt: 'Select address' header",
+        groups = listOf(),
+    )
+
+    // A saved-address suggestion row in the autofill prompt, keyed by the substring shown in its
+    // name/title (e.g. the street address). App View: package-prefixed res-id + textContains.
+    @Suppress("ktlint:standard:function-naming", "FunctionName")
+    fun ADDRESS_SUGGESTION(text: String = "") = Selector(
+        strategy = SelectorStrategy.UIAUTOMATOR_WITH_RES_ID_CONTAINING_TEXT,
+        value = "address_name",
+        secondaryValue = text,
+        description = "Autofill suggestion containing '$text'",
+        groups = listOf(),
+    )
+
+    // Assertion helper: the web street-address field is populated with the expected value.
+    // Raw web DOM id + exact text.
+    @Suppress("ktlint:standard:function-naming", "FunctionName")
+    fun AUTOFILLED_STREET_ADDRESS(text: String = "") = Selector(
+        strategy = SelectorStrategy.UIAUTOMATOR_WITH_WEB_ID_AND_TEXT,
+        value = "streetAddress",
+        secondaryValue = text,
+        description = "Web address form: street address autofilled with '$text'",
+        groups = listOf(),
+    )
+
     val all = listOf(
         SUBMIT_LOGIN_BUTTON,
         SAVE_LOGIN_PROMPT,
+        ADDRESS_STREET_WEB_FIELD,
+        ADDRESS_CITY_WEB_FIELD,
+        ADDRESS_COUNTRY_WEB_FIELD,
+        SELECT_ADDRESS_HEADER,
+        ADDRESS_SUGGESTION(),
+        AUTOFILLED_STREET_ADDRESS(),
         ENGINE_VIEW,
         PAGE_CONTENT,
         SNACKBAR_EDIT_BUTTON,
