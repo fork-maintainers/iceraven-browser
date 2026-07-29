@@ -111,6 +111,18 @@ abstract class BaseTest(
                             deletePinnedSitesStorage()
                             withContext(Dispatchers.IO) {
                                 appContext.components.core.sessionStorage.clear()
+                                // Clear saved autofill addresses so every attempt starts from a clean
+                                // screen. A leftover address (e.g. from a failed first attempt) changes
+                                // the Autofill settings layout and can push "Add address" off-screen,
+                                // turning a one-off failure into a retry that fails differently.
+                                // Best-effort: a storage error must not fail the attempt on its own, but
+                                // it is logged — a silent failure here looks identical to a state leak.
+                                runCatching {
+                                    val autofill = appContext.components.core.autofillStorage
+                                    autofill.getAllAddresses().forEach { autofill.deleteAddress(it.guid) }
+                                }.onFailure {
+                                    Log.i("BaseTest", "RetryTestRule: autofill clear failed: ${it.message}")
+                                }
                             }
                         }
                         appContext.components.useCases.tabsUseCases.removeAllTabs()
