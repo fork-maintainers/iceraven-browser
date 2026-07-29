@@ -30,6 +30,23 @@ class SettingsSavePasswordsPage(composeRule: AndroidComposeTestRule<HomeActivity
                 NavigationStep.Click(SettingsPasswordsSelectors.SAVE_PASSWORDS_OPTION),
             ),
         )
+
+        // Back out of settings to Home (each "Navigate up" pops one level: save-passwords -> passwords ->
+        // settings -> home). Lets tests that set a passwords option then load a page route home -> browser.
+        NavigationRegistry.register(
+            from = pageName,
+            to = "HomePage",
+            steps = listOf(
+                NavigationStep.ClickIfPresent(SettingsSelectors.GO_BACK_BUTTON),
+                NavigationStep.ClickIfPresent(SettingsSelectors.GO_BACK_BUTTON),
+                NavigationStep.ClickIfPresent(SettingsSelectors.GO_BACK_BUTTON),
+            ),
+        )
+    }
+
+    fun clickNeverSaveOption(): SettingsSavePasswordsPage {
+        mozClick(SettingsSavePasswordsSelectors.NEVER_SAVE_OPTION)
+        return this
     }
 
     override fun mozGetSelectorsByGroup(group: String): List<Selector> {

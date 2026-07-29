@@ -111,7 +111,27 @@ object BrowserPageSelectors {
         groups = listOf("addedToShortcutsSnackbar"),
     )
 
+    // Web form submit button. The value is a raw web DOM id, NOT a Compose tag — but GeckoView exposes web
+    // element ids unprefixed in the accessibility tree, exactly like Compose's testTagsAsResourceId, so
+    // UIAUTOMATOR_WITH_COMPOSE_TAG's un-namespaced resourceId lookup is the mechanism that matches it.
+    val SUBMIT_LOGIN_BUTTON = Selector(
+        strategy = SelectorStrategy.UIAUTOMATOR_WITH_COMPOSE_TAG,
+        value = "submit",
+        description = "Web form submit/login button",
+        groups = listOf(),
+    )
+
+    // Save-login prompt is an app View (package-prefixed res-id).
+    val SAVE_LOGIN_PROMPT = Selector(
+        strategy = SelectorStrategy.UIAUTOMATOR_WITH_RES_ID,
+        value = "feature_prompt_login_fragment",
+        description = "Save-login prompt",
+        groups = listOf(),
+    )
+
     val all = listOf(
+        SUBMIT_LOGIN_BUTTON,
+        SAVE_LOGIN_PROMPT,
         ENGINE_VIEW,
         PAGE_CONTENT,
         SNACKBAR_EDIT_BUTTON,

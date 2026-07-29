@@ -168,6 +168,21 @@ class BrowserPage(composeRule: AndroidComposeTestRule<HomeActivityIntentTestRule
         return this
     }
 
+    fun clickSubmitLoginButton(): BrowserPage {
+        mozClick(BrowserPageSelectors.SUBMIT_LOGIN_BUTTON)
+        return this
+    }
+
+    fun verifySaveLoginPromptIsDisplayed(): BrowserPage {
+        mozVerify(BrowserPageSelectors.SAVE_LOGIN_PROMPT)
+        return this
+    }
+
+    fun verifySaveLoginPromptIsNotDisplayed(): BrowserPage {
+        mozVerifyElementAbsent(BrowserPageSelectors.SAVE_LOGIN_PROMPT)
+        return this
+    }
+
     fun continueToHttpSite(): BrowserPage {
         return clickPageContent("Continue to HTTP Site")
     }
