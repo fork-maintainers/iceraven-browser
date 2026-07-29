@@ -11,6 +11,7 @@ import org.mozilla.fenix.ui.efficiency.pageObjects.BookmarkSearchPage
 import org.mozilla.fenix.ui.efficiency.pageObjects.BookmarksPage
 import org.mozilla.fenix.ui.efficiency.pageObjects.BrowserPage
 import org.mozilla.fenix.ui.efficiency.pageObjects.CollectionsPage
+import org.mozilla.fenix.ui.efficiency.pageObjects.CustomTabsPage
 import org.mozilla.fenix.ui.efficiency.pageObjects.DownloadsPage
 import org.mozilla.fenix.ui.efficiency.pageObjects.FindInPagePage
 import org.mozilla.fenix.ui.efficiency.pageObjects.HistoryPage
@@ -61,6 +62,7 @@ class PageContext(val composeRule: AndroidComposeTestRule<HomeActivityIntentTest
     val bookmarks = BookmarksPage(composeRule)
     val browserPage = BrowserPage(composeRule)
     val collections = CollectionsPage(composeRule)
+    val customTabs = CustomTabsPage(composeRule)
     val downloads = DownloadsPage(composeRule)
     val findInPage = FindInPagePage(composeRule)
     val history = HistoryPage(composeRule)

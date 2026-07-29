@@ -12,6 +12,7 @@ import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.mozilla.fenix.IntentReceiverActivity
+import org.mozilla.fenix.customannotations.Converted
 import org.mozilla.fenix.customannotations.SmokeTest
 import org.mozilla.fenix.helpers.AppAndSystemHelper.openAppFromExternalLink
 import org.mozilla.fenix.helpers.DataGenerationHelper.createCustomTabIntent
@@ -158,6 +159,10 @@ class CustomTabsTest {
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/249644
     // Verifies the main menu of a custom tab with a custom menu item
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.CustomTabsTest#verifyCustomTabMenuItemsTest"],
+        since = "2026-07",
+    )
     @SmokeTest
     @Test
     fun verifyCustomTabMenuItemsTest() {

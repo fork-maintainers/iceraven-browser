@@ -4,24 +4,39 @@
 
 package org.mozilla.fenix.ui.efficiency.pageObjects
 
+import android.content.Intent
 import androidx.compose.ui.test.junit4.AndroidComposeTestRule
+import androidx.test.platform.app.InstrumentationRegistry
+import org.mozilla.fenix.IntentReceiverActivity
+import org.mozilla.fenix.helpers.DataGenerationHelper.createCustomTabIntent
 import org.mozilla.fenix.helpers.HomeActivityIntentTestRule
 import org.mozilla.fenix.ui.efficiency.helpers.BasePage
+import org.mozilla.fenix.ui.efficiency.helpers.PageStateTracker
 import org.mozilla.fenix.ui.efficiency.helpers.Selector
-import org.mozilla.fenix.ui.efficiency.navigation.NavigationRegistry
 import org.mozilla.fenix.ui.efficiency.selectors.CustomTabsSelectors
 
 class CustomTabsPage(composeRule: AndroidComposeTestRule<HomeActivityIntentTestRule, *>) : BasePage(composeRule) {
     override val pageName = "CustomTabsPage"
 
-    init {
-        NavigationRegistry.register(
-            from = "HomePage",
-            to = pageName,
-            steps = listOf(
-                // The custom tab is created and launched using the intentReceiverActivityTestRule which will create a createCustomTabIntent
-            ),
-        )
+    // Custom tabs are LAUNCH-reached: they run in their own activity (CustomTabActivity), started by firing
+    // a custom-tabs intent at IntentReceiverActivity — not by navigating a click-path from HomePage. So there
+    // is no NavigationRegistry edge; use launchCustomTab() as the entry point (it sets the page state).
+
+    fun launchCustomTab(url: String, customMenuItemLabel: String = ""): CustomTabsPage {
+        val context = InstrumentationRegistry.getInstrumentation().targetContext
+        val intent = createCustomTabIntent(url, customMenuItemLabel).apply {
+            setClass(context, IntentReceiverActivity::class.java)
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        }
+        context.startActivity(intent)
+        mozVerify(CustomTabsSelectors.MAIN_MENU_BUTTON) // wait for the custom-tab toolbar to settle
+        PageStateTracker.currentPageName = pageName
+        return this
+    }
+
+    fun openMainMenu(): CustomTabsPage {
+        mozClick(CustomTabsSelectors.MAIN_MENU_BUTTON)
+        return this
     }
 
     override fun mozGetSelectorsByGroup(group: String): List<Selector> {
