@@ -4,7 +4,6 @@
 
 package org.mozilla.fenix.webcompat
 
-import kotlinx.serialization.json.Json
 import mozilla.components.concept.engine.EngineSession
 import mozilla.components.support.base.log.logger.Logger
 import org.json.JSONObject
@@ -48,7 +47,6 @@ class DefaultWebCompatReporterMoreInfoSender(
     ) {
         val webCompatInfo = webCompatReporterRetrievalService.retrieveInfo()
         webCompatInfo?.let {
-            val json = Json
             val info = JSONObject().apply {
                 reason?.let {
                     put("reason", reason)
@@ -72,7 +70,7 @@ class DefaultWebCompatReporterMoreInfoSender(
                         put("utm_source", "android-components-reporter")
                     },
                 )
-                put("webcompatInfo", JSONObject(json.encodeToString(webCompatInfo)))
+                put("webcompatInfo", webCompatInfo)
             }
 
             engineSession?.sendMoreWebCompatInfo(

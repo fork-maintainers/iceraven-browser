@@ -5,15 +5,14 @@
 package org.mozilla.fenix.webcompat.di
 
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.serialization.json.Json
 import mozilla.components.browser.state.state.BrowserState
 import mozilla.components.browser.state.store.BrowserStore
 import mozilla.components.service.nimbus.NimbusApi
 import org.mozilla.fenix.components.AppStore
 import org.mozilla.fenix.components.appstate.webcompat.WebCompatState
+import org.mozilla.fenix.webcompat.DefaultGleanBrokenSiteReportSender
 import org.mozilla.fenix.webcompat.middleware.DefaultNimbusExperimentsProvider
 import org.mozilla.fenix.webcompat.middleware.DefaultWebCompatReporterRetrievalService
-import org.mozilla.fenix.webcompat.middleware.WebCompatInfoDeserializer
 import org.mozilla.fenix.webcompat.middleware.WebCompatReporterNavigationMiddleware
 import org.mozilla.fenix.webcompat.middleware.WebCompatReporterStorageMiddleware
 import org.mozilla.fenix.webcompat.middleware.WebCompatReporterSubmissionMiddleware
@@ -42,7 +41,6 @@ object WebCompatReporterMiddlewareProvider {
         provideSubmissionMiddleware(
             appStore = appStore,
             browserStore = browserStore,
-            webCompatInfoDeserializer = provideWebCompatInfoDeserializer(),
             scope = scope,
             nimbusApi = nimbusApi,
         ),
@@ -59,18 +57,21 @@ object WebCompatReporterMiddlewareProvider {
     private fun provideSubmissionMiddleware(
         appStore: AppStore,
         browserStore: BrowserStore,
-        webCompatInfoDeserializer: WebCompatInfoDeserializer,
         scope: CoroutineScope,
         nimbusApi: NimbusApi,
     ): WebCompatReporterSubmissionMiddleware {
         val webCompatReporterRetrievalService = DefaultWebCompatReporterRetrievalService(
             browserStore = browserStore,
-            webCompatInfoDeserializer = webCompatInfoDeserializer,
+        )
+
+        val gleanBrokenSiteReportSender = DefaultGleanBrokenSiteReportSender(
+            browserStore = browserStore,
         )
 
         return WebCompatReporterSubmissionMiddleware(
             appStore = appStore,
             webCompatReporterRetrievalService = webCompatReporterRetrievalService,
+            gleanBrokenSiteReportSender = gleanBrokenSiteReportSender,
             scope = scope,
             nimbusExperimentsProvider = DefaultNimbusExperimentsProvider(nimbusApi),
         )
@@ -81,13 +82,4 @@ object WebCompatReporterMiddlewareProvider {
 
     private fun provideTelemetryMiddleware() =
         WebCompatReporterTelemetryMiddleware()
-
-    private val json by lazy {
-        Json {
-            ignoreUnknownKeys = true
-            useAlternativeNames = false
-        }
-    }
-
-    internal fun provideWebCompatInfoDeserializer() = WebCompatInfoDeserializer(json = json)
 }
