@@ -31,6 +31,8 @@
   <string name="history_search_hint">تارىختىن ئىزدەيدۇ</string>
   <!-- Placeholder text shown in search bar when using bookmarks search -->
   <string name="bookmark_search_hint">خەتكۈچ ئىزدەيدۇ</string>
+  <!-- Content description for the toolbar back button while searching bookmarks -->
+  <string name="bookmark_close_search_description">قايتىپ ۋە ئىزدەشنى تاقا</string>
   <!-- Placeholder text shown in search bar when using tabs search -->
   <string name="tab_search_hint">بەتكۈچ ئىزدەيدۇ</string>
   <!-- Placeholder text shown in the search bar when using application search engines -->
@@ -393,6 +395,8 @@
   <string name="ai_controls_voice_search_description">ئاۋاز Google تاۋۇش مۇلازىمىتى ئارقىلىق تېكىستكە ئايلاندۇرۇلىدۇ.</string>
   <!-- Title for the block AI enhancements confirmation dialog -->
   <string name="ai_controls_block_dialog_title">سۈنئىي ئەقىلنىڭ كۈچەيتىلگەن ئىقتىدارىنى توسامدۇ؟</string>
+  <!-- Body text for the block AI enhancements confirmation dialog. %1$s is the name of the app (for example "Firefox"). -->
+  <string name="ai_controls_block_dialog_body">سىز %1$s دىكى يېڭى ياكى نۆۋەتتىكى سۈنئىي ئەقىل كۈچەيتىلگەن ئىقتىدارى ياكى ئۇلار ھەققىدىكى قاڭقىش كۆزنىكىنى كۆرەلمەيسىز. ئىشلىتىشنى داۋاملاشتۇرماقچى بولغان ھەر قانداق نەرسىنى توسمىسىڭىز بولىدۇ. توسۇش سۈنئىي ئەقىل ئارقىلىق %1$s تەمىنلىگەن كېڭەيتىلمىگىمۇ تەسىر كۆرسىتىدۇ.</string>
   <!-- Label shown above the list of features that will be blocked in the block AI dialog -->
   <string name="ai_controls_block_dialog_what_will_be_blocked">نېمە توسۇلىدۇ:</string>
   <!-- Cancel button text in the block AI enhancements confirmation dialog -->
@@ -623,6 +627,39 @@
     %1$s is replaced by an active link, using nova_onboarding_marketing_body_link_text as text (“How we use the data”).
   -->
   <string name="nova_onboarding_marketing_body" tools:ignore="BrandUsage,UnusedResources">Firefox نى قانداق بايقىغانلىقىڭىز ۋە ئۇنى ئىشلىتىشنى Mozilla نىڭ بازارچىلىق ھەمكارلاشقۇچىلىرى بىلەن ھەمبەھىرلەڭ. بۇ سانلىق مەلۇماتلار ھەرگىز سېتىلمايدۇ. %1$s</string>
+  <!-- Marketing onboarding body. 'Firefox' and 'Mozilla' are intentionally hardcoded. -->
+  <string name="nova_onboarding_marketing_body_2" tools:ignore="BrandUsage">Firefox نى قانداق بايقىغانلىقىڭىز ۋە ئۇنى ئىشلىتىشنى Mozilla نىڭ بازارچىلىق ھەمكارلاشقۇچىلىرى بىلەن ھەمبەھىرلەڭ. بۇ سانلىق مەلۇماتلار ھەرگىز سېتىلمايدۇ.</string>
+  <!-- Marketing onboarding body. 'Firefox' and 'Mozilla' are intentionally hardcoded. -->
+  <string name="nova_onboarding_marketing_body_3" tools:ignore="BrandUsage,UnusedResources">Firefox ئىشلىتىۋاتقانلىقىڭىزنى Mozilla نىڭ Firefox كېڭەيتىش قانىلىمىزغا بىلدۈرۈشىگە يول قويۇش ئارقىلىق تېخىمۇ كۆپ كىشى بىلەن ئۇچرىشىشىمىزغا ياردەم قىلالايسىز.</string>
+  <!--
+    Marketing onboarding body. 'Firefox' and 'Mozilla' are intentionally hardcoded.
+    “Platform you came from” refers to the external app, website, store, campaign, or other source that directed the user to Firefox.
+  -->
+  <string name="nova_onboarding_marketing_body_4" tools:ignore="BrandUsage,UnusedResources">Firefox ئىشلىتىۋاتقانلىقىڭىزنى Mozilla نىڭ مەنبە سۇپىڭىزغا بىلدۈرۈشىگە يول قويۇش ئارقىلىق تېخىمۇ كۆپ كىشى بىلەن ئۇچرىشىشىمىزغا ياردەم قىلالايسىز.</string>
+  <!--
+    Marketing onboarding body. 'Firefox' and 'Mozilla' are intentionally hardcoded.
+    “Platform you came from” refers to the external app, website, store, campaign, or other source that directed the user to Firefox.
+  -->
+  <string name="nova_onboarding_marketing_body_5" tools:ignore="BrandUsage,UnusedResources">Firefox ئىشلىتىۋاتقانلىقىڭىزنى Mozilla نىڭ مەنبە سۇپىڭىزغا بىلدۈرۈشىگە يول قويۇش ئارقىلىق تېخىمۇ كۆپ كىشى بىلەن ئۇچرىشىشىمىزغا ياردەم قىلىڭ.</string>
+  <!--
+    Marketing onboarding body. 'Firefox' and 'Mozilla' are intentionally hardcoded.
+    “Platform you came from” refers to the external app, website, store, campaign, or other source that directed the user to Firefox.
+    %1$s is replaced by an active link, using nova_onboarding_marketing_body_link_text as text (“How we use the data”).
+  -->
+  <string name="nova_onboarding_marketing_body_6" tools:ignore="BrandUsage,UnusedResources">Firefox ئىشلىتىۋاتقانلىقىڭىزنى Mozilla نىڭ مەنبە سۇپىڭىزغا بىلدۈرۈشىگە يول قويۇش ئارقىلىق تېخىمۇ كۆپ كىشى بىلەن ئۇچرىشىشىمىزغا ياردەم قىلىڭ. %1$s</string>
+  <!--
+    Marketing onboarding body. 'Firefox' and 'Mozilla' are intentionally hardcoded.
+    “Platform you came from” refers to the external app, website, store, campaign, or other source that directed the user to Firefox.
+    %1$s is replaced by an active link, using nova_onboarding_marketing_body_link_text_1 as text (“Learn More”).
+  -->
+  <string name="nova_onboarding_marketing_body_7" tools:ignore="BrandUsage">Firefox ئىشلىتىۋاتقانلىقىڭىزنى Mozilla نىڭ مەنبە سۇپىڭىزغا بىلدۈرۈشىگە يول قويۇش ئارقىلىق تېخىمۇ كۆپ كىشى بىلەن ئۇچرىشىشىمىزغا ياردەم قىلالايسىز. %1$s</string>
+  <!-- Marketing onboarding additional body text. 'Firefox' is intentionally hardcoded. -->
+  <string name="nova_onboarding_marketing_body_line_two" tools:ignore="BrandUsage">Firefox مۇستەقىللىقتىن پەخىرلىنىدۇ ۋە ئوچۇق تورنىڭ تېخنىكا مونوپۇللۇقىنىڭ زىيانكەشلىكىگە ئۇچرىشىدىن قوغدايدۇ.</string>
+  <!--
+    Marketing onboarding additional body text. 'Firefox' is intentionally hardcoded.
+    “Allowing” refers to the main button “Allow and Continue”; the ask for the user is to allow communicating back to the platform.
+  -->
+  <string name="nova_onboarding_marketing_body_line_three" tools:ignore="BrandUsage">Firefox نىڭ مۇۋەپپەقىيەت قازىنىشىغا ياردەملىشىشنى ئويلىشىڭ.</string>
   <!-- Marketing onboarding body link text. -->
   <string name="nova_onboarding_marketing_body_link_text">سانلىق مەلۇماتنى قانداق ئىشلىتىمىز</string>
   <!-- Marketing onboarding body link text. -->
@@ -941,6 +978,8 @@
   <string name="notifications_allowed_summary">يول قويغان</string>
   <!-- Summary for notification preference indicating notifications are not allowed -->
   <string name="notifications_not_allowed_summary">يول قويمايدۇ</string>
+  <!-- Preference for local network access / nearby devices in Android 17 -->
+  <string name="preferences_local_network_access">يەرلىك تور / ئەتراپتىكى ئۈسكۈنە زىيارىتى</string>
   <!-- Summary for local network access preference indicating access is allowed -->
   <string name="local_network_access_allowed_summary">يول قويغان</string>
   <!-- Summary for local network access preference indicating access is not allowed -->

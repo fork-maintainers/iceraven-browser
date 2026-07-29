@@ -31,6 +31,8 @@
   <string name="history_search_hint">Etsi historiasta</string>
   <!-- Placeholder text shown in search bar when using bookmarks search -->
   <string name="bookmark_search_hint">Etsi kirjanmerkeistä</string>
+  <!-- Content description for the toolbar back button while searching bookmarks -->
+  <string name="bookmark_close_search_description">Palaa takaisin ja sulje haku</string>
   <!-- Placeholder text shown in search bar when using tabs search -->
   <string name="tab_search_hint">Etsi välilehdistä</string>
   <!-- Placeholder text shown in the search bar when using application search engines -->
@@ -976,6 +978,12 @@
   <string name="notifications_allowed_summary">Sallittu</string>
   <!-- Summary for notification preference indicating notifications are not allowed -->
   <string name="notifications_not_allowed_summary">Ei sallittu</string>
+  <!-- Preference for local network access / nearby devices in Android 17 -->
+  <string name="preferences_local_network_access">Lähiverkon käyttö / Lähellä olevat laitteet</string>
+  <!-- Summary for local network access preference indicating access is allowed -->
+  <string name="local_network_access_allowed_summary">Sallittu</string>
+  <!-- Summary for local network access preference indicating access is not allowed -->
+  <string name="local_network_access_not_allowed_summary">Ei sallittu</string>
   <!--
     Add-on Permissions
 
@@ -1698,6 +1706,14 @@
   <string name="close_tab_and_delete_group_confirmation_dialog_confirm">Poista ryhmä</string>
   <!-- Text shown on the cancel button in the Close last tab and delete tab group confirmation dialog. -->
   <string name="close_tab_and_delete_group_confirmation_dialog_cancel">Peruuta</string>
+  <!-- Content description for the three dot button next to a tab group" -->
+  <string name="tab_group_three_dot_button_content_description">Lisää valintoja</string>
+  <!-- Text shown on the edit button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_edit">Muokkaa</string>
+  <!-- Text shown on the delete button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_delete">Poista</string>
+  <!-- Text shown on the close button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_close">Sulje</string>
   <!--
     Color labels for tab groups, used for accessibility and selection UI.
 
@@ -1973,6 +1989,8 @@
   <string name="webcompat_reporter_description_error">Syötä vähintään 10 merkkiä</string>
   <!-- The label/title of a mandatory field in the Web Compat Reporter feature for adding additional information. -->
   <string name="webcompat_reporter_label_mandatory_description">Kuvaile ongelmaa yksityiskohtaisesti, jotta voimme tutkia sitä</string>
+  <!-- The label/title of a optional field in the Web Compat Reporter feature for adding additional information. -->
+  <string name="webcompat_reporter_label_optional_description">Kuvaile ongelmaa yksityiskohtaisesti, jotta voimme tutkia sitä (valinnainen)</string>
   <!-- The label/title of a field in the Web Compat Reporter feature for explaining a high-level reason why the site is broken. -->
   <string name="webcompat_reporter_label_whats_broken_2">Mikä on rikki?</string>
   <!-- The placeholder text for the dropdown where a user selects a high-level reason why the site is broken. -->
@@ -2192,6 +2210,10 @@
   <string name="bookmark_select_folder_new_folder_button_title">Uusi kansio</string>
   <!-- Bookmark snackbar message for moving a single item. %1$s is the title of the item being moved and %2$s is the new parent folder of the bookmark -->
   <string name="bookmark_moved_single_item">Siirretty %1$s kansioon %2$s</string>
+  <!-- Text for bookmark search page when there are no results. -->
+  <string name="bookmark_no_search_results">Ei hakutuloksia.</string>
+  <!-- Additional text for bookmark search page when there are no results. -->
+  <string name="bookmark_no_search_results_additional_text">Kokeile muita hakuehtoja!</string>
   <!--
     Site Permissions
 
@@ -3122,6 +3144,30 @@
   <string name="ip_protection_data_limit_reached_snackbar">%1$d Gt VPN-dataa käytetty. Käyttöoikeus nollataan ensi kuussa.</string>
   <!-- Snackbar (in-app pop-up notification) action button text that takes the user to the VPN settings screen. -->
   <string name="ip_protection_data_limit_reached_snackbar_action">Asetukset</string>
+  <!-- Description shown on the browser VPN settings screen prompting the user to turn the VPN on. -->
+  <string name="ip_protection_settings_description" tools:ignore="UnusedResources">Ota VPN käyttöön tehdäksesi selaamisestasi yksityisempää ja vaikeampaa jäljittää.</string>
+  <!-- Title shown on the browser VPN settings screen for location selection section. -->
+  <string name="ip_protection_location_title" tools:ignore="UnusedResources">Sijainti</string>
+  <!-- Label for the Recommended server location option which is automatically selected by the browser. -->
+  <string name="ip_protection_recommended_location" tools:ignore="UnusedResources">Suositeltu</string>
+  <!-- Headline for the card that promotes the standalone Mozilla VPN product. -->
+  <string name="ip_protection_mozilla_vpn_upsell_headline" tools:ignore="UnusedResources,BrandUsage">Suojaa enemmän Mozilla VPN:llä</string>
+  <!-- Body for the card that promotes the standalone Mozilla VPN product. -->
+  <string name="ip_protection_mozilla_vpn_upsell_body" tools:ignore="UnusedResources">Valitse yli 300 sijainnista ja suojaa kaikki sovelluksesi jopa viidellä laitteella.</string>
+  <!-- Label for the button that takes the user to get the standalone Mozilla VPN product. -->
+  <string name="ip_protection_mozilla_vpn_upsell_button" tools:ignore="UnusedResources,BrandUsage">Hanki Mozilla VPN</string>
+  <!-- Title for the browser VPN location picker screen. -->
+  <string name="ip_protection_location_picker_title" tools:ignore="UnusedResources">Valitse VPN-sijainti</string>
+  <!-- Description for what it means to use the Recommended setting and let the app automatically pick the best server location. -->
+  <string name="ip_protection_location_fastest_description" tools:ignore="BrandUsage">Firefox löytää nopeimman sijainnin</string>
+  <!-- Error message shown when the selected browser VPN location is unavailable. -->
+  <string name="ip_protection_location_unavailable" tools:ignore="UnusedResources">Sijainti ei ole käytettävissä. Valitse toinen sijainti.</string>
+  <!-- Snackbar (in-app pop-up notification) text shown when the previously selected browser VPN location is unavailable and the recommended location was used instead. -->
+  <string name="ip_protection_location_unavailable_recommended_snackbar" tools:ignore="UnusedResources">Valittu VPN-sijainti ei ole käytettävissä. Yhdistetty suositeltuun sijaintiin.</string>
+  <!-- Title for the card shown to the user when we are unable to fetch server locations -->
+  <string name="ip_protection_location_unavailable_title" tools:ignore="UnusedResources">Edellinen sijainti ei ole käytettävissä</string>
+  <!-- Description for the card shown to the user when we are unable to fetch server locations -->
+  <string name="ip_protection_location_unavailable_recommended_description" tools:ignore="UnusedResources">Yhdistetty suositeltuun sijaintiin.</string>
   <!--
     Autofill
 
