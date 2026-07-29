@@ -6,6 +6,7 @@ package org.mozilla.fenix.ui.efficiency.helpers
 
 import android.os.SystemClock
 import android.util.Log
+import android.view.accessibility.AccessibilityWindowInfo
 import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.SemanticsNodeInteractionCollection
 import androidx.compose.ui.test.assert
@@ -62,6 +63,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withContentDescription
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withResourceName
 import androidx.test.espresso.matcher.ViewMatchers.withText
+import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiObject
 import androidx.test.uiautomator.UiObject2
@@ -360,6 +362,32 @@ abstract class BasePage(
         }
         if (handled) composeRule.waitForIdle()
         return handled
+    }
+
+    /**
+     * True while a soft-keyboard (IME) window is on screen. Reads the accessibility window list rather
+     * than shelling out to `dumpsys input_method` the way the legacy AppAndSystemHelper does, so it needs
+     * no shell access and no output parsing.
+     */
+    fun mozIsKeyboardVisible(): Boolean =
+        InstrumentationRegistry.getInstrumentation().uiAutomation.windows
+            .any { it.type == AccessibilityWindowInfo.TYPE_INPUT_METHOD }
+
+    /** Poll until the soft keyboard is showing; throws if it never appears within [timeout]. */
+    fun mozVerifyKeyboardVisible(timeout: Long = 5_000, interval: Long = 200): BasePage {
+        val rep = rep()
+        rep?.startCmd("verify_keyboard_visible", "Verifying the soft keyboard is visible...", 1)
+        val deadline = System.currentTimeMillis() + timeout
+        while (System.currentTimeMillis() < deadline) {
+            if (mozIsKeyboardVisible()) {
+                rep?.endCmd(success = true, message = "Soft keyboard is visible")
+                return this
+            }
+            SystemClock.sleep(interval)
+        }
+        rep?.endCmd(success = false, message = "Soft keyboard not visible after ${timeout}ms")
+        ScreenDump.dump(composeRule, "mozVerifyKeyboardVisible failed")
+        throw AssertionError("Soft keyboard was expected to be visible but is not, after ${timeout}ms")
     }
 
     fun mozVerifyAnyContainsText(selector: Selector, text: String, timeout: Long = TestAssetHelper.waitingTime, interval: Long = 500): BasePage {

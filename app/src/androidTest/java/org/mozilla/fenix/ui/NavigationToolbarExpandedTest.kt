@@ -135,6 +135,10 @@ class NavigationToolbarExpandedTest {
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3333213
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.ToolbarTest#verifyTheExpandedToolbarNewTabButtonTest"],
+        since = "2026-07",
+    )
     @SmokeTest
     @Test
     fun verifyTheExpandedToolbarNewTabButtonTest() {

@@ -6,6 +6,8 @@ package org.mozilla.fenix.ui.efficiency.selectors
 
 import mozilla.components.compose.browser.toolbar.concept.BrowserToolbarTestTags.ADDRESSBAR_SEARCH_BOX
 import mozilla.components.compose.browser.toolbar.concept.BrowserToolbarTestTags.SEARCH_SELECTOR
+import org.mozilla.fenix.R
+import org.mozilla.fenix.helpers.DataGenerationHelper.getStringResource
 import org.mozilla.fenix.ui.efficiency.helpers.Selector
 import org.mozilla.fenix.ui.efficiency.helpers.SelectorStrategy
 
@@ -31,9 +33,22 @@ object SearchBarSelectors {
         groups = listOf("requiredForPage"),
     )
 
+    // Text, not content-description, and deliberately so despite text being the last-resort handle: in edit
+    // mode the hint is rendered as its own text node, and ADDRESSBAR_SEARCH_BOX carries no description at
+    // all (verified from a ScreenDump of the search view). The browser-view address bar does expose the hint
+    // as part of its description, but that is a different element in a different state. Keyed off the string
+    // resource so it survives localization.
+    val SEARCH_BAR_PLACEHOLDER = Selector(
+        strategy = SelectorStrategy.COMPOSE_BY_TEXT,
+        value = getStringResource(R.string.search_hint),
+        description = "Search bar placeholder",
+        groups = listOf(),
+    )
+
     val all = listOf(
         TOOLBAR_IN_EDIT_MODE,
         URL_TEXT,
         SEARCH_ENGINE_SELECTOR,
+        SEARCH_BAR_PLACEHOLDER,
     )
 }
