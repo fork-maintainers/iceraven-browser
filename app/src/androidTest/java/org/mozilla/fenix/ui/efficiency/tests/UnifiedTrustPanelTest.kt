@@ -118,4 +118,32 @@ class UnifiedTrustPanelTest : BaseTest() {
             .mozClick(CLEAR_COOKIES_AND_SITE_DATA_BUTTON)
         on.unifiedTrustPanel.verifyTheClearCookiesAndSiteDataDialog(originWebsite)
     }
+
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3186711
+    // Converted from legacy UnifiedTrustPanelTest.verifyInsecurePageConnectionFromQuickSettingsWithNoTrackersInCustomTabsTest
+    @SmokeTest
+    @Test
+    fun verifyInsecurePageConnectionFromQuickSettingsWithNoTrackersInCustomTabsTest() {
+        val customTabPage = mockWebServer.getGenericAsset(1)
+
+        on.customTabs.launchCustomTab(customTabPage.url.toString())
+        on.unifiedTrustPanel.navigateToPage()
+        on.unifiedTrustPanel.verifyUnifiedTrustPanelItems(
+            webSite = customTabPage.title,
+            webSiteURL = customTabPage.url.host.toString(),
+            isTheWebSiteSecure = false,
+            isEnhancedTrackingProtectionEnabled = true,
+            isTrackerBlockingEnabled = true,
+            areTrackersBlocked = false,
+        )
+        on.unifiedTrustPanel.clickTheEnhancedTrackingProtectionOption()
+        on.unifiedTrustPanel.verifyUnifiedTrustPanelItems(
+            webSite = customTabPage.title,
+            webSiteURL = customTabPage.url.host.toString(),
+            isTheWebSiteSecure = false,
+            isEnhancedTrackingProtectionEnabled = false,
+            isTrackerBlockingEnabled = false,
+            areTrackersBlocked = false,
+        )
+    }
 }

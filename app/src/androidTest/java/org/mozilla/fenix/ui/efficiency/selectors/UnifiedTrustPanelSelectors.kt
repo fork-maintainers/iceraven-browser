@@ -54,18 +54,22 @@ object UnifiedTrustPanelSelectors {
     )
 
     // ── Site identity ───────────────────────────────────────────────────────
+    // Match the unique testTag AND the text. Text alone is ambiguous — the host also renders in the
+    // address bar (gotcha A7) — but tag alone would stop asserting which site the panel is describing.
     @Suppress("ktlint:standard:function-naming", "FunctionName")
     fun WEBSITE_TITLE(webSite: String = "") = Selector(
-        strategy = SelectorStrategy.COMPOSE_BY_TEXT,
-        value = webSite,
+        strategy = SelectorStrategy.COMPOSE_BY_TAG_AND_TEXT,
+        value = "unified.trust.panel.website",
+        secondaryValue = webSite,
         description = "Unified trust panel website title: $webSite",
         groups = listOf(),
     )
 
     @Suppress("ktlint:standard:function-naming", "FunctionName")
     fun WEBSITE_URL(webSiteURL: String = "") = Selector(
-        strategy = SelectorStrategy.COMPOSE_BY_TEXT,
-        value = webSiteURL,
+        strategy = SelectorStrategy.COMPOSE_BY_TAG_AND_TEXT,
+        value = "unified.trust.panel.website.url",
+        secondaryValue = webSiteURL,
         description = "Unified trust panel website url: $webSiteURL",
         groups = listOf(),
     )

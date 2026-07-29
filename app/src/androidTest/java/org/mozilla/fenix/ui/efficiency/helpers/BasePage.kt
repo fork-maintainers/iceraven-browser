@@ -455,6 +455,14 @@ abstract class BasePage(
         fun candidates(unmerged: Boolean): SemanticsNodeInteractionCollection? = when (selector.strategy) {
             SelectorStrategy.COMPOSE_BY_TAG ->
                 composeRule.onAllNodesWithTag(selector.value, useUnmergedTree = unmerged)
+            // Tag AND the node's own text. For elements whose text also renders elsewhere on screen
+            // (e.g. a host shown both in a panel and in the address bar), the tag disambiguates while
+            // the text still asserts the content — neither alone is sufficient.
+            SelectorStrategy.COMPOSE_BY_TAG_AND_TEXT ->
+                composeRule.onAllNodes(
+                    hasTestTag(selector.value) and hasText(selector.secondaryValue ?: ""),
+                    useUnmergedTree = unmerged,
+                )
             SelectorStrategy.COMPOSE_BY_TEXT,
             SelectorStrategy.COMPOSE_BY_TEXT_MERGED,
             -> composeRule.onAllNodesWithText(selector.value, useUnmergedTree = unmerged)
@@ -1140,6 +1148,24 @@ abstract class BasePage(
                     composeRule.onNodeWithTag(selector.value)
                 } catch (_: Exception) {
                     Log.i("mozGetElement", "Compose node not found for tag: ${selector.value}"); null
+                }
+            }
+
+            SelectorStrategy.COMPOSE_BY_TAG_AND_TEXT -> {
+                val textToMatch = selector.secondaryValue ?: ""
+                try {
+                    // Unmerged: the tag and the text sit on the same Text node, which a merging
+                    // ancestor would otherwise absorb.
+                    composeRule.onNode(
+                        hasTestTag(selector.value) and hasText(textToMatch),
+                        useUnmergedTree = true,
+                    )
+                } catch (_: Exception) {
+                    Log.i(
+                        "mozGetElement",
+                        "Compose node not found for tag: ${selector.value} with text: $textToMatch",
+                    )
+                    null
                 }
             }
             // TODO: easier way to isolate parent/child/sibling elements, auto-selects sibilings or children on failure as a back-up
