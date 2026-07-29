@@ -484,6 +484,31 @@ class CustomTabBrowserToolbarMiddlewareTest {
     }
 
     @Test
+    fun `GIVEN ip protection is active WHEN the pill is built THEN proxyActiveShown is not dispatched until the animation starts`() = runTest {
+        val ipProtectionStore = IPProtectionStore(
+            initialState = IPProtectionState(proxyStatus = Authorized.Active),
+        )
+        val customTab = createCustomTab(
+            url = "URL",
+            id = customTabId,
+            trackingProtection = TrackingProtectionState(enabled = true, ignoredOnTrackingProtection = false),
+            securityInfo = SecurityInfo.Secure(),
+        )
+        val browserStore = BrowserStore(BrowserState(customTabs = listOf(customTab)))
+        val middleware = buildMiddleware(browserStore = browserStore, ipProtectionStore = ipProtectionStore)
+        val toolbarStore = buildStore(middleware)
+        testDispatcher.scheduler.advanceUntilIdle()
+
+        val siteInfo = toolbarStore.state.displayState.pageActionsStart[0] as AnimatedPillActionRes
+        assertFalse(ipProtectionStore.state.proxyActiveShown)
+
+        siteInfo.onAnimationStarted?.invoke()
+        testDispatcher.scheduler.advanceUntilIdle()
+
+        assertTrue(ipProtectionStore.state.proxyActiveShown)
+    }
+
+    @Test
     fun `GIVEN ip protection is active WHEN initializing the toolbar THEN show animated pill action`() = runTest {
         val ipProtectionStore = IPProtectionStore(
             initialState = IPProtectionState(proxyStatus = Authorized.Active),

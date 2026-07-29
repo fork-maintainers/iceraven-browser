@@ -485,9 +485,10 @@ class CustomTabBrowserToolbarMiddleware(
                 contentDescriptionResId = R.string.ip_protection_toolbar_pill_description,
                 animated = !ipProtectionStore.state.proxyActiveShown,
                 onClick = onClick,
-            ).also {
-                ipProtectionStore.dispatch(IPProtectionAction.ProxyActiveShown)
-            }
+                onAnimationStarted = {
+                    ipProtectionStore.dispatch(IPProtectionAction.ProxyActiveShown)
+                },
+            )
         } else {
             ActionButtonRes(
                 drawableResId = drawableResId,
