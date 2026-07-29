@@ -280,6 +280,14 @@ class Settings(
         get() = FxNimbus.features.homescreen.value().sectionsEnabled[HomeScreenSection.COLLECTIONS] == true
 
     /**
+     * Whether the Collections UI should be hidden.
+     */
+    var hideCollectionsUi by booleanPreference(
+        appContext.getPreferenceKey(R.string.pref_key_hide_collections),
+        default = { FxNimbus.features.collectionsToTabGroupsMigration.value().hideCollectionsUi },
+    )
+
+    /**
      * Indicates whether or not the Firefox Japan Guide default site should be shown.
      */
     val showFirefoxJpGuideDefaultSite: Boolean

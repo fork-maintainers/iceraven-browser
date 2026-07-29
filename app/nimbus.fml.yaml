@@ -1338,6 +1338,14 @@ features:
         value:
           enabled: true
 
+  collections-to-tab-groups-migration:
+    description: Feature to migrate Collections to Tab Groups for users on Firefox for Android.
+    variables:
+      hide-collections-ui:
+        description: If true, the Collections UI is hidden.
+        type: Boolean
+        default: false
+
 types:
   objects:
     GleanServerKnobsConfiguration:
