@@ -38,5 +38,5 @@ object FeatureFlags {
     /**
      * Enables Firefox Labs.
      */
-    const val FIREFOX_LABS = false
+    const val FIREFOX_LABS = true
 }
