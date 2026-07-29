@@ -8,6 +8,8 @@ import mozilla.components.compose.browser.toolbar.concept.BrowserToolbarTestTags
 import mozilla.components.compose.browser.toolbar.concept.BrowserToolbarTestTags.TABS_COUNTER
 import org.mozilla.fenix.R
 import org.mozilla.fenix.components.toolbar.BrowserToolbarTestTags.SITE_INFO_SECURE
+import org.mozilla.fenix.components.toolbar.BrowserToolbarTestTags.SITE_INFO_UNKNOWN
+import org.mozilla.fenix.components.toolbar.BrowserToolbarTestTags.SITE_INFO_UNSECURE
 import org.mozilla.fenix.helpers.DataGenerationHelper.getStringResource
 import org.mozilla.fenix.ui.efficiency.helpers.Selector
 import org.mozilla.fenix.ui.efficiency.helpers.SelectorStrategy
@@ -84,6 +86,20 @@ object ToolbarSelectors {
         groups = listOf("browserViewToolbarItems"),
     )
 
+    val UNSECURE_SITE_INFORMATION_BUTTON = Selector(
+        strategy = SelectorStrategy.COMPOSE_BY_TAG,
+        value = SITE_INFO_UNSECURE,
+        description = "Unsecure site information button",
+        groups = listOf("browserViewToolbarItems"),
+    )
+
+    val UNKNOWN_SITE_INFORMATION_BUTTON = Selector(
+        strategy = SelectorStrategy.COMPOSE_BY_TAG,
+        value = SITE_INFO_UNKNOWN,
+        description = "Unknown-state site information button",
+        groups = listOf("browserViewToolbarItems"),
+    )
+
     val all = listOf(
         TOOLBAR,
         TAB_COUNTER,
@@ -94,5 +110,7 @@ object ToolbarSelectors {
         NEW_TAB_BUTTON,
         SEARCH_ENGINE_SELECTOR_ICON(),
         SECURE_SITE_INFORMATION_BUTTON,
+        UNSECURE_SITE_INFORMATION_BUTTON,
+        UNKNOWN_SITE_INFORMATION_BUTTON,
     )
 }

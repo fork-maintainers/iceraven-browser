@@ -4,6 +4,7 @@
 
 package org.mozilla.fenix.ui.efficiency.pageObjects
 
+import android.util.Log
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.ComposeTimeoutException
@@ -120,6 +121,28 @@ class BrowserPage(composeRule: AndroidComposeTestRule<HomeActivityIntentTestRule
         assertTrue(
             mDevice.wait(Until.findObject(By.textContains(text)), waitingTimeLong) != null,
         )
+        return this
+    }
+
+    /**
+     * Verify page content that the page only produces after some asynchronous work has settled, reloading
+     * between attempts. Needed for the tracking-protection test page, whose "<category> blocked" report is
+     * written once trackers have been processed — a plain [verifyPageContent] can run before that lands and
+     * no amount of waiting on the current document will make it appear.
+     *
+     * Mirrors the legacy BrowserRobot.verifyTrackingProtectionWebContent, which retried each assertion with
+     * a page refresh for the same reason.
+     */
+    fun verifyPageContentWithReload(url: String, text: String, attempts: Int = 3): BrowserPage {
+        for (attempt in 1..attempts) {
+            try {
+                return verifyPageContent(text)
+            } catch (e: AssertionError) {
+                if (attempt == attempts) throw e
+                Log.i("BrowserPage", "verifyPageContentWithReload: '$text' absent on attempt $attempt, reloading")
+                navigateToPage(url, forceNavigation = true)
+            }
+        }
         return this
     }
 
