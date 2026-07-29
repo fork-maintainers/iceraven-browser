@@ -10,6 +10,9 @@ import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.junit4.AndroidComposeTestRule
+import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.uiautomator.UiDevice
+import java.io.ByteArrayOutputStream
 
 /**
  * ScreenDump — a concise, greppable snapshot of what the Compose UI currently exposes.
@@ -67,6 +70,45 @@ object ScreenDump {
             Log.i(TAG, "($shown nodes with a text/testTag/desc handle, of ${nodes.size} total)")
         } catch (t: Throwable) {
             Log.i(TAG, "screen dump unavailable: ${t.message}")
+        }
+        Log.i(TAG, END)
+    }
+
+    /**
+     * Native / View-hierarchy snapshot via UIAutomator — complements [dump] (which only sees Compose
+     * semantics). Prints one line per interesting View with the handles that decide a UIAUTOMATOR_* /
+     * ESPRESSO_* selector: res-id (package prefix stripped, matching UIAUTOMATOR_WITH_RES_ID values),
+     * text, content-description, and clickability. Needed for legacy View screens (RecyclerViews, res-id
+     * widgets) that don't appear in the Compose tree.
+     */
+    fun dumpUiAutomator(label: String = "") {
+        Log.i(TAG, "$BEGIN [uiautomator] ${label.ifBlank { "(no label)" }}")
+        try {
+            val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+            val xml = ByteArrayOutputStream().use { baos ->
+                device.dumpWindowHierarchy(baos)
+                baos.toString("UTF-8")
+            }
+            var shown = 0
+            Regex("<node\\b[^>]*>").findAll(xml).forEach { m ->
+                val node = m.value
+                fun attr(a: String) = Regex("$a=\"([^\"]*)\"").find(node)?.groupValues?.get(1)?.takeIf { it.isNotBlank() }
+                val resId = attr("resource-id")?.substringAfterLast("/")
+                val text = attr("text")
+                val desc = attr("content-desc")
+                if (resId == null && text == null && desc == null) return@forEach
+                val clickable = if (attr("clickable") == "true") " [clickable]" else ""
+                val parts = buildList {
+                    if (resId != null) add("res-id=\"$resId\"")
+                    if (text != null) add("text=\"$text\"")
+                    if (desc != null) add("desc=\"$desc\"")
+                }
+                Log.i(TAG, "• ${parts.joinToString("  ")}$clickable")
+                shown++
+            }
+            Log.i(TAG, "($shown native nodes with a res-id/text/desc handle)")
+        } catch (t: Throwable) {
+            Log.i(TAG, "uiautomator dump unavailable: ${t.message}")
         }
         Log.i(TAG, END)
     }
