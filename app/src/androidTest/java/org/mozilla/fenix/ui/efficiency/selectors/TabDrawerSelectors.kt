@@ -277,6 +277,13 @@ object TabDrawerSelectors {
         groups = listOf("requiredForPage"),
     )
 
+    val EMPTY_PRIVATE_TABS_LIST = Selector(
+        strategy = SelectorStrategy.COMPOSE_BY_TAG,
+        value = TabsTrayTestTag.EMPTY_PRIVATE_TABS_LIST,
+        description = "Empty private tabs list",
+        groups = listOf("emptyPrivateTabsList"),
+    )
+
     val PRIVATE_TABS_LIST = Selector(
         strategy = SelectorStrategy.COMPOSE_BY_TAG,
         value = TabsTrayTestTag.PRIVATE_TABS_LIST,
@@ -341,6 +348,7 @@ object TabDrawerSelectors {
         DELETE_TAB_GROUP_DIALOG_DELETE_GROUP_BUTTON,
         TAB_GROUP_BOTTOM_SHEET_HANDLE,
         FAB,
+        EMPTY_PRIVATE_TABS_LIST,
         PRIVATE_TABS_LIST,
         TAB_ITEM_CLOSE,
         TAB_ITEM_THUMBNAIL,

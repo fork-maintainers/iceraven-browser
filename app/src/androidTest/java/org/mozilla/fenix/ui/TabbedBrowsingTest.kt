@@ -497,6 +497,11 @@ class TabbedBrowsingTest {
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/2228470
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.TabbedBrowsingTest#privateTabsDoNotPersistAfterClosingAppTest"],
+        bug = 2058121,
+        since = "2026-07",
+    )
     @SmokeTest
     @Test
     fun privateTabsDoNotPersistAfterClosingAppTest() {

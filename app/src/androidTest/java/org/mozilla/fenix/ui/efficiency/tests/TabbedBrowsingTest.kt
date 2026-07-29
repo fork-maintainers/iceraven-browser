@@ -8,6 +8,7 @@ import org.mozilla.fenix.helpers.TestAssetHelper.getGenericAsset
 import org.mozilla.fenix.helpers.TestHelper.closeApp
 import org.mozilla.fenix.helpers.TestHelper.restartApp
 import org.mozilla.fenix.ui.efficiency.helpers.BaseTest
+import org.mozilla.fenix.ui.efficiency.selectors.HomeSelectors
 import org.mozilla.fenix.ui.efficiency.selectors.SearchBarSelectors
 import org.mozilla.fenix.ui.efficiency.selectors.TabDrawerSelectors
 import org.mozilla.fenix.ui.efficiency.selectors.TabDrawerSelectors.DELETE_TAB_GROUP_DIALOG_CANCEL_BUTTON
@@ -228,6 +229,32 @@ class TabbedBrowsingTest : BaseTest() {
             tabGroupColor = tabGroupColor,
             numberOfTabs = 2,
         )
+    }
+
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/2228470
+    @SmokeTest
+    @Test
+    fun privateTabsDoNotPersistAfterClosingAppTest() {
+        val firstWebPage = mockWebServer.getGenericAsset(1)
+        val secondWebPage = mockWebServer.getGenericAsset(2)
+
+        on.home
+            .mozClick(HomeSelectors.PRIVATE_BROWSING_BUTTON)
+        on.browserPage.navigateToPage(firstWebPage.url.toString())
+        on.tabDrawer.navigateToPage()
+            .mozClick(TabDrawerSelectors.FAB)
+        on.searchBar
+            .mozEnterText(secondWebPage.url.toString(), SearchBarSelectors.TOOLBAR_IN_EDIT_MODE)
+            .mozPressEnter(SearchBarSelectors.TOOLBAR_IN_EDIT_MODE)
+        on.browserPage.navigateToPage()
+
+        closeApp(composeRule.activityRule)
+        restartApp(composeRule.activityRule)
+
+        on.home
+            .mozVerify(HomeSelectors.PRIVATE_BROWSING_INFO_CARD_TITLE)
+        on.tabDrawer.navigateToPage()
+            .mozVerify(TabDrawerSelectors.EMPTY_PRIVATE_TABS_LIST)
     }
 
     private fun verifyGroup(tabGroupTitle: String, tabGroupColor: String, numberOfTabs: Int = 1) {
