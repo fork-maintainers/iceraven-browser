@@ -79,6 +79,16 @@ object ToolbarSelectors {
         groups = listOf("homeScreenToolbar"),
     )
 
+    // UIAutomator rather than Compose: this is asserted on BrowserPage with GeckoView active, where
+    // Compose sync can hang (same reason TAB_COUNTER_UIAUTOMATOR exists).
+    @Suppress("ktlint:standard:function-naming", "FunctionName")
+    fun TAB_COUNTER_WITH_COUNT(openTabs: String = "") = Selector(
+        strategy = SelectorStrategy.UIAUTOMATOR_WITH_DESCRIPTION_CONTAINS,
+        value = "Non-private Tabs Open: $openTabs",
+        description = "Tab counter showing $openTabs open tab(s)",
+        groups = listOf(),
+    )
+
     val SECURE_SITE_INFORMATION_BUTTON = Selector(
         strategy = SelectorStrategy.COMPOSE_BY_TAG,
         value = SITE_INFO_SECURE,
@@ -109,6 +119,7 @@ object ToolbarSelectors {
         TOOLBAR_URL_BOX_UIAUTOMATOR,
         NEW_TAB_BUTTON,
         SEARCH_ENGINE_SELECTOR_ICON(),
+        TAB_COUNTER_WITH_COUNT(),
         SECURE_SITE_INFORMATION_BUTTON,
         UNSECURE_SITE_INFORMATION_BUTTON,
         UNKNOWN_SITE_INFORMATION_BUTTON,

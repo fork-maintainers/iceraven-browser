@@ -185,6 +185,10 @@ class CustomTabsTest {
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/249645
     // The test opens a link in a custom tab then sends it to the browser
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.CustomTabsTest#openCustomTabInFirefoxTest"],
+        since = "2026-07",
+    )
     @SmokeTest
     @Test
     fun openCustomTabInFirefoxTest() {
