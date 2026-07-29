@@ -504,6 +504,21 @@ class TabManagementFragment : Fragment() {
                                             action = TabGroupAction.CloseTabGroupClicked(group = expandedGroup),
                                         )
                                     },
+                                    onAddNewTabClick = if (tabsTrayStore.state.config.homepageAsNewTabEnabled) {
+                                        {
+                                            val newTabId = requireComponents.useCases.fenixBrowserUseCases
+                                                .addNewHomepageTab(private = false)
+                                            tabsTrayStore.dispatch(
+                                                TabGroupAction.TabAddedToGroup(
+                                                    tabId = newTabId,
+                                                    groupId = expandedGroup.id,
+                                                ),
+                                            )
+                                            tabManagerController.handleNavigateToHome()
+                                        }
+                                    } else {
+                                        null
+                                    },
                                     tabInteractionHandler = tabInteractionHandler,
                                 )
                             }

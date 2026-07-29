@@ -54,6 +54,7 @@ class ExpandedTabGroupTest {
                             onDeleteTabGroupClick = {},
                             onEditTabGroupClick = {},
                             onCloseTabGroupClick = {},
+                            onAddNewTabClick = {},
                             tabInteractionHandler = NoOpTabInteractionHandler,
                         )
                     }
@@ -63,6 +64,8 @@ class ExpandedTabGroupTest {
         composeTestRule.onNodeWithTag(TabsTrayTestTag.TAB_GROUP_BOTTOM_SHEET_ROOT)
             .assertIsDisplayed()
         composeTestRule.onNodeWithTag(TabsTrayTestTag.BOTTOM_SHEET_SHARE_BUTTON)
+            .assertIsDisplayed()
+        composeTestRule.onNodeWithTag(TabsTrayTestTag.BOTTOM_SHEET_ADD_TAB_BUTTON)
             .assertIsDisplayed()
         composeTestRule.onNodeWithTag(TabsTrayTestTag.TAB_GROUP_THREE_DOT_BUTTON)
             .assertIsDisplayed()
@@ -84,6 +87,7 @@ class ExpandedTabGroupTest {
                         onDeleteTabGroupClick = {},
                         onEditTabGroupClick = {},
                         onCloseTabGroupClick = {},
+                        onAddNewTabClick = {},
                         tabInteractionHandler = NoOpTabInteractionHandler,
                     )
                 }
@@ -116,6 +120,7 @@ class ExpandedTabGroupTest {
                             onDeleteTabGroupClick = {},
                             onEditTabGroupClick = {},
                             onCloseTabGroupClick = {},
+                            onAddNewTabClick = {},
                             tabInteractionHandler = NoOpTabInteractionHandler,
                         )
                     }
@@ -149,6 +154,7 @@ class ExpandedTabGroupTest {
                             onDeleteTabGroupClick = {},
                             onEditTabGroupClick = {},
                             onCloseTabGroupClick = {},
+                            onAddNewTabClick = {},
                             tabInteractionHandler = NoOpTabInteractionHandler,
                         )
                     }
@@ -180,6 +186,7 @@ class ExpandedTabGroupTest {
                             },
                             onEditTabGroupClick = {},
                             onCloseTabGroupClick = {},
+                            onAddNewTabClick = {},
                             tabInteractionHandler = NoOpTabInteractionHandler,
                         )
                     }
@@ -212,6 +219,7 @@ class ExpandedTabGroupTest {
                                 editClicked = true
                             },
                             onCloseTabGroupClick = {},
+                            onAddNewTabClick = {},
                             tabInteractionHandler = NoOpTabInteractionHandler,
                         )
                     }
@@ -242,6 +250,7 @@ class ExpandedTabGroupTest {
                             onDeleteTabGroupClick = {},
                             onEditTabGroupClick = {},
                             onCloseTabGroupClick = { closeClicked = true },
+                            onAddNewTabClick = {},
                             tabInteractionHandler = NoOpTabInteractionHandler,
                         )
                     }
@@ -255,6 +264,35 @@ class ExpandedTabGroupTest {
             .performClick()
 
         assertTrue(closeClicked)
+    }
+
+    @Test
+    fun verifyAddNewTabClick() {
+        var addNewTabClicked = false
+
+        composeTestRule.setContent {
+            CompositionLocalProvider(LocalUnderTest provides true) {
+                FirefoxTheme(theme = Theme.Light) {
+                    Surface {
+                        ExpandedTabGroup(
+                            group = fakeTabGroup(),
+                            onItemClick = {},
+                            onTabClose = {},
+                            onDeleteTabGroupClick = {},
+                            onEditTabGroupClick = {},
+                            onCloseTabGroupClick = {},
+                            onAddNewTabClick = { addNewTabClicked = true },
+                            tabInteractionHandler = NoOpTabInteractionHandler,
+                        )
+                    }
+                }
+            }
+        }
+
+        composeTestRule.onNodeWithTag(TabsTrayTestTag.BOTTOM_SHEET_ADD_TAB_BUTTON)
+            .performClick()
+
+        assertTrue(addNewTabClicked)
     }
 
     private fun fakeTabGroup(

@@ -26,6 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.pluralStringResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
@@ -60,9 +61,12 @@ import mozilla.components.ui.icons.R as iconsR
  * @param onDeleteTabGroupClick Invoked when the user clicks on delete tab group.
  * @param onEditTabGroupClick Invoked when the user clicks to edit the [group].
  * @param onCloseTabGroupClick Invoked when the user clicks to close a tab group.
+ * @param onAddNewTabClick Invoked when the user clicks to add a new tab to the [group]. When null,
+ * the add-tab button is hidden.
  * @param tabInteractionHandler Handler for tab interactions.
  */
 @OptIn(ExperimentalMaterial3Api::class)
+@Suppress("LongParameterList")
 @Composable
 fun ExpandedTabGroup(
     group: TabsTrayItem.TabGroup,
@@ -71,6 +75,7 @@ fun ExpandedTabGroup(
     onDeleteTabGroupClick: () -> Unit,
     onEditTabGroupClick: () -> Unit,
     onCloseTabGroupClick: () -> Unit,
+    onAddNewTabClick: (() -> Unit)?,
     tabInteractionHandler: TabInteractionHandler,
 ) {
     Column(
@@ -88,6 +93,7 @@ fun ExpandedTabGroup(
             onDeleteTabGroupClick = onDeleteTabGroupClick,
             onEditTabGroupClick = onEditTabGroupClick,
             onCloseTabGroupClick = onCloseTabGroupClick,
+            onAddNewTabClick = onAddNewTabClick,
         )
 
         TabLayout(
@@ -122,6 +128,7 @@ private fun ViewTabGroupHeader(
     onDeleteTabGroupClick: () -> Unit,
     onEditTabGroupClick: () -> Unit,
     onCloseTabGroupClick: () -> Unit,
+    onAddNewTabClick: (() -> Unit)?,
 ) {
     Row(
         modifier = Modifier
@@ -179,15 +186,41 @@ private fun ViewTabGroupHeader(
                 groupTabsSize = groupTabsSize,
                 onClick = {},
             )
+
+            Spacer(modifier = Modifier.width(FirefoxTheme.layout.space.static100))
         }
 
-        Spacer(modifier = Modifier.width(FirefoxTheme.layout.space.static100))
+        if (onAddNewTabClick != null) {
+            AddTabToGroupButton(
+                onClick = onAddNewTabClick,
+            )
+
+            Spacer(modifier = Modifier.width(FirefoxTheme.layout.space.static100))
+        }
 
         TabGroupMenuButton(
             includeCloseOption = true,
             onDeleteTabGroupClick = onDeleteTabGroupClick,
             onEditTabGroupClick = onEditTabGroupClick,
             onCloseTabGroupClick = onCloseTabGroupClick,
+        )
+    }
+}
+
+@Composable
+private fun AddTabToGroupButton(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    IconButton(
+        onClick = onClick,
+        contentDescription = stringResource(id = R.string.add_tab),
+        modifier = modifier.testTag(TabsTrayTestTag.BOTTOM_SHEET_ADD_TAB_BUTTON),
+    ) {
+        Icon(
+            painter = painterResource(id = iconsR.drawable.mozac_ic_plus_24),
+            contentDescription = null,
+            tint = MaterialTheme.colorScheme.onSurface,
         )
     }
 }
@@ -245,6 +278,7 @@ private fun ExpandedTabGroupPreview(
                     onDeleteTabGroupClick = {},
                     onEditTabGroupClick = {},
                     onCloseTabGroupClick = {},
+                    onAddNewTabClick = {},
                     tabInteractionHandler = NoOpTabInteractionHandler,
                 )
             }
