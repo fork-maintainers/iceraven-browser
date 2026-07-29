@@ -103,4 +103,19 @@ class UnifiedTrustPanelTest : BaseTest() {
             areTrackersBlocked = false,
         )
     }
+
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3186714
+    // Converted from legacy UnifiedTrustPanelTest.verifyClearCookiesAndSiteDataFromQuickSettingsInCustomTabsTest
+    @SmokeTest
+    @Test
+    fun verifyClearCookiesAndSiteDataFromQuickSettingsInCustomTabsTest() {
+        val customTabPage = "https://mozilla-mobile.github.io/testapp/loginForm"
+        val originWebsite = "mozilla-mobile.github.io"
+
+        on.customTabs.launchCustomTab(customTabPage)
+        // Opens the trust panel from the custom-tab "Site information" button (CustomTabsPage -> panel edge).
+        on.unifiedTrustPanel.navigateToPage()
+            .mozClick(CLEAR_COOKIES_AND_SITE_DATA_BUTTON)
+        on.unifiedTrustPanel.verifyTheClearCookiesAndSiteDataDialog(originWebsite)
+    }
 }

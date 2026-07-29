@@ -30,6 +30,13 @@ object CustomTabsSelectors {
         groups = listOf("customTabToolbar"),
     )
 
+    val SITE_INFO_BUTTON = Selector(
+        strategy = SelectorStrategy.UIAUTOMATOR_WITH_DESCRIPTION_CONTAINS,
+        value = "Site information",
+        description = "Custom tab site information button (opens the unified trust panel)",
+        groups = listOf("customTabToolbar"),
+    )
+
     // Main-menu items (visible after opening the custom-tab menu)
     val MENU_BACK = Selector(
         strategy = SelectorStrategy.UIAUTOMATOR_WITH_TEXT_CONTAINS,
@@ -98,6 +105,7 @@ object CustomTabsSelectors {
     val all = listOf(
         MAIN_MENU_BUTTON,
         CLOSE_BUTTON,
+        SITE_INFO_BUTTON,
         MENU_BACK,
         MENU_FORWARD,
         MENU_REFRESH,

@@ -10,6 +10,7 @@ import org.mozilla.fenix.ui.efficiency.helpers.BasePage
 import org.mozilla.fenix.ui.efficiency.helpers.Selector
 import org.mozilla.fenix.ui.efficiency.navigation.NavigationRegistry
 import org.mozilla.fenix.ui.efficiency.navigation.NavigationStep
+import org.mozilla.fenix.ui.efficiency.selectors.CustomTabsSelectors
 import org.mozilla.fenix.ui.efficiency.selectors.ToolbarSelectors
 import org.mozilla.fenix.ui.efficiency.selectors.UnifiedTrustPanelSelectors
 
@@ -26,6 +27,15 @@ class UnifiedTrustPanelPage(composeRule: AndroidComposeTestRule<HomeActivityInte
                 NavigationStep.ClickIfPresent(ToolbarSelectors.SECURE_SITE_INFORMATION_BUTTON),
                 NavigationStep.ClickIfPresent(ToolbarSelectors.UNSECURE_SITE_INFORMATION_BUTTON),
                 NavigationStep.ClickIfPresent(ToolbarSelectors.UNKNOWN_SITE_INFORMATION_BUTTON),
+            ),
+        )
+
+        // From a custom tab, the trust panel opens via the custom-tab toolbar's "Site information" button.
+        NavigationRegistry.register(
+            from = "CustomTabsPage",
+            to = pageName,
+            steps = listOf(
+                NavigationStep.Click(CustomTabsSelectors.SITE_INFO_BUTTON),
             ),
         )
     }

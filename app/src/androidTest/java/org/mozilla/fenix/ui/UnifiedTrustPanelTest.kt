@@ -374,6 +374,10 @@ class UnifiedTrustPanelTest {
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3186714
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.UnifiedTrustPanelTest#verifyClearCookiesAndSiteDataFromQuickSettingsInCustomTabsTest"],
+        since = "2026-07",
+    )
     @SmokeTest
     @Test
     fun verifyClearCookiesAndSiteDataFromQuickSettingsInCustomTabsTest() {
