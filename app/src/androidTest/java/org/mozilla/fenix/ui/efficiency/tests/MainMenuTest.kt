@@ -51,6 +51,21 @@ class MainMenuTest : BaseTest(
         PromptAbuserDetector.validationsEnabled = true
     }
 
+    // Converted from legacy MainMenuTest.verifyTheBookmarksMainMenuItemTest
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3080137
+    @SmokeTest
+    @Test
+    fun verifyTheBookmarksMainMenuItemTest() {
+        val testPage = mockWebServer.getGenericAsset(1)
+        on.browserPage.navigateToPage(testPage.url.toString())
+        on.mainMenu.navigateToPage()
+            .mozClick(MainMenuSelectors.BOOKMARKS_BUTTON)
+        // Reaching the Bookmarks view is the verification that the menu item opened it.
+        on.bookmarks.navigateToPage()
+        // Parity gap: legacy also returned to the browser and re-verified page content; the nav graph has
+        // no stateful BookmarksPage -> BrowserPage return edge yet.
+    }
+
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3080168
     @SmokeTest
     @Test

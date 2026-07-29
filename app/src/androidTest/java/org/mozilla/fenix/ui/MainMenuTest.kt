@@ -1348,6 +1348,10 @@ class MainMenuTest {
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3080137
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.MainMenuTest#verifyTheBookmarksMainMenuItemTest"],
+        since = "2026-07",
+    )
     @SmokeTest
     @Test
     fun verifyTheBookmarksMainMenuItemTest() {
