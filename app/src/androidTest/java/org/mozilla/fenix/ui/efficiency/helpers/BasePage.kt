@@ -268,7 +268,13 @@ abstract class BasePage(
             message = if (allPresent) "Group '$group' verified" else "Group '$group' missing required elements",
         )
 
-        if (!allPresent) throw AssertionError("Not all elements in group '$group' are present")
+        if (!allPresent) {
+            // Dump for the same reason mozVerify does. A group failure names only the group, and the
+            // per-selector log stops at the first miss (the check is an `all {}`), so without this there
+            // is nothing to tell you whether the missing element is absent, renamed, or just off-screen.
+            ScreenDump.dump(composeRule, "mozVerifyElementsByGroup failed: $pageName group '$group'")
+            throw AssertionError("Not all elements in group '$group' are present")
+        }
         return this
     }
 
