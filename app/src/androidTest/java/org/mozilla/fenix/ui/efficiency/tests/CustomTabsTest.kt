@@ -9,6 +9,7 @@ import org.mozilla.fenix.customannotations.SmokeTest
 import org.mozilla.fenix.helpers.TestAssetHelper.getGenericAsset
 import org.mozilla.fenix.ui.efficiency.helpers.BaseTest
 import org.mozilla.fenix.ui.efficiency.selectors.CustomTabsSelectors
+import org.mozilla.fenix.ui.efficiency.selectors.FindInPageSelectors
 import org.mozilla.fenix.ui.efficiency.selectors.ToolbarSelectors
 
 class CustomTabsTest : BaseTest() {
@@ -77,5 +78,26 @@ class CustomTabsTest : BaseTest() {
         on.customTabs.openMainMenu()
             .mozClick(CustomTabsSelectors.MENU_FORWARD)
         on.customTabs.verifyWebContent(secondCustomTabPage.content)
+    }
+
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3080101
+    // Converted from legacy MainMenuTest.verifyTheFindInPageMenuItemInACustomTabTest
+    @SmokeTest
+    @Test
+    fun verifyTheFindInPageMenuItemInACustomTabTest() {
+        val customTabPage = mockWebServer.getGenericAsset(3)
+
+        on.customTabs.launchCustomTab(customTabPage.url.toString())
+        on.findInPage.navigateToPage()
+            .mozVerify(FindInPageSelectors.FIND_IN_PAGE_NEXT_BUTTON)
+            .mozVerify(FindInPageSelectors.FIND_IN_PAGE_PREV_BUTTON)
+            .mozVerify(FindInPageSelectors.FIND_IN_PAGE_CLOSE_BUTTON)
+        on.findInPage.verifyFindInPageElement("a", 3)
+        on.findInPage.mozVerifyElementAbsent(FindInPageSelectors.FIND_IN_PAGE_BAR)
+        // Parity gap: the legacy test then reopened find-in-page, searched "3" for a 1/1 result and closed
+        // with the device back button. Reopening is not expressible yet — closing the bar returns to the
+        // custom tab but leaves PageStateTracker on FindInPagePage, and there is no return edge to re-sync
+        // it, so navigateToPage() would look for a FindInPagePage -> FindInPagePage path. Same stateful-nav
+        // gap as the BookmarksPage -> BrowserPage one.
     }
 }

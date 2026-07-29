@@ -732,6 +732,10 @@ class MainMenuTest {
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3080101
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.CustomTabsTest#verifyTheFindInPageMenuItemInACustomTabTest"],
+        since = "2026-07",
+    )
     @SmokeTest
     @Test
     fun verifyTheFindInPageMenuItemInACustomTabTest() {

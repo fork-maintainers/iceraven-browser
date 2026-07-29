@@ -10,6 +10,7 @@ import org.mozilla.fenix.ui.efficiency.helpers.BasePage
 import org.mozilla.fenix.ui.efficiency.helpers.Selector
 import org.mozilla.fenix.ui.efficiency.navigation.NavigationRegistry
 import org.mozilla.fenix.ui.efficiency.navigation.NavigationStep
+import org.mozilla.fenix.ui.efficiency.selectors.CustomTabsSelectors
 import org.mozilla.fenix.ui.efficiency.selectors.FindInPageSelectors
 import org.mozilla.fenix.ui.efficiency.selectors.HomeSelectors
 import org.mozilla.fenix.ui.efficiency.selectors.MainMenuSelectors
@@ -24,6 +25,16 @@ class FindInPagePage(composeRule: AndroidComposeTestRule<HomeActivityIntentTestR
             steps = listOf(
                 NavigationStep.Click(HomeSelectors.MAIN_MENU_BUTTON_UIAUTOMATOR),
                 NavigationStep.Click(MainMenuSelectors.FIND_IN_PAGE_BUTTON),
+            ),
+        )
+
+        // Open Find in page from a custom tab's own menu.
+        NavigationRegistry.register(
+            from = "CustomTabsPage",
+            to = pageName,
+            steps = listOf(
+                NavigationStep.Click(CustomTabsSelectors.MAIN_MENU_BUTTON),
+                NavigationStep.Click(CustomTabsSelectors.MENU_FIND_IN_PAGE),
             ),
         )
     }
