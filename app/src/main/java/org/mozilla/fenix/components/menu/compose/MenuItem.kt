@@ -188,6 +188,8 @@ internal fun MenuItem(
  * @param modifier [Modifier] to be applied to the layout.
  * @param description An optional description text below the label.
  * @param iconPainter [Painter] used to display an [Icon] after the list item.
+ * @param enabled Controls the enabled state of the list item. When `false`, the list item will not
+ * be clickable.
  * @param onClick Invoked when the user clicks on the item.
  */
 @Composable
@@ -196,12 +198,14 @@ internal fun MenuTextItem(
     modifier: Modifier = Modifier,
     description: String? = null,
     iconPainter: Painter? = null,
+    enabled: Boolean = true,
     onClick: (() -> Unit)? = null,
 ) {
     TextListItem(
         label = label,
         maxLabelLines = 2,
         description = description,
+        enabled = enabled,
         minHeight = if (description != null) {
             MENU_ITEM_HEIGHT_WITH_DESC
         } else {

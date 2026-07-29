@@ -18,7 +18,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -32,7 +31,6 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
@@ -42,14 +40,13 @@ import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.PreviewParameter
-import androidx.compose.ui.unit.Dp
 import mozilla.components.ExperimentalAndroidComponentsApi
 import mozilla.components.compose.base.annotation.FlexibleWindowPreview
 import mozilla.components.compose.base.button.IconButton
-import mozilla.components.compose.base.theme.AcornCorners
 import mozilla.components.concept.engine.ipprotection.IPProtectionHandler
 import org.mozilla.fenix.R
-import org.mozilla.fenix.compose.list.TextListItem
+import org.mozilla.fenix.components.menu.compose.MenuGroup
+import org.mozilla.fenix.components.menu.compose.MenuTextItem
 import org.mozilla.fenix.theme.FirefoxTheme
 import org.mozilla.fenix.theme.PreviewThemeProvider
 import org.mozilla.fenix.theme.Theme
@@ -120,24 +117,22 @@ private fun LocationList(
             ),
         verticalArrangement = Arrangement.spacedBy(FirefoxTheme.layout.space.static200),
     ) {
-        LocationOption(
-            label = stringResource(R.string.ip_protection_location_recommended_label),
-            description = stringResource(R.string.ip_protection_location_fastest_description),
-            isSelected = selectedRegion == null,
-            cornerSize = AcornCorners.extraLarge,
-            onClick = { onLocationSelected(null) }, // this should look nicer once we have real data objects
-        )
+        MenuGroup {
+            LocationOption(
+                label = stringResource(R.string.ip_protection_location_recommended_label),
+                description = stringResource(R.string.ip_protection_location_fastest_description),
+                isSelected = selectedRegion == null,
+                onClick = { onLocationSelected(null) },
+            )
+        }
 
         if (countries.isNotEmpty()) {
-            // There is rounded container around the whole list AND
-            // individual elements have rounded (small) corners.
-            RoundedContainer(AcornCorners.extraLarge) {
+            MenuGroup {
                 countries.forEach { country ->
                     LocationOption(
                         label = regionDisplayName(country.code),
                         isSelected = country.code == selectedRegion,
                         enabled = country.available,
-                        cornerSize = AcornCorners.extraSmall,
                         onClick = { onLocationSelected(country.code) },
                     )
                 }
@@ -150,7 +145,7 @@ private fun LocationList(
 
 @Composable
 private fun LocationsEmptyState() {
-    RoundedContainer(cornerSize = AcornCorners.extraLarge) {
+    MenuGroup {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -191,50 +186,30 @@ private fun LocationsEmptyState() {
 }
 
 @Composable
-private fun RoundedContainer(
-    cornerSize: Dp,
-    content: @Composable () -> Unit,
-) {
-    Column(
-        modifier = Modifier
-            .clip(RoundedCornerShape(cornerSize)),
-        verticalArrangement = Arrangement.spacedBy(FirefoxTheme.layout.space.static25),
-    ) {
-        content()
-    }
-}
-
-@Composable
 private fun LocationOption(
     label: String,
-    description: String? = null,
     isSelected: Boolean,
-    cornerSize: Dp,
-    enabled: Boolean = true,
     onClick: () -> Unit,
+    description: String? = null,
+    enabled: Boolean = true,
 ) {
-    RoundedContainer(cornerSize = cornerSize) {
-        TextListItem(
-            label = label,
-            modifier = Modifier
-                .semantics(mergeDescendants = true) {
-                    selected = isSelected
-                    role = Role.RadioButton
-                }
-                .background(color = MaterialTheme.colorScheme.surfaceBright),
-            description = description,
-            // We should have alternative design for unavailable items,
-            // tracked in https://bugzilla.mozilla.org/show_bug.cgi?id=2056379
-            enabled = enabled,
-            // next two lines should look nicer once we have real data objects
-            iconPainter = if (isSelected) {
-                painterResource(iconsR.drawable.mozac_ic_checkmark_24)
-            } else {
-                null
-            },
-            onClick = onClick,
-        )
-    }
+    MenuTextItem(
+        label = label,
+        modifier = Modifier.semantics(mergeDescendants = true) {
+            selected = isSelected
+            role = Role.RadioButton
+        },
+        description = description,
+        // We should have alternative design for unavailable items,
+        // tracked in https://bugzilla.mozilla.org/show_bug.cgi?id=2056379
+        enabled = enabled,
+        iconPainter = if (isSelected) {
+            painterResource(iconsR.drawable.mozac_ic_checkmark_24)
+        } else {
+            null
+        },
+        onClick = onClick,
+    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
