@@ -5,13 +5,22 @@
 package org.mozilla.fenix.ui.efficiency.helpers
 
 import android.util.Log
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
 import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.junit4.AndroidComposeTestRule
+import androidx.test.espresso.Espresso
+import androidx.test.espresso.UiController
+import androidx.test.espresso.ViewAction
+import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
+import org.hamcrest.Matcher
+import org.hamcrest.Matchers
 import java.io.ByteArrayOutputStream
 
 /**
@@ -111,5 +120,58 @@ object ScreenDump {
             Log.i(TAG, "uiautomator dump unavailable: ${t.message}")
         }
         Log.i(TAG, END)
+    }
+
+    /**
+     * Espresso / in-process View-hierarchy snapshot. Complements [dumpUiAutomator]: Espresso sees the full
+     * View tree of the foreground activity — including views that carry no accessibility handle (which the
+     * UIAutomator dump omits) — and the handles Espresso can match that UIAutomator can't expose: the concrete
+     * View class, `hint`, and the parent/child nesting (shown by indentation). Prefer ESPRESSO_BY_ID for a
+     * res-id on a View (framework priority); use this to find the id/class/hint to feed it.
+     */
+    fun dumpEspresso(label: String = "") {
+        Log.i(TAG, "$BEGIN [espresso] ${label.ifBlank { "(no label)" }}")
+        try {
+            Espresso.onView(ViewMatchers.isRoot()).perform(object : ViewAction {
+                override fun getConstraints(): Matcher<View> = Matchers.any(View::class.java)
+                override fun getDescription() = "eff dump espresso view hierarchy"
+                override fun perform(uiController: UiController, view: View) = walk(view, 0)
+            })
+        } catch (t: Throwable) {
+            Log.i(TAG, "espresso dump unavailable: ${t.message}")
+        }
+        Log.i(TAG, END)
+    }
+
+    private fun walk(view: View, depth: Int) {
+        val id = if (view.id != View.NO_ID) {
+            runCatching { view.resources.getResourceEntryName(view.id) }.getOrNull()
+        } else {
+            null
+        }
+        val text = (view as? TextView)?.text?.toString()?.takeIf { it.isNotBlank() }
+        val hint = (view as? TextView)?.hint?.toString()?.takeIf { it.isNotBlank() }
+        val desc = view.contentDescription?.toString()?.takeIf { it.isNotBlank() }
+        // Print a line only for views carrying an actionable handle (id/text/hint/desc); skip pure layout wrappers.
+        if (id != null || text != null || hint != null || desc != null) {
+            val parts = buildList {
+                if (id != null) add("id=\"$id\"")
+                add("class=${view.javaClass.simpleName}")
+                if (text != null) add("text=\"$text\"")
+                if (hint != null) add("hint=\"$hint\"")
+                if (desc != null) add("desc=\"$desc\"")
+                if (view.isClickable) add("[clickable]")
+                // Espresso walks the tree regardless of visibility; flag the ones a selector can't match
+                // on screen so they aren't mistaken for usable handles.
+                when (view.visibility) {
+                    View.GONE -> add("[gone]")
+                    View.INVISIBLE -> add("[invisible]")
+                }
+            }
+            Log.i(TAG, "• ${"  ".repeat(depth)}${parts.joinToString("  ")}")
+        }
+        if (view is ViewGroup) {
+            for (i in 0 until view.childCount) walk(view.getChildAt(i), depth + 1)
+        }
     }
 }

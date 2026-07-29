@@ -39,6 +39,7 @@ class EffScreenDumpRunner : BaseTest() {
             )
         ref.getter(on).navigateToPage()
         ScreenDump.dump(composeRule, label = "effdump:$target (compose)")
+        ScreenDump.dumpEspresso(label = "effdump:$target (espresso/view-tree)")
         ScreenDump.dumpUiAutomator(label = "effdump:$target (native/uiautomator)")
     }
 }
