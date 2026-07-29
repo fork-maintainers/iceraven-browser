@@ -30,8 +30,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -67,7 +65,6 @@ import mozilla.components.feature.tab.collections.TabCollection
 import mozilla.components.feature.top.sites.presenter.DefaultTopSitesPresenter
 import mozilla.components.lib.state.ext.flow
 import mozilla.components.lib.state.ext.observeAsComposableState
-import mozilla.components.service.nimbus.messaging.Message
 import mozilla.components.support.base.feature.ViewBoundFeatureWrapper
 import mozilla.components.support.ktx.android.view.createWindowInsetsController
 import mozilla.components.support.ktx.android.view.toScope
@@ -151,7 +148,7 @@ import org.mozilla.fenix.messaging.DefaultMessageController
 import org.mozilla.fenix.messaging.FenixMessageSurfaceId
 import org.mozilla.fenix.messaging.MessagingFeature
 import org.mozilla.fenix.microsurvey.ui.MicrosurveyRequestPrompt
-import org.mozilla.fenix.microsurvey.ui.ext.toMicrosurveyUIData
+import org.mozilla.fenix.microsurvey.ui.ext.MicrosurveyUIData
 import org.mozilla.fenix.nimbus.FxNimbus
 import org.mozilla.fenix.onboarding.OnboardingFragmentDirections
 import org.mozilla.fenix.onboarding.OnboardingReason
@@ -375,7 +372,7 @@ class HomeFragment : Fragment() {
         }
 
         nullableToolbarView = buildToolbar(activity, view)
-        initComposeHomepage(view = view, activity = activity)
+        initComposeHomepage(view = view)
 
         // DO NOT MOVE ANYTHING BELOW THIS addMarker CALL!
         requireComponents.core.engine.profiler?.addMarker(
@@ -544,7 +541,6 @@ class HomeFragment : Fragment() {
     @Suppress("LongMethod", "CognitiveComplexMethod")
     private fun initComposeHomepage(
         view: ComposeView,
-        activity: HomeActivity,
     ) {
         view.setContent {
             FirefoxTheme {
@@ -563,17 +559,9 @@ class HomeFragment : Fragment() {
                 )
                 val isToolbarAtTop = settings.toolbarPosition == ToolbarPosition.TOP
 
-                val isMicrosurveyDismissed by activity.isMicrosurveyPromptDismissed
-                val microsurveyVisible by remember(isMicrosurveyDismissed) {
-                    derivedStateOf {
-                        settings.microsurveyFeatureEnabled &&
-                            !appState.value.mode.isPrivate &&
-                            !isMicrosurveyDismissed &&
-                            appState.value.messaging.messageToShow.containsKey(
-                                FenixMessageSurfaceId.MICROSURVEY,
-                            )
-                    }
-                }
+                val microsurveyVisible = settings.microsurveyFeatureEnabled &&
+                    !appState.value.mode.isPrivate &&
+                    appState.value.microsurvey.current != null
 
                 LaunchedEffect(microsurveyVisible) {
                     settings.shouldShowMicrosurveyPrompt = microsurveyVisible
@@ -585,7 +573,7 @@ class HomeFragment : Fragment() {
 
                 LaunchedEffect(currentWallpaper.name, isPrivateMode, universalEdgeToEdge) {
                     if (universalEdgeToEdge) {
-                        applyWallpaperSystemBarsTheme(activity, settings, isPrivateMode)
+                        applyWallpaperSystemBarsTheme(activity as HomeActivity, settings, isPrivateMode)
                     }
                 }
 
@@ -648,12 +636,7 @@ class HomeFragment : Fragment() {
                                 settings = settings,
                                 innerPadding = innerPadding,
                                 microsurveyVisible = microsurveyVisible,
-                                microsurveyMessage = appState.value.messaging.messageToShow[
-                                    FenixMessageSurfaceId.MICROSURVEY,
-                                ],
-                                onMicrosurveyDismiss = {
-                                    activity.isMicrosurveyPromptDismissed.value = true
-                                },
+                                microsurvey = appState.value.microsurvey.current,
                             )
                         }
                     }
@@ -695,8 +678,7 @@ class HomeFragment : Fragment() {
         settings: Settings,
         innerPadding: PaddingValues,
         microsurveyVisible: Boolean,
-        microsurveyMessage: Message?,
-        onMicrosurveyDismiss: () -> Unit,
+        microsurvey: MicrosurveyUIData?,
     ) {
         Box(
             modifier = Modifier
@@ -727,9 +709,8 @@ class HomeFragment : Fragment() {
 
             if (microsurveyVisible) {
                 MicrosurveyPrompt(
-                    message = microsurveyMessage,
+                    microsurvey = microsurvey,
                     modifier = Modifier.align(Alignment.BottomCenter),
-                    onDismiss = onMicrosurveyDismiss,
                 )
             }
 
@@ -744,11 +725,10 @@ class HomeFragment : Fragment() {
 
     @Composable
     private fun MicrosurveyPrompt(
-        message: Message?,
+        microsurvey: MicrosurveyUIData?,
         modifier: Modifier = Modifier,
-        onDismiss: () -> Unit,
     ) {
-        val microsurvey = remember(message?.id) { message?.toMicrosurveyUIData() } ?: return
+        if (microsurvey == null) return
         val appStore = requireComponents.appStore
         val navController = findNavController()
 
@@ -766,7 +746,6 @@ class HomeFragment : Fragment() {
                 },
                 onCloseButtonClicked = {
                     appStore.dispatch(MicrosurveyAction.Dismissed(microsurvey.id))
-                    onDismiss()
                 },
             )
         }

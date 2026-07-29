@@ -27,6 +27,7 @@ import androidx.biometric.BiometricManager
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.viewinterop.AndroidView
@@ -128,6 +129,7 @@ import mozilla.components.feature.webauthn.WebAuthnFeature
 import mozilla.components.lib.state.ext.consumeFlow
 import mozilla.components.lib.state.ext.consumeFrom
 import mozilla.components.lib.state.ext.flowScoped
+import mozilla.components.lib.state.ext.observeAsComposableState
 import mozilla.components.lib.state.helpers.StoreProvider.Companion.fragmentStore
 import mozilla.components.service.sync.autofill.DefaultCreditCardValidationDelegate
 import mozilla.components.service.sync.logins.DefaultLoginValidationDelegate
@@ -217,8 +219,6 @@ import org.mozilla.fenix.ext.updateMicrosurveyPromptForConfigurationChange
 import org.mozilla.fenix.messaging.FenixMessageSurfaceId
 import org.mozilla.fenix.messaging.MessagingFeature
 import org.mozilla.fenix.microsurvey.ui.MicrosurveyRequestPrompt
-import org.mozilla.fenix.microsurvey.ui.ext.MicrosurveyUIData
-import org.mozilla.fenix.microsurvey.ui.ext.toMicrosurveyUIData
 import org.mozilla.fenix.nimbus.FxNimbus
 import org.mozilla.fenix.pbmlock.BlackScreenOverlay
 import org.mozilla.fenix.pbmlock.NavigationOrigin
@@ -264,7 +264,6 @@ abstract class BaseBrowserFragment :
     private var creditCardSelectBar: AutocompletePrompt<CreditCardEntry>? = null
     private var suggestStrongPasswordBar: PasswordPromptView? = null
     private var emailMaskBar: EmailMaskPromptView? = null
-    private var currentMicrosurvey: MicrosurveyUIData? = null
     internal var blackScreenOverlay: ComposeView? = null
     private lateinit var startForResult: ActivityResultLauncher<Intent>
 
@@ -1753,35 +1752,32 @@ abstract class BaseBrowserFragment :
             content = {
                 FirefoxTheme {
                     Column {
-                        val activity = requireActivity() as HomeActivity
+                        val microsurveyState by context.components.appStore.observeAsComposableState {
+                            it.microsurvey
+                        }
 
-                        if (!activity.isMicrosurveyPromptDismissed.value) {
-                            currentMicrosurvey?.let {
-                                if (isToolbarAtBottom) {
-                                    removeBottomToolbarDivider()
-                                }
-
-                                HorizontalDivider()
-
-                                MicrosurveyRequestPrompt(
-                                    microsurvey = it,
-                                    onStartSurveyClicked = {
-                                        context.components.appStore.dispatch(MicrosurveyAction.Started(it.id))
-                                        findNavController().nav(
-                                            R.id.browserFragment,
-                                            BrowserFragmentDirections.actionGlobalMicrosurveyDialog(it.id),
-                                        )
-                                    },
-                                    onCloseButtonClicked = {
-                                        context.components.appStore.dispatch(
-                                            MicrosurveyAction.Dismissed(it.id),
-                                        )
-
-                                        context.components.settings.shouldShowMicrosurveyPrompt = false
-                                        activity.isMicrosurveyPromptDismissed.value = true
-                                    },
-                                )
+                        microsurveyState.current?.let {
+                            if (isToolbarAtBottom) {
+                                removeBottomToolbarDivider()
                             }
+
+                            HorizontalDivider()
+
+                            MicrosurveyRequestPrompt(
+                                microsurvey = it,
+                                onStartSurveyClicked = {
+                                    context.components.appStore.dispatch(MicrosurveyAction.Started(it.id))
+                                    findNavController().nav(
+                                        R.id.browserFragment,
+                                        BrowserFragmentDirections.actionGlobalMicrosurveyDialog(it.id),
+                                    )
+                                },
+                                onCloseButtonClicked = {
+                                    context.components.appStore.dispatch(
+                                        MicrosurveyAction.Dismissed(it.id),
+                                    )
+                                },
+                            )
                         }
 
                         if (isToolbarAtBottom) {
@@ -1823,19 +1819,12 @@ abstract class BaseBrowserFragment :
      */
     private fun listenForMicrosurveyMessage(context: Context) {
         binding.root.consumeFrom(context.components.appStore, viewLifecycleOwner) { state ->
-            state.messaging.messageToShow[FenixMessageSurfaceId.MICROSURVEY]?.let { message ->
-                if (message.id != currentMicrosurvey?.id) {
-                    message.toMicrosurveyUIData()?.let { microsurvey ->
-                        context.components.settings.shouldShowMicrosurveyPrompt = true
-                        currentMicrosurvey = microsurvey
-
-                        _bottomToolbarContainerView?.toolbarContainerView.let {
-                            binding.browserLayout.removeView(it)
-                        }
-
-                        initializeMicrosurveyPrompt()
-                    }
-                }
+            val isMicrosurveyVisible = state.microsurvey.current != null
+            if (isMicrosurveyVisible != context.components.settings.shouldShowMicrosurveyPrompt) {
+                context.components.settings.shouldShowMicrosurveyPrompt = isMicrosurveyVisible
+            }
+            if (isMicrosurveyVisible && _bottomToolbarContainerView == null) {
+                initializeMicrosurveyPrompt()
             }
         }
     }
@@ -2349,7 +2338,6 @@ abstract class BaseBrowserFragment :
         awesomeBarComposable = null
         browserNavigationBar = null
         blackScreenOverlay = null
-        currentMicrosurvey = null
         _binding = null
     }
 
