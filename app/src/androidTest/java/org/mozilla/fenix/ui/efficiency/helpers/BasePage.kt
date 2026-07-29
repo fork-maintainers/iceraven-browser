@@ -1397,6 +1397,24 @@ abstract class BasePage(
         return this
     }
 
+    /**
+     * Asserts the native app [appPackageName] launches, then force-stops it so it
+     * doesn't linger into subsequent tests. Falls back to verifying [url] if the
+     * package isn't installed. Delegates to [AppAndSystemHelper.assertNativeAppOpens].
+     */
+    fun mozVerifyNativeAppOpens(appPackageName: String, url: String = ""): BasePage {
+        val rep = rep()
+        rep?.startCmd(safeId("verify_native_app_opens", appPackageName), "Verifying native app '$appPackageName' opens...")
+        try {
+            AppAndSystemHelper.assertNativeAppOpens(composeRule, appPackageName, url)
+            rep?.endCmd(success = true, message = "Verified native app '$appPackageName' open flow")
+        } catch (e: Throwable) {
+            rep?.endCmd(success = false, message = "Native app verification failed for '$appPackageName': ${e.message}")
+            throw e
+        }
+        return this
+    }
+
     private fun ensureReachable(selector: Selector) {
         val rep = rep()
 

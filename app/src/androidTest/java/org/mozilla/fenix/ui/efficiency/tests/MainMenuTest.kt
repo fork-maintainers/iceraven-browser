@@ -11,6 +11,7 @@ import org.junit.Ignore
 import org.junit.Test
 import org.mozilla.fenix.customannotations.SmokeTest
 import org.mozilla.fenix.helpers.Constants
+import org.mozilla.fenix.helpers.Constants.PackageName.PRINT_SPOOLER
 import org.mozilla.fenix.helpers.MockBrowserDataHelper
 import org.mozilla.fenix.helpers.TestAssetHelper
 import org.mozilla.fenix.helpers.TestAssetHelper.firstForeignWebPageAsset
@@ -379,5 +380,18 @@ class MainMenuTest : BaseTest(
             content = testPage.url.toString(),
             subject = testPage.title,
         )
+    }
+
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3080119
+    @SmokeTest
+    @Test
+    fun verifyThePrintSubMenuOptionTest() {
+        val defaultWebPage = mockWebServer.getGenericAsset(1)
+
+        on.browserPage.navigateToPage(defaultWebPage.url.toString())
+        on.mainMenu.navigateToPage()
+            .mozClick(MainMenuSelectors.MORE_BUTTON)
+            .mozClick(MainMenuSelectors.PRINT_BUTTON)
+            .mozVerifyNativeAppOpens(PRINT_SPOOLER)
     }
 }

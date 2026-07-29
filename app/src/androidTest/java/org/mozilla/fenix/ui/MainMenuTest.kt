@@ -585,6 +585,11 @@ class MainMenuTest {
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3080119
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.MainMenuTest#verifyThePrintSubMenuOptionTest"],
+        bug = 2057199,
+        since = "2026-07",
+    )
     @SmokeTest
     @Test
     fun verifyThePrintSubMenuOptionTest() {
