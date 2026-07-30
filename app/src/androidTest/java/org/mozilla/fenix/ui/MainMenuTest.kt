@@ -537,6 +537,11 @@ class MainMenuTest {
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3080117
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.MainMenuTest#verifyTheOpenInAppSubMenuOptionIsEnabledTest"],
+        bug = 2058136,
+        since = "2026-07",
+    )
     @SmokeTest
     @Test
     fun verifyTheOpenInAppSubMenuOptionIsEnabledTest() {

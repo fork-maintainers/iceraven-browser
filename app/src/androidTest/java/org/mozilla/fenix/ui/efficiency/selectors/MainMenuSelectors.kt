@@ -245,6 +245,21 @@ object MainMenuSelectors {
         groups = listOf("browserViewMainMenuMoreItems"),
     )
 
+    val OPEN_IN_APP_BUTTON = Selector(
+        strategy = SelectorStrategy.COMPOSE_BY_CONTENT_DESCRIPTION,
+        value = getStringResource(R.string.browser_menu_open_app_link),
+        description = "Main menu Open in app button",
+        groups = listOf("browserViewMainMenuMoreItems"),
+    )
+
+    @Suppress("ktlint:standard:function-naming", "FunctionName")
+    fun OPEN_IN_APP_NAME_BUTTON(appName: String = "") = Selector(
+        strategy = SelectorStrategy.COMPOSE_BY_CONTENT_DESCRIPTION,
+        value = getStringResource(R.string.browser_menu_open_in_fenix, appName),
+        description = "Main menu Open in $appName button",
+        groups = listOf(),
+    )
+
     val all = listOf(
         NEW_PRIVATE_TAB_BUTTON,
         EXTENSIONS_BUTTON,
@@ -278,5 +293,7 @@ object MainMenuSelectors {
         PRINT_BUTTON,
         REMOVE_FROM_SHORTCUTS_BUTTON,
         ADD_TO_HOMESCREEN_BUTTON,
+        OPEN_IN_APP_BUTTON,
+        OPEN_IN_APP_NAME_BUTTON(),
     )
 }
