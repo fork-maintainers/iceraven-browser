@@ -89,7 +89,21 @@ object BrowserPageSelectors {
     val TRANSLATION_SHEET_TITLE = Selector(
         strategy = SelectorStrategy.COMPOSE_BY_TEXT,
         value = getStringResource(R.string.translations_bottom_sheet_title_first_time, argument = shortAppName),
-        description = "Translation bottom sheet translate button",
+        description = "Translation bottom sheet title",
+        groups = listOf("notTranslatedPageTranslationSheet"),
+    )
+
+    val TRANSLATION_SHEET_TRANSLATE_FROM = Selector(
+        strategy = SelectorStrategy.COMPOSE_BY_TEXT,
+        value = getStringResource(R.string.translations_bottom_sheet_translate_from),
+        description = "Translation bottom sheet translate from dropdown",
+        groups = listOf("notTranslatedPageTranslationSheet"),
+    )
+
+    val TRANSLATION_SHEET_TRANSLATE_TO = Selector(
+        strategy = SelectorStrategy.COMPOSE_BY_TEXT,
+        value = getStringResource(R.string.translations_bottom_sheet_translate_to),
+        description = "Translation bottom sheet translate to dropdown",
         groups = listOf("notTranslatedPageTranslationSheet"),
     )
 
@@ -211,6 +225,8 @@ object BrowserPageSelectors {
         TAB_CRASH_REPORTER_CLOSE_BUTTON,
         PAGE_CONTENT(),
         TRANSLATION_SHEET_TITLE,
+        TRANSLATION_SHEET_TRANSLATE_FROM,
+        TRANSLATION_SHEET_TRANSLATE_TO,
         TRANSLATION_SHEET_TRANSLATE_BUTTON,
         TRANSLATION_SHEET_SHOW_ORIGINAL_BUTTON,
         ADDED_TO_SHORTCUTS_SNACKBAR_TEXT,
