@@ -87,6 +87,7 @@ import org.mozilla.fenix.tabgroups.CloseLastTabAndDeleteTabGroupConfirmationDial
 import org.mozilla.fenix.tabgroups.DeleteTabGroupConfirmationDialog
 import org.mozilla.fenix.tabgroups.EditTabGroup
 import org.mozilla.fenix.tabgroups.ExpandedTabGroup
+import org.mozilla.fenix.tabgroups.ExpandedTabGroupActions
 import org.mozilla.fenix.tabstray.InactiveTabsBinding
 import org.mozilla.fenix.tabstray.PbmLockStatusBinding
 import org.mozilla.fenix.tabstray.TabManagerCfrController
@@ -477,8 +478,7 @@ class TabManagementFragment : Fragment() {
                                 val expandedGroup by tabsTrayStore.observeTabGroup(tabGroup = args.group)
                                     .collectAsState(initial = args.group)
 
-                                ExpandedTabGroup(
-                                    group = expandedGroup,
+                                val expandedGroupActions = ExpandedTabGroupActions(
                                     onItemClick = {
                                         when (it) {
                                             is TabsTrayItem.Tab -> handleTabClick(it)
@@ -519,6 +519,11 @@ class TabManagementFragment : Fragment() {
                                     } else {
                                         null
                                     },
+                                )
+
+                                ExpandedTabGroup(
+                                    group = expandedGroup,
+                                    actions = expandedGroupActions,
                                     tabInteractionHandler = tabInteractionHandler,
                                 )
                             }

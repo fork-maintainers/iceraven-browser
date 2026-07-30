@@ -49,12 +49,7 @@ class ExpandedTabGroupTest {
                     Surface {
                         ExpandedTabGroup(
                             group = fakeTabGroup(),
-                            onItemClick = {},
-                            onTabClose = {},
-                            onDeleteTabGroupClick = {},
-                            onEditTabGroupClick = {},
-                            onCloseTabGroupClick = {},
-                            onAddNewTabClick = {},
+                            actions = expandedTabGroupActions(),
                             tabInteractionHandler = NoOpTabInteractionHandler,
                         )
                     }
@@ -82,12 +77,7 @@ class ExpandedTabGroupTest {
                 Surface {
                     ExpandedTabGroup(
                         group = fakeTabGroup(),
-                        onItemClick = {},
-                        onTabClose = {},
-                        onDeleteTabGroupClick = {},
-                        onEditTabGroupClick = {},
-                        onCloseTabGroupClick = {},
-                        onAddNewTabClick = {},
+                        actions = expandedTabGroupActions(),
                         tabInteractionHandler = NoOpTabInteractionHandler,
                     )
                 }
@@ -111,16 +101,9 @@ class ExpandedTabGroupTest {
                     Surface {
                         ExpandedTabGroup(
                             group = fakeTabGroup(tabs = mutableListOf(tab)),
-                            onItemClick = {
-                                if (it == tab) {
-                                    itemClicked = true
-                                }
-                            },
-                            onTabClose = {},
-                            onDeleteTabGroupClick = {},
-                            onEditTabGroupClick = {},
-                            onCloseTabGroupClick = {},
-                            onAddNewTabClick = {},
+                            actions = expandedTabGroupActions(
+                                onItemClick = { if (it == tab) itemClicked = true },
+                            ),
                             tabInteractionHandler = NoOpTabInteractionHandler,
                         )
                     }
@@ -145,16 +128,9 @@ class ExpandedTabGroupTest {
                     Surface {
                         ExpandedTabGroup(
                             group = fakeTabGroup(tabs = mutableListOf(tab)),
-                            onItemClick = {},
-                            onTabClose = {
-                                if (it == tab) {
-                                    itemClosed = true
-                                }
-                            },
-                            onDeleteTabGroupClick = {},
-                            onEditTabGroupClick = {},
-                            onCloseTabGroupClick = {},
-                            onAddNewTabClick = {},
+                            actions = expandedTabGroupActions(
+                                onTabClose = { if (it == tab) itemClosed = true },
+                            ),
                             tabInteractionHandler = NoOpTabInteractionHandler,
                         )
                     }
@@ -179,14 +155,9 @@ class ExpandedTabGroupTest {
                     Surface {
                         ExpandedTabGroup(
                             group = group,
-                            onItemClick = {},
-                            onTabClose = {},
-                            onDeleteTabGroupClick = {
-                                deleteClicked = true
-                            },
-                            onEditTabGroupClick = {},
-                            onCloseTabGroupClick = {},
-                            onAddNewTabClick = {},
+                            actions = expandedTabGroupActions(
+                                onDeleteTabGroupClick = { deleteClicked = true },
+                            ),
                             tabInteractionHandler = NoOpTabInteractionHandler,
                         )
                     }
@@ -212,14 +183,9 @@ class ExpandedTabGroupTest {
                     Surface {
                         ExpandedTabGroup(
                             group = fakeTabGroup(),
-                            onItemClick = {},
-                            onTabClose = {},
-                            onDeleteTabGroupClick = {},
-                            onEditTabGroupClick = {
-                                editClicked = true
-                            },
-                            onCloseTabGroupClick = {},
-                            onAddNewTabClick = {},
+                            actions = expandedTabGroupActions(
+                                onEditTabGroupClick = { editClicked = true },
+                            ),
                             tabInteractionHandler = NoOpTabInteractionHandler,
                         )
                     }
@@ -245,12 +211,9 @@ class ExpandedTabGroupTest {
                     Surface {
                         ExpandedTabGroup(
                             group = fakeTabGroup(),
-                            onItemClick = {},
-                            onTabClose = {},
-                            onDeleteTabGroupClick = {},
-                            onEditTabGroupClick = {},
-                            onCloseTabGroupClick = { closeClicked = true },
-                            onAddNewTabClick = {},
+                            actions = expandedTabGroupActions(
+                                onCloseTabGroupClick = { closeClicked = true },
+                            ),
                             tabInteractionHandler = NoOpTabInteractionHandler,
                         )
                     }
@@ -276,12 +239,9 @@ class ExpandedTabGroupTest {
                     Surface {
                         ExpandedTabGroup(
                             group = fakeTabGroup(),
-                            onItemClick = {},
-                            onTabClose = {},
-                            onDeleteTabGroupClick = {},
-                            onEditTabGroupClick = {},
-                            onCloseTabGroupClick = {},
-                            onAddNewTabClick = { addNewTabClicked = true },
+                            actions = expandedTabGroupActions(
+                                onAddNewTabClick = { addNewTabClicked = true },
+                            ),
                             tabInteractionHandler = NoOpTabInteractionHandler,
                         )
                     }
@@ -303,4 +263,20 @@ class ExpandedTabGroupTest {
             tabs = tabs,
         )
     }
+
+    private fun expandedTabGroupActions(
+        onItemClick: (TabsTrayItem) -> Unit = {},
+        onTabClose: (TabsTrayItem.Tab) -> Unit = {},
+        onDeleteTabGroupClick: () -> Unit = {},
+        onEditTabGroupClick: () -> Unit = {},
+        onCloseTabGroupClick: () -> Unit = {},
+        onAddNewTabClick: (() -> Unit)? = {},
+    ) = ExpandedTabGroupActions(
+        onItemClick = onItemClick,
+        onTabClose = onTabClose,
+        onDeleteTabGroupClick = onDeleteTabGroupClick,
+        onEditTabGroupClick = onEditTabGroupClick,
+        onCloseTabGroupClick = onCloseTabGroupClick,
+        onAddNewTabClick = onAddNewTabClick,
+    )
 }
