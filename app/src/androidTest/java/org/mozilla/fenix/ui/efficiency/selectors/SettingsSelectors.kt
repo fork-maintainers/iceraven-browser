@@ -70,7 +70,7 @@ object SettingsSelectors {
     )
 
     val CUSTOMIZE_BUTTON = Selector(
-        strategy = SelectorStrategy.ESPRESSO_BY_TEXT,
+        strategy = SelectorStrategy.UIAUTOMATOR_WITH_TEXT,
         value = "Customize",
         description = "the Customize button",
         groups = listOf("generalSettingsSection"),
