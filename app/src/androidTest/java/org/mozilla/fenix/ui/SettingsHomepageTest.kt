@@ -168,6 +168,11 @@ class SettingsHomepageTest {
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/1569831
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.SettingsHomepageTest#verifyOpeningScreenOptionsTest"],
+        bug = 2058818,
+        since = "2026-07",
+    )
     @SmokeTest
     @Test
     fun verifyOpeningScreenOptionsTest() {

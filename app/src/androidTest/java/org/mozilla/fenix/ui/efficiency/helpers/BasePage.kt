@@ -1312,7 +1312,34 @@ abstract class BasePage(
                 }
             }
 
+            SelectorStrategy.ESPRESSO_BY_ID_WITH_SIBLING_TEXT -> {
+                val resId = selector.toResourceId()
+                val siblingText = selector.secondaryValue ?: ""
+
+                if (resId == 0) {
+                    Log.i("mozGetElement", "Invalid resource ID for: ${selector.value}")
+                    null
+                } else {
+                    onView(
+                        allOf(
+                            withId(resId),
+                            hasSibling(withText(siblingText)),
+                        ),
+                    )
+                }
+            }
+
             SelectorStrategy.ESPRESSO_BY_TEXT -> onView(withText(selector.value))
+            SelectorStrategy.ESPRESSO_BY_TEXT_WITH_SIBLING_TEXT -> {
+                val siblingText = selector.secondaryValue ?: ""
+
+                onView(
+                    allOf(
+                        withText(selector.value),
+                        hasSibling(withText(siblingText)),
+                    ),
+                )
+            }
             SelectorStrategy.ESPRESSO_BY_CONTENT_DESC -> onView(withContentDescription(selector.value))
             SelectorStrategy.ESPRESSO_BY_RES_NAME -> onView(withResourceName(containsString(selector.value)))
 

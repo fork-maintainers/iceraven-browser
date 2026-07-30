@@ -265,6 +265,15 @@ object SettingsSelectors {
         groups = listOf(),
     )
 
+    @Suppress("ktlint:standard:function-naming", "FunctionName")
+    fun SETTING_OPTION_SUMMARY(settingName: String = "", settingSummary: String = "") = Selector(
+        strategy = SelectorStrategy.ESPRESSO_BY_TEXT_WITH_SIBLING_TEXT,
+        value = settingName,
+        secondaryValue = settingSummary,
+        description = "Setting: $settingName with summary: $settingSummary",
+        groups = listOf("settingsOptionSummary"),
+    )
+
     val all = listOf(
         NAVIGATION_TOOLBAR,
         GO_BACK_BUTTON,
@@ -302,5 +311,6 @@ object SettingsSelectors {
         DOWNLOADS_BUTTON,
         OPEN_LINKS_IN_APPS_DEFAULT_SUMMARY,
         HTTPS_ONLY_MODE_ON_ALL_TABS_SUMMARY,
+        SETTING_OPTION_SUMMARY(),
     )
 }

@@ -18,8 +18,8 @@ class SettingsHomepagePage(composeRule: AndroidComposeTestRule<HomeActivityInten
 
     init {
         NavigationRegistry.register(
-            from = "SettingsPage",
-            to = pageName,
+            from = pageName,
+            to = "SettingsPage",
             steps = listOf(NavigationStep.Click(SettingsSelectors.GO_BACK_BUTTON)),
         )
 
