@@ -282,7 +282,7 @@
   <!-- Content description (not visible, for screen readers etc.) for main menu navigation header. -->
   <string name="browser_main_menu_content_description_navigation_header">Navigasjon</string>
   <!-- Content description (not visible, for screen readers etc.) for bottom sheet handlebar custom tab menu. -->
-  <string name="browser_custom_tab_menu_handlebar_content_description">Latatt menyen tilpassa faner</string>
+  <string name="browser_custom_tab_menu_handlebar_content_description">Lat att menyen tilpassa faner</string>
   <!-- Browser menu label that bookmarks the currently visited page -->
   <string name="browser_menu_bookmark_this_page_2">Bokmerk sida</string>
   <!-- Browser menu label that navigates to the edit bookmark screen for the current bookmarked page -->
@@ -1104,7 +1104,7 @@
   <!-- Title for the "Sunset" gradient alternative app icon variant in the icon picker screen. The app icon has a rich red-to-purple gradient background, resembling the tones of a sunset sky. -->
   <string name="alternative_app_icon_option_gradient_sunset">Solnedgang</string>
   <!-- Title for the "Blue Hour" gradient alternative app icon variant in the icon picker screen. The app icon has a cool blue gradient background, resembling the sky color around the time just after sunset or before sunrise. -->
-  <string name="alternative_app_icon_option_gradient_blue_hour">Blå time</string>
+  <string name="alternative_app_icon_option_gradient_blue_hour">Blåtime</string>
   <!-- Title for the "Twilight" gradient alternative app icon variant in the icon picker screen. The app icon has a purple-toned gradient background, resembling the sky color during twilight. -->
   <string name="alternative_app_icon_option_gradient_twilight">Skumring</string>
   <!-- Title for the "Midnight" gradient alternative app icon variant in the icon picker screen. The app icon features a dark gradient background, resembling the deep tones of the night sky. -->
@@ -1714,6 +1714,8 @@
   <string name="tab_group_three_dot_menu_delete">Slett</string>
   <!-- Text shown on the close button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_close">Lat att</string>
+  <!-- Text shown on the cancel button in the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_cancel">Avbryt</string>
   <!--
     Color labels for tab groups, used for accessibility and selection UI.
 

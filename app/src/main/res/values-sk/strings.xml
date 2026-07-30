@@ -1726,6 +1726,16 @@
   <string name="tab_group_three_dot_menu_delete">Odstrániť</string>
   <!-- Text shown on the close button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_close">Zavrieť</string>
+  <!-- Title for the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_title">Zrušiť skupinu kariet?</string>
+  <!-- Text shown in the body of the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_body">Karty zostanú na tomto zariadení otvorené, ale skupina bude odstránená.</string>
+  <!-- Text shown on the Don't Ask Again checkbox button in the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_dont_ask_again">Nabudúce sa už nepýtať</string>
+  <!-- Text shown on the confirm button in the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_confirm">Zrušiť skupinu</string>
+  <!-- Text shown on the cancel button in the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_cancel">Zrušiť</string>
   <!--
     Color labels for tab groups, used for accessibility and selection UI.
 
@@ -3180,6 +3190,14 @@
   <string name="ip_protection_location_unavailable" tools:ignore="UnusedResources">Lokalita nie je k dispozícii. Vyberte inú lokalitu.</string>
   <!-- Snackbar (in-app pop-up notification) text shown when the previously selected browser VPN location is unavailable and the recommended location was used instead. -->
   <string name="ip_protection_location_unavailable_recommended_snackbar" tools:ignore="UnusedResources">Vybraná lokalita VPN nie je k dispozícii. Pripojené k odporúčanej lokalite.</string>
+  <!-- Title for the card shown to the user when we are unable to fetch server locations -->
+  <string name="ip_protection_locations_unavailable_title">Lokality nie sú k dispozícii</string>
+  <!-- Description for the card shown to the user when we are unable to fetch server locations -->
+  <string name="ip_protection_locations_unavailable_description">Prepnuté na odporúčané miesto.</string>
+  <!-- Title for the browser VPN location selection screen (displayed in the app bar) -->
+  <string name="ip_protection_locations_title">Vyberte lokalitu VPN</string>
+  <!-- Content description for the browser VPN location selection screen top bar back button -->
+  <string name="ip_protection_locations_navigate_back_button_content_description">Prejsť dozadu</string>
   <!-- Title for the card shown to the user when we are unable to fetch server locations -->
   <string name="ip_protection_location_unavailable_title" tools:ignore="UnusedResources">Predchádzajúca lokalita nie je k dispozícii</string>
   <!-- Description for the card shown to the user when we are unable to fetch server locations -->

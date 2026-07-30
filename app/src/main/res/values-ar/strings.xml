@@ -1731,6 +1731,16 @@
   <string name="tab_group_three_dot_menu_delete">احذف</string>
   <!-- Text shown on the close button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_close">أغلق</string>
+  <!-- Title for the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_title">فك تجميع الألسنة؟</string>
+  <!-- Text shown in the body of the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_body">ستبقى الألسنة مفتوحة على هذا الجهاز، ولكن ستُحذف المجموعة.</string>
+  <!-- Text shown on the Don't Ask Again checkbox button in the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_dont_ask_again">لا تسألني مجددًا</string>
+  <!-- Text shown on the confirm button in the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_confirm">فك التجميع</string>
+  <!-- Text shown on the cancel button in the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_cancel">ألغِ</string>
   <!--
     Color labels for tab groups, used for accessibility and selection UI.
 
@@ -3144,6 +3154,10 @@
   <string name="ip_protection_location_title" tools:ignore="UnusedResources">المكان</string>
   <!-- Label for the Recommended server location option which is automatically selected by the browser. -->
   <string name="ip_protection_recommended_location" tools:ignore="UnusedResources">يُنصح به</string>
+  <!-- Title for the card shown to the user when we are unable to fetch server locations -->
+  <string name="ip_protection_locations_unavailable_title">المواقع غير متاحة</string>
+  <!-- Content description for the browser VPN location selection screen top bar back button -->
+  <string name="ip_protection_locations_navigate_back_button_content_description">تصفّح للوراء</string>
   <!--
     Autofill
 

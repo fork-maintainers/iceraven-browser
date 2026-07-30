@@ -1738,6 +1738,16 @@
   <string name="tab_group_three_dot_menu_delete">Dileu</string>
   <!-- Text shown on the close button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_close">Cau</string>
+  <!-- Title for the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_title">Dadgrwpio grŵp tab?</string>
+  <!-- Text shown in the body of the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_body">Bydd y tabiau yn parhau ar agor ar y ddyfais hon, ond bydd y grŵp yn cael ei ddileu.</string>
+  <!-- Text shown on the Don't Ask Again checkbox button in the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_dont_ask_again">Peidio a gofyn eto.</string>
+  <!-- Text shown on the confirm button in the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_confirm">Dadgrwpio</string>
+  <!-- Text shown on the cancel button in the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_cancel">Diddymu</string>
   <!--
     Color labels for tab groups, used for accessibility and selection UI.
 
@@ -3196,6 +3206,14 @@
   <string name="ip_protection_location_unavailable" tools:ignore="UnusedResources">Dyw\'r lleoliad ddim ar gael. Dewiswch leoliad arall.</string>
   <!-- Snackbar (in-app pop-up notification) text shown when the previously selected browser VPN location is unavailable and the recommended location was used instead. -->
   <string name="ip_protection_location_unavailable_recommended_snackbar" tools:ignore="UnusedResources">Dyw\'r lleoliad VPN dewiswyd ddim ar gael. Wedi\'i gysylltu â\'r lleoliad cywir.</string>
+  <!-- Title for the card shown to the user when we are unable to fetch server locations -->
+  <string name="ip_protection_locations_unavailable_title">Lleoliadau ddim ar gael</string>
+  <!-- Description for the card shown to the user when we are unable to fetch server locations -->
+  <string name="ip_protection_locations_unavailable_description">Wedi newid i\'r lleoliad a argymhellir.</string>
+  <!-- Title for the browser VPN location selection screen (displayed in the app bar) -->
+  <string name="ip_protection_locations_title">Dewiswch Lleoliad VPN</string>
+  <!-- Content description for the browser VPN location selection screen top bar back button -->
+  <string name="ip_protection_locations_navigate_back_button_content_description">Symud nôl</string>
   <!-- Title for the card shown to the user when we are unable to fetch server locations -->
   <string name="ip_protection_location_unavailable_title" tools:ignore="UnusedResources">Dyw\'r lleoliad blaenorol ddim ar gael</string>
   <!-- Description for the card shown to the user when we are unable to fetch server locations -->
