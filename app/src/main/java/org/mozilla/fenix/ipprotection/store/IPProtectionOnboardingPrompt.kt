@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import mozilla.components.feature.ipprotection.store.IPProtectionStore
+import mozilla.components.feature.ipprotection.store.state.AccountStatus
 import mozilla.components.feature.ipprotection.store.state.EligibilityStatus
 import mozilla.components.feature.ipprotection.store.state.IPProtectionState
 import mozilla.components.lib.state.helpers.AbstractBinding
@@ -34,10 +35,12 @@ class IPProtectionOnboardingPrompt(
     store: IPProtectionStore,
 ) : AbstractBinding<IPProtectionState>(store, mainDispatcher) {
     override suspend fun onState(flow: Flow<IPProtectionState>) {
-        flow.map { it.eligibilityStatus }
+        flow.map { Pair(it.eligibilityStatus, it.accountState.status) }
             .distinctUntilChanged()
-            .collect { eligibilityStatus ->
-                if (eligibilityStatus != EligibilityStatus.Eligible) {
+            .collect { (eligibilityStatus, accountStatus) ->
+                val accountInitializing =
+                    accountStatus == AccountStatus.Uninitialized || accountStatus == AccountStatus.WarmingUp
+                if (eligibilityStatus != EligibilityStatus.Eligible || accountInitializing) {
                     return@collect
                 }
 
