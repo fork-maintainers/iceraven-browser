@@ -239,12 +239,12 @@ private fun WallpaperThumbnailItem(
     }
     val border = if (isSelected) {
         BorderStroke(
-            width = FirefoxTheme.layout.border.thick,
+            width = FirefoxTheme.layout.border.heaviest,
             color = MaterialTheme.colorScheme.primary,
         )
     } else if (wallpaper.name == Wallpaper.DEFAULT) {
         BorderStroke(
-            width = FirefoxTheme.layout.border.thick,
+            width = FirefoxTheme.layout.border.heaviest,
             color = MaterialTheme.colorScheme.outlineVariant,
         )
     } else {

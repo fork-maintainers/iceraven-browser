@@ -135,7 +135,7 @@ val tablistItemThumbnailBorder: BorderStroke
     @Composable
     @ReadOnlyComposable
     get() = BorderStroke(
-        width = AcornLayout.AcornBorder.thin,
+        width = AcornLayout.AcornBorder.default,
         color = MaterialTheme.colorScheme.surfaceContainerHighest,
     )
 
@@ -354,7 +354,7 @@ fun tabItemConditionalBorder(selectionState: TabsTrayItemSelectionState): Border
 @Composable
 @ReadOnlyComposable
 fun tabItemBorderFocused(): BorderStroke {
-    return BorderStroke(width = FirefoxTheme.layout.border.thick, brush = FirefoxTheme.gradients.tabOutline.brush)
+    return BorderStroke(width = FirefoxTheme.layout.border.heaviest, brush = FirefoxTheme.gradients.tabOutline.brush)
 }
 
 /**
@@ -633,7 +633,7 @@ private fun Modifier.tabItemInteractionAnimation(
 ): Modifier {
     val backdropColor = MaterialTheme.colorScheme.secondaryContainer
     val backdropBorder = MaterialTheme.colorScheme.tertiary
-    val borderSize = FirefoxTheme.layout.border.thick
+    val borderSize = FirefoxTheme.layout.border.heaviest
     return this
         .thenConditional(
             Modifier.drawBehind(

@@ -1996,7 +1996,7 @@ private fun defaultCrossAxisStartPadding(): Float =
 private fun Modifier.drawVerticalReorderIndicator(gridInteractionState: GridInteractionState): Modifier {
     val crossAxisStartPadding = defaultCrossAxisStartPadding()
     val indicatorColor = MaterialTheme.colorScheme.tertiary
-    val strokeWidth = FirefoxTheme.layout.border.thick
+    val strokeWidth = FirefoxTheme.layout.border.heaviest
     return this.drawBehind(
         {
             val rect = gridInteractionState.highlightedRect ?: return@drawBehind
@@ -2024,7 +2024,7 @@ private fun Modifier.drawHorizontalReorderIndicator(
     listState: LazyListState,
 ): Modifier {
     val indicatorColor = MaterialTheme.colorScheme.tertiary
-    val strokeWidth = FirefoxTheme.layout.border.thick
+    val strokeWidth = FirefoxTheme.layout.border.heaviest
     return this.drawWithContent(
         onDraw = {
             drawContent()
