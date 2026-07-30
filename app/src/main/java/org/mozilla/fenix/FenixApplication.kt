@@ -42,7 +42,6 @@ import mozilla.appservices.autofill.AutofillApiException
 import mozilla.components.ExperimentalAndroidComponentsApi
 import mozilla.components.browser.state.action.SearchAction.SearchConfigurationAvailabilityChanged
 import mozilla.components.browser.state.action.SystemAction
-import mozilla.components.browser.state.selector.selectedTab
 import mozilla.components.browser.state.state.selectedOrDefaultPrivateSearchEngine
 import mozilla.components.browser.state.store.BrowserStore
 import mozilla.components.browser.storage.sync.GlobalPlacesDependencyProvider
@@ -857,16 +856,13 @@ open class FenixApplication : Application(), Provider, ThemeProvider {
             WebExtensionSupport.initialize(
                 components.core.engine,
                 components.core.store,
-                onNewTabOverride = { _, engineSession, url, selected ->
-                    val shouldCreatePrivateSession =
-                        components.core.store.state.selectedTab?.content?.private
-                            ?: components.settings.openLinksInAPrivateTab
-
+                isInPrivateBrowsingMode = { components.appStore.state.mode.isPrivate },
+                onNewTabOverride = { _, engineSession, url, selected, isPrivate ->
                     components.useCases.tabsUseCases.addTab(
                         url = url,
                         selectTab = selected,
                         engineSession = engineSession,
-                        private = shouldCreatePrivateSession,
+                        private = isPrivate,
                     )
                 },
                 onCloseTabOverride = { _, sessionId ->
