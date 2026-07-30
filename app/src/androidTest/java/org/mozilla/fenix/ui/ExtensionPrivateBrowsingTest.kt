@@ -6,6 +6,8 @@ package org.mozilla.fenix.ui
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import mozilla.components.browser.state.selector.selectedTab
+import mozilla.components.concept.engine.EngineSession
+import mozilla.components.concept.engine.webextension.MessageHandler
 import mozilla.components.support.webextensions.WebExtensionSupport
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -25,6 +27,8 @@ import org.mozilla.fenix.ui.robots.browserScreen
 import org.mozilla.fenix.ui.robots.homeScreen
 import org.mozilla.fenix.ui.robots.navigationToolbar
 import org.mozilla.fenix.ui.robots.webExtensionActionPopup
+import java.util.concurrent.CompletableFuture
+import java.util.concurrent.TimeUnit
 import kotlin.test.assertNotNull
 import androidx.compose.ui.test.junit4.v2.AndroidComposeTestRule as AndroidComposeTestRuleV2
 
@@ -40,6 +44,12 @@ class ExtensionPrivateBrowsingTest {
             name = "Private Browsing Android Test",
             id = "{ed6cc6f0-0f66-4ec4-85a0-e82fd3f0b045}",
             uri = "resource://android/assets/extensions/private_browsing_test/",
+        )
+
+        val PRIVATE_BROWSING_NOT_ALLOWED_EXTENSION = TestWebExtensionInstaller.BuiltInTestExtension(
+            name = "Private Browsing Not Allowed Android Test",
+            id = "{b2f4a1c3-6d7e-4f8a-9b0c-1d2e3f4a5b6c}",
+            uri = "resource://android/assets/extensions/private_browsing_not_allowed_test/",
         )
     }
 
@@ -144,5 +154,39 @@ class ExtensionPrivateBrowsingTest {
         }
 
         TestWebExtensionInstaller.uninstallExtension(PRIVATE_BROWSING_TEST_EXTENSION)
+    }
+
+    @Test
+    fun tabsCreateRejectsInPrivateBrowsingModeWhenNotAllowed() {
+        // Verifies that browser.tabs.create() rejects when in private browsing
+        // with an extension that is not allowed access to private browsing.
+
+        homeScreen(composeTestRule) {
+        }.togglePrivateBrowsingMode()
+
+        // Built-in extensions have private browsing access by default, but we
+        // opt out of it with incognito:not_allowed in its manifest.json.
+        TestWebExtensionInstaller.ensureBuiltInExtensionInstalled(PRIVATE_BROWSING_NOT_ALLOWED_EXTENSION)
+
+        val extension = WebExtensionSupport.installedExtensions[PRIVATE_BROWSING_NOT_ALLOWED_EXTENSION.id]
+        assertNotNull(extension, "Expected the extension to be installed")
+
+        val report = CompletableFuture<String>()
+        composeTestRule.activity.runOnUiThread {
+            extension.registerBackgroundMessageHandler(
+                "testresult",
+                object : MessageHandler {
+                    override fun onMessage(message: Any, source: EngineSession?): Any? {
+                        report.complete(message.toString())
+                        return null
+                    }
+                },
+            )
+        }
+
+        val outcome = report.get(waitingTimeLong, TimeUnit.MILLISECONDS)
+        assertEquals("tabs.create rejected: Cannot create new tab", outcome)
+
+        TestWebExtensionInstaller.uninstallExtension(PRIVATE_BROWSING_NOT_ALLOWED_EXTENSION)
     }
 }
