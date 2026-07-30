@@ -42,6 +42,7 @@ import org.mozilla.fenix.components.menu.MenuDialogTestTag.DESKTOP_SITE_ON
 import org.mozilla.fenix.components.menu.MenuDialogTestTag.EXTENSIONS
 import org.mozilla.fenix.components.menu.MenuDialogTestTag.EXTENSIONS_OPTION_CHEVRON
 import org.mozilla.fenix.components.menu.MenuDialogTestTag.MORE_OPTION_CHEVRON
+import org.mozilla.fenix.components.menu.MenuDialogTestTag.WEB_EXTENSION_ITEM
 import org.mozilla.fenix.helpers.Constants.LONG_CLICK_DURATION
 import org.mozilla.fenix.helpers.Constants.RETRY_COUNT
 import org.mozilla.fenix.helpers.Constants.TAG
@@ -434,6 +435,37 @@ class ThreeDotMenuMainRobot(private val composeTestRule: ComposeTestRule) {
             itemWithResIdAndDescription(EXTENSIONS, extensionTitle).exists()
         }
         Log.i(TAG, "verifyExtensionsButtonWithInstalledExtension: Verified the extensions button shows: $extensionTitle")
+    }
+
+    @OptIn(ExperimentalTestApi::class)
+    fun clickExtensionActionButton(extensionTitle: String) {
+        // Extension browserAction or pageAction button. On desktop they render
+        // in different UI surfaces, on mobile they are in the same place.
+        val extActionButton = hasTestTag(WEB_EXTENSION_ITEM)
+            .and(hasContentDescription(extensionTitle, substring = true))
+
+        Log.i(TAG, "clickExtensionActionButton: Waiting for the Extensions section")
+        composeTestRule.waitUntil(waitingTimeLong) {
+            composeTestRule.onAllNodes(hasTestTag(EXTENSIONS_OPTION_CHEVRON), useUnmergedTree = true)
+                .fetchSemanticsNodes(atLeastOneRootRequired = false).isNotEmpty()
+        }
+
+        // The extension's action button lives inside the collapsible
+        // Extensions submenu; expand it if it is not already showing.
+        if (composeTestRule.onAllNodes(extActionButton, useUnmergedTree = true)
+                .fetchSemanticsNodes(atLeastOneRootRequired = false).isEmpty()
+        ) {
+            Log.i(TAG, "clickExtensionActionButton: Expanding the Extensions section")
+            composeTestRule.extensionsChevronButton().performClick()
+        }
+
+        Log.i(TAG, "clickExtensionActionButton: Waiting for the $extensionTitle action button")
+        composeTestRule.waitUntil(waitingTimeLong) {
+            composeTestRule.onAllNodes(extActionButton, useUnmergedTree = true)
+                .fetchSemanticsNodes(atLeastOneRootRequired = false).isNotEmpty()
+        }
+        Log.i(TAG, "clickExtensionActionButton: Clicking the $extensionTitle action button")
+        composeTestRule.onNode(extActionButton, useUnmergedTree = true).performClick()
     }
 
     @OptIn(ExperimentalTestApi::class)

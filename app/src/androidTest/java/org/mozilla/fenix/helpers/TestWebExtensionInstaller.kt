@@ -11,6 +11,7 @@ import android.util.Log
 import kotlinx.coroutines.android.asCoroutineDispatcher
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeout
 import mozilla.components.browser.engine.gecko.await
@@ -18,6 +19,8 @@ import mozilla.components.support.webextensions.WebExtensionSupport
 import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.helpers.Constants.TAG
 import org.mozilla.fenix.helpers.TestHelper.appContext
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
 import kotlin.time.Duration.Companion.milliseconds
 
 /**
@@ -71,26 +74,49 @@ object TestWebExtensionInstaller {
             waitForExtensionReady(extension, readyState)
         }
 
+    fun uninstallExtension(extension: BuiltInTestExtension) = runBlocking {
+        val installed = WebExtensionSupport.installedExtensions[extension.id]
+            ?: run {
+                Log.i(TAG, "uninstallExtension: ${extension.name} was not installed")
+                return@runBlocking
+            }
+        Log.i(TAG, "uninstallExtension: Uninstalling ${extension.name}")
+        onExtensionHandlerThread {
+            suspendCancellableCoroutine { continuation ->
+                appContext.components.core.engine.uninstallWebExtension(
+                    installed,
+                    onSuccess = { continuation.resume(Unit) },
+                    onError = { _, t -> continuation.resumeWithException(t) },
+                )
+            }
+        }
+    }
+
     private suspend fun installBuiltInExtension(
         context: android.content.Context,
         extension: BuiltInTestExtension,
     ) {
+        onExtensionHandlerThread {
+            val previousPolicy = StrictMode.allowThreadDiskReads()
+            try {
+                context.components.core.geckoRuntime.webExtensionController.ensureBuiltIn(
+                    extension.uri,
+                    extension.id,
+                ).await()
+            } finally {
+                StrictMode.setThreadPolicy(previousPolicy)
+            }
+        }
+    }
+
+    private suspend fun <T> onExtensionHandlerThread(block: suspend () -> T): T {
         val handlerThread = HandlerThread("TestWebExtensionInstaller").apply { start() }
         val handlerDispatcher = Handler(handlerThread.looper).asCoroutineDispatcher()
-        try {
-            withContext(handlerDispatcher) {
-                val previousPolicy = StrictMode.allowThreadDiskReads()
-                try {
-                    context.components.core.geckoRuntime.webExtensionController.ensureBuiltIn(
-                        extension.uri,
-                        extension.id,
-                    ).await()
-                } finally {
-                    StrictMode.setThreadPolicy(previousPolicy)
-                }
-            }
+        return try {
+            withContext(handlerDispatcher) { block() }
         } finally {
             handlerThread.quitSafely()
+            handlerThread.join()
         }
     }
 
