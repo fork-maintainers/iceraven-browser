@@ -641,7 +641,10 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity, Crash
                 activity = this,
                 appStore = components.appStore,
                 settings = components.settings,
-                tabStripStatusBarView = TabStripStatusBarView(rootView = window.decorView as ViewGroup),
+                tabStripStatusBarView = TabStripStatusBarView(
+                    rootView = window.decorView as ViewGroup,
+                    lifecycle = lifecycle,
+                ),
             ),
             true,
         )

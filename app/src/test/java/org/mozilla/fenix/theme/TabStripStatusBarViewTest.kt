@@ -4,8 +4,8 @@
 
 package org.mozilla.fenix.theme
 
-import android.app.Activity
 import android.view.ViewGroup
+import androidx.activity.ComponentActivity
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -17,21 +17,21 @@ class TabStripStatusBarViewTest {
 
     @Test
     fun `WHEN show is called THEN gradient overlay is added to the decor view`() {
-        val activity = Robolectric.buildActivity(Activity::class.java).create().get()
+        val activity = Robolectric.buildActivity(ComponentActivity::class.java).create().get()
         val decorView = activity.window.decorView as ViewGroup
         val initialChildCount = decorView.childCount
 
-        TabStripStatusBarView(decorView).show()
+        TabStripStatusBarView(decorView, activity.lifecycle).show()
 
         assertEquals(initialChildCount + 1, decorView.childCount)
     }
 
     @Test
     fun `WHEN show is called twice THEN only one gradient overlay is added`() {
-        val activity = Robolectric.buildActivity(Activity::class.java).create().get()
+        val activity = Robolectric.buildActivity(ComponentActivity::class.java).create().get()
         val decorView = activity.window.decorView as ViewGroup
         val initialChildCount = decorView.childCount
-        val view = TabStripStatusBarView(decorView)
+        val view = TabStripStatusBarView(decorView, activity.lifecycle)
 
         view.show()
         view.show()
@@ -41,10 +41,10 @@ class TabStripStatusBarViewTest {
 
     @Test
     fun `WHEN hide is called THEN the gradient overlay is removed from the decor view`() {
-        val activity = Robolectric.buildActivity(Activity::class.java).create().get()
+        val activity = Robolectric.buildActivity(ComponentActivity::class.java).create().get()
         val decorView = activity.window.decorView as ViewGroup
         val initialChildCount = decorView.childCount
-        val view = TabStripStatusBarView(decorView)
+        val view = TabStripStatusBarView(decorView, activity.lifecycle)
 
         view.show()
         assertEquals(initialChildCount + 1, decorView.childCount)
