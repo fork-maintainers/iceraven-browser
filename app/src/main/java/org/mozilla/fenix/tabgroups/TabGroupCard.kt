@@ -196,9 +196,11 @@ private fun TabGroupOptionButton(
         TabGroupMenuButton(
             modifier = Modifier.size(TabHeaderIconTouchTargetSize),
             includeCloseOption = true,
+            includeUngroupOption = true,
             onDeleteTabGroupClick = onDeleteTabGroupClick,
             onEditTabGroupClick = onEditTabGroupClick,
             onCloseTabGroupClick = onCloseTabGroupClick,
+            onUngroupTabGroupClick = {},
         )
     }
 }

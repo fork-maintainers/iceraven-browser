@@ -1083,9 +1083,11 @@ private fun TabListItemContent(
                     } else {
                         TabGroupMenuButton(
                             includeCloseOption = true,
+                            includeUngroupOption = true,
                             onDeleteTabGroupClick = { onDeleteTabGroupClick(tab) },
                             onEditTabGroupClick = { onEditTabGroupClick(tab) },
                             onCloseTabGroupClick = { onCloseTabGroupClick(tab) },
+                            onUngroupTabGroupClick = {},
                         )
                     }
                 },
@@ -1543,9 +1545,11 @@ private fun ReorderableTabList(
                                     } else {
                                         TabGroupMenuButton(
                                             includeCloseOption = true,
+                                            includeUngroupOption = true,
                                             onDeleteTabGroupClick = { onDeleteTabGroupClick(tab) },
                                             onEditTabGroupClick = { onEditTabGroupClick(tab) },
                                             onCloseTabGroupClick = { onCloseTabGroupClick(tab) },
+                                            onUngroupTabGroupClick = {},
                                         )
                                     }
                                 },

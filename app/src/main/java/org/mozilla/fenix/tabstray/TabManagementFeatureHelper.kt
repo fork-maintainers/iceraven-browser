@@ -34,6 +34,11 @@ interface TabManagementFeatureHelper {
     val shareTabGroupEnabled: Boolean
 
     /**
+     * Determines whether the "Ungroup" item is displayed in a tab group's three dot menu.
+     */
+    val ungroupTabGroupEnabled: Boolean
+
+    /**
      * Whether onboarding is enabled for the Tab Groups feature.
      */
     val tabGroupsOnboardingEnabled: Boolean
@@ -62,6 +67,9 @@ data object DefaultTabManagementFeatureHelper : TabManagementFeatureHelper {
         get() = FxNimbus.features.tabGroupsLiveReorder.value().enabled
 
     override val shareTabGroupEnabled: Boolean
+        get() = false
+
+    override val ungroupTabGroupEnabled: Boolean
         get() = false
 
     override val tabGroupsOnboardingEnabled: Boolean

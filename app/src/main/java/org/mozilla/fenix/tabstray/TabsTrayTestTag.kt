@@ -81,6 +81,7 @@ internal object TabsTrayTestTag {
     const val TAB_GROUP_THREE_DOT_BUTTON = "$TAB_GROUP_ROOT.threeDotButton"
     const val EDIT_TAB_GROUP = "$TAB_GROUP_THREE_DOT_BUTTON.editGroup"
     const val CLOSE_TAB_GROUP = "$TAB_GROUP_THREE_DOT_BUTTON.closeGroup"
+    const val UNGROUP_TAB_GROUP = "$TAB_GROUP_THREE_DOT_BUTTON.ungroup"
     const val DELETE_TAB_GROUP = "$TAB_GROUP_THREE_DOT_BUTTON.deleteGroup"
 
     // Bottom app bar

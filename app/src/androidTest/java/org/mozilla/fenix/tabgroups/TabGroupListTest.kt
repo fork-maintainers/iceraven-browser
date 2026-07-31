@@ -84,6 +84,25 @@ class TabGroupListTest {
     }
 
     @Test
+    fun verifyUngroupTabGroupNotDisplayed() {
+        composeTestRule.setContent {
+            FirefoxTheme {
+                TabGroupList(
+                    groups = listOf(createTabGroup(title = "Group 1")),
+                    onTabGroupClick = {},
+                    onDeleteTabGroupClick = {},
+                    onEditTabGroupClick = {},
+                )
+            }
+        }
+
+        composeTestRule.onAllNodesWithTag(TabsTrayTestTag.TAB_GROUP_THREE_DOT_BUTTON)[0]
+            .performClick()
+
+        composeTestRule.onNodeWithTag(TabsTrayTestTag.UNGROUP_TAB_GROUP).assertDoesNotExist()
+    }
+
+    @Test
     fun verifyEditTabGroupClick() {
         val group = createTabGroup(title = "Group 1")
         var editClicked = false

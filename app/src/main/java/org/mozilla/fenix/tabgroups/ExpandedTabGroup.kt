@@ -188,9 +188,11 @@ private fun ViewTabGroupHeader(
 
         TabGroupMenuButton(
             includeCloseOption = true,
+            includeUngroupOption = true,
             onDeleteTabGroupClick = onDeleteTabGroupClick,
             onEditTabGroupClick = onEditTabGroupClick,
             onCloseTabGroupClick = onCloseTabGroupClick,
+            onUngroupTabGroupClick = {},
         )
     }
 }

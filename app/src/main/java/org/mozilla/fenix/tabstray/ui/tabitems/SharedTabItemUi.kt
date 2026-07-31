@@ -72,6 +72,7 @@ import mozilla.components.compose.base.theme.layout.AcornLayout
 import mozilla.components.support.utils.ext.isLandscape
 import mozilla.components.ui.colors.NovaColors
 import org.mozilla.fenix.R
+import org.mozilla.fenix.tabstray.LocalTabManagementFeatureHelper
 import org.mozilla.fenix.tabstray.TabsTrayTestTag
 import org.mozilla.fenix.tabstray.browser.compose.TabItemInteractionState
 import org.mozilla.fenix.tabstray.data.TabsTrayItem
@@ -225,17 +226,22 @@ val gridItemAspectRatio: Float
  * Renders the three dot button and its menu items for [TabsTrayItem.TabGroup] views.
  * @param modifier: The Modifier parameter
  * @param includeCloseOption: Whether to include the "Close" dropdown item in the menu item list.
+ * @param includeUngroupOption: Whether this surface wants the "Ungroup" dropdown item. The item is only
+ * shown when [TabManagementFeatureHelper.ungroupTabGroupEnabled] is also true.
  * @param onDeleteTabGroupClick Invoked when the user clicks on delete tab group.
  * @param onEditTabGroupClick Invoked when the user clicks to edit the selected tab group.
  * @param onCloseTabGroupClick Invoked when the user clicks to close the tab group.
+ * @param onUngroupTabGroupClick Invoked when the user clicks to ungroup the tab group.
  */
 @Composable
 fun TabGroupMenuButton(
     modifier: Modifier = Modifier,
     includeCloseOption: Boolean = false,
+    includeUngroupOption: Boolean = false,
     onDeleteTabGroupClick: () -> Unit,
     onEditTabGroupClick: () -> Unit,
     onCloseTabGroupClick: () -> Unit,
+    onUngroupTabGroupClick: () -> Unit,
 ) {
     var showDropdownMenu by remember { mutableStateOf(false) }
     IconButton(
@@ -262,6 +268,9 @@ fun TabGroupMenuButton(
                 closeTabGroup = onCloseTabGroupClick,
                 deleteTabGroup = onDeleteTabGroupClick,
                 includeCloseOption = includeCloseOption,
+                includeUngroupOption = includeUngroupOption &&
+                    LocalTabManagementFeatureHelper.current.ungroupTabGroupEnabled,
+                ungroupTabGroup = onUngroupTabGroupClick,
             ),
         )
     }
@@ -296,9 +305,11 @@ fun ListItemDismissButton(
 @Composable
 private fun generateTabGroupMenuItems(
     includeCloseOption: Boolean = false,
+    includeUngroupOption: Boolean = false,
     editTabGroup: () -> Unit,
     closeTabGroup: () -> Unit,
     deleteTabGroup: () -> Unit,
+    ungroupTabGroup: () -> Unit,
 ): List<MenuItem> {
     val editItem = MenuItem.IconItem(
         text = Text.Resource(R.string.tab_group_three_dot_menu_edit),
@@ -312,6 +323,12 @@ private fun generateTabGroupMenuItems(
         testTag = TabsTrayTestTag.CLOSE_TAB_GROUP,
         onClick = closeTabGroup,
     )
+    val ungroupItem = MenuItem.IconItem(
+        text = Text.Resource(R.string.tab_group_three_dot_menu_ungroup),
+        drawableRes = iconsR.drawable.mozac_ic_tab_ungroup_24,
+        testTag = TabsTrayTestTag.UNGROUP_TAB_GROUP,
+        onClick = ungroupTabGroup,
+    )
     val deleteItem = MenuItem.IconItem(
         text = Text.Resource(R.string.tab_group_three_dot_menu_delete),
         drawableRes = iconsR.drawable.mozac_ic_delete_24,
@@ -319,10 +336,15 @@ private fun generateTabGroupMenuItems(
         onClick = deleteTabGroup,
         level = MenuItem.FixedItem.Level.Critical,
     )
-    return if (includeCloseOption) {
-        listOf(editItem, closeItem, deleteItem)
-    } else {
-        listOf(editItem, deleteItem)
+    return buildList {
+        add(editItem)
+        if (includeCloseOption) {
+            add(closeItem)
+        }
+        if (includeUngroupOption) {
+            add(ungroupItem)
+        }
+        add(deleteItem)
     }
 }
 

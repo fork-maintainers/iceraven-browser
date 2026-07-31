@@ -97,6 +97,7 @@ fun TabGroupList(
                             onDeleteTabGroupClick = { onDeleteTabGroupClick(group) },
                             onEditTabGroupClick = { onEditTabGroupClick(group) },
                             onCloseTabGroupClick = {},
+                            onUngroupTabGroupClick = {},
                         )
                     },
                 )

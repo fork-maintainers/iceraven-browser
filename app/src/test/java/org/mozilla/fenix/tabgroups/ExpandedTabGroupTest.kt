@@ -37,6 +37,7 @@ class ExpandedTabGroupTest {
         override val tabGroupsEnabled: Boolean = true
         override val tabGroupsDragAndDropEnabled: Boolean = false
         override val shareTabGroupEnabled: Boolean = true
+        override val ungroupTabGroupEnabled: Boolean = true
         override val tabGroupsOnboardingEnabled: Boolean = false
         override val tabGroupsLiveReorderEnabled: Boolean = false
     }
@@ -73,13 +74,15 @@ class ExpandedTabGroupTest {
     @Test
     fun verifyMenuItems() {
         composeTestRule.setContent {
-            FirefoxTheme(theme = Theme.Light) {
-                Surface {
-                    ExpandedTabGroup(
-                        group = fakeTabGroup(),
-                        actions = expandedTabGroupActions(),
-                        tabInteractionHandler = NoOpTabInteractionHandler,
-                    )
+            CompositionLocalProvider(LocalTabManagementFeatureHelper provides tabManagementFeatureHelper) {
+                FirefoxTheme(theme = Theme.Light) {
+                    Surface {
+                        ExpandedTabGroup(
+                            group = fakeTabGroup(),
+                            actions = expandedTabGroupActions(),
+                            tabInteractionHandler = NoOpTabInteractionHandler,
+                        )
+                    }
                 }
             }
         }
@@ -87,6 +90,7 @@ class ExpandedTabGroupTest {
             .performClick()
         composeTestRule.onNodeWithTag(TabsTrayTestTag.EDIT_TAB_GROUP).assertIsDisplayed()
         composeTestRule.onNodeWithTag(TabsTrayTestTag.CLOSE_TAB_GROUP).assertIsDisplayed()
+        composeTestRule.onNodeWithTag(TabsTrayTestTag.UNGROUP_TAB_GROUP).assertIsDisplayed()
         composeTestRule.onNodeWithTag(TabsTrayTestTag.DELETE_TAB_GROUP).assertIsDisplayed()
     }
 
