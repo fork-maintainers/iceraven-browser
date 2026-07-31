@@ -61,7 +61,6 @@ internal class IPProtectionTelemetryMiddleware(
             }
 
             AccountStatus.Uninitialized,
-            AccountStatus.NoAccount,
             AccountStatus.WarmingUp,
             AccountStatus.NeedsAuthentication,
             AccountStatus.NeedsAuthorization,
@@ -97,7 +96,6 @@ internal class IPProtectionTelemetryMiddleware(
             }
 
             AccountStatus.Uninitialized,
-            AccountStatus.NoAccount,
             AccountStatus.WarmingUp,
             AccountStatus.NeedsAuthentication,
             AccountStatus.RequestingAuthentication,
