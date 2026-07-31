@@ -146,6 +146,21 @@ class BrowserPage(composeRule: AndroidComposeTestRule<HomeActivityIntentTestRule
         return this
     }
 
+    fun verifyTranslationSheetWithReload(url: String, attempts: Int = 3): BrowserPage {
+        for (attempt in 1..attempts) {
+            try {
+                mozVerify(BrowserPageSelectors.TRANSLATION_SHEET, timeout = waitingTimeLong)
+                mozVerifyElementsByGroup("notTranslatedPageTranslationSheet")
+                return this
+            } catch (e: AssertionError) {
+                if (attempt == attempts) throw e
+                Log.i("BrowserPage", "verifyTranslationSheetWithReload: translation sheet absent on attempt $attempt, reloading")
+                navigateToPage(url, forceNavigation = true)
+            }
+        }
+        return this
+    }
+
     fun verifyHttpsOnlyErrorPage(): BrowserPage {
         return verifyPageContent("Secure site not available")
             .verifyPageContent("Most likely, the website simply does not support HTTPS.")

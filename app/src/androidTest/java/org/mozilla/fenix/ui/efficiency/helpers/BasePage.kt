@@ -810,6 +810,19 @@ abstract class BasePage(
                     }
                 }
 
+                is UiObject2 -> {
+                    val swipePercent = 1.0f
+
+                    val uiAutomatorDirection = when (direction) {
+                        SwipeDirection.DOWN -> androidx.test.uiautomator.Direction.DOWN
+                        SwipeDirection.UP -> androidx.test.uiautomator.Direction.UP
+                        SwipeDirection.RIGHT -> androidx.test.uiautomator.Direction.RIGHT
+                        SwipeDirection.LEFT -> androidx.test.uiautomator.Direction.LEFT
+                    }
+
+                    containerElement.swipe(uiAutomatorDirection, swipePercent)
+                }
+
                 is SemanticsNodeInteraction -> {
                     containerElement.performTouchInput {
                         val swipeDistance = 1500f
@@ -852,6 +865,35 @@ abstract class BasePage(
         }
 
         return this
+    }
+
+    fun mozSwipeElementUntilAbsent(
+        selector: Selector,
+        direction: SwipeDirection,
+        maxSwipes: Int = 3,
+        applyPreconditions: Boolean = false,
+    ): BasePage {
+        val rep = rep()
+        rep?.startCmd(safeId("swipe_element_until_absent", selector.description), "Swiping ${direction.name} on '${selector.description}' until absent...", 1)
+
+        repeat(maxSwipes) { attempt ->
+            rep?.startLoc(safeId("loc", "${selector.description}_attempt_${attempt + 1}"), "Attempting to locate '${selector.description}'...", 2)
+            val present = mozVerifyElement(selector, applyPreconditions = false)
+            rep?.endLoc(success = !present, message = if (present) found(selector.description) else notFound(selector.description))
+
+            if (!present) {
+                rep?.endCmd(success = true, message = "'${selector.description}' gone after $attempt swipe(s)")
+                return this
+            }
+
+            mozSwipeElement(selector, direction, applyPreconditions)
+            composeRule.waitForIdle()
+            mDevice.waitForIdle()
+        }
+
+        rep?.endCmd(success = false, message = "'${selector.description}' still present after $maxSwipes swipe(s)")
+        ScreenDump.dump(composeRule, "mozSwipeElementUntilAbsent failed: ${selector.description}")
+        throw AssertionError("'${selector.description}' still present after $maxSwipes swipe(s)")
     }
 
     fun mozOpenNotificationsTray(): BasePage {
@@ -1364,7 +1406,7 @@ abstract class BasePage(
             }
 
             SelectorStrategy.UIAUTOMATOR2_BY_RES -> {
-                val obj = mDevice.findObject(By.res(selector.value))
+                val obj = mDevice.findObject(By.res(packageName + ":id/" + selector.value))
                 if (obj == null) {
                     Log.i("mozGetElement", "UIObject2 not found for res: ${selector.value}")
                     null

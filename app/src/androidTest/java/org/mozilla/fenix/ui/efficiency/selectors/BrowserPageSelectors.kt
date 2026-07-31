@@ -86,6 +86,13 @@ object BrowserPageSelectors {
         groups = listOf(),
     )
 
+    val TRANSLATION_SHEET = Selector(
+        strategy = SelectorStrategy.UIAUTOMATOR2_BY_RES,
+        value = "design_bottom_sheet",
+        description = "Translation bottom sheet",
+        groups = listOf("notTranslatedPageTranslationSheet"),
+    )
+
     val TRANSLATION_SHEET_TITLE = Selector(
         strategy = SelectorStrategy.COMPOSE_BY_TEXT,
         value = getStringResource(R.string.translations_bottom_sheet_title_first_time, argument = shortAppName),
@@ -111,6 +118,13 @@ object BrowserPageSelectors {
         strategy = SelectorStrategy.COMPOSE_BY_TEXT,
         value = getStringResource(R.string.translations_bottom_sheet_positive_button),
         description = "Translation bottom sheet translate button",
+        groups = listOf("notTranslatedPageTranslationSheet"),
+    )
+
+    val TRANSLATION_SHEET_NOT_NOW_BUTTON = Selector(
+        strategy = SelectorStrategy.COMPOSE_BY_TEXT,
+        value = getStringResource(R.string.translations_bottom_sheet_negative_button),
+        description = "Translation bottom sheet not now button",
         groups = listOf("notTranslatedPageTranslationSheet"),
     )
 
@@ -224,10 +238,12 @@ object BrowserPageSelectors {
         TAB_CRASH_REPORTER_RESTORE_BUTTON,
         TAB_CRASH_REPORTER_CLOSE_BUTTON,
         PAGE_CONTENT(),
+        TRANSLATION_SHEET,
         TRANSLATION_SHEET_TITLE,
         TRANSLATION_SHEET_TRANSLATE_FROM,
         TRANSLATION_SHEET_TRANSLATE_TO,
         TRANSLATION_SHEET_TRANSLATE_BUTTON,
+        TRANSLATION_SHEET_NOT_NOW_BUTTON,
         TRANSLATION_SHEET_SHOW_ORIGINAL_BUTTON,
         ADDED_TO_SHORTCUTS_SNACKBAR_TEXT,
     )

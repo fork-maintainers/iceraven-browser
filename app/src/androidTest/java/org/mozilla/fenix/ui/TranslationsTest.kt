@@ -7,6 +7,7 @@ package org.mozilla.fenix.ui
 import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
+import org.mozilla.fenix.customannotations.Converted
 import org.mozilla.fenix.customannotations.SmokeTest
 import org.mozilla.fenix.helpers.AppAndSystemHelper.disableWifiNetworkConnection
 import org.mozilla.fenix.helpers.AppAndSystemHelper.enableDataSaverSystemSetting
@@ -40,6 +41,11 @@ class TranslationsTest {
     val memoryLeaksRule = DetectMemoryLeaksRule(composeTestRule = { composeTestRule })
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/2436643
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.TranslationsTest#verifyTheFirstTranslationNotNowButtonFunctionalityTest"],
+        bug = 2059397,
+        since = "2026-07",
+    )
     @SmokeTest
     @Test
     fun verifyTheFirstTranslationNotNowButtonFunctionalityTest() {
