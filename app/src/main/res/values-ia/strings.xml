@@ -1714,6 +1714,16 @@
   <string name="tab_group_three_dot_menu_delete">Deler</string>
   <!-- Text shown on the close button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_close">Clauder</string>
+  <!-- Title for the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_title">De-gruppar gruppo de schedas?</string>
+  <!-- Text shown in the body of the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_body">Le schedas remanera aperte sur iste apparato, ma le gruppo sera delite.</string>
+  <!-- Text shown on the Don't Ask Again checkbox button in the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_dont_ask_again">Non plus demandar</string>
+  <!-- Text shown on the confirm button in the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_confirm">De-gruppar</string>
+  <!-- Text shown on the cancel button in the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_cancel">Cancellar</string>
   <!--
     Color labels for tab groups, used for accessibility and selection UI.
 
@@ -3164,6 +3174,14 @@
   <string name="ip_protection_location_unavailable" tools:ignore="UnusedResources">Position indisponibile. Elige un altere position.</string>
   <!-- Snackbar (in-app pop-up notification) text shown when the previously selected browser VPN location is unavailable and the recommended location was used instead. -->
   <string name="ip_protection_location_unavailable_recommended_snackbar" tools:ignore="UnusedResources">Position eligite del VPN indisponibile. Connexe al position recommendate.</string>
+  <!-- Title for the card shown to the user when we are unable to fetch server locations -->
+  <string name="ip_protection_locations_unavailable_title">Positiones indisponibile</string>
+  <!-- Description for the card shown to the user when we are unable to fetch server locations -->
+  <string name="ip_protection_locations_unavailable_description">Passate al position recommendate.</string>
+  <!-- Title for the browser VPN location selection screen (displayed in the app bar) -->
+  <string name="ip_protection_locations_title">Elige position del VPN</string>
+  <!-- Content description for the browser VPN location selection screen top bar back button -->
+  <string name="ip_protection_locations_navigate_back_button_content_description">Navigar retro</string>
   <!-- Title for the card shown to the user when we are unable to fetch server locations -->
   <string name="ip_protection_location_unavailable_title" tools:ignore="UnusedResources">Le previe position es indisponibile</string>
   <!-- Description for the card shown to the user when we are unable to fetch server locations -->

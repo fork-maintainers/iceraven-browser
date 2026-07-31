@@ -1714,6 +1714,10 @@
   <string name="tab_group_three_dot_menu_delete">Verwijderen</string>
   <!-- Text shown on the close button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_close">Sluiten</string>
+  <!-- Text shown on the Don't Ask Again checkbox button in the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_dont_ask_again">Dit niet meer vragen</string>
+  <!-- Text shown on the cancel button in the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_cancel">Annuleren</string>
   <!--
     Color labels for tab groups, used for accessibility and selection UI.
 
@@ -3164,6 +3168,12 @@
   <string name="ip_protection_location_unavailable" tools:ignore="UnusedResources">Locatie niet beschikbaar. Kies een andere locatie.</string>
   <!-- Snackbar (in-app pop-up notification) text shown when the previously selected browser VPN location is unavailable and the recommended location was used instead. -->
   <string name="ip_protection_location_unavailable_recommended_snackbar" tools:ignore="UnusedResources">Geselecteerde VPN-locatie is niet beschikbaar. Verbonden met de aanbevolen locatie.</string>
+  <!-- Title for the card shown to the user when we are unable to fetch server locations -->
+  <string name="ip_protection_locations_unavailable_title">Locaties niet beschikbaar</string>
+  <!-- Title for the browser VPN location selection screen (displayed in the app bar) -->
+  <string name="ip_protection_locations_title">VPN-locatie kiezen</string>
+  <!-- Content description for the browser VPN location selection screen top bar back button -->
+  <string name="ip_protection_locations_navigate_back_button_content_description">Terug bladeren</string>
   <!-- Title for the card shown to the user when we are unable to fetch server locations -->
   <string name="ip_protection_location_unavailable_title" tools:ignore="UnusedResources">Vorige locatie is niet beschikbaar</string>
   <!-- Description for the card shown to the user when we are unable to fetch server locations -->

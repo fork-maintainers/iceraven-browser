@@ -1709,6 +1709,16 @@
   <string name="tab_group_three_dot_menu_delete">刪除</string>
   <!-- Text shown on the close button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_close">關閉</string>
+  <!-- Title for the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_title">要取消分頁群組嗎？</string>
+  <!-- Text shown in the body of the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_body">將刪除群組，但在本裝置維持開啟分頁。</string>
+  <!-- Text shown on the Don't Ask Again checkbox button in the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_dont_ask_again">不要再問我</string>
+  <!-- Text shown on the confirm button in the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_confirm">取消群組</string>
+  <!-- Text shown on the cancel button in the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_cancel">取消</string>
   <!--
     Color labels for tab groups, used for accessibility and selection UI.
 
@@ -3158,6 +3168,14 @@
   <string name="ip_protection_location_unavailable" tools:ignore="UnusedResources">無法使用此位置，請改選其他位置。</string>
   <!-- Snackbar (in-app pop-up notification) text shown when the previously selected browser VPN location is unavailable and the recommended location was used instead. -->
   <string name="ip_protection_location_unavailable_recommended_snackbar" tools:ignore="UnusedResources">選擇的 VPN 連線位置無法使用，已改連線至建議位置。</string>
+  <!-- Title for the card shown to the user when we are unable to fetch server locations -->
+  <string name="ip_protection_locations_unavailable_title">無法取得位置資訊</string>
+  <!-- Description for the card shown to the user when we are unable to fetch server locations -->
+  <string name="ip_protection_locations_unavailable_description">已將連線切換至建議位置。</string>
+  <!-- Title for the browser VPN location selection screen (displayed in the app bar) -->
+  <string name="ip_protection_locations_title">選擇 VPN 連線位置</string>
+  <!-- Content description for the browser VPN location selection screen top bar back button -->
+  <string name="ip_protection_locations_navigate_back_button_content_description">瀏覽上一頁</string>
   <!-- Title for the card shown to the user when we are unable to fetch server locations -->
   <string name="ip_protection_location_unavailable_title" tools:ignore="UnusedResources">無法使用先前的連線位置</string>
   <!-- Description for the card shown to the user when we are unable to fetch server locations -->

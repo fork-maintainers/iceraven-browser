@@ -1743,11 +1743,11 @@
   <!-- Text shown in the body of the Ungroup tab group confirmation dialog. -->
   <string name="ungroup_tab_group_confirmation_dialog_body">Bydd y tabiau yn parhau ar agor ar y ddyfais hon, ond bydd y grŵp yn cael ei ddileu.</string>
   <!-- Text shown on the Don't Ask Again checkbox button in the Ungroup tab group confirmation dialog. -->
-  <string name="ungroup_tab_group_confirmation_dialog_dont_ask_again">Peidio a gofyn eto.</string>
+  <string name="ungroup_tab_group_confirmation_dialog_dont_ask_again">Peidio gofyn eto</string>
   <!-- Text shown on the confirm button in the Ungroup tab group confirmation dialog. -->
   <string name="ungroup_tab_group_confirmation_dialog_confirm">Dadgrwpio</string>
   <!-- Text shown on the cancel button in the Ungroup tab group confirmation dialog. -->
-  <string name="ungroup_tab_group_confirmation_dialog_cancel">Diddymu</string>
+  <string name="ungroup_tab_group_confirmation_dialog_cancel">Na</string>
   <!--
     Color labels for tab groups, used for accessibility and selection UI.
 
@@ -3209,11 +3209,11 @@
   <!-- Title for the card shown to the user when we are unable to fetch server locations -->
   <string name="ip_protection_locations_unavailable_title">Lleoliadau ddim ar gael</string>
   <!-- Description for the card shown to the user when we are unable to fetch server locations -->
-  <string name="ip_protection_locations_unavailable_description">Wedi newid i\'r lleoliad a argymhellir.</string>
+  <string name="ip_protection_locations_unavailable_description">Wedi newid i\'r lleoliad sy\'n cael ei argymell.</string>
   <!-- Title for the browser VPN location selection screen (displayed in the app bar) -->
-  <string name="ip_protection_locations_title">Dewiswch Lleoliad VPN</string>
+  <string name="ip_protection_locations_title">Dewis Lleoliad VPN</string>
   <!-- Content description for the browser VPN location selection screen top bar back button -->
-  <string name="ip_protection_locations_navigate_back_button_content_description">Symud nôl</string>
+  <string name="ip_protection_locations_navigate_back_button_content_description">Mynd nôl</string>
   <!-- Title for the card shown to the user when we are unable to fetch server locations -->
   <string name="ip_protection_location_unavailable_title" tools:ignore="UnusedResources">Dyw\'r lleoliad blaenorol ddim ar gael</string>
   <!-- Description for the card shown to the user when we are unable to fetch server locations -->
