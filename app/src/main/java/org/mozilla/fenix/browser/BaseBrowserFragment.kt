@@ -1261,8 +1261,14 @@ abstract class BaseBrowserFragment :
                 shouldShowDoNotAskAgainCheckBox = context.components.appStore.state.mode != BrowsingMode.Private,
                 store = store,
                 shouldHide = {
-                    val state = requireComponents.appStore.state
-                    state.isPrivateScreenLocked && state.mode.isPrivate
+                    // if the fragment is detached,
+                    // returning true will hide the site permission prompt rather than crash
+                    if (this.context == null) {
+                        true
+                    } else {
+                        val state = requireComponents.appStore.state
+                        state.isPrivateScreenLocked && state.mode.isPrivate
+                    }
                 },
             ),
             owner = this,
