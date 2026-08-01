@@ -1714,8 +1714,14 @@
   <string name="tab_group_three_dot_menu_delete">Fuortsmite</string>
   <!-- Text shown on the close button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_close">Slute</string>
+  <!-- Title for the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_title">Ljepblêdgroep degroepearje?</string>
+  <!-- Text shown in the body of the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_body">De ljepblêden sille op dit apparaat iepen bliuwe, mar de groep wurdt fuortsmiten.</string>
   <!-- Text shown on the Don't Ask Again checkbox button in the Ungroup tab group confirmation dialog. -->
   <string name="ungroup_tab_group_confirmation_dialog_dont_ask_again">Dit net mear freegje</string>
+  <!-- Text shown on the confirm button in the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_confirm">Degroeperje</string>
   <!-- Text shown on the cancel button in the Ungroup tab group confirmation dialog. -->
   <string name="ungroup_tab_group_confirmation_dialog_cancel">Annulearje</string>
   <!--
@@ -3170,6 +3176,8 @@
   <string name="ip_protection_location_unavailable_recommended_snackbar" tools:ignore="UnusedResources">Selektearre VPN-lokaasje is net beskikber. Ferbûn mei de oanrekommandearre lokaasje.</string>
   <!-- Title for the card shown to the user when we are unable to fetch server locations -->
   <string name="ip_protection_locations_unavailable_title">Lokaasjes net beskikber</string>
+  <!-- Description for the card shown to the user when we are unable to fetch server locations -->
+  <string name="ip_protection_locations_unavailable_description">Nei oanrekommandearre lokaasje wiksele.</string>
   <!-- Title for the browser VPN location selection screen (displayed in the app bar) -->
   <string name="ip_protection_locations_title">VPN-lokaasje kieze</string>
   <!-- Content description for the browser VPN location selection screen top bar back button -->

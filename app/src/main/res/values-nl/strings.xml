@@ -1714,8 +1714,14 @@
   <string name="tab_group_three_dot_menu_delete">Verwijderen</string>
   <!-- Text shown on the close button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_close">Sluiten</string>
+  <!-- Title for the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_title">Tabbladgroep degroeperen?</string>
+  <!-- Text shown in the body of the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_body">De tabbladen zullen op dit apparaat geopend blijven, maar de groep wordt verwijderd.</string>
   <!-- Text shown on the Don't Ask Again checkbox button in the Ungroup tab group confirmation dialog. -->
   <string name="ungroup_tab_group_confirmation_dialog_dont_ask_again">Dit niet meer vragen</string>
+  <!-- Text shown on the confirm button in the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_confirm">Degroeperen</string>
   <!-- Text shown on the cancel button in the Ungroup tab group confirmation dialog. -->
   <string name="ungroup_tab_group_confirmation_dialog_cancel">Annuleren</string>
   <!--
@@ -3170,6 +3176,8 @@
   <string name="ip_protection_location_unavailable_recommended_snackbar" tools:ignore="UnusedResources">Geselecteerde VPN-locatie is niet beschikbaar. Verbonden met de aanbevolen locatie.</string>
   <!-- Title for the card shown to the user when we are unable to fetch server locations -->
   <string name="ip_protection_locations_unavailable_title">Locaties niet beschikbaar</string>
+  <!-- Description for the card shown to the user when we are unable to fetch server locations -->
+  <string name="ip_protection_locations_unavailable_description">Naar aanbevolen locatie gewisseld.</string>
   <!-- Title for the browser VPN location selection screen (displayed in the app bar) -->
   <string name="ip_protection_locations_title">VPN-locatie kiezen</string>
   <!-- Content description for the browser VPN location selection screen top bar back button -->

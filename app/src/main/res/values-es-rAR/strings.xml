@@ -3177,7 +3177,7 @@
   <!-- Title for the card shown to the user when we are unable to fetch server locations -->
   <string name="ip_protection_locations_unavailable_title">Ubicaciones no disponibles</string>
   <!-- Description for the card shown to the user when we are unable to fetch server locations -->
-  <string name="ip_protection_locations_unavailable_description">Cambió a la ubicación recomendada.</string>
+  <string name="ip_protection_locations_unavailable_description">Se cambió a la ubicación recomendada.</string>
   <!-- Title for the browser VPN location selection screen (displayed in the app bar) -->
   <string name="ip_protection_locations_title">Elegir ubicación de VPN</string>
   <!-- Content description for the browser VPN location selection screen top bar back button -->
