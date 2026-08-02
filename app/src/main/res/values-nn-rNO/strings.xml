@@ -1716,6 +1716,8 @@
   <string name="tab_group_three_dot_menu_close">Lat att</string>
   <!-- Title for the Ungroup tab group confirmation dialog. -->
   <string name="ungroup_tab_group_confirmation_dialog_title">Avgruppere fanegruppe?</string>
+  <!-- Text shown in the body of the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_body">Fanane vil halde fram med å vere opne på denne eininga, men gruppa vil bli sletta.</string>
   <!-- Text shown on the Don't Ask Again checkbox button in the Ungroup tab group confirmation dialog. -->
   <string name="ungroup_tab_group_confirmation_dialog_dont_ask_again">Ikkje spør igjen</string>
   <!-- Text shown on the confirm button in the Ungroup tab group confirmation dialog. -->
@@ -3172,6 +3174,10 @@
   <string name="ip_protection_location_unavailable" tools:ignore="UnusedResources">Plassering ikkje tilgjengeleg. Vel ei anna plassering.</string>
   <!-- Snackbar (in-app pop-up notification) text shown when the previously selected browser VPN location is unavailable and the recommended location was used instead. -->
   <string name="ip_protection_location_unavailable_recommended_snackbar" tools:ignore="UnusedResources">Den valde VPN-plasseringa er ikkje tilgjengeleg. Tilkopla den tilrådde plasseringa.</string>
+  <!-- Title for the card shown to the user when we are unable to fetch server locations -->
+  <string name="ip_protection_locations_unavailable_title">Plasseringar ikkje tilgjengelege</string>
+  <!-- Description for the card shown to the user when we are unable to fetch server locations -->
+  <string name="ip_protection_locations_unavailable_description">Byt til tilrådd plassering.</string>
   <!-- Title for the browser VPN location selection screen (displayed in the app bar) -->
   <string name="ip_protection_locations_title">Vel VPN-plassering</string>
   <!-- Content description for the browser VPN location selection screen top bar back button -->
