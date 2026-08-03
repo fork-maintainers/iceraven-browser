@@ -44,7 +44,6 @@ import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -1071,7 +1070,7 @@ private fun TabListItemContent(
                         if (selectionState.isSelected) {
                             MaterialTheme.colorScheme.primaryContainer
                         } else {
-                            MaterialTheme.colorScheme.surfaceContainerLowest
+                            MaterialTheme.colorScheme.surfaceBright
                         },
                     ),
                 trailingContent = {
@@ -1190,6 +1189,7 @@ private fun InteractableTabList(
                 .background(MaterialTheme.colorScheme.surface)
                 .drawHorizontalReorderIndicator(listInteractionState = listInteractionState, listState = state),
             state = state,
+            verticalArrangement = Arrangement.spacedBy(FirefoxTheme.layout.space.static25),
             contentPadding = PaddingValues(
                 bottom = tabListBottomPadding,
                 top = tabListPadding,
@@ -1250,7 +1250,7 @@ private fun LazyListScope.interactableTabListContent(
         showTabGroupOnboarding = displayTabGroupOnboarding,
         selectedItemIndex = selectedItemIndex,
         onTabGroupOnboardingDismiss = onTabGroupOnboardingDismiss,
-    ) { position, shapeInfo, showDivider, tab ->
+    ) { position, shapeInfo, tab ->
         // Pins the currently dragged item so that it can be scrolled off screen without being disposed
         val pinnableContainer = LocalPinnableContainer.current
         val isDragged by remember(tab.id) {
@@ -1292,9 +1292,6 @@ private fun LazyListScope.interactableTabListContent(
                 onGroupEntranceAnimationPlayed = onGroupEntranceAnimationPlayed,
             )
         }
-        if (showDivider) {
-            HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
-        }
     }
     trackersBlockedContent(trackersBlockedCount, onPrivacyReportTapped)
 }
@@ -1328,7 +1325,6 @@ private fun LazyListScope.tabListItems(
     tabContent: @Composable LazyItemScope.(
         position: Int,
         shapeInfo: TabListShapeInfo,
-        showDivider: Boolean,
         tab: TabsTrayItem,
     ) -> Unit,
 ) {
@@ -1350,7 +1346,6 @@ private fun LazyListScope.tabListItems(
                 itemIndex = index,
                 size = rowCount,
             ),
-            index != tabsBeforeOnboarding.lastIndex,
             tab,
         )
     }
@@ -1381,7 +1376,6 @@ private fun LazyListScope.tabListItems(
                     itemIndex = position,
                     size = rowCount,
                 ),
-                index != tabsAfterOnboarding.lastIndex,
                 tab,
             )
         }
@@ -1470,6 +1464,7 @@ private fun ReorderableTabList(
                     shouldLongPressToDrag = reorderingEnabled && !isInMultiSelectMode,
                 ),
             state = state,
+            verticalArrangement = Arrangement.spacedBy(FirefoxTheme.layout.space.static25),
             contentPadding = PaddingValues(
                 bottom = tabListBottomPadding,
             ),
@@ -1485,7 +1480,7 @@ private fun ReorderableTabList(
                 showTabGroupOnboarding = displayTabGroupOnboarding,
                 selectedItemIndex = selectedItemIndex,
                 onTabGroupOnboardingDismiss = onTabGroupOnboardingDismiss,
-            ) { position, shapeInfo, showDivider, tab ->
+            ) { position, shapeInfo, tab ->
                 val selectionState = TabsTrayItemSelectionState(
                     isFocused = tab.isFocused,
                     multiSelectEnabled = isInMultiSelectMode,
@@ -1533,7 +1528,7 @@ private fun ReorderableTabList(
                                         if (selectionState.isSelected) {
                                             MaterialTheme.colorScheme.primaryContainer
                                         } else {
-                                            MaterialTheme.colorScheme.surfaceContainerLowest
+                                            MaterialTheme.colorScheme.surfaceBright
                                         },
                                     ),
                                 trailingContent = {
@@ -1558,10 +1553,6 @@ private fun ReorderableTabList(
                             )
                         }
                     }
-                }
-
-                if (showDivider) {
-                    HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
                 }
             }
 

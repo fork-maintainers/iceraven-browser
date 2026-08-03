@@ -133,7 +133,7 @@ private fun TabContent(
     val contentBackgroundColor = if (selectionState.isSelected) {
         MaterialTheme.colorScheme.primaryContainer
     } else {
-        MaterialTheme.colorScheme.surfaceContainerLowest
+        MaterialTheme.colorScheme.surfaceBright
     }
     Row(
         modifier = modifier

@@ -5,13 +5,13 @@
 package org.mozilla.fenix.tabstray.ui.tabpage
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -62,6 +62,7 @@ fun TabGroupList(
                     top = FirefoxTheme.layout.space.dynamic200,
                     end = FirefoxTheme.layout.space.dynamic200,
                 ),
+            verticalArrangement = Arrangement.spacedBy(FirefoxTheme.layout.space.static25),
         ) {
             itemsIndexed(
                 items = groups,
@@ -81,7 +82,7 @@ fun TabGroupList(
                     tabGroup = group,
                     onClick = { onTabGroupClick(group) },
                     modifier = Modifier
-                        .background(MaterialTheme.colorScheme.surfaceContainerLowest)
+                        .background(MaterialTheme.colorScheme.surfaceBright)
                         .tabListItemShapeStyling(
                             tabShapeInfo = tabShapeInfo,
                             selectionState = TabsTrayItemSelectionState(
@@ -101,10 +102,6 @@ fun TabGroupList(
                         )
                     },
                 )
-
-                if (index != groups.lastIndex) {
-                    HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
-                }
             }
         }
     }
