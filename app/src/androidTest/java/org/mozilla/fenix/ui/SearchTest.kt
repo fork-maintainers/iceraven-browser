@@ -660,6 +660,7 @@ class SearchTest {
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/1232638
     // Default search code for DuckDuckGo-US
+    @Ignore("Failing, see https://bugzilla.mozilla.org/show_bug.cgi?id=1858878")
     @Test
     fun defaultSearchCodeDuckDuckGoUS() {
         homeScreen(composeTestRule) {
