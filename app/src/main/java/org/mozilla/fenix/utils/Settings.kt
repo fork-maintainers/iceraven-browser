@@ -2756,12 +2756,6 @@ class Settings(
         default = false,
     )
 
-    /** Forces GPI (Google Play Integrity) authentication for IPProtection, set through Secret Settings. */
-    var ipProtectionUseGpi by booleanPreference(
-        key = appContext.getPreferenceKey(R.string.pref_key_ip_protection_use_gpi),
-        default = false,
-    )
-
     /**
      * Indicates if the user has already toggled the VPN on.
      */
