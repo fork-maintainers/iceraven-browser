@@ -21,11 +21,13 @@ class UnifiedTrustPanelPage(composeRule: AndroidComposeTestRule<HomeActivityInte
         NavigationRegistry.register(
             from = "BrowserPage",
             to = pageName,
-            // The site-info button's tag depends on the page's security state (secure / unsecure /
-            // unknown). Try each — ClickIfPresent opens the panel from whichever one the page shows.
+            // The site-info button's tag depends on the page's state (insecure connection / secure /
+            // tracking protection off / unknown). Try each - ClickIfPresent opens the panel from
+            // whichever one the page shows.
             steps = listOf(
+                NavigationStep.ClickIfPresent(ToolbarSelectors.INSECURE_CONNECTION_INFORMATION_BUTTON),
                 NavigationStep.ClickIfPresent(ToolbarSelectors.SECURE_SITE_INFORMATION_BUTTON),
-                NavigationStep.ClickIfPresent(ToolbarSelectors.UNSECURE_SITE_INFORMATION_BUTTON),
+                NavigationStep.ClickIfPresent(ToolbarSelectors.TRACKING_PROTECTION_OFF_INFORMATION_BUTTON),
                 NavigationStep.ClickIfPresent(ToolbarSelectors.UNKNOWN_SITE_INFORMATION_BUTTON),
             ),
         )

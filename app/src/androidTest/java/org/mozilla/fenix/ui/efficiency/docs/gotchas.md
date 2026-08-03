@@ -136,8 +136,9 @@ Last updated: 2026-07-22.
 ### B7. Nav entry/arrival selectors must cover EVERY runtime state (2026-07-23, bit us twice)
 - **Why:** a screen's arrival signal or entry control can change with app state. (1) RecentlyClosed's
   `requiredForPage` was the empty-state view — absent once the list is populated, so populated tests
-  couldn't confirm arrival. (2) The UnifiedTrustPanel entry button's testTag depends on page security:
-  `SITE_INFO_SECURE` vs `SITE_INFO_UNSECURE` vs `SITE_INFO_UNKNOWN` — the secure-only edge never opened
+  couldn't confirm arrival. (2) The UnifiedTrustPanel entry button's testTag depends on the page's
+  security and tracking protection state: `SITE_INFO_SECURE` vs `SITE_INFO_INSECURE_CONNECTION` vs
+  `SITE_INFO_TRACKING_PROTECTION_OFF` vs `SITE_INFO_UNKNOWN` — the secure-only edge never opened
   the panel on an http page.
 - **Check:** `requiredForPage` must be an element present in ALL states (e.g. a toolbar title, never an
   empty-list placeholder). A nav edge whose entry control is state-dependent must `ClickIfPresent` every

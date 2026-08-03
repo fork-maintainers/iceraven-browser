@@ -7,9 +7,10 @@ package org.mozilla.fenix.ui.efficiency.selectors
 import mozilla.components.compose.browser.toolbar.concept.BrowserToolbarTestTags.ADDRESSBAR_URL_BOX
 import mozilla.components.compose.browser.toolbar.concept.BrowserToolbarTestTags.TABS_COUNTER
 import org.mozilla.fenix.R
+import org.mozilla.fenix.components.toolbar.BrowserToolbarTestTags.SITE_INFO_INSECURE_CONNECTION
 import org.mozilla.fenix.components.toolbar.BrowserToolbarTestTags.SITE_INFO_SECURE
+import org.mozilla.fenix.components.toolbar.BrowserToolbarTestTags.SITE_INFO_TRACKING_PROTECTION_OFF
 import org.mozilla.fenix.components.toolbar.BrowserToolbarTestTags.SITE_INFO_UNKNOWN
-import org.mozilla.fenix.components.toolbar.BrowserToolbarTestTags.SITE_INFO_UNSECURE
 import org.mozilla.fenix.helpers.DataGenerationHelper.getStringResource
 import org.mozilla.fenix.ui.efficiency.helpers.Selector
 import org.mozilla.fenix.ui.efficiency.helpers.SelectorStrategy
@@ -89,6 +90,13 @@ object ToolbarSelectors {
         groups = listOf(),
     )
 
+    val INSECURE_CONNECTION_INFORMATION_BUTTON = Selector(
+        strategy = SelectorStrategy.COMPOSE_BY_TAG,
+        value = SITE_INFO_INSECURE_CONNECTION,
+        description = "Insecure connection information button",
+        groups = listOf("browserViewToolbarItems"),
+    )
+
     val SECURE_SITE_INFORMATION_BUTTON = Selector(
         strategy = SelectorStrategy.COMPOSE_BY_TAG,
         value = SITE_INFO_SECURE,
@@ -96,10 +104,10 @@ object ToolbarSelectors {
         groups = listOf("browserViewToolbarItems"),
     )
 
-    val UNSECURE_SITE_INFORMATION_BUTTON = Selector(
+    val TRACKING_PROTECTION_OFF_INFORMATION_BUTTON = Selector(
         strategy = SelectorStrategy.COMPOSE_BY_TAG,
-        value = SITE_INFO_UNSECURE,
-        description = "Unsecure site information button",
+        value = SITE_INFO_TRACKING_PROTECTION_OFF,
+        description = "Tracking protection off information button",
         groups = listOf("browserViewToolbarItems"),
     )
 
@@ -120,8 +128,9 @@ object ToolbarSelectors {
         NEW_TAB_BUTTON,
         SEARCH_ENGINE_SELECTOR_ICON(),
         TAB_COUNTER_WITH_COUNT(),
+        INSECURE_CONNECTION_INFORMATION_BUTTON,
         SECURE_SITE_INFORMATION_BUTTON,
-        UNSECURE_SITE_INFORMATION_BUTTON,
+        TRACKING_PROTECTION_OFF_INFORMATION_BUTTON,
         UNKNOWN_SITE_INFORMATION_BUTTON,
     )
 }

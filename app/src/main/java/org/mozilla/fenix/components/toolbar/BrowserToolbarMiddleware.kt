@@ -109,10 +109,11 @@ import org.mozilla.fenix.components.appstate.snackbar.SnackbarState
 import org.mozilla.fenix.components.menu.MenuAccessPoint
 import org.mozilla.fenix.components.metrics.MetricsUtils
 import org.mozilla.fenix.components.share.ShareSource
+import org.mozilla.fenix.components.toolbar.BrowserToolbarTestTags.SITE_INFO_INSECURE_CONNECTION
 import org.mozilla.fenix.components.toolbar.BrowserToolbarTestTags.SITE_INFO_LOCAL_FILE
 import org.mozilla.fenix.components.toolbar.BrowserToolbarTestTags.SITE_INFO_SECURE
+import org.mozilla.fenix.components.toolbar.BrowserToolbarTestTags.SITE_INFO_TRACKING_PROTECTION_OFF
 import org.mozilla.fenix.components.toolbar.BrowserToolbarTestTags.SITE_INFO_UNKNOWN
-import org.mozilla.fenix.components.toolbar.BrowserToolbarTestTags.SITE_INFO_UNSECURE
 import org.mozilla.fenix.components.toolbar.DisplayActions.AddBookmarkClicked
 import org.mozilla.fenix.components.toolbar.DisplayActions.EditBookmarkClicked
 import org.mozilla.fenix.components.toolbar.DisplayActions.HomepageClicked
@@ -200,7 +201,8 @@ internal object BrowserToolbarTestTags {
     const val SITE_INFO_LOCAL_FILE = "browser.toolbar.site.info.local.file"
     const val SITE_INFO_UNKNOWN = "browser.toolbar.site.info.unknown"
     const val SITE_INFO_SECURE = "browser.toolbar.site.info.secure"
-    const val SITE_INFO_UNSECURE = "browser.toolbar.site.info.unsecure"
+    const val SITE_INFO_INSECURE_CONNECTION = "browser.toolbar.site.info.insecure.connection"
+    const val SITE_INFO_TRACKING_PROTECTION_OFF = "browser.toolbar.site.info.tracking.protection.off"
 }
 
 /**
@@ -1304,9 +1306,15 @@ class BrowserToolbarMiddleware(
                     onClick = object : BrowserToolbarEvent {},
                     testTag = SITE_INFO_UNKNOWN,
                 )
-            } else if (
-                selectedTab.content.securityInfo.isSecure &&
-                selectedTab.trackingProtection.enabled &&
+            } else if (!selectedTab.content.securityInfo.isSecure) {
+                buildSiteInfoAction(
+                    drawableResId = iconsR.drawable.mozac_ic_shield_slash_24,
+                    contentDescription = toolbarR.string.mozac_browser_toolbar_content_description_site_info,
+                    highlighted = highlight,
+                    onClick = StartPageActions.SiteInfoClicked,
+                    testTag = SITE_INFO_INSECURE_CONNECTION,
+                )
+            } else if (selectedTab.trackingProtection.enabled &&
                 !selectedTab.trackingProtection.ignoredOnTrackingProtection
             ) {
                 buildSiteInfoAction(
@@ -1318,11 +1326,11 @@ class BrowserToolbarMiddleware(
                 )
             } else {
                 buildSiteInfoAction(
-                    drawableResId = iconsR.drawable.mozac_ic_shield_slash_24,
+                    drawableResId = iconsR.drawable.mozac_ic_shield_cross_24,
                     contentDescription = toolbarR.string.mozac_browser_toolbar_content_description_site_info,
                     highlighted = highlight,
                     onClick = StartPageActions.SiteInfoClicked,
-                    testTag = SITE_INFO_UNSECURE,
+                    testTag = SITE_INFO_TRACKING_PROTECTION_OFF,
                 )
             }
         }

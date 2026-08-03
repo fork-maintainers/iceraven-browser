@@ -391,7 +391,7 @@ class CustomTabBrowserToolbarMiddlewareTest {
         )
         val middleware = buildMiddleware(browserStore)
         val expectedInsecureIndicator = ActionButtonRes(
-            drawableResId = iconsR.drawable.mozac_ic_shield_slash_24,
+            drawableResId = iconsR.drawable.mozac_ic_shield_cross_24,
             contentDescription = toolbarR.string.mozac_browser_toolbar_content_description_site_info,
             onClick = SiteInfoClicked,
         )
@@ -419,7 +419,7 @@ class CustomTabBrowserToolbarMiddlewareTest {
         )
         val middleware = buildMiddleware(browserStore)
         val expectedInsecureIndicator = ActionButtonRes(
-            drawableResId = iconsR.drawable.mozac_ic_shield_slash_24,
+            drawableResId = iconsR.drawable.mozac_ic_shield_cross_24,
             contentDescription = toolbarR.string.mozac_browser_toolbar_content_description_site_info,
             onClick = SiteInfoClicked,
         )
@@ -459,7 +459,7 @@ class CustomTabBrowserToolbarMiddlewareTest {
         )
         val middleware = buildMiddleware(browserStore)
         val expectedInsecureIndicator = ActionButtonRes(
-            drawableResId = iconsR.drawable.mozac_ic_shield_slash_24,
+            drawableResId = iconsR.drawable.mozac_ic_shield_cross_24,
             contentDescription = toolbarR.string.mozac_browser_toolbar_content_description_site_info,
             onClick = SiteInfoClicked,
         )
