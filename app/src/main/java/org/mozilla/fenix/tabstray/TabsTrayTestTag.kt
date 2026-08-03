@@ -93,4 +93,7 @@ internal object TabsTrayTestTag {
 
     // Tab grid
     const val TAB_GRID = "$TABS_TRAY.grid"
+
+    // Tab list
+    const val TAB_LIST = "$TABS_TRAY.list"
 }

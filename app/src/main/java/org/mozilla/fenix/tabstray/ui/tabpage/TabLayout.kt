@@ -190,7 +190,8 @@ private val ignoredItems = setOf(HEADER_ITEM_KEY, SPAN_ITEM_KEY, TAB_GROUP_ONBOA
  * @param onTabGroupOnboardingDismiss Invoked when the user dismisses the tab group onboarding card.
  * @param onTabGroupOnboardingShown Invoked when the tab group onboarding card is shown to the user.
  * @param header Optional layout to display before [tabs].
- * @param contentPadding Optional PaddingValues to pad the tab's content.
+ * @param contentPadding [PaddingValues] applied around the tabs when displayed in a grid.
+ * @param listHorizontalPadding Horizontal padding applied around the tabs when displayed in a list.
  * @param onPrivacyReportTapped Invoked when the trackers blocked pill is tapped.
  * @param enteringGroupId The id of a group entering composition for the first time, if any. Can be null.
  * @param onGroupEntranceAnimationPlayed Called when a new group's entrance animation is played.
@@ -221,6 +222,7 @@ fun TabLayout(
     onTabGroupOnboardingShown: () -> Unit = {},
     header: (@Composable () -> Unit)? = null,
     contentPadding: PaddingValues = defaultTabLayoutContentPadding(),
+    listHorizontalPadding: Dp = tabListPadding,
     onPrivacyReportTapped: (() -> Unit)? = null,
     enteringGroupId: String? = null,
     onGroupEntranceAnimationPlayed: () -> Unit = {},
@@ -269,6 +271,7 @@ fun TabLayout(
             onTabGroupOnboardingDismiss = onTabGroupOnboardingDismiss,
             onTabGroupOnboardingShown = onTabGroupOnboardingShown,
             header = header,
+            horizontalPadding = listHorizontalPadding,
             trackersBlockedCount = trackersBlockedCount,
             focusEnabled = focusEnabled,
             dragAndDropEnabled = dragAndDropEnabled,
@@ -307,6 +310,7 @@ private fun TabList(
     onTabGroupOnboardingDismiss: () -> Unit = {},
     onTabGroupOnboardingShown: () -> Unit = {},
     header: (@Composable () -> Unit)? = null,
+    horizontalPadding: Dp = tabListPadding,
     onPrivacyReportTapped: (() -> Unit)? = null,
     onGroupEntranceAnimationPlayed: () -> Unit,
     dragProcessingState: TabsTrayState.DragProcessingState = TabsTrayState.DragProcessingState.UNINITIALIZED,
@@ -327,6 +331,7 @@ private fun TabList(
             onTabGroupOnboardingDismiss = onTabGroupOnboardingDismiss,
             onTabGroupOnboardingShown = onTabGroupOnboardingShown,
             header = header,
+            horizontalPadding = horizontalPadding,
             trackersBlockedCount = trackersBlockedCount,
             focusEnabled = focusEnabled,
             dragAndDropEnabled = dragAndDropEnabled,
@@ -352,6 +357,7 @@ private fun TabList(
             onCloseTabGroupClick = onCloseTabGroupClick,
             onTabGroupOnboardingDismiss = onTabGroupOnboardingDismiss,
             header = header,
+            horizontalPadding = horizontalPadding,
             trackersBlockedCount = trackersBlockedCount,
             focusEnabled = true,
             reorderingEnabled = reorderingEnabled,
@@ -1119,6 +1125,7 @@ private fun InteractableTabList(
     focusEnabled: Boolean,
     dragAndDropEnabled: Boolean,
     header: (@Composable () -> Unit)? = null,
+    horizontalPadding: Dp = tabListPadding,
     onPrivacyReportTapped: (() -> Unit)? = null,
     enteringGroupId: String?,
     onGroupEntranceAnimationPlayed: () -> Unit,
@@ -1182,11 +1189,11 @@ private fun InteractableTabList(
         LazyColumn(
             modifier = modifier
                 .width(FirefoxTheme.layout.size.containerMaxWidth)
-                .padding(
-                    start = tabListPadding,
-                    end = tabListPadding,
-                )
+                .padding(horizontal = horizontalPadding)
                 .background(MaterialTheme.colorScheme.surface)
+                .semantics {
+                    testTag = TabsTrayTestTag.TAB_LIST
+                }
                 .drawHorizontalReorderIndicator(listInteractionState = listInteractionState, listState = state),
             state = state,
             verticalArrangement = Arrangement.spacedBy(FirefoxTheme.layout.space.static25),
@@ -1399,6 +1406,7 @@ private fun ReorderableTabList(
     onCloseTabGroupClick: (TabsTrayItem.TabGroup) -> Unit,
     onTabGroupOnboardingDismiss: () -> Unit = {},
     header: (@Composable () -> Unit)? = null,
+    horizontalPadding: Dp = tabListPadding,
     trackersBlockedCount: Int? = null,
     focusEnabled: Boolean = true,
     reorderingEnabled: Boolean = true,
@@ -1453,11 +1461,11 @@ private fun ReorderableTabList(
         LazyColumn(
             modifier = modifier
                 .width(FirefoxTheme.layout.size.containerMaxWidth)
-                .padding(
-                    start = tabListPadding,
-                    end = tabListPadding,
-                )
+                .padding(horizontal = horizontalPadding)
                 .background(MaterialTheme.colorScheme.surface)
+                .semantics {
+                    testTag = TabsTrayTestTag.TAB_LIST
+                }
                 .detectListPressAndDrag(
                     listState = state,
                     reorderState = reorderState,

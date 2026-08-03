@@ -524,6 +524,7 @@ class TabManagementFragment : Fragment() {
                                 ExpandedTabGroup(
                                     group = expandedGroup,
                                     actions = expandedGroupActions,
+                                    displayTabsInGrid = state.config.displayTabsInGrid,
                                     tabInteractionHandler = tabInteractionHandler,
                                 )
                             }

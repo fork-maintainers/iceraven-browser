@@ -15,12 +15,9 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
@@ -57,6 +54,7 @@ import mozilla.components.ui.icons.R as iconsR
  * Renders an expanded view of a user's tab group.
  * @param group [TabsTrayItem.TabGroup] item rendered by the card.
  * @param actions [ExpandedTabGroupActions] invoked in response to user interactions.
+ * @param displayTabsInGrid Whether the group's tabs are displayed in a grid (vs a list).
  * @param tabInteractionHandler Handler for tab interactions.
  */
 @OptIn(ExperimentalMaterial3Api::class)
@@ -64,6 +62,7 @@ import mozilla.components.ui.icons.R as iconsR
 fun ExpandedTabGroup(
     group: TabsTrayItem.TabGroup,
     actions: ExpandedTabGroupActions,
+    displayTabsInGrid: Boolean,
     tabInteractionHandler: TabInteractionHandler,
 ) {
     Column(
@@ -86,7 +85,7 @@ fun ExpandedTabGroup(
 
         TabLayout(
             tabs = group.tabs,
-            displayTabsInGrid = true,
+            displayTabsInGrid = displayTabsInGrid,
             dragAndDropEnabled = false,
             reorderingEnabled = true,
             displayTabGroupOnboarding = false,
@@ -103,6 +102,7 @@ fun ExpandedTabGroup(
             onCloseTabGroupClick = { }, // Ignore tab group closes
             onTabGroupOnboardingDismiss = { }, // Ignore onboarding dismissals - onboarding is not shown in this layout
             contentPadding = PaddingValues(0.dp), // TabLayout should not have its own content padding inside this view
+            listHorizontalPadding = 0.dp, // The list layout should not add its own horizontal padding inside this view
             focusEnabled = true, // Drag and drop is not possible in this view, so focus should never be suppressed
         )
     }
@@ -240,40 +240,27 @@ private fun ShareTabGroupButton(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @FlexibleWindowLightDarkPreview
 @Composable
 private fun ExpandedTabGroupPreview(
     @PreviewParameter(ExpandedTabGroupPreviewProvider::class)
     previewState: ExpandedTabGroupPreviewState,
 ) {
-    val sheetState = rememberModalBottomSheetState()
-    LaunchedEffect(Unit) {
-        if (!sheetState.isVisible) {
-            sheetState.show()
-        }
-    }
-
     FirefoxTheme {
         Surface {
-            ModalBottomSheet(
-                modifier = Modifier.testTag(TabsTrayTestTag.TAB_GROUP_BOTTOM_SHEET_ROOT),
-                sheetState = sheetState,
-                onDismissRequest = {},
-            ) {
-                ExpandedTabGroup(
-                    group = previewState.group,
-                    actions = ExpandedTabGroupActions(
-                        onItemClick = {},
-                        onTabClose = {},
-                        onDeleteTabGroupClick = {},
-                        onEditTabGroupClick = {},
-                        onCloseTabGroupClick = {},
-                        onAddNewTabClick = {},
-                    ),
-                    tabInteractionHandler = NoOpTabInteractionHandler,
-                )
-            }
+            ExpandedTabGroup(
+                group = previewState.group,
+                actions = ExpandedTabGroupActions(
+                    onItemClick = {},
+                    onTabClose = {},
+                    onDeleteTabGroupClick = {},
+                    onEditTabGroupClick = {},
+                    onCloseTabGroupClick = {},
+                    onAddNewTabClick = {},
+                ),
+                displayTabsInGrid = previewState.displayTabsInGrid,
+                tabInteractionHandler = NoOpTabInteractionHandler,
+            )
         }
     }
 }
@@ -292,6 +279,7 @@ private fun generateFakeTabsList(
 private data class ExpandedTabGroupPreviewState(
     val group: TabsTrayItem.TabGroup,
     val selectedTabId: String? = null,
+    val displayTabsInGrid: Boolean = true,
 )
 
 private class ExpandedTabGroupPreviewProvider :
@@ -351,6 +339,16 @@ private class ExpandedTabGroupPreviewProvider :
                     tabs = generateFakeTabsList(),
                 ),
                 selectedTabId = "tabid0",
+            ),
+        ),
+        Pair(
+            "List view",
+            ExpandedTabGroupPreviewState(
+                group = createTabGroup(
+                    title = "Tab Group",
+                    tabs = generateFakeTabsList(),
+                ),
+                displayTabsInGrid = false,
             ),
         ),
     )
