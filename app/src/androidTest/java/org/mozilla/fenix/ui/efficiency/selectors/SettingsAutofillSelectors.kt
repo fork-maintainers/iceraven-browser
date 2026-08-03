@@ -107,6 +107,35 @@ object SettingsAutofillSelectors {
         groups = listOf("addressForm"),
     )
 
+    val DELETE_ADDRESS_TOOLBAR_BUTTON = Selector(
+        strategy = SelectorStrategy.COMPOSE_BY_TAG,
+        value = EditAddressTestTag.TOPBAR_DELETE_BUTTON,
+        description = "Edit address screen: toolbar delete button",
+        groups = listOf("deleteAddress"),
+    )
+
+    val CANCEL_DELETE_ADDRESS_BUTTON = Selector(
+        strategy = SelectorStrategy.COMPOSE_BY_TAG,
+        value = EditAddressTestTag.DIALOG_CANCEL_BUTTON,
+        description = "Delete address dialog: Cancel button",
+        groups = listOf("deleteAddress"),
+    )
+
+    val CONFIRM_DELETE_ADDRESS_BUTTON = Selector(
+        strategy = SelectorStrategy.COMPOSE_BY_TAG,
+        value = EditAddressTestTag.DIALOG_DELETE_BUTTON,
+        description = "Delete address dialog: Delete (confirm) button",
+        groups = listOf("deleteAddress"),
+    )
+
+    @Suppress("ktlint:standard:function-naming", "FunctionName")
+    fun SAVED_ADDRESS(name: String = "") = Selector(
+        strategy = SelectorStrategy.COMPOSE_BY_TEXT,
+        value = name,
+        description = "Saved address row: $name",
+        groups = listOf("manageAddresses"),
+    )
+
     val all = listOf(
         SETTINGS_AUTOFILL_TITLE,
         AUTOFILL_ADDRESSES_TOGGLE,
@@ -121,5 +150,8 @@ object SettingsAutofillSelectors {
         ADDRESS_PHONE_FIELD,
         ADDRESS_EMAIL_FIELD,
         ADDRESS_SAVE_BUTTON,
+        DELETE_ADDRESS_TOOLBAR_BUTTON,
+        CANCEL_DELETE_ADDRESS_BUTTON,
+        CONFIRM_DELETE_ADDRESS_BUTTON,
     )
 }

@@ -9,6 +9,7 @@ import org.mozilla.fenix.customannotations.SmokeTest
 import org.mozilla.fenix.helpers.TestAssetHelper.addressFormAsset
 import org.mozilla.fenix.ui.efficiency.data.AddressTestData
 import org.mozilla.fenix.ui.efficiency.helpers.BaseTest
+import org.mozilla.fenix.ui.efficiency.selectors.SettingsAutofillSelectors
 
 class AddressAutofillTest : BaseTest() {
     private val mockWebServer get() = fenixTestRule.mockWebServer
@@ -28,5 +29,24 @@ class AddressAutofillTest : BaseTest() {
             .clickSelectAddressButton()
             .clickAddressSuggestion(address.streetAddress)
             .verifyAutofilledAddress(address.streetAddress)
+    }
+
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3205332
+    @SmokeTest
+    @Test
+    fun deleteSavedAddressTest() {
+        val address = AddressTestData.FIRST
+
+        on.settingsAutofill.navigateToPage()
+            .fillAndSaveAddress(address)
+            .mozClick(SettingsAutofillSelectors.MANAGE_ADDRESSES_BUTTON)
+            .mozVerify(SettingsAutofillSelectors.SAVED_ADDRESS(address.name))
+            .mozClick(SettingsAutofillSelectors.SAVED_ADDRESS(address.name))
+            .mozVerify(SettingsAutofillSelectors.DELETE_ADDRESS_TOOLBAR_BUTTON)
+            .mozClick(SettingsAutofillSelectors.DELETE_ADDRESS_TOOLBAR_BUTTON)
+            .mozClick(SettingsAutofillSelectors.CANCEL_DELETE_ADDRESS_BUTTON)
+            .mozClick(SettingsAutofillSelectors.DELETE_ADDRESS_TOOLBAR_BUTTON)
+            .mozClick(SettingsAutofillSelectors.CONFIRM_DELETE_ADDRESS_BUTTON)
+            .mozVerify(SettingsAutofillSelectors.ADD_ADDRESS_BUTTON)
     }
 }

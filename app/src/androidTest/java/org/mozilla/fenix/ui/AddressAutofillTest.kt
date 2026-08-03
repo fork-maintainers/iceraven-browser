@@ -110,6 +110,11 @@ class AddressAutofillTest {
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3205332
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.AddressAutofillTest#deleteSavedAddressTest"],
+        bug = 2060174,
+        since = "2026-08",
+    )
     @SmokeTest
     @Test
     fun deleteSavedAddressTest() {
