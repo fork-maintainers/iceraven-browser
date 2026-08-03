@@ -156,7 +156,6 @@ private fun WebCompatReporterContent(
     Column(
         modifier = Modifier
             .padding(paddingValues)
-            .imePadding()
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
@@ -165,7 +164,8 @@ private fun WebCompatReporterContent(
                 .weight(1f)
                 .verticalScroll(scrollState)
                 .padding(horizontal = FirefoxTheme.layout.space.static200)
-                .width(FirefoxTheme.layout.size.containerMaxWidth),
+                .width(FirefoxTheme.layout.size.containerMaxWidth)
+                .imePadding(),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             ReporterHeader(
