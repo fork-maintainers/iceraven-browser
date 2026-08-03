@@ -559,6 +559,10 @@
   <string name="nova_onboarding_marketing_body_link_text">Як мы ўжываем звесткі</string>
   <!-- Marketing onboarding body link text. -->
   <string name="nova_onboarding_marketing_body_link_text_1">Падрабязней</string>
+  <!-- Marketing onboarding primary button text. -->
+  <string name="nova_onboarding_marketing_primary_button_text_3">Так</string>
+  <!-- Marketing onboarding secondary button text. -->
+  <string name="nova_onboarding_marketing_secondary_button_text_2">Не</string>
   <!-- Notifications onboarding button. -->
   <string name="nova_onboarding_notifications_button">Уключыць апавяшчэнні</string>
   <!-- "Add search widget" onboarding button. 'Firefox' is intentionally hardcoded. -->
@@ -1693,14 +1697,20 @@
   <string name="bookmark_delete_folder_content_description">Выдаліць папку</string>
   <!-- Content description for bookmark search floating action button -->
   <string name="bookmark_search_button_content_description">Шукаць у закладках</string>
+  <!-- Content description for select folder screen search action button ("search" is a verb) -->
+  <string name="select_bookmark_search_button_content_description">Шукаць папкі</string>
   <!-- Content description for the "close" button in bookmarks screen. -->
   <string name="bookmark_close_button_content_description">Закрыць закладкі</string>
+  <!-- Content description for the Import bookmarks button in bookmarks screen. -->
+  <string name="bookmark_import_bookmarks_button_content_description">Імпартаваць з файла</string>
   <!-- Title for the bookmark list empty state -->
   <string name="bookmark_empty_list_title">Пакуль няма закладак</string>
   <!-- Text for the button to navigate to sync authentication -->
   <string name="bookmark_empty_list_guest_cta">Увайсці ў сінхранізацыю</string>
   <!-- Description for the add new folder button when selecting a folder. -->
   <string name="bookmark_select_folder_new_folder_button_title">Новая папка</string>
+  <!-- Text for bookmark search page when there are no results. -->
+  <string name="bookmark_no_search_results">Супадзенні не знойдзены.</string>
   <!--
     Site Permissions
 
@@ -1870,6 +1880,10 @@
   <string name="menu_print">Друкаваць</string>
   <!-- Sub-header in the dialog to share a link to another sync device -->
   <string name="share_device_subheader">Даслаць на прыладу</string>
+  <!-- Text for the QR code action in the native share sheet -->
+  <string name="share_qr_code">QR-код</string>
+  <!-- Title shown in the QR code display screen -->
+  <string name="qr_code_display_title">QR-код</string>
   <!-- Content description for the close button in the QR code display screen -->
   <string name="qr_code_display_close">Закрыць</string>
   <!-- Label for the download button on the QR code display screen -->
@@ -2109,6 +2123,10 @@
   <string name="preference_enhanced_tracking_protection_strict">Строгая</string>
   <!-- Preference description for enhanced tracking protection for the strict protection settings -->
   <string name="preference_enhanced_tracking_protection_strict_description_4">Мацнейшая ахова ад сачэння і лепшая хуткадзейнасць, але некаторыя сайты могуць не працаваць належным чынам.</string>
+  <!-- Preference label for the enhanced tracking protection option to fix major site issues caused by tracker blocking -->
+  <string name="preference_enhanced_tracking_protection_allow_list_baseline_2">Выпраўляць сур\'ёзныя праблемы з сайтамі (рэкамендуецца)</string>
+  <!-- Preference label for the enhanced tracking protection option to fix minor site issues caused by tracker blocking -->
+  <string name="preference_enhanced_tracking_protection_allow_list_convenience_label">Выпраўленне нязначных праблем з сайтамі</string>
   <!-- Learn more text for the enhanced tracking protection options to fix issues caused by tracker blocking -->
   <string name="preference_enhanced_tracking_protection_allow_list_learn_more">Падрабязней</string>
   <!--
@@ -2237,6 +2255,8 @@
   <string name="preference_doh_default_protection">Прадвызначаная ахова</string>
   <!-- Bullet point 2 for "Default Protection" information page under "DNS over HTTPS" -->
   <string name="preference_doh_default_protection_info_2">Калі ёсць праблема з бяспечным пастаўшчыком DNS, выкарыстоўваць стандартны правайдар DNS</string>
+  <!-- Bullet point 4 for "Default Protection" information page under "DNS over HTTPS" -->
+  <string name="preference_doh_default_protection_info_4">Адключаць, калі актыўныя палітыкі VPN, бацькоўскі кантроль або карпаратыўныя палітыкі</string>
   <!-- Bullet point 2 for "Increased Protection" information page under "DNS over HTTPS" -->
   <string name="preference_doh_increased_protection_info_2">Выкарыстоўваць стандартны правайдар DNS толькі калі ёсць праблемы з\u00a0бяспечным DNS</string>
   <!-- Bullet point 3 for "Max Protection" information page under "DNS over HTTPS" -->
@@ -2444,6 +2464,10 @@
   <string name="ip_protection_menu_limit_reached">Дасягнуты ліміт %1$d ГБ</string>
   <!-- Label shown next to the browser protection icon in the address bar when the browser VPN is active -->
   <string name="ip_protection_toolbar_pill_label">VPN уключаны</string>
+  <!-- Label for the dismiss button on the onboarding bottom sheet. -->
+  <string name="ip_protection_onboarding_not_now_button">Не зараз</string>
+  <!-- Snackbar (in-app pop-up notification) action button text that takes the user to the VPN settings screen. -->
+  <string name="ip_protection_data_limit_reached_snackbar_action">Налады</string>
   <!--
     Autofill
 
@@ -3139,6 +3163,8 @@
   <string name="likert_scale_option_5" tools:ignore="UnusedResources">Вельмі незадаволены</string>
   <!-- Option for likert scale -->
   <string name="likert_scale_option_6" tools:ignore="UnusedResources">Я ёй не карыстаюся</string>
+  <!-- Option for likert scale. Note: The word "Firefox" should NOT be translated. -->
+  <string name="likert_scale_option_7" tools:ignore="BrandUsage,UnusedResources">Я не карыстаюся пошукам у Firefox</string>
   <!-- Option for likert scale -->
   <string name="likert_scale_option_8" tools:ignore="UnusedResources">Я не выкарыстоўваю сінхранізацыю</string>
   <!-- Text shown in the survey title for homepage microsurvey. Note: The word "Firefox" should NOT be translated. -->

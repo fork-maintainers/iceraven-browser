@@ -1714,6 +1714,10 @@
   <string name="tab_group_three_dot_menu_delete">Διαγραφή</string>
   <!-- Text shown on the close button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_close">Κλείσιμο</string>
+  <!-- Text shown on the confirm button in the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_confirm">Κατάργηση ομαδοποίησης</string>
+  <!-- Text shown on the cancel button in the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_cancel">Ακύρωση</string>
   <!--
     Color labels for tab groups, used for accessibility and selection UI.
 

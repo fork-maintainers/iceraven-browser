@@ -1708,6 +1708,16 @@
   <string name="tab_group_three_dot_menu_delete">削除</string>
   <!-- Text shown on the close button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_close">閉じる</string>
+  <!-- Title for the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_title">タブグループを解除しますか？</string>
+  <!-- Text shown in the body of the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_body">タブはこの端末上で開いたままになりますが、グループは削除されます。</string>
+  <!-- Text shown on the Don't Ask Again checkbox button in the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_dont_ask_again">次回からは確認しない</string>
+  <!-- Text shown on the confirm button in the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_confirm">グループ解除</string>
+  <!-- Text shown on the cancel button in the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_cancel">キャンセル</string>
   <!--
     Color labels for tab groups, used for accessibility and selection UI.
 
@@ -3157,6 +3167,14 @@
   <string name="ip_protection_location_unavailable" tools:ignore="UnusedResources">選択した接続先が利用できません。別の場所を選択してください。</string>
   <!-- Snackbar (in-app pop-up notification) text shown when the previously selected browser VPN location is unavailable and the recommended location was used instead. -->
   <string name="ip_protection_location_unavailable_recommended_snackbar" tools:ignore="UnusedResources">選択された VPN の接続先が利用できないため、推奨の接続先に接続しました。</string>
+  <!-- Title for the card shown to the user when we are unable to fetch server locations -->
+  <string name="ip_protection_locations_unavailable_title">接続先が利用できません</string>
+  <!-- Description for the card shown to the user when we are unable to fetch server locations -->
+  <string name="ip_protection_locations_unavailable_description">推奨の接続先に切り替えました。</string>
+  <!-- Title for the browser VPN location selection screen (displayed in the app bar) -->
+  <string name="ip_protection_locations_title">VPN の接続先を選択してください</string>
+  <!-- Content description for the browser VPN location selection screen top bar back button -->
+  <string name="ip_protection_locations_navigate_back_button_content_description">前のページへ戻る</string>
   <!-- Title for the card shown to the user when we are unable to fetch server locations -->
   <string name="ip_protection_location_unavailable_title" tools:ignore="UnusedResources">以前の接続先は利用できません</string>
   <!-- Description for the card shown to the user when we are unable to fetch server locations -->
