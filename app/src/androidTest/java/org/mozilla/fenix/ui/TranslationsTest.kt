@@ -70,6 +70,11 @@ class TranslationsTest {
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/2437107
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.TranslationsTest#verifyMainMenuTranslationButtonFunctionalityTest"],
+        bug = 2060217,
+        since = "2026-08",
+    )
     @SmokeTest
     @Test
     fun verifyMainMenuTranslationButtonFunctionalityTest() {
