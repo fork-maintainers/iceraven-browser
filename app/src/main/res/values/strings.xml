@@ -1815,8 +1815,6 @@
     <string name="webcompat_reporter_preview_report">Preview Report</string>
     <!-- The title shown at the top of the WebCompat Report preview panel. This appears after the user taps the “Preview” button before sending a report. -->
     <string name="webcompat_reporter_preview_bottom_sheet_header">Report Preview</string>
-    <!-- Label for the “Send” button shown in the WebCompat Report preview panel, which the user taps to submit the report. -->
-    <string name="webcompat_reporter_preview_bottom_sheet_send">Send</string>
     <!-- Title for the Edit URL confirmation dialog in the WebCompatReporter-->
     <string name="webcompat_reporter_edit_url_dialog_title">Edit website URL</string>
     <!-- Text shown on the save button for the Edit URL confirmation dialog in the WebCompatReporter. -->

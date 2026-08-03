@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.only
@@ -44,7 +43,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import mozilla.components.compose.base.BottomSheetHandle
-import mozilla.components.compose.base.button.FilledButton
 import org.mozilla.fenix.R
 import org.mozilla.fenix.components.menu.compose.ExpandableMenuItemAnimation
 import org.mozilla.fenix.components.menu.compose.MenuGroup
@@ -57,10 +55,8 @@ import mozilla.components.ui.icons.R as iconsR
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun WebCompatReporterPreviewSheet(
-    isSendButtonEnabled: Boolean,
     previewReporterItems: List<PreviewReporterItem>,
     onDismissRequest: () -> Unit,
-    onSendClick: () -> Unit,
 ) {
     ModalBottomSheet(
         onDismissRequest = onDismissRequest,
@@ -80,9 +76,7 @@ internal fun WebCompatReporterPreviewSheet(
         contentWindowInsets = { WindowInsets.safeDrawing.only(WindowInsetsSides.Bottom) },
     ) {
         PreviewSheetContent(
-            isSendButtonEnabled = isSendButtonEnabled,
             previewReporterItems = previewReporterItems,
-            onSendClick = onSendClick,
         )
     }
 }
@@ -90,15 +84,18 @@ internal fun WebCompatReporterPreviewSheet(
 @Composable
 private fun PreviewSheetContent(
     previewReporterItems: List<PreviewReporterItem>,
-    onSendClick: () -> Unit,
-    isSendButtonEnabled: Boolean,
 ) {
     val expandedItems = remember { mutableStateMapOf<String, Boolean>() }
 
     Column(
         modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = FirefoxTheme.layout.space.dynamic200),
+            .fillMaxWidth()
+            .verticalScroll(rememberScrollState())
+            .padding(
+                start = FirefoxTheme.layout.space.dynamic200,
+                end = FirefoxTheme.layout.space.dynamic200,
+                bottom = FirefoxTheme.layout.space.dynamic200,
+            ),
         horizontalAlignment = Alignment.Start,
     ) {
         Text(
@@ -108,31 +105,16 @@ private fun PreviewSheetContent(
 
         Spacer(modifier = Modifier.height(FirefoxTheme.layout.space.static200))
 
-        Column(
-            modifier = Modifier
-                .weight(1f)
-                .verticalScroll(rememberScrollState()),
-        ) {
-            MenuGroup {
-                for (previewReporterItem in previewReporterItems) {
-                    val isExpanded = expandedItems[previewReporterItem.title] == true
-                    PreviewReporterItemRow(
-                        previewReporterItem = previewReporterItem,
-                        isExpanded = isExpanded,
-                        onExpandToggle = { expandedItems[previewReporterItem.title] = !isExpanded },
-                    )
-                }
+        MenuGroup {
+            for (previewReporterItem in previewReporterItems) {
+                val isExpanded = expandedItems[previewReporterItem.title] == true
+                PreviewReporterItemRow(
+                    previewReporterItem = previewReporterItem,
+                    isExpanded = isExpanded,
+                    onExpandToggle = { expandedItems[previewReporterItem.title] = !isExpanded },
+                )
             }
         }
-
-        FilledButton(
-            text = stringResource(id = R.string.webcompat_reporter_preview_bottom_sheet_send),
-            onClick = onSendClick,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = FirefoxTheme.layout.space.static200),
-            enabled = isSendButtonEnabled,
-        )
     }
 }
 
@@ -255,9 +237,7 @@ private fun WebCompatReporterPreviewSheetContent() {
         )
     }
     PreviewSheetContent(
-        isSendButtonEnabled = true,
         previewReporterItems = previewReporterItems,
-        onSendClick = {},
     )
 }
 

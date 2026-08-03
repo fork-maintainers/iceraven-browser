@@ -328,8 +328,6 @@ private fun WebCompatReporterDialogs(
         WebCompatReporterPreviewSheet(
             previewReporterItems = state.previewReporterItems,
             onDismissRequest = onDismissPreview,
-            onSendClick = { onAction(WebCompatReporterAction.SendReportClicked) },
-            isSendButtonEnabled = state.isSubmitEnabled,
         )
     }
 }
