@@ -178,6 +178,32 @@ fun LensCameraScreen(
     }
 }
 
+/**
+ * Camera-less stand-in for [LensCameraScreen], showing only the Google Lens header. Used as the
+ * backdrop for [GoogleLensOptOutBottomSheet] so no camera preview is started while the sheet is up.
+ *
+ * @param onClose Callback when the close button is tapped.
+ * @param modifier The [Modifier] to be applied to this composable.
+ */
+@Composable
+fun LensOptOutBackdrop(
+    onClose: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Box(
+        modifier = modifier
+            .windowInsetsPadding(WindowInsets.safeDrawing)
+            .fillMaxSize()
+            .background(Color.Black),
+    ) {
+        CameraTopBar(
+            mode = CameraMode.LENS,
+            onClose = onClose,
+            modifier = Modifier.align(Alignment.TopStart),
+        )
+    }
+}
+
 @Composable
 private fun CameraTopBar(
     mode: CameraMode,

@@ -48,6 +48,9 @@ class LensFeatureTest {
     private val cameraPermissionLauncher: ActivityResultLauncher<String> = mockk(relaxed = true)
     private val uploader: LensImageUploader = mockk()
     private var cameraPermissionResult = PackageManager.PERMISSION_GRANTED
+
+    // Most tests exercise the post-acknowledgement flow; the opt-out tests below set this to false.
+    private var hasAcknowledgedOptOut = true
     private val feature = LensFeature(
         context = testContext,
         appStore = appStore,
@@ -56,6 +59,7 @@ class LensFeatureTest {
         uploader = uploader,
         mainDispatcher = testDispatcher,
         permissionChecker = { _, _ -> cameraPermissionResult },
+        hasAcknowledgedOptOut = { hasAcknowledgedOptOut },
     )
 
     @Before
@@ -327,6 +331,18 @@ class LensFeatureTest {
 
         verify { cameraPermissionLauncher.launch(Manifest.permission.CAMERA) }
         verify(exactly = 0) { lensLauncher.launch(any()) }
+    }
+
+    @Test
+    fun `GIVEN the opt-out sheet has not been acknowledged WHEN LensRequested is dispatched THEN the camera activity is launched without requesting the permission`() = runTest(testDispatcher) {
+        hasAcknowledgedOptOut = false
+        cameraPermissionResult = PackageManager.PERMISSION_DENIED
+
+        appStore.dispatch(LensAction.LensRequested)
+        testDispatcher.scheduler.advanceUntilIdle()
+
+        verify { lensLauncher.launch(any()) }
+        verify(exactly = 0) { cameraPermissionLauncher.launch(any()) }
     }
 
     @Test

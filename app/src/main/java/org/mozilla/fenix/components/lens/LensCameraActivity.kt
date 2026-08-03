@@ -19,9 +19,14 @@ import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.ui.platform.ComposeView
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import androidx.core.os.BundleCompat
+import androidx.core.view.OneShotPreDrawListener
+import androidx.core.view.isVisible
 import androidx.fragment.app.commit
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
@@ -30,7 +35,9 @@ import kotlinx.coroutines.withContext
 import mozilla.components.feature.qr.QrAnalyzer
 import mozilla.components.feature.qr.QrScanActivity
 import mozilla.components.support.base.log.logger.Logger
+import org.mozilla.fenix.BuildConfig
 import org.mozilla.fenix.R
+import org.mozilla.fenix.ext.components
 import java.io.IOException
 
 internal const val LENS_IMAGES_DIR = "lens_images"
@@ -44,6 +51,13 @@ class LensCameraActivity : AppCompatActivity() {
 
     private val logger = Logger("LensCameraActivity")
 
+    private var optOutSheetPreDrawListener: OneShotPreDrawListener? = null
+
+    // The camera permission is requested at most once per activity instance: the result is
+    // delivered before onResume, so without this onResume would re-request it after a denial.
+    @VisibleForTesting
+    internal var permissionRequested = false
+
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission(),
     ) { isGranted -> handlePermissionResult(isGranted) }
@@ -54,8 +68,7 @@ class LensCameraActivity : AppCompatActivity() {
             launchCameraFragment()
         } else {
             Toast.makeText(this, R.string.lens_camera_permission_denied, Toast.LENGTH_SHORT).show()
-            setResult(RESULT_CANCELED)
-            finish()
+            cancelAndFinish()
         }
     }
 
@@ -86,8 +99,16 @@ class LensCameraActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lens_camera)
+        permissionRequested = savedInstanceState?.getBoolean(STATE_PERMISSION_REQUESTED, false) == true
         if (savedInstanceState == null) {
             lifecycleScope.launch(Dispatchers.IO) { clearLensImageCache() }
+        }
+
+        supportFragmentManager.setFragmentResultListener(
+            GoogleLensOptOutBottomSheetFragment.RESULT_REQUEST_KEY,
+            this,
+        ) { _, bundle ->
+            handleOptOutResult(bundle.getString(GoogleLensOptOutBottomSheetFragment.RESULT_ACTION))
         }
 
         supportFragmentManager.setFragmentResultListener(
@@ -135,22 +156,153 @@ class LensCameraActivity : AppCompatActivity() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        checkCameraPermission()
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putBoolean(STATE_PERMISSION_REQUESTED, permissionRequested)
     }
 
-    private fun checkCameraPermission() {
+    override fun onResume() {
+        super.onResume()
+        // handlePermissionResult may already have finished us: activity results are delivered
+        // before onResume, and finishing does not stop the lifecycle from reaching it.
+        if (isFinishing) return
+
+        // The opt-out sheet gates everything else: while it is up neither the camera permission nor
+        // LensCameraFragment - and therefore the camera itself - is touched.
+        if (components.settings.hasAcceptedGoogleLensFirstRun) {
+            if (!permissionRequested) {
+                checkCameraPermission()
+            }
+        } else {
+            showOptOutBackdrop()
+            requestOptOutBottomSheet()
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        // OneShotPreDrawListener only unregisters itself once it runs or once the view is detached,
+        // and the decor view stays attached across a stop. Removing it here keeps a stop/start
+        // before the first frame from leaving a stale listener that adds a second sheet.
+        optOutSheetPreDrawListener?.removeListener()
+        optOutSheetPreDrawListener = null
+    }
+
+    /**
+     * Shows the camera-less backdrop the opt-out sheet sits on. Composed on demand so the common
+     * post-acknowledgement path, which goes straight to the camera, never pays for it.
+     */
+    private fun showOptOutBackdrop() {
+        val backdrop = findViewById<ComposeView>(R.id.lens_opt_out_backdrop)
+        if (backdrop.isVisible) return
+        // Not wrapped in FirefoxTheme, matching how LensCameraFragment hosts LensCameraScreen: the
+        // camera surface is always dark and uses fixed colors.
+        backdrop.setContent {
+            LensOptOutBackdrop(onClose = ::cancelAndFinish)
+        }
+        backdrop.isVisible = true
+    }
+
+    /**
+     * Hides the backdrop once the camera takes over. It is only covered by the fragment container,
+     * so leaving it in place would keep its close button reachable by accessibility services.
+     */
+    private fun hideOptOutBackdrop() {
+        val backdrop = findViewById<ComposeView>(R.id.lens_opt_out_backdrop)
+        if (!backdrop.isVisible) return
+        backdrop.isVisible = false
+        backdrop.disposeComposition()
+    }
+
+    /**
+     * Schedules the opt-out sheet for after the activity's first frame. Showing it any earlier adds
+     * the dialog window while this window still has non-final metrics, which lays the sheet out at
+     * the top of the screen for a frame before its behavior offsets it into place.
+     */
+    @VisibleForTesting
+    internal fun requestOptOutBottomSheet() {
+        if (optOutSheetPreDrawListener != null ||
+            supportFragmentManager.findFragmentByTag(GoogleLensOptOutBottomSheetFragment.TAG) != null
+        ) {
+            return
+        }
+        optOutSheetPreDrawListener = OneShotPreDrawListener.add(window.decorView) {
+            // Posted so the sheet is added after the first frame is drawn, not merely after layout.
+            // The listener handle is cleared by onStop rather than here, so a request stays "in
+            // flight" for the rest of this start and cannot be issued twice.
+            window.decorView.post {
+                if (!isFinishing && !isDestroyed &&
+                    lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)
+                ) {
+                    showOptOutBottomSheet()
+                }
+            }
+        }
+    }
+
+    @VisibleForTesting
+    internal fun showOptOutBottomSheet() {
+        // DialogFragment.show commits asynchronously, so an already-pending add would be invisible
+        // to findFragmentByTag and a second caller would queue a duplicate sheet behind it.
+        supportFragmentManager.executePendingTransactions()
+        if (supportFragmentManager.findFragmentByTag(GoogleLensOptOutBottomSheetFragment.TAG) != null) {
+            return
+        }
+        GoogleLensOptOutBottomSheetFragment().show(
+            supportFragmentManager,
+            GoogleLensOptOutBottomSheetFragment.TAG,
+        )
+    }
+
+    @VisibleForTesting
+    internal fun handleOptOutResult(action: String?) {
+        when (action) {
+            GoogleLensOptOutBottomSheetFragment.ACTION_TRY_IT_NOW -> {
+                // Recorded even if the permission is subsequently denied: the user did opt in.
+                components.settings.hasAcceptedGoogleLensFirstRun = true
+                checkCameraPermission()
+            }
+            GoogleLensOptOutBottomSheetFragment.ACTION_SETTINGS -> {
+                openSearchSettings()
+                cancelAndFinish()
+            }
+            else -> cancelAndFinish()
+        }
+    }
+
+    @VisibleForTesting
+    internal fun openSearchSettings() {
+        startActivity(
+            Intent(
+                Intent.ACTION_VIEW,
+                "${BuildConfig.DEEP_LINK_SCHEME}://settings_search_engine".toUri(),
+            ).apply {
+                setPackage(packageName)
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            },
+        )
+    }
+
+    @VisibleForTesting
+    internal fun cancelAndFinish() {
+        setResult(RESULT_CANCELED)
+        finish()
+    }
+
+    @VisibleForTesting
+    internal fun checkCameraPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
             == PackageManager.PERMISSION_GRANTED
         ) {
             launchCameraFragment()
         } else {
+            permissionRequested = true
             requestPermissionLauncher.launch(Manifest.permission.CAMERA)
         }
     }
 
     private fun launchCameraFragment() {
+        hideOptOutBackdrop()
         if (supportFragmentManager.findFragmentById(R.id.lens_fragment_container_view) != null) {
             return
         }
@@ -259,6 +411,8 @@ class LensCameraActivity : AppCompatActivity() {
         // IntArray pixel copy inside QrAnalyzer — enough to OOM low-RAM devices. ZXing
         // detects QR codes reliably well below this resolution.
         private const val QR_DECODE_MAX_DIMENSION = 2048
+
+        private const val STATE_PERMISSION_REQUESTED = "permission_requested"
 
         /**
          * Result intent extra naming the upload method that produced the image, read by

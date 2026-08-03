@@ -48,6 +48,9 @@ class LensFeature(
     private val uploader: LensImageUploader,
     private val mainDispatcher: CoroutineDispatcher = Dispatchers.Main,
     private val permissionChecker: (Context, String) -> Int = ContextCompat::checkSelfPermission,
+    private val hasAcknowledgedOptOut: () -> Boolean = {
+        context.components.settings.hasAcceptedGoogleLensFirstRun
+    },
 ) : LifecycleAwareFeature {
 
     private val logger = Logger("LensFeature")
@@ -81,7 +84,11 @@ class LensFeature(
     }
 
     private fun launchCamera() {
-        if (permissionChecker(context, Manifest.permission.CAMERA)
+        if (!hasAcknowledgedOptOut()) {
+            // The opt-out bottom sheet has to be seen before any permission prompt;
+            // LensCameraActivity requests the permission itself once the user accepts.
+            launchCameraActivity()
+        } else if (permissionChecker(context, Manifest.permission.CAMERA)
             == PackageManager.PERMISSION_GRANTED
         ) {
             launchCameraActivity()

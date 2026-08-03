@@ -3248,6 +3248,15 @@ class Settings(
     )
 
     /**
+     * Whether the user has acknowledged the Google Lens first-run bottom sheet by tapping
+     * "Try it now". Set only on that action, so declining re-shows the sheet on the next tap.
+     */
+    var hasAcceptedGoogleLensFirstRun by booleanPreference(
+        key = appContext.getPreferenceKey(R.string.pref_key_has_accepted_google_lens_first_run),
+        default = false,
+    )
+
+    /**
      * Whether the voice search entry point is shown in the display-mode browser toolbar.
      */
     var showVoiceSearchInDisplayToolbar by booleanPreference(

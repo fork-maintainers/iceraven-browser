@@ -704,11 +704,14 @@
         <item name="android:textSize">14sp</item>
     </style>
 
-    <style name="Theme.LensCamera" parent="Theme.AppCompat.NoActionBar">
+    <!-- Material DayNight parent so bottom sheets hosted here resolve the same day/night dialog
+       - theme as the rest of the app; the camera surface itself stays black via the items below. -->
+    <style name="Theme.LensCamera" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowBackground">@android:color/black</item>
         <item name="android:navigationBarColor">@android:color/black</item>
         <item name="android:statusBarColor">@android:color/black</item>
+        <item name="bottomSheetDialogTheme">@style/BottomSheet</item>
     </style>
 
     <style name="Theme.Transparent" parent="android:Theme">
