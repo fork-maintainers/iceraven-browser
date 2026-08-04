@@ -5,6 +5,7 @@
 package org.mozilla.fenix.components.lens
 
 import android.content.Context
+import android.view.TextureView
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -86,8 +87,7 @@ private const val VIEWFINDER_WIDTH_FRACTION = 0.7f
  * @property showError Whether to display the camera error message.
  * @property mode Active capture mode; controls which controls and overlays are shown.
  * @property previewAspectRatio Display-oriented width/height ratio for the camera preview, or
- *   null if not yet determined. When non-null the preview is letterboxed at the camera buffer's
- *   native aspect ratio to avoid full-screen upscaling.
+ *   null if not yet determined.
  */
 data class LensCameraState(
     val showError: Boolean,
@@ -104,7 +104,7 @@ data class LensCameraState(
  * @param onShutter Callback when the shutter button is tapped (Lens mode only).
  * @param onGallery Callback when the gallery button is tapped. Available in both Lens and
  *   QR modes; the host distinguishes the two via the active camera mode at tap time.
- * @param textureViewProvider Factory that creates the [AutoFitTextureView]; the caller is
+ * @param textureViewProvider Factory that creates the preview [TextureView]; the caller is
  *   responsible for retaining the returned reference for camera-session wiring.
  */
 @Composable
@@ -114,7 +114,7 @@ fun LensCameraScreen(
     onClose: () -> Unit,
     onShutter: () -> Unit,
     onGallery: () -> Unit,
-    textureViewProvider: (Context) -> AutoFitTextureView,
+    textureViewProvider: (Context) -> TextureView,
 ) {
     Box(
         modifier = Modifier
