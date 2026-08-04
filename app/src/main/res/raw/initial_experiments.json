@@ -996,7 +996,7 @@
       "channel": "release",
       "userFacingName": "Casual Game RELEASE",
       "userFacingDescription": "Casual game for early user journey engagement and fun",
-      "isEnrollmentPaused": false,
+      "isEnrollmentPaused": true,
       "isRollout": false,
       "bucketConfig": {
         "randomizationUnit": "nimbus_id",
