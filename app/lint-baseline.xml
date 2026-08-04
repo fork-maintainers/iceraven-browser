@@ -2,28 +2,6 @@
 <issues format="6" by="lint 9.2.1" type="baseline" client="gradle" dependencies="false" name="AGP (9.2.1)" variant="all" version="9.2.1">
 
     <issue
-        id="EmptySuperCall"
-        message="No need to call `super.onCleared`; the super method is defined to be empty"
-        errorLine1="        super.onCleared()"
-        errorLine2="              ~~~~~~~~~">
-        <location
-            file="src/main/java/org/mozilla/fenix/perf/ProfilerViewModel.kt"
-            line="264"
-            column="15"/>
-    </issue>
-
-    <issue
-        id="CheckResult"
-        message="The result of `swipeUp` is not used"
-        errorLine1="                            swipeUp()"
-        errorLine2="                            ~~~~~~~~~">
-        <location
-            file="src/androidTest/java/org/mozilla/fenix/ui/robots/HomeScreenRobot.kt"
-            line="715"
-            column="29"/>
-    </issue>
-
-    <issue
         id="ComposeIconButtonUsage"
         message="Use mozilla.components.compose.base.button.IconButton instead of androidx.compose.material3.IconButton"
         errorLine1="import androidx.compose.material3.IconButton"
@@ -1069,17 +1047,6 @@
     </issue>
 
     <issue
-        id="UseOfNonLambdaOffsetOverload"
-        message="State backed values should use the lambda overload of Modifier.offset"
-        errorLine1="            .offset(y = offsetState),"
-        errorLine2="             ~~~~~~">
-        <location
-            file="src/main/java/org/mozilla/fenix/experiments/view/ResearchSurfaceSurvey.kt"
-            line="77"
-            column="14"/>
-    </issue>
-
-    <issue
         id="TypographyFractions"
         message="Use fraction character ⅓ (&amp;#8531;) instead of 1/3?"
         errorLine1="  &lt;string name=&quot;setup_checklist_subtitle_3_steps_first_step&quot;>Khởi đầu tuyệt vời! Bạn đã hoàn thành 1 / 3 bước.&lt;/string>"
@@ -1159,17 +1126,6 @@
             file="src/main/res/layout/sign_in_preference.xml"
             line="17"
             column="6"/>
-    </issue>
-
-    <issue
-        id="RtlSymmetry"
-        message="When you define `paddingStart` you should probably also define `paddingEnd` for right-to-left symmetry"
-        errorLine1="    android:paddingStart=&quot;@dimen/custom_checkbox_alignment_margin&quot;>"
-        errorLine2="    ~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/layout/checkbox_left_sub_preference.xml"
-            line="15"
-            column="5"/>
     </issue>
 
 </issues>
