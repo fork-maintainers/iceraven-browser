@@ -1273,6 +1273,14 @@ features:
           enabled: true
 
 
+  homepage-weather-widget:
+    description: Feature to enable Homepage Weather Widget for users on Firefox for Android.
+    variables:
+      enabled:
+        description: If true, Homepage Weather Widget is enabled.
+        type: Boolean
+        default: false
+
   webcompat-reporter-enhancements:
     description: Feature to enable WebCompat Reporter enhancements for users on Firefox Android.
     variables:

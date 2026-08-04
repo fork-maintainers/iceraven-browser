@@ -113,6 +113,8 @@
     <string name="preferences_debug_settings_add_shortcuts_improvement" translatable="false">Enable Add Shortcuts Improvement</string>
     <!-- Label for enabling Merino Client -->
     <string name="preferences_debug_settings_merino_client" translatable="false">Enable Merino Client</string>
+    <!-- Label for enabling Homepage Weather Widget -->
+    <string name="preferences_debug_settings_homepage_weather_widget" translatable="false">Enable Homepage Weather Widget</string>
     <!-- Label for enabling Mozilla Ads Client for Sponsored Stories -->
     <string name="preferences_debug_settings_ads_client_for_stories" translatable="false">Enable Ads Client for Stories</string>
     <!-- Label for enabling the custom tab extension -->
