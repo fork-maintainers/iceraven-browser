@@ -2,6 +2,28 @@
 <issues format="6" by="lint 9.2.1" type="baseline" client="gradle" dependencies="false" name="AGP (9.2.1)" variant="all" version="9.2.1">
 
     <issue
+        id="EmptySuperCall"
+        message="No need to call `super.onCleared`; the super method is defined to be empty"
+        errorLine1="        super.onCleared()"
+        errorLine2="              ~~~~~~~~~">
+        <location
+            file="src/main/java/org/mozilla/fenix/perf/ProfilerViewModel.kt"
+            line="264"
+            column="15"/>
+    </issue>
+
+    <issue
+        id="CheckResult"
+        message="The result of `swipeUp` is not used"
+        errorLine1="                            swipeUp()"
+        errorLine2="                            ~~~~~~~~~">
+        <location
+            file="src/androidTest/java/org/mozilla/fenix/ui/robots/HomeScreenRobot.kt"
+            line="715"
+            column="29"/>
+    </issue>
+
+    <issue
         id="ComposeIconButtonUsage"
         message="Use mozilla.components.compose.base.button.IconButton instead of androidx.compose.material3.IconButton"
         errorLine1="import androidx.compose.material3.IconButton"
@@ -51,30 +73,8 @@
         errorLine1="        return ComposeView(requireContext()).apply {"
         errorLine2="               ~~~~~~~~~~~">
         <location
-            file="src/main/java/org/mozilla/fenix/bookmarks/BookmarkFragment.kt"
-            line="99"
-            column="16"/>
-    </issue>
-
-    <issue
-        id="UseFragmentContent"
-        message="Prefer content {} instead of manually constructing a ComposeView in onCreateView()."
-        errorLine1="        return ComposeView(requireContext()).apply {"
-        errorLine2="               ~~~~~~~~~~~">
-        <location
-            file="src/main/java/org/mozilla/fenix/bookmarks/EditBookmarkFragment.kt"
-            line="48"
-            column="16"/>
-    </issue>
-
-    <issue
-        id="UseFragmentContent"
-        message="Prefer content {} instead of manually constructing a ComposeView in onCreateView()."
-        errorLine1="        return ComposeView(requireContext()).apply {"
-        errorLine2="               ~~~~~~~~~~~">
-        <location
             file="src/main/java/org/mozilla/fenix/components/lens/LensCameraFragment.kt"
-            line="210"
+            line="209"
             column="16"/>
     </issue>
 
@@ -85,7 +85,7 @@
         errorLine2="              ~~~~~~~~~~~">
         <location
             file="src/main/java/org/mozilla/fenix/components/menu/MenuDialogFragment.kt"
-            line="259"
+            line="256"
             column="15"/>
     </issue>
 
@@ -107,7 +107,7 @@
         errorLine2="               ~~~~~~~~~~~">
         <location
             file="src/main/java/org/mozilla/fenix/pbmlock/UnlockPrivateTabsFragment.kt"
-            line="57"
+            line="56"
             column="16"/>
     </issue>
 
@@ -118,7 +118,7 @@
         errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/java/org/mozilla/fenix/ext/Context.kt"
-            line="79"
+            line="80"
             column="9"/>
     </issue>
 
@@ -481,7 +481,7 @@
         errorLine2="                                              ~~~~~~~~~~~~">
         <location
             file="src/main/java/org/mozilla/fenix/components/appstate/AppStoreReducer.kt"
-            line="88"
+            line="87"
             column="47"/>
     </issue>
 
@@ -492,7 +492,7 @@
         errorLine2="        ~~~~~~~~~~~~~">
         <location
             file="src/main/java/org/mozilla/fenix/browser/BrowserFragment.kt"
-            line="407"
+            line="399"
             column="9"/>
     </issue>
 
@@ -591,7 +591,7 @@
         errorLine2="  ^">
         <location
             file="src/main/res/values-zh-rTW/strings.xml"
-            line="683"
+            line="689"
             column="3"/>
     </issue>
 
@@ -602,7 +602,7 @@
         errorLine2="  ^">
         <location
             file="src/main/res/values-ja/strings.xml"
-            line="1758"
+            line="1811"
             column="3"/>
     </issue>
 
@@ -613,7 +613,7 @@
         errorLine2="  ^">
         <location
             file="src/main/res/values-zh-rTW/strings.xml"
-            line="1792"
+            line="1812"
             column="3"/>
     </issue>
 
@@ -624,7 +624,7 @@
         errorLine2="         ~~~~~~~~">
         <location
             file="src/main/AndroidManifest.xml"
-            line="752"
+            line="755"
             column="10"/>
     </issue>
 
@@ -635,7 +635,7 @@
         errorLine2="                             ~~~~~">
         <location
             file="src/main/AndroidManifest.xml"
-            line="69"
+            line="70"
             column="30"/>
     </issue>
 
@@ -914,7 +914,6 @@
             column="5"/>
     </issue>
 
-
     <issue
         id="Overdraw"
         message="Possible overdraw: Root element paints background `?attr/colorSurface` with a theme that also paints a background (inferred theme is `@style/NormalTheme`)"
@@ -925,8 +924,6 @@
             line="11"
             column="5"/>
     </issue>
-
-
 
     <issue
         id="Overdraw"
@@ -1050,50 +1047,6 @@
     </issue>
 
     <issue
-        id="Overdraw"
-        message="Possible overdraw: Root element paints background `?android:selectableItemBackground` with a theme that also paints a background (inferred theme is `@style/NormalTheme`)"
-        errorLine1="    android:background=&quot;?android:selectableItemBackground&quot;"
-        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/layout/search_engine_radio_button.xml"
-            line="11"
-            column="5"/>
-    </issue>
-
-    <issue
-        id="Overdraw"
-        message="Possible overdraw: Root element paints background `?attr/colorSurface` with a theme that also paints a background (inferred theme is `@style/NormalTheme`)"
-        errorLine1="    android:background=&quot;?attr/colorSurface&quot;"
-        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/layout/suggest_strong_password_bar.xml"
-            line="9"
-            column="5"/>
-    </issue>
-
-    <issue
-        id="Overdraw"
-        message="Possible overdraw: Root element paints background `#FF0250BB` with a theme that also paints a background (inferred theme is `@style/NormalTheme`)"
-        errorLine1="    android:background=&quot;#FF0250BB&quot;>"
-        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/layout/tracking_protection_learn_more_preference.xml"
-            line="10"
-            column="5"/>
-    </issue>
-
-    <issue
-        id="Overdraw"
-        message="Possible overdraw: Root element paints background `?attr/layer2` with a theme that also paints a background (inferred theme is `@style/NormalTheme`)"
-        errorLine1="    android:background=&quot;?attr/layer2&quot;>"
-        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/layout/view_crash_reporter.xml"
-            line="11"
-            column="5"/>
-    </issue>
-
-    <issue
         id="UnusedResources"
         message="The resource `R.drawable.ic_onboarding_key_features` appears to be unused"
         errorLine1="&lt;vector xmlns:aapt=&quot;http://schemas.android.com/aapt&quot; xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot; android:height=&quot;320dp&quot; android:viewportHeight=&quot;193.94&quot; android:viewportWidth=&quot;200&quot; android:width=&quot;329.99896dp&quot;>"
@@ -1133,7 +1086,7 @@
         errorLine2="                                                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-vi/strings.xml"
-            line="4214"
+            line="4254"
             column="62"/>
     </issue>
 
@@ -1144,7 +1097,7 @@
         errorLine2="                                             ~~~~~~~~~~">
         <location
             file="src/main/res/values-ru/strings.xml"
-            line="4473"
+            line="4522"
             column="46"/>
     </issue>
 
@@ -1167,14 +1120,14 @@
 
     <issue
         id="IconDensities"
-        message="Missing the following drawables in `drawable-mdpi`: fenix_search_widget.webp">
+        message="Missing the following drawables in `drawable-mdpi`: fenix_search_widget.webp (found in drawable-hdpi)">
         <location
             file="src/main/res/drawable-mdpi"/>
     </issue>
 
     <issue
         id="IconDensities"
-        message="Missing the following drawables in `drawable-xhdpi`: fenix_search_widget.webp">
+        message="Missing the following drawables in `drawable-xhdpi`: fenix_search_widget.webp (found in drawable-hdpi)">
         <location
             file="src/main/res/drawable-xhdpi"/>
     </issue>
@@ -1217,6 +1170,83 @@
             file="src/main/res/layout/checkbox_left_sub_preference.xml"
             line="15"
             column="5"/>
+    </issue>
+
+    <issue
+        id="JUnitAssertNotNull"
+        message="Use kotlin.test.assertNotNull instead of JUnit assertNotNull"
+        errorLine1="            assertNotNull(store.state.bookmarksAddFolderState)"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/test/java/org/mozilla/fenix/bookmarks/BookmarksMiddlewareTest.kt"
+            line="613"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="JUnitAssertNotNull"
+        message="Use kotlin.test.assertNotNull instead of JUnit assertNotNull"
+        errorLine1="            assertNotNull(store.state.bookmarksAddFolderState)"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/test/java/org/mozilla/fenix/bookmarks/BookmarksMiddlewareTest.kt"
+            line="639"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="JUnitAssertNotNull"
+        message="Use kotlin.test.assertNotNull instead of JUnit assertNotNull"
+        errorLine1="            assertNotNull(store.state.bookmarksEditBookmarkState)"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/test/java/org/mozilla/fenix/bookmarks/BookmarksMiddlewareTest.kt"
+            line="952"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="JUnitAssertNotNull"
+        message="Use kotlin.test.assertNotNull instead of JUnit assertNotNull"
+        errorLine1="            assertNotNull(store.state.bookmarksEditBookmarkState)"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/test/java/org/mozilla/fenix/bookmarks/BookmarksMiddlewareTest.kt"
+            line="1089"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="JUnitAssertNotNull"
+        message="Use kotlin.test.assertNotNull instead of JUnit assertNotNull"
+        errorLine1="            assertNotNull(store.state.bookmarksEditBookmarkState)"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/test/java/org/mozilla/fenix/bookmarks/BookmarksMiddlewareTest.kt"
+            line="1152"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="JUnitAssertNotNull"
+        message="Use kotlin.test.assertNotNull instead of JUnit assertNotNull"
+        errorLine1="            assertNotNull(store.state.bookmarksSelectFolderState)"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/test/java/org/mozilla/fenix/bookmarks/BookmarksMiddlewareTest.kt"
+            line="2927"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="JUnitAssertNotNull"
+        message="Use kotlin.test.assertNotNull instead of JUnit assertNotNull"
+        errorLine1="            assertNotNull(store.state.bookmarksSelectFolderState?.innerSelectionGuid)"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/test/java/org/mozilla/fenix/bookmarks/BookmarksMiddlewareTest.kt"
+            line="3227"
+            column="13"/>
     </issue>
 
 </issues>
