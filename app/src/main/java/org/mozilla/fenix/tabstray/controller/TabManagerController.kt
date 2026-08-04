@@ -40,6 +40,7 @@ import org.mozilla.fenix.components.TabCollectionStorage
 import org.mozilla.fenix.components.accounts.FenixFxAEntryPoint
 import org.mozilla.fenix.components.appstate.AppAction
 import org.mozilla.fenix.components.bookmarks.BookmarksUseCase
+import org.mozilla.fenix.components.share.ShareSheetChooserAction
 import org.mozilla.fenix.components.share.ShareSource
 import org.mozilla.fenix.components.usecases.FenixBrowserUseCases
 import org.mozilla.fenix.components.usecases.ShareUseCases
@@ -562,6 +563,14 @@ class DefaultTabManagerController(
             items = data,
             source = ShareSource.TABS_TRAY,
             isPrivate = tabs.any { it.private },
+            chooserActions = if (tabs.size == 1) {
+                listOf(
+                    ShareSheetChooserAction.SEND_TO_DEVICES,
+                    ShareSheetChooserAction.QR_CODE,
+                )
+            } else {
+                listOf(ShareSheetChooserAction.SEND_TO_DEVICES)
+            },
             navigateToShareFragment = {
                 navController.navigate(
                     TabManagementFragmentDirections.actionGlobalShareFragment(data = data.toTypedArray()),

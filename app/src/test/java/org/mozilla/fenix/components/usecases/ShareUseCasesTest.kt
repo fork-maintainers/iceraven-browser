@@ -23,6 +23,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mozilla.fenix.GleanMetrics.NativeShareSheet
+import org.mozilla.fenix.components.share.ShareSheetChooserAction
 import org.mozilla.fenix.components.share.ShareSource
 import org.mozilla.fenix.components.usecases.fake.FakeShareSheetLauncher
 import org.mozilla.fenix.helpers.FenixGleanTestRule
@@ -104,6 +105,12 @@ class ShareUseCasesTest {
                     title = "Mozilla",
                     isPrivate = false,
                     isCustomTab = false,
+                    chooserActions = listOf(
+                        ShareSheetChooserAction.SAVE_PDF,
+                        ShareSheetChooserAction.PRINT,
+                        ShareSheetChooserAction.SEND_TO_DEVICES,
+                        ShareSheetChooserAction.QR_CODE,
+                    ),
                 ),
             ),
             shareSheetLauncher.urlShares,
@@ -138,6 +145,12 @@ class ShareUseCasesTest {
                     isCustomTab = false,
                     text = "Check this out",
                     subject = "A subject",
+                    chooserActions = listOf(
+                        ShareSheetChooserAction.SAVE_PDF,
+                        ShareSheetChooserAction.PRINT,
+                        ShareSheetChooserAction.SEND_TO_DEVICES,
+                        ShareSheetChooserAction.QR_CODE,
+                    ),
                 ),
             ),
             shareSheetLauncher.urlShares,

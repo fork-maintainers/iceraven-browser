@@ -1008,18 +1008,7 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity, Crash
         DefaultGleanDebugToolsStorage.persistDebugViewTagIfRequested(intent, components.settings)
 
         if (intent.action == SEND_TO_DEVICES_ACTION) {
-            val url = intent.getStringExtra(SendToDevicesDialogFragment.EXTRA_URL) ?: return
-            val title = intent.getStringExtra(SendToDevicesDialogFragment.EXTRA_TITLE)
-            val isPrivate = intent.getStringExtra(SendToDevicesDialogFragment.EXTRA_PRIVACY) ==
-                SendToDevicesDialogFragment.PRIVACY_PRIVATE
-
-            if (supportFragmentManager.findFragmentByTag(SendToDevicesDialogFragment.TAG) == null) {
-                SendToDevicesDialogFragment.newInstance(url, title, isPrivate).showNow(
-                    supportFragmentManager,
-                    SendToDevicesDialogFragment.TAG,
-                )
-            }
-
+            handleSendToDevicesActionIntent(intent)
             return
         }
 
@@ -1056,6 +1045,21 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity, Crash
                 ) + externalSourceIntentProcessors
             intentProcessors.forEach { it.process(intent, navHost.navController, this.intent, components.settings) }
             browsingModeManager.updateMode(intent)
+        }
+    }
+
+    private fun handleSendToDevicesActionIntent(intent: Intent) {
+        val urls = intent.getStringArrayListExtra(SendToDevicesDialogFragment.EXTRA_URLS)
+        if (urls.isNullOrEmpty()) return
+        val titles = intent.getStringArrayListExtra(SendToDevicesDialogFragment.EXTRA_TITLES).orEmpty()
+        val isPrivate = intent.getStringExtra(SendToDevicesDialogFragment.EXTRA_PRIVACY) ==
+            SendToDevicesDialogFragment.PRIVACY_PRIVATE
+
+        if (supportFragmentManager.findFragmentByTag(SendToDevicesDialogFragment.TAG) == null) {
+            SendToDevicesDialogFragment.newInstance(urls, titles, isPrivate).showNow(
+                supportFragmentManager,
+                SendToDevicesDialogFragment.TAG,
+            )
         }
     }
 

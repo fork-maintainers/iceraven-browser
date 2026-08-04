@@ -64,6 +64,7 @@ import org.mozilla.fenix.components.TabCollectionStorage
 import org.mozilla.fenix.components.accounts.FenixFxAEntryPoint
 import org.mozilla.fenix.components.appstate.AppState
 import org.mozilla.fenix.components.bookmarks.BookmarksUseCase
+import org.mozilla.fenix.components.share.ShareSheetChooserAction
 import org.mozilla.fenix.components.share.ShareSource
 import org.mozilla.fenix.components.usecases.FenixBrowserUseCases
 import org.mozilla.fenix.components.usecases.ShareUseCases
@@ -1820,6 +1821,7 @@ class DefaultTabManagerControllerTest {
                 items = listOf(ShareData(url = tab.content.url, title = tab.content.title)),
                 source = ShareSource.TABS_TRAY,
                 isPrivate = false,
+                chooserActions = listOf(ShareSheetChooserAction.SEND_TO_DEVICES, ShareSheetChooserAction.QR_CODE),
                 navigateToShareFragment = any(),
             )
         }
@@ -1847,6 +1849,7 @@ class DefaultTabManagerControllerTest {
                 ),
                 source = ShareSource.TABS_TRAY,
                 isPrivate = false,
+                chooserActions = listOf(ShareSheetChooserAction.SEND_TO_DEVICES),
                 navigateToShareFragment = any(),
             )
         }

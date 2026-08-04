@@ -75,9 +75,7 @@ class SendToDevicesDialogFragment : BottomSheetDialogFragment() {
         SendTabUseCases(requireComponents.backgroundServices.accountManager)
     }
 
-    private var tabUrl: String? = null
-    private var tabTitle: String? = null
-    private var tabPrivacy: TabPrivacy = TabPrivacy.Normal
+    private var tabs: List<TabData> = emptyList()
     private var hasNavigatedToSignIn = false
 
     private val accountObserver = object : AccountObserver {
@@ -96,12 +94,10 @@ class SendToDevicesDialogFragment : BottomSheetDialogFragment() {
             uiState = uiState,
             onDismiss = { dismiss() },
             onSendToDevice = { option: SyncShareOption.SingleDevice ->
-                sendAndDismiss(
-                    sendTabToDevices(option.device.id, tabUrl ?: "", tabTitle ?: "", tabPrivacy),
-                )
+                sendAndDismiss(sendTabsToDevice(option.device.id, tabs))
             },
             onSendToAll = {
-                sendAndDismiss(sendTabToAllDevices(tabUrl ?: "", tabTitle ?: "", tabPrivacy))
+                sendAndDismiss(sendTabsToAllDevices(tabs))
             },
         )
     }
@@ -133,12 +129,15 @@ class SendToDevicesDialogFragment : BottomSheetDialogFragment() {
     }
 
     internal fun loadTabData(bundle: Bundle?) {
-        tabUrl = bundle?.getString(EXTRA_URL)
-        tabTitle = bundle?.getString(EXTRA_TITLE)
-        tabPrivacy = if (bundle?.getString(EXTRA_PRIVACY) == PRIVACY_PRIVATE) {
+        val urls = bundle?.getStringArrayList(EXTRA_URLS).orEmpty()
+        val titles = bundle?.getStringArrayList(EXTRA_TITLES).orEmpty()
+        val privacy = if (bundle?.getString(EXTRA_PRIVACY) == PRIVACY_PRIVATE) {
             TabPrivacy.Private
         } else {
             TabPrivacy.Normal
+        }
+        tabs = urls.mapIndexed { i, url ->
+            TabData(url = url, title = titles.getOrNull(i).orEmpty(), privacy = privacy)
         }
     }
 
@@ -198,48 +197,44 @@ class SendToDevicesDialogFragment : BottomSheetDialogFragment() {
         }
     }
 
-    private fun sendTabToDevices(
+    private fun sendTabsToDevice(
         deviceId: String,
-        url: String,
-        title: String,
-        privacy: TabPrivacy,
+        tabs: List<TabData>,
     ): Deferred<Boolean> {
         return sendTabUseCases.sendToDeviceAsync.invoke(
             deviceId = deviceId,
-            tab = TabData(url = url, title = title, privacy = privacy),
+            tabs = tabs,
         )
     }
 
-    private fun sendTabToAllDevices(
-        url: String,
-        title: String,
-        privacy: TabPrivacy,
+    private fun sendTabsToAllDevices(
+        tabs: List<TabData>,
     ): Deferred<Boolean> {
         return sendTabUseCases.sendToAllAsync.invoke(
-            tab = TabData(url = url, title = title, privacy = privacy),
+            tabs = tabs,
         )
     }
 
     companion object {
         const val TAG = "SendToDevicesDialogFragment"
 
-        internal const val EXTRA_URL = "url"
-        internal const val EXTRA_TITLE = "title"
+        internal const val EXTRA_URLS = "urls"
+        internal const val EXTRA_TITLES = "titles"
         internal const val EXTRA_PRIVACY = "privacy"
         internal const val PRIVACY_PRIVATE = "PRIVATE"
         internal const val PRIVACY_NORMAL = "NORMAL"
 
         /**
-         * Creates a new instance of [SendToDevicesDialogFragment] with the provided URL, title, and privacy status.
-         * @param url The URL of the tab to be sent.
-         * @param title The title of the tab to be sent (optional).
-         * @param isPrivate Whether the tab is private or not.
+         * Creates a new instance of [SendToDevicesDialogFragment] with the provided URLs, titles, and privacy status.
+         * @param urls The URLs of the tabs to be sent.
+         * @param titles The titles of the tabs to be sent, aligned by index with [urls].
+         * @param isPrivate Whether the tabs are private or not.
          */
-        fun newInstance(url: String, title: String?, isPrivate: Boolean) =
+        fun newInstance(urls: List<String>, titles: List<String>, isPrivate: Boolean) =
             SendToDevicesDialogFragment().apply {
                 arguments = Bundle().apply {
-                    putString(EXTRA_URL, url)
-                    putString(EXTRA_TITLE, title)
+                    putStringArrayList(EXTRA_URLS, ArrayList(urls))
+                    putStringArrayList(EXTRA_TITLES, ArrayList(titles))
                     putString(EXTRA_PRIVACY, if (isPrivate) PRIVACY_PRIVATE else PRIVACY_NORMAL)
                 }
             }

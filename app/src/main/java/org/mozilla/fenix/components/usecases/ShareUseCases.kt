@@ -7,6 +7,7 @@ package org.mozilla.fenix.components.usecases
 import mozilla.components.browser.state.store.BrowserStore
 import mozilla.components.concept.engine.prompt.ShareData
 import org.mozilla.fenix.GleanMetrics.NativeShareSheet
+import org.mozilla.fenix.components.share.ShareSheetChooserAction
 import org.mozilla.fenix.components.share.ShareSheetLauncher
 import org.mozilla.fenix.components.share.ShareSource
 import org.mozilla.fenix.components.share.createPdfShareAction
@@ -86,6 +87,8 @@ class ShareUseCases(
      * @param isPrivate Whether the items belong to private browsing mode.
      * @param subject Optional subject for the share. When `null`, the
      * underlying launcher defaults to the first item's title.
+     * @param chooserActions An array of chooser actions that will be added to the share intent chooser in the native
+     * share sheet.
      * @param navigateToShareFragment Lambda provided by the caller that provides navigation to the
      * [ShareFragment]. Invoked as a fallback when the system share sheet nor the PDF share action applies.
      */
@@ -94,6 +97,7 @@ class ShareUseCases(
         source: ShareSource,
         isPrivate: Boolean = false,
         subject: String? = null,
+        chooserActions: List<ShareSheetChooserAction> = listOf(),
         navigateToShareFragment: () -> Unit,
     ) {
         if (settings.nativeShareSheetEnabled && isSystemShareSheetSupported) {
@@ -102,6 +106,7 @@ class ShareUseCases(
                 items = items,
                 isPrivate = isPrivate,
                 subject = subject,
+                chooserActions = chooserActions,
             )
         } else {
             navigateToShareFragment()
