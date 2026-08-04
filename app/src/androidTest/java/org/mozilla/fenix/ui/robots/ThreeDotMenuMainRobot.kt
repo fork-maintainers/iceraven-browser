@@ -9,7 +9,6 @@ package org.mozilla.fenix.ui.robots
 import android.util.Log
 import androidx.compose.ui.test.ComposeTimeoutException
 import androidx.compose.ui.test.ExperimentalTestApi
-import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotDisplayed
@@ -299,9 +298,9 @@ class ThreeDotMenuMainRobot(private val composeTestRule: ComposeTestRule) {
         Log.i(TAG, "verifyHomeMainMenuItems: Trying to verify that the \"Sign in\" button exists.")
         composeTestRule.signInButton().assertIsDisplayed()
         Log.i(TAG, "verifyHomeMainMenuItems: Verified that the \"Sign in\" button exists.")
-        Log.i(TAG, "verifyHomeMainMenuItems: Trying to verify that the \"Change wallpaper\" button exists.")
-        composeTestRule.changeWallpaperButton().assertIsDisplayed()
-        Log.i(TAG, "verifyHomeMainMenuItems: Verified that the \"Change wallpaper\" button exists.")
+        Log.i(TAG, "verifyHomeMainMenuItems: Trying to verify that the \"Customize homepage\" button exists.")
+        composeTestRule.customizeHomepageButton().assertIsDisplayed()
+        Log.i(TAG, "verifyHomeMainMenuItems: Verified that the \"Customize homepage\" button exists.")
         Log.i(TAG, "verifyHomeMainMenuItems: Trying to verify that the \"Settings\" button exists.")
         composeTestRule.settingsButton().assertIsDisplayed()
         Log.i(TAG, "verifyHomeMainMenuItems: Verified that the \"Settings\" button exists.")
@@ -995,4 +994,4 @@ private fun ComposeTestRule.extensionsChevronButton() = onNodeWithTag(EXTENSIONS
 
 private fun ComposeTestRule.summarizePageButton() = onNodeWithContentDescription(getStringResource(R.string.browser_menu_summarize_page))
 
-private fun ComposeTestRule.changeWallpaperButton() = onNodeWithContentDescription(getStringResource(R.string.browser_menu_change_wallpaper))
+private fun ComposeTestRule.customizeHomepageButton() = onNodeWithContentDescription(getStringResource(R.string.browser_menu_customize_homepage))

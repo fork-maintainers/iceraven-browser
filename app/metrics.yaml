@@ -139,9 +139,9 @@ events:
           A string containing the name of the item the user tapped. These items
           include:
           add_bookmark, add_to_homescreen, add_to_top_sites, addon_details, addons_manager,
-          back, back_long_press, bookmark, bookmarks, change_wallpaper, custom_back, custom_back_long_press,
+          back, back_long_press, bookmark, bookmarks, custom_back, custom_back_long_press,
           custom_desktop_view_off, custom_desktop_view_on, custom_find_in_page,
-          custom_forward, custom_forward_long_press, custom_share, desktop_view_off,
+          custom_forward, custom_forward_long_press, custom_share, customize_homepage, desktop_view_off,
           desktop_view_on, discover_more_extensions, dismiss_menu_banner, downloads,
           edit_bookmark, find_in_page, forward, forward_long_press, history, install_addon,
           installed_addon_details, menu_banner, new_tab, open_in_app, open_in_fenix, print_content,

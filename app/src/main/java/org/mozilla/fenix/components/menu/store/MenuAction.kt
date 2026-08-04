@@ -222,9 +222,9 @@ sealed class MenuAction : Action {
         data object Settings : Navigate()
 
         /**
-         * [Navigate] action dispatched when navigating to the wallpaper settings.
+         * [Navigate] action dispatched when navigating to the homepage settings.
          */
-        data object Wallpaper : Navigate()
+        data object CustomizeHomepage : Navigate()
 
         /**
          * [Navigate] action dispatched when navigating to bookmarks.

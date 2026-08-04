@@ -562,8 +562,8 @@ class MenuDialogFragment : BottomSheetDialogFragment() {
                                     onSettingsButtonClick = {
                                         menuStore.dispatch(MenuAction.Navigate.Settings)
                                     },
-                                    onWallpaperButtonClick = {
-                                        menuStore.dispatch(MenuAction.Navigate.Wallpaper)
+                                    onCustomizeHomepageButtonClick = {
+                                        menuStore.dispatch(MenuAction.Navigate.CustomizeHomepage)
                                     },
                                     onBookmarkPageMenuClick = {
                                         menuStore.dispatch(MenuAction.AddBookmark)

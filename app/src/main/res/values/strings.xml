@@ -955,8 +955,8 @@
     <string name="customize_toggle_pocket_sponsored">Sponsored stories</string>
     <!-- Title for the opening wallpaper settings screen -->
     <string name="customize_wallpapers">Wallpapers</string>
-    <!-- Label for the menu item that opens the wallpaper settings screen. -->
-    <string name="browser_menu_change_wallpaper">Change wallpaper</string>
+    <!-- Label for the menu item that opens the customize homepage settings screen. -->
+    <string name="browser_menu_customize_homepage">Customize homepage</string>
     <!-- Title for the customize home screen section with sponsored shortcuts. -->
     <string name="customize_toggle_contile">Sponsored shortcuts</string>
 

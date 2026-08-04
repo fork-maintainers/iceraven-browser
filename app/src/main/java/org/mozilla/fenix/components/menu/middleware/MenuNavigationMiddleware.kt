@@ -124,9 +124,9 @@ class MenuNavigationMiddleware(
                     MenuDialogFragmentDirections.actionGlobalSettingsFragment(),
                 )
 
-                is MenuAction.Navigate.Wallpaper -> navController.nav(
+                is MenuAction.Navigate.CustomizeHomepage -> navController.nav(
                     R.id.menuDialogFragment,
-                    MenuDialogFragmentDirections.actionGlobalWallpaperSettingsFragment(),
+                    MenuDialogFragmentDirections.actionGlobalHomeSettingsFragment(),
                 )
 
                 is MenuAction.Navigate.InstalledAddonDetails -> navController.nav(

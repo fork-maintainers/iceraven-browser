@@ -182,10 +182,10 @@ object MainMenuSelectors {
         groups = listOf("requiresScroll"),
     )
 
-    val CHANGE_WALLPAPER_BUTTON = Selector(
+    val CUSTOMIZE_HOMEPAGE_BUTTON = Selector(
         strategy = SelectorStrategy.COMPOSE_BY_CONTENT_DESCRIPTION,
-        value = getStringResource(R.string.browser_menu_change_wallpaper),
-        description = "Change wallpaper Settings button",
+        value = getStringResource(R.string.browser_menu_customize_homepage),
+        description = "Customize homepage Settings button",
         groups = listOf("homePageMainMenuItems"),
     )
 
@@ -284,7 +284,7 @@ object MainMenuSelectors {
         DESKTOP_SITE_ON,
         DESKTOP_SITE_OFF,
         MORE_BUTTON,
-        CHANGE_WALLPAPER_BUTTON,
+        CUSTOMIZE_HOMEPAGE_BUTTON,
         SAVE_TO_COLLECTIONS_BUTTON,
         ADD_TO_SHORTCUTS_BUTTON,
         TRANSLATE_BUTTON,
