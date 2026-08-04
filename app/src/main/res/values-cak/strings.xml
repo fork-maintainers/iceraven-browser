@@ -39,6 +39,10 @@
   <string name="application_search_hint">Ketz\'ib\'äx tzij yekanöx</string>
   <!-- The header text displayed on the private tabs page when no private tabs are open -->
   <string name="tab_manager_empty_private_tabs_page_header">Ichinan okem pa k\'amaya\'l</string>
+  <!-- The supplementary text displayed on the private tabs page when no private tabs are open. %1$s is the name of the app (for example "Firefox") -->
+  <string name="tab_manager_empty_private_tabs_page_description">%1$s man xtunataj ta ri anatab\'al ni xa ta ri taq kuki, po xkeyake\' ri k\'ak\'a\' taq yaketal.</string>
+  <!-- The header text displayed on the normal tabs page when no normal tabs are open -->
+  <string name="tab_manager_empty_normal_tabs_page_header">Titz\'uk jun k\'ak\'a\' ruwi\' richin nitikirisäx rukanoxik</string>
   <!-- Tab tray multi select title in app bar. %1$d is the number of tabs selected -->
   <string name="tab_tray_multi_select_title">%1$d xcha\'</string>
   <!-- Tab tray multi select title in app bar when no tabs are selected -->
@@ -51,6 +55,10 @@
   <string name="tab_tray_select_collection">Ticha\' mol</string>
   <!-- Content description for close button while in multiselect mode in tab tray -->
   <string name="tab_tray_close_multiselect_content_description">Tel pa k\'ïy cha\'oj b\'anikil</string>
+  <!-- The header text displayed on the synced tabs page when the user is not logged into an account. -->
+  <string name="tab_manager_empty_synced_tabs_page_header">Ke\'achapa\' taq ruwi\' pa xab\'achike okisaxel</string>
+  <!-- The supplementary text displayed on the synced tabs page when the user is not logged into an account. -->
+  <string name="tab_manager_empty_synced_tabs_page_description">Tatikirisaj molojri\'ïl richin yenuk\'samajïx ximon taq ruwi\' pa konojel taq awokisaxel.</string>
   <!-- The action text displayed on the synced tabs page when the user is not logged into an account, prompting the user to sign into their account. When clicked, it takes the user to the account sign-in flow. -->
   <string name="tab_manager_empty_synced_tabs_page_sign_in_cta">Titikirisäx molojri\'ïl</string>
   <!-- Text for the button used to show all stories -->
@@ -100,6 +108,12 @@
   <string name="open_in_app_cfr_negative_button_text">Tewäx</string>
   <!-- Private browsing erase action "contextual feature recommendation" (CFR) -->
 
+  <!--
+    Address bar swipe "contextual feature recommendation" (CFR)
+
+    Text for the message displayed in the contextual feature recommendation popup promoting swipe of address bar.
+  -->
+  <string name="address_bar_swipe_cfr_message_2">Tisilöx ri rusamajib\'al pa xokon o pan ajkiq\'a\' richin nik\'ëx ri ruwi\'.</string>
   <!-- Text for the info dialog when camera permissions have been denied but user tries to access a camera feature. -->
   <string name="camera_permissions_needed_message">Najowäx okem pa elesäy wachib\'äl. Jät pa runuk\'ulem Android, tachapa\' pa ya\'oj q\'ij k\'a ri\' pa tiya\' q\'ij.</string>
   <!-- Text for the positive action button to go to Android Settings to grant permissions. -->
@@ -217,6 +231,8 @@
   <string name="browser_menu_add_to_homescreen">Titz\'aqatisäx pa ri Rutikirib\'al ruwa</string>
   <!-- Browser menu toggle that adds a PWA of the site on the device home screen. -->
   <string name="browser_menu_add_app_to_homescreen">Titz\'aqatisäx chokoy pa ri nïm tzuwäch</string>
+  <!-- Text for notifying users that Xiaomi devices require additional permissions to add to home screen -->
+  <string name="browser_menu_add_to_homescreen_xiaomi">Ri taq Xiaomi okisaxel rik\'in jub\'a\' xtik\'utüx ruwi\' ya\'oj q\'ij chi ke richin nitz\'aqatisäx jun chojokem pa ri rutikirib\'al ruwäch. Tatz\'eta\' ri anuk\'ulem.</string>
   <!-- Content description (not visible, for screen readers etc.) for the Resync tabs button -->
   <string name="resync_button_content_description">Tixim chik</string>
   <!-- Browser menu button that opens the find in page menu -->
@@ -255,6 +271,8 @@
   <string name="browser_menu_sign_back_in_to_sync">Titikirisäx chik molojri\'ïl richin ximojri\'ïl</string>
   <!-- Browser menu caption label for the "Sign back in to sync" browser menu item described in `browser_menu_sign_back_in_to_sync` when there is an error in syncing -->
   <string name="browser_menu_syncing_paused_caption">Q\'aton ximojri\'ïl</string>
+  <!-- Browser menu caption label for an authenticated user -->
+  <string name="browser_menu_signed_in_caption">Tanuk\'samajij ri taq ayakoj chuqa\' ri taq aximoj</string>
   <!-- Browser menu label that creates a private tab -->
   <string name="browser_menu_new_private_tab">K\'ak\'a\' ichinan ruwi\'</string>
   <!-- Browser menu label that navigates to the Password screen -->
@@ -263,12 +281,16 @@
   <string name="browser_close_main_menu_handlebar_content_description">Titz\'apïx k\'utsamaj</string>
   <!-- Content description (not visible, for screen readers etc.) for main menu navigation header. -->
   <string name="browser_main_menu_content_description_navigation_header">Okem pa k\'amaya\'l</string>
+  <!-- Content description (not visible, for screen readers etc.) for bottom sheet handlebar custom tab menu. -->
+  <string name="browser_custom_tab_menu_handlebar_content_description">Titz\'apïx ri ruxaq rucholsamajib\'al ichinan ruwi\'</string>
   <!-- Browser menu label that bookmarks the currently visited page -->
   <string name="browser_menu_bookmark_this_page_2">Yaketal ruxaq</string>
   <!-- Browser menu label that navigates to the edit bookmark screen for the current bookmarked page -->
   <string name="browser_menu_edit_bookmark">Tinuk\' yaketal</string>
   <!-- Browser menu label that the saves the currently visited page as a PDF -->
   <string name="browser_menu_save_as_pdf_2">Tiyak achi\'el jun PDF</string>
+  <!-- Browser menu label for moving the current private tab to a non-private tab -->
+  <string name="browser_menu_move_to_non_private_tab">Tisilöx pa jun me\'ichinan ruwi\'</string>
   <!-- Browser menu label for navigating to the translation feature, which provides language translation options the current visited page -->
   <string name="browser_menu_translate_page_2">Titzalq\'omïx ruxaq</string>
   <!-- Browser menu label for navigating to the summarization feature, which provides site summarization for the current visited page -->
@@ -286,12 +308,25 @@
     %1$s is the name of the app (for example "Firefox").
   -->
   <string name="browser_menu_delete_browsing_data_on_quit">Tel pa %1$s</string>
+  <!--
+    Content description for a banner within the menu which prompt the user to make this app their default browser.
+    %1$s is the name of the app (for example "Firefox").
+  -->
+  <string name="browser_menu_default_banner_title">Taya\' %1$s achi\'el ri k\'o wi</string>
   <!-- Label text within the set as default banner -->
   <string name="browser_menu_default_banner_subtitle_2">Aninäq, ichinan chuqa\' b\'anon awuma.</string>
   <!-- Content description (not visible, for screen readers etc.) for the button that dismisses the set as default banner in the menu -->
   <string name="browser_menu_default_banner_dismiss_promotion">Timalïx rutaluxik</string>
   <!-- Content description (not visible, for screen readers etc.) for recommended extensions in main menu -->
   <string name="browser_menu_recommended_extensions_content_description">Ch\'aqa\' etamab\'äl</string>
+  <!--
+    Menu "contextual feature recommendation" (CFR)
+
+    Text for the title in the contextual feature recommendation popup promoting the menu feature.
+  -->
+  <string name="menu_cfr_title">K\'ak\'a\': ch\'utin cha\'osamaj</string>
+  <!-- Text for the message in the contextual feature recommendation popup promoting the menu feature. -->
+  <string name="menu_cfr_body">Anin tawila\' ri nakanoj, chupam ichinan okem chuqa\' taq samaj eyakon.</string>
   <!--
     Extensions management fragment
 
@@ -304,6 +339,18 @@
     Content description for the translate page toolbar button that opens the translations dialog when no translation has occurred.
   -->
   <string name="browser_toolbar_translate">Titzalq\'omïx ruxaq</string>
+  <!-- CFR description for the browser toolbar describing the "Shake to summarize feature" -->
+  <string name="browser_toolbar_summarize_cfr_description">Tatotaj ri awokisaxel richin nach\'utinisaj re ruxaq re\' pa xil ramaj. ⚡️</string>
+  <!--
+    Translation Toolbar
+
+    Translation toolbar label that is displayed when the current page has been translated by the translation feature.
+    %1$s is the name of the language that is displayed in the original page. (For example: English)
+    %2$s is the name of the language which the page was translated to. (For example: French)
+  -->
+  <string name="translation_toolbar_translated_from_and_to" tools:ignore="UnusedResources">Tzalq\'omin %1$s pa %2$s.</string>
+  <!-- Content description for the translate toolbar action that opens the translations dialog. -->
+  <string name="translation_toolbar_expand_action">Tijaq ruxaq richin tzalq\'omanïk</string>
   <!-- Content description for the translate toolbar action that closes the translations toolbar. -->
   <string name="translation_toolbar_close_action">Tixutüx rutzijol</string>
   <!--
@@ -318,16 +365,38 @@
     Title for the AI controls settings screen
   -->
   <string name="preferences_ai_controls">IA taq samajib\'äl</string>
+  <!-- Headline text for the AI controls banner. %s is the name of the app (for example "Firefox"). -->
+  <string name="ai_controls_banner_headline">Junelïk k\'o jun acha\'oj pa %s</string>
+  <!-- Supporting text for the AI controls banner. %s is a learn more link using ai_controls_learn_more as text. -->
+  <string name="ai_controls_banner_supporting_text_2">Ri ri\' rutz\'aqatisan we nawokisaj utzilan taq samajib\'äl rik\'in IA. %s</string>
   <!-- Link text for learning more about AI controls -->
   <string name="ai_controls_learn_more">Tetamäx ch\'aqa\' chik</string>
+  <!-- Title for the block AI enhancements toggle -->
+  <string name="ai_controls_block_ai_title">Keq\'at ri taq rutzil IA</string>
+  <!-- Description for the block AI enhancements toggle. %s is the name of the app (for example "Firefox"). -->
+  <string name="ai_controls_block_ai_description">Ri q\'atoj nuq\'ijuj chi man xke\'atz\'ët ta ri k\'ak\'a\' taq rutzil IA o ri kan e k\'o wi pa %s, ni xa ta ri elenel taq tzuwäch chi kij.</string>
+  <!-- Link text to see what AI enhancements are and aren’t included -->
+  <string name="ai_controls_see_whats_included">Tanik\'oj ri ruk\'amon pe chuqa\' ri manäq</string>
+  <!-- Banner text shown when AI enhancements are blocked -->
+  <string name="ai_controls_blocked_info_banner">Ri utziläj k\'ak\'a\' taq IA chuqa\' e k\'o wi xeq\'at pa ri kan k\'o wi. Ke\'atzija\' chik taq rusamaj re wakami:</string>
+  <!-- Section header for the AI-powered features list -->
+  <string name="ai_controls_ai_powered_features">Taq samaj rik\'in IA</string>
   <!-- Title for the translations AI feature toggle -->
   <string name="ai_controls_translations_title">Taq tzalq\'omanïk</string>
+  <!-- Description for the translations AI feature toggle -->
+  <string name="ai_controls_translations_description">Konojel ri taq tzalq\'omanïk e k\'o pan ichinan chupam ri awokisaxel.</string>
+  <!-- Link text to navigate to more translations settings -->
+  <string name="ai_controls_more_translations_settings">Ch\'aqa\' chik taq runuk\'ulem tzalq\'omanïk</string>
   <!-- Link text to navigate to more page summary settings -->
   <string name="ai_controls_more_page_summary_settings">Ch\'aqa\' runuk\'ulem ruch\'utinem ruxaq</string>
   <!-- Title for the voice search AI feature toggle -->
   <string name="ai_controls_voice_search_title">Tikanöx chi ch\'ab\'äl</string>
+  <!-- Description for the voice search AI feature toggle -->
+  <string name="ai_controls_voice_search_description">Ri k\'oxom nupo\' ri\' pa tz\'ib\'anïk rik\'in ri rusamaj ch\'ab\'äl Google.</string>
   <!-- Title for the block AI enhancements confirmation dialog -->
   <string name="ai_controls_block_dialog_title">¿La niq\'at ri rutzil AI?</string>
+  <!-- Body text for the block AI enhancements confirmation dialog. %1$s is the name of the app (for example "Firefox"). -->
+  <string name="ai_controls_block_dialog_body">Man xkewachin ta utziläj k\'ak\'a\' taq IA chuqa\' ri e k\'o wakami pa %1$s, ni xa ta elenel taq tzuwäch chi kij. K\'a ri, tikirel yetzij chik ronojel ri najowäx k\'a nokisäx. Ri q\'atoj chuqa\' xkerutz\'ila\' ri taq k\'amal nikokisaj IA ya\'on ruma %1$s.</string>
   <!-- Label shown above the list of features that will be blocked in the block AI dialog -->
   <string name="ai_controls_block_dialog_what_will_be_blocked">Achike ri xtiq\'at:</string>
   <!-- Cancel button text in the block AI enhancements confirmation dialog -->
@@ -395,6 +464,8 @@
   <string name="onboarding_preferences_dialog_crash_reporting_learn_more_2">Tetamäx ch\'aqa\' chik</string>
   <!-- Title for the startup crash page. %s is the name of the app (for example "Firefox") -->
   <string name="startup_crash_title">%s k\'o chi nutikirisaj ri\'</string>
+  <!-- Body text for the startup crash page. %s is the name of the app (for example "Firefox") -->
+  <string name="startup_crash_body">Xk\'oje\' jun k\'ayewal toq xjaq %s. We nitaq jun rutzijol sachoj yojruto\' richin niqatz\'ët chuqa\' niqasöl ri ruk\'ayewal ri okib\'äl. Ri taq rutzijol tikirel nikik\'waj ichinan taq na\'oj o e\'ichinan.</string>
   <!-- Button text to submit a startup crash report -->
   <string name="startup_crash_positive">Titaq rutzijol sachoj</string>
   <!-- Button text to continue and not send a startup crash report -->
@@ -416,6 +487,10 @@
   <string name="onboarding_term_of_service_line_two_link_text">Ichinan na\'oj</string>
   <!-- Used as text for the link in onboarding_term_of_service_line_three. -->
   <string name="onboarding_term_of_service_line_three_link_text">Tinuk\'samajïx</string>
+  <!-- Terms of use (ToU) onboarding redesign title. -->
+  <string name="onboarding_redesign_tou_title" tools:ignore="UnusedResources">Nuk\'üt ri utziläj okib\'äl richin Android</string>
+  <!-- Terms of use (ToU) first subheader. -->
+  <string name="onboarding_redesign_tou_subheader_one" tools:ignore="UnusedResources">Nisamajib\'ëx ruxaq achi\'el ruchuq\'a\' ri q\'aq\'</string>
   <!-- Terms of use (ToU) second subheader. -->
   <string name="onboarding_redesign_tou_subheader_two" tools:ignore="UnusedResources">Ruyonil chajinïk chuwäch ojqanem</string>
   <!-- Terms of use (ToU) third subheader. -->
@@ -448,6 +523,8 @@
   <string name="onboarding_marketing_redesign_learn_more" tools:ignore="UnusedResources">Atux rub\'eyal yeqokisaj ri taq tzij</string>
   <!-- Marketing onboarding page button label. Button to confirm choice and start browsing. -->
   <string name="onboarding_marketing_redesign_positive_button" tools:ignore="UnusedResources">Tijikib\'äx</string>
+  <!-- Set to default browser onboarding redesign title. -->
+  <string name="onboarding_redesign_set_default_browser_title" tools:ignore="UnusedResources">Tak\'ulu\' yonil chajinïk chi rij ojqanem pa rub\'eyal k\'o wi</string>
   <!-- Sync onboarding redesign title. 'Firefox' is intentionally hardcoded. -->
   <string name="onboarding_redesign_sync_title" tools:ignore="BrandUsage,UnusedResources">Tixim pa xab\'akuchi\' akuchi\' nokisäx Firefox</string>
   <!-- Sync onboarding redesign positive button text. -->

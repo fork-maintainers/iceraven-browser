@@ -1710,6 +1710,8 @@
   <string name="tab_group_three_dot_button_content_description">Weitere Optionen</string>
   <!-- Text shown on the edit button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_edit">Bearbeiten</string>
+  <!-- Text shown on the ungroup button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_ungroup">Gruppierung aufheben</string>
   <!-- Text shown on the delete button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_delete">Löschen</string>
   <!-- Text shown on the close button for a tab group on the three dot menu -->
@@ -2425,6 +2427,10 @@
   <string name="sync_sign_in">Bei Sync anmelden</string>
   <!-- An option from the share dialog to send link to all other sync devices -->
   <string name="sync_send_to_all">An alle Geräte senden</string>
+  <!-- Text displayed when no other sync devices are available for link sharing -->
+  <string name="sync_no_devices_available">Keine Geräte verfügbar</string>
+  <!-- Text displayed when no other sync devices are available for link sharing. -->
+  <string name="sync_no_devices_available_description">Alle Geräte, die mit diesem Konto angemeldet sind und mit ihnen synchronisieren, werden hier angezeigt.</string>
   <!-- An option from the share dialog to reconnect to sync -->
   <string name="sync_reconnect">Wieder mit Sync verbinden</string>
   <!-- Text displayed when sync is offline and cannot be accessed -->

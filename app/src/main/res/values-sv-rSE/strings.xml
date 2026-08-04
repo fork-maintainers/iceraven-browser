@@ -1710,6 +1710,8 @@
   <string name="tab_group_three_dot_button_content_description">Fler alternativ</string>
   <!-- Text shown on the edit button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_edit">Redigera</string>
+  <!-- Text shown on the ungroup button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_ungroup">Dela upp</string>
   <!-- Text shown on the delete button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_delete">Ta bort</string>
   <!-- Text shown on the close button for a tab group on the three dot menu -->
@@ -2425,6 +2427,10 @@
   <string name="sync_sign_in">Logga in till Sync</string>
   <!-- An option from the share dialog to send link to all other sync devices -->
   <string name="sync_send_to_all">Skicka till alla enheter</string>
+  <!-- Text displayed when no other sync devices are available for link sharing -->
+  <string name="sync_no_devices_available">Inga enheter tillgängliga</string>
+  <!-- Text displayed when no other sync devices are available for link sharing. -->
+  <string name="sync_no_devices_available_description">Alla enheter som är inloggade och synkroniserar med det här kontot visas här.</string>
   <!-- An option from the share dialog to reconnect to sync -->
   <string name="sync_reconnect">Återanslut till Sync</string>
   <!-- Text displayed when sync is offline and cannot be accessed -->

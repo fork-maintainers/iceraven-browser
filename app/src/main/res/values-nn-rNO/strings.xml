@@ -2618,7 +2618,7 @@
   <!-- Text shown for settings option for create new account text.'Firefox' intentionally hardcoded here. -->
   <string name="sign_in_create_account_text" tools:ignore="BrandUsage"><![CDATA[Ingen konto? <u>Lag ein</u> for å synkronisere Firefox mellom einingar.]]></string>
   <!-- Text shown in confirmation dialog to sign out of account. %s is the name of the app (for example "Firefox"). -->
-  <string name="sign_out_confirmation_message_2">%s vil stoppe synkroniseringa med kontoen din, men vil ikkje slette nettleserdataa dine på denne eiinga.</string>
+  <string name="sign_out_confirmation_message_2">%s vil stoppe synkroniseringa med kontoen din, men vil ikkje slette nettlesardataa dine på denne eiinga.</string>
   <!-- Option to continue signing out of account shown in confirmation dialog to sign out of account -->
   <string name="sign_out_disconnect">Kople frå</string>
   <!-- Option to cancel signing out shown in confirmation dialog to sign out of account -->

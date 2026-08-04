@@ -1704,6 +1704,8 @@
   <string name="tab_group_three_dot_button_content_description">옵션 더보기</string>
   <!-- Text shown on the edit button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_edit">편집</string>
+  <!-- Text shown on the ungroup button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_ungroup">그룹 해제</string>
   <!-- Text shown on the delete button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_delete">삭제</string>
   <!-- Text shown on the close button for a tab group on the three dot menu -->
@@ -2418,6 +2420,10 @@
   <string name="sync_sign_in">Sync에 로그인</string>
   <!-- An option from the share dialog to send link to all other sync devices -->
   <string name="sync_send_to_all">모든 기기에 보내기</string>
+  <!-- Text displayed when no other sync devices are available for link sharing -->
+  <string name="sync_no_devices_available">기기 없음</string>
+  <!-- Text displayed when no other sync devices are available for link sharing. -->
+  <string name="sync_no_devices_available_description">이 계정에 로그인하고 동기화한 모든 기기가 여기에 나타납니다.</string>
   <!-- An option from the share dialog to reconnect to sync -->
   <string name="sync_reconnect">Sync에 다시 연결</string>
   <!-- Text displayed when sync is offline and cannot be accessed -->

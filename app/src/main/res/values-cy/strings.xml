@@ -1734,6 +1734,8 @@
   <string name="tab_group_three_dot_button_content_description">Rhagor o ddewisiadau</string>
   <!-- Text shown on the edit button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_edit">Golygu</string>
+  <!-- Text shown on the ungroup button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_ungroup">Dadgrwpio</string>
   <!-- Text shown on the delete button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_delete">Dileu</string>
   <!-- Text shown on the close button for a tab group on the three dot menu -->
@@ -2453,6 +2455,10 @@
   <string name="sync_sign_in">Mewngofnodi i Sync</string>
   <!-- An option from the share dialog to send link to all other sync devices -->
   <string name="sync_send_to_all">Anfon at bob dyfais</string>
+  <!-- Text displayed when no other sync devices are available for link sharing -->
+  <string name="sync_no_devices_available">Dim dyfeisiau ar gael</string>
+  <!-- Text displayed when no other sync devices are available for link sharing. -->
+  <string name="sync_no_devices_available_description">Bydd unrhyw ddyfeisiau sydd wedi mewngofnodi ac yn cysoni i\'r cyfrif hwn yn ymddangos yma.</string>
   <!-- An option from the share dialog to reconnect to sync -->
   <string name="sync_reconnect">Ailgysylltu â Sync</string>
   <!-- Text displayed when sync is offline and cannot be accessed -->
