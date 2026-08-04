@@ -19,6 +19,14 @@
     <issue id="ExtraTranslation" severity="ignore" />
     <issue id="Untranslatable" severity="ignore" />
     <issue id="MissingDefaultResource" severity="ignore" />
+    <!-- Which plural forms a language needs and whether to use a fraction character are the translators'
+         call, and the localized files come from the l10n import, so only check the default strings. -->
+    <issue id="UnusedQuantity">
+        <ignore path="**/values-*/strings.xml" />
+    </issue>
+    <issue id="TypographyFractions">
+        <ignore path="**/values-*/strings.xml" />
+    </issue>
     <issue id="BrandUsage" severity="error">
         <ignore path="**/values-*/strings.xml" />
         <ignore path="**/values-*/*_strings.xml" />
