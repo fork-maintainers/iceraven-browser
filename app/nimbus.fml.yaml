@@ -1305,6 +1305,14 @@ features:
         type: Boolean
         default: false
 
+  oled-theme:
+    description: Feature to provide the OLED theme option for users on Firefox for Android.
+    variables:
+      enabled:
+        description: If true, the OLED theme option is shown.
+        type: Boolean
+        default: false
+
 types:
   objects:
     GleanServerKnobsConfiguration:
