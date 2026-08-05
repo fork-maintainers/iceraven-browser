@@ -4,6 +4,7 @@
 
 package org.mozilla.fenix.components.share
 
+import android.app.Dialog
 import android.content.Intent
 import android.content.res.Configuration
 import android.net.ConnectivityManager
@@ -16,6 +17,8 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.compose.runtime.collectAsState
 import androidx.core.content.getSystemService
 import androidx.core.net.toUri
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat.Type.systemBars
 import androidx.fragment.app.viewModels
 import androidx.fragment.compose.content
 import androidx.lifecycle.ViewModel
@@ -35,6 +38,7 @@ import mozilla.components.feature.share.RecentAppsStorage
 import mozilla.components.service.fxa.manager.FxaAccountManager
 import mozilla.components.support.utils.ext.isLandscape
 import mozilla.components.support.utils.ext.packageManagerCompatHelper
+import mozilla.components.support.utils.ext.top
 import mozilla.telemetry.glean.private.NoExtras
 import org.mozilla.fenix.BuildConfig
 import org.mozilla.fenix.GleanMetrics.SyncAccount
@@ -100,6 +104,20 @@ class SendToDevicesDialogFragment : BottomSheetDialogFragment() {
                 sendAndDismiss(sendTabsToAllDevices(tabs))
             },
         )
+    }
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        return super.onCreateDialog(savedInstanceState).apply {
+            setOnShowListener {
+                val bottomSheet = findViewById<View>(materialR.id.design_bottom_sheet) ?: return@setOnShowListener
+                ViewCompat.setOnApplyWindowInsetsListener(bottomSheet) { view, insets ->
+                    val systemBarInsets = insets.getInsets(systemBars())
+                    view.setPadding(0, systemBarInsets.top, 0, systemBarInsets.bottom)
+                    insets
+                }
+                bottomSheet.setBackgroundResource(R.drawable.bottom_sheet_with_top_rounded_corners)
+            }
+        }
     }
 
     override fun onStart() {
