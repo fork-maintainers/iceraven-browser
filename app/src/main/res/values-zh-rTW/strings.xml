@@ -1705,6 +1705,8 @@
   <string name="tab_group_three_dot_button_content_description">更多選項</string>
   <!-- Text shown on the edit button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_edit">編輯</string>
+  <!-- Text shown on the ungroup button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_ungroup">取消群組</string>
   <!-- Text shown on the delete button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_delete">刪除</string>
   <!-- Text shown on the close button for a tab group on the three dot menu -->
@@ -2420,6 +2422,10 @@
   <string name="sync_sign_in">登入 Sync</string>
   <!-- An option from the share dialog to send link to all other sync devices -->
   <string name="sync_send_to_all">傳送到所有裝置</string>
+  <!-- Text displayed when no other sync devices are available for link sharing -->
+  <string name="sync_no_devices_available">無裝置可用</string>
+  <!-- Text displayed when no other sync devices are available for link sharing. -->
+  <string name="sync_no_devices_available_description">所有已登入並與此帳號同步的裝置，顯示於此處。</string>
   <!-- An option from the share dialog to reconnect to sync -->
   <string name="sync_reconnect">重新連線到 Sync</string>
   <!-- Text displayed when sync is offline and cannot be accessed -->

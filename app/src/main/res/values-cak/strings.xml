@@ -460,6 +460,10 @@
   <string name="onboarding_home_content_description_close_button">Titz\'apïx</string>
   <!-- Title for the privacy preferences dialog shown during onboarding. Note: The word "Firefox" should NOT be translated. -->
   <string name="onboarding_preferences_dialog_title" tools:ignore="BrandUsage">Kato\'on richin nutziläx ri Firefox</string>
+  <!-- Title for the crash reporting option in the privacy preferences dialog shown during onboarding. -->
+  <string name="onboarding_preferences_dialog_crash_reporting_title">Ketaq pa ruyonil kitzijol sachoj</string>
+  <!-- Description for the crash reporting option in the privacy preferences dialog shown during onboarding. -->
+  <string name="onboarding_preferences_dialog_crash_reporting_description">Ri taq rutzijol sachoj nikiya\' q\'ij chi qe niqatz\'ët chuqa\' niqasöl taq ruk\'ayewal okik\'amaya\'l. Ri taq tzijol tikirel nikik\'waj ichinan chuqa\' ewatäl taq tzij.</string>
   <!-- Learn more link for the crash reporting option in the privacy preferences dialog shown during onboarding. -->
   <string name="onboarding_preferences_dialog_crash_reporting_learn_more_2">Tetamäx ch\'aqa\' chik</string>
   <!-- Title for the startup crash page. %s is the name of the app (for example "Firefox") -->
@@ -472,6 +476,9 @@
   <string name="startup_crash_negative">Mani matyox</string>
   <!-- Button text to reopen firefox after the crash is processed %s is the name of the app (for example "Firefox") -->
   <string name="startup_crash_restart">Tijaq chik %s</string>
+  <!-- Title for the usage data option in the privacy preferences dialog shown during onboarding. Note: The word "Mozilla" should NOT be translated. -->
+  <string name="onboarding_preferences_dialog_usage_data_title" tools:ignore="BrandUsage">Ketaq samajel taq tzij chuqa\' samaj chi re ri Mozilla</string>
+  <string name="onboarding_preferences_dialog_usage_data_description_2" tools:ignore="BrandUsage">Ri taq rutzij awokisaxel, ri runuk\'ulem hardware chuqa\' achike rub\'eyal nokisäx Firefox yeto\'on chi ye\'utziläx taq samaj, ri rub\'eyal nisamäj chuqa\' ri rujikonem chi ruwäch ri ruwach\'ulew.</string>
   <string name="onboarding_preferences_dialog_usage_data_learn_more_2">Tetamäx ch\'aqa\' chik</string>
   <!-- Positive button label for the privacy preferences dialog shown during onboarding. -->
   <string name="onboarding_preferences_dialog_positive_button">Xk\'is</string>
@@ -485,6 +492,8 @@
   <string name="onboarding_term_of_service_line_two_2" tools:ignore="BrandUsage">Firefox numäy ri awichinanem. Tawetamaj ch\'aqa\' chik pa %1$s.</string>
   <!-- Used as text for the link in onboarding_term_of_service_line_two. -->
   <string name="onboarding_term_of_service_line_two_link_text">Ichinan na\'oj</string>
+  <!-- Line three of the terms of service onboarding page. 'Firefox' and 'Mozilla' are intentionally hardcoded. %1$s is replaced by an active link using onboarding_term_of_service_line_three_link_text as text (“Manage”). -->
+  <string name="onboarding_term_of_service_line_three" tools:ignore="BrandUsage">Richin yato\'on richin nutziläx ri okik\'amaya\'l, ri Firefox yerutäq taq rutzij nik\'oxik chuqa\' samaj rik\'in Mozilla. %1$s</string>
   <!-- Used as text for the link in onboarding_term_of_service_line_three. -->
   <string name="onboarding_term_of_service_line_three_link_text">Tinuk\'samajïx</string>
   <!-- Terms of use (ToU) onboarding redesign title. -->
@@ -509,6 +518,11 @@
   <string name="onboarding_redesign_tou_body_two" tools:ignore="BrandUsage,UnusedResources">Firefox numäy ri awichinanem. Tawetamaj ch\'aqa\' chik pa %1$s.</string>
   <!-- Used as text for the link in onboarding_redesign_tou_body_two. -->
   <string name="onboarding_redesign_tou_body_two_link_text" tools:ignore="UnusedResources">Ichinan na\'oj</string>
+  <!--
+    Terms of use (ToU) third body text. 'Firefox' and 'Mozilla' are intentionally hardcoded.
+    %1$s is replaced by an active link using onboarding_redesign_tou_body_three_link_text as text (“Manage Settings”).
+  -->
+  <string name="onboarding_redesign_tou_body_three" tools:ignore="BrandUsage,UnusedResources">Richin yato\'on richin nutziläx ri okik\'amaya\'l, ri Firefox yerutäq taq rutzij nik\'oxik chuqa\' samaj rik\'in Mozilla. %1$s</string>
   <!-- Used as text for the link in onboarding_redesign_tou_body_three. -->
   <string name="onboarding_redesign_tou_body_three_link_text" tools:ignore="UnusedResources">Kenuk\'samajïx taq runuk\'ulem</string>
   <!-- Terms of use (ToU) onboarding page continue button label. -->
@@ -519,20 +533,28 @@
   <string name="onboarding_redesign_continue_button" tools:ignore="UnusedResources">Titikïr chik el</string>
   <!-- Marketing onboarding page title. 'Firefox' is intentionally hardcoded. -->
   <string name="onboarding_marketing_redesign_title" tools:ignore="BrandUsage">Kojato\' chi niqanimirisaj Firefox</string>
+  <!-- Marketing onboarding page opt-out checkbox. Unchecking the box does not increase data collection. Our data practices remain the same. 'Mozilla' is intentionally hardcoded. -->
+  <string name="onboarding_marketing_redesign_opt_out_checkbox" tools:ignore="BrandUsage,UnusedResources">Kakomonin kik\'in rachsamajel rumarkentin Mozilla achike rub\'eyal xawïl Firefox chuqa\' achi\'el rub\'eyal nawokisaj. Re taq tzij re\' majub\'ey xkek\'ayïx.</string>
   <!-- Marketing onboarding page clickable link text to "learn more" on how data is used. -->
   <string name="onboarding_marketing_redesign_learn_more" tools:ignore="UnusedResources">Atux rub\'eyal yeqokisaj ri taq tzij</string>
   <!-- Marketing onboarding page button label. Button to confirm choice and start browsing. -->
   <string name="onboarding_marketing_redesign_positive_button" tools:ignore="UnusedResources">Tijikib\'äx</string>
   <!-- Set to default browser onboarding redesign title. -->
   <string name="onboarding_redesign_set_default_browser_title" tools:ignore="UnusedResources">Tak\'ulu\' yonil chajinïk chi rij ojqanem pa rub\'eyal k\'o wi</string>
+  <!-- Set to default browser onboarding redesign body. -->
+  <string name="onboarding_redesign_set_default_browser_body" tools:ignore="UnusedResources">Jun chapoj nito\'on chi nuq\'ät jun moloj chi yatq\'eleb\'ej ri nab\'än.</string>
   <!-- Sync onboarding redesign title. 'Firefox' is intentionally hardcoded. -->
   <string name="onboarding_redesign_sync_title" tools:ignore="BrandUsage,UnusedResources">Tixim pa xab\'akuchi\' akuchi\' nokisäx Firefox</string>
+  <!-- Sync onboarding redesign body. -->
+  <string name="onboarding_redesign_sync_body" tools:ignore="UnusedResources">Ke\'ak\'ulu\' taq yaketal, taq ruwi\' chuqa\' ewan taq tzij pa xab\'achike okisaxel. Ronojel chajin rik\'in ewan rusik\'ixik.</string>
   <!-- Sync onboarding redesign positive button text. -->
   <string name="onboarding_redesign_sync_positive_button" tools:ignore="UnusedResources">Tichap komonïk</string>
   <!-- Sync onboarding redesign negative button text. -->
   <string name="onboarding_redesign_sync_negative_button" tools:ignore="UnusedResources">Wakami mani</string>
   <!-- Marketing onboarding page title variant. “One last thing” refers to the final step or action in the onboarding process that we’re asking users to take before they can start using the browser. -->
   <string name="onboarding_marketing_title_1" tools:ignore="UnusedResources">Jun chik wachinäq</string>
+  <!-- Marketing onboarding page body variant. 'Firefox' is intentionally hardcoded. -->
+  <string name="onboarding_marketing_body_1" tools:ignore="BrandUsage,UnusedResources">Kakomonin kik\'in rachsamajel rumarkentin Mozilla achike rub\'eyal xawïl Firefox chuqa\' achi\'el rub\'eyal nawokisaj. Re taq tzij re\' majub\'ey xkek\'ayïx.</string>
   <!-- Marketing onboarding page button label variant. Button to confirm choice and start browsing. -->
   <string name="onboarding_marketing_positive_button_1" tools:ignore="UnusedResources">Tak\'ulu\' chuqa\' tachapa\' okem</string>
   <!-- ==== Project "Nova" onboarding strings ==== -->
@@ -545,6 +567,10 @@
   <string name="nova_onboarding_negative_button">Wakami mani</string>
   <!-- "Skip" onboarding button. -->
   <string name="nova_onboarding_skip_button" tools:ignore="UnusedResources">Tik\'o\'</string>
+  <!-- Terms of use (ToU) onboarding title. -->
+  <string name="nova_onboarding_tou_title" tools:ignore="UnusedResources">Tatijoj awi\' richin kikotem yixanin</string>
+  <!-- Terms of use (ToU) onboarding subtitle. -->
+  <string name="nova_onboarding_tou_subtitle">Anin, jikïl chuqa\' majun manya.</string>
   <!--
     Terms of use (ToU) onboarding body line one.
     %1$s is replaced by an active link, using nova_onboarding_tou_body_line_1_link_text as text (“Firefox Terms of Use”).
@@ -559,10 +585,19 @@
   <string name="nova_onboarding_tou_body_line_2" tools:ignore="BrandUsage">Firefox numäy ri awichinanem. Tawetamaj ch\'aqa\' chik pa %1$s.</string>
   <!-- Terms of use (ToU) onboarding body line two link text for nova_onboarding_tou_body_line_2. -->
   <string name="nova_onboarding_tou_body_line_2_link_text">Ichinan na\'oj</string>
+  <!--
+    Terms of use (ToU) onboarding body line three. 'Firefox' and 'Mozilla' are intentionally hardcoded.
+    %1$s is replaced by an active link, using nova_onboarding_tou_body_line_3_link_text as text (“Manage Settings”).
+  -->
+  <string name="nova_onboarding_tou_body_line_3" tools:ignore="BrandUsage">Richin yato\'on richin nutziläx ri okik\'amaya\'l, ri Firefox yerutäq taq rutzij nik\'oxik chuqa\' samaj rik\'in Mozilla. %1$s</string>
   <!-- Terms of use (ToU) onboarding body line three link text for nova_onboarding_tou_body_line_3. -->
   <string name="nova_onboarding_tou_body_line_3_link_text">Tinuk\'samajïx runuk\'ulem</string>
   <!-- "Set to default" onboarding title. -->
   <string name="nova_onboarding_set_to_default_title" tools:ignore="UnusedResources">Yojch\'o chik tab\'ij chi ke ri itzel taq ojqanela\'</string>
+  <!-- "Set to default" onboarding title. -->
+  <string name="nova_onboarding_set_to_default_title_2">Ke\'ajaqa konojel ri taq aximonel rik\'in tz\'aqatisan ichinanem</string>
+  <!-- "Set to default" onboarding subtitle. -->
+  <string name="nova_onboarding_set_to_default_subtitle">Yeqachajij ri taq atzij chuqa\' ruyon yeruq\'ät ri taq moloj nikiq\'ijilaj ri nab\'än.</string>
   <!-- "Set to default" onboarding button. -->
   <string name="nova_onboarding_set_to_default_button">Tiya\' kan achi\'el kanob\'äl k\'o wi</string>
   <!-- Toolbar selection onboarding title. -->
@@ -585,6 +620,11 @@
   <string name="nova_onboarding_sync_button">Tichap komonïk</string>
   <!-- Marketing onboarding title. -->
   <string name="nova_onboarding_marketing_title">Kojato\' chi runuk\'ik jun utziläj k\'amaya\'l</string>
+  <!--
+    Marketing onboarding body. 'Firefox' and 'Mozilla' are intentionally hardcoded.
+    %1$s is replaced by an active link, using nova_onboarding_marketing_body_link_text as text (“How we use the data”).
+  -->
+  <string name="nova_onboarding_marketing_body" tools:ignore="BrandUsage,UnusedResources">Kakomonin kik\'in rachsamajel rumarkentin Mozilla achike rub\'eyal xawïl Firefox chuqa\' achi\'el rub\'eyal nawokisaj. Re taq tzij re\' majub\'ey xkek\'ayïx. %1$s</string>
   <!-- Marketing onboarding body link text. -->
   <string name="nova_onboarding_marketing_body_link_text">Atux rub\'eyal yeqokisaj ri taq tzij</string>
   <!-- Marketing onboarding body link text. -->

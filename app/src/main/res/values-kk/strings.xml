@@ -1710,6 +1710,8 @@
   <string name="tab_group_three_dot_button_content_description">Көбірек опциялар</string>
   <!-- Text shown on the edit button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_edit">Түзету</string>
+  <!-- Text shown on the ungroup button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_ungroup">Топтан шығару</string>
   <!-- Text shown on the delete button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_delete">Өшіру</string>
   <!-- Text shown on the close button for a tab group on the three dot menu -->
@@ -2425,6 +2427,10 @@
   <string name="sync_sign_in">Синхрондау ішіне кіру</string>
   <!-- An option from the share dialog to send link to all other sync devices -->
   <string name="sync_send_to_all">Барлық құрылғыларға жіберу</string>
+  <!-- Text displayed when no other sync devices are available for link sharing -->
+  <string name="sync_no_devices_available">Қолжетімді құрылғылар жоқ</string>
+  <!-- Text displayed when no other sync devices are available for link sharing. -->
+  <string name="sync_no_devices_available_description">Осы тіркелгіге кірген және синхрондалған кез келген құрылғы осында көрсетіледі.</string>
   <!-- An option from the share dialog to reconnect to sync -->
   <string name="sync_reconnect">Синхрондауға қайта байланысу</string>
   <!-- Text displayed when sync is offline and cannot be accessed -->
