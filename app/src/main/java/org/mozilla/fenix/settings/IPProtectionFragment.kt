@@ -183,11 +183,9 @@ class IPProtectionFragment : Fragment(), SystemInsetsPaddedFragment {
     }
 
     private fun handleOnLocationClicked() {
-        if (requireComponents.settings.isIPProtectionLocationsEnabled) {
-            findNavController().navigate(
-                IPProtectionFragmentDirections.actionIpProtectionFragmentToIpProtectionLocationFragment(),
-            )
-        }
+        findNavController().navigate(
+            IPProtectionFragmentDirections.actionIpProtectionFragmentToIpProtectionLocationFragment(),
+        )
     }
 
     /**
