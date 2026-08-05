@@ -18,17 +18,23 @@ import org.mozilla.fenix.helpers.TestHelper.mDevice
 import org.mozilla.fenix.ui.efficiency.helpers.BasePage
 import org.mozilla.fenix.ui.efficiency.helpers.Selector
 import org.mozilla.fenix.ui.efficiency.navigation.NavigationRegistry
+import org.mozilla.fenix.ui.efficiency.navigation.NavigationStep
+import org.mozilla.fenix.ui.efficiency.selectors.MainMenuSelectors
 import org.mozilla.fenix.ui.efficiency.selectors.ShareOverlaySelectors
 
 class ShareOverlayPage(composeRule: AndroidComposeTestRule<HomeActivityIntentTestRule, *>) : BasePage(composeRule) {
     override val pageName = "ShareOverlayPage"
 
     init {
+        // Registered from MainMenuPage rather than BrowserPage so the graph routes
+        // BrowserPage -> MainMenuPage -> ShareOverlayPage and the menu-opening step is not duplicated
+        // here. This replaces an edge from BrowserPage that had an empty step list: it made
+        // navigateToPage() a silent no-op that reported success without leaving the browser.
         NavigationRegistry.register(
-            from = "BrowserPage",
+            from = "MainMenuPage",
             to = pageName,
             steps = listOf(
-                // Will need to create selectors for different pages to have a nav path
+                NavigationStep.Click(MainMenuSelectors.SHARE_BUTTON),
             ),
         )
     }
