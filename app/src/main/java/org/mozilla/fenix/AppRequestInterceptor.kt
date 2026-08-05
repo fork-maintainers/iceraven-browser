@@ -192,6 +192,7 @@ class AppRequestInterceptor(
         ErrorType.ERROR_NET_INTERRUPT,
         ErrorType.ERROR_NET_TIMEOUT,
         ErrorType.ERROR_CONNECTION_REFUSED,
+        ErrorType.ERROR_LOCAL_NETWORK_ACCESS_DENIED,
         ErrorType.ERROR_UNKNOWN_SOCKET_TYPE,
         ErrorType.ERROR_REDIRECT_LOOP,
         ErrorType.ERROR_OFFLINE,
