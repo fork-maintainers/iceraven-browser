@@ -66,6 +66,9 @@ open class ExternalAppBrowserActivity : HomeActivity() {
     @VisibleForTesting
     override fun addAboutHomeBinding(lifecycle: Lifecycle) = Unit
 
+    @VisibleForTesting
+    override fun addHomepageTabBinding(lifecycle: Lifecycle) = Unit
+
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     internal fun hasExternalTab(): Boolean {
         return getExternalTab() != null

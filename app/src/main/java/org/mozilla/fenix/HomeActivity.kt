@@ -97,12 +97,14 @@ import org.mozilla.fenix.GleanMetrics.StartOnHome
 import org.mozilla.fenix.addons.ExtensionsProcessDisabledBackgroundController
 import org.mozilla.fenix.addons.ExtensionsProcessDisabledForegroundController
 import org.mozilla.fenix.bindings.ExternalAppLinkStatusBinding
+import org.mozilla.fenix.bindings.HomepageTabBinding
 import org.mozilla.fenix.bindings.SummarizeToolbarHighlightBinding
 import org.mozilla.fenix.bookmarks.DesktopFolders
 import org.mozilla.fenix.browser.BrowserFragment
 import org.mozilla.fenix.browser.browsingmode.BrowsingMode
 import org.mozilla.fenix.browser.browsingmode.BrowsingModeManager
 import org.mozilla.fenix.browser.browsingmode.DefaultBrowsingModeManager
+import org.mozilla.fenix.components.DefaultHomepageAsANewTabPreferenceRepository
 import org.mozilla.fenix.components.DefaultShortcutManagerCompatWrapper
 import org.mozilla.fenix.components.appstate.AppAction
 import org.mozilla.fenix.components.appstate.AppAction.ShareAction
@@ -286,6 +288,15 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity, Crash
         AboutHomeBinding(
             browserStore = components.core.store,
             navController = navHost.navController,
+        )
+    }
+
+    private val homepageTabBinding by lazy {
+        HomepageTabBinding(
+            browserStore = components.core.store,
+            browsingModeManager = browsingModeManager,
+            fenixBrowserUseCases = components.useCases.fenixBrowserUseCases,
+            repository = DefaultHomepageAsANewTabPreferenceRepository(components.settings),
         )
     }
 
@@ -615,6 +626,7 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity, Crash
         )
 
         addAboutHomeBinding(lifecycle)
+        addHomepageTabBinding(lifecycle)
 
         if (!isCustomTabIntent(intent)) {
             lifecycle.addObserver(webExtensionPromptFeature)
@@ -1465,6 +1477,11 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity, Crash
     @VisibleForTesting
     internal open fun addAboutHomeBinding(lifecycle: Lifecycle) {
         lifecycle.addObserver(aboutHomeBinding)
+    }
+
+    @VisibleForTesting
+    internal open fun addHomepageTabBinding(lifecycle: Lifecycle) {
+        lifecycle.addObserver(homepageTabBinding)
     }
 
     final override fun attachBaseContext(base: Context) {

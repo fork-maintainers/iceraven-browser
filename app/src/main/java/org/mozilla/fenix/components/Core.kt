@@ -396,10 +396,6 @@ class Core(
                         TranslationsEnabledSettings.dataStore(context).isEnabled.first()
                     },
                 ),
-                StartupMiddleware(
-                    applicationContext = context,
-                    repository = DefaultHomepageAsANewTabPreferenceRepository(context.components.settings),
-                ),
                 AboutHomeMiddleware(
                     homepageTitle = context.getString(R.string.tab_tray_homepage_tab),
                 ),
