@@ -9,7 +9,7 @@ Linux, and Windows.
 ## Why it lives here
 
 `ConsoleLogger` emits a plain structured stream on the `Eff` logcat tag (no baked-in color). Color and
-formatting are a *view-time* concern, so the raw logcat artifact — including the one downloaded from a
+formatting are a _view-time_ concern, so the raw logcat artifact — including the one downloaded from a
 Firebase test run — stays clean and machine-parseable. `effpretty` is how a human renders that stream.
 One plain source, many renderers (this CLI today, a dev-tools GUI later).
 

@@ -52,13 +52,13 @@ GeckoView, so different elements on one screen may need different strategies —
 
 ### Worked example: onboarding cards (why text is sometimes correct)
 
-The onboarding card *titles* are `Text(stringResource(title))` with **no** `testTag` or id on the
+The onboarding card _titles_ are `Text(stringResource(title))` with **no** `testTag` or id on the
 title node — so `COMPOSE_BY_TEXT` on the string resource is the right (and only) stable handle for
-"is card X shown". The card *buttons* do expose a tag, but it's title-prefixed and awkward
+"is card X shown". The card _buttons_ do expose a tag, but it's title-prefixed and awkward
 (`testTag = <localized title> + "onboarding_card.positive_button"`), so matching their text resource
 (`nova_onboarding_continue_button`) is simpler and equally stable. Lesson: **prefer tags/ids, but
 confirm what the composable actually exposes** — don't assume a tag exists, and don't reflexively
-copy the legacy robot's text matcher when a tag *does* exist.
+copy the legacy robot's text matcher when a tag _does_ exist.
 
 ## Groups (important)
 

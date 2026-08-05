@@ -2,7 +2,7 @@
 
 Reach for this only when the interaction/assertion gate fails: a test needs something the existing
 verbs can't express. Extending is rare on purpose — most tests compose what's already here. When you
-do extend, add the smallest *general* capability, because every test inherits it.
+do extend, add the smallest _general_ capability, because every test inherits it.
 
 ## First, check what already exists (don't reinvent)
 
@@ -32,7 +32,7 @@ If one of these fits, compose — stop here.
 
 Model it on an existing verb of the same shape. Keep the signature `moz…(selector: Selector, …):
 BasePage` and `return this` so it chains. Handle the not-found / timeout path consistently with
-siblings (the harness retries at the `BaseTest` level). Add a one-line doc explaining *why* it
+siblings (the harness retries at the `BaseTest` level). Add a one-line doc explaining _why_ it
 exists and when to use it.
 
 ## Harness gaps worth naming (not yet abstracted)

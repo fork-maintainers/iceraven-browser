@@ -9,29 +9,35 @@ This is the step before `authoring-selectors.md` (which is about writing the cat
   instrumentation or attach a debugger to see elements. Two options that work against a plain (debuggable)
   build, below. This covers the **native/app** layer, which is most selectors.
 - **You want the exact trees the harness sees** (Compose + Espresso + UIAutomator, with types) — that runs
-  *inside* an instrumented test via `ScreenDump`/`effdump`; see "Dump the screen — all three layers" below.
+  _inside_ an instrumented test via `ScreenDump`/`effdump`; see "Dump the screen — all three layers" below.
 
 ### Option A — raw `adb` uiautomator dump (CLI, no test, fastest)
+
 Dumps the current screen's native/UIAutomator elements. Every node's `resource-id`, `text` and
 `content-desc` is in the XML, which is what decides the strategy (app res-id →
 `ESPRESSO_BY_ID`/`UIAUTOMATOR_WITH_RES_ID`; content-desc → content-description; text → last resort; a
 prefix-less id → the raw-resourceId/web strategy):
+
 ```
 adb shell uiautomator dump /sdcard/window_dump.xml
 adb exec-out cat /sdcard/window_dump.xml
 ```
+
 Fast and dependency-free, but it is raw XML with no ranking or screenshot. For anything more than a quick
 look, use Option C — `effview` does this parsing for you and overlays the result on a screenshot.
 
 ### Option B — Android Studio **Layout Inspector** (GUI, no test)
+
 `View ▸ Tool Windows ▸ Layout Inspector`, attach to the running app process. It shows the **View tree AND
 Compose composables**, with attributes/semantics. Best for Compose-heavy screens, and the only option that
-shows a `testTag` that is *not* published to the accessibility tree (see the boundary section below).
+shows a `testTag` that is _not_ published to the accessibility tree (see the boundary section below).
 
 ### Option C — the in-test inspector (all three layers, incl Compose testTags) ⭐ recommended
+
 The best of both: real Compose testTags + Espresso + UIAutomator, **and** an interactive click-around loop —
 no breakpoint, no Evaluate Expression. Run the inspector (it keeps the app alive ~30 min without pausing),
 then one command per screen:
+
 ```
 # 1) start the interactive inspector, leave it running:
 ./mach gradle fenix:connectedDebugAndroidTest \
@@ -40,6 +46,7 @@ then one command per screen:
 # 3) dump + view it (repeat 2–3 per screen):
 devtools/effview/effview.sh
 ```
+
 `effview.sh` drops a trigger file → `ScreenDump.dumpAll()` writes a screenshot + a 3-layer element JSON to the
 app's internal storage → the script pulls both with `adb exec-out run-as` → renders `screen.html`: the
 screenshot with every element boxed, **color-coded by layer** (Compose / Espresso / UIAutomator) and mapped to
@@ -48,7 +55,8 @@ its suggested selector. For a single dump without the loop: run `InteractiveInsp
 app's internal `filesDir` — that's what makes them reachable on a scoped-storage device.
 
 ### The honest boundary (why "just dump everything" isn't possible)
-- **Compose `testTag`s** are a Compose-*test* concept, and by default they are NOT in the
+
+- **Compose `testTag`s** are a Compose-_test_ concept, and by default they are NOT in the
   UIAutomator/accessibility tree. The exception matters, because Fenix relies on it: a composable that also
   sets `testTagsAsResourceId = true` publishes its tag as the node's **resource-id** (un-prefixed), so it
   DOES show up in an `adb` dump and can be matched device-side — that is exactly what
@@ -84,7 +92,7 @@ Text collides and breaks on localization. If a `testTag` exists, use it even whe
 nodes).
 
 **But do not silently drop the content check when you switch to a tag.** If the text was the thing being
-asserted — "the panel is describing *this* site" — matching the tag alone reduces the assertion to "an
+asserted — "the panel is describing _this_ site" — matching the tag alone reduces the assertion to "an
 element with this tag exists", which is nearly always true and passes for the wrong reason. Match both
 with `COMPOSE_BY_TAG_AND_TEXT` (tag in `value`, expected text in `secondaryValue`): the tag disambiguates,
 the text still asserts the content.

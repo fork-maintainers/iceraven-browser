@@ -4,7 +4,7 @@ Visual selector discovery for test authoring. Click any element on a screenshot 
 
 ![effview example](example_effview.png)
 
-*Click any element on screen to see all matching selectors, ranked by quality, with ready-to-paste code snippets.*
+_Click any element on screen to see all matching selectors, ranked by quality, with ready-to-paste code snippets._
 
 ## What It Does
 
@@ -17,6 +17,7 @@ Visual selector discovery for test authoring. Click any element on a screenshot 
 ## Quick Start
 
 **1. Start the interactive inspect test** (keeps app alive 30 min):
+
 ```bash
 cd mobile/android/fenix
 ./mach gradle fenix:connectedDebugAndroidTest \
@@ -26,6 +27,7 @@ cd mobile/android/fenix
 **2. Navigate to any screen** in the app (manually drive it)
 
 **3. Trigger a dump and view it**:
+
 ```bash
 cd app/src/androidTest/java/org/mozilla/fenix/ui/efficiency/devtools/effview
 ./effview.sh
@@ -72,16 +74,19 @@ val TOP_SITES = Selector(
 ## Advanced Usage
 
 **Pull without triggering a new dump** (if you already have one):
+
 ```bash
 ./effview.sh --no-trigger
 ```
 
 **Use a different package**:
+
 ```bash
 PKG=org.mozilla.firefox.debug ./effview.sh
 ```
 
 **Custom output directory**:
+
 ```bash
 OUT=./my-dumps ./effview.sh
 ```
@@ -89,14 +94,17 @@ OUT=./my-dumps ./effview.sh
 ## Troubleshooting
 
 **"run-as: unknown package"**
+
 - The app isn't running or already stopped
 - Solution: Make sure `InteractiveInspectTest#inspect` is still running (it stays alive 30 min)
 
 **"No such file: eff-screendump.json"**
+
 - No dump has been triggered yet
 - Solution: Touch the trigger file: `adb shell run-as org.mozilla.fenix.debug touch files/eff-scan`
 
 **Viewer shows empty/wrong elements**
+
 - The dump might be stale
 - Solution: Navigate to your target screen, then run `./effview.sh` again
 

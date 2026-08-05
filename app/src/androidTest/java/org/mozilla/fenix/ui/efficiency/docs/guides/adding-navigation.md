@@ -44,6 +44,7 @@ gap — see `extending-basepage.md`.
 ## Verify the path resolves
 
 After adding an edge, confirm the graph can actually route it before writing the test:
+
 - Run with `-PlogNavigationSummary` (BaseTest logs the path summary) or use the devtools reachability
   generator/logger to see the computed path.
 - If BFS can't find a path, a middle edge is missing — add the intermediate page's edges too.
@@ -53,4 +54,4 @@ After adding an edge, confirm the graph can actually route it before writing the
 - Edges are directed. `A -> B` does not give you `B -> A`; register both if both are used.
 - A wrong/rearranged step sequence is the most common cause of a nav that "can't find the page" —
   mirror the exact click order a user performs.
-- Keep `requiredForPage` honest on the target, or a *successful* route will still fail verification.
+- Keep `requiredForPage` honest on the target, or a _successful_ route will still fail verification.

@@ -1,6 +1,6 @@
 # Writing an efficiency test
 
-Once the building blocks exist, the test is a short, fluent description of *what* to check. It
+Once the building blocks exist, the test is a short, fluent description of _what_ to check. It
 extends `BaseTest`, which owns the compose rule, retries, cleanup, and the mock web server.
 
 ## Structure
