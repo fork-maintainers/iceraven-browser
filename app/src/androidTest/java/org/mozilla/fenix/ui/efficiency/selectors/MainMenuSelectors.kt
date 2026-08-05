@@ -150,6 +150,45 @@ object MainMenuSelectors {
         groups = listOf("browserViewMainMenuItems"),
     )
 
+    val REPORT_BROKEN_SITE_BUTTON = Selector(
+        strategy = SelectorStrategy.COMPOSE_BY_CONTENT_DESCRIPTION,
+        value = getStringResource(R.string.browser_menu_webcompat_reporter_2),
+        description = "Main menu Report broken site button",
+        groups = listOf("browserViewMainMenuMoreItems"),
+    )
+
+    val EXTENSIONS_CHEVRON = Selector(
+        strategy = SelectorStrategy.COMPOSE_BY_TAG,
+        value = MenuDialogTestTag.EXTENSIONS_OPTION_CHEVRON,
+        description = "Main menu Extensions expand/collapse chevron",
+        groups = listOf(),
+    )
+
+    val TRY_RECOMMENDED_EXTENSION_BUTTON = Selector(
+        strategy = SelectorStrategy.COMPOSE_BY_CONTENT_DESCRIPTION_SUBSTRING,
+        value = "Extensions Try a recommended extension",
+        description = "Main menu Extensions - Try a recommended extension button",
+        groups = listOf(),
+    )
+
+    val DISCOVER_MORE_EXTENSIONS_BUTTON = Selector(
+        strategy = SelectorStrategy.COMPOSE_BY_TEXT,
+        value = getStringResource(R.string.browser_menu_discover_more_extensions),
+        description = "Main menu Discover more extensions button",
+        groups = listOf("expandedExtensionsMenuItems"),
+    )
+
+    // Keyed on the addon row rather than the addon name: which addons AMO recommends is server-driven,
+    // so matching names would couple the test to remote data. Must be the row tag, not
+    // RECOMMENDED_ADDON_ITEM_TITLE — that one is applied via labelModifier, so the row's merged
+    // semantics hide it and onAllNodesWithTag (merged tree) cannot see it.
+    val RECOMMENDED_ADDON_ITEM = Selector(
+        strategy = SelectorStrategy.COMPOSE_ON_ALL_NODES_BY_TAG_ON_FIRST,
+        value = MenuDialogTestTag.RECOMMENDED_ADDON_ITEM,
+        description = "Recommended addon row in the expanded Extensions submenu",
+        groups = listOf("expandedExtensionsMenuItems"),
+    )
+
     // TODO (M. Barone 3/20/2026): add getting 'appName' to our base helpers
     val DEFAULT_BROWSER_BANNER_TITLE = Selector(
         strategy = SelectorStrategy.COMPOSE_BY_TEXT,
@@ -285,6 +324,11 @@ object MainMenuSelectors {
         DESKTOP_SITE_OFF,
         MORE_BUTTON,
         CUSTOMIZE_HOMEPAGE_BUTTON,
+        REPORT_BROKEN_SITE_BUTTON,
+        EXTENSIONS_CHEVRON,
+        TRY_RECOMMENDED_EXTENSION_BUTTON,
+        DISCOVER_MORE_EXTENSIONS_BUTTON,
+        RECOMMENDED_ADDON_ITEM,
         SAVE_TO_COLLECTIONS_BUTTON,
         ADD_TO_SHORTCUTS_BUTTON,
         TRANSLATE_BUTTON,

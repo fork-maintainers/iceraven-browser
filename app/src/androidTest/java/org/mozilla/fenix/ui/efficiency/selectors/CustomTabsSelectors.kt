@@ -94,6 +94,18 @@ object CustomTabsSelectors {
         groups = listOf("customTabMainMenuItems"),
     )
 
+    // Compose twin of MENU_BACK, required for long-press. mozLongClick dispatches on the resolved
+    // element type: a UIAutomator UiObject gets UiObject.longClick() (the ~500ms system long-press
+    // timeout), which this Compose button does not register as a long press — it lands as a plain
+    // click and just navigates back. The Compose path instead does composeLongClick(5000ms), matching
+    // the legacy robot's onNodeWithText("Back") + LONG_CLICK_DURATION.
+    val MENU_BACK_COMPOSE = Selector(
+        strategy = SelectorStrategy.COMPOSE_BY_TEXT,
+        value = getStringResource(R.string.browser_menu_back),
+        description = "Custom tab menu: Back (Compose, for long-press)",
+        groups = listOf(),
+    )
+
     @Suppress("ktlint:standard:function-naming", "FunctionName")
     fun MENU_CUSTOM_ITEM(label: String = "") = Selector(
         strategy = SelectorStrategy.UIAUTOMATOR_WITH_TEXT_CONTAINS,
@@ -107,6 +119,7 @@ object CustomTabsSelectors {
         CLOSE_BUTTON,
         SITE_INFO_BUTTON,
         MENU_BACK,
+        MENU_BACK_COMPOSE,
         MENU_FORWARD,
         MENU_REFRESH,
         MENU_SHARE,

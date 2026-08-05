@@ -912,6 +912,11 @@ class MainMenuTest {
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3080112
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.MainMenuTest#verifyTheReportBrokenSiteSubMenuOptionTest"],
+        bug = 2060267,
+        since = "2026-08",
+    )
     @SmokeTest
     @Test
     fun verifyTheReportBrokenSiteSubMenuOptionTest() {
@@ -1338,6 +1343,15 @@ class MainMenuTest {
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3080134
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.MainMenuTest#verifyTheExtensionsMainMenuListTest"],
+        bug = 2060267,
+        since = "2026-08",
+        notes = "Legacy verifyTheRecommendedAddons asserted three named addons, each with its own " +
+            "\"Add <addon>\" install button, retrying against a hardcoded candidate list. The port asserts " +
+            "that a recommended-addon row is present instead, since which addons AMO recommends is " +
+            "server-driven. The per-addon install-button check did not carry over.",
+    )
     @SmokeTest
     @Test
     fun verifyTheExtensionsMainMenuListTest() {
@@ -1449,6 +1463,11 @@ class MainMenuTest {
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/4245663
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.CustomTabsTest#verifyTheMainMenuBackButtonLongClickFromCustomTabTest"],
+        bug = 2060267,
+        since = "2026-08",
+    )
     @SmokeTest
     @Test
     fun verifyTheMainMenuBackButtonLongClickFromCustomTabTest() {

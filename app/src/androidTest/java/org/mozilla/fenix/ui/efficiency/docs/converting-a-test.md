@@ -51,8 +51,10 @@ passes on a retry is flaky, not done. → `guides/debugging-tests.md`. *(Helpers
 ## 7. Parity + close-out
 Confirm the converted test covers the legacy assertions. If you deliberately omit a leg (e.g. the nav graph
 has no stateful return edge yet), leave a short parity note in the test and log it as a harness gap — don't
-drop it silently. **Then** add the `replacedBy` marker to the legacy method — only after it's green **and
-landed** (the conversion burndown keys off that marker).
+drop it silently. **Then** annotate the legacy method with `@Converted(replacedBy = [...], bug = NNNNN,
+since = "YYYY-MM")`, recording any dropped coverage in `notes`. The gate is **green** — annotate it in the
+**same commit as the conversion**, not in a later pass; the conversion burndown keys off that marker, so a
+conversion that lands without it reads as unconverted.
 
 ## 8. Land it
 File the Bugzilla bug, then edit the bug title to prepend `Bug NNNNN - ` so it matches your commit subject.

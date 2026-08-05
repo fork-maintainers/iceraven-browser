@@ -54,6 +54,7 @@ import org.mozilla.fenix.ui.efficiency.pageObjects.TabDrawerPage
 import org.mozilla.fenix.ui.efficiency.pageObjects.TabHistoryPage
 import org.mozilla.fenix.ui.efficiency.pageObjects.ToolbarComponent
 import org.mozilla.fenix.ui.efficiency.pageObjects.UnifiedTrustPanelPage
+import org.mozilla.fenix.ui.efficiency.pageObjects.WebCompatReporterPage
 import androidx.compose.ui.test.junit4.v2.AndroidComposeTestRule as AndroidComposeTestRuleV2
 
 class PageContext(val composeRule: AndroidComposeTestRule<HomeActivityIntentTestRule, *>) {
@@ -106,6 +107,7 @@ class PageContext(val composeRule: AndroidComposeTestRule<HomeActivityIntentTest
     val tabHistory = TabHistoryPage(composeRule)
     val toolbar = ToolbarComponent(composeRule)
     val unifiedTrustPanel = UnifiedTrustPanelPage(composeRule)
+    val webCompatReporter = WebCompatReporterPage(composeRule)
 
     fun initTestRule(
         skipOnboarding: Boolean = true,

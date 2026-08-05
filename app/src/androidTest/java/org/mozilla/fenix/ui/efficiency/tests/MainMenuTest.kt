@@ -36,6 +36,7 @@ import org.mozilla.fenix.ui.efficiency.selectors.MainMenuSelectors.DESKTOP_SITE_
 import org.mozilla.fenix.ui.efficiency.selectors.MainMenuSelectors.EDIT_BOOKMARK_BUTTON
 import org.mozilla.fenix.ui.efficiency.selectors.MainMenuSelectors.FORWARD_BUTTON
 import org.mozilla.fenix.ui.efficiency.selectors.TabHistorySelectors
+import org.mozilla.fenix.ui.efficiency.selectors.WebCompatReporterSelectors
 
 class MainMenuTest : BaseTest(
     isPageLoadTranslationsPromptEnabled = false,
@@ -454,6 +455,41 @@ class MainMenuTest : BaseTest(
             .mozVerify(TabHistorySelectors.TAB_HISTORY_LIST)
             .mozVerify(TabHistorySelectors.TAB_HISTORY_ITEM(nextWebPage.url.toString()))
             .mozVerify(TabHistorySelectors.TAB_HISTORY_ITEM(firstWebPage.url.toString()))
+    }
+
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3080112
+    // Converted from legacy MainMenuTest.verifyTheReportBrokenSiteSubMenuOptionTest
+    @SmokeTest
+    @Test
+    fun verifyTheReportBrokenSiteSubMenuOptionTest() {
+        val defaultWebPage = mockWebServer.getGenericAsset(1)
+
+        on.browserPage.navigateToPage(defaultWebPage.url.toString())
+        on.webCompatReporter.navigateToPage()
+            .mozVerify(WebCompatReporterSelectors.URL_LABEL)
+            .mozVerify(WebCompatReporterSelectors.REPORTED_SITE_URL(defaultWebPage.url.toString()))
+            .mozVerify(WebCompatReporterSelectors.WHATS_BROKEN_LABEL)
+            .mozVerify(WebCompatReporterSelectors.DESCRIPTION)
+    }
+
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3080134
+    // Converted from legacy MainMenuTest.verifyTheExtensionsMainMenuListTest
+    @SmokeTest
+    @Test
+    fun verifyTheExtensionsMainMenuListTest() {
+        val testPage = mockWebServer.getGenericAsset(1)
+
+        on.browserPage.navigateToPage(testPage.url.toString())
+        on.mainMenu.navigateToPage()
+            .mozVerify(MainMenuSelectors.TRY_RECOMMENDED_EXTENSION_BUTTON)
+            .mozClick(MainMenuSelectors.EXTENSIONS_CHEVRON)
+            .mozVerifyElementsByGroup("expandedExtensionsMenuItems")
+            .mozClick(MainMenuSelectors.EXTENSIONS_CHEVRON)
+            .mozVerifyElementAbsent(MainMenuSelectors.DISCOVER_MORE_EXTENSIONS_BUTTON)
+        // Parity gap: legacy verifyTheRecommendedAddons asserted three named addons, each with its own
+        // "Add <addon>" install button, retrying against a hardcoded candidate list. The port asserts a
+        // recommended-addon row is present instead — which addons AMO recommends is server-driven, so
+        // matching on names couples the test to remote data. The install-button check did not carry over.
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3080117

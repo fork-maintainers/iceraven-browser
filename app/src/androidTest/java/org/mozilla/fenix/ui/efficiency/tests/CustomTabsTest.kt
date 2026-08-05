@@ -7,9 +7,12 @@ package org.mozilla.fenix.ui.efficiency.tests
 import org.junit.Test
 import org.mozilla.fenix.customannotations.SmokeTest
 import org.mozilla.fenix.helpers.TestAssetHelper.getGenericAsset
+import org.mozilla.fenix.helpers.TestAssetHelper.navigablePageStartAsset
+import org.mozilla.fenix.helpers.TestAssetHelper.navigablePageTargetAsset
 import org.mozilla.fenix.ui.efficiency.helpers.BaseTest
 import org.mozilla.fenix.ui.efficiency.selectors.CustomTabsSelectors
 import org.mozilla.fenix.ui.efficiency.selectors.FindInPageSelectors
+import org.mozilla.fenix.ui.efficiency.selectors.TabHistorySelectors
 import org.mozilla.fenix.ui.efficiency.selectors.ToolbarSelectors
 
 class CustomTabsTest : BaseTest() {
@@ -99,5 +102,24 @@ class CustomTabsTest : BaseTest() {
         // custom tab but leaves PageStateTracker on FindInPagePage, and there is no return edge to re-sync
         // it, so navigateToPage() would look for a FindInPagePage -> FindInPagePage path. Same stateful-nav
         // gap as the BookmarksPage -> BrowserPage one.
+    }
+
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/4245663
+    // Converted from legacy MainMenuTest.verifyTheMainMenuBackButtonLongClickFromCustomTabTest
+    @SmokeTest
+    @Test
+    fun verifyTheMainMenuBackButtonLongClickFromCustomTabTest() {
+        val startPage = mockWebServer.navigablePageStartAsset
+        val targetPage = mockWebServer.navigablePageTargetAsset
+
+        on.customTabs.launchCustomTab(startPage.url.toString(), "TestMenuItem")
+        on.customTabs.clickWebContent("Go to target page")
+        on.customTabs.openMainMenu()
+            .mozLongClick(CustomTabsSelectors.MENU_BACK_COMPOSE)
+
+        on.tabHistory
+            .mozVerify(TabHistorySelectors.TAB_HISTORY_LIST_UIAUTOMATOR)
+            .mozVerify(TabHistorySelectors.TAB_HISTORY_ITEM(startPage.url.toString()))
+            .mozVerify(TabHistorySelectors.TAB_HISTORY_ITEM(targetPage.url.toString()))
     }
 }
