@@ -72,4 +72,9 @@ enum class SelectorStrategy {
     // "org.mozilla.fenix.debug:id/action0" and never match. Mirrors the legacy
     // NotificationRobot.downloadSystemNotificationButton.
     UIAUTOMATOR_WITH_RAW_RES_ID_CONTAINING_TEXT,
+
+    // Raw (un-prefixed) res-id on its own, for a system-UI container that carries no text of its own —
+    // e.g. the notification shade's scroller. UIAUTOMATOR_WITH_RAW_RES_ID_CONTAINING_TEXT cannot stand in
+    // for this: its text criterion is not optional at the UiSelector level.
+    UIAUTOMATOR_WITH_RAW_RES_ID,
 }

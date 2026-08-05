@@ -43,7 +43,15 @@ class NotificationPage(composeRule: AndroidComposeTestRule<HomeActivityIntentTes
      */
     fun openNotificationTray(): NotificationPage {
         mozOpenNotificationsTray()
-        mozVerify(NotificationSelectors.NOTIFICATION_HEADER)
+        try {
+            mozVerify(NotificationSelectors.NOTIFICATION_SHADE)
+        } catch (e: AssertionError) {
+            // The shade is already open at this point, and it holds window focus. Leaving it open makes
+            // everything after this fail on an unrelated error — including a retry of this test, which
+            // cannot even launch the activity over it. Close it and let the real failure through.
+            closeNotificationTray()
+            throw e
+        }
         return this
     }
 
@@ -97,11 +105,27 @@ class NotificationPage(composeRule: AndroidComposeTestRule<HomeActivityIntentTes
         return this
     }
 
-    /** Closes the shade and returns the app to the foreground. */
+    /**
+     * Closes the shade and returns the app to the foreground.
+     *
+     * Back is what dismisses the shade, but it does not always take, so the close is confirmed and
+     * escalated to home rather than assumed. An open shade is not a recoverable state for a later
+     * interaction: it keeps window focus, which blocks both Espresso and the next activity launch.
+     */
     fun closeNotificationTray(): NotificationPage {
         mDevice.pressBack()
+        mDevice.waitForIdle()
+        if (isNotificationTrayOpen()) {
+            mDevice.pressHome()
+            mDevice.waitForIdle()
+        }
         return this
     }
+
+    private fun isNotificationTrayOpen(): Boolean =
+        mDevice.findObject(
+            UiSelector().resourceId(NotificationSelectors.NOTIFICATION_STACK_SCROLLER_RES_ID),
+        ).exists() || mDevice.currentPackageName == SYSTEM_UI_PACKAGE
 
     override fun mozGetSelectorsByGroup(group: String): List<Selector> {
         return NotificationSelectors.all.filter { it.groups.contains(group) }
@@ -111,5 +135,6 @@ class NotificationPage(composeRule: AndroidComposeTestRule<HomeActivityIntentTes
         const val SWIPE_STEPS = 10
         const val ACTION_RETRIES = 3
         const val WINDOW_UPDATE_TIMEOUT = 5_000L
+        const val SYSTEM_UI_PACKAGE = "com.android.systemui"
     }
 }

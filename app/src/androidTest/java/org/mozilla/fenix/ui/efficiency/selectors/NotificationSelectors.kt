@@ -4,17 +4,21 @@
 
 package org.mozilla.fenix.ui.efficiency.selectors
 
-import org.mozilla.fenix.helpers.TestHelper.appName
 import org.mozilla.fenix.ui.efficiency.helpers.Selector
 import org.mozilla.fenix.ui.efficiency.helpers.SelectorStrategy
 
 object NotificationSelectors {
 
-    // We should add UISelector with res id and text
-    val NOTIFICATION_HEADER = Selector(
-        strategy = SelectorStrategy.UIAUTOMATOR_WITH_TEXT,
-        value = appName,
-        description = "System notification header",
+    const val NOTIFICATION_STACK_SCROLLER_RES_ID = "com.android.systemui:id/notification_stack_scroller"
+
+    // Proof that the shade is open, which is what page presence means for this page. Deliberately not
+    // keyed on the app's own notification header (text == appName): that only exists once Firefox has
+    // posted a notification and rendered it, so it made "is the shade open" lose a race against the
+    // notification it was really waiting for. Tests assert their own notification by text instead.
+    val NOTIFICATION_SHADE = Selector(
+        strategy = SelectorStrategy.UIAUTOMATOR_WITH_RAW_RES_ID,
+        value = NOTIFICATION_STACK_SCROLLER_RES_ID,
+        description = "System notification shade",
         groups = listOf("requiredForPage"),
     )
 
@@ -52,7 +56,7 @@ object NotificationSelectors {
     )
 
     val all = listOf(
-        NOTIFICATION_HEADER,
+        NOTIFICATION_SHADE,
         NOTIFICATION_ACTION_BUTTON(),
         SYSTEM_NOTIFICATION(),
         NOTIFICATION_TOP_LINE(),
