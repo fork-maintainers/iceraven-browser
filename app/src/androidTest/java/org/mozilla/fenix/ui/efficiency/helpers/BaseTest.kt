@@ -127,6 +127,10 @@ abstract class BaseTest(
                                 runCatching {
                                     val autofill = appContext.components.core.autofillStorage
                                     autofill.getAllAddresses().forEach { autofill.deleteAddress(it.guid) }
+                                    // Same for cards: a leftover card replaces "Add card" with "Manage
+                                    // cards" on the Autofill screen, so a retry of a card test starts on
+                                    // a different screen than the first attempt did.
+                                    autofill.getAllCreditCards().forEach { autofill.deleteCreditCard(it.guid) }
                                 }.onFailure {
                                     Log.i("BaseTest", "RetryTestRule: autofill clear failed: ${it.message}")
                                 }

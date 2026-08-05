@@ -7,6 +7,7 @@ package org.mozilla.fenix.ui
 import androidx.test.espresso.Espresso.closeSoftKeyboard
 import org.junit.Rule
 import org.junit.Test
+import org.mozilla.fenix.customannotations.Converted
 import org.mozilla.fenix.customannotations.SkipLeaks
 import org.mozilla.fenix.customannotations.SmokeTest
 import org.mozilla.fenix.helpers.AppAndSystemHelper.bringAppToForeground
@@ -126,6 +127,13 @@ class CreditCardAutofillTest {
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/2271192
+    @Converted(
+        replacedBy = [
+            "org.mozilla.fenix.ui.efficiency.tests.CreditCardAutofillTest#deleteSavedCreditCardUsingMenuButtonTest",
+        ],
+        bug = 2060406,
+        since = "2026-08",
+    )
     @SmokeTest
     @Test
     fun deleteSavedCreditCardUsingMenuButtonTest() {

@@ -20,7 +20,9 @@ import org.mozilla.fenix.helpers.HomeActivityIntentTestRule
 import org.mozilla.fenix.helpers.TestAssetHelper.waitingTimeLong
 import org.mozilla.fenix.helpers.TestHelper.waitForAppWindowToBeUpdated
 import org.mozilla.fenix.settings.address.ui.edit.EditAddressTestTag
+import org.mozilla.fenix.settings.creditcards.ui.CreditCardEditorTestTags
 import org.mozilla.fenix.ui.efficiency.data.AddressDetails
+import org.mozilla.fenix.ui.efficiency.data.CreditCardDetails
 import org.mozilla.fenix.ui.efficiency.helpers.BasePage
 import org.mozilla.fenix.ui.efficiency.helpers.Selector
 import org.mozilla.fenix.ui.efficiency.navigation.NavigationRegistry
@@ -93,12 +95,46 @@ class SettingsAutofillPage(composeRule: AndroidComposeTestRule<HomeActivityInten
         return this
     }
 
+    /**
+     * Fill the Add card form and save, leaving the Autofill list with one saved card (asserted via the
+     * "Manage cards" button), mirroring the legacy SettingsSubMenuAutofillRobot.fillAndSaveCreditCard.
+     *
+     * The expiry month/year are dropdowns rather than text fields, so they reuse [selectDropdownOption]
+     * — the same popup-drain handling the address Country/State fields need.
+     */
+    fun fillAndSaveCreditCard(card: CreditCardDetails): SettingsAutofillPage {
+        mozVerify(SettingsAutofillSelectors.ADD_CREDIT_CARD_BUTTON)
+        mozClick(SettingsAutofillSelectors.ADD_CREDIT_CARD_BUTTON)
+        composeRule.waitUntil(waitingTimeLong) {
+            composeRule.onAllNodesWithTagCount(CreditCardEditorTestTags.CARD_NUMBER_FIELD) > 0
+        }
+
+        mozEnterText(card.number, SettingsAutofillSelectors.CREDIT_CARD_NUMBER_FIELD)
+        mozEnterText(card.nameOnCard, SettingsAutofillSelectors.CREDIT_CARD_NAME_FIELD)
+
+        selectDropdownOption(CreditCardEditorTestTags.EXPIRATION_MONTH_FIELD, card.expiryMonth, substring = true)
+        selectDropdownOption(CreditCardEditorTestTags.EXPIRATION_YEAR_FIELD, card.expiryYear, substring = true)
+        waitForKeyboardDismiss()
+
+        val saveButton = composeRule.onNodeWithTag(CreditCardEditorTestTags.SAVE_BUTTON)
+        runCatching { saveButton.performScrollTo() }
+        saveButton.performClick()
+
+        mozVerify(SettingsAutofillSelectors.MANAGE_SAVED_CREDIT_CARDS_BUTTON)
+        return this
+    }
+
     // --- Screen-specific Compose helpers (ported from SettingsSubMenuAutofillRobot) ---
 
     private fun AndroidComposeTestRule<HomeActivityIntentTestRule, *>.onAllNodesWithTagCount(tag: String): Int =
         onAllNodes(hasTestTag(tag)).fetchSemanticsNodes().size
 
-    private fun selectDropdownOption(dropdownTag: String, optionText: String) {
+    /**
+     * @param substring match the option by substring, case-insensitively. The card expiry dropdowns
+     * render their options with surrounding text (e.g. the month number alongside the name), so an exact
+     * match finds nothing there; the address dropdowns render the value on its own and match exactly.
+     */
+    private fun selectDropdownOption(dropdownTag: String, optionText: String, substring: Boolean = false) {
         waitForKeyboardDismiss()
         runCatching { waitForPopupToDismiss() }
         composeRule.waitForIdle()
@@ -111,17 +147,20 @@ class SettingsAutofillPage(composeRule: AndroidComposeTestRule<HomeActivityInten
             }
             composeRule.onNodeWithTag(dropdownTag).performTouchInput { click() }
 
+            val option = hasText(optionText, substring = substring, ignoreCase = substring)
             try {
                 composeRule.waitUntil(5_000L) {
-                    composeRule.onAllNodes(hasText(optionText)).fetchSemanticsNodes().isNotEmpty()
+                    composeRule.onAllNodes(option).fetchSemanticsNodes().isNotEmpty()
                 }
-                val nodeCount = composeRule.onAllNodes(hasText(optionText)).fetchSemanticsNodes().size
+                val nodeCount = composeRule.onAllNodes(option).fetchSemanticsNodes().size
                 runCatching {
-                    composeRule.onAllNodes(hasText(optionText))[nodeCount - 1].performScrollTo()
+                    composeRule.onAllNodes(option)[nodeCount - 1].performScrollTo()
                     composeRule.waitForIdle()
                 }
-                composeRule.onAllNodes(hasText(optionText))[nodeCount - 1].performClick()
-            } catch (e: Exception) {
+                composeRule.onAllNodes(option)[nodeCount - 1].performClick()
+            // Throwable, not Exception: Compose's waitUntil raises ComposeTimeoutException, which extends
+            // Throwable directly, so catching Exception here let a timeout escape instead of retrying.
+            } catch (e: Throwable) {
                 Log.w("SettingsAutofillPage", "selectDropdownOption: attempt $attempt for '$optionText' failed: ${e.message?.take(120)}")
                 continue
             }
