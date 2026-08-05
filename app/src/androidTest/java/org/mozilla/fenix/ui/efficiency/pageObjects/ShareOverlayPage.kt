@@ -19,6 +19,7 @@ import org.mozilla.fenix.ui.efficiency.helpers.BasePage
 import org.mozilla.fenix.ui.efficiency.helpers.Selector
 import org.mozilla.fenix.ui.efficiency.navigation.NavigationRegistry
 import org.mozilla.fenix.ui.efficiency.navigation.NavigationStep
+import org.mozilla.fenix.ui.efficiency.selectors.BrowserPageSelectors
 import org.mozilla.fenix.ui.efficiency.selectors.MainMenuSelectors
 import org.mozilla.fenix.ui.efficiency.selectors.ShareOverlaySelectors
 
@@ -26,17 +27,26 @@ class ShareOverlayPage(composeRule: AndroidComposeTestRule<HomeActivityIntentTes
     override val pageName = "ShareOverlayPage"
 
     init {
-        // Registered from MainMenuPage rather than BrowserPage so the graph routes
-        // BrowserPage -> MainMenuPage -> ShareOverlayPage and the menu-opening step is not duplicated
-        // here. This replaces an edge from BrowserPage that had an empty step list: it made
-        // navigateToPage() a silent no-op that reported success without leaving the browser.
+        // Rooted at BrowserPage, with the menu-opening click inline, because Share exists only in the
+        // browser main menu. MainMenuPage is a single graph node standing for two different screens —
+        // the home menu and the browser menu — and it is reachable from HomePage in one step, so an
+        // edge from MainMenuPage let the planner route AppEntry -> HomePage -> MainMenuPage and then
+        // look for a Share item the home menu does not have. Duplicating the menu click here is the
+        // cost of that node being ambiguous; FindInPagePage and TabHistoryPage are rooted the same way.
         NavigationRegistry.register(
-            from = "MainMenuPage",
+            from = "BrowserPage",
             to = pageName,
             steps = listOf(
+                NavigationStep.Click(BrowserPageSelectors.MAIN_MENU_BUTTON),
                 NavigationStep.Click(MainMenuSelectors.SHARE_BUTTON),
             ),
         )
+    }
+
+    // Reaching the share sheet means having a page to share, so an empty url still has to load one.
+    override fun navigateToPage(url: String, forceNavigation: Boolean): ShareOverlayPage {
+        super.navigateToPage(url = url.ifBlank { "example.com" }, forceNavigation = forceNavigation)
+        return this
     }
 
     override fun mozGetSelectorsByGroup(group: String): List<Selector> {
