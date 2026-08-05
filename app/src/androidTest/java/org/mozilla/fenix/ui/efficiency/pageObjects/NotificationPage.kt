@@ -5,7 +5,9 @@
 package org.mozilla.fenix.ui.efficiency.pageObjects
 
 import androidx.compose.ui.test.junit4.AndroidComposeTestRule
+import androidx.test.uiautomator.UiSelector
 import org.mozilla.fenix.helpers.HomeActivityIntentTestRule
+import org.mozilla.fenix.helpers.TestHelper.mDevice
 import org.mozilla.fenix.ui.efficiency.helpers.BasePage
 import org.mozilla.fenix.ui.efficiency.helpers.Selector
 import org.mozilla.fenix.ui.efficiency.navigation.NavigationRegistry
@@ -23,7 +25,91 @@ class NotificationPage(composeRule: AndroidComposeTestRule<HomeActivityIntentTes
         )
     }
 
+    // Narrowed return type so the helpers below stay reachable when chained off navigateToPage(), which
+    // otherwise hands back a BasePage. Same pattern as SettingsAutofillPage and TabHistoryPage.
+    override fun navigateToPage(url: String, forceNavigation: Boolean): NotificationPage {
+        super.navigateToPage(url = url, forceNavigation = forceNavigation)
+        return this
+    }
+
+    /**
+     * Opens the notification shade from wherever the app currently is.
+     *
+     * Prefer this over [navigateToPage]. The shade is a system overlay pulled down from the status bar,
+     * so it is reachable from every app state — it is not a screen you route to through the nav graph.
+     * The registered HomePage edge only covers one starting state, so navigateToPage() fails with "no
+     * navigation path found" from anywhere else (e.g. inside a custom tab). Modelling the remaining
+     * states as more graph edges would mean an edge per page for something globally reachable.
+     */
+    fun openNotificationTray(): NotificationPage {
+        mozOpenNotificationsTray()
+        mozVerify(NotificationSelectors.NOTIFICATION_HEADER)
+        return this
+    }
+
+    /**
+     * Expands a collapsed notification so its action buttons become reachable, by swiping down on its
+     * top line. Notifications in the shade are collapsed by default and their action buttons are not
+     * in the hierarchy at all until expanded, so this must run before [clickNotificationActionButton].
+     */
+    fun expandNotification(text: String): NotificationPage {
+        mozVerify(NotificationSelectors.SYSTEM_NOTIFICATION(text))
+        mDevice.findObject(
+            UiSelector()
+                .resourceId("android:id/notification_top_line")
+                .childSelector(UiSelector().textContains(text)),
+        ).swipeDown(SWIPE_STEPS)
+        return this
+    }
+
+    /**
+     * Clicks a notification action button (e.g. "PAUSE", "RESUME", "CANCEL" on a download).
+     *
+     * Retries, because the shade re-lays-out as a download's state changes and a click can land while
+     * the row is being rebuilt. Success is confirmed by the button no longer being present rather than
+     * by the click returning — clicking PAUSE swaps the button for RESUME, so the old label going away
+     * is what actually proves the action was applied.
+     */
+    fun clickNotificationActionButton(action: String): NotificationPage {
+        val selector = NotificationSelectors.NOTIFICATION_ACTION_BUTTON(action)
+        var lastError: AssertionError? = null
+        repeat(ACTION_RETRIES) {
+            try {
+                mozVerify(selector)
+                mozClick(selector)
+                mozVerifyElementAbsent(selector)
+                return this
+            } catch (e: AssertionError) {
+                lastError = e
+                mDevice.waitForWindowUpdate(null, WINDOW_UPDATE_TIMEOUT)
+            }
+        }
+        throw lastError ?: AssertionError("Could not click notification action button: $action")
+    }
+
+    fun verifyNotificationExists(text: String): NotificationPage {
+        mozVerify(NotificationSelectors.SYSTEM_NOTIFICATION(text))
+        return this
+    }
+
+    fun verifyNotificationDoesNotExist(text: String): NotificationPage {
+        mozVerifyElementAbsent(NotificationSelectors.SYSTEM_NOTIFICATION(text))
+        return this
+    }
+
+    /** Closes the shade and returns the app to the foreground. */
+    fun closeNotificationTray(): NotificationPage {
+        mDevice.pressBack()
+        return this
+    }
+
     override fun mozGetSelectorsByGroup(group: String): List<Selector> {
         return NotificationSelectors.all.filter { it.groups.contains(group) }
+    }
+
+    private companion object {
+        const val SWIPE_STEPS = 10
+        const val ACTION_RETRIES = 3
+        const val WINDOW_UPDATE_TIMEOUT = 5_000L
     }
 }
