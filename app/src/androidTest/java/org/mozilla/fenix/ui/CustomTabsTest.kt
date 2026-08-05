@@ -127,6 +127,13 @@ class CustomTabsTest {
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/2334761
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.CustomTabsTest#verifyDownloadInACustomTabTest"],
+        bug = 2060346,
+        since = "2026-08",
+        notes = "The replacement serves downloads.html from the local mockWebServer instead of " +
+            "storage.googleapis.com; same asset and link, no external network dependency.",
+    )
     @SmokeTest
     @Test
     fun verifyDownloadInACustomTabTest() {

@@ -4,13 +4,18 @@
 
 package org.mozilla.fenix.ui.efficiency.tests
 
+import mozilla.components.support.ktx.util.PromptAbuserDetector
+import org.junit.After
+import org.junit.Before
 import org.junit.Test
 import org.mozilla.fenix.customannotations.SmokeTest
+import org.mozilla.fenix.helpers.TestAssetHelper.downloadPageAsset
 import org.mozilla.fenix.helpers.TestAssetHelper.getGenericAsset
 import org.mozilla.fenix.helpers.TestAssetHelper.navigablePageStartAsset
 import org.mozilla.fenix.helpers.TestAssetHelper.navigablePageTargetAsset
 import org.mozilla.fenix.ui.efficiency.helpers.BaseTest
 import org.mozilla.fenix.ui.efficiency.selectors.CustomTabsSelectors
+import org.mozilla.fenix.ui.efficiency.selectors.DownloadsSelectors
 import org.mozilla.fenix.ui.efficiency.selectors.FindInPageSelectors
 import org.mozilla.fenix.ui.efficiency.selectors.TabHistorySelectors
 import org.mozilla.fenix.ui.efficiency.selectors.ToolbarSelectors
@@ -18,6 +23,19 @@ import org.mozilla.fenix.ui.efficiency.selectors.ToolbarSelectors
 class CustomTabsTest : BaseTest() {
 
     private val mockWebServer get() = fenixTestRule.mockWebServer
+
+    // Required by verifyDownloadInACustomTabTest: without it the download prompt's Download button
+    // resolves and the click reports success, but the click is dropped as prompt abuse, so the dialog
+    // stays open and the failure surfaces later as a missing snackbar. See bug 2060299.
+    @Before
+    fun disablePromptAbuserDetector() {
+        PromptAbuserDetector.validationsEnabled = false
+    }
+
+    @After
+    fun restorePromptAbuserDetector() {
+        PromptAbuserDetector.validationsEnabled = true
+    }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/249644
     // Converted from legacy CustomTabsTest.verifyCustomTabMenuItemsTest
@@ -102,6 +120,29 @@ class CustomTabsTest : BaseTest() {
         // custom tab but leaves PageStateTracker on FindInPagePage, and there is no return edge to re-sync
         // it, so navigateToPage() would look for a FindInPagePage -> FindInPagePage path. Same stateful-nav
         // gap as the BookmarksPage -> BrowserPage one.
+    }
+
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/2334761
+    // Converted from legacy CustomTabsTest.verifyDownloadInACustomTabTest
+    @SmokeTest
+    @Test
+    fun verifyDownloadInACustomTabTest() {
+        // Deliberate deviation from legacy, which loads
+        // https://storage.googleapis.com/mobile_test_assets/test_app/downloads.html. The local
+        // mockWebServer asset serves the same downloads.html with the same web_icon.png link, so
+        // coverage is unchanged while the test stops depending on external network.
+        val customTabPage = mockWebServer.downloadPageAsset
+        val downloadFile = "web_icon.png"
+
+        on.customTabs.launchCustomTab(customTabPage.url.toString(), "TestMenuItem")
+        on.customTabs.clickWebContent(downloadFile)
+        on.downloads
+            .mozVerifyElementsByGroup("downloadDialog")
+            .mozClick(DownloadsSelectors.DOWNLOAD_DIALOG_CONFIRM_BUTTON)
+            .mozVerify(DownloadsSelectors.DOWNLOAD_COMPLETE_SNACKBAR, timeout = 15_000)
+        on.notification.openNotificationTray()
+            .verifyNotificationExists("Download completed")
+            .closeNotificationTray()
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/4245663
