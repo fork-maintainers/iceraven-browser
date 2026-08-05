@@ -1,12 +1,12 @@
 # Telemetry - Implementation, Reviews, Renewals
 
-# Creating Glean Annotations
+## Creating Glean Annotations
 
 Glean Annotations repository: <https://github.com/mozilla/glean-annotations>
 
 See the documentation on how to [create new annotations](https://mozilla.github.io/glean-annotations/contributing/creating/).
 
-# Data review
+## Data review
 
 Data reviews are needed on all patches that add new telemetry or modify existing telemetry.
 Any change that touches metrics will be automatically flagged with a `needs-data-classification` tag by Phabricator.
