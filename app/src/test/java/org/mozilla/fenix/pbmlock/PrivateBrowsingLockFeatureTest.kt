@@ -182,7 +182,7 @@ class PrivateBrowsingLockFeatureTest {
         assertFalse(appStore.state.isPrivateScreenLocked)
     }
 
-    // observing private mode tests
+    // observePrivateModeLock tests
     @Test
     fun `GIVEN normal mode and enabled lock WHEN observePrivateModeLock is triggered THEN observing lock doesn't trigger`() = runTest {
         var result = false
@@ -388,10 +388,10 @@ class PrivateBrowsingLockFeatureTest {
     }
 
     @Test
-    fun `GIVEN the feature is on and there are private tabs and we are in a custom tab WHEN we click on Open in Firefox THEN we don't lock PBM`() {
+    fun `GIVEN the feature is on and there are private tabs and we are in a private custom tab WHEN we click on Open in Firefox THEN we don't lock PBM`() {
         val isFeatureEnabled = true
 
-        val appStore = AppStore(initialState = AppState(openInFirefoxRequested = false))
+        val appStore = AppStore(initialState = AppState(mode = BrowsingMode.Private, openInFirefoxRequested = false))
         val browserStore = createBrowserStore(mixedTabs)
         val feature = createFeature(appStore, browserStore, createStorage(isFeatureEnabled))
 
@@ -505,6 +505,67 @@ class PrivateBrowsingLockFeatureTest {
 
         // verify that going to normal mode doesn't lock private mode
         appStore.dispatch(AppAction.BrowsingModeManagerModeChanged(mode = BrowsingMode.Normal))
+
+        assertTrue(appStore.state.mode == BrowsingMode.Normal)
+        assertFalse(appStore.state.isPrivateScreenLocked)
+    }
+
+    // tests for switching between browsing modes
+    @Test
+    fun `GIVEN the feature is enabled and private tabs are open WHEN switching from private to normal mode THEN private mode is locked`() {
+        val isFeatureEnabled = true
+        val appStore = createAppStore(BrowsingMode.Private, isPrivateScreenLocked = false)
+        val browserStore = createBrowserStore(mixedTabs)
+        val feature = createFeature(appStore, browserStore, createStorage(isFeatureEnabled))
+        val activity = mockk<AppCompatActivity>(relaxed = true)
+        every { activity.isChangingConfigurations } returns false
+
+        assertTrue(appStore.state.mode == BrowsingMode.Private)
+        assertFalse(appStore.state.isPrivateScreenLocked)
+
+        appStore.dispatch(AppAction.BrowsingModeManagerModeChanged(mode = BrowsingMode.Normal))
+        testDispatcher.scheduler.advanceUntilIdle()
+        feature.onStart(activity)
+
+        assertTrue(appStore.state.mode == BrowsingMode.Normal)
+        assertTrue(appStore.state.isPrivateScreenLocked)
+    }
+
+    @Test
+    fun `GIVEN the feature is enabled and there are no private tabs open WHEN switching from private to normal mode THEN private mode is not locked`() {
+        val isFeatureEnabled = true
+        val appStore = createAppStore(BrowsingMode.Private, isPrivateScreenLocked = false)
+        val browserStore = createBrowserStore(regularTabs)
+        val feature = createFeature(appStore, browserStore, createStorage(isFeatureEnabled))
+        val activity = mockk<AppCompatActivity>(relaxed = true)
+        every { activity.isChangingConfigurations } returns false
+
+        assertTrue(appStore.state.mode == BrowsingMode.Private)
+        assertFalse(appStore.state.isPrivateScreenLocked)
+
+        appStore.dispatch(AppAction.BrowsingModeManagerModeChanged(mode = BrowsingMode.Normal))
+        testDispatcher.scheduler.advanceUntilIdle()
+        feature.onStart(activity)
+
+        assertTrue(appStore.state.mode == BrowsingMode.Normal)
+        assertFalse(appStore.state.isPrivateScreenLocked)
+    }
+
+    @Test
+    fun `GIVEN the feature is not enabled and private tabs are open WHEN switching from private to normal mode THEN private mode is not locked`() {
+        val isFeatureEnabled = false
+        val appStore = createAppStore(BrowsingMode.Private, isPrivateScreenLocked = false)
+        val browserStore = createBrowserStore(mixedTabs)
+        val feature = createFeature(appStore, browserStore, createStorage(isFeatureEnabled))
+        val activity = mockk<AppCompatActivity>(relaxed = true)
+        every { activity.isChangingConfigurations } returns false
+
+        assertTrue(appStore.state.mode == BrowsingMode.Private)
+        assertFalse(appStore.state.isPrivateScreenLocked)
+
+        appStore.dispatch(AppAction.BrowsingModeManagerModeChanged(mode = BrowsingMode.Normal))
+        testDispatcher.scheduler.advanceUntilIdle()
+        feature.onStart(activity)
 
         assertTrue(appStore.state.mode == BrowsingMode.Normal)
         assertFalse(appStore.state.isPrivateScreenLocked)
