@@ -21,7 +21,7 @@ class NotificationPage(composeRule: AndroidComposeTestRule<HomeActivityIntentTes
         NavigationRegistry.register(
             from = "HomePage",
             to = pageName,
-            steps = listOf(NavigationStep.OpenNotificationsTray(openNotificationsTrayAction = {})),
+            steps = listOf(NavigationStep.OpenNotificationsTray),
         )
     }
 
