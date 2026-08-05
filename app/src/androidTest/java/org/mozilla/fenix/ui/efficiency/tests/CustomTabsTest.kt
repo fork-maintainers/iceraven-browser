@@ -121,5 +121,7 @@ class CustomTabsTest : BaseTest() {
             .mozVerify(TabHistorySelectors.TAB_HISTORY_LIST_UIAUTOMATOR)
             .mozVerify(TabHistorySelectors.TAB_HISTORY_ITEM(startPage.url.toString()))
             .mozVerify(TabHistorySelectors.TAB_HISTORY_ITEM(targetPage.url.toString()))
+        // Keeps the test self-contained rather than handing the next one an open sheet.
+        on.tabHistory.dismissTabHistorySheet()
     }
 }

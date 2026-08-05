@@ -6,6 +6,7 @@ package org.mozilla.fenix.ui.efficiency.pageObjects
 
 import androidx.compose.ui.test.junit4.AndroidComposeTestRule
 import org.mozilla.fenix.helpers.HomeActivityIntentTestRule
+import org.mozilla.fenix.helpers.TestHelper.mDevice
 import org.mozilla.fenix.ui.efficiency.helpers.BasePage
 import org.mozilla.fenix.ui.efficiency.helpers.Selector
 import org.mozilla.fenix.ui.efficiency.navigation.NavigationRegistry
@@ -39,6 +40,23 @@ class TabHistoryPage(composeRule: AndroidComposeTestRule<HomeActivityIntentTestR
 
     override fun navigateToPage(url: String, forceNavigation: Boolean): TabHistoryPage {
         super.navigateToPage(url = url.ifBlank { "example.com" }, forceNavigation = forceNavigation)
+        return this
+    }
+
+    /**
+     * Dismisses the tab-history bottom sheet.
+     *
+     * Call this at the end of any test that opens it. The sheet is app UI the test deliberately opened,
+     * so it is the test's to clean up — not something OverlayRegistry should handle, since that is for
+     * system surfaces the test never asked for and only fires on a locate miss.
+     *
+     * This keeps the test self-contained rather than handing the next one an open sheet. Note it was NOT
+     * the cause of the CustomTabsTest retry-pass on verifyDownloadInACustomTabTest: adding this left the
+     * class result byte-identical, so that leak is still unidentified. Do not read this as the fix for it.
+     */
+    fun dismissTabHistorySheet(): TabHistoryPage {
+        mDevice.pressBack()
+        mozVerifyElementAbsent(TabHistorySelectors.TAB_HISTORY_LIST_UIAUTOMATOR)
         return this
     }
 
