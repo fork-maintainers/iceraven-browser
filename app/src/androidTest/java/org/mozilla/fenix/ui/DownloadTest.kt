@@ -11,6 +11,7 @@ import androidx.test.espresso.intent.rule.IntentsRule
 import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
+import org.mozilla.fenix.customannotations.Converted
 import org.mozilla.fenix.customannotations.SkipLeaks
 import org.mozilla.fenix.customannotations.SmokeTest
 import org.mozilla.fenix.helpers.AppAndSystemHelper.assertExternalAppOpens
@@ -364,6 +365,14 @@ class DownloadTest {
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/2048448
     // Save edited PDF file from the share overlay
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.DownloadTest#saveAsPdfFunctionalityTest"],
+        bug = 2060299,
+        since = "2026-08",
+        notes = "Legacy verifyDownloadPrompt also asserted the prompt named the file and that Cancel " +
+            "was displayed; the share-sheet prompt is a different dialog from the main-menu route and " +
+            "needs its own selectors, so those two checks did not carry over.",
+    )
     @SmokeTest
     @Test
     fun saveAsPdfFunctionalityTest() {
