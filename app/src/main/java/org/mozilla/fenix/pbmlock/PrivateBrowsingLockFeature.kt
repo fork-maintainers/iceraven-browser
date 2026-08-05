@@ -222,6 +222,18 @@ class PrivateBrowsingLockFeature(
                             }
                         }
                 }
+
+                // Observe tray visibility to lock the private tabs when leaving the tabstray unless it’s private mode.
+                launch {
+                    flow.map { it.isTabsTrayVisible }
+                        .distinctUntilChanged()
+                        .filter { !it }
+                        .collect {
+                            if (appStore.state.mode != BrowsingMode.Private && !appStore.state.isPrivateScreenLocked) {
+                                maybeLockPrivateMode()
+                            }
+                        }
+                }
             }
         }
     }

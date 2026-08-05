@@ -65,6 +65,7 @@ import org.mozilla.fenix.GleanMetrics.PrivateBrowsingLocked
 import org.mozilla.fenix.GleanMetrics.TabsTray
 import org.mozilla.fenix.HomeActivity
 import org.mozilla.fenix.R
+import org.mozilla.fenix.components.appstate.AppAction
 import org.mozilla.fenix.compose.navigation.BottomSheetSceneStrategy
 import org.mozilla.fenix.ext.actualInactiveTabs
 import org.mozilla.fenix.ext.components
@@ -727,9 +728,13 @@ class TabManagementFragment : Fragment() {
         findPreviousDialogFragment()?.let { dialog ->
             dialog.onAcceptClicked = ::onCancelDownloadWarningAccepted
         }
+        requireComponents.appStore.dispatch(AppAction.UpdateTabsTrayVisibility(true))
     }
 
     override fun onDestroyView() {
+        if (activity?.isChangingConfigurations == false) {
+            requireComponents.appStore.dispatch(AppAction.UpdateTabsTrayVisibility(false))
+        }
         super.onDestroyView()
         recordBreadcrumb("TabManagementFragment onDestroyView")
     }

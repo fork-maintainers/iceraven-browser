@@ -284,6 +284,8 @@ internal object AppStoreReducer {
         )
 
         is AppAction.BlockedTrackersAction -> BlockedTrackersStateReducer.reduce(state, action)
+
+        is AppAction.UpdateTabsTrayVisibility -> state.copy(isTabsTrayVisible = action.visible)
     }
 }
 

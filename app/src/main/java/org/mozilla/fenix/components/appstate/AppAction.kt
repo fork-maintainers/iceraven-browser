@@ -178,6 +178,11 @@ sealed class AppAction : Action {
     data class UpdateDefaultBrowserStatus(val isDefault: Boolean) : AppAction()
 
     /**
+     * Updates the visibility of the TabsTray.
+     */
+    data class UpdateTabsTrayVisibility(val visible: Boolean) : AppAction()
+
+    /**
      * [Action]s related to interactions with the Messaging Framework.
      */
     sealed class MessagingAction : AppAction() {
