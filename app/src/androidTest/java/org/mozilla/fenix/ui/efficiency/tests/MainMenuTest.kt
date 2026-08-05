@@ -472,6 +472,21 @@ class MainMenuTest : BaseTest(
             .mozVerify(WebCompatReporterSelectors.DESCRIPTION)
     }
 
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3080151
+    // Converted from legacy MainMenuTest.verifyRecommendedExtensionsListWhileNoExtensionIsInstalledTest
+    @SmokeTest
+    @Test
+    fun verifyRecommendedExtensionsListWhileNoExtensionIsInstalledTest() {
+        val genericURL = mockWebServer.getGenericAsset(1)
+
+        on.browserPage.navigateToPage(genericURL.url.toString())
+            .verifyPageContent(genericURL.content)
+        on.mainMenu.navigateToPage()
+            .mozVerify(MainMenuSelectors.TRY_RECOMMENDED_EXTENSION_BUTTON)
+            .mozClick(MainMenuSelectors.EXTENSIONS_BUTTON_UIAUTOMATOR)
+            .mozVerifyElementsByGroup("expandedExtensionsMenuItems")
+    }
+
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3080134
     // Converted from legacy MainMenuTest.verifyTheExtensionsMainMenuListTest
     @SmokeTest

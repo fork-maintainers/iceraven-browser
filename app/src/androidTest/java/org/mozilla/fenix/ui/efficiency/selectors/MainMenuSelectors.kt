@@ -157,6 +157,17 @@ object MainMenuSelectors {
         groups = listOf("browserViewMainMenuMoreItems"),
     )
 
+    // The Extensions row opens its submenu in a new window, so match it by res-id at the device level
+    // (the node sets testTagsAsResourceId) rather than through Compose. Mirrors the legacy
+    // itemWithResId("mainMenu.extensions").clickAndWaitForNewWindow. EXTENSIONS_BUTTON above is the
+    // Compose-text twin, used for verifying the row is present rather than for opening it.
+    val EXTENSIONS_BUTTON_UIAUTOMATOR = Selector(
+        strategy = SelectorStrategy.UIAUTOMATOR_WITH_COMPOSE_TAG,
+        value = MenuDialogTestTag.EXTENSIONS,
+        description = "Main menu Extensions button (UIAutomator)",
+        groups = listOf(),
+    )
+
     val EXTENSIONS_CHEVRON = Selector(
         strategy = SelectorStrategy.COMPOSE_BY_TAG,
         value = MenuDialogTestTag.EXTENSIONS_OPTION_CHEVRON,
@@ -325,6 +336,7 @@ object MainMenuSelectors {
         MORE_BUTTON,
         CUSTOMIZE_HOMEPAGE_BUTTON,
         REPORT_BROKEN_SITE_BUTTON,
+        EXTENSIONS_BUTTON_UIAUTOMATOR,
         EXTENSIONS_CHEVRON,
         TRY_RECOMMENDED_EXTENSION_BUTTON,
         DISCOVER_MORE_EXTENSIONS_BUTTON,

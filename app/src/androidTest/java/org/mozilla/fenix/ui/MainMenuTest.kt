@@ -247,6 +247,11 @@ class MainMenuTest {
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3080151
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.MainMenuTest#verifyRecommendedExtensionsListWhileNoExtensionIsInstalledTest"],
+        bug = 2060288,
+        since = "2026-08",
+    )
     @SmokeTest
     @Test
     fun verifyRecommendedExtensionsListWhileNoExtensionIsInstalledTest() {
