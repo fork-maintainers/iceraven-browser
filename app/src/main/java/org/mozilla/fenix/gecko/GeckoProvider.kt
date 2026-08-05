@@ -92,15 +92,6 @@ object GeckoProvider {
             .experimentDelegate(NimbusExperimentDelegate())
             .contentBlocking(
                 policy.toContentBlockingSetting(
-                    cookieBannerHandlingMode = context.components.settings.getCookieBannerHandling(),
-                    cookieBannerHandlingModePrivateBrowsing = context.components.settings
-                        .getCookieBannerHandlingPrivateMode(),
-                    cookieBannerHandlingDetectOnlyMode =
-                    context.components.settings.shouldEnableCookieBannerDetectOnly,
-                    cookieBannerGlobalRulesEnabled =
-                    context.components.settings.shouldEnableCookieBannerGlobalRules,
-                    cookieBannerGlobalRulesSubFramesEnabled =
-                    context.components.settings.shouldEnableCookieBannerGlobalRulesSubFrame,
                     queryParameterStripping = false,
                     queryParameterStrippingPrivateBrowsing = false,
                     queryParameterStrippingAllowList = "",

@@ -168,55 +168,6 @@ features:
         gecko-pref:
           pref: "nimbus.qa.pref-bool-user"
           branch: "user"
-  cookie-banners:
-    description: Features for cookie banner handling.
-    variables:
-      sections-enabled:
-        description: "This property provides a lookup table of whether or not the given section should be enabled."
-        type: Map<CookieBannersSection, Int>
-        default:
-          {
-            "feature-ui": 0,
-            "feature-setting-value": 0,
-            "feature-setting-value-pbm": 0,
-            "feature-setting-detect-only": 0,
-            "feature-setting-global-rules": 1,
-            "feature-setting-global-rules-sub-frames": 1,
-          }
-    defaults:
-      - channel: developer
-        value: {
-          "sections-enabled": {
-            "feature-ui": 1,
-            "feature-setting-value": 0,
-            "feature-setting-value-pbm": 1,
-            "feature-setting-detect-only": 0,
-            "feature-setting-global-rules": 1,
-            "feature-setting-global-rules-sub-frames": 1,
-          }
-        }
-      - channel: nightly
-        value: {
-          "sections-enabled": {
-            "feature-ui": 0,
-            "feature-setting-value": 0,
-            "feature-setting-value-pbm": 0,
-            "feature-setting-detect-only": 0,
-            "feature-setting-global-rules": 1,
-            "feature-setting-global-rules-sub-frames": 1,
-          }
-        }
-      - channel: beta
-        value: {
-          "sections-enabled": {
-            "feature-ui": 0,
-            "feature-setting-value": 0,
-            "feature-setting-value-pbm": 0,
-            "feature-setting-detect-only": 0,
-            "feature-setting-global-rules": 1,
-            "feature-setting-global-rules-sub-frames": 1,
-          }
-        }
 
   onboarding:
     description: "A feature that configures the new user onboarding page.
@@ -1394,29 +1345,6 @@ types:
           description: The collections section of the homepage.
         privacy-report:
           description: The privacy report section showing trackers blocked.
-
-    CookieBannersSection:
-      description: The identifiers for the sections of the MR 2022.
-      variants:
-        feature-ui:
-          description: An integer either 0 or 1 indicating if the UI for cookie banner handling should be visible,
-            0 to hide the UI and 1 to show the UI. The actual UI is composed by cookie banner section
-            in the settings page, the toolbar section and the re-engagement dialog.
-        feature-setting-value:
-          description: An integer either 0 or 1 indicating if cookie banner setting should be enabled or disabled,
-             0 for setting the value to disabled, 1  for enabling the setting with the value reject_all.
-        feature-setting-value-pbm:
-          description: An integer either 0 or 1 indicating if cookie banner setting should be enabled or disabled,
-            0 for setting the value to disabled, 1  for enabling the setting with the value reject_all.
-        feature-setting-detect-only:
-          description: An integer either 0 or 1 indicating if cookie banner detect only mode
-            should be enabled or disabled. 0 for setting to be disabled, and 1 for enabling the setting.
-        feature-setting-global-rules:
-          description: An integer either 0 or 1 indicating if cookie banner global rules
-            should be enabled or disabled. 0 for setting to be disabled, and 1 for enabling the setting.
-        feature-setting-global-rules-sub-frames:
-          description: An integer either 0 or 1 indicating if cookie banner global rules sub-frames
-            should be enabled or disabled. 0 for setting to be disabled, and 1 for enabling the setting.
 
     QueryParameterStrippingSection:
       description: The identifiers for the options for the Query Parameter Stripping feature.

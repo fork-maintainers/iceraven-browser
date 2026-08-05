@@ -9,7 +9,6 @@ import androidx.core.content.edit
 import io.mockk.every
 import io.mockk.spyk
 import io.mockk.verify
-import mozilla.components.browser.engine.gecko.cookiebanners.ReportSiteDomainsRepository.Companion.REPORT_SITE_DOMAINS_REPOSITORY_NAME
 import mozilla.components.concept.engine.Engine.HttpsOnlyMode.DISABLED
 import mozilla.components.concept.engine.Engine.HttpsOnlyMode.ENABLED
 import mozilla.components.concept.engine.Engine.HttpsOnlyMode.ENABLED_PRIVATE_ONLY
@@ -1074,7 +1073,7 @@ class SettingsTest {
     @Test
     fun `GIVEN an existing report site domains datastore WHEN deleteReportSiteDomainsDataStoreIfNeeded is called THEN the datastore is deleted`() {
         val settings = Settings(testContext)
-        val dataStoreFile = File(testContext.filesDir, "datastore/$REPORT_SITE_DOMAINS_REPOSITORY_NAME.preferences_pb")
+        val dataStoreFile = File(testContext.filesDir, "datastore/report_site_domains_preferences.preferences_pb")
         dataStoreFile.parentFile?.mkdirs()
         dataStoreFile.createNewFile()
         assertTrue(dataStoreFile.exists())
@@ -1087,7 +1086,7 @@ class SettingsTest {
     @Test
     fun `GIVEN the report site domains datastore was already deleted WHEN deleteReportSiteDomainsDataStoreIfNeeded is called again THEN the datastore is not deleted a second time`() {
         val settings = Settings(testContext)
-        val dataStoreFile = File(testContext.filesDir, "datastore/$REPORT_SITE_DOMAINS_REPOSITORY_NAME.preferences_pb")
+        val dataStoreFile = File(testContext.filesDir, "datastore/report_site_domains_preferences.preferences_pb")
         dataStoreFile.parentFile?.mkdirs()
         dataStoreFile.createNewFile()
 

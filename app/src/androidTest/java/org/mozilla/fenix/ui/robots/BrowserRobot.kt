@@ -964,27 +964,6 @@ class BrowserRobot(private val composeTestRule: ComposeTestRule) {
     fun verifyColorIsNotSelected(hexValue: String) =
         assertUIObjectExists(itemContainingText("Selected date is: $hexValue"), exists = false)
 
-    fun verifyCookieBannerExists(exists: Boolean) {
-        for (i in 1..RETRY_COUNT) {
-            Log.i(TAG, "verifyCookieBannerExists: Started try #$i")
-            try {
-                // Wait for the blocker to kick-in and make the cookie banner disappear
-                Log.i(TAG, "verifyCookieBannerExists: Waiting for $waitingTime ms for cookie banner to be gone")
-                itemWithResId("cookieConsentBanner").waitUntilGone(waitingTimeLong)
-                Log.i(TAG, "verifyCookieBannerExists: Waited for $waitingTime ms for cookie banner to be gone")
-                // Assert that the blocker properly dismissed the cookie banner
-                assertUIObjectExists(itemWithResId("cookieConsentBanner"), exists = exists)
-
-                break
-            } catch (e: AssertionError) {
-                Log.i(TAG, "verifyCookieBannerExists: AssertionError caught, executing fallback methods")
-                if (i == RETRY_COUNT) {
-                    throw e
-                }
-            }
-        }
-    }
-
     fun verifyOpenLinkInAnotherAppPrompt(appName: String) {
         assertUIObjectExists(
             itemContainingText(

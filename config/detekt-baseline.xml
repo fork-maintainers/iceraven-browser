@@ -7,7 +7,6 @@
     <ID>ClassAcronymCasing:CfrToolsStore.kt$CfrToolsAction$ResetLastCFRTimestampButtonClicked : CfrToolsAction</ID>
     <ID>ClassAcronymCasing:ClientUUID.kt$ClientUUID : UserIdProviderRequestHashProvider</ID>
     <ID>ClassAcronymCasing:ClientUUID.kt$PrefsBackedClientUUID : ClientUUID</ID>
-    <ID>ClassAcronymCasing:CustomCBHSwitchPreference.kt$CustomCBHSwitchPreference : SwitchPreferenceCompat</ID>
     <ID>ClassAcronymCasing:FakeClientUUID.kt$FakeClientUUID : ClientUUID</ID>
     <ID>ClassAcronymCasing:FenixFxAEntryPoint.kt$FenixFxAEntryPoint$CREATOR : Creator</ID>
     <ID>ClassAcronymCasing:InstallReferrerWorker.kt$UTMParams</ID>

@@ -187,12 +187,6 @@ class Core(
             dohExceptionsList = context.components.settings.dohExceptionsList.toList(),
             globalPrivacyControlEnabled = context.components.settings.shouldEnableGlobalPrivacyControl,
             fdlibmMathEnabled = FxNimbus.features.fingerprintingProtection.value().fdlibmMath,
-            cookieBannerHandlingMode = context.components.settings.getCookieBannerHandling(),
-            cookieBannerHandlingModePrivateBrowsing = context.components.settings.getCookieBannerHandlingPrivateMode(),
-            cookieBannerHandlingDetectOnlyMode = context.components.settings.shouldEnableCookieBannerDetectOnly,
-            cookieBannerHandlingGlobalRules = context.components.settings.shouldEnableCookieBannerGlobalRules,
-            cookieBannerHandlingGlobalRulesSubFrames =
-                context.components.settings.shouldEnableCookieBannerGlobalRulesSubFrame,
             emailTrackerBlockingPrivateBrowsing = true,
             userCharacteristicPingCurrentVersion = FxNimbus.features.userCharacteristics.value().currentVersion,
             getDesktopMode = {

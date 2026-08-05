@@ -18,10 +18,8 @@ import androidx.annotation.VisibleForTesting.Companion.PRIVATE
 import androidx.core.content.edit
 import androidx.lifecycle.LifecycleOwner
 import androidx.preference.PreferenceManager
-import mozilla.components.browser.engine.gecko.cookiebanners.ReportSiteDomainsRepository.Companion.REPORT_SITE_DOMAINS_REPOSITORY_NAME
 import mozilla.components.concept.engine.Engine
 import mozilla.components.concept.engine.Engine.HttpsOnlyMode
-import mozilla.components.concept.engine.EngineSession.CookieBannerHandlingMode
 import mozilla.components.feature.sitepermissions.SitePermissionsRules
 import mozilla.components.feature.sitepermissions.SitePermissionsRules.Action
 import mozilla.components.feature.sitepermissions.SitePermissionsRules.AutoplayAction
@@ -60,7 +58,6 @@ import org.mozilla.fenix.ext.getPreferenceKey
 import org.mozilla.fenix.ext.pixelSizeFor
 import org.mozilla.fenix.home.pocket.ContentRecommendationsFeatureHelper
 import org.mozilla.fenix.home.topsites.TopSitesConfigConstants.TOP_SITES_MAX_COUNT
-import org.mozilla.fenix.nimbus.CookieBannersSection
 import org.mozilla.fenix.nimbus.DefaultBrowserPrompt
 import org.mozilla.fenix.nimbus.FxNimbus
 import org.mozilla.fenix.nimbus.HomeScreenSection
@@ -1242,29 +1239,6 @@ class Settings(
         false,
     )
 
-    var shouldUseCookieBannerPrivateMode by booleanPreference(
-        appContext.getPreferenceKey(R.string.pref_key_cookie_banner_private_mode),
-        default = { shouldUseCookieBannerPrivateModeDefaultValue },
-    )
-
-    val shouldUseCookieBannerPrivateModeDefaultValue: Boolean
-        get() = cookieBannersSection[CookieBannersSection.FEATURE_SETTING_VALUE_PBM] == 1
-
-    val shouldUseCookieBanner: Boolean
-        get() = cookieBannersSection[CookieBannersSection.FEATURE_SETTING_VALUE] == 1
-
-    val shouldShowCookieBannerUI: Boolean
-        get() = cookieBannersSection[CookieBannersSection.FEATURE_UI] == 1
-
-    val shouldEnableCookieBannerDetectOnly: Boolean
-        get() = cookieBannersSection[CookieBannersSection.FEATURE_SETTING_DETECT_ONLY] == 1
-
-    val shouldEnableCookieBannerGlobalRules: Boolean
-        get() = cookieBannersSection[CookieBannersSection.FEATURE_SETTING_GLOBAL_RULES] == 1
-
-    val shouldEnableCookieBannerGlobalRulesSubFrame: Boolean
-        get() = cookieBannersSection[CookieBannersSection.FEATURE_SETTING_GLOBAL_RULES_SUB_FRAMES] == 1
-
     /**
      * Declared as a function for performance purposes. This could be declared as a variable using
      * booleanPreference like other members of this class. However, doing so will make it so it will
@@ -1956,7 +1930,7 @@ class Settings(
     }
 
     /**
-     * Indicates if the [REPORT_SITE_DOMAINS_REPOSITORY_NAME] DataStore has been deleted.
+     * Indicates if the `report_site_domains_preferences` DataStore has been deleted.
      */
     private var hasDeletedReportSiteDomainsDataStore by booleanPreference(
         appContext.getPreferenceKey(R.string.pref_key_deleted_report_site_domains_datastore),
@@ -1964,12 +1938,12 @@ class Settings(
     )
 
     /**
-     * Deletes the [REPORT_SITE_DOMAINS_REPOSITORY_NAME] DataStore left behind on existing
+     * Deletes the `report_site_domains_preferences` DataStore left behind on existing
      * application after the legacy cookie banner feature was removed.
      */
     fun deleteReportSiteDomainsDataStoreIfNeeded() {
         if (!hasDeletedReportSiteDomainsDataStore) {
-            File(appContext.filesDir, "datastore/$REPORT_SITE_DOMAINS_REPOSITORY_NAME.preferences_pb").delete()
+            File(appContext.filesDir, "datastore/report_site_domains_preferences.preferences_pb").delete()
             hasDeletedReportSiteDomainsDataStore = true
         }
     }
@@ -2232,10 +2206,6 @@ class Settings(
         return featureGate.isAddressFeatureEnabled()
     }
 
-    private val cookieBannersSection: Map<CookieBannersSection, Int>
-        get() =
-            FxNimbus.features.cookieBanners.value().sectionsEnabled
-
     var signedInFxaAccount by booleanPreference(
         appContext.getPreferenceKey(R.string.pref_key_fxa_signed_in),
         default = false,
@@ -2411,30 +2381,6 @@ class Settings(
             HttpsOnlyMode.ENABLED_PRIVATE_ONLY
         } else {
             HttpsOnlyMode.ENABLED
-        }
-    }
-
-    /**
-     * Get the current mode for cookie banner handling
-     */
-    fun getCookieBannerHandling(): CookieBannerHandlingMode {
-        return when (shouldUseCookieBanner) {
-            true -> CookieBannerHandlingMode.REJECT_ALL
-            false -> {
-                CookieBannerHandlingMode.DISABLED
-            }
-        }
-    }
-
-    /**
-     * Get the current mode for cookie banner handling
-     */
-    fun getCookieBannerHandlingPrivateMode(): CookieBannerHandlingMode {
-        return when (shouldUseCookieBannerPrivateMode) {
-            true -> CookieBannerHandlingMode.REJECT_ALL
-            false -> {
-                CookieBannerHandlingMode.DISABLED
-            }
         }
     }
 

@@ -32,7 +32,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.SwitchPreferenceCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.CoroutineScope
@@ -59,7 +58,6 @@ import mozilla.telemetry.glean.private.NoExtras
 import org.mozilla.fenix.Config
 import org.mozilla.fenix.FeatureFlags
 import org.mozilla.fenix.GleanMetrics.Addons
-import org.mozilla.fenix.GleanMetrics.CookieBanners
 import org.mozilla.fenix.GleanMetrics.Events
 import org.mozilla.fenix.GleanMetrics.SettingsSearch
 import org.mozilla.fenix.GleanMetrics.TrackingProtection
@@ -649,7 +647,6 @@ class SettingsFragment : PreferenceFragmentCompat(), SystemInsetsPaddedFragment 
             preferenceStartProfiler?.isVisible = showSecretDebugMenuThisSession &&
                 (components.core.engine.profiler?.isProfilerActive() != null)
         }
-        setupCookieBannerPreference(settings)
         setupInstallAddonFromFilePreference(settings)
         setLinkSharingPreference()
         setupAmoCollectionOverridePreference(
@@ -869,36 +866,6 @@ class SettingsFragment : PreferenceFragmentCompat(), SystemInsetsPaddedFragment 
         findPreference<Preference>(getPreferenceKey(R.string.pref_key_email_masks))?.let {
             it.isVisible = settings.isEmailMaskFeatureEnabled &&
                     components.relayEligibilityStore.state.eligibilityState is Eligible
-        }
-    }
-
-    @VisibleForTesting
-    internal fun setupCookieBannerPreference(settings: Settings) {
-        FxNimbus.features.cookieBanners.recordExposure()
-        if (settings.shouldShowCookieBannerUI) {
-            with(requirePreference<SwitchPreferenceCompat>(R.string.pref_key_cookie_banner_private_mode)) {
-                isVisible = settings.shouldShowCookieBannerUI
-
-                onPreferenceChangeListener = object : SharedPreferenceUpdater() {
-                    override fun onPreferenceChange(
-                        preference: Preference,
-                        newValue: Any?,
-                    ): Boolean {
-                        val metricTag = if (newValue == true) {
-                            "reject_all"
-                        } else {
-                            "disabled"
-                        }
-                        val engineSettings = components.core.engine.settings
-                        settings.shouldUseCookieBannerPrivateMode = newValue as Boolean
-                        val mode = settings.getCookieBannerHandlingPrivateMode()
-                        engineSettings.cookieBannerHandlingModePrivateBrowsing = mode
-                        CookieBanners.settingChangedPmb.record(CookieBanners.SettingChangedPmbExtra(metricTag))
-                        components.useCases.sessionUseCases.reload()
-                        return super.onPreferenceChange(preference, newValue)
-                    }
-                }
-            }
         }
     }
 
