@@ -10,17 +10,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.compose.material3.SnackbarHostState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.fragment.app.Fragment
 import androidx.fragment.compose.content
 import androidx.navigation.fragment.findNavController
 import mozilla.components.ExperimentalAndroidComponentsApi
+import mozilla.components.feature.ipprotection.store.IPProtectionAction
 import mozilla.components.lib.state.ext.observeAsComposableState
 import org.mozilla.fenix.components.components
 import org.mozilla.fenix.e2e.SystemInsetsPaddedFragment
+import org.mozilla.fenix.ext.requireComponents
 import org.mozilla.fenix.theme.FirefoxTheme
 
 /**
@@ -35,16 +33,20 @@ class IPProtectionLocationsFragment : Fragment(), SystemInsetsPaddedFragment {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ) = content {
-        var selectedRegion by rememberSaveable { mutableStateOf<String?>(null) }
-        val countries = components.ipProtection.store.observeAsComposableState { it.countries }.value
+        val selectedLocation =
+            components.ipProtection.store.observeAsComposableState { it.locationState.selectedLocation }.value
+        val locations =
+            components.ipProtection.store.observeAsComposableState { it.locationState.locations }.value
 
         FirefoxTheme {
             IPProtectionLocationsScreen(
-                selectedRegion = selectedRegion,
-                countries = countries,
+                selectedLocation = selectedLocation,
+                locations = locations,
                 snackbarHostState = snackbarHostState,
                 onNavigateBack = { findNavController().popBackStack() },
-                onLocationSelected = { selectedRegion = it },
+                onLocationSelected = { country ->
+                    requireComponents.ipProtection.store.dispatch(IPProtectionAction.LocationChanged(country))
+                },
             )
         }
     }

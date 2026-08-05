@@ -2,6 +2,8 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
+@file:OptIn(ExperimentalAndroidComponentsApi::class)
+
 package org.mozilla.fenix.settings
 
 import androidx.compose.foundation.Image
@@ -60,8 +62,11 @@ import mozilla.components.concept.engine.ipprotection.IPProtectionHandler
 import mozilla.components.concept.engine.ipprotection.ServiceState
 import mozilla.components.feature.ipprotection.store.state.Authorized
 import mozilla.components.feature.ipprotection.store.state.BYTES_PER_GB
+import mozilla.components.feature.ipprotection.store.state.Country
 import mozilla.components.feature.ipprotection.store.state.EligibilityStatus
 import mozilla.components.feature.ipprotection.store.state.IPProtectionState
+import mozilla.components.feature.ipprotection.store.state.Location
+import mozilla.components.feature.ipprotection.store.state.Recommended
 import mozilla.components.feature.ipprotection.store.state.Uninitialized
 import mozilla.components.feature.ipprotection.store.state.maxDataGb
 import mozilla.components.feature.ipprotection.store.state.remainingDataGb
@@ -164,6 +169,7 @@ fun IPProtectionScreen(
                     }
 
                     VpnLocationSection(
+                        selectedLocation = state.locationState.selectedLocation,
                         onLocationClicked = onLocationClicked,
                         enabled = isLocationSelectionEnabled,
                     )
@@ -324,6 +330,7 @@ private fun ColumnScope.GetStartedSection(
 
 @Composable
 private fun VpnLocationSection(
+    selectedLocation: Location,
     onLocationClicked: () -> Unit,
     enabled: Boolean,
 ) {
@@ -335,15 +342,25 @@ private fun VpnLocationSection(
         ),
     )
 
-    TextListItem(
-        label = stringResource(R.string.ip_protection_location_recommended_label),
-        description = stringResource(
-            R.string.ip_protection_location_fastest_description,
-            stringResource(R.string.firefox),
-        ),
-        maxDescriptionLines = Int.MAX_VALUE,
-        onClick = onLocationClicked.takeIf { enabled },
-    )
+    when (selectedLocation) {
+        is Recommended -> {
+            TextListItem(
+                label = stringResource(R.string.ip_protection_location_recommended_label),
+                description = stringResource(
+                    R.string.ip_protection_location_fastest_description,
+                    stringResource(R.string.firefox),
+                ),
+                maxDescriptionLines = Int.MAX_VALUE,
+                onClick = onLocationClicked.takeIf { enabled },
+            )
+        }
+        is Country -> {
+            TextListItem(
+                label = selectedLocation.displayName,
+                onClick = onLocationClicked.takeIf { enabled },
+            )
+        }
+    }
 }
 
 @Composable

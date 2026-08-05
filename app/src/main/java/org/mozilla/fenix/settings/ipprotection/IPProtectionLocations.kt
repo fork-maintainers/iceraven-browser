@@ -43,33 +43,33 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import mozilla.components.ExperimentalAndroidComponentsApi
 import mozilla.components.compose.base.annotation.FlexibleWindowPreview
 import mozilla.components.compose.base.button.IconButton
-import mozilla.components.concept.engine.ipprotection.IPProtectionHandler
+import mozilla.components.feature.ipprotection.store.state.Country
+import mozilla.components.feature.ipprotection.store.state.Location
+import mozilla.components.feature.ipprotection.store.state.Recommended
 import org.mozilla.fenix.R
 import org.mozilla.fenix.components.menu.compose.MenuGroup
 import org.mozilla.fenix.components.menu.compose.MenuTextItem
 import org.mozilla.fenix.theme.FirefoxTheme
 import org.mozilla.fenix.theme.PreviewThemeProvider
 import org.mozilla.fenix.theme.Theme
-import java.util.IllformedLocaleException
-import java.util.Locale
 import mozilla.components.ui.icons.R as iconsR
 
 /**
  * The IP Protection location selection screen.
  *
- * @param selectedRegion The currently selected region, or `null` for recommended location.
- * @param countries A list of countries available in the proxy server-list.
+ * @param selectedLocation The currently selected location.
+ * @param locations A list of available locations for user to choose from.
  * @param snackbarHostState The [SnackbarHostState] used to display snackbars.
  * @param onNavigateBack Called when the back navigation icon is tapped.
  * @param onLocationSelected Called with the user taps on a location.
  */
 @Composable
 fun IPProtectionLocationsScreen(
-    selectedRegion: String?,
-    countries: List<IPProtectionHandler.Country>,
+    selectedLocation: Location,
+    locations: List<Location>,
     snackbarHostState: SnackbarHostState,
     onNavigateBack: () -> Unit,
-    onLocationSelected: (String?) -> Unit,
+    onLocationSelected: (Location) -> Unit,
 ) {
     val screenTitle = stringResource(R.string.ip_protection_locations_title)
 
@@ -94,8 +94,8 @@ fun IPProtectionLocationsScreen(
             color = MaterialTheme.colorScheme.surface,
         ) {
             LocationList(
-                selectedRegion = selectedRegion,
-                countries = countries,
+                selectedLocation = selectedLocation,
+                locations = locations,
                 onLocationSelected = onLocationSelected,
             )
         }
@@ -104,10 +104,13 @@ fun IPProtectionLocationsScreen(
 
 @Composable
 private fun LocationList(
-    selectedRegion: String?,
-    countries: List<IPProtectionHandler.Country>,
-    onLocationSelected: (String?) -> Unit,
+    selectedLocation: Location,
+    locations: List<Location>,
+    onLocationSelected: (Location) -> Unit,
 ) {
+    val recommended = locations.filterIsInstance<Recommended>().firstOrNull()
+    val countries = locations.filterIsInstance<Country>()
+
     Column(
         modifier = Modifier
             .verticalScroll(rememberScrollState())
@@ -117,23 +120,25 @@ private fun LocationList(
             ),
         verticalArrangement = Arrangement.spacedBy(FirefoxTheme.layout.space.static200),
     ) {
-        MenuGroup {
-            LocationOption(
-                label = stringResource(R.string.ip_protection_location_recommended_label),
-                description = stringResource(R.string.ip_protection_location_fastest_description),
-                isSelected = selectedRegion == null,
-                onClick = { onLocationSelected(null) },
-            )
+        if (recommended != null) {
+            MenuGroup {
+                LocationOption(
+                    label = stringResource(R.string.ip_protection_location_recommended_label),
+                    description = stringResource(R.string.ip_protection_location_fastest_description),
+                    isSelected = selectedLocation == recommended,
+                    onClick = { onLocationSelected(recommended) },
+                )
+            }
         }
 
         if (countries.isNotEmpty()) {
             MenuGroup {
                 countries.forEach { country ->
                     LocationOption(
-                        label = regionDisplayName(country.code),
-                        isSelected = country.code == selectedRegion,
+                        label = country.displayName,
+                        isSelected = country == selectedLocation,
                         enabled = country.available,
-                        onClick = { onLocationSelected(country.code) },
+                        onClick = { onLocationSelected(country) },
                     )
                 }
             }
@@ -242,22 +247,6 @@ private fun IPProtectionLocationsTopAppBar(
     )
 }
 
-// This will probably go into the data layer, with some validation logic.
-// We might want to filter out broken input (if `getDisplayCountry` returns an empty string)
-private fun regionDisplayName(regionCode: String): String {
-    val normalizedCode = regionCode.uppercase()
-    val displayName = try {
-        Locale.Builder()
-            .setRegion(normalizedCode)
-            .build()
-            .getDisplayCountry(Locale.getDefault())
-    } catch (_: IllformedLocaleException) {
-        ""
-    }
-
-    return displayName.ifBlank { normalizedCode }
-}
-
 @FlexibleWindowPreview
 @Composable
 private fun IPProtectionLocationsRecommendedPreview(
@@ -265,8 +254,8 @@ private fun IPProtectionLocationsRecommendedPreview(
 ) {
     FirefoxTheme(theme = theme) {
         IPProtectionLocationsScreen(
-            selectedRegion = null,
-            countries = SAMPLE_COUNTRIES,
+            selectedLocation = SAMPLE_LOCATIONS.first(),
+            locations = SAMPLE_LOCATIONS,
             snackbarHostState = SnackbarHostState(),
             onNavigateBack = {},
             onLocationSelected = {},
@@ -281,8 +270,8 @@ private fun IPProtectionLocationsCountrySelectedPreview(
 ) {
     FirefoxTheme(theme = theme) {
         IPProtectionLocationsScreen(
-            selectedRegion = "fr",
-            countries = SAMPLE_COUNTRIES,
+            selectedLocation = SAMPLE_LOCATIONS[1],
+            locations = SAMPLE_LOCATIONS,
             snackbarHostState = SnackbarHostState(),
             onNavigateBack = {},
             onLocationSelected = {},
@@ -297,8 +286,8 @@ private fun IPProtectionLocationsEmptyPreview(
 ) {
     FirefoxTheme(theme = theme) {
         IPProtectionLocationsScreen(
-            selectedRegion = null,
-            countries = emptyList(),
+            selectedLocation = SAMPLE_LOCATIONS.first(),
+            locations = listOf(SAMPLE_LOCATIONS.first()),
             snackbarHostState = SnackbarHostState(),
             onNavigateBack = {},
             onLocationSelected = {},
@@ -306,9 +295,10 @@ private fun IPProtectionLocationsEmptyPreview(
     }
 }
 
-private val SAMPLE_COUNTRIES = listOf(
-    IPProtectionHandler.Country(code = "dk", available = true),
-    IPProtectionHandler.Country(code = "fr", available = true),
-    IPProtectionHandler.Country(code = "gb", available = false),
-    IPProtectionHandler.Country(code = "us", available = true),
+private val SAMPLE_LOCATIONS = listOf(
+    Recommended(),
+    Country(countryCode = "dk", available = true),
+    Country(countryCode = "fr", available = true),
+    Country(countryCode = "gb", available = false),
+    Country(countryCode = "us", available = true),
 )
