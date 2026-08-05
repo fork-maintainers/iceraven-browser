@@ -2874,7 +2874,7 @@
     <!-- Description for the card shown to the user when we are unable to fetch server locations -->
     <string name="ip_protection_locations_unavailable_description">Switched to the recommended location.</string>
     <!-- Title for the browser VPN location selection screen (displayed in the app bar) -->
-    <string name="ip_protection_locations_title">Choose VPN Location</string>
+    <string name="ip_protection_locations_title">Choose VPN location</string>
     <!-- Content description for the browser VPN location selection screen top bar back button -->
     <string name="ip_protection_locations_navigate_back_button_content_description">Navigate back</string>
 
