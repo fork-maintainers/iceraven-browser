@@ -60,6 +60,7 @@ abstract class BaseTest(
     private val isPocketEnabled: Boolean = true,
     private val isRecentlyVisitedFeatureEnabled: Boolean = true,
     private val shouldUseExpandedToolbar: Boolean = false,
+    private val isPWAsPromptEnabled: Boolean = false,
 ) {
 
     // Default launch built from the constructor args (back-compat for every existing subclass).
@@ -69,6 +70,7 @@ abstract class BaseTest(
         isPocketEnabled = isPocketEnabled,
         isRecentlyVisitedFeatureEnabled = isRecentlyVisitedFeatureEnabled,
         shouldUseExpandedToolbar = shouldUseExpandedToolbar,
+        isPWAsPromptEnabled = isPWAsPromptEnabled,
     )
 
     /** Override to vary the launch per run/case (e.g. the reachability shard uses the case's config). */
@@ -102,6 +104,7 @@ abstract class BaseTest(
                             isPocketEnabled = cfg.isPocketEnabled,
                             isRecentlyVisitedFeatureEnabled = cfg.isRecentlyVisitedFeatureEnabled,
                             shouldUseExpandedToolbar = cfg.shouldUseExpandedToolbar,
+                            isPWAsPromptEnabled = cfg.isPWAsPromptEnabled,
                         ),
                     ) { it.activity }
                     try {
@@ -122,6 +125,14 @@ abstract class BaseTest(
                                     autofill.getAllAddresses().forEach { autofill.deleteAddress(it.guid) }
                                 }.onFailure {
                                     Log.i("BaseTest", "RetryTestRule: autofill clear failed: ${it.message}")
+                                }
+                                // Clear saved logins for the same reason (and so a retry doesn't inherit
+                                // logins the previous attempt saved — a re-submit of the same credentials
+                                // shows no save prompt, which reads as a spurious failure).
+                                runCatching {
+                                    appContext.components.core.passwordsStorage.wipeLocal()
+                                }.onFailure {
+                                    Log.i("BaseTest", "RetryTestRule: logins clear failed: ${it.message}")
                                 }
                             }
                         }

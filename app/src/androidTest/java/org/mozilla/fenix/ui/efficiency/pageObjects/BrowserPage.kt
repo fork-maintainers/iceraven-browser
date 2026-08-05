@@ -202,6 +202,51 @@ class BrowserPage(composeRule: AndroidComposeTestRule<HomeActivityIntentTestRule
         return clickPageContent("Continue to HTTP Site")
     }
 
+    /**
+     * Type a username/password into the web login form. Submitting the form GETs to itself, so after
+     * the first save the page reloads; typing the next set of credentials while that reload is still in
+     * flight silently loses them (and the following submit then re-saves the previous login instead of
+     * the new one). Each attempt therefore waits for the reloaded form to be present, enters the
+     * credentials, and asserts the username actually stuck — re-entering if the reload wiped it.
+     * Mirrors the legacy setPageObjectText (waitForExists + retry-with-refresh) sequence.
+     */
+    fun setLoginFormCredentials(username: String, password: String, attempts: Int = 4): BrowserPage {
+        for (attempt in 1..attempts) {
+            mozVerify(BrowserPageSelectors.USERNAME_WEB_FIELD, timeout = waitingTimeLong)
+            mozClearAndEnterText(username, BrowserPageSelectors.USERNAME_WEB_FIELD)
+            mozClearAndEnterText(password, BrowserPageSelectors.PASSWORD_WEB_FIELD)
+            try {
+                mozVerify(BrowserPageSelectors.PREFILLED_USERNAME(username), timeout = 3_000)
+                return this
+            } catch (e: AssertionError) {
+                if (attempt == attempts) throw e
+                Log.i("BrowserPage", "setLoginFormCredentials: username '$username' didn't stick on attempt $attempt, re-entering")
+            }
+        }
+        return this
+    }
+
+    /**
+     * Open the saved-login suggestions bar over the web form's username field. Focusing the field is
+     * what summons the bar, but the first focus sometimes autofills the field directly without ever
+     * showing it, so we re-focus and retry. Mirrors the legacy BrowserRobot.clickSuggestedLoginsButton,
+     * which re-clicked the username field for the same reason.
+     */
+    fun clickSuggestedLoginsBar(attempts: Int = 3): BrowserPage {
+        for (attempt in 1..attempts) {
+            mozClick(BrowserPageSelectors.USERNAME_WEB_FIELD)
+            try {
+                mozVerify(BrowserPageSelectors.SUGGESTED_LOGINS_BAR, timeout = 3_000)
+                mozClick(BrowserPageSelectors.SUGGESTED_LOGINS_BAR)
+                return this
+            } catch (e: AssertionError) {
+                if (attempt == attempts) throw e
+                Log.i("BrowserPage", "clickSuggestedLoginsBar: bar absent on attempt $attempt, re-focusing username")
+            }
+        }
+        return this
+    }
+
     fun verifyUrl(url: String): BrowserPage {
         val expectedText = url.replace("http://", "")
         val textMatcher = hasText(expectedText, substring = true, ignoreCase = true)
