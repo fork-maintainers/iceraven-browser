@@ -4,7 +4,6 @@
 
 package org.mozilla.fenix.ext
 
-import androidx.annotation.VisibleForTesting
 import org.mozilla.fenix.home.recenttabs.RecentTab
 
 /**
@@ -12,7 +11,6 @@ import org.mozilla.fenix.home.recenttabs.RecentTab
  *
  * @param tab [RecentTab] to remove from the list
  */
-@VisibleForTesting
 internal fun List<RecentTab>.filterOutTab(tab: RecentTab): List<RecentTab> = filterNot {
     it is RecentTab.Tab && tab is RecentTab.Tab && it.state.id == tab.state.id
 }

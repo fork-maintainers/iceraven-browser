@@ -119,8 +119,9 @@ class Settings(
 
         /**
          * The minimum number a search groups should contain.
+         *
+         * Mutable so that tests can lower the threshold.
          */
-        @VisibleForTesting
         internal var searchGroupMinimumSites: Int = 2
 
         private fun Action.toInt() = when (this) {
