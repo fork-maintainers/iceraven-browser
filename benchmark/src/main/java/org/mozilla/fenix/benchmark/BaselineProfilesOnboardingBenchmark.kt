@@ -18,6 +18,7 @@ import org.mozilla.fenix.benchmark.utils.TARGET_PACKAGE
 import org.mozilla.fenix.benchmark.utils.clearPackageData
 import org.mozilla.fenix.benchmark.utils.measureRepeatedDefault
 import org.mozilla.fenix.benchmark.utils.onboardingJourney
+import org.mozilla.fenix.benchmark.utils.revokeNotificationPermission
 
 /**
  * This test class benchmarks the speed of completing onboarding. Run this benchmark to verify how effective
@@ -67,6 +68,7 @@ class BaselineProfilesOnboardingBenchmark {
             setupBlock = {
                 pressHome()
                 device.clearPackageData(packageName = packageName)
+                device.revokeNotificationPermission(packageName = packageName)
                 killProcess()
             },
         ) {
