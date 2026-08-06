@@ -1043,6 +1043,8 @@
   <string name="customize_toggle_pocket_sponsored">Sponsore ferhalen</string>
   <!-- Title for the opening wallpaper settings screen -->
   <string name="customize_wallpapers">Eftergrûnen</string>
+  <!-- Label for the menu item that opens the customize homepage settings screen. -->
+  <string name="browser_menu_customize_homepage">Startside oanpasse</string>
   <!-- Label for the menu item that opens the wallpaper settings screen. -->
   <string name="browser_menu_change_wallpaper">Eftergrûn wizigje</string>
   <!-- Title for the customize home screen section with sponsored shortcuts. -->
@@ -1710,6 +1712,8 @@
   <string name="tab_group_three_dot_button_content_description">Mear opsjes</string>
   <!-- Text shown on the edit button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_edit">Bewurkje</string>
+  <!-- Text shown on the ungroup button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_ungroup">Degroeperje</string>
   <!-- Text shown on the delete button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_delete">Fuortsmite</string>
   <!-- Text shown on the close button for a tab group on the three dot menu -->
@@ -2425,6 +2429,10 @@
   <string name="sync_sign_in">Oanmelde by Sync</string>
   <!-- An option from the share dialog to send link to all other sync devices -->
   <string name="sync_send_to_all">Ferstjoere nei alle apparaten</string>
+  <!-- Text displayed when no other sync devices are available for link sharing -->
+  <string name="sync_no_devices_available">Gjin apparaten beskikber</string>
+  <!-- Text displayed when no other sync devices are available for link sharing. -->
+  <string name="sync_no_devices_available_description">Alle apparaten dy’t oanmeld binne en mei dizze account syngronisearje, ferskine hjir.</string>
   <!-- An option from the share dialog to reconnect to sync -->
   <string name="sync_reconnect">Opnij ferbine mei Sync</string>
   <!-- Text displayed when sync is offline and cannot be accessed -->
@@ -4751,6 +4759,16 @@
   <string name="lens_camera_mode_qr">QR-scanner</string>
   <!-- Toast shown when the user picks an image from the gallery in QR mode but no QR code is found in it -->
   <string name="lens_camera_qr_no_code_found">Gjin QR-koade fûn yn ôfbylding</string>
+  <!-- Title of the bottom sheet shown the first time the user opens the Google Lens camera screen -->
+  <string name="lens_opt_out_title">Fyn it mei Google Lens</string>
+  <!-- Description of the bottom sheet shown the first time the user opens the Google Lens camera screen -->
+  <string name="lens_opt_out_description">Kies in ôfbylding of brûk jo kamera om mei Google Lens resultaten op te heljen.</string>
+  <!-- Text of the link in the first-run Google Lens bottom sheet that opens the Search settings page -->
+  <string name="lens_opt_out_settings_link">Google Lens-ynstellingen</string>
+  <!-- Button in the first-run Google Lens bottom sheet that dismisses it and starts the camera -->
+  <string name="lens_opt_out_try_it_now_button">No probearje</string>
+  <!-- Button in the first-run Google Lens bottom sheet that leaves Google Lens without using it -->
+  <string name="lens_opt_out_not_now_button">No net</string>
   <!--
     Firefox Labs
 

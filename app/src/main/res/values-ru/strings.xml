@@ -1044,6 +1044,8 @@
   <string name="customize_toggle_pocket_sponsored">Статьи спонсоров</string>
   <!-- Title for the opening wallpaper settings screen -->
   <string name="customize_wallpapers">Обои</string>
+  <!-- Label for the menu item that opens the customize homepage settings screen. -->
+  <string name="browser_menu_customize_homepage">Настройка домашней страницы</string>
   <!-- Label for the menu item that opens the wallpaper settings screen. -->
   <string name="browser_menu_change_wallpaper">Сменить обои</string>
   <!-- Title for the customize home screen section with sponsored shortcuts. -->
@@ -4773,6 +4775,16 @@
   <string name="lens_camera_mode_qr">Сканер QR-кодов</string>
   <!-- Toast shown when the user picks an image from the gallery in QR mode but no QR code is found in it -->
   <string name="lens_camera_qr_no_code_found">В изображении не найден QR-код</string>
+  <!-- Title of the bottom sheet shown the first time the user opens the Google Lens camera screen -->
+  <string name="lens_opt_out_title">Найдите её с помощью Google Lens</string>
+  <!-- Description of the bottom sheet shown the first time the user opens the Google Lens camera screen -->
+  <string name="lens_opt_out_description">Выберите изображение или используйте свою камеру, чтобы получить результаты с Google Lens.</string>
+  <!-- Text of the link in the first-run Google Lens bottom sheet that opens the Search settings page -->
+  <string name="lens_opt_out_settings_link">Параметры Google Lens</string>
+  <!-- Button in the first-run Google Lens bottom sheet that dismisses it and starts the camera -->
+  <string name="lens_opt_out_try_it_now_button">Попробовать сейчас</string>
+  <!-- Button in the first-run Google Lens bottom sheet that leaves Google Lens without using it -->
+  <string name="lens_opt_out_not_now_button">Не сейчас</string>
   <!--
     Firefox Labs
 

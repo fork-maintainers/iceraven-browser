@@ -1045,6 +1045,8 @@
   <string name="customize_toggle_pocket_sponsored">Sponserowane stawizny</string>
   <!-- Title for the opening wallpaper settings screen -->
   <string name="customize_wallpapers">Pozadkowe wobrazy</string>
+  <!-- Label for the menu item that opens the customize homepage settings screen. -->
+  <string name="browser_menu_customize_homepage">Startowu stronu přiměrić</string>
   <!-- Label for the menu item that opens the wallpaper settings screen. -->
   <string name="browser_menu_change_wallpaper">Pozadkowy wobraz změnić</string>
   <!-- Title for the customize home screen section with sponsored shortcuts. -->
@@ -4789,6 +4791,16 @@
   <string name="lens_camera_mode_qr">QR-skener</string>
   <!-- Toast shown when the user picks an image from the gallery in QR mode but no QR code is found in it -->
   <string name="lens_camera_qr_no_code_found">Žadyn QR-kod we wobrazu namakany</string>
+  <!-- Title of the bottom sheet shown the first time the user opens the Google Lens camera screen -->
+  <string name="lens_opt_out_title">Namakajće jón z Google Lens</string>
+  <!-- Description of the bottom sheet shown the first time the user opens the Google Lens camera screen -->
+  <string name="lens_opt_out_description">Wubjerće wobraz abo wužiwajće swoju kameru, zo byšće wuslědki z Google Lens dóstał.</string>
+  <!-- Text of the link in the first-run Google Lens bottom sheet that opens the Search settings page -->
+  <string name="lens_opt_out_settings_link">Nastajenja Google Lens</string>
+  <!-- Button in the first-run Google Lens bottom sheet that dismisses it and starts the camera -->
+  <string name="lens_opt_out_try_it_now_button">Spytajće to nětko</string>
+  <!-- Button in the first-run Google Lens bottom sheet that leaves Google Lens without using it -->
+  <string name="lens_opt_out_not_now_button">Nic nětko</string>
   <!--
     Firefox Labs
 

@@ -1043,6 +1043,8 @@
   <string name="customize_toggle_pocket_sponsored">قوللىغان ھېكايىلەر</string>
   <!-- Title for the opening wallpaper settings screen -->
   <string name="customize_wallpapers">تام قەغىزى</string>
+  <!-- Label for the menu item that opens the customize homepage settings screen. -->
+  <string name="browser_menu_customize_homepage">باش بەتنى خاسلاشتۇر</string>
   <!-- Label for the menu item that opens the wallpaper settings screen. -->
   <string name="browser_menu_change_wallpaper">تام قەغەز ئۆزگەرت</string>
   <!-- Title for the customize home screen section with sponsored shortcuts. -->
@@ -1710,10 +1712,22 @@
   <string name="tab_group_three_dot_button_content_description">تېخىمۇ كۆپ تاللانما</string>
   <!-- Text shown on the edit button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_edit">تەھرىر</string>
+  <!-- Text shown on the ungroup button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_ungroup">گۇرۇپپىلىما</string>
   <!-- Text shown on the delete button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_delete">ئۆچۈر</string>
   <!-- Text shown on the close button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_close">ياپ</string>
+  <!-- Title for the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_title">بەتكۈچ گۇرۇپپىسىنى ئۆچۈرەمدۇ؟</string>
+  <!-- Text shown in the body of the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_body">بەتكۈچلەر بۇ ئۈسكۈنىدە ئوچۇق تۇرىدۇ ئەمما گۇرۇپپا ئۆچۈرۈلىدۇ.</string>
+  <!-- Text shown on the Don't Ask Again checkbox button in the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_dont_ask_again">قايتا سورىما</string>
+  <!-- Text shown on the confirm button in the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_confirm">گۇرۇپپىلىما</string>
+  <!-- Text shown on the cancel button in the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_cancel">ۋاز كەچ</string>
   <!--
     Color labels for tab groups, used for accessibility and selection UI.
 
@@ -2415,6 +2429,10 @@
   <string name="sync_sign_in">قەدەمداشلاشتا تىزىمغا كىرىڭ</string>
   <!-- An option from the share dialog to send link to all other sync devices -->
   <string name="sync_send_to_all">ھەممە ئۈسكۈنىگە يوللا</string>
+  <!-- Text displayed when no other sync devices are available for link sharing -->
+  <string name="sync_no_devices_available">ھېچقانداق ئۈسكۈنە يوق</string>
+  <!-- Text displayed when no other sync devices are available for link sharing. -->
+  <string name="sync_no_devices_available_description">بۇ ھېسابتا ھەر قانداق ئۈسكۈنە تىزىمغا كىرسە ۋە قەدەمداشلىسا بۇ جايدا كۆرۈنىدۇ.</string>
   <!-- An option from the share dialog to reconnect to sync -->
   <string name="sync_reconnect">قەدەمداشقا قايتا باغلىنىدۇ</string>
   <!-- Text displayed when sync is offline and cannot be accessed -->
@@ -3164,6 +3182,14 @@
   <string name="ip_protection_location_unavailable" tools:ignore="UnusedResources">ئورۇننى ئىشلەتكىلى بولمايدۇ. باشقا ئورۇننى تاللاڭ.</string>
   <!-- Snackbar (in-app pop-up notification) text shown when the previously selected browser VPN location is unavailable and the recommended location was used instead. -->
   <string name="ip_protection_location_unavailable_recommended_snackbar" tools:ignore="UnusedResources">تاللىغان VPN نى ئىشلەتكىلى بولمايدۇ. تەۋسىيە قىلىنغان ئورۇنغا باغلاندى.</string>
+  <!-- Title for the card shown to the user when we are unable to fetch server locations -->
+  <string name="ip_protection_locations_unavailable_title">ئورۇن ئۇچۇرى يوق</string>
+  <!-- Description for the card shown to the user when we are unable to fetch server locations -->
+  <string name="ip_protection_locations_unavailable_description">تەۋسىيە قىلىنغان ئورۇنغا ئالماشتى.</string>
+  <!-- Title for the browser VPN location selection screen (displayed in the app bar) -->
+  <string name="ip_protection_locations_title">VPN ئورنى تاللىنىدۇ</string>
+  <!-- Content description for the browser VPN location selection screen top bar back button -->
+  <string name="ip_protection_locations_navigate_back_button_content_description">كەينىگە قايت</string>
   <!-- Title for the card shown to the user when we are unable to fetch server locations -->
   <string name="ip_protection_location_unavailable_title" tools:ignore="UnusedResources">ئالدىنقى ئورۇننى ئىشلەتكىلى بولمايدۇ</string>
   <!-- Description for the card shown to the user when we are unable to fetch server locations -->
@@ -4510,6 +4536,10 @@
   <string name="sports_widget_final">ھەل قىلغۇچ مۇسابىقە</string>
   <!-- Round name shown on the sports widget for the bronze final stage in the soccer tournament. -->
   <string name="sports_widget_bronze_final">مىس مېدال ھەل قىلغۇچ مۇسابىقىسى</string>
+  <!-- Sports widget error card message shown when match data fails to load. -->
+  <string name="sports_widget_error_load_failed" tools:ignore="UnusedResources">ھازىر مۇسابىقە ئۇچۇرىنى ئىشلەتكىلى بولمايدۇ. بىر قانچە مىنۇتتىن كېيىن قايتا يېڭىلاڭ.</string>
+  <!-- Sports widget error card message shown when the network connection is interrupted and live updates pause. -->
+  <string name="sports_widget_error_connection_interrupted" tools:ignore="UnusedResources">باغلىنىش ئۈزۈلدى — شۇئان يېڭىلاش ۋاقىتلىق توختىتىلدى.</string>
   <!-- Sports widget action label to refresh match data after an error. -->
   <string name="sports_widget_error_refresh">يېڭىلا</string>
   <!-- Sports widget group stage label for group A in the soccer tournament. -->
@@ -4542,6 +4572,12 @@
   <string name="sports_widget_view_match_details" tools:ignore="UnusedResources">مۇسابىقە تەپسىلاتىنى كۆرسەت</string>
   <!-- Sports widget section header for related soccer matches in the same group. -->
   <string name="sports_widget_related_matches" tools:ignore="UnusedResources">مۇناسىۋەتلىك مۇسابىقە</string>
+  <!-- Sports widget section header for a list of upcoming soccer matches that have not yet started. -->
+  <string name="sports_widget_upcoming" tools:ignore="UnusedResources">يېقىنلىشىۋاتقىنى</string>
+  <!-- Sports widget match status suffix appended to match scores (e.g., "3 - 2 (Full time)") to indicate the match has been completed. -->
+  <string name="sports_widget_match_full_time_suffix">(مۇسابىقە ئاخىرى)</string>
+  <!-- Sports widget match status to indicate the match has been completed. -->
+  <string name="sports_widget_match_full_time_2">مۇسابىقە ئاخىرى</string>
   <!--
     Sports widget card title encouraging the user to follow the soccer tournament. “Keep tabs on” is an informal expression
     meaning to stay updated on or regularly follow something (in this case, World Cup matches and updates).
@@ -4550,24 +4586,109 @@
     or tracking in a technical sense; the meaning is about staying informed.
   -->
   <string name="sports_widget_card_title">دۇنيا لوڭقىسى مۇسابىقە ئۇچۇرى</string>
+  <!-- Sports widget card description shown below the title on the homepage entry point. -->
+  <string name="sports_widget_card_description">شۇئان مۇسابىقە يېڭىلانما ئۇچۇرى ۋە باشقىلارغا ئېرىشىدۇ.</string>
   <!-- Sports widget menu item to change the selected team. -->
   <string name="sports_widget_change_team">كوماندا ئالماشتۇر</string>
+  <!-- Sports widget menu item to get a custom wallpaper for the widget. -->
+  <string name="sports_widget_get_custom_wallpaper">ئىختىيارىي تام قەغەزگە ئېرىش</string>
   <!-- Sports widget menu item to remove the widget from the homepage. -->
   <string name="sports_widget_remove">چىقىرىۋەت</string>
+  <!-- Sports widget card title shown after a team is eliminated, asking if the user still wants to continue following the soccer tournament. -->
+  <string name="sports_widget_still_want_to_follow">يەنىلا ئەگىشىشنى داۋملاشتۇرامدۇ؟</string>
+  <!-- Sports widget card description shown after a team is eliminated, suggesting to choose another team. -->
+  <string name="sports_widget_choose_another_team">باشقا پۇتبول كوماندىسىنى تاللاپ دۇنيا لوڭقىسى پۇتبول مۇسابىقىسىنىڭ ئەڭ يېڭى خەۋىرىگە ئەگىشىدۇ.</string>
   <!-- Sports widget button label to follow another team after the current team is eliminated. -->
   <string name="sports_widget_follow_another_team">باشقا كوماندىغا ئەگەش</string>
+  <!-- Sports widget card title shown before the soccer tournament begins on top of a timer that is counting down. -->
+  <string name="sports_widget_countdown_to_world_cup">دۇنيا لوڭقىسى پۇتبول مۇسابىقىسى باشلىنىش ۋاقتى</string>
+  <!-- Sports widget button label that navigates the user to the full soccer tournament match schedule. -->
+  <string name="sports_widget_view_schedule">كۈنتەرتىپنى كۆرسەت</string>
   <!-- Sports widget button label that dismisses the step of choosing a team to follow. -->
   <string name="sports_widget_skip">ئاتلا</string>
+  <!-- Sports widget match status label shown during halftime of a match. -->
+  <string name="sports_widget_halftime" tools:ignore="UnusedResources">ئوتتۇرا مەيدان دەم ئېلىش</string>
+  <!-- Sports widget match status label shown during extra time of a match. -->
+  <string name="sports_widget_extra_time">ئۇزارتىلغان ۋاقىت</string>
+  <!-- Sports widget match status label shown during penalties of a match. -->
+  <string name="sports_widget_penalties">نۇقتا توپ</string>
   <!--
     Sports widget countdown label for days. D is short for Day. The layout only allows for 1–2 characters:
     if there is an equivalent single character for your language, use that (e.g. T for German).
     Your translation will be automatically truncated at 2 characters to avoid layout issues.
   -->
   <string name="sports_widget_countdown_days">ك</string>
+  <!--
+    Sports widget countdown pill abbreviated label for hours. H is short for Hour. The layout only allows for 1–2 characters:
+    if there is an equivalent single character for your language, use that (e.g. S for German).
+    Your translation will be automatically truncated at 2 characters to avoid layout issues.
+  -->
+  <string name="sports_widget_countdown_hours">س</string>
+  <!--
+    Sports widget countdown pill abbreviated label for minutes. M is short for Minute. The layout only allows for 1–2 characters:
+    if there is an equivalent single character for your language, use that.
+    Your translation will be automatically truncated at 2 characters to avoid layout issues
+  -->
+  <string name="sports_widget_countdown_minutes">م</string>
+  <!-- Content description (for accessibility, not displayed) for the close button on the sports widget team / country selector. -->
+  <string name="sports_widget_close_team_selection_sheet_content_description">كوماندا تاللاش جەدۋىلىنى ياپىدۇ</string>
   <!-- Content description (for accessibility, not displayed) for the close button on the sports widget card. -->
   <string name="sports_widget_close_content_description">ياپ</string>
   <!-- Content description (for accessibility, not displayed) for the overflow (more options) menu button on the sports widget card. -->
   <string name="sports_widget_more_options_content_description">تېخىمۇ كۆپ تاللانما</string>
+  <!--
+    Content description (for accessibility, not displayed) announcing the time remaining until the soccer tournament kickoff.
+    %1$d is the number of days, %2$d is the number of hours, and %3$d is the number of minutes.
+  -->
+  <string name="sports_widget_countdown_remaining_content_description">قالغان ۋاقىت. كۈن: %1$d. سائەت: %2$d. مىنۇت: %3$d.</string>
+  <!-- Content description (for accessibility, not displayed)  for the action that navigates to the World Cup website. -->
+  <string name="sports_widget_go_to_world_cup_site_content_description" tools:ignore="UnusedResources">دۇنيا لوڭقىسى تور بېكىتىگە يۆتكىلىدۇ</string>
+  <!--
+    Content description (for accessibility, not displayed)  announcing an upcoming soccer match.
+    %1$s is the home team name, %2$s is the away team name, %3$s is the match date, %4$s is the kickoff time.
+  -->
+  <string name="sports_widget_upcoming_match_content_description">كېلەر قېتىملىق: %1$s - %2$s، %3$s - %4$s</string>
+  <!--
+    Content description (for accessibility, not displayed) announcing a soccer match.
+    %1$s is the home team name, %2$s is the away team name, %3$s is trailing context
+    (e.g. formatted score "1 - 2 (Full time)", upcoming match info "Jun 19 5:00 PM",
+    or a match status like "Full time").
+  -->
+  <string name="sports_widget_match_content_description">%1$s - %2$s، %3$s</string>
+  <!--
+    Content description (for accessibility, not displayed)  used for the sports widget card header announcing a live match for a group or stage.
+    %s is the soccer tournament group name or stage (e.g. Group A represented by sports_widget_group_a, Round of 32 represented by sports_widget_round_of_32,
+    or Final represented by sports_widget_final).
+  -->
+  <string name="sports_widget_live_game_content_description">%s، نەق مەيدان مۇسابىقە</string>
+  <!--
+    Content description (for accessibility, not displayed) announcing a live score.
+    %1$s is the home team name, %2$d is the home team score, %3$s is the away team name, %4$d is the away team score,
+    and %5$s is the match elapsed time (e.g. 72 minutes).
+  -->
+  <string name="sports_widget_live_score_content_description">%1$s %2$d، %3$s %4$d، %5$s، شۇئان</string>
+  <!--
+    Content description (for accessibility, not displayed) announcing the elapsed minutes of a live match.
+    %1$s is the clock value, which may be a plain number (e.g. "72") or include extra time (e.g. "90+3").
+  -->
+  <string name="sports_widget_match_elapsed_minutes">مۇسابىقە ۋاقتى(مىنۇت): %1$s</string>
+  <!--
+    Content description (for accessibility, not displayed) for a paginated item.
+    %1$s is the soccer tournament group name or stage (e.g. Group A represented by sports_widget_group_a, Round of 32 represented by sports_widget_round_of_32),
+    %2$d is the current page number, and %3$d is the total number of pages.
+  -->
+  <string name="sports_widget_page_position_content_description">%1$s، %2$d/%3$d بەت</string>
+  <!--
+    Content description (for accessibility, not displayed) for a page within the World Cup final results carousel.
+    %1$d is the current page number, and %2$d is the total number of pages.
+  -->
+  <string name="sports_widget_final_results_page_content_description" tools:ignore="UnusedResources">دۇنيا لوڭقىسى ھەل قىلغۇچ مۇسابىقىسىنىڭ نەتىجىسى، %1$d/%2$d بەت</string>
+  <!-- Content description (for accessibility, not displayed) for the World Cup final results page. -->
+  <string name="sports_widget_final_results_content_description">دۇنيا لوڭقىسى ھەل قىلغۇچ مۇسابىقىسىنىڭ نەتىجىسى</string>
+  <!-- Content description (for accessibility, not displayed) for the remove button that removes the sports widget from the homepage. -->
+  <string name="sports_widget_remove_content_description" tools:ignore="UnusedResources">دۇنيا لوڭقىسىنى باش بەتتىن چىقىرىۋەت</string>
+  <!-- Title shown on the sports widget immediately after the user has followed a team. %s is the selected team (e.g., "USA"). -->
+  <string name="sports_widget_team_followed_title">ئەگىشىۋاتقانلار: %s</string>
   <!-- Sports widget error card description shown when the user is offline. -->
   <string name="sports_widget_error_connection_offline_description">ئىنتېرنېت باغلىنىشىڭىزنى تەكشۈرۈپ ئاندىن قايتا سىناڭ.</string>
   <!-- Sports widget general group stage label in the soccer tournament. -->
@@ -4576,6 +4697,8 @@
   <string name="sports_widget_error_load_failed_title">ھازىرچە مۇسابىقە ئۇچۇرى يوق.</string>
   <!-- Sports widget error card description shown when match data fails to load. -->
   <string name="sports_widget_error_load_failed_description">بىر نەچچە مىنۇتتىن كېيىن يېڭىلاپ كۆرۈڭ.</string>
+  <!-- Content description (for accessibility, not displayed) for teams which have not yet been determined in the match schedule. -->
+  <string name="sports_widget_team_to_be_determined">كوماندا بېكىتىلىدۇ</string>
   <!-- ==== End of Terms of use popup prompt. ==== -->
 
   <!--

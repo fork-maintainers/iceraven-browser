@@ -616,6 +616,8 @@
   <string name="nova_onboarding_theme_selection_dark_label" tools:ignore="UnusedResources">Q\'equ\'m</string>
   <!-- Sync onboarding title. -->
   <string name="nova_onboarding_sync_title">Tasamajij chanin akuchi\' xya\' wi kan</string>
+  <!-- Sync onboarding subtitle. -->
+  <string name="nova_onboarding_sync_subtitle">Ke\'ak\'waj taq yaketal, ewan taq tzij chuqa\' ch\'aqa\' chik pa xab\'achike awokisaxel. Ri ichinan taq awetamab\'al jikïl e k\'o chuqa\' echajin rik\'in ewan rusik\'ixik.</string>
   <!-- Sync onboarding button. -->
   <string name="nova_onboarding_sync_button">Tichap komonïk</string>
   <!-- Marketing onboarding title. -->
@@ -625,6 +627,39 @@
     %1$s is replaced by an active link, using nova_onboarding_marketing_body_link_text as text (“How we use the data”).
   -->
   <string name="nova_onboarding_marketing_body" tools:ignore="BrandUsage,UnusedResources">Kakomonin kik\'in rachsamajel rumarkentin Mozilla achike rub\'eyal xawïl Firefox chuqa\' achi\'el rub\'eyal nawokisaj. Re taq tzij re\' majub\'ey xkek\'ayïx. %1$s</string>
+  <!-- Marketing onboarding body. 'Firefox' and 'Mozilla' are intentionally hardcoded. -->
+  <string name="nova_onboarding_marketing_body_2" tools:ignore="BrandUsage">Kakomonin kik\'in rachsamajel rumarkentin Mozilla achike rub\'eyal xawïl Firefox chuqa\' achi\'el rub\'eyal nawokisaj. Re taq tzij re\' majub\'ey xkek\'ayïx.</string>
+  <!-- Marketing onboarding body. 'Firefox' and 'Mozilla' are intentionally hardcoded. -->
+  <string name="nova_onboarding_marketing_body_3" tools:ignore="BrandUsage,UnusedResources">Yatikïr yojato\' richin yojapon kik\'in ch\'aqa\' chik winaqi\', akuchi\' naya\' q\'ij chi re ri Mozilla chi tuya\' rutzijol chi ke ri k\'amab\'ey akuchi\' niya\' rutzijol chi ri Firefox awokisaxel.</string>
+  <!--
+    Marketing onboarding body. 'Firefox' and 'Mozilla' are intentionally hardcoded.
+    “Platform you came from” refers to the external app, website, store, campaign, or other source that directed the user to Firefox.
+  -->
+  <string name="nova_onboarding_marketing_body_4" tools:ignore="BrandUsage,UnusedResources">Yatikïr yojato\' richin yojapon kik\'in ch\'aqa\' chik winaqi\', akuchi\' naya\' q\'ij chi re ri Mozilla chi tuya\' rutzijol chi ke ri k\'amab\'ey akuchi\' atpetenäq chi nawokisaj Firefox.</string>
+  <!--
+    Marketing onboarding body. 'Firefox' and 'Mozilla' are intentionally hardcoded.
+    “Platform you came from” refers to the external app, website, store, campaign, or other source that directed the user to Firefox.
+  -->
+  <string name="nova_onboarding_marketing_body_5" tools:ignore="BrandUsage,UnusedResources">Kojato\' richin yojapon kik\'in ch\'aqa\' chik winaqi\', akuchi\' naya\' q\'ij chi re ri Mozilla chi tuya\' rutzijol chi ke ri k\'amab\'ey akuchi\' atpetenäq chi nawokisaj Firefox.</string>
+  <!--
+    Marketing onboarding body. 'Firefox' and 'Mozilla' are intentionally hardcoded.
+    “Platform you came from” refers to the external app, website, store, campaign, or other source that directed the user to Firefox.
+    %1$s is replaced by an active link, using nova_onboarding_marketing_body_link_text as text (“How we use the data”).
+  -->
+  <string name="nova_onboarding_marketing_body_6" tools:ignore="BrandUsage,UnusedResources">Kojato\' richin yojapon kik\'in ch\'aqa\' chik winaqi\', akuchi\' naya\' q\'ij chi re ri Mozilla chi tuya\' rutzijol chi ke ri k\'amab\'ey akuchi\' atpetenäq chi nawokisaj Firefox. %1$s</string>
+  <!--
+    Marketing onboarding body. 'Firefox' and 'Mozilla' are intentionally hardcoded.
+    “Platform you came from” refers to the external app, website, store, campaign, or other source that directed the user to Firefox.
+    %1$s is replaced by an active link, using nova_onboarding_marketing_body_link_text_1 as text (“Learn More”).
+  -->
+  <string name="nova_onboarding_marketing_body_7" tools:ignore="BrandUsage">Yatikïr yojato\' richin yojapon kik\'in ch\'aqa\' chik winaqi\', akuchi\' naya\' q\'ij chi re ri Mozilla chi tuya\' rutzijol chi ke ri k\'amab\'ey akuchi\' atpetenäq chi nawokisaj Firefox. %1$s</string>
+  <!-- Marketing onboarding additional body text. 'Firefox' is intentionally hardcoded. -->
+  <string name="nova_onboarding_marketing_body_line_two" tools:ignore="BrandUsage">Firefox nuna\' ri\' chi jun ajyonil chuqa\' nito\'on chi jantape\' jaqäl ri ajk\'am chi kiwäch ri taq ajteknolojiy monopolyo.</string>
+  <!--
+    Marketing onboarding additional body text. 'Firefox' is intentionally hardcoded.
+    “Allowing” refers to the main button “Allow and Continue”; the ask for the user is to allow communicating back to the platform.
+  -->
+  <string name="nova_onboarding_marketing_body_line_three" tools:ignore="BrandUsage">Tab\'ana\' utzil taqu\' richin yojato\' chi ri Firefox nich\'akon.</string>
   <!-- Marketing onboarding body link text. -->
   <string name="nova_onboarding_marketing_body_link_text">Atux rub\'eyal yeqokisaj ri taq tzij</string>
   <!-- Marketing onboarding body link text. -->
@@ -639,12 +674,43 @@
   <string name="nova_onboarding_marketing_secondary_button_text_2">Mani</string>
   <!-- Notifications onboarding title. 'Firefox' is intentionally hardcoded. -->
   <string name="nova_onboarding_notifications_title" tools:ignore="BrandUsage,UnusedResources">Ri taq rutzijol yatkito\' yalan at jikil pa Firefox</string>
+  <!-- Notifications onboarding subtitle. 'Firefox' is intentionally hardcoded. -->
+  <string name="nova_onboarding_notifications_subtitle" tools:ignore="BrandUsage,UnusedResources">Tawila\' ri ruk\'isib\'äl ichinan taq rusamajib\'al Firefox richin awetaman rub\'eyal nachajij awi\' ri wakami.</string>
   <!-- Notifications onboarding button. -->
   <string name="nova_onboarding_notifications_button">Ketzij taq rutzijol</string>
+  <!-- "Add search widget" onboarding title. -->
+  <string name="nova_onboarding_add_search_widget_title">Tab\'ana\' chi ri jujun taq kanoxïk junelïk e\'ichinan</string>
+  <!-- "Add search widget" onboarding subtitle. 'Firefox' is intentionally hardcoded. -->
+  <string name="nova_onboarding_add_search_widget_subtitle" tools:ignore="BrandUsage">Tatikirisaj ri kanoxïk pa ri ruwäch rutikirib\'al awoyonib\'al chuqa\' tijike\' chawäch chi ri yonil taq ruchajinik Firefox nikito\' awij.</string>
   <!-- "Add search widget" onboarding button. 'Firefox' is intentionally hardcoded. -->
   <string name="nova_onboarding_add_search_widget_button" tools:ignore="BrandUsage">Titz\'aqatisäx ruwidget Firefox</string>
+  <!-- Customize prompt onboarding title. -->
+  <string name="nova_onboarding_customize_prompt_title" tools:ignore="UnusedResources">Man k\'ayew ta richin nichinäx chuqa\' yalan ichinan rik\'in jujun taq chapoj</string>
+  <plurals name="nova_onboarding_customize_prompt_body" tools:ignore="UnusedResources">
+    <!--
+      Customize prompt onboarding body.
+      %1$s is replaced by the product name (for example "Firefox"),
+      %2$,d is replaced by the number of trackers blocked. The comma represents the thousand
+      separator (e.g. 1,000 in English), and it will automatically use the correct character
+      for your locale (don't change or remove it).
+    -->
+    <item quantity="one">%1$s xuq\'ät %2$,d ojqanel toq okinäq pan ajk\'am.</item>
+    <item quantity="other">%1$s xeruq\'ät %2$,d ojqanela\' toq okinäq pan ajk\'am.</item>
+  </plurals>
+  <!-- Customize prompt onboarding positive button. -->
+  <string name="nova_onboarding_customize_prompt_positive_button" tools:ignore="UnusedResources">Titikirisäx richinaxik</string>
+  <!-- App icon onboarding title. -->
+  <string name="nova_onboarding_app_icon_prompt_title" tools:ignore="UnusedResources">Tacha\' jun ruwäch ichinan chokoy</string>
+  <!-- App icon onboarding body. -->
+  <string name="nova_onboarding_app_icon_prompt_body" tools:ignore="UnusedResources">Tab\'ana\' chi ri rutikirib\'al awäch nawichinaj.</string>
   <!-- ==== End of Project "Nova" onboarding strings ==== -->
 
+  <!--
+    Widget Picker
+
+    Widget description for widget picker screen
+  -->
+  <string name="widget_picket_description">Titikirisäx jun anin kanoxïk</string>
   <!--
     Search Widget
 
@@ -667,6 +733,12 @@
   <string name="preferences_category_general">Chijun</string>
   <!-- Preference category for all links about Fenix -->
   <string name="preferences_category_about">Tawetamaj qawäch</string>
+  <!-- Preference category for settings related to changing the default search engine -->
+  <string name="preferences_category_select_default_search_engine_2">Kanob\'äl k\'o wi pa ri relik okem</string>
+  <!-- Preference category for settings related to changing the private browsing search engine -->
+  <string name="preferences_category_select_private_search_engine">Kanob\'äl ichinan pa ri relik okem</string>
+  <!-- Option to set the private browsing mode to use the normal default search engine -->
+  <string name="search_engine_use_default">Tokisäx ri kanob\'äl pa ri relik okem</string>
   <!-- Preference for settings related to managing search shortcuts for the quick search menu -->
   <string name="preferences_manage_search_shortcuts_2">Ke\'asamajij cha\'el taq kanob\'äl</string>
   <!-- Summary for preference for settings related to managing search shortcuts for the quick search menu -->
@@ -679,6 +751,8 @@
   <string name="preferences_search">Tikanöx</string>
   <!-- Preference for settings related to Search engines -->
   <string name="preferences_search_engines">Ttaq kanob\'äl</string>
+  <!-- Settings item to add a search widget on the device's homescreen. -->
+  <string name="preferences_add_search_widget_from_settings">Ruwidget rutikirib\'al wachaj</string>
   <!-- Preference for settings related to Search engines suggestions -->
   <string name="preferences_search_engines_suggestions">Chilab\'en taq kanob\'äl</string>
   <!-- Preference Category for settings related to Search address bar -->
@@ -714,6 +788,10 @@
   <string name="preferences_add_private_browsing_shortcut">Titz\'aqatisäx choj okem pa ri ichinan okem pa k\'amaya\'l</string>
   <!-- Preference for enabling "HTTPS-Only" mode -->
   <string name="preferences_https_only_title">HTTPS-Only B\'anikil</string>
+  <!-- Preference title for using the screen lock to hide tabs in private browsing -->
+  <string name="preferences_pbm_lock_screen_title">Tawokisaj ri q\'atoj ruwäch richin ye\'awewaj taq ruwi\' pa ri ichinan okem</string>
+  <!-- Informs the user how to access the tabs when "Use screen lock to hide tabs in private browsing" is enabled -->
+  <string name="preferences_pbm_lock_screen_summary_3">Titz\'et ruwi\' rik\'in ri retal ruwi\' aq\'a\', PIN o wachaj meq\'atoj. Toq natzïj re\' chuqa\' nuq\'ät ri chapoj chuqa\' ri rokisaxik pa komon ri ruwäch.</string>
   <!-- Label for cookie banner section in quick settings panel. -->
   <string name="cookie_banner_blocker">Kiq\'atöy kitzijol cookie</string>
   <!-- Preference for removing cookie/consent banners from sites automatically in private mode. See reduce_cookie_banner_summary for additional context. -->
@@ -740,6 +818,8 @@
   <string name="reduce_cookie_banner_details_panel_title_off_for_site_1">¿La nichup ri ruq\'atoj kitzijol taq cookie richin %1$s?</string>
   <!-- Title text for a detail explanation indicating cookie banner reducer didn't work for the current site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
   <string name="reduce_cookie_banner_details_panel_title_unsupported_site_request_2">Man yeruq\'ät ta ri %1$s pa ruyonil ri taq kik\'utuj taq cookie pa re ruxaq re\'. Yatikïr natäq un k\'utuj richin nito\' re ruxaq re\' ri chwa\'q kab\'ij.</string>
+  <!-- Long text for a detail explanation indicating what will happen if cookie banner handling is off for a site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
+  <string name="reduce_cookie_banner_details_panel_description_off_for_site_1">Toq xtachüp, %1$s xkeruyüj taq kuki chuqa\' xtutikirisaj chik ri ruxaq. Tirekel yerutz\'apij ri taq molojri\'ïl chuqa\' yerujäm ri taq ch\'ich\' richin loq\'oj.</string>
   <!-- Long text for a detail explanation indicating what will happen if cookie banner handling is on for a site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
   <string name="reduce_cookie_banner_details_panel_description_on_for_site_3">Toq nitzij, ri %1$s xtutojtob\'ej xkeruxutuj pa ruyonil ri taq kitzijol taq cookie pa re ruxaq re\'.</string>
   <!-- Title for the cookie banner re-engagement CFR, the placeholder is replaced with app name. %1$s is the name of the app (for example "Firefox"). -->
@@ -764,6 +844,8 @@
   <string name="errorpage_httpsonly_title">Man k\'o ta ri jikil ruxaq</string>
   <!-- Message shown in the error page for when trying to access a http website while https only mode is enabled. The message has two paragraphs. This is the first. -->
   <string name="errorpage_httpsonly_message_title">Rik\'in jub\'a\' chi ri ajk\'amaya\'l ruxaq xa man nuk\'äm ta ri\' rik\'in ri HTTPS.</string>
+  <!-- Message shown in the error page for when trying to access a http website while https only mode is enabled. The message has two paragraphs. This is the second. -->
+  <string name="errorpage_httpsonly_message_summary">Po rik\'in jub\'a\' chuqa\' k\'o jun q\'eleb\'anel nib\'anon. We k\'a yatok na pa ri ajk\'am ruxaq, k\'o man ye\'atz\'ib\'aj ta na\'onel taq etamab\'äl. We k\'a nasamajij na, ri rub\'anikil HTTPS xtichuputäj jun ti mej pa ri ruxaq.</string>
   <!-- Preference for accessibility -->
   <string name="preferences_accessibility">Okel</string>
   <!-- Preference to override the Mozilla account server -->
@@ -772,6 +854,8 @@
   <string name="preferences_override_sync_tokenserver">Ichinan ruk\'u\'x rusamaj Sync</string>
   <!-- Preference category for account information -->
   <string name="preferences_category_account">Rub\'i\' taqoya\'l</string>
+  <!-- Preference for changing where the AddressBar is positioned -->
+  <string name="preferences_toolbar_2">Ruk\'ojlib\'al rusamajib\'al ochochib\'äl</string>
   <!-- Preference for changing toolbar layout -->
   <string name="preferences_toolbar_layout">Ruwachib\'enik Rukajtz\'ik Samajib\'äl</string>
   <!-- Preference for changing default theme to dark or light mode -->
@@ -780,6 +864,10 @@
   <string name="preferences_home_2">Ruxaq tikirib\'äl</string>
   <!-- Preference for customizing the app icon -->
   <string name="preferences_app_icon">Ruwachib\'al App</string>
+  <!-- Preference for showing the tab strip -->
+  <string name="preferences_tab_strip">Rutz\'etik rusamajib\'al ruwi\'</string>
+  <!-- Preference for gestures based actions -->
+  <string name="preferences_toolbar_shortcut">Chojokem pa rusamajib\'al</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_toolbar_select_shortcut">Tacha\' jun chojokem</string>
   <!-- Preference for gestures based actions -->
@@ -806,6 +894,8 @@
   <string name="preferences_show_voice_search">Tik\'ut rukanoxik chi ch\'ab\'äl</string>
   <!-- Preference title for switch preference to show search suggestions also in private mode -->
   <string name="preferences_show_search_suggestions_in_private">Tik\'ut pan ichinan molojri\'ïl</string>
+  <!-- Preference title for switch preference to show trending search suggestions -->
+  <string name="preferences_show_trending_search_suggestions">Kek\'ut ri ajnab\'ey taq chilab\'enïk</string>
   <!-- Preference title for switch preference to show recent search suggestions -->
   <string name="preferences_show_recent_search_suggestions">Kek\'ut k\'ab\'a\' ekanon</string>
   <!-- Preference title for switch preference to show a clipboard suggestion when searching -->
@@ -823,12 +913,27 @@
   <!-- Preference title for switch preference to show sponsored Firefox Suggest search suggestions -->
   <string name="preferences_show_sponsored_suggestions">Chilab\'en taq to\'onela\'</string>
   <!--
+    Summary for preference to show sponsored Firefox Suggest search suggestions.
+    %1$s is the name of the app (for example "Firefox").
+  -->
+  <string name="preferences_show_sponsored_suggestions_summary">Tato\' ri %1$s rik\'in chilab\'enïk jantäq etalun</string>
+  <!--
     Preference title for switch preference to show Firefox Suggest search suggestions for web content.
     %1$s is the name of the app (for example "Firefox").
   -->
   <string name="preferences_show_nonsponsored_suggestions">Taq ruchilab\'exik %1$s</string>
   <!-- Summary for preference to show Firefox Suggest search suggestions for web content -->
   <string name="preferences_show_nonsponsored_suggestions_summary">Kek\'ul taq ruchilab\'exik web ruximon ri\' rik\'in ritaq akanoxik</string>
+  <!-- Preference title for switch preference to show search optimization cards -->
+  <string name="preferences_show_search_optimization_cards" tools:ignore="BrandUsage">Tik\'ul ruchilab\'exik Mozilla toq yatz\'ib\'an</string>
+  <!-- Preference for link sharing -->
+  <string name="preferences_link_sharing">Kekomonïx taq ximonel</string>
+  <!-- Title for the link sharing toggle. %1$s is replaced by the brand name (e.g. Firefox). -->
+  <string name="link_sharing_toggle_title">Titz\'aqatisäx taq ruximonel ruqasanik %1$s toq nikomonïx pa WhatsApp</string>
+  <!-- Body for the link sharing toggle.  %1$s is replaced by the brand name (e.g. Firefox). -->
+  <string name="link_sharing_toggle_body">Ke\'apeyoj ri taq awachib\'il richin nikitojtob\'ej ri okem aninäq chuqa\' jikÏl rik\'in %1$s toq nakomonij jun ximonel pa WhatsApp</string>
+  <!-- Snackbar message shown when user shares a link -->
+  <string name="link_shared_snackbar_message">Komonn ximonel</string>
   <!-- Snackbar action label shown when user shares a link -->
   <string name="link_shared_snackbar_action">Tinuk\'samajïx runuk\'ulem</string>
   <!-- Preference for open links in third party apps -->
@@ -839,6 +944,17 @@
   <string name="preferences_open_links_in_apps_ask">Tik\'utüx toq nijaq</string>
   <!-- Preference for open links in third party apps never open in apps option -->
   <string name="preferences_open_links_in_apps_never">Majub\'ey</string>
+  <!-- Preference category for file storage. -->
+  <string name="preferences_category_file_storage">Kiyakik taq yakb\'äl</string>
+  <!-- Preference title for downloads default location. -->
+  <string name="preferences_downloads_default_location_title">Ruk\'ojlib\'al q\'asanïk k\'o wi</string>
+  <!--
+    Message shown as the summary of the download location preference when the
+    app has lost the permission to access a previously selected custom folder.
+  -->
+  <string name="preference_downloads_folder_permission_lost" tools:ignore="UnusedResources">Man ya\'on ta q\'ij richin nokisäx re molyakb\'äl re\'. Tatojtob\'ej nacha\' jun chik.</string>
+  <!-- Preference title for choosing an app to handle downloads -->
+  <string name="preferences_choose_app_for_downloads">Kenuk\'samajïx taq qasanïk rik\'in jun chik chokoy</string>
   <string name="preferences_downloads_delete_from_device">Tiyuj pan okisaxel</string>
   <string name="preferences_downloads_delete_from_device_description">Xyuj ri yakb\'äl pa ri awokisaxel chuqa\' pa runatab\'al qasanïk</string>
   <string name="preferences_downloads_remove_from_download_history">Tiyuj pa ri runatab\'al qasanïk</string>
@@ -869,14 +985,26 @@
     The title of the origin permission option allowing a user to enable the extension to run on all sites
   -->
   <string name="addons_permissions_allow_for_all_sites">Tiya\' q\'ij chi ke ronojel ruxaq</string>
+  <!-- The subtitle for the allow for all sites preference toggle -->
+  <string name="addons_permissions_allow_for_all_sites_subtitle">We akuqub\'an ak\'u\'x chi rij re k\'amal re\', yatikïr naya\' q\'ij chi re\' pa ronojel ri ajk\'am ruxaq.</string>
   <!-- The text shown when an extension does not require permissions -->
   <string name="addons_does_not_require_permissions">Majun ya\'oj q\'ij nrajo re k\'amal re\'.</string>
+  <!-- The description of data collection permissions listed in the addon's permissions screen.  %1$s is a formatted list of permissions. -->
+  <string name="addons_permissions_required_data_collection_description_2">Ri nuk\'samaje nub\'ij chi re k\'amal re\' yerumöl: %1$s</string>
+  <!-- The description of the "none" data collection permission, when the extension doesn't collect anything according to the developer. -->
+  <string name="addons_permissions_none_required_data_collection_description">Ri nuk\'samajel nub\'ij chi re k\'amal re\' man rajowaxik ta yerumöl taq tzij.</string>
   <!-- The title of the required permissions section from addon's permissions screen. -->
   <string name="addons_permissions_heading_required_permissions">Taq ya\'oj q\'ij rajowaxik:</string>
   <!-- The title of the optional permissions section from addon's permissions screen. -->
   <string name="addons_permissions_heading_optional_permissions">Cha\'on ya\'oj q\'ij:</string>
   <!-- The title of the required data collection permissions section from addon's permissions screen. -->
   <string name="addons_permissions_heading_required_data_collection">Rumolik taq tzij rajowaxik:</string>
+  <!--
+    Add-on Preferences
+
+    Preference to customize the configured AMO (addons.mozilla.org) collection
+  -->
+  <string name="preferences_customize_extension_collection">Moloj ichinan taq tz\'aqat</string>
   <!-- Button caption to confirm the add-on collection configuration -->
   <string name="customize_addon_collection_ok">ÜTZ</string>
   <!-- Button caption to abort the add-on collection configuration -->
@@ -926,6 +1054,8 @@
   <string name="wallpaper_learn_more">Tetamäx ch\'aqa\' chik</string>
   <!-- Text for classic wallpapers title. %s is the name of the app (for example "Firefox"). -->
   <string name="wallpaper_classic_title">Ojer %s</string>
+  <!-- Text for artist series wallpapers title. "Artist series" represents a collection of artist collaborated wallpapers. -->
+  <string name="wallpaper_artist_series_title">Kicholsamaj taq artista</string>
   <!-- Description text for the artist series wallpapers with learn more link. %s is a learn more link using wallpaper_learn_more as text. "Independent voices" is the name of the wallpaper collection -->
   <string name="wallpaper_artist_series_description_with_learn_more">Ri Jamäl ch\'ab\'äl molb\'äl. %s</string>
   <!-- Description text for the artist series wallpapers. "Independent voices" is the name of the wallpaper collection -->

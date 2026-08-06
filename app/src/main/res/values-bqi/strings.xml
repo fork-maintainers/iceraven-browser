@@ -1043,6 +1043,8 @@
   <string name="customize_toggle_pocket_sponsored">وزعیتا هؽزگرووݩ</string>
   <!-- Title for the opening wallpaper settings screen -->
   <string name="customize_wallpapers">کاقز دیواری یل</string>
+  <!-- Label for the menu item that opens the customize homepage settings screen. -->
+  <string name="browser_menu_customize_homepage">سفارشی کردن بلگه هووه</string>
   <!-- Label for the menu item that opens the wallpaper settings screen. -->
   <string name="browser_menu_change_wallpaper">آلشت کاقز دیواری</string>
   <!-- Title for the customize home screen section with sponsored shortcuts. -->
@@ -4720,15 +4722,15 @@
   <!-- The second active link used in privacy_notice_updated_homepage_message -->
   <string name="privacy_notice_updated_homepage_message_learn_more" tools:ignore="UnusedResources">قلوه دووسته بۊین</string>
   <!-- Google Lens prototype related strings -->
-  <string name="preferences_debug_settings_google_lens_integration">فعال کردن ادغام گۊگل لنز</string>
+  <string name="preferences_debug_settings_google_lens_integration">فعال کردن ادغام Google Lens</string>
   <!-- Lens image search button content description -->
   <string name="lens_search_content_description">پیتینیڌن وا شؽوات</string>
   <!-- Content description for the gallery picker button in the Lens camera screen -->
-  <string name="content_description_gallery">ز شؽوات مال پسند کۊنین تا و گۊگل لنز فشناڌه بۊ</string>
+  <string name="content_description_gallery">ز شؽوات مال پسند کۊنین تا و Google Lens فشناڌه بۊ</string>
   <!-- Content description for the shutter button in the Lens camera screen -->
-  <string name="content_description_take_photo">شؽوات بگیرین وو و گۊگل لنز بفشنین</string>
+  <string name="content_description_take_photo">شؽوات بگیرین وو و Google Lens بفشنین</string>
   <!-- Image context menu entry that sends the long-pressed image to Google Lens -->
-  <string name="context_menu_open_image_with_google_lens">پیتینیڌن وا گۊگل لنز</string>
+  <string name="context_menu_open_image_with_google_lens">پیتینیڌن وا Google Lens</string>
   <!-- Toast shown when the user denies the camera permission requested by the Lens camera screen -->
   <string name="lens_camera_permission_denied">موجوز رڌ وابی</string>
   <!--
@@ -4742,21 +4744,31 @@
   -->
   <string name="lens_camera_title_qr">QR کود</string>
   <!-- Title for the Google Lens Search Settings page feature toggle -->
-  <string name="search_settings_google_lens_title">فعال کردن پیتینیڌن گۊگل لنز</string>
+  <string name="search_settings_google_lens_title">فعال کردن پیتینیڌن Google Lens</string>
   <!-- Description for the Google Lens Search Settings page feature toggle -->
   <string name="search_settings_google_lens_description">شؽواتا ن سی پیتینیڌن بسری و گۊگل افشنه.</string>
   <!-- Caption shown under the Google Lens toggle clarifying when the feature is available -->
   <string name="preferences_google_lens_availability_caption">تینا مجالی من دسرس هڌ ک گۊگل ای روء و کار ونده بۊ وو موتور پیتینیڌن و کار ونده ایسا مجال گشتن بۊوس.</string>
   <!-- Title for the Google Lens AI feature toggle -->
-  <string name="ai_controls_google_lens_title">گۊگل لنز</string>
+  <string name="ai_controls_google_lens_title">Google Lens</string>
   <!-- Description for the Google Lens AI feature toggle -->
   <string name="ai_controls_google_lens_description">شؽواتا ن سی پیتینیڌن بسری و گۊگل افشنه.</string>
   <!-- Content description for the Google Lens half of the camera mode toggle -->
-  <string name="lens_camera_mode_lens">گۊگل لنز</string>
+  <string name="lens_camera_mode_lens">Google Lens</string>
   <!-- Content description for the QR scanner half of the camera mode toggle -->
   <string name="lens_camera_mode_qr">اسکنر QR</string>
   <!-- Toast shown when the user picks an image from the gallery in QR mode but no QR code is found in it -->
   <string name="lens_camera_qr_no_code_found">کود QR من شؽوات نجۊرست</string>
+  <!-- Title of the bottom sheet shown the first time the user opens the Google Lens camera screen -->
+  <string name="lens_opt_out_title">هونه وا Google Lens بجۊر</string>
+  <!-- Description of the bottom sheet shown the first time the user opens the Google Lens camera screen -->
+  <string name="lens_opt_out_description">سی گرؽڌن نتیجه یل وا Google Lens، شؽواتی پسند کۊنین یا شؽواتگر خوتووݩ ن و کار بگرین.</string>
+  <!-- Text of the link in the first-run Google Lens bottom sheet that opens the Search settings page -->
+  <string name="lens_opt_out_settings_link">سامووا Google Lens</string>
+  <!-- Button in the first-run Google Lens bottom sheet that dismisses it and starts the camera -->
+  <string name="lens_opt_out_try_it_now_button">هیم سکو امتهووݩ کوݩ</string>
+  <!-- Button in the first-run Google Lens bottom sheet that leaves Google Lens without using it -->
+  <string name="lens_opt_out_not_now_button">سکو ن</string>
   <!--
     Firefox Labs
 

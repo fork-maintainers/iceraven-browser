@@ -1045,6 +1045,8 @@
   <string name="customize_toggle_pocket_sponsored">Sponzorované príbehy</string>
   <!-- Title for the opening wallpaper settings screen -->
   <string name="customize_wallpapers">Tapety</string>
+  <!-- Label for the menu item that opens the customize homepage settings screen. -->
+  <string name="browser_menu_customize_homepage">Upraviť domovskú stránku</string>
   <!-- Label for the menu item that opens the wallpaper settings screen. -->
   <string name="browser_menu_change_wallpaper">Zmeniť tapetu</string>
   <!-- Title for the customize home screen section with sponsored shortcuts. -->
@@ -1722,6 +1724,8 @@
   <string name="tab_group_three_dot_button_content_description">Ďalšie možnosti</string>
   <!-- Text shown on the edit button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_edit">Upraviť</string>
+  <!-- Text shown on the ungroup button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_ungroup">Zrušiť skupinu</string>
   <!-- Text shown on the delete button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_delete">Odstrániť</string>
   <!-- Text shown on the close button for a tab group on the three dot menu -->
@@ -2439,6 +2443,10 @@
   <string name="sync_sign_in">Prihlásiť sa k službe Sync</string>
   <!-- An option from the share dialog to send link to all other sync devices -->
   <string name="sync_send_to_all">Odoslať do všetkých zariadení</string>
+  <!-- Text displayed when no other sync devices are available for link sharing -->
+  <string name="sync_no_devices_available">K dispozícii nie sú žiadne zariadenia</string>
+  <!-- Text displayed when no other sync devices are available for link sharing. -->
+  <string name="sync_no_devices_available_description">Tu sa zobrazia všetky zariadenia prihlásené a synchronizované s týmto účtom.</string>
   <!-- An option from the share dialog to reconnect to sync -->
   <string name="sync_reconnect">Znovu sa pripojiť k synchronizácii</string>
   <!-- Text displayed when sync is offline and cannot be accessed -->
@@ -4783,6 +4791,16 @@
   <string name="lens_camera_mode_qr">Skener QR kódov</string>
   <!-- Toast shown when the user picks an image from the gallery in QR mode but no QR code is found in it -->
   <string name="lens_camera_qr_no_code_found">Na obrázku sa nenašiel žiadny QR kód</string>
+  <!-- Title of the bottom sheet shown the first time the user opens the Google Lens camera screen -->
+  <string name="lens_opt_out_title">Nájdite to pomocou služby Google Lens</string>
+  <!-- Description of the bottom sheet shown the first time the user opens the Google Lens camera screen -->
+  <string name="lens_opt_out_description">Ak chcete vyhľadávať pomocou funkcie Google Lens, vyberte obrázok alebo použite fotoaparát.</string>
+  <!-- Text of the link in the first-run Google Lens bottom sheet that opens the Search settings page -->
+  <string name="lens_opt_out_settings_link">Nastavenia Google Lens</string>
+  <!-- Button in the first-run Google Lens bottom sheet that dismisses it and starts the camera -->
+  <string name="lens_opt_out_try_it_now_button">Vyskúšajte si to hneď teraz</string>
+  <!-- Button in the first-run Google Lens bottom sheet that leaves Google Lens without using it -->
+  <string name="lens_opt_out_not_now_button">Teraz nie</string>
   <!--
     Firefox Labs
 
