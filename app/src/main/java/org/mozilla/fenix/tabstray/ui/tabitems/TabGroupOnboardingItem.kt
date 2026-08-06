@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -48,7 +49,6 @@ fun TabGroupOnboardingGridItem(
     PromoCard(
         description = stringResource(R.string.tab_group_onboarding_grid_item_description),
         modifier = modifier
-            .fillMaxWidth()
             .heightIn(min = OnboardingGridItemMinHeight)
             .testTag(TabsTrayTestTag.TAB_GROUP_ONBOARDING_GRID_ITEM),
         title = stringResource(R.string.tab_group_onboarding_item_title),
@@ -57,6 +57,7 @@ fun TabGroupOnboardingGridItem(
                 animationResource = R.raw.mozac_ic_kit_tab_groups_animation,
                 staticDrawableResource = R.drawable.mozac_ic_kit_tab_groups,
                 modifier = Modifier
+                    .height(OnboardingGridItemMinHeight)
                     .padding(vertical = FirefoxTheme.layout.space.static150)
                     .testTag(TabsTrayTestTag.TAB_GROUP_ONBOARDING_ILLUSTRATION),
                 contentDescription = null,
