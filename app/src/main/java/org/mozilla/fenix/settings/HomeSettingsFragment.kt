@@ -142,6 +142,12 @@ class HomeSettingsFragment : PreferenceFragmentCompat(), SystemInsetsPaddedFragm
             onPreferenceChangeListener = createMetricPreferenceChangeListener("recently_visited")
         }
 
+        requirePreference<SwitchPreferenceCompat>(R.string.pref_key_show_homepage_weather_widget).apply {
+            isVisible = fenixSettings.enableHomepageWeatherWidget
+            isChecked = fenixSettings.showHomepageWeatherWidget
+            onPreferenceChangeListener = createMetricPreferenceChangeListener("weather")
+        }
+
         requirePreference<Preference>(R.string.pref_key_wallpapers).apply {
             setOnPreferenceClickListener {
                 view?.findNavController()?.navigateWithBreadcrumb(
