@@ -139,6 +139,30 @@ object ToolbarSelectors {
         groups = listOf(),
     )
 
+    @Suppress("ktlint:standard:function-naming", "FunctionName")
+    fun TAB_STRIP_TAB_COUNTER_WITH_COUNT(openTabs: String = "") = Selector(
+        strategy = SelectorStrategy.COMPOSE_BY_CONTENT_DESCRIPTION,
+        value = "Non-private Tabs Open: $openTabs. Tap to switch tabs.",
+        description = "Tab strip tab counter showing $openTabs open tab(s)",
+        groups = listOf(),
+    )
+
+    @Suppress("ktlint:standard:function-naming", "FunctionName")
+    fun TAB_STRIP_TAB(tabTitle: String = "") = Selector(
+        strategy = SelectorStrategy.UIAUTOMATOR_WITH_TEXT,
+        value = tabTitle,
+        description = "Tab strip tab '$tabTitle'",
+        groups = listOf(),
+    )
+
+    @Suppress("ktlint:standard:function-naming", "FunctionName")
+    fun TAB_STRIP_CLOSE_TAB_BUTTON(tabTitle: String = "") = Selector(
+        strategy = SelectorStrategy.UIAUTOMATOR_WITH_DESCRIPTION_CONTAINS,
+        value = "Close tab $tabTitle",
+        description = "Tab strip close button for '$tabTitle'",
+        groups = listOf(),
+    )
+
     val INSECURE_CONNECTION_INFORMATION_BUTTON = Selector(
         strategy = SelectorStrategy.COMPOSE_BY_TAG,
         value = SITE_INFO_INSECURE_CONNECTION,
@@ -184,6 +208,9 @@ object ToolbarSelectors {
         SITE_INFO_BUTTON,
         SEARCH_ENGINE_SELECTOR_ICON(),
         TAB_COUNTER_WITH_COUNT(),
+        TAB_STRIP_TAB_COUNTER_WITH_COUNT(),
+        TAB_STRIP_TAB(),
+        TAB_STRIP_CLOSE_TAB_BUTTON(),
         INSECURE_CONNECTION_INFORMATION_BUTTON,
         SECURE_SITE_INFORMATION_BUTTON,
         TRACKING_PROTECTION_OFF_INFORMATION_BUTTON,

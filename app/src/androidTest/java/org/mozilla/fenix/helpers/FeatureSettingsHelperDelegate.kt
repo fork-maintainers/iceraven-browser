@@ -48,6 +48,7 @@ class FeatureSettingsHelperDelegate : FeatureSettingsHelper {
         shakeToSummarizeFeatureFlagEnabled = settings.shakeToSummarizeFeatureFlagEnabled,
         isPrivateModeAndStoriesEntryPointEnabled = settings.privateModeAndStoriesEntryPointEnabled,
         shouldUseExpandedToolbar = settings.shouldUseExpandedToolbar,
+        isTabStripEnabled = settings.isTabStripEnabled,
         nativeShareSheetEnabled = settings.nativeShareSheetEnabled,
         showVoiceSearchInDisplayToolbar = settings.showVoiceSearchInDisplayToolbar,
         isHomepageTrendingRecentSearchEnabled = settings.enableHomepageTrendingRecentSearch,
@@ -77,6 +78,7 @@ class FeatureSettingsHelperDelegate : FeatureSettingsHelper {
     override var shakeToSummarizeFeatureFlagEnabled: Boolean by updatedFeatureFlags::shakeToSummarizeFeatureFlagEnabled
     override var isPrivateModeAndStoriesEntryPointEnabled: Boolean by updatedFeatureFlags::isPrivateModeAndStoriesEntryPointEnabled
     override var shouldUseExpandedToolbar: Boolean by updatedFeatureFlags::shouldUseExpandedToolbar
+    override var isTabStripEnabled: Boolean by updatedFeatureFlags::isTabStripEnabled
     override var nativeShareSheetEnabled: Boolean by updatedFeatureFlags::nativeShareSheetEnabled
     override var showVoiceSearchInDisplayToolbar: Boolean by updatedFeatureFlags::showVoiceSearchInDisplayToolbar
     override var isHomepageTrendingRecentSearchEnabled: Boolean by updatedFeatureFlags::isHomepageTrendingRecentSearchEnabled
@@ -116,6 +118,7 @@ class FeatureSettingsHelperDelegate : FeatureSettingsHelper {
         settings.shakeToSummarizeFeatureFlagEnabled = featureFlags.shakeToSummarizeFeatureFlagEnabled
         settings.privateModeAndStoriesEntryPointEnabled = featureFlags.isPrivateModeAndStoriesEntryPointEnabled
         settings.shouldUseExpandedToolbar = featureFlags.shouldUseExpandedToolbar
+        settings.isTabStripEnabled = featureFlags.isTabStripEnabled
         settings.nativeShareSheetEnabled = featureFlags.nativeShareSheetEnabled
         settings.showVoiceSearchInDisplayToolbar = featureFlags.showVoiceSearchInDisplayToolbar
         settings.enableHomepageTrendingRecentSearch = featureFlags.isHomepageTrendingRecentSearchEnabled
@@ -143,6 +146,7 @@ private data class FeatureFlags(
     var shakeToSummarizeFeatureFlagEnabled: Boolean,
     var isPrivateModeAndStoriesEntryPointEnabled: Boolean,
     var shouldUseExpandedToolbar: Boolean,
+    var isTabStripEnabled: Boolean,
     var nativeShareSheetEnabled: Boolean,
     var showVoiceSearchInDisplayToolbar: Boolean,
     var isHomepageTrendingRecentSearchEnabled: Boolean,

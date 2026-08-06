@@ -17,7 +17,9 @@ import org.mozilla.fenix.helpers.TestAssetHelper.getGenericAsset
 import org.mozilla.fenix.ui.efficiency.helpers.BaseTest
 import org.mozilla.fenix.ui.efficiency.selectors.BookmarksSelectors
 import org.mozilla.fenix.ui.efficiency.selectors.BrowserPageSelectors
+import org.mozilla.fenix.ui.efficiency.selectors.HomeSelectors
 import org.mozilla.fenix.ui.efficiency.selectors.SearchBarSelectors
+import org.mozilla.fenix.ui.efficiency.selectors.SettingsCustomizeSelectors
 import org.mozilla.fenix.ui.efficiency.selectors.ToolbarSelectors
 
 class NavigationToolbarExpandedTest : BaseTest(shouldUseExpandedToolbar = true) {
@@ -75,7 +77,7 @@ class NavigationToolbarExpandedTest : BaseTest(shouldUseExpandedToolbar = true) 
 
         setScreenOrientation(orientationRule, ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE)
 
-        on.browserPage.verifyToolbarIsAtTop()
+        on.toolbar.verifyToolbarIsAtTop()
         on.browserPage.verifyUrl(website.url.toString())
         on.browserPage.mozVerify(ToolbarSelectors.SITE_INFO_BUTTON)
         on.browserPage.mozVerify(ToolbarSelectors.EXPANDED_TOOLBAR_BACK_BUTTON)
@@ -158,5 +160,85 @@ class NavigationToolbarExpandedTest : BaseTest(shouldUseExpandedToolbar = true) 
             .mozVerifyElementsByGroup("browserViewMainMenuItems")
 
         setScreenOrientation(orientationRule, ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+    }
+
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3333206
+    @SmokeTest
+    @Test
+    fun verifyHomepageItemsWithTabStripTest() {
+        composeRule.activityRule.applySettingsExceptions {
+            it.isTabStripEnabled = true
+        }
+        // With the tab strip enabled and the expanded toolbar, the address bar sits at the top while the
+        // navigation bar with its actions sits at the bottom.
+        on.toolbar.verifyToolbarIsAtTop()
+        on.toolbar.verifyNavBarIsAtBottom()
+        on.home.mozVerify(ToolbarSelectors.EXPANDED_TOOLBAR_ADD_BOOKMARK_BUTTON)
+        on.home.mozVerify(ToolbarSelectors.EXPANDED_TOOLBAR_SHARE_BUTTON)
+        on.home.mozVerify(ToolbarSelectors.NEW_TAB_BUTTON)
+        on.home.mozVerify(ToolbarSelectors.TAB_COUNTER_WITH_COUNT("0"))
+        on.home.mozVerify(HomeSelectors.MAIN_MENU_BUTTON)
+    }
+
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3333193
+    @SmokeTest
+    @Test
+    fun verifyTheTabStripUITest() {
+        val website = mockWebServer.getGenericAsset(1)
+
+        composeRule.activityRule.applySettingsExceptions {
+            it.isTabStripEnabled = true
+        }
+
+        on.browserPage.navigateToPage(website.url.toString())
+            .verifyPageContent(website.content)
+            .verifyUrl(website.url.toString())
+        on.browserPage.mozVerify(ToolbarSelectors.SITE_INFO_BUTTON)
+
+        // Tab strip enabled with the expanded toolbar: address bar at top, the open tab shown in the strip,
+        // and the navigation bar with its actions at the bottom.
+        on.toolbar.verifyToolbarIsAtTop()
+        on.browserPage.mozVerify(ToolbarSelectors.TAB_STRIP_TAB(website.title))
+        on.browserPage.mozVerify(ToolbarSelectors.TAB_STRIP_CLOSE_TAB_BUTTON(website.title))
+        on.toolbar.verifyNavBarIsAtBottom()
+        on.browserPage.mozVerify(ToolbarSelectors.EXPANDED_TOOLBAR_ADD_BOOKMARK_BUTTON)
+        on.browserPage.mozVerify(ToolbarSelectors.EXPANDED_TOOLBAR_SHARE_BUTTON)
+        on.browserPage.mozVerify(ToolbarSelectors.NEW_TAB_BUTTON)
+        on.browserPage.mozVerify(ToolbarSelectors.TAB_COUNTER_WITH_COUNT("1"))
+        on.browserPage.mozVerify(BrowserPageSelectors.MAIN_MENU_BUTTON)
+    }
+
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3333194
+    @SmokeTest
+    @Test
+    fun verifyTheNewTabButtonWithTabStripEnabledTest() {
+        val website = mockWebServer.getGenericAsset(1)
+
+        composeRule.activityRule.applySettingsExceptions {
+            it.isTabStripEnabled = true
+        }
+
+        on.browserPage.navigateToPage(website.url.toString())
+        on.browserPage.mozVerify(ToolbarSelectors.TAB_STRIP_TAB_COUNTER_WITH_COUNT("1"))
+        on.browserPage.mozVerify(ToolbarSelectors.NEW_TAB_BUTTON)
+
+        // Tapping New tab opens a fresh tab focused on the search bar.
+        on.browserPage.mozClick(ToolbarSelectors.NEW_TAB_BUTTON)
+        on.searchBar.mozVerify(SearchBarSelectors.SEARCH_BAR_PLACEHOLDER)
+    }
+
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3333195
+    @SmokeTest
+    @Test
+    fun verifyTabsTrayWithTabStripEnabledTest() {
+        val website = mockWebServer.getGenericAsset(1)
+
+        composeRule.activityRule.applySettingsExceptions {
+            it.isTabStripEnabled = true
+        }
+
+        on.browserPage.navigateToPage(website.url.toString())
+        on.tabDrawer.navigateToPage()
+        on.tabDrawer.verifyExistingOpenTabs(website.title)
     }
 }

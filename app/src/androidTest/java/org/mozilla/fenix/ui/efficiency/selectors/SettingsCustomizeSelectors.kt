@@ -24,6 +24,13 @@ object SettingsCustomizeSelectors {
         groups = listOf("customizeSettings"),
     )
 
+    val SHOW_TAB_BAR_TOGGLE = Selector(
+        strategy = SelectorStrategy.ESPRESSO_BY_TEXT,
+        value = getStringResource(R.string.preference_tab_strip_show),
+        description = "Show tab bar toggle",
+        groups = listOf("requiresScroll"),
+    )
+
     val SELECT_APP_ICON_TITLE = Selector(
         strategy = SelectorStrategy.UIAUTOMATOR_WITH_TEXT,
         value = getStringResource(R.string.preference_select_app_icon_title),
@@ -62,6 +69,7 @@ object SettingsCustomizeSelectors {
     val all = listOf(
         SETTINGS_CUSTOMIZE_TITLE,
         SHOW_TOOLBAR_TOGGLE,
+        SHOW_TAB_BAR_TOGGLE,
         SELECT_APP_ICON_TITLE,
         APP_ICON_DEFAULT,
         TOOLBAR_LAYOUT_SIMPLE,

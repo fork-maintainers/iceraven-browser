@@ -422,6 +422,11 @@ class NavigationToolbarExpandedTest {
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3333206
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.NavigationToolbarExpandedTest#verifyHomepageItemsWithTabStripTest"],
+        bug = 2060482,
+        since = "2026-08",
+    )
     @SmokeTest
     @Test
     fun verifyHomepageItemsWithTabStripTest() {
@@ -445,6 +450,11 @@ class NavigationToolbarExpandedTest {
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3333193
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.NavigationToolbarExpandedTest#verifyTheTabStripUITest"],
+        bug = 2060482,
+        since = "2026-08",
+    )
     @SmokeTest
     @Test
     fun verifyTheTabStripUITest() {
@@ -480,6 +490,11 @@ class NavigationToolbarExpandedTest {
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3333194
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.NavigationToolbarExpandedTest#verifyTheNewTabButtonWithTabStripEnabledTest"],
+        bug = 2060482,
+        since = "2026-08",
+    )
     @SmokeTest
     @Test
     fun verifyTheNewTabButtonWithTabStripEnabledTest() {
@@ -505,6 +520,11 @@ class NavigationToolbarExpandedTest {
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3333195
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.NavigationToolbarExpandedTest#verifyTabsTrayWithTabStripEnabledTest"],
+        bug = 2060482,
+        since = "2026-08",
+    )
     @SmokeTest
     @Test
     fun verifyTabsTrayWithTabStripEnabledTest() {

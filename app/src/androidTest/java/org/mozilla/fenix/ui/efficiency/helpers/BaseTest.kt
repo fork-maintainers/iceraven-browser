@@ -64,6 +64,7 @@ abstract class BaseTest(
     private val isPocketEnabled: Boolean = true,
     private val isRecentlyVisitedFeatureEnabled: Boolean = true,
     private val shouldUseExpandedToolbar: Boolean = false,
+    private val isTabStripEnabled: Boolean = false,
     private val isPWAsPromptEnabled: Boolean = false,
 ) {
 
@@ -74,6 +75,7 @@ abstract class BaseTest(
         isPocketEnabled = isPocketEnabled,
         isRecentlyVisitedFeatureEnabled = isRecentlyVisitedFeatureEnabled,
         shouldUseExpandedToolbar = shouldUseExpandedToolbar,
+        isTabStripEnabled = isTabStripEnabled,
         isPWAsPromptEnabled = isPWAsPromptEnabled,
     )
 
@@ -108,6 +110,7 @@ abstract class BaseTest(
                             isPocketEnabled = cfg.isPocketEnabled,
                             isRecentlyVisitedFeatureEnabled = cfg.isRecentlyVisitedFeatureEnabled,
                             shouldUseExpandedToolbar = cfg.shouldUseExpandedToolbar,
+                            isTabStripEnabled = cfg.isTabStripEnabled,
                             isPWAsPromptEnabled = cfg.isPWAsPromptEnabled,
                         ),
                     ) { it.activity }

@@ -67,6 +67,7 @@ class HomeActivityTestRule(
         shakeToSummarizeFeatureFlagEnabled: Boolean = settings.shakeToSummarizeFeatureFlagEnabled,
         isPrivateModeAndStoriesEntryPointEnabled: Boolean = false,
         shouldUseExpandedToolbar: Boolean = false,
+        isTabStripEnabled: Boolean = false,
         nativeShareSheetEnabled: Boolean = false,
         showVoiceSearchInDisplayToolbar: Boolean = false,
         isHomepageTrendingRecentSearchEnabled: Boolean = false,
@@ -91,6 +92,7 @@ class HomeActivityTestRule(
         this.shakeToSummarizeFeatureFlagEnabled = shakeToSummarizeFeatureFlagEnabled
         this.isPrivateModeAndStoriesEntryPointEnabled = isPrivateModeAndStoriesEntryPointEnabled
         this.shouldUseExpandedToolbar = shouldUseExpandedToolbar
+        this.isTabStripEnabled = isTabStripEnabled
         this.nativeShareSheetEnabled = nativeShareSheetEnabled
         this.showVoiceSearchInDisplayToolbar = showVoiceSearchInDisplayToolbar
         this.isHomepageTrendingRecentSearchEnabled = isHomepageTrendingRecentSearchEnabled
@@ -158,6 +160,7 @@ class HomeActivityTestRule(
             hasSeenShakeToSummarizeToolbarCfr = true,
             isTermsOfServiceAccepted = true,
             isPrivateModeAndStoriesEntryPointEnabled = false,
+            isTabStripEnabled = false,
         )
     }
 }
@@ -205,6 +208,7 @@ class HomeActivityIntentTestRule internal constructor(
         shakeToSummarizeFeatureFlagEnabled: Boolean = settings.shakeToSummarizeFeatureFlagEnabled,
         isPrivateModeAndStoriesEntryPointEnabled: Boolean = false,
         shouldUseExpandedToolbar: Boolean = false,
+        isTabStripEnabled: Boolean = false,
         nativeShareSheetEnabled: Boolean = false,
         showVoiceSearchInDisplayToolbar: Boolean = false,
         isHomepageTrendingRecentSearchEnabled: Boolean = false,
@@ -231,6 +235,7 @@ class HomeActivityIntentTestRule internal constructor(
         this.shakeToSummarizeFeatureFlagEnabled = shakeToSummarizeFeatureFlagEnabled
         this.isPrivateModeAndStoriesEntryPointEnabled = isPrivateModeAndStoriesEntryPointEnabled
         this.shouldUseExpandedToolbar = shouldUseExpandedToolbar
+        this.isTabStripEnabled = isTabStripEnabled
         this.nativeShareSheetEnabled = nativeShareSheetEnabled
         this.showVoiceSearchInDisplayToolbar = showVoiceSearchInDisplayToolbar
         this.isHomepageTrendingRecentSearchEnabled = isHomepageTrendingRecentSearchEnabled
@@ -308,6 +313,7 @@ class HomeActivityIntentTestRule internal constructor(
         isPrivateModeAndStoriesEntryPointEnabled = settings.privateModeAndStoriesEntryPointEnabled
         nativeShareSheetEnabled = settings.nativeShareSheetEnabled
         isHomepageTrendingRecentSearchEnabled = settings.enableHomepageTrendingRecentSearch
+        isTabStripEnabled = settings.isTabStripEnabled
     }
 
     companion object {
@@ -341,6 +347,7 @@ class HomeActivityIntentTestRule internal constructor(
             isTermsOfServiceAccepted = true,
             tabManagerOpeningAnimationEnabled = false,
             isPrivateModeAndStoriesEntryPointEnabled = false,
+            isTabStripEnabled = false,
         )
     }
 }

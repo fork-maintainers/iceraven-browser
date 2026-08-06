@@ -120,6 +120,11 @@ interface FeatureSettingsHelper {
     var shouldUseExpandedToolbar: Boolean
 
     /**
+     * Enable or disable the tab strip (the "Show tab bar" customization).
+     */
+    var isTabStripEnabled: Boolean
+
+    /**
      * Whether the Native Share Sheet feature is enabled.
      */
     var nativeShareSheetEnabled: Boolean
