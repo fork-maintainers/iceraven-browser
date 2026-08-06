@@ -1405,6 +1405,16 @@ abstract class BasePage(
                 }
             }
 
+            SelectorStrategy.UIAUTOMATOR2_BY_DESCRIPTION_CONTAINS -> {
+                val obj = mDevice.findObject(By.descContains(selector.value))
+                if (obj == null) {
+                    Log.i("mozGetElement", "UIObject2 not found for descContains: ${selector.value}")
+                    null
+                } else {
+                    obj
+                }
+            }
+
             SelectorStrategy.UIAUTOMATOR2_BY_RES -> {
                 val obj = mDevice.findObject(By.res(packageName + ":id/" + selector.value))
                 if (obj == null) {

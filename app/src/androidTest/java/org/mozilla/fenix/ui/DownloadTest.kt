@@ -75,8 +75,8 @@ class DownloadTest {
     @Test
     fun verifyTheDownloadPromptsTest() {
         downloadRobot(composeTestRule) {
-            openPageAndDownloadFile(url = mockWebServer.downloadPageAsset.url, downloadFile = "web_icon.png")
-            verifyDownloadCompleteSnackbar(fileName = "web_icon.png")
+            openPageAndDownloadFile(url = mockWebServer.downloadPageAsset.url, downloadFile = "png_image.png")
+            verifyDownloadCompleteSnackbar(fileName = "png_image.png")
             clickSnackbarButton(composeTestRule = this@DownloadTest.composeTestRule, "OPEN")
             verifyPhotosAppOpens()
         }
@@ -115,8 +115,8 @@ class DownloadTest {
     @Test
     fun verifyDownloadCompleteNotificationTest() {
         downloadRobot(composeTestRule) {
-            openPageAndDownloadFile(url = mockWebServer.downloadPageAsset.url, downloadFile = "web_icon.png")
-            verifyDownloadCompleteSnackbar(fileName = "web_icon.png")
+            openPageAndDownloadFile(url = mockWebServer.downloadPageAsset.url, downloadFile = "png_image.png")
+            verifyDownloadCompleteSnackbar(fileName = "png_image.png")
             waitUntilDownloadSnackbarGone()
         }
         mDevice.openNotification()
@@ -132,7 +132,7 @@ class DownloadTest {
                 direction = "Left",
                 shouldDismissNotification = true,
                 canExpandNotification = false,
-                notificationItem = "web_icon.png",
+                notificationItem = "png_image.png",
             )
             verifySystemNotificationDoesNotExist("Firefox Fenix")
         }.closeNotificationTray(composeTestRule) {
@@ -169,14 +169,14 @@ class DownloadTest {
     @Test
     fun openDownloadedFileFromDownloadsMenuTest() {
         downloadRobot(composeTestRule) {
-            openPageAndDownloadFile(url = mockWebServer.downloadPageAsset.url, downloadFile = "web_icon.png")
-            verifyDownloadCompleteSnackbar(fileName = "web_icon.png")
+            openPageAndDownloadFile(url = mockWebServer.downloadPageAsset.url, downloadFile = "png_image.png")
+            verifyDownloadCompleteSnackbar(fileName = "png_image.png")
         }
         browserScreen(composeTestRule) {
         }.openThreeDotMenu {
         }.clickDownloadsButton {
-            verifyDownloadedFileExistsInDownloadsList("web_icon.png")
-            clickDownloadedItem("web_icon.png")
+            verifyDownloadedFileExistsInDownloadsList("png_image.png")
+            clickDownloadedItem("png_image.png")
             verifyPhotosAppOpens()
             mDevice.pressBack()
         }
@@ -187,19 +187,19 @@ class DownloadTest {
     @SkipLeaks(reasons = ["https://bugzilla.mozilla.org/show_bug.cgi?id=2004099"])
     fun deleteDownloadedFileTest() {
         downloadRobot(composeTestRule) {
-            openPageAndDownloadFile(url = mockWebServer.downloadPageAsset.url, downloadFile = "smallZip.zip")
+            openPageAndDownloadFile(url = mockWebServer.downloadPageAsset.url, downloadFile = "zip_small.zip")
         }
         browserScreen(composeTestRule) {
         }.openThreeDotMenu {
         }.clickDownloadsButton {
-            verifyDownloadedFileExistsInDownloadsList("smallZip.zip")
-            clickDownloadItemMenuIcon("smallZip.zip")
-            deleteDownloadedItem("smallZip.zip")
+            verifyDownloadedFileExistsInDownloadsList("zip_small.zip")
+            clickDownloadItemMenuIcon("zip_small.zip")
+            deleteDownloadedItem("zip_small.zip")
             confirmDeleteDownloadDialogIfDisplayed()
             clickSnackbarButton(composeTestRule, "Undo")
-            verifyDownloadedFileExistsInDownloadsList("smallZip.zip")
-            clickDownloadItemMenuIcon("smallZip.zip")
-            deleteDownloadedItem("smallZip.zip")
+            verifyDownloadedFileExistsInDownloadsList("zip_small.zip")
+            clickDownloadItemMenuIcon("zip_small.zip")
+            deleteDownloadedItem("zip_small.zip")
             confirmDeleteDownloadDialogIfDisplayed()
             verifyEmptyDownloadsList()
         }
@@ -208,8 +208,8 @@ class DownloadTest {
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/2302662
     @Test
     fun deleteMultipleDownloadedFilesTest() {
-        val firstDownloadedFile = "smallZip.zip"
-        val secondDownloadedFile = "textfile.txt"
+        val firstDownloadedFile = "zip_small.zip"
+        val secondDownloadedFile = "txt_file.txt"
 
         downloadRobot(composeTestRule) {
             openPageAndDownloadFile(url = mockWebServer.downloadPageAsset.url, downloadFile = firstDownloadedFile)
@@ -246,14 +246,14 @@ class DownloadTest {
     @Test
     fun fileDeletedFromStorageIsDeletedEverywhereTest() {
         downloadRobot(composeTestRule) {
-            openPageAndDownloadFile(url = mockWebServer.downloadPageAsset.url, downloadFile = "smallZip.zip")
-            verifyDownloadCompleteSnackbar(fileName = "smallZip.zip")
+            openPageAndDownloadFile(url = mockWebServer.downloadPageAsset.url, downloadFile = "zip_small.zip")
+            verifyDownloadCompleteSnackbar(fileName = "zip_small.zip")
         }
         browserScreen(composeTestRule) {
         }.openThreeDotMenu {
         }.clickDownloadsButton {
-            verifyDownloadedFileExistsInDownloadsList("smallZip.zip")
-            deleteDownloadedFileOnStorage("smallZip.zip")
+            verifyDownloadedFileExistsInDownloadsList("zip_small.zip")
+            deleteDownloadedFileOnStorage("zip_small.zip")
         }.exitDownloadsManagerToBrowser {
         }.openThreeDotMenu {
         }.clickDownloadsButton {
@@ -262,13 +262,13 @@ class DownloadTest {
         }
 
         downloadRobot(composeTestRule) {
-            openPageAndDownloadFile(url = mockWebServer.downloadPageAsset.url, downloadFile = "smallZip.zip")
-            verifyDownloadCompleteSnackbar(fileName = "smallZip.zip")
+            openPageAndDownloadFile(url = mockWebServer.downloadPageAsset.url, downloadFile = "zip_small.zip")
+            verifyDownloadCompleteSnackbar(fileName = "zip_small.zip")
         }
         browserScreen(composeTestRule) {
         }.openThreeDotMenu {
         }.clickDownloadsButton {
-            verifyDownloadedFileExistsInDownloadsList("smallZip.zip")
+            verifyDownloadedFileExistsInDownloadsList("zip_small.zip")
         }
     }
 
@@ -420,8 +420,8 @@ class DownloadTest {
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/2981843
     @Test
     fun verifyTheDownloadFiltersTest() {
-        val firstDownloadedFile = "smallZip.zip"
-        val secondDownloadedFile = "web_icon.png"
+        val firstDownloadedFile = "zip_small.zip"
+        val secondDownloadedFile = "png_image.png"
 
         downloadRobot(composeTestRule) {
             openPageAndDownloadFile(url = mockWebServer.downloadPageAsset.url, downloadFile = firstDownloadedFile)
@@ -445,15 +445,15 @@ class DownloadTest {
     @Test
     fun shareDownloadedFileTest() {
         downloadRobot(composeTestRule) {
-            openPageAndDownloadFile(url = mockWebServer.downloadPageAsset.url, downloadFile = "web_icon.png")
-            verifyDownloadCompleteSnackbar(fileName = "web_icon.png")
+            openPageAndDownloadFile(url = mockWebServer.downloadPageAsset.url, downloadFile = "png_image.png")
+            verifyDownloadCompleteSnackbar(fileName = "png_image.png")
         }
         browserScreen(composeTestRule) {
         }.openThreeDotMenu {
         }.clickDownloadsButton {
-            verifyDownloadedFileExistsInDownloadsList("web_icon.png")
-            clickDownloadItemMenuIcon("web_icon.png")
-        }.shareDownloadedItem("web_icon.png") {
+            verifyDownloadedFileExistsInDownloadsList("png_image.png")
+            clickDownloadItemMenuIcon("png_image.png")
+        }.shareDownloadedItem("png_image.png") {
             expandAndroidShareLayout("Gmail")
             clickSharingApp("Gmail", GMAIL_APP)
             assertNativeAppOpens(composeTestRule, GMAIL_APP)

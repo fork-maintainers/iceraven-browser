@@ -37,7 +37,11 @@ class EffScreenDumpRunner : BaseTest() {
                 "effdump: no PageContext page named '$target'. Options: " +
                     PageCatalog.discoverPages().joinToString(", ") { it.propertyName },
             )
-        ref.getter(on).navigateToPage()
+        // Optional: dump a specific URL rather than the page's default landing state. Needed for
+        // browserPage, which otherwise loads example.com — useless when the selectors you are
+        // authoring belong to some other test page.
+        val url = InstrumentationRegistry.getArguments().getString("effdump.url").orEmpty()
+        ref.getter(on).navigateToPage(url = url)
         ScreenDump.dump(composeRule, label = "effdump:$target (compose)")
         ScreenDump.dumpEspresso(label = "effdump:$target (espresso/view-tree)")
         ScreenDump.dumpUiAutomator(label = "effdump:$target (native/uiautomator)")
