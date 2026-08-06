@@ -48,13 +48,6 @@ enum class SelectorStrategy {
     UIAUTOMATOR2_BY_RES,
     UIAUTOMATOR2_BY_CLASS,
     UIAUTOMATOR2_BY_TEXT,
-
-    // UiObject2 content-description-contains. Prefer this over UIAUTOMATOR_WITH_DESCRIPTION_CONTAINS
-    // for a control whose reaction is SLOW (opens a dialog, starts a download): UiObject (the
-    // UiSelector strategies) clicks via clickAndSync, which reports failure when no window update
-    // lands inside its ~5.5s budget — a slow-but-successful click is then indistinguishable from a
-    // missed one. UiObject2.click() just injects the gesture and lets the caller do the waiting.
-    UIAUTOMATOR2_BY_DESCRIPTION_CONTAINS,
     UIAUTOMATOR_WITH_TEXT_CONTAINS,
     UIAUTOMATOR_WITH_RES_ID,
     UIAUTOMATOR_WITH_COMPOSE_TAG,
