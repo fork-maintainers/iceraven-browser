@@ -54,6 +54,7 @@ class BookmarksTest {
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/2833690
     @Converted(
         replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.BookmarksTest#deleteBookmarkFoldersTest"],
+        bug = 2043198,
         since = "2026-05",
     )
     @SmokeTest
@@ -135,6 +136,7 @@ class BookmarksTest {
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/2833693
     @Converted(
         replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.BookmarksTest#shareBookmarkTest"],
+        bug = 2043198,
         since = "2026-05",
     )
     @SmokeTest
@@ -162,6 +164,7 @@ class BookmarksTest {
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/2833702
     @Converted(
         replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.BookmarksTest#openMultipleSelectedBookmarksInANewTabTest"],
+        bug = 2043198,
         since = "2026-05",
     )
     @SmokeTest
@@ -196,6 +199,7 @@ class BookmarksTest {
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/2833704
     @Converted(
         replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.BookmarksTest#deleteMultipleSelectedBookmarksTest"],
+        bug = 2043198,
         since = "2026-05",
     )
     @SmokeTest
@@ -246,6 +250,7 @@ class BookmarksTest {
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/2833712
     @Converted(
         replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.BookmarksTest#verifySearchForBookmarkedItemsTest"],
+        bug = 2043198,
         since = "2026-05",
     )
     @SmokeTest

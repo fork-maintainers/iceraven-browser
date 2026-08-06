@@ -509,6 +509,7 @@ class LoginsTest {
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/517818
     @Converted(
         replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.SettingsPasswordsTest#verifyNeverSaveLoginOptionTest"],
+        bug = 2057407,
         since = "2026-07",
     )
     @SmokeTest

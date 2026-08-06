@@ -168,6 +168,7 @@ class CustomTabsTest {
     // Verifies the main menu of a custom tab with a custom menu item
     @Converted(
         replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.CustomTabsTest#verifyCustomTabMenuItemsTest"],
+        bug = 2057412,
         since = "2026-07",
     )
     @SmokeTest
@@ -194,6 +195,7 @@ class CustomTabsTest {
     // The test opens a link in a custom tab then sends it to the browser
     @Converted(
         replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.CustomTabsTest#openCustomTabInFirefoxTest"],
+        bug = 2057416,
         since = "2026-07",
     )
     @SmokeTest

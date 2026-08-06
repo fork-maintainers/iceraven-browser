@@ -47,6 +47,7 @@ class RecentlyClosedTabsTest {
     // Verifies that a recently closed item is properly opened
     @Converted(
         replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.RecentlyClosedTabsTest#openRecentlyClosedItemTest"],
+        bug = 2057411,
         since = "2026-07",
     )
     @SmokeTest
@@ -82,6 +83,7 @@ class RecentlyClosedTabsTest {
     // Verifies that tapping the "x" button removes a recently closed item from the list
     @Converted(
         replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.RecentlyClosedTabsTest#deleteRecentlyClosedTabsItemTest"],
+        bug = 2057411,
         since = "2026-07",
     )
     @SmokeTest

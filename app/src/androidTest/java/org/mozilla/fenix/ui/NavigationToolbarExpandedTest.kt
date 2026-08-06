@@ -137,6 +137,7 @@ class NavigationToolbarExpandedTest {
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3333213
     @Converted(
         replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.ToolbarTest#verifyTheExpandedToolbarNewTabButtonTest"],
+        bug = 2057957,
         since = "2026-07",
     )
     @SmokeTest
@@ -158,6 +159,7 @@ class NavigationToolbarExpandedTest {
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3333214
     @Converted(
         replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.ToolbarTest#verifyTheExpandedToolbarTabTrayButtonTest"],
+        bug = 2057419,
         since = "2026-07",
     )
     @SmokeTest
@@ -176,6 +178,7 @@ class NavigationToolbarExpandedTest {
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3333215
     @Converted(
         replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.ToolbarTest#verifyTheExpandedToolbarMainMenuButtonTest"],
+        bug = 2057419,
         since = "2026-07",
     )
     @SmokeTest

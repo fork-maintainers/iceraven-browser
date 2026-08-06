@@ -117,7 +117,7 @@ class SettingsHomepageTest {
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/1564999
     @Converted(
-        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.SettingsHomepageTest#verifyJumpBackInSectionTest"],
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.SettingsHomepageTest#jumpBackInOptionTest"],
         bug = 2042363,
         since = "2026-05",
     )
