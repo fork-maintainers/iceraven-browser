@@ -280,6 +280,13 @@ object BrowserPageSelectors {
         groups = listOf(),
     )
 
+    val STAY_IN_FIREFOX_PROMPT_BUTTON = Selector(
+        strategy = SelectorStrategy.UIAUTOMATOR_WITH_TEXT_CONTAINS,
+        value = "Stay in",
+        description = "Applinks prompt 'Stay in Firefox' button",
+        groups = listOf(),
+    )
+
     val all = listOf(
         ADDED_TO_SHORTCUTS_SNACKBAR_TEXT,
         ADDRESS_CITY_WEB_FIELD,
@@ -298,6 +305,7 @@ object BrowserPageSelectors {
         SAVE_LOGIN_PROMPT_CONFIRM_BUTTON,
         SELECT_ADDRESS_HEADER,
         SNACKBAR_EDIT_BUTTON,
+        STAY_IN_FIREFOX_PROMPT_BUTTON,
         SUBMIT_LOGIN_BUTTON,
         SUGGESTED_LOGIN(),
         SUGGESTED_LOGINS_BAR,
