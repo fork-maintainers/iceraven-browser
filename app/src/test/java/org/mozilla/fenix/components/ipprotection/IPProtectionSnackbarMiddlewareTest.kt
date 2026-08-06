@@ -42,7 +42,7 @@ class IPProtectionSnackbarMiddlewareTest {
 
     @Test
     fun `WHEN ActivationFailed is dispatched THEN ConnectionError snackbar action is dispatched`() {
-        ipProtectionStore.dispatch(IPProtectionAction.ToggleFailed)
+        ipProtectionStore.dispatch(IPProtectionAction.ToggleFailed())
 
         captureMiddleware.assertLastAction(AppAction.IPProtectionSnackbarAction.ConnectionError::class) { action ->
             assertEquals(connectionError, action.title)
@@ -64,7 +64,7 @@ class IPProtectionSnackbarMiddlewareTest {
             // Simulates HomeActivity recreation: the same process-scoped IPProtectionStore now has
             // a new observer (a freshly-instantiated IPProtectionInfoPrompter). With the snackbar
             // owned by middleware, the new observer does not re-fire on already-set state.
-            ipProtectionStore.dispatch(IPProtectionAction.ToggleFailed)
+            ipProtectionStore.dispatch(IPProtectionAction.ToggleFailed())
             captureMiddleware.assertLastAction(AppAction.IPProtectionSnackbarAction.ConnectionError::class)
             captureMiddleware.reset()
 
