@@ -1060,7 +1060,7 @@
       ],
       "targeting": "(('casual-game-release' in active_experiments) || ((days_since_install < 7) && (app_version|versionCompare('153.!') >= 0)))",
       "startDate": "2026-07-06",
-      "enrollmentEndDate": null,
+      "enrollmentEndDate": "2026-08-05",
       "endDate": null,
       "proposedDuration": 28,
       "proposedEnrollment": 7,
