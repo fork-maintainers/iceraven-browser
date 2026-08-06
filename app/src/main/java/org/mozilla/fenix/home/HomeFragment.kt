@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.VisibleForTesting
@@ -38,6 +39,9 @@ import androidx.compose.ui.layout.boundsInRoot
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -83,6 +87,8 @@ import org.mozilla.fenix.R
 import org.mozilla.fenix.biometricauthentication.AuthenticationStatus
 import org.mozilla.fenix.biometricauthentication.BiometricAuthenticationManager
 import org.mozilla.fenix.browser.BrowserFragmentDirections
+import org.mozilla.fenix.browser.SwipeGestureLayout
+import org.mozilla.fenix.browser.TabPreview
 import org.mozilla.fenix.browser.browsingmode.BrowsingMode
 import org.mozilla.fenix.browser.tabstrip.TabStrip
 import org.mozilla.fenix.browser.tabstrip.TabStripColors
@@ -141,6 +147,7 @@ import org.mozilla.fenix.home.topsites.TopSitesBinding
 import org.mozilla.fenix.home.topsites.controller.DefaultTopSiteController
 import org.mozilla.fenix.home.topsites.controller.TopSitesSource
 import org.mozilla.fenix.home.topsites.getTopSitesConfig
+import org.mozilla.fenix.home.ui.HomeSwipeIntegration
 import org.mozilla.fenix.home.ui.Homepage
 import org.mozilla.fenix.home.ui.WallpaperBackground
 import org.mozilla.fenix.ipprotection.store.IPProtectionOnboardingPrompt
@@ -231,6 +238,12 @@ class HomeFragment : Fragment() {
     private lateinit var privacyNoticeBannerStore: PrivacyNoticeBannerStore
 
     private var _sessionControlController: SessionControlController? = null
+
+    private var homeTabPreview: TabPreview? = null
+    private var homepageComposeView: ComposeView? = null
+    private var toolbarBoundsInRoot: Rect? = null
+    private var navbarBoundsInRoot: Rect? = null
+
     private val sessionControlController: SessionControlController
         get() = _sessionControlController!!
 
@@ -366,13 +379,18 @@ class HomeFragment : Fragment() {
         val profilerStartTime = requireComponents.core.engine.profiler?.getProfilerTime()
 
         val activity = activity as HomeActivity
-        val view = ComposeView(activity).apply {
+        val composeView = ComposeView(activity).apply {
             id = R.id.homepageView
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
         }
-
-        nullableToolbarView = buildToolbar(activity, view)
-        initComposeHomepage(view = view)
+        homepageComposeView = composeView
+        nullableToolbarView = buildToolbar(activity, composeView)
+        initComposeHomepage(view = composeView)
+        val view = if (isToolbarSwipeToSwitchTabsEnabled()) {
+            wrapInSwipeLayout(activity, composeView)
+        } else {
+            composeView
+        }
 
         // DO NOT MOVE ANYTHING BELOW THIS addMarker CALL!
         requireComponents.core.engine.profiler?.addMarker(
@@ -381,6 +399,36 @@ class HomeFragment : Fragment() {
             "HomeFragment.onCreateView",
         )
         return view
+    }
+
+    private fun wrapInSwipeLayout(
+        context: HomeActivity,
+        composeView: ComposeView,
+    ): SwipeGestureLayout {
+       val fill = ViewGroup.LayoutParams.MATCH_PARENT
+       val matchParent = { FrameLayout.LayoutParams(fill, fill) }
+       return SwipeGestureLayout(context).apply {
+           layoutParams = ViewGroup.LayoutParams(fill, fill)
+           addView(composeView, matchParent())
+           addView(
+               TabPreview(context).apply {
+                   visibility = View.GONE
+                   isClickable = false
+                   isFocusable = false
+                   ViewCompat.setOnApplyWindowInsetsListener(this) { v, insets ->
+                       val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+                       v.updatePadding(
+                           left = bars.left,
+                           top = bars.top,
+                           right = bars.right,
+                           bottom = bars.bottom,
+                       )
+                       insets
+                   }
+               }.also { homeTabPreview = it },
+               matchParent(),
+           )
+       }
     }
 
     private fun buildToolbar(activity: HomeActivity, view: View): FenixHomeToolbar {
@@ -507,6 +555,7 @@ class HomeFragment : Fragment() {
         initRecentTabsListFeature(view = view)
         initPrivacyReportFeature(view = view)
         initBookmarksFeature(view = view)
+        initSwipeToSwitchTabs(view)
         initHistoryMetadataFeature(view = view)
         initThumbnailsFeature(view = view)
         initReviewPromptBinding(view = view)
@@ -538,6 +587,49 @@ class HomeFragment : Fragment() {
         )
     }
 
+    /**
+     * Whether swiping the toolbar to switch tabs should be enabled on the homepage. This only
+     * applies when Home behaves as a tab (HNT) and the tab strip is not in use.
+     */
+    private fun isToolbarSwipeToSwitchTabsEnabled(): Boolean = with(requireComponents.settings) {
+        isSwipeToolbarToSwitchTabsEnabled && !isTabStripEnabled && enableHomepageAsNewTab
+    }
+
+    @Suppress("ReturnCount")
+    private fun initSwipeToSwitchTabs(view: View) {
+        if (!isToolbarSwipeToSwitchTabsEnabled()) {
+            return
+        }
+
+        val gestureLayout = view as? SwipeGestureLayout ?: return
+        val contentLayout = homepageComposeView ?: return
+        val tabPreview = homeTabPreview ?: return
+
+        HomeSwipeIntegration(
+            activity = requireActivity(),
+            store = requireComponents.core.store,
+            selectTabUseCase = requireComponents.useCases.tabsUseCases.selectTab,
+            contentLayout = contentLayout,
+            gestureLayout = gestureLayout,
+            navController = findNavController(),
+            navBarLayoutRect = { navbarBoundsInRoot.toScreenRect(contentLayout) },
+            toolbarLayoutRect = { toolbarBoundsInRoot.toScreenRect(contentLayout) },
+            tabPreview = tabPreview,
+        ).initializeSwipeUI()
+    }
+
+    private fun Rect?.toScreenRect(contentLayout: ComposeView): Rect? {
+        if (this == null) return null
+        val location = IntArray(2)
+        contentLayout.getLocationOnScreen(location)
+        return Rect(
+            left + location[0],
+            top + location[1],
+            right + location[0],
+            bottom + location[1],
+        )
+    }
+
     @Suppress("LongMethod", "CognitiveComplexMethod")
     private fun initComposeHomepage(
         view: ComposeView,
@@ -558,6 +650,7 @@ class HomeFragment : Fragment() {
                     initial = privacyNoticeBannerStore.state,
                 )
                 val isToolbarAtTop = settings.toolbarPosition == ToolbarPosition.TOP
+                val captureToolbarBounds = remember { isToolbarSwipeToSwitchTabsEnabled() }
 
                 val microsurveyVisible = settings.microsurveyFeatureEnabled &&
                     !appState.value.mode.isPrivate &&
@@ -618,14 +711,20 @@ class HomeFragment : Fragment() {
                                 .imePadding(),
                             topBar = {
                                 if (isToolbarAtTop) {
-                                    toolbarView.Content()
+                                    ToolbarSlot(captureToolbarBounds, { toolbarBoundsInRoot = it }) {
+                                        toolbarView.Content()
+                                    }
                                 }
                             },
                             bottomBar = {
                                 if (isToolbarAtTop) {
-                                    homeNavigationBar?.Content()
+                                    ToolbarSlot(captureToolbarBounds, { navbarBoundsInRoot = it }) {
+                                        homeNavigationBar?.Content()
+                                    }
                                 } else {
-                                    toolbarView.Content()
+                                    ToolbarSlot(captureToolbarBounds, { toolbarBoundsInRoot = it }) {
+                                        toolbarView.Content()
+                                    }
                                 }
                             },
                             containerColor = Color.Transparent,
@@ -648,6 +747,33 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
+    /**
+     * Renders a home toolbar slot, capturing its on-screen bounds via [onBounds] only when
+     * [captureBounds] is true (i.e. when swipe-to-switch-tabs is active). When disabled, the
+     * content is rendered directly so the home layout is unchanged.
+     */
+    @Composable
+    private fun ToolbarSlot(
+        captureBounds: Boolean,
+        onBounds: (Rect) -> Unit,
+        content: @Composable () -> Unit,
+    ) {
+        if (captureBounds) {
+            Box(
+                modifier = Modifier.onGloballyPositioned {
+                    onBounds(it.boundsInRoot().toAndroidRect())
+                },
+            ) {
+                content()
+            }
+        } else {
+            content()
+        }
+    }
+
+    private fun androidx.compose.ui.geometry.Rect.toAndroidRect(): Rect =
+        Rect(left.toInt(), top.toInt(), right.toInt(), bottom.toInt())
 
     /**
      * Matches the status bar and navigation bar icon appearance to the current wallpaper's text
@@ -848,6 +974,11 @@ class HomeFragment : Fragment() {
 
         nullableToolbarView = null
         homeNavigationBar = null
+
+        homepageComposeView = null
+        homeTabPreview = null
+        toolbarBoundsInRoot = null
+        navbarBoundsInRoot = null
 
         _sessionControlController?.unregisterCallback()
         _sessionControlController = null
@@ -1154,7 +1285,9 @@ class HomeFragment : Fragment() {
         thumbnailsFeature.set(
             feature = HomepageThumbnailIntegration(
                 context = requireContext(),
-                view = view,
+                // Screenshot only the homepage content, not the swipe layout root, otherwise the
+                // TabPreview overlay gets baked into the thumbnail and compounds on every swipe.
+                view = homepageComposeView ?: view,
                 store = requireComponents.core.store,
                 appStore = requireComponents.appStore,
                 homepageContentBounds = { homepageContentBounds },
