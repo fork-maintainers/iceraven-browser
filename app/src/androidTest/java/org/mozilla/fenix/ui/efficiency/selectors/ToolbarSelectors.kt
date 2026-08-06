@@ -72,6 +72,55 @@ object ToolbarSelectors {
         groups = listOf(),
     )
 
+    val EXPANDED_TOOLBAR_ADD_BOOKMARK_BUTTON = Selector(
+        strategy = SelectorStrategy.UIAUTOMATOR_WITH_DESCRIPTION_CONTAINS,
+        value = getStringResource(R.string.browser_menu_bookmark_this_page_2),
+        description = "Expanded toolbar bookmark page button",
+        groups = listOf("expandedToolbarItem"),
+    )
+
+    val EXPANDED_TOOLBAR_EDIT_BOOKMARK_BUTTON = Selector(
+        strategy = SelectorStrategy.UIAUTOMATOR_WITH_DESCRIPTION_CONTAINS,
+        value = getStringResource(R.string.browser_menu_edit_bookmark),
+        description = "Expanded toolbar edit bookmark button",
+        groups = listOf("expandedToolbarItem"),
+    )
+
+    val EXPANDED_TOOLBAR_SHARE_BUTTON = Selector(
+        strategy = SelectorStrategy.UIAUTOMATOR_WITH_DESCRIPTION_CONTAINS,
+        value = getStringResource(R.string.browser_menu_share),
+        description = "Expanded toolbar share button",
+        groups = listOf("expandedToolbarItem"),
+    )
+
+    val EXPANDED_TOOLBAR_BACK_BUTTON = Selector(
+        strategy = SelectorStrategy.UIAUTOMATOR_WITH_DESCRIPTION_CONTAINS,
+        value = getStringResource(R.string.browser_menu_back),
+        description = "Expanded toolbar back button",
+        groups = listOf("expandedToolbarInLandscapeItem"),
+    )
+
+    val EXPANDED_TOOLBAR_FORWARD_BUTTON = Selector(
+        strategy = SelectorStrategy.UIAUTOMATOR_WITH_DESCRIPTION_CONTAINS,
+        value = getStringResource(R.string.browser_menu_forward),
+        description = "Expanded toolbar forward button",
+        groups = listOf("expandedToolbarInLandscapeItem"),
+    )
+
+    val EXPANDED_TOOLBAR_REFRESH_BUTTON = Selector(
+        strategy = SelectorStrategy.UIAUTOMATOR_WITH_DESCRIPTION_CONTAINS,
+        value = getStringResource(R.string.browser_menu_refresh),
+        description = "Expanded toolbar refresh button",
+        groups = listOf("expandedToolbarInLandscapeItem"),
+    )
+
+    val SITE_INFO_BUTTON = Selector(
+        strategy = SelectorStrategy.UIAUTOMATOR_WITH_DESCRIPTION_CONTAINS,
+        value = "Site information",
+        description = "Site information button",
+        groups = listOf(),
+    )
+
     @Suppress("ktlint:standard:function-naming", "FunctionName")
     fun SEARCH_ENGINE_SELECTOR_ICON(searchEngineName: String = "") = Selector(
         strategy = SelectorStrategy.COMPOSE_BY_CONTENT_DESCRIPTION,
@@ -126,6 +175,13 @@ object ToolbarSelectors {
         TOOLBAR_URL_BOX,
         TOOLBAR_URL_BOX_UIAUTOMATOR,
         NEW_TAB_BUTTON,
+        EXPANDED_TOOLBAR_ADD_BOOKMARK_BUTTON,
+        EXPANDED_TOOLBAR_EDIT_BOOKMARK_BUTTON,
+        EXPANDED_TOOLBAR_SHARE_BUTTON,
+        EXPANDED_TOOLBAR_BACK_BUTTON,
+        EXPANDED_TOOLBAR_FORWARD_BUTTON,
+        EXPANDED_TOOLBAR_REFRESH_BUTTON,
+        SITE_INFO_BUTTON,
         SEARCH_ENGINE_SELECTOR_ICON(),
         TAB_COUNTER_WITH_COUNT(),
         INSECURE_CONNECTION_INFORMATION_BUTTON,

@@ -12,6 +12,7 @@ import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.AndroidComposeTestRule
 import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.test.uiautomator.By
+import androidx.test.uiautomator.UiSelector
 import androidx.test.uiautomator.Until
 import mozilla.components.compose.browser.toolbar.concept.BrowserToolbarTestTags.ADDRESSBAR_URL
 import org.junit.Assert.assertTrue
@@ -325,6 +326,21 @@ class BrowserPage(composeRule: AndroidComposeTestRule<HomeActivityIntentTestRule
     fun openMainMenu(): BrowserPage {
         mozClick(BrowserPageSelectors.MAIN_MENU_BUTTON)
 
+        return this
+    }
+
+    /**
+     * Assert the toolbar sits in the top half of the screen. With shouldUseExpandedToolbar the toolbar is at
+     * the bottom in portrait and moves to the top in landscape; this is the landscape check. Ports the legacy
+     * HomeScreenRobot.verifyToolbarPosition(bottomPosition = false) geometry.
+     */
+    fun verifyToolbarIsAtTop(): BrowserPage {
+        val toolbar = mDevice.findObject(UiSelector().resourceId("$packageName:id/composable_toolbar"))
+        assertTrue("Toolbar must be present in the view hierarchy", toolbar.waitForExists(waitingTime))
+        assertTrue(
+            "Toolbar should be positioned at the top of the screen",
+            toolbar.visibleBounds.centerY() < mDevice.displayHeight / 2,
+        )
         return this
     }
 

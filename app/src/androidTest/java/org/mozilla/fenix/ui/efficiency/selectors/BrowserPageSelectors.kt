@@ -6,6 +6,7 @@ package org.mozilla.fenix.ui.efficiency.selectors
 
 import org.mozilla.fenix.R
 import org.mozilla.fenix.compose.snackbar.SNACKBAR_BUTTON_TEST_TAG
+import org.mozilla.fenix.compose.snackbar.SNACKBAR_TEST_TAG
 import org.mozilla.fenix.helpers.DataGenerationHelper.getStringResource
 import org.mozilla.fenix.helpers.TestHelper.shortAppName
 import org.mozilla.fenix.ui.efficiency.helpers.Selector
@@ -31,6 +32,13 @@ object BrowserPageSelectors {
         value = SNACKBAR_BUTTON_TEST_TAG,
         description = "Snackbar Edit button",
         groups = listOf("snackbar"),
+    )
+
+    val SNACKBAR = Selector(
+        strategy = SelectorStrategy.UIAUTOMATOR_WITH_COMPOSE_TAG,
+        value = SNACKBAR_TEST_TAG,
+        description = "Snackbar container",
+        groups = listOf(),
     )
 
     val MAIN_MENU_BUTTON = Selector(
@@ -310,6 +318,8 @@ object BrowserPageSelectors {
         SUGGESTED_LOGIN(),
         SUGGESTED_LOGINS_BAR,
         TAB_CRASH_REPORTER_CLOSE_BUTTON,
+        SNACKBAR,
+        MAIN_MENU_BUTTON,
         TAB_CRASH_REPORTER_IMAGE,
         TAB_CRASH_REPORTER_MESSAGE,
         TAB_CRASH_REPORTER_RESTORE_BUTTON,
