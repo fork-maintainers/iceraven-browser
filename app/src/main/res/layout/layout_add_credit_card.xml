@@ -6,11 +6,13 @@
     android:id="@+id/add_credit_card_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?attr/selectableItemBackground"
     android:clickable="true"
-    android:focusable="true">
+    android:focusable="true"
+    tools:ignore="Overdraw">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/add_credit_card_icon"

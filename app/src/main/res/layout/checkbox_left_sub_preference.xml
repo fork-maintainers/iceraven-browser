@@ -13,7 +13,7 @@
     android:focusable="true"
     android:gravity="center_vertical"
     android:paddingStart="@dimen/custom_checkbox_alignment_margin"
-    tools:ignore="RtlSymmetry">
+    tools:ignore="RtlSymmetry,Overdraw">
 
     <LinearLayout
         android:id="@android:id/widget_frame"

@@ -11,7 +11,8 @@
     android:background="?attr/colorSurface"
     android:paddingStart="11dp"
     android:paddingTop="21dp"
-    android:paddingEnd="16dp">
+    android:paddingEnd="16dp"
+    tools:ignore="Overdraw">
 
     <TextView
         android:id="@+id/banner_info_message"
