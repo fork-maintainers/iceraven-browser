@@ -299,7 +299,7 @@ class OnboardingFragment : Fragment() {
                     sequencePosition = pagesToDisplay.sequencePosition(it.type),
                 )
 
-                if (requireComponents.settings.shouldShowSetAsDefaultPrompt()) {
+                if (FxNimbus.features.defaultBrowserPrompt.value().enabled) {
                     defaultBrowserPromptManager.maybePromptToSetAsDefaultBrowser(it)
                 }
             },

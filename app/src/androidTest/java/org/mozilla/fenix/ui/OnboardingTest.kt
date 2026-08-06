@@ -40,6 +40,7 @@ class OnboardingTest {
     val memoryLeaksRule = DetectMemoryLeaksRule(composeTestRule = { composeTestRule })
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3349493
+    @SdkSuppress(minSdkVersion = 29)
     @SmokeTest
     @Test
     fun verifyTheTermsOfUseOnboardingCardTest() {
@@ -47,6 +48,7 @@ class OnboardingTest {
             homeScreen(composeTestRule) {
                 verifyTheTermsOfUseOnboardingCard()
                 clickTheOnboardingCardContinueButton()
+                clickTheSetAsDefaultBrowserDialogCancelButton()
                 verifyTheSetAsDefaultBrowserOnboardingCard()
             }
         }
@@ -235,6 +237,7 @@ class OnboardingTest {
             homeScreen(composeTestRule) {
                 verifyTheTermsOfUseOnboardingCard()
                 clickTheOnboardingCardContinueButton()
+                clickTheSetAsDefaultBrowserDialogCancelButton()
                 verifyTheSetAsDefaultBrowserOnboardingCard()
                 clickNotNowOnboardingCardButton()
                 verifyTheFirefoxSearchWidgetOnboardingCard()
@@ -244,6 +247,7 @@ class OnboardingTest {
                 restartApp(composeTestRule.activityRule)
                 verifyTheTermsOfUseOnboardingCard()
                 clickTheOnboardingCardContinueButton()
+                clickTheSetAsDefaultBrowserDialogCancelButton()
                 verifyTheSetAsDefaultBrowserOnboardingCard()
             }
         }
