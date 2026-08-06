@@ -2170,7 +2170,7 @@ abstract class BaseBrowserFragment :
         return context?.components?.core?.store?.state?.findCustomTabOrSelectedTab(customTabSessionId)
     }
 
-    @VisibleForTesting
+    @VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
     internal fun getCurrentTab(): SessionState? {
         return requireComponents.core.store.state.findCustomTabOrSelectedTab(customTabSessionId)
     }

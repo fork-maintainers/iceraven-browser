@@ -114,89 +114,12 @@
     <issue
         id="VisibleForTests"
         message="This method should only be accessed from tests or within private scope"
-        errorLine1="        getCurrentTab()?.let { tab ->"
-        errorLine2="        ~~~~~~~~~~~~~">
-        <location
-            file="src/main/java/org/mozilla/fenix/browser/BrowserFragment.kt"
-            line="399"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="VisibleForTests"
-        message="This method should only be accessed from tests or within private scope"
-        errorLine1="            (binding.root.layoutParams as CoordinatorLayout.LayoutParams).behavior = DynamicInfoBannerBehavior("
-        errorLine2="             ~~~~~~~">
-        <location
-            file="src/main/java/org/mozilla/fenix/browser/infobanner/DynamicInfoBanner.kt"
-            line="51"
-            column="14"/>
-    </issue>
-
-    <issue
-        id="VisibleForTests"
-        message="This method should only be accessed from tests or within private scope"
-        errorLine1="        binding.exceptionsLearnMore.isVisible = false"
-        errorLine2="        ~~~~~~~">
-        <location
-            file="src/main/java/org/mozilla/fenix/exceptions/login/LoginExceptionsView.kt"
-            line="21"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="VisibleForTests"
-        message="This method should only be accessed from tests or within private scope"
-        errorLine1="        binding.exceptionsEmptyMessage.text ="
-        errorLine2="        ~~~~~~~">
-        <location
-            file="src/main/java/org/mozilla/fenix/exceptions/login/LoginExceptionsView.kt"
-            line="22"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="VisibleForTests"
-        message="This method should only be accessed from tests or within private scope"
-        errorLine1="        binding.exceptionsList.apply {"
-        errorLine2="        ~~~~~~~">
-        <location
-            file="src/main/java/org/mozilla/fenix/exceptions/login/LoginExceptionsView.kt"
-            line="27"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="VisibleForTests"
-        message="This method should only be accessed from tests or within private scope"
         errorLine1="                    it.items.size >= searchGroupMinimumSites"
         errorLine2="                                     ~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/java/org/mozilla/fenix/components/history/PagedHistoryProvider.kt"
             line="133"
             column="38"/>
-    </issue>
-
-    <issue
-        id="VisibleForTests"
-        message="This method should only be accessed from tests or within private scope"
-        errorLine1="        binding.exceptionsList.apply {"
-        errorLine2="        ~~~~~~~">
-        <location
-            file="src/main/java/org/mozilla/fenix/exceptions/trackingprotection/TrackingProtectionExceptionsView.kt"
-            line="21"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="VisibleForTests"
-        message="This method should only be accessed from tests or within private scope"
-        errorLine1="        with(binding.exceptionsLearnMore) {"
-        errorLine2="             ~~~~~~~">
-        <location
-            file="src/main/java/org/mozilla/fenix/exceptions/trackingprotection/TrackingProtectionExceptionsView.kt"
-            line="25"
-            column="14"/>
     </issue>
 
     <issue

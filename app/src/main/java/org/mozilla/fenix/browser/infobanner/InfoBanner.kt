@@ -41,7 +41,7 @@ open class InfoBanner(
     private val currentTimeMillis: () -> Long = { System.currentTimeMillis() },
 ) {
     @SuppressLint("InflateParams")
-    @VisibleForTesting
+    @VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
     internal val binding = InfoBannerBinding.inflate(LayoutInflater.from(context), container, false)
 
     internal open fun showBanner() {
