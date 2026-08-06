@@ -2,8 +2,6 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-@file:OptIn(ExperimentalAndroidComponentsApi::class)
-
 package org.mozilla.fenix.components.ipprotection
 
 import android.os.SystemClock
@@ -15,8 +13,6 @@ import mozilla.components.feature.ipprotection.store.state.IPProtectionState
 import mozilla.components.lib.state.Middleware
 import mozilla.components.lib.state.Store
 import org.mozilla.fenix.GleanMetrics.Vpn
-import org.mozilla.geckoview.ExperimentalGeckoViewApi
-import org.mozilla.geckoview.IPProtectionController.IPProxyException
 
 /**
  * [Middleware] that records telemetry for the FxA authentication and authorization initiated through IP Protection
@@ -44,7 +40,7 @@ internal class IPProtectionTelemetryMiddleware(
     ) {
         // The entitled but unauthenticated error state can be only captured before the reducer processes the action.
         if (action is IPProtectionAction.ToggleFailed) {
-            handleToggleFailedAction(store.state, action.error)
+            handleToggleFailedAction(store.state)
         }
 
         val previousStatus = store.state.accountState.status
@@ -118,14 +114,14 @@ internal class IPProtectionTelemetryMiddleware(
         }
     }
 
-    @androidx.annotation.OptIn(ExperimentalGeckoViewApi::class)
-    private fun handleToggleFailedAction(state: IPProtectionState, error: Throwable?) {
+    @OptIn(ExperimentalAndroidComponentsApi::class)
+    private fun handleToggleFailedAction(state: IPProtectionState) {
         if (state.accountState.status == AccountStatus.EnrolledAndEntitled &&
             state.serviceStatus == ServiceState.Unauthenticated
         ) {
             Vpn.entitledAccountUnauthenticated.record()
         }
-        Vpn.errorEncountered.record(Vpn.ErrorEncounteredExtra(errorCode = "${(error as? IPProxyException)?.code}"))
+        Vpn.errorEncountered.record()
     }
 
     private fun durationSince(startMs: Long?): Int? = startMs?.let { (currentTimeInMillis() - it).toInt() }
