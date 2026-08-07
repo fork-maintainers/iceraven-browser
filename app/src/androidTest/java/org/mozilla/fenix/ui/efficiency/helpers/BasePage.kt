@@ -778,10 +778,18 @@ abstract class BasePage(
         }
     }
 
+    /**
+     * Swipe a single [direction] on [selector]'s element. [steps] controls the gesture speed for the
+     * UiAutomator ([UiObject]) backend: it is the number of motion events sent, so a low value produces a
+     * fast flick and a high value a slow drag. Some gestures only register as a flick (e.g. swiping the
+     * navigation toolbar to switch tabs), so callers that need one pass a small [steps]; the default of
+     * 100 keeps the original slow-drag behaviour for existing callers.
+     */
     fun mozSwipeElement(
         selector: Selector,
         direction: SwipeDirection,
         applyPreconditions: Boolean = false,
+        steps: Int = 100,
     ): BasePage {
         val rep = rep()
         rep?.startCmd(safeId("swipe_element", selector.description), "Swiping ${direction.name} on '${selector.description}'...", 1)
@@ -801,7 +809,6 @@ abstract class BasePage(
                 }
 
                 is UiObject -> {
-                    val steps = 100
                     when (direction) {
                         SwipeDirection.DOWN -> containerElement.swipeDown(steps)
                         SwipeDirection.UP -> containerElement.swipeUp(steps)
