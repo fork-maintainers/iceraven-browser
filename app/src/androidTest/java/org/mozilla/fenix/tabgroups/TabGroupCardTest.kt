@@ -48,6 +48,7 @@ class TabGroupCardTest {
         override val openingAnimationEnabled: Boolean = false
         override val tabGroupsEnabled: Boolean = true
         override val tabGroupsDragAndDropEnabled: Boolean = false
+        override val shareTabGroupEnabled: Boolean = false
         override val ungroupTabGroupEnabled: Boolean = true
         override val tabGroupsOnboardingEnabled: Boolean = false
         override val tabGroupsLiveReorderEnabled: Boolean = false
@@ -154,7 +155,6 @@ class TabGroupCardTest {
             .performClick()
         composeTestRule.onNodeWithTag(TabsTrayTestTag.EDIT_TAB_GROUP).assertIsDisplayed()
         composeTestRule.onNodeWithTag(TabsTrayTestTag.CLOSE_TAB_GROUP).assertIsDisplayed()
-        composeTestRule.onNodeWithTag(TabsTrayTestTag.SHARE_TAB_GROUP).assertIsDisplayed()
         composeTestRule.onNodeWithTag(TabsTrayTestTag.UNGROUP_TAB_GROUP).assertIsDisplayed()
         composeTestRule.onNodeWithTag(TabsTrayTestTag.DELETE_TAB_GROUP).assertIsDisplayed()
     }
@@ -368,7 +368,6 @@ class TabGroupCardTest {
         onDeleteTabGroupClick: (String) -> Unit = {},
         onEditTabGroupClick: (TabsTrayItem.TabGroup) -> Unit = {},
         onCloseTabGroupClick: (TabsTrayItem.TabGroup) -> Unit = {},
-        onShareTabGroupClick: (TabsTrayItem.TabGroup) -> Unit = {},
         featureHelper: TabManagementFeatureHelper = tabManagementFeatureHelper,
     ) {
         CompositionLocalProvider(LocalTabManagementFeatureHelper provides featureHelper) {
@@ -385,7 +384,6 @@ class TabGroupCardTest {
                 onDeleteTabGroupClick = { onDeleteTabGroupClick("Test") },
                 onEditTabGroupClick = { onEditTabGroupClick(group) },
                 onCloseTabGroupClick = { onCloseTabGroupClick(group) },
-                onShareTabGroupClick = { onShareTabGroupClick(group) },
             )
         }
     }

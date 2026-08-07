@@ -83,12 +83,10 @@ const val BOTTOM_END_THUMBNAIL_INDEX = 3
  * @param clickHandler: Handler for all click-handling inputs (long click, click, etc)
  * @param modifier: The Modifier
  * @param interactionState The tab item's interaction state (hover, drag, etc)
+ * @param onDeleteTabGroupClick Invoked when the user clicks on delete tab group.
  * @param onEditTabGroupClick Invoked when the user clicks to edit the tab group.
  * @param onCloseTabGroupClick Invoked when the user clicks to close the tab group.
- * @param onShareTabGroupClick Invoked when the user clicks to share the tab group.
- * @param onDeleteTabGroupClick Invoked when the user clicks on delete tab group.
  */
-@Suppress("LongParameterList")
 @Composable
 fun TabGroupCard(
     group: TabsTrayItem.TabGroup,
@@ -96,10 +94,9 @@ fun TabGroupCard(
     clickHandler: TabsTrayItemClickHandler,
     modifier: Modifier = Modifier,
     interactionState: TabItemInteractionState,
+    onDeleteTabGroupClick: (TabsTrayItem.TabGroup) -> Unit,
     onEditTabGroupClick: () -> Unit,
     onCloseTabGroupClick: () -> Unit,
-    onShareTabGroupClick: (TabsTrayItem.TabGroup) -> Unit,
-    onDeleteTabGroupClick: (TabsTrayItem.TabGroup) -> Unit,
 ) {
     val containerColor = tabGridItemContainerColor(selectionState)
 
@@ -149,10 +146,9 @@ fun TabGroupCard(
 
                         TabGroupOptionButton(
                             selectionState = selectionState,
+                            onDeleteTabGroupClick = { onDeleteTabGroupClick(group) },
                             onEditTabGroupClick = onEditTabGroupClick,
                             onCloseTabGroupClick = onCloseTabGroupClick,
-                            onShareTabGroupClick = { onShareTabGroupClick(group) },
-                            onDeleteTabGroupClick = { onDeleteTabGroupClick(group) },
                         )
                     }
                 }
@@ -187,10 +183,9 @@ fun TabGroupCard(
 @Composable
 private fun TabGroupOptionButton(
     selectionState: TabsTrayItemSelectionState,
+    onDeleteTabGroupClick: () -> Unit,
     onEditTabGroupClick: () -> Unit,
     onCloseTabGroupClick: () -> Unit,
-    onShareTabGroupClick: () -> Unit,
-    onDeleteTabGroupClick: () -> Unit,
 ) {
     if (selectionState.multiSelectEnabled) {
         MultiSelectTabButton(
@@ -205,7 +200,6 @@ private fun TabGroupOptionButton(
             onDeleteTabGroupClick = onDeleteTabGroupClick,
             onEditTabGroupClick = onEditTabGroupClick,
             onCloseTabGroupClick = onCloseTabGroupClick,
-            onShareTabGroupClick = onShareTabGroupClick,
             onUngroupTabGroupClick = {},
         )
     }
@@ -544,10 +538,9 @@ private fun TabGroupCardPreview(
                 ),
                 modifier = Modifier.weight(1f),
                 interactionState = tabGroupCardState.interactionState,
+                onDeleteTabGroupClick = {},
                 onEditTabGroupClick = {},
                 onCloseTabGroupClick = {},
-                onShareTabGroupClick = {},
-                onDeleteTabGroupClick = {},
             )
         }
     }

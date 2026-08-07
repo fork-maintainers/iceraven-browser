@@ -109,7 +109,6 @@ import org.mozilla.fenix.tabstray.ui.syncedtabs.OnTabCloseClick as OnSyncedTabCl
  * @param onOpenNewPrivateTabClicked Invoked when the fab is clicked in [Page.PrivateTabs].
  * @param onSyncedTabsFabClicked Invoked when the fab is clicked in [Page.SyncedTabs].
  * @param onUnlockPbmClick Invoked when user clicks on the Unlock button.
- * @param onShareTabGroupClick Invoked when the user clicks to share a tab group.
  * @param trackersBlockedCount The number of trackers blocked to display in the footer card.
  * @param onPrivacyReportTapped Invoked when the trackers blocked pill is tapped.
  */
@@ -158,7 +157,6 @@ fun TabsTray(
     onOpenNewPrivateTabClicked: () -> Unit,
     onSyncedTabsFabClicked: () -> Unit,
     onUnlockPbmClick: () -> Unit,
-    onShareTabGroupClick: (TabsTrayItem.TabGroup) -> Unit,
     trackersBlockedCount: Int? = null,
     onPrivacyReportTapped: (() -> Unit)? = null,
 ) {
@@ -259,15 +257,14 @@ fun TabsTray(
                             onInactiveTabsCFRShown = onInactiveTabsCFRShown,
                             onInactiveTabsCFRClick = onInactiveTabsCFRClick,
                             onInactiveTabsCFRDismiss = onInactiveTabsCFRDismiss,
+                            onDeleteTabGroupClick = { group ->
+                                onAction(TabGroupAction.DeleteClicked(group))
+                            },
                             onEditTabGroupClick = { group ->
                                 onAction(TabGroupAction.EditTabGroupClicked(group = group))
                             },
                             onCloseTabGroupClick = { group ->
                                 onAction(TabGroupAction.CloseTabGroupClicked(group = group))
-                            },
-                            onShareTabGroupClick = onShareTabGroupClick,
-                            onDeleteTabGroupClick = { group ->
-                                onAction(TabGroupAction.DeleteClicked(group))
                             },
                             onTabGroupOnboardingDismiss = onTabGroupOnboardingDismiss,
                             onTabGroupOnboardingShown = onTabGroupOnboardingShown,
@@ -311,12 +308,11 @@ fun TabsTray(
                             onTabGroupClick = { group ->
                                 onAction(TabGroupAction.OpenTabGroupClicked(group))
                             },
-                            onEditTabGroupClick = { group ->
-                                onAction(TabGroupAction.EditTabGroupClicked(group = group))
-                            },
-                            onShareTabGroupClick = onShareTabGroupClick,
                             onDeleteTabGroupClick = { group ->
                                 onAction(TabGroupAction.DeleteClicked(group))
+                            },
+                            onEditTabGroupClick = { group ->
+                                onAction(TabGroupAction.EditTabGroupClicked(group = group))
                             },
                         )
                     }
@@ -476,7 +472,6 @@ private fun TabsTrayPreview(
                 store.dispatch(TabsTrayAction.UpdateSyncedTabs(newSyncedTabList))
             },
             onUnlockPbmClick = {},
-            onShareTabGroupClick = {},
         )
     }
 }

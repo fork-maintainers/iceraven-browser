@@ -35,9 +35,8 @@ class TabGroupsPageTest {
                 TabGroupsPage(
                     state = TabsTrayState.TabGroupState(),
                     onTabGroupClick = {},
-                    onEditTabGroupClick = {},
-                    onShareTabGroupClick = {},
                     onDeleteTabGroupClick = {},
+                    onEditTabGroupClick = {},
                 )
             }
         }
@@ -62,9 +61,8 @@ class TabGroupsPageTest {
                         groupClicked = true
                         clickedGroup = it
                     },
-                    onEditTabGroupClick = {},
-                    onShareTabGroupClick = {},
                     onDeleteTabGroupClick = {},
+                    onEditTabGroupClick = {},
                 )
             }
         }
@@ -94,7 +92,6 @@ class TabGroupsPageTest {
                         clickedGroup = it
                     },
                     onEditTabGroupClick = {},
-                    onShareTabGroupClick = {},
                 )
             }
         }
@@ -126,7 +123,6 @@ class TabGroupsPageTest {
                         editClicked = true
                         clickedGroup = it
                     },
-                    onShareTabGroupClick = {},
                 )
             }
         }

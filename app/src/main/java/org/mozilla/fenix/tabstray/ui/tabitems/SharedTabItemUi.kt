@@ -231,7 +231,6 @@ val gridItemAspectRatio: Float
  * @param onDeleteTabGroupClick Invoked when the user clicks on delete tab group.
  * @param onEditTabGroupClick Invoked when the user clicks to edit the selected tab group.
  * @param onCloseTabGroupClick Invoked when the user clicks to close the tab group.
- * @param onShareTabGroupClick Invoked when the user clicks to share the tab group.
  * @param onUngroupTabGroupClick Invoked when the user clicks to ungroup the tab group.
  */
 @Composable
@@ -242,7 +241,6 @@ fun TabGroupMenuButton(
     onDeleteTabGroupClick: () -> Unit,
     onEditTabGroupClick: () -> Unit,
     onCloseTabGroupClick: () -> Unit,
-    onShareTabGroupClick: () -> Unit,
     onUngroupTabGroupClick: () -> Unit,
 ) {
     var showDropdownMenu by remember { mutableStateOf(false) }
@@ -266,11 +264,10 @@ fun TabGroupMenuButton(
             expanded = showDropdownMenu,
             onDismissRequest = { showDropdownMenu = false },
             menuItems = generateTabGroupMenuItems(
-                includeCloseOption = includeCloseOption,
                 editTabGroup = onEditTabGroupClick,
                 closeTabGroup = onCloseTabGroupClick,
-                shareTabGroup = onShareTabGroupClick,
                 deleteTabGroup = onDeleteTabGroupClick,
+                includeCloseOption = includeCloseOption,
                 includeUngroupOption = includeUngroupOption &&
                     LocalTabManagementFeatureHelper.current.ungroupTabGroupEnabled,
                 ungroupTabGroup = onUngroupTabGroupClick,
@@ -311,7 +308,6 @@ private fun generateTabGroupMenuItems(
     includeUngroupOption: Boolean = false,
     editTabGroup: () -> Unit,
     closeTabGroup: () -> Unit,
-    shareTabGroup: () -> Unit,
     deleteTabGroup: () -> Unit,
     ungroupTabGroup: () -> Unit,
 ): List<MenuItem> {
@@ -333,12 +329,6 @@ private fun generateTabGroupMenuItems(
         testTag = TabsTrayTestTag.UNGROUP_TAB_GROUP,
         onClick = ungroupTabGroup,
     )
-    val shareItem = MenuItem.IconItem(
-        text = Text.Resource(R.string.tab_group_three_dot_menu_share),
-        drawableRes = iconsR.drawable.mozac_ic_share_android_24,
-        testTag = TabsTrayTestTag.SHARE_TAB_GROUP,
-        onClick = shareTabGroup,
-    )
     val deleteItem = MenuItem.IconItem(
         text = Text.Resource(R.string.tab_group_three_dot_menu_delete),
         drawableRes = iconsR.drawable.mozac_ic_delete_24,
@@ -351,7 +341,6 @@ private fun generateTabGroupMenuItems(
         if (includeCloseOption) {
             add(closeItem)
         }
-        add(shareItem)
         if (includeUngroupOption) {
             add(ungroupItem)
         }
