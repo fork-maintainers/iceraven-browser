@@ -451,6 +451,7 @@ class TabManagementFragment : Fragment() {
                                     onUnlockPbmClick = {
                                         verifyUser(fallbackVerification = verificationResultLauncher)
                                     },
+                                    onShareTabGroupClick = { },
                                     trackersBlockedCount = trackersBlockedCount,
                                     onPrivacyReportTapped = tabManagerController::onPrivacyReportTapped,
                                 )

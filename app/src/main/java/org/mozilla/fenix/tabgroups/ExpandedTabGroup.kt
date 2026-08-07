@@ -35,7 +35,6 @@ import androidx.compose.ui.unit.dp
 import mozilla.components.compose.base.annotation.FlexibleWindowLightDarkPreview
 import mozilla.components.compose.base.button.IconButton
 import org.mozilla.fenix.R
-import org.mozilla.fenix.tabstray.LocalTabManagementFeatureHelper
 import org.mozilla.fenix.tabstray.TabsTrayTestTag
 import org.mozilla.fenix.tabstray.controller.NoOpTabInteractionHandler
 import org.mozilla.fenix.tabstray.controller.TabInteractionHandler
@@ -97,9 +96,10 @@ fun ExpandedTabGroup(
             onTabClose = actions.onTabClose,
             onItemClick = actions.onItemClick,
             onItemLongClick = { item -> }, // Ignore long click
-            onDeleteTabGroupClick = { }, // Ignore tab group deletes
             onEditTabGroupClick = { }, // Ignore tab group edits
             onCloseTabGroupClick = { }, // Ignore tab group closes
+            onShareTabGroupClick = { }, // Ignore tab group shares
+            onDeleteTabGroupClick = { }, // Ignore tab group deletes
             onTabGroupOnboardingDismiss = { }, // Ignore onboarding dismissals - onboarding is not shown in this layout
             contentPadding = PaddingValues(0.dp), // TabLayout should not have its own content padding inside this view
             listHorizontalPadding = 0.dp, // The list layout should not add its own horizontal padding inside this view
@@ -168,15 +168,13 @@ private fun ViewTabGroupHeader(
             ),
         )
 
-        if (LocalTabManagementFeatureHelper.current.shareTabGroupEnabled) {
-            ShareTabGroupButton(
-                title = title,
-                groupTabsSize = groupTabsSize,
-                onClick = {},
-            )
+        ShareTabGroupButton(
+            title = title,
+            groupTabsSize = groupTabsSize,
+            onClick = {},
+        )
 
-            Spacer(modifier = Modifier.width(FirefoxTheme.layout.space.static100))
-        }
+        Spacer(modifier = Modifier.width(FirefoxTheme.layout.space.static100))
 
         if (onAddNewTabClick != null) {
             AddTabToGroupButton(
@@ -192,6 +190,7 @@ private fun ViewTabGroupHeader(
             onDeleteTabGroupClick = onDeleteTabGroupClick,
             onEditTabGroupClick = onEditTabGroupClick,
             onCloseTabGroupClick = onCloseTabGroupClick,
+            onShareTabGroupClick = {},
             onUngroupTabGroupClick = {},
         )
     }
