@@ -4,7 +4,6 @@
 
 package org.mozilla.fenix.components.usecases.fake
 
-import android.net.Uri
 import mozilla.components.concept.engine.prompt.ShareData
 import org.mozilla.fenix.components.share.ShareSheetChooserAction
 import org.mozilla.fenix.components.share.ShareSheetLauncher
@@ -27,7 +26,6 @@ class FakeShareSheetLauncher : ShareSheetLauncher {
         val isPrivate: Boolean,
         val subject: String?,
         val chooserActions: List<ShareSheetChooserAction> = listOf(),
-        val thumbnailUri: Uri? = null,
     )
 
     val urlShares: MutableList<UrlShare> = mutableListOf()
@@ -51,8 +49,7 @@ class FakeShareSheetLauncher : ShareSheetLauncher {
         isPrivate: Boolean,
         subject: String?,
         chooserActions: List<ShareSheetChooserAction>,
-        thumbnailUri: Uri?,
     ) {
-        itemsShares += ItemsShare(items, isPrivate, subject, chooserActions, thumbnailUri)
+        itemsShares += ItemsShare(items, isPrivate, subject, chooserActions)
     }
 }

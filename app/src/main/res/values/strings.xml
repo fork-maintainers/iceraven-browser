@@ -1512,6 +1512,13 @@
       <item quantity="one">Add to %1$s tab group, %2$d tab, color %3$s</item>
       <item quantity="other">Add to %1$s tab group, %2$d tabs, color %3$s</item>
     </plurals>
+    <!-- Content Description for share tab group button.
+      %1$s is the name of the tab group.
+      %2$d is the number of tabs in a tab group. -->
+  <plurals name="share_tab_group_button_content_description">
+        <item quantity="one">Share %1$s tab group with %2$d tab.</item>
+        <item quantity="other">Share %1$s tab group with %2$d tabs.</item>
+  </plurals>
     <!-- Content description for the grabber/handle of the tab group bottom sheet. -->
   <string name="tab_group_sheet_dismiss_description">View tab group, collapse drag handle</string>
     <!-- Accessibility description for the header of an expanded tab group.

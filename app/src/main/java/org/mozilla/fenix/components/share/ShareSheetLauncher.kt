@@ -9,7 +9,6 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Icon
-import android.net.Uri
 import android.os.Build
 import android.service.chooser.ChooserAction
 import androidx.annotation.RequiresApi
@@ -45,14 +44,6 @@ enum class ShareSheetChooserAction {
     PRINT,
     SEND_TO_DEVICES,
     QR_CODE,
-    ;
-
-    companion object {
-        /**
-         * Chooser actions offered when sharing a set of tabs.
-         */
-        val tabChooserActions = listOf(SEND_TO_DEVICES, QR_CODE)
-    }
 }
 
 /**
@@ -83,15 +74,9 @@ interface ShareDelegate {
      * @param text The text to share, typically the URL of the page.
      * @param subject The subject of the share, typically the title of the page.
      * @param actions An array of [ChooserAction] that will be added to the share intent chooser.
-     * @param thumbnailUri Optional thumbnail shown in the share sheet preview.
      */
     @RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
-    fun shareWithChooserActions(
-        text: String,
-        subject: String,
-        actions: Array<ChooserAction>,
-        thumbnailUri: Uri? = null,
-    )
+    fun shareWithChooserActions(text: String, subject: String, actions: Array<ChooserAction>)
 }
 
 private class ContextShareDelegate(private val getContext: () -> Context) : ShareDelegate {
@@ -100,18 +85,8 @@ private class ContextShareDelegate(private val getContext: () -> Context) : Shar
     }
 
     @RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
-    override fun shareWithChooserActions(
-        text: String,
-        subject: String,
-        actions: Array<ChooserAction>,
-        thumbnailUri: Uri?,
-    ) {
-        getContext().shareWithChooserActions(
-            text = text,
-            subject = subject,
-            actions = actions,
-            thumbnailUri = thumbnailUri,
-        )
+    override fun shareWithChooserActions(text: String, subject: String, actions: Array<ChooserAction>) {
+        getContext().shareWithChooserActions(text = text, subject = subject, actions = actions)
     }
 }
 
@@ -155,14 +130,12 @@ interface ShareSheetLauncher {
      * to the first item's title.
      * @param chooserActions An array of [ChooserAction] that will be added to the share intent chooser in the native
      * share sheet.
-     * @param thumbnailUri Optional thumbnail shown in the share sheet preview.
      */
     fun showSystemShareSheet(
         items: List<ShareData>,
         isPrivate: Boolean = false,
         subject: String? = null,
         chooserActions: List<ShareSheetChooserAction> = listOf(ShareSheetChooserAction.SEND_TO_DEVICES),
-        thumbnailUri: Uri? = null,
     )
 
     companion object {
@@ -270,7 +243,6 @@ class DefaultShareSheetLauncher(
         isPrivate: Boolean,
         subject: String?,
         chooserActions: List<ShareSheetChooserAction>,
-        thumbnailUri: Uri?,
     ) {
         val itemsWithUrl = items.filter { it.url != null }
         val urls = itemsWithUrl.map { it.url.orEmpty() }
@@ -310,7 +282,6 @@ class DefaultShareSheetLauncher(
                             qrCodeAction = qrCodeAction,
                         )
                     }.toTypedArray(),
-                    thumbnailUri = thumbnailUri,
                 )
             }
         } else {

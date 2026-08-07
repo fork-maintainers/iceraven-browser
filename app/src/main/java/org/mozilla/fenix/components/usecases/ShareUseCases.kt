@@ -4,7 +4,6 @@
 
 package org.mozilla.fenix.components.usecases
 
-import android.net.Uri
 import mozilla.components.browser.state.store.BrowserStore
 import mozilla.components.concept.engine.prompt.ShareData
 import org.mozilla.fenix.GleanMetrics.NativeShareSheet
@@ -90,7 +89,6 @@ class ShareUseCases(
      * underlying launcher defaults to the first item's title.
      * @param chooserActions An array of chooser actions that will be added to the share intent chooser in the native
      * share sheet.
-     * @param thumbnailUri Optional thumbnail shown in the system share sheet preview.
      * @param navigateToShareFragment Lambda provided by the caller that provides navigation to the
      * [ShareFragment]. Invoked as a fallback when the system share sheet nor the PDF share action applies.
      */
@@ -100,7 +98,6 @@ class ShareUseCases(
         isPrivate: Boolean = false,
         subject: String? = null,
         chooserActions: List<ShareSheetChooserAction> = listOf(),
-        thumbnailUri: Uri? = null,
         navigateToShareFragment: () -> Unit,
     ) {
         if (settings.nativeShareSheetEnabled && isSystemShareSheetSupported) {
@@ -110,7 +107,6 @@ class ShareUseCases(
                 isPrivate = isPrivate,
                 subject = subject,
                 chooserActions = chooserActions,
-                thumbnailUri = thumbnailUri,
             )
         } else {
             navigateToShareFragment()

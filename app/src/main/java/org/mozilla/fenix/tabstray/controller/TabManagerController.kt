@@ -5,8 +5,6 @@
 package org.mozilla.fenix.tabstray.controller
 
 import android.content.Context
-import android.net.Uri
-import androidx.annotation.ColorInt
 import androidx.annotation.VisibleForTesting
 import androidx.navigation.NavController
 import kotlinx.coroutines.CoroutineScope
@@ -134,19 +132,6 @@ interface TabManagerController :
      * Shares the current set of selected tabs.
      */
     fun handleShareSelectedTabsClicked()
-
-    /**
-     * Shares the tabs in the given tab group.
-     *
-     * @param group The tab group to share.
-     * @param dotColor The ARGB color of the group's theme dot, forwarded for the share preview.
-     * @param thumbnailUri Optional cached thumbnail image shown in the system share sheet preview.
-     */
-    fun handleShareTabGroupClicked(
-        group: TabsTrayItem.TabGroup,
-        @ColorInt dotColor: Int,
-        thumbnailUri: Uri?,
-    )
 
     /**
      * Navigate from the Tab Manager to Recently Closed section in the History fragment.
@@ -578,40 +563,17 @@ class DefaultTabManagerController(
             items = data,
             source = ShareSource.TABS_TRAY,
             isPrivate = tabs.any { it.private },
-            chooserActions = ShareSheetChooserAction.tabChooserActions,
+            chooserActions = if (tabs.size == 1) {
+                listOf(
+                    ShareSheetChooserAction.SEND_TO_DEVICES,
+                    ShareSheetChooserAction.QR_CODE,
+                )
+            } else {
+                listOf(ShareSheetChooserAction.SEND_TO_DEVICES)
+            },
             navigateToShareFragment = {
                 navController.navigate(
                     TabManagementFragmentDirections.actionGlobalShareFragment(data = data.toTypedArray()),
-                )
-            },
-        )
-    }
-
-    override fun handleShareTabGroupClicked(
-        group: TabsTrayItem.TabGroup,
-        @ColorInt dotColor: Int,
-        thumbnailUri: Uri?,
-    ) {
-        TabsTray.shareTabGroup.record(TabsTray.ShareTabGroupExtra(tabCount = group.tabs.size))
-
-        val data = group.tabs.map {
-            ShareData(url = it.url, title = it.title)
-        }
-
-        shareUseCases.shareItems(
-            items = data,
-            source = ShareSource.TABS_TRAY,
-            isPrivate = group.tabs.any { it.private },
-            subject = group.title,
-            chooserActions = ShareSheetChooserAction.tabChooserActions,
-            thumbnailUri = thumbnailUri,
-            navigateToShareFragment = {
-                navController.navigate(
-                    TabManagementFragmentDirections.actionGlobalShareFragment(
-                        data = data.toTypedArray(),
-                        shareGroupTitle = group.title,
-                        shareGroupColor = dotColor,
-                    ),
                 )
             },
         )

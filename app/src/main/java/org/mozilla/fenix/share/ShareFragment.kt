@@ -147,7 +147,6 @@ class ShareFragment : AppCompatDialogFragment() {
             binding.closeSharingScrim.alpha = 1.0f
             shareCloseView = ShareCloseView(binding.closeSharingContent, shareInteractor)
             shareCloseView.setTabs(shareData)
-            shareCloseView.setGroup(args.shareGroupTitle, args.shareGroupColor)
         }
         shareToAppsView = ShareToAppsView(binding.appsShareLayout, shareInteractor)
 

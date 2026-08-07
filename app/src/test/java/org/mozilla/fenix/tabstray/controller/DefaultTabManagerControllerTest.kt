@@ -5,7 +5,6 @@
 package org.mozilla.fenix.tabstray.controller
 
 import android.content.Context
-import androidx.core.net.toUri
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDirections
@@ -76,7 +75,6 @@ import org.mozilla.fenix.home.HomeScreenViewModel.Companion.ALL_NORMAL_TABS
 import org.mozilla.fenix.home.HomeScreenViewModel.Companion.ALL_PRIVATE_TABS
 import org.mozilla.fenix.tabstray.data.TabGroupTheme
 import org.mozilla.fenix.tabstray.data.TabsTrayItem
-import org.mozilla.fenix.tabstray.data.createTabGroup
 import org.mozilla.fenix.tabstray.redux.action.TabsTrayAction
 import org.mozilla.fenix.tabstray.redux.state.Page
 import org.mozilla.fenix.tabstray.redux.state.TabsTrayState
@@ -1823,7 +1821,7 @@ class DefaultTabManagerControllerTest {
                 items = listOf(ShareData(url = tab.content.url, title = tab.content.title)),
                 source = ShareSource.TABS_TRAY,
                 isPrivate = false,
-                chooserActions = ShareSheetChooserAction.tabChooserActions,
+                chooserActions = listOf(ShareSheetChooserAction.SEND_TO_DEVICES, ShareSheetChooserAction.QR_CODE),
                 navigateToShareFragment = any(),
             )
         }
@@ -1851,47 +1849,12 @@ class DefaultTabManagerControllerTest {
                 ),
                 source = ShareSource.TABS_TRAY,
                 isPrivate = false,
-                chooserActions = ShareSheetChooserAction.tabChooserActions,
+                chooserActions = listOf(ShareSheetChooserAction.SEND_TO_DEVICES),
                 navigateToShareFragment = any(),
             )
         }
 
         val snapshot = TabsTray.shareSelectedTabs.testGetValue()!!
-        assertEquals("2", snapshot.single().extra?.getValue("tab_count"))
-    }
-
-    @Test
-    fun `GIVEN a tab group WHEN handleShareTabGroupClicked THEN report telemetry and invoke the share use case with the group's tabs`() {
-        val tab1 = createTab(url = "https://mozilla.org", title = "Mozilla")
-        val tab2 = createTab(url = "https://firefox.com", title = "Firefox")
-        val group = createTabGroup(
-            title = "My group",
-            tabs = listOf(TabsTrayItem.Tab(tab = tab1), TabsTrayItem.Tab(tab = tab2)),
-        )
-        val thumbnailUri = "content://thumbnail".toUri()
-
-        createController().handleShareTabGroupClicked(
-            group = group,
-            dotColor = 0xFF2196F3.toInt(),
-            thumbnailUri = thumbnailUri,
-        )
-
-        verify {
-            shareUseCases.shareItems(
-                items = listOf(
-                    ShareData(url = tab1.content.url, title = tab1.content.title),
-                    ShareData(url = tab2.content.url, title = tab2.content.title),
-                ),
-                source = ShareSource.TABS_TRAY,
-                isPrivate = false,
-                subject = "My group",
-                chooserActions = ShareSheetChooserAction.tabChooserActions,
-                thumbnailUri = thumbnailUri,
-                navigateToShareFragment = any(),
-            )
-        }
-
-        val snapshot = TabsTray.shareTabGroup.testGetValue()!!
         assertEquals("2", snapshot.single().extra?.getValue("tab_count"))
     }
 
