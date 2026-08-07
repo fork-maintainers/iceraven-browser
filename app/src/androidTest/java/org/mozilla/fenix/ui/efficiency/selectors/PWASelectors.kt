@@ -16,7 +16,17 @@ object PWASelectors {
         groups = listOf("requiredForPage"),
     )
 
+    // The browser nav/URL bar. Present in the normal browser, absent when a PWA runs standalone — so its
+    // absence is the "opened as an installed app" signal (mirrors legacy PwaTest.verifyNavURLBarHidden).
+    val NAV_URL_BAR = Selector(
+        strategy = SelectorStrategy.UIAUTOMATOR_WITH_RES_ID,
+        value = "toolbar",
+        description = "Browser navigation URL bar",
+        groups = listOf(),
+    )
+
     val all = listOf(
         PWA_SCREEN,
+        NAV_URL_BAR,
     )
 }

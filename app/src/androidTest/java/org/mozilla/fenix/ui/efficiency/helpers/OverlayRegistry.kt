@@ -59,7 +59,35 @@ object OverlayRegistry {
         ),
     )
 
+    /**
+     * "Add to Home screen" prompt. Two triggers, one UI: the automatic PWA onboarding prompt shown on a
+     * repeat visit to an installable site (PwaOnboardingObserver, fragment_pwa_onboarding.xml) and the
+     * explicit menu "Add app to home screen" dialog (fragment_create_shortcut.xml). Both expose the same
+     * res-ids (`add_button`/`cancel_button`), so one entry covers both. The automatic prompt pops over the
+     * page uninvited and covers the engine view, breaking navigation in tests that never asked to install
+     * anything (hit converting LoginsTest) — so it is dismissed here rather than suppressed per-test with a
+     * launch flag. Dismiss is `cancel_button`, which is side-effect-free (it does NOT pin a shortcut); never
+     * dismiss via `add_button`. A test that legitimately drives this prompt (e.g. installPWAFromTheMainMenuTest)
+     * locates its control successfully, so this fallback — which only fires on a locate miss — never engages.
+     */
+    val ADD_TO_HOME_SCREEN_PROMPT = BlockingOverlay(
+        name = "Add to Home screen prompt",
+        presence = Selector(
+            strategy = SelectorStrategy.UIAUTOMATOR_WITH_RES_ID,
+            value = "cancel_button",
+            description = "Add to Home screen prompt cancel button",
+        ),
+        dismiss = listOf(
+            Selector(
+                strategy = SelectorStrategy.UIAUTOMATOR_WITH_RES_ID,
+                value = "cancel_button",
+                description = "Add to Home screen prompt cancel button",
+            ),
+        ),
+    )
+
     val known: List<BlockingOverlay> = listOf(
         STYLUS_HANDWRITING_PROMPT,
+        ADD_TO_HOME_SCREEN_PROMPT,
     )
 }

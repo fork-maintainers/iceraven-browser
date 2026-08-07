@@ -317,6 +317,13 @@ object MainMenuSelectors {
         groups = listOf("browserViewMainMenuMoreItems"),
     )
 
+    val ADD_APP_TO_HOMESCREEN_BUTTON = Selector(
+        strategy = SelectorStrategy.COMPOSE_BY_CONTENT_DESCRIPTION,
+        value = getStringResource(R.string.browser_menu_add_app_to_homescreen),
+        description = "Main menu add app (PWA) to homescreen button",
+        groups = listOf("browserViewMainMenuMoreItems"),
+    )
+
     val OPEN_IN_APP_BUTTON = Selector(
         strategy = SelectorStrategy.COMPOSE_BY_CONTENT_DESCRIPTION,
         value = getStringResource(R.string.browser_menu_open_app_link),
@@ -386,6 +393,7 @@ object MainMenuSelectors {
         REMOVE_FROM_SHORTCUTS_BUTTON,
         ADD_TO_HOMESCREEN_BUTTON,
         CUSTOMIZE_READER_VIEW_BUTTON,
+        ADD_APP_TO_HOMESCREEN_BUTTON,
         OPEN_IN_APP_BUTTON,
         OPEN_IN_APP_NAME_BUTTON(),
     )
