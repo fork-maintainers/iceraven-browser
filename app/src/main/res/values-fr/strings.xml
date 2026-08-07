@@ -4766,7 +4766,7 @@
   <!-- Text of the link in the first-run Google Lens bottom sheet that opens the Search settings page -->
   <string name="lens_opt_out_settings_link">Paramètres de Google Lens</string>
   <!-- Button in the first-run Google Lens bottom sheet that dismisses it and starts the camera -->
-  <string name="lens_opt_out_try_it_now_button">Essayez-le maintenant</string>
+  <string name="lens_opt_out_try_it_now_button">Essayer maintenant</string>
   <!-- Button in the first-run Google Lens bottom sheet that leaves Google Lens without using it -->
   <string name="lens_opt_out_not_now_button">Plus tard</string>
   <!--

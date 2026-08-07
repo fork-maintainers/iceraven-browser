@@ -1043,6 +1043,8 @@
   <string name="customize_toggle_pocket_sponsored">贊助內容</string>
   <!-- Title for the opening wallpaper settings screen -->
   <string name="customize_wallpapers">背景圖</string>
+  <!-- Label for the menu item that opens the customize homepage settings screen. -->
+  <string name="browser_menu_customize_homepage">自訂首頁</string>
   <!-- Label for the menu item that opens the wallpaper settings screen. -->
   <string name="browser_menu_change_wallpaper">更改背景圖</string>
   <!-- Title for the customize home screen section with sponsored shortcuts. -->
@@ -4743,6 +4745,16 @@
   <string name="lens_camera_mode_qr">QR Code 掃描器</string>
   <!-- Toast shown when the user picks an image from the gallery in QR mode but no QR code is found in it -->
   <string name="lens_camera_qr_no_code_found">圖片中找不到 QR Code</string>
+  <!-- Title of the bottom sheet shown the first time the user opens the Google Lens camera screen -->
+  <string name="lens_opt_out_title">使用 Google 智慧鏡頭搜尋</string>
+  <!-- Description of the bottom sheet shown the first time the user opens the Google Lens camera screen -->
+  <string name="lens_opt_out_description">挑選一張圖片，或使用攝影機拍照來使用 Google 智慧鏡頭搜尋。</string>
+  <!-- Text of the link in the first-run Google Lens bottom sheet that opens the Search settings page -->
+  <string name="lens_opt_out_settings_link">Google 智慧鏡頭選項</string>
+  <!-- Button in the first-run Google Lens bottom sheet that dismisses it and starts the camera -->
+  <string name="lens_opt_out_try_it_now_button">立刻試試</string>
+  <!-- Button in the first-run Google Lens bottom sheet that leaves Google Lens without using it -->
+  <string name="lens_opt_out_not_now_button">現在不要</string>
   <!--
     Firefox Labs
 

@@ -1044,6 +1044,8 @@
   <string name="customize_toggle_pocket_sponsored">סיפורים ממומנים</string>
   <!-- Title for the opening wallpaper settings screen -->
   <string name="customize_wallpapers">תמונות רקע</string>
+  <!-- Label for the menu item that opens the customize homepage settings screen. -->
+  <string name="browser_menu_customize_homepage">התאמה אישית של מסך הבית</string>
   <!-- Label for the menu item that opens the wallpaper settings screen. -->
   <string name="browser_menu_change_wallpaper">שינוי תמונת רקע</string>
   <!-- Title for the customize home screen section with sponsored shortcuts. -->
@@ -4769,6 +4771,16 @@
   <string name="lens_camera_mode_qr">סורק QR</string>
   <!-- Toast shown when the user picks an image from the gallery in QR mode but no QR code is found in it -->
   <string name="lens_camera_qr_no_code_found">לא נמצא קוד QR בתמונה</string>
+  <!-- Title of the bottom sheet shown the first time the user opens the Google Lens camera screen -->
+  <string name="lens_opt_out_title">חיפוש באמצעות Google Lens</string>
+  <!-- Description of the bottom sheet shown the first time the user opens the Google Lens camera screen -->
+  <string name="lens_opt_out_description">ניתן לבחור בתמונה או להשתמש במצלמה שלך כדי לקבל תוצאות מ־Google Lens.</string>
+  <!-- Text of the link in the first-run Google Lens bottom sheet that opens the Search settings page -->
+  <string name="lens_opt_out_settings_link">הגדרות Google Lens</string>
+  <!-- Button in the first-run Google Lens bottom sheet that dismisses it and starts the camera -->
+  <string name="lens_opt_out_try_it_now_button">לנסות עכשיו</string>
+  <!-- Button in the first-run Google Lens bottom sheet that leaves Google Lens without using it -->
+  <string name="lens_opt_out_not_now_button">לא כעת</string>
   <!--
     Firefox Labs
 

@@ -1043,6 +1043,8 @@
   <string name="customize_toggle_pocket_sponsored">Tembiasakue jehepyme’ẽguáva</string>
   <!-- Title for the opening wallpaper settings screen -->
   <string name="customize_wallpapers">Mba’erechaha rugua</string>
+  <!-- Label for the menu item that opens the customize homepage settings screen. -->
+  <string name="browser_menu_customize_homepage">Emboava ñepyrũha</string>
   <!-- Label for the menu item that opens the wallpaper settings screen. -->
   <string name="browser_menu_change_wallpaper">Emoambue mba’erechaha rugua</string>
   <!-- Title for the customize home screen section with sponsored shortcuts. -->
@@ -1710,6 +1712,8 @@
   <string name="tab_group_three_dot_button_content_description">Jeporavorãve</string>
   <!-- Text shown on the edit button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_edit">Mbosako’i</string>
+  <!-- Text shown on the ungroup button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_ungroup">Eipe’a ijatyhágui</string>
   <!-- Text shown on the delete button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_delete">Mboguete</string>
   <!-- Text shown on the close button for a tab group on the three dot menu -->
@@ -2425,6 +2429,10 @@
   <string name="sync_sign_in">Eñepyrũ tembiapo Sync-pe</string>
   <!-- An option from the share dialog to send link to all other sync devices -->
   <string name="sync_send_to_all">Emondo opaite mba’e’okápe</string>
+  <!-- Text displayed when no other sync devices are available for link sharing -->
+  <string name="sync_no_devices_available">Ndaipóri mba’e’oka porupyrã</string>
+  <!-- Text displayed when no other sync devices are available for link sharing. -->
+  <string name="sync_no_devices_available_description">Oimeraẽva mba’e’oka ojeporu ha ojuehepyréva ko mba’ete ndive ojehecháta ápe.</string>
   <!-- An option from the share dialog to reconnect to sync -->
   <string name="sync_reconnect">Eikejey Sync-pe</string>
   <!-- Text displayed when sync is offline and cannot be accessed -->
@@ -4751,6 +4759,16 @@
   <string name="lens_camera_mode_qr">QR moha’ãngaha</string>
   <!-- Toast shown when the user picks an image from the gallery in QR mode but no QR code is found in it -->
   <string name="lens_camera_qr_no_code_found">Ndojejuhúi QR ayvu ta’ãngapegua</string>
+  <!-- Title of the bottom sheet shown the first time the user opens the Google Lens camera screen -->
+  <string name="lens_opt_out_title">Eheka Google Lens ndive</string>
+  <!-- Description of the bottom sheet shown the first time the user opens the Google Lens camera screen -->
+  <string name="lens_opt_out_description">Eiporavo ta’ãnga térã eiporu kámara ehupyty hag̃ua Google Lens ndive.</string>
+  <!-- Text of the link in the first-run Google Lens bottom sheet that opens the Search settings page -->
+  <string name="lens_opt_out_settings_link">Google Lens ñemnoheko</string>
+  <!-- Button in the first-run Google Lens bottom sheet that dismisses it and starts the camera -->
+  <string name="lens_opt_out_try_it_now_button">Eiporu ko’ág̃a</string>
+  <!-- Button in the first-run Google Lens bottom sheet that leaves Google Lens without using it -->
+  <string name="lens_opt_out_not_now_button">Ani ko’ág̃a</string>
   <!--
     Firefox Labs
 
