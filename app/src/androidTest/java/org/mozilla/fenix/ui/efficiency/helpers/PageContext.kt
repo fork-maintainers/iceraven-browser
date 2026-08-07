@@ -74,6 +74,11 @@ class PageContext(val composeRule: AndroidComposeTestRule<HomeActivityIntentTest
     val microsurveys = MicrosurveysPage(composeRule)
     val notification = NotificationPage(composeRule)
     val onboarding = OnboardingPage(composeRule)
+
+    // ReaderViewPage is intentionally NOT registered here. The reader-view appearance controls are a
+    // transient overlay reachable only on a reader-capable page via the toolbar toggle + Customize
+    // Reader View menu item, which the navigation graph cannot express. Registering it would make the
+    // reachability suite fail. Tests drive that sequence explicitly and instantiate ReaderViewPage locally.
     val recentlyClosedTabs = RecentlyClosedTabsPage(composeRule)
     val searchBar = SearchBarComponent(composeRule)
     val settings = SettingsPage(composeRule)

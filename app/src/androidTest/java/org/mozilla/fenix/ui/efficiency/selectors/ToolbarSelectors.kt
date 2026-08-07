@@ -129,6 +129,20 @@ object ToolbarSelectors {
         groups = listOf("homeScreenToolbar"),
     )
 
+    val READER_VIEW_BUTTON = Selector(
+        strategy = SelectorStrategy.COMPOSE_BY_CONTENT_DESCRIPTION,
+        value = getStringResource(R.string.browser_menu_read),
+        description = "Reader view toolbar button",
+        groups = listOf(),
+    )
+
+    val READER_VIEW_CLOSE_BUTTON = Selector(
+        strategy = SelectorStrategy.COMPOSE_BY_CONTENT_DESCRIPTION,
+        value = getStringResource(R.string.browser_menu_read_close),
+        description = "Close reader view toolbar button",
+        groups = listOf(),
+    )
+
     // UIAutomator rather than Compose: this is asserted on BrowserPage with GeckoView active, where
     // Compose sync can hang (same reason TAB_COUNTER_UIAUTOMATOR exists).
     @Suppress("ktlint:standard:function-naming", "FunctionName")
@@ -206,6 +220,8 @@ object ToolbarSelectors {
         EXPANDED_TOOLBAR_FORWARD_BUTTON,
         EXPANDED_TOOLBAR_REFRESH_BUTTON,
         SITE_INFO_BUTTON,
+        READER_VIEW_BUTTON,
+        READER_VIEW_CLOSE_BUTTON,
         SEARCH_ENGINE_SELECTOR_ICON(),
         TAB_COUNTER_WITH_COUNT(),
         TAB_STRIP_TAB_COUNTER_WITH_COUNT(),

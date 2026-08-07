@@ -312,6 +312,14 @@ object MainMenuSelectors {
         groups = listOf(),
     )
 
+    // Only present when the browser is showing reader view.
+    val CUSTOMIZE_READER_VIEW_BUTTON = Selector(
+        strategy = SelectorStrategy.COMPOSE_BY_CONTENT_DESCRIPTION,
+        value = getStringResource(R.string.browser_menu_customize_reader_view_2),
+        description = "Main menu Customize Reader View button",
+        groups = listOf(),
+    )
+
     // Order matters: mozVerifyElementsByGroup verifies in this declaration order. In the landscape
     // browser main menu the list scrolls, so the always-visible items must be verified first and the
     // requiresScroll items last, in on-screen top-to-bottom order (History -> ... -> Settings) — once
@@ -355,6 +363,7 @@ object MainMenuSelectors {
         PRINT_BUTTON,
         REMOVE_FROM_SHORTCUTS_BUTTON,
         ADD_TO_HOMESCREEN_BUTTON,
+        CUSTOMIZE_READER_VIEW_BUTTON,
         OPEN_IN_APP_BUTTON,
         OPEN_IN_APP_NAME_BUTTON(),
     )
