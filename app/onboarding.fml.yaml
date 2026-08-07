@@ -46,48 +46,9 @@ features:
               primary-button-label: nova_onboarding_set_to_default_button
               secondary-button-label: nova_onboarding_negative_button
 
-            add-search-widget:
-              card-type: add-search-widget
-              ordering: 20
-              title: nova_onboarding_add_search_widget_title
-              body: nova_onboarding_add_search_widget_subtitle
-              image-res: nova_onboarding_widget
-              primary-button-label: nova_onboarding_add_search_widget_button
-              secondary-button-label: nova_onboarding_negative_button
-
-            sync-sign-in:
-              card-type: sync-sign-in
-              ordering: 30
-              title: nova_onboarding_sync_title
-              body: nova_onboarding_sync_subtitle
-              image-res: nova_onboarding_sync
-              primary-button-label: nova_onboarding_sync_button
-              secondary-button-label: nova_onboarding_negative_button
-
-            notification-permission:
-              card-type: notification-permission
-              ordering: 40
-              title: nova_onboarding_notifications_title
-              body: nova_onboarding_notifications_subtitle
-              image-res: nova_onboarding_notifications
-              primary-button-label: nova_onboarding_notifications_button
-              secondary-button-label: nova_onboarding_negative_button
-
-            toolbar-placement:
-              card-type: toolbar-placement
-              ordering: 50
-              title: nova_onboarding_toolbar_selection_title
-              primary-button-label: nova_onboarding_continue_button
-              extra-data:
-                customization-toolbar-data:
-                  - toolbar-type: toolbar-top
-                    label: nova_onboarding_toolbar_selection_top_label
-                  - toolbar-type: toolbar-bottom
-                    label: nova_onboarding_toolbar_selection_bottom_label
-
             marketing:
               card-type: marketing-data
-              ordering: 60
+              ordering: 20
               title: nova_onboarding_marketing_title
               image-res: nova_onboarding_marketing
               primary-button-label: nova_onboarding_continue_button
@@ -96,18 +57,6 @@ features:
                 marketing-data:
                   body-line-one-text: nova_onboarding_marketing_body
                   body-line-one-link-text: nova_onboarding_marketing_body_link_text
-    defaults:
-      - channel: nightly
-        value:
-          cards:
-            add-search-widget:
-              enabled: false
-            sync-sign-in:
-              enabled: false
-            notification-permission:
-              enabled: false
-            toolbar-placement:
-              enabled: false
 
   continuous-onboarding:
     description: >
@@ -117,11 +66,7 @@ features:
       enabled:
         description: If true, the feature is enabled.
         type: Boolean
-        default: false
-    defaults:
-      - channel: nightly
-        value:
-          enabled: true
+        default: true
 
 objects:
 

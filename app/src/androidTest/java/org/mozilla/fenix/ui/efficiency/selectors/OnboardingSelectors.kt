@@ -13,9 +13,8 @@ import org.mozilla.fenix.ui.efficiency.helpers.SelectorStrategy
  * Selectors for the first-run Onboarding flow (Compose cards shown when the app launches with
  * onboarding enabled — BaseTest(skipOnboarding = false)).
  *
- * Verified against onboarding.fml.yaml + on-device dumps. The live card order (by `ordering`, minus
- * runtime-gated cards) is:
- *   Terms of Use → Default Browser → Add Search Widget → Sync → [Notification: gated/absent] → Toolbar
+ * Verified against onboarding.fml.yaml + on-device dumps. The live card order (by `ordering`) is:
+ *   Terms of Use → Default Browser.
  *
  * Titles are unique text, matched by COMPOSE_BY_TEXT (the title nodes expose no testTag/id). NOTE the
  * resource names are misleading: `set_to_default_title_2` renders as "Open all your links with built-in
@@ -43,27 +42,6 @@ object OnboardingSelectors {
         groups = listOf("defaultBrowserCard"),
     )
 
-    val SEARCH_WIDGET_TITLE = Selector(
-        strategy = SelectorStrategy.COMPOSE_BY_TEXT,
-        value = getStringResource(R.string.nova_onboarding_add_search_widget_title), // "Make every search more private"
-        description = "Add search widget onboarding card title",
-        groups = listOf("searchWidgetCard"),
-    )
-
-    val SYNC_TITLE = Selector(
-        strategy = SelectorStrategy.COMPOSE_BY_TEXT,
-        value = getStringResource(R.string.nova_onboarding_sync_title), // "Instantly pick up where you left off"
-        description = "Sync (sign-in) onboarding card title",
-        groups = listOf("syncCard"),
-    )
-
-    val TOOLBAR_TITLE = Selector(
-        strategy = SelectorStrategy.COMPOSE_BY_TEXT,
-        value = getStringResource(R.string.nova_onboarding_toolbar_selection_title), // "Choose your address bar"
-        description = "Toolbar placement onboarding card title",
-        groups = listOf("toolbarCard"),
-    )
-
     // --- Advance controls (shared text across cards; click via mozClickDisplayed) ---
     val CONTINUE_BUTTON = Selector(
         strategy = SelectorStrategy.COMPOSE_BY_TEXT,
@@ -82,9 +60,6 @@ object OnboardingSelectors {
     val all = listOf(
         TERMS_OF_USE_TITLE,
         DEFAULT_BROWSER_TITLE,
-        SEARCH_WIDGET_TITLE,
-        SYNC_TITLE,
-        TOOLBAR_TITLE,
         CONTINUE_BUTTON,
         NOT_NOW_BUTTON,
     )

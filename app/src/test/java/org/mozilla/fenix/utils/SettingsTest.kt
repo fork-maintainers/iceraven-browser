@@ -448,6 +448,9 @@ class SettingsTest {
 
     @Test
     fun showPwaFragment() {
+        // The PWA CFR is only relevant when the continuous onboarding flow is disabled.
+        settings.continuousOnboardingFeatureEnabled = false
+
         // When just created
         // Then
         assertFalse(settings.shouldShowPwaCfr)

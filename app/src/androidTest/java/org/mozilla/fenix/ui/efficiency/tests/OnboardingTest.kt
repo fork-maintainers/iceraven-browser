@@ -13,14 +13,12 @@ import org.mozilla.fenix.ui.efficiency.selectors.OnboardingSelectors
  * Converted Onboarding card smoke tests (Phase A).
  *
  * Launches with onboarding enabled via BaseTest(skipOnboarding = false). Live card order (from
- * onboarding.fml.yaml, minus runtime-gated cards):
- *   Terms of Use → Default Browser → Add Search Widget → Sync → Toolbar
- * (the Notification-permission card is runtime-gated and does not appear, so it is not converted.)
+ * onboarding.fml.yaml) is: Terms of Use → Default Browser.
  *
  * mozVerify requires the card to be *displayed*, so each test walks to its card. Advancing uses the
  * standard mozClick(...) on the shared "Continue"/"Not now" controls — resolve() clicks the match on
  * the currently-visible page (the cards share button text and sit in a HorizontalPager). We advance
- * the optional cards with "Not now" so we don't trigger their actions (set-default dialog, sync sign-in).
+ * the optional card with "Not now" so we don't trigger its action (set-default dialog).
  */
 class OnboardingTest : BaseTest(skipOnboarding = false) {
 
@@ -42,50 +40,4 @@ class OnboardingTest : BaseTest(skipOnboarding = false) {
             .mozClick(OnboardingSelectors.CONTINUE_BUTTON)
             .mozVerify(OnboardingSelectors.DEFAULT_BROWSER_TITLE)
     }
-
-    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3349495
-    @SmokeTest
-    @Test
-    fun verifyTheFirefoxSearchWidgetOnboardingCardTest() {
-        on.onboarding.navigateToPage()
-            .mozVerify(OnboardingSelectors.TERMS_OF_USE_TITLE)
-            .mozClick(OnboardingSelectors.CONTINUE_BUTTON)
-            .mozVerify(OnboardingSelectors.DEFAULT_BROWSER_TITLE)
-            .mozClick(OnboardingSelectors.NOT_NOW_BUTTON)
-            .mozVerify(OnboardingSelectors.SEARCH_WIDGET_TITLE)
-    }
-
-    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3349496
-    @SmokeTest
-    @Test
-    fun verifyTheStartSyncingOnboardingCardTest() {
-        on.onboarding.navigateToPage()
-            .mozVerify(OnboardingSelectors.TERMS_OF_USE_TITLE)
-            .mozClick(OnboardingSelectors.CONTINUE_BUTTON)
-            .mozVerify(OnboardingSelectors.DEFAULT_BROWSER_TITLE)
-            .mozClick(OnboardingSelectors.NOT_NOW_BUTTON)
-            .mozVerify(OnboardingSelectors.SEARCH_WIDGET_TITLE)
-            .mozClick(OnboardingSelectors.NOT_NOW_BUTTON)
-            .mozVerify(OnboardingSelectors.SYNC_TITLE)
-    }
-
-    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3349499
-    @SmokeTest
-    @Test
-    fun verifyTheChooseYourAddressBarOnboardingCardTest() {
-        on.onboarding.navigateToPage()
-            .mozVerify(OnboardingSelectors.TERMS_OF_USE_TITLE)
-            .mozClick(OnboardingSelectors.CONTINUE_BUTTON)
-            .mozVerify(OnboardingSelectors.DEFAULT_BROWSER_TITLE)
-            .mozClick(OnboardingSelectors.NOT_NOW_BUTTON)
-            .mozVerify(OnboardingSelectors.SEARCH_WIDGET_TITLE)
-            .mozClick(OnboardingSelectors.NOT_NOW_BUTTON)
-            .mozVerify(OnboardingSelectors.SYNC_TITLE)
-            .mozClick(OnboardingSelectors.NOT_NOW_BUTTON)
-            .mozVerify(OnboardingSelectors.TOOLBAR_TITLE)
-    }
-
-    // NOTE: verifyTheNotificationsOnboardingCardTest (TestRail 3349498) is intentionally NOT converted —
-    // the Notification-permission card is runtime-gated and does not appear in this flow (its title
-    // never showed in the screen dumps). Revisit if/when that card is enabled for the test config.
 }
