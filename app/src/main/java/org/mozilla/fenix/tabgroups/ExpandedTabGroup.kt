@@ -76,10 +76,7 @@ fun ExpandedTabGroup(
             title = group.title,
             groupTheme = group.theme,
             groupTabsSize = group.tabs.size,
-            onDeleteTabGroupClick = actions.onDeleteTabGroupClick,
-            onEditTabGroupClick = actions.onEditTabGroupClick,
-            onCloseTabGroupClick = actions.onCloseTabGroupClick,
-            onAddNewTabClick = actions.onAddNewTabClick,
+            actions = actions,
         )
 
         TabLayout(
@@ -113,10 +110,7 @@ private fun ViewTabGroupHeader(
     title: String,
     groupTabsSize: Int,
     groupTheme: TabGroupTheme,
-    onDeleteTabGroupClick: () -> Unit,
-    onEditTabGroupClick: () -> Unit,
-    onCloseTabGroupClick: () -> Unit,
-    onAddNewTabClick: (() -> Unit)?,
+    actions: ExpandedTabGroupActions,
 ) {
     Row(
         modifier = Modifier
@@ -168,14 +162,7 @@ private fun ViewTabGroupHeader(
             ),
         )
 
-        ShareTabGroupButton(
-            title = title,
-            groupTabsSize = groupTabsSize,
-            onClick = {},
-        )
-
-        Spacer(modifier = Modifier.width(FirefoxTheme.layout.space.static100))
-
+        val onAddNewTabClick = actions.onAddNewTabClick
         if (onAddNewTabClick != null) {
             AddTabToGroupButton(
                 onClick = onAddNewTabClick,
@@ -187,10 +174,10 @@ private fun ViewTabGroupHeader(
         TabGroupMenuButton(
             includeCloseOption = true,
             includeUngroupOption = true,
-            onDeleteTabGroupClick = onDeleteTabGroupClick,
-            onEditTabGroupClick = onEditTabGroupClick,
-            onCloseTabGroupClick = onCloseTabGroupClick,
-            onShareTabGroupClick = {},
+            onDeleteTabGroupClick = actions.onDeleteTabGroupClick,
+            onEditTabGroupClick = actions.onEditTabGroupClick,
+            onCloseTabGroupClick = actions.onCloseTabGroupClick,
+            onShareTabGroupClick = actions.onShareTabGroupClick,
             onUngroupTabGroupClick = {},
         )
     }
@@ -214,31 +201,6 @@ private fun AddTabToGroupButton(
     }
 }
 
-@Composable
-private fun ShareTabGroupButton(
-    title: String,
-    groupTabsSize: Int,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    IconButton(
-        onClick = onClick,
-        contentDescription = pluralStringResource(
-            id = R.plurals.share_tab_group_button_content_description,
-            count = groupTabsSize,
-            title,
-            groupTabsSize,
-        ),
-        modifier = modifier.testTag(TabsTrayTestTag.BOTTOM_SHEET_SHARE_BUTTON),
-    ) {
-        Icon(
-            painter = painterResource(id = iconsR.drawable.mozac_ic_share_android_24),
-            contentDescription = null,
-            tint = MaterialTheme.colorScheme.onSurface,
-        )
-    }
-}
-
 @FlexibleWindowLightDarkPreview
 @Composable
 private fun ExpandedTabGroupPreview(
@@ -256,6 +218,7 @@ private fun ExpandedTabGroupPreview(
                     onEditTabGroupClick = {},
                     onCloseTabGroupClick = {},
                     onAddNewTabClick = {},
+                    onShareTabGroupClick = {},
                 ),
                 displayTabsInGrid = previewState.displayTabsInGrid,
                 tabInteractionHandler = NoOpTabInteractionHandler,
@@ -369,6 +332,7 @@ private class ExpandedTabGroupPreviewProvider :
  * @property onCloseTabGroupClick Invoked when the user clicks to close a tab group.
  * @property onAddNewTabClick Invoked when the user clicks to add a new tab to the group. When null,
  * the add-tab button is hidden.
+ * @property onShareTabGroupClick Invoked when the user clicks to share the group.
  */
 data class ExpandedTabGroupActions(
     val onItemClick: (TabsTrayItem) -> Unit,
@@ -377,4 +341,5 @@ data class ExpandedTabGroupActions(
     val onEditTabGroupClick: () -> Unit,
     val onCloseTabGroupClick: () -> Unit,
     val onAddNewTabClick: (() -> Unit)?,
+    val onShareTabGroupClick: () -> Unit,
 )

@@ -1259,6 +1259,15 @@
             android:defaultValue="@null"
             app:argType="string"
             app:nullable="true" />
+        <argument
+            android:name="shareGroupTitle"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="shareGroupColor"
+            android:defaultValue="0"
+            app:argType="integer" />
     </dialog>
     <fragment
         android:id="@+id/accountProblemFragment"
