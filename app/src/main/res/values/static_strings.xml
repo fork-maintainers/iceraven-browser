@@ -405,9 +405,6 @@
     <!-- Summary for secret settings that are still being developed and not recommended to be enabled by nightly users. -->
     <string name="preferences_debug_settings_development_phase_summary" translatable="false">In development phase</string>
 
-    <!-- Label for the Customize Home preference to show the weather widget on the homepage. -->
-    <string name="customize_toggle_weather" translatable="false">Weather</string>
-
     <!--  Firefox brand name  -->
     <string name="app_name_firefox" tools:ignore="BrandUsage">Firefox</string>
 </resources>

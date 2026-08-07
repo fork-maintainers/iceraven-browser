@@ -4142,8 +4142,8 @@ customize_home:
           toggled.
 
           We currently track: most_visited_sites, jump_back_in,
-          recently_visited, bookmarks, pocket, contile, privacy_report, and
-          weather. We previously tracked bookmarks as recently_saved.
+          recently_visited, bookmarks, pocket, contile, and privacy_report.
+          We previously tracked bookmarks as recently_saved.
       enabled:
         type: boolean
         description: "Whether or not the preference is *now* enabled"

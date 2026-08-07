@@ -20,10 +20,6 @@
         android:title="@string/customize_toggle_contile" />
 
     <androidx.preference.SwitchPreferenceCompat
-      android:key="@string/pref_key_show_homepage_weather_widget"
-      android:title="@string/customize_toggle_weather" />
-
-    <androidx.preference.SwitchPreferenceCompat
         android:key="@string/pref_key_privacy_report"
         android:title="@string/customize_toggle_privacy_report" />
 
