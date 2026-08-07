@@ -685,6 +685,73 @@ abstract class BasePage(
     }
 
     /**
+     * Polls until [selector] is present AND enabled, then clicks it. Use for a control that renders
+     * immediately but is briefly disabled (e.g. the add-on permission dialog's "Add" button, which
+     * PermissionsDialogFragment disables for ~1s): [mozClick]/[mozClickIfPresent] check presence only
+     * and would tap the still-disabled control, which the app ignores — a silent no-op. Dispatches
+     * across all element backends so it works regardless of the selector's strategy.
+     */
+    fun mozClickWhenEnabled(
+        selector: Selector,
+        timeout: Long = TestAssetHelper.waitingTime,
+        interval: Long = 200,
+    ): BasePage {
+        val rep = rep()
+        rep?.startCmd(safeId("click_when_enabled", selector.description), "Attempting to click '${selector.description}' once enabled...", 1)
+
+        val deadline = System.currentTimeMillis() + timeout
+        var element: Any? = null
+        while (System.currentTimeMillis() < deadline) {
+            rep?.startLoc(safeId("loc", selector.description), "Waiting for '${selector.description}' to be enabled...", 2)
+            element = mozGetElement(selector, applyPreconditions = false)
+            val enabled = element != null && isElementEnabled(element)
+            rep?.endLoc(success = enabled, message = if (enabled) found(selector.description) else notFound(selector.description))
+            if (enabled) break
+            element = null
+            SystemClock.sleep(interval)
+        }
+
+        if (element == null) {
+            rep?.endCmd(success = false, message = "'${selector.description}' not enabled after ${timeout}ms")
+            ScreenDump.dump(composeRule, "mozClickWhenEnabled: '${selector.description}' never became enabled")
+            throw AssertionError("'${selector.description}' was expected to become enabled but did not, after ${timeout}ms")
+        }
+
+        try {
+            when (element) {
+                is ViewInteraction -> element.perform(click())
+                is UiObject -> element.click()
+                is UiObject2 -> element.click()
+                is SemanticsNodeInteraction -> {
+                    element.assertExists()
+                    element.assertIsDisplayed()
+                    element.performClick()
+                }
+                else -> throw AssertionError("Unsupported element type (${element::class.simpleName}) for selector: ${selector.description}")
+            }
+            rep?.endCmd(success = true, message = "Clicked '${selector.description}'")
+            return this
+        } catch (e: Throwable) {
+            rep?.endCmd(success = false, message = "Click '${selector.description}' failed: ${e.message ?: "exception"}")
+            ScreenDump.dump(composeRule, "mozClickWhenEnabled failed: ${selector.description}")
+            throw e
+        }
+    }
+
+    /** Exception-safe "is this element enabled right now?" probe, dispatched across all backends. */
+    private fun isElementEnabled(element: Any?): Boolean = try {
+        when (element) {
+            is ViewInteraction -> { element.check(matches(isEnabled())); true }
+            is UiObject -> element.isEnabled
+            is UiObject2 -> element.isEnabled
+            is SemanticsNodeInteraction -> { element.assertExists(); element.assertIsEnabled(); true }
+            else -> false
+        }
+    } catch (_: Throwable) {
+        false
+    }
+
+    /**
      * Presses back until [selector] disappears, bounded by [maxPresses]. Mirrors the legacy
      * exitMenu() pattern: gating on the anchor's disappearance rather than a fixed back-press
      * count tolerates presses that are swallowed while a Compose/fragment transition is still

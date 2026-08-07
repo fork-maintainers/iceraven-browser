@@ -268,6 +268,11 @@ class MainMenuTest {
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3080160
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.MainMenuTest#verifyTheExtensionsMenuListAfterRemovingAnExtensionTest"],
+        bug = 2061643,
+        since = "2026-08",
+    )
     @SmokeTest
     @Test
     fun verifyTheExtensionsMenuListAfterRemovingAnExtensionTest() {
@@ -306,6 +311,11 @@ class MainMenuTest {
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3080163
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.MainMenuTest#verifyTheExtensionsMenuListAfterRemovingAnExtensionTest"],
+        bug = 2061643,
+        since = "2026-08",
+    )
     @SmokeTest
     @Test
     fun verifyTheManageExtensionsItemTest() {

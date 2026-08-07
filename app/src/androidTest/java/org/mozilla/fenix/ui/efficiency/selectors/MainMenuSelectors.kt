@@ -191,6 +191,26 @@ object MainMenuSelectors {
         groups = listOf("expandedExtensionsMenuItems"),
     )
 
+    // Shown in the expanded Extensions submenu once at least one extension is installed; opens the
+    // full add-ons manager. Mirrors the legacy clickManageExtensionsButtonFromRedesignedMainMenu.
+    val MANAGE_EXTENSIONS_BUTTON = Selector(
+        strategy = SelectorStrategy.COMPOSE_BY_TEXT,
+        value = getStringResource(R.string.browser_menu_manage_extensions),
+        description = "Main menu Manage extensions button",
+        groups = listOf(),
+    )
+
+    // The "Add <addon>" install icon on a recommended addon row in the expanded Extensions submenu.
+    // Keyed on the addon name because there is no test tag on the install icon (see AddonMenuItem);
+    // matched at the device level like the legacy installRecommendedAddon (itemWithDescription).
+    @Suppress("ktlint:standard:function-naming", "FunctionName")
+    fun RECOMMENDED_ADDON_INSTALL_BUTTON(addonTitle: String = "") = Selector(
+        strategy = SelectorStrategy.UIAUTOMATOR_WITH_DESCRIPTION_CONTAINS,
+        value = getStringResource(R.string.browser_menu_extension_plus_icon_content_description_2, addonTitle),
+        description = "Install recommended addon '$addonTitle' button",
+        groups = listOf(),
+    )
+
     // Keyed on the addon row rather than the addon name: which addons AMO recommends is server-driven,
     // so matching names would couple the test to remote data. Must be the row tag, not
     // RECOMMENDED_ADDON_ITEM_TITLE — that one is applied via labelModifier, so the row's merged
@@ -348,6 +368,8 @@ object MainMenuSelectors {
         EXTENSIONS_CHEVRON,
         TRY_RECOMMENDED_EXTENSION_BUTTON,
         DISCOVER_MORE_EXTENSIONS_BUTTON,
+        MANAGE_EXTENSIONS_BUTTON,
+        RECOMMENDED_ADDON_INSTALL_BUTTON(),
         RECOMMENDED_ADDON_ITEM,
         HISTORY_BUTTON,
         BOOKMARKS_BUTTON,

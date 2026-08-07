@@ -49,4 +49,16 @@ class SettingsAddonsManagerPage(composeRule: AndroidComposeTestRule<HomeActivity
     override fun mozGetSelectorsByGroup(group: String): List<Selector> {
         return SettingsAddonsManagerSelectors.all.filter { it.groups.contains(group) }
     }
+
+    /**
+     * Opens the detail screen for the installed [addonTitle] and removes it, returning to the add-ons
+     * manager list. Mirrors the legacy openDetailedMenuForAddon + removeAddon flow.
+     */
+    fun removeInstalledExtension(addonTitle: String): SettingsAddonsManagerPage {
+        mozVerify(SettingsAddonsManagerSelectors.INSTALLED_ADDON_ITEM(addonTitle))
+        mozClick(SettingsAddonsManagerSelectors.INSTALLED_ADDON_ITEM(addonTitle))
+        mozVerify(SettingsAddonsManagerSelectors.REMOVE_ADDON_BUTTON)
+        mozClick(SettingsAddonsManagerSelectors.REMOVE_ADDON_BUTTON)
+        return this
+    }
 }
