@@ -24,9 +24,11 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.layout
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.LiveRegionMode
@@ -34,6 +36,7 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
+import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
@@ -131,30 +134,60 @@ private fun IPProtectionToggle(
             tint = MaterialTheme.colorScheme.onSurfaceVariant,
         )
 
-        Column(modifier = Modifier.weight(1f)) {
-            Text(
-                text = stringResource(R.string.ip_protection_toggle_label),
-                color = MaterialTheme.colorScheme.onSurface,
-                style = FirefoxTheme.typography.subtitle1,
-                overflow = TextOverflow.Ellipsis,
-                maxLines = 1,
-            )
-
-            if (state.status == IPProtectionMenuStatus.DataLimitReached && state.dataLimitGb > 0) {
-                Text(
-                    text = stringResource(R.string.ip_protection_menu_limit_reached, state.dataLimitGb),
-                    color = MaterialTheme.colorScheme.error,
-                    style = FirefoxTheme.typography.caption,
-                    overflow = TextOverflow.Ellipsis,
-                    maxLines = 1,
-                )
-            }
-        }
+        IPProtectionLabel(
+            state = state,
+            modifier = Modifier.weight(1f),
+        )
 
         Badge(
             badgeText = statusDescription,
             state = badgeState(state.status),
         )
+    }
+}
+
+@Composable
+private fun IPProtectionLabel(
+    state: IPProtectionMenuState,
+    modifier: Modifier = Modifier,
+) {
+    val label = stringResource(R.string.ip_protection_toggle_label)
+    val labelStyle = FirefoxTheme.typography.subtitle1
+    val textMeasurer = rememberTextMeasurer()
+    val textLayout = remember(label, labelStyle) {
+        textMeasurer.measure(text = label, style = labelStyle).size.width
+    }
+
+    Column(
+        modifier = modifier.layout { measurable, constraints ->
+            val placeable = if (constraints.maxWidth >= textLayout) {
+                measurable.measure(constraints)
+            } else {
+                null
+            }
+
+            layout(width = placeable?.width ?: 0, height = placeable?.height ?: 0) {
+                placeable?.placeRelative(0, 0)
+            }
+        },
+    ) {
+        Text(
+            text = label,
+            color = MaterialTheme.colorScheme.onSurface,
+            style = labelStyle,
+            overflow = TextOverflow.Ellipsis,
+            maxLines = 1,
+        )
+
+        if (state.status == IPProtectionMenuStatus.DataLimitReached && state.dataLimitGb > 0) {
+            Text(
+                text = stringResource(R.string.ip_protection_menu_limit_reached, state.dataLimitGb),
+                color = MaterialTheme.colorScheme.error,
+                style = FirefoxTheme.typography.caption,
+                overflow = TextOverflow.Ellipsis,
+                maxLines = 1,
+            )
+        }
     }
 }
 
