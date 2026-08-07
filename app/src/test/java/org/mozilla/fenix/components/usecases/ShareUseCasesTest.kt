@@ -4,6 +4,7 @@
 
 package org.mozilla.fenix.components.usecases
 
+import androidx.core.net.toUri
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.spyk
@@ -256,6 +257,35 @@ class ShareUseCasesTest {
         val events = NativeShareSheet.shown.testGetValue()
         assertEquals(1, events?.size)
         assertEquals("home", events?.single()?.extra?.get("source"))
+    }
+
+    @Config(sdk = [34])
+    @Test
+    fun `GIVEN chooserActions and a thumbnailUri WHEN shareItems is called THEN they are forwarded to the system share sheet`() {
+        val items = listOf(ShareData(url = "https://mozilla.org", title = "Mozilla"))
+        val thumbnailUri = "content://thumbnail".toUri()
+
+        shareUseCases.shareItems(
+            items = items,
+            source = ShareSource.TABS_TRAY,
+            subject = "My tab group",
+            chooserActions = ShareSheetChooserAction.tabChooserActions,
+            thumbnailUri = thumbnailUri,
+            navigateToShareFragment = navigateToShareFragment,
+        )
+
+        assertEquals(
+            listOf(
+                FakeShareSheetLauncher.ItemsShare(
+                    items = items,
+                    isPrivate = false,
+                    subject = "My tab group",
+                    chooserActions = ShareSheetChooserAction.tabChooserActions,
+                    thumbnailUri = thumbnailUri,
+                ),
+            ),
+            shareSheetLauncher.itemsShares,
+        )
     }
 
     @Config(sdk = [34])

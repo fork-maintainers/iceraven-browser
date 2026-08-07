@@ -59,8 +59,6 @@ class ExpandedTabGroupTest {
         }
         composeTestRule.onNodeWithTag(TabsTrayTestTag.TAB_GROUP_BOTTOM_SHEET_ROOT)
             .assertIsDisplayed()
-        composeTestRule.onNodeWithTag(TabsTrayTestTag.BOTTOM_SHEET_SHARE_BUTTON)
-            .assertIsDisplayed()
         composeTestRule.onNodeWithTag(TabsTrayTestTag.BOTTOM_SHEET_ADD_TAB_BUTTON)
             .assertIsDisplayed()
         composeTestRule.onNodeWithTag(TabsTrayTestTag.TAB_GROUP_THREE_DOT_BUTTON)
@@ -326,6 +324,7 @@ class ExpandedTabGroupTest {
         onEditTabGroupClick: () -> Unit = {},
         onCloseTabGroupClick: () -> Unit = {},
         onAddNewTabClick: (() -> Unit)? = {},
+        onShareTabGroupClick: () -> Unit = {},
     ) = ExpandedTabGroupActions(
         onItemClick = onItemClick,
         onTabClose = onTabClose,
@@ -333,5 +332,6 @@ class ExpandedTabGroupTest {
         onEditTabGroupClick = onEditTabGroupClick,
         onCloseTabGroupClick = onCloseTabGroupClick,
         onAddNewTabClick = onAddNewTabClick,
+        onShareTabGroupClick = onShareTabGroupClick,
     )
 }
