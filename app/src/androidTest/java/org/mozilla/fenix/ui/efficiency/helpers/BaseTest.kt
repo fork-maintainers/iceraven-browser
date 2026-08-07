@@ -65,7 +65,6 @@ abstract class BaseTest(
     private val isRecentlyVisitedFeatureEnabled: Boolean = true,
     private val shouldUseExpandedToolbar: Boolean = false,
     private val isTabStripEnabled: Boolean = false,
-    private val isPWAsPromptEnabled: Boolean = false,
 ) {
 
     // Default launch built from the constructor args (back-compat for every existing subclass).
@@ -76,7 +75,6 @@ abstract class BaseTest(
         isRecentlyVisitedFeatureEnabled = isRecentlyVisitedFeatureEnabled,
         shouldUseExpandedToolbar = shouldUseExpandedToolbar,
         isTabStripEnabled = isTabStripEnabled,
-        isPWAsPromptEnabled = isPWAsPromptEnabled,
     )
 
     /** Override to vary the launch per run/case (e.g. the reachability shard uses the case's config). */
@@ -111,7 +109,6 @@ abstract class BaseTest(
                             isRecentlyVisitedFeatureEnabled = cfg.isRecentlyVisitedFeatureEnabled,
                             shouldUseExpandedToolbar = cfg.shouldUseExpandedToolbar,
                             isTabStripEnabled = cfg.isTabStripEnabled,
-                            isPWAsPromptEnabled = cfg.isPWAsPromptEnabled,
                         ),
                     ) { it.activity }
                     try {
