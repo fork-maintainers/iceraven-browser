@@ -37,16 +37,18 @@ import org.mozilla.fenix.theme.FirefoxTheme
  * @param groups The list of tab groups to display.
  * @param modifier: The Modifier applied to the tab group list.
  * @param onTabGroupClick Invoked when the user clicks on a tab group.
- * @param onDeleteTabGroupClick Invoked when the user clicks on delete tab group.
  * @param onEditTabGroupClick Invoked when the user clicks to edit the tab group.
+ * @param onShareTabGroupClick Invoked when the user clicks to share the tab group.
+ * @param onDeleteTabGroupClick Invoked when the user clicks on delete tab group.
  */
 @Composable
 fun TabGroupList(
     groups: List<TabsTrayItem.TabGroup>,
     modifier: Modifier = Modifier,
     onTabGroupClick: (TabsTrayItem.TabGroup) -> Unit,
-    onDeleteTabGroupClick: (TabsTrayItem.TabGroup) -> Unit,
     onEditTabGroupClick: (TabsTrayItem.TabGroup) -> Unit,
+    onShareTabGroupClick: (TabsTrayItem.TabGroup) -> Unit,
+    onDeleteTabGroupClick: (TabsTrayItem.TabGroup) -> Unit,
 ) {
     Box(
         modifier = Modifier
@@ -95,10 +97,11 @@ fun TabGroupList(
                     trailingContent = {
                         TabGroupMenuButton(
                             includeCloseOption = false,
-                            onDeleteTabGroupClick = { onDeleteTabGroupClick(group) },
                             onEditTabGroupClick = { onEditTabGroupClick(group) },
                             onCloseTabGroupClick = {},
+                            onShareTabGroupClick = { onShareTabGroupClick(group) },
                             onUngroupTabGroupClick = {},
+                            onDeleteTabGroupClick = { onDeleteTabGroupClick(group) },
                         )
                     },
                 )
@@ -134,8 +137,9 @@ private fun TabGroupListPreview() {
                 ),
             ),
             onTabGroupClick = {},
-            onDeleteTabGroupClick = {},
             onEditTabGroupClick = {},
+            onShareTabGroupClick = {},
+            onDeleteTabGroupClick = {},
         )
     }
 }
