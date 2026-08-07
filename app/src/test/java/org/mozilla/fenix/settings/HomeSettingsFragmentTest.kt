@@ -20,6 +20,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mozilla.fenix.GleanMetrics.CustomizeHome
 import org.mozilla.fenix.GleanMetrics.Events
 import org.mozilla.fenix.R
 import org.mozilla.fenix.components.AppStore
@@ -138,6 +139,27 @@ internal class HomeSettingsFragmentTest {
         assertEquals("true", events.single().extra?.get("enabled"))
     }
 
+    @Test
+    fun `WHEN toggling the weather setting THEN customize home preference_toggled is recorded with the weather key`() {
+        every { appSettings.enableHomepageWeatherWidget } returns true
+
+        activateFragment()
+
+        val result = getWeatherPreference().callChangeListener(true)
+
+        assertTrue(result)
+        val events = CustomizeHome.preferenceToggled.testGetValue()!!
+        assertEquals(1, events.size)
+        assertEquals("weather", events.single().extra?.get("preference_key"))
+        assertEquals("true", events.single().extra?.get("enabled"))
+        verify {
+            appPrefsEditor.putBoolean(
+                homeSettingsFragment.getString(R.string.pref_key_show_homepage_weather_widget),
+                true,
+            )
+        }
+    }
+
     private fun activateFragment() {
         val activity = Robolectric.buildActivity(FragmentActivity::class.java).create().get()
         homeSettingsFragment = HomeSettingsFragment()
@@ -168,5 +190,10 @@ internal class HomeSettingsFragmentTest {
     private fun getPrivacyReportPreference(): SwitchPreferenceCompat =
         homeSettingsFragment.findPreference(
             homeSettingsFragment.getPreferenceKey(R.string.pref_key_privacy_report),
+        )!!
+
+    private fun getWeatherPreference(): SwitchPreferenceCompat =
+        homeSettingsFragment.findPreference(
+            homeSettingsFragment.getPreferenceKey(R.string.pref_key_show_homepage_weather_widget),
         )!!
 }
