@@ -27,6 +27,7 @@ import org.mozilla.fenix.ui.efficiency.helpers.Selector
 import org.mozilla.fenix.ui.efficiency.navigation.NavigationRegistry
 import org.mozilla.fenix.ui.efficiency.navigation.NavigationStep
 import org.mozilla.fenix.ui.efficiency.selectors.BrowserPageSelectors
+import org.mozilla.fenix.ui.efficiency.selectors.DownloadsSelectors
 import org.mozilla.fenix.ui.efficiency.selectors.HomeSelectors
 import org.mozilla.fenix.ui.efficiency.selectors.MainMenuSelectors
 import org.mozilla.fenix.ui.efficiency.selectors.SearchBarSelectors
@@ -180,6 +181,62 @@ class BrowserPage(composeRule: AndroidComposeTestRule<HomeActivityIntentTestRule
 
     fun clickPageContentIfPresent(text: String): BrowserPage {
         mozClickIfPresent(BrowserPageSelectors.PAGE_CONTENT(text))
+        return this
+    }
+
+    // --- Downloads from a web page ---
+
+    /**
+     * Click the download link named [fileName] and wait for the download prompt, reloading [url]
+     * between attempts.
+     *
+     * Mirrors the legacy BrowserRobot.clickDownloadLink, which retried the click three times with a
+     * page refresh in between: the link can be tapped before the page is fully interactive, in which
+     * case the tap lands but no prompt opens — waiting longer on the same document never helps.
+     */
+    fun clickDownloadLink(fileName: String, url: String, attempts: Int = 3): BrowserPage {
+        for (attempt in 1..attempts) {
+            try {
+                mozClick(DownloadsSelectors.DOWNLOAD_LINK(fileName))
+                mozVerify(DownloadsSelectors.DOWNLOAD_DIALOG_TITLE, timeout = waitingTimeLong)
+                return this
+            } catch (e: AssertionError) {
+                if (attempt == attempts) throw e
+                Log.i("BrowserPage", "clickDownloadLink: no download prompt for '$fileName' on attempt $attempt, reloading")
+                navigateToPage(url, forceNavigation = true)
+            }
+        }
+        return this
+    }
+
+    /**
+     * Assert the full download prompt, not just its title: legacy verifyDownloadPrompt checked the
+     * dialog, its Cancel button and its Download button were all displayed.
+     */
+    fun verifyDownloadPrompt(): BrowserPage {
+        mozVerify(DownloadsSelectors.DOWNLOAD_DIALOG_TITLE, timeout = waitingTimeLong)
+        mozVerify(DownloadsSelectors.DOWNLOAD_DIALOG_CANCEL_BUTTON)
+        mozVerify(DownloadsSelectors.DOWNLOAD_DIALOG_CONFIRM_BUTTON)
+        return this
+    }
+
+    /** Confirm the download prompt, starting the download. */
+    fun clickDownloadPromptConfirmButton(): BrowserPage {
+        mozClick(DownloadsSelectors.DOWNLOAD_DIALOG_CONFIRM_BUTTON)
+        return this
+    }
+
+    /**
+     * Assert the "Download completed" snackbar for [fileName] — the completion text, the "Open"
+     * action (tag and label) and the file name itself, as legacy verifyDownloadCompleteSnackbar did.
+     */
+    fun verifyDownloadCompleteSnackbar(fileName: String): BrowserPage {
+        // The snackbar only appears once the file has actually transferred, so this waits on the
+        // network, not on rendering.
+        mozVerify(DownloadsSelectors.DOWNLOAD_COMPLETE_SNACKBAR, timeout = waitingTimeLong)
+        mozVerify(DownloadsSelectors.DOWNLOAD_SNACK_BAR_OPEN_BUTTON)
+        mozVerify(DownloadsSelectors.DOWNLOAD_SNACK_BAR_OPEN_ACTION_LABEL)
+        mozVerify(DownloadsSelectors.FILE_NAME_TEXT(fileName))
         return this
     }
 

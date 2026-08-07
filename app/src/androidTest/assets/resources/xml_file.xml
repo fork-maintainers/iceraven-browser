@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<downloads>
+  <file name="png_image.png" type="image/png"/>
+  <file name="zip_small.zip" type="application/zip"/>
+  <file name="txt_file.txt" type="text/plain"/>
+</downloads>
