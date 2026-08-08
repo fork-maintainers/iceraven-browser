@@ -1943,6 +1943,10 @@
   <!-- The error message of the URL text field when an invalid URL has been entered. -->
   <string name="webcompat_reporter_url_error_invalid">Please enter a valid URL</string>
   <!-- The label/title of a field in the Web Compat Reporter feature for explaining a high-level reason why the site is broken. -->
+  <string name="webcompat_reporter_label_whats_broken_3">What’s not working?</string>
+  <!-- Content description for the icon button that clears the selected broken site reason in the WebCompat Reporter. -->
+  <string name="webcompat_reporter_clear_reason_content_description">Clear selected reason</string>
+  <!-- The label/title of a field in the Web Compat Reporter feature for explaining a high-level reason why the site is broken. -->
   <string name="webcompat_reporter_label_whats_broken_2">What’s broken?</string>
   <!-- The placeholder text for the dropdown where a user selects a high-level reason why the site is broken. -->
   <string name="webcompat_reporter_choose_reason_2">Choose a reason</string>
@@ -1992,6 +1996,10 @@
   <string name="webcompat_reporter_reason_account2">Can’t sign in or register</string>
   <!-- Broken site reason text for site asked to turn off ad blocker -->
   <string name="webcompat_reporter_reason_turn_off_adblocker">Site asked to turn off ad blocker</string>
+  <!-- Broken site reason text for browser isn’t supported or blocked -->
+  <string name="webcompat_reporter_reason_notsupported_2">Browser is blocked or unsupported</string>
+  <!-- Broken site reason text for the site being deceptive -->
+  <string name="webcompat_reporter_reason_site_is_deceptive">This site is deceptive</string>
   <!-- Broken site reason text for browser isn’t supported or blocked -->
   <string name="webcompat_reporter_reason_notsupported">Browser isn’t supported or blocked</string>
   <!-- Broken site reason text for something else -->
@@ -3083,6 +3091,28 @@
   <string name="ip_protection_data_limit_reached_snackbar">%1$d GB of VPN data used. Access will reset next month.</string>
   <!-- Snackbar (in-app pop-up notification) action button text that takes the user to the VPN settings screen. -->
   <string name="ip_protection_data_limit_reached_snackbar_action">Settings</string>
+  <!-- Label for the button that takes the user to get the standalone Mozilla VPN product. -->
+  <string name="ip_protection_mozilla_vpn_upsell_button" tools:ignore="UnusedResources,BrandUsage">Get Mozilla VPN</string>
+  <!-- Title for the browser VPN location picker screen. -->
+  <string name="ip_protection_location_picker_title" tools:ignore="UnusedResources">Choose VPN location</string>
+  <!-- Description for what it means to use the Recommended setting and let the app automatically pick the best server location. -->
+  <string name="ip_protection_location_fastest_description" tools:ignore="BrandUsage">Firefox finds the fastest location</string>
+  <!-- Error message shown when the selected browser VPN location is unavailable. -->
+  <string name="ip_protection_location_unavailable" tools:ignore="UnusedResources">Location unavailable. Choose another location.</string>
+  <!-- Snackbar (in-app pop-up notification) text shown when the previously selected browser VPN location is unavailable and the recommended location was used instead. -->
+  <string name="ip_protection_location_unavailable_recommended_snackbar" tools:ignore="UnusedResources">Selected VPN location unavailable. Connected to the recommended location.</string>
+  <!-- Title for the card shown to the user when we are unable to fetch server locations -->
+  <string name="ip_protection_locations_unavailable_title">Locations unavailable</string>
+  <!-- Description for the card shown to the user when we are unable to fetch server locations -->
+  <string name="ip_protection_locations_unavailable_description">Switched to the recommended location.</string>
+  <!-- Title for the browser VPN location selection screen (displayed in the app bar) -->
+  <string name="ip_protection_locations_title">Choose VPN location</string>
+  <!-- Content description for the browser VPN location selection screen top bar back button -->
+  <string name="ip_protection_locations_navigate_back_button_content_description">Navigate back</string>
+  <!-- Title for the card shown to the user when we are unable to fetch server locations -->
+  <string name="ip_protection_location_unavailable_title" tools:ignore="UnusedResources">Previous location is unavailable</string>
+  <!-- Description for the card shown to the user when we are unable to fetch server locations -->
+  <string name="ip_protection_location_unavailable_recommended_description" tools:ignore="UnusedResources">Connected to the recommended location.</string>
   <!--
     Autofill
 
@@ -3886,6 +3916,8 @@
     %s is a placeholder for the name of the certificate authority that issued the certificate.
   -->
   <string name="connection_security_panel_verified_by">Verified by %s</string>
+  <!-- Content description (not visible, for screen readers etc.) for the handle used to drag the protections dashboard to the bottom of the screen and close it. -->
+  <string name="tracker_protections_dashboard_close_handlebar_content_description">Close dashboard</string>
   <!--
     Text for the connection security panel when the site uses a QWAC.
     %s is a placeholder for the organization for which the certificate was issued.
@@ -4009,6 +4041,26 @@
   <string name="microsurvey_sync_title" tools:ignore="BrandUsage,UnusedResources">How satisfied are you with the sync experience in Firefox?</string>
   <!-- Text shown in the survey title for 'describe your experience so far' microsurvey. Note: The word "Firefox" should NOT be translated. -->
   <string name="microsurvey_describe_your_experience_title" tools:ignore="BrandUsage,UnusedResources">Help us improve Firefox. Which best describes your experience so far?</string>
+  <!--
+    Uninstall Survey
+
+    Title text for the uninstall survey dialog, asking the user for the reason they are removing the app
+  -->
+  <string name="microsurvey_uninstall_survey_title">Your feedback matters. Why are you uninstalling?</string>
+  <!-- Uninstall survey answer option -->
+  <string name="uninstall_survey_option_1_v2">It’s slow or unreliable</string>
+  <!-- Uninstall survey answer option -->
+  <string name="uninstall_survey_option_2_v2">Websites didn’t work properly</string>
+  <!-- Uninstall survey answer option -->
+  <string name="uninstall_survey_option_3_v2">Missing features I need</string>
+  <!-- Uninstall survey answer option -->
+  <string name="uninstall_survey_option_4_v2">Videos, downloads, or media didn’t work</string>
+  <!-- Uninstall survey answer option -->
+  <string name="uninstall_survey_option_5_v2">It’s hard to use or poorly designed</string>
+  <!-- Uninstall survey answer option -->
+  <string name="uninstall_survey_option_6_v2">Privacy or security concerns</string>
+  <!-- Button label shown at the bottom of the uninstall survey -->
+  <string name="uninstall_survey_button_label">Submit feedback and uninstall</string>
   <!--
     Accessibility
 
@@ -4588,6 +4640,54 @@
   <string name="privacy_notice_updated_homepage_message_privacy_notice" tools:ignore="UnusedResources">Privacy Notice</string>
   <!-- The second active link used in privacy_notice_updated_homepage_message -->
   <string name="privacy_notice_updated_homepage_message_learn_more" tools:ignore="UnusedResources">Learn more</string>
+  <!-- Google Lens prototype related strings -->
+  <string name="preferences_debug_settings_google_lens_integration">Enable Google Lens Integration</string>
+  <!-- Lens image search button content description -->
+  <string name="lens_search_content_description">Search with image</string>
+  <!-- Content description for the gallery picker button in the Lens camera screen -->
+  <string name="content_description_gallery">Choose from gallery to send to Google Lens</string>
+  <!-- Content description for the shutter button in the Lens camera screen -->
+  <string name="content_description_take_photo">Take photo and send to Google Lens</string>
+  <!-- Image context menu entry that sends the long-pressed image to Google Lens -->
+  <string name="context_menu_open_image_with_google_lens">Search with Google Lens</string>
+  <!-- Toast shown when the user denies the camera permission requested by the Lens camera screen -->
+  <string name="lens_camera_permission_denied">Permission denied</string>
+  <!--
+    Title shown at the top of the camera screen, next to the close button, telling the
+    user that the photo they capture will be sent to Google Lens for a visual search.
+  -->
+  <string name="lens_camera_title_lens">Google Lens</string>
+  <!--
+    Title shown at the top of the camera screen, next to the close button, telling the
+    user that the camera is being used to scan a QR code.
+  -->
+  <string name="lens_camera_title_qr">QR Code</string>
+  <!-- Title for the Google Lens Search Settings page feature toggle -->
+  <string name="search_settings_google_lens_title">Enable Google Lens search</string>
+  <!-- Description for the Google Lens Search Settings page feature toggle -->
+  <string name="search_settings_google_lens_description">Sends images and photos to Google for visual search.</string>
+  <!-- Caption shown under the Google Lens toggle clarifying when the feature is available -->
+  <string name="preferences_google_lens_availability_caption">Available only when Google is enabled above and is your active search engine while browsing.</string>
+  <!-- Title for the Google Lens AI feature toggle -->
+  <string name="ai_controls_google_lens_title">Google Lens</string>
+  <!-- Description for the Google Lens AI feature toggle -->
+  <string name="ai_controls_google_lens_description">Sends images and photos to Google for visual search.</string>
+  <!-- Content description for the Google Lens half of the camera mode toggle -->
+  <string name="lens_camera_mode_lens">Google Lens</string>
+  <!-- Content description for the QR scanner half of the camera mode toggle -->
+  <string name="lens_camera_mode_qr">QR scanner</string>
+  <!-- Toast shown when the user picks an image from the gallery in QR mode but no QR code is found in it -->
+  <string name="lens_camera_qr_no_code_found">No QR code found in image</string>
+  <!-- Title of the bottom sheet shown the first time the user opens the Google Lens camera screen -->
+  <string name="lens_opt_out_title">Find it with Google Lens</string>
+  <!-- Description of the bottom sheet shown the first time the user opens the Google Lens camera screen -->
+  <string name="lens_opt_out_description">Choose an image or use your camera to get results with Google Lens.</string>
+  <!-- Text of the link in the first-run Google Lens bottom sheet that opens the Search settings page -->
+  <string name="lens_opt_out_settings_link">Google Lens settings</string>
+  <!-- Button in the first-run Google Lens bottom sheet that dismisses it and starts the camera -->
+  <string name="lens_opt_out_try_it_now_button">Try it now</string>
+  <!-- Button in the first-run Google Lens bottom sheet that leaves Google Lens without using it -->
+  <string name="lens_opt_out_not_now_button">Not now</string>
   <!--
     Firefox Labs
 
@@ -4624,6 +4724,8 @@
   <string name="firefox_labs_feature_enable_dialog_message">To turn on this feature, restart %s.</string>
   <!-- The description text that is displayed in the confirmation dialog on the Firefox Labs screen for toggling "off" experimental features. %s is the name of the app (for example "Firefox Nightly") -->
   <string name="firefox_labs_feature_disable_dialog_message">To turn off this feature, restart %s.</string>
+  <!-- Helper text shown beneath a Firefox Labs item when it is blocked from being turned on. -->
+  <string name="firefox_labs_feature_conflict">Feature isn’t available to try.</string>
   <!-- Text displayed on the Firefox Labs screen when there are no Labs experimental features present. -->
   <string name="firefox_labs_no_labs_available_description">No experimental features to try right now</string>
 </resources>

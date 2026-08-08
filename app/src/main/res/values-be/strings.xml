@@ -1920,6 +1920,8 @@
   <string name="sync_add_new_device_learn_button">Даведацца больш пра адпраўку картак…</string>
   <!-- Text for the button to connect another device -->
   <string name="sync_add_new_device_connect_button">Злучыць іншую прыладу…</string>
+  <!-- A short message template for the shared link with a footer. %1$s is the shared link, %2$s is the app name (e.g. Firefox) and %3$s is a download link for the app. -->
+  <string name="sent_from_firefox_template_short" tools:ignore="UnusedResources">%1$s Адпраўлена з %2$s 🦊 %3$s</string>
   <!--
     Notifications
 

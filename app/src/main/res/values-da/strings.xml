@@ -2374,7 +2374,7 @@
   <!-- Heading on the QR code display screen -->
   <string name="qr_code_display_share_nearby">Del link i nærheden</string>
   <!-- Body text on the QR code display screen instructing the user to have others scan the code -->
-  <string name="qr_code_display_instructions">For at dele dette link med folk i nærheden, skal du få dem til at scanne QR-koden nedenfor.</string>
+  <string name="qr_code_display_instructions">For at dele dette link med folk i nærheden, skal du få dem til at skanne QR-koden nedenfor.</string>
   <!-- Label for the download button on the QR code display screen -->
   <string name="qr_code_display_download">Hent</string>
   <!-- Toast shown when the QR code is successfully saved to Downloads -->
