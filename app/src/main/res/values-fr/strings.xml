@@ -4760,7 +4760,7 @@
   <!-- Toast shown when the user picks an image from the gallery in QR mode but no QR code is found in it -->
   <string name="lens_camera_qr_no_code_found">Aucun code QR trouvé dans l’image</string>
   <!-- Title of the bottom sheet shown the first time the user opens the Google Lens camera screen -->
-  <string name="lens_opt_out_title">Trouvez avec Google Lens</string>
+  <string name="lens_opt_out_title">Trouvez ce que vous recherchez avec Google Lens</string>
   <!-- Description of the bottom sheet shown the first time the user opens the Google Lens camera screen -->
   <string name="lens_opt_out_description">Sélectionnez une image ou utilisez votre appareil photo pour obtenir des résultats avec Google\u00a0Lens.</string>
   <!-- Text of the link in the first-run Google Lens bottom sheet that opens the Search settings page -->

@@ -1704,6 +1704,8 @@
   <string name="tab_group_three_dot_menu_delete">ลบ</string>
   <!-- Text shown on the close button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_close">ปิด</string>
+  <!-- Text shown on the Don't Ask Again checkbox button in the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_dont_ask_again">ไม่ต้องถามอีก</string>
   <!--
     Color labels for tab groups, used for accessibility and selection UI.
 

@@ -31,6 +31,8 @@
   <string name="history_search_hint">Претражи историју</string>
   <!-- Placeholder text shown in search bar when using bookmarks search -->
   <string name="bookmark_search_hint">Претражи обележиваче</string>
+  <!-- Content description for the toolbar back button while searching bookmarks -->
+  <string name="bookmark_close_search_description">Врати се и затвори претрагу</string>
   <!-- Placeholder text shown in search bar when using tabs search -->
   <string name="tab_search_hint">Претражи језичке</string>
   <!-- Placeholder text shown in the search bar when using application search engines -->
@@ -977,6 +979,12 @@
   <string name="notifications_allowed_summary">Дозвољено</string>
   <!-- Summary for notification preference indicating notifications are not allowed -->
   <string name="notifications_not_allowed_summary">Није дозвољено</string>
+  <!-- Preference for local network access / nearby devices in Android 17 -->
+  <string name="preferences_local_network_access">Приступ локалној мрежи / Уређаји у близини</string>
+  <!-- Summary for local network access preference indicating access is allowed -->
+  <string name="local_network_access_allowed_summary">Дозвољено</string>
+  <!-- Summary for local network access preference indicating access is not allowed -->
+  <string name="local_network_access_not_allowed_summary">Није дозвољено</string>
   <!--
     Add-on Permissions
 
@@ -1036,6 +1044,8 @@
   <string name="customize_toggle_pocket_sponsored">Спонзорисане приче</string>
   <!-- Title for the opening wallpaper settings screen -->
   <string name="customize_wallpapers">Позадине</string>
+  <!-- Label for the menu item that opens the customize homepage settings screen. -->
+  <string name="browser_menu_customize_homepage">Прилагоди почетну страну</string>
   <!-- Label for the menu item that opens the wallpaper settings screen. -->
   <string name="browser_menu_change_wallpaper">Промени позадину</string>
   <!-- Title for the customize home screen section with sponsored shortcuts. -->
@@ -1700,6 +1710,26 @@
   <string name="close_tab_and_delete_group_confirmation_dialog_confirm">Обриши групу</string>
   <!-- Text shown on the cancel button in the Close last tab and delete tab group confirmation dialog. -->
   <string name="close_tab_and_delete_group_confirmation_dialog_cancel">Откажи</string>
+  <!-- Content description for the three dot button next to a tab group" -->
+  <string name="tab_group_three_dot_button_content_description">Више могућности</string>
+  <!-- Text shown on the edit button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_edit">Уреди</string>
+  <!-- Text shown on the ungroup button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_ungroup">Разгрупиши</string>
+  <!-- Text shown on the delete button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_delete">Обриши</string>
+  <!-- Text shown on the close button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_close">Затвори</string>
+  <!-- Title for the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_title">Разгруписати групу језичака?</string>
+  <!-- Text shown in the body of the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_body">Језичци ће остати отворени на овом уређају, али ће група бити обрисана.</string>
+  <!-- Text shown on the Don't Ask Again checkbox button in the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_dont_ask_again">Не питај поново</string>
+  <!-- Text shown on the confirm button in the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_confirm">Разгрупиши</string>
+  <!-- Text shown on the cancel button in the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_cancel">Откажи</string>
   <!--
     Color labels for tab groups, used for accessibility and selection UI.
 
@@ -1976,6 +2006,8 @@
   <string name="webcompat_reporter_description_error">Унесите најмање 10 знакова</string>
   <!-- The label/title of a mandatory field in the Web Compat Reporter feature for adding additional information. -->
   <string name="webcompat_reporter_label_mandatory_description">Опишите проблем детаљно како бисмо могли да истражимо ову ситуацију</string>
+  <!-- The label/title of a optional field in the Web Compat Reporter feature for adding additional information. -->
+  <string name="webcompat_reporter_label_optional_description">Опишите проблем детаљно како бисте нам помогли да истражимо проблем (необавезно)</string>
   <!-- The label/title of a field in the Web Compat Reporter feature for explaining a high-level reason why the site is broken. -->
   <string name="webcompat_reporter_label_whats_broken_2">Шта не ради?</string>
   <!-- The placeholder text for the dropdown where a user selects a high-level reason why the site is broken. -->
@@ -2195,6 +2227,10 @@
   <string name="bookmark_select_folder_new_folder_button_title">Нова фасцикла</string>
   <!-- Bookmark snackbar message for moving a single item. %1$s is the title of the item being moved and %2$s is the new parent folder of the bookmark -->
   <string name="bookmark_moved_single_item">Премештено %1$s у %2$s</string>
+  <!-- Text for bookmark search page when there are no results. -->
+  <string name="bookmark_no_search_results">Није пронађено ниједно поклапање.</string>
+  <!-- Additional text for bookmark search page when there are no results. -->
+  <string name="bookmark_no_search_results_additional_text">Пробајте другу претрагу!</string>
   <!--
     Site Permissions
 
@@ -2396,6 +2432,10 @@
   <string name="sync_sign_in">Пријави се на Sync</string>
   <!-- An option from the share dialog to send link to all other sync devices -->
   <string name="sync_send_to_all">Пошаљи на све уређаје</string>
+  <!-- Text displayed when no other sync devices are available for link sharing -->
+  <string name="sync_no_devices_available">Нема доступних уређаја</string>
+  <!-- Text displayed when no other sync devices are available for link sharing. -->
+  <string name="sync_no_devices_available_description">Сви уређаји који су пријављени и усклађују се са овим налогом појавиће се овде.</string>
   <!-- An option from the share dialog to reconnect to sync -->
   <string name="sync_reconnect">Поново се повежи на Sync</string>
   <!-- Text displayed when sync is offline and cannot be accessed -->
@@ -3125,6 +3165,38 @@
   <string name="ip_protection_data_limit_reached_snackbar">Искоришћено је %1$d GB ВПН података. Приступ ће бити враћен следећег месеца.</string>
   <!-- Snackbar (in-app pop-up notification) action button text that takes the user to the VPN settings screen. -->
   <string name="ip_protection_data_limit_reached_snackbar_action">Подешавања</string>
+  <!-- Description shown on the browser VPN settings screen prompting the user to turn the VPN on. -->
+  <string name="ip_protection_settings_description" tools:ignore="UnusedResources">Укључите ВПН како би ваше прегледање било приватније и теже за праћење.</string>
+  <!-- Title shown on the browser VPN settings screen for location selection section. -->
+  <string name="ip_protection_location_title" tools:ignore="UnusedResources">Локација</string>
+  <!-- Label for the Recommended server location option which is automatically selected by the browser. -->
+  <string name="ip_protection_recommended_location" tools:ignore="UnusedResources">Препоручено</string>
+  <!-- Headline for the card that promotes the standalone Mozilla VPN product. -->
+  <string name="ip_protection_mozilla_vpn_upsell_headline" tools:ignore="UnusedResources,BrandUsage">Заштитите више уз Mozilla VPN</string>
+  <!-- Body for the card that promotes the standalone Mozilla VPN product. -->
+  <string name="ip_protection_mozilla_vpn_upsell_body" tools:ignore="UnusedResources">Изаберите из више од 300 локација и заштитите све своје апликације на до 5 уређаја.</string>
+  <!-- Label for the button that takes the user to get the standalone Mozilla VPN product. -->
+  <string name="ip_protection_mozilla_vpn_upsell_button" tools:ignore="UnusedResources,BrandUsage">Набавите Mozilla VPN</string>
+  <!-- Title for the browser VPN location picker screen. -->
+  <string name="ip_protection_location_picker_title" tools:ignore="UnusedResources">Изаберите VPN локацију</string>
+  <!-- Description for what it means to use the Recommended setting and let the app automatically pick the best server location. -->
+  <string name="ip_protection_location_fastest_description" tools:ignore="BrandUsage">Firefox проналази најбржу локацију</string>
+  <!-- Error message shown when the selected browser VPN location is unavailable. -->
+  <string name="ip_protection_location_unavailable" tools:ignore="UnusedResources">Локација је недоступна. Изаберите другу локацију.</string>
+  <!-- Snackbar (in-app pop-up notification) text shown when the previously selected browser VPN location is unavailable and the recommended location was used instead. -->
+  <string name="ip_protection_location_unavailable_recommended_snackbar" tools:ignore="UnusedResources">Изабрана VPN локација је недоступна. Повезано са препорученом локацијом.</string>
+  <!-- Title for the card shown to the user when we are unable to fetch server locations -->
+  <string name="ip_protection_locations_unavailable_title">Локације недоступне</string>
+  <!-- Description for the card shown to the user when we are unable to fetch server locations -->
+  <string name="ip_protection_locations_unavailable_description">Пребачено на препоручену локацију.</string>
+  <!-- Title for the browser VPN location selection screen (displayed in the app bar) -->
+  <string name="ip_protection_locations_title">Изаберите VPN локацију</string>
+  <!-- Content description for the browser VPN location selection screen top bar back button -->
+  <string name="ip_protection_locations_navigate_back_button_content_description">Иди назад</string>
+  <!-- Title for the card shown to the user when we are unable to fetch server locations -->
+  <string name="ip_protection_location_unavailable_title" tools:ignore="UnusedResources">Претходна локација је недоступна</string>
+  <!-- Description for the card shown to the user when we are unable to fetch server locations -->
+  <string name="ip_protection_location_unavailable_recommended_description" tools:ignore="UnusedResources">Повезано са препорученом локацијом.</string>
   <!--
     Autofill
 
@@ -4690,6 +4762,16 @@
   <string name="lens_camera_mode_qr">КР скенер</string>
   <!-- Toast shown when the user picks an image from the gallery in QR mode but no QR code is found in it -->
   <string name="lens_camera_qr_no_code_found">У слици није пронађен КР код</string>
+  <!-- Title of the bottom sheet shown the first time the user opens the Google Lens camera screen -->
+  <string name="lens_opt_out_title">Пронађи помоћу Google објектива</string>
+  <!-- Description of the bottom sheet shown the first time the user opens the Google Lens camera screen -->
+  <string name="lens_opt_out_description">Изаберите слику или користите камеру да добијете резултате помоћу Google објектива.</string>
+  <!-- Text of the link in the first-run Google Lens bottom sheet that opens the Search settings page -->
+  <string name="lens_opt_out_settings_link">Подешавања Google објектива</string>
+  <!-- Button in the first-run Google Lens bottom sheet that dismisses it and starts the camera -->
+  <string name="lens_opt_out_try_it_now_button">Испробај одмах</string>
+  <!-- Button in the first-run Google Lens bottom sheet that leaves Google Lens without using it -->
+  <string name="lens_opt_out_not_now_button">Не сада</string>
   <!--
     Firefox Labs
 

@@ -2445,6 +2445,8 @@
   <string name="sync_send_to_all">Poslat do všech zařízení</string>
   <!-- Text displayed when no other sync devices are available for link sharing -->
   <string name="sync_no_devices_available">K dispozici nejsou žádné zařízení</string>
+  <!-- Text displayed when no other sync devices are available for link sharing. -->
+  <string name="sync_no_devices_available_description">Zde se zobrazí všechna zařízení, která jsou přihlášena k tomuto účtu a synchronizují se s ním.</string>
   <!-- An option from the share dialog to reconnect to sync -->
   <string name="sync_reconnect">Znovu se připojit k synchronizaci</string>
   <!-- Text displayed when sync is offline and cannot be accessed -->
