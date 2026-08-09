@@ -313,7 +313,7 @@ class Core(
     }
 
     private val locationService: LocationService by lazyMonitored {
-        if (Config.channel.isDebug || BuildConfig.MLS_TOKEN.isEmpty()) {
+        if (BuildConfig.MLS_TOKEN.isEmpty()) {
             LocationService.default()
         } else {
             MozillaLocationService(context, client, BuildConfig.MLS_TOKEN)
