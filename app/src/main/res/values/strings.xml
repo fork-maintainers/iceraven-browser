@@ -4036,6 +4036,14 @@
     <!-- The second active link used in privacy_notice_updated_homepage_message -->
     <string name="privacy_notice_updated_homepage_message_learn_more" tools:ignore="UnusedResources">Learn more</string>
 
+    <!-- Collections migration homepage card -->
+    <!-- Title shown on the collections to tab groups migration card on the homepage. -->
+    <string name="collections_migration_homepage_banner_title">Collections are now groups</string>
+    <!-- Message shown on the collections to tab groups migration card on the homepage. -->
+    <string name="collections_migration_homepage_card_message">There’s a simpler way to keep your tabs organized</string>
+    <!-- Link text shown on the collections to tab groups migration card that opens the tab groups page in the tab manager. -->
+    <string name="collections_migration_homepage_card_link">View my tab groups</string>
+
     <!-- Google Lens prototype related strings -->
     <string name="preferences_debug_settings_google_lens_integration">Enable Google Lens Integration</string>
     <!-- Lens image search button content description -->
