@@ -72,6 +72,7 @@ internal fun ProtectionPanel(
     isLocalPdf: Boolean,
     showIPProtection: Boolean,
     numberOfTrackersBlocked: Int,
+    isPrivate: Boolean,
     websitePermissions: List<WebsitePermission>,
     onTrackerBlockedMenuClick: () -> Unit,
     onTrackingProtectionToggleClick: () -> Unit,
@@ -123,7 +124,7 @@ internal fun ProtectionPanel(
             onViewQWACClick = onViewQWACClick,
         )
 
-        if (!isLocalPdf) {
+        if (!isLocalPdf && !isPrivate) {
             MenuGroup {
                 MenuItem(
                     label = stringResource(id = R.string.clear_site_data),
@@ -467,6 +468,7 @@ private fun ProtectionPanelPreview(
                 isTrackingProtectionEnabled = state.isTrackingProtectionEnabled,
                 isGlobalTrackingProtectionEnabled = true,
                 isLocalPdf = false,
+                isPrivate = false,
                 showIPProtection = true,
                 numberOfTrackersBlocked = 5,
                 websitePermissions = listOf(

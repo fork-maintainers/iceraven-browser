@@ -91,8 +91,33 @@ class ProtectionPanelTest {
             .assertDoesNotExist()
     }
 
+    @Test
+    fun `WHEN tab is private THEN clear site data menu is not shown`() {
+        setProtectionPanel(
+            numberOfTrackersBlocked = 0,
+            isPrivate = true,
+        )
+
+        composeTestRule
+            .onNodeWithText(resources.getString(R.string.clear_site_data), useUnmergedTree = true)
+            .assertDoesNotExist()
+    }
+
+    @Test
+    fun `WHEN tab is not private THEN clear site data menu is shown`() {
+        setProtectionPanel(
+            numberOfTrackersBlocked = 0,
+            isPrivate = false,
+        )
+
+        composeTestRule
+            .onNodeWithText(resources.getString(R.string.clear_site_data), useUnmergedTree = true)
+            .assertExists()
+    }
+
     private fun setProtectionPanel(
         numberOfTrackersBlocked: Int,
+        isPrivate: Boolean = false,
         onTrackerBlockedMenuClick: () -> Unit = {},
     ) {
         composeTestRule.setContent {
@@ -109,6 +134,7 @@ class ProtectionPanelTest {
                     isTrackingProtectionEnabled = true,
                     isGlobalTrackingProtectionEnabled = true,
                     isLocalPdf = false,
+                    isPrivate = isPrivate,
                     showIPProtection = false,
                     numberOfTrackersBlocked = numberOfTrackersBlocked,
                     websitePermissions = emptyList(),
