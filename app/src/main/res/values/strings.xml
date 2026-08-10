@@ -789,6 +789,8 @@
     <string name="preferences_toolbar_shortcut">Toolbar shortcut</string>
     <!-- Preference for gestures based actions -->
     <string name="preferences_toolbar_select_shortcut">Select a shortcut</string>
+    <!-- Title of a menu option allowing to change the shortcut button shown in the toolbar -->
+    <string name="toolbar_shortcut_menu_edit_option">Edit shortcut</string>
     <!-- Preference for gestures based actions -->
     <string name="preferences_gestures">Gestures</string>
     <!-- Preference for settings related to visual options -->
