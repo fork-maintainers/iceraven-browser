@@ -13,9 +13,9 @@ import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.updatePaddingRelative
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.color.MaterialColors
+import mozilla.components.support.ktx.android.view.pixelSizeFor
 import mozilla.components.support.ktx.android.view.putCompoundDrawablesRelativeWithIntrinsicBounds
 import org.mozilla.fenix.R
-import org.mozilla.fenix.ext.pixelSizeFor
 import com.google.android.material.R as materialR
 import mozilla.components.ui.icons.R as iconsR
 

@@ -23,6 +23,7 @@ import mozilla.components.browser.state.state.TabSessionState
 import mozilla.components.browser.state.state.isActive
 import mozilla.components.browser.state.store.BrowserStore
 import mozilla.components.feature.tabs.TabsUseCases
+import mozilla.components.support.ktx.android.content.pixelSizeFor
 import mozilla.components.support.ktx.android.view.getRectWithViewLocation
 import mozilla.components.support.utils.ext.bottom
 import mozilla.components.support.utils.ext.getWindowInsets
@@ -36,7 +37,6 @@ import org.mozilla.fenix.browser.TabPreview
 import org.mozilla.fenix.components.toolbar.gestures.ToolbarHorizontalGesturesHandler.Companion.GESTURE_FINISH_PERCENT
 import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.ext.maxActiveTime
-import org.mozilla.fenix.ext.pixelSizeFor
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min

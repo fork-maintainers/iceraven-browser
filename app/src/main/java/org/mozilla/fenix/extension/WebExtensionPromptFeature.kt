@@ -41,6 +41,7 @@ import mozilla.components.feature.addons.ui.PermissionsDialogFragment
 import mozilla.components.lib.state.ext.flowScoped
 import mozilla.components.support.base.feature.LifecycleAwareFeature
 import mozilla.components.support.ktx.android.content.appVersionName
+import mozilla.components.support.ktx.android.content.pixelSizeFor
 import mozilla.components.ui.widgets.withCenterAlignedButtons
 import org.mozilla.fenix.BuildConfig
 import org.mozilla.fenix.R
@@ -48,7 +49,6 @@ import org.mozilla.fenix.addons.AddonsManagementFragmentDirections
 import org.mozilla.fenix.addons.DownloadAddonDialogFragment
 import org.mozilla.fenix.addons.DownloadAddonDialogFragmentArgs
 import org.mozilla.fenix.ext.components
-import org.mozilla.fenix.ext.pixelSizeFor
 import org.mozilla.fenix.settings.SupportUtils
 import org.mozilla.fenix.theme.ThemeManager
 import androidx.appcompat.R as appcompatR
