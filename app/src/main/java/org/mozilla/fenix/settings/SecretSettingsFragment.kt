@@ -392,6 +392,11 @@ class SecretSettingsFragment : PreferenceFragmentCompat(), SystemInsetsPaddedFra
             onPreferenceChangeListener = SharedPreferenceUpdater()
         }
 
+        requirePreference<SwitchPreferenceCompat>(R.string.pref_key_enable_pdf_tools).apply {
+            isChecked = settings.enablePdfTools
+            onPreferenceChangeListener = SharedPreferenceUpdater()
+        }
+
         requirePreference<SwitchPreferenceCompat>(R.string.pref_key_enable_homepage_customization).apply {
             isChecked = settings.enableHomepageCustomization
             onPreferenceChangeListener = SharedPreferenceUpdater()

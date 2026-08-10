@@ -1313,6 +1313,14 @@ features:
         type: Boolean
         default: false
 
+  pdf-viewer:
+    description: Feature for the PDF viewer tools for users on Firefox for Android.
+    variables:
+      android-ui-tools:
+        description: If true, the Android PDF UI tools are shown.
+        type: Boolean
+        default: false
+
 types:
   objects:
     GleanServerKnobsConfiguration:

@@ -495,6 +495,7 @@
     <string name="pref_key_enable_homepage_customization" translatable="false">pref_key_enable_homepage_customization</string>
     <string name="pref_key_enable_homepage_trending_recent_search" translatable="false">pref_key_enable_homepage_trending_recent_search</string>
     <string name="pref_key_enable_oled_theme" translatable="false">pref_key_enable_oled_theme</string>
+    <string name="pref_key_enable_pdf_tools" translatable="false">pref_key_enable_pdf_tools</string>
     <!-- Preference for the feature flag -->
     <string name="pref_key_enable_shake_to_summarize" translatable="false">pref_key_enable_shake_to_summarize</string>
     <string name="pref_key_page_summaries" translatable="false">pref_key_page_summaries</string>
