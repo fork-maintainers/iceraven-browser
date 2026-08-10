@@ -4120,4 +4120,8 @@
     <string name="firefox_labs_feature_conflict">Feature isn’t available to try.</string>
     <!-- Text displayed on the Firefox Labs screen when there are no Labs experimental features present. -->
     <string name="firefox_labs_no_labs_available_description">No experimental features to try right now</string>
+    <!-- Title of the Firefox Labs Sandboxing experiment. -->
+    <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">Website isolation</string>
+    <!-- Description of the Firefox Labs Sandboxing experiment. -->
+    <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">An extra barrier between websites that helps protect your data across tabs. May affect performance, stability, website compatibility, and how browsing history is saved.</string>
 </resources>
