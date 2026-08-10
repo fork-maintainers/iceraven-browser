@@ -163,9 +163,7 @@ class HistoryFragment :
         )
     }.flow
 
-    private var _historyView: HistoryView? = null
-    private val historyView: HistoryView
-        get() = _historyView!!
+    private var historyView: HistoryView? = null
     private var _binding: FragmentHistoryBinding? = null
     private val binding get() = _binding!!
     private var searchLayout: ComposeView? = null
@@ -226,7 +224,7 @@ class HistoryFragment :
         toolbarStore = buildToolbarStore().value
         searchStore = buildSearchStore(toolbarStore).value
 
-        _historyView = HistoryView(
+        historyView = HistoryView(
             container = binding.historyLayout,
             onZeroItemsLoaded = {
                 historyStore.dispatch(
@@ -278,13 +276,13 @@ class HistoryFragment :
         lensFeature = LensFeature.register(this, lensLauncher, lensCameraPermissionLauncher)
 
         consumeFrom(historyStore) {
-            historyView.update(it)
+            historyView?.update(it)
             updateDeleteMenuItemView(!it.isEmpty)
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
             history.collect {
-                historyView.historyAdapter.submitData(it)
+                historyView?.historyAdapter?.submitData(it)
             }
         }
 
@@ -583,7 +581,7 @@ class HistoryFragment :
     override fun onDestroyView() {
         super.onDestroyView()
         stopStateBindings()
-        _historyView = null
+        historyView = null
         _binding = null
         searchLayout = null
     }
@@ -616,13 +614,15 @@ class HistoryFragment :
     }
 
     private fun onDeleteInitiated(items: Set<History>) {
+        val browserStore = requireComponents.core.store
+        val historyStorage = requireComponents.core.historyStorage
         lifecycleScope.launch {
             delete(
-                browserStore = requireComponents.core.store,
-                historyStorage = requireComponents.core.historyStorage,
+                browserStore = browserStore,
+                historyStorage = historyStorage,
                 items = items,
             )
-            historyView.historyAdapter.refresh()
+            historyView?.historyAdapter?.refresh()
         }
     }
 
@@ -705,7 +705,7 @@ class HistoryFragment :
             browserStore.dispatch(EngineAction.PurgeHistoryAction)
 
             historyStore.dispatch(HistoryFragmentAction.ExitDeletionMode)
-            historyView.historyAdapter.refresh()
+            historyView?.historyAdapter?.refresh()
         }
     }
 
