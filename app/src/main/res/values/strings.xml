@@ -1356,6 +1356,12 @@
     <!-- Title of inactive tabs preference -->
     <string name="preferences_inactive_tabs_title">Tabs you haven’t viewed for two weeks get moved to the inactive section.</string>
 
+    <!-- Privacy report -->
+    <!-- Category header of a preference that allows a user to enable or disable the privacy report feature -->
+    <string name="preferences_privacy_report">Privacy report</string>
+    <!-- Title of the privacy report preference that allows a user to enable or disable the feature -->
+    <string name="preferences_privacy_report_title">Enable privacy report</string>
+
     <!-- Studies -->
     <!-- Title of the remove studies button -->
     <string name="studies_remove">Remove</string>
