@@ -103,6 +103,7 @@ import org.mozilla.fenix.components.appstate.AppAction
 import org.mozilla.fenix.components.history.DefaultPagedHistoryProvider
 import org.mozilla.fenix.components.metrics.MetricsUtils
 import org.mozilla.fenix.components.search.HISTORY_SEARCH_ENGINE_ID
+import org.mozilla.fenix.components.share.ShareSheetChooserAction
 import org.mozilla.fenix.components.share.ShareSource
 import org.mozilla.fenix.databinding.FragmentHistoryBinding
 import org.mozilla.fenix.e2e.SystemInsetsPaddedFragment
@@ -632,6 +633,14 @@ class HistoryFragment :
         requireComponents.useCases.shareUseCases.shareItems(
             items = data,
             source = ShareSource.HISTORY,
+            chooserActions = if (data.size == 1) {
+                listOf(
+                    ShareSheetChooserAction.SEND_TO_DEVICES,
+                    ShareSheetChooserAction.QR_CODE,
+                )
+            } else {
+                listOf(ShareSheetChooserAction.SEND_TO_DEVICES)
+            },
             navigateToShareFragment = {
                 val directions = HistoryFragmentDirections.actionGlobalShareFragment(
                     data = data.toTypedArray(),
