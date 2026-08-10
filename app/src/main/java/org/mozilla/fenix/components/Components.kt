@@ -94,6 +94,7 @@ import org.mozilla.fenix.perf.StrictModeManager
 import org.mozilla.fenix.perf.lazyMonitored
 import org.mozilla.fenix.reviewprompt.ReviewPromptMiddleware
 import org.mozilla.fenix.search.VoiceSearchAIControlFeature
+import org.mozilla.fenix.settings.ToolbarShortcutSettingsSearchProvider
 import org.mozilla.fenix.settings.ai.AIControlsSearchProvider
 import org.mozilla.fenix.settings.datachoices.DataChoicesSearchProvider
 import org.mozilla.fenix.settings.emailmasks.middleware.DefaultEmailMasksRepository
@@ -421,6 +422,7 @@ class Components(
                 FirefoxLabsSettingsSearchProvider(
                     isLabsEnabled = { settings.enableFirefoxLabs },
                 ),
+                ToolbarShortcutSettingsSearchProvider,
             ),
         )
     }

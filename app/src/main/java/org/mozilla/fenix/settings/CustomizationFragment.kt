@@ -4,6 +4,7 @@
 
 package org.mozilla.fenix.settings
 
+import android.content.Context
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Build.VERSION.SDK_INT
@@ -35,6 +36,9 @@ import org.mozilla.fenix.ext.isTallWindow
 import org.mozilla.fenix.ext.isWideWindow
 import org.mozilla.fenix.ext.requireComponents
 import org.mozilla.fenix.ext.showToolbar
+import org.mozilla.fenix.settings.settingssearch.PreferenceFileInformation.CustomizationPreferences
+import org.mozilla.fenix.settings.settingssearch.SettingsSearchItem
+import org.mozilla.fenix.settings.settingssearch.SettingsSearchProvider
 import org.mozilla.fenix.translations.TranslationsEnabledSettings
 import org.mozilla.fenix.utils.Settings
 import org.mozilla.fenix.utils.view.addToRadioGroup
@@ -419,5 +423,26 @@ class CustomizationFragment : PreferenceFragmentCompat(), SystemInsetsPaddedFrag
         val isSummarizationGestureEnabled: Boolean,
         val isTranslationsFeatureEnabled: Boolean,
         val isTranslationsFeatureSupported: Boolean,
+    )
+}
+
+/**
+ * Provides the toolbar shortcuts options for use in settings search.
+ */
+object ToolbarShortcutSettingsSearchProvider : SettingsSearchProvider {
+    private val preferenceFileInformation = CustomizationPreferences
+
+    override fun getSearchItems(context: Context) = listOf(
+        SettingsSearchItem(
+            title = context.getString(R.string.preferences_toolbar_shortcut),
+            summary = "",
+            preferenceKey = context.getString(
+                R.string.pref_key_customization_category_toolbar_shortcut,
+            ),
+            categoryHeader = context.getString(
+                preferenceFileInformation.categoryHeaderResourceId,
+            ),
+            preferenceFileInformation = preferenceFileInformation,
+        ),
     )
 }
