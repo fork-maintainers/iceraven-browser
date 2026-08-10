@@ -16,6 +16,7 @@ import org.mozilla.fenix.GleanMetrics.Toolbar
 import org.mozilla.fenix.components.toolbar.BrowserToolbarTelemetryMiddleware.ToolbarActionRecord
 import org.mozilla.fenix.components.toolbar.DisplayActions.AddBookmarkClicked
 import org.mozilla.fenix.components.toolbar.DisplayActions.EditBookmarkClicked
+import org.mozilla.fenix.components.toolbar.DisplayActions.EditShortcutClicked
 import org.mozilla.fenix.components.toolbar.DisplayActions.HomepageClicked
 import org.mozilla.fenix.components.toolbar.DisplayActions.MenuClicked
 import org.mozilla.fenix.components.toolbar.DisplayActions.NavigateBackClicked
@@ -24,6 +25,7 @@ import org.mozilla.fenix.components.toolbar.DisplayActions.NavigateForwardClicke
 import org.mozilla.fenix.components.toolbar.DisplayActions.NavigateForwardLongClicked
 import org.mozilla.fenix.components.toolbar.DisplayActions.RefreshClicked
 import org.mozilla.fenix.components.toolbar.DisplayActions.ShareClicked
+import org.mozilla.fenix.components.toolbar.DisplayActions.ShortcutLongClicked
 import org.mozilla.fenix.components.toolbar.DisplayActions.StopRefreshClicked
 import org.mozilla.fenix.components.toolbar.DisplayActions.TranslateClicked
 import org.mozilla.fenix.components.toolbar.PageEndActionsInteractions.ReaderModeClicked
@@ -33,6 +35,8 @@ import org.mozilla.fenix.components.toolbar.TabCounterInteractions.AddNewTab
 import org.mozilla.fenix.components.toolbar.TabCounterInteractions.TabCounterClicked
 import org.mozilla.fenix.components.toolbar.TabCounterInteractions.TabCounterLongClicked
 import org.mozilla.fenix.helpers.FenixGleanTestRule
+import org.mozilla.fenix.telemetry.ACTION_EDIT_SHORTCUT_CLICKED
+import org.mozilla.fenix.telemetry.ACTION_SHORTCUT_LONG_CLICKED
 import org.mozilla.fenix.telemetry.SOURCE_ADDRESS_BAR
 import org.mozilla.fenix.telemetry.SOURCE_NAVIGATION_BAR
 import org.mozilla.fenix.telemetry.SURFACE_BROWSER
@@ -208,6 +212,27 @@ class BrowserToolbarTelemetryMiddlewareTest {
         buildStore.dispatch(DisplayActions.SummarizeClicked(Source.AddressBar.BrowserEnd))
 
         assertTelemetryRecorded(Source.AddressBar.BrowserEnd, item = ToolbarActionRecord.SummarizeClicked.action)
+    }
+
+    @Test
+    fun `WHEN a shortcut is long clicked THEN record telemetry`() {
+        buildStore.dispatch(ShortcutLongClicked(Source.AddressBar.BrowserEnd))
+
+        assertTelemetryRecorded(Source.AddressBar.BrowserEnd, item = ToolbarActionRecord.ShortcutLongClicked.action)
+    }
+
+    @Test
+    fun `WHEN choosing to edit a shortcut THEN record telemetry`() {
+        buildStore.dispatch(EditShortcutClicked(Source.AddressBar.BrowserEnd))
+
+        assertTelemetryRecorded(Source.AddressBar.BrowserEnd, item = ToolbarActionRecord.EditShortcutClicked.action)
+    }
+
+    @Test
+    fun `WHEN recording telemetry for the shortcut interactions THEN use the intended event descriptions`() {
+        assertEquals(ACTION_SHORTCUT_LONG_CLICKED, ToolbarActionRecord.ShortcutLongClicked.action)
+
+        assertEquals(ACTION_EDIT_SHORTCUT_CLICKED, ToolbarActionRecord.EditShortcutClicked.action)
     }
 
     private fun assertTelemetryRecorded(

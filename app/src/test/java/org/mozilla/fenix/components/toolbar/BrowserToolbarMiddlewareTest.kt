@@ -160,6 +160,7 @@ import org.mozilla.fenix.components.toolbar.DisplayActions.NavigateForwardClicke
 import org.mozilla.fenix.components.toolbar.DisplayActions.NavigateForwardLongClicked
 import org.mozilla.fenix.components.toolbar.DisplayActions.RefreshClicked
 import org.mozilla.fenix.components.toolbar.DisplayActions.ShareClicked
+import org.mozilla.fenix.components.toolbar.DisplayActions.ShortcutLongClicked
 import org.mozilla.fenix.components.toolbar.DisplayActions.StopRefreshClicked
 import org.mozilla.fenix.components.toolbar.DisplayActions.SummarizeClicked
 import org.mozilla.fenix.components.toolbar.DisplayActions.TranslateClicked
@@ -3661,7 +3662,7 @@ class BrowserToolbarMiddlewareTest {
         val toolbarStore = buildStore()
 
         val shortcutButton = toolbarStore.state.displayState.browserActionsEnd[0] as ActionButtonRes
-        assertEqualsEditShortcutMenu(shortcutButton.onLongClick)
+        assertEqualsShortcutLongClick(shortcutButton.onLongClick)
     }
 
     @Test
@@ -3669,8 +3670,8 @@ class BrowserToolbarMiddlewareTest {
         every { navController.currentDestination?.id } returns R.id.browserFragment
         val toolbarStore = buildStore()
         val shortcutButton = toolbarStore.state.displayState.browserActionsEnd[0] as ActionButtonRes
-        val editShortcutOption = assertIs<BrowserToolbarMenu>(shortcutButton.onLongClick)
-            .items().first() as BrowserToolbarMenuButton
+        val editShortcutOption = assertIs<CombinedEventAndMenu>(shortcutButton.onLongClick)
+            .menu.items().first() as BrowserToolbarMenuButton
 
         toolbarStore.dispatch(editShortcutOption.onClick!!)
 
@@ -3858,18 +3859,20 @@ class BrowserToolbarMiddlewareTest {
         source: Source = Source.AddressBar.BrowserEnd,
     ) {
         assertEquals(expected, actual.copy(onLongClick = expected.onLongClick))
-        assertEqualsEditShortcutMenu(actual.onLongClick, source)
+        assertEqualsShortcutLongClick(actual.onLongClick, source)
     }
 
     /**
-     * Assert that [actual] is the menu shown when long clicking a toolbar shortcut.
+     * Assert that [actual] is how long clicking a toolbar shortcut is handled - dispatching an event
+     * for recording telemetry and showing a menu allowing to edit which shortcut is shown.
      */
-    private fun assertEqualsEditShortcutMenu(
+    private fun assertEqualsShortcutLongClick(
         actual: BrowserToolbarInteraction?,
         source: Source = Source.AddressBar.BrowserEnd,
     ) {
-        val menu = assertIs<BrowserToolbarMenu>(actual)
-        assertEquals(expectedEditShortcutMenuItems(source), menu.items())
+        val longClick = assertIs<CombinedEventAndMenu>(actual)
+        assertEquals(ShortcutLongClicked(source), longClick.event)
+        assertEquals(expectedEditShortcutMenuItems(source), longClick.menu.items())
     }
 
     private fun expectedEditShortcutMenuItems(source: Source = Source.AddressBar.BrowserEnd) = listOf(

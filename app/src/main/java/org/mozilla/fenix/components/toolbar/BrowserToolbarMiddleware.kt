@@ -49,7 +49,6 @@ import mozilla.components.compose.browser.toolbar.store.BrowserToolbarAction.Ini
 import mozilla.components.compose.browser.toolbar.store.BrowserToolbarInteraction
 import mozilla.components.compose.browser.toolbar.store.BrowserToolbarInteraction.BrowserToolbarEvent
 import mozilla.components.compose.browser.toolbar.store.BrowserToolbarInteraction.BrowserToolbarEvent.Source
-import mozilla.components.compose.browser.toolbar.store.BrowserToolbarInteraction.BrowserToolbarMenu
 import mozilla.components.compose.browser.toolbar.store.BrowserToolbarInteraction.CombinedEventAndMenu
 import mozilla.components.compose.browser.toolbar.store.BrowserToolbarMenuItem.BrowserToolbarMenuButton
 import mozilla.components.compose.browser.toolbar.store.BrowserToolbarMenuItem.BrowserToolbarMenuButton.ContentDescription.StringResContentDescription
@@ -126,6 +125,7 @@ import org.mozilla.fenix.components.toolbar.DisplayActions.NavigateForwardClicke
 import org.mozilla.fenix.components.toolbar.DisplayActions.NavigateForwardLongClicked
 import org.mozilla.fenix.components.toolbar.DisplayActions.RefreshClicked
 import org.mozilla.fenix.components.toolbar.DisplayActions.ShareClicked
+import org.mozilla.fenix.components.toolbar.DisplayActions.ShortcutLongClicked
 import org.mozilla.fenix.components.toolbar.DisplayActions.StopRefreshClicked
 import org.mozilla.fenix.components.toolbar.DisplayActions.SummarizeClicked
 import org.mozilla.fenix.components.toolbar.DisplayActions.TranslateClicked
@@ -171,6 +171,7 @@ internal sealed class DisplayActions(override val source: Source) : BrowserToolb
     data class TranslateClicked(override val source: Source) : DisplayActions(source)
     data class HomepageClicked(override val source: Source) : DisplayActions(source)
     data class SummarizeClicked(override val source: Source) : DisplayActions(source)
+    data class ShortcutLongClicked(override val source: Source) : DisplayActions(source)
     data class EditShortcutClicked(override val source: Source) : DisplayActions(source)
 }
 
@@ -1441,7 +1442,7 @@ class BrowserToolbarMiddleware(
         }
     }
 
-    private fun buildShortcutLongPressMenu(source: Source) = BrowserToolbarMenu {
+    private fun buildShortcutLongPressMenu(source: Source) = CombinedEventAndMenu(ShortcutLongClicked(source)) {
         listOf(
             BrowserToolbarMenuButton(
                 icon = null,
