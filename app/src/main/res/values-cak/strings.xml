@@ -955,9 +955,12 @@
   <string name="preference_downloads_folder_permission_lost" tools:ignore="UnusedResources">Man ya\'on ta q\'ij richin nokisäx re molyakb\'äl re\'. Tatojtob\'ej nacha\' jun chik.</string>
   <!-- Preference title for choosing an app to handle downloads -->
   <string name="preferences_choose_app_for_downloads">Kenuk\'samajïx taq qasanïk rik\'in jun chik chokoy</string>
+  <!-- Preference category for deleting or removing downloads -->
+  <string name="preferences_category_delete_or_remove_downloads">Keyuj o Kelesäx ri qasanïk</string>
   <string name="preferences_downloads_delete_from_device">Tiyuj pan okisaxel</string>
   <string name="preferences_downloads_delete_from_device_description">Xyuj ri yakb\'äl pa ri awokisaxel chuqa\' pa runatab\'al qasanïk</string>
   <string name="preferences_downloads_remove_from_download_history">Tiyuj pa ri runatab\'al qasanïk</string>
+  <string name="preferences_downloads_remove_from_download_history_description">Ri yakb\'äl xyuj pa ri runatab\'al qasanïk, po k\'a yakäl na pa ri awokisaxel</string>
   <string name="preferences_downloads_ask_when_to_delete_files">Tik\'utüx pe toq yenyuj taq yakb\'äl</string>
   <!-- Preference for downloads -->
   <string name="preferences_downloads_2">Taq runuk\'ulem qasanïk</string>
@@ -975,6 +978,8 @@
   <string name="notifications_allowed_summary">Xya\' q\'ij</string>
   <!-- Summary for notification preference indicating notifications are not allowed -->
   <string name="notifications_not_allowed_summary">Man ya\'on ta q\'ij chi re</string>
+  <!-- Preference for local network access / nearby devices in Android 17 -->
+  <string name="preferences_local_network_access">Okem pa ichin k\'amab\'ey / naqaj okisaxel</string>
   <!-- Summary for local network access preference indicating access is allowed -->
   <string name="local_network_access_allowed_summary">Ya\'on q\'ij</string>
   <!-- Summary for local network access preference indicating access is not allowed -->
@@ -999,6 +1004,8 @@
   <string name="addons_permissions_heading_optional_permissions">Cha\'on ya\'oj q\'ij:</string>
   <!-- The title of the required data collection permissions section from addon's permissions screen. -->
   <string name="addons_permissions_heading_required_data_collection">Rumolik taq tzij rajowaxik:</string>
+  <!-- The title of the optional data collection permissions section from addon's permissions screen. -->
+  <string name="addons_permissions_heading_optional_data_collection">Kimolik cha\'el taq tzij:</string>
   <!--
     Add-on Preferences
 
@@ -1036,8 +1043,14 @@
   <string name="customize_toggle_pocket_sponsored">To\'on taq b\'anob\'äl</string>
   <!-- Title for the opening wallpaper settings screen -->
   <string name="customize_wallpapers">Rupam ruwäch</string>
+  <!-- Label for the menu item that opens the customize homepage settings screen. -->
+  <string name="browser_menu_customize_homepage">Tawichinaj ri ruxaq atikirib\'al</string>
+  <!-- Label for the menu item that opens the wallpaper settings screen. -->
+  <string name="browser_menu_change_wallpaper">Tijal rupam ruwäch</string>
   <!-- Title for the customize home screen section with sponsored shortcuts. -->
   <string name="customize_toggle_contile">Xto\' chojmin okem</string>
+  <!-- Title for the customize home screen section that toggles the Homepage sports widget. -->
+  <string name="customize_toggle_world_cup">Aj ruwach\'ule ch\'akob\'äl</string>
   <!--
     Wallpapers
 
@@ -1118,14 +1131,30 @@
   <string name="alternative_app_icon_option_flaming">Pa ruxaq q\'aq\'</string>
   <!-- Title for the "Cool" themed alternative app icon variant in the icon picker screen. The app icon uses a warm orange-to-yellow gradient background with a sleek, modern twist on the Firefox logo, giving it a fresh and stylish appearance. -->
   <string name="alternative_app_icon_option_cool">Tik\'asäs</string>
+  <!-- Title for the "Solid colors" group of alternative app icon variants in the icon picker screen. This group contains icons with flat, uniform color backgrounds. -->
+  <string name="alternative_app_icon_group_solid_colors">Q\'ëq taq b\'onil</string>
+  <!-- Title for the "Gradients" group of alternative app icon variants in the icon picker screen. This group contains icons with gradient backgrounds inspired by natural light conditions. -->
+  <string name="alternative_app_icon_group_gradients">Muqumüj</string>
   <!-- Title for the "Featured" group of alternative app icon variants in the icon picker screen. This group includes retro, pixel art, themed, and artist-created icons. -->
   <string name="alternative_app_icon_group_featured">Ya\'on kiq\'ij</string>
   <!-- Title to show in alert when user selects an alternative app icon -->
   <string name="restart_warning_dialog_title">¿La nijal ruwachib\'al chokoy?</string>
+  <!-- Message to warn users that applying an alternative app icon may require an app restart. Whether or not the app closes depends on what version of Android it is, so we use the word "may" instead of "will". %1$s is replaced by the brand name (e.g. Firefox). -->
+  <string name="restart_warning_dialog_body_2">Rik\'in jub\'a\' xtitz\'apitäj ri chokoy. Xa xe tachapa\' ri k\'ak\'a\' wachib\'äl richin najäq chik %1$s.</string>
+  <!-- Message to warn users that applying an alternative app icon may require an app restart and will remove existing shortcuts because of the OS limitations. Whether or not the app closes depends on what version of Android it is, so we use the word "may" instead of "will". %1$s is replaced by the brand name (e.g. Firefox). -->
+  <string name="restart_and_shortcuts_removal_warning_dialog_body">Ri rujalik wachib\'äl xtuyäj xab\'achike ruxaq chuqa\' chojokem ri xyak pa ri rutikirib\'al ruwäch. %1$s tikirel nitz\'apitäj. Tachapa\' ri k\'ak\'a\' ruwäch richin najäq chik.</string>
   <!-- Dialog button text for confirming the possible app restart and new icon selection -->
   <string name="restart_warning_dialog_button_positive_2">Tijal ruwäch</string>
   <!-- Dialog button text for cancelling app icon change -->
   <string name="restart_warning_dialog_button_negative">Tiq\'at</string>
+  <!-- Error message snackbar shown after the user tried to apply the new icon but the Android OS threw an error while updating existing app shortcuts (e.g. private mode shortcut) -->
+  <string name="shortcuts_update_error">Man xk\'ex ta ri ruwachib\'al chokoy. Ke\'ayuju\' ri chojokem e k\'o chuqa\' tatojtob\'ej chik.</string>
+  <!--
+    Add-ons general availability nimbus message
+
+    Title of the Nimbus message for extension general availability
+  -->
+  <string name="addon_ga_message_title_2" tools:ignore="UnusedResources">K\'ak\'a\' taq k\'amal e wachel wakami</string>
   <!-- Body of the Nimbus message for add-ons general availability. 'Firefox' intentionally hardcoded here -->
   <string name="addon_ga_message_body" tools:ignore="BrandUsage,UnusedResources">Ke\'awila\' +100 k\'ak\'a\' taq k\'amal ri nikiya\' q\'ij chawe\' nawichinaj Firefox.</string>
   <!-- Button text of the Nimbus message for extensions general availability. -->
@@ -1136,6 +1165,12 @@
     Title of the extension crash dialog shown to the user when enough errors have occurred with extensions and they need to be temporarily disabled
   -->
   <string name="extension_process_crash_dialog_title">Echupun jumej ri taq k\'amal</string>
+  <!--
+    This is a message shown to the user when too many errors have occurred with the extensions process and they have been disabled.
+    The user can decide if they would like to continue trying to start extensions or if they'd rather continue without them.
+    %1$s is the name of the app (for example "Firefox").
+  -->
+  <string name="extension_process_crash_dialog_message">Jun o ch\'aqa\' chik taq k\'amal man yesamäj ta, ri nub\'än chi man ütz ta nisamäj ri q\'inoj. %1$s xutojtob\'ej xutikirisaj ri taq kamal pa man xtikirisäx ta. Ri taq k\'amal man xketikirisäx ta pa re molojri\'ïl wakami. Ri kiyujik o kichupik ri taq k\'amal tikirel nuchojmirisaj re k\'ayewal re\'.</string>
   <!-- Button text on the extension crash dialog to prompt the user to try restarting the extensions but the dialog will reappear if it is unsuccessful again -->
   <string name="extension_process_crash_dialog_retry_button_text" tools:ignore="UnusedResources">Titojtob\'ëx yetikirisäx taq k\'amal</string>
   <!-- Button text on the extension crash dialog to prompt the user to continue with all extensions disabled. -->
@@ -1220,19 +1255,35 @@
   <string name="exceptions_empty_message_description">Ri taq man relik ta nikiya\' q\'ij chawe richin nachüp ri chajinïk chuwäch ojqanem pa ri taq ruxaq echa\'on.</string>
   <!-- Text displayed when there are no exceptions, with learn more link that brings users to a tracking protection SUMO page -->
   <string name="exceptions_empty_message_learn_more_link">Tetamäx ch\'aqa\' chik</string>
+  <!-- Preference switch for usage and technical data collection -->
+  <string name="preference_usage_data_2">Titaq samajel taq tzij chuqa\' richin samajinem</string>
   <!-- Preference switch for usage and technical learn more link in new compose -->
   <string name="preference_usage_data_learn_more_2">Tetamäx ch\'aqa\' chik chi rij jikil tzij</string>
+  <!-- Preference description for marketing data collection. Note: The words "Firefox" should NOT be translated -->
+  <string name="preferences_usage_data_description_1" tools:ignore="BrandUsage">Ri taq rutzij awokisaxel, ri runuk\'ulem hardware chuqa\' ri okisaxik yojkito\' chi ye\'utziläx taq samaj, ri rub\'eyal nisamäj chuqa\' ri rujikonem chi ruwäch ri ruwach\'ulew.</string>
   <!-- Preference switch for daily usage ping data collection -->
   <string name="preferences_daily_usage_ping_title">Ping nokisäx ronojel q\'ij</string>
   <string name="preferences_daily_usage_ping_description" tools:ignore="BrandUsage">Re re\' nuto\' ri Mozilla richin nitikïr yerajilaj taq ruwinaq yetajin.</string>
+  <string name="preferences_daily_usage_ping_learn_more">Tetamäx ch\'aqa\' chik chi rij ri ping nokisäx q\'ij q\'ij</string>
   <!-- Title for the crash reporting option in the privacy preferences dialog shown during onboarding. -->
   <string name="crash_reporting_snack_bar_message">Taqon rutzijol</string>
   <!-- Text for sumo link to learn more about crash reports in data collection screen -->
   <string name="preferences_crashes_learn_more">Tetamäx ch\'aqa\' chik chi kij ri kitzijol taq sachoj</string>
   <!-- Title Headers for data collection settings screen -->
   <string name="crash_reports_data_category">Rutzijol taq sachoj</string>
+  <string name="usage_data_category">Rutzij okem</string>
   <string name="studies_data_category">Taq tijonïk</string>
   <string name="technical_data_category">Etamanel tzij</string>
+  <string name="crash_reporting_description">Ri taq rutzijol sachoj nikiya\' q\'ij chi qe niqatz\'ët chuqa\' niqasöl taq ruk\'ayewal okik\'amaya\'l. Ri taq tzijol tikirel nikik\'waj ichinan chuqa\' ewatäl taq tzij.</string>
+  <!-- Section title for campaign measurement in data collections screen -->
+  <string name="preferences_marketing_data_title">Taq rupajb\'al tzijol</string>
+  <!-- Preference switch for campaign measurement data (marketing data) collection -->
+  <string name="preferences_marketing_data_2">Taq rutzij rupajb\'al tzijol</string>
+  <!--
+    Preference description for marketing data collection.
+    Note: The words "Firefox" and "Mozilla" should NOT be translated. “That you use it” is to mean that the user is opting in to sharing that they are continuing to use Firefox after installing it; not that Firefox is tracking their “usage” or what they’re using it for.
+  -->
+  <string name="preferences_marketing_data_description_4" tools:ignore="BrandUsage">Kakomonin kik\'in rachsamajel rumarkentin Mozilla achike rub\'eyal xawïl Firefox chuqa\' achi\'el rub\'eyal nawokisaj.</string>
   <!-- Learn more link for marketing data preference -->
   <string name="preferences_marketing_data_learn_more">Tetamäx ch\'aqa\' chik chi rij ri markenting</string>
   <!-- Title for studies preferences -->
@@ -1267,6 +1318,8 @@
   <string name="preference_simple_toolbar">Relik</string>
   <!-- Preference for using expanded toolbar -->
   <string name="preference_expanded_toolbar">Xnimirisäx</string>
+  <!-- Preference description indicating the toolbar location preference is disabled when the tab strip is enabled -->
+  <string name="preference_toolbar_pref_disabled_explanation">Ri rusamajib\'al ochochib\'al k\'o chi k\'o aq\'anij toq niwachin pe ri rusamajib\'al ruwi\'.</string>
   <!-- New tab shortcut in toolbar customization -->
   <string name="toolbar_customize_shortcut_new_tab">Tijaq jun k\'ak\'a\' ruwi\'</string>
   <!-- Share shortcut in toolbar customization -->
@@ -1300,6 +1353,12 @@
   <!-- Preference for using following device theme -->
   <string name="preference_follow_device_theme">Tojqäx ri ruwachinel oyonib\'äl</string>
   <!--
+    Tab Strip Preferences
+
+    Preferences for showing tab strip
+  -->
+  <string name="preference_tab_strip_show">Tik\'ut rusamajib\'al ruwi\'</string>
+  <!--
     Gestures Preferences
 
     Preferences for using pull to refresh in a webpage
@@ -1307,8 +1366,12 @@
   <string name="preference_gestures_website_pull_to_refresh">Tiqirirëx richin nik\'ex</string>
   <!-- Preference for using the dynamic toolbar -->
   <string name="preference_gestures_dynamic_toolbar">Taq\'axaj richin nawewaj ri ajkajtz\'ik</string>
+  <!-- Preference for showing the opened tabs by swiping up on the toolbar -->
+  <string name="preference_gestures_swipe_toolbar_show_tabs_2">Tiq\'axäx ri ajkatz\'ik pa pa\'alem richin yetz\'et ri jaqon taq ruwi\'</string>
   <!-- Preference for switching tabs by swiping horizontally on the addressbar -->
   <string name="preference_gestures_swipe_toolbar_switch_tabs_2">Tiq\'axäx ri ochichib\'äl chi taq ruchi\' richin nijal ruwi\'</string>
+  <!-- Preference for switching for the shake to summarize toggle in page summaries and customize settings -->
+  <string name="preferences_shake_to_summarize">Titotäx richin nich\'utinisäx</string>
   <!--
     Library
 
@@ -1336,6 +1399,11 @@
     %d is a placeholder for the number of tabs that will be opened
   -->
   <string name="open_all_warning_title">¿La nijaq %d? ruwi\'</string>
+  <!--
+    Message to warn users that a large number of tabs will be opened
+    %s will be replaced by app name.
+  -->
+  <string name="open_all_warning_message">Ri kijaqik k\'ïy taq ruwi\' rik\'in jub\'a\' nub\'än eqal chi re %s toq ye\'ok pa ri taq ruxaq. ¿La at jikïl chi nawajo\' nasamajij qa?</string>
   <!-- Dialog button text for confirming open all tabs -->
   <string name="open_all_warning_confirm">Kejaq taq ruwi\'</string>
   <!-- Dialog button text for canceling open all tabs -->
@@ -1392,10 +1460,18 @@
   <string name="preference_auto_close_tabs" tools:ignore="UnusedResources">Ketz\'apïx kiyon ri jaqäl taq ruwi\'</string>
   <!-- Content description (not visible, for screen readers etc.): Close tab button -->
   <string name="tab_manager_close_tabs">Titz\'apïx</string>
+  <!--
+    Opening screen
+
+    Title of a preference that allows a user to choose what screen to show after opening the app
+  -->
+  <string name="preferences_opening_screen">Ruwäch okem</string>
   <!-- Option for always opening the homepage when re-opening the app -->
   <string name="opening_screen_homepage">Ruxaq tikirib\'äl</string>
   <!-- Option for always opening the user's last-open tab when re-opening the app -->
   <string name="opening_screen_last_tab">K\'isib\'äl ruwi\'</string>
+  <!-- Option for always opening the homepage when re-opening the app after four hours of inactivity -->
+  <string name="opening_screen_after_four_hours_of_inactivity">Tikirib\'äl ruxaq chi rij kaji\' ramaj ruchupun ri\'</string>
   <!-- Summary for tabs preference when auto closing tabs setting is set to manual close -->
   <string name="close_tabs_manually_summary">Titz\'apïx chi q\'ab\'aj</string>
   <!-- Summary for tabs preference when auto closing tabs setting is set to auto close tabs after one day -->
@@ -1426,10 +1502,31 @@
   <string name="studies_remove">Tiyuj</string>
   <!-- Title of the active section on the studies list -->
   <string name="studies_active">Tzijïl</string>
+  <!-- Description for studies. Note: The word "Firefox" should NOT be translated -->
+  <string name="studies_description_4" tools:ignore="BrandUsage">Ri Firefox yerucha\' taq okisanela\' choj ke ri\' richin nikitojtob\'ej ri taq samajib\'äl, ri nrutzilaj retal ruwäch chi qe qonojel.</string>
+  <!-- Title of the Studies data preference -->
+  <string name="studies_title_2">Tiya\' q\'ij chi ke ri tijonel taq samaj</string>
   <!-- Learn more link for studies, links to an article for more information about studies. -->
   <string name="studies_learn_more">Tetamäx ch\'aqa\' chik</string>
+  <!--
+    Remote Improvements (Rollouts)
+
+    Title of the Remote Improvements (rollouts) data preference
+  -->
+  <string name="remote_improvements_title">Tiya\' q\'ij chi ke ri näj taq rutzil</string>
+  <!-- Description for remote improvements. Note: The word "Firefox" should NOT be translated -->
+  <string name="remote_improvements_description" tools:ignore="BrandUsage">Firefox xkerutzilaj ri taq samajib\'äl, ri rub\'eyal nisamäj chuqa\' ri taq kijikomal taq k\'exoj. Ri taq jaloj näj xesamajïx.</string>
   <!-- Learn more link for remote improvements, links to an article for more information about rollouts. -->
   <string name="remote_improvements_learn_more">Tetamäx ch\'aqa\' chik</string>
+  <!-- Title for remote improvements preference in Advanced settings -->
+  <string name="preferences_remote_improvements">Näj taq rutzil</string>
+  <!--
+    Sessions
+
+    Title for the list of tabs in the current normal session used by a11y services
+    The %1$s will be replaced by the number of opened normal tabs
+  -->
+  <string name="tabs_header_normal_tabs_counter_title">Relik Jaqon taq ruwi\': %1$s. Tachapa\' richin nak\'ëx ruwi\'.</string>
   <!--
     Title for the list of tabs in the current private session used by a11y services
     The %1$s will be replaced by the number of opened private tabs
@@ -1444,6 +1541,8 @@
   <string name="add_tab">Titz\'aqatisäx ruwi\'</string>
   <!-- Content description (not visible, for screen readers etc.): Add tab button. Adds a news tab when pressed -->
   <string name="add_private_tab">Titz\'aqatisäx ichinan ruwi\'</string>
+  <!-- Text for the tab search bar placeholder -->
+  <string name="tab_manager_search_bar_placeholder">Tikanöx pa taq ruwi\'</string>
   <!-- Text shown in the menu to view recently closed tabs -->
   <string name="tab_tray_menu_recently_closed">Taq ruwi\' nimakol ketz\'apïx</string>
   <!-- Text shown in the menu to select all tabs. -->
@@ -1456,6 +1555,8 @@
   <string name="tab_tray_menu_item_close">Titz\'apïx ronojel ri taq ruwi\'</string>
   <!-- Text shown as the title of the Close all tabs confirmation dialog in Tab Manager -->
   <string name="tab_manager_close_all_tabs_dialog_title">¿La yetz\'apïx konojel ri taq ruwi\'?</string>
+  <!-- Text shown in the body of the Close all tabs confirmation dialog in Tab Manager -->
+  <string name="tab_manager_close_all_tabs_dialog_body">Re xkerutz\'apij ronojel ri jaqäl taq ruwi\'.</string>
   <!-- Text shown on the confirm button in the Close all tabs confirmation dialog -->
   <string name="tab_manager_close_all_tabs_dialog_confirm">Ketz\'apïx Ruwi\'</string>
   <!-- Text shown on the cancel button in the Close all tabs confirmation dialog -->
@@ -1507,6 +1608,8 @@
   <!-- Title for the edit tab group bottom sheet -->
   <string name="edit_tab_group_title">Tinuk\' molaj</string>
   <string name="create_tab_group_save_button">Tiyak</string>
+  <!-- Description for the handle at the top of a bottom sheet, used to drag the sheet up or down. -->
+  <string name="edit_tab_group_bottom_sheet_grabber_content_description">K\'ak\'a\' molaj, tich\'utinisäx rusamajib\'al qirirenïk</string>
   <!--
     Default tab group name when creating a tab group
     %d is the number of existing tab groups + 1.
@@ -1514,6 +1617,14 @@
   <string name="create_tab_group_form_default_name">Molaj %d</string>
   <!-- Label for the tab group name field in the bottom sheet to create or edit a tab group. -->
   <string name="create_tab_group_name_label">B\'i\'aj</string>
+  <!-- Content Description for closing the "Add to Tab Group" panel. -->
+  <string name="add_to_tab_group_bottom_sheet_grabber_content_description">Titz\'aqatisäx pa jun molaj, tich\'utinisäx rusamajib\'al qirirenïk</string>
+  <!-- Content Description for "New tab group" panel. -->
+  <string name="add_to_new_tab_group_content_description">Titz\'aqatisäx pa jun k\'ak\'a\' molaj ruwi\'</string>
+  <!-- Text shown on the confirm button in the Delete tab group confirmation dialog. -->
+  <string name="delete_tab_group_confirmation_dialog_confirm">Tiyuj molaj</string>
+  <!-- Text shown on the cancel button in the Delete tab group confirmation dialog. -->
+  <string name="delete_tab_group_confirmation_dialog_cancel">Tiq\'at</string>
   <!-- Title for the Close last tab and delete tab group confirmation dialog. -->
   <string name="close_tab_and_delete_group_confirmation_dialog_title">¿Ketz\'apïx taq ruwi\' chuqa\' tiyuj molaj?</string>
   <!-- Text shown on the confirm button in the Close last tab and delete tab group confirmation dialog. -->
@@ -1522,6 +1633,10 @@
   <string name="close_tab_and_delete_group_confirmation_dialog_cancel">Tiq\'at</string>
   <!-- Content description for the three dot button next to a tab group" -->
   <string name="tab_group_three_dot_button_content_description">Ch\'aqa\' taq cha\'oj</string>
+  <!-- Text shown on the Don't Ask Again checkbox button in the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_dont_ask_again">Mani nik\'utüx chik</string>
+  <!-- Text shown on the confirm button in the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_confirm">Memolaj</string>
   <!-- Text shown on the cancel button in the Ungroup tab group confirmation dialog. -->
   <string name="ungroup_tab_group_confirmation_dialog_cancel">Tiq\'at</string>
   <!--
@@ -1571,8 +1686,19 @@
   <string name="history_older">Ojer</string>
   <!-- Text shown when no history exists -->
   <string name="history_empty_message">Majun natab\'äl wawe\'</string>
+  <!--
+    Downloads
+
+    Text for the snackbar to confirm that a multiple download items have been removed. %1$s is the number of removed download items.
+    %1$d is the number of items deleted.
+  -->
+  <string name="download_delete_multiple_items_snackbar_2">Yujun taq wachinäq: %1$d</string>
+  <!-- Title for the dialog that prompts the user to choose an app for downloading a file. -->
+  <string name="download_app_dialog_title">Tiqasäx yakb\'äl rik\'in:</string>
   <!-- Text for the snackbar to confirm that a single download item has been removed. %1$s is the name of the download item. -->
   <string name="download_delete_single_item_snackbar_2">Xyuj “%1$s”</string>
+  <!-- Text for the snackbar to confirm that downloads are in progress. -->
+  <string name="download_in_progress_snackbar">Tajin ri qasanïk…</string>
   <!-- Text for the snackbar action button to view in progress download details. -->
   <string name="download_in_progress_snackbar_action_details">Taq b\'anikil</string>
   <!-- Text for the snackbar to confirm that a download has completed. -->
@@ -1581,11 +1707,27 @@
   <string name="download_completed_snackbar_action_open">Tijaq</string>
   <!-- Text for the snackbar action button to undo deleting a download. -->
   <string name="download_undo_delete_snackbar_action">Titzolïx</string>
+  <!-- Text shown when no download exists -->
+  <string name="download_empty_message_2">K\'a majun taq qasanïk</string>
+  <!-- Text description shown when no download exists -->
+  <string name="download_empty_description">Ri taq yakb\'äl xke\'aqasaj xkewachin wawe\'.</string>
   <!--
     History multi select title in app bar
     %1$d is the number of downloads selected
   -->
   <string name="download_multi_select_title">%1$d xcha\'</string>
+  <!-- Title for the dialog that is shown when there is not enough storage space to download a file. -->
+  <string name="download_file_has_not_enough_storage_dialog_title">Man k\'o ta k\'ïy rupam</string>
+  <!--
+    Message for the dialog that is shown when there is not enough storage space to download a file.
+    %s is the name of the file to download.
+  -->
+  <string name="download_file_has_not_enough_storage_dialog_message"><![CDATA[Re okisaxel re\' man k\'ïy ta rupam k\'o richin niqasäx <b>%s</b>.]]></string>
+  <!--
+    Text for the confirm button in the dialog that is shown when there is not enough storage space to download a file.
+    This button will navigate the user to the device's storage management settings.
+  -->
+  <string name="download_file_has_not_enough_storage_dialog_confirm_button_text">Kenuk\'samajïx taq yakb\'äl</string>
   <!--
     Text for the cancel button in the dialog that is shown when there is not enough storage space to download a file.
     This button will dismiss the dialog.
@@ -1595,6 +1737,10 @@
   <string name="download_delete_item">Tiyuj</string>
   <!-- Content description for the toolbar "Navigate back" button -->
   <string name="download_navigate_back_description">Katok pa k\'amaya\'l titzolin</string>
+  <!-- Content description for the toolbar "Navigate to Downloads Settings" button -->
+  <string name="download_navigate_settings_description">Tib\'e pa kinuk\'ulem qasanïk</string>
+  <!-- Content description for the toolbar back button while searching the downloads -->
+  <string name="download_close_search_description">Titzolin chuqa\' titz\'apïx kanoxïk</string>
   <!--
     Content description for the search bar clear text button on the downloads screen
 
@@ -1713,6 +1859,12 @@
   <string name="webcompat_reporter_label_url">URL</string>
   <!-- The error message of the URL text field when an invalid URL has been entered. -->
   <string name="webcompat_reporter_url_error_invalid">Tab\'ana\' utzil tatz\'ib\'aj jun URL</string>
+  <!-- The label/title of a field in the Web Compat Reporter feature for explaining a high-level reason why the site is broken. -->
+  <string name="webcompat_reporter_label_whats_broken_2">¿Achike k\'ayewal k\'o?</string>
+  <!-- The placeholder text for the dropdown where a user selects a high-level reason why the site is broken. -->
+  <string name="webcompat_reporter_choose_reason_2">Tacha\' jun aruma</string>
+  <!-- The error message of the dropdown, prompting the user to select a high-level reason why the site is broken. -->
+  <string name="webcompat_reporter_choose_reason_error">Tacha\' jun aruma</string>
   <!-- The button text for navigating away from the feature to provide more information on the broken site's bug report. -->
   <string name="webcompat_reporter_add_more_info">Titz\'aqatisäx ch\'aq\' etamab\'äl</string>
   <!-- The button text for the cancel button to leave the Web Compat Reporter feature. -->
@@ -1721,6 +1873,8 @@
   <string name="webcompat_reporter_send_report">Titaq rutzijol</string>
   <!-- The button text for the send button to submit the provided form data. -->
   <string name="webcompat_reporter_send">Titaq</string>
+  <!-- The button text for the preview report button to view a preview of the report. -->
+  <string name="webcompat_reporter_preview_report">Titz\'et chik ri rutzijol</string>
   <!-- Label for the “Send” button shown in the WebCompat Report preview panel, which the user taps to submit the report. -->
   <string name="webcompat_reporter_preview_bottom_sheet_send">Titaq</string>
   <!-- Text shown on the save button for the Edit URL confirmation dialog in the WebCompatReporter. -->
@@ -1741,6 +1895,12 @@
   <string name="tab_crash_close">Titz\'apïx ruwi\'</string>
   <!-- Restore tab button text on the tab crash page -->
   <string name="tab_crash_restore">Titzolïx ruwi\'</string>
+  <!-- Single unsubmitted crash matching remote settings. %1$s is the name of the app (for example "Firefox"). -->
+  <string name="unsubmitted_crash_requested_by_devs_dialog_title">K\'o jun rutzijol k\'ayewal man taqon ta, tajin nisol rij. Ri rutaqik xkojruto\' richin niqutzilaj %1$s. Ri rutz\'apixik re rutzijol re\' choj numalij kan re rutzijol re\'.</string>
+  <!-- Multiple unsubmitted crashes matching remote settings. %1$d is the number of unsent crash reports, %2$s is the name of the app (for example "Firefox"). -->
+  <string name="unsubmitted_crashes_requested_by_devs_dialog_title">K\'o jun rutzijol k\'ayewal man taqon ta (%1$d) ruximon ri\' rik\'in taq k\'ayewal ri tajin nisamajïx kij %2$s. Ri rutz\'apixik re rutzijol re\' choj numalij kan ri taq rutzijol.</string>
+  <!-- Unsubmitted crash dialog checkbox label for automatically sending reports in the future -->
+  <string name="unsubmitted_crash_dialog_checkbox_label">Ketaq pa ruyonil kitzijol sachoj</string>
   <!-- Unsubmitted crash dialog negative button to dismiss the dialog -->
   <string name="unsubmitted_crash_dialog_negative_button">Titz\'apïx</string>
   <!-- Unsubmitted crash dialog negative button to dismiss the dialog -->
@@ -1931,6 +2091,8 @@
   <string name="browser_feature_desktop_site_on">Titzij</string>
   <!-- Toggle if desktop site is turned off -->
   <string name="browser_feature_desktop_site_off">Tichup</string>
+  <!-- Preference for altering the default browsing mode. When enabled, the desktop site will always be requested. -->
+  <string name="preference_feature_desktop_mode_default">Junelïk tik\'utüx ruxaq ruk\'amaya\'l ajkematz\'ib\'</string>
   <!--
     Collections
 

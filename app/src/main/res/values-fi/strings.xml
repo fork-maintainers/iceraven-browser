@@ -1043,6 +1043,8 @@
   <string name="customize_toggle_pocket_sponsored">Sponsoroidut tarinat</string>
   <!-- Title for the opening wallpaper settings screen -->
   <string name="customize_wallpapers">Taustakuvat</string>
+  <!-- Label for the menu item that opens the customize homepage settings screen. -->
+  <string name="browser_menu_customize_homepage">Mukauta kotisivua</string>
   <!-- Label for the menu item that opens the wallpaper settings screen. -->
   <string name="browser_menu_change_wallpaper">Vaihda taustakuva</string>
   <!-- Title for the customize home screen section with sponsored shortcuts. -->
@@ -1710,10 +1712,22 @@
   <string name="tab_group_three_dot_button_content_description">Lisää valintoja</string>
   <!-- Text shown on the edit button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_edit">Muokkaa</string>
+  <!-- Text shown on the ungroup button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_ungroup">Pura ryhmittely</string>
   <!-- Text shown on the delete button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_delete">Poista</string>
   <!-- Text shown on the close button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_close">Sulje</string>
+  <!-- Title for the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_title">Puretaanko välilehtiryhmän ryhmittely?</string>
+  <!-- Text shown in the body of the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_body">Välilehdet pysyvät auki tällä laitteella, mutta ryhmä poistetaan.</string>
+  <!-- Text shown on the Don't Ask Again checkbox button in the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_dont_ask_again">Älä kysy uudestaan</string>
+  <!-- Text shown on the confirm button in the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_confirm">Pura ryhmittely</string>
+  <!-- Text shown on the cancel button in the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_cancel">Peruuta</string>
   <!--
     Color labels for tab groups, used for accessibility and selection UI.
 
@@ -2415,6 +2429,10 @@
   <string name="sync_sign_in">Kirjaudu sisään Synciin</string>
   <!-- An option from the share dialog to send link to all other sync devices -->
   <string name="sync_send_to_all">Lähetä kaikkiin laitteisiin</string>
+  <!-- Text displayed when no other sync devices are available for link sharing -->
+  <string name="sync_no_devices_available">Ei laitteita saatavilla</string>
+  <!-- Text displayed when no other sync devices are available for link sharing. -->
+  <string name="sync_no_devices_available_description">Kaikki tälle tilille kirjautuneet ja synkronoituvat laitteet näkyvät tässä.</string>
   <!-- An option from the share dialog to reconnect to sync -->
   <string name="sync_reconnect">Yhdistä uudelleen Synciin</string>
   <!-- Text displayed when sync is offline and cannot be accessed -->
@@ -3164,6 +3182,14 @@
   <string name="ip_protection_location_unavailable" tools:ignore="UnusedResources">Sijainti ei ole käytettävissä. Valitse toinen sijainti.</string>
   <!-- Snackbar (in-app pop-up notification) text shown when the previously selected browser VPN location is unavailable and the recommended location was used instead. -->
   <string name="ip_protection_location_unavailable_recommended_snackbar" tools:ignore="UnusedResources">Valittu VPN-sijainti ei ole käytettävissä. Yhdistetty suositeltuun sijaintiin.</string>
+  <!-- Title for the card shown to the user when we are unable to fetch server locations -->
+  <string name="ip_protection_locations_unavailable_title">Sijainnit eivät ole saatavilla</string>
+  <!-- Description for the card shown to the user when we are unable to fetch server locations -->
+  <string name="ip_protection_locations_unavailable_description">Vaihdettu suositeltuun sijaintiin.</string>
+  <!-- Title for the browser VPN location selection screen (displayed in the app bar) -->
+  <string name="ip_protection_locations_title">Valitse VPN-sijainti</string>
+  <!-- Content description for the browser VPN location selection screen top bar back button -->
+  <string name="ip_protection_locations_navigate_back_button_content_description">Siirry taaksepäin</string>
   <!-- Title for the card shown to the user when we are unable to fetch server locations -->
   <string name="ip_protection_location_unavailable_title" tools:ignore="UnusedResources">Edellinen sijainti ei ole käytettävissä</string>
   <!-- Description for the card shown to the user when we are unable to fetch server locations -->
@@ -4733,6 +4759,16 @@
   <string name="lens_camera_mode_qr">QR-skanneri</string>
   <!-- Toast shown when the user picks an image from the gallery in QR mode but no QR code is found in it -->
   <string name="lens_camera_qr_no_code_found">Kuvasta ei löytynyt QR-koodia</string>
+  <!-- Title of the bottom sheet shown the first time the user opens the Google Lens camera screen -->
+  <string name="lens_opt_out_title">Löydä se Google Lensillä</string>
+  <!-- Description of the bottom sheet shown the first time the user opens the Google Lens camera screen -->
+  <string name="lens_opt_out_description">Valitse kuva tai käytä kameraasi saadaksesi tuloksia Google Lensillä.</string>
+  <!-- Text of the link in the first-run Google Lens bottom sheet that opens the Search settings page -->
+  <string name="lens_opt_out_settings_link">Google Lensin asetukset</string>
+  <!-- Button in the first-run Google Lens bottom sheet that dismisses it and starts the camera -->
+  <string name="lens_opt_out_try_it_now_button">Kokeile nyt</string>
+  <!-- Button in the first-run Google Lens bottom sheet that leaves Google Lens without using it -->
+  <string name="lens_opt_out_not_now_button">Ei nyt</string>
   <!--
     Firefox Labs
 

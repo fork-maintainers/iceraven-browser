@@ -1203,13 +1203,13 @@
   <!-- Label indicating that sync is in progress -->
   <string name="sync_syncing_in_progress">동기화 중…</string>
   <!-- Label summary indicating that sync failed. %s is the date stamp showing last time it succeeded. -->
-  <string name="sync_failed_summary">동기화 실패. 마지막 성공: %s</string>
+  <string name="sync_failed_summary">동기화 실패. 최근 성공: %s</string>
   <!-- Label summary showing never synced -->
-  <string name="sync_failed_never_synced_summary">동기화 실패. 마지막 동기화: 없음</string>
+  <string name="sync_failed_never_synced_summary">동기화 실패. 최근 동기화: 없음</string>
   <!-- Label summary the date we last synced. %s is date stamp showing last time sync was completed. -->
-  <string name="sync_last_synced_summary">마지막 동기화: %s</string>
+  <string name="sync_last_synced_summary">최근 동기화: %s</string>
   <!-- Label summary showing never synced -->
-  <string name="sync_never_synced_summary">마지막 동기화: 없음</string>
+  <string name="sync_never_synced_summary">최근 동기화: 없음</string>
   <!--
     Text for displaying the default device name.
     %1$s is the name of the app (for example "Firefox"). %2$s is the device manufacturer name
@@ -1768,9 +1768,9 @@
   <!-- Text for the header that groups the history for yesterday -->
   <string name="history_yesterday">어제</string>
   <!-- Text for the header that groups the history the past 7 days -->
-  <string name="history_7_days">지난 7 일</string>
+  <string name="history_7_days">최근 7일</string>
   <!-- Text for the header that groups the history the past 30 days -->
-  <string name="history_30_days">지난 30 일</string>
+  <string name="history_30_days">최근 30일</string>
   <!-- Text for the header that groups the history older than the last month -->
   <string name="history_older">이전</string>
   <!-- Text shown when no history exists -->
@@ -3031,7 +3031,7 @@
   <!-- Saved logins sorting strategy menu item -by name- (if selected, it will sort saved logins alphabetically) -->
   <string name="saved_logins_sort_strategy_alphabetically">이름 (A-Z)</string>
   <!-- Saved logins sorting strategy menu item -by last used- (if selected, it will sort saved logins by last used) -->
-  <string name="saved_logins_sort_strategy_last_used">마지막 사용</string>
+  <string name="saved_logins_sort_strategy_last_used">최근 사용</string>
   <!-- Content description (not visible, for screen readers etc.) -->
   <string name="saved_logins_menu_dropdown_chevron_icon_content_description_2">비밀번호 정렬 메뉴</string>
   <!-- Label for button to import passwords from file. -->

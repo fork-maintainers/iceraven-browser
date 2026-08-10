@@ -978,6 +978,8 @@
   <string name="notifications_allowed_summary">İzin verildi</string>
   <!-- Summary for notification preference indicating notifications are not allowed -->
   <string name="notifications_not_allowed_summary">İzin verilmedi</string>
+  <!-- Preference for local network access / nearby devices in Android 17 -->
+  <string name="preferences_local_network_access">Yerel ağ erişimi / yakındaki cihazlar</string>
   <!-- Summary for local network access preference indicating access is allowed -->
   <string name="local_network_access_allowed_summary">İzin verildi</string>
   <!-- Summary for local network access preference indicating access is not allowed -->
@@ -1041,6 +1043,8 @@
   <string name="customize_toggle_pocket_sponsored">Sponsorlu haberler</string>
   <!-- Title for the opening wallpaper settings screen -->
   <string name="customize_wallpapers">Duvar kâğıtları</string>
+  <!-- Label for the menu item that opens the customize homepage settings screen. -->
+  <string name="browser_menu_customize_homepage">Giriş sayfasını özelleştir</string>
   <!-- Label for the menu item that opens the wallpaper settings screen. -->
   <string name="browser_menu_change_wallpaper">Duvar kâğıdını değiştir</string>
   <!-- Title for the customize home screen section with sponsored shortcuts. -->
@@ -1708,10 +1712,14 @@
   <string name="tab_group_three_dot_button_content_description">Diğer seçenekler</string>
   <!-- Text shown on the edit button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_edit">Düzenle</string>
+  <!-- Text shown on the ungroup button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_ungroup">Gruptan çıkar</string>
   <!-- Text shown on the delete button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_delete">Sil</string>
   <!-- Text shown on the close button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_close">Kapat</string>
+  <!-- Title for the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_title">Sekme grubu dağıtılsın mı?</string>
   <!-- Text shown in the body of the Ungroup tab group confirmation dialog. -->
   <string name="ungroup_tab_group_confirmation_dialog_body">Sekmeler bu cihazda açık kalacak ama grup silinecektir.</string>
   <!-- Text shown on the Don't Ask Again checkbox button in the Ungroup tab group confirmation dialog. -->
@@ -2421,6 +2429,10 @@
   <string name="sync_sign_in">Sync’e giriş yap</string>
   <!-- An option from the share dialog to send link to all other sync devices -->
   <string name="sync_send_to_all">Tüm cihazlara gönder</string>
+  <!-- Text displayed when no other sync devices are available for link sharing -->
+  <string name="sync_no_devices_available">Kullanılabilir cihaz yok</string>
+  <!-- Text displayed when no other sync devices are available for link sharing. -->
+  <string name="sync_no_devices_available_description">Bu hesaba giriş yapan ve hesapla eşitlenen cihazlar burada görünecektir.</string>
   <!-- An option from the share dialog to reconnect to sync -->
   <string name="sync_reconnect">Sync’e yeniden bağlan</string>
   <!-- Text displayed when sync is offline and cannot be accessed -->
@@ -4747,6 +4759,16 @@
   <string name="lens_camera_mode_qr">QR tarayıcı</string>
   <!-- Toast shown when the user picks an image from the gallery in QR mode but no QR code is found in it -->
   <string name="lens_camera_qr_no_code_found">Resimde QR kodu bulunamadı</string>
+  <!-- Title of the bottom sheet shown the first time the user opens the Google Lens camera screen -->
+  <string name="lens_opt_out_title">Google Lens ile bul</string>
+  <!-- Description of the bottom sheet shown the first time the user opens the Google Lens camera screen -->
+  <string name="lens_opt_out_description">Google Lens sonuçlarını görmek için bir resim seçin veya kameranızı kullanın.</string>
+  <!-- Text of the link in the first-run Google Lens bottom sheet that opens the Search settings page -->
+  <string name="lens_opt_out_settings_link">Google Lens ayarları</string>
+  <!-- Button in the first-run Google Lens bottom sheet that dismisses it and starts the camera -->
+  <string name="lens_opt_out_try_it_now_button">Hemen dene</string>
+  <!-- Button in the first-run Google Lens bottom sheet that leaves Google Lens without using it -->
+  <string name="lens_opt_out_not_now_button">Şimdi değil</string>
   <!--
     Firefox Labs
 
