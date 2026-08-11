@@ -61,6 +61,7 @@ enum class SelectorStrategy {
     // lands inside its ~5.5s budget — a slow-but-successful click is then indistinguishable from a
     // missed one. UiObject2.click() just injects the gesture and lets the caller do the waiting.
     UIAUTOMATOR2_BY_DESCRIPTION_CONTAINS,
+    UIAUTOMATOR2_BY_TEXT_CONTAINS,
     UIAUTOMATOR_WITH_TEXT_CONTAINS,
     UIAUTOMATOR_WITH_RES_ID,
     UIAUTOMATOR_WITH_COMPOSE_TAG,

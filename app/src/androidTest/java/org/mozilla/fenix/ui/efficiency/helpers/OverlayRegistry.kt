@@ -86,8 +86,35 @@ object OverlayRegistry {
         ),
     )
 
+    /**
+     * "Open this link in <app>?" app-links prompt: raised when a link the current setting routes to an
+     * external app is tapped (e.g. a stray tap on a `tel:`/`vnd.youtube:` link, or an incidental
+     * redirect) while `openLinksInExternalApp = ASK`. It covers the page until dismissed.
+     *
+     * Dismiss with "Stay in <app>", the neutral choice: it closes the prompt and keeps the browser on
+     * the current page (the "Open in App" alternative would leave Firefox). A test that legitimately
+     * expects this prompt locates it directly and never triggers the registry — dismissal only runs on
+     * a locate MISS, so it cannot ambush a test that is interacting with the prompt on purpose.
+     */
+    val OPEN_LINK_IN_APP_PROMPT = BlockingOverlay(
+        name = "Open link in another app prompt",
+        presence = Selector(
+            strategy = SelectorStrategy.UIAUTOMATOR_WITH_TEXT_CONTAINS,
+            value = "Open this link in",
+            description = "Applinks prompt title",
+        ),
+        dismiss = listOf(
+            Selector(
+                strategy = SelectorStrategy.UIAUTOMATOR2_BY_TEXT_CONTAINS,
+                value = "Stay in",
+                description = "Applinks prompt 'Stay in Firefox' button",
+            ),
+        ),
+    )
+
     val known: List<BlockingOverlay> = listOf(
         STYLUS_HANDWRITING_PROMPT,
         ADD_TO_HOME_SCREEN_PROMPT,
+        OPEN_LINK_IN_APP_PROMPT,
     )
 }
