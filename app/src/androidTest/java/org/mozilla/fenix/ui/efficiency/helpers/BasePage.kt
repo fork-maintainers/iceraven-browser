@@ -20,6 +20,7 @@ import androidx.compose.ui.test.filter
 import androidx.compose.ui.test.hasAnyAncestor
 import androidx.compose.ui.test.hasAnyChild
 import androidx.compose.ui.test.hasAnySibling
+import androidx.compose.ui.test.hasContentDescription
 import androidx.compose.ui.test.hasParent
 import androidx.compose.ui.test.hasSetTextAction
 import androidx.compose.ui.test.hasTestTag
@@ -1363,6 +1364,21 @@ abstract class BasePage(
                     null
                 }
             }
+            SelectorStrategy.COMPOSE_BY_TAG_AND_CONTENT_DESCRIPTION_SUBSTRING -> {
+                val descriptionToMatch = selector.secondaryValue ?: ""
+                try {
+                    composeRule.onNode(
+                        hasTestTag(selector.value) and
+                            hasContentDescription(descriptionToMatch, substring = true),
+                    )
+                } catch (_: Exception) {
+                    Log.i(
+                        "mozGetElement",
+                        "Compose node not found for tag: ${selector.value} with content description: $descriptionToMatch",
+                    )
+                    null
+                }
+            }
             // TODO: easier way to isolate parent/child/sibling elements, auto-selects sibilings or children on failure as a back-up
             SelectorStrategy.COMPOSE_ON_ALL_NODES_BY_TAG_ON_FIRST -> {
                 try {
@@ -1506,6 +1522,14 @@ abstract class BasePage(
 
             SelectorStrategy.UIAUTOMATOR_WITH_COMPOSE_TAG -> {
                 val obj = mDevice.findObject(UiSelector().resourceId(selector.value))
+                if (!obj.exists()) null else obj
+            }
+
+            SelectorStrategy.UIAUTOMATOR_WITH_RES_ID_AND_DESCRIPTION_CONTAINS -> {
+                val descriptionToMatch = selector.secondaryValue ?: ""
+                val obj = mDevice.findObject(
+                    UiSelector().resourceId(selector.value).descriptionContains(descriptionToMatch),
+                )
                 if (!obj.exists()) null else obj
             }
 

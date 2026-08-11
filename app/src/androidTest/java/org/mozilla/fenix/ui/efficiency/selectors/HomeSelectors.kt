@@ -54,9 +54,16 @@ object HomeSelectors {
     )
 
     val HOME_WORDMARK_LOGO = Selector(
-        strategy = SelectorStrategy.UIAUTOMATOR_WITH_RES_ID,
+        strategy = SelectorStrategy.COMPOSE_BY_TAG,
         value = "homepage.wordmark.logo",
         description = "the home screen wordmark logo",
+        groups = listOf("homeScreen"),
+    )
+
+    val HOME_WORDMARK_TEXT = Selector(
+        strategy = SelectorStrategy.COMPOSE_BY_TAG,
+        value = "homepage.wordmark.text",
+        description = "the home screen wordmark text",
         groups = listOf("homeScreen"),
     )
 
@@ -120,6 +127,7 @@ object HomeSelectors {
         PRIVATE_BROWSING_BUTTON,
         TOP_SITES_LIST,
         HOME_WORDMARK_LOGO,
+        HOME_WORDMARK_TEXT,
         COLLECTIONS_HEADER,
         TAB_COUNTER_ZERO,
         JUMP_BACK_IN_SECTION,

@@ -156,7 +156,7 @@ object MainMenuSelectors {
         strategy = SelectorStrategy.COMPOSE_BY_CONTENT_DESCRIPTION,
         value = getStringResource(R.string.browser_menu_webcompat_reporter_2),
         description = "Main menu Report broken site button",
-        groups = listOf("browserViewMainMenuMoreItems"),
+        groups = listOf("browserViewMainMenuMoreItems", "moreMainMenuSubList"),
     )
 
     // The Extensions row opens its submenu in a new window, so match it by res-id at the device level
@@ -181,6 +181,15 @@ object MainMenuSelectors {
         strategy = SelectorStrategy.COMPOSE_BY_CONTENT_DESCRIPTION_SUBSTRING,
         value = "Extensions Try a recommended extension",
         description = "Main menu Extensions - Try a recommended extension button",
+        groups = listOf(),
+    )
+
+    // Shown on the collapsed Extensions row when extensions are installed but all disabled. Mirrors the
+    // legacy verifyNoExtensionsEnabledButton (contentDescription "Extensions No extensions enabled").
+    val NO_EXTENSIONS_ENABLED_BUTTON = Selector(
+        strategy = SelectorStrategy.COMPOSE_BY_CONTENT_DESCRIPTION_SUBSTRING,
+        value = "Extensions No extensions enabled",
+        description = "Main menu Extensions - No extensions enabled button",
         groups = listOf(),
     )
 
@@ -220,6 +229,29 @@ object MainMenuSelectors {
         value = MenuDialogTestTag.RECOMMENDED_ADDON_ITEM,
         description = "Recommended addon row in the expanded Extensions submenu",
         groups = listOf("expandedExtensionsMenuItems"),
+    )
+
+    // The collapsed Extensions main-menu row once an extension is installed: it advertises the addon
+    // name in its content description. Mirrors the legacy verifyExtensionsButtonWithInstalledExtension
+    // (itemWithResIdAndDescription("mainMenu.extensions", <addon>)).
+    @Suppress("ktlint:standard:function-naming", "FunctionName")
+    fun EXTENSIONS_BUTTON_WITH_INSTALLED_EXTENSION(addonTitle: String = "") = Selector(
+        strategy = SelectorStrategy.UIAUTOMATOR_WITH_RES_ID_AND_DESCRIPTION_CONTAINS,
+        value = MenuDialogTestTag.EXTENSIONS,
+        secondaryValue = addonTitle,
+        description = "Extensions menu row advertising installed extension '$addonTitle'",
+        groups = listOf(),
+    )
+
+    // The installed extension row in the expanded Extensions submenu. Mirrors the legacy
+    // verifyInstalledExtension (hasTestTag(WEB_EXTENSION_ITEM) + content description contains <addon>).
+    @Suppress("ktlint:standard:function-naming", "FunctionName")
+    fun INSTALLED_EXTENSION_ITEM(addonTitle: String = "") = Selector(
+        strategy = SelectorStrategy.COMPOSE_BY_TAG_AND_CONTENT_DESCRIPTION_SUBSTRING,
+        value = MenuDialogTestTag.WEB_EXTENSION_ITEM,
+        secondaryValue = addonTitle,
+        description = "Installed extension '$addonTitle' row in the expanded Extensions submenu",
+        groups = listOf(),
     )
 
     // TODO (M. Barone 3/20/2026): add getting 'appName' to our base helpers
@@ -265,21 +297,21 @@ object MainMenuSelectors {
         strategy = SelectorStrategy.COMPOSE_BY_CONTENT_DESCRIPTION,
         value = getStringResource(R.string.browser_menu_save_to_collection_2),
         description = "Save to collections button",
-        groups = listOf("moreMainMenuItems"),
+        groups = listOf("moreMainMenuItems", "moreMainMenuSubList"),
     )
 
     val ADD_TO_SHORTCUTS_BUTTON = Selector(
         strategy = SelectorStrategy.COMPOSE_BY_CONTENT_DESCRIPTION,
         value = getStringResource(R.string.browser_menu_add_to_shortcuts),
         description = "Main menu Add to shortcuts button",
-        groups = listOf("browserViewMainMenuMoreItems"),
+        groups = listOf("browserViewMainMenuMoreItems", "moreMainMenuSubList"),
     )
 
     val TRANSLATE_BUTTON = Selector(
         strategy = SelectorStrategy.COMPOSE_BY_CONTENT_DESCRIPTION,
         value = getStringResource(R.string.browser_menu_translations),
         description = "Translate page button",
-        groups = listOf("moreMenuItems"),
+        groups = listOf("moreMenuItems", "moreMainMenuSubList"),
     )
 
     val TRANSLATED_BUTTON = Selector(
@@ -293,14 +325,21 @@ object MainMenuSelectors {
         strategy = SelectorStrategy.COMPOSE_BY_CONTENT_DESCRIPTION,
         value = getStringResource(R.string.browser_menu_save_as_pdf_2),
         description = "Main menu save as PDF button",
-        groups = listOf("moreMenuItems"),
+        groups = listOf("moreMenuItems", "moreMainMenuSubList"),
+    )
+
+    val SUMMARIZE_PAGE_BUTTON = Selector(
+        strategy = SelectorStrategy.COMPOSE_BY_CONTENT_DESCRIPTION,
+        value = getStringResource(R.string.browser_menu_summarize_page),
+        description = "Main menu Summarize page button",
+        groups = listOf("moreMainMenuSubList"),
     )
 
     val PRINT_BUTTON = Selector(
         strategy = SelectorStrategy.COMPOSE_BY_CONTENT_DESCRIPTION,
         value = getStringResource(R.string.browser_menu_print_2),
         description = "Print page button",
-        groups = listOf("moreMenuItems"),
+        groups = listOf("moreMenuItems", "moreMainMenuSubList"),
     )
 
     val REMOVE_FROM_SHORTCUTS_BUTTON = Selector(
@@ -314,7 +353,7 @@ object MainMenuSelectors {
         strategy = SelectorStrategy.COMPOSE_BY_CONTENT_DESCRIPTION,
         value = getStringResource(R.string.browser_menu_add_to_homescreen),
         description = "Main menu add to homescreen button",
-        groups = listOf("browserViewMainMenuMoreItems"),
+        groups = listOf("browserViewMainMenuMoreItems", "moreMainMenuSubList"),
     )
 
     val ADD_APP_TO_HOMESCREEN_BUTTON = Selector(
@@ -328,7 +367,7 @@ object MainMenuSelectors {
         strategy = SelectorStrategy.COMPOSE_BY_CONTENT_DESCRIPTION,
         value = getStringResource(R.string.browser_menu_open_app_link),
         description = "Main menu Open in app button",
-        groups = listOf("browserViewMainMenuMoreItems"),
+        groups = listOf("browserViewMainMenuMoreItems", "moreMainMenuSubList"),
     )
 
     @Suppress("ktlint:standard:function-naming", "FunctionName")
@@ -374,10 +413,13 @@ object MainMenuSelectors {
         EXTENSIONS_BUTTON_UIAUTOMATOR,
         EXTENSIONS_CHEVRON,
         TRY_RECOMMENDED_EXTENSION_BUTTON,
+        NO_EXTENSIONS_ENABLED_BUTTON,
         DISCOVER_MORE_EXTENSIONS_BUTTON,
         MANAGE_EXTENSIONS_BUTTON,
         RECOMMENDED_ADDON_INSTALL_BUTTON(),
         RECOMMENDED_ADDON_ITEM,
+        EXTENSIONS_BUTTON_WITH_INSTALLED_EXTENSION(),
+        INSTALLED_EXTENSION_ITEM(),
         HISTORY_BUTTON,
         BOOKMARKS_BUTTON,
         DOWNLOADS_BUTTON,
@@ -389,6 +431,7 @@ object MainMenuSelectors {
         TRANSLATE_BUTTON,
         TRANSLATED_BUTTON,
         SAVE_AS_PDF_BUTTON,
+        SUMMARIZE_PAGE_BUTTON,
         PRINT_BUTTON,
         REMOVE_FROM_SHORTCUTS_BUTTON,
         ADD_TO_HOMESCREEN_BUTTON,
