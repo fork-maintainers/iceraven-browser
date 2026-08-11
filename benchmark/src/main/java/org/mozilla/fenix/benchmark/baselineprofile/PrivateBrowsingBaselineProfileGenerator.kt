@@ -52,6 +52,7 @@ class PrivateBrowsingBaselineProfileGenerator {
     fun generateBaselineProfile() {
         rule.collect(
             packageName = TARGET_PACKAGE,
+            maxIterations = baselineProfileMaxIterations(),
         ) {
             privateBrowsingJourney(url = mockRule.url(HtmlAsset.SIMPLE))
         }

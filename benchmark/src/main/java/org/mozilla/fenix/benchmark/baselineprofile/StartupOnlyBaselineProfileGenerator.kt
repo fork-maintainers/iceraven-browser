@@ -48,6 +48,7 @@ class StartupOnlyBaselineProfileGenerator {
     fun generateBaselineProfile() {
         rule.collect(
             packageName = TARGET_PACKAGE,
+            maxIterations = baselineProfileMaxIterations(),
         ) {
             startupOnlyJourney()
         }

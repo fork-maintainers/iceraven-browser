@@ -52,6 +52,7 @@ class SwitchTabsBaselineProfileGenerator {
     fun generateBaselineProfile() {
         rule.collect(
             packageName = TARGET_PACKAGE,
+            maxIterations = baselineProfileMaxIterations(),
         ) {
             switchTabsJourney(
                 simpleHtmlUrl = mockRule.url(HtmlAsset.SIMPLE),

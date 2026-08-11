@@ -55,6 +55,7 @@ class BrowserPageScrollBaselineProfileGenerator {
     fun generateBaselineProfile() {
         rule.collect(
             packageName = TARGET_PACKAGE,
+            maxIterations = baselineProfileMaxIterations(),
         ) {
             browserPageScrollJourney(url = mockRule.url(HtmlAsset.LONG))
         }

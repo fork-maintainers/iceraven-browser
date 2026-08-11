@@ -49,6 +49,7 @@ class HomepageScrollBaselineProfileGenerator {
     fun generateBaselineProfile() {
         rule.collect(
             packageName = TARGET_PACKAGE,
+            maxIterations = baselineProfileMaxIterations(),
         ) {
             homepageScrollJourney()
         }

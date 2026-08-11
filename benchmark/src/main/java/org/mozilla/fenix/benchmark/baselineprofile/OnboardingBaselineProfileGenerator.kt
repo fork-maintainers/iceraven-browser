@@ -53,6 +53,7 @@ class OnboardingBaselineProfileGenerator {
     fun generateBaselineProfile() {
         rule.collect(
             packageName = TARGET_PACKAGE,
+            maxIterations = baselineProfileMaxIterations(),
         ) {
             device.clearPackageData(packageName = packageName)
             device.revokeNotificationPermission(packageName = packageName)

@@ -52,6 +52,7 @@ class NormalBrowsingBaselineProfileGenerator {
     fun generateBaselineProfile() {
         rule.collect(
             packageName = TARGET_PACKAGE,
+            maxIterations = baselineProfileMaxIterations(),
         ) {
             normalBrowsingJourney(url = mockRule.url(HtmlAsset.SIMPLE))
         }

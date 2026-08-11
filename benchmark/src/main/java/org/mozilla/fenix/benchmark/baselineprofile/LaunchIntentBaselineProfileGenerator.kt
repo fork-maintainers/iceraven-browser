@@ -54,6 +54,7 @@ class LaunchIntentBaselineProfileGenerator {
     fun generateBaselineProfile() {
         rule.collect(
             packageName = TARGET_PACKAGE,
+            maxIterations = baselineProfileMaxIterations(),
         ) {
             launchIntentJourney(intentData = mockRule.uri(HtmlAsset.SIMPLE))
         }
