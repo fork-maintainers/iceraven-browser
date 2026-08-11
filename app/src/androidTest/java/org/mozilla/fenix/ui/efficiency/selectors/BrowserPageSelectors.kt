@@ -289,6 +289,15 @@ object BrowserPageSelectors {
         groups = listOf(),
     )
 
+    // "Set cookies" button on the storage_write.html test page. Web DOM id, exposed unprefixed by
+    // GeckoView (same mechanism as SUBMIT_LOGIN_BUTTON), so UIAUTOMATOR_WITH_COMPOSE_TAG matches it.
+    val SET_COOKIES_WEB_BUTTON = Selector(
+        strategy = SelectorStrategy.UIAUTOMATOR_WITH_COMPOSE_TAG,
+        value = "setCookies",
+        description = "Web page 'Set cookies' button",
+        groups = listOf(),
+    )
+
     // UiObject2 (By.textContains): clicking these applinks-prompt buttons only dismisses the in-app
     // sheet, which the legacy UiObject.click() misreports as a failed click (gotcha: no post-click
     // window-change event for its sync to latch). UiObject2.click() does not gate on that sync.
@@ -337,6 +346,7 @@ object BrowserPageSelectors {
         SAVE_LOGIN_PROMPT,
         SAVE_LOGIN_PROMPT_CONFIRM_BUTTON,
         SELECT_ADDRESS_HEADER,
+        SET_COOKIES_WEB_BUTTON,
         SNACKBAR_EDIT_BUTTON,
         STAY_IN_FIREFOX_PROMPT_BUTTON,
         SUBMIT_LOGIN_BUTTON,

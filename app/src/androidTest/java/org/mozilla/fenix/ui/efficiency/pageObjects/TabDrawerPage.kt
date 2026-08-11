@@ -55,8 +55,18 @@ class TabDrawerPage(composeRule: AndroidComposeTestRule<HomeActivityIntentTestRu
         return TabDrawerSelectors.all.filter { it.groups.contains(group) }
     }
 
+    override fun navigateToPage(url: String, forceNavigation: Boolean): TabDrawerPage {
+        super.navigateToPage(url, forceNavigation)
+        return this
+    }
+
     fun closeTabWithTitle(title: String): TabDrawerPage {
         mozClickFirstWithParentText(TabDrawerSelectors.TAB_ITEM_CLOSE, title)
+        return this
+    }
+
+    fun verifyNoOpenTabsInNormalBrowsing(): TabDrawerPage {
+        mozVerifyElementsByGroup("emptyNormalBrowsingTabDrawerView")
         return this
     }
 
