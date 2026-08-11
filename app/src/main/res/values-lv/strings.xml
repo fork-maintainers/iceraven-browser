@@ -9,12 +9,44 @@
 <resources>
   <!-- Private browsing erase action "contextual feature recommendation" (CFR) -->
 
+  <!-- Title for the block AI enhancements toggle -->
+  <string name="ai_controls_block_ai_title">Liegt MI uzlabojumus</string>
+  <!-- Title for the block AI enhancements confirmation dialog -->
+  <string name="ai_controls_block_dialog_title">Liegt MI uzlabojumus?</string>
+  <!-- Block button text in the block AI enhancements confirmation dialog -->
+  <string name="ai_controls_block_dialog_block">Liegt</string>
+  <!-- Button in the search suggestions onboarding that allows search suggestions in private sessions -->
+  <string name="search_suggestions_onboarding_allow_button">Atļaut</string>
+  <!-- Search suggestion onboarding hint title text -->
+  <string name="search_suggestions_onboarding_title">Atļaut meklēšanas iestatījumus privātās sesijās?</string>
+  <!-- Search suggestion onboarding hint description text, %s is the name of the app (for example "Firefox"). -->
+  <string name="search_suggestions_onboarding_text">%s kopīgos visu adreses joslā ievadīto ar noklusējuma meklētāju.</string>
   <!-- Menu option in the search selector menu to open the search settings -->
   <string name="search_settings_menu_item">Meklēšanas iestatījumi</string>
   <!-- ==== Project "Nova" onboarding strings ==== -->
 
   <!-- ==== End of Project "Nova" onboarding strings ==== -->
 
+  <!--
+    Add-on Permissions
+
+    The title of the origin permission option allowing a user to enable the extension to run on all sites
+  -->
+  <string name="addons_permissions_allow_for_all_sites">Atļaut visām vietnēm</string>
+  <!-- Label that indicates that video and audio autoplay is only allowed over Wi-Fi -->
+  <string name="preference_option_autoplay_allowed_wifi_only2">Liegt video un skaņu tikai tad, kad tiek izmantoti mobilie dati</string>
+  <!-- Label for global setting that indicates that video autoplay is allowed, but audio autoplay is blocked -->
+  <string name="preference_option_autoplay_block_audio2">Liegt tikai skaņu</string>
+  <!-- Label for site specific setting that indicates that video autoplay is allowed, but audio autoplay is blocked -->
+  <string name="quick_setting_option_autoplay_block_audio">Liegt tikai skaņu</string>
+  <!-- Label for global setting that indicates that all video and audio autoplay is blocked -->
+  <string name="preference_option_autoplay_blocked3">Liegt skaņu un video</string>
+  <!-- Label for site specific setting that indicates that all video and audio autoplay is blocked -->
+  <string name="quick_setting_option_autoplay_blocked">Liegt skaņu un video</string>
+  <!-- Title of the Add search engine screen -->
+  <string name="search_engine_add_custom_search_engine_title">Pievienot meklētāju</string>
+  <!-- Content description (not visible, for screen readers etc.): Title for the button that navigates to add new engine screen -->
+  <string name="search_engine_add_custom_search_engine_button_content_description">Pievienot jaunu meklētāju</string>
   <!-- Translations feature -->
 
   <!-- TextField Design System Component -->
@@ -25,6 +57,8 @@
     Title of Settings Search. "Search" is a verb here
   -->
   <string name="settings_search_title">Meklēt iestatījumus</string>
+  <!-- Section header for recent search results -->
+  <string name="settings_search_recent_searches_section_header">Neseni meklēšanas iznākumi</string>
   <!-- Content Description for the button to open Settings Search (to search through settings). -->
   <string name="settings_search_button_content_description">Iestatījumu meklēšanas poga</string>
   <!-- ==== Terms of use pop up prompt ==== -->

@@ -1043,6 +1043,8 @@
   <string name="customize_toggle_pocket_sponsored">Sponsede historier</string>
   <!-- Title for the opening wallpaper settings screen -->
   <string name="customize_wallpapers">Bakgrunnsbilder</string>
+  <!-- Label for the menu item that opens the customize homepage settings screen. -->
+  <string name="browser_menu_customize_homepage">Tilpass startsiden</string>
   <!-- Label for the menu item that opens the wallpaper settings screen. -->
   <string name="browser_menu_change_wallpaper">Endre bakgrunnsbilde</string>
   <!-- Title for the customize home screen section with sponsored shortcuts. -->
@@ -1710,6 +1712,8 @@
   <string name="tab_group_three_dot_button_content_description">Flere innstillinger</string>
   <!-- Text shown on the edit button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_edit">Rediger</string>
+  <!-- Text shown on the ungroup button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_ungroup">Opphev gruppering</string>
   <!-- Text shown on the delete button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_delete">Slett</string>
   <!-- Text shown on the close button for a tab group on the three dot menu -->
@@ -2421,6 +2425,10 @@
   <string name="sync_sign_in">Logg inn på Sync</string>
   <!-- An option from the share dialog to send link to all other sync devices -->
   <string name="sync_send_to_all">Send til alle enheter</string>
+  <!-- Text displayed when no other sync devices are available for link sharing -->
+  <string name="sync_no_devices_available">Ingen enheter tilgjengelig</string>
+  <!-- Text displayed when no other sync devices are available for link sharing. -->
+  <string name="sync_no_devices_available_description">Alle enheter som er logget inn og synkroniserer med denne kontoen, vises her.</string>
   <!-- An option from the share dialog to reconnect to sync -->
   <string name="sync_reconnect">Koble til Sync på nytt</string>
   <!-- Text displayed when sync is offline and cannot be accessed -->
@@ -4747,6 +4755,16 @@
   <string name="lens_camera_mode_qr">QR-skanner</string>
   <!-- Toast shown when the user picks an image from the gallery in QR mode but no QR code is found in it -->
   <string name="lens_camera_qr_no_code_found">Ingen QR-kode funnet i bildet</string>
+  <!-- Title of the bottom sheet shown the first time the user opens the Google Lens camera screen -->
+  <string name="lens_opt_out_title">Finn det med Google Lens</string>
+  <!-- Description of the bottom sheet shown the first time the user opens the Google Lens camera screen -->
+  <string name="lens_opt_out_description">Velg et bilde eller bruk kameraet ditt for å få resultater med Google Lens.</string>
+  <!-- Text of the link in the first-run Google Lens bottom sheet that opens the Search settings page -->
+  <string name="lens_opt_out_settings_link">Google Lens-innstillinger</string>
+  <!-- Button in the first-run Google Lens bottom sheet that dismisses it and starts the camera -->
+  <string name="lens_opt_out_try_it_now_button">Prøv det nå</string>
+  <!-- Button in the first-run Google Lens bottom sheet that leaves Google Lens without using it -->
+  <string name="lens_opt_out_not_now_button">Ikke nå</string>
   <!--
     Firefox Labs
 
