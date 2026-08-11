@@ -137,6 +137,7 @@ class CustomTabsTest : BaseTest() {
         on.customTabs.launchCustomTab(customTabPage.url.toString(), "TestMenuItem")
         on.customTabs.clickWebContent(downloadFile)
         on.downloads
+            .mozVerify(DownloadsSelectors.DOWNLOAD_DIALOG_TITLE)
             .mozVerifyElementsByGroup("downloadDialog")
             .mozClick(DownloadsSelectors.DOWNLOAD_DIALOG_CONFIRM_BUTTON)
             .mozVerify(DownloadsSelectors.DOWNLOAD_COMPLETE_SNACKBAR, timeout = 15_000)
