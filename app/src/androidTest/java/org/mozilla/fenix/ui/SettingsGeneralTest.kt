@@ -77,6 +77,11 @@ class SettingsGeneralTest {
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/344213
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.SettingsGeneralTest#verifyFontSizingChangeTest"],
+        bug = 2062580,
+        since = "2026-08",
+    )
     @SmokeTest
     @Test
     fun verifyFontSizingChangeTest() {
@@ -230,6 +235,11 @@ class SettingsGeneralTest {
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/243583
     // For API>23
     // Verifies the default browser switch opens the system default apps menu.
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.SettingsGeneralTest#changeDefaultBrowserSetting"],
+        bug = 2062580,
+        since = "2026-08",
+    )
     @SmokeTest
     @Test
     fun changeDefaultBrowserSetting() {

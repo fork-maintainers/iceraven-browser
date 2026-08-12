@@ -7,6 +7,7 @@ package org.mozilla.fenix.ui.efficiency.helpers
 import android.os.SystemClock
 import android.util.Log
 import android.view.accessibility.AccessibilityWindowInfo
+import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.SemanticsNodeInteractionCollection
 import androidx.compose.ui.test.assert
@@ -35,6 +36,7 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performImeAction
+import androidx.compose.ui.test.performSemanticsAction
 import androidx.compose.ui.test.performTextClearance
 import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.performTouchInput
@@ -1066,6 +1068,28 @@ abstract class BasePage(
         } catch (e: Throwable) {
             rep?.endCmd(success = false, message = "Press Enter failed for '${selector.description}': ${e.message ?: "exception"}")
             throw AssertionError("Failed to press Enter for selector: ${selector.description}", e)
+        }
+    }
+
+    /**
+     * Drive a Compose slider to [value] via its SetProgress semantics action, rather than a touch
+     * drag. A synthetic swipe can only land on whatever step the gesture geometry happens to hit;
+     * SetProgress asks the slider for an exact value, which is what the legacy accessibility test
+     * relied on to set a precise font-size percentage. Compose-tag selectors only.
+     */
+    fun mozSetSliderValue(selector: Selector, value: Float): BasePage {
+        val rep = rep()
+        rep?.startCmd(safeId("set_slider", selector.description), "Setting '${selector.description}' to $value...", 1)
+        try {
+            val node = composeRule.onNodeWithTag(selector.value)
+            node.assertExists()
+            node.performSemanticsAction(SemanticsActions.SetProgress) { it(value) }
+            rep?.endCmd(success = true, message = "Set '${selector.description}' to $value")
+            return this
+        } catch (e: Throwable) {
+            rep?.endCmd(success = false, message = "Set slider '${selector.description}' failed: ${e.message ?: "exception"}")
+            ScreenDump.dump(composeRule, "mozSetSliderValue failed: ${selector.description}")
+            throw e
         }
     }
 

@@ -15,10 +15,12 @@ import androidx.test.uiautomator.By
 import androidx.test.uiautomator.Until
 import mozilla.components.compose.browser.toolbar.concept.BrowserToolbarTestTags.ADDRESSBAR_URL
 import org.junit.Assert.assertTrue
+import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.helpers.HomeActivityIntentTestRule
 import org.mozilla.fenix.helpers.TestAssetHelper.waitingTime
 import org.mozilla.fenix.helpers.TestAssetHelper.waitingTimeLong
 import org.mozilla.fenix.helpers.TestAssetHelper.waitingTimeShort
+import org.mozilla.fenix.helpers.TestHelper.appContext
 import org.mozilla.fenix.helpers.TestHelper.mDevice
 import org.mozilla.fenix.helpers.TestHelper.packageName
 import org.mozilla.fenix.helpers.ext.waitNotNull
@@ -362,6 +364,22 @@ class BrowserPage(composeRule: AndroidComposeTestRule<HomeActivityIntentTestRule
         return this
     }
 
+    /**
+     * Assert the Gecko engine's font-size factor matches [textSizePercentage], mirroring the legacy
+     * checkTextSizeOnWebsite: the accessibility slider ultimately drives engine.settings.fontSizeFactor,
+     * so this reads the applied engine setting rather than measuring rendered text. The step math
+     * (MIN_VALUE/STEP_SIZE/DECIMAL_CONVERSION) is copied from the legacy accessibility robot.
+     */
+    fun verifyTextSizeOnWebsite(textSizePercentage: Int): BrowserPage {
+        val steps = (textSizePercentage - FONT_SIZE_MIN_VALUE) / FONT_SIZE_STEP_SIZE
+        val expectedFactor = ((steps * FONT_SIZE_STEP_SIZE) + FONT_SIZE_MIN_VALUE).toFloat() / FONT_SIZE_DECIMAL_CONVERSION
+        assertTrue(
+            "Text size on website was not set to: $textSizePercentage",
+            appContext.components.core.engine.settings.fontSizeFactor == expectedFactor,
+        )
+        return this
+    }
+
     fun openMainMenu(): BrowserPage {
         mozClick(BrowserPageSelectors.MAIN_MENU_BUTTON)
 
@@ -424,5 +442,8 @@ class BrowserPage(composeRule: AndroidComposeTestRule<HomeActivityIntentTestRule
     private companion object {
         const val HTTPS_ERROR_GO_BACK = "Go Back (Recommended)"
         const val AUTOFILL_RETRY_COUNT = 3
+        const val FONT_SIZE_STEP_SIZE = 5
+        const val FONT_SIZE_MIN_VALUE = 50
+        const val FONT_SIZE_DECIMAL_CONVERSION = 100f
     }
 }
