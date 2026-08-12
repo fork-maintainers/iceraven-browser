@@ -1043,6 +1043,8 @@
   <string name="customize_toggle_pocket_sponsored">Szponzorált történetek</string>
   <!-- Title for the opening wallpaper settings screen -->
   <string name="customize_wallpapers">Háttérképek</string>
+  <!-- Label for the menu item that opens the customize homepage settings screen. -->
+  <string name="browser_menu_customize_homepage">Kezdőoldal testreszabása</string>
   <!-- Label for the menu item that opens the wallpaper settings screen. -->
   <string name="browser_menu_change_wallpaper">Háttérkép módosítása</string>
   <!-- Title for the customize home screen section with sponsored shortcuts. -->
@@ -1714,6 +1716,8 @@
   <string name="tab_group_three_dot_menu_ungroup">Csoportbontás</string>
   <!-- Text shown on the delete button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_delete">Törlés</string>
+  <!-- Text shown on the share button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_share">Megosztás</string>
   <!-- Text shown on the close button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_close">Bezárás</string>
   <!-- Title for the Ungroup tab group confirmation dialog. -->
@@ -4757,6 +4761,16 @@
   <string name="lens_camera_mode_qr">QR-leolvasó</string>
   <!-- Toast shown when the user picks an image from the gallery in QR mode but no QR code is found in it -->
   <string name="lens_camera_qr_no_code_found">Nem található QR-kód a képen</string>
+  <!-- Title of the bottom sheet shown the first time the user opens the Google Lens camera screen -->
+  <string name="lens_opt_out_title">Keresés a Google Lens használatával</string>
+  <!-- Description of the bottom sheet shown the first time the user opens the Google Lens camera screen -->
+  <string name="lens_opt_out_description">Válasszon egy képet, vagy használja a kamerát, hogy eredményeket kapjon a Google Lens-zel.</string>
+  <!-- Text of the link in the first-run Google Lens bottom sheet that opens the Search settings page -->
+  <string name="lens_opt_out_settings_link">Google Lens beállítások</string>
+  <!-- Button in the first-run Google Lens bottom sheet that dismisses it and starts the camera -->
+  <string name="lens_opt_out_try_it_now_button">Kipróbálás most</string>
+  <!-- Button in the first-run Google Lens bottom sheet that leaves Google Lens without using it -->
+  <string name="lens_opt_out_not_now_button">Most nem</string>
   <!--
     Firefox Labs
 

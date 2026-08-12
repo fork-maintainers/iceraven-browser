@@ -1716,6 +1716,8 @@
   <string name="tab_group_three_dot_menu_ungroup">Avgrupper</string>
   <!-- Text shown on the delete button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_delete">Slett</string>
+  <!-- Text shown on the share button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_share">Del</string>
   <!-- Text shown on the close button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_close">Lat att</string>
   <!-- Title for the Ungroup tab group confirmation dialog. -->

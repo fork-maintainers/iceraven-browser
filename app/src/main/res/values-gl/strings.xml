@@ -1716,6 +1716,8 @@
   <string name="tab_group_three_dot_menu_ungroup">Desagrupar</string>
   <!-- Text shown on the delete button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_delete">Eliminar</string>
+  <!-- Text shown on the share button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_share">Compartir</string>
   <!-- Text shown on the close button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_close">Pechar</string>
   <!-- Title for the Ungroup tab group confirmation dialog. -->

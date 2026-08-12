@@ -6,9 +6,20 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
+  <!-- Label of button in create collection dialog for creating a new collection -->
+  <string name="tab_tray_add_new_collection">Pievienot jaunu krājumu</string>
   <!-- Private browsing erase action "contextual feature recommendation" (CFR) -->
 
+  <!--
+    Content description (not visible, for screen readers etc.): Label for plus icon used to add extension.
+    %1$s is the name of the extension (for example: ClearURLs).
+  -->
+  <string name="browser_menu_extension_plus_icon_content_description_2">Pievienot %1$s</string>
+  <!-- Browser menu toggle that adds a shortcut to the site on the device home screen. -->
+  <string name="browser_menu_add_to_homescreen">Pievienot sākuma ekrānam</string>
+  <!-- Browser menu toggle that adds a PWA of the site on the device home screen. -->
+  <string name="browser_menu_add_app_to_homescreen">Pievienot lietotni sākuma ekrānam</string>
   <!-- Title for the block AI enhancements toggle -->
   <string name="ai_controls_block_ai_title">Liegt MI uzlabojumus</string>
   <!-- Title for the block AI enhancements confirmation dialog -->
@@ -25,14 +36,42 @@
   <string name="search_settings_menu_item">Meklēšanas iestatījumi</string>
   <!-- ==== Project "Nova" onboarding strings ==== -->
 
+  <!-- "Add search widget" onboarding button. 'Firefox' is intentionally hardcoded. -->
+  <string name="nova_onboarding_add_search_widget_button" tools:ignore="BrandUsage">Pievienot Firefox logrīku</string>
   <!-- ==== End of Project "Nova" onboarding strings ==== -->
 
+  <!-- Preference for adding private browsing shortcut -->
+  <string name="preferences_add_private_browsing_shortcut">Pievienot privātās pārlūkošanas īsceļu</string>
   <!--
     Add-on Permissions
 
     The title of the origin permission option allowing a user to enable the extension to run on all sites
   -->
   <string name="addons_permissions_allow_for_all_sites">Atļaut visām vietnēm</string>
+  <!-- The title of the required permissions section from addon's permissions screen. -->
+  <string name="addons_permissions_heading_required_permissions">Nepieciešamās atļaujas:</string>
+  <!-- Add bookmark shortcut in toolbar customization -->
+  <string name="toolbar_customize_shortcut_add_bookmark">Pievienot grāmatzīmi</string>
+  <!-- Content description (not visible, for screen readers etc.): Add tab button. Adds a news tab when pressed -->
+  <string name="add_tab">Pievienot cilni</string>
+  <!-- Content description (not visible, for screen readers etc.): Add tab button. Adds a news tab when pressed -->
+  <string name="add_private_tab">Pievienot privātu cilni</string>
+  <!-- Text shown in the multiselect menu for adding selected tabs to collections. -->
+  <string name="tab_manager_multiselect_menu_item_add_to_collection">Pievienot krājumam</string>
+  <!-- Text shown in the multiselect menu for adding selected tabs to a tab group. -->
+  <string name="tab_manager_multiselect_menu_item_add_to_tab_group">Pievienot kopai</string>
+  <!-- Title for adding more tabs to a tab group. -->
+  <string name="add_to_tab_group_title">Pievienot</string>
+  <!-- Content Description for "New tab group" panel. -->
+  <string name="add_to_new_tab_group_content_description">Pievienot jaunai ciļņu kopai</string>
+  <!-- Text shown on the share button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_share">Kopīgot</string>
+  <!-- The button text for navigating away from the feature to provide more information on the broken site's bug report. -->
+  <string name="webcompat_reporter_add_more_info">Pievienot vairāk informācijas</string>
+  <!-- Screen title for adding a bookmarks folder -->
+  <string name="bookmark_add_folder">Pievienot mapi</string>
+  <!-- Content description for the bookmark list new folder navigation bar button -->
+  <string name="bookmark_add_new_folder_button_content_description">Pievienot jaunu mapi</string>
   <!-- Label that indicates that video and audio autoplay is only allowed over Wi-Fi -->
   <string name="preference_option_autoplay_allowed_wifi_only2">Liegt video un skaņu tikai tad, kad tiek izmantoti mobilie dati</string>
   <!-- Label for global setting that indicates that video autoplay is allowed, but audio autoplay is blocked -->
@@ -43,12 +82,60 @@
   <string name="preference_option_autoplay_blocked3">Liegt skaņu un video</string>
   <!-- Label for site specific setting that indicates that all video and audio autoplay is blocked -->
   <string name="quick_setting_option_autoplay_blocked">Liegt skaņu un video</string>
+  <!-- Button to add new collection for the "select collection" step of the collection creator -->
+  <string name="create_collection_add_new_collection">Pievienot jaunu krājumu</string>
+  <!-- Content description for the "Add Site" button -->
+  <string name="preference_doh_add_site_description">Pievienot vietni</string>
+  <!-- Add button text for provider textfield under "DNS over HTTPS" -->
+  <string name="preference_doh_provider_custom_dialog_add">Pievienot</string>
+  <!-- Text displayed that links to adding website domain for "DNS over HTTPS" exceptions. -->
+  <string name="preference_doh_exceptions_add">Pievienot vietni</string>
+  <!-- Title text for the Add To Homescreen dialog -->
+  <string name="add_to_homescreen_title">Pievienot sākuma ekrānam</string>
+  <!-- Add button text for the Add to Homescreen dialog -->
+  <string name="add_to_homescreen_add">Pievienot</string>
+  <!-- Preference option for adding a password -->
+  <string name="preferences_logins_add_login_2">Pievienot paroli</string>
+  <!-- Content description, used by tools like screenreaders, to press on the add new login button. -->
+  <string name="saved_logins_add_new_login_button_content_description">Pievienot jaunu pieteikšanās vienumu</string>
+  <!-- Preference option for adding a card -->
+  <string name="preferences_credit_cards_add_credit_card_2">Pievienot karti</string>
+  <!-- Preference option for adding an address -->
+  <string name="preferences_addresses_add_address">Pievienot adresi</string>
+  <!-- Title of the "Add card" screen -->
+  <string name="credit_cards_add_card">Pievienot karti</string>
+  <!-- Error message for card name on card validation -->
+  <string name="credit_cards_name_on_card_validation_error_message_2">Jāpievieno vārds</string>
+  <!-- Title of the "Add address" screen -->
+  <string name="addresses_add_address">Pievienot adresi</string>
   <!-- Title of the Add search engine screen -->
   <string name="search_engine_add_custom_search_engine_title">Pievienot meklētāju</string>
   <!-- Content description (not visible, for screen readers etc.): Title for the button that navigates to add new engine screen -->
   <string name="search_engine_add_custom_search_engine_button_content_description">Pievienot jaunu meklētāju</string>
+  <!-- Browser menu button that adds a shortcut to the home fragment -->
+  <string name="browser_menu_add_to_shortcuts">Pievienot īsceļiem</string>
+  <!-- The page title for adding new password. -->
+  <string name="add_login_2">Pievienot paroli</string>
+  <!-- Label for the "Add shortcut" button displayed as a tile. -->
+  <string name="homepage_shortcuts_add_shortcut">Pievienot īsceļu</string>
+  <!-- Title for the "Add to homepage" bottom sheet. -->
+  <string name="homepage_shortcuts_add_to_homepage">Pievienot sākumlapai</string>
+  <!-- Label for the "Add website" button in the "Add to homepage" bottom sheet. -->
+  <string name="homepage_shortcuts_add_website">Pievienot tīmekļvietni</string>
   <!-- Translations feature -->
 
+  <!-- The button text to add tabs to the active tab group in the tab creation tool. -->
+  <string name="debug_drawer_tab_tools_tab_creation_tool_button_text_active">Pievienot izmantotajām cilnēm</string>
+  <!-- The button text to add tabs to the inactive tab group in the tab creation tool. -->
+  <string name="debug_drawer_tab_tools_tab_creation_tool_button_text_inactive">Pievienot neizmantotajām cilnēm</string>
+  <!-- The button text to add tabs to the private tab group in the tab creation tool. -->
+  <string name="debug_drawer_tab_tools_tab_creation_tool_button_text_private">Pievienot privātajām cilnēm</string>
+  <!--
+    Add-ons debug tools
+
+    The description of the Add-ons Tools in the Debug Drawer
+  -->
+  <string name="debug_drawer_addons_tools_title">Papildinājumu rīki</string>
   <!-- TextField Design System Component -->
 
   <!--
