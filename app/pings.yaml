@@ -57,6 +57,26 @@ adjust-attribution:
   notification_emails:
     - android-probes@mozilla.com
 
+referrals:
+  description: |
+    Sent on first run by a profile installed via a Firefox referral link. Carries
+    only the referral code, which is deliberately excluded from attribution data
+    and from every other ping. See bug 2055255 for the desktop equivalent.
+
+    The code is a quasi-identifier, so it is kept out of the lifespan-of-install
+    `client_info.attribution` data that rides on every other ping. This ping still
+    carries the client id, because a referral is only meaningful when tied to the
+    install it credits; the isolation is of the code's *reach*, not of the join
+    itself, which remains available to anyone querying this ping.
+  include_client_id: true
+  send_if_empty: false
+  bugs:
+    - https://bugzilla.mozilla.org/show_bug.cgi?id=2062793
+  data_reviews:
+    - https://bugzilla.mozilla.org/show_bug.cgi?id=2062793
+  notification_emails:
+    - android-probes@mozilla.com
+
 home:
   description: |
     Homepage new tab related instrumentation.

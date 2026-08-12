@@ -507,6 +507,15 @@ class Settings(
         default = false,
     )
 
+    /**
+     * Whether the `referrals` ping has already been submitted for this profile. A referral code
+     * must only ever be reported once.
+     */
+    var referralPingSubmitted by booleanPreference(
+        appContext.getPreferenceKey(R.string.pref_key_referral_ping_submitted),
+        default = false,
+    )
+
     var rtamoAddonDownloadUrl by stringPreference(
         appContext.getPreferenceKey(R.string.pref_key_rtamo_addon_download_url),
         default = "",

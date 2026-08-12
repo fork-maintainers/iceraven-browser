@@ -79,9 +79,19 @@ class InstallReferrerWorker(
         settings: Settings,
     ) {
         if (!installReferrerResponse.isNullOrBlank()) {
-            PlayStoreAttribution.installReferrerResponse.set(installReferrerResponse)
+            var utmParams = UTMParams.parseUTMParameters(installReferrerResponse)
 
-            val utmParams = UTMParams.parseUTMParameters(installReferrerResponse)
+            // A referral code must not reach attribution data, so it is pulled out and reported on
+            // its own ping before anything else consumes utm_content. See bug 2062793.
+            ReferralAttribution.referralCodeFrom(utmParams.content)?.let { referralCode ->
+                ReferralAttribution.submit(referralCode, settings)
+                utmParams = utmParams.copy(content = "")
+            }
+
+            PlayStoreAttribution.installReferrerResponse.set(
+                ReferralAttribution.redact(installReferrerResponse),
+            )
+
             val metaParams = MetaParams.extractMetaAttribution(utmParams.content)
             if (metaParams != null) {
                 settings.isUserMetaAttributed = true
