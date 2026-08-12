@@ -149,16 +149,47 @@ class BrowserPage(composeRule: AndroidComposeTestRule<HomeActivityIntentTestRule
         return this
     }
 
+    fun verifyTranslationSheetIsDisplayed(): BrowserPage {
+        // The "translate from/to" dropdowns render a beat after the sheet frame, title and
+        // buttons because they depend on the async page-settings fetch. mozVerifyElementsByGroup
+        // is a single-shot check, so firing it the instant the sheet animates in can miss the
+        // dropdowns and fail spuriously. Gate on the last-rendered dropdown before the group check.
+        mozVerify(BrowserPageSelectors.TRANSLATION_SHEET_TRANSLATE_TO, timeout = waitingTimeLong)
+        mozVerifyElementsByGroup("notTranslatedPageTranslationSheet")
+        return this
+    }
+
+    // Reload-based recovery for the page-load auto-prompt path, where reloading the page re-triggers
+    // the sheet. The menu-opened path (isPageLoadTranslationsPromptEnabled = false) must NOT use this:
+    // a reload there dismisses the sheet with no way to bring it back -- call
+    // verifyTranslationSheetIsDisplayed() directly instead.
     fun verifyTranslationSheetWithReload(url: String, attempts: Int = 3): BrowserPage {
         for (attempt in 1..attempts) {
             try {
-                mozVerify(BrowserPageSelectors.TRANSLATION_SHEET, timeout = waitingTimeLong)
-                mozVerifyElementsByGroup("notTranslatedPageTranslationSheet")
-                return this
+                return verifyTranslationSheetIsDisplayed()
             } catch (e: AssertionError) {
                 if (attempt == attempts) throw e
                 Log.i("BrowserPage", "verifyTranslationSheetWithReload: translation sheet absent on attempt $attempt, reloading")
                 navigateToPage(url, forceNavigation = true)
+            }
+        }
+        return this
+    }
+
+    fun translatePageFromSheet(attempts: Int = 3): BrowserPage {
+        mozClick(BrowserPageSelectors.TRANSLATION_SHEET_TRANSLATE_BUTTON)
+        // A first-time translation downloads a language model (tens of MB) before it can finish
+        // and dismiss the sheet, so on a slow or briefly-dropped network a single wait window
+        // isn't enough. Retry the wait -- the download keeps progressing in the background -- rather
+        // than failing the first time it overruns. This mirrors the legacy TranslationsRobot's
+        // RETRY_COUNT x waitingTimeLong budget.
+        for (attempt in 1..attempts) {
+            try {
+                mozWaitUntilAbsent(BrowserPageSelectors.TRANSLATION_SHEET_TRANSLATE_BUTTON, timeout = waitingTimeLong)
+                return this
+            } catch (e: AssertionError) {
+                if (attempt == attempts) throw e
+                Log.i("BrowserPage", "translatePageFromSheet: sheet still up after attempt $attempt, waiting again")
             }
         }
         return this
