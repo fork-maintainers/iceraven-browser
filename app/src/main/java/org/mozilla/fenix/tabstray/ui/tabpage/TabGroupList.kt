@@ -84,7 +84,6 @@ fun TabGroupList(
                     tabGroup = group,
                     onClick = { onTabGroupClick(group) },
                     modifier = Modifier
-                        .background(MaterialTheme.colorScheme.surfaceBright)
                         .tabListItemShapeStyling(
                             tabShapeInfo = tabShapeInfo,
                             selectionState = TabsTrayItemSelectionState(
@@ -92,7 +91,8 @@ fun TabGroupList(
                                 multiSelectEnabled = false,
                                 focusEnabled = true,
                             ),
-                        ),
+                        )
+                        .background(MaterialTheme.colorScheme.surfaceBright),
                     selectionState = selectionState,
                     trailingContent = {
                         TabGroupMenuButton(
