@@ -891,10 +891,6 @@ features:
         description: Whether to show the new AppLinksPromptFragment dialog when an app link is detected. If false, the old dialog is used.
         type: Boolean
         default: true
-    defaults:
-      - channel: release
-        value:
-          show-new-prompt: false
 
   tab-management-enhancements:
     description: Control the visibility of the tab management enhancements.
