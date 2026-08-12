@@ -770,8 +770,6 @@
     <ID>UndocumentedPublicFunction:ProfilerMarkers.kt$ProfilerMarkers$fun addForDispatchTouchEvent(profiler: Profiler?, ev: MotionEvent?)</ID>
     <ID>UndocumentedPublicFunction:ProfilerMarkers.kt$ProfilerMarkers$fun addListenerForOnGlobalLayout(engine: Engine, activity: Activity, rootView: View)</ID>
     <ID>UndocumentedPublicFunction:ProfilerMarkers.kt$ProfilerMarkers$fun homeActivityOnStart(rootContainer: View, profiler: Profiler?)</ID>
-    <ID>UndocumentedPublicFunction:PwaOnboardingObserver.kt$PwaOnboardingObserver$fun start()</ID>
-    <ID>UndocumentedPublicFunction:PwaOnboardingObserver.kt$PwaOnboardingObserver$fun stop()</ID>
     <ID>UndocumentedPublicFunction:AutoplayValue.kt$AutoplayValue$abstract fun createSitePermissionsFromCustomRules(origin: String, settings: Settings): SitePermissions</ID>
     <ID>UndocumentedPublicFunction:AutoplayValue.kt$AutoplayValue$abstract fun isSelected(): Boolean</ID>
     <ID>UndocumentedPublicFunction:AutoplayValue.kt$AutoplayValue$abstract fun updateSitePermissions(sitePermissions: SitePermissions): SitePermissions</ID>

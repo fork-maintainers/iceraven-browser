@@ -48,7 +48,6 @@ class NavigationToolbarExpandedTest {
     val composeTestRule =
         AndroidComposeTestRuleV2(
             HomeActivityIntentTestRule(
-                isPWAsPromptEnabled = false,
                 isWallpaperOnboardingEnabled = false,
                 isOpenInAppBannerEnabled = false,
                 isMicrosurveyEnabled = false,

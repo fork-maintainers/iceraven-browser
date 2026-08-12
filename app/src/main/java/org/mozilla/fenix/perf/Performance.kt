@@ -37,7 +37,6 @@ object Performance {
 
         disableOnboarding(context)
         disableTrackingProtectionPopups(context)
-        disableFirstTimePWAPopup(context)
         disableOpenInApp(context)
         disableS2SCfr(context)
     }
@@ -104,13 +103,6 @@ object Performance {
      */
     private fun disableTrackingProtectionPopups(context: Context) {
         context.components.settings.isOverrideTPPopupsForPerformanceTest = true
-    }
-
-    /**
-     * Disables the first time PWA popup.
-     */
-    private fun disableFirstTimePWAPopup(context: Context) {
-        context.components.settings.userKnowsAboutPwas = true
     }
 
     /**

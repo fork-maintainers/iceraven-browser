@@ -35,12 +35,6 @@ interface FeatureSettingsHelper {
     var isRecentlyVisitedFeatureEnabled: Boolean
 
     /**
-     * Whether the onboarding dialog for PWAs should be shown or not.
-     * It can show the first time a website that can be installed as a PWA is accessed.
-     */
-    var isPWAsPromptEnabled: Boolean
-
-    /**
      * Whether the "Site permissions" option is checked in the "Delete browsing data" screen or not.
      */
     var isDeleteSitePermissionsEnabled: Boolean

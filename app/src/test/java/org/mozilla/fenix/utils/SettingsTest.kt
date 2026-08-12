@@ -447,34 +447,6 @@ class SettingsTest {
     }
 
     @Test
-    fun showPwaFragment() {
-        // The PWA CFR is only relevant when the continuous onboarding flow is disabled.
-        settings.continuousOnboardingFeatureEnabled = false
-
-        // When just created
-        // Then
-        assertFalse(settings.shouldShowPwaCfr)
-
-        // When visited once
-        settings.incrementVisitedInstallableCount()
-
-        // Then
-        assertFalse(settings.shouldShowPwaCfr)
-
-        // When visited twice
-        settings.incrementVisitedInstallableCount()
-
-        // Then
-        assertFalse(settings.shouldShowPwaCfr)
-
-        // When visited thrice
-        settings.incrementVisitedInstallableCount()
-
-        // Then
-        assertTrue(settings.shouldShowPwaCfr)
-    }
-
-    @Test
     fun sitePermissionsPhoneFeatureCameraAction() {
         // When just created
         // Then

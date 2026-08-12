@@ -78,7 +78,6 @@ import org.mozilla.fenix.onboarding.OnboardingReason
 import org.mozilla.fenix.onboarding.OnboardingTelemetryRecorder
 import org.mozilla.fenix.onboarding.continuous.ContinuousOnboardingFeature
 import org.mozilla.fenix.settings.downloads.DownloadLocationManager
-import org.mozilla.fenix.shortcut.PwaOnboardingObserver
 import org.mozilla.fenix.summarization.SummarizationNavigator
 import org.mozilla.fenix.termsofuse.store.Surface
 import org.mozilla.fenix.utils.Settings
@@ -149,8 +148,6 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, SystemIns
             ),
         )
     }
-
-    private var pwaOnboardingObserver: PwaOnboardingObserver? = null
 
     override fun initializeUI(view: View, tab: SessionState) {
         super.initializeUI(view, tab)
@@ -367,22 +364,9 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, SystemIns
     override fun onStart() {
         super.onStart()
         val context = requireContext()
-        val settings = context.components.settings
 
         if (context.components.appStore.state.longfoxEntryPointReady) {
             context.components.appStore.dispatch(AppAction.UpdateShowFoxPeekAnimation(false))
-        }
-
-        if (!settings.userKnowsAboutPwas) {
-            pwaOnboardingObserver = PwaOnboardingObserver(
-                store = context.components.core.store,
-                lifecycleOwner = this,
-                navController = findNavController(),
-                settings = settings,
-                webAppUseCases = context.components.useCases.webAppUseCases,
-            ).also {
-                it.start()
-            }
         }
 
         subscribeToTabCollections()
@@ -399,7 +383,6 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, SystemIns
         super.onStop()
         updateLastBrowseActivity()
         updateHistoryMetadata()
-        pwaOnboardingObserver?.stop()
     }
 
     private fun updateHistoryMetadata() {

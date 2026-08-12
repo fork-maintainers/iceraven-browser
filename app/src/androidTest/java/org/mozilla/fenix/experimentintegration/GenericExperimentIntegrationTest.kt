@@ -21,9 +21,7 @@ class GenericExperimentIntegrationTest {
     @get:Rule
     val composeTestRule =
         AndroidComposeTestRuleV2(
-            HomeActivityTestRule(
-                isPWAsPromptEnabled = false,
-            ),
+            HomeActivityTestRule(),
         ) { it.activity }
 
     @Before

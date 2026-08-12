@@ -50,7 +50,6 @@ class HomeActivityTestRule(
         isPocketEnabled: Boolean = settings.showPocketRecommendationsFeature,
         isRecentTabsFeatureEnabled: Boolean = settings.showRecentTabsFeature,
         isRecentlyVisitedFeatureEnabled: Boolean = settings.historyMetadataUIFeature,
-        isPWAsPromptEnabled: Boolean = !settings.userKnowsAboutPwas,
         isWallpaperOnboardingEnabled: Boolean = settings.showWallpaperOnboarding,
         isDeleteSitePermissionsEnabled: Boolean = settings.deleteSitePermissions,
         isOpenInAppBannerEnabled: Boolean = settings.shouldShowOpenInAppBanner,
@@ -75,7 +74,6 @@ class HomeActivityTestRule(
         this.isPocketEnabled = isPocketEnabled
         this.isRecentTabsFeatureEnabled = isRecentTabsFeatureEnabled
         this.isRecentlyVisitedFeatureEnabled = isRecentlyVisitedFeatureEnabled
-        this.isPWAsPromptEnabled = isPWAsPromptEnabled
         this.isWallpaperOnboardingEnabled = isWallpaperOnboardingEnabled
         this.isDeleteSitePermissionsEnabled = isDeleteSitePermissionsEnabled
         this.isOpenInAppBannerEnabled = isOpenInAppBannerEnabled
@@ -147,7 +145,6 @@ class HomeActivityTestRule(
             initialTouchMode = initialTouchMode,
             launchActivity = launchActivity,
             skipOnboarding = skipOnboarding,
-            isPWAsPromptEnabled = false,
             isWallpaperOnboardingEnabled = false,
             isOpenInAppBannerEnabled = false,
             isMicrosurveyEnabled = false,
@@ -189,7 +186,6 @@ class HomeActivityIntentTestRule internal constructor(
         isPocketEnabled: Boolean = settings.showPocketRecommendationsFeature,
         isRecentTabsFeatureEnabled: Boolean = settings.showRecentTabsFeature,
         isRecentlyVisitedFeatureEnabled: Boolean = settings.historyMetadataUIFeature,
-        isPWAsPromptEnabled: Boolean = !settings.userKnowsAboutPwas,
         isWallpaperOnboardingEnabled: Boolean = settings.showWallpaperOnboarding,
         isDeleteSitePermissionsEnabled: Boolean = settings.deleteSitePermissions,
         isOpenInAppBannerEnabled: Boolean = settings.shouldShowOpenInAppBanner,
@@ -216,7 +212,6 @@ class HomeActivityIntentTestRule internal constructor(
         this.isPocketEnabled = isPocketEnabled
         this.isRecentTabsFeatureEnabled = isRecentTabsFeatureEnabled
         this.isRecentlyVisitedFeatureEnabled = isRecentlyVisitedFeatureEnabled
-        this.isPWAsPromptEnabled = isPWAsPromptEnabled
         this.isWallpaperOnboardingEnabled = isWallpaperOnboardingEnabled
         this.isDeleteSitePermissionsEnabled = isDeleteSitePermissionsEnabled
         this.isOpenInAppBannerEnabled = isOpenInAppBannerEnabled
@@ -297,7 +292,6 @@ class HomeActivityIntentTestRule internal constructor(
         isPocketEnabled = settings.showPocketRecommendationsFeature
         isRecentTabsFeatureEnabled = settings.showRecentTabsFeature
         isRecentlyVisitedFeatureEnabled = settings.historyMetadataUIFeature
-        isPWAsPromptEnabled = !settings.userKnowsAboutPwas
         isWallpaperOnboardingEnabled = settings.showWallpaperOnboarding
         isDeleteSitePermissionsEnabled = settings.deleteSitePermissions
         isOpenInAppBannerEnabled = settings.shouldShowOpenInAppBanner
@@ -333,7 +327,6 @@ class HomeActivityIntentTestRule internal constructor(
             initialTouchMode = initialTouchMode,
             launchActivity = launchActivity,
             skipOnboarding = skipOnboarding,
-            isPWAsPromptEnabled = false,
             isWallpaperOnboardingEnabled = false,
             isOpenInAppBannerEnabled = false,
             isMicrosurveyEnabled = false,

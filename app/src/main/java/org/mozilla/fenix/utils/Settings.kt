@@ -9,7 +9,6 @@ import android.appwidget.AppWidgetManager
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
-import android.content.pm.ShortcutManager
 import android.content.res.Resources
 import android.os.Environment
 import android.view.accessibility.AccessibilityManager
@@ -1682,40 +1681,6 @@ class Settings(
 
     var showSearchSuggestionsInPrivateOnboardingFinished by booleanPreference(
         appContext.getPreferenceKey(R.string.pref_key_show_search_suggestions_in_private_onboarding),
-        default = false,
-    )
-
-    fun incrementVisitedInstallableCount() = pwaInstallableVisitCount.increment()
-
-    @VisibleForTesting(otherwise = PRIVATE)
-    internal val pwaInstallableVisitCount = counterPreference(
-        appContext.getPreferenceKey(R.string.pref_key_install_pwa_visits),
-        maxCount = 3,
-    )
-
-    private val userNeedsToVisitInstallableSites: Boolean
-        get() = pwaInstallableVisitCount.underMaxCount()
-
-    val shouldShowPwaCfr: Boolean
-        get() {
-            if (!canShowCfr || !inAppMessagesEnabled || continuousOnboardingFeatureEnabled) return false
-            // We only want to show this on the 3rd time a user visits a site
-            if (userNeedsToVisitInstallableSites) return false
-
-            // ShortcutManager::pinnedShortcuts is only available on Oreo+
-            if (!userKnowsAboutPwas) {
-                val manager = appContext.getSystemService(ShortcutManager::class.java)
-                val alreadyHavePwaInstalled = manager != null && manager.pinnedShortcuts.size > 0
-
-                // Users know about PWAs onboarding if they already have PWAs installed.
-                userKnowsAboutPwas = alreadyHavePwaInstalled
-            }
-            // Show dialog only if user does not know abut PWAs
-            return !userKnowsAboutPwas
-        }
-
-    var userKnowsAboutPwas by booleanPreference(
-        appContext.getPreferenceKey(R.string.pref_key_user_knows_about_pwa),
         default = false,
     )
 

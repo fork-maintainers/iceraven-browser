@@ -31,7 +31,6 @@ class FeatureSettingsHelperDelegate : FeatureSettingsHelper {
         isPocketEnabled = settings.showPocketRecommendationsFeature,
         isRecentTabsFeatureEnabled = settings.showRecentTabsFeature,
         isRecentlyVisitedFeatureEnabled = settings.historyMetadataUIFeature,
-        isPWAsPromptEnabled = !settings.userKnowsAboutPwas,
         isWallpaperOnboardingEnabled = settings.showWallpaperOnboarding,
         isDeleteSitePermissionsEnabled = settings.deleteSitePermissions,
         isOpenInAppBannerEnabled = settings.shouldShowOpenInAppBanner,
@@ -63,7 +62,6 @@ class FeatureSettingsHelperDelegate : FeatureSettingsHelper {
     override var isWallpaperOnboardingEnabled: Boolean by updatedFeatureFlags::isWallpaperOnboardingEnabled
     override var isRecentTabsFeatureEnabled: Boolean by updatedFeatureFlags::isRecentTabsFeatureEnabled
     override var isRecentlyVisitedFeatureEnabled: Boolean by updatedFeatureFlags::isRecentlyVisitedFeatureEnabled
-    override var isPWAsPromptEnabled: Boolean by updatedFeatureFlags::isPWAsPromptEnabled
     override var isOpenInAppBannerEnabled: Boolean by updatedFeatureFlags::isOpenInAppBannerEnabled
     override var etpPolicy: ETPPolicy by updatedFeatureFlags::etpPolicy
     override var isLocationPermissionEnabled: SitePermissionsRules.Action by updatedFeatureFlags::isLocationPermissionEnabled
@@ -101,7 +99,6 @@ class FeatureSettingsHelperDelegate : FeatureSettingsHelper {
         settings.showPocketRecommendationsFeature = featureFlags.isPocketEnabled
         settings.showRecentTabsFeature = featureFlags.isRecentTabsFeatureEnabled
         settings.historyMetadataUIFeature = featureFlags.isRecentlyVisitedFeatureEnabled
-        settings.userKnowsAboutPwas = !featureFlags.isPWAsPromptEnabled
         settings.showWallpaperOnboarding = featureFlags.isWallpaperOnboardingEnabled
         settings.deleteSitePermissions = featureFlags.isDeleteSitePermissionsEnabled
         settings.shouldShowOpenInAppBanner = featureFlags.isOpenInAppBannerEnabled
@@ -129,7 +126,6 @@ private data class FeatureFlags(
     var isPocketEnabled: Boolean,
     var isRecentTabsFeatureEnabled: Boolean,
     var isRecentlyVisitedFeatureEnabled: Boolean,
-    var isPWAsPromptEnabled: Boolean,
     var isWallpaperOnboardingEnabled: Boolean,
     var isDeleteSitePermissionsEnabled: Boolean,
     var isOpenInAppBannerEnabled: Boolean,

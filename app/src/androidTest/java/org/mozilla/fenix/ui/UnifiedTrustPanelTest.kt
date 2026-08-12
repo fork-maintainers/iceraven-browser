@@ -36,9 +36,7 @@ class UnifiedTrustPanelTest {
     @get:Rule(order = 1)
     val composeTestRule =
         AndroidComposeTestRuleV2(
-            HomeActivityIntentTestRule(
-                isPWAsPromptEnabled = false,
-            ),
+            HomeActivityIntentTestRule(),
         ) { it.activity }
 
     @get:Rule

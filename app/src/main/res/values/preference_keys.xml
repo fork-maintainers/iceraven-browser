@@ -89,7 +89,6 @@
     <string name="pref_key_private_mode_opened" translatable="false">pref_key_private_mode_opened</string>
     <string name="pref_key_open_in_app_opened" translatable="false">pref_key_open_in_app_opened</string>
     <string name="pref_key_install_pwa_opened" translatable="false">pref_key_install_pwa_opened</string>
-    <string name="pref_key_install_pwa_visits" translatable="false">pref_key_install_pwa_visits</string>
     <string name="pref_key_times_app_opened" translatable="false">pref_key_times_app_opened</string>
     <string name="pref_key_custom_review_prompt_ui_enabled" translatable="false">pref_key_custom_review_prompt_ui_enabled</string>
     <string name="pref_key_last_browse_activity_time" translatable="false">pref_key_last_browse_activity_time</string>
@@ -388,9 +387,6 @@
     <string name="pref_key_frecency_filter_query" translatable="false">pref_key_frecency_filter_query</string>
     <!-- Whether or not the sponsored tiles should be shown to user. -->
     <string name="pref_key_suppress_sponsored_tiles" translatable="false">pref_key_suppress_sponsored_tiles</string>
-
-    <!-- A value  of `true` means the PWA dialog has been showed or user already has PWAs installed -->
-    <string name="pref_key_user_knows_about_pwa" translatable="false">pref_key_user_knows_about_pwa</string>
 
     <!-- A value  of `true` means the Open In App Banner has not been shown yet -->
     <string name="pref_key_should_show_open_in_app_banner" translatable="false">pref_key_should_show_open_in_app_banner</string>
