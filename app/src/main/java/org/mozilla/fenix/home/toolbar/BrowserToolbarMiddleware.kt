@@ -63,12 +63,12 @@ import org.mozilla.fenix.browser.browsingmode.BrowsingMode.Normal
 import org.mozilla.fenix.browser.browsingmode.BrowsingMode.Private
 import org.mozilla.fenix.browser.browsingmode.BrowsingModeManager
 import org.mozilla.fenix.components.AppStore
-import org.mozilla.fenix.components.UseCases
 import org.mozilla.fenix.components.appstate.AppAction
 import org.mozilla.fenix.components.appstate.AppAction.SearchAction.SearchStarted
 import org.mozilla.fenix.components.appstate.SupportedMenuNotifications
 import org.mozilla.fenix.components.appstate.VoiceSearchAction.VoiceInputRequested
 import org.mozilla.fenix.components.menu.MenuAccessPoint
+import org.mozilla.fenix.components.usecases.FenixBrowserUseCases
 import org.mozilla.fenix.ext.nav
 import org.mozilla.fenix.home.HomeFragmentDirections
 import org.mozilla.fenix.home.toolbar.DisplayActions.FakeClicked
@@ -119,7 +119,7 @@ internal sealed class PageOriginInteractions : BrowserToolbarEvent {
  * @param appStore [AppStore] to sync from.
  * @param browserStore [BrowserStore] to sync from.
  * @param clipboard [ClipboardHandler] to use for reading from device's clipboard.
- * @param useCases [UseCases] helping this integrate with other features of the applications.
+ * @param fenixBrowserUseCases [FenixBrowserUseCases] for loading URLs and opening new tabs.
  * @param navController [NavController] to use for navigating to other in-app destinations.
  * @param browsingModeManager [BrowsingModeManager] for querying the current browsing mode.
  * @param settings [Settings] for accessing application settings.
@@ -134,7 +134,7 @@ class BrowserToolbarMiddleware(
     private val appStore: AppStore,
     private val browserStore: BrowserStore,
     private val clipboard: ClipboardHandler,
-    private val useCases: UseCases,
+    private val fenixBrowserUseCases: FenixBrowserUseCases,
     private val navController: NavController,
     private val browsingModeManager: BrowsingModeManager,
     private val settings: Settings,
@@ -209,11 +209,11 @@ class BrowserToolbarMiddleware(
                 next(action)
             }
             is AddNewTab -> {
-                openNewTab(store, Normal)
+                addNewTab(store, Normal)
                 next(action)
             }
             is AddNewPrivateTab -> {
-                openNewTab(store, Private)
+                addNewTab(store, Private)
                 next(action)
             }
 
@@ -234,7 +234,7 @@ class BrowserToolbarMiddleware(
             }
             is LoadFromClipboardClicked -> {
                 clipboard.extractURL()?.let {
-                    useCases.fenixBrowserUseCases.loadUrlOrSearch(
+                    fenixBrowserUseCases.loadUrlOrSearch(
                         searchTermOrURL = it,
                         newTab = true,
                         private = browsingModeManager.mode == Private,
@@ -247,6 +247,18 @@ class BrowserToolbarMiddleware(
             }
 
             else -> next(action)
+        }
+    }
+
+    private fun addNewTab(
+        store: Store<BrowserToolbarState, BrowserToolbarAction>,
+        browsingMode: BrowsingMode,
+    ) {
+        if (settings.enableHomepageAsNewTab) {
+            fenixBrowserUseCases.addNewHomepageTab(private = browsingMode.isPrivate)
+            browsingModeManager.mode = browsingMode
+        } else {
+            openNewTab(store, browsingMode)
         }
     }
 
