@@ -33,6 +33,27 @@ object SearchBarSelectors {
         groups = listOf("requiredForPage"),
     )
 
+    // An engine row inside the search-selector popup menu. Each row exposes the plain engine name as
+    // its content-description (mirrors the legacy verifySearchShortcutList / selectTemporarySearchMethod
+    // which matched hasContentDescription(engineName)).
+    @Suppress("ktlint:standard:function-naming", "FunctionName")
+    fun SEARCH_SELECTOR_MENU_ENGINE(engineName: String = "") = Selector(
+        strategy = SelectorStrategy.COMPOSE_BY_CONTENT_DESCRIPTION,
+        value = engineName,
+        description = "Search selector menu engine: $engineName",
+        groups = listOf(),
+    )
+
+    // A single awesomebar suggestion row. The tag is on each suggestion item (the container uses the
+    // plural "mozac.awesomebar.suggestions"). Verified against ground truth as a collection with
+    // mozVerifyAnyContainsText / mozVerifyNoneContainText.
+    val AWESOMEBAR_SUGGESTION = Selector(
+        strategy = SelectorStrategy.COMPOSE_BY_TAG,
+        value = "mozac.awesomebar.suggestion",
+        description = "Awesomebar search suggestion",
+        groups = listOf(),
+    )
+
     // Text, not content-description, and deliberately so despite text being the last-resort handle: in edit
     // mode the hint is rendered as its own text node, and ADDRESSBAR_SEARCH_BOX carries no description at
     // all (verified from a ScreenDump of the search view). The browser-view address bar does expose the hint
@@ -49,6 +70,8 @@ object SearchBarSelectors {
         TOOLBAR_IN_EDIT_MODE,
         URL_TEXT,
         SEARCH_ENGINE_SELECTOR,
+        SEARCH_SELECTOR_MENU_ENGINE(),
+        AWESOMEBAR_SUGGESTION,
         SEARCH_BAR_PLACEHOLDER,
     )
 }

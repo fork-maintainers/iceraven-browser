@@ -274,6 +274,20 @@ class NavigationReachabilityParameterizedTest(
                     page = { settingsSearch },
                     state = runState.ifBlank { "Navigation Reachability" },
                 ),
+// pageName=SettingsSearchAddSearchEnginePage, property=settingsSearchAddSearchEngine
+                Case(
+                    label = "SettingsSearchAddSearchEnginePage",
+                    testRailId = "TBD",
+                    page = { settingsSearchAddSearchEngine },
+                    state = runState.ifBlank { "Navigation Reachability" },
+                ),
+// pageName=SettingsSearchManageShortcutsPage, property=settingsSearchManageShortcuts
+                Case(
+                    label = "SettingsSearchManageShortcutsPage",
+                    testRailId = "TBD",
+                    page = { settingsSearchManageShortcuts },
+                    state = runState.ifBlank { "Navigation Reachability" },
+                ),
 // pageName=SettingsSiteSettingsPage, property=settingsSiteSettings, paths=1
                 Case(
                     label = "SettingsSiteSettingsPage",

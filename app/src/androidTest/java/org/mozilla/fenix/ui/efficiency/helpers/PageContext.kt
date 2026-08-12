@@ -43,7 +43,9 @@ import org.mozilla.fenix.ui.efficiency.pageObjects.SettingsPasswordsPage
 import org.mozilla.fenix.ui.efficiency.pageObjects.SettingsPrivateBrowsingPage
 import org.mozilla.fenix.ui.efficiency.pageObjects.SettingsSavePasswordsPage
 import org.mozilla.fenix.ui.efficiency.pageObjects.SettingsSavedPasswordsPage
+import org.mozilla.fenix.ui.efficiency.pageObjects.SettingsSearchAddSearchEnginePage
 import org.mozilla.fenix.ui.efficiency.pageObjects.SettingsSearchDefaultSearchEnginePage
+import org.mozilla.fenix.ui.efficiency.pageObjects.SettingsSearchManageShortcutsPage
 import org.mozilla.fenix.ui.efficiency.pageObjects.SettingsSearchPage
 import org.mozilla.fenix.ui.efficiency.pageObjects.SettingsSiteSettingsExceptionsPage
 import org.mozilla.fenix.ui.efficiency.pageObjects.SettingsSiteSettingsPage
@@ -103,7 +105,9 @@ class PageContext(val composeRule: AndroidComposeTestRule<HomeActivityIntentTest
     val settingsSavePasswords = SettingsSavePasswordsPage(composeRule)
     val settingsSavedPasswords = SettingsSavedPasswordsPage(composeRule)
     val settingsSearch = SettingsSearchPage(composeRule)
+    val settingsSearchAddSearchEngine = SettingsSearchAddSearchEnginePage(composeRule)
     val settingsSearchDefaultSearchEngine = SettingsSearchDefaultSearchEnginePage(composeRule)
+    val settingsSearchManageShortcuts = SettingsSearchManageShortcutsPage(composeRule)
     val settingsSiteSettings = SettingsSiteSettingsPage(composeRule)
     val settingsSiteSettingsExceptions = SettingsSiteSettingsExceptionsPage(composeRule)
     val settingsTabs = SettingsTabsPage(composeRule)

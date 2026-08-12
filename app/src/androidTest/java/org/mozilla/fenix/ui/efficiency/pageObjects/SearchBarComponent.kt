@@ -32,6 +32,14 @@ class SearchBarComponent(composeRule: AndroidComposeTestRule<HomeActivityIntentT
             to = pageName,
             steps = listOf(NavigationStep.Click(ToolbarSelectors.TOOLBAR_URL_BOX_UIAUTOMATOR)),
         )
+
+        // Dismiss the search bar (edit mode) back to Home. Without an outbound edge the graph can enter
+        // the search bar but never route out of it.
+        NavigationRegistry.register(
+            from = pageName,
+            to = "HomePage",
+            steps = listOf(NavigationStep.PressBack),
+        )
     }
 
     override fun mozGetSelectorsByGroup(group: String): List<Selector> {

@@ -66,6 +66,15 @@ object SettingsSelectors {
         groups = listOf("generalSettingsSection"),
     )
 
+    // Espresso variant of the Search row, used to assert its summary (the default engine name) via a
+    // sibling-text check - the UiAutomator SEARCH_BUTTON cannot express hasSibling.
+    val SEARCH_SETTING_ROW = Selector(
+        strategy = SelectorStrategy.ESPRESSO_BY_TEXT,
+        value = "Search",
+        description = "the Search settings row",
+        groups = listOf(),
+    )
+
     val TABS_BUTTON = Selector(
         strategy = SelectorStrategy.UIAUTOMATOR_WITH_TEXT,
         value = "Tabs",
@@ -300,6 +309,7 @@ object SettingsSelectors {
         EXTENSIONS_BUTTON,
         SETTINGS_TITLE,
         SEARCH_BUTTON,
+        SEARCH_SETTING_ROW,
         TABS_BUTTON,
         ACCESSIBILITY_BUTTON,
         AUTOFILL_BUTTON,
