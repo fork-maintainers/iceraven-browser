@@ -154,19 +154,17 @@ class PrivateBrowsingLockFeature(
         observePrivateTabsClosure()
         observeAppStoreUpdates()
 
-        appStore.dispatch(
-            PrivateBrowsingLockAction.UpdatePrivateBrowsingLock(
-                isLocked = isLocked,
-            ),
-        )
+        if (appStore.state.isPrivateScreenLocked != isLocked) {
+            appStore.dispatch(
+                PrivateBrowsingLockAction.UpdatePrivateBrowsingLock(
+                    isLocked = isLocked,
+                ),
+            )
+        }
     }
 
     private fun deactivate() {
-        browserStoreScope?.cancel()
-        browserStoreScope = null
-
-        appStoreScope?.cancel()
-        appStoreScope = null
+        cancelScopes()
 
         appStore.dispatch(
             PrivateBrowsingLockAction.UpdatePrivateBrowsingLock(
@@ -216,11 +214,7 @@ class PrivateBrowsingLockFeature(
                     flow.map { it.mode }
                         .distinctUntilChanged()
                         .filter { it != BrowsingMode.Private }
-                        .collect {
-                            if (!appStore.state.isPrivateScreenLocked) {
-                                maybeLockPrivateMode()
-                            }
-                        }
+                        .collect { maybeLockPrivateMode() }
                 }
 
                 // Observe tray visibility to lock the private tabs when leaving the tabstray unless it’s private mode.
@@ -229,7 +223,7 @@ class PrivateBrowsingLockFeature(
                         .distinctUntilChanged()
                         .filter { !it }
                         .collect {
-                            if (appStore.state.mode != BrowsingMode.Private && !appStore.state.isPrivateScreenLocked) {
+                            if (appStore.state.mode != BrowsingMode.Private) {
                                 maybeLockPrivateMode()
                             }
                         }
@@ -265,15 +259,26 @@ class PrivateBrowsingLockFeature(
         storage.startObservingSharedPrefs()
     }
 
+    override fun onDestroy(owner: LifecycleOwner) {
+        cancelScopes()
+
+        super.onDestroy(owner)
+    }
+
     private fun maybeLockPrivateMode() {
-        // When the app gets inactive with opened tabs, we lock the private mode.
-        if (browserStore.state.privateTabs.isNotEmpty()) {
-            appStore.dispatch(
-                PrivateBrowsingLockAction.UpdatePrivateBrowsingLock(
-                    isLocked = true,
-                ),
-            )
+        if (appStore.state.isPrivateScreenLocked || browserStore.state.privateTabs.isEmpty()) {
+            return
         }
+
+        appStore.dispatch(PrivateBrowsingLockAction.UpdatePrivateBrowsingLock(isLocked = true))
+    }
+
+    private fun cancelScopes() {
+        browserStoreScope?.cancel()
+        browserStoreScope = null
+
+        appStoreScope?.cancel()
+        appStoreScope = null
     }
 }
 
