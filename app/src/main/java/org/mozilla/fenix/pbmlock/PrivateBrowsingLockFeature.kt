@@ -110,7 +110,6 @@ class PrivateBrowsingLockFeature(
     private var browserStoreScope: CoroutineScope? = null
     private var appStoreScope: CoroutineScope? = null
     private var isFeatureEnabled = false
-    private var openInFirefoxRequested = false
 
     init {
         isFeatureEnabled = storage.isFeatureEnabled
@@ -232,16 +231,6 @@ class PrivateBrowsingLockFeature(
         }
     }
 
-    override fun onStart(owner: LifecycleOwner) {
-        super.onStart(owner)
-
-        // We want to persist the request only within a single "user session" - between 'onStart'
-        // and 'onStop' calls. 'onStart' and 'onResume' calls are significantly different within
-        // this feature, because system dialogs (like permission requests) will trigger the
-        // 'onPause' lifecycle event, but not the 'onStop'.
-        openInFirefoxRequested = false
-    }
-
     override fun onStop(owner: LifecycleOwner) {
         super.onStop(owner)
 
@@ -262,6 +251,11 @@ class PrivateBrowsingLockFeature(
     override fun onDestroy(owner: LifecycleOwner) {
         cancelScopes()
 
+        // Clear the flag when the Activity is permanently destroyed,so it doesn't affect future browsing sessions.
+        if (owner is Activity && !owner.isChangingConfigurations) {
+            openInFirefoxRequested = false
+        }
+
         super.onDestroy(owner)
     }
 
@@ -279,6 +273,12 @@ class PrivateBrowsingLockFeature(
 
         appStoreScope?.cancel()
         appStoreScope = null
+    }
+
+    companion object {
+        // Static flag to bridge suppression signal between activities during "Open in Firefox"
+        @VisibleForTesting
+        internal var openInFirefoxRequested = false
     }
 }
 
