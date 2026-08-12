@@ -6,6 +6,7 @@ package org.mozilla.fenix.ui.efficiency.pageObjects
 
 import androidx.compose.ui.test.junit4.AndroidComposeTestRule
 import org.mozilla.fenix.helpers.HomeActivityIntentTestRule
+import org.mozilla.fenix.helpers.TestAssetHelper.waitingTimeLong
 import org.mozilla.fenix.ui.efficiency.helpers.BasePage
 import org.mozilla.fenix.ui.efficiency.helpers.Selector
 import org.mozilla.fenix.ui.efficiency.navigation.NavigationRegistry
@@ -47,8 +48,37 @@ class SettingsAddonsManagerPage(composeRule: AndroidComposeTestRule<HomeActivity
         )
     }
 
+    override fun navigateToPage(url: String, forceNavigation: Boolean): SettingsAddonsManagerPage {
+        super.navigateToPage(url, forceNavigation)
+        return this
+    }
+
     override fun mozGetSelectorsByGroup(group: String): List<Selector> {
         return SettingsAddonsManagerSelectors.all.filter { it.groups.contains(group) }
+    }
+
+    /**
+     * Installs [addonTitle] from the add-ons manager list, then closes the install-completed prompt.
+     * When [allowInPrivateBrowsing] is true the "Allow in private browsing" checkbox is ticked before
+     * confirming. Assumes the add-ons manager list is already open. Mirrors the legacy installAddon /
+     * installAddonInPrivateMode + closeAddonInstallCompletePrompt flow.
+     */
+    fun installAddon(addonTitle: String, allowInPrivateBrowsing: Boolean = false): SettingsAddonsManagerPage {
+        mozWaitUntilAbsent(SettingsAddonsManagerSelectors.ADD_ONS_PROGRESS_BAR, timeout = waitingTimeLong)
+        mozClick(SettingsAddonsManagerSelectors.INSTALL_ADDON_BUTTON(addonTitle))
+        mozVerify(SettingsAddonsManagerSelectors.ADDON_PERMISSION_PROMPT_TITLE(addonTitle), timeout = waitingTimeLong)
+        if (allowInPrivateBrowsing) {
+            mozClick(SettingsAddonsManagerSelectors.ALLOW_IN_PRIVATE_BROWSING_CHECKBOX)
+        }
+        // The permission dialog disables its Add button for ~1s after appearing, so wait for it to
+        // become enabled before clicking (mirrors the legacy allowPermissionToInstall).
+        mozClickWhenEnabled(SettingsAddonsManagerSelectors.ADDON_PERMISSION_ALLOW_BUTTON)
+        mozVerify(SettingsAddonsManagerSelectors.ADDON_INSTALL_COMPLETED_TITLE(addonTitle), timeout = waitingTimeLong)
+        // Closing the "<addon> was added" dialog is best-effort: some extensions auto-open an
+        // onboarding tab on install that tears the dialog down first, and the legacy
+        // closeAddonInstallCompletePrompt ignored the click result too.
+        mozClickIfPresent(SettingsAddonsManagerSelectors.ADDON_INSTALL_COMPLETED_OK_BUTTON)
+        return this
     }
 
     /**

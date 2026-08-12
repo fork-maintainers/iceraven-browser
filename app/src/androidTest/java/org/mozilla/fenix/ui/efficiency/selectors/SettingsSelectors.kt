@@ -31,7 +31,25 @@ object SettingsSelectors {
         strategy = SelectorStrategy.ESPRESSO_BY_TEXT,
         value = "General",
         description = "the General heading",
-        groups = listOf("generalSettingsSection"),
+        groups = listOf("generalSettingsSection", "settingsView"),
+    )
+
+    // The "Privacy and security" preference category heading. requiresScroll: it sits below the fold
+    // on a phone. Mirrors the legacy verifySettingsView (scrollToElementByText + onView(withText(...))).
+    val PRIVACY_AND_SECURITY_HEADING = Selector(
+        strategy = SelectorStrategy.UIAUTOMATOR_WITH_TEXT,
+        value = getStringResource(R.string.preferences_category_privacy_security),
+        description = "the Privacy and security heading",
+        groups = listOf("settingsView", "requiresScroll"),
+    )
+
+    // The "Extensions" settings entry, far down the settings list. requiresScroll for the same reason.
+    // Mirrors the legacy verifySettingsView (RecyclerView scrollTo preferences_extensions).
+    val EXTENSIONS_BUTTON = Selector(
+        strategy = SelectorStrategy.UIAUTOMATOR_WITH_TEXT,
+        value = getStringResource(R.string.preferences_extensions),
+        description = "the Extensions button",
+        groups = listOf("settingsView", "requiresScroll"),
     )
 
     val SETTINGS_TITLE = Selector(
@@ -278,6 +296,8 @@ object SettingsSelectors {
         NAVIGATION_TOOLBAR,
         GO_BACK_BUTTON,
         GENERAL_HEADING,
+        PRIVACY_AND_SECURITY_HEADING,
+        EXTENSIONS_BUTTON,
         SETTINGS_TITLE,
         SEARCH_BUTTON,
         TABS_BUTTON,
