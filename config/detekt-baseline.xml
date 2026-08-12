@@ -132,9 +132,6 @@
     <ID>ForbiddenSuppress:StartupStateProvider.kt$StartupStateProvider$@Suppress("MagicNumber")</ID>
     <ID>ForbiddenSuppress:Stories.kt$@Suppress("CyclomaticComplexMethod", "LongMethod", "CognitiveComplexMethod")</ID>
     <ID>ForbiddenSuppress:String.kt$@Suppress("MagicNumber")</ID>
-    <ID>ForbiddenSuppress:SwipeToDismissBox2.kt$@Suppress("CognitiveComplexMethod")</ID>
-    <ID>ForbiddenSuppress:SwipeToDismissBox2.kt$@Suppress("DEPRECATION", "CognitiveComplexMethod")</ID>
-    <ID>ForbiddenSuppress:SwipeToDismissBox2.kt$@Suppress("MagicNumber")</ID>
     <ID>ForbiddenSuppress:SyncedTabsList.kt$@SuppressWarnings("LongMethod", "CognitiveComplexMethod")</ID>
     <ID>ForbiddenSuppress:TabLayout.kt$@Suppress("LongParameterList", "LongMethod")</ID>
     <ID>ForbiddenSuppress:TabLayout.kt$@Suppress("LongParameterList", "LongMethod", "CognitiveComplexMethod")</ID>

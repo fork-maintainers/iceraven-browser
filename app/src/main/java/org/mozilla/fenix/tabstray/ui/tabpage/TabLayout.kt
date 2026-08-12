@@ -8,8 +8,6 @@ package org.mozilla.fenix.tabstray.ui.tabpage
 
 import android.content.res.Configuration
 import androidx.annotation.VisibleForTesting
-import androidx.compose.animation.core.DecayAnimationSpec
-import androidx.compose.animation.rememberSplineBasedDecay
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.ScrollableState
 import androidx.compose.foundation.layout.Arrangement
@@ -45,6 +43,7 @@ import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SwipeToDismissBoxValue
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -68,14 +67,12 @@ import androidx.compose.ui.layout.LocalPinnableContainer
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
@@ -83,7 +80,6 @@ import mozilla.components.compose.base.RadioCheckmark
 import mozilla.components.compose.base.annotation.FlexibleWindowPreview
 import mozilla.components.compose.base.modifier.thenConditional
 import org.mozilla.fenix.R
-import org.mozilla.fenix.compose.SwipeToDismissState2
 import org.mozilla.fenix.tabgroups.TabGroupCard
 import org.mozilla.fenix.tabgroups.TabGroupRow
 import org.mozilla.fenix.tabstray.TabsTrayTestTag
@@ -123,6 +119,7 @@ import org.mozilla.fenix.tabstray.ui.tabitems.TabListTabItem
 import org.mozilla.fenix.tabstray.ui.tabitems.TabsTrayItemClickHandler
 import org.mozilla.fenix.tabstray.ui.tabitems.TabsTrayItemSelectionState
 import org.mozilla.fenix.tabstray.ui.tabitems.gridItemAspectRatio
+import org.mozilla.fenix.tabstray.ui.tabitems.rememberTabSwipeToDismissBoxState
 import org.mozilla.fenix.tabstray.ui.tabitems.tabGridColumnCount
 import org.mozilla.fenix.tabstray.ui.tabitems.tabItemGroupListInteractionAnimation
 import org.mozilla.fenix.tabstray.ui.tabitems.tabListItemShapeStyling
@@ -880,21 +877,13 @@ private fun LazyGridItemScope.ReorderableTabGridItemContent(
     onShareTabGroupClick: (TabsTrayItem.TabGroup) -> Unit,
     onDeleteTabGroupClick: (TabsTrayItem.TabGroup) -> Unit,
 ) {
-    val decayAnimationSpec: DecayAnimationSpec<Float> = rememberSplineBasedDecay()
-    val density = LocalDensity.current
-    val isRtl = LocalLayoutDirection.current == LayoutDirection.Rtl
-    val swipeState = remember(isInMultiSelectMode) {
-        SwipeToDismissState2(
-            density = density,
-            enabled = !isInMultiSelectMode,
-            decayAnimationSpec = decayAnimationSpec,
-            isRtl = isRtl,
-        )
-    }
-    val swipingActive by remember(swipeState.swipingActive) {
-        mutableStateOf(swipeState.swipingActive)
-    }
+    val swipeToDismissBoxState = rememberTabSwipeToDismissBoxState(tabId = tabsTrayItem.id)
     val shouldClickListen = reorderState.draggingItemKey != tabsTrayItem.id
+    val swipingActive by remember(swipeToDismissBoxState) {
+        derivedStateOf {
+            swipeToDismissBoxState.dismissDirection != SwipeToDismissBoxValue.Settled
+        }
+    }
 
     ReorderableDragItemContainer(
         state = reorderState,
@@ -912,13 +901,14 @@ private fun LazyGridItemScope.ReorderableTabGridItemContent(
             is TabsTrayItem.Tab -> {
                 TabGridTabItem(
                     tab = tabsTrayItem,
+                    swipeToDismissBoxState = swipeToDismissBoxState,
+                    swipingEnabled = !isInMultiSelectMode,
+                    interactionState = interactionState,
+                    onCloseClick = onTabClose,
+                    onClick = onItemClick,
                     thumbnailSizePx = thumbnailSizePx,
                     selectionState = selectionState,
                     shouldClickListen = shouldClickListen,
-                    swipeState = swipeState,
-                    onCloseClick = onTabClose,
-                    onClick = onItemClick,
-                    interactionState = interactionState,
                 )
             }
 
@@ -961,21 +951,13 @@ private fun LazyGridItemScope.InteractableTabGridItemContent(
     enteringGroupId: String?,
     onGroupEntranceAnimationPlayed: () -> Unit,
 ) {
-    val decayAnimationSpec: DecayAnimationSpec<Float> = rememberSplineBasedDecay()
-    val density = LocalDensity.current
-    val isRtl = LocalLayoutDirection.current == LayoutDirection.Rtl
-    val swipeState = remember(isInMultiSelectMode) {
-        SwipeToDismissState2(
-            density = density,
-            enabled = !isInMultiSelectMode,
-            decayAnimationSpec = decayAnimationSpec,
-            isRtl = isRtl,
-        )
-    }
-    val swipingActive by remember(swipeState.swipingActive) {
-        mutableStateOf(swipeState.swipingActive)
-    }
+    val swipeToDismissBoxState = rememberTabSwipeToDismissBoxState(tabId = tabsTrayItem.id)
     val shouldClickListen = reorderState.draggedItem.key != tabsTrayItem.id
+    val swipingActive by remember(swipeToDismissBoxState) {
+        derivedStateOf {
+            swipeToDismissBoxState.dismissDirection != SwipeToDismissBoxValue.Settled
+        }
+    }
     InteractableDragItemContainer(
         state = reorderState,
         position = index + if (hasHeader) 1 else 0,
@@ -994,13 +976,14 @@ private fun LazyGridItemScope.InteractableTabGridItemContent(
             is TabsTrayItem.Tab -> {
                 TabGridTabItem(
                     tab = tabsTrayItem,
+                    swipeToDismissBoxState = swipeToDismissBoxState,
+                    swipingEnabled = !isInMultiSelectMode,
+                    interactionState = interactionState,
+                    onCloseClick = onTabClose,
+                    onClick = onItemClick,
                     thumbnailSizePx = thumbnailSizePx,
                     selectionState = selectionState,
                     shouldClickListen = shouldClickListen,
-                    swipeState = swipeState,
-                    onCloseClick = onTabClose,
-                    onClick = onItemClick,
-                    interactionState = interactionState,
                 )
             }
 

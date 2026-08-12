@@ -4,7 +4,6 @@
 
 package org.mozilla.fenix.tabgroups
 
-import androidx.compose.animation.rememberSplineBasedDecay
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -26,6 +25,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberSwipeToDismissBoxState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
@@ -47,7 +47,6 @@ import mozilla.components.compose.base.annotation.FlexibleWindowLightDarkPreview
 import mozilla.components.compose.base.theme.surfaceDimVariant
 import mozilla.components.support.base.utils.MAX_URI_LENGTH
 import mozilla.components.ui.colors.NovaColors
-import org.mozilla.fenix.compose.SwipeToDismissState2
 import org.mozilla.fenix.compose.TabThumbnail
 import org.mozilla.fenix.compose.TabThumbnailImageData
 import org.mozilla.fenix.tabstray.TabsTrayTestTag
@@ -519,18 +518,14 @@ private fun TabGroupCardPreview(
                         title = "Kit's Blog",
                     ),
                 ),
-                thumbnailSizePx = 50,
-                selectionState = tabGroupCardState.selectionState,
-                modifier = Modifier.weight(1f),
-                swipeState = SwipeToDismissState2(
-                    density = LocalDensity.current,
-                    isRtl = false,
-                    decayAnimationSpec = rememberSplineBasedDecay(),
-                    enabled = false,
-                ),
+                swipeToDismissBoxState = rememberSwipeToDismissBoxState(),
+                swipingEnabled = true,
+                interactionState = tabGroupCardState.interactionState,
                 onCloseClick = {},
                 onClick = {},
-                interactionState = tabGroupCardState.interactionState,
+                modifier = Modifier.weight(1f),
+                thumbnailSizePx = 50,
+                selectionState = tabGroupCardState.selectionState,
             )
 
             TabGroupCard(

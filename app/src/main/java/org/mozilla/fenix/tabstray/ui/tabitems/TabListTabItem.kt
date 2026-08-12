@@ -4,8 +4,6 @@
 
 package org.mozilla.fenix.tabstray.ui.tabitems
 
-import androidx.compose.animation.core.DecayAnimationSpec
-import androidx.compose.animation.rememberSplineBasedDecay
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -13,10 +11,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SwipeToDismissBox
+import androidx.compose.material3.SwipeToDismissBoxValue
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
@@ -36,8 +38,6 @@ import mozilla.components.compose.base.RadioCheckmark
 import mozilla.components.support.base.utils.MAX_URI_LENGTH
 import org.mozilla.fenix.R
 import org.mozilla.fenix.compose.DismissibleItemBackground
-import org.mozilla.fenix.compose.SwipeToDismissBox2
-import org.mozilla.fenix.compose.SwipeToDismissState2
 import org.mozilla.fenix.compose.TabThumbnail
 import org.mozilla.fenix.ext.toShortUrl
 import org.mozilla.fenix.tabstray.TabsTrayTestTag
@@ -80,28 +80,27 @@ fun TabListTabItem(
     onClick: (TabsTrayItem) -> Unit,
     onLongClick: ((TabsTrayItem) -> Unit)? = null,
 ) {
-    val decayAnimationSpec: DecayAnimationSpec<Float> = rememberSplineBasedDecay()
-    val density = LocalDensity.current
+    val swipeToDismissBoxState = rememberTabSwipeToDismissBoxState(tabId = tab.id)
     val isRtl = LocalLayoutDirection.current == LayoutDirection.Rtl
 
-    val swipeState = remember(selectionState.multiSelectEnabled, swipingEnabled) {
-        SwipeToDismissState2(
-            density = density,
-            enabled = !selectionState.multiSelectEnabled && swipingEnabled,
-            decayAnimationSpec = decayAnimationSpec,
-            isRtl = isRtl,
-        )
-    }
+    // SwipeToDismissBox invokes onDismiss from a LaunchedEffect keyed on the callback, so an
+    // unstable lambda would re-close the tab on every recomposition that follows the dismissal.
+    val currentTab by rememberUpdatedState(tab)
+    val currentOnCloseClick by rememberUpdatedState(onCloseClick)
+    val onDismiss = remember { { _: SwipeToDismissBoxValue -> currentOnCloseClick(currentTab) } }
 
-    SwipeToDismissBox2(
-        state = swipeState,
-        onItemDismiss = {
-            onCloseClick(tab)
-        },
+    SwipeToDismissBox(
+        state = swipeToDismissBoxState,
+        onDismiss = onDismiss,
+        gesturesEnabled = !selectionState.multiSelectEnabled && swipingEnabled,
         backgroundContent = {
+            // dismissDirection comes from the raw offset and is not mirrored for RTL.
+            val contentMovedRight =
+                swipeToDismissBoxState.dismissDirection == SwipeToDismissBoxValue.StartToEnd
+
             DismissibleItemBackground(
-                isSwipeActive = swipeState.swipingActive,
-                isSwipingToStart = swipeState.swipingActive && swipeState.isSwipingToStart,
+                isSwipeActive = swipeToDismissBoxState.dismissDirection != SwipeToDismissBoxValue.Settled,
+                isSwipingToStart = if (isRtl) contentMovedRight else !contentMovedRight,
             )
         },
     ) {
@@ -110,7 +109,12 @@ fun TabListTabItem(
             selectionState = selectionState,
             interactionState = interactionState,
             shouldClickListen = shouldClickListen,
-            modifier = modifier,
+            // The fade has to wrap the caller's modifier: the focus outline is a border applied
+            // there by tabListItemShapeStyling, and it only picks up the alpha if it is drawn
+            // inside the layer.
+            modifier = Modifier
+                .fadeOnSwipeToDismiss(swipeToDismissBoxState)
+                .then(modifier),
             onCloseClick = onCloseClick,
             onClick = onClick,
             onLongClick = onLongClick,
