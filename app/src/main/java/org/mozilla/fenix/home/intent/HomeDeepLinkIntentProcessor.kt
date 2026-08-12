@@ -82,6 +82,7 @@ class HomeDeepLinkIntentProcessor(
             "settings_app_icon" -> GlobalDirections.SettingsAppIcon
             "settings_ai_controls" -> GlobalDirections.SettingsAIControls
             "protections_dashboard" -> GlobalDirections.ProtectionsDashboard
+            "settings_ip_protection" -> GlobalDirections.SettingsIpProtection
 
             else -> return
         }

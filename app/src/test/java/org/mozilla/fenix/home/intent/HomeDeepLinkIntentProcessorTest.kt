@@ -401,6 +401,22 @@ class HomeDeepLinkIntentProcessorTest {
         verify { out wasNot Called }
     }
 
+    @Test
+    fun `process settings_ip_protection deep link`() {
+        assertTrue(processorHome.process(testIntent("settings_ip_protection"), navController, out, settings))
+
+        verify { activity wasNot Called }
+        verify {
+            navController.navigate(
+                NavGraphDirections.actionGlobalIpProtectionFragment(
+                    entrypoint = FenixFxAEntryPoint.DeepLink,
+                    startAuthFlow = false,
+                ),
+            )
+        }
+        verify { out wasNot Called }
+    }
+
     private fun testIntent(uri: String) = Intent("", "$DEEP_LINK_SCHEME://$uri".toUri())
 
     private fun showAddSearchWidgetPrompt(activity: Activity) {

@@ -532,6 +532,7 @@
                 <data android:host="settings_addon_manager"/>
                 <data android:host="settings_ai_controls"/>
                 <data android:host="settings_delete_browsing_data"/>
+                <data android:host="settings_ip_protection"/>
                 <data android:host="settings_logins"/>
                 <data android:host="settings_notifications"/>
                 <data android:host="settings_marketing_notifications"/>

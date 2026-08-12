@@ -53,6 +53,13 @@ enum class GlobalDirections(val navDirections: NavDirections, val destinationId:
         NavGraphDirections.actionGlobalAiControlsFragment(),
         R.id.aiControlsFragment,
     ),
+    SettingsIpProtection(
+        NavGraphDirections.actionGlobalIpProtectionFragment(
+            entrypoint = FenixFxAEntryPoint.DeepLink,
+            startAuthFlow = false,
+        ),
+        R.id.ipProtectionFragment,
+    ),
     SettingsLogins(
         NavGraphDirections.actionGlobalSavedLoginsAuthFragment(),
         R.id.saveLoginSettingFragment,
