@@ -870,6 +870,8 @@
   <string name="preferences_toolbar_shortcut">ره نهنگ نوار ٱوزار</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_toolbar_select_shortcut">پسند ی ره نهنگ</string>
+  <!-- Title of a menu option allowing to change the shortcut button shown in the toolbar -->
+  <string name="toolbar_shortcut_menu_edit_option">آلشت ره نهنگ</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_gestures">اشاره یل</string>
   <!-- Preference for settings related to visual options -->
@@ -1494,6 +1496,14 @@
   <string name="preferences_inactive_tabs">جا گورو بلگه یل قڌیمی و بشن قیر فعال</string>
   <!-- Title of inactive tabs preference -->
   <string name="preferences_inactive_tabs_title">بلگه یلی ک بیشتر ز دو هفته ننیشتینه، و بشن قیر فعال جا گورو ابۊن.</string>
+  <!--
+    Privacy report
+
+    Category header of a preference that allows a user to enable or disable the privacy report feature
+  -->
+  <string name="preferences_privacy_report">گوزارش هریم سیخومی</string>
+  <!-- Title of the privacy report preference that allows a user to enable or disable the feature -->
+  <string name="preferences_privacy_report_title">فعال کردن گوزارش هریم سیخومی</string>
   <!--
     Studies
 
@@ -4723,6 +4733,16 @@
   <string name="privacy_notice_updated_homepage_message_privacy_notice" tools:ignore="UnusedResources">نوکات زفت مهرمووه ای</string>
   <!-- The second active link used in privacy_notice_updated_homepage_message -->
   <string name="privacy_notice_updated_homepage_message_learn_more" tools:ignore="UnusedResources">قلوه دووسته بۊین</string>
+  <!--
+    Collections migration homepage card
+
+    Title shown on the collections to tab groups migration card on the homepage.
+  -->
+  <string name="collections_migration_homepage_banner_title">کتنا سکو بونکۊ هڌن</string>
+  <!-- Message shown on the collections to tab groups migration card on the homepage. -->
+  <string name="collections_migration_homepage_card_message">ی ره ساڌه تر سی مورتب واڌاشتن بلگه یل هڌه</string>
+  <!-- Link text shown on the collections to tab groups migration card that opens the tab groups page in the tab manager. -->
+  <string name="collections_migration_homepage_card_link">نیشتن بونکۊ یل بلگه مو</string>
   <!-- Google Lens prototype related strings -->
   <string name="preferences_debug_settings_google_lens_integration">فعال کردن ادغام Google Lens</string>
   <!-- Lens image search button content description -->
@@ -4811,4 +4831,8 @@
   <string name="firefox_labs_feature_conflict">ای ویژیی سی امتهووݩ کردن من دسرس نؽ.</string>
   <!-- Text displayed on the Firefox Labs screen when there are no Labs experimental features present. -->
   <string name="firefox_labs_no_labs_available_description">سکو هیچ ویژیی آزمایشی سی امتهووݩ کردن نؽ</string>
+  <!-- Title of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">سوا کردن وبگه</string>
+  <!-- Description of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">ی مانع ازافی منجا وبگه یل ک سی زفت وابیڌن داده یل ایسا من بلگه یل موختلف هیاری اده. گاشڌ ری عملکرد پایداری، سازگاری وبگه وو بارت زفت کردن ویرگار گشتن تئسیر بنه.</string>
 </resources>

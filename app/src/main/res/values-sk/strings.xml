@@ -872,6 +872,8 @@
   <string name="preferences_toolbar_shortcut">Skratka na paneli s nástrojmi</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_toolbar_select_shortcut">Vyberte skratku</string>
+  <!-- Title of a menu option allowing to change the shortcut button shown in the toolbar -->
+  <string name="toolbar_shortcut_menu_edit_option">Upraviť skratku</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_gestures">Gestá</string>
   <!-- Preference for settings related to visual options -->
@@ -1496,6 +1498,14 @@
   <string name="preferences_inactive_tabs">Presúvať staré karty medzi neaktívne</string>
   <!-- Title of inactive tabs preference -->
   <string name="preferences_inactive_tabs_title">Karty, ktoré ste dva týždne nevideli, sa presunú do neaktívnej sekcie.</string>
+  <!--
+    Privacy report
+
+    Category header of a preference that allows a user to enable or disable the privacy report feature
+  -->
+  <string name="preferences_privacy_report">Správa o ochrane osobných údajov</string>
+  <!-- Title of the privacy report preference that allows a user to enable or disable the feature -->
+  <string name="preferences_privacy_report_title">Povoliť správu o ochrane súkromia</string>
   <!--
     Studies
 
@@ -4755,6 +4765,16 @@
   <string name="privacy_notice_updated_homepage_message_privacy_notice" tools:ignore="UnusedResources">Vyhlásenie o ochrane osobných údajov</string>
   <!-- The second active link used in privacy_notice_updated_homepage_message -->
   <string name="privacy_notice_updated_homepage_message_learn_more" tools:ignore="UnusedResources">Ďalšie informácie</string>
+  <!--
+    Collections migration homepage card
+
+    Title shown on the collections to tab groups migration card on the homepage.
+  -->
+  <string name="collections_migration_homepage_banner_title">Kolekcie sú teraz skupiny</string>
+  <!-- Message shown on the collections to tab groups migration card on the homepage. -->
+  <string name="collections_migration_homepage_card_message">Existuje jednoduchší spôsob, ako si udržať poriadok v záložkách</string>
+  <!-- Link text shown on the collections to tab groups migration card that opens the tab groups page in the tab manager. -->
+  <string name="collections_migration_homepage_card_link">Zobraziť moje skupiny kariet</string>
   <!-- Google Lens prototype related strings -->
   <string name="preferences_debug_settings_google_lens_integration">Povoliť integráciu služby Google Lens</string>
   <!-- Lens image search button content description -->
@@ -4843,4 +4863,8 @@
   <string name="firefox_labs_feature_conflict">Funkcia nie je k dispozícii na vyskúšanie.</string>
   <!-- Text displayed on the Firefox Labs screen when there are no Labs experimental features present. -->
   <string name="firefox_labs_no_labs_available_description">Momentálne nie sú k dispozícii žiadne experimentálne funkcie na vyskúšanie</string>
+  <!-- Title of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">Izolácia webových stránok</string>
+  <!-- Description of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">Dodatočná bariéra medzi webovými stránkami, ktorá pomáha chrániť vaše údaje naprieč kartami. Môže ovplyvniť výkon, stabilitu, kompatibilitu webových stránok a spôsob ukladania histórie prehliadania.</string>
 </resources>

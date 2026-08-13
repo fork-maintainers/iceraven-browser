@@ -869,6 +869,8 @@
   <string name="preferences_toolbar_shortcut">도구 모음 바로 가기</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_toolbar_select_shortcut">바로 가기 선택</string>
+  <!-- Title of a menu option allowing to change the shortcut button shown in the toolbar -->
+  <string name="toolbar_shortcut_menu_edit_option">바로 가기 편집</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_gestures">제스처</string>
   <!-- Preference for settings related to visual options -->
@@ -1494,13 +1496,21 @@
   <!-- Title of inactive tabs preference -->
   <string name="preferences_inactive_tabs_title">2주 동안 보지 않은 탭은 비활동 섹션으로 이동</string>
   <!--
+    Privacy report
+
+    Category header of a preference that allows a user to enable or disable the privacy report feature
+  -->
+  <string name="preferences_privacy_report">개인정보 보호 보고서</string>
+  <!-- Title of the privacy report preference that allows a user to enable or disable the feature -->
+  <string name="preferences_privacy_report_title">개인정보 보호 보고서 활성화</string>
+  <!--
     Studies
 
     Title of the remove studies button
   -->
-  <string name="studies_remove">삭제</string>
+  <string name="studies_remove">제거</string>
   <!-- Title of the active section on the studies list -->
-  <string name="studies_active">활성화</string>
+  <string name="studies_active">활성</string>
   <!-- Description for studies. Note: The word "Firefox" should NOT be translated -->
   <string name="studies_description_4" tools:ignore="BrandUsage">Firefox는 기능을 테스트할 사용자를 무작위로 선택하여, 모두를 위해 품질을 향상시킵니다.</string>
   <!-- Title of the Studies data preference -->
@@ -4707,6 +4717,16 @@
   <string name="privacy_notice_updated_homepage_message_privacy_notice" tools:ignore="UnusedResources">개인정보처리방침</string>
   <!-- The second active link used in privacy_notice_updated_homepage_message -->
   <string name="privacy_notice_updated_homepage_message_learn_more" tools:ignore="UnusedResources">더 알아보기</string>
+  <!--
+    Collections migration homepage card
+
+    Title shown on the collections to tab groups migration card on the homepage.
+  -->
+  <string name="collections_migration_homepage_banner_title">이제 모음집이 탭 그룹입니다</string>
+  <!-- Message shown on the collections to tab groups migration card on the homepage. -->
+  <string name="collections_migration_homepage_card_message">탭을 정리할 수 있는 더 간단한 방법이 있습니다</string>
+  <!-- Link text shown on the collections to tab groups migration card that opens the tab groups page in the tab manager. -->
+  <string name="collections_migration_homepage_card_link">내 탭 그룹 보기</string>
   <!-- Google Lens prototype related strings -->
   <string name="preferences_debug_settings_google_lens_integration">Google 렌즈 통합 사용함</string>
   <!-- Lens image search button content description -->
@@ -4795,4 +4815,8 @@
   <string name="firefox_labs_feature_conflict">해당 기능은 체험해 볼 수 없습니다.</string>
   <!-- Text displayed on the Firefox Labs screen when there are no Labs experimental features present. -->
   <string name="firefox_labs_no_labs_available_description">지금은 이용 가능한 실험실 기능이 없음</string>
+  <!-- Title of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">웹 사이트 격리</string>
+  <!-- Description of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">웹 사이트 간에 추가적인 장벽을 세워 탭 간 데이터 유출을 방지합니다. 성능, 안정성, 웹 사이트 호환성 및 방문 기록 저장 방식에 영향을 줄 수 있습니다.</string>
 </resources>

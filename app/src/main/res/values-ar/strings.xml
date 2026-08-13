@@ -869,6 +869,8 @@
   <string name="preferences_toolbar_shortcut">اختصار شريط الأدوات</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_toolbar_select_shortcut">حدّد اختصارًا</string>
+  <!-- Title of a menu option allowing to change the shortcut button shown in the toolbar -->
+  <string name="toolbar_shortcut_menu_edit_option">حرّر الاختصار</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_gestures">الإيماءات</string>
   <!-- Preference for settings related to visual options -->
@@ -1490,6 +1492,14 @@
   <!-- Title of inactive tabs preference -->
   <string name="preferences_inactive_tabs_title">ستُنقل التبويبات التي لم تعرضها منذ أسبوعين إلى قسم \"غير نشط\".</string>
   <!--
+    Privacy report
+
+    Category header of a preference that allows a user to enable or disable the privacy report feature
+  -->
+  <string name="preferences_privacy_report">تقرير الخصوصية</string>
+  <!-- Title of the privacy report preference that allows a user to enable or disable the feature -->
+  <string name="preferences_privacy_report_title">فعّل تقرير الخصوصية</string>
+  <!--
     Studies
 
     Title of the remove studies button
@@ -1731,6 +1741,8 @@
   <string name="tab_group_three_dot_menu_ungroup">فك التجميع</string>
   <!-- Text shown on the delete button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_delete">احذف</string>
+  <!-- Text shown on the share button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_share">شارِك</string>
   <!-- Text shown on the close button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_close">أغلق</string>
   <!-- Title for the Ungroup tab group confirmation dialog. -->
@@ -4433,6 +4445,10 @@
   <string name="privacy_notice_updated_homepage_message_privacy_notice" tools:ignore="UnusedResources">تنويه الخصوصية</string>
   <!-- The second active link used in privacy_notice_updated_homepage_message -->
   <string name="privacy_notice_updated_homepage_message_learn_more" tools:ignore="UnusedResources">معرفة المزيد</string>
+  <!-- Message shown on the collections to tab groups migration card on the homepage. -->
+  <string name="collections_migration_homepage_card_message">هناك طريقة أبسط للحفاظ على تنظيم علامات التبويب الخاصة بك</string>
+  <!-- Link text shown on the collections to tab groups migration card that opens the tab groups page in the tab manager. -->
+  <string name="collections_migration_homepage_card_link">عرض مجموعات علامات التبويب الخاصة بي</string>
   <!-- Google Lens prototype related strings -->
   <string name="preferences_debug_settings_google_lens_integration">فعِّل تكامل Google Lens</string>
   <!-- Lens image search button content description -->
@@ -4502,4 +4518,8 @@
   <string name="firefox_labs_feature_conflict">هذه الميزة غير متاحة للتجربة.</string>
   <!-- Text displayed on the Firefox Labs screen when there are no Labs experimental features present. -->
   <string name="firefox_labs_no_labs_available_description">لا توجد ميزات تجريبية متاحة للتجربة حاليًا</string>
+  <!-- Title of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">عزل الموقع</string>
+  <!-- Description of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">حاجز إضافي بين المواقع الإلكترونية يساعد على حماية بياناتك عبر علامات التبويب. قد يؤثر على الأداء والاستقرار وتوافق المواقع الإلكترونية وكيفية حفظ سجل التصفح.</string>
 </resources>

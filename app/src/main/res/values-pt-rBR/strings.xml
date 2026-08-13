@@ -870,6 +870,8 @@
   <string name="preferences_toolbar_shortcut">Atalho na barra de ferramentas</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_toolbar_select_shortcut">Selecione um atalho</string>
+  <!-- Title of a menu option allowing to change the shortcut button shown in the toolbar -->
+  <string name="toolbar_shortcut_menu_edit_option">Editar atalho</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_gestures">Gestos</string>
   <!-- Preference for settings related to visual options -->
@@ -1495,6 +1497,14 @@
   <!-- Title of inactive tabs preference -->
   <string name="preferences_inactive_tabs_title">Mover abas que você não usa há duas semanas para a seção de inativas</string>
   <!--
+    Privacy report
+
+    Category header of a preference that allows a user to enable or disable the privacy report feature
+  -->
+  <string name="preferences_privacy_report">Relatório de privacidade</string>
+  <!-- Title of the privacy report preference that allows a user to enable or disable the feature -->
+  <string name="preferences_privacy_report_title">Ativar relatório de privacidade</string>
+  <!--
     Studies
 
     Title of the remove studies button
@@ -1716,6 +1726,8 @@
   <string name="tab_group_three_dot_menu_ungroup">Desagrupar</string>
   <!-- Text shown on the delete button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_delete">Excluir</string>
+  <!-- Text shown on the share button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_share">Compartilhar</string>
   <!-- Text shown on the close button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_close">Fechar</string>
   <!-- Title for the Ungroup tab group confirmation dialog. -->
@@ -4721,6 +4733,16 @@
   <string name="privacy_notice_updated_homepage_message_privacy_notice" tools:ignore="UnusedResources">Aviso de privacidade</string>
   <!-- The second active link used in privacy_notice_updated_homepage_message -->
   <string name="privacy_notice_updated_homepage_message_learn_more" tools:ignore="UnusedResources">Saiba mais</string>
+  <!--
+    Collections migration homepage card
+
+    Title shown on the collections to tab groups migration card on the homepage.
+  -->
+  <string name="collections_migration_homepage_banner_title">Coleções passaram a ser grupos</string>
+  <!-- Message shown on the collections to tab groups migration card on the homepage. -->
+  <string name="collections_migration_homepage_card_message">Existe um jeito mais simples de manter suas abas organizadas</string>
+  <!-- Link text shown on the collections to tab groups migration card that opens the tab groups page in the tab manager. -->
+  <string name="collections_migration_homepage_card_link">Ver meus grupos de abas</string>
   <!-- Google Lens prototype related strings -->
   <string name="preferences_debug_settings_google_lens_integration">Ativar integração com Google Lens</string>
   <!-- Lens image search button content description -->
@@ -4809,4 +4831,8 @@
   <string name="firefox_labs_feature_conflict">Este recurso não está disponível para testar.</string>
   <!-- Text displayed on the Firefox Labs screen when there are no Labs experimental features present. -->
   <string name="firefox_labs_no_labs_available_description">Nenhum recurso experimental para testar agora</string>
+  <!-- Title of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">Isolamento de sites</string>
+  <!-- Description of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">Uma barreira adicional entre sites que ajuda a proteger seus dados de uma aba para outra. Pode afetar desempenho, estabilidade, compatibilidade de sites e como o histórico de navegação é salvo.</string>
 </resources>

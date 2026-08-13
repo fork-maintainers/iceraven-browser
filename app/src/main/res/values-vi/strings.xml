@@ -869,6 +869,8 @@
   <string name="preferences_toolbar_shortcut">Phím tắt thanh công cụ</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_toolbar_select_shortcut">Chọn một phím tắt</string>
+  <!-- Title of a menu option allowing to change the shortcut button shown in the toolbar -->
+  <string name="toolbar_shortcut_menu_edit_option">Chỉnh sửa lối tắt</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_gestures">Cử chỉ</string>
   <!-- Preference for settings related to visual options -->
@@ -1494,6 +1496,14 @@
   <!-- Title of inactive tabs preference -->
   <string name="preferences_inactive_tabs_title">Các thẻ mà bạn chưa xem trong hai tuần sẽ được chuyển vào phần không hoạt động.</string>
   <!--
+    Privacy report
+
+    Category header of a preference that allows a user to enable or disable the privacy report feature
+  -->
+  <string name="preferences_privacy_report">Báo cáo về quyền riêng tư</string>
+  <!-- Title of the privacy report preference that allows a user to enable or disable the feature -->
+  <string name="preferences_privacy_report_title">Bật báo cáo về quyền riêng tư</string>
+  <!--
     Studies
 
     Title of the remove studies button
@@ -1710,6 +1720,8 @@
   <string name="tab_group_three_dot_menu_ungroup">Tách nhóm</string>
   <!-- Text shown on the delete button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_delete">Xóa</string>
+  <!-- Text shown on the share button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_share">Chia sẻ</string>
   <!-- Text shown on the close button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_close">Đóng</string>
   <!-- Title for the Ungroup tab group confirmation dialog. -->
@@ -4705,6 +4717,16 @@
   <string name="privacy_notice_updated_homepage_message_privacy_notice" tools:ignore="UnusedResources">Thông báo về quyền riêng tư</string>
   <!-- The second active link used in privacy_notice_updated_homepage_message -->
   <string name="privacy_notice_updated_homepage_message_learn_more" tools:ignore="UnusedResources">Tìm hiểu thêm</string>
+  <!--
+    Collections migration homepage card
+
+    Title shown on the collections to tab groups migration card on the homepage.
+  -->
+  <string name="collections_migration_homepage_banner_title">Bộ sưu tập bây giờ trở thành nhóm</string>
+  <!-- Message shown on the collections to tab groups migration card on the homepage. -->
+  <string name="collections_migration_homepage_card_message">Cách đơn giản hơn để sắp xếp các thẻ của bạn</string>
+  <!-- Link text shown on the collections to tab groups migration card that opens the tab groups page in the tab manager. -->
+  <string name="collections_migration_homepage_card_link">Xem nhóm thẻ của tôi</string>
   <!-- Google Lens prototype related strings -->
   <string name="preferences_debug_settings_google_lens_integration">Kích hoạt tính năng Google Ống kính được tích hợp</string>
   <!-- Lens image search button content description -->
@@ -4793,4 +4815,8 @@
   <string name="firefox_labs_feature_conflict">Tính năng hiện chưa khả dụng để dùng thử.</string>
   <!-- Text displayed on the Firefox Labs screen when there are no Labs experimental features present. -->
   <string name="firefox_labs_no_labs_available_description">Chưa có tính năng thử nghiệm nào để thử bây giờ</string>
+  <!-- Title of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">Cô lập trang web</string>
+  <!-- Description of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">Một lớp bảo vệ bổ sung giữa các trang web giúp bảo vệ dữ liệu của bạn giữa các thẻ. Có thể ảnh hưởng đến hiệu suất, độ ổn định, khả năng tương thích của trang web và cách lưu lịch sử duyệt web.</string>
 </resources>

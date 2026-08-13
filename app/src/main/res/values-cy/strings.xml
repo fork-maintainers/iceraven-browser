@@ -874,6 +874,8 @@
   <string name="preferences_toolbar_shortcut">Llwybr byr y bar offer</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_toolbar_select_shortcut">Dewis llwybr byr</string>
+  <!-- Title of a menu option allowing to change the shortcut button shown in the toolbar -->
+  <string name="toolbar_shortcut_menu_edit_option">Golygu llwybr byr</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_gestures">Ystumiau</string>
   <!-- Preference for settings related to visual options -->
@@ -1498,6 +1500,14 @@
   <string name="preferences_inactive_tabs">Symud hen dabiau i anweithredol</string>
   <!-- Title of inactive tabs preference -->
   <string name="preferences_inactive_tabs_title">Mae tabiau dydych chi heb edrych arnyn nhw ers pythefnos yn cael eu symud i’r adran anweithredol.</string>
+  <!--
+    Privacy report
+
+    Category header of a preference that allows a user to enable or disable the privacy report feature
+  -->
+  <string name="preferences_privacy_report">Adroddiad preifatrwydd</string>
+  <!-- Title of the privacy report preference that allows a user to enable or disable the feature -->
+  <string name="preferences_privacy_report_title">Galluogi adroddiad preifatrwydd</string>
   <!--
     Studies
 
@@ -4787,6 +4797,16 @@
   <string name="privacy_notice_updated_homepage_message_privacy_notice" tools:ignore="UnusedResources">Hysbysiad Preifatrwydd</string>
   <!-- The second active link used in privacy_notice_updated_homepage_message -->
   <string name="privacy_notice_updated_homepage_message_learn_more" tools:ignore="UnusedResources">Dysgu rhagor</string>
+  <!--
+    Collections migration homepage card
+
+    Title shown on the collections to tab groups migration card on the homepage.
+  -->
+  <string name="collections_migration_homepage_banner_title">Mae casgliadau bellach yn grwpiau</string>
+  <!-- Message shown on the collections to tab groups migration card on the homepage. -->
+  <string name="collections_migration_homepage_card_message">Mae yna ffordd symlach o gadw\'ch tabiau\'n drefnus</string>
+  <!-- Link text shown on the collections to tab groups migration card that opens the tab groups page in the tab manager. -->
+  <string name="collections_migration_homepage_card_link">Gweld fy ngrwpiau tab</string>
   <!-- Google Lens prototype related strings -->
   <string name="preferences_debug_settings_google_lens_integration">Galluogi Integreiddio Lens Google</string>
   <!-- Lens image search button content description -->
@@ -4875,4 +4895,8 @@
   <string name="firefox_labs_feature_conflict">Dyw\'r nodwedd ddim ar gael i roi cynnig arni.</string>
   <!-- Text displayed on the Firefox Labs screen when there are no Labs experimental features present. -->
   <string name="firefox_labs_no_labs_available_description">Does dim nodweddion arbrofol i\'w profi ar hyn o bryd</string>
+  <!-- Title of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">Ynysu gwefan</string>
+  <!-- Description of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">Rhwystr ychwanegol rhwng gwefannau sy\'n helpu i amddiffyn eich data ar draws tabiau. Gall effeithio ar berfformiad, sefydlogrwydd, cydweddoldeb gwefan, a sut mae hanes pori yn cael ei gadw.</string>
 </resources>

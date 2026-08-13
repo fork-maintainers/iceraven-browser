@@ -870,6 +870,8 @@
   <string name="preferences_toolbar_shortcut">工具列捷徑</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_toolbar_select_shortcut">選擇捷徑</string>
+  <!-- Title of a menu option allowing to change the shortcut button shown in the toolbar -->
+  <string name="toolbar_shortcut_menu_edit_option">編輯捷徑</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_gestures">手勢</string>
   <!-- Preference for settings related to visual options -->
@@ -1494,6 +1496,14 @@
   <string name="preferences_inactive_tabs">將舊分頁移動到獨立區塊</string>
   <!-- Title of inactive tabs preference -->
   <string name="preferences_inactive_tabs_title">將超過兩週沒有檢視過的分頁，移動至「閒置分頁」區塊。</string>
+  <!--
+    Privacy report
+
+    Category header of a preference that allows a user to enable or disable the privacy report feature
+  -->
+  <string name="preferences_privacy_report">隱私權報告</string>
+  <!-- Title of the privacy report preference that allows a user to enable or disable the feature -->
+  <string name="preferences_privacy_report_title">開啟隱私權報告功能</string>
   <!--
     Studies
 
@@ -4709,6 +4719,16 @@
   <string name="privacy_notice_updated_homepage_message_privacy_notice" tools:ignore="UnusedResources">隱私權公告</string>
   <!-- The second active link used in privacy_notice_updated_homepage_message -->
   <string name="privacy_notice_updated_homepage_message_learn_more" tools:ignore="UnusedResources">更多資訊</string>
+  <!--
+    Collections migration homepage card
+
+    Title shown on the collections to tab groups migration card on the homepage.
+  -->
+  <string name="collections_migration_homepage_banner_title">收藏集改名為群組了</string>
+  <!-- Message shown on the collections to tab groups migration card on the homepage. -->
+  <string name="collections_migration_homepage_card_message">用更簡單的方式讓分頁更有條理</string>
+  <!-- Link text shown on the collections to tab groups migration card that opens the tab groups page in the tab manager. -->
+  <string name="collections_migration_homepage_card_link">檢視我的分頁群組</string>
   <!-- Google Lens prototype related strings -->
   <string name="preferences_debug_settings_google_lens_integration">開啟 Google 智慧鏡頭整合</string>
   <!-- Lens image search button content description -->
@@ -4797,4 +4817,8 @@
   <string name="firefox_labs_feature_conflict">無法試用此功能。</string>
   <!-- Text displayed on the Firefox Labs screen when there are no Labs experimental features present. -->
   <string name="firefox_labs_no_labs_available_description">目前沒有可以嘗試的實驗性功能</string>
+  <!-- Title of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">網站隔離</string>
+  <!-- Description of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">在不同網站間再加入一道屏障，幫助保護您跨分頁間的資料。可能會影響效能、穩定性、網站相容性以及瀏覽紀錄的儲存方式。</string>
 </resources>

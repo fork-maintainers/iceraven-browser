@@ -871,6 +871,8 @@
   <string name="preferences_toolbar_shortcut">Ярлык на панели инструментов</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_toolbar_select_shortcut">Выберите ярлык</string>
+  <!-- Title of a menu option allowing to change the shortcut button shown in the toolbar -->
+  <string name="toolbar_shortcut_menu_edit_option">Изменить ярлык</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_gestures">Жесты</string>
   <!-- Preference for settings related to visual options -->
@@ -1495,6 +1497,14 @@
   <string name="preferences_inactive_tabs">Перемещать старые вкладки в неактивные</string>
   <!-- Title of inactive tabs preference -->
   <string name="preferences_inactive_tabs_title">Вкладки, к которым вы не обращались в течение двух недель, перемещаются в неактивные.</string>
+  <!--
+    Privacy report
+
+    Category header of a preference that allows a user to enable or disable the privacy report feature
+  -->
+  <string name="preferences_privacy_report">Отчёт о конфиденциальности</string>
+  <!-- Title of the privacy report preference that allows a user to enable or disable the feature -->
+  <string name="preferences_privacy_report_title">Включить отчёт о приватности</string>
   <!--
     Studies
 
@@ -4739,6 +4749,16 @@
   <string name="privacy_notice_updated_homepage_message_privacy_notice" tools:ignore="UnusedResources">Уведомление о конфиденциальности</string>
   <!-- The second active link used in privacy_notice_updated_homepage_message -->
   <string name="privacy_notice_updated_homepage_message_learn_more" tools:ignore="UnusedResources">Подробнее</string>
+  <!--
+    Collections migration homepage card
+
+    Title shown on the collections to tab groups migration card on the homepage.
+  -->
+  <string name="collections_migration_homepage_banner_title">Подборки теперь группы</string>
+  <!-- Message shown on the collections to tab groups migration card on the homepage. -->
+  <string name="collections_migration_homepage_card_message">Есть более простой способ держать ваши вкладки организованными</string>
+  <!-- Link text shown on the collections to tab groups migration card that opens the tab groups page in the tab manager. -->
+  <string name="collections_migration_homepage_card_link">Посмотреть мои группы вкладок</string>
   <!-- Google Lens prototype related strings -->
   <string name="preferences_debug_settings_google_lens_integration">Включить интеграцию с Google Lens</string>
   <!-- Lens image search button content description -->
@@ -4827,4 +4847,8 @@
   <string name="firefox_labs_feature_conflict">Функция недоступна для тестирования.</string>
   <!-- Text displayed on the Firefox Labs screen when there are no Labs experimental features present. -->
   <string name="firefox_labs_no_labs_available_description">Сейчас нет экспериментальных функций, которые можно попробовать</string>
+  <!-- Title of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">Изоляция сайтов</string>
+  <!-- Description of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">Дополнительный барьер между веб-сайтами, который помогает защитить ваши данные на вкладках. Может повлиять на производительность, стабильность, совместимость с веб-сайтами, а также на сохранение истории просмотров.</string>
 </resources>

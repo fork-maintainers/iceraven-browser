@@ -870,6 +870,8 @@
   <string name="preferences_toolbar_shortcut">Acceso directo en la barra de herramientas</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_toolbar_select_shortcut">Seleccionar un atajo</string>
+  <!-- Title of a menu option allowing to change the shortcut button shown in the toolbar -->
+  <string name="toolbar_shortcut_menu_edit_option">Editar acceso directo</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_gestures">Gestos</string>
   <!-- Preference for settings related to visual options -->
@@ -1494,6 +1496,14 @@
   <string name="preferences_inactive_tabs">Mover pestañas antiguas a inactivas</string>
   <!-- Title of inactive tabs preference -->
   <string name="preferences_inactive_tabs_title">Las pestañas que no viste durante dos semanas se mueven a la sección inactiva.</string>
+  <!--
+    Privacy report
+
+    Category header of a preference that allows a user to enable or disable the privacy report feature
+  -->
+  <string name="preferences_privacy_report">Informe de privacidad</string>
+  <!-- Title of the privacy report preference that allows a user to enable or disable the feature -->
+  <string name="preferences_privacy_report_title">Habilitar informe de privacidad</string>
   <!--
     Studies
 
@@ -4723,6 +4733,16 @@
   <string name="privacy_notice_updated_homepage_message_privacy_notice" tools:ignore="UnusedResources">Nota de privacidad</string>
   <!-- The second active link used in privacy_notice_updated_homepage_message -->
   <string name="privacy_notice_updated_homepage_message_learn_more" tools:ignore="UnusedResources">Conocer más</string>
+  <!--
+    Collections migration homepage card
+
+    Title shown on the collections to tab groups migration card on the homepage.
+  -->
+  <string name="collections_migration_homepage_banner_title">Las colecciones ahora son grupos</string>
+  <!-- Message shown on the collections to tab groups migration card on the homepage. -->
+  <string name="collections_migration_homepage_card_message">Hay una forma más sencilla de mantener tus pestañas organizadas</string>
+  <!-- Link text shown on the collections to tab groups migration card that opens the tab groups page in the tab manager. -->
+  <string name="collections_migration_homepage_card_link">Ver mis grupos de pestañas</string>
   <!-- Google Lens prototype related strings -->
   <string name="preferences_debug_settings_google_lens_integration">Habilitar integración con Google Lens</string>
   <!-- Lens image search button content description -->
@@ -4811,4 +4831,8 @@
   <string name="firefox_labs_feature_conflict">La función no está disponible para probar.</string>
   <!-- Text displayed on the Firefox Labs screen when there are no Labs experimental features present. -->
   <string name="firefox_labs_no_labs_available_description">No hay funciones experimentales para probar en este momento</string>
+  <!-- Title of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">Aislamiento del sitio web</string>
+  <!-- Description of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">Una barrera adicional entre sitios web que ayuda a proteger tus datos en todas las pestañas. Puede afectar el rendimiento, la estabilidad, la compatibilidad de los sitios web y cómo se guarda el historial de navegación.</string>
 </resources>

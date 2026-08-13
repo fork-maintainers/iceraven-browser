@@ -870,6 +870,8 @@
   <string name="preferences_toolbar_shortcut">Scorciatoia nella barra degli strumenti</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_toolbar_select_shortcut">Seleziona una scorciatoia</string>
+  <!-- Title of a menu option allowing to change the shortcut button shown in the toolbar -->
+  <string name="toolbar_shortcut_menu_edit_option">Modifica scorciatoia</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_gestures">Gesti</string>
   <!-- Preference for settings related to visual options -->
@@ -1494,6 +1496,14 @@
   <string name="preferences_inactive_tabs">Sposta le vecchie schede nella sezione Inattive</string>
   <!-- Title of inactive tabs preference -->
   <string name="preferences_inactive_tabs_title">La schede che non visualizzi da due settimane vengono spostate nella sezione Inattive.</string>
+  <!--
+    Privacy report
+
+    Category header of a preference that allows a user to enable or disable the privacy report feature
+  -->
+  <string name="preferences_privacy_report">Rapporto sulla privacy</string>
+  <!-- Title of the privacy report preference that allows a user to enable or disable the feature -->
+  <string name="preferences_privacy_report_title">Attiva rapporto sulla privacy</string>
   <!--
     Studies
 
@@ -4723,6 +4733,16 @@
   <string name="privacy_notice_updated_homepage_message_privacy_notice" tools:ignore="UnusedResources">informativa sulla privacy</string>
   <!-- The second active link used in privacy_notice_updated_homepage_message -->
   <string name="privacy_notice_updated_homepage_message_learn_more" tools:ignore="UnusedResources">Ulteriori informazioni</string>
+  <!--
+    Collections migration homepage card
+
+    Title shown on the collections to tab groups migration card on the homepage.
+  -->
+  <string name="collections_migration_homepage_banner_title">Le raccolte diventano gruppi</string>
+  <!-- Message shown on the collections to tab groups migration card on the homepage. -->
+  <string name="collections_migration_homepage_card_message">Organizzare le tue schede è ancora più semplice</string>
+  <!-- Link text shown on the collections to tab groups migration card that opens the tab groups page in the tab manager. -->
+  <string name="collections_migration_homepage_card_link">Visualizza i miei gruppi di schede</string>
   <!-- Google Lens prototype related strings -->
   <string name="preferences_debug_settings_google_lens_integration">Attiva integrazione con Google Lens</string>
   <!-- Lens image search button content description -->
@@ -4811,4 +4831,8 @@
   <string name="firefox_labs_feature_conflict">Questa funzione non è disponibile per essere provata.</string>
   <!-- Text displayed on the Firefox Labs screen when there are no Labs experimental features present. -->
   <string name="firefox_labs_no_labs_available_description">Al momento non ci sono funzionalità sperimentali disponibili</string>
+  <!-- Title of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">Isolamento dei siti web</string>
+  <!-- Description of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">Una barriera aggiuntiva tra i siti web che contribuisce a proteggere i tuoi dati tra schede diverse. Può influire sulle prestazioni, sulla stabilità, sul funzionamento dei siti web e sul salvataggio della cronologia di navigazione.</string>
 </resources>

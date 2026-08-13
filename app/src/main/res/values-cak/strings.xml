@@ -870,6 +870,8 @@
   <string name="preferences_toolbar_shortcut">Chojokem pa rusamajib\'al</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_toolbar_select_shortcut">Tacha\' jun chojokem</string>
+  <!-- Title of a menu option allowing to change the shortcut button shown in the toolbar -->
+  <string name="toolbar_shortcut_menu_edit_option">Tinuk\' chojokem</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_gestures">B\'anoj paläj</string>
   <!-- Preference for settings related to visual options -->
@@ -1495,6 +1497,14 @@
   <!-- Title of inactive tabs preference -->
   <string name="preferences_inactive_tabs_title">Ri taq ruwi\' man e\'atz\'eton ta pa ka\'i\' wuqq\'ij yejal pa ri echupun tanaj.</string>
   <!--
+    Privacy report
+
+    Category header of a preference that allows a user to enable or disable the privacy report feature
+  -->
+  <string name="preferences_privacy_report">Rutzijol ichinanem</string>
+  <!-- Title of the privacy report preference that allows a user to enable or disable the feature -->
+  <string name="preferences_privacy_report_title">Titzij ichinan rutzijol</string>
+  <!--
     Studies
 
     Title of the remove studies button
@@ -1532,6 +1542,14 @@
     The %1$s will be replaced by the number of opened private tabs
   -->
   <string name="tabs_header_private_tabs_counter_title">Jaqon ichinan taq ruwi\': %1$s. Tachapa\' richin nak\'ëx ruwi\'.</string>
+  <plurals name="tabs_header_tab_group_counter_title">
+    <!--
+      Title for the list of tab groups used by a11y services
+      The %1$d will be replaced by the number of opened tab groups
+    -->
+    <item quantity="one">%1$d molaj ruwi\' jaqon. Tachapa\' richin nak\'ëx ruwi\'.</item>
+    <item quantity="other">%1$d molaj taq ruwi\' ejaqon. Tachapa\' richin ye\'ak\'ëx taq ruwi\'.</item>
+  </plurals>
   <!--
     Title for the list of tabs in the synced tabs used by a11y services
     The %1$s will be replaced by the number of opened synced tabs
@@ -1541,6 +1559,8 @@
   <string name="add_tab">Titz\'aqatisäx ruwi\'</string>
   <!-- Content description (not visible, for screen readers etc.): Add tab button. Adds a news tab when pressed -->
   <string name="add_private_tab">Titz\'aqatisäx ichinan ruwi\'</string>
+  <!-- Content description (not visible, for screen readers etc.): Create tab group button. Opens the create tab group sheet when pressed -->
+  <string name="create_tab_group_content_description">Titz\'uk molaj ruwi\'</string>
   <!-- Text for the tab search bar placeholder -->
   <string name="tab_manager_search_bar_placeholder">Tikanöx pa taq ruwi\'</string>
   <!-- Text shown in the menu to view recently closed tabs -->
@@ -1581,12 +1601,16 @@
   <string name="tabs_tray_select_tabs">Kecha\' taq ruwi\'</string>
   <!-- Text for tab manager search page when there are no results. -->
   <string name="tab_manager_no_search_results">Majun taq rujunamil ye\'ilitäj.</string>
+  <!-- Additional text for tab manager search page when there are no results. -->
+  <string name="tab_manager_no_search_results_additional_text">¡Tatojtob\'ej jun chik kanoxïk!</string>
   <!-- Content description (not visible, for screen readers etc.): Close tab button. Closes the current session when pressed -->
   <string name="close_tab">Titz\'apïx ruwi\'</string>
   <!-- Content description (not visible, for screen readers etc.): Close tab <title> button. %s is the tab title -->
   <string name="close_tab_title">Titz\'apïx ruwi\' %s</string>
   <!-- Content description (not visible, for screen readers etc.): Opens the open tabs menu when pressed -->
   <string name="open_tabs_menu">Tijaq kik\'utsamaj ruwi\'</string>
+  <!-- Content description (not visible, for screen readers etc.): Return to tab manager -->
+  <string name="tab_manager_search_bar_back_content_description">Titzolin pa kinuk\'ulem taq ruwi\'</string>
   <!-- Open tabs menu item to save tabs to collection -->
   <string name="tabs_menu_save_to_collection1">Keyak ruwi\' pa mol</string>
   <!-- Text for the menu button to delete a collection -->
@@ -1605,6 +1629,24 @@
   <string name="pwa_site_controls_title_private">%1$s (Ichinan Rub\'anikil)</string>
   <!-- Content description (not visible, for screen readers etc.) for the button to open the Tab Search feature to search through tabs. -->
   <string name="tab_manager_open_tab_search">Tijay kanoxik pa ruwi\'</string>
+  <!-- Title for introducing tab groups via an onboarding card shown in the tab manager. -->
+  <string name="tab_group_onboarding_item_title">Titz\'uk jun molaj ruwi\'</string>
+  <!-- Description for tab groups onboarding shown in the tab manager when in grid view. -->
+  <string name="tab_group_onboarding_grid_item_description">Taqirirej jun ruwi\' pa ruwi\' jun chik richin ye\'atzob\'ajij.</string>
+  <!-- Description for tab groups onboarding shown in the tab manager when in list view. -->
+  <string name="tab_group_onboarding_list_item_description">Ke\'acha\' k\'ïy taq ruwi\' richin natz\'ük jun molaj.</string>
+  <!-- Content description (accessibility label) for button to dismiss the tab group onboarding item. -->
+  <string name="tab_group_onboarding_item_dismiss_content_description">Tixutüx ruya\'ik pa jun rumolaj ruwi\'</string>
+  <!-- The header text displayed on the tab groups page when no tab groups are open -->
+  <string name="tab_manager_empty_tab_groups_page_header">Ke\'atojtob\'ej molaj taq ruwi\' richin jub\'a\' nasiloj ke ri\' k\'ïy nab\'än</string>
+  <!-- The description displayed on the tab groups page when no tab groups are open -->
+  <string name="tab_manager_empty_tab_groups_page_description">Ke\'acha\' ri taq ruwi\' richin natz\'ük jun molaj. Wawe\' xkeyak, xa xe chik yeb\'e\'ajek\'a\' pe.</string>
+  <!--
+    Tab Group
+
+    Title for the create tab group bottom sheet
+  -->
+  <string name="create_tab_group_title">Titz\'uk molaj ruwi\'</string>
   <!-- Title for the edit tab group bottom sheet -->
   <string name="edit_tab_group_title">Tinuk\' molaj</string>
   <string name="create_tab_group_save_button">Tiyak</string>
@@ -1617,22 +1659,81 @@
   <string name="create_tab_group_form_default_name">Molaj %d</string>
   <!-- Label for the tab group name field in the bottom sheet to create or edit a tab group. -->
   <string name="create_tab_group_name_label">B\'i\'aj</string>
+  <!-- Title for adding more tabs to a tab group. -->
+  <string name="add_to_tab_group_title">Titz\'aqatisáx pa</string>
   <!-- Content Description for closing the "Add to Tab Group" panel. -->
   <string name="add_to_tab_group_bottom_sheet_grabber_content_description">Titz\'aqatisäx pa jun molaj, tich\'utinisäx rusamajib\'al qirirenïk</string>
   <!-- Content Description for "New tab group" panel. -->
   <string name="add_to_new_tab_group_content_description">Titz\'aqatisäx pa jun k\'ak\'a\' molaj ruwi\'</string>
+  <!-- Label for adding to a new tab group. -->
+  <string name="add_to_new_tab_group_title">K\'ak\'a\' molaj ruwi\'</string>
+  <plurals name="tab_group_tabs_count_subtitle">
+    <!--
+      Subtitle for the number of tabs in a tab group.
+      %1$d is the number of tabs in a tab group.
+    -->
+    <item quantity="one">%1$d ruwi\'</item>
+    <item quantity="other">%1$d taq ruwi\'</item>
+  </plurals>
+  <plurals name="add_to_exiting_tab_group_content_description">
+    <!--
+      Accessibility description for add to existing tab group.
+      %1$s is the group name, %2$d is the number of tabs, %3$s is the color name.
+    -->
+    <item quantity="one">Titz\'aqatisäx pa %1$s molaj ruwi\', %2$d ruwi\', %3$s b\'onil</item>
+    <item quantity="other">Titz\'aqatisäx pa %1$s molaj ruwi\', %2$d taq ruwi\', %3$s b\'onil</item>
+  </plurals>
+  <plurals name="share_tab_group_button_content_description">
+    <!--
+      Content Description for share tab group button.
+      %1$s is the name of the tab group.
+      %2$d is the number of tabs in a tab group.
+    -->
+    <item quantity="one">Titz\'aqatisäx %1$s molaj ruwi\' rik\'in %2$d ruwi\'.</item>
+    <item quantity="other">Titz\'aqatisäx %1$s molaj ruwi\' kik\'in %2$d taq ruwi\'.</item>
+  </plurals>
+  <!-- Content description for the grabber/handle of the tab group bottom sheet. -->
+  <string name="tab_group_sheet_dismiss_description">Titz\'et molaj ruwi\', tich\'utinisäx rusamajib\'al qirirenïk</string>
+  <plurals name="expanded_tab_group_header_description">
+    <!--
+      Accessibility description for the header of an expanded tab group.
+      %1$s is the group name, %2$d is the number of tabs, %3$s is the color name.
+    -->
+    <item quantity="one">%1$s molaj ruwi\' rik\'in %2$d ruwi\', %3$s b\'onil</item>
+    <item quantity="other">%1$s molaj ruwi\' kik\'in %2$d taq ruwi\', %3$s b\'onil</item>
+  </plurals>
+  <!-- Title for the Delete tab group confirmation dialog. -->
+  <string name="delete_tab_group_confirmation_dialog_title">¿La niyuj molaj ruwi\'?</string>
+  <!-- Text shown in the body of the Delete tab group confirmation dialog. -->
+  <string name="delete_tab_group_confirmation_dialog_body">Rere\' xe tal xtuyuj ri molaj.</string>
   <!-- Text shown on the confirm button in the Delete tab group confirmation dialog. -->
   <string name="delete_tab_group_confirmation_dialog_confirm">Tiyuj molaj</string>
   <!-- Text shown on the cancel button in the Delete tab group confirmation dialog. -->
   <string name="delete_tab_group_confirmation_dialog_cancel">Tiq\'at</string>
   <!-- Title for the Close last tab and delete tab group confirmation dialog. -->
   <string name="close_tab_and_delete_group_confirmation_dialog_title">¿Ketz\'apïx taq ruwi\' chuqa\' tiyuj molaj?</string>
+  <!-- Text shown in the body of the Close last tab and delete tab group confirmation dialog. -->
+  <string name="close_tab_and_delete_group_confirmation_dialog_body">Rere\' xe tal xtuyuj ri molaj.</string>
   <!-- Text shown on the confirm button in the Close last tab and delete tab group confirmation dialog. -->
   <string name="close_tab_and_delete_group_confirmation_dialog_confirm">Tiyuj molaj</string>
   <!-- Text shown on the cancel button in the Close last tab and delete tab group confirmation dialog. -->
   <string name="close_tab_and_delete_group_confirmation_dialog_cancel">Tiq\'at</string>
   <!-- Content description for the three dot button next to a tab group" -->
   <string name="tab_group_three_dot_button_content_description">Ch\'aqa\' taq cha\'oj</string>
+  <!-- Text shown on the edit button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_edit">Tinuk\'</string>
+  <!-- Text shown on the ungroup button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_ungroup">Memolaj</string>
+  <!-- Text shown on the delete button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_delete">Tiyuj</string>
+  <!-- Text shown on the share button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_share">Tikomonïx</string>
+  <!-- Text shown on the close button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_close">Titz\'apïx</string>
+  <!-- Title for the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_title">¿La nimemolajïx ri molaj ruwi\'?</string>
+  <!-- Text shown in the body of the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_body">Ri taq ruwi\' xe tal xkejaq pa re okisaxel re\', xa xe chi xtiyuj ri molaj.</string>
   <!-- Text shown on the Don't Ask Again checkbox button in the Ungroup tab group confirmation dialog. -->
   <string name="ungroup_tab_group_confirmation_dialog_dont_ask_again">Mani nik\'utüx chik</string>
   <!-- Text shown on the confirm button in the Ungroup tab group confirmation dialog. -->
@@ -1655,6 +1756,12 @@
   <string name="tab_group_color_purple">Purpura\'</string>
   <!-- Tab group color: Blue -->
   <string name="tab_group_color_blue">Xar</string>
+  <!-- Tab group color: Cyan -->
+  <string name="tab_group_color_cyan">Cyan</string>
+  <!-- Tab group color: Green -->
+  <string name="tab_group_color_green">Räx</string>
+  <!-- Tab group color: Grey -->
+  <string name="tab_group_color_grey">Chaj</string>
   <!--
     History
 
@@ -1733,6 +1840,11 @@
     This button will dismiss the dialog.
   -->
   <string name="download_file_has_not_enough_storage_dialog_cancel_button_text">Tiq\'at</string>
+  <plurals name="downloads_delete_dialog_title">
+    <!-- Title for the download deletion confirmation dialog. The message changes depending on how many files are selected. %d is the number of files to be deleted. -->
+    <item quantity="one">¿La niyuj yakb\'äl?</item>
+    <item quantity="other">¿La yeyuj %d yakb\'äl?</item>
+  </plurals>
   <!-- Text for the button to delete a single downloaded file item -->
   <string name="download_delete_item">Tiyuj</string>
   <!-- Content description for the toolbar "Navigate back" button -->
@@ -1764,12 +1876,31 @@
   <string name="download_delete_multi_select_dialog_confirm">Tiyuj</string>
   <!-- Alert dialog confirmation before deleting multiple download items, this is the negative action. -->
   <string name="download_delete_multi_select_dialog_cancel">Tiq\'at</string>
+  <!-- Alert dialog confirmation before deleting a single download item or many download items, this is one of the radio buttons within the dialog box for the user to select. -->
+  <string name="download_delete_dialog_from_device">Tiyuj pan okisaxel</string>
+  <!-- Alert dialog confirmation before deleting a single download item or many download items, this is one of the radio buttons within the dialog box for the user to select. -->
+  <string name="download_delete_dialog_from_history">Xa xe tiyuj pa runatab\'al qasanïk</string>
+  <!-- Alert dialog confirmation before deleting a single download item or many download items, this is the negative action. -->
+  <string name="download_delete_dialog_cancel">Tiq\'at</string>
+  <!-- Alert dialog confirmation before deleting a single download item or many download items, this is the positive action. -->
+  <string name="download_delete_dialog_confirm">Tijikib\'äx</string>
   <!-- Title for the alert dialog confirmation before renaming a download item. -->
   <string name="download_rename_dialog_title">Tisik\'ïx chik ri ruwäch b\'i\'aj</string>
   <!-- Label for the name field in the alert dialog confirmation before renaming a download item. -->
   <string name="download_rename_dialog_label">B\'i\'aj</string>
   <string name="download_rename_dialog_confirm_button">Tiyak</string>
   <string name="download_rename_dialog_cancel_button">Tiq\'at</string>
+  <!--
+    Error message when renaming with a name that already exists.
+    %s is the proposed file name.
+  -->
+  <string name="download_rename_error_exists_error">Jun yakb\'äl rub\'inia\'an “%s” k\'o chik pa rek\'ojlib\'äl re\'</string>
+  <!-- Error message when renaming with an invalid file name. -->
+  <string name="download_rename_error_invalid_name_error">Ri kib\'i\' yakb\'äl man ruk\'amon ta kik\'wan “/”</string>
+  <!-- Error message shown when a user tries to rename a downloaded file but only changes the casing (e.g., "file.txt" to "File.txt"). -->
+  <string name="download_rename_error_case_only_error">Ri b\'i\'aj xatz\'ib\'aj xa xe nujäl ri\' ruma nïm o ch\'utitz\'ib\'. Tatojtob\'ej jun chik rub\'i yakb\'äl.</string>
+  <!-- Title for the alert dialog when the file cannot be renamed. -->
+  <string name="download_rename_error_cannot_rename_title">Man tikirel ta nijal rub\'i\' yakb\'äl</string>
   <string name="download_rename_error_dismiss_button">ÜTZ</string>
   <string name="change_file_extension_cancel_button">Tiq\'at</string>
   <string name="change_file_extension_confirm_button">Ja\', tijal</string>

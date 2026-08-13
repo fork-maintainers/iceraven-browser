@@ -872,6 +872,8 @@
   <string name="preferences_toolbar_shortcut">Bližnjica v orodni vrstici</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_toolbar_select_shortcut">Izberite bližnjico</string>
+  <!-- Title of a menu option allowing to change the shortcut button shown in the toolbar -->
+  <string name="toolbar_shortcut_menu_edit_option">Uredi bližnjico</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_gestures">Poteze</string>
   <!-- Preference for settings related to visual options -->
@@ -1496,6 +1498,14 @@
   <string name="preferences_inactive_tabs">Premakni stare zavihke med nedejavne</string>
   <!-- Title of inactive tabs preference -->
   <string name="preferences_inactive_tabs_title">Zavihki, ki jih dva tedna niste odprli, se premaknejo v razdelek nedejavnih.</string>
+  <!--
+    Privacy report
+
+    Category header of a preference that allows a user to enable or disable the privacy report feature
+  -->
+  <string name="preferences_privacy_report">Poročilo o zasebnosti</string>
+  <!-- Title of the privacy report preference that allows a user to enable or disable the feature -->
+  <string name="preferences_privacy_report_title">Omogoči poročilo o zasebnosti</string>
   <!--
     Studies
 
@@ -4755,6 +4765,16 @@
   <string name="privacy_notice_updated_homepage_message_privacy_notice" tools:ignore="UnusedResources">obvestilo o zasebnosti</string>
   <!-- The second active link used in privacy_notice_updated_homepage_message -->
   <string name="privacy_notice_updated_homepage_message_learn_more" tools:ignore="UnusedResources">Več o tem</string>
+  <!--
+    Collections migration homepage card
+
+    Title shown on the collections to tab groups migration card on the homepage.
+  -->
+  <string name="collections_migration_homepage_banner_title">Zbirke so postale skupine</string>
+  <!-- Message shown on the collections to tab groups migration card on the homepage. -->
+  <string name="collections_migration_homepage_card_message">Zavihke lahko organizirate na preprostejši način</string>
+  <!-- Link text shown on the collections to tab groups migration card that opens the tab groups page in the tab manager. -->
+  <string name="collections_migration_homepage_card_link">Prikaži moje skupine zavihkov</string>
   <!-- Google Lens prototype related strings -->
   <string name="preferences_debug_settings_google_lens_integration">Omogoči integracijo z Google Lens</string>
   <!-- Lens image search button content description -->
@@ -4843,4 +4863,8 @@
   <string name="firefox_labs_feature_conflict">Možnost ni na voljo za preskušanje.</string>
   <!-- Text displayed on the Firefox Labs screen when there are no Labs experimental features present. -->
   <string name="firefox_labs_no_labs_available_description">Trenutno ni poskusnih možnosti, ki bi jih lahko preizkusili</string>
+  <!-- Title of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">Izolacija spletnih mest</string>
+  <!-- Description of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">Dodatna zaščitna pregrada med spletnimi mesti, ki pomaga varovati vaše podatke v različnih zavihkih. Lahko vpliva na učinkovitost delovanja, stabilnost, združljivost spletnih mest in način shranjevanja zgodovine brskanja.</string>
 </resources>

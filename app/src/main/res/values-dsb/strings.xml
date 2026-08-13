@@ -872,6 +872,8 @@
   <string name="preferences_toolbar_shortcut">Zwězanje symboloweje rědki</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_toolbar_select_shortcut">Wubjeŕśo zwězanje</string>
+  <!-- Title of a menu option allowing to change the shortcut button shown in the toolbar -->
+  <string name="toolbar_shortcut_menu_edit_option">Zwězanje wobźěłaś</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_gestures">Gesty</string>
   <!-- Preference for settings related to visual options -->
@@ -1496,6 +1498,14 @@
   <string name="preferences_inactive_tabs">Stare rejtariki do „inaktiwne“ pśesunuś</string>
   <!-- Title of inactive tabs preference -->
   <string name="preferences_inactive_tabs_title">Rejtariki, kótarež njejsćo se woglědał dwa tyźenja, se do inaktiwnego wótrězka pśesunu.</string>
+  <!--
+    Privacy report
+
+    Category header of a preference that allows a user to enable or disable the privacy report feature
+  -->
+  <string name="preferences_privacy_report">Rozpšawa priwatnosći</string>
+  <!-- Title of the privacy report preference that allows a user to enable or disable the feature -->
+  <string name="preferences_privacy_report_title">Rozpšawu priwatnosći zmóžniś</string>
   <!--
     Studies
 
@@ -4755,6 +4765,16 @@
   <string name="privacy_notice_updated_homepage_message_privacy_notice" tools:ignore="UnusedResources">powěźeńku priwatnosći</string>
   <!-- The second active link used in privacy_notice_updated_homepage_message -->
   <string name="privacy_notice_updated_homepage_message_learn_more" tools:ignore="UnusedResources">Dalšne informacije</string>
+  <!--
+    Collections migration homepage card
+
+    Title shown on the collections to tab groups migration card on the homepage.
+  -->
+  <string name="collections_migration_homepage_banner_title">Zběrki su něnto kupki</string>
+  <!-- Message shown on the collections to tab groups migration card on the homepage. -->
+  <string name="collections_migration_homepage_card_message">Dajo jadnorjejšy nałog, waše rejtariki zorganizěrowane wobchowaś</string>
+  <!-- Link text shown on the collections to tab groups migration card that opens the tab groups page in the tab manager. -->
+  <string name="collections_migration_homepage_card_link">Móje kupki rejtarikow pokazaś</string>
   <!-- Google Lens prototype related strings -->
   <string name="preferences_debug_settings_google_lens_integration">Integraciju Google Lens zmóžniś</string>
   <!-- Lens image search button content description -->
@@ -4843,4 +4863,8 @@
   <string name="firefox_labs_feature_conflict">Funkcija njedajo se tuchylu wopytaś.</string>
   <!-- Text displayed on the Firefox Labs screen when there are no Labs experimental features present. -->
   <string name="firefox_labs_no_labs_available_description">Tuchylu njedajo eksperimentalne funkcije za testowanje</string>
+  <!-- Title of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">Izolacija websedła</string>
+  <!-- Description of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">Pśidatna bariera mjazy websedłami, kótaraž pomaga, waše daty na wšych rejtarikach šćitaś. Móžo wugbaśe, stabilnosć, kompatibelnosć websedła a nałog składowanja historije pśeglědowanja wobwliwowaś.</string>
 </resources>
