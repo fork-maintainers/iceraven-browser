@@ -4,7 +4,6 @@
 
 package org.mozilla.fenix.browser.infobanner
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View.GONE
@@ -40,7 +39,6 @@ open class InfoBanner(
     private val actionToPerform: (() -> Unit)? = null,
     private val currentTimeMillis: () -> Long = { System.currentTimeMillis() },
 ) {
-    @SuppressLint("InflateParams")
     @VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
     internal val binding = InfoBannerBinding.inflate(LayoutInflater.from(context), container, false)
 

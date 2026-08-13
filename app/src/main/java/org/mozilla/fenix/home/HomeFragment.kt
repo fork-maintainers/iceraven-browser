@@ -4,7 +4,6 @@
 
 package org.mozilla.fenix.home
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
@@ -212,7 +211,6 @@ class HomeFragment : Fragment() {
     private val browsingModeManager get() = (activity as HomeActivity).browsingModeManager
 
     private val collectionStorageObserver = object : TabCollectionStorage.Observer {
-        @SuppressLint("NotifyDataSetChanged")
         override fun onTabsAdded(tabCollection: TabCollection, sessions: List<TabSessionState>) {
             if (sessions.size == 1) {
                 showComposeSnackbar(

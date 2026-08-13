@@ -11,4 +11,4 @@
     android:elevation="@dimen/browser_fragment_above_toolbar_panels_elevation"
     android:outlineProvider="none"
     android:visibility="gone"
-    tools:ignore="MozMultipleConstraintLayoutsAndCustomViews,Overdraw" />
+    tools:ignore="Overdraw" />

@@ -4,7 +4,6 @@
 
 package org.mozilla.fenix
 
-import android.annotation.SuppressLint
 import android.app.ActivityManager
 import android.app.Application
 import android.content.Context
@@ -195,7 +194,6 @@ open class FenixApplication : Application(), Provider, ThemeProvider {
      * such as Nimbus, Glean and Gecko. Note that Robolectric tests override this with an empty
      * implementation that skips this initialization.
      */
-    @SuppressLint("NewApi")
     protected open fun initializeFenixProcess() {
         // [TIMER] Record the start of the [PerfStartup.applicationOnCreate] metric here. Do this
         // manually because Glean has not started initializing yet. Note that by this point the
@@ -754,7 +752,6 @@ open class FenixApplication : Application(), Provider, ThemeProvider {
         }
     }
 
-    @SuppressLint("NewApi")
     override fun onTrimMemory(level: Int) {
         super.onTrimMemory(level)
 

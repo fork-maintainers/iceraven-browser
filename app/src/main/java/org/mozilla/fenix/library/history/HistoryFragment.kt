@@ -4,7 +4,6 @@
 
 package org.mozilla.fenix.library.history
 
-import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.DialogInterface
 import android.content.Intent
@@ -721,7 +720,6 @@ class HistoryFragment :
     internal class DeleteConfirmationDialogFragment(
         private val onDeleteTimeRange: (selectedTimeFrame: RemoveTimeFrame?) -> Unit,
     ) : DialogFragment() {
-        @SuppressLint("InflateParams")
         override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
             MaterialAlertDialogBuilder(requireContext()).apply {
                 val layout = getLayoutInflater().inflate(R.layout.delete_history_time_range_dialog, null)

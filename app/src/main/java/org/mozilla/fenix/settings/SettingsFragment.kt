@@ -5,7 +5,6 @@
 package org.mozilla.fenix.settings
 
 import android.Manifest.permission.ACCESS_LOCAL_NETWORK
-import android.annotation.SuppressLint
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -247,7 +246,6 @@ class SettingsFragment : PreferenceFragmentCompat(), SystemInsetsPaddedFragment 
         )
     }
 
-    @SuppressLint("RestrictedApi")
     override fun onResume() {
         super.onResume()
 
@@ -354,7 +352,6 @@ class SettingsFragment : PreferenceFragmentCompat(), SystemInsetsPaddedFragment 
         }
     }
 
-    @SuppressLint("InflateParams")
     @Suppress("LongMethod", "CyclomaticComplexMethod")
     override fun onPreferenceTreeClick(preference: Preference): Boolean {
         // Hide the scrollbar so the animation looks smoother

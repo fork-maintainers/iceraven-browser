@@ -4,7 +4,6 @@
 
 package org.mozilla.fenix.home.topsites.controller
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.res.ColorStateList
 import android.view.LayoutInflater
@@ -183,7 +182,6 @@ class DefaultTopSiteController(
         )
     }
 
-    @SuppressLint("InflateParams")
     override fun handleEditTopSiteClicked(topSite: TopSite) {
         activity.let {
             val customLayout =
