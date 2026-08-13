@@ -245,7 +245,7 @@ android {
     }
 
     lint {
-        lintConfig = file("lint.xml")
+        lintConfig = file("../../shared-lint.xml")
         baseline = file("lint-baseline.xml")
         sarifReport = true
         sarifOutput = file("../build/reports/lint/lint-report.sarif.json")

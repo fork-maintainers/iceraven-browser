@@ -26,6 +26,9 @@ android {
     buildFeatures {
         buildConfig true
     }
+    lint {
+        lintConfig = file("../../../shared-lint.xml")
+    }
 }
 
 dependencies {
