@@ -870,6 +870,8 @@
   <string name="preferences_toolbar_shortcut">Werkbalksnelkoppeling</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_toolbar_select_shortcut">Selecteer een snelkoppeling</string>
+  <!-- Title of a menu option allowing to change the shortcut button shown in the toolbar -->
+  <string name="toolbar_shortcut_menu_edit_option">Snelkoppeling bewerken</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_gestures">Bewegingen</string>
   <!-- Preference for settings related to visual options -->
@@ -1494,6 +1496,14 @@
   <string name="preferences_inactive_tabs">Oude tabbladen naar inactief verplaatsen</string>
   <!-- Title of inactive tabs preference -->
   <string name="preferences_inactive_tabs_title">Tabbladen die u twee weken niet hebt bekeken, worden verplaatst naar de sectie Inactief.</string>
+  <!--
+    Privacy report
+
+    Category header of a preference that allows a user to enable or disable the privacy report feature
+  -->
+  <string name="preferences_privacy_report">Privacyrapport</string>
+  <!-- Title of the privacy report preference that allows a user to enable or disable the feature -->
+  <string name="preferences_privacy_report_title">Privacyrapport inschakelen</string>
   <!--
     Studies
 
@@ -4723,6 +4733,16 @@
   <string name="privacy_notice_updated_homepage_message_privacy_notice" tools:ignore="UnusedResources">Privacyverklaring</string>
   <!-- The second active link used in privacy_notice_updated_homepage_message -->
   <string name="privacy_notice_updated_homepage_message_learn_more" tools:ignore="UnusedResources">Meer info</string>
+  <!--
+    Collections migration homepage card
+
+    Title shown on the collections to tab groups migration card on the homepage.
+  -->
+  <string name="collections_migration_homepage_banner_title">Collecties zijn nu groepen</string>
+  <!-- Message shown on the collections to tab groups migration card on the homepage. -->
+  <string name="collections_migration_homepage_card_message">Er is een eenvoudiger manier om uw tabbladen geordend te houden</string>
+  <!-- Link text shown on the collections to tab groups migration card that opens the tab groups page in the tab manager. -->
+  <string name="collections_migration_homepage_card_link">Mijn tabbladgroepen bekijken</string>
   <!-- Google Lens prototype related strings -->
   <string name="preferences_debug_settings_google_lens_integration">Integratie van Google Lens inschakelen</string>
   <!-- Lens image search button content description -->
@@ -4811,4 +4831,8 @@
   <string name="firefox_labs_feature_conflict">Functie is niet beschikbaar om te proberen.</string>
   <!-- Text displayed on the Firefox Labs screen when there are no Labs experimental features present. -->
   <string name="firefox_labs_no_labs_available_description">Er zijn momenteel geen experimentele functies om te proberen</string>
+  <!-- Title of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">Website-isolatie</string>
+  <!-- Description of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">Een extra barrière tussen websites die uw gegevens tussen tabbladen helpt beschermen. Kan invloed hebben op prestaties, stabiliteit, websitecompatibiliteit en hoe navigatiegeschiedenis wordt opgeslagen.</string>
 </resources>

@@ -4740,7 +4740,7 @@
   -->
   <string name="collections_migration_homepage_banner_title">Las colecciones ahora son grupos</string>
   <!-- Message shown on the collections to tab groups migration card on the homepage. -->
-  <string name="collections_migration_homepage_card_message">Hay una forma más sencilla de mantener tus pestañas organizadas</string>
+  <string name="collections_migration_homepage_card_message">Hay una forma más simple de mantener tus pestañas organizadas</string>
   <!-- Link text shown on the collections to tab groups migration card that opens the tab groups page in the tab manager. -->
   <string name="collections_migration_homepage_card_link">Ver mis grupos de pestañas</string>
   <!-- Google Lens prototype related strings -->
@@ -4832,7 +4832,7 @@
   <!-- Text displayed on the Firefox Labs screen when there are no Labs experimental features present. -->
   <string name="firefox_labs_no_labs_available_description">No hay funciones experimentales para probar en este momento</string>
   <!-- Title of the Firefox Labs Sandboxing experiment. -->
-  <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">Aislamiento del sitio web</string>
+  <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">Aislamiento de sitio web</string>
   <!-- Description of the Firefox Labs Sandboxing experiment. -->
-  <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">Una barrera adicional entre sitios web que ayuda a proteger tus datos en todas las pestañas. Puede afectar el rendimiento, la estabilidad, la compatibilidad de los sitios web y cómo se guarda el historial de navegación.</string>
+  <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">Una barrera adicional entre sitios web que ayuda a proteger tus datos entre pestañas. Puede afectar el rendimiento, la estabilidad, la compatibilidad de los sitios web y cómo se guarda el historial de navegación.</string>
 </resources>

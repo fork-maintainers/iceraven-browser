@@ -31,6 +31,8 @@
   <string name="history_search_hint">Search history</string>
   <!-- Placeholder text shown in search bar when using bookmarks search -->
   <string name="bookmark_search_hint">Search bookmarks</string>
+  <!-- Content description for the toolbar back button while searching bookmarks -->
+  <string name="bookmark_close_search_description">Go back and close search</string>
   <!-- Placeholder text shown in search bar when using tabs search -->
   <string name="tab_search_hint">Search tabs</string>
   <!-- Placeholder text shown in the search bar when using application search engines -->
@@ -149,6 +151,8 @@
   <string name="home_screen_shortcut_open_new_private_tab_2">New private tab</string>
   <!-- Shortcut action to open Passwords screen -->
   <string name="home_screen_shortcut_passwords">Passwords</string>
+  <!-- Shortcut action to open uninstall survey -->
+  <string name="home_screen_shortcut_uninstall_survey">Uninstall, why?</string>
   <!--
     Recent Tabs
 
@@ -270,7 +274,7 @@
   <!-- Browser menu caption label for an authenticated user -->
   <string name="browser_menu_signed_in_caption">Manage what you back up and sync</string>
   <!-- Browser menu label that creates a private tab -->
-  <string name="browser_menu_new_private_tab">New Private Tab</string>
+  <string name="browser_menu_new_private_tab">New private tab</string>
   <!-- Browser menu label that navigates to the Password screen -->
   <string name="browser_menu_passwords">Passwords</string>
   <!-- Content description (not visible, for screen readers etc.) for the handle used to drag the main menu at the bottom of the screen. -->
@@ -520,7 +524,7 @@
   -->
   <string name="onboarding_redesign_tou_body_three" tools:ignore="BrandUsage,UnusedResources">To help improve the browser, Firefox sends diagnostic and interaction data to Mozilla. %1$s</string>
   <!-- Used as text for the link in onboarding_redesign_tou_body_three. -->
-  <string name="onboarding_redesign_tou_body_three_link_text" tools:ignore="UnusedResources">Manage settings</string>
+  <string name="onboarding_redesign_tou_body_three_link_text" tools:ignore="UnusedResources">Manage Settings</string>
   <!-- Terms of use (ToU) onboarding page continue button label. -->
   <string name="onboarding_redesign_tou_agree_and_continue_button_label" tools:ignore="UnusedResources">Continue</string>
   <!-- Onboarding header for the toolbar selection card. -->
@@ -643,12 +647,31 @@
     %1$s is replaced by an active link, using nova_onboarding_marketing_body_link_text as text (“How we use the data”).
   -->
   <string name="nova_onboarding_marketing_body_6" tools:ignore="BrandUsage,UnusedResources">Help us reach more people by allowing Mozilla to inform the platform you came from that you use Firefox. %1$s</string>
+  <!--
+    Marketing onboarding body. 'Firefox' and 'Mozilla' are intentionally hardcoded.
+    “Platform you came from” refers to the external app, website, store, campaign, or other source that directed the user to Firefox.
+    %1$s is replaced by an active link, using nova_onboarding_marketing_body_link_text_1 as text (“Learn More”).
+  -->
+  <string name="nova_onboarding_marketing_body_7" tools:ignore="BrandUsage">You can help us reach more people by allowing Mozilla to inform the platform you came from that you use Firefox. %1$s</string>
+  <!-- Marketing onboarding additional body text. 'Firefox' is intentionally hardcoded. -->
+  <string name="nova_onboarding_marketing_body_line_two" tools:ignore="BrandUsage">Firefox is proudly independent and dedicated to defending the open web against tech monopolies.</string>
+  <!--
+    Marketing onboarding additional body text. 'Firefox' is intentionally hardcoded.
+    “Allowing” refers to the main button “Allow and Continue”; the ask for the user is to allow communicating back to the platform.
+  -->
+  <string name="nova_onboarding_marketing_body_line_three" tools:ignore="BrandUsage">Please consider allowing to help Firefox win.</string>
   <!-- Marketing onboarding body link text. -->
   <string name="nova_onboarding_marketing_body_link_text">How we use the data</string>
+  <!-- Marketing onboarding body link text. -->
+  <string name="nova_onboarding_marketing_body_link_text_1">Learn More</string>
   <!-- Marketing onboarding primary button text. 'Firefox' is intentionally hardcoded. -->
   <string name="nova_onboarding_marketing_primary_button_text" tools:ignore="BrandUsage,UnusedResources">Help Firefox</string>
+  <!-- Marketing onboarding primary button text. -->
+  <string name="nova_onboarding_marketing_primary_button_text_3">Yes</string>
   <!-- Marketing onboarding secondary button text. -->
   <string name="nova_onboarding_marketing_secondary_button_text" tools:ignore="UnusedResources">No Thanks</string>
+  <!-- Marketing onboarding secondary button text. -->
+  <string name="nova_onboarding_marketing_secondary_button_text_2">No</string>
   <!-- Notifications onboarding title. 'Firefox' is intentionally hardcoded. -->
   <string name="nova_onboarding_notifications_title" tools:ignore="BrandUsage,UnusedResources">Notifications help you stay safer with Firefox</string>
   <!-- Notifications onboarding subtitle. 'Firefox' is intentionally hardcoded. -->
@@ -847,6 +870,8 @@
   <string name="preferences_toolbar_shortcut">Toolbar shortcut</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_toolbar_select_shortcut">Select a shortcut</string>
+  <!-- Title of a menu option allowing to change the shortcut button shown in the toolbar -->
+  <string name="toolbar_shortcut_menu_edit_option">Edit shortcut</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_gestures">Gestures</string>
   <!-- Preference for settings related to visual options -->
@@ -955,6 +980,12 @@
   <string name="notifications_allowed_summary">Allowed</string>
   <!-- Summary for notification preference indicating notifications are not allowed -->
   <string name="notifications_not_allowed_summary">Not allowed</string>
+  <!-- Preference for local network access / nearby devices in Android 17 -->
+  <string name="preferences_local_network_access">Local Network Access / Nearby Devices</string>
+  <!-- Summary for local network access preference indicating access is allowed -->
+  <string name="local_network_access_allowed_summary">Allowed</string>
+  <!-- Summary for local network access preference indicating access is not allowed -->
+  <string name="local_network_access_not_allowed_summary">Not allowed</string>
   <!--
     Add-on Permissions
 
@@ -982,7 +1013,7 @@
 
     Preference to customize the configured AMO (addons.mozilla.org) collection
   -->
-  <string name="preferences_customize_extension_collection">Custom Extension collection</string>
+  <string name="preferences_customize_extension_collection">Custom extension collection</string>
   <!-- Button caption to confirm the add-on collection configuration -->
   <string name="customize_addon_collection_ok">OK</string>
   <!-- Button caption to abort the add-on collection configuration -->
@@ -1014,6 +1045,8 @@
   <string name="customize_toggle_pocket_sponsored">Sponsored stories</string>
   <!-- Title for the opening wallpaper settings screen -->
   <string name="customize_wallpapers">Wallpapers</string>
+  <!-- Label for the menu item that opens the customize homepage settings screen. -->
+  <string name="browser_menu_customize_homepage">Customize homepage</string>
   <!-- Label for the menu item that opens the wallpaper settings screen. -->
   <string name="browser_menu_change_wallpaper">Change wallpaper</string>
   <!-- Title for the customize home screen section with sponsored shortcuts. -->
@@ -1418,7 +1451,7 @@
   <!-- Title of preference that allows a user to auto close tabs after a specified amount of time -->
   <string name="preferences_close_tabs">Close tabs</string>
   <!-- Option for auto closing tabs that will never auto close tabs, always allows user to manually close tabs -->
-  <string name="close_tabs_manually">Manually</string>
+  <string name="close_tabs_manually">Never</string>
   <!-- Option for auto closing tabs that will auto close tabs after one day -->
   <string name="close_tabs_after_one_day">After one day</string>
   <!-- Option for auto closing tabs that will auto close tabs after one week -->
@@ -1463,6 +1496,14 @@
   <string name="preferences_inactive_tabs">Move old tabs to inactive</string>
   <!-- Title of inactive tabs preference -->
   <string name="preferences_inactive_tabs_title">Tabs you haven’t viewed for two weeks get moved to the inactive section.</string>
+  <!--
+    Privacy report
+
+    Category header of a preference that allows a user to enable or disable the privacy report feature
+  -->
+  <string name="preferences_privacy_report">Privacy report</string>
+  <!-- Title of the privacy report preference that allows a user to enable or disable the feature -->
+  <string name="preferences_privacy_report_title">Enable privacy report</string>
   <!--
     Studies
 
@@ -1518,6 +1559,8 @@
   <string name="add_tab">Add tab</string>
   <!-- Content description (not visible, for screen readers etc.): Add tab button. Adds a news tab when pressed -->
   <string name="add_private_tab">Add private tab</string>
+  <!-- Content description (not visible, for screen readers etc.): Create tab group button. Opens the create tab group sheet when pressed -->
+  <string name="create_tab_group_content_description">Create tab group</string>
   <!-- Text for the tab search bar placeholder -->
   <string name="tab_manager_search_bar_placeholder">Search your tabs</string>
   <!-- Text shown in the menu to view recently closed tabs -->
@@ -1675,6 +1718,28 @@
   <string name="close_tab_and_delete_group_confirmation_dialog_confirm">Delete group</string>
   <!-- Text shown on the cancel button in the Close last tab and delete tab group confirmation dialog. -->
   <string name="close_tab_and_delete_group_confirmation_dialog_cancel">Cancel</string>
+  <!-- Content description for the three dot button next to a tab group" -->
+  <string name="tab_group_three_dot_button_content_description">More options</string>
+  <!-- Text shown on the edit button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_edit">Edit</string>
+  <!-- Text shown on the ungroup button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_ungroup">Ungroup</string>
+  <!-- Text shown on the delete button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_delete">Delete</string>
+  <!-- Text shown on the share button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_share">Share</string>
+  <!-- Text shown on the close button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_close">Close</string>
+  <!-- Title for the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_title">Ungroup tab group?</string>
+  <!-- Text shown in the body of the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_body">The tabs will remain open on this device, but the group will be deleted.</string>
+  <!-- Text shown on the Don't Ask Again checkbox button in the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_dont_ask_again">Don’t ask again</string>
+  <!-- Text shown on the confirm button in the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_confirm">Ungroup</string>
+  <!-- Text shown on the cancel button in the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_cancel">Cancel</string>
   <!--
     Color labels for tab groups, used for accessibility and selection UI.
 
@@ -1946,6 +2011,12 @@
   <string name="webcompat_reporter_label_whats_broken_3">What’s not working?</string>
   <!-- Content description for the icon button that clears the selected broken site reason in the WebCompat Reporter. -->
   <string name="webcompat_reporter_clear_reason_content_description">Clear selected reason</string>
+  <!-- The error message of the description when the user selects "Something else" as the reason, but left the description empty or too short. -->
+  <string name="webcompat_reporter_description_error">Please enter at least 10 characters</string>
+  <!-- The label/title of a mandatory field in the Web Compat Reporter feature for adding additional information. -->
+  <string name="webcompat_reporter_label_mandatory_description">Describe the problem in detail to help us investigate the issue</string>
+  <!-- The label/title of a optional field in the Web Compat Reporter feature for adding additional information. -->
+  <string name="webcompat_reporter_label_optional_description">Describe the problem in detail to help us investigate the issue (optional)</string>
   <!-- The label/title of a field in the Web Compat Reporter feature for explaining a high-level reason why the site is broken. -->
   <string name="webcompat_reporter_label_whats_broken_2">What’s broken?</string>
   <!-- The placeholder text for the dropdown where a user selects a high-level reason why the site is broken. -->
@@ -1958,6 +2029,8 @@
   <string name="webcompat_reporter_add_more_info">Add more info</string>
   <!-- The button text for the cancel button to leave the Web Compat Reporter feature. -->
   <string name="webcompat_reporter_cancel">Cancel</string>
+  <!-- The button text for the send button to submit the provided form data. -->
+  <string name="webcompat_reporter_send_report">Send report</string>
   <!-- The button text for the send button to submit the provided form data. -->
   <string name="webcompat_reporter_send">Send</string>
   <!-- Text for a snackbar to confirm the successful submission of a WebCompat report. -->
@@ -2163,6 +2236,10 @@
   <string name="bookmark_select_folder_new_folder_button_title">New folder</string>
   <!-- Bookmark snackbar message for moving a single item. %1$s is the title of the item being moved and %2$s is the new parent folder of the bookmark -->
   <string name="bookmark_moved_single_item">Moved %1$s to %2$s</string>
+  <!-- Text for bookmark search page when there are no results. -->
+  <string name="bookmark_no_search_results">No matches found.</string>
+  <!-- Additional text for bookmark search page when there are no results. -->
+  <string name="bookmark_no_search_results_additional_text">Try another search!</string>
   <!--
     Site Permissions
 
@@ -2280,9 +2357,9 @@
   <!-- Button to add new collection for the "select collection" step of the collection creator -->
   <string name="create_collection_add_new_collection">Add new collection</string>
   <!-- Button to select all tabs in the "select tabs" step of the collection creator -->
-  <string name="create_collection_select_all">Select All</string>
+  <string name="create_collection_select_all">Select all</string>
   <!-- Button to deselect all tabs in the "select tabs" step of the collection creator -->
-  <string name="create_collection_deselect_all">Deselect All</string>
+  <string name="create_collection_deselect_all">Deselect all</string>
   <!-- Text to prompt users to select the tabs to save in the "select tabs" step of the collection creator -->
   <string name="create_collection_save_to_collection_empty">Select tabs to save</string>
   <!--
@@ -2364,6 +2441,10 @@
   <string name="sync_sign_in">Sign in to Sync</string>
   <!-- An option from the share dialog to send link to all other sync devices -->
   <string name="sync_send_to_all">Send to all devices</string>
+  <!-- Text displayed when no other sync devices are available for link sharing -->
+  <string name="sync_no_devices_available">No devices available</string>
+  <!-- Text displayed when no other sync devices are available for link sharing. -->
+  <string name="sync_no_devices_available_description">Any devices signed in and syncing to this account will appear here.</string>
   <!-- An option from the share dialog to reconnect to sync -->
   <string name="sync_reconnect">Reconnect to Sync</string>
   <!-- Text displayed when sync is offline and cannot be accessed -->
@@ -2420,6 +2501,8 @@
   <string name="preferences_take_survey">Take Survey</string>
   <!-- Preference for not taking the short survey. -->
   <string name="preferences_not_take_survey">No Thanks</string>
+  <!-- Error message shown in a Toast when the system fails to trigger the device uninstallation prompt. -->
+  <string name="uninstall_survey_error_failed">Failed to open the system uninstall prompt, please use the system uninstall action directly.</string>
   <!--
     Snackbar
 
@@ -2495,7 +2578,7 @@
   <!-- Title for the Delete browsing data on quit preference -->
   <string name="preferences_delete_browsing_data_on_quit">Delete browsing data on quit</string>
   <!-- Summary for the Delete browsing data on quit preference. "Quit" translation should match delete_browsing_data_on_quit_action translation. -->
-  <string name="preference_summary_delete_browsing_data_on_quit_2">Automatically deletes browsing data when you select \"Quit\" from the main menu</string>
+  <string name="preference_summary_delete_browsing_data_on_quit_2">Automatically deletes browsing data when you select “Quit” from the main menu</string>
   <!-- Title text of a delete browsing data dialog. -->
   <string name="delete_history_prompt_title">Time range to delete</string>
   <!-- Body text of a delete browsing data dialog. -->
@@ -2734,7 +2817,7 @@
 
     Preference title for DNS over HTTPS settings
   -->
-  <string name="preference_doh_title">DNS Over HTTPS</string>
+  <string name="preference_doh_title">DNS over HTTPS</string>
   <!-- Description of the preference to enable "DNS over HTTPS". %1$s is replaced by a link using `preference_doh_learn_more` at text ("Learn More"). -->
   <string name="preference_doh_summary">Domain Name System (DNS) over HTTPS sends your request for a domain name through an encrypted connection, providing a secure DNS and making it harder for others to see which website you’re about to access. %1$s</string>
   <!-- Used as text for the link in `preference_doh_title`, points to documentation about "DNS over HTTPS" -->
@@ -3091,6 +3174,16 @@
   <string name="ip_protection_data_limit_reached_snackbar">%1$d GB of VPN data used. Access will reset next month.</string>
   <!-- Snackbar (in-app pop-up notification) action button text that takes the user to the VPN settings screen. -->
   <string name="ip_protection_data_limit_reached_snackbar_action">Settings</string>
+  <!-- Description shown on the browser VPN settings screen prompting the user to turn the VPN on. -->
+  <string name="ip_protection_settings_description" tools:ignore="UnusedResources">Turn VPN on to make your browsing more private and harder to trace.</string>
+  <!-- Title shown on the browser VPN settings screen for location selection section. -->
+  <string name="ip_protection_location_title" tools:ignore="UnusedResources">Location</string>
+  <!-- Label for the Recommended server location option which is automatically selected by the browser. -->
+  <string name="ip_protection_recommended_location" tools:ignore="UnusedResources">Recommended</string>
+  <!-- Headline for the card that promotes the standalone Mozilla VPN product. -->
+  <string name="ip_protection_mozilla_vpn_upsell_headline" tools:ignore="UnusedResources,BrandUsage">Protect more with Mozilla VPN</string>
+  <!-- Body for the card that promotes the standalone Mozilla VPN product. -->
+  <string name="ip_protection_mozilla_vpn_upsell_body" tools:ignore="UnusedResources">Choose from 300+ locations and protect all your apps on up to 5 devices.</string>
   <!-- Label for the button that takes the user to get the standalone Mozilla VPN product. -->
   <string name="ip_protection_mozilla_vpn_upsell_button" tools:ignore="UnusedResources,BrandUsage">Get Mozilla VPN</string>
   <!-- Title for the browser VPN location picker screen. -->
@@ -3373,7 +3466,7 @@
   <!-- This is the hint text that is shown inline on the hostname field of the create new login page. 'https://www.example.com' intentionally hardcoded here -->
   <string name="add_login_hostname_hint_text">https://www.example.com</string>
   <!-- This is an error message shown below the hostname field of the add login page when a hostname does not contain http or https. -->
-  <string name="add_login_hostname_invalid_text_3">Web address must contain \"https://\" or \"http://\"</string>
+  <string name="add_login_hostname_invalid_text_3">Web address must contain “https://” or “http://”</string>
   <!-- This is an error message shown below the hostname field of the add login page when a hostname is invalid. -->
   <string name="add_login_hostname_invalid_text_2">Valid hostname required</string>
   <!--
@@ -4000,7 +4093,7 @@
   <!-- The survey completion confirmation text -->
   <string name="micro_survey_feedback_confirmation">Thanks for your feedback!</string>
   <!-- Option for likert scale -->
-  <string name="likert_scale_option_1" tools:ignore="UnusedResources">Very Satisfied</string>
+  <string name="likert_scale_option_1" tools:ignore="UnusedResources">Very satisfied</string>
   <!-- Option for likert scale -->
   <string name="likert_scale_option_2" tools:ignore="UnusedResources">Satisfied</string>
   <!-- Option for likert scale -->
@@ -4008,7 +4101,7 @@
   <!-- Option for likert scale -->
   <string name="likert_scale_option_4" tools:ignore="UnusedResources">Dissatisfied</string>
   <!-- Option for likert scale -->
-  <string name="likert_scale_option_5" tools:ignore="UnusedResources">Very Dissatisfied</string>
+  <string name="likert_scale_option_5" tools:ignore="UnusedResources">Very dissatisfied</string>
   <!-- Option for likert scale -->
   <string name="likert_scale_option_6" tools:ignore="UnusedResources">I don’t use it</string>
   <!-- Option for likert scale. Note: The word "Firefox" should NOT be translated. -->
@@ -4607,7 +4700,7 @@
   <!-- Content description (for accessibility, not displayed) for the remove button that removes the sports widget from the homepage. -->
   <string name="sports_widget_remove_content_description" tools:ignore="UnusedResources">Remove World Cup from home</string>
   <!-- Title shown on the sports widget immediately after the user has followed a team. %s is the selected team (e.g., "USA"). -->
-  <string name="sports_widget_team_followed_title">Following: %s</string>
+  <string name="sports_widget_team_followed_title">Following: \n%s</string>
   <!-- Description shown on the sports widget immediately after the user has followed a team -->
   <string name="sports_widget_team_followed_description">Check back for match info as the tournament approaches.</string>
   <!-- Sports widget match status label shown during first half of a match. -->
@@ -4640,6 +4733,16 @@
   <string name="privacy_notice_updated_homepage_message_privacy_notice" tools:ignore="UnusedResources">Privacy Notice</string>
   <!-- The second active link used in privacy_notice_updated_homepage_message -->
   <string name="privacy_notice_updated_homepage_message_learn_more" tools:ignore="UnusedResources">Learn more</string>
+  <!--
+    Collections migration homepage card
+
+    Title shown on the collections to tab groups migration card on the homepage.
+  -->
+  <string name="collections_migration_homepage_banner_title">Collections are now groups</string>
+  <!-- Message shown on the collections to tab groups migration card on the homepage. -->
+  <string name="collections_migration_homepage_card_message">There’s a simpler way to keep your tabs organized</string>
+  <!-- Link text shown on the collections to tab groups migration card that opens the tab groups page in the tab manager. -->
+  <string name="collections_migration_homepage_card_link">View my tab groups</string>
   <!-- Google Lens prototype related strings -->
   <string name="preferences_debug_settings_google_lens_integration">Enable Google Lens Integration</string>
   <!-- Lens image search button content description -->
@@ -4728,4 +4831,8 @@
   <string name="firefox_labs_feature_conflict">Feature isn’t available to try.</string>
   <!-- Text displayed on the Firefox Labs screen when there are no Labs experimental features present. -->
   <string name="firefox_labs_no_labs_available_description">No experimental features to try right now</string>
+  <!-- Title of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">Website isolation</string>
+  <!-- Description of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">An extra barrier between websites that helps protect your data across tabs. May affect performance, stability, website compatibility, and how browsing history is saved.</string>
 </resources>

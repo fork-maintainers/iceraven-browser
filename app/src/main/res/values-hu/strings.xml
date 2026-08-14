@@ -870,6 +870,8 @@
   <string name="preferences_toolbar_shortcut">Eszköztár indítóikonja</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_toolbar_select_shortcut">Válasszon egy indítóikont</string>
+  <!-- Title of a menu option allowing to change the shortcut button shown in the toolbar -->
+  <string name="toolbar_shortcut_menu_edit_option">Indítóikon szerkesztése</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_gestures">Kézmozdulatok</string>
   <!-- Preference for settings related to visual options -->
@@ -1494,6 +1496,14 @@
   <string name="preferences_inactive_tabs">Régi lapok áthelyezése az inaktívak közé</string>
   <!-- Title of inactive tabs preference -->
   <string name="preferences_inactive_tabs_title">Azok a lapok, melyeket két hete nem nézett meg, átkerülnek az inaktív részbe.</string>
+  <!--
+    Privacy report
+
+    Category header of a preference that allows a user to enable or disable the privacy report feature
+  -->
+  <string name="preferences_privacy_report">Adatvédelmi jelentés</string>
+  <!-- Title of the privacy report preference that allows a user to enable or disable the feature -->
+  <string name="preferences_privacy_report_title">Adatvédelmi jelentés engedélyezése</string>
   <!--
     Studies
 
@@ -4723,6 +4733,16 @@
   <string name="privacy_notice_updated_homepage_message_privacy_notice" tools:ignore="UnusedResources">Adatvédelmi nyilatkozat</string>
   <!-- The second active link used in privacy_notice_updated_homepage_message -->
   <string name="privacy_notice_updated_homepage_message_learn_more" tools:ignore="UnusedResources">További tudnivalók</string>
+  <!--
+    Collections migration homepage card
+
+    Title shown on the collections to tab groups migration card on the homepage.
+  -->
+  <string name="collections_migration_homepage_banner_title">A gyűjtemények mostantól csoportok</string>
+  <!-- Message shown on the collections to tab groups migration card on the homepage. -->
+  <string name="collections_migration_homepage_card_message">Van egy egyszerűbb módja a lapok rendszerezésének</string>
+  <!-- Link text shown on the collections to tab groups migration card that opens the tab groups page in the tab manager. -->
+  <string name="collections_migration_homepage_card_link">Saját lapcsoportok megtekintése</string>
   <!-- Google Lens prototype related strings -->
   <string name="preferences_debug_settings_google_lens_integration">Google Lens integráció engedélyezése</string>
   <!-- Lens image search button content description -->
@@ -4811,4 +4831,8 @@
   <string name="firefox_labs_feature_conflict">A funkció nem próbálható ki.</string>
   <!-- Text displayed on the Firefox Labs screen when there are no Labs experimental features present. -->
   <string name="firefox_labs_no_labs_available_description">Jelenleg nincsenek kipróbálható kísérleti funkciók</string>
+  <!-- Title of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">Webhelyek elkülönítése</string>
+  <!-- Description of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">További védelem a webhelyek között, amely segít megvédeni az adatait a lapok között. Befolyásolhatja a teljesítményt, a stabilitást, a webhely-kompatibilitást, és a böngészési előzmények mentési módját.</string>
 </resources>

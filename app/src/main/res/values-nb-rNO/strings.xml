@@ -870,6 +870,8 @@
   <string name="preferences_toolbar_shortcut">Verktøylinje-snarvei</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_toolbar_select_shortcut">Velg en snarvei</string>
+  <!-- Title of a menu option allowing to change the shortcut button shown in the toolbar -->
+  <string name="toolbar_shortcut_menu_edit_option">Rediger snarvei</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_gestures">Bevegelser</string>
   <!-- Preference for settings related to visual options -->
@@ -1494,6 +1496,14 @@
   <string name="preferences_inactive_tabs">Flytt gamle faner til inaktive</string>
   <!-- Title of inactive tabs preference -->
   <string name="preferences_inactive_tabs_title">Faner du ikke har vist på to uker, flyttes til den inaktive delen.</string>
+  <!--
+    Privacy report
+
+    Category header of a preference that allows a user to enable or disable the privacy report feature
+  -->
+  <string name="preferences_privacy_report">Personvernrapport</string>
+  <!-- Title of the privacy report preference that allows a user to enable or disable the feature -->
+  <string name="preferences_privacy_report_title">Aktiver personvernrapport</string>
   <!--
     Studies
 
@@ -4723,6 +4733,16 @@
   <string name="privacy_notice_updated_homepage_message_privacy_notice" tools:ignore="UnusedResources">Personvernerklæring</string>
   <!-- The second active link used in privacy_notice_updated_homepage_message -->
   <string name="privacy_notice_updated_homepage_message_learn_more" tools:ignore="UnusedResources">Les mer</string>
+  <!--
+    Collections migration homepage card
+
+    Title shown on the collections to tab groups migration card on the homepage.
+  -->
+  <string name="collections_migration_homepage_banner_title">Samlinger er nå grupper</string>
+  <!-- Message shown on the collections to tab groups migration card on the homepage. -->
+  <string name="collections_migration_homepage_card_message">Det finnes en enklere måte å holde fanene dine organisert på</string>
+  <!-- Link text shown on the collections to tab groups migration card that opens the tab groups page in the tab manager. -->
+  <string name="collections_migration_homepage_card_link">Vis fanegruppene mine</string>
   <!-- Google Lens prototype related strings -->
   <string name="preferences_debug_settings_google_lens_integration">Aktiver Google Lens-integrasjon</string>
   <!-- Lens image search button content description -->
@@ -4811,4 +4831,8 @@
   <string name="firefox_labs_feature_conflict">Funksjonen er ikke tilgjengelig for testing.</string>
   <!-- Text displayed on the Firefox Labs screen when there are no Labs experimental features present. -->
   <string name="firefox_labs_no_labs_available_description">Ingen eksperimentelle funksjoner å prøve akkurat nå</string>
+  <!-- Title of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">Nettstedisolering</string>
+  <!-- Description of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">En ekstra barriere mellom nettsteder som bidrar til å beskytte dataene dine på tvers av faner. Kan påvirke ytelse, stabilitet, nettstedskompatibilitet og hvordan nettleserloggen lagres.</string>
 </resources>

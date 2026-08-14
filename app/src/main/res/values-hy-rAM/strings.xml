@@ -870,6 +870,8 @@
   <string name="preferences_toolbar_shortcut">Գործիքագոտու դյուրանցում</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_toolbar_select_shortcut">Ընտրեք դյուրացնում</string>
+  <!-- Title of a menu option allowing to change the shortcut button shown in the toolbar -->
+  <string name="toolbar_shortcut_menu_edit_option">Խմբագրել դյուրանցումը</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_gestures">Ժեստեր</string>
   <!-- Preference for settings related to visual options -->
@@ -1495,6 +1497,14 @@
   <!-- Title of inactive tabs preference -->
   <string name="preferences_inactive_tabs_title">Ներդիրները, որոնք չեք դիտել երկու շաբաթ, տեղափոխվել են անգործուն հատված:</string>
   <!--
+    Privacy report
+
+    Category header of a preference that allows a user to enable or disable the privacy report feature
+  -->
+  <string name="preferences_privacy_report">Գաղտնիության զեկույց</string>
+  <!-- Title of the privacy report preference that allows a user to enable or disable the feature -->
+  <string name="preferences_privacy_report_title">Միացնել գաղտնիության մասին հաշվետվությունը</string>
+  <!--
     Studies
 
     Title of the remove studies button
@@ -1716,6 +1726,8 @@
   <string name="tab_group_three_dot_menu_ungroup">Ապախմբավորել</string>
   <!-- Text shown on the delete button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_delete">Ջնջել</string>
+  <!-- Text shown on the share button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_share">Համօգտագործել</string>
   <!-- Text shown on the close button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_close">Փակել</string>
   <!-- Title for the Ungroup tab group confirmation dialog. -->
@@ -4721,6 +4733,16 @@
   <string name="privacy_notice_updated_homepage_message_privacy_notice" tools:ignore="UnusedResources">Գաղտնիության դրույթներ</string>
   <!-- The second active link used in privacy_notice_updated_homepage_message -->
   <string name="privacy_notice_updated_homepage_message_learn_more" tools:ignore="UnusedResources">Իմանալ ավելին</string>
+  <!--
+    Collections migration homepage card
+
+    Title shown on the collections to tab groups migration card on the homepage.
+  -->
+  <string name="collections_migration_homepage_banner_title">Հավաքածուներն այժմ խմբավորված են</string>
+  <!-- Message shown on the collections to tab groups migration card on the homepage. -->
+  <string name="collections_migration_homepage_card_message">Կա ձեր ներդիրները կազմակերպված պահելու ավելի պարզ միջոց</string>
+  <!-- Link text shown on the collections to tab groups migration card that opens the tab groups page in the tab manager. -->
+  <string name="collections_migration_homepage_card_link">Դիտել իմ ներդիրների խմբերը</string>
   <!-- Google Lens prototype related strings -->
   <string name="preferences_debug_settings_google_lens_integration">Միացնել Google Lens-ի ինտեգրումը</string>
   <!-- Lens image search button content description -->
@@ -4809,4 +4831,8 @@
   <string name="firefox_labs_feature_conflict">Գործառույթը հասանելի չէ փորձարկելու համար։</string>
   <!-- Text displayed on the Firefox Labs screen when there are no Labs experimental features present. -->
   <string name="firefox_labs_no_labs_available_description">Այս պահին փորձարկման համար փորձնական գործառույթներ չկան</string>
+  <!-- Title of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">Կայքի մեկուսացում</string>
+  <!-- Description of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">Լրացուցիչ պատնեշ կայքերի միջև, որը օգնում է պաշտպանել ձեր տվյալները տարբեր ներդիրներում: Կարող է ազդել աշխատանքի, կայունության, կայքերի համատեղելիության և զննարկման պատմության պահպանման վրա:</string>
 </resources>

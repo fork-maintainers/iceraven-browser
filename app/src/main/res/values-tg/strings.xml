@@ -870,6 +870,8 @@
   <string name="preferences_toolbar_shortcut">Миёнбури навори абзорҳо</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_toolbar_select_shortcut">Миёнбуреро интихоб кунед</string>
+  <!-- Title of a menu option allowing to change the shortcut button shown in the toolbar -->
+  <string name="toolbar_shortcut_menu_edit_option">Таҳрир кардани миёнбур</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_gestures">Ишораҳо</string>
   <!-- Preference for settings related to visual options -->
@@ -1494,6 +1496,14 @@
   <string name="preferences_inactive_tabs">Варақаҳои куҳнаро ба ғайрифаъол интиқол диҳед</string>
   <!-- Title of inactive tabs preference -->
   <string name="preferences_inactive_tabs_title">Варақаҳое, ки шумо ду ҳафта такроран надидаед, ба қисмати ғайрифаъол интиқол дода мешаванд.</string>
+  <!--
+    Privacy report
+
+    Category header of a preference that allows a user to enable or disable the privacy report feature
+  -->
+  <string name="preferences_privacy_report">Гузориш дар бораи махфият</string>
+  <!-- Title of the privacy report preference that allows a user to enable or disable the feature -->
+  <string name="preferences_privacy_report_title">Фаъол кардани гузориш дар бораи махфият</string>
   <!--
     Studies
 

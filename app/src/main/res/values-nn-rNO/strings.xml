@@ -4739,6 +4739,8 @@
     Title shown on the collections to tab groups migration card on the homepage.
   -->
   <string name="collections_migration_homepage_banner_title">Samlingar er no grupper</string>
+  <!-- Message shown on the collections to tab groups migration card on the homepage. -->
+  <string name="collections_migration_homepage_card_message">Det finst ein enklare måte å halde fanene dine organiserte på</string>
   <!-- Link text shown on the collections to tab groups migration card that opens the tab groups page in the tab manager. -->
   <string name="collections_migration_homepage_card_link">Vis fanegruppene mine</string>
   <!-- Google Lens prototype related strings -->
@@ -4829,4 +4831,8 @@
   <string name="firefox_labs_feature_conflict">Funksjonen er ikkje tilgjengeleg for prøving.</string>
   <!-- Text displayed on the Firefox Labs screen when there are no Labs experimental features present. -->
   <string name="firefox_labs_no_labs_available_description">Ingen eksperimentelle funksjonar å prøve akkurat no</string>
+  <!-- Title of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">Nettstadisolering</string>
+  <!-- Description of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">Ein ekstra barriere mellom nettstadar som bidreg til å verne dataa dine på tvers av faner. Kan påverke yting, stabilitet, nettstadkompatibilitet og korleis nettlesarloggen blir lagra.</string>
 </resources>
