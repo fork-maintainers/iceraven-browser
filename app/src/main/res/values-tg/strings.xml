@@ -4733,6 +4733,16 @@
   <string name="privacy_notice_updated_homepage_message_privacy_notice" tools:ignore="UnusedResources">Огоҳномаи махфият</string>
   <!-- The second active link used in privacy_notice_updated_homepage_message -->
   <string name="privacy_notice_updated_homepage_message_learn_more" tools:ignore="UnusedResources">Маълумоти бештар</string>
+  <!--
+    Collections migration homepage card
+
+    Title shown on the collections to tab groups migration card on the homepage.
+  -->
+  <string name="collections_migration_homepage_banner_title">Маҷмуаҳо акнун ба гурӯҳҳо табдил ёфтаанд</string>
+  <!-- Message shown on the collections to tab groups migration card on the homepage. -->
+  <string name="collections_migration_homepage_card_message">Роҳи осонтари барои ба тартиб даровардани варақаҳои шумо мавҷуд аст</string>
+  <!-- Link text shown on the collections to tab groups migration card that opens the tab groups page in the tab manager. -->
+  <string name="collections_migration_homepage_card_link">Намоиши гурӯҳҳои варақаҳои ман</string>
   <!-- Google Lens prototype related strings -->
   <string name="preferences_debug_settings_google_lens_integration">Фаъол кардани ҳамгироии «Google Lens»</string>
   <!-- Lens image search button content description -->
@@ -4821,4 +4831,8 @@
   <string name="firefox_labs_feature_conflict">Ин хусусият барои санҷиш дастнорас аст.</string>
   <!-- Text displayed on the Firefox Labs screen when there are no Labs experimental features present. -->
   <string name="firefox_labs_no_labs_available_description">Дар айни замон ягон хусусияти озмоишӣ барои санҷиш дастрас нест</string>
+  <!-- Title of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">Маҳдудкунии сомона</string>
+  <!-- Description of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">Монеаи иловагӣ байни сомонаҳо, ки барои ҳифзи маълумоти шумо дар варақаҳои гуногун мусоидат мекунад. Ин метавонад ба самаранокӣ, устуворӣ, мутобиқати сомонаҳо ва тарзи нигоҳдории таърихи тамошобинӣ таъсир расонад.</string>
 </resources>

@@ -15,7 +15,7 @@
   -->
   <string name="longfox">LONGFOX</string>
   <string name="likes_cookies">🍪 szereti a sütiket 🍪</string>
-  <string name="tap_to_play">koppintson a lejátszáshoz!</string>
+  <string name="tap_to_play">koppintson a játékhoz!</string>
   <!--
     %1$d is a placeholder for the current high score. HISCORE is an
     abbreviation for "Highest Score".

@@ -870,6 +870,8 @@
   <string name="preferences_toolbar_shortcut">Құралдар тақтасының жарлығы</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_toolbar_select_shortcut">Жарлықты таңдау</string>
+  <!-- Title of a menu option allowing to change the shortcut button shown in the toolbar -->
+  <string name="toolbar_shortcut_menu_edit_option">Жарлықты түзету</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_gestures">Ым қимылдар</string>
   <!-- Preference for settings related to visual options -->
@@ -1495,6 +1497,14 @@
   <!-- Title of inactive tabs preference -->
   <string name="preferences_inactive_tabs_title">Сіз екі апта бойы қарамаған беттер белсенді емес топқа жылжытылады.</string>
   <!--
+    Privacy report
+
+    Category header of a preference that allows a user to enable or disable the privacy report feature
+  -->
+  <string name="preferences_privacy_report">Жекелік есептемесі</string>
+  <!-- Title of the privacy report preference that allows a user to enable or disable the feature -->
+  <string name="preferences_privacy_report_title">Жекелік есептемесін іске қосу</string>
+  <!--
     Studies
 
     Title of the remove studies button
@@ -1716,6 +1726,8 @@
   <string name="tab_group_three_dot_menu_ungroup">Топтан шығару</string>
   <!-- Text shown on the delete button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_delete">Өшіру</string>
+  <!-- Text shown on the share button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_share">Бөлісу</string>
   <!-- Text shown on the close button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_close">Жабу</string>
   <!-- Title for the Ungroup tab group confirmation dialog. -->
@@ -4721,6 +4733,16 @@
   <string name="privacy_notice_updated_homepage_message_privacy_notice" tools:ignore="UnusedResources">Жекелік ескертуі</string>
   <!-- The second active link used in privacy_notice_updated_homepage_message -->
   <string name="privacy_notice_updated_homepage_message_learn_more" tools:ignore="UnusedResources">Көбірек білу</string>
+  <!--
+    Collections migration homepage card
+
+    Title shown on the collections to tab groups migration card on the homepage.
+  -->
+  <string name="collections_migration_homepage_banner_title">Жинақтар енді топтар болды</string>
+  <!-- Message shown on the collections to tab groups migration card on the homepage. -->
+  <string name="collections_migration_homepage_card_message">Беттеріңізді ретке келтірудің қарапайым жолы бар</string>
+  <!-- Link text shown on the collections to tab groups migration card that opens the tab groups page in the tab manager. -->
+  <string name="collections_migration_homepage_card_link">Менің беттер топтарымды қарау</string>
   <!-- Google Lens prototype related strings -->
   <string name="preferences_debug_settings_google_lens_integration">Google Lens интеграциясын іске қосу</string>
   <!-- Lens image search button content description -->
@@ -4809,4 +4831,8 @@
   <string name="firefox_labs_feature_conflict">Бұл функцияны қолданып көру үшін қолжетімсіз.</string>
   <!-- Text displayed on the Firefox Labs screen when there are no Labs experimental features present. -->
   <string name="firefox_labs_no_labs_available_description">Қазір сынап көруге болатын эксперименттік мүмкіндіктер жоқ</string>
+  <!-- Title of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">Веб-сайтты оқшаулау</string>
+  <!-- Description of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">Деректеріңізді беттер арқылы қорғауға көмектесетін веб-сайттар арасындағы қосымша тосқауыл. Өнімділікке, тұрақтылыққа, веб-сайт үйлесімділігіне және шолу тарихының сақталуына әсер етуі мүмкін.</string>
 </resources>
