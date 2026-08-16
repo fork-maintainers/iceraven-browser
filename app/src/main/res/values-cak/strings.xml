@@ -108,12 +108,6 @@
   <string name="open_in_app_cfr_negative_button_text">Tewäx</string>
   <!-- Private browsing erase action "contextual feature recommendation" (CFR) -->
 
-  <!--
-    Address bar swipe "contextual feature recommendation" (CFR)
-
-    Text for the message displayed in the contextual feature recommendation popup promoting swipe of address bar.
-  -->
-  <string name="address_bar_swipe_cfr_message_2">Tisilöx ri rusamajib\'al pa xokon o pan ajkiq\'a\' richin nik\'ëx ri ruwi\'.</string>
   <!-- Text for the info dialog when camera permissions have been denied but user tries to access a camera feature. -->
   <string name="camera_permissions_needed_message">Najowäx okem pa elesäy wachib\'äl. Jät pa runuk\'ulem Android, tachapa\' pa ya\'oj q\'ij k\'a ri\' pa tiya\' q\'ij.</string>
   <!-- Text for the positive action button to go to Android Settings to grant permissions. -->
@@ -319,14 +313,6 @@
   <string name="browser_menu_default_banner_dismiss_promotion">Timalïx rutaluxik</string>
   <!-- Content description (not visible, for screen readers etc.) for recommended extensions in main menu -->
   <string name="browser_menu_recommended_extensions_content_description">Ch\'aqa\' etamab\'äl</string>
-  <!--
-    Menu "contextual feature recommendation" (CFR)
-
-    Text for the title in the contextual feature recommendation popup promoting the menu feature.
-  -->
-  <string name="menu_cfr_title">K\'ak\'a\': ch\'utin cha\'osamaj</string>
-  <!-- Text for the message in the contextual feature recommendation popup promoting the menu feature. -->
-  <string name="menu_cfr_body">Anin tawila\' ri nakanoj, chupam ichinan okem chuqa\' taq samaj eyakon.</string>
   <!--
     Extensions management fragment
 
@@ -792,40 +778,8 @@
   <string name="preferences_pbm_lock_screen_title">Tawokisaj ri q\'atoj ruwäch richin ye\'awewaj taq ruwi\' pa ri ichinan okem</string>
   <!-- Informs the user how to access the tabs when "Use screen lock to hide tabs in private browsing" is enabled -->
   <string name="preferences_pbm_lock_screen_summary_3">Titz\'et ruwi\' rik\'in ri retal ruwi\' aq\'a\', PIN o wachaj meq\'atoj. Toq natzïj re\' chuqa\' nuq\'ät ri chapoj chuqa\' ri rokisaxik pa komon ri ruwäch.</string>
-  <!-- Label for cookie banner section in quick settings panel. -->
-  <string name="cookie_banner_blocker">Kiq\'atöy kitzijol cookie</string>
   <!-- Preference for removing cookie/consent banners from sites automatically in private mode. See reduce_cookie_banner_summary for additional context. -->
   <string name="preferences_cookie_banner_reduction_private_mode">Ruq\'atöy kitzijol taq cookie pan ichinan okem</string>
-  <!-- Text for indicating cookie banner handling is off this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_off_for_site">Chupül pa re ruxaq re\'</string>
-  <!-- Text for cancel button indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_cancel_button">Tiq\'at</string>
-  <!-- Text for request support button indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_request_support_button_2">Titaq k\'utuj</string>
-  <!-- Text for title indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_title_2">¿Tik\'utüx to\'ïk richin re ruxaq re\'?</string>
-  <!-- Label for the snackBar, after the user reports with success a website where cookie banner reducer did not work -->
-  <string name="cookie_banner_handling_report_site_snack_bar_text_2">Xtaq k\'utuj</string>
-  <!-- Text for indicating cookie banner handling is on this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_on_for_site">Tzijïl pa re ruxaq re\'</string>
-  <!-- Text for indicating that a request for unsupported site was sent to Nimbus (it's a Mozilla library for experiments), this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_unsupported_site_request_submitted_2">Xtaq ruk\'utuj to\'ïk</string>
-  <!-- Text for indicating cookie banner handling is currently not supported for this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_unsupported_site">Wakami man koch\'el ta re ruxaq re\'</string>
-  <!-- Title text for a detail explanation indicating cookie banner handling is on this site, this is shown as part of the cookie banner panel in the toolbar. %1$s is a shortened URL of the current site. -->
-  <string name="reduce_cookie_banner_details_panel_title_on_for_site_1">¿La nitzij ri kiq\'atik taq kitzijol cookie richin %1$s?</string>
-  <!-- Title text for a detail explanation indicating cookie banner handling is off this site, this is shown as part of the cookie banner panel in the toolbar. %1$s is a shortened URL of the current site. -->
-  <string name="reduce_cookie_banner_details_panel_title_off_for_site_1">¿La nichup ri ruq\'atoj kitzijol taq cookie richin %1$s?</string>
-  <!-- Title text for a detail explanation indicating cookie banner reducer didn't work for the current site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_title_unsupported_site_request_2">Man yeruq\'ät ta ri %1$s pa ruyonil ri taq kik\'utuj taq cookie pa re ruxaq re\'. Yatikïr natäq un k\'utuj richin nito\' re ruxaq re\' ri chwa\'q kab\'ij.</string>
-  <!-- Long text for a detail explanation indicating what will happen if cookie banner handling is off for a site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_description_off_for_site_1">Toq xtachüp, %1$s xkeruyüj taq kuki chuqa\' xtutikirisaj chik ri ruxaq. Tirekel yerutz\'apij ri taq molojri\'ïl chuqa\' yerujäm ri taq ch\'ich\' richin loq\'oj.</string>
-  <!-- Long text for a detail explanation indicating what will happen if cookie banner handling is on for a site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_description_on_for_site_3">Toq nitzij, ri %1$s xtutojtob\'ej xkeruxutuj pa ruyonil ri taq kitzijol taq cookie pa re ruxaq re\'.</string>
-  <!-- Title for the cookie banner re-engagement CFR, the placeholder is replaced with app name. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="cookie_banner_cfr_title">%1$s k\'a b\'a\' keruxutuj taq cookie</string>
-  <!-- Message for the cookie banner re-engagement CFR -->
-  <string name="cookie_banner_cfr_message">Jub\'a\' nikik\'äm atzub\'al, jub\'a\' taq cookie ri yatkojqaj pa re ruxaq re\'.</string>
   <!-- Description of the preference to enable "HTTPS-Only" mode. -->
   <string name="preferences_https_only_summary">Tatojtob\'ej yatok pa yonil chupam ri ruxaq akuchi\' nawokisaj ri rub\'eyal ewan rusik\'ixik ri HTTPS richin jun ütz jikib\'anem</string>
   <!-- Summary of https only preference if https only is set to off -->
@@ -1770,8 +1724,6 @@
   <string name="history_search_1">Ketz\'ib\'äx tzij yekanöx</string>
   <!-- Text for the button to clear all history -->
   <string name="history_delete_all">Tiyuj natab\'äl</string>
-  <!-- Text for the snackbar to confirm that multiple browsing history items has been deleted -->
-  <string name="history_delete_multiple_items_snackbar">Xyuj Natab\'äl</string>
   <!-- Text for the snackbar to confirm that a single browsing history item has been deleted. %1$s is the shortened URL of the deleted history item. -->
   <string name="history_delete_single_item_snackbar">Xyuj %1$s</string>
   <!-- Context description text for the button to delete a single history item -->
@@ -1901,7 +1853,15 @@
   <string name="download_rename_error_case_only_error">Ri b\'i\'aj xatz\'ib\'aj xa xe nujäl ri\' ruma nïm o ch\'utitz\'ib\'. Tatojtob\'ej jun chik rub\'i yakb\'äl.</string>
   <!-- Title for the alert dialog when the file cannot be renamed. -->
   <string name="download_rename_error_cannot_rename_title">Man tikirel ta nijal rub\'i\' yakb\'äl</string>
+  <!-- Description message for the alert dialog when the file cannot be renamed. -->
+  <string name="download_rename_error_cannot_rename_description">Re yakb\'äl re\' man tikirel ta nijal rub\'i\' ruma ruq\'atoj ri q\'inoj o ri yakb\'äl.</string>
   <string name="download_rename_error_dismiss_button">ÜTZ</string>
+  <!--
+    Title for the alert dialog to change file extension.
+    %s is the file type to change to.
+  -->
+  <string name="change_file_extension_title">¿La nijal ri ruwäch yakb\'äl chi %s?</string>
+  <string name="change_file_extension_description">Rere\' rik\'in jub\'a\' nujäq ri yakb\'äl pa jun wi chi chokoy, k\'ayew chi re ri awokisaxel.</string>
   <string name="change_file_extension_cancel_button">Tiq\'at</string>
   <string name="change_file_extension_confirm_button">Ja\', tijal</string>
   <!-- Text for the header of in progress downloads -->
@@ -1920,6 +1880,8 @@
   <string name="download_time_period_last_30_days">Ruk\'isib\'äl 30 q\'ij</string>
   <!-- Text for the header that groups the downloads older than other groups -->
   <string name="download_time_period_older">Ojer</string>
+  <!-- Description of an in progress download item, displayed in the downloads list when the download has just started. -->
+  <string name="download_item_in_progress_description_preparing">Nib\'an ri qasanïk…</string>
   <!--
     Description of an in progress download item, displayed in the downloads list when the download time remaining is known.
     %1$s is the current file size that has been downloaded.
@@ -1933,6 +1895,11 @@
     %2$s is the total size of the downloaded file.
   -->
   <string name="download_item_in_progress_description_pending">%1$s / %2$s • royob\'en</string>
+  <!--
+    Description of an in progress download item, displayed in the downloads list when the total download size is unknown. This results in the estimated download time remaining to be unknown also.
+    %1$s is the current file size that has been downloaded.
+  -->
+  <string name="download_item_in_progress_description_unknown_total_size">%1$s • me\'etaman ramaj</string>
   <!--
     Description of a paused download item, displayed in the downloads list.
     %1$s is the current file size that has been downloaded.
@@ -1984,6 +1951,8 @@
     The title of the Web Compat Reporter feature. This is displayed in the top app bar.
   -->
   <string name="webcompat_reporter_screen_title">Tiya\' rutzijol jun ruxaq man nisamäj ta</string>
+  <!-- The description of the Web Compat Reporter feature, which has a "learn more" button text for navigating to a SUMO link to learn more about reporting a broken site. %1$s is the name of the app (for example "Firefox") and %2$s is the learn more button. -->
+  <string name="webcompat_reporter_description_3">Ri atzijol yojruto chi niq\'ax pa qawi\' chuqa\' nisol k\'ayewal pa %1$s richin ütz chi qe qonojel. %2$s</string>
   <!-- The button text for navigating to the SUMO link to learn more about reporting a broken site. -->
   <string name="webcompat_reporter_learn_more">Tetamäx ch\'aqa\' chik</string>
   <!-- The text field label of the URL text field. This is displayed above the user-inputted URL. -->
@@ -1991,27 +1960,59 @@
   <!-- The error message of the URL text field when an invalid URL has been entered. -->
   <string name="webcompat_reporter_url_error_invalid">Tab\'ana\' utzil tatz\'ib\'aj jun URL</string>
   <!-- The label/title of a field in the Web Compat Reporter feature for explaining a high-level reason why the site is broken. -->
-  <string name="webcompat_reporter_label_whats_broken_2">¿Achike k\'ayewal k\'o?</string>
-  <!-- The placeholder text for the dropdown where a user selects a high-level reason why the site is broken. -->
-  <string name="webcompat_reporter_choose_reason_2">Tacha\' jun aruma</string>
-  <!-- The error message of the dropdown, prompting the user to select a high-level reason why the site is broken. -->
-  <string name="webcompat_reporter_choose_reason_error">Tacha\' jun aruma</string>
-  <!-- The button text for navigating away from the feature to provide more information on the broken site's bug report. -->
-  <string name="webcompat_reporter_add_more_info">Titz\'aqatisäx ch\'aq\' etamab\'äl</string>
+  <string name="webcompat_reporter_label_whats_broken_3">¿Achike ri man nisamäj ta?</string>
+  <!-- Content description for the icon button that clears the selected broken site reason in the WebCompat Reporter. -->
+  <string name="webcompat_reporter_clear_reason_content_description">Tayuju\' ri aruma cha\'on</string>
+  <!-- The error message of the description when the user selects "Something else" as the reason, but left the description empty or too short. -->
+  <string name="webcompat_reporter_description_error">Taju\' we jub\'a\' 10 taq tz\'ib\'</string>
+  <!-- The label/title of a mandatory field in the Web Compat Reporter feature for adding additional information. -->
+  <string name="webcompat_reporter_label_mandatory_description">Tacholo\' ri k\'ayewal pa retal richin yojato\' chi rukanoxik</string>
+  <!-- The label/title of a optional field in the Web Compat Reporter feature for adding additional information. -->
+  <string name="webcompat_reporter_label_optional_description">Tacholo\' ri k\'ayewal pa retal richin yojato\' chi rukanoxik (cha\'el)</string>
   <!-- The button text for the cancel button to leave the Web Compat Reporter feature. -->
   <string name="webcompat_reporter_cancel">Tiq\'at</string>
   <!-- The button text for the send button to submit the provided form data. -->
   <string name="webcompat_reporter_send_report">Titaq rutzijol</string>
-  <!-- The button text for the send button to submit the provided form data. -->
-  <string name="webcompat_reporter_send">Titaq</string>
+  <!-- Text for a snackbar to confirm the successful submission of a WebCompat report. -->
+  <string name="webcompat_reporter_success_snackbar_text_2">Taqon rutzijol</string>
+  <!-- Placeholder text for the description field to prompt the user on what they should type. -->
+  <string name="webcompat_reporter_problem_description_placeholder_text_2">¿Achike xk\'ulwachitäj? ¿Achike awoyob\'en chi nik\'ulwachitäj? Ke\'acholo\' ri taq rub\'eyal richin nitzij ri k\'ayewal.</string>
+  <!-- Label of the checkbox on the “Report broken site” screen for sending URLS blocked by Enhanced Tracking Protection. -->
+  <string name="webcompat_reporter_etp_checkbox_text_2">Titaq rucholb\'al q\'aton taq ch\'akulal ruma ri chajin rojqanem</string>
   <!-- The button text for the preview report button to view a preview of the report. -->
   <string name="webcompat_reporter_preview_report">Titz\'et chik ri rutzijol</string>
+  <!-- The title shown at the top of the WebCompat Report preview panel. This appears after the user taps the “Preview” button before sending a report. -->
+  <string name="webcompat_reporter_preview_bottom_sheet_header">Nab\'ey rutz\'etik rutzijol</string>
   <!-- Label for the “Send” button shown in the WebCompat Report preview panel, which the user taps to submit the report. -->
   <string name="webcompat_reporter_preview_bottom_sheet_send">Titaq</string>
+  <!-- Title for the Edit URL confirmation dialog in the WebCompatReporter -->
+  <string name="webcompat_reporter_edit_url_dialog_title">Tinuk\' ri ajk\'am ruxaq URL</string>
   <!-- Text shown on the save button for the Edit URL confirmation dialog in the WebCompatReporter. -->
   <string name="webcompat_reporter_edit_url_dialog_save">Tiyak</string>
   <!-- Text shown on the dismiss button for the Edit URL confirmation dialog in the WebCompatReporter. -->
   <string name="webcompat_reporter_edit_url_dialog_dismiss">Tichup ruwäch</string>
+  <!--
+    These reason strings are dropdown options on a WebCompat reporter form, indicating what is broken on the site.
+
+    Broken site reason text for site doesn’t load
+  -->
+  <string name="webcompat_reporter_reason_load">Man nisamäj ta ri ruxaq</string>
+  <!-- Broken site reason text for can’t pay, check out or shop -->
+  <string name="webcompat_reporter_reason_checkout">Man yitikïr ta yitojon ni xa ta yiloq\'on</string>
+  <!-- Broken site reason text for site is slow -->
+  <string name="webcompat_reporter_reason_slow2">Eqal re ruxaq</string>
+  <!-- Broken site reason text for video isn’t playing or loading -->
+  <string name="webcompat_reporter_reason_media2">Man nitzijtäj ta ni xa ta nisamäj ri silowäch</string>
+  <!-- Broken site reason text for missing content -->
+  <string name="webcompat_reporter_reason_content2">Metz\'aqät rupam</string>
+  <!-- Broken site reason text for can’t sign in or register -->
+  <string name="webcompat_reporter_reason_account2">Man tikirel ta nutikirisaj molojri\'ïl o nitz\'ib\'äx rub\'i\'</string>
+  <!-- Broken site reason text for site asked to turn off ad blocker -->
+  <string name="webcompat_reporter_reason_turn_off_adblocker">Ri ruxaq xuk\'utuj timetzij ri q\'atöy rutzijol</string>
+  <!-- Broken site reason text for browser isn’t supported or blocked -->
+  <string name="webcompat_reporter_reason_notsupported_2">Ri okik\'amaya\'l man ruximon ta ri\' o ruq\'aton ri\'</string>
+  <!-- Broken site reason text for the site being deceptive -->
+  <string name="webcompat_reporter_reason_site_is_deceptive">Q\'olonel re ruxaq re\'</string>
   <!-- Broken site reason text for something else -->
   <string name="webcompat_reporter_reason_other">Jun chik wachinäq</string>
   <!--
@@ -2026,6 +2027,8 @@
   <string name="tab_crash_close">Titz\'apïx ruwi\'</string>
   <!-- Restore tab button text on the tab crash page -->
   <string name="tab_crash_restore">Titzolïx ruwi\'</string>
+  <!-- Unsubmitted crash dialog title, %s is the name of the app (for example "Firefox"). -->
+  <string name="unsubmitted_crash_dialog_title_2">%s k\'ayewal. ¿La nitaj rutzijol?</string>
   <!-- Single unsubmitted crash matching remote settings. %1$s is the name of the app (for example "Firefox"). -->
   <string name="unsubmitted_crash_requested_by_devs_dialog_title">K\'o jun rutzijol k\'ayewal man taqon ta, tajin nisol rij. Ri rutaqik xkojruto\' richin niqutzilaj %1$s. Ri rutz\'apixik re rutzijol re\' choj numalij kan re rutzijol re\'.</string>
   <!-- Multiple unsubmitted crashes matching remote settings. %1$d is the number of unsent crash reports, %2$s is the name of the app (for example "Firefox"). -->
@@ -2042,6 +2045,9 @@
   <string name="unsubmitted_crash_dialog_positive_button_2">TITAQ</string>
   <!-- Unsubmitted crash dialog positive button to submit crash report -->
   <string name="unsubmitted_crash_dialog_positive_button">Titaq rutzijol sachoj</string>
+  <!-- Body text for crash report dialog. %s is the link text in the annotated string (ie. "Learn More") -->
+  <string name="unsubmitted_crash_dialog_body">Ri taq rutzijol sachoj yojkito\' richin niqatz\'ët chuqa\' niqasöl taq ruk\'ayewal okik\'amaya\'l. Ri taq tzijol tikirel nikik\'waj ichinan chuqa\' ewatäl taq tzij. %s</string>
+  <string name="unsubmitted_crash_dialog_learn_more">Tetamäx ch\'aqa\' chik</string>
   <!-- Unsubmitted crash dialog button to open a web page with more details on the feature and privacy policy -->
   <string name="unsubmitted_crash_requested_by_devs_learn_more">Tetamäx ch\'aqa\' chik</string>
   <!--
@@ -2056,6 +2062,14 @@
   <string name="bookmark_add_folder">Titz\'aqatisäx Yakwuj</string>
   <!-- Snackbar title that confirms a bookmark was saved into a folder. %s is the name of the folder the bookmark was saved into. -->
   <string name="bookmark_saved_in_folder_snackbar">Xyak pa “%s”</string>
+  <!-- Snackbar title describing failure to add a new folder -->
+  <string name="bookmark_error_add_folder">Man tikirel ta xtz\'aqatisäx molyakb\'äl</string>
+  <!-- Snackbar title describing failure to edit an existing folder -->
+  <string name="bookmark_error_edit_folder">Man tikirel ta xnuk\' molyakb\'äl</string>
+  <!-- Snackbar title describing failure to select a new parent folder for a bookmark or folder -->
+  <string name="bookmark_error_select_folder">Man tikirel ta xjal ri nimaläj molyakb\'äl</string>
+  <!-- Snackbar title describing failure to edit a bookmark -->
+  <string name="bookmark_error_edit_bookmark">Man tikirel ta xnuk\' yaketal</string>
   <!-- Snackbar edit button shown after a bookmark has been created. -->
   <string name="edit_bookmark_snackbar_action">TINUK\'</string>
   <!-- Bookmark menu select button -->
@@ -2078,8 +2092,24 @@
   <string name="bookmark_menu_open_all_in_private_tabs_button">Tijaq ronojel pan ichinan ruwi\'</string>
   <!-- Bookmark overflow menu delete button -->
   <string name="bookmark_menu_delete_button">Tiyuj</string>
+  <!-- Accessibility label for sorting options -->
+  <string name="bookmark_sort_menu_content_desc">Cha\'el taq cholajem</string>
+  <!-- Label for button to sort bookmarks by user-defined sort order in the bookmark sorting overflow menu. -->
+  <string name="bookmark_sort_menu_custom">Tichol chi e ichinan rucholajem</string>
+  <!-- Label for button to sort bookmarks by newest in the bookmark sorting overflow menu. -->
+  <string name="bookmark_sort_menu_newest">Tichol chi e k\'ak\'a\'</string>
+  <!-- Label for button to sort bookmarks by oldest in the bookmark sorting overflow menu. -->
+  <string name="bookmark_sort_menu_oldest">Tichol chi e ojer</string>
+  <!-- Label for button to sort bookmarks in alphabetical order in the bookmark sorting overflow menu. -->
+  <string name="bookmark_sort_menu_a_to_z">Tichol chi A - Z</string>
+  <!-- Label for button to sort bookmarks in reverse alphabetical order in the bookmark sorting overflow menu. -->
+  <string name="bookmark_sort_menu_z_to_a">Tichol chi Z - A</string>
   <!-- Label for button to import bookmarks from file. -->
   <string name="bookmark_import_menu_button">Tijik\' pa jun yakb\'äl:</string>
+  <!-- Snackbar message shown when a bookmark import attempt fails. -->
+  <string name="bookmark_import_failure_snackbar">Man xejik\' ta ri taq yaketal. Tatojtob\'ej chik.</string>
+  <!-- Default name for the folder created when importing bookmarks from a file. -->
+  <string name="bookmark_import_destination_default_name">Jik\'on taq yaketal</string>
   <!--
     Bookmark multi select title in app bar
     %1$d is the number of bookmarks selected
@@ -2120,10 +2150,26 @@
   <string name="bookmark_search_button_content_description">Kekanöx taq yaketal</string>
   <!-- Content description for select folder screen search action button ("search" is a verb) -->
   <string name="select_bookmark_search_button_content_description">Tikanöx yakwuj</string>
+  <!-- Content description for the overflow menu for a bookmark item. %s is a folder name or bookmark title. -->
+  <string name="bookmark_item_menu_button_content_description">Rucha\'ob\'al ch\'akulal richin %s</string>
+  <!-- Content description for the chevron that will open a folder on the select folder screen and display its children. %s is the title of the folder that will be opened -->
+  <string name="bookmark_select_folder_expand_folder_content_description">Tinimirisäx ri yakwuj: %s</string>
+  <!-- Content description for the chevron that will close a folder on the select folder screen so that its children are no longer visible. %s is the title of the folder that will be closed -->
+  <string name="bookmark_select_folder_close_folder_content_description">Titz\'apïx yakwuj: %s</string>
+  <!-- Content description for the "close" button in bookmarks screen. -->
+  <string name="bookmark_close_button_content_description">Ketz\'apïx taq yaketal</string>
+  <!-- Content description for the Import bookmarks button in bookmarks screen. -->
+  <string name="bookmark_import_bookmarks_button_content_description">Tijik\' pa jun yakb\'äl</string>
   <!-- Title for the bookmark list empty state -->
   <string name="bookmark_empty_list_title">K\'a majun yaketal</string>
+  <!-- Title for the bookmark list empty state at the root level. -->
+  <string name="bookmark_empty_list_root_title">Juman ke\'aya\' ri jeb\'ël taq ayaketal</string>
+  <!-- Bookmark screen folder description. %s is the count of bookmark folder children -->
+  <string name="bookmarks_folder_description">Taq yaketal pa yakwuj: %s</string>
   <!-- Text for the button to navigate to sync authentication -->
   <string name="bookmark_empty_list_guest_cta">Tatikirisaj molojri\'ïl pa yaximon</string>
+  <!-- Description for the bookmark list empty state when you're in an empty folder. -->
+  <string name="bookmark_empty_list_folder_description">Ke\'atz\'aqatisaj taq yaketal toq yatok pa k\'amaya\'l richin xke\'awïl ri taq jeb\'ël ruxaq.</string>
   <!-- Description for the add new folder button when selecting a folder. -->
   <string name="bookmark_select_folder_new_folder_button_title">K\'ak\'a\' yakwuj</string>
   <!-- Bookmark snackbar message for moving a single item. %1$s is the title of the item being moved and %2$s is the new parent folder of the bookmark -->
@@ -2138,12 +2184,6 @@
     Button label that take the user to the Android App setting
   -->
   <string name="phone_feature_go_to_settings">Tib\'e pa taq Nuk\'ulem</string>
-  <!--
-    Content description (not visible, for screen readers etc.): Quick settings sheet
-    to give users access to site specific information / settings. For example:
-    Secure settings status and a button to modify site permissions
-  -->
-  <string name="quick_settings_sheet">Ruxaq aninäq taq nuk\'ulem</string>
   <!-- Label that indicates that this option it the recommended one -->
   <string name="phone_feature_recommended">Chilab\'en</string>
   <!-- Button label for clearing all the information of site permissions -->
@@ -2162,6 +2202,10 @@
   <string name="clear_permissions_on_all_sites">Keyuj ya\'oj taq q\'ij pa ronojel taq ruxaq</string>
   <!-- Preference for altering video and audio autoplay for all websites -->
   <string name="preference_browser_feature_autoplay">Ruyonil rutzijik</string>
+  <!-- Preference for local device access for all websites -->
+  <string name="preference_browser_feature_local_device_access">Taq chokoy chuqa\' taq rusamaj okisaxel</string>
+  <!-- Preference for local network access for all websites -->
+  <string name="preference_browser_feature_local_network_access">Taq rokisaxel aj wawe\' k\'amab\'ey</string>
   <!-- Preference for altering the camera access for all websites -->
   <string name="preference_phone_feature_camera">Elesäy wachib\'äl</string>
   <!-- Preference for altering the microphone access for all websites -->
@@ -2222,6 +2266,10 @@
   <string name="browser_feature_desktop_site_on">Titzij</string>
   <!-- Toggle if desktop site is turned off -->
   <string name="browser_feature_desktop_site_off">Tichup</string>
+  <!-- Category header of a preference that allows a user to alter settings related to web permissions. -->
+  <string name="preferences_category_permissions">Taq ya\'oj q\'ij</string>
+  <!-- Category header of a preference that allows a user to alter settings related to web content. -->
+  <string name="preferences_category_content">Rupam</string>
   <!-- Preference for altering the default browsing mode. When enabled, the desktop site will always be requested. -->
   <string name="preference_feature_desktop_mode_default">Junelïk tik\'utüx ruxaq ruk\'amaya\'l ajkematz\'ib\'</string>
   <!--
@@ -2303,8 +2351,16 @@
   <string name="qr_code_display_title">QR b\'itz\'ib\'</string>
   <!-- Content description for the close button in the QR code display screen -->
   <string name="qr_code_display_close">Titz\'apïx</string>
+  <!-- Heading on the QR code display screen -->
+  <string name="qr_code_display_share_nearby">Tikomonïx naqaj ximoj</string>
+  <!-- Body text on the QR code display screen instructing the user to have others scan the code -->
+  <string name="qr_code_display_instructions">Richin nikomonïx re ximoj re\' kik\'in naqaj winäq, tak\'utuj chi ke chi tikiwachib\'ej re QR b\'itz\'ib\' re\'.</string>
   <!-- Label for the download button on the QR code display screen -->
   <string name="qr_code_display_download">Tiqasäx</string>
+  <!-- Toast shown when the QR code is successfully saved to Downloads -->
+  <string name="qr_code_download_success">QR b\'itz\'b\' xyak pa Qasanïk</string>
+  <!-- Toast shown when saving the QR code to Downloads fails -->
+  <string name="qr_code_download_failure">Man tikirel ta xyak ri QR b\'itz\'ib\'</string>
   <!-- Sub-header in the dialog to share a link to an app from the full list -->
   <string name="share_link_all_apps_subheader">Ronojel b\'anoj</string>
   <!-- Sub-header in the dialog to share a link to an app from the most-recent sorted list -->
@@ -2317,6 +2373,10 @@
   <string name="sync_sign_in">Tatikirisaj molojri\'ïl pa Sync</string>
   <!-- An option from the share dialog to send link to all other sync devices -->
   <string name="sync_send_to_all">Titaq pa ronojel okisab\'äl</string>
+  <!-- Text displayed when no other sync devices are available for link sharing -->
+  <string name="sync_no_devices_available">Majun wachel okisaxel</string>
+  <!-- Text displayed when no other sync devices are available for link sharing. -->
+  <string name="sync_no_devices_available_description">Xab\'achike okisan chuqa\' ximon okisaxel rik\'in re rub\'i\' taqoya\'l re\' xtiwachin wawe\'.</string>
   <!-- An option from the share dialog to reconnect to sync -->
   <string name="sync_reconnect">Tokisäx chik pa Sync</string>
   <!-- Text displayed when sync is offline and cannot be accessed -->
@@ -2337,6 +2397,10 @@
   <string name="sync_add_new_device_learn_button">Tetamäx chi rij ri Kitaqik taq Ruwi\'…</string>
   <!-- Text for the button to connect another device -->
   <string name="sync_add_new_device_connect_button">Tokisäx Jun Chik Okisab\'äl…</string>
+  <!-- A message template for the shared link with a footer. %1$s is the shared link, %2$s is the app name (e.g. Firefox) and %3$s is a download link for the app. -->
+  <string name="sent_from_firefox_template" tools:ignore="UnusedResources">%1$s Taqon pe pa %2$s 🦊Tatojtob\'ej re oyonib\'äl okik\'amaya\'l: %3$s</string>
+  <!-- A short message template for the shared link with a footer. %1$s is the shared link, %2$s is the app name (e.g. Firefox) and %3$s is a download link for the app. -->
+  <string name="sent_from_firefox_template_short" tools:ignore="UnusedResources">%1$s Taqon pe pa %2$s 🦊 %3$s</string>
   <!--
     Notifications
 
@@ -2345,6 +2409,7 @@
   <string name="notification_pbm_delete_text_2">Ketz\'apïx ichinan taq ruwi\'</string>
   <!-- Text shown in the notification that pops up to remind the user that a private browsing session is active for Android 14+ -->
   <string name="notification_erase_title_android_14">La yetz\'apïx ichinan taq ruwi\'?</string>
+  <string name="notification_erase_text_android_14">Tachapa\' o tarik\'a\' re rutzijol re\' richin ye\'atz\'apij re ichinan taq ruwi\'.</string>
   <!-- Name of the marketing notification channel. Displayed in the "App notifications" system settings for the app -->
   <string name="notification_marketing_channel_name">Markentin</string>
   <!--
@@ -2368,12 +2433,16 @@
   <string name="preferences_take_survey">Tinojisäx nojwuj</string>
   <!-- Preference for not taking the short survey. -->
   <string name="preferences_not_take_survey">Mani matyox</string>
+  <!-- Error message shown in a Toast when the system fails to trigger the device uninstallation prompt. -->
+  <string name="uninstall_survey_error_failed">Man tikirel ta xjaq ri ruwäch rumeyakoj q\'inoj. Jumul tawokisaj ri rusamaj rumeyakoj q\'inoj.</string>
   <!--
     Snackbar
 
     Text shown in snackbar when user closes a tab
   -->
   <string name="snackbar_tab_closed">Ruwi\' xtz\'apïx</string>
+  <!-- Text shown in snackbar when user closes multiple inactive tabs. %1$s will be replaced with the number of tabs closed. -->
+  <string name="snackbar_num_tabs_closed">Tz\'apäl taq ruwi\': %1$s</string>
   <!-- Text shown in snackbar when user bookmarks a list of tabs. %s is the name of the folder the bookmark was saved into. -->
   <string name="snackbar_message_bookmarks_saved_in_2">Taq yaketal eyakon pa “%s”</string>
   <!-- Text shown in snackbar when user adds a site to shortcuts -->
@@ -2444,6 +2513,8 @@
   <string name="preference_summary_delete_browsing_data_on_quit_2">Keyuj ri taq tzij okem pa k\'amaya\'l pa ruyonil toq xtacha\' \"Tel\" pa ri nïm k\'utsamajib\'äl</string>
   <!-- Title text of a delete browsing data dialog. -->
   <string name="delete_history_prompt_title">Rupajb\'al ramaj richin niyuj</string>
+  <!-- Body text of a delete browsing data dialog. -->
+  <string name="delete_history_prompt_body_2">Tayuju\' ri natab\'äl (chuqa\' ri ximon natab\'äl k\'o chupam ch\'aqa\' chik okisaxel)</string>
   <!-- Radio button in the delete browsing data dialog to delete history items for the last hour. -->
   <string name="delete_history_prompt_button_last_hour">Ruk\'isib\'äl ramaj</string>
   <!-- Radio button in the delete browsing data dialog to delete history items for today and yesterday. -->
@@ -2509,19 +2580,28 @@
   <!--
     Enhanced Tracking Protection
 
-    Link displayed in enhanced tracking protection panel to access tracking protection settings
-  -->
-  <string name="etp_settings">Runuk\'ulem Ojqanem</string>
-  <!--
-    Enhanced Tracking Protection
-
     Preference title for enhanced tracking protection settings
   -->
   <string name="preference_enhanced_tracking_protection">Utzirisan Chajinïk chuwäch Ojqanem</string>
+  <!-- Preference summary for enhanced tracking protection settings on/off switch -->
+  <string name="preference_enhanced_tracking_protection_summary">Wakami rik\'in kichajixik ronojel taq kuki, ri kowiläj qapokob\' k\'o wakami chi kiwäch ri rojqanela\' xalq\'atin taq ruxaq.</string>
   <!-- Description of enhanced tracking protection. %s is the name of the app (for example "Firefox"). -->
   <string name="preference_enhanced_tracking_protection_explanation_2">%s yaruchajij chi kiwäch relik ojqanela\', ri nikoqaj ri nab\'än pa k\'amab\'ey.</string>
   <!-- Text displayed that links to website about enhanced tracking protection -->
   <string name="preference_enhanced_tracking_protection_explanation_learn_more">Tetamäx ch\'aqa\' chik</string>
+  <plurals name="trackers_blocked_count_2">
+    <!--
+      Trackers blocked card on homepage
+
+      Text shown on the trackers blocked card. %d is the number of trackers blocked.
+    -->
+    <item quantity="one">%d q\'aton ojqanel</item>
+    <item quantity="other">%d eq\'aton ojqanela\'</item>
+  </plurals>
+  <!-- Text shown on the trackers blocked card when no trackers have been blocked yet -->
+  <string name="trackers_blocked_empty">Atchajin</string>
+  <!-- Text shown below the trackers blocked card with typing animation -->
+  <string name="help_catch_trackers">Kato\'on chi kichapik ri ojqanela\'</string>
   <!-- Preference for enhanced tracking protection for the standard protection settings -->
   <string name="preference_enhanced_tracking_protection_standard_default_1">Junaman (k\'o wi)</string>
   <!-- Preference description for enhanced tracking protection for the standard protection settings -->
@@ -2532,8 +2612,28 @@
   <string name="preference_enhanced_tracking_protection_strict">Nimaläj</string>
   <!-- Preference description for enhanced tracking protection for the strict protection settings -->
   <string name="preference_enhanced_tracking_protection_strict_description_4">K\'ïy chajinïk chuwäch ojqanem chuqa\' ütz rub\'eyal nisamäj, xa xe chi jujun taq ruxaq rik\'in jub\'a\' man xkesamäj ta ütz.</string>
+  <!-- Preference label for the enhanced tracking protection option to fix major site issues caused by tracker blocking -->
+  <string name="preference_enhanced_tracking_protection_allow_list_baseline_2">Kenuk\' nima\'q taq ruk\'ayewal ruxaq (chilab\'en)</string>
+  <!-- Preference label for the enhanced tracking protection option to fix minor site issues caused by tracker blocking -->
+  <string name="preference_enhanced_tracking_protection_allow_list_convenience_label">Kenuk\' koköj taq ruk\'ayewal ruxaq</string>
+  <!-- Preference description for the enhanced tracking protection option to fix minor site issues caused by tracker blocking -->
+  <string name="preference_enhanced_tracking_protection_allow_list_convenience_description">K\'o chi nokisäx kik\'in ri taq kinuk\'ik richin ri nima\'q taq k\'ayewal.</string>
+  <!-- Preference sub header for the enhanced tracking protection options to fix issues caused by tracker blocking -->
+  <string name="preference_enhanced_tracking_protection_allow_list_subheader">Kenuk\' taq ruk\'ayewal ruxaq</string>
   <!-- Learn more text for the enhanced tracking protection options to fix issues caused by tracker blocking -->
   <string name="preference_enhanced_tracking_protection_allow_list_learn_more">Tetamäx ch\'aqa\' chik</string>
+  <!--
+    Dialog that appears after user tries to uncheck the baseline exceptions preference under Strict or Custom tracking protection
+
+    Title for the dialog that appears after disabling the baseline exceptions preference under Strict or Custom tracking protection
+  -->
+  <string name="preference_enhanced_tracking_protection_allow_list_dialog_title">¿La kan nawajo\' ye\'achüp ri taq runuk\'ik?</string>
+  <!-- Message for the dialog that appears after disabling the baseline exceptions preference under Strict or Custom tracking protection. %1$s is the name of the application (e.g. Fenix). -->
+  <string name="preference_enhanced_tracking_protection_allow_list_dialog_message">Re runuk\'ulem re\' nito\'on richin yerunük\' relik taq ruk\'ayewal ruxaq. We nichup rik\'in jub\'a\' jujun taq ruxaq man xkesamäj ta chuqa\' %1$s man xtitikïr ta xtito\'on chi kinuk\'ik ri taq k\'ayewal ri\'.</string>
+  <!-- Confirmation button text for the dialog that appears after disabling the baseline exceptions preference under Strict or Custom tracking protection -->
+  <string name="preference_enhanced_tracking_protection_allow_list_dialog_confirm">Kechup taq runuk\'ik</string>
+  <!-- Cancel button text for the dialog that appears after disabling the baseline exceptions preference under Strict or Custom tracking protection. This dismisses the dialog and re-enables the preference. -->
+  <string name="preference_enhanced_tracking_protection_allow_list_dialog_cancel">Ketzij ri taq runuk\'ik</string>
   <!-- Accessibility text for the Strict protection information icon -->
   <string name="preference_enhanced_tracking_protection_strict_info_button">Achike ri q\'aton ruma ri ruchajixik ojqanem k\'o</string>
   <!-- Preference for enhanced tracking protection for the custom protection settings -->
@@ -2558,6 +2658,8 @@
   <string name="preference_enhanced_tracking_protection_custom_cookies_4">Ronojel kuki (xketz\'ilon pa ri ajk\'amaya\'l ruxaq)</string>
   <!-- Option for enhanced tracking protection for the custom protection settings for cookies -->
   <string name="preference_enhanced_tracking_protection_custom_cookies_5">Kejech\'üx taq cookie pa xoch\'in taq ruxaq</string>
+  <!-- Preference for Global Privacy Control for the custom privacy settings for Global Privacy Control. '&amp;' is replaced with the ampersand symbol: & -->
+  <string name="preference_enhanced_tracking_protection_custom_global_privacy_control">Tib\'ix chi ke ri ajk\'am ruxaq chi man tikik\'ayij ni xa ta kekik\'ayij ri taq nutzij</string>
   <!-- Preference for enhanced tracking protection for the custom protection settings for tracking content -->
   <string name="preference_enhanced_tracking_protection_custom_tracking_content">Rupam ojqanem</string>
   <!-- Option for enhanced tracking protection for the custom protection settings for tracking content -->
@@ -2566,12 +2668,10 @@
   <string name="preference_enhanced_tracking_protection_custom_tracking_content_2">Xa xe\' pan Ichinan taq ruwi\'</string>
   <!-- Preference for enhanced tracking protection for the custom protection settings -->
   <string name="preference_enhanced_tracking_protection_custom_cryptominers">Cryptominers</string>
-  <!-- Button label for navigating to the Enhanced Tracking Protection details -->
-  <string name="enhanced_tracking_protection_details">Kib\'anikil</string>
+  <!-- Preference for enhanced tracking protection for the custom protection settings -->
+  <string name="preference_enhanced_tracking_protection_custom_known_fingerprinters">Etaman taq Fingerprinters</string>
   <!-- Header for categories that are being being blocked by current Enhanced Tracking Protection settings -->
   <string name="enhanced_tracking_protection_blocked">Xq\'at</string>
-  <!-- Header for categories that are being not being blocked by current Enhanced Tracking Protection settings -->
-  <string name="enhanced_tracking_protection_allowed">Xya\' q\'ij</string>
   <!-- Category of trackers (social media trackers) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_social_media_trackers_title">Kojqanela\' aj Winäq K\'amab\'ey</string>
   <!-- Description of social media trackers that can be blocked by Enhanced Tracking Protection -->
@@ -2582,6 +2682,8 @@
   <string name="etp_cookies_title_2">Kikuki xoch\'in taq ruxaq</string>
   <!-- Description of cross-site tracking cookies that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_cookies_description">Keq\'at taq kikuki eltzijonel taq k\'amab\'ey chuqa\' ri taq ajk\'ayij ch\'ob\'oj richin yekimöl taq rutzij awokem pa k\'ïy ruxaq.</string>
+  <!-- Description of cross-site tracking cookies that can be blocked by Enhanced Tracking Protection -->
+  <string name="etp_cookies_description_2">Ri taq ronojel kichajixik kuki, yerujech\'ej ri taq rukuki ruxaq akuchi\' at k\'o richin chi ri taq ojqanela\', achi\'el ri taq ajk\'am taq rutzijol, man ketikïr tikokisaj richin yatkojqaj rik\'in ri taq ruxaq.</string>
   <!-- Category of trackers (cryptominers) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_cryptominers_title">Taq kriptominer</string>
   <!-- Description of cryptominers that can be blocked by Enhanced Tracking Protection -->
@@ -2592,10 +2694,6 @@
   <string name="etp_tracking_content_title">Rupam Ojqanem</string>
   <!-- Description of tracking content that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_tracking_content_description">Ke\'aq\'ata\' ri taq eltzijol man e k\'o ta chupam, taq silowäch chuqa\' taq rupam kik\'wan taq rub\'itz\'ib\' ojqanem. Nitikïr yerutz\'ila\' jujun taq rusamaj ajk\'amaya\'l ruxaq.</string>
-  <!-- Enhanced Tracking Protection message that protection is currently on for this site -->
-  <string name="etp_panel_on">TZIJÏL ri chajinïk pa re ruxaq re\'</string>
-  <!-- Enhanced Tracking Protection message that protection is currently off for this site -->
-  <string name="etp_panel_off">CHUPÜL ri chajinïk pa re ruxaq re\'</string>
   <!-- Header for exceptions list for which sites enhanced tracking protection is always off -->
   <string name="enhanced_tracking_protection_exceptions">Chupül ri Utzilan Chajinïk chuwäch Ojqanem pa re ajk\'amaya\'l taq ruxaq re\'</string>
   <!--
@@ -2614,25 +2712,65 @@
   <string name="etp_redirect_trackers_title">Kechojmïx chik Ojqanela\'</string>
   <!-- Description of redirect tracker cookies that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_redirect_trackers_description">Yeruyüj ri taq cookies echojmirisan pan ajk\'amaya\'l taq ruxaq ojqanem etaman kiwa.</string>
+  <!-- Preference for fingerprinting protection for the custom protection settings -->
+  <string name="etp_suspected_fingerprinters_title">Tz\'etöy taq Fingerprinters</string>
+  <!-- Description of fingerprinters that can be blocked by fingerprinting protection -->
+  <string name="etp_suspected_fingerprinters_description">Tatz\'ija\' ri kichajixik tz\'etöy richin yeq\'at ri yenuk\'u\' itzel taq fingerprinters.</string>
+  <!-- Category of trackers (fingerprinters) that can be blocked by Enhanced Tracking Protection -->
+  <string name="etp_known_fingerprinters_title">Etaman taq Fingerprinters</string>
   <!--
-    Description of the SmartBlock Enhanced Tracking Protection feature. The * symbol is intentionally hardcoded here,
-    as we use it on the UI to indicate which trackers have been partially unblocked.
+    Content description (not visible, for screen readers etc.):
+    Enhanced tracking protection exception preference icon for ETP settings.
   -->
-  <string name="preference_etp_smartblock_description">Jujun ojqanela\' ya\'on ketal man eq\'aton ta chik pa re ruxaq re\' ruma xe\'asamajij *.</string>
-  <!-- Text displayed that links to website about enhanced tracking protection SmartBlock -->
-  <string name="preference_etp_smartblock_learn_more">Tetamäx ch\'aqa\' chik</string>
+  <string name="preference_etp_exceptions_icon_description">Ruwäch rajowanik cha\'el ruchajixik utzilan ojqanem</string>
   <!--
     DNS over HTTPS (DoH)
 
     Preference title for DNS over HTTPS settings
   -->
   <string name="preference_doh_title">DNS chi rij HTTPS</string>
+  <!-- Description of the preference to enable "DNS over HTTPS". %1$s is replaced by a link using `preference_doh_learn_more` at text ("Learn More"). -->
+  <string name="preference_doh_summary">Ri ruq\'inoj kib\'i\' dominio (DNS) rik\'in ri HTTP yerutäq taq ruk\'utuj jun rub\'i\' dominio rik\'in jun ewan rusik\'ixik okem, akuchi\' nuya\' jun jikïl DNS chuqa\' nub\'än chi ch\'aqa\' chik k\'ayew nikitz\'ët achike ajk\'am ruxaq nrajo\' nok. %1$s</string>
   <!-- Used as text for the link in `preference_doh_title`, points to documentation about "DNS over HTTPS" -->
   <string name="preference_doh_learn_more">Tetamäx ch\'aqa\' chik</string>
   <!-- Content description for the "Exceptions" button -->
   <string name="preference_doh_exceptions_description">Taq man relik ta</string>
+  <!-- Content description for the "Info" button -->
+  <string name="preference_doh_info_description">Eta\'m</string>
+  <!-- Content description for the "Add Site" button -->
+  <string name="preference_doh_add_site_description">Titz\'aqatisäx ruxaq</string>
+  <!-- Title displayed for "Default Protection" option under "DNS over HTTPS" -->
+  <string name="preference_doh_default_protection">Chajinïk K\'o Wi</string>
+  <!-- Summary displayed for "Default Protection" option under "DNS over HTTPS". %1$s is the name of the application (e.g. Fenix). -->
+  <string name="preference_doh_default_protection_summary">%1$s nuna\'ojij jampe\' toq nrokisaj jikïl DNS richin nuchajij ri awichinaxik.</string>
+  <!-- Bullet point 1 for "Default Protection" information page under "DNS over HTTPS" -->
+  <string name="preference_doh_default_protection_info_1">Tawokisaj ri ya\'öl samaj xacha\'</string>
+  <!-- Bullet point 2 for "Default Protection" information page under "DNS over HTTPS" -->
+  <string name="preference_doh_default_protection_info_2">Tawokisaj ri asolöy DNS k\'o wi, we k\'o jun k\'ayewal rik\'in ri ya\'öl jikïl DNS</string>
+  <!-- Bullet point 3 for "Default Protection" information page under "DNS over HTTPS". %1$s is replaced by a link using `preference_doh_learn_more` at text ("Learn More"). -->
+  <string name="preference_doh_default_protection_info_3">Tokisäx jun aj wawe\' ya\'öl, we tikirel. %1$s</string>
+  <!-- Bullet point 4 for "Default Protection" information page under "DNS over HTTPS" -->
+  <string name="preference_doh_default_protection_info_4">Tachupu\' toq ri taq runa\'ojil VPN, ximïl chajinïk o nimak\'ayij e tzijÏl</string>
+  <!-- Bullet point 5 for "Default Protection" information page under "DNS over HTTPS". %1$s is the name of the application (e.g. Fenix). %2$s is replaced by a link using `preference_doh_learn_more` at text ("Learn More"). -->
+  <string name="preference_doh_default_protection_info_5">Tichup toq jun k\'amab\'ey nuya\' rutzijol chi re %1$s chi man ütz ta nrokisaj jikïl DNS. %2$s</string>
+  <!-- Title displayed for "Increased Protection" option under "DNS over HTTPS" -->
+  <string name="preference_doh_increased_protection">Nimirisan chajinïk</string>
+  <!-- Summary displayed for "Increased Protection" option under "DNS over HTTPS" -->
+  <string name="preference_doh_increased_protection_summary">Pan aq\'a\' k\'o jampe\' nawokisaj ri jikïl DNS chuqa\' nacha\' ri ajya\'öl.</string>
+  <!-- Bullet point 1 for "Increased Protection" information page under "DNS over HTTPS" -->
+  <string name="preference_doh_increased_protection_info_1">Tawokisaj ri ya\'öl samaj xacha\'</string>
+  <!-- Bullet point 2 for "Increased Protection" information page under "DNS over HTTPS" -->
+  <string name="preference_doh_increased_protection_info_2">Xa xe tawokisaj ri asolöy DNS k\'o wi, we k\'o jun k\'ayewal rik\'in ikïl DNS</string>
+  <!-- Title displayed for "Max Protection" option under "DNS over HTTPS" -->
+  <string name="preference_doh_max_protection">Nïm chajinem</string>
+  <!-- Summary displayed for "Max Protection" option under "DNS over HTTPS". %1$s is the name of the application (e.g. Fenix). -->
+  <string name="preference_doh_max_protection_summary">%1$s junelïk tokisäx jikÏl DNS. Xtitz\'etetäj jun rutzijol k\'ayewal chuwäch xtiqokisaj ri DNS k\'o pa q\'inoj.</string>
   <!-- Bullet point 1 for "Max Protection" information page under "DNS over HTTPS" -->
   <string name="preference_doh_max_protection_info_1">Xa xe tawokisaj ri ya\'öl samaj xacha\'</string>
+  <!-- Bullet point 2 for "Max Protection" information page under "DNS over HTTPS" -->
+  <string name="preference_doh_max_protection_info_2">Junelïk tiya\' rutzijol we ri jikïl DNS man wachel ta</string>
+  <!-- Bullet point 3 for "Max Protection" information page under "DNS over HTTPS" -->
+  <string name="preference_doh_max_protection_info_3">We ri jikïl DNS man wachel ta, man xkesamäj ta ni xa ta ütz xkesamäj ri taq ruxaq</string>
   <!-- Title displayed for "Off" option under "DNS over HTTPS" -->
   <string name="preference_doh_off">Tichup</string>
   <!-- Summary displayed for "Off" option under "DNS over HTTPS" -->
@@ -2647,6 +2785,8 @@
   <string name="preference_doh_provider_custom_dialog_title">Ajya\'öl ichinan</string>
   <!-- Text displayed above provider textfield under "DNS over HTTPS" -->
   <string name="preference_doh_provider_custom_dialog_textfield">Ajya\'öl</string>
+  <!-- Error text displayed for provider textfield under "DNS over HTTPS" if the URL does not start with "https://" or its scheme is not "https" -->
+  <string name="preference_doh_provider_custom_dialog_error_https">Ri URL k\'o chi nitikïr rik\'in “https://”</string>
   <!-- Error text displayed for provider textfield under "DNS over HTTPS" if the URL is invalid -->
   <string name="preference_doh_provider_custom_dialog_error_invalid">Me\'okel URL</string>
   <!-- Cancel button text for provider textfield under "DNS over HTTPS" -->
@@ -2997,10 +3137,6 @@
   <string name="phone_feature_blocked_step_permissions"><![CDATA[2. Tachapa\' <b>Taq Ya\'oj Q\'ij</b>]]></string>
   <!-- Third step for the allowing a permission (%1$s is the permission name, for example "Camera"). -->
   <string name="phone_feature_blocked_step_feature"><![CDATA[3. Tik\'exlöx <b>%1$s</b> rik\'in TZIJÏL]]></string>
-  <!-- Label that indicates a site is using a secure connection -->
-  <string name="quick_settings_sheet_secure_connection_2">Rujikomal okem</string>
-  <!-- Label that indicates a site is using a insecure connection -->
-  <string name="quick_settings_sheet_insecure_connection_2">Man ütz ta chi okem</string>
   <!-- Label to clear site data -->
   <string name="clear_site_data">Kejosq\'ïx ri taq kaxlanwey chuqa\' taq ruxaq ruk\'amaya\'l tzij</string>
   <!-- Confirmation message for a dialog confirming if the user wants to delete all the permissions for all sites -->
@@ -3015,11 +3151,6 @@
   <string name="browser_menu_add_to_shortcuts">Titz\'aqatisäx ruq\'a\'</string>
   <!-- Browser menu button that removes a shortcut from the home fragment -->
   <string name="browser_menu_remove_from_shortcuts">Tiyu pa ruq\'a\'</string>
-  <!--
-    text shown before the issuer name to indicate who its verified by, %1$s is the name of
-    the certificate authority that verified the ticket
-  -->
-  <string name="certificate_info_verified_by">Jikib\'an Ruma: %1$s</string>
   <!-- Positive action of a dialog asking to delete -->
   <string name="dialog_delete_positive">Tiyuj</string>
   <!-- Negative action of a dialog asking to delete login -->

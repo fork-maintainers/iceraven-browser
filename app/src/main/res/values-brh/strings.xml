@@ -296,8 +296,6 @@
     %1$s is the name of the app (for example "Firefox").
   -->
   <string name="preferences_about">ئنا باروٹ %1$s</string>
-  <!-- Text for cancel button indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_cancel_button">کینسل</string>
   <!-- Summary of https only preference if https only is set to off -->
   <string name="preferences_https_only_off">بند</string>
   <!-- Preference for changing where the AddressBar is positioned -->
@@ -505,8 +503,6 @@
   <string name="close_tab_title">%s ٹیب اے بند کبو</string>
   <!-- Text for the button to clear all history -->
   <string name="history_delete_all">تاریخچہ مٹائفبو</string>
-  <!-- Text for the snackbar to confirm that multiple browsing history items has been deleted -->
-  <string name="history_delete_multiple_items_snackbar">تاریخچہ مٹائفنگا</string>
   <!-- Text for the header that groups the history for today -->
   <string name="history_today">اینو</string>
   <!-- Text for the header that groups the history for yesterday -->
@@ -557,8 +553,6 @@
   <string name="webcompat_reporter_learn_more">پین ہیل کبو</string>
   <!-- The button text for the cancel button to leave the Web Compat Reporter feature. -->
   <string name="webcompat_reporter_cancel">کینسل</string>
-  <!-- The button text for the send button to submit the provided form data. -->
-  <string name="webcompat_reporter_send">رائ کبو</string>
   <!-- Unsubmitted crash dialog negative button to dismiss the dialog -->
   <string name="unsubmitted_crash_dialog_negative_button">بند</string>
   <!-- Snackbar title that confirms a bookmark was saved into a folder. %s is the name of the folder the bookmark was saved into. -->

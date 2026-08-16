@@ -108,12 +108,6 @@
   <string name="open_in_app_cfr_negative_button_text">닫기</string>
   <!-- Private browsing erase action "contextual feature recommendation" (CFR) -->
 
-  <!--
-    Address bar swipe "contextual feature recommendation" (CFR)
-
-    Text for the message displayed in the contextual feature recommendation popup promoting swipe of address bar.
-  -->
-  <string name="address_bar_swipe_cfr_message_2">도구 모음을 왼쪽이나 오른쪽으로 스와이프해서 탭을 전환합니다.</string>
   <!-- Text for the info dialog when camera permissions have been denied but user tries to access a camera feature. -->
   <string name="camera_permissions_needed_message">카메라 액세스가 필요합니다. Android 설정으로 이동하여 권한을 탭한 다음 허용을 탭하세요.</string>
   <!-- Text for the positive action button to go to Android Settings to grant permissions. -->
@@ -319,14 +313,6 @@
   <string name="browser_menu_default_banner_dismiss_promotion">프로모션 닫기</string>
   <!-- Content description (not visible, for screen readers etc.) for recommended extensions in main menu -->
   <string name="browser_menu_recommended_extensions_content_description">추가 정보</string>
-  <!--
-    Menu "contextual feature recommendation" (CFR)
-
-    Text for the title in the contextual feature recommendation popup promoting the menu feature.
-  -->
-  <string name="menu_cfr_title">새 기능: 간소화된 메뉴</string>
-  <!-- Text for the message in the contextual feature recommendation popup promoting the menu feature. -->
-  <string name="menu_cfr_body">사생활 보호 모드부터 저장 작업까지 필요한 것을 더 빠르게 찾으세요.</string>
   <!--
     Extensions management fragment
 
@@ -791,40 +777,8 @@
   <string name="preferences_pbm_lock_screen_title">사생활 보호 모드에서 탭을 숨기기 위해 화면 잠금 사용</string>
   <!-- Informs the user how to access the tabs when "Use screen lock to hide tabs in private browsing" is enabled -->
   <string name="preferences_pbm_lock_screen_summary_3">지문, PIN 또는 얼굴인식 잠금 해제로 탭을 봅니다. 이 옵션을 켜면 화면 캡처 및 공유도 차단합니다.</string>
-  <!-- Label for cookie banner section in quick settings panel. -->
-  <string name="cookie_banner_blocker">쿠키 배너 차단기</string>
   <!-- Preference for removing cookie/consent banners from sites automatically in private mode. See reduce_cookie_banner_summary for additional context. -->
   <string name="preferences_cookie_banner_reduction_private_mode">사생활 보호 모드의 쿠키 배너 차단기</string>
-  <!-- Text for indicating cookie banner handling is off this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_off_for_site">이 사이트에서 꺼짐</string>
-  <!-- Text for cancel button indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_cancel_button">취소</string>
-  <!-- Text for request support button indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_request_support_button_2">요청 보내기</string>
-  <!-- Text for title indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_title_2">이 사이트에 대한 지원을 요청하시겠습니까?</string>
-  <!-- Label for the snackBar, after the user reports with success a website where cookie banner reducer did not work -->
-  <string name="cookie_banner_handling_report_site_snack_bar_text_2">요청 전송됨</string>
-  <!-- Text for indicating cookie banner handling is on this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_on_for_site">이 사이트에서 켜짐</string>
-  <!-- Text for indicating that a request for unsupported site was sent to Nimbus (it's a Mozilla library for experiments), this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_unsupported_site_request_submitted_2">지원 요청 전송됨</string>
-  <!-- Text for indicating cookie banner handling is currently not supported for this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_unsupported_site">현재 지원되지 않는 사이트</string>
-  <!-- Title text for a detail explanation indicating cookie banner handling is on this site, this is shown as part of the cookie banner panel in the toolbar. %1$s is a shortened URL of the current site. -->
-  <string name="reduce_cookie_banner_details_panel_title_on_for_site_1">%1$s에 쿠키 배너 차단기를 켜시겠습니까?</string>
-  <!-- Title text for a detail explanation indicating cookie banner handling is off this site, this is shown as part of the cookie banner panel in the toolbar. %1$s is a shortened URL of the current site. -->
-  <string name="reduce_cookie_banner_details_panel_title_off_for_site_1">%1$s에 쿠키 배너 차단기를 끄시겠습니까?</string>
-  <!-- Title text for a detail explanation indicating cookie banner reducer didn't work for the current site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_title_unsupported_site_request_2">%1$s는 이 사이트에서 쿠키 요청을 자동으로 거부할 수 없습니다. 나중에 이 사이트를 지원하도록 요청을 보낼 수 있습니다.</string>
-  <!-- Long text for a detail explanation indicating what will happen if cookie banner handling is off for a site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_description_off_for_site_1">끄면 %1$s가 쿠키를 지우고 이 사이트를 다시 로드합니다. 로그아웃되거나 장바구니가 비워질 수 있습니다.</string>
-  <!-- Long text for a detail explanation indicating what will happen if cookie banner handling is on for a site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_description_on_for_site_3">켜면 %1$s가 이 사이트의 모든 쿠키 배너를 자동으로 거부하려고 시도합니다.</string>
-  <!-- Title for the cookie banner re-engagement CFR, the placeholder is replaced with app name. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="cookie_banner_cfr_title">%1$s가 쿠키를 거부했습니다</string>
-  <!-- Message for the cookie banner re-engagement CFR -->
-  <string name="cookie_banner_cfr_message">방해 요소가 줄어들고, 이 사이트에서 사용자를 추적하는 쿠키가 줄어듭니다.</string>
   <!-- Description of the preference to enable "HTTPS-Only" mode. -->
   <string name="preferences_https_only_summary">보안 강화를 위해 HTTPS 암호화 프로토콜을 사용하여 사이트에 자동으로 연결을 시도합니다.</string>
   <!-- Summary of https only preference if https only is set to off -->
@@ -1764,8 +1718,6 @@
   <string name="history_search_1">검색어 입력</string>
   <!-- Text for the button to clear all history -->
   <string name="history_delete_all">기록 삭제</string>
-  <!-- Text for the snackbar to confirm that multiple browsing history items has been deleted -->
-  <string name="history_delete_multiple_items_snackbar">기록 삭제됨</string>
   <!-- Text for the snackbar to confirm that a single browsing history item has been deleted. %1$s is the shortened URL of the deleted history item. -->
   <string name="history_delete_single_item_snackbar">%1$s 삭제됨</string>
   <!-- Context description text for the button to delete a single history item -->
@@ -2010,22 +1962,10 @@
   <string name="webcompat_reporter_label_mandatory_description">조사에 도움이 되도록 문제를 자세히 설명해 주세요</string>
   <!-- The label/title of a optional field in the Web Compat Reporter feature for adding additional information. -->
   <string name="webcompat_reporter_label_optional_description">조사에 도움이 되도록 문제를 자세히 설명해 주세요 (선택 사항)</string>
-  <!-- The label/title of a field in the Web Compat Reporter feature for explaining a high-level reason why the site is broken. -->
-  <string name="webcompat_reporter_label_whats_broken_2">어떤 문제인가요?</string>
-  <!-- The placeholder text for the dropdown where a user selects a high-level reason why the site is broken. -->
-  <string name="webcompat_reporter_choose_reason_2">이유 선택</string>
-  <!-- The error message of the dropdown, prompting the user to select a high-level reason why the site is broken. -->
-  <string name="webcompat_reporter_choose_reason_error">이유를 선택하세요</string>
-  <!-- The label/title of an optional field in the Web Compat Reporter feature for adding additional information. -->
-  <string name="webcompat_reporter_label_description_2">조사에 도움이 되도록 문제를 자세히 설명해 주세요 (선택 사항)</string>
-  <!-- The button text for navigating away from the feature to provide more information on the broken site's bug report. -->
-  <string name="webcompat_reporter_add_more_info">추가 정보 추가</string>
   <!-- The button text for the cancel button to leave the Web Compat Reporter feature. -->
   <string name="webcompat_reporter_cancel">취소</string>
   <!-- The button text for the send button to submit the provided form data. -->
   <string name="webcompat_reporter_send_report">보고서 보내기</string>
-  <!-- The button text for the send button to submit the provided form data. -->
-  <string name="webcompat_reporter_send">보내기</string>
   <!-- Text for a snackbar to confirm the successful submission of a WebCompat report. -->
   <string name="webcompat_reporter_success_snackbar_text_2">신고가 전송됨</string>
   <!-- Placeholder text for the description field to prompt the user on what they should type. -->
@@ -2066,8 +2006,6 @@
   <string name="webcompat_reporter_reason_notsupported_2">지원되지 않거나 차단된 브라우저</string>
   <!-- Broken site reason text for the site being deceptive -->
   <string name="webcompat_reporter_reason_site_is_deceptive">의심스러운 사이트</string>
-  <!-- Broken site reason text for browser isn’t supported or blocked -->
-  <string name="webcompat_reporter_reason_notsupported">지원되지 않거나 차단된 브라우저</string>
   <!-- Broken site reason text for something else -->
   <string name="webcompat_reporter_reason_other">기타</string>
   <!--
@@ -2239,12 +2177,6 @@
     Button label that take the user to the Android App setting
   -->
   <string name="phone_feature_go_to_settings">설정으로 이동</string>
-  <!--
-    Content description (not visible, for screen readers etc.): Quick settings sheet
-    to give users access to site specific information / settings. For example:
-    Secure settings status and a button to modify site permissions
-  -->
-  <string name="quick_settings_sheet">빠른 설정 시트</string>
   <!-- Label that indicates that this option it the recommended one -->
   <string name="phone_feature_recommended">추천</string>
   <!-- Button label for clearing all the information of site permissions -->
@@ -2641,12 +2573,6 @@
   <!--
     Enhanced Tracking Protection
 
-    Link displayed in enhanced tracking protection panel to access tracking protection settings
-  -->
-  <string name="etp_settings">보호 설정</string>
-  <!--
-    Enhanced Tracking Protection
-
     Preference title for enhanced tracking protection settings
   -->
   <string name="preference_enhanced_tracking_protection">향상된 추적 방지 기능</string>
@@ -2736,12 +2662,8 @@
   <string name="preference_enhanced_tracking_protection_custom_cryptominers">암호화폐 채굴기</string>
   <!-- Preference for enhanced tracking protection for the custom protection settings -->
   <string name="preference_enhanced_tracking_protection_custom_known_fingerprinters">알려진 디지털 지문</string>
-  <!-- Button label for navigating to the Enhanced Tracking Protection details -->
-  <string name="enhanced_tracking_protection_details">상세 정보</string>
   <!-- Header for categories that are being being blocked by current Enhanced Tracking Protection settings -->
   <string name="enhanced_tracking_protection_blocked">차단됨</string>
-  <!-- Header for categories that are being not being blocked by current Enhanced Tracking Protection settings -->
-  <string name="enhanced_tracking_protection_allowed">허용됨</string>
   <!-- Category of trackers (social media trackers) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_social_media_trackers_title">소셜 미디어 추적기</string>
   <!-- Description of social media trackers that can be blocked by Enhanced Tracking Protection -->
@@ -2764,10 +2686,6 @@
   <string name="etp_tracking_content_title">추적 콘텐츠</string>
   <!-- Description of tracking content that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_tracking_content_description">추적 코드가 포함된 외부 광고, 동영상 및 기타 콘텐츠가 로드되지 않도록 합니다. 일부 웹 사이트의 기능에 영향을 줄 수 있습니다.</string>
-  <!-- Enhanced Tracking Protection message that protection is currently on for this site -->
-  <string name="etp_panel_on">이 사이트에서 보호 켜짐</string>
-  <!-- Enhanced Tracking Protection message that protection is currently off for this site -->
-  <string name="etp_panel_off">이 사이트에서 보호 꺼짐</string>
   <!-- Header for exceptions list for which sites enhanced tracking protection is always off -->
   <string name="enhanced_tracking_protection_exceptions">이 웹 사이트에 향상된 추적 방지 기능이 꺼짐</string>
   <!--
@@ -2792,13 +2710,6 @@
   <string name="etp_suspected_fingerprinters_description">의심되는 디지털 지문을 차단하기 위해 디지털 지문 보호를 활성화합니다.</string>
   <!-- Category of trackers (fingerprinters) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_known_fingerprinters_title">알려진 디지털 지문</string>
-  <!--
-    Description of the SmartBlock Enhanced Tracking Protection feature. The * symbol is intentionally hardcoded here,
-    as we use it on the UI to indicate which trackers have been partially unblocked.
-  -->
-  <string name="preference_etp_smartblock_description">아래에 표시된 일부 추적기는 사용자가 *과 상호 작용했기 때문에 이 페이지에서 부분적으로 차단 해제되었습니다.</string>
-  <!-- Text displayed that links to website about enhanced tracking protection SmartBlock -->
-  <string name="preference_etp_smartblock_learn_more">더 알아보기</string>
   <!--
     Content description (not visible, for screen readers etc.):
     Enhanced tracking protection exception preference icon for ETP settings.
@@ -3404,16 +3315,8 @@
   <string name="phone_feature_blocked_step_permissions"><![CDATA[2. <b>권한</b>을 탭하세요]]></string>
   <!-- Third step for the allowing a permission (%1$s is the permission name, for example "Camera"). -->
   <string name="phone_feature_blocked_step_feature"><![CDATA[3. <b>%1$s</b>을(를) 켜기로 전환하세요]]></string>
-  <!-- Label that indicates a site is using a secure connection -->
-  <string name="quick_settings_sheet_secure_connection_2">연결이 안전함</string>
-  <!-- Label that indicates a site is using a insecure connection -->
-  <string name="quick_settings_sheet_insecure_connection_2">연결이 안전하지 않음</string>
-  <!-- Label that indicates a site is displaying a local document -->
-  <string name="quick_settings_sheet_local_page">이 페이지는 사용자의 기기에 저장되었습니다.</string>
   <!-- Label to clear site data -->
   <string name="clear_site_data">쿠키 및 사이트 데이터 지우기</string>
-  <!-- Confirmation message for a dialog confirming if the user wants to delete all data for current site. %s is the domain of the site. -->
-  <string name="confirm_clear_site_data"><![CDATA[<b>%s</b> 사이트의 모든 쿠키와 데이터를 지우시겠습니까?]]></string>
   <!-- Confirmation message for a dialog confirming if the user wants to delete all the permissions for all sites -->
   <string name="confirm_clear_permissions_on_all_sites">모든 사이트의 모든 권한을 지우시겠습니까?</string>
   <!-- Confirmation message for a dialog confirming if the user wants to delete all the permissions for a site -->
@@ -3426,11 +3329,6 @@
   <string name="browser_menu_add_to_shortcuts">바로 가기에 추가</string>
   <!-- Browser menu button that removes a shortcut from the home fragment -->
   <string name="browser_menu_remove_from_shortcuts">바로 가기에서 삭제</string>
-  <!--
-    text shown before the issuer name to indicate who its verified by, %1$s is the name of
-    the certificate authority that verified the ticket
-  -->
-  <string name="certificate_info_verified_by">인증 기관: %1$s</string>
   <!-- Message in delete confirmation dialog for password -->
   <string name="login_deletion_confirmation_2">이 비밀번호를 삭제하시겠습니까?</string>
   <!-- Positive action of a dialog asking to delete -->
@@ -3494,6 +3392,16 @@
     which navigates the user to a screen displaying all the shortcuts.
   -->
   <string name="homepage_shortcuts_show_all_content_description">모든 단축키 보기</string>
+  <!--
+    Label for the button in the shortcuts home screen section that expands the section to show
+    every shortcut.
+  -->
+  <string name="homepage_shortcuts_show_all">모두 보기</string>
+  <!--
+    Label for the button in the shortcuts home screen section that collapses the section back
+    to showing only the first shortcuts.
+  -->
+  <string name="homepage_shortcuts_show_less">접기</string>
   <!-- Label for the "Add shortcut" button displayed as a tile. -->
   <string name="homepage_shortcuts_add_shortcut">바로 가기 추가</string>
   <!-- Title for the "Add to homepage" bottom sheet. -->
@@ -4755,10 +4663,6 @@
   <string name="search_settings_google_lens_description">시각적 검색을 위해 이미지와 사진을 Google에 보냅니다.</string>
   <!-- Caption shown under the Google Lens toggle clarifying when the feature is available -->
   <string name="preferences_google_lens_availability_caption">위의 Google 항목을 활성화하고 탐색 중 Google을 기본 검색 엔진으로 사용할 때만 이용 가능합니다.</string>
-  <!-- Title for the Google Lens AI feature toggle -->
-  <string name="ai_controls_google_lens_title">Google 렌즈</string>
-  <!-- Description for the Google Lens AI feature toggle -->
-  <string name="ai_controls_google_lens_description">시각적 검색을 위해 이미지와 사진을 Google에 보냅니다.</string>
   <!-- Content description for the Google Lens half of the camera mode toggle -->
   <string name="lens_camera_mode_lens">Google 렌즈</string>
   <!-- Content description for the QR scanner half of the camera mode toggle -->

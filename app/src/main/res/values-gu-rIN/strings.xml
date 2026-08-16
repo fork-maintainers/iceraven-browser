@@ -361,12 +361,6 @@
     Button label that take the user to the Android App setting
   -->
   <string name="phone_feature_go_to_settings">સેટિંગ્સ પર જાઓ</string>
-  <!--
-    Content description (not visible, for screen readers etc.): Quick settings sheet
-    to give users access to site specific information / settings. For example:
-    Secure settings status and a button to modify site permissions
-  -->
-  <string name="quick_settings_sheet">ઝડપી સેટિંગ્સ શીટ</string>
   <!-- Label that indicates that this option it the recommended one -->
   <string name="phone_feature_recommended">ભલામણ કરેલ</string>
   <!-- Button label for clearing all the information of site permissions -->
@@ -585,12 +579,6 @@
   <!--
     Enhanced Tracking Protection
 
-    Link displayed in enhanced tracking protection panel to access tracking protection settings
-  -->
-  <string name="etp_settings">સુરક્ષા સેટિંગ્સ</string>
-  <!--
-    Enhanced Tracking Protection
-
     Preference title for enhanced tracking protection settings
   -->
   <string name="preference_enhanced_tracking_protection">ઉન્નત ટ્રેકિંગ સંરક્ષણ</string>
@@ -614,8 +602,6 @@
   <string name="preference_enhanced_tracking_protection_custom_tracking_content_2">ફક્ત ખાનગી ટબ્સમાં</string>
   <!-- Header for categories that are being being blocked by current Enhanced Tracking Protection settings -->
   <string name="enhanced_tracking_protection_blocked">અવરોધિત</string>
-  <!-- Header for categories that are being not being blocked by current Enhanced Tracking Protection settings -->
-  <string name="enhanced_tracking_protection_allowed">મંજૂર</string>
   <!-- Category of trackers (social media trackers) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_social_media_trackers_title">સોશિયલ મીડિયા ટ્રેકર્સ</string>
   <!-- Description of social media trackers that can be blocked by Enhanced Tracking Protection -->
@@ -630,10 +616,6 @@
   <string name="etp_cryptominers_description">ડિજિટલ ચલણની ખાણ મેળવવા માટે તમારા ઉપકરણની ઍક્સેસ મેળવતા દૂષિત સ્ક્રિપ્ટોને રોકે છે.</string>
   <!-- Category of trackers (tracking content) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_tracking_content_title">ટ્રેકિંગ સામગ્રી</string>
-  <!-- Enhanced Tracking Protection message that protection is currently on for this site -->
-  <string name="etp_panel_on">આ સાઇટ માટે સંરક્ષણ ચાલુ છે</string>
-  <!-- Enhanced Tracking Protection message that protection is currently off for this site -->
-  <string name="etp_panel_off">આ સાઇટ માટે સંરક્ષણ બંધ છે</string>
   <!-- Header for exceptions list for which sites enhanced tracking protection is always off -->
   <string name="enhanced_tracking_protection_exceptions">આ વેબસાઇટ્સ માટે ઉન્નત ટ્રેકિંગ પ્રોટેક્શન બંધ છે</string>
   <!-- About page link text to open what's new link. %s is the name of the app (for example "Firefox"). -->
@@ -729,11 +711,6 @@
   <string name="search_add_custom_engine_error_missing_template">તે તપાસણી કરો કે શોધ શબ્દમાળા ઉદાહરણ ફોર્મેટ સાથે મેળ ખાય છે</string>
   <!-- Heading for the instructions to allow a permission -->
   <string name="phone_feature_blocked_intro">તેને મંજૂરી આપવા માટે:</string>
-  <!--
-    text shown before the issuer name to indicate who its verified by, %1$s is the name of
-    the certificate authority that verified the ticket
-  -->
-  <string name="certificate_info_verified_by">દ્વારા ચકાસાયેલ: %1$s</string>
   <!-- Translations feature -->
 
   <!-- TextField Design System Component -->

@@ -490,8 +490,6 @@
   <string name="pwa_site_controls_title_private">%1$s (သီးသန့်ကိုယ်ပိုင် ပုံစံ)</string>
   <!-- Text for the button to clear all history -->
   <string name="history_delete_all">မှတ်တမ်းကို ဖျက်ပါ</string>
-  <!-- Text for the snackbar to confirm that multiple browsing history items has been deleted -->
-  <string name="history_delete_multiple_items_snackbar">မှတ်တမ်း ကို ဖျက်ပြီး</string>
   <!-- Text for the snackbar to confirm that a single browsing history item has been deleted. %1$s is the shortened URL of the deleted history item. -->
   <string name="history_delete_single_item_snackbar">%1$s ခု ဖျက်ပြီး</string>
   <!-- Context description text for the button to delete a single history item -->
@@ -572,12 +570,6 @@
     Button label that take the user to the Android App setting
   -->
   <string name="phone_feature_go_to_settings">အပြင်အဆင်များသို့ သွားပါ</string>
-  <!--
-    Content description (not visible, for screen readers etc.): Quick settings sheet
-    to give users access to site specific information / settings. For example:
-    Secure settings status and a button to modify site permissions
-  -->
-  <string name="quick_settings_sheet">အလျင်အမြန်ပြင်ဆင်နိုင်သောအပြင်အဆင်</string>
   <!-- Label that indicates that this option it the recommended one -->
   <string name="phone_feature_recommended">အကြံပြုထားသည်</string>
   <!-- Button label for clearing all the information of site permissions -->
@@ -826,12 +818,6 @@
   <!--
     Enhanced Tracking Protection
 
-    Link displayed in enhanced tracking protection panel to access tracking protection settings
-  -->
-  <string name="etp_settings">ကာကွယ်မှုဆိုင်ရာ အပြင်အဆင်များ</string>
-  <!--
-    Enhanced Tracking Protection
-
     Preference title for enhanced tracking protection settings
   -->
   <string name="preference_enhanced_tracking_protection">အဆင့်မြှင့် ခြေရာခံကာကွယ်မှု</string>
@@ -873,12 +859,8 @@
   <string name="preference_enhanced_tracking_protection_custom_tracking_content_2">သီးသန့်တဗ်များတွင်သာ</string>
   <!-- Preference for enhanced tracking protection for the custom protection settings -->
   <string name="preference_enhanced_tracking_protection_custom_cryptominers">Cryptominers</string>
-  <!-- Button label for navigating to the Enhanced Tracking Protection details -->
-  <string name="enhanced_tracking_protection_details">အသေးစိတ်များ</string>
   <!-- Header for categories that are being being blocked by current Enhanced Tracking Protection settings -->
   <string name="enhanced_tracking_protection_blocked">ပိတ်ဆို့ထားသည်</string>
-  <!-- Header for categories that are being not being blocked by current Enhanced Tracking Protection settings -->
-  <string name="enhanced_tracking_protection_allowed">ခွင့်ပြုထားသည်</string>
   <!-- Category of trackers (social media trackers) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_social_media_trackers_title">လူမှုမီဒီယာ ခြေရာခံသူများ</string>
   <!-- Description of social media trackers that can be blocked by Enhanced Tracking Protection -->
@@ -895,10 +877,6 @@
   <string name="etp_tracking_content_title">နောက်ယောင်ခံသည့် အရာများ</string>
   <!-- Description of tracking content that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_tracking_content_description">ခြေရာခံခြင်းကုဒ်ပါရှိခြင်းကြောင့်အပြင်ဘက်ကြော်ငြာများ၊ဗွီဒီယိုများနှင့်အခြားအကြောင်းအရာများကိုတားမြစ်သည်။ အချို့သော ဆိုက်၏လုပ်ဆောင်နိုင်စွမ်းကိုအကျိုးသက်ရောက်နိုင်သည်။</string>
-  <!-- Enhanced Tracking Protection message that protection is currently on for this site -->
-  <string name="etp_panel_on">ဤဆိုက်အတွက် ကာကွယ်မှုဖွင့်ထားသည်။</string>
-  <!-- Enhanced Tracking Protection message that protection is currently off for this site -->
-  <string name="etp_panel_off">ဤဆိုက်အတွက် ကာကွယ်မှုပိတ်ထားသည်။</string>
   <!-- Header for exceptions list for which sites enhanced tracking protection is always off -->
   <string name="enhanced_tracking_protection_exceptions">ဤဆိုက်များအတွက် ထိန်းညှိခြေရာခံကာကွယ်ရေးများကိုပိတ်ပါ။</string>
   <!--
@@ -1083,11 +1061,6 @@
   <string name="confirm_clear_permission_site">ဤဆိုက်အတွက်ခွင့်ပြုချက်များဖျက်ရန်သေချာပါသလား။</string>
   <!-- label shown when there are not site exceptions to show in the site exception settings -->
   <string name="no_site_exceptions">site ချွင်းချက်မရှိပါ</string>
-  <!--
-    text shown before the issuer name to indicate who its verified by, %1$s is the name of
-    the certificate authority that verified the ticket
-  -->
-  <string name="certificate_info_verified_by">%1$s မှစစ်ဆေးပြီး။</string>
   <!-- Positive action of a dialog asking to delete -->
   <string name="dialog_delete_positive">ဖျက်ပါ</string>
   <!-- Voice search button content description -->

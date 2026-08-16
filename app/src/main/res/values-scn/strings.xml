@@ -83,12 +83,6 @@
   <string name="open_in_app_cfr_negative_button_text">Leva</string>
   <!-- Private browsing erase action "contextual feature recommendation" (CFR) -->
 
-  <!--
-    Address bar swipe "contextual feature recommendation" (CFR)
-
-    Text for the message displayed in the contextual feature recommendation popup promoting swipe of address bar.
-  -->
-  <string name="address_bar_swipe_cfr_message_2">Tira a sbarra a manu dritta o a manu manca pi canciari i schedi.</string>
   <!-- Text for the info dialog when camera permissions have been denied but user tries to access a camera feature. -->
   <string name="camera_permissions_needed_message">Abbisognu d’accèdiri â fotucàmmira. Vai nnê mpustazzioni di Android, ammacca pirmissi e doppu auturizza.</string>
   <!-- Text for the positive action button to go to Android Settings to grant permissions. -->
@@ -285,14 +279,6 @@
   <!-- Content description (not visible, for screen readers etc.) for recommended extensions in main menu -->
   <string name="browser_menu_recommended_extensions_content_description">Cchiù nfurmazzioni</string>
   <!--
-    Menu "contextual feature recommendation" (CFR)
-
-    Text for the title in the contextual feature recommendation popup promoting the menu feature.
-  -->
-  <string name="menu_cfr_title">Novu: minù cchiù fàcili</string>
-  <!-- Text for the message in the contextual feature recommendation popup promoting the menu feature. -->
-  <string name="menu_cfr_body">Attrova chiḍḍu chi ti serbi cchiù lestu, dâ navicazzioni privata nzinu a l’azzioni di sarbataggiu.</string>
-  <!--
     Extensions management fragment
 
     Text displayed when there are no extensions to be shown
@@ -468,40 +454,8 @@
   <string name="preferences_https_only_title">Mudalità sulu HTTPS</string>
   <!-- Preference title for using the screen lock to hide tabs in private browsing -->
   <string name="preferences_pbm_lock_screen_title">Usa u bloccu dû schirmu p’ammucciari i schedi dâ navicazzioni privata</string>
-  <!-- Label for cookie banner section in quick settings panel. -->
-  <string name="cookie_banner_blocker">Bloccu dî banneri dî viscotta</string>
   <!-- Preference for removing cookie/consent banners from sites automatically in private mode. See reduce_cookie_banner_summary for additional context. -->
   <string name="preferences_cookie_banner_reduction_private_mode">Bloccu dî banneri dî viscotta nnâ navicazzioni privata</string>
-  <!-- Text for indicating cookie banner handling is off this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_off_for_site">Astutatu pi stu situ</string>
-  <!-- Text for cancel button indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_cancel_button">Sfai</string>
-  <!-- Text for request support button indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_request_support_button_2">Manna dumanna</string>
-  <!-- Text for title indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_title_2">Vo’ addumannari supportu pi stu situ?</string>
-  <!-- Label for the snackBar, after the user reports with success a website where cookie banner reducer did not work -->
-  <string name="cookie_banner_handling_report_site_snack_bar_text_2">Dumanna mannata</string>
-  <!-- Text for indicating cookie banner handling is on this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_on_for_site">Aḍḍumatu pi stu situ</string>
-  <!-- Text for indicating that a request for unsupported site was sent to Nimbus (it's a Mozilla library for experiments), this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_unsupported_site_request_submitted_2">Dumanna di supportu mannata</string>
-  <!-- Text for indicating cookie banner handling is currently not supported for this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_unsupported_site">Stu situ accamora nun è suppurtatu</string>
-  <!-- Title text for a detail explanation indicating cookie banner handling is on this site, this is shown as part of the cookie banner panel in the toolbar. %1$s is a shortened URL of the current site. -->
-  <string name="reduce_cookie_banner_details_panel_title_on_for_site_1">Vo’ aḍḍumari u bloccu dî banneri dî viscotta pi %1$s?</string>
-  <!-- Title text for a detail explanation indicating cookie banner handling is off this site, this is shown as part of the cookie banner panel in the toolbar. %1$s is a shortened URL of the current site. -->
-  <string name="reduce_cookie_banner_details_panel_title_off_for_site_1">Vo’ astutari u bloccu dî banneri dî viscotta pi %1$s?</string>
-  <!-- Title text for a detail explanation indicating cookie banner reducer didn't work for the current site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_title_unsupported_site_request_2">%1$s nun po’ rifiutari ’n autumàticu i dumanni pî viscotta di stu situ. Po’ mannari na dumanna di supporti di stu situ ’n futuru.</string>
-  <!-- Long text for a detail explanation indicating what will happen if cookie banner handling is off for a site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_description_off_for_site_1">Si astutatu, %1$s scancella tutti i viscotta e càrrica arrè stu situ. Chistu ti putissi fari nèsciri o sbacantari i to carrelli dâ spisa.</string>
-  <!-- Long text for a detail explanation indicating what will happen if cookie banner handling is on for a site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_description_on_for_site_3">Si aḍḍumatu, %1$s prova a rifiutari ’n autumàticu tutti i banneri dî viscotta nna stu situ.</string>
-  <!-- Title for the cookie banner re-engagement CFR, the placeholder is replaced with app name. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="cookie_banner_cfr_title">%1$s rifiutau viscotta ora ora pi tia</string>
-  <!-- Message for the cookie banner re-engagement CFR -->
-  <string name="cookie_banner_cfr_message">Cchiù picca distrazzioni, cchiù picca viscotta chi ti tràzzanu nta stu situ.</string>
   <!-- Description of the preference to enable "HTTPS-Only" mode. -->
   <string name="preferences_https_only_summary">Prova a cullijàrisi ’n autumàticu ê siti usannu u prutucollu di cifratura HTTPS pi na sicurizza supiriuri.</string>
   <!-- Summary of https only preference if https only is set to off -->
@@ -1161,8 +1115,6 @@
   <string name="history_search_1">Scrivi i tèrmini dâ risciduta</string>
   <!-- Text for the button to clear all history -->
   <string name="history_delete_all">Scancella a crunuluggìa</string>
-  <!-- Text for the snackbar to confirm that multiple browsing history items has been deleted -->
-  <string name="history_delete_multiple_items_snackbar">Scancillasti a crunuluggìa</string>
   <!-- Text for the snackbar to confirm that a single browsing history item has been deleted. %1$s is the shortened URL of the deleted history item. -->
   <string name="history_delete_single_item_snackbar">Scancillasti %1$s</string>
   <!-- Context description text for the button to delete a single history item -->
@@ -1343,16 +1295,8 @@
   <string name="webcompat_reporter_label_url">Nnirizzu</string>
   <!-- The error message of the URL text field when an invalid URL has been entered. -->
   <string name="webcompat_reporter_url_error_invalid">Pi favuri metti nu nnirizzu vàlitu</string>
-  <!-- The label/title of a field in the Web Compat Reporter feature for explaining a high-level reason why the site is broken. -->
-  <string name="webcompat_reporter_label_whats_broken_2">Chi si rumpìu?</string>
-  <!-- The placeholder text for the dropdown where a user selects a high-level reason why the site is broken. -->
-  <string name="webcompat_reporter_choose_reason_2">Scarta na scaciuni</string>
-  <!-- The error message of the dropdown, prompting the user to select a high-level reason why the site is broken. -->
-  <string name="webcompat_reporter_choose_reason_error">Pi favuri scarta na scaciuni</string>
   <!-- The button text for the cancel button to leave the Web Compat Reporter feature. -->
   <string name="webcompat_reporter_cancel">Sfai</string>
-  <!-- The button text for the send button to submit the provided form data. -->
-  <string name="webcompat_reporter_send">Manna</string>
   <!--
     These reason strings are dropdown options on a WebCompat reporter form, indicating what is broken on the site.
 
@@ -1371,8 +1315,6 @@
   <string name="webcompat_reporter_reason_account2">Nun è pussìbbili tràsiri o riggistràrisi</string>
   <!-- Broken site reason text for site asked to turn off ad blocker -->
   <string name="webcompat_reporter_reason_turn_off_adblocker">U situ addumannau di sdisattivari u bloccu dî pubblicità</string>
-  <!-- Broken site reason text for browser isn’t supported or blocked -->
-  <string name="webcompat_reporter_reason_notsupported">U navicaturi nun è suppurtatu o è bluccatu</string>
   <!-- Broken site reason text for something else -->
   <string name="webcompat_reporter_reason_other">N’autra cosa</string>
   <!--
@@ -1506,12 +1448,6 @@
     Button label that take the user to the Android App setting
   -->
   <string name="phone_feature_go_to_settings">Vai nnê mpustazzioni</string>
-  <!--
-    Content description (not visible, for screen readers etc.): Quick settings sheet
-    to give users access to site specific information / settings. For example:
-    Secure settings status and a button to modify site permissions
-  -->
-  <string name="quick_settings_sheet">Fogghiu dî mpustazzioni lesti</string>
   <!-- Label that indicates that this option it the recommended one -->
   <string name="phone_feature_recommended">Raccumannata</string>
   <!-- Button label for clearing all the information of site permissions -->
@@ -1866,12 +1802,6 @@
   <!--
     Enhanced Tracking Protection
 
-    Link displayed in enhanced tracking protection panel to access tracking protection settings
-  -->
-  <string name="etp_settings">Mpustazzioni di prutizzioni</string>
-  <!--
-    Enhanced Tracking Protection
-
     Preference title for enhanced tracking protection settings
   -->
   <string name="preference_enhanced_tracking_protection">Prutizzioni avanzata dû trazzamentu</string>
@@ -1927,12 +1857,8 @@
   <string name="preference_enhanced_tracking_protection_custom_cryptominers">Pirrijatura di crittumunita</string>
   <!-- Preference for enhanced tracking protection for the custom protection settings -->
   <string name="preference_enhanced_tracking_protection_custom_known_fingerprinters">Giniratura di griffi nfurmàtichi canusciuti</string>
-  <!-- Button label for navigating to the Enhanced Tracking Protection details -->
-  <string name="enhanced_tracking_protection_details">Minutagghi</string>
   <!-- Header for categories that are being being blocked by current Enhanced Tracking Protection settings -->
   <string name="enhanced_tracking_protection_blocked">Bluccati</string>
-  <!-- Header for categories that are being not being blocked by current Enhanced Tracking Protection settings -->
-  <string name="enhanced_tracking_protection_allowed">Pirmisi</string>
   <!-- Category of trackers (social media trackers) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_social_media_trackers_title">Trazzatura dî riti suciali</string>
   <!-- Description of social media trackers that can be blocked by Enhanced Tracking Protection -->
@@ -1955,10 +1881,6 @@
   <string name="etp_tracking_content_title">Cuntinutu trazzanti</string>
   <!-- Description of tracking content that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_tracking_content_description">Blocca pubblicità, vidiu e autri cuntinuti chi ànnu còdici trazzanti. Putissi fari sfarsijari quarchi situ.</string>
-  <!-- Enhanced Tracking Protection message that protection is currently on for this site -->
-  <string name="etp_panel_on">Attivasti i prutizzioni pi stu situ</string>
-  <!-- Enhanced Tracking Protection message that protection is currently off for this site -->
-  <string name="etp_panel_off">Sdisattivasti i prutizzioni pi stu situ</string>
   <!-- Header for exceptions list for which sites enhanced tracking protection is always off -->
   <string name="enhanced_tracking_protection_exceptions">A prutizzioni avanzata dû trazzamentu è sdisattivata pi sti siti</string>
   <!--
@@ -1983,13 +1905,6 @@
   <string name="etp_suspected_fingerprinters_description">Attiva a prutizzioni contra â ginirazzioni di griffi nfurmàtichi pi chiḍḍi chi sunnu suspetti.</string>
   <!-- Category of trackers (fingerprinters) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_known_fingerprinters_title">Giniratura di griffi nfurmàtichi canusciuti</string>
-  <!--
-    Description of the SmartBlock Enhanced Tracking Protection feature. The * symbol is intentionally hardcoded here,
-    as we use it on the UI to indicate which trackers have been partially unblocked.
-  -->
-  <string name="preference_etp_smartblock_description">Certi trazzatura marcati appressu foru sbluccati di manera parziali nna sta pàggina picchì ntiraggisti cu iḍḍi *.</string>
-  <!-- Text displayed that links to website about enhanced tracking protection SmartBlock -->
-  <string name="preference_etp_smartblock_learn_more">Cchiù nfurmazzioni</string>
   <!--
     Content description (not visible, for screen readers etc.):
     Enhanced tracking protection exception preference icon for ETP settings.
@@ -2391,16 +2306,8 @@
   <string name="phone_feature_blocked_step_permissions"><![CDATA[2. Ammacca <b>Pirmissi</b>]]></string>
   <!-- Third step for the allowing a permission (%1$s is the permission name, for example "Camera"). -->
   <string name="phone_feature_blocked_step_feature"><![CDATA[3. Abbìlita <b>%1$s</b>]]></string>
-  <!-- Label that indicates a site is using a secure connection -->
-  <string name="quick_settings_sheet_secure_connection_2">A cunnissioni è sicura</string>
-  <!-- Label that indicates a site is using a insecure connection -->
-  <string name="quick_settings_sheet_insecure_connection_2">A cunnissioni nun è sicura</string>
-  <!-- Label that indicates a site is displaying a local document -->
-  <string name="quick_settings_sheet_local_page">Sta pàggina è sarbata nnô to dispusitivu</string>
   <!-- Label to clear site data -->
   <string name="clear_site_data">Scancella i viscotta e i dati dî siti</string>
-  <!-- Confirmation message for a dialog confirming if the user wants to delete all data for current site. %s is the domain of the site. -->
-  <string name="confirm_clear_site_data"><![CDATA[Scancillari tutti i viscotta e i dati dû situ <b>%s</b>?]]></string>
   <!-- Confirmation message for a dialog confirming if the user wants to delete all the permissions for all sites -->
   <string name="confirm_clear_permissions_on_all_sites">Scancillari tutti i pirmissi di tutti i siti?</string>
   <!-- Confirmation message for a dialog confirming if the user wants to delete all the permissions for a site -->
@@ -2413,11 +2320,6 @@
   <string name="browser_menu_add_to_shortcuts">Junci a l’accurzi</string>
   <!-- Browser menu button that removes a shortcut from the home fragment -->
   <string name="browser_menu_remove_from_shortcuts">Leva di l’accurzi</string>
-  <!--
-    text shown before the issuer name to indicate who its verified by, %1$s is the name of
-    the certificate authority that verified the ticket
-  -->
-  <string name="certificate_info_verified_by">Virificatu di: %1$s</string>
   <!-- Message in delete confirmation dialog for password -->
   <string name="login_deletion_confirmation_2">Scancillari sta chiavi?</string>
   <!-- Positive action of a dialog asking to delete -->

@@ -108,12 +108,6 @@
   <string name="open_in_app_cfr_negative_button_text">أهمِل</string>
   <!-- Private browsing erase action "contextual feature recommendation" (CFR) -->
 
-  <!--
-    Address bar swipe "contextual feature recommendation" (CFR)
-
-    Text for the message displayed in the contextual feature recommendation popup promoting swipe of address bar.
-  -->
-  <string name="address_bar_swipe_cfr_message_2">اسحب شريط الأدوات لليمين أو اليسار للانتقال بين التبويبات.</string>
   <!-- Text for the info dialog when camera permissions have been denied but user tries to access a camera feature. -->
   <string name="camera_permissions_needed_message">يُشترط الوصول إلى الكاميرا. افتح إعدادات أندرويد، وانقر \"الأذونات\" ثم انقر \"سماح\".</string>
   <!-- Text for the positive action button to go to Android Settings to grant permissions. -->
@@ -319,14 +313,6 @@
   <string name="browser_menu_default_banner_dismiss_promotion">أهمِل العرض الترويجي</string>
   <!-- Content description (not visible, for screen readers etc.) for recommended extensions in main menu -->
   <string name="browser_menu_recommended_extensions_content_description">المزيد من المعلومات</string>
-  <!--
-    Menu "contextual feature recommendation" (CFR)
-
-    Text for the title in the contextual feature recommendation popup promoting the menu feature.
-  -->
-  <string name="menu_cfr_title">جديد: قائمة انسيابية</string>
-  <!-- Text for the message in the contextual feature recommendation popup promoting the menu feature. -->
-  <string name="menu_cfr_body">وصول أسرع لكل ما تحتاجه، من التصفح الخاص إلى خيارات الحفظ.</string>
   <!--
     Extensions management fragment
 
@@ -791,40 +777,8 @@
   <string name="preferences_pbm_lock_screen_title">استخدم قفل الشاشة لإخفاء التبويبات في التصفح الخاص</string>
   <!-- Informs the user how to access the tabs when "Use screen lock to hide tabs in private browsing" is enabled -->
   <string name="preferences_pbm_lock_screen_summary_3">افتح التبويبات بالبصمة أو الرقم التعريفي الشخصي أو التعرف على الوجه. تفعيل هذه الميزة يمنع أيضًا تصوير الشاشة أو مشاركتها.</string>
-  <!-- Label for cookie banner section in quick settings panel. -->
-  <string name="cookie_banner_blocker">مانع لافتة ملفات تعريف الارتباط</string>
   <!-- Preference for removing cookie/consent banners from sites automatically in private mode. See reduce_cookie_banner_summary for additional context. -->
   <string name="preferences_cookie_banner_reduction_private_mode">مانع ملفات تعريف الارتباط في التصفح الخاص</string>
-  <!-- Text for indicating cookie banner handling is off this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_off_for_site">أوقف التشغيل لهذا الموقع</string>
-  <!-- Text for cancel button indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_cancel_button">ألغِ</string>
-  <!-- Text for request support button indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_request_support_button_2">أرسل الطلب</string>
-  <!-- Text for title indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_title_2">طلب الدعم لهذا الموقع؟</string>
-  <!-- Label for the snackBar, after the user reports with success a website where cookie banner reducer did not work -->
-  <string name="cookie_banner_handling_report_site_snack_bar_text_2">أُرسِل الطلب</string>
-  <!-- Text for indicating cookie banner handling is on this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_on_for_site">مفعّل لهذا الموقع</string>
-  <!-- Text for indicating that a request for unsupported site was sent to Nimbus (it's a Mozilla library for experiments), this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_unsupported_site_request_submitted_2">أُرسِل طلب الدعم</string>
-  <!-- Text for indicating cookie banner handling is currently not supported for this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_unsupported_site">الموقع غير مدعوم حاليا</string>
-  <!-- Title text for a detail explanation indicating cookie banner handling is on this site, this is shown as part of the cookie banner panel in the toolbar. %1$s is a shortened URL of the current site. -->
-  <string name="reduce_cookie_banner_details_panel_title_on_for_site_1">أأشغل مانع لافتات ملفات تعريف الارتباط لـ%1$s؟</string>
-  <!-- Title text for a detail explanation indicating cookie banner handling is off this site, this is shown as part of the cookie banner panel in the toolbar. %1$s is a shortened URL of the current site. -->
-  <string name="reduce_cookie_banner_details_panel_title_off_for_site_1">أأطفئ مانع لافتات ملفات تعريف الارتباط لـ%1$s؟</string>
-  <!-- Title text for a detail explanation indicating cookie banner reducer didn't work for the current site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_title_unsupported_site_request_2">لا يمكن لـ %1$s رفض طلبات ملفات تعريف الارتباط تلقائياً في هذا الموقع. يمكنك إرسال طلب لدعم هذا الموقع في المستقبل.</string>
-  <!-- Long text for a detail explanation indicating what will happen if cookie banner handling is off for a site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_description_off_for_site_1">أوقف التشغيل ليقوم %1$s بمسح ملفات تعريف الارتباط وتحديث الموقع. قد يؤدي هذا إلى تسجيل خروجك أو حذف محتويات سلة التسوق.</string>
-  <!-- Long text for a detail explanation indicating what will happen if cookie banner handling is on for a site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_description_on_for_site_3">عند التفعيل، سيحاول %1$s رفض جميع لافتات ملفات تعريف الارتباط تلقائياً على هذا الموقع.</string>
-  <!-- Title for the cookie banner re-engagement CFR, the placeholder is replaced with app name. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="cookie_banner_cfr_title">رفض %1$s ملفات تعريف الارتباط نيابةً عنك</string>
-  <!-- Message for the cookie banner re-engagement CFR -->
-  <string name="cookie_banner_cfr_message">تصفح بلا إزعاج، وتتبع أقل لملفات تعريف الارتباط في هذا الموقع.</string>
   <!-- Description of the preference to enable "HTTPS-Only" mode. -->
   <string name="preferences_https_only_summary">يحاول الاتصال بالمواقع تلقائيا باستعمال بروتوكول التعمية HTTPS لمزيد من الأمان.</string>
   <!-- Summary of https only preference if https only is set to off -->
@@ -1785,8 +1739,6 @@
   <string name="history_search_1">أدخِل نصوص البحث</string>
   <!-- Text for the button to clear all history -->
   <string name="history_delete_all">احذف التأريخ</string>
-  <!-- Text for the snackbar to confirm that multiple browsing history items has been deleted -->
-  <string name="history_delete_multiple_items_snackbar">حُذف التأريخ</string>
   <!-- Text for the snackbar to confirm that a single browsing history item has been deleted. %1$s is the shortened URL of the deleted history item. -->
   <string name="history_delete_single_item_snackbar">حُذف %1$s</string>
   <!-- Context description text for the button to delete a single history item -->
@@ -2036,20 +1988,10 @@
   <string name="webcompat_reporter_label_mandatory_description">صف المشكلة بالتفصيل لمساعدتنا في التحقيق فيها</string>
   <!-- The label/title of a optional field in the Web Compat Reporter feature for adding additional information. -->
   <string name="webcompat_reporter_label_optional_description">صف المشكلة بالتفصيل لمساعدتنا في التحقيق في الأمر (اختياري)</string>
-  <!-- The label/title of a field in the Web Compat Reporter feature for explaining a high-level reason why the site is broken. -->
-  <string name="webcompat_reporter_label_whats_broken_2">ما الخلل؟</string>
-  <!-- The placeholder text for the dropdown where a user selects a high-level reason why the site is broken. -->
-  <string name="webcompat_reporter_choose_reason_2">اختر سببًا</string>
-  <!-- The error message of the dropdown, prompting the user to select a high-level reason why the site is broken. -->
-  <string name="webcompat_reporter_choose_reason_error">يُرجى اختيار سبب</string>
-  <!-- The button text for navigating away from the feature to provide more information on the broken site's bug report. -->
-  <string name="webcompat_reporter_add_more_info">إضافة المزيد من المعلومات</string>
   <!-- The button text for the cancel button to leave the Web Compat Reporter feature. -->
   <string name="webcompat_reporter_cancel">إلغاء</string>
   <!-- The button text for the send button to submit the provided form data. -->
   <string name="webcompat_reporter_send_report">أرسل البلاغ</string>
-  <!-- The button text for the send button to submit the provided form data. -->
-  <string name="webcompat_reporter_send">إرسال</string>
   <!-- Text for a snackbar to confirm the successful submission of a WebCompat report. -->
   <string name="webcompat_reporter_success_snackbar_text_2">أُرسل التقرير</string>
   <!-- The button text for the preview report button to view a preview of the report. -->
@@ -2086,8 +2028,6 @@
   <string name="webcompat_reporter_reason_notsupported_2">المتصفح غير مدعوم أو حُظِر</string>
   <!-- Broken site reason text for the site being deceptive -->
   <string name="webcompat_reporter_reason_site_is_deceptive">هذا الموقع مضلل</string>
-  <!-- Broken site reason text for browser isn’t supported or blocked -->
-  <string name="webcompat_reporter_reason_notsupported">المتصفح غير مدعوم أو تم حظره</string>
   <!-- Broken site reason text for something else -->
   <string name="webcompat_reporter_reason_other">سبب آخر</string>
   <!--
@@ -2259,12 +2199,6 @@
     Button label that take the user to the Android App setting
   -->
   <string name="phone_feature_go_to_settings">الانتقال إلى الإعدادات</string>
-  <!--
-    Content description (not visible, for screen readers etc.): Quick settings sheet
-    to give users access to site specific information / settings. For example:
-    Secure settings status and a button to modify site permissions
-  -->
-  <string name="quick_settings_sheet">صفحة الإعدادات السريعة</string>
   <!-- Label that indicates that this option it the recommended one -->
   <string name="phone_feature_recommended">موصى به</string>
   <!-- Button label for clearing all the information of site permissions -->
@@ -2661,12 +2595,6 @@
   <!--
     Enhanced Tracking Protection
 
-    Link displayed in enhanced tracking protection panel to access tracking protection settings
-  -->
-  <string name="etp_settings">إعدادات الحماية</string>
-  <!--
-    Enhanced Tracking Protection
-
     Preference title for enhanced tracking protection settings
   -->
   <string name="preference_enhanced_tracking_protection">الحماية الموسّعة من التعقب</string>
@@ -2748,12 +2676,8 @@
   <string name="preference_enhanced_tracking_protection_custom_cryptominers">المُعدّنات المعمّاة</string>
   <!-- Preference for enhanced tracking protection for the custom protection settings -->
   <string name="preference_enhanced_tracking_protection_custom_known_fingerprinters">مسجّلات البصمة المعروفة</string>
-  <!-- Button label for navigating to the Enhanced Tracking Protection details -->
-  <string name="enhanced_tracking_protection_details">التفاصيل</string>
   <!-- Header for categories that are being being blocked by current Enhanced Tracking Protection settings -->
   <string name="enhanced_tracking_protection_blocked">تم حجبها</string>
-  <!-- Header for categories that are being not being blocked by current Enhanced Tracking Protection settings -->
-  <string name="enhanced_tracking_protection_allowed">مسموح بها</string>
   <!-- Category of trackers (social media trackers) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_social_media_trackers_title">متعقبات مواقع التواصل الاجتماعي</string>
   <!-- Description of social media trackers that can be blocked by Enhanced Tracking Protection -->
@@ -2776,10 +2700,6 @@
   <string name="etp_tracking_content_title">المحتوى الذي يتعقّبك</string>
   <!-- Description of tracking content that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_tracking_content_description">توقيف تحميل الإعلانات والفيديوهات وغيرها من محتويات خارجية تحتوي على برمجيات تعقّب. قد يؤثّر هذا على سلوك بعض المواقع.</string>
-  <!-- Enhanced Tracking Protection message that protection is currently on for this site -->
-  <string name="etp_panel_on">تم تفعيل الحماية في هذا الموقع</string>
-  <!-- Enhanced Tracking Protection message that protection is currently off for this site -->
-  <string name="etp_panel_off">تم تعطيل الحماية في هذا الموقع</string>
   <!-- Header for exceptions list for which sites enhanced tracking protection is always off -->
   <string name="enhanced_tracking_protection_exceptions">تم تعطيل الحماية المحسّنة من التعقب لهذه المواقع</string>
   <!--
@@ -2804,13 +2724,6 @@
   <string name="etp_suspected_fingerprinters_description">تكمين الحماية من التبصيم لإيقاف مسجّلات البصمة المشبوهة.</string>
   <!-- Category of trackers (fingerprinters) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_known_fingerprinters_title">مسجّلات البصمة المعروفة</string>
-  <!--
-    Description of the SmartBlock Enhanced Tracking Protection feature. The * symbol is intentionally hardcoded here,
-    as we use it on the UI to indicate which trackers have been partially unblocked.
-  -->
-  <string name="preference_etp_smartblock_description">تم رفع الحظر جزئيًا عن بعض أدوات التعقب المبينة أدناه في هذه الصفحة لأنك تفاعلت معها *.</string>
-  <!-- Text displayed that links to website about enhanced tracking protection SmartBlock -->
-  <string name="preference_etp_smartblock_learn_more">اطّلع على المزيد</string>
   <!--
     Content description (not visible, for screen readers etc.):
     Enhanced tracking protection exception preference icon for ETP settings.
@@ -3382,16 +3295,8 @@
   <string name="phone_feature_blocked_step_permissions"><![CDATA[2. انقر <b>الأذونات</b>]]></string>
   <!-- Third step for the allowing a permission (%1$s is the permission name, for example "Camera"). -->
   <string name="phone_feature_blocked_step_feature"><![CDATA[3. اضبط <b>%1$s</b> على ”مفعّل/مفعّلة“]]></string>
-  <!-- Label that indicates a site is using a secure connection -->
-  <string name="quick_settings_sheet_secure_connection_2">الاتصال آمن</string>
-  <!-- Label that indicates a site is using a insecure connection -->
-  <string name="quick_settings_sheet_insecure_connection_2">الاتصال غير آمن</string>
-  <!-- Label that indicates a site is displaying a local document -->
-  <string name="quick_settings_sheet_local_page">هذه الصفحة مخزنة على جهازك.</string>
   <!-- Label to clear site data -->
   <string name="clear_site_data">امسح ملفات تعريف الارتباط وبيانات المواقع</string>
-  <!-- Confirmation message for a dialog confirming if the user wants to delete all data for current site. %s is the domain of the site. -->
-  <string name="confirm_clear_site_data"><![CDATA[هل أنت متأكد أنك تريد مسح كل ملفات تعريف الارتباط وبيانات الموقع <b>%s</b>؟]]></string>
   <!-- Confirmation message for a dialog confirming if the user wants to delete all the permissions for all sites -->
   <string name="confirm_clear_permissions_on_all_sites">هل أنت متأكد أنك تريد مسح كل الأذونات لكل المواقع؟</string>
   <!-- Confirmation message for a dialog confirming if the user wants to delete all the permissions for a site -->
@@ -3404,11 +3309,6 @@
   <string name="browser_menu_add_to_shortcuts">الإضافة إلى الاختصارات</string>
   <!-- Browser menu button that removes a shortcut from the home fragment -->
   <string name="browser_menu_remove_from_shortcuts">الإزالة من الاختصارات</string>
-  <!--
-    text shown before the issuer name to indicate who its verified by, %1$s is the name of
-    the certificate authority that verified the ticket
-  -->
-  <string name="certificate_info_verified_by">تثبّت منها: %1$s</string>
   <!-- Message in delete confirmation dialog for password -->
   <string name="login_deletion_confirmation_2">هل أنت متأكد أنك تريد حذف كلمة المرور هذه؟</string>
   <!-- Positive action of a dialog asking to delete -->
@@ -4477,10 +4377,6 @@
   <string name="search_settings_google_lens_description">يرسل الصور إلى جوجل للبحث المرئي.</string>
   <!-- Caption shown under the Google Lens toggle clarifying when the feature is available -->
   <string name="preferences_google_lens_availability_caption">متاح فقط عند تفعيل جوجل أعلاه ويكون محرك البحث النشط أثناء التصفح.</string>
-  <!-- Title for the Google Lens AI feature toggle -->
-  <string name="ai_controls_google_lens_title">Google Lens</string>
-  <!-- Description for the Google Lens AI feature toggle -->
-  <string name="ai_controls_google_lens_description">يرسل الصور إلى جوجل للبحث المرئي.</string>
   <!-- Content description for the Google Lens half of the camera mode toggle -->
   <string name="lens_camera_mode_lens">Google Lens</string>
   <!-- Content description for the QR scanner half of the camera mode toggle -->

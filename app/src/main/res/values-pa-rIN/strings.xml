@@ -108,12 +108,6 @@
   <string name="open_in_app_cfr_negative_button_text">ਖ਼ਾਰਜ ਕਰੋ</string>
   <!-- Private browsing erase action "contextual feature recommendation" (CFR) -->
 
-  <!--
-    Address bar swipe "contextual feature recommendation" (CFR)
-
-    Text for the message displayed in the contextual feature recommendation popup promoting swipe of address bar.
-  -->
-  <string name="address_bar_swipe_cfr_message_2">ਟੈਬਾਂ ਬਦਲਣ ਲਈ ਟੂਲਬਾਰ ਨੂੰ ਖੱਬੇ ਜਾਂ ਸੱਜੇ ਕਰੋ।</string>
   <!-- Text for the info dialog when camera permissions have been denied but user tries to access a camera feature. -->
   <string name="camera_permissions_needed_message">ਕੈਮਰੇ ਲਈ ਪਹੁੰਚ ਚਾਹੀਦੀ ਹੈ। Android ਸੈਟਿੰਗਾਂ ਉੱਤੇ ਜਾਓ, ਇਜਾਜ਼ਤਾਂ ਨੂੰ ਛੂਹੋ ਅਤੇ ਇਜਾਜ਼ਤ ਨੂੰ ਛੂਹੋ।</string>
   <!-- Text for the positive action button to go to Android Settings to grant permissions. -->
@@ -319,14 +313,6 @@
   <string name="browser_menu_default_banner_dismiss_promotion">ਪਰਚਾਰ ਨੂੰ ਖ਼ਾਰਜ ਕਰੋ</string>
   <!-- Content description (not visible, for screen readers etc.) for recommended extensions in main menu -->
   <string name="browser_menu_recommended_extensions_content_description">ਹੋਰ ਜਾਣਕਾਰੀ</string>
-  <!--
-    Menu "contextual feature recommendation" (CFR)
-
-    Text for the title in the contextual feature recommendation popup promoting the menu feature.
-  -->
-  <string name="menu_cfr_title">ਨਵਾਂ: ਸਟਰੀਮ-ਲਾਈਨ ਕੀਤਾ ਮੇਨੂ</string>
-  <!-- Text for the message in the contextual feature recommendation popup promoting the menu feature. -->
-  <string name="menu_cfr_body">ਪ੍ਰਾਈਵੇਟ ਬਰਾਊਜ਼ਿੰਗ ਤੋਂ ਕਾਰਵਾਈਆਂ ਸੰਭਾਲਣ ਲਈ, ਜੋ ਤੁਹਾਨੂੰ ਚਾਹੀਦਾ ਹੈ, ਉਹ ਵੱਧ ਤੇਜ਼ੀ ਨਾਲ ਲੱਭੋ।</string>
   <!--
     Extensions management fragment
 
@@ -792,40 +778,8 @@
   <string name="preferences_pbm_lock_screen_title">ਪ੍ਰਾਈਵੇਟ ਬਰਾਊਜ਼ਿੰਗ ਵਿੱਚ ਟੈਬਾਂ ਨੂੰ ਓਹਲੇ ਕਰਨ ਲਈ ਸਕਰੀਨ ਲਾਕ ਦੀ ਵਰਤੋਂ ਕਰੋ</string>
   <!-- Informs the user how to access the tabs when "Use screen lock to hide tabs in private browsing" is enabled -->
   <string name="preferences_pbm_lock_screen_summary_3">ਆਪਣੇ ਫਿੰਗਰਪਰਿੰਟ, ਪਿੰਨ ਜਾਂ ਫੇਸ ਅਣ-ਲਾਕ ਨਾਲ ਟੈਬਾਂ ਨੂੰ ਵੇਖੋ। ਇਸ ਨੂੰ ਚਾਲੂ ਕਰਨ ਨਾਲ ਸਕਰੀਨ ਸ਼ਾਟ ਲੈਣ ਅਤੇ ਸਾਂਝਾ ਕਰ ਤੋਂ ਵੀ ਰੋਕਿਆ ਜਾਂਦਾ ਹੈ।</string>
-  <!-- Label for cookie banner section in quick settings panel. -->
-  <string name="cookie_banner_blocker">ਕੂਕੀ ਬੈਨਰ ਰੋਕੂ</string>
   <!-- Preference for removing cookie/consent banners from sites automatically in private mode. See reduce_cookie_banner_summary for additional context. -->
   <string name="preferences_cookie_banner_reduction_private_mode">ਪ੍ਰਾਈਵੇਟ ਬਰਾਊਜ਼ਿੰਗ ਵਿੱਚ ਕੂਕੀ ਬੈਨਰ ਰੋਕੂ</string>
-  <!-- Text for indicating cookie banner handling is off this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_off_for_site">ਇਸ ਸਾਈਟ ਲਈ ਬੰਦ</string>
-  <!-- Text for cancel button indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_cancel_button">ਰੱਦ ਕਰੋ</string>
-  <!-- Text for request support button indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_request_support_button_2">ਬੇਨਤੀ ਭੇਜੀ</string>
-  <!-- Text for title indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_title_2">ਇਸ ਸਾਈਟ ਲਈ ਸਹਾਇਤਾ ਦੀ ਬੇਨਤੀ ਕਰਨੀ ਹੈ?</string>
-  <!-- Label for the snackBar, after the user reports with success a website where cookie banner reducer did not work -->
-  <string name="cookie_banner_handling_report_site_snack_bar_text_2">ਬੇਨਤੀ ਭੇਜੀ ਗਈ</string>
-  <!-- Text for indicating cookie banner handling is on this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_on_for_site">ਇਸ ਸਾਈਟ ਲਈ ਚਾਲੂ</string>
-  <!-- Text for indicating that a request for unsupported site was sent to Nimbus (it's a Mozilla library for experiments), this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_unsupported_site_request_submitted_2">ਸਹਾਇਤਾ ਬੇਨਤੀ ਭੇਜੀ</string>
-  <!-- Text for indicating cookie banner handling is currently not supported for this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_unsupported_site">ਸਾਈਟ ਇਸ ਵੇਲੇ ਸਹਾਇਕ ਨਹੀਂ ਹੈ</string>
-  <!-- Title text for a detail explanation indicating cookie banner handling is on this site, this is shown as part of the cookie banner panel in the toolbar. %1$s is a shortened URL of the current site. -->
-  <string name="reduce_cookie_banner_details_panel_title_on_for_site_1">ਕੀ %1$s ਲਈ ਕੂਕੀ ਬੈਨਰ ਰੋਕੂ ਚਾਲੂ ਕਰਨਾ ਹੈ?</string>
-  <!-- Title text for a detail explanation indicating cookie banner handling is off this site, this is shown as part of the cookie banner panel in the toolbar. %1$s is a shortened URL of the current site. -->
-  <string name="reduce_cookie_banner_details_panel_title_off_for_site_1">ਕੀ %1$s ਲਈ ਕੂਕੀ ਬੈਨਰ ਰੋਕੂ ਬੰਦ ਕਰਨਾ ਹੈ?</string>
-  <!-- Title text for a detail explanation indicating cookie banner reducer didn't work for the current site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_title_unsupported_site_request_2">%1$s ਇਸ ਸਾਈਟ ਲਈ ਆਪਣੇ-ਆਪ ਕੂਕੀ ਬੇਨਤੀਆਂ ਨੂੰ ਰੱਦ ਨਹੀਂ ਕਰ ਸਕਦਾ ਹੈ। ਤੁਸੀਂ ਭਵਿੱਖ ਵਿੱਚ ਇਸ ਸਾਈਟ ਵਾਸਤੇ ਸਹਾਇਤਾ ਲਈ ਬੇਨਤੀ ਕਰ ਸਕਦੇ ਹੋ।</string>
-  <!-- Long text for a detail explanation indicating what will happen if cookie banner handling is off for a site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_description_off_for_site_1">ਬੰਦ ਕਰਨ ਨਾਲ %1$s ਇਸ ਸਾਈਟ ਲਈ ਕੂਕੀਜ਼ ਮਿਟਾ ਕੇ ਇਸ ਨੂੰ ਮੁੜ ਲੋਡ ਕਰੇਗਾ। ਇਹ ਤੁਹਾਨੂੰ ਸਾਈਟ ਆਉਟ ਜਾਂ ਤੁਹਾਡੀ ਖਰੀਦਦਾਰੀ ਕਾਰਟਾਂ ਨੂੰ ਖਾਲੀ ਕਰੇਗਾ।</string>
-  <!-- Long text for a detail explanation indicating what will happen if cookie banner handling is on for a site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_description_on_for_site_3">ਚਾਲੂ ਕਰੋ ਅਤੇ %1$s ਇਸ ਸਾਈਟ ਵਾਸਤੇ ਕੂਕੀ ਬੈਨਰ ਨੂੰ ਆਪਣੇ-ਆਪ ਇਨਕਾਰ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੇਗਾ।</string>
-  <!-- Title for the cookie banner re-engagement CFR, the placeholder is replaced with app name. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="cookie_banner_cfr_title">%1$s ਨੇ ਹੁਣੇ ਤੁਹਾਡੇ ਲਈ ਕੂਕੀਜ਼ ਤੋਂ ਇਨਕਾਰ ਕੀਤਾ ਹੈ</string>
-  <!-- Message for the cookie banner re-engagement CFR -->
-  <string name="cookie_banner_cfr_message">ਇਸ ਸਾਈਟ ਲਈ ਤੁਹਾਡੇ ਲਈ ਘੱਟ ਧਿਆਨ ਭਟਕਣਾ, ਘੱਟ ਕੂਕੀਜ਼ ਟਰੈਕਿੰਗ ਹੈ।</string>
   <!-- Description of the preference to enable "HTTPS-Only" mode. -->
   <string name="preferences_https_only_summary">ਵਾਧਾ ਕੀਤੀ ਸੁਰੱਖਿਆ ਲਈ HTTPS ਇੰਕ੍ਰਿਪਸ਼ਨ ਪਰੋਟੋਕਾਲ ਵਰਤ ਕੇ ਸਾਈਟਾਂ ਨਾਲ ਕਨੈਕਟ ਕਰਨ ਦੀ ਆਪਣੇ-ਆਪ ਕੋਸ਼ਿਸ਼ ਕਰੋ।</string>
   <!-- Summary of https only preference if https only is set to off -->
@@ -1758,8 +1712,6 @@
   <string name="history_search_1">ਖੋਜ ਸ਼ਬਦ ਦਿਓ</string>
   <!-- Text for the button to clear all history -->
   <string name="history_delete_all">ਅਤੀਤ ਹਟਾਓ</string>
-  <!-- Text for the snackbar to confirm that multiple browsing history items has been deleted -->
-  <string name="history_delete_multiple_items_snackbar">ਅਤੀਤ ਹਟਾਇਆ ਗਿਆ</string>
   <!-- Text for the snackbar to confirm that a single browsing history item has been deleted. %1$s is the shortened URL of the deleted history item. -->
   <string name="history_delete_single_item_snackbar">%1$s ਨੂੰ ਹਟਾਇਆ</string>
   <!-- Context description text for the button to delete a single history item -->
@@ -2005,22 +1957,10 @@
   <string name="webcompat_reporter_label_mandatory_description">ਮਸਲੇ ਬਾਰੇ ਜਾਂਚ ਕਰਨ ਲਈ ਸਾਡੀ ਮਦਦ ਵਾਸਤੇ ਵੇਰਵੇ ਸਮੇਤ ਸਮੱਸਿਆ ਦੀ ਜਾਣਕਾਰੀ ਦਿਓ</string>
   <!-- The label/title of a optional field in the Web Compat Reporter feature for adding additional information. -->
   <string name="webcompat_reporter_label_optional_description">ਮਸਲੇ ਬਾਰੇ ਜਾਂਚ ਕਰਨ ਲਈ ਸਾਡੀ ਮਦਦ ਵਾਸਤੇ ਵੇਰਵੇ ਸਮੇਤ ਸਮੱਸਿਆ ਦੀ ਜਾਣਕਾਰੀ ਦਿਓ (ਚੋਣਵਾਂ)</string>
-  <!-- The label/title of a field in the Web Compat Reporter feature for explaining a high-level reason why the site is broken. -->
-  <string name="webcompat_reporter_label_whats_broken_2">ਕੀ ਖ਼ਰਾਬ ਹੈ?</string>
-  <!-- The placeholder text for the dropdown where a user selects a high-level reason why the site is broken. -->
-  <string name="webcompat_reporter_choose_reason_2">ਕਾਰਨ ਨੂੰ ਚੁਣੋ</string>
-  <!-- The error message of the dropdown, prompting the user to select a high-level reason why the site is broken. -->
-  <string name="webcompat_reporter_choose_reason_error">ਕਾਰਨ ਚੁਣੋ ਜੀ</string>
-  <!-- The label/title of an optional field in the Web Compat Reporter feature for adding additional information. -->
-  <string name="webcompat_reporter_label_description_2">ਮਸਲੇ ਬਾਰੇ ਜਾਂਚ ਕਰਨ ਲਈ ਸਾਡੀ ਮਦਦ ਵਾਸਤੇ ਵੇਰਵੇ ਸਮੇਤ ਸਮੱਸਿਆ ਦੀ ਜਾਣਕਾਰੀ ਦਿਓ (ਚੋਣਵਾਂ)</string>
-  <!-- The button text for navigating away from the feature to provide more information on the broken site's bug report. -->
-  <string name="webcompat_reporter_add_more_info">ਹੋਰ ਜਾਣਕਾਰੀ ਨੂੰ ਜੋੜੋ</string>
   <!-- The button text for the cancel button to leave the Web Compat Reporter feature. -->
   <string name="webcompat_reporter_cancel">ਰੱਦ ਕਰੋ</string>
   <!-- The button text for the send button to submit the provided form data. -->
   <string name="webcompat_reporter_send_report">ਰਿਪੋਰਟ ਭੇਜੋ</string>
-  <!-- The button text for the send button to submit the provided form data. -->
-  <string name="webcompat_reporter_send">ਭੇਜੋ</string>
   <!-- Text for a snackbar to confirm the successful submission of a WebCompat report. -->
   <string name="webcompat_reporter_success_snackbar_text_2">ਰਿਪੋਰਟ ਭੇਜੀ</string>
   <!-- Placeholder text for the description field to prompt the user on what they should type. -->
@@ -2061,8 +2001,6 @@
   <string name="webcompat_reporter_reason_notsupported_2">ਬਰਾਊਜ਼ਰ ਸਹਾਇਕ ਨਹੀਂ ਹੈ ਜਾਂ ਪਾਬੰਦੀ ਲਾਈ ਹੈ</string>
   <!-- Broken site reason text for the site being deceptive -->
   <string name="webcompat_reporter_reason_site_is_deceptive">ਇਹ ਸਾਈਟ ਧੋਖਾਧੜੀ ਹੈ</string>
-  <!-- Broken site reason text for browser isn’t supported or blocked -->
-  <string name="webcompat_reporter_reason_notsupported">ਬਰਾਊਜ਼ਰ ਸਹਾਇਕ ਨਹੀਂ ਹੈ ਜਾਂ ਪਾਬੰਦੀ ਲਾਈ ਹੈ</string>
   <!-- Broken site reason text for something else -->
   <string name="webcompat_reporter_reason_other">ਕੁਝ ਹੋਰ</string>
   <!--
@@ -2234,12 +2172,6 @@
     Button label that take the user to the Android App setting
   -->
   <string name="phone_feature_go_to_settings">ਸੈਟਿੰਗਾਂ ‘ਤੇ ਜਾਓ</string>
-  <!--
-    Content description (not visible, for screen readers etc.): Quick settings sheet
-    to give users access to site specific information / settings. For example:
-    Secure settings status and a button to modify site permissions
-  -->
-  <string name="quick_settings_sheet">ਤੁਰੰਤ ਸੈਟਿੰਗਾਂ ਸ਼ੀਟ</string>
   <!-- Label that indicates that this option it the recommended one -->
   <string name="phone_feature_recommended">ਸਿਫਾਰਸ਼ੀ</string>
   <!-- Button label for clearing all the information of site permissions -->
@@ -2636,12 +2568,6 @@
   <!--
     Enhanced Tracking Protection
 
-    Link displayed in enhanced tracking protection panel to access tracking protection settings
-  -->
-  <string name="etp_settings">ਸੁਰੱਖਿਆ ਸੈਟਿੰਗਾਂ</string>
-  <!--
-    Enhanced Tracking Protection
-
     Preference title for enhanced tracking protection settings
   -->
   <string name="preference_enhanced_tracking_protection">ਟਰੈਕ ਹੋਣ ਤੋਂ ਵਾਧਾ ਕੀਤੀ ਸੁਰੱਖਿਆ</string>
@@ -2732,12 +2658,8 @@
   <string name="preference_enhanced_tracking_protection_custom_cryptominers">ਕ੍ਰਿਪਟੋ-ਮਾਈਨਰ</string>
   <!-- Preference for enhanced tracking protection for the custom protection settings -->
   <string name="preference_enhanced_tracking_protection_custom_known_fingerprinters">ਜਾਣੇ-ਪਛਾਣੇ ਫਿੰਗਰ-ਪਰਿੰਟਰ</string>
-  <!-- Button label for navigating to the Enhanced Tracking Protection details -->
-  <string name="enhanced_tracking_protection_details">ਵੇਰਵੇ</string>
   <!-- Header for categories that are being being blocked by current Enhanced Tracking Protection settings -->
   <string name="enhanced_tracking_protection_blocked">ਪਾਬੰਦੀ ਲਗਾਏ</string>
-  <!-- Header for categories that are being not being blocked by current Enhanced Tracking Protection settings -->
-  <string name="enhanced_tracking_protection_allowed">ਮਨਜ਼ੂਰ ਕੀਤੇ</string>
   <!-- Category of trackers (social media trackers) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_social_media_trackers_title">ਸਮਾਜਿਕ ਮੀਡਿਆ ਟਰੈਕਰ</string>
   <!-- Description of social media trackers that can be blocked by Enhanced Tracking Protection -->
@@ -2760,10 +2682,6 @@
   <string name="etp_tracking_content_title">ਸਮੱਗਰੀ ਟਰੈਕ ਕਰਨ ਵਾਲੇ</string>
   <!-- Description of tracking content that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_tracking_content_description">ਬਾਹਰੀ ਇਸ਼ਤਿਹਾਰ, ਵਿਡੀਓ ਅਤੇ ਹੋਰ ਸਮੱਗਰੀ ਨੂੰ ਰੋਕਦਾ ਹੈ, ਜਿਸ ‘ਚ ਟਰੈਕ ਕਰਨ ਵਾਲਾ ਕੋਡ ਹੁੰਦਾ ਹੈ। ਕੁਝ ਵੈੱਬਸਾਈਟਾਂ ਦਾ ਕੰਮਕਾਜ ਪ੍ਰਭਾਵਿਤ ਹੋ ਸਕਦਾ ਹੈ।</string>
-  <!-- Enhanced Tracking Protection message that protection is currently on for this site -->
-  <string name="etp_panel_on">ਇਸ ਸਾਈਟ ਲਈ ਸੁਰੱਖਿਆ ਚਾਲੂ ਹੈ</string>
-  <!-- Enhanced Tracking Protection message that protection is currently off for this site -->
-  <string name="etp_panel_off">ਇਸ ਸਾਈਟ ਲਈ ਸੁਰੱਖਿਆ ਬੰਦ ਹੈ</string>
   <!-- Header for exceptions list for which sites enhanced tracking protection is always off -->
   <string name="enhanced_tracking_protection_exceptions">ਇਹਨਾਂ ਵੈੱਬਸਾਈਟਾਂ ਲਈ ਵਧੇਰੇ ਟਰੈਕਿੰਗ ਸੁਰੱਖਿਆ ਬੰਦ ਹੈ</string>
   <!--
@@ -2788,13 +2706,6 @@
   <string name="etp_suspected_fingerprinters_description">ਸ਼ੱਕੀ ਫਿੰਗਰ-ਪਰਿੰਟਰਾਂ ਨੂੰ ਰੋਕਣ ਲਈ ਫਿੰਗਰ-ਪਰਿੰਟਰਿੰਗ ਸੁਰੱਖਿਆ ਨੂੰ ਸਮਰੱਥ ਕਰਦਾ ਹੈ।</string>
   <!-- Category of trackers (fingerprinters) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_known_fingerprinters_title">ਜਾਣੇ-ਪਛਾਣੇ ਫਿੰਗਰ-ਪਰਿੰਟਰ</string>
-  <!--
-    Description of the SmartBlock Enhanced Tracking Protection feature. The * symbol is intentionally hardcoded here,
-    as we use it on the UI to indicate which trackers have been partially unblocked.
-  -->
-  <string name="preference_etp_smartblock_description">ਇਸ ਸਫ਼ੇ ਉੱਤੇ ਹੇਠ ਨਿਸ਼ਾਨ ਲਾਏ ਕੁਝ ਟਰੈਕਰਾਂ ਤੋਂ ਅਧੂਰੇ ਰੂਪ ਵਿੱਚ ਪਾਬੰਦੀ ਹਟਾਈ ਗਈ ਹੈ, ਕਿਉਂਕਿ ਤੁਸੀਂ ਉਹਨਾਂ ਨਾਲ ਸੰਪਰਕ ਕਰ ਰਹੇ ਹੋ *।</string>
-  <!-- Text displayed that links to website about enhanced tracking protection SmartBlock -->
-  <string name="preference_etp_smartblock_learn_more">ਹੋਰ ਜਾਣੋ</string>
   <!--
     Content description (not visible, for screen readers etc.):
     Enhanced tracking protection exception preference icon for ETP settings.
@@ -3400,16 +3311,8 @@
   <string name="phone_feature_blocked_step_permissions"><![CDATA[2. <b>ਇਜਾਜ਼ਤਾਂ</b> ਨੂੰ ਛੂਹੋ]]></string>
   <!-- Third step for the allowing a permission (%1$s is the permission name, for example "Camera"). -->
   <string name="phone_feature_blocked_step_feature"><![CDATA[3. <b>%1$s</b> ਨੂੰ ਚਾਲੂ ਲਈ ਬਦਲੋ]]></string>
-  <!-- Label that indicates a site is using a secure connection -->
-  <string name="quick_settings_sheet_secure_connection_2">ਕਨੈਕਸ਼ਨ ਸੁਰੱਖਿਅਤ ਹੈ</string>
-  <!-- Label that indicates a site is using a insecure connection -->
-  <string name="quick_settings_sheet_insecure_connection_2">ਕਨੈਕਸ਼ਨ ਸੁਰੱਖਿਅਤ ਨਹੀਂ ਹੈ</string>
-  <!-- Label that indicates a site is displaying a local document -->
-  <string name="quick_settings_sheet_local_page">ਇਸ ਸਫ਼ੇ ਨੂੰ ਤੁਹਾਡੇ ਡਿਵਾਈਸ ਉੱਤੇ ਸੰਭਾਲਿਆ ਜਾਂਦਾ ਹੈ।</string>
   <!-- Label to clear site data -->
   <string name="clear_site_data">ਕੂਕੀਜ਼ ਤੇ ਸਾਈਟ ਡਾਟਾ ਮਿਟਾਓ</string>
-  <!-- Confirmation message for a dialog confirming if the user wants to delete all data for current site. %s is the domain of the site. -->
-  <string name="confirm_clear_site_data"><![CDATA[ਕੀ ਤੁਸੀਂ <b>%s</b> ਸਾਈਟ ਲਈ ਸਾਰੇ ਕੂਕੀਜ਼ ਤੇ ਡਾਟੇ ਨੂੰ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?]]></string>
   <!-- Confirmation message for a dialog confirming if the user wants to delete all the permissions for all sites -->
   <string name="confirm_clear_permissions_on_all_sites">ਕੀ ਤੁਸੀਂ ਸਾਰੀਆਂ ਸਾਈਟਾਂ ਲਈ ਸਭ ਸਹਿਮਤੀਆਂ ਨੂੰ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?</string>
   <!-- Confirmation message for a dialog confirming if the user wants to delete all the permissions for a site -->
@@ -3422,11 +3325,6 @@
   <string name="browser_menu_add_to_shortcuts">ਸ਼ਾਰਟਕੱਟਾਂ ਵਿੱਚ ਜੋੜੋ</string>
   <!-- Browser menu button that removes a shortcut from the home fragment -->
   <string name="browser_menu_remove_from_shortcuts">ਸ਼ਾਰਟਕੱਟ ਵਿੱਚੋਂ ਹਟਾਓ</string>
-  <!--
-    text shown before the issuer name to indicate who its verified by, %1$s is the name of
-    the certificate authority that verified the ticket
-  -->
-  <string name="certificate_info_verified_by">ਤਸਦੀਕ ਕੀਤਾ: %1$s</string>
   <!-- Message in delete confirmation dialog for password -->
   <string name="login_deletion_confirmation_2">ਕੀ ਤੁਸੀਂ ਇਸ ਪਾਸਵਰਡ ਨੂੰ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?</string>
   <!-- Positive action of a dialog asking to delete -->
@@ -4749,10 +4647,6 @@
   <string name="search_settings_google_lens_description">ਦਿੱਖ ਖੋਜ ਲਈ Google ਨੂੰ ਚਿੱਤਰ ਅਤੇ ਫ਼ੋਟੋ ਭੇਜਦਾ ਹੈ।</string>
   <!-- Caption shown under the Google Lens toggle clarifying when the feature is available -->
   <string name="preferences_google_lens_availability_caption">ਜਦੋਂ ਉੱਤੇ Google ਸਮਰੱਥ ਹੁੰਦਾ ਹੈ ਤਾਂ ਹੀ ਮੌਜੂਦ ਹੁੰਦਾ ਹੈ ਅਤੇ ਬਰਾਊਜ਼ ਕਰਨ ਦੇ ਦੌਰਾਨ ਤੁਹਾਡਾ ਸਰਗਰਮ ਖੋਜ ਇੰਜਣ ਹੁੰਦਾ ਹੈ।</string>
-  <!-- Title for the Google Lens AI feature toggle -->
-  <string name="ai_controls_google_lens_title">Google Lens</string>
-  <!-- Description for the Google Lens AI feature toggle -->
-  <string name="ai_controls_google_lens_description">ਦਿੱਖ ਖੋਜ ਲਈ Google ਨੂੰ ਚਿੱਤਰ ਅਤੇ ਫ਼ੋਟੋ ਭੇਜਦਾ ਹੈ।</string>
   <!-- Content description for the Google Lens half of the camera mode toggle -->
   <string name="lens_camera_mode_lens">Google Lens</string>
   <!-- Content description for the QR scanner half of the camera mode toggle -->

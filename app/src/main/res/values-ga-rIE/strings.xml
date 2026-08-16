@@ -445,12 +445,6 @@
     Button label that take the user to the Android App setting
   -->
   <string name="phone_feature_go_to_settings">Socruithe</string>
-  <!--
-    Content description (not visible, for screen readers etc.): Quick settings sheet
-    to give users access to site specific information / settings. For example:
-    Secure settings status and a button to modify site permissions
-  -->
-  <string name="quick_settings_sheet">Bileog Mearshocruithe</string>
   <!-- Label that indicates that this option it the recommended one -->
   <string name="phone_feature_recommended">Molta</string>
   <!-- Button label for clearing all the information of site permissions -->
@@ -661,12 +655,6 @@
   <!--
     Enhanced Tracking Protection
 
-    Link displayed in enhanced tracking protection panel to access tracking protection settings
-  -->
-  <string name="etp_settings">Socruithe Cosanta</string>
-  <!--
-    Enhanced Tracking Protection
-
     Preference title for enhanced tracking protection settings
   -->
   <string name="preference_enhanced_tracking_protection">Ardchosaint ar Lorgaireacht</string>
@@ -684,8 +672,6 @@
   <string name="preference_enhanced_tracking_protection_custom_info_button">Rudaí a bhfuil cosc orthu le cosaint dhian</string>
   <!-- Header for categories that are being being blocked by current Enhanced Tracking Protection settings -->
   <string name="enhanced_tracking_protection_blocked">Coiscthe</string>
-  <!-- Header for categories that are being not being blocked by current Enhanced Tracking Protection settings -->
-  <string name="enhanced_tracking_protection_allowed">Ceadaithe</string>
   <!-- Category of trackers (social media trackers) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_social_media_trackers_title">Lorgairí Meán Sóisialta</string>
   <!-- Description of social media trackers that can be blocked by Enhanced Tracking Protection -->
@@ -702,10 +688,6 @@
   <string name="etp_tracking_content_title">Ábhar Lorgaireachta</string>
   <!-- Description of tracking content that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_tracking_content_description">Cuireann sé seo cosc ar fhógraí, ar fhíseáin, agus ar ábhar eile a bhfuil cód lorgaireachta ann. Imríonn sé tionchar ar fheidhmíocht suíomh áirithe.</string>
-  <!-- Enhanced Tracking Protection message that protection is currently on for this site -->
-  <string name="etp_panel_on">Tá cosaint AR SIÚL don suíomh seo</string>
-  <!-- Enhanced Tracking Protection message that protection is currently off for this site -->
-  <string name="etp_panel_off">Tá cosaint MÚCHTA don suíomh seo</string>
   <!-- Header for exceptions list for which sites enhanced tracking protection is always off -->
   <string name="enhanced_tracking_protection_exceptions">Tá Ardchosaint ar Lorgaireachta múchta do na suímh seo</string>
   <!-- About page link text to open what's new link. %s is the name of the app (for example "Firefox"). -->
@@ -815,11 +797,6 @@
   <string name="confirm_clear_permission_site">An bhfuil tú cinnte gur mhaith leat an cead seo a ghlanadh ar an suíomh seo?</string>
   <!-- label shown when there are not site exceptions to show in the site exception settings -->
   <string name="no_site_exceptions">Gan eisceachtaí suímh</string>
-  <!--
-    text shown before the issuer name to indicate who its verified by, %1$s is the name of
-    the certificate authority that verified the ticket
-  -->
-  <string name="certificate_info_verified_by">Fíoraithe ag: %1$s</string>
   <!--
     Context description text for the "Show all" button in the shortcuts home screen section
     which navigates the user to a screen displaying all the shortcuts.

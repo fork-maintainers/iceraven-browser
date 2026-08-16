@@ -260,14 +260,6 @@
   <!-- Content description (not visible, for screen readers etc.) for recommended extensions in main menu -->
   <string name="browser_menu_recommended_extensions_content_description">Muioc’h a ditouroù</string>
   <!--
-    Menu "contextual feature recommendation" (CFR)
-
-    Text for the title in the contextual feature recommendation popup promoting the menu feature.
-  -->
-  <string name="menu_cfr_title">Nevez: lañser simplaet</string>
-  <!-- Text for the message in the contextual feature recommendation popup promoting the menu feature. -->
-  <string name="menu_cfr_body">Kavit ar pezh a glaskit buanoc’h, eus ar merdeiñ prevez d\'an enrollañ</string>
-  <!--
     Extensions management fragment
 
     Text displayed when there are no extensions to be shown
@@ -441,40 +433,8 @@
   <string name="preferences_add_private_browsing_shortcut">Ouzhpennañ ur verradenn merdeiñ prevez</string>
   <!-- Preference for enabling "HTTPS-Only" mode -->
   <string name="preferences_https_only_title">Mod HTTPS-hepken</string>
-  <!-- Label for cookie banner section in quick settings panel. -->
-  <string name="cookie_banner_blocker">Stanker banniel an toupinoù</string>
   <!-- Preference for removing cookie/consent banners from sites automatically in private mode. See reduce_cookie_banner_summary for additional context. -->
   <string name="preferences_cookie_banner_reduction_private_mode">Stanker banniel an toupinoù er merdeiñ prevez</string>
-  <!-- Text for indicating cookie banner handling is off this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_off_for_site">Diweredekaet evit al lec’hienn-mañ</string>
-  <!-- Text for cancel button indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_cancel_button">Nullañ</string>
-  <!-- Text for request support button indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_request_support_button_2">Kas ur goulenn</string>
-  <!-- Text for title indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_title_2">Goulenn vefe skoret al lec’hienn-mañ?</string>
-  <!-- Label for the snackBar, after the user reports with success a website where cookie banner reducer did not work -->
-  <string name="cookie_banner_handling_report_site_snack_bar_text_2">Goulenn kaset</string>
-  <!-- Text for indicating cookie banner handling is on this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_on_for_site">Gweredekaet evit al lec’hienn-mañ</string>
-  <!-- Text for indicating that a request for unsupported site was sent to Nimbus (it's a Mozilla library for experiments), this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_unsupported_site_request_submitted_2">Goulenn skor kaset</string>
-  <!-- Text for indicating cookie banner handling is currently not supported for this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_unsupported_site">N’eo ket skoret al lec’hienn-mañ c’hoazh</string>
-  <!-- Title text for a detail explanation indicating cookie banner handling is on this site, this is shown as part of the cookie banner panel in the toolbar. %1$s is a shortened URL of the current site. -->
-  <string name="reduce_cookie_banner_details_panel_title_on_for_site_1">Gweredekaat stanker banniel an toupinoù evit %1$s?</string>
-  <!-- Title text for a detail explanation indicating cookie banner handling is off this site, this is shown as part of the cookie banner panel in the toolbar. %1$s is a shortened URL of the current site. -->
-  <string name="reduce_cookie_banner_details_panel_title_off_for_site_1">Diweredekaat stanker banniel an toupinoù evit %1$s?</string>
-  <!-- Title text for a detail explanation indicating cookie banner reducer didn't work for the current site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_title_unsupported_site_request_2">%1$s n’hall ket nac’hañ ar goulennoù toupinoù war al lec’hienn-mañ. Gallout a rit goulenn e vefe skoret al lec’hienn-mañ en dazont.</string>
-  <!-- Long text for a detail explanation indicating what will happen if cookie banner handling is off for a site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_description_off_for_site_1">Diweredekaat ha skarzhet e vo an toupinoù hag adkarget al lec’hienn gant %1$s. Digennaskañ a raio ac’hanoc’h ha goullonderiñ a raio ho paner.</string>
-  <!-- Long text for a detail explanation indicating what will happen if cookie banner handling is on for a site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_description_on_for_site_3">Gweredekaat ha %1$s a glasko nac’hañ bannieloù an toupinoù ent emgefreek war al lec’hienn-mañ.</string>
-  <!-- Title for the cookie banner re-engagement CFR, the placeholder is replaced with app name. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="cookie_banner_cfr_title">%1$s en deus nac’het toupinoù evidoc’h</string>
-  <!-- Message for the cookie banner re-engagement CFR -->
-  <string name="cookie_banner_cfr_message">Nebeutoc’h a draoù diezhomm, nebeutoc’h a doupinoù ho’ch heuliañ ac’hanoc’h war al lec’hienn-mañ.</string>
   <!-- Description of the preference to enable "HTTPS-Only" mode. -->
   <string name="preferences_https_only_summary">Klask kennaskañ ent emgefreek gant ar c’homenad HTTPS evit muioc’h a surentez.</string>
   <!-- Summary of https only preference if https only is set to off -->
@@ -1047,8 +1007,6 @@
   <string name="history_search_1">Enankit gerioù da glask</string>
   <!-- Text for the button to clear all history -->
   <string name="history_delete_all">Dilemel ar roll istor</string>
-  <!-- Text for the snackbar to confirm that multiple browsing history items has been deleted -->
-  <string name="history_delete_multiple_items_snackbar">Roll istor dilamet</string>
   <!-- Text for the snackbar to confirm that a single browsing history item has been deleted. %1$s is the shortened URL of the deleted history item. -->
   <string name="history_delete_single_item_snackbar">Dilamet %1$s</string>
   <!-- Context description text for the button to delete a single history item -->
@@ -1204,16 +1162,8 @@
   <string name="webcompat_reporter_label_url">URL</string>
   <!-- The error message of the URL text field when an invalid URL has been entered. -->
   <string name="webcompat_reporter_url_error_invalid">Enankit un URL reizh mar plij</string>
-  <!-- The label/title of a field in the Web Compat Reporter feature for explaining a high-level reason why the site is broken. -->
-  <string name="webcompat_reporter_label_whats_broken_2">Petra eo ar gudenn?</string>
-  <!-- The placeholder text for the dropdown where a user selects a high-level reason why the site is broken. -->
-  <string name="webcompat_reporter_choose_reason_2">Dibab un abeg</string>
-  <!-- The error message of the dropdown, prompting the user to select a high-level reason why the site is broken. -->
-  <string name="webcompat_reporter_choose_reason_error">Dibabit un abeg mar plij</string>
   <!-- The button text for the cancel button to leave the Web Compat Reporter feature. -->
   <string name="webcompat_reporter_cancel">Nullañ</string>
-  <!-- The button text for the send button to submit the provided form data. -->
-  <string name="webcompat_reporter_send">Kas</string>
   <!--
     These reason strings are dropdown options on a WebCompat reporter form, indicating what is broken on the site.
 
@@ -1339,12 +1289,6 @@
     Button label that take the user to the Android App setting
   -->
   <string name="phone_feature_go_to_settings">Mont dʼan arventennoù</string>
-  <!--
-    Content description (not visible, for screen readers etc.): Quick settings sheet
-    to give users access to site specific information / settings. For example:
-    Secure settings status and a button to modify site permissions
-  -->
-  <string name="quick_settings_sheet">Panell mont buan dʼan arventennoù</string>
   <!-- Label that indicates that this option it the recommended one -->
   <string name="phone_feature_recommended">Erbedet</string>
   <!-- Button label for clearing all the information of site permissions -->
@@ -1695,12 +1639,6 @@
   <!--
     Enhanced Tracking Protection
 
-    Link displayed in enhanced tracking protection panel to access tracking protection settings
-  -->
-  <string name="etp_settings">Arventennoù gwarez</string>
-  <!--
-    Enhanced Tracking Protection
-
     Preference title for enhanced tracking protection settings
   -->
   <string name="preference_enhanced_tracking_protection">Gwarez heuliañ araoket</string>
@@ -1756,12 +1694,8 @@
   <string name="preference_enhanced_tracking_protection_custom_cryptominers">Kriptogleuzerien</string>
   <!-- Preference for enhanced tracking protection for the custom protection settings -->
   <string name="preference_enhanced_tracking_protection_custom_known_fingerprinters">Roudoù niverel anavezet</string>
-  <!-- Button label for navigating to the Enhanced Tracking Protection details -->
-  <string name="enhanced_tracking_protection_details">Munudoù</string>
   <!-- Header for categories that are being being blocked by current Enhanced Tracking Protection settings -->
   <string name="enhanced_tracking_protection_blocked">Stanket</string>
-  <!-- Header for categories that are being not being blocked by current Enhanced Tracking Protection settings -->
-  <string name="enhanced_tracking_protection_allowed">Aotreet</string>
   <!-- Category of trackers (social media trackers) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_social_media_trackers_title">Heulierien mediaoù kevredadel</string>
   <!-- Description of social media trackers that can be blocked by Enhanced Tracking Protection -->
@@ -1784,10 +1718,6 @@
   <string name="etp_tracking_content_title">Endalc’had heuliañ</string>
   <!-- Description of tracking content that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_tracking_content_description">Harzañ a ra ar bruderezh diavaez hag an endalc’hadoù all da gargañ a endalc’h ur boneg heuliañ. Gallout a ra kaout un efed war mont-en-dro lec’hiennoù ’zo.</string>
-  <!-- Enhanced Tracking Protection message that protection is currently on for this site -->
-  <string name="etp_panel_on">GWEREDEKAET eo ar gwarez war al lec’hienn-mañ.</string>
-  <!-- Enhanced Tracking Protection message that protection is currently off for this site -->
-  <string name="etp_panel_off">DIWEREDEKAET eo ar gwarez war al lec’hienn-mañ.</string>
   <!-- Header for exceptions list for which sites enhanced tracking protection is always off -->
   <string name="enhanced_tracking_protection_exceptions">Diweredekaet eo bet ar gwarez heuliañ araoket evit al lecʼhiennoù-mañ</string>
   <!--
@@ -1812,13 +1742,6 @@
   <string name="etp_suspected_fingerprinters_description">Gweredekaat ar gwarez a-enep an dastumerien roudoù niverel.</string>
   <!-- Category of trackers (fingerprinters) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_known_fingerprinters_title">Dastumerien roudoù niverel anavezet</string>
-  <!--
-    Description of the SmartBlock Enhanced Tracking Protection feature. The * symbol is intentionally hardcoded here,
-    as we use it on the UI to indicate which trackers have been partially unblocked.
-  -->
-  <string name="preference_etp_smartblock_description">Un nebeud heulierien merket a-zindan a zo bet damzistanket war ar bajenn-mañ peogwir ho peus etrewezhiet gante *.</string>
-  <!-- Text displayed that links to website about enhanced tracking protection SmartBlock -->
-  <string name="preference_etp_smartblock_learn_more">Gouzout hiroc’h</string>
   <!--
     Content description (not visible, for screen readers etc.):
     Enhanced tracking protection exception preference icon for ETP settings.
@@ -2160,14 +2083,8 @@
   <string name="phone_feature_blocked_step_permissions"><![CDATA[2. Stokit war <b>Aotreoù</b>]]></string>
   <!-- Third step for the allowing a permission (%1$s is the permission name, for example "Camera"). -->
   <string name="phone_feature_blocked_step_feature"><![CDATA[3. Gweredekait <b>%1$s</b>]]></string>
-  <!-- Label that indicates a site is using a secure connection -->
-  <string name="quick_settings_sheet_secure_connection_2">Kennask suraet</string>
-  <!-- Label that indicates a site is using a insecure connection -->
-  <string name="quick_settings_sheet_insecure_connection_2">N’eo ket diarvar ar c’hennask</string>
   <!-- Label to clear site data -->
   <string name="clear_site_data">Skarzhañ an toupinoù ha roadennoù lec’hienn</string>
-  <!-- Confirmation message for a dialog confirming if the user wants to delete all data for current site. %s is the domain of the site. -->
-  <string name="confirm_clear_site_data"><![CDATA[Sur oc’h e fell deoc’h skarzhañ an holl doupinoù ha roadennoù war al lec’hienn <b>%s</b>?]]></string>
   <!-- Confirmation message for a dialog confirming if the user wants to delete all the permissions for all sites -->
   <string name="confirm_clear_permissions_on_all_sites">Sur oc’h e fell deoc’h skarzhañ an holl aotreoù war an holl lec’hiennoù?</string>
   <!-- Confirmation message for a dialog confirming if the user wants to delete all the permissions for a site -->
@@ -2180,11 +2097,6 @@
   <string name="browser_menu_add_to_shortcuts">Ouzhpennañ er berradennoù</string>
   <!-- Browser menu button that removes a shortcut from the home fragment -->
   <string name="browser_menu_remove_from_shortcuts">Dilemel eus ar berradennoù</string>
-  <!--
-    text shown before the issuer name to indicate who its verified by, %1$s is the name of
-    the certificate authority that verified the ticket
-  -->
-  <string name="certificate_info_verified_by">Gwiriet gant:%1$s</string>
   <!-- Message in delete confirmation dialog for password -->
   <string name="login_deletion_confirmation_2">Sur ocʼh e fell deocʼh dilemel ar ger-tremen-mañ?</string>
   <!-- Positive action of a dialog asking to delete -->

@@ -106,12 +106,6 @@
   <string name="open_in_app_cfr_negative_button_text">Ignori</string>
   <!-- Private browsing erase action "contextual feature recommendation" (CFR) -->
 
-  <!--
-    Address bar swipe "contextual feature recommendation" (CFR)
-
-    Text for the message displayed in the contextual feature recommendation popup promoting swipe of address bar.
-  -->
-  <string name="address_bar_swipe_cfr_message_2">Ŝovu la ilaron dekstren aŭ maldekstren por ŝanĝi langetojn.</string>
   <!-- Text for the info dialog when camera permissions have been denied but user tries to access a camera feature. -->
   <string name="camera_permissions_needed_message">Aliro al la fimilo postulata. Iru al agordoj de Android, tuŝetu Permesojn kaj poste Permesi.</string>
   <!-- Text for the positive action button to go to Android Settings to grant permissions. -->
@@ -317,14 +311,6 @@
   <string name="browser_menu_default_banner_dismiss_promotion">Rifuzi oferton</string>
   <!-- Content description (not visible, for screen readers etc.) for recommended extensions in main menu -->
   <string name="browser_menu_recommended_extensions_content_description">Pli da informo</string>
-  <!--
-    Menu "contextual feature recommendation" (CFR)
-
-    Text for the title in the contextual feature recommendation popup promoting the menu feature.
-  -->
-  <string name="menu_cfr_title">Nova: simpligita menuo</string>
-  <!-- Text for the message in the contextual feature recommendation popup promoting the menu feature. -->
-  <string name="menu_cfr_body">Pli rapide trovu kion vi bezonas, ekzemple privatan reĝimon aŭ paĝajn agojn.</string>
   <!--
     Extensions management fragment
 
@@ -790,40 +776,8 @@
   <string name="preferences_pbm_lock_screen_title">Uzi la blokadon de ekrano por kaŝi langetojn en privata retumo</string>
   <!-- Informs the user how to access the tabs when "Use screen lock to hide tabs in private browsing" is enabled -->
   <string name="preferences_pbm_lock_screen_summary_3">Aliru viajn langetojn per via fingrospuro, PIN aŭ malblokado per vizaĝo. Se vi ŝaltas tion ĉi, ekrankopioj kaj divido de ekrano estos malpermesataj.</string>
-  <!-- Label for cookie banner section in quick settings panel. -->
-  <string name="cookie_banner_blocker">Blokilo de kuketaj anoncoj</string>
   <!-- Preference for removing cookie/consent banners from sites automatically in private mode. See reduce_cookie_banner_summary for additional context. -->
   <string name="preferences_cookie_banner_reduction_private_mode">Blokilo de kuketaj anoncoj en privata retumo</string>
-  <!-- Text for indicating cookie banner handling is off this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_off_for_site">Malŝaltita por tiu ĉi retejo</string>
-  <!-- Text for cancel button indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_cancel_button">Nuligi</string>
-  <!-- Text for request support button indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_request_support_button_2">Sendi peton</string>
-  <!-- Text for title indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_title_2">Ĉu peti subtenon por tiu ĉi retejo?</string>
-  <!-- Label for the snackBar, after the user reports with success a website where cookie banner reducer did not work -->
-  <string name="cookie_banner_handling_report_site_snack_bar_text_2">Peto sendita</string>
-  <!-- Text for indicating cookie banner handling is on this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_on_for_site">Ŝaltita por tiu ĉi retejo</string>
-  <!-- Text for indicating that a request for unsupported site was sent to Nimbus (it's a Mozilla library for experiments), this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_unsupported_site_request_submitted_2">Peto pri subteno sendita</string>
-  <!-- Text for indicating cookie banner handling is currently not supported for this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_unsupported_site">Retejo nuntempe ne subtenata</string>
-  <!-- Title text for a detail explanation indicating cookie banner handling is on this site, this is shown as part of the cookie banner panel in the toolbar. %1$s is a shortened URL of the current site. -->
-  <string name="reduce_cookie_banner_details_panel_title_on_for_site_1">Ĉu ŝalti la blokilon de kuketaj anoncoj por %1$s?</string>
-  <!-- Title text for a detail explanation indicating cookie banner handling is off this site, this is shown as part of the cookie banner panel in the toolbar. %1$s is a shortened URL of the current site. -->
-  <string name="reduce_cookie_banner_details_panel_title_off_for_site_1">Ĉu malŝalti la blokilon de kuketaj anoncoj por %1$s?</string>
-  <!-- Title text for a detail explanation indicating cookie banner reducer didn't work for the current site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_title_unsupported_site_request_2">%1$s ne povas aŭtomate rifuzi kuketojn en tiu ĉi retejo. Vi povas sendi peton por aldoni subtenon por tiu ĉi retejo en la estonteco.</string>
-  <!-- Long text for a detail explanation indicating what will happen if cookie banner handling is off for a site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_description_off_for_site_1">Malŝaltu kaj %1$s forigos kuketojn kaj reŝagos tiun ĉi retejon. Tiu ĉi ago povus fini la seancon aŭ malplenigi aĉetumĉaron.</string>
-  <!-- Long text for a detail explanation indicating what will happen if cookie banner handling is on for a site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_description_on_for_site_3">Ŝaltu, kaj %1$s klopodos aŭtomate rifuzi kuketajn anoncojn en tiu ĉi retejo.</string>
-  <!-- Title for the cookie banner re-engagement CFR, the placeholder is replaced with app name. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="cookie_banner_cfr_title">%1$s ĵus rifuzis kuketojn por vi</string>
-  <!-- Message for the cookie banner re-engagement CFR -->
-  <string name="cookie_banner_cfr_message">Malpli da distro, malpli da kuketoj klopodante spuri vin en tiu ĉi retejo.</string>
   <!-- Description of the preference to enable "HTTPS-Only" mode. -->
   <string name="preferences_https_only_summary">Aŭtomate provi konekti al retejoj per la ĉifrita protokolo HTTPS por pliigi sekurecon.</string>
   <!-- Summary of https only preference if https only is set to off -->
@@ -1728,8 +1682,6 @@
   <string name="history_search_1">Tajpu serĉan tekston</string>
   <!-- Text for the button to clear all history -->
   <string name="history_delete_all">Forigi historion</string>
-  <!-- Text for the snackbar to confirm that multiple browsing history items has been deleted -->
-  <string name="history_delete_multiple_items_snackbar">Historio viŝita</string>
   <!-- Text for the snackbar to confirm that a single browsing history item has been deleted. %1$s is the shortened URL of the deleted history item. -->
   <string name="history_delete_single_item_snackbar">%1$s forigita</string>
   <!-- Context description text for the button to delete a single history item -->
@@ -1973,22 +1925,10 @@
   <string name="webcompat_reporter_description_error">Bonvolu tajpi minimume 10 signojn</string>
   <!-- The label/title of a mandatory field in the Web Compat Reporter feature for adding additional information. -->
   <string name="webcompat_reporter_label_mandatory_description">Detale priskribu la problemon por helpi nin esplori ĝin</string>
-  <!-- The label/title of a field in the Web Compat Reporter feature for explaining a high-level reason why the site is broken. -->
-  <string name="webcompat_reporter_label_whats_broken_2">Kio ne bone funkcias?</string>
-  <!-- The placeholder text for the dropdown where a user selects a high-level reason why the site is broken. -->
-  <string name="webcompat_reporter_choose_reason_2">Elektu kialon</string>
-  <!-- The error message of the dropdown, prompting the user to select a high-level reason why the site is broken. -->
-  <string name="webcompat_reporter_choose_reason_error">Bonvolu elekti kialon</string>
-  <!-- The label/title of an optional field in the Web Compat Reporter feature for adding additional information. -->
-  <string name="webcompat_reporter_label_description_2">Detale priskribu la problemon por helpi nin esplori ĝin (nedevige)</string>
-  <!-- The button text for navigating away from the feature to provide more information on the broken site's bug report. -->
-  <string name="webcompat_reporter_add_more_info">Aldoni pli da informo</string>
   <!-- The button text for the cancel button to leave the Web Compat Reporter feature. -->
   <string name="webcompat_reporter_cancel">Nuligi</string>
   <!-- The button text for the send button to submit the provided form data. -->
   <string name="webcompat_reporter_send_report">Sendi raporton</string>
-  <!-- The button text for the send button to submit the provided form data. -->
-  <string name="webcompat_reporter_send">Sendi</string>
   <!-- Text for a snackbar to confirm the successful submission of a WebCompat report. -->
   <string name="webcompat_reporter_success_snackbar_text_2">Raporto sendita</string>
   <!-- Placeholder text for the description field to prompt the user on what they should type. -->
@@ -2029,8 +1969,6 @@
   <string name="webcompat_reporter_reason_notsupported_2">La retumilo ne estas subtenata aŭ ĝi esta blokita</string>
   <!-- Broken site reason text for the site being deceptive -->
   <string name="webcompat_reporter_reason_site_is_deceptive">Tiu ĉi retejo estas trompa</string>
-  <!-- Broken site reason text for browser isn’t supported or blocked -->
-  <string name="webcompat_reporter_reason_notsupported">La retumilo ne estas subtenata aŭ ĝi esta blokita</string>
   <!-- Broken site reason text for something else -->
   <string name="webcompat_reporter_reason_other">Io alia</string>
   <!--
@@ -2198,12 +2136,6 @@
     Button label that take the user to the Android App setting
   -->
   <string name="phone_feature_go_to_settings">Iri al agordoj</string>
-  <!--
-    Content description (not visible, for screen readers etc.): Quick settings sheet
-    to give users access to site specific information / settings. For example:
-    Secure settings status and a button to modify site permissions
-  -->
-  <string name="quick_settings_sheet">Rapidalira agorda panelo</string>
   <!-- Label that indicates that this option it the recommended one -->
   <string name="phone_feature_recommended">Rekomenditaj</string>
   <!-- Button label for clearing all the information of site permissions -->
@@ -2596,12 +2528,6 @@
   <!--
     Enhanced Tracking Protection
 
-    Link displayed in enhanced tracking protection panel to access tracking protection settings
-  -->
-  <string name="etp_settings">Agordoj de protekto</string>
-  <!--
-    Enhanced Tracking Protection
-
     Preference title for enhanced tracking protection settings
   -->
   <string name="preference_enhanced_tracking_protection">Plibonigita protekto kontraŭ spurado</string>
@@ -2692,12 +2618,8 @@
   <string name="preference_enhanced_tracking_protection_custom_cryptominers">Miniloj de ĉifromono</string>
   <!-- Preference for enhanced tracking protection for the custom protection settings -->
   <string name="preference_enhanced_tracking_protection_custom_known_fingerprinters">Konataj identigiloj de ciferecaj spuroj</string>
-  <!-- Button label for navigating to the Enhanced Tracking Protection details -->
-  <string name="enhanced_tracking_protection_details">Detaloj</string>
   <!-- Header for categories that are being being blocked by current Enhanced Tracking Protection settings -->
   <string name="enhanced_tracking_protection_blocked">Blokita</string>
-  <!-- Header for categories that are being not being blocked by current Enhanced Tracking Protection settings -->
-  <string name="enhanced_tracking_protection_allowed">Permesita</string>
   <!-- Category of trackers (social media trackers) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_social_media_trackers_title">Sociretaj spuriloj</string>
   <!-- Description of social media trackers that can be blocked by Enhanced Tracking Protection -->
@@ -2720,10 +2642,6 @@
   <string name="etp_tracking_content_title">Spurila enhavo</string>
   <!-- Description of tracking content that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_tracking_content_description">Haltigo de ŝargado de nerektaj reklamoj, filmetoj kaj aliaj enhavoj, kiuj portas spurilan kodon. Tio povas misfunkciigi kelkajn trajtojn de retejoj.</string>
-  <!-- Enhanced Tracking Protection message that protection is currently on for this site -->
-  <string name="etp_panel_on">Protektoj ŝaltitaj por tiu ĉi retejo</string>
-  <!-- Enhanced Tracking Protection message that protection is currently off for this site -->
-  <string name="etp_panel_off">Protektoj malŝaltitaj por tiu ĉi retejo</string>
   <!-- Header for exceptions list for which sites enhanced tracking protection is always off -->
   <string name="enhanced_tracking_protection_exceptions">Plibonigita protekto kontraŭ spurado estas malŝaltita por tiuj ĉi retejoj</string>
   <!--
@@ -2748,13 +2666,6 @@
   <string name="etp_suspected_fingerprinters_description">Tio ĉi aktivigas la protekton de ciferecaj spuroj por eviti suspektatajn identigilojn de ciferecaj spuroj.</string>
   <!-- Category of trackers (fingerprinters) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_known_fingerprinters_title">Konataj identigiloj de ciferecaj spuroj</string>
-  <!--
-    Description of the SmartBlock Enhanced Tracking Protection feature. The * symbol is intentionally hardcoded here,
-    as we use it on the UI to indicate which trackers have been partially unblocked.
-  -->
-  <string name="preference_etp_smartblock_description">La sube markitaj spuriloj estis parte malblokitaj en tiu ĉi paĝo ĉar vi interagis kun ili *.</string>
-  <!-- Text displayed that links to website about enhanced tracking protection SmartBlock -->
-  <string name="preference_etp_smartblock_learn_more">Pli da informo</string>
   <!--
     Content description (not visible, for screen readers etc.):
     Enhanced tracking protection exception preference icon for ETP settings.
@@ -3328,16 +3239,8 @@
   <string name="phone_feature_blocked_step_permissions"><![CDATA[2. Tuŝetu <b>Permesoj</b>]]></string>
   <!-- Third step for the allowing a permission (%1$s is the permission name, for example "Camera"). -->
   <string name="phone_feature_blocked_step_feature"><![CDATA[3. Aktivigu <b>%1$s</b>]]></string>
-  <!-- Label that indicates a site is using a secure connection -->
-  <string name="quick_settings_sheet_secure_connection_2">Sekura konekto</string>
-  <!-- Label that indicates a site is using a insecure connection -->
-  <string name="quick_settings_sheet_insecure_connection_2">Nesekura konekto</string>
-  <!-- Label that indicates a site is displaying a local document -->
-  <string name="quick_settings_sheet_local_page">Tiu ĉi paĝo estas konservita en via aparato.</string>
   <!-- Label to clear site data -->
   <string name="clear_site_data">Viŝi kuketojn kaj retejajn datumojn</string>
-  <!-- Confirmation message for a dialog confirming if the user wants to delete all data for current site. %s is the domain of the site. -->
-  <string name="confirm_clear_site_data"><![CDATA[Ĉu vi certe volas viŝi ĉiujn kuketojn kaj datumojn por la retejo <b>%s</b>?]]></string>
   <!-- Confirmation message for a dialog confirming if the user wants to delete all the permissions for all sites -->
   <string name="confirm_clear_permissions_on_all_sites">Ĉu vi certe volas viŝi ĉiujn permesojn por ĉiuj retejoj?</string>
   <!-- Confirmation message for a dialog confirming if the user wants to delete all the permissions for a site -->
@@ -3350,11 +3253,6 @@
   <string name="browser_menu_add_to_shortcuts">Aldoni al ŝparvojoj</string>
   <!-- Browser menu button that removes a shortcut from the home fragment -->
   <string name="browser_menu_remove_from_shortcuts">Forigi el ŝparvojoj</string>
-  <!--
-    text shown before the issuer name to indicate who its verified by, %1$s is the name of
-    the certificate authority that verified the ticket
-  -->
-  <string name="certificate_info_verified_by">Kontrolita de: %1$s</string>
   <!-- Message in delete confirmation dialog for password -->
   <string name="login_deletion_confirmation_2">Ĉu vi certe volas forigi tiun ĉi pasvorton?</string>
   <!-- Positive action of a dialog asking to delete -->
@@ -4677,10 +4575,6 @@
   <string name="search_settings_google_lens_description">Tio ĉi sendas bildojn kaj fotojn al Google, por vide serĉi ilin.</string>
   <!-- Caption shown under the Google Lens toggle clarifying when the feature is available -->
   <string name="preferences_google_lens_availability_caption">Tio nur disponeblas se Google estas aktiva (supre) kaj ĝi estas via aktiva serĉilo dum retumo.</string>
-  <!-- Title for the Google Lens AI feature toggle -->
-  <string name="ai_controls_google_lens_title">Google Lens</string>
-  <!-- Description for the Google Lens AI feature toggle -->
-  <string name="ai_controls_google_lens_description">Tio ĉi sendas bildojn kaj fotojn al Google, por vide serĉi ilin.</string>
   <!-- Content description for the Google Lens half of the camera mode toggle -->
   <string name="lens_camera_mode_lens">Google Lens</string>
   <!-- Content description for the QR scanner half of the camera mode toggle -->

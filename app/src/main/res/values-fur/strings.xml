@@ -106,12 +106,6 @@
   <string name="open_in_app_cfr_negative_button_text">Scarte</string>
   <!-- Private browsing erase action "contextual feature recommendation" (CFR) -->
 
-  <!--
-    Address bar swipe "contextual feature recommendation" (CFR)
-
-    Text for the message displayed in the contextual feature recommendation popup promoting swipe of address bar.
-  -->
-  <string name="address_bar_swipe_cfr_message_2">Scor la sbare dai struments a çampe o a diestre par cambiâ schede.</string>
   <!-- Text for the info dialog when camera permissions have been denied but user tries to access a camera feature. -->
   <string name="camera_permissions_needed_message">Al covente l’acès ae fotocjamare. Va tes impostazions di Android, va te schede dai permès e tocje permet.</string>
   <!-- Text for the positive action button to go to Android Settings to grant permissions. -->
@@ -317,14 +311,6 @@
   <string name="browser_menu_default_banner_dismiss_promotion">Siere promozion</string>
   <!-- Content description (not visible, for screen readers etc.) for recommended extensions in main menu -->
   <string name="browser_menu_recommended_extensions_content_description">Altris informazions</string>
-  <!--
-    Menu "contextual feature recommendation" (CFR)
-
-    Text for the title in the contextual feature recommendation popup promoting the menu feature.
-  -->
-  <string name="menu_cfr_title">Novitâts: menù semplificât</string>
-  <!-- Text for the message in the contextual feature recommendation popup promoting the menu feature. -->
-  <string name="menu_cfr_body">Cjate ce che ti covente besvelt, de navigazion privade aes azions par salvâ contignûts.</string>
   <!--
     Extensions management fragment
 
@@ -790,40 +776,8 @@
   <string name="preferences_pbm_lock_screen_title">Dopre il bloc dal schermi par platâ lis schedis te navigazion privade</string>
   <!-- Informs the user how to access the tabs when "Use screen lock to hide tabs in private browsing" is enabled -->
   <string name="preferences_pbm_lock_screen_summary_3">Viôt lis schedis cul sbloc cul impront, cul PIN o cu la muse. Ativant cheste funzion nol sarà pussibil nancje caturâ o condividi il schermi.</string>
-  <!-- Label for cookie banner section in quick settings panel. -->
-  <string name="cookie_banner_blocker">Bloc strissons pai cookies</string>
   <!-- Preference for removing cookie/consent banners from sites automatically in private mode. See reduce_cookie_banner_summary for additional context. -->
   <string name="preferences_cookie_banner_reduction_private_mode">Bloc strissons pai cookies te navigazion privade</string>
-  <!-- Text for indicating cookie banner handling is off this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_off_for_site">Disative par chest sît</string>
-  <!-- Text for cancel button indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_cancel_button">Anule</string>
-  <!-- Text for request support button indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_request_support_button_2">Invie richieste</string>
-  <!-- Text for title indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_title_2">Domandâ il supuart par chest sît?</string>
-  <!-- Label for the snackBar, after the user reports with success a website where cookie banner reducer did not work -->
-  <string name="cookie_banner_handling_report_site_snack_bar_text_2">Richieste inviade</string>
-  <!-- Text for indicating cookie banner handling is on this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_on_for_site">Ative par chest sît</string>
-  <!-- Text for indicating that a request for unsupported site was sent to Nimbus (it's a Mozilla library for experiments), this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_unsupported_site_request_submitted_2">Richieste di supuart inviade</string>
-  <!-- Text for indicating cookie banner handling is currently not supported for this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_unsupported_site">Sît pal moment no supuartât</string>
-  <!-- Title text for a detail explanation indicating cookie banner handling is on this site, this is shown as part of the cookie banner panel in the toolbar. %1$s is a shortened URL of the current site. -->
-  <string name="reduce_cookie_banner_details_panel_title_on_for_site_1">Ativâ il bloc strissons pai cookies in %1$s?</string>
-  <!-- Title text for a detail explanation indicating cookie banner handling is off this site, this is shown as part of the cookie banner panel in the toolbar. %1$s is a shortened URL of the current site. -->
-  <string name="reduce_cookie_banner_details_panel_title_off_for_site_1">Disativâ il bloc strissons pai cookies in %1$s?</string>
-  <!-- Title text for a detail explanation indicating cookie banner reducer didn't work for the current site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_title_unsupported_site_request_2">%1$s nol pues refudâ in automatic lis richiestis dai cookies su chest sît. Tu puedis inviâ une richieste par supuartâ un doman chest sît.</string>
-  <!-- Long text for a detail explanation indicating what will happen if cookie banner handling is off for a site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_description_off_for_site_1">Dopo la disativazion, %1$s al netarà vie i cookies e al tornarà a cjariâ il sît. Cheste operazion e podarès fâti disconeti dal sît o disvuedâ i carei pes compris tal sît.</string>
-  <!-- Long text for a detail explanation indicating what will happen if cookie banner handling is on for a site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_description_on_for_site_3">Ativilu e %1$s al cirarà di refudâ in automatic ducj i strissons dai cookies su chest sît.</string>
-  <!-- Title for the cookie banner re-engagement CFR, the placeholder is replaced with app name. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="cookie_banner_cfr_title">%1$s al à a pene refudât i cookies par te</string>
-  <!-- Message for the cookie banner re-engagement CFR -->
-  <string name="cookie_banner_cfr_message">Mancul distrazions, mancul cookies che ti stan daûr su chest sît.</string>
   <!-- Description of the preference to enable "HTTPS-Only" mode. -->
   <string name="preferences_https_only_summary">Al cîr di conetisi in automatic ai sîts doprant il protocol di cifradure HTTPS par vê une sigurece miorade.</string>
   <!-- Summary of https only preference if https only is set to off -->
@@ -1728,8 +1682,6 @@
   <string name="history_search_1">Inserìs i tiermins di ricercje</string>
   <!-- Text for the button to clear all history -->
   <string name="history_delete_all">Scancele la cronologjie</string>
-  <!-- Text for the snackbar to confirm that multiple browsing history items has been deleted -->
-  <string name="history_delete_multiple_items_snackbar">Cronologjie eliminade</string>
   <!-- Text for the snackbar to confirm that a single browsing history item has been deleted. %1$s is the shortened URL of the deleted history item. -->
   <string name="history_delete_single_item_snackbar">%1$s eliminât</string>
   <!-- Context description text for the button to delete a single history item -->
@@ -1973,22 +1925,10 @@
   <string name="webcompat_reporter_description_error">Inserìs almancul 10 caratars</string>
   <!-- The label/title of a mandatory field in the Web Compat Reporter feature for adding additional information. -->
   <string name="webcompat_reporter_label_mandatory_description">Da une descrizion detaiade dal probleme par judânus a esaminâlu</string>
-  <!-- The label/title of a field in the Web Compat Reporter feature for explaining a high-level reason why the site is broken. -->
-  <string name="webcompat_reporter_label_whats_broken_2">Ce no funzionial?</string>
-  <!-- The placeholder text for the dropdown where a user selects a high-level reason why the site is broken. -->
-  <string name="webcompat_reporter_choose_reason_2">Sielç un motîf</string>
-  <!-- The error message of the dropdown, prompting the user to select a high-level reason why the site is broken. -->
-  <string name="webcompat_reporter_choose_reason_error">Sielç un motîf</string>
-  <!-- The label/title of an optional field in the Web Compat Reporter feature for adding additional information. -->
-  <string name="webcompat_reporter_label_description_2">Da une descrizion detaiade dal probleme par judânus a esaminâlu (facoltatîf)</string>
-  <!-- The button text for navigating away from the feature to provide more information on the broken site's bug report. -->
-  <string name="webcompat_reporter_add_more_info">Zonte altris informazions</string>
   <!-- The button text for the cancel button to leave the Web Compat Reporter feature. -->
   <string name="webcompat_reporter_cancel">Anule</string>
   <!-- The button text for the send button to submit the provided form data. -->
   <string name="webcompat_reporter_send_report">Mande segnalazion</string>
-  <!-- The button text for the send button to submit the provided form data. -->
-  <string name="webcompat_reporter_send">Invie</string>
   <!-- Text for a snackbar to confirm the successful submission of a WebCompat report. -->
   <string name="webcompat_reporter_success_snackbar_text_2">Segnalazion inviade</string>
   <!-- Placeholder text for the description field to prompt the user on what they should type. -->
@@ -2029,8 +1969,6 @@
   <string name="webcompat_reporter_reason_notsupported_2">Il navigadôr nol è supuartât o al ven blocât</string>
   <!-- Broken site reason text for the site being deceptive -->
   <string name="webcompat_reporter_reason_site_is_deceptive">Chest sît al è ingjanôs</string>
-  <!-- Broken site reason text for browser isn’t supported or blocked -->
-  <string name="webcompat_reporter_reason_notsupported">Il navigadôr nol è supuartât o al ven blocât</string>
   <!-- Broken site reason text for something else -->
   <string name="webcompat_reporter_reason_other">Alc altri</string>
   <!--
@@ -2198,12 +2136,6 @@
     Button label that take the user to the Android App setting
   -->
   <string name="phone_feature_go_to_settings">Va aes impostazions</string>
-  <!--
-    Content description (not visible, for screen readers etc.): Quick settings sheet
-    to give users access to site specific information / settings. For example:
-    Secure settings status and a button to modify site permissions
-  -->
-  <string name="quick_settings_sheet">Sfuei des impostazions rapidis</string>
   <!-- Label that indicates that this option it the recommended one -->
   <string name="phone_feature_recommended">Racomandade</string>
   <!-- Button label for clearing all the information of site permissions -->
@@ -2596,12 +2528,6 @@
   <!--
     Enhanced Tracking Protection
 
-    Link displayed in enhanced tracking protection panel to access tracking protection settings
-  -->
-  <string name="etp_settings">Impostazions di protezion</string>
-  <!--
-    Enhanced Tracking Protection
-
     Preference title for enhanced tracking protection settings
   -->
   <string name="preference_enhanced_tracking_protection">Protezion miorade da lis spiis</string>
@@ -2692,12 +2618,8 @@
   <string name="preference_enhanced_tracking_protection_custom_cryptominers">Minadôrs di criptomonede</string>
   <!-- Preference for enhanced tracking protection for the custom protection settings -->
   <string name="preference_enhanced_tracking_protection_custom_known_fingerprinters">Rilevadôrs di stamp numeric cognossûts</string>
-  <!-- Button label for navigating to the Enhanced Tracking Protection details -->
-  <string name="enhanced_tracking_protection_details">Detais</string>
   <!-- Header for categories that are being being blocked by current Enhanced Tracking Protection settings -->
   <string name="enhanced_tracking_protection_blocked">Blocâts</string>
-  <!-- Header for categories that are being not being blocked by current Enhanced Tracking Protection settings -->
-  <string name="enhanced_tracking_protection_allowed">Permetûts</string>
   <!-- Category of trackers (social media trackers) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_social_media_trackers_title">Spiis (trackers) dai social media</string>
   <!-- Description of social media trackers that can be blocked by Enhanced Tracking Protection -->
@@ -2720,10 +2642,6 @@
   <string name="etp_tracking_content_title">Contignûts che ti spiin</string>
   <!-- Description of tracking content that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_tracking_content_description">Al ferme il cjariament di publicitâts esternis, videos e altris contignûts che a contegnin codiç che ti spie. Al pues influençâ cualchi funzionalitât dal sît web.</string>
-  <!-- Enhanced Tracking Protection message that protection is currently on for this site -->
-  <string name="etp_panel_on">Lis protezions a son ATIVIS par chest sît</string>
-  <!-- Enhanced Tracking Protection message that protection is currently off for this site -->
-  <string name="etp_panel_off">Lis protezions a son DISATIVADIS par chest sît</string>
   <!-- Header for exceptions list for which sites enhanced tracking protection is always off -->
   <string name="enhanced_tracking_protection_exceptions">La protezion miorade da lis spiis e je disativade par chescj sîts web</string>
   <!--
@@ -2748,13 +2666,6 @@
   <string name="etp_suspected_fingerprinters_description">Ative la protezion cuintri il rilevament dal stamp numeric par fermâ i rilevadôrs di stamp numeric suspiets.</string>
   <!-- Category of trackers (fingerprinters) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_known_fingerprinters_title">Rilevadôrs di stamp numeric cognossûts</string>
-  <!--
-    Description of the SmartBlock Enhanced Tracking Protection feature. The * symbol is intentionally hardcoded here,
-    as we use it on the UI to indicate which trackers have been partially unblocked.
-  -->
-  <string name="preference_etp_smartblock_description">Cualchi spie indicade chi sot e je stade sblocade in mût parziâl su cheste pagjine parcè che tu âs interagjît cun lôr *.</string>
-  <!-- Text displayed that links to website about enhanced tracking protection SmartBlock -->
-  <string name="preference_etp_smartblock_learn_more">Plui informazions</string>
   <!--
     Content description (not visible, for screen readers etc.):
     Enhanced tracking protection exception preference icon for ETP settings.
@@ -3328,16 +3239,8 @@
   <string name="phone_feature_blocked_step_permissions"><![CDATA[2. Tocje <b>Permès</b>]]></string>
   <!-- Third step for the allowing a permission (%1$s is the permission name, for example "Camera"). -->
   <string name="phone_feature_blocked_step_feature"><![CDATA[3. Met <b>%1$s</b> su Permet]]></string>
-  <!-- Label that indicates a site is using a secure connection -->
-  <string name="quick_settings_sheet_secure_connection_2">La conession e je sigure</string>
-  <!-- Label that indicates a site is using a insecure connection -->
-  <string name="quick_settings_sheet_insecure_connection_2">La conession no je sigure</string>
-  <!-- Label that indicates a site is displaying a local document -->
-  <string name="quick_settings_sheet_local_page">Cheste pagjine e je memorizade sul to dispositîf.</string>
   <!-- Label to clear site data -->
   <string name="clear_site_data">Nete vie i cookies e i dâts dai sîts</string>
-  <!-- Confirmation message for a dialog confirming if the user wants to delete all data for current site. %s is the domain of the site. -->
-  <string name="confirm_clear_site_data"><![CDATA[Netâ vie pardabon ducj i cookies e i dâts pal sît <b>%s</b>?]]></string>
   <!-- Confirmation message for a dialog confirming if the user wants to delete all the permissions for all sites -->
   <string name="confirm_clear_permissions_on_all_sites">Netâ vie pardabon ducj i permès par ducj i sîts?</string>
   <!-- Confirmation message for a dialog confirming if the user wants to delete all the permissions for a site -->
@@ -3350,11 +3253,6 @@
   <string name="browser_menu_add_to_shortcuts">Zonte aes scurtis</string>
   <!-- Browser menu button that removes a shortcut from the home fragment -->
   <string name="browser_menu_remove_from_shortcuts">Gjave des scurtis</string>
-  <!--
-    text shown before the issuer name to indicate who its verified by, %1$s is the name of
-    the certificate authority that verified the ticket
-  -->
-  <string name="certificate_info_verified_by">Verificât di: %1$s</string>
   <!-- Message in delete confirmation dialog for password -->
   <string name="login_deletion_confirmation_2">Eliminâ pardabon cheste password?</string>
   <!-- Positive action of a dialog asking to delete -->
@@ -4677,10 +4575,6 @@
   <string name="search_settings_google_lens_description">Al mande imagjins e fotos a Google par fâ une ricercje visive.</string>
   <!-- Caption shown under the Google Lens toggle clarifying when the feature is available -->
   <string name="preferences_google_lens_availability_caption">Disponibil nome se Google al è atîf e al è metût come motôr di ricercje predefinît dulinvie de navigazion.</string>
-  <!-- Title for the Google Lens AI feature toggle -->
-  <string name="ai_controls_google_lens_title">Google Lens</string>
-  <!-- Description for the Google Lens AI feature toggle -->
-  <string name="ai_controls_google_lens_description">Al mande imagjins e fotos a Google par fâ une ricercje visive.</string>
   <!-- Content description for the Google Lens half of the camera mode toggle -->
   <string name="lens_camera_mode_lens">Google Lens</string>
   <!-- Content description for the QR scanner half of the camera mode toggle -->

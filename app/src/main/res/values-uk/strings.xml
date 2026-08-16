@@ -108,12 +108,6 @@
   <string name="open_in_app_cfr_negative_button_text">Відхилити</string>
   <!-- Private browsing erase action "contextual feature recommendation" (CFR) -->
 
-  <!--
-    Address bar swipe "contextual feature recommendation" (CFR)
-
-    Text for the message displayed in the contextual feature recommendation popup promoting swipe of address bar.
-  -->
-  <string name="address_bar_swipe_cfr_message_2">Проведіть по панелі інструментів ліворуч або праворуч, щоб перемкнути вкладки.</string>
   <!-- Text for the info dialog when camera permissions have been denied but user tries to access a camera feature. -->
   <string name="camera_permissions_needed_message">Необхідний доступ до камери. Перейдіть до налаштувань Android, торкніться дозволів та торкніться дозволити.</string>
   <!-- Text for the positive action button to go to Android Settings to grant permissions. -->
@@ -319,14 +313,6 @@
   <string name="browser_menu_default_banner_dismiss_promotion">Відхилити промоакцію</string>
   <!-- Content description (not visible, for screen readers etc.) for recommended extensions in main menu -->
   <string name="browser_menu_recommended_extensions_content_description">Докладніше</string>
-  <!--
-    Menu "contextual feature recommendation" (CFR)
-
-    Text for the title in the contextual feature recommendation popup promoting the menu feature.
-  -->
-  <string name="menu_cfr_title">Нове: спрощене меню</string>
-  <!-- Text for the message in the contextual feature recommendation popup promoting the menu feature. -->
-  <string name="menu_cfr_body">Швидше знаходьте те, що вам потрібно, від приватного перегляду до збереження.</string>
   <!--
     Extensions management fragment
 
@@ -793,40 +779,8 @@
   <string name="preferences_pbm_lock_screen_title">Використовувати блокування екрана, щоб приховати вкладки в приватному перегляді</string>
   <!-- Informs the user how to access the tabs when "Use screen lock to hide tabs in private browsing" is enabled -->
   <string name="preferences_pbm_lock_screen_summary_3">Захистіть вкладки за допомогою відбитка пальця, PIN-коду або розпізнавання обличчя. Увімкнення цієї функції також забороняє знімки та поширення екрана.</string>
-  <!-- Label for cookie banner section in quick settings panel. -->
-  <string name="cookie_banner_blocker">Блокувальник банерів файлів cookie</string>
   <!-- Preference for removing cookie/consent banners from sites automatically in private mode. See reduce_cookie_banner_summary for additional context. -->
   <string name="preferences_cookie_banner_reduction_private_mode">Блокувальник банерів файлів cookie у приватному перегляді</string>
-  <!-- Text for indicating cookie banner handling is off this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_off_for_site">Вимкнено для цього сайту</string>
-  <!-- Text for cancel button indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_cancel_button">Скасувати</string>
-  <!-- Text for request support button indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_request_support_button_2">Надіслати запит</string>
-  <!-- Text for title indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_title_2">Подати запит на підтримку цього сайту?</string>
-  <!-- Label for the snackBar, after the user reports with success a website where cookie banner reducer did not work -->
-  <string name="cookie_banner_handling_report_site_snack_bar_text_2">Запит надіслано</string>
-  <!-- Text for indicating cookie banner handling is on this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_on_for_site">Увімкнено для цього сайту</string>
-  <!-- Text for indicating that a request for unsupported site was sent to Nimbus (it's a Mozilla library for experiments), this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_unsupported_site_request_submitted_2">Запит на підтримку сайту надіслано</string>
-  <!-- Text for indicating cookie banner handling is currently not supported for this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_unsupported_site">Сайт наразі не підтримується</string>
-  <!-- Title text for a detail explanation indicating cookie banner handling is on this site, this is shown as part of the cookie banner panel in the toolbar. %1$s is a shortened URL of the current site. -->
-  <string name="reduce_cookie_banner_details_panel_title_on_for_site_1">Увімкнути блокувальник банерів про файли cookie для %1$s?</string>
-  <!-- Title text for a detail explanation indicating cookie banner handling is off this site, this is shown as part of the cookie banner panel in the toolbar. %1$s is a shortened URL of the current site. -->
-  <string name="reduce_cookie_banner_details_panel_title_off_for_site_1">Вимкнути блокувальник банерів про файли cookie для %1$s?</string>
-  <!-- Title text for a detail explanation indicating cookie banner reducer didn't work for the current site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_title_unsupported_site_request_2">На цьому сайті %1$s не може автоматично відхиляти запити на збереження файлів cookie. Ви можете надіслати запит для підтримки цього сайту в майбутньому.</string>
-  <!-- Long text for a detail explanation indicating what will happen if cookie banner handling is off for a site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_description_off_for_site_1">Вимкніть %1$s, щоб очистити файли cookie та перезавантажити цей сайт. Це може призвести до виходу з вебсайту та очищення збережених покупок у кошику.</string>
-  <!-- Long text for a detail explanation indicating what will happen if cookie banner handling is on for a site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_description_on_for_site_3">Увімкніть, і %1$s намагатиметься автоматично відхиляти всі банери про файли cookie на цьому сайті.</string>
-  <!-- Title for the cookie banner re-engagement CFR, the placeholder is replaced with app name. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="cookie_banner_cfr_title">%1$s щойно відхилив файли cookie</string>
-  <!-- Message for the cookie banner re-engagement CFR -->
-  <string name="cookie_banner_cfr_message">Менше відволікань і менше файлів cookie, які відстежують вас на цьому сайті.</string>
   <!-- Description of the preference to enable "HTTPS-Only" mode. -->
   <string name="preferences_https_only_summary">Намагатися автоматично встановлювати з’єднання з сайтами за допомогою протоколу шифрування HTTPS для поліпшення безпеки.</string>
   <!-- Summary of https only preference if https only is set to off -->
@@ -871,6 +825,8 @@
   <string name="preferences_toolbar_shortcut">Ярлик панелі інструментів</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_toolbar_select_shortcut">Вибрати ярлик</string>
+  <!-- Title of a menu option allowing to change the shortcut button shown in the toolbar -->
+  <string name="toolbar_shortcut_menu_edit_option">Редагувати ярлик</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_gestures">Жести</string>
   <!-- Preference for settings related to visual options -->
@@ -1496,6 +1452,14 @@
   <!-- Title of inactive tabs preference -->
   <string name="preferences_inactive_tabs_title">Вкладки, які ви не переглядали впродовж двох тижнів, переміщуватимуться у розділ неактивних.</string>
   <!--
+    Privacy report
+
+    Category header of a preference that allows a user to enable or disable the privacy report feature
+  -->
+  <string name="preferences_privacy_report">Звіт про приватність</string>
+  <!-- Title of the privacy report preference that allows a user to enable or disable the feature -->
+  <string name="preferences_privacy_report_title">Увімкнути звіт про приватність</string>
+  <!--
     Studies
 
     Title of the remove studies button
@@ -1722,6 +1686,8 @@
   <string name="tab_group_three_dot_menu_ungroup">Розгрупувати</string>
   <!-- Text shown on the delete button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_delete">Видалити</string>
+  <!-- Text shown on the share button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_share">Поділитися</string>
   <!-- Text shown on the close button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_close">Закрити</string>
   <!-- Title for the Ungroup tab group confirmation dialog. -->
@@ -1764,8 +1730,6 @@
   <string name="history_search_1">Введіть пошукові терміни</string>
   <!-- Text for the button to clear all history -->
   <string name="history_delete_all">Видалити історію</string>
-  <!-- Text for the snackbar to confirm that multiple browsing history items has been deleted -->
-  <string name="history_delete_multiple_items_snackbar">Історію видалено</string>
   <!-- Text for the snackbar to confirm that a single browsing history item has been deleted. %1$s is the shortened URL of the deleted history item. -->
   <string name="history_delete_single_item_snackbar">%1$s видалено</string>
   <!-- Context description text for the button to delete a single history item -->
@@ -2012,22 +1976,10 @@
   <string name="webcompat_reporter_label_mandatory_description">Детально опишіть проблему, щоб ми могли її дослідити</string>
   <!-- The label/title of a optional field in the Web Compat Reporter feature for adding additional information. -->
   <string name="webcompat_reporter_label_optional_description">Детально опишіть проблему, щоб допомогти нам її дослідити (необов’язково)</string>
-  <!-- The label/title of a field in the Web Compat Reporter feature for explaining a high-level reason why the site is broken. -->
-  <string name="webcompat_reporter_label_whats_broken_2">Що не так?</string>
-  <!-- The placeholder text for the dropdown where a user selects a high-level reason why the site is broken. -->
-  <string name="webcompat_reporter_choose_reason_2">Виберіть причину</string>
-  <!-- The error message of the dropdown, prompting the user to select a high-level reason why the site is broken. -->
-  <string name="webcompat_reporter_choose_reason_error">Виберіть причину</string>
-  <!-- The label/title of an optional field in the Web Compat Reporter feature for adding additional information. -->
-  <string name="webcompat_reporter_label_description_2">Детально опишіть проблему, щоб допомогти нам її дослідити (необов’язково)</string>
-  <!-- The button text for navigating away from the feature to provide more information on the broken site's bug report. -->
-  <string name="webcompat_reporter_add_more_info">Додати інформацію</string>
   <!-- The button text for the cancel button to leave the Web Compat Reporter feature. -->
   <string name="webcompat_reporter_cancel">Скасувати</string>
   <!-- The button text for the send button to submit the provided form data. -->
   <string name="webcompat_reporter_send_report">Надіслати звіт</string>
-  <!-- The button text for the send button to submit the provided form data. -->
-  <string name="webcompat_reporter_send">Надіслати</string>
   <!-- Text for a snackbar to confirm the successful submission of a WebCompat report. -->
   <string name="webcompat_reporter_success_snackbar_text_2">Звіт надіслано</string>
   <!-- Placeholder text for the description field to prompt the user on what they should type. -->
@@ -2068,8 +2020,6 @@
   <string name="webcompat_reporter_reason_notsupported_2">Браузер не підтримується або блокується</string>
   <!-- Broken site reason text for the site being deceptive -->
   <string name="webcompat_reporter_reason_site_is_deceptive">Цей сайт оманливий</string>
-  <!-- Broken site reason text for browser isn’t supported or blocked -->
-  <string name="webcompat_reporter_reason_notsupported">Браузер не підтримується або блокується</string>
   <!-- Broken site reason text for something else -->
   <string name="webcompat_reporter_reason_other">Щось інше</string>
   <!--
@@ -2241,12 +2191,6 @@
     Button label that take the user to the Android App setting
   -->
   <string name="phone_feature_go_to_settings">Перейти до налаштувань</string>
-  <!--
-    Content description (not visible, for screen readers etc.): Quick settings sheet
-    to give users access to site specific information / settings. For example:
-    Secure settings status and a button to modify site permissions
-  -->
-  <string name="quick_settings_sheet">Панель швидких налаштувань</string>
   <!-- Label that indicates that this option it the recommended one -->
   <string name="phone_feature_recommended">Рекомендовано</string>
   <!-- Button label for clearing all the information of site permissions -->
@@ -2643,12 +2587,6 @@
   <!--
     Enhanced Tracking Protection
 
-    Link displayed in enhanced tracking protection panel to access tracking protection settings
-  -->
-  <string name="etp_settings">Налаштування захисту</string>
-  <!--
-    Enhanced Tracking Protection
-
     Preference title for enhanced tracking protection settings
   -->
   <string name="preference_enhanced_tracking_protection">Розширений захист від стеження</string>
@@ -2740,12 +2678,8 @@
   <string name="preference_enhanced_tracking_protection_custom_cryptominers">Криптомайнери</string>
   <!-- Preference for enhanced tracking protection for the custom protection settings -->
   <string name="preference_enhanced_tracking_protection_custom_known_fingerprinters">Відомі засоби зчитування цифрового відбитка</string>
-  <!-- Button label for navigating to the Enhanced Tracking Protection details -->
-  <string name="enhanced_tracking_protection_details">Подробиці</string>
   <!-- Header for categories that are being being blocked by current Enhanced Tracking Protection settings -->
   <string name="enhanced_tracking_protection_blocked">Заблоковано</string>
-  <!-- Header for categories that are being not being blocked by current Enhanced Tracking Protection settings -->
-  <string name="enhanced_tracking_protection_allowed">Дозволено</string>
   <!-- Category of trackers (social media trackers) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_social_media_trackers_title">Стеження соціальних мереж</string>
   <!-- Description of social media trackers that can be blocked by Enhanced Tracking Protection -->
@@ -2768,10 +2702,6 @@
   <string name="etp_tracking_content_title">Вміст стеження</string>
   <!-- Description of tracking content that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_tracking_content_description">Блокує завантаження зовнішньої реклами, відео та іншого вмісту з вбудованим кодом стеження. Може вплинути на функціональність вебсайтів.</string>
-  <!-- Enhanced Tracking Protection message that protection is currently on for this site -->
-  <string name="etp_panel_on">Захист на цьому сайті увімкнено</string>
-  <!-- Enhanced Tracking Protection message that protection is currently off for this site -->
-  <string name="etp_panel_off">Захист на цьому сайті вимкнено</string>
   <!-- Header for exceptions list for which sites enhanced tracking protection is always off -->
   <string name="enhanced_tracking_protection_exceptions">Розширений захист від стеження вимкнено для цих вебсайтів</string>
   <!--
@@ -2796,13 +2726,6 @@
   <string name="etp_suspected_fingerprinters_description">Вмикає захист цифрового відбитка, щоб зупинити підозрілі зчитування.</string>
   <!-- Category of trackers (fingerprinters) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_known_fingerprinters_title">Відомі засоби зчитування цифрового відбитка</string>
-  <!--
-    Description of the SmartBlock Enhanced Tracking Protection feature. The * symbol is intentionally hardcoded here,
-    as we use it on the UI to indicate which trackers have been partially unblocked.
-  -->
-  <string name="preference_etp_smartblock_description">Деякі елементи стеження, зазначені нижче, були частково розблоковані на цій сторінці, тому що ви взаємодіяли з ними *.</string>
-  <!-- Text displayed that links to website about enhanced tracking protection SmartBlock -->
-  <string name="preference_etp_smartblock_learn_more">Докладніше</string>
   <!--
     Content description (not visible, for screen readers etc.):
     Enhanced tracking protection exception preference icon for ETP settings.
@@ -3408,16 +3331,8 @@
   <string name="phone_feature_blocked_step_permissions"><![CDATA[2. Торкніться <b>Дозволи</b>]]></string>
   <!-- Third step for the allowing a permission (%1$s is the permission name, for example "Camera"). -->
   <string name="phone_feature_blocked_step_feature"><![CDATA[3. Увімкніть перемикач <b>%1$s</b>]]></string>
-  <!-- Label that indicates a site is using a secure connection -->
-  <string name="quick_settings_sheet_secure_connection_2">З’єднання захищене</string>
-  <!-- Label that indicates a site is using a insecure connection -->
-  <string name="quick_settings_sheet_insecure_connection_2">З’єднання не захищене</string>
-  <!-- Label that indicates a site is displaying a local document -->
-  <string name="quick_settings_sheet_local_page">Ця сторінка зберігається на вашому пристрої.</string>
   <!-- Label to clear site data -->
   <string name="clear_site_data">Стерти файли cookie та дані сайту</string>
-  <!-- Confirmation message for a dialog confirming if the user wants to delete all data for current site. %s is the domain of the site. -->
-  <string name="confirm_clear_site_data"><![CDATA[Ви дійсно хочете стерти всі файли cookie та дані сайту <b>%s</b>?]]></string>
   <!-- Confirmation message for a dialog confirming if the user wants to delete all the permissions for all sites -->
   <string name="confirm_clear_permissions_on_all_sites">Ви впевнені, що хочете очистити всі дозволи на всіх сайтах?</string>
   <!-- Confirmation message for a dialog confirming if the user wants to delete all the permissions for a site -->
@@ -3430,11 +3345,6 @@
   <string name="browser_menu_add_to_shortcuts">Додати до ярликів</string>
   <!-- Browser menu button that removes a shortcut from the home fragment -->
   <string name="browser_menu_remove_from_shortcuts">Вилучити з ярликів</string>
-  <!--
-    text shown before the issuer name to indicate who its verified by, %1$s is the name of
-    the certificate authority that verified the ticket
-  -->
-  <string name="certificate_info_verified_by">Засвідчено: %1$s</string>
   <!-- Message in delete confirmation dialog for password -->
   <string name="login_deletion_confirmation_2">Ви дійсно хочете видалити цей пароль?</string>
   <!-- Positive action of a dialog asking to delete -->
@@ -3498,6 +3408,16 @@
     which navigates the user to a screen displaying all the shortcuts.
   -->
   <string name="homepage_shortcuts_show_all_content_description">Показати всі ярлики</string>
+  <!--
+    Label for the button in the shortcuts home screen section that expands the section to show
+    every shortcut.
+  -->
+  <string name="homepage_shortcuts_show_all">Розгорнути</string>
+  <!--
+    Label for the button in the shortcuts home screen section that collapses the section back
+    to showing only the first shortcuts.
+  -->
+  <string name="homepage_shortcuts_show_less">Згорнути</string>
   <!-- Label for the "Add shortcut" button displayed as a tile. -->
   <string name="homepage_shortcuts_add_shortcut">Додати ярлик</string>
   <!-- Title for the "Add to homepage" bottom sheet. -->
@@ -4737,6 +4657,16 @@
   <string name="privacy_notice_updated_homepage_message_privacy_notice" tools:ignore="UnusedResources">Положення про приватність</string>
   <!-- The second active link used in privacy_notice_updated_homepage_message -->
   <string name="privacy_notice_updated_homepage_message_learn_more" tools:ignore="UnusedResources">Докладніше</string>
+  <!--
+    Collections migration homepage card
+
+    Title shown on the collections to tab groups migration card on the homepage.
+  -->
+  <string name="collections_migration_homepage_banner_title">Колекції тепер стали групами</string>
+  <!-- Message shown on the collections to tab groups migration card on the homepage. -->
+  <string name="collections_migration_homepage_card_message">Є простіший спосіб упорядкування ваших вкладок</string>
+  <!-- Link text shown on the collections to tab groups migration card that opens the tab groups page in the tab manager. -->
+  <string name="collections_migration_homepage_card_link">Переглянути мої групи вкладок</string>
   <!-- Google Lens prototype related strings -->
   <string name="preferences_debug_settings_google_lens_integration">Увімкнути інтеграцію з Google Об’єктивом</string>
   <!-- Lens image search button content description -->
@@ -4765,10 +4695,6 @@
   <string name="search_settings_google_lens_description">Надсилання зображень і фотографій до Google для візуального пошуку.</string>
   <!-- Caption shown under the Google Lens toggle clarifying when the feature is available -->
   <string name="preferences_google_lens_availability_caption">Доступно лише якщо Google увімкнено й використовується як пошукова система під час перегляду вебсторінок.</string>
-  <!-- Title for the Google Lens AI feature toggle -->
-  <string name="ai_controls_google_lens_title">Google Об’єктив</string>
-  <!-- Description for the Google Lens AI feature toggle -->
-  <string name="ai_controls_google_lens_description">Надсилання зображень і фотографій до Google для візуального пошуку.</string>
   <!-- Content description for the Google Lens half of the camera mode toggle -->
   <string name="lens_camera_mode_lens">Google Об’єктив</string>
   <!-- Content description for the QR scanner half of the camera mode toggle -->
@@ -4825,4 +4751,8 @@
   <string name="firefox_labs_feature_conflict">Функція недоступна для випробування.</string>
   <!-- Text displayed on the Firefox Labs screen when there are no Labs experimental features present. -->
   <string name="firefox_labs_no_labs_available_description">Наразі немає експериментальних функцій</string>
+  <!-- Title of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">Ізоляція вебсайтів</string>
+  <!-- Description of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">Додатковий бар’єр між вебсайтами, який допомагає захистити ваші дані на різних вкладках. Може впливати на продуктивність, стабільність, сумісність із вебсайтами та спосіб збереження історії переглядів.</string>
 </resources>

@@ -106,12 +106,6 @@
   <string name="open_in_app_cfr_negative_button_text">បដិសេធ</string>
   <!-- Private browsing erase action "contextual feature recommendation" (CFR) -->
 
-  <!--
-    Address bar swipe "contextual feature recommendation" (CFR)
-
-    Text for the message displayed in the contextual feature recommendation popup promoting swipe of address bar.
-  -->
-  <string name="address_bar_swipe_cfr_message_2">អូសរបារឧបករណ៍ទៅឆ្វេង ឬស្តាំ ដើម្បីប្តូរផ្ទាំង។</string>
   <!-- Text for the info dialog when camera permissions have been denied but user tries to access a camera feature. -->
   <string name="camera_permissions_needed_message">ត្រូវការសិទ្ធិចូលប្រើកាមេរ៉ា។ ចូលទៅកាន់ការកំណត់ Android ចុចការអនុញ្ញាត ហើយចុចអនុញ្ញាត។</string>
   <!-- Text for the positive action button to go to Android Settings to grant permissions. -->
@@ -313,14 +307,6 @@
   <string name="browser_menu_default_banner_dismiss_promotion">បដិសេធការផ្សព្វផ្សាយ</string>
   <!-- Content description (not visible, for screen readers etc.) for recommended extensions in main menu -->
   <string name="browser_menu_recommended_extensions_content_description">ព័ត៌មានបន្ថែម</string>
-  <!--
-    Menu "contextual feature recommendation" (CFR)
-
-    Text for the title in the contextual feature recommendation popup promoting the menu feature.
-  -->
-  <string name="menu_cfr_title">ថ្មី៖ ម៉ឺនុយដែលសម្រួល</string>
-  <!-- Text for the message in the contextual feature recommendation popup promoting the menu feature. -->
-  <string name="menu_cfr_body">ស្វែងរកអ្វីដែលអ្នកត្រូវការលឿនជាងមុន ចាប់ពីការច្បោលឯកជន រហូតដល់ការរក្សាទុកសកម្មភាព។</string>
   <!--
     Extensions management fragment
 
@@ -596,16 +582,6 @@
   <string name="preferences_https_only_title">របៀប HTTPS តែប៉ុណ្ណោះ</string>
   <!-- Preference title for using the screen lock to hide tabs in private browsing -->
   <string name="preferences_pbm_lock_screen_title">ប្រើការចាក់សោអេក្រង់ ដើម្បីលាក់ផ្ទាំងក្នុងការច្បោលឯកជន</string>
-  <!-- Text for indicating cookie banner handling is off this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_off_for_site">បិទសម្រាប់គេហទំព័រនេះ</string>
-  <!-- Text for cancel button indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_cancel_button">បោះបង់</string>
-  <!-- Text for request support button indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_request_support_button_2">ផ្ញើសំណើ</string>
-  <!-- Text for indicating cookie banner handling is on this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_on_for_site">បើកសម្រាប់គេហទំព័រនេះ</string>
-  <!-- Text for indicating cookie banner handling is currently not supported for this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_unsupported_site">បច្ចុប្បន្នគេហទំព័រមិនត្រូវបានគាំទ្រទេ</string>
   <!-- Summary of https only preference if https only is set to off -->
   <string name="preferences_https_only_off">បិទ</string>
   <!-- Summary of https only preference if https only is set to on in all tabs -->
@@ -1163,8 +1139,6 @@
   <string name="history_search_1">បញ្ចូលពាក្យស្វែងរក</string>
   <!-- Text for the button to clear all history -->
   <string name="history_delete_all">លុបប្រវត្តិ</string>
-  <!-- Text for the snackbar to confirm that multiple browsing history items has been deleted -->
-  <string name="history_delete_multiple_items_snackbar">បានលុបប្រវត្តិ</string>
   <!-- Text for the snackbar to confirm that a single browsing history item has been deleted. %1$s is the shortened URL of the deleted history item. -->
   <string name="history_delete_single_item_snackbar">បានលុប %1$s</string>
   <!-- Context description text for the button to delete a single history item -->
@@ -1578,12 +1552,6 @@
   <string name="preference_enhanced_tracking_protection_custom_tracking_content_1">នៅក្នុងផ្ទាំងទាំងអស់</string>
   <!-- Option for enhanced tracking protection for the custom protection settings for tracking content -->
   <string name="preference_enhanced_tracking_protection_custom_tracking_content_2">មានតែនៅក្នុងផ្ទាំងឯកជនប៉ុណ្ណោះ</string>
-  <!-- Header for categories that are being not being blocked by current Enhanced Tracking Protection settings -->
-  <string name="enhanced_tracking_protection_allowed">បាន​អនុញ្ញាត</string>
-  <!-- Enhanced Tracking Protection message that protection is currently on for this site -->
-  <string name="etp_panel_on">ការការពារត្រូវបានបើកសម្រាប់អាសយដ្ឋានវេបនេះ</string>
-  <!-- Enhanced Tracking Protection message that protection is currently off for this site -->
-  <string name="etp_panel_off">ការការពារត្រូវបានបិទសម្រាប់អាសយដ្ឋានវេបនេះ</string>
   <!-- Content description for the "Add Site" button -->
   <string name="preference_doh_add_site_description">បន្ថែមអាសយដ្ឋានវេប</string>
   <!-- Title displayed for "Off" option under "DNS over HTTPS" -->

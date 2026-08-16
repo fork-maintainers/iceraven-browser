@@ -384,8 +384,6 @@
   <string name="pwa_site_controls_title_private">%1$s (கமுக்க முறை)</string>
   <!-- Text for the button to clear all history -->
   <string name="history_delete_all">வரலாற்றை அழி</string>
-  <!-- Text for the snackbar to confirm that multiple browsing history items has been deleted -->
-  <string name="history_delete_multiple_items_snackbar">வரலாறு அழிக்கப்பட்டது</string>
   <!-- Text for the snackbar to confirm that a single browsing history item has been deleted. %1$s is the shortened URL of the deleted history item. -->
   <string name="history_delete_single_item_snackbar">%1$s அழிக்கப்பட்டது</string>
   <!-- Context description text for the button to delete a single history item -->
@@ -460,12 +458,6 @@
     Button label that take the user to the Android App setting
   -->
   <string name="phone_feature_go_to_settings">அமைவுகளுக்கு செல்</string>
-  <!--
-    Content description (not visible, for screen readers etc.): Quick settings sheet
-    to give users access to site specific information / settings. For example:
-    Secure settings status and a button to modify site permissions
-  -->
-  <string name="quick_settings_sheet">விரைவான அமைவுகள் தாள்</string>
   <!-- Label that indicates that this option it the recommended one -->
   <string name="phone_feature_recommended">பரிந்துரைக்கப்பட்டது</string>
   <!-- Button label for clearing all the information of site permissions -->
@@ -687,12 +679,6 @@
   <!--
     Enhanced Tracking Protection
 
-    Link displayed in enhanced tracking protection panel to access tracking protection settings
-  -->
-  <string name="etp_settings">பாதுகாப்பு அமைவுகள்</string>
-  <!--
-    Enhanced Tracking Protection
-
     Preference title for enhanced tracking protection settings
   -->
   <string name="preference_enhanced_tracking_protection">மேம்படுத்தப்பட்ட தடமறியல் பாதுகாப்பு</string>
@@ -736,8 +722,6 @@
   <string name="preference_enhanced_tracking_protection_custom_cryptominers">இரகசியபரிவர்த்தனையாளர்கள்</string>
   <!-- Header for categories that are being being blocked by current Enhanced Tracking Protection settings -->
   <string name="enhanced_tracking_protection_blocked">தடுக்கப்பட்டவை</string>
-  <!-- Header for categories that are being not being blocked by current Enhanced Tracking Protection settings -->
-  <string name="enhanced_tracking_protection_allowed">அனுமதித்தவை</string>
   <!-- Category of trackers (social media trackers) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_social_media_trackers_title">சமூக பின்தொடரிகள்</string>
   <!-- Description of social media trackers that can be blocked by Enhanced Tracking Protection -->
@@ -754,10 +738,6 @@
   <string name="etp_tracking_content_title">உள்ளடக்கப் பின்தொடரல்</string>
   <!-- Description of tracking content that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_tracking_content_description">பின்தொடரி குறியீட்டைக் கொண்ட விளம்பரங்கள், காணொளிகள் மற்றும் பிற உள்ளடக்கங்களை ஏற்றுவதிலிருந்து நிறுத்துகிறது. வலைத்தள செயல்பாட்டைப் பாதிக்கலாம்.</string>
-  <!-- Enhanced Tracking Protection message that protection is currently on for this site -->
-  <string name="etp_panel_on">இத்தளத்திற்கான பாதுகாப்புகள் இயக்கத்தில் உள்ளன</string>
-  <!-- Enhanced Tracking Protection message that protection is currently off for this site -->
-  <string name="etp_panel_off">இத்தளத்திற்கான பாதுகாப்புகள் முடக்கப்பட்டுள்ளன</string>
   <!-- Header for exceptions list for which sites enhanced tracking protection is always off -->
   <string name="enhanced_tracking_protection_exceptions">இத்தளத்திற்கு மேம்பட்ட தடமறி பாதுகாப்பு முடக்கப்பட்டுள்ளது.</string>
   <!--
@@ -892,11 +872,6 @@
   <string name="confirm_clear_permission_site">இந்தத் தளத்திற்கான இந்த அனுமதியை நீக்க விரும்புகிறீர்களா?</string>
   <!-- label shown when there are not site exceptions to show in the site exception settings -->
   <string name="no_site_exceptions">தள விதிவிலக்குகள் இல்லை</string>
-  <!--
-    text shown before the issuer name to indicate who its verified by, %1$s is the name of
-    the certificate authority that verified the ticket
-  -->
-  <string name="certificate_info_verified_by">சரிபார்த்தது: %1$s</string>
   <!-- Positive action of a dialog asking to delete -->
   <string name="dialog_delete_positive">நீக்கு</string>
   <!-- Voice search button content description -->

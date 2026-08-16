@@ -86,8 +86,6 @@
   <string name="tab_group_three_dot_menu_share">Kopīgot</string>
   <!-- Alert dialog confirmation before deleting multiple download items, this is the title. -->
   <string name="download_delete_multi_select_dialog_confirmation">Vai tiešām izdzēst atlasītos vienumus?</string>
-  <!-- The button text for navigating away from the feature to provide more information on the broken site's bug report. -->
-  <string name="webcompat_reporter_add_more_info">Pievienot vairāk informācijas</string>
   <!--
     Bookmarks
 
@@ -110,6 +108,8 @@
   <string name="quick_setting_option_autoplay_blocked">Liegt skaņu un video</string>
   <!-- Button to add new collection for the "select collection" step of the collection creator -->
   <string name="create_collection_add_new_collection">Pievienot jaunu krājumu</string>
+  <!-- Text displayed when sync is offline and cannot be accessed -->
+  <string name="sync_offline">Bezsaistē</string>
   <!-- Tab collection deletion prompt dialog message. %1$s is the collection name. -->
   <string name="tab_collection_dialog_message">Vai tiešām izdzēst %1$s?</string>
   <!--
@@ -146,8 +146,6 @@
   <string name="search_engine_add_custom_search_engine_title">Pievienot meklētāju</string>
   <!-- Content description (not visible, for screen readers etc.): Title for the button that navigates to add new engine screen -->
   <string name="search_engine_add_custom_search_engine_button_content_description">Pievienot jaunu meklētāju</string>
-  <!-- Confirmation message for a dialog confirming if the user wants to delete all data for current site. %s is the domain of the site. -->
-  <string name="confirm_clear_site_data"><![CDATA[Vai tiešām notīrīt visas vietnes <b>%s</b> sīkdatnes un datus?]]></string>
   <!-- Confirmation message for a dialog confirming if the user wants to delete all the permissions for all sites -->
   <string name="confirm_clear_permissions_on_all_sites">Vai tiešām noņemt visu vietņu visas atļaujas?</string>
   <!-- Confirmation message for a dialog confirming if the user wants to delete all the permissions for a site -->
@@ -160,6 +158,16 @@
   <string name="login_deletion_confirmation_2">Vai tiešām izdzēst šo paroli?</string>
   <!-- The page title for adding new password. -->
   <string name="add_login_2">Pievienot paroli</string>
+  <!--
+    Label for the button in the shortcuts home screen section that expands the section to show
+    every shortcut.
+  -->
+  <string name="homepage_shortcuts_show_all">Rādīt visus</string>
+  <!--
+    Label for the button in the shortcuts home screen section that collapses the section back
+    to showing only the first shortcuts.
+  -->
+  <string name="homepage_shortcuts_show_less">Rādīt mazāk</string>
   <!-- Label for the "Add shortcut" button displayed as a tile. -->
   <string name="homepage_shortcuts_add_shortcut">Pievienot īsceļu</string>
   <!-- Title for the "Add to homepage" bottom sheet. -->

@@ -372,8 +372,6 @@
   <string name="pwa_site_controls_title_private">%1$s (ব্যক্তিগত মোড)</string>
   <!-- Text for the button to clear all history -->
   <string name="history_delete_all">ইতিহাস মুছুন</string>
-  <!-- Text for the snackbar to confirm that multiple browsing history items has been deleted -->
-  <string name="history_delete_multiple_items_snackbar">ইতিহাস মুছে ফেলা হয়েছে</string>
   <!-- Text for the snackbar to confirm that a single browsing history item has been deleted. %1$s is the shortened URL of the deleted history item. -->
   <string name="history_delete_single_item_snackbar">%1$s মুছে ফেলা হয়েছে</string>
   <!-- Context description text for the button to delete a single history item -->
@@ -447,12 +445,6 @@
     Button label that take the user to the Android App setting
   -->
   <string name="phone_feature_go_to_settings">সেটিংস এ যান</string>
-  <!--
-    Content description (not visible, for screen readers etc.): Quick settings sheet
-    to give users access to site specific information / settings. For example:
-    Secure settings status and a button to modify site permissions
-  -->
-  <string name="quick_settings_sheet">দ্রুত সেটিংস শীট</string>
   <!-- Label that indicates that this option it the recommended one -->
   <string name="phone_feature_recommended">সুপারিশকৃত</string>
   <!-- Button label for clearing all the information of site permissions -->
@@ -671,12 +663,6 @@
   <!--
     Enhanced Tracking Protection
 
-    Link displayed in enhanced tracking protection panel to access tracking protection settings
-  -->
-  <string name="etp_settings">সুরক্ষা সেটিংস</string>
-  <!--
-    Enhanced Tracking Protection
-
     Preference title for enhanced tracking protection settings
   -->
   <string name="preference_enhanced_tracking_protection">ট্র্যাকিং সুরক্ষা বর্ধিত করা হয়েছে</string>
@@ -706,8 +692,6 @@
   <string name="preference_enhanced_tracking_protection_custom_cryptominers">ক্রিপ্টোমাইনারস</string>
   <!-- Header for categories that are being being blocked by current Enhanced Tracking Protection settings -->
   <string name="enhanced_tracking_protection_blocked">ব্লক করা হয়েছে</string>
-  <!-- Header for categories that are being not being blocked by current Enhanced Tracking Protection settings -->
-  <string name="enhanced_tracking_protection_allowed">অনুমতি দেওয়া হয়েছে</string>
   <!-- Category of trackers (social media trackers) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_social_media_trackers_title">সোশ্যাল মিডিয়া ট্র্যাকার</string>
   <!-- Category of trackers (cross-site tracking cookies) that can be blocked by Enhanced Tracking Protection -->
@@ -716,10 +700,6 @@
   <string name="etp_cryptominers_title">ক্রিপ্টোমাইনারস</string>
   <!-- Category of trackers (tracking content) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_tracking_content_title">ট্র্যাকিং কন্টেন্ট</string>
-  <!-- Enhanced Tracking Protection message that protection is currently on for this site -->
-  <string name="etp_panel_on">এই সাইটের জন্য সুরক্ষা ON আছে</string>
-  <!-- Enhanced Tracking Protection message that protection is currently off for this site -->
-  <string name="etp_panel_off">এই সাইটের জন্য সুরক্ষা OFF আছে</string>
   <!-- About page link text to open what's new link. %s is the name of the app (for example "Firefox"). -->
   <string name="about_whats_new">%s এ নতুন যা আছে</string>
   <!--
@@ -811,11 +791,6 @@
   <string name="confirm_clear_permissions_on_all_sites">আপনি কি নিশ্চিত যে আপনি সব সাইটের সব অনুমতি সাফ করতে চান?</string>
   <!-- Confirmation message for a dialog confirming if the user wants to delete all the permissions for a site -->
   <string name="confirm_clear_permissions_site">আপনি কি নিশ্চিত যে আপনি এই সাইটের জন্য সব অনুমতি সাফ করতে চান?</string>
-  <!--
-    text shown before the issuer name to indicate who its verified by, %1$s is the name of
-    the certificate authority that verified the ticket
-  -->
-  <string name="certificate_info_verified_by">যাচাই করা হয়েছে : %1$s দিয়ে</string>
   <!-- Positive action of a dialog asking to delete -->
   <string name="dialog_delete_positive">মুছে ফেলুন</string>
   <!-- Translations feature -->

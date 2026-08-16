@@ -132,12 +132,6 @@
   <string name="sync_add_new_device_title">ଡିଭାଇସକୁ ପଠାନ୍ତୁ</string>
   <!-- Text shown for settings option for sign with email -->
   <string name="sign_in_with_email">ଏହା ପରିବର୍ତ୍ତେ ଇମେଲ୍ ବ୍ୟବହାର କରନ୍ତୁ</string>
-  <!--
-    Enhanced Tracking Protection
-
-    Link displayed in enhanced tracking protection panel to access tracking protection settings
-  -->
-  <string name="etp_settings">ସୁରକ୍ଷା ସେଟିଂସ୍</string>
   <!-- Preference for enhanced tracking protection for the standard protection settings -->
   <string name="preference_enhanced_tracking_protection_standard_default_1">ମାନକ (ଡିଫଲ୍ଟ)</string>
   <!-- Preference for enhanced tracking protection for the strict protection settings -->

@@ -345,40 +345,8 @@
   <string name="preferences_add_private_browsing_shortcut">گیزلی مورور شورتکاتینی آرتیر</string>
   <!-- Preference for enabling "HTTPS-Only" mode -->
   <string name="preferences_https_only_title">یالنیز HTTPS حالتی</string>
-  <!-- Label for cookie banner section in quick settings panel. -->
-  <string name="cookie_banner_blocker">کوکی بنر مسدود ائلیه‌نی</string>
   <!-- Preference for removing cookie/consent banners from sites automatically in private mode. See reduce_cookie_banner_summary for additional context. -->
   <string name="preferences_cookie_banner_reduction_private_mode">گیزلی موروردا کوکی بنر مسدود ائلینی</string>
-  <!-- Text for indicating cookie banner handling is off this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_off_for_site">بو سایتدا باغلی</string>
-  <!-- Text for cancel button indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_cancel_button">لغو</string>
-  <!-- Text for request support button indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_request_support_button_2">ایستک یوللا</string>
-  <!-- Text for title indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_title_2">بو سایت اوچون آرخالاما ایستنسین؟</string>
-  <!-- Label for the snackBar, after the user reports with success a website where cookie banner reducer did not work -->
-  <string name="cookie_banner_handling_report_site_snack_bar_text_2">ایستک گؤندریلدی</string>
-  <!-- Text for indicating cookie banner handling is on this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_on_for_site">بو سایت اوچون آچیق</string>
-  <!-- Text for indicating that a request for unsupported site was sent to Nimbus (it's a Mozilla library for experiments), this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_unsupported_site_request_submitted_2">آرخالاما ایستکی گوندریلدی</string>
-  <!-- Text for indicating cookie banner handling is currently not supported for this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_unsupported_site">سایت هله‌لیک آرخالانمیر</string>
-  <!-- Title text for a detail explanation indicating cookie banner handling is on this site, this is shown as part of the cookie banner panel in the toolbar. %1$s is a shortened URL of the current site. -->
-  <string name="reduce_cookie_banner_details_panel_title_on_for_site_1">%1$s اوچون کوکی بنر مسدود ائلین ایشله‌سین؟</string>
-  <!-- Title text for a detail explanation indicating cookie banner handling is off this site, this is shown as part of the cookie banner panel in the toolbar. %1$s is a shortened URL of the current site. -->
-  <string name="reduce_cookie_banner_details_panel_title_off_for_site_1">%1$s اوچون کوکی بنر مسدود ائلین ایشدن سالینسین؟</string>
-  <!-- Title text for a detail explanation indicating cookie banner reducer didn't work for the current site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_title_unsupported_site_request_2">%1$s بو سایتدا کوُکی ایستک‌لرینی اوْتوماتیک رد ائده بیلمز. گله‌جکده بوُ سایتی آرخالاماق اوُچون ایستک گؤندره بیلرسینیز.</string>
-  <!-- Long text for a detail explanation indicating what will happen if cookie banner handling is off for a site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_description_off_for_site_1">باغلاییْن و %1$s کوُکی‌لری سیله‌جک و بو سایتیْ یئنی‌دن دوْلدوُراجاق. بوُ ، سیزی حسابدان چیخارا ویا آلیْش-وئریْش سبدلرینی بوْشالتا بیلر.</string>
-  <!-- Long text for a detail explanation indicating what will happen if cookie banner handling is on for a site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_description_on_for_site_3">آچیْن و %1$s بو سایتداکیْ بوتون کوُکی بنرلرینی اوْتوماتیک رد ائتمه‌گه چالیْشاجاق.</string>
-  <!-- Title for the cookie banner re-engagement CFR, the placeholder is replaced with app name. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="cookie_banner_cfr_title">%1$s سیزین اوچون کوُکی‌لری رد ائتدی.</string>
-  <!-- Message for the cookie banner re-engagement CFR -->
-  <string name="cookie_banner_cfr_message">داها آز حواس داغیلماسیْ، بوُ سایتدا سیزی تعقیب ائدن کوُکی‌لر آز.</string>
   <!-- Description of the preference to enable "HTTPS-Only" mode. -->
   <string name="preferences_https_only_summary">داها چوْخ گوونلیک اوچون HTTPS رمزله‌مه پروْتوکولوُندان ایستیفاده ائده‌رک سایتلارا اوْتوماتیک قوْشوُلماغا چالیْشیر.</string>
   <!-- Summary of https only preference if https only is set to off -->
@@ -880,8 +848,6 @@
   <string name="history_search_1">آختاریش شرطلرینی گیر</string>
   <!-- Text for the button to clear all history -->
   <string name="history_delete_all">گئچمیشی سیل</string>
-  <!-- Text for the snackbar to confirm that multiple browsing history items has been deleted -->
-  <string name="history_delete_multiple_items_snackbar">گئچمیش سیلیندی</string>
   <!-- Text for the snackbar to confirm that a single browsing history item has been deleted. %1$s is the shortened URL of the deleted history item. -->
   <string name="history_delete_single_item_snackbar">%1$s سیلیندی</string>
   <!-- Context description text for the button to delete a single history item -->
@@ -978,12 +944,6 @@
     Button label that take the user to the Android App setting
   -->
   <string name="phone_feature_go_to_settings">تنظیم‌لره گئدین</string>
-  <!--
-    Content description (not visible, for screen readers etc.): Quick settings sheet
-    to give users access to site specific information / settings. For example:
-    Secure settings status and a button to modify site permissions
-  -->
-  <string name="quick_settings_sheet">یئیین تنظیم‌لر صفحه‌سی</string>
   <!-- Label that indicates that this option it the recommended one -->
   <string name="phone_feature_recommended">توصیه اولموش</string>
   <!-- Button label for clearing all the information of site permissions -->
@@ -1324,12 +1284,6 @@
   <!--
     Enhanced Tracking Protection
 
-    Link displayed in enhanced tracking protection panel to access tracking protection settings
-  -->
-  <string name="etp_settings">قوْروما تنظیم‌لری</string>
-  <!--
-    Enhanced Tracking Protection
-
     Preference title for enhanced tracking protection settings
   -->
   <string name="preference_enhanced_tracking_protection">گلیشمیش ایزله‌مه قوْرماسیْ</string>
@@ -1385,12 +1339,8 @@
   <string name="preference_enhanced_tracking_protection_custom_cryptominers">کریپتو معدنچی</string>
   <!-- Preference for enhanced tracking protection for the custom protection settings -->
   <string name="preference_enhanced_tracking_protection_custom_known_fingerprinters">تانینمیش بارماق ایزلری</string>
-  <!-- Button label for navigating to the Enhanced Tracking Protection details -->
-  <string name="enhanced_tracking_protection_details">آیرینتی‌لار</string>
   <!-- Header for categories that are being being blocked by current Enhanced Tracking Protection settings -->
   <string name="enhanced_tracking_protection_blocked">مسدود اوْلان</string>
-  <!-- Header for categories that are being not being blocked by current Enhanced Tracking Protection settings -->
-  <string name="enhanced_tracking_protection_allowed">ایجازه وئریلن‌لر</string>
   <!-- Category of trackers (social media trackers) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_social_media_trackers_title">اجتماعی شبکه ایزله‌ییجی‌لری</string>
   <!-- Description of social media trackers that can be blocked by Enhanced Tracking Protection -->
@@ -1413,10 +1363,6 @@
   <string name="etp_tracking_content_title">ایزله‌مه محتواسی</string>
   <!-- Description of tracking content that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_tracking_content_description">ایزله‌مه کوْدو اوْلان خارجی تبلیغاتلارین، ویدئولارین و باشقا محتوالارین دوْلماسینیْ دایاندیریر. بعضی سایت عملکردلرینه تاثیر ائده بیلر.</string>
-  <!-- Enhanced Tracking Protection message that protection is currently on for this site -->
-  <string name="etp_panel_on">بو سایت اوچون قوْرومالار آچیقدیر</string>
-  <!-- Enhanced Tracking Protection message that protection is currently off for this site -->
-  <string name="etp_panel_off">بو سایت اوچون قوْرومالار باغلیدیر</string>
   <!-- Header for exceptions list for which sites enhanced tracking protection is always off -->
   <string name="enhanced_tracking_protection_exceptions">بو سایتلار اوچون گلیشمیش ایزله‌مه قورماسی باغلیدیر</string>
   <!--
@@ -1441,13 +1387,6 @@
   <string name="etp_suspected_fingerprinters_description">مشکوک بارماق ایزلرینی دایاندیرماق اوچون بارماق ایزی قوْرونماسینیْ گوجلندیریر.</string>
   <!-- Category of trackers (fingerprinters) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_known_fingerprinters_title">تانینمیش بارماق ایزلری</string>
-  <!--
-    Description of the SmartBlock Enhanced Tracking Protection feature. The * symbol is intentionally hardcoded here,
-    as we use it on the UI to indicate which trackers have been partially unblocked.
-  -->
-  <string name="preference_etp_smartblock_description">آشاغیدا اشاره اوْلونان بعضی ایزله‌ییجی‌لر، اوْنلارلا تعامل ساخلاماغیز اوچون بو صفحه‌ده مسدودیت‌لری رفع اوْلموش.</string>
-  <!-- Text displayed that links to website about enhanced tracking protection SmartBlock -->
-  <string name="preference_etp_smartblock_learn_more">آرتیق بیلین</string>
   <!--
     Content description (not visible, for screen readers etc.):
     Enhanced tracking protection exception preference icon for ETP settings.
@@ -1739,14 +1678,8 @@
   <string name="phone_feature_blocked_step_permissions"><![CDATA[2. <b>اجازه‌لری</b> ویرین]]></string>
   <!-- Third step for the allowing a permission (%1$s is the permission name, for example "Camera"). -->
   <string name="phone_feature_blocked_step_feature"><![CDATA[3. <b>%1$s</b> تغییرینی آچ]]></string>
-  <!-- Label that indicates a site is using a secure connection -->
-  <string name="quick_settings_sheet_secure_connection_2">باغلانتیْ گوونلی</string>
-  <!-- Label that indicates a site is using a insecure connection -->
-  <string name="quick_settings_sheet_insecure_connection_2">باغلانتیْ گوونلی دئییل</string>
   <!-- Label to clear site data -->
   <string name="clear_site_data">کوکی‌لر و سایت دیتالاریْ سیلین</string>
-  <!-- Confirmation message for a dialog confirming if the user wants to delete all data for current site. %s is the domain of the site. -->
-  <string name="confirm_clear_site_data"><![CDATA[<b>%s</b> سایتین بوتون کوکی‌لر و سایت دیتالارینیْ سیلمه‌گه آرخایینسیز؟]]></string>
   <!-- Confirmation message for a dialog confirming if the user wants to delete all the permissions for all sites -->
   <string name="confirm_clear_permissions_on_all_sites">بوتون سایتلارداکی بوتون اجازه‌لری سیلمک ایسته‌دیگیزه آرخایینسیز؟</string>
   <!-- Confirmation message for a dialog confirming if the user wants to delete all the permissions for a site -->
@@ -1759,11 +1692,6 @@
   <string name="browser_menu_add_to_shortcuts">شورتکات‌لارا آرتیر</string>
   <!-- Browser menu button that removes a shortcut from the home fragment -->
   <string name="browser_menu_remove_from_shortcuts">شورتکات‌لاردان قالدیر</string>
-  <!--
-    text shown before the issuer name to indicate who its verified by, %1$s is the name of
-    the certificate authority that verified the ticket
-  -->
-  <string name="certificate_info_verified_by">دوغرولایان: %1$s</string>
   <!-- Message in delete confirmation dialog for password -->
   <string name="login_deletion_confirmation_2">بو رمزی سیلمه‌گه آرخایینسیز؟</string>
   <!-- Positive action of a dialog asking to delete -->
