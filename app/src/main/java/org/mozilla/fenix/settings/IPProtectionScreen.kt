@@ -21,7 +21,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -74,6 +73,7 @@ import mozilla.components.feature.ipprotection.store.state.usedDataGb
 import org.mozilla.fenix.R
 import org.mozilla.fenix.compose.list.TextListItem
 import org.mozilla.fenix.compose.settings.SettingsSectionHeader
+import org.mozilla.fenix.ipprotection.ui.debouncedToggleable
 import org.mozilla.fenix.theme.FirefoxTheme
 import org.mozilla.fenix.theme.PreviewThemeProvider
 import org.mozilla.fenix.theme.Theme
@@ -155,7 +155,9 @@ fun IPProtectionScreen(
 
                 VpnToggleRow(
                     checked = state.proxyStatus is Authorized.Active,
-                    enabled = state.proxyStatus is Authorized && state.proxyStatus !is Authorized.DataLimitReached,
+                    enabled = state.proxyStatus is Authorized &&
+                        state.proxyStatus !is Authorized.DataLimitReached &&
+                        state.proxyStatus !is Authorized.Activating,
                     onToggle = onVpnToggle,
                 )
 
@@ -373,7 +375,7 @@ private fun VpnToggleRow(
         modifier = Modifier
             .fillMaxWidth()
             .defaultMinSize(minHeight = 56.dp)
-            .toggleable(
+            .debouncedToggleable(
                 value = checked,
                 enabled = enabled,
                 role = Role.Switch,

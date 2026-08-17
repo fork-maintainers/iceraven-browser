@@ -41,6 +41,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import mozilla.components.compose.base.annotation.FlexibleWindowLightDarkPreview
+import mozilla.components.compose.base.modifier.debouncedClickable
 import org.mozilla.fenix.R
 import org.mozilla.fenix.components.menu.store.IPProtectionMenuState
 import org.mozilla.fenix.components.menu.store.IPProtectionMenuStatus
@@ -119,7 +120,7 @@ private fun IPProtectionToggle(
     Row(
         modifier = modifier
             .fillMaxHeight()
-            .clickable(role = Role.Button) { onToggle() }
+            .debouncedClickable { onToggle() }
             .semantics {
                 stateDescription = statusDescription
                 liveRegion = LiveRegionMode.Polite
