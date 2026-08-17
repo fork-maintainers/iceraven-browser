@@ -825,6 +825,8 @@
   <string name="preferences_toolbar_shortcut">ᱴᱩᱞᱵᱟᱨ ᱠᱷᱟᱴᱚᱢᱟᱪᱷᱟ</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_toolbar_select_shortcut">ᱢᱤᱫ ᱠᱷᱟᱴᱚᱢᱟᱪᱷᱟ ᱵᱟᱪᱷᱟᱣ ᱢᱮ</string>
+  <!-- Title of a menu option allowing to change the shortcut button shown in the toolbar -->
+  <string name="toolbar_shortcut_menu_edit_option">ᱠᱷᱟᱴᱚᱢᱟᱪᱷᱟ ᱥᱟᱯᱲᱟᱣ ᱢᱮ</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_gestures">ᱪᱤᱱᱦᱟᱹ ᱠᱚ</string>
   <!-- Preference for settings related to visual options -->
@@ -1450,6 +1452,14 @@
   <!-- Title of inactive tabs preference -->
   <string name="preferences_inactive_tabs_title">ᱟᱢᱟᱜ ᱴᱮᱵᱽ ᱚᱠᱟ ᱫᱚ ᱵᱟᱨ ᱦᱟᱴ ᱫᱷᱟᱹᱵᱤᱡ ᱵᱟᱝ ᱧᱮᱞ ᱠᱟᱱᱟ ᱚᱱᱟ ᱫᱚ ᱵᱟᱝ ᱪᱟᱹᱞᱩᱜ ᱛᱷᱟᱨ ᱨᱮ ᱩᱪᱟᱹᱲᱚᱜᱼᱟ ᱾</string>
   <!--
+    Privacy report
+
+    Category header of a preference that allows a user to enable or disable the privacy report feature
+  -->
+  <string name="preferences_privacy_report">ᱱᱤᱥᱚᱱ ᱠᱷᱚᱵᱚᱨ</string>
+  <!-- Title of the privacy report preference that allows a user to enable or disable the feature -->
+  <string name="preferences_privacy_report_title">ᱯᱨᱟᱭᱣᱮᱥᱤ ᱨᱤᱯᱚᱨᱴ ᱪᱟᱹᱞᱩᱭ ᱢᱮ</string>
+  <!--
     Studies
 
     Title of the remove studies button
@@ -1676,6 +1686,8 @@
   <string name="tab_group_three_dot_menu_ungroup">ᱪᱷᱟᱰᱟ</string>
   <!-- Text shown on the delete button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_delete">ᱢᱮᱴᱟᱣ ᱢᱮ</string>
+  <!-- Text shown on the share button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_share">ᱦᱟᱹᱴᱤᱧ ᱢᱮ</string>
   <!-- Text shown on the close button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_close">ᱵᱚᱸᱫᱚᱭ ᱢᱮ</string>
   <!-- Title for the Ungroup tab group confirmation dialog. -->
@@ -3396,6 +3408,16 @@
     which navigates the user to a screen displaying all the shortcuts.
   -->
   <string name="homepage_shortcuts_show_all_content_description">ᱡᱷᱚᱛᱚ ᱠᱷᱟᱴᱚᱢᱟᱪᱷᱟ ᱫᱮᱠᱷᱟᱣᱢᱮ</string>
+  <!--
+    Label for the button in the shortcuts home screen section that expands the section to show
+    every shortcut.
+  -->
+  <string name="homepage_shortcuts_show_all">ᱡᱷᱚᱛᱚ ᱫᱮᱠᱷᱟᱣ ᱢᱮ</string>
+  <!--
+    Label for the button in the shortcuts home screen section that collapses the section back
+    to showing only the first shortcuts.
+  -->
+  <string name="homepage_shortcuts_show_less">ᱠᱚᱢ ᱫᱮᱠᱷᱟᱣ ᱢᱮ</string>
   <!-- Label for the "Add shortcut" button displayed as a tile. -->
   <string name="homepage_shortcuts_add_shortcut">ᱠᱷᱟᱴᱚᱢᱟᱪᱷᱟ ᱥᱮᱞᱮᱫᱽ ᱢᱮ</string>
   <!-- Title for the "Add to homepage" bottom sheet. -->
@@ -4635,6 +4657,16 @@
   <string name="privacy_notice_updated_homepage_message_privacy_notice" tools:ignore="UnusedResources">ᱫᱟᱱᱟᱝ ᱧᱮᱛᱮᱞ</string>
   <!-- The second active link used in privacy_notice_updated_homepage_message -->
   <string name="privacy_notice_updated_homepage_message_learn_more" tools:ignore="UnusedResources">ᱵᱟᱹᱲᱛᱤ ᱵᱟᱰᱟᱭ ᱢᱮ</string>
+  <!--
+    Collections migration homepage card
+
+    Title shown on the collections to tab groups migration card on the homepage.
+  -->
+  <string name="collections_migration_homepage_banner_title">ᱡᱟᱣᱨᱟᱜ ᱠᱚ ᱫᱚ ᱱᱤᱛᱚᱜ ᱫᱳᱞ ᱠᱟᱱᱟ</string>
+  <!-- Message shown on the collections to tab groups migration card on the homepage. -->
+  <string name="collections_migration_homepage_card_message">ᱟᱢᱟᱜ ᱴᱮᱵᱽ ᱥᱟᱯᱲᱟᱣ ᱫᱚᱦᱚ ᱞᱟᱹᱜᱤᱫ ᱟᱞᱜᱟ ᱰᱟᱦᱟᱨ ᱢᱮᱱᱟᱜᱼᱟ</string>
+  <!-- Link text shown on the collections to tab groups migration card that opens the tab groups page in the tab manager. -->
+  <string name="collections_migration_homepage_card_link">ᱤᱧᱟᱜ ᱴᱮᱵᱽ ᱜᱟᱫᱮᱞ ᱠᱚ ᱧᱮᱞ ᱢᱮ</string>
   <!-- Google Lens prototype related strings -->
   <string name="preferences_debug_settings_google_lens_integration">Google Lens ᱠᱷᱚᱧᱡᱟ ᱮᱢᱪᱷᱚᱭ ᱢᱮ</string>
   <!-- Lens image search button content description -->
@@ -4719,4 +4751,8 @@
   <string name="firefox_labs_feature_conflict">ᱯᱷᱤᱪᱟᱨ ᱫᱚ ᱪᱮᱥᱴᱟ ᱞᱟᱹᱜᱤᱫ ᱵᱟᱝ ᱧᱟᱢᱚᱜ ᱠᱟᱱᱟ ᱾</string>
   <!-- Text displayed on the Firefox Labs screen when there are no Labs experimental features present. -->
   <string name="firefox_labs_no_labs_available_description">ᱱᱤᱛᱚᱜ ᱫᱚ ᱪᱮᱥᱴᱟ ᱞᱟᱹᱜᱤᱫ ᱪᱮᱫ ᱮᱠᱥᱯᱮᱨᱤᱢᱮᱱᱴᱟᱞ ᱯᱷᱤᱪᱟᱨ ᱵᱟᱹᱱᱩᱜᱼᱟ</string>
+  <!-- Title of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">ᱣᱮᱵᱽᱥᱟᱭᱤᱴ ᱟᱭᱥᱚᱞᱮᱥᱚᱱ</string>
+  <!-- Description of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">ᱣᱮᱵᱽᱥᱟᱭᱤᱴ ᱠᱚ ᱛᱟᱞᱟ ᱨᱮ ᱢᱤᱫ ᱵᱟᱹᱲᱛᱤ ᱛᱟᱲᱟᱢ ᱡᱟᱦᱟᱸ ᱫᱚ ᱴᱮᱵᱽ ᱠᱚ ᱨᱮ ᱟᱢᱟᱜ ᱰᱟᱴᱟ ᱨᱩᱠᱷᱤᱭᱟᱹ ᱨᱮ ᱜᱚᱲᱚ ᱮᱢᱟᱭᱟ ᱾ ᱠᱟᱹᱢᱤᱦᱚᱨᱟ, ᱥᱛᱷᱤᱨ, ᱣᱮᱵᱽᱥᱟᱭᱤᱴ ᱵᱮᱥ ᱠᱟᱹᱢᱤᱦᱚᱪᱚ ᱟᱨ ᱵᱽᱨᱟᱣᱩᱡᱤᱝ ᱱᱟᱜᱟᱢ ᱪᱮᱫ ᱞᱮᱠᱟ ᱨᱩᱟᱠᱷᱤᱭᱟᱹᱟᱜ-ᱟ ᱚᱱᱟ ᱨᱮ ᱯᱨᱚᱵᱷᱟᱣ ᱮᱢ ᱫᱟᱲᱮᱭᱟᱜ-ᱟᱭ ᱾</string>
 </resources>

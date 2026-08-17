@@ -824,6 +824,8 @@
   <string name="preferences_toolbar_shortcut">Eike pya’eha temboporu rupápe</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_toolbar_select_shortcut">Eiporavo mbopya’eha</string>
+  <!-- Title of a menu option allowing to change the shortcut button shown in the toolbar -->
+  <string name="toolbar_shortcut_menu_edit_option">Embosako’i jeike pya’eha</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_gestures">Ñeha’ãnga</string>
   <!-- Preference for settings related to visual options -->
@@ -1448,6 +1450,14 @@
   <string name="preferences_inactive_tabs">Eguerova tendayke ituja ha ojeporu’ỹva</string>
   <!-- Title of inactive tabs preference -->
   <string name="preferences_inactive_tabs_title">Umi tendayke ehecha’ỹa mokõi arapokõindýpe ohóma tenda ojeporu’ỹvape.</string>
+  <!--
+    Privacy report
+
+    Category header of a preference that allows a user to enable or disable the privacy report feature
+  -->
+  <string name="preferences_privacy_report">Marandu ñemiguáva</string>
+  <!-- Title of the privacy report preference that allows a user to enable or disable the feature -->
+  <string name="preferences_privacy_report_title">Embojuruja marandu’i ñemigua</string>
   <!--
     Studies
 
@@ -3390,6 +3400,16 @@
     which navigates the user to a screen displaying all the shortcuts.
   -->
   <string name="homepage_shortcuts_show_all_content_description">Ehechaukapa tairenda mbopya’eha</string>
+  <!--
+    Label for the button in the shortcuts home screen section that expands the section to show
+    every shortcut.
+  -->
+  <string name="homepage_shortcuts_show_all">Techaukapa</string>
+  <!--
+    Label for the button in the shortcuts home screen section that collapses the section back
+    to showing only the first shortcuts.
+  -->
+  <string name="homepage_shortcuts_show_less">Techauka’ive</string>
   <!-- Label for the "Add shortcut" button displayed as a tile. -->
   <string name="homepage_shortcuts_add_shortcut">Embojuaju jeike pya’eha</string>
   <!-- Title for the "Add to homepage" bottom sheet. -->
@@ -4621,6 +4641,16 @@
   <string name="privacy_notice_updated_homepage_message_privacy_notice" tools:ignore="UnusedResources">Marandu’i ñemiguáva</string>
   <!-- The second active link used in privacy_notice_updated_homepage_message -->
   <string name="privacy_notice_updated_homepage_message_learn_more" tools:ignore="UnusedResources">Eikuaave</string>
+  <!--
+    Collections migration homepage card
+
+    Title shown on the collections to tab groups migration card on the homepage.
+  -->
+  <string name="collections_migration_homepage_banner_title">Ñembyatyeta ko’ág̃a atykuéra</string>
+  <!-- Message shown on the collections to tab groups migration card on the homepage. -->
+  <string name="collections_migration_homepage_card_message">Ko’ág̃a ikatu eguereko ne rendaykekuéra hendaitépe</string>
+  <!-- Link text shown on the collections to tab groups migration card that opens the tab groups page in the tab manager. -->
+  <string name="collections_migration_homepage_card_link">Ahecha tendayke aty</string>
   <!-- Google Lens prototype related strings -->
   <string name="preferences_debug_settings_google_lens_integration">Embojuruja juaju Google Lens ndive</string>
   <!-- Lens image search button content description -->
@@ -4705,4 +4735,8 @@
   <string name="firefox_labs_feature_conflict">Tembiapoite ndoikói eiporu hag̃ua.</string>
   <!-- Text displayed on the Firefox Labs screen when there are no Labs experimental features present. -->
   <string name="firefox_labs_no_labs_available_description">Ndaipóri tembiapoite ikatúva eiporu ko’aĝa</string>
+  <!-- Title of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">Ñanduti rogue momombyry</string>
+  <!-- Description of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">Peteĩ jokohave ñanduti rogue pa’ũme oipytyvõva omo’ã hag̃ua ne mba’ekuaarãita tendayke apytépe. Omombegue ne rembiapo, tekopyta, tendaita jokupyty ha mba’éicha oñeñongatu ñeikundaha rembiasakue.</string>
 </resources>

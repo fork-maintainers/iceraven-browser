@@ -825,6 +825,8 @@
   <string name="preferences_toolbar_shortcut">קיצור דרך בסרגל הכלים</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_toolbar_select_shortcut">בחירת קיצור דרך</string>
+  <!-- Title of a menu option allowing to change the shortcut button shown in the toolbar -->
+  <string name="toolbar_shortcut_menu_edit_option">עריכת קיצור דרך</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_gestures">מחוות</string>
   <!-- Preference for settings related to visual options -->
@@ -1449,6 +1451,14 @@
   <string name="preferences_inactive_tabs">העברת לשוניות ישנות ללא פעילות</string>
   <!-- Title of inactive tabs preference -->
   <string name="preferences_inactive_tabs_title">לשוניות בהן לא צפית במשך שבועיים מועברות לאגף הלא פעילים.</string>
+  <!--
+    Privacy report
+
+    Category header of a preference that allows a user to enable or disable the privacy report feature
+  -->
+  <string name="preferences_privacy_report">דוח פרטיות</string>
+  <!-- Title of the privacy report preference that allows a user to enable or disable the feature -->
+  <string name="preferences_privacy_report_title">הפעלת דוח פרטיות</string>
   <!--
     Studies
 
@@ -3396,6 +3406,16 @@
     which navigates the user to a screen displaying all the shortcuts.
   -->
   <string name="homepage_shortcuts_show_all_content_description">הצגת כל קיצורי הדרך</string>
+  <!--
+    Label for the button in the shortcuts home screen section that expands the section to show
+    every shortcut.
+  -->
+  <string name="homepage_shortcuts_show_all">להציג הכול</string>
+  <!--
+    Label for the button in the shortcuts home screen section that collapses the section back
+    to showing only the first shortcuts.
+  -->
+  <string name="homepage_shortcuts_show_less">להציג פחות</string>
   <!-- Label for the "Add shortcut" button displayed as a tile. -->
   <string name="homepage_shortcuts_add_shortcut">הוספת קיצור דרך</string>
   <!-- Title for the "Add to homepage" bottom sheet. -->
@@ -4633,6 +4653,16 @@
   <string name="privacy_notice_updated_homepage_message_privacy_notice" tools:ignore="UnusedResources">הצהרת הפרטיות</string>
   <!-- The second active link used in privacy_notice_updated_homepage_message -->
   <string name="privacy_notice_updated_homepage_message_learn_more" tools:ignore="UnusedResources">מידע נוסף</string>
+  <!--
+    Collections migration homepage card
+
+    Title shown on the collections to tab groups migration card on the homepage.
+  -->
+  <string name="collections_migration_homepage_banner_title">אוספים הם כעת קבוצות</string>
+  <!-- Message shown on the collections to tab groups migration card on the homepage. -->
+  <string name="collections_migration_homepage_card_message">יש דרך פשוטה יותר לשמור על הלשוניות שלך מאורגנות</string>
+  <!-- Link text shown on the collections to tab groups migration card that opens the tab groups page in the tab manager. -->
+  <string name="collections_migration_homepage_card_link">הצגת קבוצות הלשוניות שלי</string>
   <!-- Google Lens prototype related strings -->
   <string name="preferences_debug_settings_google_lens_integration">הפעלת שילוב של Google Lens</string>
   <!-- Lens image search button content description -->
@@ -4717,4 +4747,8 @@
   <string name="firefox_labs_feature_conflict">התכונה אינה זמינה לניסיון.</string>
   <!-- Text displayed on the Firefox Labs screen when there are no Labs experimental features present. -->
   <string name="firefox_labs_no_labs_available_description">אין תכונות ניסיוניות לנסות כרגע</string>
+  <!-- Title of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">בידוד אתרים</string>
+  <!-- Description of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">מחסום נוסף בין אתרים המסייע בהגנה על הנתונים שלך בין לשוניות. עלול להשפיע על הביצועים, היציבות, תאימות האתרים וכיצד היסטוריית הגלישה נשמרת.</string>
 </resources>
