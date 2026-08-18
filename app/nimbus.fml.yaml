@@ -1009,6 +1009,14 @@ features:
           Whether or not to turn on local network / device access blocking
         type: Boolean
         default: false
+      block-insecure-contexts:
+        description: >
+          Whether or not LNA requests coming from insecure contexts should be
+          blocked outright, without prompting the user for permission
+        type: Option<Boolean>
+        gecko-pref:
+          pref: "network.lna.block_insecure_contexts"
+          branch: "default"
 
   isolated-content-processes:
     description: Feature that controls content process isolation.
