@@ -1455,9 +1455,9 @@
 
     Category header of a preference that allows a user to enable or disable the privacy report feature
   -->
-  <string name="preferences_privacy_report">Sekretessrapport</string>
+  <string name="preferences_privacy_report">Integritetsrapport</string>
   <!-- Title of the privacy report preference that allows a user to enable or disable the feature -->
-  <string name="preferences_privacy_report_title">Aktivera sekretessrapport</string>
+  <string name="preferences_privacy_report_title">Aktivera integritetsrapport</string>
   <!--
     Studies
 
@@ -3409,7 +3409,7 @@
     Label for the button in the shortcuts home screen section that collapses the section back
     to showing only the first shortcuts.
   -->
-  <string name="homepage_shortcuts_show_less">Visa mindre</string>
+  <string name="homepage_shortcuts_show_less">Visa färre</string>
   <!-- Label for the "Add shortcut" button displayed as a tile. -->
   <string name="homepage_shortcuts_add_shortcut">Lägg till genväg</string>
   <!-- Title for the "Add to homepage" bottom sheet. -->

@@ -824,6 +824,8 @@
   <string name="preferences_toolbar_shortcut">Araç çubuğu kısayolu</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_toolbar_select_shortcut">Bir kısayol seçin</string>
+  <!-- Title of a menu option allowing to change the shortcut button shown in the toolbar -->
+  <string name="toolbar_shortcut_menu_edit_option">Kısayolu düzenle</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_gestures">Parmak hareketleri</string>
   <!-- Preference for settings related to visual options -->
@@ -1448,6 +1450,14 @@
   <string name="preferences_inactive_tabs">Eski sekmeleri pasife taşı</string>
   <!-- Title of inactive tabs preference -->
   <string name="preferences_inactive_tabs_title">İki haftadır bakmadığınız sekmeler pasif bölümüne taşınır.</string>
+  <!--
+    Privacy report
+
+    Category header of a preference that allows a user to enable or disable the privacy report feature
+  -->
+  <string name="preferences_privacy_report">Gizlilik raporu</string>
+  <!-- Title of the privacy report preference that allows a user to enable or disable the feature -->
+  <string name="preferences_privacy_report_title">Gizlilik raporunu etkinleştir</string>
   <!--
     Studies
 
@@ -3390,6 +3400,16 @@
     which navigates the user to a screen displaying all the shortcuts.
   -->
   <string name="homepage_shortcuts_show_all_content_description">Tüm kısayolları göster</string>
+  <!--
+    Label for the button in the shortcuts home screen section that expands the section to show
+    every shortcut.
+  -->
+  <string name="homepage_shortcuts_show_all">Tümünü göster</string>
+  <!--
+    Label for the button in the shortcuts home screen section that collapses the section back
+    to showing only the first shortcuts.
+  -->
+  <string name="homepage_shortcuts_show_less">Daha az göster</string>
   <!-- Label for the "Add shortcut" button displayed as a tile. -->
   <string name="homepage_shortcuts_add_shortcut">Kısayol ekle</string>
   <!-- Title for the "Add to homepage" bottom sheet. -->

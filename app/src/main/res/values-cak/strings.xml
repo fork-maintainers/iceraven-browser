@@ -2795,12 +2795,16 @@
   <string name="preference_doh_provider_custom_dialog_add">Titz\'aqatisäx</string>
   <!-- Preference to access list of login exceptions that we don't use DNS over HTTPS -->
   <string name="preference_doh_exceptions">Taq man relik ta</string>
+  <!-- Description of "exceptions" for "DNS over HTTPS". %1$s is the name of the app (for example "Firefox"). -->
+  <string name="preference_doh_exceptions_summary">%1$s man xtrokisaj ta jikïl DNS pa re taq ruxaq re chuqa\' ri taq rusubdominio.</string>
   <!-- Text displayed that links to adding website domain for "DNS over HTTPS" exceptions. -->
   <string name="preference_doh_exceptions_add">Titz\'aqatisäx ruwi\'</string>
   <!-- Text displayed above the input field when adding exceptions for "DNS over HTTPS". -->
   <string name="preference_doh_exceptions_add_site">Ruxaq k\'amaya\'l</string>
   <!-- Placeholder URL displayed in the input field when adding exceptions for "DNS over HTTPS". -->
   <string name="preference_doh_exceptions_add_placeholder">example.com</string>
+  <!-- Error displayed in the input field when adding invalid URLs for "DNS over HTTPS". -->
+  <string name="preference_doh_exceptions_add_error">K\'o chi jun okel dominio</string>
   <!-- Text displayed on the button within the input field for adding exceptions to "DNS over HTTPS" -->
   <string name="preference_doh_exceptions_add_save">Tiyak</string>
   <!-- Text displayed for removing all exceptions in "DNS over HTTPS" -->
@@ -2813,6 +2817,8 @@
   <string name="about_privacy_notice">Ichinan na\'oj</string>
   <!-- About page link text to open know your rights link -->
   <string name="about_know_your_rights">Tawetamaj ach\'ojib\'al</string>
+  <!-- About page link text to open terms of use link -->
+  <string name="about_terms_of_use" tools:ignore="UnusedResources">Rojqanem Rokisaxik</string>
   <!-- About page link text to open licensing information link -->
   <string name="about_licensing_information">Na\'oj chi rij ya\'öl q\'ij</string>
   <!-- About page link text to open a screen with libraries that are used -->
@@ -2857,22 +2863,36 @@
   <string name="preferences_passwords_save_logins_never_save">Majub\'ey tiyak</string>
   <!-- Preference for autofilling saved logins in Firefox (in web content), %1$s will be replaced with the app name -->
   <string name="preferences_passwords_autofill2">Tinojisäx ruyonil pa %1$s</string>
+  <!-- Description for the preference for autofilling saved logins in Firefox (in web content), %1$s will be replaced with the app name -->
+  <string name="preferences_passwords_autofill_description">Ketz\'aqatisäx chuqa\' keyak ri kib\'i\' okisanela\' chuqa\' ewan taq tzij pa ri taq ajk\'am ruxaq toq nokisäx %1$s.</string>
   <!-- Preference for autofilling logins from Fenix in other apps (e.g. autofilling the Twitter app) -->
   <string name="preferences_android_autofill">Titz\'aqatisäx ruyon pa ch\'aqa\' chik taq okisab\'äl.</string>
+  <!-- Description for the preference for autofilling logins from Fenix in other apps (e.g. autofilling the Twitter app) -->
+  <string name="preferences_android_autofill_description">Ketz\'aqatisäx kib\'i\' okisanela\' chuqa\' ewan taq tzij pa ch\'aqa\' chik taq chokoy e k\'o pan awokisaxel.</string>
   <!-- Preference option for adding a password -->
   <string name="preferences_logins_add_login_2">Titz\'aqatisäx ewan tzij</string>
   <!-- Preference for syncing saved passwords in Fenix -->
   <string name="preferences_passwords_sync_logins_2">Kexim ewan taq tzij</string>
+  <!-- Preference for syncing saved passwords in Fenix, when not signed in -->
+  <string name="preferences_passwords_sync_logins_across_devices_2">Sync ewan taq tzij chi kikojol okisab\'äl</string>
   <!-- Preference to access list of saved passwords -->
   <string name="preferences_passwords_saved_logins_2">Xeyak ewan taq tzij</string>
+  <!-- Description of empty list of saved passwords. %s is the name of the app (for example "Firefox"). -->
+  <string name="preferences_passwords_saved_logins_description_empty_text_2">Ri ewan taq tzij xke\'ayäk o xke\'axïm rik\'in %s xtiq\'alajin wawe\'. Ronojel ri ewan taq tzij xke\'ayäk ewan kisik\'ixik.</string>
   <!-- Clickable text for opening an external link for more information about Sync. -->
   <string name="preferences_passwords_saved_logins_description_empty_learn_more_link_2">Tawetamaj ch\'aqa\' chik chi rij ri sync</string>
   <!-- Preference to access list of login exceptions that we never save logins for -->
   <string name="preferences_passwords_exceptions">Taq man relik ta</string>
+  <!-- Empty description of list of login exceptions that we never save passwords for. %s is the name of the app (for example "Firefox"). -->
+  <string name="preferences_passwords_exceptions_description_empty_2">%s man xkeruyäk ta ri ewan taq kitzij ri taq ruxaq echolajin wawe\'.</string>
+  <!-- Description of list of login exceptions that we never save passwords for. %s is the name of the app (for example "Firefox"). -->
+  <string name="preferences_passwords_exceptions_description_2">%s man xkeruyäk ta ri ewan taq kitzij re taq ruxaq re\'.</string>
   <!-- Text on button to remove all saved login exceptions -->
   <string name="preferences_passwords_exceptions_remove_all">Tiyuj ronojel man relik ta</string>
   <!-- Hint for search box in passwords list -->
   <string name="preferences_passwords_saved_logins_search_2">Kekanöx ewan taq tzij</string>
+  <!-- Content description for the logins navigation bar back button -->
+  <string name="logins_navigate_back_button_content_description">Chi rij</string>
   <!-- The header for the site that a login is for -->
   <string name="preferences_passwords_saved_logins_site">Ruxaq k\'amaya\'l</string>
   <!-- The header for the username for a login -->
@@ -2893,6 +2913,14 @@
   <string name="saved_login_clear_username">Tijosq\'ïx rub\'i\' winäq</string>
   <!-- Content Description (for screenreaders etc) read for the button to clear the hostname field while creating a login -->
   <string name="saved_login_clear_hostname">Tijosq\'ïx ruk\'u\'x samaj</string>
+  <!-- Content description, used by tools like screenreaders, for the 3 dots button that shows commands related to the currently displayed login (edit, delete). -->
+  <string name="login_detail_menu_button_content_description">Rucha\'ob\'al kib\'anikil molojri\'ïl</string>
+  <!-- Content description, used by tools like screenreaders, to go back and exit the login detail view. -->
+  <string name="login_details_navigate_back_button_content_description">Katok pa k\'amaya\'l titzolin</string>
+  <!-- Edit text for the login detail menu edit button -->
+  <string name="login_detail_menu_edit_button">Tinuk\'</string>
+  <!-- Delete text for the login detail menu delete button -->
+  <string name="login_detail_menu_delete_button">Tiyuj</string>
   <!-- Content description, used by tools like screenreaders, to go back and exit the add login view. -->
   <string name="add_login_navigate_back_button_content_description">Katok pa k\'amaya\'l titzolin</string>
   <!-- Content description, used by tools like screenreaders, to press on the save new login button. -->
@@ -2917,6 +2945,8 @@
   <string name="logins_biometric_unlock_button">Titzij chik</string>
   <!-- Button for leaving logins on the biometric lock screen -->
   <string name="logins_biometric_leave_button">Tel</string>
+  <!-- Title of warning dialog if users have no device authentication set up -->
+  <string name="logins_warning_dialog_title_2">Ke\'ajikib\'a\' ri eyakon ewan taq atzij</string>
   <!-- Message of warning dialog if users have no device authentication set up -->
   <string name="logins_warning_dialog_message_2">Tab\'ana\' runuk\'ulem jun retal ruq\'atoj okisab\'äl, jun PIN o jun ewan tzij richin nachajij ri ewan taq atzij e\'ayakon we xa ta k\'o xtichapo ri awokisab\'al.</string>
   <!-- Negative button to ignore warning dialog if users have no device authentication set up -->
@@ -2933,16 +2963,67 @@
   <string name="saved_logins_sort_strategy_alphabetically">B\'i\'aj (A-Y)</string>
   <!-- Saved logins sorting strategy menu item -by last used- (if selected, it will sort saved logins by last used) -->
   <string name="saved_logins_sort_strategy_last_used">Ruk\'isib\'äl mul xokisäx</string>
+  <!-- Content description (not visible, for screen readers etc.) -->
+  <string name="saved_logins_menu_dropdown_chevron_icon_content_description_2">Cha\'ob\'äl richin yecholajïx ewan taq tzij</string>
   <!-- Label for button to import passwords from file. -->
   <string name="passwords_import_menu_button">Tijik\' pa jun yakb\'äl</string>
+  <!--
+    Email Masks
+
+    Title for the Email Masks in the settings menu
+  -->
+  <string name="preferences_email_masks">Ruk\'oj taqoya\'l</string>
+  <!-- Title for the Suggest Email Masks toggle -->
+  <string name="preferences_email_masks_suggest_title">Tichilab\'ëx ruk\'oj rutaqoya\'l</string>
+  <!-- Summary for the Suggest Email Masks toggle. -->
+  <string name="preferences_email_masks_suggest_summary">Tawewaj ri qitzij ataqoya\'l richin nachajij ri rokem spam. Jujun taq ruxaq man nikiköch\' ta kik\'oj taqoya\'l.</string>
   <!-- Text that links to additional information about the Email Masks -->
   <string name="preferences_email_masks_suggest_learn_more">Tetamäx ch\'aqa\' chik</string>
+  <!-- Title for the Manage Email Masks links to Firefox Relay dashboard -->
+  <string name="preferences_email_masks_manage_title">Kenuk\'samajïx kik\'oj taqoya\'l</string>
+  <!-- The message displayed when a user has used all of their free-tier email masks, so now the application will choose an existing one at random. -->
+  <string name="email_masks_max_free_tier_reached">E\'awokisan ri 5 sipan taq kik\'oj taqoya\'l, ruma ri\' toq xqacha\' jun richin nawokisaj chi.</string>
+  <!-- The message displayed when there was an error with the email mask or Firefox Account services. -->
+  <string name="email_masks_error_retrieving_masks">Man e k\'o ta ri taq kik\'oj taqoya\'l wakami, tatojtob\'ej pa ka\'i\' oxi\' chik apo ch\'utiramaj.</string>
+  <!--
+    Firefox browser VPN (a browser-only proxy, distinct from the Mozilla VPN service)
+
+    Title for the browser VPN entry in the settings list
+  -->
+  <string name="preferences_ip_protection_title_2">Tz\'aqät VPN</string>
+  <!-- Label for the BETA badge for the browser VPN entry in the settings list -->
+  <string name="preferences_ip_protection_beta_badge_label">BETA</string>
+  <!-- Title for the browser VPN settings screen (displayed in the app bar) -->
+  <string name="ip_protection_title">VPN</string>
+  <!-- Label for the browser VPN toggle on the settings screen -->
+  <string name="ip_protection_toggle_label">VPN</string>
+  <!-- Content description for the browser VPN settings screen top bar back button -->
+  <string name="ip_protection_navigate_back_button_content_description">Katok pa k\'amaya\'l titzolin</string>
+  <!-- Headline for the browser VPN promo card. %s is the name of the app (for example "Firefox"). -->
+  <string name="ip_protection_promo_headline">Tz\'aqät VPN richin %s</string>
+  <!-- Body text for the browser VPN promo card . %s is a learn more link using ip_protection_learn_more as text. -->
+  <string name="ip_protection_promo_body_2">Katok rik\'in nïm chajinïk akuchi\' nawewaj ri ak\'ojlib\'al, achi\'el pa jaqäl Wi-Fi. %s</string>
   <!-- Link text that opens additional information about the browser VPN -->
   <string name="ip_protection_learn_more">Tetamäx ch\'aqa\' chik</string>
+  <!-- Label for the monthly data allowance section on the browser VPN settings screen -->
+  <string name="ip_protection_data_limit_label">Ruchi\' kitzij pa ik\'il</string>
+  <!--
+    Data usage shown on the browser VPN settings screen.
+    %1$.1f is the data remaining in GB (for example "8.3").
+    %2$.1f is the total monthly allowance in GB (for example "50.0").
+  -->
+  <string name="ip_protection_data_limit_value">%1$.1f GB de %2$.1f GB rutz\'aqat</string>
+  <!--
+    Text shown below the data usage bar describing when the monthly allowance resets.
+    %1$.0f is the total monthly data allowance in GB (for example "50").
+  -->
+  <string name="ip_protection_data_reset_info">Xtitzolïx pa %1$.0f GB pa ri nab\'ey q\'ij chi re jujun ik\'.</string>
   <!-- Header for the browser VPN `location` section -->
   <string name="ip_protection_location_section">K\'ojlib\'äl</string>
   <!-- Label for the recommended automatic location option on the browser VPN settings screen -->
   <string name="ip_protection_location_recommended_label">Chilab\'en</string>
+  <!-- Description for the recommended automatic location option on the browser VPN settings screen -->
+  <string name="ip_protection_location_recommended_description">Tacha\' pa ruyonil ri ruk\'ojlib\'al VPN aninäq.</string>
   <!-- Badge label shown in the menu item when the browser VPN is active -->
   <string name="preferences_ip_protection_on">Titzij</string>
   <!-- Badge label shown in the menu item when the browser VPN is off -->
@@ -2955,14 +3036,34 @@
   <string name="ip_protection_menu_error">Sachoj</string>
   <!-- Badge label shown in the menu item when the user is eligible to use the browser VPN but should authenticate or authorize it first. -->
   <string name="ip_protection_menu_auth_required">Tatojtob\'ej</string>
+  <!-- Content description for the chevron button that opens the browser VPN settings screen -->
+  <string name="ip_protection_navigate_settings">Tijaq runuk\'ulem VPN</string>
+  <!--
+    Subtitle shown below the VPN label in menus when the monthly data allowance is exhausted.
+    %1$d is the total monthly allowance in GB (for example "50").
+  -->
+  <string name="ip_protection_menu_limit_reached">%1$d GB ruchi\' xq\'ix</string>
+  <!--
+    Error message shown on the browser VPN settings screen when the monthly data allowance is exhausted.
+    %1$d is the total monthly allowance in GB (for example "50").
+  -->
+  <string name="ip_protection_data_limit_reached_description">Xawokisaj chijun ri %1$d GB rutzij ri VPN. Ri okem xtitzolïx ri jun chik ik\'.</string>
   <!-- Label shown next to the browser protection icon in the address bar when the browser VPN is active -->
   <string name="ip_protection_toolbar_pill_label">Tzijon VPN</string>
+  <!-- Accessibility description for the browser VPN pill in the address bar when the VPN has been activated -->
+  <string name="ip_protection_toolbar_pill_description">Ri VPN tzijon.</string>
   <!-- Label for the button that starts the browser VPN authentication or authorization flow on the settings screen -->
   <string name="ip_protection_get_started">Titikirisäx</string>
+  <!-- Label for the "connecting" state of the button that starts the browser VPN authentication or authorization flow on the settings screen -->
+  <string name="ip_protection_connecting">Nok…</string>
+  <!-- Headline for the browser VPN onboarding card. %s is the name of the app (for example "Firefox"). -->
+  <string name="ip_protection_onboarding_card_headline">Titojtob\'ëx z\'aqät VPN richin %s</string>
   <!-- Used as text for a link in ip_protection_onboarding_body. Make sure to adapt capitalization if the link is in the middle of the sentence. -->
   <string name="ip_protection_onboarding_body_link_promo">Tetamäx ch\'aqa\' chik</string>
   <!-- Label for the dismiss button on the onboarding bottom sheet. -->
   <string name="ip_protection_onboarding_not_now_button">Wakami mani</string>
+  <!-- Snackbar (in-app pop-up notification) action button text that takes the user to the VPN settings screen. -->
+  <string name="ip_protection_data_limit_reached_snackbar_action">Taq nuk\'ulem</string>
   <!-- Label for the Recommended server location option which is automatically selected by the browser. -->
   <string name="ip_protection_recommended_location" tools:ignore="UnusedResources">Chilab\'en</string>
   <!--

@@ -823,6 +823,8 @@
   <string name="preferences_toolbar_shortcut">ツールバーのショートカット</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_toolbar_select_shortcut">ショートカットを選択</string>
+  <!-- Title of a menu option allowing to change the shortcut button shown in the toolbar -->
+  <string name="toolbar_shortcut_menu_edit_option">ショートカットを編集</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_gestures">ジェスチャー</string>
   <!-- Preference for settings related to visual options -->
@@ -1448,6 +1450,14 @@
   <!-- Title of inactive tabs preference -->
   <string name="preferences_inactive_tabs_title">2 週間以上表示していないタブを休止中セクションに移動します。</string>
   <!--
+    Privacy report
+
+    Category header of a preference that allows a user to enable or disable the privacy report feature
+  -->
+  <string name="preferences_privacy_report">プライバシー報告</string>
+  <!-- Title of the privacy report preference that allows a user to enable or disable the feature -->
+  <string name="preferences_privacy_report_title">プライバシーレポートを有効にする</string>
+  <!--
     Studies
 
     Title of the remove studies button
@@ -1664,6 +1674,8 @@
   <string name="tab_group_three_dot_menu_ungroup">グループ解除</string>
   <!-- Text shown on the delete button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_delete">削除</string>
+  <!-- Text shown on the share button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_share">共有</string>
   <!-- Text shown on the close button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_close">閉じる</string>
   <!-- Title for the Ungroup tab group confirmation dialog. -->
@@ -3381,6 +3393,16 @@
     which navigates the user to a screen displaying all the shortcuts.
   -->
   <string name="homepage_shortcuts_show_all_content_description">すべてのショートカットを表示します</string>
+  <!--
+    Label for the button in the shortcuts home screen section that expands the section to show
+    every shortcut.
+  -->
+  <string name="homepage_shortcuts_show_all">すべて表示</string>
+  <!--
+    Label for the button in the shortcuts home screen section that collapses the section back
+    to showing only the first shortcuts.
+  -->
+  <string name="homepage_shortcuts_show_less">折りたたむ</string>
   <!-- Label for the "Add shortcut" button displayed as a tile. -->
   <string name="homepage_shortcuts_add_shortcut">ショートカットを追加</string>
   <!-- Title for the "Add to homepage" bottom sheet. -->

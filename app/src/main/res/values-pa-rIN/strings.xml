@@ -824,6 +824,8 @@
   <string name="preferences_toolbar_shortcut">ਟੂਲਬਾਰ ਸ਼ਾਰਟਕੱਟ</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_toolbar_select_shortcut">ਕੋਈ ਸ਼ਾਰਟਕੱਟ ਨੂੰ ਚੁਣੋ</string>
+  <!-- Title of a menu option allowing to change the shortcut button shown in the toolbar -->
+  <string name="toolbar_shortcut_menu_edit_option">ਸ਼ਾਰਟਕੱਟ ਨੂੰ ਸੋਧੋ</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_gestures">ਇਸ਼ਾਰੇ</string>
   <!-- Preference for settings related to visual options -->
@@ -1449,6 +1451,14 @@
   <!-- Title of inactive tabs preference -->
   <string name="preferences_inactive_tabs_title">ਪਿਛਲੇ ਦੋ ਹਫ਼ਤਿਆਂ ਵਿੱਚ ਤੁਹਾਡੇ ਵਲੋਂ ਨਾ ਵੇਖੀਆਂ ਟੈਬਾਂ ਨੂੰ ਨਾ-ਸਰਗਰਮ ਭਾਗ ਵਿੱਚ ਭੇਜਿਆ ਜਾਂਦਾ ਹੈ।</string>
   <!--
+    Privacy report
+
+    Category header of a preference that allows a user to enable or disable the privacy report feature
+  -->
+  <string name="preferences_privacy_report">ਪਰਦੇਦਾਰੀ ਦੀ ਰਿਪੋਰਟ</string>
+  <!-- Title of the privacy report preference that allows a user to enable or disable the feature -->
+  <string name="preferences_privacy_report_title">ਪਰਦੇਦਾਰੀ ਦੀ ਰਿਪੋਰਟ ਨੂੰ ਸਮਰੱਥ ਕਰੋ</string>
+  <!--
     Studies
 
     Title of the remove studies button
@@ -1670,6 +1680,8 @@
   <string name="tab_group_three_dot_menu_ungroup">ਅਣ-ਗਰੁੱਪ ਕਰੋ</string>
   <!-- Text shown on the delete button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_delete">ਹਟਾਓ</string>
+  <!-- Text shown on the share button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_share">ਸਾਂਝਾ ਕਰੋ</string>
   <!-- Text shown on the close button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_close">ਬੰਦ ਕਰੋ</string>
   <!-- Title for the Ungroup tab group confirmation dialog. -->
@@ -3388,6 +3400,16 @@
     which navigates the user to a screen displaying all the shortcuts.
   -->
   <string name="homepage_shortcuts_show_all_content_description">ਸਭ ਸ਼ਾਰਟਕੱਟਾਂ ਨੂੰ ਵੇਖਾਓ</string>
+  <!--
+    Label for the button in the shortcuts home screen section that expands the section to show
+    every shortcut.
+  -->
+  <string name="homepage_shortcuts_show_all">ਸਭ ਨੂੰ ਵੇਖਾਓ</string>
+  <!--
+    Label for the button in the shortcuts home screen section that collapses the section back
+    to showing only the first shortcuts.
+  -->
+  <string name="homepage_shortcuts_show_less">ਘੱਟ ਵੇਖਾਓ</string>
   <!-- Label for the "Add shortcut" button displayed as a tile. -->
   <string name="homepage_shortcuts_add_shortcut">ਸ਼ਾਰਟਕੱਟ ਨੂੰ ਜੋੜੋ</string>
   <!-- Title for the "Add to homepage" bottom sheet. -->
@@ -4619,6 +4641,16 @@
   <string name="privacy_notice_updated_homepage_message_privacy_notice" tools:ignore="UnusedResources">ਪਰਦੇਦਾਰੀ ਸੂਚਨਾ</string>
   <!-- The second active link used in privacy_notice_updated_homepage_message -->
   <string name="privacy_notice_updated_homepage_message_learn_more" tools:ignore="UnusedResources">ਹੋਰ ਜਾਣੋ</string>
+  <!--
+    Collections migration homepage card
+
+    Title shown on the collections to tab groups migration card on the homepage.
+  -->
+  <string name="collections_migration_homepage_banner_title">ਭੰਡਾਰ ਹੁਣ ਗਰੁੱਪ ਹਨ</string>
+  <!-- Message shown on the collections to tab groups migration card on the homepage. -->
+  <string name="collections_migration_homepage_card_message">ਆਪਣੀਆਂ ਟੈਬਾਂ ਦਾ ਪ੍ਰਬੰਧ ਕਰਨ ਲਈ ਇੱਕ ਸਰਲ ਢੰਗ ਹੈ</string>
+  <!-- Link text shown on the collections to tab groups migration card that opens the tab groups page in the tab manager. -->
+  <string name="collections_migration_homepage_card_link">ਮੇਰੇ ਟੈਬ ਗਰੁੱਪ ਨੂੰ ਵੇਖੋ</string>
   <!-- Google Lens prototype related strings -->
   <string name="preferences_debug_settings_google_lens_integration">Google Lens ਐਂਟੀਗਰੇਸ਼ਨ ਨੂੰ ਸਮਰੱਥ ਕਰੋ</string>
   <!-- Lens image search button content description -->
@@ -4703,4 +4735,8 @@
   <string name="firefox_labs_feature_conflict">ਫ਼ੀਚਰ ਅਜ਼ਮਾਉਣ ਲਈ ਤਿਆਰ ਨਹੀਂ ਹੈ।</string>
   <!-- Text displayed on the Firefox Labs screen when there are no Labs experimental features present. -->
   <string name="firefox_labs_no_labs_available_description">ਹੁਣੇ ਵਰਤਣ ਲਈ ਕੋਈ ਤਜਰਬੇ ਅਧੀਨ ਫ਼ੀਚਰ ਮੌਜੂਦ ਨਹੀਂ ਹੈ</string>
+  <!-- Title of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">ਵੈੱਬਸਾਈਟ ਅਲਹਿਦਗੀ</string>
+  <!-- Description of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">ਵੈੱਬਸਾਈਟਾਂ ਵਿਚਾਲੇ ਵਧੀਕ ਰੋਕ ਹੈ, ਜੋ ਕਿ ਤੁਹਾਡੇ ਡਾਟੇ ਨੂੰ ਟੈਬਾਂ ਵਿਚਾਲੇ ਸੁਰੱਖਿਅਤ ਰੱਖਦੀ ਹੈ। ਕਾਰਗੁਜ਼ਾਰੀ, ਸਥਿਰਤਾ, ਵੈੱਬ ਸਾਈਟ ਅਨੁਕੂਲਤਾ ਅਤੇ ਬਰਾਊਜ਼ ਕਰਨ ਵਾਲੇ ਅਤੀਤ ਨੂੰ ਕਿਵੇਂ ਸੰਭਾਲਿਆ ਜਾਂਦਾ ਹੈ, ਨੂੰ ਪ੍ਰਭਾਵਿਤ ਕਰ ਸਕਦੀ ਹੈ।</string>
 </resources>
