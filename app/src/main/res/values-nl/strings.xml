@@ -767,7 +767,7 @@
   <!-- Preference for opening links in a private tab -->
   <string name="preferences_open_links_in_a_private_tab">Koppelingen openen in een privétabblad</string>
   <!-- Preference for allowing screenshots to be taken while in a private tab -->
-  <string name="preferences_allow_screenshots_in_private_mode">Schermafdrukken tijdens privénavigatie toestaan</string>
+  <string name="preferences_allow_screenshots_in_private_mode">Schermafbeeldingen tijdens privénavigatie toestaan</string>
   <!-- Will inform the user of the risk of activating Allow screenshots in private browsing option -->
   <string name="preferences_screenshots_in_private_mode_disclaimer">Indien toegestaan, zijn privétabbladen ook zichtbaar wanneer meerdere apps zijn geopend</string>
   <!-- Preference for adding private browsing shortcut -->
@@ -3400,6 +3400,16 @@
     which navigates the user to a screen displaying all the shortcuts.
   -->
   <string name="homepage_shortcuts_show_all_content_description">Alle sneltoetsen tonen</string>
+  <!--
+    Label for the button in the shortcuts home screen section that expands the section to show
+    every shortcut.
+  -->
+  <string name="homepage_shortcuts_show_all">Alles tonen</string>
+  <!--
+    Label for the button in the shortcuts home screen section that collapses the section back
+    to showing only the first shortcuts.
+  -->
+  <string name="homepage_shortcuts_show_less">Minder tonen</string>
   <!-- Label for the "Add shortcut" button displayed as a tile. -->
   <string name="homepage_shortcuts_add_shortcut">Snelkoppeling toevoegen</string>
   <!-- Title for the "Add to homepage" bottom sheet. -->
