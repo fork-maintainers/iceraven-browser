@@ -4802,5 +4802,5 @@
   <!-- Title of the Firefox Labs Sandboxing experiment. -->
   <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">Ynysu gwefan</string>
   <!-- Description of the Firefox Labs Sandboxing experiment. -->
-  <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">Rhwystr ychwanegol rhwng gwefannau sy\'n helpu i amddiffyn eich data ar draws tabiau. Gall effeithio ar berfformiad, sefydlogrwydd, cydweddoldeb gwefan, a sut mae hanes pori yn cael ei gadw.</string>
+  <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">Rhwystr ychwanegol rhwng gwefannau sy\'n helpu i ddiogelu eich data ar draws tabiau. Gall effeithio ar berfformiad, sefydlogrwydd, cydnawsedd gwefannau, a sut mae hanes pori\'n cael ei gadw.</string>
 </resources>
