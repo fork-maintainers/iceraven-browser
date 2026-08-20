@@ -513,13 +513,13 @@ features:
           If true, the values for both SHIP and Fission set in this file apply.
           Otherwise, the values from modules/libpref/init/StaticPrefList.yaml apply.
         type: Boolean
-        default: false
+        default: true
       enabled:
         description: >
           Whether or not to enable fission. Fission is enabled when set to true. Fission is disabled when
           set to false.
         type: Boolean
-        default: false
+        default: true
       isolationStrategy:
         description: >
           The web content isolation strategy to use with fission. "0" means "isolate nothing", similar to
@@ -527,14 +527,7 @@ features:
           process. "2" means "isolate high value", Android-specific setting to only isolate sites
           considered "high value".
         type: Int
-        default: 0
-    defaults:
-      - channel: nightly
-        value:
-          isolationStrategy: 2
-      - channel: developer
-        value:
-          isolationStrategy: 2
+        default: 1
 
   suggest-shipped-domains:
     description: Feature that suggests domains from the shipped domain list.
