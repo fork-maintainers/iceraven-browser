@@ -50,6 +50,7 @@ import org.mozilla.fenix.ext.DEFAULT_ACTIVE_DAYS
 import org.mozilla.fenix.ext.nav
 import org.mozilla.fenix.ext.openToBrowser
 import org.mozilla.fenix.ext.potentialInactiveTabs
+import org.mozilla.fenix.home.HomeScreenViewModel.Companion.ALL_ACTIVE_NORMAL_TABS
 import org.mozilla.fenix.home.HomeScreenViewModel.Companion.ALL_NORMAL_TABS
 import org.mozilla.fenix.home.HomeScreenViewModel.Companion.ALL_PRIVATE_TABS
 import org.mozilla.fenix.share.ShareFragment
@@ -403,8 +404,9 @@ class DefaultTabManagerController(
     }
 
     /**
-     * Calculates the IDs of normal tabs that should be protected from engine deletion.
-     * This includes all inactive tabs and tabs inside open (visible) tab groups.
+     * Calculates the IDs of normal tabs that should be protected from being selected after other tabs are deleted.
+     * This
+     * includes all inactive tabs and tabs inside open (visible) tab groups.
      */
     private fun getExcludedNormalTabIds(): Set<String> {
         val state = tabsTrayStore.state
@@ -469,9 +471,7 @@ class DefaultTabManagerController(
             tabsUseCases.removeTabs(excludedTabIds = excludedTabIds, ids = tabs.map { it.id })
             showUndoSnackbarForTab(isPrivate)
         } else {
-            dismissTabManagerAndNavigateHome(
-                if (isPrivate) ALL_PRIVATE_TABS else ALL_NORMAL_TABS,
-            )
+            dismissTabManagerAndNavigateHome(if (isPrivate) ALL_PRIVATE_TABS else ALL_ACTIVE_NORMAL_TABS)
         }
     }
 

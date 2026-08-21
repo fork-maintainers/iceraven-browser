@@ -23,6 +23,7 @@ import org.mozilla.fenix.ext.actualInactiveTabs
 import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.ext.tabClosedUndoMessage
 import org.mozilla.fenix.ext.tabsClosedUndoMessage
+import org.mozilla.fenix.home.HomeScreenViewModel.Companion.ALL_ACTIVE_NORMAL_TABS
 import org.mozilla.fenix.home.HomeScreenViewModel.Companion.ALL_NORMAL_TABS
 import org.mozilla.fenix.home.HomeScreenViewModel.Companion.ALL_PRIVATE_TABS
 import org.mozilla.fenix.utils.Settings
@@ -62,7 +63,7 @@ class TabsCleanupFeature(
      */
     override fun start() {
         viewModel.sessionToDelete?.also {
-            if (it == ALL_NORMAL_TABS || it == ALL_PRIVATE_TABS) {
+            if (it == ALL_NORMAL_TABS || it == ALL_PRIVATE_TABS || it == ALL_ACTIVE_NORMAL_TABS) {
                 removeAllTabsAndShowSnackbar(it)
             } else {
                 removeTabAndShowSnackbar(it)
@@ -93,19 +94,12 @@ class TabsCleanupFeature(
     }
 
     private fun removeAllTabsAndShowSnackbar(sessionCode: String) {
-        val isPrivate = sessionCode == ALL_PRIVATE_TABS
-
-        val tabsCount = if (isPrivate) {
-            browserStore.state.privateTabs.size
-        } else {
-            browserStore.state.normalTabs.size
-        }
-
-        if (isPrivate) {
-            tabsUseCases.removePrivateTabs()
-        } else {
-            tabsUseCases.removeNormalTabs()
-        }
+        val tabsCount = when (sessionCode) {
+                ALL_PRIVATE_TABS -> removeAllPrivateTabs()
+                ALL_NORMAL_TABS -> removeAllNormalTabs()
+                ALL_ACTIVE_NORMAL_TABS -> removeAllActiveNormalTabs()
+                else -> return
+            }
 
         var tabId: String? = null
         if (settings.enableHomepageAsNewTab) {
@@ -125,6 +119,21 @@ class TabsCleanupFeature(
                 onUndoAllTabsRemoved(tabId)
             },
         )
+    }
+
+    private fun removeAllPrivateTabs(): Int =
+        browserStore.state.privateTabs.size.also { tabsUseCases.removePrivateTabs() }
+
+    private fun removeAllNormalTabs(): Int = browserStore.state.normalTabs.size.also { tabsUseCases.removeNormalTabs() }
+
+    private fun removeAllActiveNormalTabs(): Int {
+        val inactiveTabIds = browserStore.state.actualInactiveTabs(settings = settings).map { it.id }.toSet()
+        val normalTabIds = browserStore.state.normalTabs.map { it.id }
+        val tabsToRemove = normalTabIds.filter { it !in inactiveTabIds }
+
+        tabsUseCases.removeTabs(ids = tabsToRemove, excludedTabIds = inactiveTabIds)
+
+        return tabsToRemove.size
     }
 
     /**

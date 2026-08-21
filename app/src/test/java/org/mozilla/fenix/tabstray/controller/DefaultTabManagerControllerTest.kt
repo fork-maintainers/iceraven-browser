@@ -72,7 +72,7 @@ import org.mozilla.fenix.components.usecases.ShareUseCases
 import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.ext.maxActiveTime
 import org.mozilla.fenix.helpers.FenixGleanTestRule
-import org.mozilla.fenix.home.HomeScreenViewModel.Companion.ALL_NORMAL_TABS
+import org.mozilla.fenix.home.HomeScreenViewModel.Companion.ALL_ACTIVE_NORMAL_TABS
 import org.mozilla.fenix.home.HomeScreenViewModel.Companion.ALL_PRIVATE_TABS
 import org.mozilla.fenix.tabstray.data.TabGroupTheme
 import org.mozilla.fenix.tabstray.data.TabsTrayItem
@@ -539,7 +539,7 @@ class DefaultTabManagerControllerTest {
     }
 
     @Test
-    fun `WHEN handleMultipleTabsDeletion is called to close all private tabs THEN that it navigates to home where that tabs will be removed`() {
+    fun `WHEN deleteMultipleTabs is called to close all private tabs THEN that it navigates to home where that tabs will be removed`() {
         val controller = spyk(createController())
 
         val privateTab1 = createTab(id = "1", url = "https://mozilla.org", private = true)
@@ -562,24 +562,35 @@ class DefaultTabManagerControllerTest {
         controller.deleteMultipleTabs(tabItems)
 
         verify { controller.dismissTabManagerAndNavigateHome(ALL_PRIVATE_TABS) }
-
-        verify(exactly = 0) { tabsUseCases.removeTabs(any<List<String>>(), any<Set<String>>()) }
     }
 
     @Test
-    fun `WHEN handleMultipleTabsDeletion is called to close all normal tabs THEN that it navigates to home where that tabs will be removed`() {
+    fun `WHEN deleteMultipleTabs is called to close all active normal tabs THEN that it navigates to home where those tabs will be removed`() {
         val normalTab1 = createTab(id = "1", url = "https://mozilla.org", private = false)
         val normalTab2 = createTab(id = "2", url = "https://mozilla.org", private = false)
-        val tabItems = listOf(TabsTrayItem.Tab(tab = normalTab1), TabsTrayItem.Tab(tab = normalTab2))
+        val inactiveTab =
+            createTab(
+                id = "3",
+                url = "https://mozilla.org",
+                private = false,
+                lastAccess = 0L,
+                createdAt = 0L,
+            )
+        val tabItems =
+            listOf(
+                TabsTrayItem.Tab(tab = normalTab1),
+                TabsTrayItem.Tab(tab = normalTab2),
+                TabsTrayItem.Tab(tab = inactiveTab),
+            )
 
         every { browserStore.state } returns mockk {
-            every { tabs } returns listOf(normalTab1, normalTab2)
+            every { tabs } returns listOf(normalTab1, normalTab2, inactiveTab)
         }
 
         every { trayStore.state } returns mockk {
             every { normalTabsState.items } returns tabItems
             every { inactiveTabs } returns mockk {
-                every { tabs } returns emptyList()
+                every { tabs } returns listOf(TabsTrayItem.Tab(inactiveTab))
             }
         }
 
@@ -587,13 +598,11 @@ class DefaultTabManagerControllerTest {
 
         controller.deleteMultipleTabs(tabItems)
 
-        verify { controller.dismissTabManagerAndNavigateHome(ALL_NORMAL_TABS) }
-
-        verify(exactly = 0) { tabsUseCases.removeTabs(any<List<String>>(), any<Set<String>>()) }
+        verify { controller.dismissTabManagerAndNavigateHome(ALL_ACTIVE_NORMAL_TABS) }
     }
 
     @Test
-    fun `WHEN handleMultipleTabsDeletion is called to close some private tabs THEN that it uses tabsUseCases#removeTabs and shows an undo snackbar`() {
+    fun `WHEN deleteMultipleTabs is called to close some private tabs THEN that it uses tabsUseCases#removeTabs and shows an undo snackbar`() {
         var showUndoSnackbarForTabInvoked = false
         val controller = spyk(
             createController(showUndoSnackbarForTab = { showUndoSnackbarForTabInvoked = true }),
@@ -627,7 +636,7 @@ class DefaultTabManagerControllerTest {
     }
 
     @Test
-    fun `WHEN handleMultipleTabsDeletion is called to close some normal tabs THEN that it uses tabsUseCases#removeTabs and shows an undo snackbar`() {
+    fun `WHEN deleteMultipleTabs is called to close some normal tabs THEN that it uses tabsUseCases#removeTabs and shows an undo snackbar`() {
         var showUndoSnackbarForTabInvoked = false
         val controller = spyk(createController(showUndoSnackbarForTab = { showUndoSnackbarForTabInvoked = true }))
 
@@ -693,9 +702,21 @@ class DefaultTabManagerControllerTest {
     fun `GIVEN 2 active tabs and 1 inactive tab WHEN deleteMultipleTabs is called on both active tabs THEN it navigates home and excludes the inactive tab`() {
         val activeTab1 = createTab(id = "active1", url = "https://mozilla.org", private = false)
         val activeTab2 = createTab(id = "active2", url = "https://mozilla.org", private = false)
-        val inactiveTab = createTab(id = "inactiveId", url = "https://mozilla.org", private = false)
+        val inactiveTab =
+            createTab(
+                id = "inactiveId",
+                url = "https://mozilla.org",
+                private = false,
+                lastAccess = 0L,
+                createdAt = 0L,
+            )
 
-        val activeTabItems = listOf(TabsTrayItem.Tab(activeTab1), TabsTrayItem.Tab(activeTab2))
+        val activeTabItems =
+            listOf(
+                TabsTrayItem.Tab(activeTab1),
+                TabsTrayItem.Tab(activeTab2),
+                TabsTrayItem.Tab(inactiveTab),
+            )
 
         every { browserStore.state } returns mockk {
             every { tabs } returns listOf(activeTab1, activeTab2, inactiveTab)
@@ -713,9 +734,7 @@ class DefaultTabManagerControllerTest {
 
         controller.deleteMultipleTabs(activeTabItems)
 
-        verify { controller.dismissTabManagerAndNavigateHome(ALL_NORMAL_TABS) }
-
-        verify(exactly = 0) { tabsUseCases.removeTabs(ids = any(), excludedTabIds = any()) }
+        verify { controller.dismissTabManagerAndNavigateHome(ALL_ACTIVE_NORMAL_TABS) }
     }
 
     @Test
@@ -760,7 +779,14 @@ class DefaultTabManagerControllerTest {
     fun `GIVEN grouped tabs and an inactive tab WHEN deleteMultipleTabs is called on all grouped tabs THEN it flattens the group, navigates home, and excludes the inactive tab`() {
         val grouped1 = createTab(id = "grouped1", url = "https://mozilla.org", private = false)
         val grouped2 = createTab(id = "grouped2", url = "https://mozilla.org", private = false)
-        val inactiveTab = createTab(id = "inactive1", url = "https://mozilla.org", private = false)
+        val inactiveTab =
+            createTab(
+                id = "inactive1",
+                url = "https://mozilla.org",
+                private = false,
+                lastAccess = 0L,
+                createdAt = 0L,
+            )
 
         val tabGroup = TabsTrayItem.TabGroup(
             id = "group1",
@@ -787,8 +813,7 @@ class DefaultTabManagerControllerTest {
 
         controller.deleteMultipleTabs(itemsToDelete)
 
-        verify { controller.dismissTabManagerAndNavigateHome(ALL_NORMAL_TABS) }
-        verify(exactly = 0) { tabsUseCases.removeTabs(any(), any()) }
+        verify { controller.dismissTabManagerAndNavigateHome(ALL_ACTIVE_NORMAL_TABS) }
     }
 
     @Test
@@ -903,7 +928,7 @@ class DefaultTabManagerControllerTest {
     }
 
     @Test
-    fun `WHEN handleMultipleTabsDeletion is called to close all private tabs THEN it navigates to home where those tabs will be removed`() {
+    fun `WHEN deleteMultipleTabs is called to close all private tabs THEN it navigates to home where those tabs will be removed`() {
         val privateTab1 = createTab(id = "private1", url = "https://mozilla.org", private = true)
         val privateTab2 = createTab(id = "private2", url = "https://mozilla.org", private = true)
         val tabItems = listOf(TabsTrayItem.Tab(tab = privateTab1), TabsTrayItem.Tab(tab = privateTab2))
@@ -930,33 +955,7 @@ class DefaultTabManagerControllerTest {
     }
 
     @Test
-    fun `WHEN handleMultipleTabsDeletion is called to close all inactive tabs THEN it navigates to home where those tabs will be removed`() {
-        val inactiveTab1 = createTab(id = "inactive1", url = "https://mozilla.org", private = false)
-        val inactiveTab2 = createTab(id = "inactive2", url = "https://mozilla.com", private = false)
-
-        val inactiveTabItems = listOf(TabsTrayItem.Tab(inactiveTab1), TabsTrayItem.Tab(inactiveTab2))
-
-        every { browserStore.state } returns BrowserState(
-            tabs = listOf(inactiveTab1, inactiveTab2),
-            downloads = emptyMap(),
-        )
-
-        every { trayStore.state } returns TabsTrayState(
-            privateBrowsing = TabsTrayState.PrivateBrowsingState(tabs = emptyList()),
-            normalTabsState = TabsTrayState.NormalTabsState(items = emptyList()),
-            inactiveTabs = TabsTrayState.InactiveTabsState(tabs = inactiveTabItems),
-        )
-
-        val controller = spyk(createController())
-
-        controller.deleteMultipleTabs(tabs = inactiveTabItems)
-
-        verify { controller.dismissTabManagerAndNavigateHome(ALL_NORMAL_TABS) }
-        verify(exactly = 0) { tabsUseCases.removeTabs(ids = any(), excludedTabIds = any()) }
-    }
-
-    @Test
-    fun `GIVEN no tab groups exist WHEN handleMultipleTabsDeletion is called to close all normal tabs THEN it navigates to home where those tabs will be removed`() {
+    fun `GIVEN no tab groups exist WHEN deleteMultipleTabs is called to close all normal tabs THEN it navigates to home where those tabs will be removed`() {
         val normalTab1 = createTab(id = "normal1", url = "https://mozilla.org", private = false)
         val normalTab2 = createTab(id = "normal2", url = "https://mozilla.com", private = false)
 
@@ -978,13 +977,11 @@ class DefaultTabManagerControllerTest {
 
         controller.deleteMultipleTabs(tabs = normalTabItems)
 
-        verify { controller.dismissTabManagerAndNavigateHome(ALL_NORMAL_TABS) }
-
-        verify(exactly = 0) { tabsUseCases.removeTabs(ids = any(), excludedTabIds = any()) }
+        verify { controller.dismissTabManagerAndNavigateHome(ALL_ACTIVE_NORMAL_TABS) }
     }
 
     @Test
-    fun `GIVEN only open tab groups exist WHEN handleMultipleTabsDeletion is called to close all normal tabs THEN it flattens the groups and navigates to home`() {
+    fun `GIVEN only open tab groups exist WHEN deleteMultipleTabs is called to close all active normal tabs THEN it flattens the groups and navigates to home`() {
         val groupedTab1 = createTab(id = "grouped1", url = "https://mozilla.org", private = false)
         val groupedTab2 = createTab(id = "grouped2", url = "https://mozilla.com", private = false)
 
@@ -1014,11 +1011,7 @@ class DefaultTabManagerControllerTest {
 
         controller.deleteMultipleTabs(tabs = tabItemsToDelete)
 
-        verify { controller.dismissTabManagerAndNavigateHome(ALL_NORMAL_TABS) }
-
-        verify(exactly = 0) {
-            tabsUseCases.removeTabs(ids = any(), excludedTabIds = any())
-        }
+        verify { controller.dismissTabManagerAndNavigateHome(ALL_ACTIVE_NORMAL_TABS) }
     }
 
     @Test
@@ -1052,8 +1045,7 @@ class DefaultTabManagerControllerTest {
 
         controller.deleteMultipleTabs(listOf(visibleTabItem))
 
-        verify { controller.dismissTabManagerAndNavigateHome(ALL_NORMAL_TABS) }
-        verify(exactly = 0) { tabsUseCases.removeTabs(ids = any(), excludedTabIds = any()) }
+        verify { controller.dismissTabManagerAndNavigateHome(ALL_ACTIVE_NORMAL_TABS) }
     }
 
     @Test
@@ -1206,15 +1198,20 @@ class DefaultTabManagerControllerTest {
 
         controller.deleteMultipleTabs(tabs = itemsToDelete)
 
-        verify { controller.dismissTabManagerAndNavigateHome(ALL_NORMAL_TABS) }
-
-        verify(exactly = 0) { tabsUseCases.removeTabs(any(), any()) }
+        verify { controller.dismissTabManagerAndNavigateHome(ALL_ACTIVE_NORMAL_TABS) }
     }
 
     @Test
     fun `GIVEN inactive tabs and a closed group WHEN deleteMultipleTabs deletes all visible normal tabs THEN it navigates to home`() {
         val visibleNormalTabToDelete = createTab(id = "visible_to_delete", url = "https://mozilla.org", private = false)
-        val inactiveTab = createTab(id = "inactive_tab", url = "https://mozilla.com", private = false)
+        val inactiveTab =
+            createTab(
+                id = "inactive_tab",
+                url = "https://mozilla.com",
+                private = false,
+                lastAccess = 0L,
+                createdAt = 0L,
+            )
         val tabInsideClosedGroup = createTab(id = "tab_in_closed_group", url = "https://mozilla.org", private = false)
 
         val itemsToDelete = listOf(TabsTrayItem.Tab(visibleNormalTabToDelete))
@@ -1243,9 +1240,7 @@ class DefaultTabManagerControllerTest {
 
         controller.deleteMultipleTabs(tabs = itemsToDelete)
 
-        verify { controller.dismissTabManagerAndNavigateHome(ALL_NORMAL_TABS) }
-
-        verify(exactly = 0) { tabsUseCases.removeTabs(any(), any()) }
+        verify { controller.dismissTabManagerAndNavigateHome(ALL_ACTIVE_NORMAL_TABS) }
     }
 
     @Test
