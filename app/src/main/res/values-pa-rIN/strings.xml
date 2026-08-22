@@ -1304,6 +1304,11 @@
   <string name="preference_light_theme">ਹਲਕਾ</string>
   <!-- Preference for using dark theme -->
   <string name="preference_dark_theme">ਗੂੜ੍ਹਾ</string>
+  <!--
+    Preference for using the OLED theme. For localization, this can be translated as "True Black", "Maximum Darkness",
+    or "Full dark" if needed.
+  -->
+  <string name="preference_oled_theme">ਪੂਰਾ ਗੂੜ੍ਹਾ</string>
   <!-- Preference for using using dark or light theme automatically set by battery -->
   <string name="preference_auto_battery_theme">ਬੈਟਰੀ ਬੱਚਤਕਾਰ ਵਲੋਂ ਨਿਯਤ ਕੀਤਾ</string>
   <!-- Preference for using following device theme -->
@@ -1450,6 +1455,8 @@
   <string name="preferences_inactive_tabs">ਪੁਰਾਣੀਆਂ ਟੈਬਾਂ ਨੂੰ ਨਾ-ਸਰਗਰਮ ਵਿੱਚ ਭੇਜੋ</string>
   <!-- Title of inactive tabs preference -->
   <string name="preferences_inactive_tabs_title">ਪਿਛਲੇ ਦੋ ਹਫ਼ਤਿਆਂ ਵਿੱਚ ਤੁਹਾਡੇ ਵਲੋਂ ਨਾ ਵੇਖੀਆਂ ਟੈਬਾਂ ਨੂੰ ਨਾ-ਸਰਗਰਮ ਭਾਗ ਵਿੱਚ ਭੇਜਿਆ ਜਾਂਦਾ ਹੈ।</string>
+  <!-- Title for the preference to enable or disable the tab groups feature -->
+  <string name="preferences_tab_groups_feature">ਟੈਬ ਗਰੁੱਪ ਨੂੰ ਸਮਰੱਥ ਕਰੋ</string>
   <!--
     Privacy report
 
@@ -1694,6 +1701,14 @@
   <string name="ungroup_tab_group_confirmation_dialog_confirm">ਅਣ-ਗਰੁੱਪ ਕਰੋ</string>
   <!-- Text shown on the cancel button in the Ungroup tab group confirmation dialog. -->
   <string name="ungroup_tab_group_confirmation_dialog_cancel">ਰੱਦ ਕਰੋ</string>
+  <!-- Custom accessibility action to reorder a tab up rather than dragging. -->
+  <string name="custom_accessibility_action_reorder_tab_up">ਟੈਬ ਨੂੰ ਉੱਤੇ ਭੇਜੋ</string>
+  <!-- Custom accessibility action to reorder a tab left rather than dragging. -->
+  <string name="custom_accessibility_action_reorder_tab_left">ਟੈਬ ਨੂੰ ਖੱਬੇ ਭੇਜੋ</string>
+  <!-- Custom accessibility action to reorder a tab right rather than dragging. -->
+  <string name="custom_accessibility_action_reorder_tab_right">ਟੈਬ ਨੂੰ ਸੱਜੇ ਭੇਜੋ</string>
+  <!-- Custom accessibility action to reorder a tab down rather than dragging. -->
+  <string name="custom_accessibility_action_reorder_tab_down">ਟੈਬ ਨੂੰ ਹੇਠਾਂ ਭੇਜੋ</string>
   <!--
     Color labels for tab groups, used for accessibility and selection UI.
 
@@ -3101,6 +3116,8 @@
   <string name="ip_protection_location_picker_title" tools:ignore="UnusedResources">VPN ਟਿਕਾਣੇ ਨੂੰ ਚੁਣੋ</string>
   <!-- Description for what it means to use the Recommended setting and let the app automatically pick the best server location. -->
   <string name="ip_protection_location_fastest_description" tools:ignore="BrandUsage">Firefox ਸਭ ਤੋਂ ਤੇਜ਼ ਟਿਕਾਣਾ ਲੱਭਦਾ ਹੈ</string>
+  <!-- Description for an unavailable VPN location in the location list. -->
+  <string name="ip_protection_location_unavailable_description">ਨਾ-ਮੌਜੂਦ</string>
   <!-- Error message shown when the selected browser VPN location is unavailable. -->
   <string name="ip_protection_location_unavailable" tools:ignore="UnusedResources">ਟਿਕਾਣਾ ਮੌਜੂਦ ਨਹੀਂ ਹੈ। ਹੋਰ ਟਿਕਾਣੇ ਨੂੰ ਚੁਣੋ।</string>
   <!-- Snackbar (in-app pop-up notification) text shown when the previously selected browser VPN location is unavailable and the recommended location was used instead. -->
@@ -4739,4 +4756,16 @@
   <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">ਵੈੱਬਸਾਈਟ ਅਲਹਿਦਗੀ</string>
   <!-- Description of the Firefox Labs Sandboxing experiment. -->
   <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">ਵੈੱਬਸਾਈਟਾਂ ਵਿਚਾਲੇ ਵਧੀਕ ਰੋਕ ਹੈ, ਜੋ ਕਿ ਤੁਹਾਡੇ ਡਾਟੇ ਨੂੰ ਟੈਬਾਂ ਵਿਚਾਲੇ ਸੁਰੱਖਿਅਤ ਰੱਖਦੀ ਹੈ। ਕਾਰਗੁਜ਼ਾਰੀ, ਸਥਿਰਤਾ, ਵੈੱਬ ਸਾਈਟ ਅਨੁਕੂਲਤਾ ਅਤੇ ਬਰਾਊਜ਼ ਕਰਨ ਵਾਲੇ ਅਤੀਤ ਨੂੰ ਕਿਵੇਂ ਸੰਭਾਲਿਆ ਜਾਂਦਾ ਹੈ, ਨੂੰ ਪ੍ਰਭਾਵਿਤ ਕਰ ਸਕਦੀ ਹੈ।</string>
+  <!--
+    PDF viewer toolbar and buttons
+
+    Content description for accessibility (used by screen readers): Description for the button that triggers the start of a signature workflow on the PDF displayed on the screen.
+  -->
+  <string name="pdf_tools_sign_content_description">PDF ਉੱਤੇ ਦਸਤਖ਼ਤ ਕਰੋ</string>
+  <!-- Content description for accessibility (used by screen readers): Description of the button that downloads the PDF displayed on the screen to the user's device. -->
+  <string name="pdf_tools_download_content_description">PDF ਨੂੰ ਡਾਊਨਲੋਡ ਕਰੋ</string>
+  <!-- Content description for accessibility (used by screen readers): Description for the button that opens the printing dialogue window for the PDF displayed on the screen. -->
+  <string name="pdf_tools_print_content_description">PDF ਨੂੰ ਪਰਿੰਟ ਕਰੋ</string>
+  <!-- Content description for accessibility (used by screen readers): Description for the button that opens the sharing options for the PDF being displayed on the screen. -->
+  <string name="pdf_tools_share_content_description">PDF ਨੂੰ ਸਾਂਝਾ ਕਰੋ</string>
 </resources>

@@ -4763,7 +4763,7 @@
   -->
   <string name="pdf_tools_sign_content_description">Signera PDF</string>
   <!-- Content description for accessibility (used by screen readers): Description of the button that downloads the PDF displayed on the screen to the user's device. -->
-  <string name="pdf_tools_download_content_description">Hämta PDF</string>
+  <string name="pdf_tools_download_content_description">Ladda ner PDF</string>
   <!-- Content description for accessibility (used by screen readers): Description for the button that opens the printing dialogue window for the PDF displayed on the screen. -->
   <string name="pdf_tools_print_content_description">Skriv ut PDF</string>
   <!-- Content description for accessibility (used by screen readers): Description for the button that opens the sharing options for the PDF being displayed on the screen. -->

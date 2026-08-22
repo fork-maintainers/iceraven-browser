@@ -40,7 +40,7 @@
   <!-- The header text displayed on the private tabs page when no private tabs are open -->
   <string name="tab_manager_empty_private_tabs_page_header">Navigazione anonima</string>
   <!-- The supplementary text displayed on the private tabs page when no private tabs are open. %1$s is the name of the app (for example "Firefox") -->
-  <string name="tab_manager_empty_private_tabs_page_description">%1$s non salverà alcuna cronologia o cookie per questa finestra. I segnalibri aggiunti verranno comunque conservati sul dispositivo.</string>
+  <string name="tab_manager_empty_private_tabs_page_description">%1$s non salverà alcuna cronologia o cookie, ma i segnalibri aggiunti rimarranno salvati.</string>
   <!-- The header text displayed on the normal tabs page when no normal tabs are open -->
   <string name="tab_manager_empty_normal_tabs_page_header">Apri una nuova scheda per cominciare a cercare</string>
   <!-- Tab tray multi select title in app bar. %1$d is the number of tabs selected -->
@@ -101,7 +101,7 @@
 
     Text for the info message. %1$s is the name of the app (for example "Firefox").
   -->
-  <string name="open_in_app_cfr_info_message_2">È possibile impostare %1$s come browser predefinito per aprire i link nelle app.</string>
+  <string name="open_in_app_cfr_info_message_2">È possibile impostare %1$s per aprire automaticamente i link nelle app.</string>
   <!-- Text for the positive action button -->
   <string name="open_in_app_cfr_positive_button_text">Vai alle impostazioni</string>
   <!-- Text for the negative action button -->
@@ -667,7 +667,7 @@
   <!-- "Add search widget" onboarding button. 'Firefox' is intentionally hardcoded. -->
   <string name="nova_onboarding_add_search_widget_button" tools:ignore="BrandUsage">Aggiungi widget di Firefox</string>
   <!-- Customize prompt onboarding title. -->
-  <string name="nova_onboarding_customize_prompt_title" tools:ignore="UnusedResources">Facile da personalizzare, più privacy a ogni tocco.</string>
+  <string name="nova_onboarding_customize_prompt_title" tools:ignore="UnusedResources">Facile da personalizzare, più privacy a ogni tocco</string>
   <plurals name="nova_onboarding_customize_prompt_body" tools:ignore="UnusedResources">
     <!--
       Customize prompt onboarding body.
@@ -883,7 +883,7 @@
   <!-- Body for the link sharing toggle.  %1$s is replaced by the brand name (e.g. Firefox). -->
   <string name="link_sharing_toggle_body">Invita i tuoi amici a navigare più velocemente e in modo più sicuro con %1$s ogni volta che condividi un link su WhatsApp.</string>
   <!-- Snackbar message shown when user shares a link -->
-  <string name="link_shared_snackbar_message">Condiviso link</string>
+  <string name="link_shared_snackbar_message">Link condiviso</string>
   <!-- Snackbar action label shown when user shares a link -->
   <string name="link_shared_snackbar_action">Gestisci impostazioni</string>
   <!-- Preference for open links in third party apps -->
@@ -910,7 +910,7 @@
   <string name="preferences_downloads_delete_from_device">Elimina dal dispositivo</string>
   <string name="preferences_downloads_delete_from_device_description">Il file viene eliminato dal dispositivo e rimosso dalla cronologia dei download</string>
   <string name="preferences_downloads_remove_from_download_history">Rimuovi dalla cronologia dei download</string>
-  <string name="preferences_downloads_remove_from_download_history_description">Il file viene eliminato dalla cronologia dei download, ma resta salvato sul dispositivo</string>
+  <string name="preferences_downloads_remove_from_download_history_description">Il file viene rimosso dalla cronologia dei download, ma resta salvato sul dispositivo</string>
   <string name="preferences_downloads_ask_when_to_delete_files">Chiedi quando elimino i file</string>
   <!-- Preference for downloads -->
   <string name="preferences_downloads_2">Impostazioni download</string>
@@ -1448,7 +1448,7 @@
   -->
   <string name="preferences_inactive_tabs">Sposta le vecchie schede nella sezione Inattive</string>
   <!-- Title of inactive tabs preference -->
-  <string name="preferences_inactive_tabs_title">La schede che non visualizzi da due settimane vengono spostate nella sezione Inattive.</string>
+  <string name="preferences_inactive_tabs_title">Le schede che non visualizzi da due settimane vengono spostate nella sezione Inattive.</string>
   <!-- Title for the preference to enable or disable the tab groups feature -->
   <string name="preferences_tab_groups_feature">Attiva gruppi di schede</string>
   <!--
@@ -1503,7 +1503,7 @@
       The %1$d will be replaced by the number of opened tab groups
     -->
     <item quantity="one">Aperto %1$d gruppo di schede. Tocca per cambiare scheda.</item>
-    <item quantity="other">Aperto %1$d gruppi di schede. Tocca per cambiare scheda.</item>
+    <item quantity="other">Aperti %1$d gruppi di schede. Tocca per cambiare scheda.</item>
   </plurals>
   <!--
     Title for the list of tabs in the synced tabs used by a11y services
@@ -1857,7 +1857,7 @@
   -->
   <string name="download_rename_error_exists_error">In questo percorso esiste già un file chiamato “%s”.</string>
   <!-- Error message when renaming with an invalid file name. -->
-  <string name="download_rename_error_invalid_name_error">Non è possibile utilizzare “/” per il nome di un file.</string>
+  <string name="download_rename_error_invalid_name_error">I nomi dei file non possono contenere “/”</string>
   <!-- Error message shown when a user tries to rename a downloaded file but only changes the casing (e.g., "file.txt" to "File.txt"). -->
   <string name="download_rename_error_case_only_error">Il nome inserito modifica solo le maiuscole o le minuscole. Scegli un nome diverso.</string>
   <!-- Title for the alert dialog when the file cannot be renamed. -->
@@ -1903,7 +1903,7 @@
     %1$s is the current file size that has been downloaded.
     %2$s is the total size of the downloaded file.
   -->
-  <string name="download_item_in_progress_description_pending">%1$s / %2$s • in corso</string>
+  <string name="download_item_in_progress_description_pending">%1$s / %2$s • in attesa</string>
   <!--
     Description of an in progress download item, displayed in the downloads list when the total download size is unknown. This results in the estimated download time remaining to be unknown also.
     %1$s is the current file size that has been downloaded.
@@ -2129,7 +2129,7 @@
   <!-- Bookmark folder editing screen title -->
   <string name="edit_bookmark_folder_fragment_title">Modifica cartella</string>
   <!-- Bookmark URL editing field label -->
-  <string name="bookmark_url_label">INDIRIZZO</string>
+  <string name="bookmark_url_label">Indirizzo</string>
   <!-- Text indicating which folder a bookmark or folder will be saved in -->
   <string name="bookmark_save_in_label">Salva in</string>
   <!-- Label for a text input field for a bookmark or folder name -->
@@ -2389,7 +2389,7 @@
   <!-- An option from the share dialog to reconnect to sync -->
   <string name="sync_reconnect">Riconnetti a Sync</string>
   <!-- Text displayed when sync is offline and cannot be accessed -->
-  <string name="sync_offline">Non in linea</string>
+  <string name="sync_offline">Non connesso</string>
   <!-- An option to connect additional devices -->
   <string name="sync_connect_device">Connetti un altro dispositivo</string>
   <!-- The dialog text shown when additional devices are not available -->
@@ -2484,7 +2484,7 @@
   <!-- Title for Accessibility Text Automatic Size Scaling Preference -->
   <string name="preference_accessibility_auto_size_2">Ridimensiona automaticamente i caratteri</string>
   <!-- Summary for Accessibility Text Automatic Size Scaling Preference -->
-  <string name="preference_accessibility_auto_size_summary">La dimensione dei caratteri corrisponderà alle impostazioni di Android. Disattivare per gestire la dimensione dei caratteri separatamente.</string>
+  <string name="preference_accessibility_auto_size_summary">La dimensione dei caratteri corrisponderà alle impostazioni di Android. Disattiva per gestire la dimensione dei caratteri qui.</string>
   <!-- Title for the Delete browsing data preference -->
   <string name="preferences_delete_browsing_data">Elimina dati di navigazione</string>
   <!-- Title for the tabs item in Delete browsing data -->
@@ -2527,7 +2527,7 @@
   <!-- Radio button in the delete browsing data dialog to delete history items for the last hour. -->
   <string name="delete_history_prompt_button_last_hour">Ultima ora</string>
   <!-- Radio button in the delete browsing data dialog to delete history items for today and yesterday. -->
-  <string name="delete_history_prompt_button_today_and_yesterday">Ieri e oggi</string>
+  <string name="delete_history_prompt_button_today_and_yesterday">Oggi e ieri</string>
   <!-- Radio button in the delete browsing data dialog to delete all history. -->
   <string name="delete_history_prompt_button_everything">Tutto</string>
   <!-- Dialog message to the user asking to delete browsing data. %s is the name of the app (for example "Firefox"). -->
@@ -2559,7 +2559,7 @@
 
     Text shown in snackbar when multiple tabs have been sent to device
   -->
-  <string name="sync_sent_tabs_snackbar_2">Scheda inviata</string>
+  <string name="sync_sent_tabs_snackbar_2">Schede inviate</string>
   <!-- Text shown in snackbar when one tab has been sent to device -->
   <string name="sync_sent_tab_snackbar_2">Scheda inviata</string>
   <!-- Text shown in snackbar when sharing tabs failed -->
@@ -2620,7 +2620,7 @@
   <!-- Preference for enhanced tracking protection for the strict protection settings -->
   <string name="preference_enhanced_tracking_protection_strict">Restrittiva</string>
   <!-- Preference description for enhanced tracking protection for the strict protection settings -->
-  <string name="preference_enhanced_tracking_protection_strict_description_4">Maggiore protezione dal tracciamento e prestazioni più veloci, alcuni siti potrebbero non funzionare correttamente.</string>
+  <string name="preference_enhanced_tracking_protection_strict_description_4">Maggiore protezione dal tracciamento e prestazioni più veloci, ma alcuni siti potrebbero non funzionare correttamente.</string>
   <!-- Preference label for the enhanced tracking protection option to fix major site issues caused by tracker blocking -->
   <string name="preference_enhanced_tracking_protection_allow_list_baseline_2">Risolvi problemi gravi con i siti (opzione consigliata)</string>
   <!-- Preference label for the enhanced tracking protection option to fix minor site issues caused by tracker blocking -->
@@ -2720,7 +2720,7 @@
   <!-- Category of trackers (redirect trackers) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_redirect_trackers_title">Traccianti di reindirizzamento</string>
   <!-- Description of redirect tracker cookies that can be blocked by Enhanced Tracking Protection -->
-  <string name="etp_redirect_trackers_description">Elimina i cookie impostati per reindirizzare a siti web noti per il tracciamento.</string>
+  <string name="etp_redirect_trackers_description">Elimina i cookie impostati dai reindirizzamenti a siti web noti per il tracciamento.</string>
   <!-- Preference for fingerprinting protection for the custom protection settings -->
   <string name="etp_suspected_fingerprinters_title">Sospetti fingerprinter</string>
   <!-- Description of fingerprinters that can be blocked by fingerprinting protection -->
@@ -3095,7 +3095,7 @@
   <!-- Snackbar (in-app pop-up notification) action button text that takes the user to the VPN settings screen. -->
   <string name="ip_protection_data_limit_reached_snackbar_action">Impostazioni</string>
   <!-- Description shown on the browser VPN settings screen prompting the user to turn the VPN on. -->
-  <string name="ip_protection_settings_description" tools:ignore="UnusedResources">Attiva la VPN per proteggere la tua privacy durante la navigazione e rendere più difficile il tracciamento.</string>
+  <string name="ip_protection_settings_description" tools:ignore="UnusedResources">Attiva la VPN per rendere la tua navigazione più privata e difficile da tracciare.</string>
   <!-- Title shown on the browser VPN settings screen for location selection section. -->
   <string name="ip_protection_location_title" tools:ignore="UnusedResources">Posizione</string>
   <!-- Label for the Recommended server location option which is automatically selected by the browser. -->
@@ -3119,7 +3119,7 @@
   <!-- Title for the card shown to the user when we are unable to fetch server locations -->
   <string name="ip_protection_locations_unavailable_title">Posizioni non disponibili</string>
   <!-- Description for the card shown to the user when we are unable to fetch server locations -->
-  <string name="ip_protection_locations_unavailable_description">Passata alla posizione consigliata.</string>
+  <string name="ip_protection_locations_unavailable_description">È stata selezionata la posizione consigliata.</string>
   <!-- Title for the browser VPN location selection screen (displayed in the app bar) -->
   <string name="ip_protection_locations_title">Scegli posizione VPN</string>
   <!-- Content description for the browser VPN location selection screen top bar back button -->
@@ -3145,7 +3145,7 @@
   <!-- Preference option for syncing credit cards across devices. This is displayed when the user is not signed into sync -->
   <string name="preferences_credit_cards_sync_cards_across_devices">Sincronizza le carte tra i tuoi dispositivi</string>
   <!-- Preference option for syncing credit cards across devices. This is displayed when the user is signed into sync -->
-  <string name="preferences_credit_cards_sync_cards">Sincronizza carte di credito</string>
+  <string name="preferences_credit_cards_sync_cards">Sincronizza carte</string>
   <!-- Preference option for adding a card -->
   <string name="preferences_credit_cards_add_credit_card_2">Aggiungi carta</string>
   <!-- Preference option for managing saved cards -->
@@ -3199,7 +3199,7 @@
   <!-- Error message for card name on card validation -->
   <string name="credit_cards_name_on_card_validation_error_message_2">Aggiungi un nome</string>
   <!-- Message displayed in biometric prompt displayed for authentication before allowing users to view their saved credit cards -->
-  <string name="credit_cards_biometric_prompt_message">Sblocca per visualizzare le carte di credito salvate</string>
+  <string name="credit_cards_biometric_prompt_message">Sblocca per visualizzare le carte salvate</string>
   <!-- Title of warning dialog if users have no device authentication set up -->
   <string name="credit_cards_warning_dialog_title_2">Proteggi i metodi di pagamento salvati</string>
   <!-- Message of warning dialog if users have no device authentication set up -->
@@ -3263,7 +3263,7 @@
   <!-- Label for an address field (e.g. mailing address) used as part of the form autofill feature. The header for the Do/Si of the address. Do/Si refers to provincial level divisions, pertinent to addresses in South Korea. -->
   <string name="addresses_do_si" tools:ignore="UnusedResources">Do/Si</string>
   <!-- Label for an address field (e.g. mailing address) used as part of the form autofill feature. Used in countries like Nicaragua and Colombia where departments are a key administrative division. -->
-  <string name="addresses_department" tools:ignore="UnusedResources">Reparto</string>
+  <string name="addresses_department" tools:ignore="UnusedResources">Dipartimento</string>
   <!-- Label for an address field (e.g. mailing address) used as part of the form autofill feature. Essential for addresses in the United Arab Emirates. -->
   <string name="addresses_emirate" tools:ignore="UnusedResources">Emirato</string>
   <!-- Label for an address field (e.g. mailing address) used as part of the form autofill feature. Relevant for addresses in countries like Russia and Ukraine. -->
@@ -3351,7 +3351,7 @@
   <!-- Message in delete confirmation dialog for password -->
   <string name="login_deletion_confirmation_2">Eliminare questa password?</string>
   <!-- Positive action of a dialog asking to delete -->
-  <string name="dialog_delete_positive">Rimuovi</string>
+  <string name="dialog_delete_positive">Elimina</string>
   <!-- Negative action of a dialog asking to delete login -->
   <string name="dialog_delete_negative">Annulla</string>
   <!-- The page title for editing a saved password. -->
@@ -3518,9 +3518,9 @@
   <!-- Default browser card text -->
   <string name="default_browser_experiment_card_text" tools:ignore="BrandUsage">Apri link da siti web, email e messaggi in Firefox per impostazione predefinita.</string>
   <!-- Content description radio buttons with a link to more information -->
-  <string name="radio_preference_info_content_description">Fare clic per ulteriori dettagli</string>
+  <string name="radio_preference_info_content_description">Tocca per ulteriori dettagli</string>
   <!-- Content description for the action bar "up" button -->
-  <string name="action_bar_up_description">Vai su</string>
+  <string name="action_bar_up_description">Torna indietro</string>
   <!--
     Pocket recommended stories
 
@@ -3589,7 +3589,7 @@
   <!-- Button text on the translations dialog when a translation error appears. -->
   <string name="translations_bottom_sheet_positive_button_error">Riprova</string>
   <!-- Inactive button text on the translations dialog that indicates a translation is currently in progress. This button will be accompanied by a loading icon. -->
-  <string name="translations_bottom_sheet_translating_in_progress">Traduzione</string>
+  <string name="translations_bottom_sheet_translating_in_progress">Traduzione in corso</string>
   <!-- Button content description (not visible, for screen readers etc.) for the translations dialog translate button that indicates a translation is currently in progress. -->
   <string name="translations_bottom_sheet_translating_in_progress_content_description">Traduzione in corso</string>
   <!-- Default dropdown option when initially selecting a language from the translations dialog language selection dropdown. -->
@@ -3736,7 +3736,7 @@
   <!-- All languages list item. When the user presses this item, they can delete all languages that were downloaded. -->
   <string name="download_language_all_languages_item_preference_to_delete">Elimina tutte le lingue</string>
   <!-- Content description (not visible, for screen readers etc.): For a language list item that was downloaded, the user can now delete it. -->
-  <string name="download_languages_item_content_description_downloaded_state">Rimuovi</string>
+  <string name="download_languages_item_content_description_downloaded_state">Elimina</string>
   <!-- Content description (not visible, for screen readers etc.): For a language list item, deleting is in progress. -->
   <string name="download_languages_item_content_description_delete_in_progress_state">In corso</string>
   <!--
@@ -3910,7 +3910,7 @@
     Description text for a dialog confirming whether the user wants to delete all data for current site.
     %s is a placeholder for the base domain of website.
   -->
-  <string name="clear_site_data_dialog_description"><![CDATA[La rimozione di cookie e dati dei siti web per <b>%s</b> potrebbe disconnetterti dal sito o svuotare eventuali carrelli in sospeso.]]></string>
+  <string name="clear_site_data_dialog_description"><![CDATA[La rimozione di cookie e dati dei siti web per <b>%s</b> potrebbe disconnetterti dai siti o svuotare eventuali carrelli in sospeso.]]></string>
   <!-- Button text on the clear site data dialog to allow users to confirm they wish to clear the site data. -->
   <string name="clear_site_data_dialog_positive_button_text">Cancella</string>
   <!-- Button text on the clear site data dialog to allow users to cancel the action and not clear the site data. -->
@@ -4104,11 +4104,11 @@
   -->
   <string name="debug_drawer_addresses_title">Indirizzi</string>
   <!-- The title of the section header for the list of debug locales that can be enabled and disabled. -->
-  <string name="debug_drawer_addresses_debug_locales_header">Scelta delle lingue da attivare</string>
+  <string name="debug_drawer_addresses_debug_locales_header">Scelta dei locale da attivare</string>
   <!-- The title of the header for the section for managing addresses. -->
   <string name="debug_drawer_addresses_management_header">Gestisci indirizzi</string>
   <!-- The title of the button in the debug drawer for adding a new address. -->
-  <string name="debug_drawer_add_new_address">Aggiungi un nuovo indirizzo per la lingua selezionata</string>
+  <string name="debug_drawer_add_new_address">Aggiungi un nuovo indirizzo per il locale selezionato</string>
   <!-- The title of the button for deleting in the debug drawer all addresses. -->
   <string name="debug_drawer_delete_all_addresses">Elimina tutti gli indirizzi</string>
   <!--
@@ -4128,7 +4128,7 @@
   -->
   <string name="debug_drawer_cfr_tools_title">Strumenti CFR</string>
   <!-- The title of the reset CFR section in CFR Tools -->
-  <string name="debug_drawer_cfr_tools_reset_cfr_title">Ripristina CFR</string>
+  <string name="debug_drawer_cfr_tools_reset_cfr_title">Reimposta CFR</string>
   <!--
     Glean debug tools
 
@@ -4156,7 +4156,7 @@
   <!-- The title of the button for overriding home and current region. -->
   <string name="debug_drawer_override_region">Sovrascrivi regioni home e corrente</string>
   <!-- The title of the button for overriding home region permanently. -->
-  <string name="debug_drawer_override_home_region_permanently">Sostituisci regione home in modo permanente</string>
+  <string name="debug_drawer_override_home_region_permanently">Sovrascrivi regione home in modo permanente</string>
   <!--
     Add-ons debug tools
 
@@ -4218,7 +4218,7 @@
   <!-- Push notification message about old Firefox version. "Update" is a verb. -->
   <string name="certificate_warning_push_notification_pnw2_message" tools:ignore="UnusedResources">Aggiorna prima del 14 marzo per continuare a utilizzare componenti aggiuntivi e altre caratteristiche.</string>
   <!-- Push notification message about old Firefox version -->
-  <string name="certificate_warning_push_notification_pnw3_message" tools:ignore="UnusedResources">Alcune funzioni smetteranno di funzionare da domani.</string>
+  <string name="certificate_warning_push_notification_pnw3_message" tools:ignore="UnusedResources">Alcune funzioni smetteranno di funzionare domani.</string>
   <!--
     Setup checklist feature
 
@@ -4657,7 +4657,7 @@
   <!-- Lens image search button content description -->
   <string name="lens_search_content_description">Cerca con immagine</string>
   <!-- Content description for the gallery picker button in the Lens camera screen -->
-  <string name="content_description_gallery">Seleziona una foto dalla galleria da inviare a Google Lens</string>
+  <string name="content_description_gallery">Seleziona dalla galleria un’immagine da inviare a Google Lens</string>
   <!-- Content description for the shutter button in the Lens camera screen -->
   <string name="content_description_take_photo">Scatta una foto e inviala a Google Lens</string>
   <!-- Image context menu entry that sends the long-pressed image to Google Lens -->
@@ -4679,7 +4679,7 @@
   <!-- Description for the Google Lens Search Settings page feature toggle -->
   <string name="search_settings_google_lens_description">Invia immagini e foto a Google per una ricerca visiva.</string>
   <!-- Caption shown under the Google Lens toggle clarifying when the feature is available -->
-  <string name="preferences_google_lens_availability_caption">Disponibile solo se Google è attivo ed è impostato come motore di ricerca predefinito durante la navigazione.</string>
+  <string name="preferences_google_lens_availability_caption">Disponibile solo se Google è attivo qui sopra ed è il motore di ricerca in uso durante la navigazione.</string>
   <!-- Content description for the Google Lens half of the camera mode toggle -->
   <string name="lens_camera_mode_lens">Google Lens</string>
   <!-- Content description for the QR scanner half of the camera mode toggle -->

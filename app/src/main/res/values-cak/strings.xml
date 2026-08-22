@@ -3322,6 +3322,8 @@
   <string name="search_add_custom_engine_suggest_url_label">API richin ri ruchilab\'exik kanoxïk (cha\'el)</string>
   <!-- Placeholder text shown in the Search Suggestion String TextField before a user enters text -->
   <string name="search_add_custom_engine_suggest_string_hint">API URL richin Kichilab\'exik Kanoxïk</string>
+  <!-- Description text for the Search Suggestion String TextField. The %s is part of the string -->
+  <string name="search_add_custom_engine_suggest_string_example_2" formatted="false">Tik\'ex k\'ulb\'enïk rik\'in “%s”. Achi\'el:\n https://suggestqueries.google.com/complete/search?client=firefox&amp;q=%s</string>
   <!-- The text for the "Save" button for saving a custom search engine -->
   <string name="search_custom_engine_save_button">Tiyak</string>
   <!-- Text shown when a user leaves the name field empty -->
@@ -3635,23 +3637,77 @@
   <string name="translation_option_bottom_sheet_switch_description">Ke\'achupu\' ri taq rusujunik tzalq\'omanïk</string>
   <!-- Button text for the button that will take the user to the translation settings dialog. -->
   <string name="translation_option_bottom_sheet_translation_settings">Taq runuk\'ulem tzalq\'omanïk</string>
+  <!-- Button text for the button that will take the user to a website to learn more about how translations works in the given app. %1$s is the name of the app (for example "Firefox"). -->
+  <string name="translation_option_bottom_sheet_about_translations">Chi kij ri taq tzalq\'omanïk pa %1$s</string>
+  <!-- Content description (not visible, for screen readers etc.) for closing the translations bottom sheet. -->
+  <string name="translation_option_bottom_sheet_close_content_description">Titz\'apïx ri ruxaq tzalq\'omanïk</string>
+  <!-- The title of the warning card informs the user that an error has occurred at page settings. -->
+  <string name="translation_option_bottom_sheet_error_warning_text">Jujun taq nuk\'ulem man e wachel ta jumej.</string>
+  <!--
+    Translation settings dialog
+
+    Title of the translation settings dialog that allows a user to set their preferred translation settings.
+  -->
+  <string name="translation_settings_toolbar_title">Taq tzalq\'omanïk</string>
+  <!-- Toggle switch label that indicates that the browser should signal or indicate when a translation is possible for any page. -->
+  <string name="translation_settings_offer_to_translate">Tisuj tzalq\'omanïk toq k\'atzinel</string>
+  <!-- Toggle switch label that indicates that downloading files required for translating is permitted when using data saver mode in Android. -->
+  <string name="translation_settings_always_download">Junelïk keqasäx taq ch\'ab\'äl pa yakoj taq tzij rub\'anikil</string>
+  <!-- Section header text that begins the section of a list of different options the user may select to adjust their translation preferences. -->
+  <string name="translation_settings_translation_preference">Taq rajowaxik tzalq\'omanïk</string>
   <!-- Button text for the button that will take the user to the automatic translations settings dialog. On the automatic translations settings dialog, the user can set if translations should occur automatically for a given language. -->
   <string name="translation_settings_automatic_translation">Ruyonil tzalq\'omanïk</string>
+  <!-- Button text for the button that will take the user to the never translate these sites dialog. On the never translate these sites dialog, the user can set if translations should never occur on certain websites. -->
+  <string name="translation_settings_automatic_never_translate_sites">Majub\'ey ketzalq\'omïx re taq ruxaq re\'</string>
+  <!-- Button text for the button that will take the user to the download languages dialog. On the download languages dialog, the user can manage which languages they would like to download for translations. -->
+  <string name="translation_settings_download_language">Keqasäx taq ch\'ab\'äl</string>
+  <!-- Toggle switch title and description for the translation settings control. -->
+  <string name="translation_settings_control_title">Taq tzalq\'omanïk</string>
+  <!-- Description for the translation settings toggle switch. -->
+  <string name="translation_settings_control_description">Konojel ri taq tzalq\'omanïk e k\'o pan ichinan chupam ri awokisaxel.</string>
+  <!-- Clickable text for the translations settings item that links to a website. -->
+  <string name="translation_settings_control_learn_more">Tetamäx ch\'aqa\' chik</string>
   <!--
     Automatic translation preference screen
 
     Title of the automatic translation preference screen that will appear on the toolbar.
   -->
   <string name="automatic_translation_toolbar_title_preference">Ruyonil tzalq\'omanïk</string>
+  <!-- Screen header presenting the automatic translation preference feature. It will appear under the toolbar. -->
+  <string name="automatic_translation_header_preference">Tacha\' jun ch\'ab\'äl richin nanuk\'samajij ri taq rajowaxik ”junelïk titzalq\'omïx“ chuqa\' ”majub\'ey titzalq\'omïx“.</string>
+  <!-- The title of the warning card informs the user that the system could not load languages for translation settings. -->
+  <string name="automatic_translation_error_warning_text">Man xesamajïx ta ri taq ch\'ab\'äl. Tatojtob\'ej na jub\'a\'.</string>
+  <!--
+    Automatic translation options preference screen
+
+    Preference option for offering to translate. Radio button title text.
+  -->
+  <string name="automatic_translation_option_offer_to_translate_title_preference">Tisuj tzalq\'omanïk (k\'o wi)</string>
+  <!-- Preference option for offering to translate. Radio button summary text. %1$s is the name of the app (for example "Firefox"). -->
+  <string name="automatic_translation_option_offer_to_translate_summary_preference">%1$s xtusüj chi yerutzalq\'omij taq ruxaq pa re ch\'ab\'äl re\'.</string>
   <!-- Preference option for always translate. Radio button title text. -->
   <string name="automatic_translation_option_always_translate_title_preference">Junelïk titzalq\'omïx</string>
+  <!-- Preference option for always translate. Radio button summary text. %1$s is the name of the app (for example "Firefox"). -->
+  <string name="automatic_translation_option_always_translate_summary_preference">%1$s xtutzalq\'omij re ch\'ab\'äl re\' pa ruyonil toq xtisamajib\'ëx ri ruxaq.</string>
   <!-- Preference option for never translate. Radio button title text. -->
   <string name="automatic_translation_option_never_translate_title_preference">Majub\'ey titzalq\'omïx</string>
+  <!-- Preference option for never translate. Radio button summary text. %1$s is the name of the app (for example "Firefox"). -->
+  <string name="automatic_translation_option_never_translate_summary_preference">%1$s majub\'ey xtusüj chi yerutzalq\'omij taq ruxaq pa re ch\'ab\'äl re\'.</string>
+  <!--
+    Never translate site preference screen
+
+    Title of the never translate site preference screen that will appear on the toolbar.
+  -->
+  <string name="never_translate_site_toolbar_title_preference">Majub\'ey ketzalq\'omïx re taq ruxaq re\'</string>
+  <!-- Screen header presenting the never translate site preference feature. It will appear under the toolbar. -->
+  <string name="never_translate_site_header_preference">Richin nitz\'aqatisäx jun k\'ak\'a\' ruxaq: katok chuqa\' tacha\' “Majub\'ey titzalq\'omïx re ruxaq re\'” pa rucha\'osamajib\'al tzalq\'omanïk.</string>
   <!--
     Content description (not visible, for screen readers etc.): For a never-translated site list item that is selected.
     %1$s is web site url (for example:"wikipedia.com")
   -->
   <string name="never_translate_site_item_list_content_description_preference">Tiyuj %1$s</string>
+  <!-- The title of the warning card informs the user that an error has occurred at the never translate sites list. -->
+  <string name="never_translate_site_error_warning_text">Man xesamajib\'ëx ta ri taq ruxaq. Tatojtob\'ej chik na.</string>
   <!--
     The Delete site dialogue title will appear when the user clicks on a list item.
     %1$s is web site url (for example:"wikipedia.com")
@@ -3667,6 +3723,8 @@
     Title of the toolbar for the translation feature screen where users may download different languages for translation.
   -->
   <string name="download_languages_translations_toolbar_title_preference">Keqasäx taq ch\'ab\'äl</string>
+  <!-- Screen header presenting the download language preference feature. It will appear under the toolbar. %1$s is a link using download_languages_header_learn_more_preference as text ("Learn more"). Talkback will append this to say "Double tap to open link to learn more". -->
+  <string name="download_languages_header_preference">Keqasäx tz\'aqät taq ch\'ab\'äl richin nitzalq\'omïx anin chuqa\' toq majun okem. %1$s</string>
   <!-- Clickable text from the screen header that links to a website. -->
   <string name="download_languages_header_learn_more_preference">Tetamäx ch\'aqa\' chik</string>
   <!-- The subhead of the download language preference screen will appear above the pivot language. -->
@@ -3683,16 +3741,77 @@
   <string name="download_language_header_preference">Keqasäx taq ch\'ab\'äl</string>
   <!-- All languages list item. When the user presses this item, they can download all languages. -->
   <string name="download_language_all_languages_item_preference">Ronojel taq ch\'ab\'äl</string>
+  <!-- All languages list item. When the user presses this item, they can delete all languages that were downloaded. -->
+  <string name="download_language_all_languages_item_preference_to_delete">Keyuj ronojel taq ch\'ab\'äl</string>
   <!-- Content description (not visible, for screen readers etc.): For a language list item that was downloaded, the user can now delete it. -->
   <string name="download_languages_item_content_description_downloaded_state">Tiyuj</string>
   <!-- Content description (not visible, for screen readers etc.): For a language list item, deleting is in progress. -->
   <string name="download_languages_item_content_description_delete_in_progress_state">Nitajin</string>
+  <!--
+    Content description (not visible, for screen readers etc.): For a language list item, downloading is in progress.
+    %1$s is the language name, for example, "Spanish".
+    %2$s is the language file size, for example, "(3.91 KB)".
+  -->
+  <string name="download_languages_item_content_description_download_in_progress_state">Tiq\'at ruqasaxik %1$s (%2$s)</string>
   <!-- Content description (not visible, for screen readers etc.): For a language list item that was not downloaded. -->
   <string name="download_languages_item_content_description_not_downloaded_state">Tiqasäx</string>
+  <!-- The title of the warning card informs the user that an error has occurred when fetching the list of languages. -->
+  <string name="download_languages_fetch_error_warning_text">Man xesamajïx ta ri taq ch\'ab\'äl. Tatojtob\'ej na jub\'a\'.</string>
+  <!--
+    The title of the warning card informs the user that an error has occurred at downloading a language.
+    %1$s is the language name, for example, "Spanish".
+  -->
+  <string name="download_languages_error_warning_text"><![CDATA[Man tikirel ta xqasäx <b>%1$s</b>. Tatojtob\'ej chik.]]></string>
+  <!--
+    The title of the warning card informs the user that an error has occurred at deleting a language.
+    %1$s is the language name, for example, "Spanish".
+  -->
+  <string name="download_languages_delete_error_warning_text"><![CDATA[Man tikirel ta xyuj <b>%1$s</b>. Tatojtob\'ej chik.]]></string>
+  <!--
+    Title for the dialog used by the translations feature to confirm deleting a language.
+    The dialog will be presented when the user requests deletion of a language.
+    %1$s is the name of the language, for example, "Spanish" and %2$s is the size in kilobytes or megabytes of the language file.
+  -->
+  <string name="delete_language_file_dialog_title">¿La niyuj %1$s (%2$s)?</string>
+  <!-- Additional information for the dialog used by the translations feature to confirm deleting a language. %1$s is the name of the app (for example "Firefox"). -->
+  <string name="delete_language_file_dialog_message">We nayüj re ch\'ab\'äl re\', %1$s xkeruqasaj nik\'aj taq ch\'ab\'äl pa kache\' toq nitzalqomin.</string>
+  <!--
+    Title for the dialog used by the translations feature to confirm deleting all languages file.
+    The dialog will be presented when the user requests deletion of all languages file.
+    %1$s is the size in kilobytes or megabytes of the language file.
+  -->
+  <string name="delete_language_all_languages_file_dialog_title">¿La yeyuj ronojel taq ch\'ab\'äl (%1$s)?</string>
+  <!-- Additional information for the dialog used by the translations feature to confirm deleting all languages file. %1$s is the name of the app (for example "Firefox"). -->
+  <string name="delete_language_all_languages_file_dialog_message">We ye\'ayüj ronojel ri ch\'ab\'äl, %1$s xkeruqasaj nik\'aj taq ch\'ab\'äl pa kache\' toq nitzalqomin.</string>
   <!-- Button text on the dialog used by the translations feature to confirm deleting a language. -->
   <string name="delete_language_file_dialog_positive_button_text">Tiyuj</string>
   <!-- Button text on the dialog used by the translations feature to cancel deleting a language. -->
   <string name="delete_language_file_dialog_negative_button_text">Tiq\'at</string>
+  <!--
+    Title for the data saving mode warning dialog used by the translations feature.
+    This dialog will be presented when the user attempts to download a language or perform
+    a translation without the necessary language files downloaded first when Android's data saver mode is enabled and the user is not using WiFi.
+    %1$s is the size in kilobytes or megabytes of the language file.
+  -->
+  <string name="download_language_file_dialog_title">¿La niqasäx toq at k\'o pa yakoj taq tzij rub\'anikil (%1$s)?</string>
+  <!-- Additional information for the data saving mode warning dialog used by the translations feature. This text explains the reason a download is required for a translation. -->
+  <string name="download_language_file_dialog_message_all_languages">Yeqaqasaj nik\'aj taq ch\'ab\'äl pan akache\' richin chi e ichinan ri taq tzalq\'omanïk.</string>
+  <!-- Checkbox label text on the data saving mode warning dialog used by the translations feature. This checkbox allows users to ignore the data usage warnings. -->
+  <string name="download_language_file_dialog_checkbox_text">Junelïk keqasäx pa yakoj taq tzij rub\'anikil</string>
+  <!-- Button text on the data saving mode warning dialog used by the translations feature to allow users to confirm they wish to continue and download the language file. -->
+  <string name="download_language_file_dialog_positive_button_text">Tiqasäx</string>
+  <!-- Button text on the data saving mode warning dialog used by the translations feature to allow users to confirm they wish to continue and download the language file and perform a translation. -->
+  <string name="download_language_file_dialog_positive_button_text_all_languages">Tiqasäx chuqa\' titzalq\'omïx</string>
+  <!-- Button text on the data saving mode warning dialog used by the translations feature to allow users to cancel the action and not perform a download of the language file. -->
+  <string name="download_language_file_dialog_negative_button_text">Tiq\'at</string>
+  <!--
+    Unified Trust Panel
+
+    Title text for the protection panel banner when the site is not secure.
+  -->
+  <string name="protection_panel_banner_not_secure_title">Tachajij awi\' pa re ruxaq re\'</string>
+  <!-- Description text for the protection panel banner when the site is not secure. -->
+  <string name="protection_panel_banner_not_secure_description">Itzel ri awokem</string>
   <!-- Title text for the protection panel banner when tracking protection is disabled. -->
   <string name="protection_panel_banner_not_protected_title">Xe\'achüp ri taq chajinïk</string>
   <!--
@@ -3902,22 +4021,102 @@
   <string name="likert_scale_option_1" tools:ignore="UnusedResources">Jumul yikikot</string>
   <!-- Option for likert scale -->
   <string name="likert_scale_option_2" tools:ignore="UnusedResources">Yikikot</string>
+  <!-- Option for likert scale -->
+  <string name="likert_scale_option_3" tools:ignore="UnusedResources">Pa nik\'aj</string>
+  <!-- Option for likert scale -->
+  <string name="likert_scale_option_4" tools:ignore="UnusedResources">Me\'ütz</string>
+  <!-- Option for likert scale -->
+  <string name="likert_scale_option_5" tools:ignore="UnusedResources">Yalan me\'ütz</string>
+  <!-- Option for likert scale -->
+  <string name="likert_scale_option_6" tools:ignore="UnusedResources">Man ninwokisaj ta</string>
+  <!-- Option for likert scale. Note: The word "Firefox" should NOT be translated. -->
+  <string name="likert_scale_option_7" tools:ignore="BrandUsage,UnusedResources">Man ninwokisaj ta ri kanoxïk pa Firefox</string>
+  <!-- Option for likert scale -->
+  <string name="likert_scale_option_8" tools:ignore="UnusedResources">Man ninwokisaj ta ri sync</string>
+  <!-- Option for likert scale -->
+  <string name="likert_scale_option_slow_or_buggy" tools:ignore="UnusedResources">Eqal o k\'ïy rusachoj</string>
+  <!-- Option for likert scale -->
+  <string name="likert_scale_option_features_hard_to_find_or_missing" tools:ignore="UnusedResources">Ri taq rusamaj k\'ayew richin ye\'ilitäj o man e k\'o ta</string>
+  <!-- Option for likert scale -->
+  <string name="likert_scale_option_confusing_or_hard_to_use" tools:ignore="UnusedResources">Yatrusäch o k\'ayew rokisaxik</string>
+  <!-- Option for likert scale -->
+  <string name="likert_scale_option_its_okay" tools:ignore="UnusedResources">Ütz, po man ütz ta chi kiwäch ch\'aqa\' chik taq kanob\'äl</string>
+  <!-- Option for likert scale. Note: The word "Firefox" should NOT be translated. -->
+  <string name="likert_scale_option_i_plan_to_keep_using" tools:ignore="BrandUsage,UnusedResources">Nina\'ojin k\'a ninwokisaj na Firefox</string>
+  <!-- Text shown in prompt for printing microsurvey. "sec" It's an abbreviation for "second". Note: The word "Firefox" should NOT be translated. -->
+  <string name="microsurvey_prompt_printing_title" tools:ignore="BrandUsage,UnusedResources">Kato\'on richin ütz nitz\'ajb\'äx pa Firefox. Xa xe nuk\'waj jun ch\'utiramaj.</string>
+  <!-- Text shown in prompt for search microsurvey. Note: The word "Firefox" should NOT be translated. -->
+  <string name="microsurvey_prompt_search_title" tools:ignore="BrandUsage,UnusedResources">Kato\'on richin ye\'utziläx taq kanoxïk pa Firefox. Xa xe nuk\'waj jun ch\'utiramaj.</string>
+  <!-- Text shown in prompt for sync microsurvey. Note: The word "Firefox" should NOT be translated. -->
+  <string name="microsurvey_prompt_sync_title" tools:ignore="BrandUsage,UnusedResources">Kato\'on richin nutziläx taq ximoj pa Firefox. Xa xe nuk\'waj jun ch\'utiramaj.</string>
+  <!-- Text shown in the survey title for printing microsurvey. Note: The word "Firefox" should NOT be translated. -->
+  <string name="microsurvey_survey_printing_title" tools:ignore="BrandUsage,UnusedResources">¿Achi\'el ana\'on rik\'in ri tz\'ajb\'anïk pa Firefox?</string>
+  <!-- Text shown in the survey title for homepage microsurvey. Note: The word "Firefox" should NOT be translated. -->
+  <string name="microsurvey_homepage_title" tools:ignore="BrandUsage,UnusedResources">¿Achi\'el ana\'on rik\'in ri tikirib\'äl ruxaq Firefox?</string>
+  <!-- Text shown in the survey title for search experience microsurvey. Note: The word "Firefox" should NOT be translated. -->
+  <string name="microsurvey_search_title" tools:ignore="BrandUsage,UnusedResources">¿Achi\'el ana\'on rik\'in ri retamaxik kanoxïk pa Firefox?</string>
+  <!-- Text shown in the survey title for sync experience microsurvey. Note: The word "Firefox" should NOT be translated. -->
+  <string name="microsurvey_sync_title" tools:ignore="BrandUsage,UnusedResources">¿Achi\'el ana\'on rik\'in ri retamaxik ximoj pa Firefox?</string>
+  <!-- Text shown in the survey title for 'describe your experience so far' microsurvey. Note: The word "Firefox" should NOT be translated. -->
+  <string name="microsurvey_describe_your_experience_title" tools:ignore="BrandUsage,UnusedResources">Kojato\' richin niqutzilaj Firefox. ¿Achike ütz nuq\'alajisaj ri awetamab\'al k\'a wakami?</string>
+  <!--
+    Uninstall Survey
+
+    Title text for the uninstall survey dialog, asking the user for the reason they are removing the app
+  -->
+  <string name="microsurvey_uninstall_survey_title">Yalan rejqalem ri atzij. ¿Aruma toq nameyäk?</string>
+  <!-- Uninstall survey answer option -->
+  <string name="uninstall_survey_option_1_v2">Yalan eqal o jub\'a\' mejikÏl</string>
+  <!-- Uninstall survey answer option -->
+  <string name="uninstall_survey_option_2_v2">Ri taq ajk\'am ruxaq ma yesamäj ta ütz</string>
+  <!-- Uninstall survey answer option -->
+  <string name="uninstall_survey_option_3_v2">E k\'o taq samajib\'äl ri man e k\'o ta</string>
+  <!-- Uninstall survey answer option -->
+  <string name="uninstall_survey_option_4_v2">Ri taq silowäch, taq qasanïk o ri kiyakb\'al q\'ojom man yesamäj ta</string>
+  <!-- Uninstall survey answer option -->
+  <string name="uninstall_survey_option_5_v2">K\'ayew rokisaxik o man ütz ta nuk\'un</string>
+  <!-- Uninstall survey answer option -->
+  <string name="uninstall_survey_option_6_v2">Mayoj chi kij ri ichinaxïk o chuqa\' chi rij ri jikomal</string>
+  <!-- Button label shown at the bottom of the uninstall survey -->
+  <string name="uninstall_survey_button_label">Ketaq taq tzij chuqa\' timeyak</string>
+  <!--
+    Accessibility
+
+    Content description for the survey application icon. Note: The word "Firefox" should NOT be translated.
+  -->
+  <string name="microsurvey_app_icon_content_description" tools:ignore="BrandUsage">Firefox wachib\'äl</string>
+  <!-- Content description for the survey feature icon. -->
+  <string name="microsurvey_feature_icon_content_description">Ruwäch rusamajib\'al enkwesta</string>
+  <!-- Content description (not visible, for screen readers etc.) for closing microsurvey bottom sheet. -->
+  <string name="microsurvey_close_handle_content_description">Titz\'apïx enkwesta</string>
   <!-- Content description for "X" button that is closing microsurvey. -->
   <string name="microsurvey_close_button_content_description">Titz\'apïx</string>
+  <!-- The title of the autofill tab in the Debug Drawer. -->
+  <string name="debug_drawer_autofill_title">Kisamajib\'al yonil ninojisäx</string>
   <!--
     Debug drawer logins
 
     The title of the Logins feature in the Debug Drawer.
   -->
   <string name="debug_drawer_logins_title">Kitikirisaxik taq molojri\'ïl</string>
+  <!-- The title of the logins section in the Logins feature. %s is the site domain. -->
+  <string name="debug_drawer_logins_current_domain_label">Dominio k\'o: %s</string>
+  <!-- The label for a button to add a new fake login for the current domain in the Logins feature. -->
+  <string name="debug_drawer_logins_add_login_button">Titz\'aqatisäx jun manya okem chi re re dominio re\'</string>
+  <!-- Content description for delete button. %s is the username of the login. -->
+  <string name="debug_drawer_logins_delete_login_button_content_description">Tiyuj rutikirib\'al molojri\'ïl rik\'in rub\'i\' okisanel %s</string>
   <!--
     Debug drawer addresses
 
     The title of the Addresses feature in the Debug Drawer.
   -->
   <string name="debug_drawer_addresses_title">Taq ochochib\'äl</string>
+  <!-- The title of the section header for the list of debug locales that can be enabled and disabled. -->
+  <string name="debug_drawer_addresses_debug_locales_header">Ruch\'ab\'äl chojmisanem richin nitzij</string>
   <!-- The title of the header for the section for managing addresses. -->
   <string name="debug_drawer_addresses_management_header">Kenuk\'samajïx taq ochochib\'äl</string>
+  <!-- The title of the button in the debug drawer for adding a new address. -->
+  <string name="debug_drawer_add_new_address">Titz\'aqatisäx jun k\'ak\'a\' ochochib\'äl richin ri k\'ojlib\'äl xcha\'</string>
   <!-- The title of the button for deleting in the debug drawer all addresses. -->
   <string name="debug_drawer_delete_all_addresses">Keyuj ronojel ochochib\'äl</string>
   <!--
@@ -3928,6 +4127,52 @@
   <string name="debug_drawer_credit_cards_title">Rutarjeta\' kre\'ito\'</string>
   <!-- The title of the button in the debug drawer for adding a new credit card -->
   <string name="debug_drawer_add_new_credit_card">Titz\'aqatisäx rutarjeta\' kre\'ito\'</string>
+  <!-- The title of the button for deleting in the debug drawer all addresses. -->
+  <string name="debug_drawer_delete_all_credit_cards">Keyuj ronojel ri kre\'ito tarjeta\'</string>
+  <!--
+    Debug drawer "contextual feature recommendation" (CFR) tools
+
+    The title of the CFR Tools feature in the Debug Drawer
+  -->
+  <string name="debug_drawer_cfr_tools_title">CFR taq samajib\'äl</string>
+  <!-- The title of the reset CFR section in CFR Tools -->
+  <string name="debug_drawer_cfr_tools_reset_cfr_title">Titzij chik CFRs</string>
+  <!--
+    Glean debug tools
+
+    The title of the glean debugging feature
+  -->
+  <string name="glean_debug_tools_title">KIsamjib\'al ruchojmisanik Glean</string>
+  <!--
+    Debug drawer region tools
+
+    Title of the Region tools in the Debug Drawer.
+    This tool allows temporarily overriding the home region (user's default locale)
+    and the current region (device's detected location) for testing purposes.
+  -->
+  <string name="debug_drawer_region_tools_title">Kisamajib\'al taq k\'ojlib\'äl</string>
+  <!-- The description of the Region tools in the Debug Drawer -->
+  <string name="debug_drawer_regin_tools_description">Jumej yeruk\'ëx ri taq retal rutikirib\'al k\'ojlib\'äl chuq\'a ri k\'o wakami richin ri tojtob\'enïk</string>
+  <!-- The text label for displaying home region. -->
+  <string name="debug_drawer_home_region_label">Ruxe\' k\'ojlib\'äl</string>
+  <!-- The text label for displaying current region. -->
+  <string name="debug_drawer_current_region_label">K\'ojlib\'äl wakami</string>
+  <!-- The text field label for overriding home region. -->
+  <string name="debug_drawer_override_home_region_label">Tik\'ex ruxe\' k\'ojlib\'äl</string>
+  <!-- The text field label for overriding current region. -->
+  <string name="debug_drawer_override_current_region_label">Tik\'ex k\'ojlib\'äl k\'o wakami</string>
+  <!-- The title of the button for overriding home and current region. -->
+  <string name="debug_drawer_override_region">Tik\'ex ri rutikirib\'al k\'ojlib\'äl chuqa\' ri wakami</string>
+  <!-- The title of the button for overriding home region permanently. -->
+  <string name="debug_drawer_override_home_region_permanently">Jumul tik\'ëx ri ruxe\' k\'ojlib\'äl</string>
+  <!--
+    Add-ons debug tools
+
+    The description of the Add-ons Tools in the Debug Drawer
+  -->
+  <string name="debug_drawer_addons_tools_title">Kisamajib\'al taq tz\'aqat</string>
+  <!-- The title of the button used to check for add-on updates. -->
+  <string name="addons_debug_tools_check_for_updates_button">Kekanöx taq k\'exoj</string>
   <!--
     Messages explaining how to exit fullscreen mode
 
@@ -3958,6 +4203,8 @@
   <string name="certificate_warning_homepage_card_update_now_button" tools:ignore="UnusedResources">Tak\'exa\' ruwäch wakami</string>
   <!-- Homepage card title about old Firefox version. "Update" is a verb. Note: The word "Firefox" should NOT be translated. -->
   <string name="certificate_warning_homepage_card_hca1_title" tools:ignore="BrandUsage,UnusedResources">Tak\'exa\' ruwäch ri Firefox okik\'amaya\'l</string>
+  <!-- Homepage card message about old Firefox version -->
+  <string name="certificate_warning_homepage_card_hca1_message" tools:ignore="UnusedResources">Jun ruxe\'el sertipika\'o xtik\'o ruq\'ijul, ri nub\'än chi jujun taq samajib\'äl man xkesamäj ta chik pa ri 14 q\'ij richin marso.</string>
   <!-- Homepage card title about old Firefox version. "Update" is a verb. -->
   <string name="certificate_warning_homepage_card_hcr1_title" tools:ignore="UnusedResources">Tak\'exa\' chuwäch ri 14 q\'ij richin marso</string>
   <!-- Homepage card message about old Firefox version. Note: The word "Firefox" should NOT be translated. -->
@@ -3972,8 +4219,88 @@
   <string name="certificate_warning_homepage_card_hcw3_message" tools:ignore="BrandUsage,UnusedResources">Ri ruwäch a Firefox man xtisamäj ta chik ütz ri 14 q\'ij richin marso ruma jun sertipika\'o xtik\'o ruq\'ijul.</string>
   <!-- Push notification title about old Firefox version. "Update" is a noun. -->
   <string name="certificate_warning_push_notification_update_recommended_title" tools:ignore="UnusedResources">K\'exoj chilab\'en</string>
+  <!-- Push notification message about old Firefox version -->
+  <string name="certificate_warning_push_notification_pnr1_message" tools:ignore="UnusedResources">Ri taq tz\'aqat chuqa\' jujun taq samajib\'äl man xkesamäj ta chik ri 14 q\'ij richin marso.</string>
+  <!-- Push notification title about old Firefox version. Note: The word "Firefox" should NOT be translated. -->
+  <string name="certificate_warning_push_notification_pnw2_title" tools:ignore="BrandUsage,UnusedResources">At k\'o pa jun ojer ruwäch chi Firefox</string>
+  <!-- Push notification message about old Firefox version. "Update" is a verb. -->
+  <string name="certificate_warning_push_notification_pnw2_message" tools:ignore="UnusedResources">Tak\'exa\' chuwäch ri 14 q\'ij richin marso richin k\'a ye\'awokisaj na ri taq tz\'aqat chuqa\' ch\'aqa\' chik taq samajib\'äl.</string>
+  <!-- Push notification message about old Firefox version -->
+  <string name="certificate_warning_push_notification_pnw3_message" tools:ignore="UnusedResources">Jujun taq samajib\'äl man xkesamäj ta chik chwa\'q.</string>
   <!-- TextField Design System Component -->
 
+  <!--
+    Setup checklist feature
+
+    ===== Setup checklist feature: Title =====
+
+    Title for the setup checklist feature when the state is 'incomplete'. %1$s is the name of the app (for example "Firefox").
+  -->
+  <string name="setup_checklist_title_state_incomplete">Tik\'is runuk\'samajixik %1$s</string>
+  <!-- Title for the setup checklist feature when the state is 'completed' -->
+  <string name="setup_checklist_title_state_completed">¡Kakikot!</string>
+  <!--
+    ===== Setup checklist feature: Subtitles for 3 steps =====
+
+    Subtitle for a setup checklist with 3 steps initial step. %1$s is the name of the app (for example "Firefox").
+  -->
+  <string name="setup_checklist_subtitle_3_steps_initial_state">Ke\'atz\'aqatisaj re 3 taq xak re\' richin nanuk\'samajij %1$s richin yak\'astan rik\'in ri utziläj na\'oj richin okik\'amaya\'l.</string>
+  <!-- Subtitle for a setup checklist with 3 steps when the first task is completed. -->
+  <string name="setup_checklist_subtitle_3_steps_first_step">¡Ütz rutikirib\'axik! Xatz\'aqatisaj 1 richin ri e 3 taq xak.</string>
+  <!-- Subtitle for a setup checklist with 3 steps when two of the tasks are completed. -->
+  <string name="setup_checklist_subtitle_3_steps_second_step">¡B\'a chik! Ka\'i\' taq xak chuqa\' 1 xtitz\'aqatisäx.</string>
+  <!-- Subtitle for a setup checklist with 3 steps completed state. %1$s is the name of the app (for example "Firefox"). -->
+  <string name="setup_checklist_subtitle_3_steps_completed_state">Xe\'atz\'aqatisaj ri 3 taq xaq. Tak\'owisaj ak\'u\'x rik\'in ri aninem, ri ichinanem chuqa\' ri rujikomal %1$s.</string>
+  <!--
+    ===== Setup checklist feature: Subtitles for 6 steps =====
+
+    Subtitle for a setup checklist with 6 steps initial state. %1$s is the name of the app (for example "Firefox").
+  -->
+  <string name="setup_checklist_subtitle_6_steps_initial_state">Ke\'atz\'aqatisaj ri 6 taq xak richin nanuk\'samajij %1$s richin yak\'astan rik\'in ri utziläj na\'oj richin okik\'amaya\'l.</string>
+  <!-- Subtitle for a setup checklist with 6 steps when the first task is completed. -->
+  <string name="setup_checklist_subtitle_6_steps_first_step">¡Ütz rutikirib\'axik! Xatz\'aqatisaj 1 richin ri e 6 taq xak.</string>
+  <!-- Subtitle for the setup checklist when the second task is completed. -->
+  <string name="setup_checklist_subtitle_6_steps_second_step">Xe\'atz\'aqatisaj 2 chi re ri 6 taq xak. ¡Ütz atb\'enäq!</string>
+  <!-- Subtitle for a setup checklist with 6 steps when three of the tasks are completed. -->
+  <string name="setup_checklist_subtitle_6_steps_third_step">¡Xanik\'ajär yan! Oxi\' taq xak etz\'aqatisan chuqa\' 3 xketz\'aqatisäx.</string>
+  <!-- Subtitle for a setup checklist with 6 steps when the fourth task is completed. -->
+  <string name="setup_checklist_subtitle_6_steps_fourth_step">Xe\'ab\'än yan 4 taq xak. ¡Xa xe chik 2!</string>
+  <!-- Subtitle for a setup checklist with 6 steps when the fifth task is completed. -->
+  <string name="setup_checklist_subtitle_6_steps_fifth_step">¡Nik\'is yan! 1 chik xak richin yatapon pa ri q\'i\'ob\'äl.</string>
+  <!-- Subtitle for a setup checklist with 6 steps completed state. %1$s is the name of the app (for example "Firefox"). -->
+  <string name="setup_checklist_subtitle_6_steps_completed_state">Xe\'atz\'aqatisaj ronojel ri 6 taq xaq. Tak\'owisaj ak\'u\'x rik\'in ri aninem, ri ichinanem chuqa\' ri rujikomal %1$s.</string>
+  <!--
+    ===== Setup checklist feature: Subtitles for 5 steps (Large screen devices don't support toolbar placement) =====
+
+    Subtitle for a setup checklist with 5 steps initial state. %1$s is the name of the app (for example "Firefox").
+  -->
+  <string name="setup_checklist_subtitle_5_steps_initial_state">Ke\'atz\'aqatisaj ri 5 taq xak richin nanuk\'samajij %1$s richin yak\'astan rik\'in ri utziläj na\'oj richin okik\'amaya\'l.</string>
+  <!-- Subtitle for a setup checklist with 5 steps when the first task is completed. -->
+  <string name="setup_checklist_subtitle_5_steps_first_step">¡Ütz rutikirib\'axik! Xatz\'aqatisaj 1 richin ri e 5 taq xak.</string>
+  <!-- Subtitle for the setup checklist when the second task is completed. -->
+  <string name="setup_checklist_subtitle_5_steps_second_step">Xe\'atz\'aqatisaj 2 chi re ri 5 taq xak. ¡Ütz atb\'enäq!</string>
+  <!-- Subtitle for a setup checklist with 5 steps when three of the tasks are completed. -->
+  <string name="setup_checklist_subtitle_5_steps_third_step">¡Xanik\'ajär yan! Oxi\' taq xak etz\'aqatisan chuqa\' 2 xketz\'aqatisäx.</string>
+  <!-- Subtitle for a setup checklist with 5 steps when the fifth task is completed. -->
+  <string name="setup_checklist_subtitle_5_steps_fourth_step">¡Nik\'is yan! 1 chik xak richin yatapon pa ri q\'i\'ob\'äl.</string>
+  <!-- Subtitle for a setup checklist with 5 steps completed state. %1$s is the name of the app (for example "Firefox"). -->
+  <string name="setup_checklist_subtitle_5_steps_completed_state">Xe\'atz\'aqatisaj ronojel ri 5 taq xaq. Tak\'owisaj ak\'u\'x rik\'in ri aninem, ri ichinanem chuqa\' ri rujikomal %1$s.</string>
+  <!--
+    ===== Setup checklist feature: Task titles =====
+
+    The title of the default browser task for the setup checklist
+  -->
+  <string name="setup_checklist_task_default_browser">Tiya\' kan achi\'el kanob\'äl k\'o wi</string>
+  <!-- The title of the sign-in task for the setup checklist -->
+  <string name="setup_checklist_task_account_sync">Katok pa rub\'i\' ataqoya\'l</string>
+  <!-- The title of the theme selection task for the setup checklist -->
+  <string name="setup_checklist_task_theme_selection">Tacha\' jun ruwäch</string>
+  <!-- The title of the toolbar selection task for the setup checklist -->
+  <string name="setup_checklist_task_toolbar_selection">Tacha\' ruk\'ojlib\'al raj samajib\'äl</string>
+  <!-- The title of the explore extensions task for the setup checklist -->
+  <string name="setup_checklist_task_explore_extensions">Kekanöx taq k\'amal</string>
+  <!-- The title of the search widget task for the setup checklist -->
+  <string name="setup_checklist_task_search_widget_2">Tanik\'oj ri widget richin kanoxïk</string>
   <!--
     ===== Setup checklist feature: Group titles =====
 
@@ -3982,6 +4309,14 @@
   <string name="setup_checklist_group_essentials">%1$s erajowaxik</string>
   <!-- The title of the 'customize' group in the setup checklist. %1$s is the name of the app (for example "Firefox"). -->
   <string name="setup_checklist_group_customize">Tawichinaj %1$s awichin</string>
+  <!-- The title of the 'helpful tools' group in the setup checklist -->
+  <string name="setup_checklist_group_helpful_tools">Ütz taq samajib\'äl</string>
+  <!--
+    ===== Setup checklist feature: Button =====
+
+    Text for the 'remove' button for the setup checklist
+  -->
+  <string name="setup_checklist_button_remove">Tiyuj rucholajem jikib\'anïk</string>
   <!--
     ===== Setup checklist feature: Accessibility =====
 
@@ -3990,10 +4325,46 @@
   <string name="a11y_completed_task_description">Xtz\'aqät samaj</string>
   <!-- Accessibility description for the task icon -->
   <string name="a11y_task_icon_description">Ruwachaj samaj</string>
+  <!--
+    Private browsing mode authentication screen
+
+    Label for the secondary action to exit private browsing mode
+  -->
+  <string name="pbm_authentication_leave_private_tabs">Keya\' kan ichinan taq ruwi\'</string>
+  <!-- Label for the primary action button to unlock private tabs -->
+  <string name="pbm_authentication_unlock">Titzij chik</string>
+  <!-- Title text instructing the user to unlock private tabs -->
+  <string name="pbm_authentication_unlock_private_tabs">Man keq\'at ri ichinan taq ruwi\'</string>
+  <!-- Authentication prompt title to enable the private tabs mode -->
+  <string name="pbm_authentication_enable_lock">Titz\'ij ri ruq\'atik kiwäch ichinan taq ruwi\'</string>
+  <!-- Authentication prompt title to disable the private tabs mode -->
+  <string name="pbm_authentication_disable_lock">Tichup ri ruq\'atik kiwäch ichinan taq ruwi\'</string>
+  <!-- Label for a preference shown when the device supports screen lock (e.g., PIN, pattern, or password) but the user has not set one up. -->
+  <string name="pbm_authentication_lock_device_feature_disabled">Tinuk\'samajïx ruq\'atik ruwäch richin ye\'ewäx taq ruwi\'</string>
+  <!-- Title text for the contextual feature recommendation (CFR) suggesting the user enable a screen lock to protect private tabs -->
+  <string name="private_tab_cfr_title">¿La nokisäx ri ruq\'atik ruwäch richin ye\'ewäx ri ichinan taq ruwi\'?</string>
   <!-- Negative button text for the contextual feature recommendation (CFR) dismissing the screen lock suggestion -->
   <string name="private_tab_cfr_negative">Mani matyox</string>
   <!-- Positive button text for the contextual feature recommendation (CFR) enabling screen lock for private tabs -->
   <string name="private_tab_cfr_positive">Keq\'at ruwi\'</string>
+  <!--
+    Review prompt
+
+    Title for a prompt asking the user about their experience using the app. %1$s is the name of the app (for example "Firefox").
+  -->
+  <string name="review_prompt_pre_prompt_header">¿Achike nab\'ij chi rij ri %1$s?</string>
+  <!-- Label for a button negatively rating the user's experience with the app -->
+  <string name="review_prompt_negative_button">K\'o nuk\'ayewal</string>
+  <!-- Label for a button positively rating the user's experience with the app -->
+  <string name="review_prompt_positive_button">¡Yalan tik\'asäs!</string>
+  <!-- Title for a prompt asking the user to rate the app on Google Play Store. %1$s is the name of the app (for example "Firefox"). -->
+  <string name="review_prompt_rate_header">Matyox ruma ri awajowaxik chi re ri %1$s. ¿La k\'o aramaj richin nakomonij ri awajowaxik rik\'in pajb\'äl?</string>
+  <!-- Label for a button proceeding to rate the app on Google Play Store. %1$s is the name of the app (for example "Firefox"). -->
+  <string name="review_prompt_rate_button">Tapaja\' %1$s pa Play Store</string>
+  <!-- Title for a prompt asking the user send us feedback. %1$s is the name of the app (for example "Firefox"). -->
+  <string name="review_prompt_feedback_header">Niqajoyowaj awäch ruma k\'o ak\'ayewal. Tab\'ij chi qe achike rub\'eyal niqutzilaj %1$s.</string>
+  <!-- Label for a button opening a feedback forum -->
+  <string name="review_prompt_feedback_button">Taya\' kan jun na\'oj</string>
   <!--
     Settings Search Strings
 
@@ -4008,8 +4379,30 @@
   <string name="settings_search_empty_query_placeholder">Majun k\'ak\'a\' taq kanoxïk</string>
   <!-- Text of button allowing to clear history of recent searches done in the settings screen. -->
   <string name="settings_search_clear_recent_searches_message">Tijosq\'ïx ronojel</string>
+  <!-- Section header for recent search results -->
+  <string name="settings_search_recent_searches_section_header">Ketal ri nimakol kekanöx</string>
+  <!-- Message displayed when the search field is not empty but search results is empty. -->
+  <string name="settings_search_no_results_title">Majun xq\'alajin pe</string>
+  <!-- Sub-message displayed when the search field is not empty but search results is empty. -->
+  <string name="settings_search_no_results_message">¿Rik\'in jub\'a\' k\'o chi natojtob\'ej rik\'in jun chik kanoxïk?</string>
+  <!-- Content Description for the button to open Settings Search (to search through settings). -->
+  <string name="settings_search_button_content_description">Taq runuk\'ulem rupitz\'b\'al kanoxïk</string>
   <!-- ==== Terms of use pop up prompt ==== -->
 
+  <!-- Title for the pop up prompt -->
+  <string name="terms_of_use_prompt_title">K\'o jun qak\'exoj</string>
+  <!--
+    Message for the terms of use pop up prompt
+    %1$s is the product name "Firefox"
+    %2$s is the string terms_of_use_prompt_link_terms_of_use (Terms of Use) that is a link to the terms of use
+    %3$s is the string terms_of_use_prompt_link_privacy_notice (Privacy Notice) that is a link to the privacy notice
+  -->
+  <string name="terms_of_use_prompt_message_1">Xqanïm %2$s richin %1$s chuqa\' xqak\'ëx ri %3$s.</string>
+  <!--
+    Second part of the terms of use pop up prompt
+    %1$s is the string terms_of_use_prompt_link_learn_more (Learn more) that is a link to a website with more information about the terms of use
+  -->
+  <string name="terms_of_use_prompt_message_2">Taya\' jun ch\'uti aramaj richin ye\'anik\'oj chuqa\' ye\'ak\'ül. %1$s.</string>
   <!-- Terms of use link in the pop up prompt message that links to the terms of use -->
   <string name="terms_of_use_prompt_link_terms_of_use">Rojqanem Rokisaxik</string>
   <!-- Privacy notice link in the pop up prompt message that links to the privacy notice -->
@@ -4024,8 +4417,24 @@
 
   <!-- A title for the popup prompt. -->
   <string name="terms_of_use_prompt_title_option_a" tools:ignore="UnusedResources">Rojqanem Rokisaxik</string>
+  <!--
+    A title for the popup prompt.
+    %1$s is the product name "Firefox"
+  -->
+  <string name="terms_of_use_prompt_title_option_b" tools:ignore="UnusedResources">Jun rutzijol %1$s</string>
+  <!--
+    Copy for the Terms of Use popup prompt body line two.
+    %1$s is the string terms_of_use_prompt_body_line_two_alternative_link ("here") that is a link to the Terms of Use
+  -->
+  <string name="terms_of_use_prompt_body_line_two_alternative" tools:ignore="UnusedResources">Yatikïr nawetamaj mas %1$s.</string>
   <!-- Link text for terms_of_use_prompt_body_line_two_alternative that links to a site with more information about the Terms of Use -->
   <string name="terms_of_use_prompt_body_line_two_alternative_link" tools:ignore="UnusedResources">wawe\'</string>
+  <!--
+    Sports widget
+
+    Title text shown at the top of the sports widget country selector, encouraging the user to pick a national team to follow.
+  -->
+  <string name="sports_widget_country_selector_title">Tawojqaj ri amolaj</string>
   <!-- Section header for the North America region in the sports widget country selector. -->
   <string name="sports_widget_confederation_north_america">Pa Jotöl</string>
   <!-- Section header for the Africa confederation group in the sports widget country selector. -->
@@ -4034,8 +4443,46 @@
   <string name="sports_widget_confederation_asia">Asya\'</string>
   <!-- Section header for the CONCACAF confederation group in the sports widget country selector. "CONCACAF" is the abbreviation for "Confederation of North, Central America and Caribbean Association Football". -->
   <string name="sports_widget_confederation_concacaf">CONCACAF</string>
+  <!-- Section header for the Europe confederation group in the sports widget country selector. -->
+  <string name="sports_widget_confederation_europe">Ewropa</string>
+  <!-- Section header for the Oceania confederation group in the sports widget country selector. -->
+  <string name="sports_widget_confederation_oceania">Ose\'aniya\'</string>
+  <!-- Section header for the South America confederation group in the sports widget country selector. -->
+  <string name="sports_widget_confederation_south_america">Suramerika\'</string>
+  <!-- Country name for England in the sports widget. England cannot be resolved with the Android Intl APIs so it needs an explicit string. -->
+  <string name="sports_widget_country_england">Inlater</string>
+  <!-- Country name for Scotland in the sports widget. Scotland cannot be resolved with the Android Intl APIs so it needs an explicit string. -->
+  <string name="sports_widget_country_scotland">Eskosya\'</string>
+  <!-- Label shown on the sports widget scoreboard when a match is currently being played live. -->
+  <string name="sports_widget_match_live">TAJIN</string>
+  <!-- Title shown on the sports widget champion scoreboard row celebrating the soccer tournament winner. -->
+  <string name="sports_widget_champions_title">Aj Ruwach\'ulew Chakonela\' 2026</string>
+  <!-- Title shown on the sports widget champion scoreboard celebrating the soccer tournament runners-up. Runners-up means second place. -->
+  <string name="sports_widget_runner_up_title" tools:ignore="UnusedResources">Achch\'akonela\'</string>
+  <!-- Title shown on the sports widget champion scoreboard celebrating the soccer tournament third place winners. -->
+  <string name="sports_widget_third_place_title">Aj rox</string>
+  <!-- Round name shown on the sports widget for the Round of 32 stage in the soccer tournament. -->
+  <string name="sports_widget_round_of_32">Ruwaqlajuj sol</string>
+  <!-- Round name shown on the sports widget for the Round of 16 stage in the soccer tournament. -->
+  <string name="sports_widget_round_of_16">Ruwaqxaq sol</string>
+  <!-- Round name shown on the sports widget for the quarter-finals stage in the soccer tournament. -->
+  <string name="sports_widget_quarter_final">Aj rukaj molaj</string>
+  <!-- Round name shown on the sports widget for the semi-finals stage in the soccer tournament. -->
+  <string name="sports_widget_semi_final">Aj ruka\'n molaj</string>
+  <!-- Round name shown on the sports widget for the final stage in the soccer tournament. -->
+  <string name="sports_widget_final">Ruk\'isib\'äl</string>
+  <!-- Round name shown on the sports widget for the bronze final stage in the soccer tournament. -->
+  <string name="sports_widget_bronze_final">Rox k\'ojlib\'äl</string>
+  <!-- Sports widget error card message shown when match data fails to load. -->
+  <string name="sports_widget_error_load_failed" tools:ignore="UnusedResources">Man e k\'o ta ri rutzijol etz\'anem wakami. Tatojtob\'ej pa ka\'i\' oxi\' chik apo ch\'utiramaj.</string>
+  <!-- Sports widget error card message shown when the network connection is interrupted and live updates pause. -->
+  <string name="sports_widget_error_connection_interrupted" tools:ignore="UnusedResources">Xq\'at jumej ri okem — k\'exoj pa tajin echupun.</string>
   <!-- Sports widget action label to refresh match data after an error. -->
   <string name="sports_widget_error_refresh">Titzolïx</string>
+  <!-- Sports widget group stage label for group A in the soccer tournament. -->
+  <string name="sports_widget_group_a">Molaj A</string>
+  <!-- Sports widget group stage label for group B in the soccer tournament. -->
+  <string name="sports_widget_group_b">Molaj B</string>
   <!-- Sports widget group stage label for group C in the soccer tournament. -->
   <string name="sports_widget_group_c">C molaj</string>
   <!-- Sports widget group stage label for group D in the soccer tournament. -->
@@ -4060,18 +4507,44 @@
   <string name="sports_widget_see_results" tools:ignore="UnusedResources">Ketz\'ët q\'i\'oj</string>
   <!-- Sports widget button label to view details of a soccer match results. -->
   <string name="sports_widget_view_match_details" tools:ignore="UnusedResources">Ketz\'et kib\'anikil taq molaj</string>
+  <!-- Sports widget section header for related soccer matches in the same group. -->
+  <string name="sports_widget_related_matches" tools:ignore="UnusedResources">Etz\'anem kiximon ki\'</string>
   <!-- Sports widget section header for a list of upcoming soccer matches that have not yet started. -->
   <string name="sports_widget_upcoming" tools:ignore="UnusedResources">Yepe yan</string>
   <!-- Sports widget match status suffix appended to match scores (e.g., "3 - 2 (Full time)") to indicate the match has been completed. -->
   <string name="sports_widget_match_full_time_suffix">(Xq\'is etz\'anem)</string>
   <!-- Sports widget match status to indicate the match has been completed. -->
   <string name="sports_widget_match_full_time_2">Xk\'is etz\'anem</string>
+  <!--
+    Sports widget card title encouraging the user to follow the soccer tournament. “Keep tabs on” is an informal expression
+    meaning to stay updated on or regularly follow something (in this case, World Cup matches and updates).
+    It’s playfully related to Firefox in that “tabs” are a browser feature.
+    It suggests ongoing awareness rather than active monitoring or control. Not to be translated literally as physical “tabs”
+    or tracking in a technical sense; the meaning is about staying informed.
+  -->
+  <string name="sports_widget_card_title">Tawetamaj chi rij ri Aj Ruwach\'ulew Etz\'anem</string>
+  <!-- Sports widget card description shown below the title on the homepage entry point. -->
+  <string name="sports_widget_card_description">Ke\'ak\'ulu\' kik\'exoj taq etz\'anem ri yetajin chuqa\' ch\'aqa\' chik.</string>
   <!-- Sports widget menu item to change the selected team. -->
   <string name="sports_widget_change_team">Tijal molaj</string>
+  <!-- Sports widget menu item to get a custom wallpaper for the widget. -->
+  <string name="sports_widget_get_custom_wallpaper">Tak\'ulu\' jun ichinan rupam ruwäch</string>
   <!-- Sports widget menu item to remove the widget from the homepage. -->
   <string name="sports_widget_remove">Tiyuj</string>
+  <!-- Sports widget card title shown after a team is eliminated, asking if the user still wants to continue following the soccer tournament. -->
+  <string name="sports_widget_still_want_to_follow">¿La k\'a nawajo\' nawojqaj?</string>
+  <!-- Sports widget card description shown after a team is eliminated, suggesting to choose another team. -->
+  <string name="sports_widget_choose_another_team">Tacha\' jun chik molaj etz\'enala\' richin nawojqaj ri Aj Ruwach\'ulew Etz\'anem.</string>
+  <!-- Sports widget button label to follow another team after the current team is eliminated. -->
+  <string name="sports_widget_follow_another_team">Tojqäx jun chik molaj</string>
+  <!-- Sports widget card title shown before the soccer tournament begins on top of a timer that is counting down. -->
+  <string name="sports_widget_countdown_to_world_cup">Rajlab\'al q\'ij Aj Ruwach\'ulew Etz\'anem</string>
+  <!-- Sports widget button label that navigates the user to the full soccer tournament match schedule. -->
+  <string name="sports_widget_view_schedule">Titz\'et ruq\'ijul etz\'anem</string>
   <!-- Sports widget button label that dismisses the step of choosing a team to follow. -->
   <string name="sports_widget_skip">Tik\'o\'</string>
+  <!-- Sports widget match status label shown during halftime of a match. -->
+  <string name="sports_widget_halftime" tools:ignore="UnusedResources">Nik\'aj ramaj</string>
   <!-- Sports widget match status label shown during extra time of a match. -->
   <string name="sports_widget_extra_time">Ruwi\' ramaj</string>
   <!-- Sports widget match status label shown during penalties of a match. -->
@@ -4094,10 +4567,24 @@
     Your translation will be automatically truncated at 2 characters to avoid layout issues
   -->
   <string name="sports_widget_countdown_minutes">M</string>
+  <!-- Content description (for accessibility, not displayed) for the close button on the sports widget team / country selector. -->
+  <string name="sports_widget_close_team_selection_sheet_content_description">Titz\'apïx ruxaq kicha\'ik molaj</string>
   <!-- Content description (for accessibility, not displayed) for the close button on the sports widget card. -->
   <string name="sports_widget_close_content_description">Titz\'apïx</string>
   <!-- Content description (for accessibility, not displayed) for the overflow (more options) menu button on the sports widget card. -->
   <string name="sports_widget_more_options_content_description">Ch\'aqa\' chik taq cha\'oj</string>
+  <!--
+    Content description (for accessibility, not displayed) announcing the time remaining until the soccer tournament kickoff.
+    %1$d is the number of days, %2$d is the number of hours, and %3$d is the number of minutes.
+  -->
+  <string name="sports_widget_countdown_remaining_content_description">Ramaj nrajo\' na. Taq q\'ij: %1$d. Taq ramaj: %2$d. Taq ch\'utiramaj: %3$d.</string>
+  <!-- Content description (for accessibility, not displayed)  for the action that navigates to the World Cup website. -->
+  <string name="sports_widget_go_to_world_cup_site_content_description" tools:ignore="UnusedResources">Tib\'an b\'enam pa ruxaq Aj Ruwach\'ulew</string>
+  <!--
+    Content description (for accessibility, not displayed)  announcing an upcoming soccer match.
+    %1$s is the home team name, %2$s is the away team name, %3$s is the match date, %4$s is the kickoff time.
+  -->
+  <string name="sports_widget_upcoming_match_content_description">Petenäq: %1$s rik\'in %2$s, %3$s pa %4$s</string>
   <!--
     Content description (for accessibility, not displayed) announcing a soccer match.
     %1$s is the home team name, %2$s is the away team name, %3$s is trailing context
@@ -4106,23 +4593,179 @@
   -->
   <string name="sports_widget_match_content_description">%1$s chuwäch %2$s, %3$s</string>
   <!--
+    Content description (for accessibility, not displayed)  used for the sports widget card header announcing a live match for a group or stage.
+    %s is the soccer tournament group name or stage (e.g. Group A represented by sports_widget_group_a, Round of 32 represented by sports_widget_round_of_32,
+    or Final represented by sports_widget_final).
+  -->
+  <string name="sports_widget_live_game_content_description">%s, etz\'anem tajin</string>
+  <!--
     Content description (for accessibility, not displayed) announcing a live score.
     %1$s is the home team name, %2$d is the home team score, %3$s is the away team name, %4$d is the away team score,
     and %5$s is the match elapsed time (e.g. 72 minutes).
   -->
   <string name="sports_widget_live_score_content_description">%1$s %2$d, %3$s %4$d, %5$s, pa k\'aslïk</string>
   <!--
+    Content description (for accessibility, not displayed) announcing the elapsed minutes of a live match.
+    %1$s is the clock value, which may be a plain number (e.g. "72") or include extra time (e.g. "90+3").
+  -->
+  <string name="sports_widget_match_elapsed_minutes">Ramaj b\'enäq pa ch\'utiramaj: %1$s</string>
+  <!--
     Content description (for accessibility, not displayed) for a paginated item.
     %1$s is the soccer tournament group name or stage (e.g. Group A represented by sports_widget_group_a, Round of 32 represented by sports_widget_round_of_32),
     %2$d is the current page number, and %3$d is the total number of pages.
   -->
   <string name="sports_widget_page_position_content_description">%1$s, ruxaq %2$d richin %3$d</string>
+  <!--
+    Content description (for accessibility, not displayed) for a page within the World Cup final results carousel.
+    %1$d is the current page number, and %2$d is the total number of pages.
+  -->
+  <string name="sports_widget_final_results_page_content_description" tools:ignore="UnusedResources">Ruk\'isib\'äl taq etz\'anem pa Ri Ch\'akob\'äl Ruwach\'ulew, ruxaq %1$d richin %2$d</string>
+  <!-- Content description (for accessibility, not displayed) for the World Cup final results page. -->
+  <string name="sports_widget_final_results_content_description">Ruk\'isib\'äl taq q\'i\'oj pa ri Aj Ruwach\'ulew</string>
+  <!-- Content description (for accessibility, not displayed) for the remove button that removes the sports widget from the homepage. -->
+  <string name="sports_widget_remove_content_description" tools:ignore="UnusedResources">Tiyuj Ruch\'akob\'al Aj Ruwach\'ulew pa rutikirib\'al</string>
+  <!-- Title shown on the sports widget immediately after the user has followed a team. %s is the selected team (e.g., "USA"). -->
+  <string name="sports_widget_team_followed_title">Nojqäx: %s</string>
+  <!-- Description shown on the sports widget immediately after the user has followed a team -->
+  <string name="sports_widget_team_followed_description">Tak\'ulb\'ej chik ri rutzijol etz\'anem chuwäch ninaqajan pe ri etz\'anib\'äl.</string>
+  <!-- Sports widget match status label shown during first half of a match. -->
+  <string name="sports_widget_first_half" tools:ignore="UnusedResources">Nab\'ey peraj</string>
+  <!-- Sports widget match status label shown during second half of a match. -->
+  <string name="sports_widget_second_half" tools:ignore="UnusedResources">Ruka\'n peraj</string>
+  <!-- Sports widget error card title shown when the user is offline. -->
+  <string name="sports_widget_error_connection_offline_title">Achi\'el chi man atokinäq ta.</string>
+  <!-- Sports widget error card description shown when the user is offline. -->
+  <string name="sports_widget_error_connection_offline_description">Tanik\'oj ri awokem pan internet k\'a ri tatojb\'ej chik.</string>
+  <!-- Sports widget general group stage label in the soccer tournament. -->
+  <string name="sports_widget_group_stage">Kinuk\'ik molaj</string>
+  <!-- Sports widget error card title shown when match data fails to load. -->
+  <string name="sports_widget_error_load_failed_title">Ri rutzijol etz\'anem man wachel ta wakami.</string>
+  <!-- Sports widget error card description shown when match data fails to load. -->
+  <string name="sports_widget_error_load_failed_description">Totjtob\'ej nak\'ëx rutz\'etik pa jujun ch\'uti ramaj.</string>
+  <!-- Content description (for accessibility, not displayed) for teams which have not yet been determined in the match schedule. -->
+  <string name="sports_widget_team_to_be_determined">Molaj xtitz\'etetäj na</string>
   <!-- ==== End of Terms of use popup prompt. ==== -->
 
+  <!--
+    Privacy notice homepage banner
+
+    A message we show the user on the homepage when there is a new version of the privacy notice. 'Firefox' is intentionally hardcoded.
+    %1$s is replaced by an active link using privacy_notice_updated_homepage_message_privacy_notice as text (Privacy Notice)
+    %2$s is replaced by an active link using privacy_notice_updated_homepage_message_learn_more as text (Learn more)
+  -->
+  <string name="privacy_notice_updated_homepage_message" tools:ignore="BrandUsage,UnusedResources">Xqak\'ëx ri %1$s qichin richin yeqak\'üt ri ruk\'isib\'äl taq rusamajib\'al Firefox. %2$s</string>
   <!-- The first active link used in privacy_notice_updated_homepage_message -->
   <string name="privacy_notice_updated_homepage_message_privacy_notice" tools:ignore="UnusedResources">Ichinan na\'oj</string>
   <!-- The second active link used in privacy_notice_updated_homepage_message -->
   <string name="privacy_notice_updated_homepage_message_learn_more" tools:ignore="UnusedResources">Tetamäx ch\'aqa\' chik</string>
+  <!--
+    Collections migration homepage card
+
+    Title shown on the collections to tab groups migration card on the homepage.
+  -->
+  <string name="collections_migration_homepage_banner_title">Wakami ri taq mol e molaj</string>
+  <!-- Message shown on the collections to tab groups migration card on the homepage. -->
+  <string name="collections_migration_homepage_card_message">K\'o jun rub\'eyal man k\'ayew ta richin ye\'acholajij ri taq ruwi\'</string>
+  <!-- Link text shown on the collections to tab groups migration card that opens the tab groups page in the tab manager. -->
+  <string name="collections_migration_homepage_card_link">Ketz\'et ri kimolaj taq nuwi\'</string>
+  <!-- Google Lens prototype related strings -->
+  <string name="preferences_debug_settings_google_lens_integration">Titzij ri runuk\'ik Google Lens</string>
+  <!-- Lens image search button content description -->
+  <string name="lens_search_content_description">Tikanöx rik\'in wachib\'äl</string>
+  <!-- Content description for the gallery picker button in the Lens camera screen -->
+  <string name="content_description_gallery">Tacha\' pa ri wachib\'alil richin nitaq pa Google Lens</string>
+  <!-- Content description for the shutter button in the Lens camera screen -->
+  <string name="content_description_take_photo">Telesäx jun wachib\'äl chuqa\' titaq chi re Google Lens</string>
+  <!-- Image context menu entry that sends the long-pressed image to Google Lens -->
+  <string name="context_menu_open_image_with_google_lens">Tikanöx rik\'in Google Lens</string>
+  <!-- Toast shown when the user denies the camera permission requested by the Lens camera screen -->
+  <string name="lens_camera_permission_denied">Man niya\' ta q\'ij</string>
+  <!--
+    Title shown at the top of the camera screen, next to the close button, telling the
+    user that the photo they capture will be sent to Google Lens for a visual search.
+  -->
+  <string name="lens_camera_title_lens">Google Lens</string>
+  <!--
+    Title shown at the top of the camera screen, next to the close button, telling the
+    user that the camera is being used to scan a QR code.
+  -->
+  <string name="lens_camera_title_qr">QR b\'itz\'ib\'</string>
+  <!-- Title for the Google Lens Search Settings page feature toggle -->
+  <string name="search_settings_google_lens_title">Titzij ri kanoxïk rik\'in Google Lens</string>
+  <!-- Description for the Google Lens Search Settings page feature toggle -->
+  <string name="search_settings_google_lens_description">Ke\'ataqa\' taq wachib\'äl chuqa\' taq wachaj pa Google richin wachel kanoxïk.</string>
+  <!-- Caption shown under the Google Lens toggle clarifying when the feature is available -->
+  <string name="preferences_google_lens_availability_caption">Wachel xa xe toq ri Google tzijïl aq\'anij chuqa\' ja ri tzijïl okik\'amaya\'l toq atokinäq pa k\'amaya\'l.</string>
+  <!-- Content description for the Google Lens half of the camera mode toggle -->
+  <string name="lens_camera_mode_lens">Google Lens</string>
   <!-- Content description for the QR scanner half of the camera mode toggle -->
   <string name="lens_camera_mode_qr">QR tz\'ajwachib\'äl</string>
+  <!-- Toast shown when the user picks an image from the gallery in QR mode but no QR code is found in it -->
+  <string name="lens_camera_qr_no_code_found">Man xilitäj ta nijun QR b\'itz\'ib\' pa ri wachib\'äl</string>
+  <!-- Title of the bottom sheet shown the first time the user opens the Google Lens camera screen -->
+  <string name="lens_opt_out_title">Tawila\' rik\'in ri Google Lens</string>
+  <!-- Description of the bottom sheet shown the first time the user opens the Google Lens camera screen -->
+  <string name="lens_opt_out_description">Tacha\' jun wachib\'äl o tawokisaj ri elesäy wachib\'äl richin yek\'ul taq q\'i\'oj rik\'in ri Google Lens.</string>
+  <!-- Text of the link in the first-run Google Lens bottom sheet that opens the Search settings page -->
+  <string name="lens_opt_out_settings_link">Runuk\'ulem Google Lens</string>
+  <!-- Button in the first-run Google Lens bottom sheet that dismisses it and starts the camera -->
+  <string name="lens_opt_out_try_it_now_button">Tatojtob\'ej wakami</string>
+  <!-- Button in the first-run Google Lens bottom sheet that leaves Google Lens without using it -->
+  <string name="lens_opt_out_not_now_button">Wakami mani</string>
+  <!--
+    Firefox Labs
+
+    Firefox Labs is the name of a screen in Settings to allow users to learn about
+    experimental and in-development features, and turn those features on and off.
+    The "Labs" portion can be localized, "Firefox" must be treated as a brand and kept
+    in English.
+  -->
+  <string name="firefox_labs_title" tools:ignore="BrandUsage">Firefox Labs</string>
+  <!-- Banner title text on the Firefox Labs screen. -->
+  <string name="firefox_labs_banner_title_2">¡Ke\'atojtob\'ej ri qasoltojtob\'enel taq rub\'anikil!</string>
+  <!--
+    Banner description text on the Firefox Labs screen. Provides information on what Firefox Labs does. %s is the name of the app (for example "Firefox Nightly").
+    Text will appear under the Firefox Labs banner title.
+  -->
+  <string name="firefox_labs_experimental_description">Tajin yeb\'an chuqa\' yek\'ex, ri nub\'än chi nutz\'ila\' ri rusamaj %s.</string>
+  <!-- The link text shown when a feedback URL for a Firefox Labs feature is available. The feedback URL page will allow users to provide opinions and suggestions. -->
+  <string name="firefox_labs_share_feedback">Tikomonïx na\'oj</string>
+  <!-- Content description for the share feedback link on a Firefox Labs feature. This text will be used by screen readers to provide more context on the feedback link. %s is the name of the Firefox Labs feature. -->
+  <string name="firefox_labs_share_feedback_content_description">Tikomonïk na\'oj chi rij %s.</string>
+  <!-- Button text on the Firefox Labs screen for restoring all toggles back to the default settings. The button will turn off any experimental features. -->
+  <string name="firefox_labs_restore_default_button_text">Ke\'atzolij ri taq wachinel e k\'o wi</string>
+  <!-- The title used in a confirmation dialog on the Firefox Labs screen when toggling "on" or "off" an experimental feature that requires a restart. -->
+  <string name="firefox_labs_feature_dialog_title">K\'o chi nitikirisäx</string>
+  <!-- The text on the dialog on the Firefox Labs screen for the positive button when toggling "on" and "off" experimental features. This prompts the user to confirm that they want to restart the app. -->
+  <string name="firefox_labs_dialog_restart_button">Titikirisäx chik</string>
+  <!-- The text on the dialog on the Firefox Labs screen for the negative button when toggling "on" and "off" experimental features. This is used to cancel the action and return to the previous screen. -->
+  <string name="firefox_labs_dialog_cancel_button">Tiq\'at</string>
+  <!-- The title used in a confirmation dialog on the Firefox Labs screen when restoring the application to its defaults by turning "off" any experimental features. -->
+  <string name="firefox_labs_restore_defaults_dialog_title">K\'o chi nitikirisäx</string>
+  <!-- The description used in a confirmation dialog on the Firefox Labs screen when restoring the application to its defaults by turning "off" any experimental features. %s is the name of the app (for example "Firefox Nightly") -->
+  <string name="firefox_labs_restore_defaults_dialog_message">Richin nichojmirisäx ri runuk\'ulem k\'o wi, tatikirisaj chik %s.</string>
+  <!-- The description text that is displayed in the confirmation dialog on the Firefox Labs screen for toggling "on" experimental features. %s is the name of the app (for example "Firefox Nightly") -->
+  <string name="firefox_labs_feature_enable_dialog_message">Richin natzïj re samaj re\', tatikirisaj %s.</string>
+  <!-- The description text that is displayed in the confirmation dialog on the Firefox Labs screen for toggling "off" experimental features. %s is the name of the app (for example "Firefox Nightly") -->
+  <string name="firefox_labs_feature_disable_dialog_message">Richin nachüp re samaj re\', tatikirisaj %s.</string>
+  <!-- Helper text shown beneath a Firefox Labs item when it is blocked from being turned on. -->
+  <string name="firefox_labs_feature_conflict">Man k\'o ta ri samaj richin nitojtob\'ëx.</string>
+  <!-- Text displayed on the Firefox Labs screen when there are no Labs experimental features present. -->
+  <string name="firefox_labs_no_labs_available_description">Manäq ajsolojtojtob\'enel taq samaj richin yetojtob\'ëx wakami</string>
+  <!-- Title of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">Rujech\'uxik ajk\'am ruxaq</string>
+  <!-- Description of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">Jun rutz\'aqat q\'atoj chi kikojol ajk\'am ruxaq, ri nito\'on richin yechajïx ri taq atzij chi kikojol ri taq ruwi\'. Nitikïr nuxoch\'ij ri rusamaj, ri rujikib\'anik, ri kik\'amoxik ajk\'am taq ruxaq chuqa\' achi\'el rub\'eyal niyak ri runatab\'al okem pa k\'amaya\'l.</string>
+  <!--
+    PDF viewer toolbar and buttons
+
+    Content description for accessibility (used by screen readers): Description for the button that triggers the start of a signature workflow on the PDF displayed on the screen.
+  -->
+  <string name="pdf_tools_sign_content_description">Tijux PDF</string>
+  <!-- Content description for accessibility (used by screen readers): Description of the button that downloads the PDF displayed on the screen to the user's device. -->
+  <string name="pdf_tools_download_content_description">Tiqasäx PDF</string>
+  <!-- Content description for accessibility (used by screen readers): Description for the button that opens the printing dialogue window for the PDF displayed on the screen. -->
+  <string name="pdf_tools_print_content_description">Titz\'ajb\'äx PDF</string>
+  <!-- Content description for accessibility (used by screen readers): Description for the button that opens the sharing options for the PDF being displayed on the screen. -->
+  <string name="pdf_tools_share_content_description">Tikomonïx PDF</string>
 </resources>

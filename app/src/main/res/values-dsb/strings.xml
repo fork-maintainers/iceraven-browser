@@ -1306,6 +1306,11 @@
   <string name="preference_light_theme">Swětły</string>
   <!-- Preference for using dark theme -->
   <string name="preference_dark_theme">Śamny</string>
+  <!--
+    Preference for using the OLED theme. For localization, this can be translated as "True Black", "Maximum Darkness",
+    or "Full dark" if needed.
+  -->
+  <string name="preference_oled_theme">Nejwěcej śamny</string>
   <!-- Preference for using using dark or light theme automatically set by battery -->
   <string name="preference_auto_battery_theme">Pó zažarjeńskich nastajenjach baterije</string>
   <!-- Preference for using following device theme -->
@@ -1452,6 +1457,8 @@
   <string name="preferences_inactive_tabs">Stare rejtariki do „inaktiwne“ pśesunuś</string>
   <!-- Title of inactive tabs preference -->
   <string name="preferences_inactive_tabs_title">Rejtariki, kótarež njejsćo se woglědał dwa tyźenja, se do inaktiwnego wótrězka pśesunu.</string>
+  <!-- Title for the preference to enable or disable the tab groups feature -->
+  <string name="preferences_tab_groups_feature">Kupki rejtarikow zmóžniś</string>
   <!--
     Privacy report
 
@@ -1706,6 +1713,14 @@
   <string name="ungroup_tab_group_confirmation_dialog_confirm">Kupku wótpóraś</string>
   <!-- Text shown on the cancel button in the Ungroup tab group confirmation dialog. -->
   <string name="ungroup_tab_group_confirmation_dialog_cancel">Pśetergnuś</string>
+  <!-- Custom accessibility action to reorder a tab up rather than dragging. -->
+  <string name="custom_accessibility_action_reorder_tab_up">Rejtarik górjej pśesunuś</string>
+  <!-- Custom accessibility action to reorder a tab left rather than dragging. -->
+  <string name="custom_accessibility_action_reorder_tab_left">Rejtarik nalěwo pśesunuś</string>
+  <!-- Custom accessibility action to reorder a tab right rather than dragging. -->
+  <string name="custom_accessibility_action_reorder_tab_right">Rejtarik napšawo pśesunuś</string>
+  <!-- Custom accessibility action to reorder a tab down rather than dragging. -->
+  <string name="custom_accessibility_action_reorder_tab_down">Rejtarik dołoj pśesunuś</string>
   <!--
     Color labels for tab groups, used for accessibility and selection UI.
 
@@ -3117,6 +3132,8 @@
   <string name="ip_protection_location_picker_title" tools:ignore="UnusedResources">Stojnišćo VPN wubraś</string>
   <!-- Description for what it means to use the Recommended setting and let the app automatically pick the best server location. -->
   <string name="ip_protection_location_fastest_description" tools:ignore="BrandUsage">Firefox namakajo nejmalsnjejše stojnišćo</string>
+  <!-- Description for an unavailable VPN location in the location list. -->
+  <string name="ip_protection_location_unavailable_description">Njejo k dispoziciji</string>
   <!-- Error message shown when the selected browser VPN location is unavailable. -->
   <string name="ip_protection_location_unavailable" tools:ignore="UnusedResources">Stojnišćo njejo k dispoziciji. Wubjeŕśo druge stojnišćo.</string>
   <!-- Snackbar (in-app pop-up notification) text shown when the previously selected browser VPN location is unavailable and the recommended location was used instead. -->
@@ -4771,4 +4788,16 @@
   <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">Izolacija websedła</string>
   <!-- Description of the Firefox Labs Sandboxing experiment. -->
   <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">Pśidatna bariera mjazy websedłami, kótaraž pomaga, waše daty na wšych rejtarikach šćitaś. Móžo wugbaśe, stabilnosć, kompatibelnosć websedła a nałog składowanja historije pśeglědowanja wobwliwowaś.</string>
+  <!--
+    PDF viewer toolbar and buttons
+
+    Content description for accessibility (used by screen readers): Description for the button that triggers the start of a signature workflow on the PDF displayed on the screen.
+  -->
+  <string name="pdf_tools_sign_content_description">PDF signěrowaś</string>
+  <!-- Content description for accessibility (used by screen readers): Description of the button that downloads the PDF displayed on the screen to the user's device. -->
+  <string name="pdf_tools_download_content_description">PDF ześěgnuś</string>
+  <!-- Content description for accessibility (used by screen readers): Description for the button that opens the printing dialogue window for the PDF displayed on the screen. -->
+  <string name="pdf_tools_print_content_description">PDF śišćaś</string>
+  <!-- Content description for accessibility (used by screen readers): Description for the button that opens the sharing options for the PDF being displayed on the screen. -->
+  <string name="pdf_tools_share_content_description">PDF źěliś</string>
 </resources>
