@@ -1091,7 +1091,7 @@ features:
         description: Country codes whose users are eligible for IP Protection.
         type: List<String>
         default: [ "AU", "AT", "BE", "BG", "CA", "CL", "CO", "DK", "FI", "FR", "DE", "IE", "IT", "JP", "MY", "MX",
-                   "NL", "NZ", "NO", "PL", "PT", "SG", "ZA", "ES", "SE", "CH", "TH", "GB", "US" ]
+                   "NL", "NZ", "NO", "PL", "PT", "RO", "SG", "ZA", "ES", "SE", "CH", "TH", "GB", "US" ]
       promo-deadline:
         description: The final date for the promotion to end. This needs to be an ISO 8601 formatted date (i.e. YYYY-MM-DD).
         type: String
