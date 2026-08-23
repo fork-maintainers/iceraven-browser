@@ -708,7 +708,7 @@
   <!-- Text preview for larger sized widgets -->
   <string name="search_widget_text_long">Web’de ara</string>
   <!-- Content description (not visible, for screen readers etc.): Voice search -->
-  <string name="search_widget_voice">Sesli arama</string>
+  <string name="search_widget_voice">Sesle arama</string>
   <!--
     Preferences
 
@@ -1016,7 +1016,7 @@
   <!-- Snackbar message for when wallpaper couldn't be downloaded -->
   <string name="wallpaper_download_error_snackbar_message">Duvar kâğıdı indirilemedi</string>
   <!-- Snackbar label for action to retry downloading the wallpaper -->
-  <string name="wallpaper_download_error_snackbar_action">Tekrar dene</string>
+  <string name="wallpaper_download_error_snackbar_action">Yeniden dene</string>
   <!-- Snackbar message for when wallpaper couldn't be selected because of the disk error -->
   <string name="wallpaper_select_error_snackbar_message">Duvar kâğıdı değiştirilemedi</string>
   <!-- Text displayed that links to website containing documentation about the "Limited Edition" wallpapers. -->
@@ -1131,6 +1131,8 @@
   <string name="extension_process_crash_dialog_retry_button_text" tools:ignore="UnusedResources">Uzantıları yeniden başlatmayı dene</string>
   <!-- Button text on the extension crash dialog to prompt the user to continue with all extensions disabled. -->
   <string name="extension_process_crash_dialog_disable_extensions_button_text">Uzantıları devre dışı bırakarak devam et</string>
+  <!-- Text shown in the snackbar action button that lets the user retry an add-on operation that just failed. -->
+  <string name="addon_failure_retry_action">Yeniden dene</string>
   <!--
     Account Preferences
 
@@ -1304,6 +1306,11 @@
   <string name="preference_light_theme">Açık</string>
   <!-- Preference for using dark theme -->
   <string name="preference_dark_theme">Koyu</string>
+  <!--
+    Preference for using the OLED theme. For localization, this can be translated as "True Black", "Maximum Darkness",
+    or "Full dark" if needed.
+  -->
+  <string name="preference_oled_theme">Simsiyah</string>
   <!-- Preference for using using dark or light theme automatically set by battery -->
   <string name="preference_auto_battery_theme">Pil tasarrufuna göre</string>
   <!-- Preference for using following device theme -->
@@ -1450,6 +1457,8 @@
   <string name="preferences_inactive_tabs">Eski sekmeleri pasife taşı</string>
   <!-- Title of inactive tabs preference -->
   <string name="preferences_inactive_tabs_title">İki haftadır bakmadığınız sekmeler pasif bölümüne taşınır.</string>
+  <!-- Title for the preference to enable or disable the tab groups feature -->
+  <string name="preferences_tab_groups_feature">Sekme gruplarını etkinleştir</string>
   <!--
     Privacy report
 
@@ -1556,7 +1565,7 @@
   <!-- Text for tab manager search page when there are no results. -->
   <string name="tab_manager_no_search_results">Eşleşme bulunamadı.</string>
   <!-- Additional text for tab manager search page when there are no results. -->
-  <string name="tab_manager_no_search_results_additional_text">Başka bir şey arayın!</string>
+  <string name="tab_manager_no_search_results_additional_text">Başka bir şey aramayı deneyin.</string>
   <!-- Content description (not visible, for screen readers etc.): Close tab button. Closes the current session when pressed -->
   <string name="close_tab">Sekmeyi kapat</string>
   <!-- Content description (not visible, for screen readers etc.): Close tab <title> button. %s is the tab title -->
@@ -1693,7 +1702,15 @@
   <!-- Text shown on the confirm button in the Ungroup tab group confirmation dialog. -->
   <string name="ungroup_tab_group_confirmation_dialog_confirm">Gruptan çıkar</string>
   <!-- Text shown on the cancel button in the Ungroup tab group confirmation dialog. -->
-  <string name="ungroup_tab_group_confirmation_dialog_cancel">Vazgeç</string>
+  <string name="ungroup_tab_group_confirmation_dialog_cancel">İptal</string>
+  <!-- Custom accessibility action to reorder a tab up rather than dragging. -->
+  <string name="custom_accessibility_action_reorder_tab_up">Sekmeyi yukarı taşı</string>
+  <!-- Custom accessibility action to reorder a tab left rather than dragging. -->
+  <string name="custom_accessibility_action_reorder_tab_left">Sekmeyi sola taşı</string>
+  <!-- Custom accessibility action to reorder a tab right rather than dragging. -->
+  <string name="custom_accessibility_action_reorder_tab_right">Sekmeyi sağa taşı</string>
+  <!-- Custom accessibility action to reorder a tab down rather than dragging. -->
+  <string name="custom_accessibility_action_reorder_tab_down">Sekmeyi aşağı taşı</string>
   <!--
     Color labels for tab groups, used for accessibility and selection UI.
 
@@ -1732,7 +1749,7 @@
     History multi select title in app bar
     %1$d is the number of bookmarks selected
   -->
-  <string name="history_multi_select_title">%1$d seçildi</string>
+  <string name="history_multi_select_title">%1$d yer imi seçildi</string>
   <!-- Text for the header that groups the history for today -->
   <string name="history_today">Bugün</string>
   <!-- Text for the header that groups the history for yesterday -->
@@ -2120,7 +2137,7 @@
   <!-- Bookmark folder editing screen title -->
   <string name="edit_bookmark_folder_fragment_title">Klasörü düzenle</string>
   <!-- Bookmark URL editing field label -->
-  <string name="bookmark_url_label">ADRES</string>
+  <string name="bookmark_url_label">Adres</string>
   <!-- Text indicating which folder a bookmark or folder will be saved in -->
   <string name="bookmark_save_in_label">Kayıt konumu</string>
   <!-- Label for a text input field for a bookmark or folder name -->
@@ -3052,6 +3069,10 @@
   <string name="ip_protection_toolbar_pill_label">VPN açık</string>
   <!-- Accessibility description for the browser VPN pill in the address bar when the VPN has been activated -->
   <string name="ip_protection_toolbar_pill_description">VPN etkin.</string>
+  <!-- Label shown next to the browser protection icon in the address bar when the browser VPN turns off -->
+  <string name="ip_protection_toolbar_pill_label_off">VPN kapalı</string>
+  <!-- Accessibility description for the browser VPN pill in the address bar when the VPN has turned off -->
+  <string name="ip_protection_toolbar_pill_description_off">VPN kapalı.</string>
   <!-- Label for the button that starts the browser VPN authentication or authorization flow on the settings screen -->
   <string name="ip_protection_get_started">Başla</string>
   <!-- Label for the "connecting" state of the button that starts the browser VPN authentication or authorization flow on the settings screen -->
@@ -3071,7 +3092,7 @@
     %1$s is a localized date (for example "Jun 9") indicating the end of the promotional period.
     %2$s is a link using ip_protection_onboarding_body_link_promo (“Learn more”) as text. It links to a support article about VPN on Firefox.
   -->
-  <string name="ip_protection_onboarding_body_promo">Gezintinizi daha gizli ve izlemesi zor hale getirmek için VPN\'i açın. %1$s tarihine kadar sınırsız bant genişliğine sahip olmak için hemen deneyin. %2$s</string>
+  <string name="ip_protection_onboarding_body_promo">Gezintinizi daha gizli ve izlenmesi zor hale getirmek için VPN’i açın. %1$s tarihine kadar sınırsız bant genişliğine sahip olmak için hemen deneyin. %2$s</string>
   <!-- Used as text for a link in ip_protection_onboarding_body. Make sure to adapt capitalization if the link is in the middle of the sentence. -->
   <string name="ip_protection_onboarding_body_link_promo">Daha fazla bilgi al</string>
   <!-- Label for the dismiss button on the onboarding bottom sheet. -->
@@ -3101,6 +3122,8 @@
   <string name="ip_protection_location_picker_title" tools:ignore="UnusedResources">VPN konumunu seçin</string>
   <!-- Description for what it means to use the Recommended setting and let the app automatically pick the best server location. -->
   <string name="ip_protection_location_fastest_description" tools:ignore="BrandUsage">Firefox en hızlı konumu bulur</string>
+  <!-- Description for an unavailable VPN location in the location list. -->
+  <string name="ip_protection_location_unavailable_description">Kullanılamıyor</string>
   <!-- Error message shown when the selected browser VPN location is unavailable. -->
   <string name="ip_protection_location_unavailable" tools:ignore="UnusedResources">Bu konum kullanılamıyor. Başka bir konum seçin.</string>
   <!-- Snackbar (in-app pop-up notification) text shown when the previously selected browser VPN location is unavailable and the recommended location was used instead. -->
@@ -3382,7 +3405,7 @@
   <!-- Text displayed in the synced tabs screen when a user is not signed in to Firefox Sync describing Synced Tabs -->
   <string name="synced_tabs_sign_in_message">Diğer cihazlarınızdaki sekmelerin listesini görün.</string>
   <!-- Text displayed on a button in the synced tabs screen to link users to sign in when a user is not signed in to Firefox Sync -->
-  <string name="synced_tabs_sign_in_button">Sync’e giriş yapın</string>
+  <string name="synced_tabs_sign_in_button">Eşitlemek için giriş yap</string>
   <!-- The text displayed when a synced device has no tabs to show in the list of Synced Tabs. -->
   <string name="synced_tabs_no_open_tabs">Açık sekme yok</string>
   <!-- Content description for expanding a group of synced tabs. -->
@@ -4739,4 +4762,16 @@
   <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">Web sitesi izolasyonu</string>
   <!-- Description of the Firefox Labs Sandboxing experiment. -->
   <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">Sekmeden sekmeye sızabilecek verilerinizi koruyan, web sitelerinin arasına yerleşen ek bir güvenlik katmanı. Performansı, kararlılığı, site uyumluluğunu ve gezinti geçmişinin kaydedilme biçimini etkileyebilir.</string>
+  <!--
+    PDF viewer toolbar and buttons
+
+    Content description for accessibility (used by screen readers): Description for the button that triggers the start of a signature workflow on the PDF displayed on the screen.
+  -->
+  <string name="pdf_tools_sign_content_description">PDF’i imzala</string>
+  <!-- Content description for accessibility (used by screen readers): Description of the button that downloads the PDF displayed on the screen to the user's device. -->
+  <string name="pdf_tools_download_content_description">PDF’i indir</string>
+  <!-- Content description for accessibility (used by screen readers): Description for the button that opens the printing dialogue window for the PDF displayed on the screen. -->
+  <string name="pdf_tools_print_content_description">PDF’i yazdır</string>
+  <!-- Content description for accessibility (used by screen readers): Description for the button that opens the sharing options for the PDF being displayed on the screen. -->
+  <string name="pdf_tools_share_content_description">PDF’i paylaş</string>
 </resources>

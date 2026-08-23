@@ -29,7 +29,7 @@
   <!-- Button in the search suggestions onboarding that allows search suggestions in private sessions -->
   <string name="search_suggestions_onboarding_allow_button">Atļaut</string>
   <!-- Search suggestion onboarding hint title text -->
-  <string name="search_suggestions_onboarding_title">Atļaut meklēšanas iestatījumus privātās sesijās?</string>
+  <string name="search_suggestions_onboarding_title">Atļaut meklēšanas ieteikumus privātās sesijās?</string>
   <!-- Search suggestion onboarding hint description text, %s is the name of the app (for example "Firefox"). -->
   <string name="search_suggestions_onboarding_text">%s kopīgos visu adreses joslā ievadīto ar noklusējuma meklētāju.</string>
   <!-- Menu option in the search selector menu to open the search settings -->
@@ -60,6 +60,12 @@
   <string name="addons_permissions_heading_required_permissions">Nepieciešamās atļaujas:</string>
   <!-- Label for the menu item that opens the customize homepage settings screen. -->
   <string name="browser_menu_customize_homepage">Pielāgot sākumlapu</string>
+  <!-- Snackbar label for action to retry downloading the wallpaper -->
+  <string name="wallpaper_download_error_snackbar_action">Mēģināt vēlreiz</string>
+  <!-- Error message snackbar shown after the user tried to apply the new icon but the Android OS threw an error while updating existing app shortcuts (e.g. private mode shortcut) -->
+  <string name="shortcuts_update_error">Lietotnes ikonas atjaunināšana neizdevās. Jānoņem esošās saīsnes un jāmēģina vēlreiz.</string>
+  <!-- Text shown in the snackbar action button that lets the user retry an add-on operation that just failed. -->
+  <string name="addon_failure_retry_action">Atkārtot</string>
   <!-- Add bookmark shortcut in toolbar customization -->
   <string name="toolbar_customize_shortcut_add_bookmark">Pievienot grāmatzīmi</string>
   <!--
@@ -147,6 +153,10 @@
   <string name="preferences_logins_add_login_2">Pievienot paroli</string>
   <!-- Content description, used by tools like screenreaders, to press on the add new login button. -->
   <string name="saved_logins_add_new_login_button_content_description">Pievienot jaunu pieteikšanās vienumu</string>
+  <!-- Label shown next to the browser protection icon in the address bar when the browser VPN turns off -->
+  <string name="ip_protection_toolbar_pill_label_off">VPN izslēgts</string>
+  <!-- Accessibility description for the browser VPN pill in the address bar when the VPN has turned off -->
+  <string name="ip_protection_toolbar_pill_description_off">VPN ir izslēgts.</string>
   <!-- Description for an unavailable VPN location in the location list. -->
   <string name="ip_protection_location_unavailable_description">Nepieejams</string>
   <!-- Preference option for adding a card -->
@@ -193,6 +203,10 @@
   <string name="homepage_shortcuts_add_website">Pievienot tīmekļvietni</string>
   <!-- Translations feature -->
 
+  <!-- Button text on the translations dialog when a translation error appears. -->
+  <string name="translations_bottom_sheet_positive_button_error">Mēģināt vēlreiz</string>
+  <!-- The title of the warning card informs the user that a translation could not be completed. -->
+  <string name="translation_error_could_not_translate_warning_text">Tulkošanas laikā radās sarežģījums. Lūgums mēģināt vēlreiz.</string>
   <!-- The title of the warning card informs the user that the list of languages cannot be loaded. -->
   <string name="translation_error_could_not_load_languages_warning_text">Nevarēja ielādēt valodas. Jāpārbauda savienojums ar internetu un jāmēģina vēlreiz.</string>
   <!-- The button text to add tabs to the active tab group in the tab creation tool. -->

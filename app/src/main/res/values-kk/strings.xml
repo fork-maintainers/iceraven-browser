@@ -1131,6 +1131,8 @@
   <string name="extension_process_crash_dialog_retry_button_text" tools:ignore="UnusedResources">Кеңейтулерді қайта іске қосып көріңіз</string>
   <!-- Button text on the extension crash dialog to prompt the user to continue with all extensions disabled. -->
   <string name="extension_process_crash_dialog_disable_extensions_button_text">Сөндірілген кеңейтулермен жалғастыру</string>
+  <!-- Text shown in the snackbar action button that lets the user retry an add-on operation that just failed. -->
+  <string name="addon_failure_retry_action">Қайталау</string>
   <!--
     Account Preferences
 
@@ -1304,6 +1306,11 @@
   <string name="preference_light_theme">Ашық түсті</string>
   <!-- Preference for using dark theme -->
   <string name="preference_dark_theme">Күңгірт</string>
+  <!--
+    Preference for using the OLED theme. For localization, this can be translated as "True Black", "Maximum Darkness",
+    or "Full dark" if needed.
+  -->
+  <string name="preference_oled_theme">Ең қараңғы</string>
   <!-- Preference for using using dark or light theme automatically set by battery -->
   <string name="preference_auto_battery_theme">Батареяны үнемдеу режимін ескеру</string>
   <!-- Preference for using following device theme -->
@@ -1450,6 +1457,8 @@
   <string name="preferences_inactive_tabs">Ескі беттерді белсенді емес күйге жылжыту</string>
   <!-- Title of inactive tabs preference -->
   <string name="preferences_inactive_tabs_title">Сіз екі апта бойы қарамаған беттер белсенді емес топқа жылжытылады.</string>
+  <!-- Title for the preference to enable or disable the tab groups feature -->
+  <string name="preferences_tab_groups_feature">Беттер топтарын іске қосу</string>
   <!--
     Privacy report
 
@@ -1694,6 +1703,14 @@
   <string name="ungroup_tab_group_confirmation_dialog_confirm">Топтан шығару</string>
   <!-- Text shown on the cancel button in the Ungroup tab group confirmation dialog. -->
   <string name="ungroup_tab_group_confirmation_dialog_cancel">Бас тарту</string>
+  <!-- Custom accessibility action to reorder a tab up rather than dragging. -->
+  <string name="custom_accessibility_action_reorder_tab_up">Бетті жоғары жылжыту</string>
+  <!-- Custom accessibility action to reorder a tab left rather than dragging. -->
+  <string name="custom_accessibility_action_reorder_tab_left">Бетті солға жылжыту</string>
+  <!-- Custom accessibility action to reorder a tab right rather than dragging. -->
+  <string name="custom_accessibility_action_reorder_tab_right">Бетті оңға жылжыту</string>
+  <!-- Custom accessibility action to reorder a tab down rather than dragging. -->
+  <string name="custom_accessibility_action_reorder_tab_down">Бетті төмен жылжыту</string>
   <!--
     Color labels for tab groups, used for accessibility and selection UI.
 
@@ -3101,6 +3118,8 @@
   <string name="ip_protection_location_picker_title" tools:ignore="UnusedResources">VPN орналасуын таңдау</string>
   <!-- Description for what it means to use the Recommended setting and let the app automatically pick the best server location. -->
   <string name="ip_protection_location_fastest_description" tools:ignore="BrandUsage">Firefox ең жылдам орналасқан жерді табады</string>
+  <!-- Description for an unavailable VPN location in the location list. -->
+  <string name="ip_protection_location_unavailable_description">Қолжетімді емес</string>
   <!-- Error message shown when the selected browser VPN location is unavailable. -->
   <string name="ip_protection_location_unavailable" tools:ignore="UnusedResources">Орналасу қолжетімді емес. Басқа орынды таңдаңыз.</string>
   <!-- Snackbar (in-app pop-up notification) text shown when the previously selected browser VPN location is unavailable and the recommended location was used instead. -->
