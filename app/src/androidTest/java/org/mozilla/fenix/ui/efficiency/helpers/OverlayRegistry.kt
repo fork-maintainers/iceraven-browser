@@ -112,9 +112,31 @@ object OverlayRegistry {
         ),
     )
 
+    /**
+     * Android system "Set as default" browser prompt: raised when the app or a specific action requests to
+     * become the system-level default browser. This is a system-controlled modal dialog that appears in a
+     * separate window, blocking interaction with the underlying browser UI.
+     */
+    val SET_DEFAULT_BROWSER_SYSTEM_DIALOG = BlockingOverlay(
+        name = "Set default browser system dialog",
+        presence = Selector(
+            strategy = SelectorStrategy.UIAUTOMATOR_WITH_TEXT_CONTAINS,
+            value = "as your default browser app?",
+            description = "Set default browser system dialog title",
+        ),
+        dismiss = listOf(
+            Selector(
+                strategy = SelectorStrategy.UIAUTOMATOR_WITH_TEXT,
+                value = "Cancel",
+                description = "Set default browser system dialog Cancel button",
+            ),
+        ),
+    )
+
     val known: List<BlockingOverlay> = listOf(
         STYLUS_HANDWRITING_PROMPT,
         ADD_TO_HOME_SCREEN_PROMPT,
         OPEN_LINK_IN_APP_PROMPT,
+        SET_DEFAULT_BROWSER_SYSTEM_DIALOG,
     )
 }
