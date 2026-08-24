@@ -883,6 +883,16 @@
             <action android:name="org.mozilla.fenix.TRIGGER_MESSAGE_WORKER" />
           </intent-filter>
         </receiver>
+
+        <receiver
+          android:name="org.mozilla.fenix.experiments.QANimbusToolingReceiver"
+          android:exported="true"
+          android:enabled="true"
+          android:permission="android.permission.DUMP">
+          <intent-filter>
+            <action android:name="org.mozilla.fenix.NIMBUS_TOOLING" />
+          </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
