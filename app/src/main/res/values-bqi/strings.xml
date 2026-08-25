@@ -2761,11 +2761,11 @@
   <!-- Summary displayed for "Default Protection" option under "DNS over HTTPS". %1$s is the name of the application (e.g. Fenix). -->
   <string name="preference_doh_default_protection_summary">%1$s سلا دستسه ک چ مجالی DNS ٱمن ن سی زفت وابیڌن هریم سیخومی ایسا و کار بره.</string>
   <!-- Bullet point 1 for "Default Protection" information page under "DNS over HTTPS" -->
-  <string name="preference_doh_default_protection_info_1">و کار گرؽڌن جۊر کوݩ پسند بیڌه ایسا</string>
+  <string name="preference_doh_default_protection_info_1">و کار گرؽڌن جۊر کوننده پسند بیڌه ایسا</string>
   <!-- Bullet point 2 for "Default Protection" information page under "DNS over HTTPS" -->
-  <string name="preference_doh_default_protection_info_2">ٱر موشکلی وا جۊر کوݩ DNS ٱمن هڌه، DNS پؽش فرز خوتووݩ ن و کار بگیرین</string>
+  <string name="preference_doh_default_protection_info_2">ٱر موشکلی وا جۊر کوننده DNS ٱمن هڌه، DNS پؽش فرز خوتووݩ ن و کار بگیرین</string>
   <!-- Bullet point 3 for "Default Protection" information page under "DNS over HTTPS". %1$s is replaced by a link using `preference_doh_learn_more` at text ("Learn More"). -->
-  <string name="preference_doh_default_protection_info_3">و کار گرؽڌن جۊر کوݩ مهلی ٱر ک بۊ. %1$s</string>
+  <string name="preference_doh_default_protection_info_3">و کار گرؽڌن جۊر کوننده مهلی ٱر ک بۊ. %1$s</string>
   <!-- Bullet point 4 for "Default Protection" information page under "DNS over HTTPS" -->
   <string name="preference_doh_default_protection_info_4">کۊر من مجالی ک وی پی ان، کونتورول والدین یا سیاستا سازمۊوی فعال بۊن</string>
   <!-- Bullet point 5 for "Default Protection" information page under "DNS over HTTPS". %1$s is the name of the application (e.g. Fenix). %2$s is replaced by a link using `preference_doh_learn_more` at text ("Learn More"). -->
@@ -2775,7 +2775,7 @@
   <!-- Summary displayed for "Increased Protection" option under "DNS over HTTPS" -->
   <string name="preference_doh_increased_protection_summary">ایسا اگۊین ک چ مجالی DNS ٱمن و کار روه وو جۊر کونسه پسند اکۊنین.</string>
   <!-- Bullet point 1 for "Increased Protection" information page under "DNS over HTTPS" -->
-  <string name="preference_doh_increased_protection_info_1">و کار گرؽڌن جۊر کوݩ پسند بیڌه ایسا</string>
+  <string name="preference_doh_increased_protection_info_1">و کار گرؽڌن جۊر کوننده پسند بیڌه ایسا</string>
   <!-- Bullet point 2 for "Increased Protection" information page under "DNS over HTTPS" -->
   <string name="preference_doh_increased_protection_info_2">تینا ٱر موشکلی وا جۊر کوݩ DNS ٱمن هڌه، DNS پؽش فرز خوتووݩ ن و کار بگیرین</string>
   <!-- Title displayed for "Max Protection" option under "DNS over HTTPS" -->
@@ -2783,7 +2783,7 @@
   <!-- Summary displayed for "Max Protection" option under "DNS over HTTPS". %1$s is the name of the application (e.g. Fenix). -->
   <string name="preference_doh_max_protection_summary">%1$s هی و عونوان DNS ٱمن و کار روه. پؽش ز یوکه DNS سیستوم و کار روه، و ایسا ی هوشتار اختار ٱمنیتی داڌه ابۊ.</string>
   <!-- Bullet point 1 for "Max Protection" information page under "DNS over HTTPS" -->
-  <string name="preference_doh_max_protection_info_1">تینا و کار گرؽڌن جۊر کوݩ پسند بیڌه</string>
+  <string name="preference_doh_max_protection_info_1">تینا و کار گرؽڌن جۊر کوننده پسند بیڌه</string>
   <!-- Bullet point 2 for "Max Protection" information page under "DNS over HTTPS" -->
   <string name="preference_doh_max_protection_info_2">ٱر DNS ٱمن من دسرس نبی، هی اختار بڌه</string>
   <!-- Bullet point 3 for "Max Protection" information page under "DNS over HTTPS" -->
@@ -2793,15 +2793,15 @@
   <!-- Summary displayed for "Off" option under "DNS over HTTPS" -->
   <string name="preference_doh_off_summary">موبدل DNS پؽش فرز خوته و کار بگر</string>
   <!-- Text displayed above provider dropdown under "DNS over HTTPS" -->
-  <string name="preference_doh_choose_provider">پسند جۊر کوݩ</string>
+  <string name="preference_doh_choose_provider">پسند جۊر کوننده</string>
   <!-- Text displayed for "Default provider" under "DNS over HTTPS" providers -->
   <string name="preference_doh_provider_default">(پؽش فرز)</string>
   <!-- Text displayed for "Custom" under "DNS over HTTPS" providers -->
   <string name="preference_doh_provider_custom">سفارشی</string>
   <!-- Text displayed for "Custom provider" dialog under "DNS over HTTPS" -->
-  <string name="preference_doh_provider_custom_dialog_title">جۊر کوݩ سفارشی</string>
+  <string name="preference_doh_provider_custom_dialog_title">جۊر کوننده سفارشی</string>
   <!-- Text displayed above provider textfield under "DNS over HTTPS" -->
-  <string name="preference_doh_provider_custom_dialog_textfield">جۊر کوݩ</string>
+  <string name="preference_doh_provider_custom_dialog_textfield">جۊر کوننده</string>
   <!-- Error text displayed for provider textfield under "DNS over HTTPS" if the URL does not start with "https://" or its scheme is not "https" -->
   <string name="preference_doh_provider_custom_dialog_error_https">نشۊوی وا، وا «‪https://‬» شۊرۊ بۊ</string>
   <!-- Error text displayed for provider textfield under "DNS over HTTPS" if the URL is invalid -->

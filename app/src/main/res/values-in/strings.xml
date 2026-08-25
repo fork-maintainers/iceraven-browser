@@ -2285,7 +2285,7 @@
   <!-- Title for the cookies and site data items in Delete browsing data -->
   <string name="preferences_delete_browsing_data_cookies_and_site_data">Kuki dan data situs</string>
   <!-- Subtitle for the cookies item in Delete browsing data -->
-  <string name="preferences_delete_browsing_data_cookies_subtitle">Anda\\ akan keluar dari sebagian besar situs</string>
+  <string name="preferences_delete_browsing_data_cookies_subtitle">Anda akan keluar dari sebagian besar situs</string>
   <!-- Title for the cached images and files item in Delete browsing data -->
   <string name="preferences_delete_browsing_data_cached_files">Gambar dan berkas dalam tembolok</string>
   <!-- Subtitle for the cached images and files item in Delete browsing data -->
