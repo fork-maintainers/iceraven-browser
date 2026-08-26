@@ -1462,7 +1462,7 @@
   <!-- Title of inactive tabs preference -->
   <string name="preferences_inactive_tabs_title">Mae tabiau dydych chi heb edrych arnyn nhw ers pythefnos yn cael eu symud i’r adran anweithredol.</string>
   <!-- Title for the preference to enable or disable the tab groups feature -->
-  <string name="preferences_tab_groups_feature">Galluogi Grwpiau Tab</string>
+  <string name="preferences_tab_groups_feature">Galluogi Grwpiau Tabiau</string>
   <!--
     Privacy report
 
@@ -1732,7 +1732,7 @@
   <!-- Custom accessibility action to reorder a tab left rather than dragging. -->
   <string name="custom_accessibility_action_reorder_tab_left">Symud tab i\'r chwith</string>
   <!-- Custom accessibility action to reorder a tab right rather than dragging. -->
-  <string name="custom_accessibility_action_reorder_tab_right">Symudwch y tab i\'r dde</string>
+  <string name="custom_accessibility_action_reorder_tab_right">Symud tab i\'r dde</string>
   <!-- Custom accessibility action to reorder a tab down rather than dragging. -->
   <string name="custom_accessibility_action_reorder_tab_down">Symud tab i lawr</string>
   <!--
@@ -3104,7 +3104,7 @@
   <!-- Label shown next to the browser protection icon in the address bar when the browser VPN turns off -->
   <string name="ip_protection_toolbar_pill_label_off">VPN i ffwrdd</string>
   <!-- Accessibility description for the browser VPN pill in the address bar when the VPN has turned off -->
-  <string name="ip_protection_toolbar_pill_description_off">Mae VPN i ffwrdd.</string>
+  <string name="ip_protection_toolbar_pill_description_off">Mae\'r VPN i ffwrdd.</string>
   <!-- Label for the button that starts the browser VPN authentication or authorization flow on the settings screen -->
   <string name="ip_protection_get_started">Cychwyn arni</string>
   <!-- Label for the "connecting" state of the button that starts the browser VPN authentication or authorization flow on the settings screen -->
@@ -4831,7 +4831,7 @@
 
     Content description for accessibility (used by screen readers): Description for the button that triggers the start of a signature workflow on the PDF displayed on the screen.
   -->
-  <string name="pdf_tools_sign_content_description">Arwyddwch PDF</string>
+  <string name="pdf_tools_sign_content_description">Arwyddo\'r PDF</string>
   <!-- Content description for accessibility (used by screen readers): Description of the button that downloads the PDF displayed on the screen to the user's device. -->
   <string name="pdf_tools_download_content_description">Llwytho PDF i Lawr</string>
   <!-- Content description for accessibility (used by screen readers): Description for the button that opens the printing dialogue window for the PDF displayed on the screen. -->

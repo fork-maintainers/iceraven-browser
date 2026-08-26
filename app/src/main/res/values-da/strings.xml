@@ -824,6 +824,8 @@
   <string name="preferences_toolbar_shortcut">Genvej på værktøjslinjen</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_toolbar_select_shortcut">Vælg en genvej</string>
+  <!-- Title of a menu option allowing to change the shortcut button shown in the toolbar -->
+  <string name="toolbar_shortcut_menu_edit_option">Rediger genvej</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_gestures">Bevægelser</string>
   <!-- Preference for settings related to visual options -->
@@ -1129,6 +1131,8 @@
   <string name="extension_process_crash_dialog_retry_button_text" tools:ignore="UnusedResources">Prøv at genstarte udvidelser</string>
   <!-- Button text on the extension crash dialog to prompt the user to continue with all extensions disabled. -->
   <string name="extension_process_crash_dialog_disable_extensions_button_text">Fortsæt med udvidelser deaktiveret</string>
+  <!-- Text shown in the snackbar action button that lets the user retry an add-on operation that just failed. -->
+  <string name="addon_failure_retry_action">Prøv igen</string>
   <!--
     Account Preferences
 
@@ -1302,6 +1306,11 @@
   <string name="preference_light_theme">Lys</string>
   <!-- Preference for using dark theme -->
   <string name="preference_dark_theme">Mørk</string>
+  <!--
+    Preference for using the OLED theme. For localization, this can be translated as "True Black", "Maximum Darkness",
+    or "Full dark" if needed.
+  -->
+  <string name="preference_oled_theme">Mørkest</string>
   <!-- Preference for using using dark or light theme automatically set by battery -->
   <string name="preference_auto_battery_theme">Indstil med strømstyring</string>
   <!-- Preference for using following device theme -->
@@ -1448,6 +1457,16 @@
   <string name="preferences_inactive_tabs">Flyt gamle faneblade til afsnittet Inaktive faneblade</string>
   <!-- Title of inactive tabs preference -->
   <string name="preferences_inactive_tabs_title">Faneblade, du ikke har set i to uger, flyttes til afsnittet Inaktive faneblade.</string>
+  <!-- Title for the preference to enable or disable the tab groups feature -->
+  <string name="preferences_tab_groups_feature">Aktiver fanebladsgrupper</string>
+  <!--
+    Privacy report
+
+    Category header of a preference that allows a user to enable or disable the privacy report feature
+  -->
+  <string name="preferences_privacy_report">Privatlivsrapport</string>
+  <!-- Title of the privacy report preference that allows a user to enable or disable the feature -->
+  <string name="preferences_privacy_report_title">Aktiver privatlivsrapport</string>
   <!--
     Studies
 
@@ -1684,6 +1703,14 @@
   <string name="ungroup_tab_group_confirmation_dialog_confirm">Ophæv gruppering</string>
   <!-- Text shown on the cancel button in the Ungroup tab group confirmation dialog. -->
   <string name="ungroup_tab_group_confirmation_dialog_cancel">Annuller</string>
+  <!-- Custom accessibility action to reorder a tab up rather than dragging. -->
+  <string name="custom_accessibility_action_reorder_tab_up">Flyt faneblad op</string>
+  <!-- Custom accessibility action to reorder a tab left rather than dragging. -->
+  <string name="custom_accessibility_action_reorder_tab_left">Flyt faneblad til venstre</string>
+  <!-- Custom accessibility action to reorder a tab right rather than dragging. -->
+  <string name="custom_accessibility_action_reorder_tab_right">Flyt faneblad til højre</string>
+  <!-- Custom accessibility action to reorder a tab down rather than dragging. -->
+  <string name="custom_accessibility_action_reorder_tab_down">Flyt faneblad ned</string>
   <!--
     Color labels for tab groups, used for accessibility and selection UI.
 
@@ -3042,6 +3069,10 @@
   <string name="ip_protection_toolbar_pill_label">VPN slået til</string>
   <!-- Accessibility description for the browser VPN pill in the address bar when the VPN has been activated -->
   <string name="ip_protection_toolbar_pill_description">VPN er aktiv.</string>
+  <!-- Label shown next to the browser protection icon in the address bar when the browser VPN turns off -->
+  <string name="ip_protection_toolbar_pill_label_off">VPN slået fra</string>
+  <!-- Accessibility description for the browser VPN pill in the address bar when the VPN has turned off -->
+  <string name="ip_protection_toolbar_pill_description_off">VPN er slået fra.</string>
   <!-- Label for the button that starts the browser VPN authentication or authorization flow on the settings screen -->
   <string name="ip_protection_get_started">Kom i gang</string>
   <!-- Label for the "connecting" state of the button that starts the browser VPN authentication or authorization flow on the settings screen -->
@@ -3091,6 +3122,8 @@
   <string name="ip_protection_location_picker_title" tools:ignore="UnusedResources">Vælg VPN-placering</string>
   <!-- Description for what it means to use the Recommended setting and let the app automatically pick the best server location. -->
   <string name="ip_protection_location_fastest_description" tools:ignore="BrandUsage">Firefox finder den hurtigste placering</string>
+  <!-- Description for an unavailable VPN location in the location list. -->
+  <string name="ip_protection_location_unavailable_description">Ikke tilgængelig</string>
   <!-- Error message shown when the selected browser VPN location is unavailable. -->
   <string name="ip_protection_location_unavailable" tools:ignore="UnusedResources">Placeringen er ikke tilgængelig. Vælg en anden placering.</string>
   <!-- Snackbar (in-app pop-up notification) text shown when the previously selected browser VPN location is unavailable and the recommended location was used instead. -->
@@ -3390,6 +3423,16 @@
     which navigates the user to a screen displaying all the shortcuts.
   -->
   <string name="homepage_shortcuts_show_all_content_description">Vis alle genveje</string>
+  <!--
+    Label for the button in the shortcuts home screen section that expands the section to show
+    every shortcut.
+  -->
+  <string name="homepage_shortcuts_show_all">Vis alle</string>
+  <!--
+    Label for the button in the shortcuts home screen section that collapses the section back
+    to showing only the first shortcuts.
+  -->
+  <string name="homepage_shortcuts_show_less">Vis færre</string>
   <!-- Label for the "Add shortcut" button displayed as a tile. -->
   <string name="homepage_shortcuts_add_shortcut">Tilføj genvej</string>
   <!-- Title for the "Add to homepage" bottom sheet. -->
@@ -4621,6 +4664,16 @@
   <string name="privacy_notice_updated_homepage_message_privacy_notice" tools:ignore="UnusedResources">privatlivserklæring</string>
   <!-- The second active link used in privacy_notice_updated_homepage_message -->
   <string name="privacy_notice_updated_homepage_message_learn_more" tools:ignore="UnusedResources">Læs mere</string>
+  <!--
+    Collections migration homepage card
+
+    Title shown on the collections to tab groups migration card on the homepage.
+  -->
+  <string name="collections_migration_homepage_banner_title">Samlinger er nu grupper</string>
+  <!-- Message shown on the collections to tab groups migration card on the homepage. -->
+  <string name="collections_migration_homepage_card_message">Der er en enklere måde at holde dine faneblade organiseret på</string>
+  <!-- Link text shown on the collections to tab groups migration card that opens the tab groups page in the tab manager. -->
+  <string name="collections_migration_homepage_card_link">Vis mine fanebladsgrupper</string>
   <!-- Google Lens prototype related strings -->
   <string name="preferences_debug_settings_google_lens_integration">Aktiver integration af Google Lens</string>
   <!-- Lens image search button content description -->
@@ -4705,4 +4758,20 @@
   <string name="firefox_labs_feature_conflict">Funktionen kan ikke prøves.</string>
   <!-- Text displayed on the Firefox Labs screen when there are no Labs experimental features present. -->
   <string name="firefox_labs_no_labs_available_description">Ingen eksperimentelle funktioner at afprøve lige nu</string>
+  <!-- Title of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">Websteds-isolering</string>
+  <!-- Description of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">En ekstra barriere mellem websteder, der hjælper med at beskytte dine data på tværs af faneblade. Kan påvirke ydeevne, stabilitet, websteds-kompatibilitet og hvordan browserhistorikken gemmes.</string>
+  <!--
+    PDF viewer toolbar and buttons
+
+    Content description for accessibility (used by screen readers): Description for the button that triggers the start of a signature workflow on the PDF displayed on the screen.
+  -->
+  <string name="pdf_tools_sign_content_description">Underskriv PDF-fil</string>
+  <!-- Content description for accessibility (used by screen readers): Description of the button that downloads the PDF displayed on the screen to the user's device. -->
+  <string name="pdf_tools_download_content_description">Hent PDF-fil</string>
+  <!-- Content description for accessibility (used by screen readers): Description for the button that opens the printing dialogue window for the PDF displayed on the screen. -->
+  <string name="pdf_tools_print_content_description">Udskriv PDF-fil</string>
+  <!-- Content description for accessibility (used by screen readers): Description for the button that opens the sharing options for the PDF being displayed on the screen. -->
+  <string name="pdf_tools_share_content_description">Del PDF-fil</string>
 </resources>
