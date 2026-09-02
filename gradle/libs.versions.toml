@@ -36,9 +36,9 @@ exifinterface = "1.4.2"
 fragment = "1.8.9"
 lifecycle = "2.11.0"
 media = "1.7.1"
-media3 = "1.10.1"
+media3 = "1.11.0"
 navigation = "2.9.8"
-navigation3 = "1.1.2"
+navigation3 = "1.1.5"
 paging = "3.5.0"
 palette = "1.0.0"
 preference = "1.2.1"
@@ -57,19 +57,19 @@ work = "2.11.2"
 accompanist = "0.37.3"
 firebase-messaging = "25.0.2"
 installreferrer = "2.2"
-ksp = "2.3.10"
+ksp = "2.3.11"
 material = "1.14.0"
-mlkit-prompt = "1.0.0-beta2"
+mlkit-prompt = "1.0.0-beta4"
 osslicenses-plugin = "0.13.0"
 play-integrity = "1.6.0"
 play-review = "2.0.2"
 play-services-ads-id = "18.3.0"
 play-services-base = "18.10.0"
 play-services-fido = "21.3.0"
-protobuf = "4.35.0" # Keep Protobuf in sync with the version used by AppServices.
+protobuf = "4.35.1"
 
 # Gradle plugins
-dependency-analysis = "3.12.0"
+dependency-analysis = "3.18.0"
 jacoco = "0.8.15"
 kaml = "0.104.0"
 protobuf-plugin = "0.10.0"
@@ -83,7 +83,7 @@ androidx-lint = "1.0.0"
 detekt = "1.23.8"
 google-java-format = "1.28.0"
 ktlint = "1.8.0"
-spotless = "8.8.0"
+spotless = "8.9.0"
 
 # Mozilla
 glean = "68.0.1"
@@ -108,14 +108,14 @@ robolectric = "4.16.1"
 adjust = "5.7.0"
 androidsvg = "1.4"
 disklrucache = "2.0.2"
-jetbrains-markdown = "0.7.3"
-jna = "5.18.1"
-json = "20260522"
-jsoup = "1.22.2"
+jetbrains-markdown = "0.7.9"
+jna = "5.19.1"
+json = "20260719"
+jsoup = "1.23.1"
 lottie = "6.7.1"
 okhttp = "5.4.0"
-okio = "3.17.0"
-sentry = "8.48.0"
+okio = "3.18.1"
+sentry = "8.52.0"
 zxing = "3.5.4"
 
 [libraries]
@@ -318,7 +318,6 @@ android-lint-plugin = { id = "com.android.lint", version.ref = "android-gradle-p
 # No version: supplied by the buildscript classpath, which the plugins DSL must not version-check.
 androidx-safeargs = { id = "androidx.navigation.safeargs.kotlin" }
 dependency-analysis = { id = "com.autonomousapps.dependency-analysis", version.ref = "dependency-analysis" }
-detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 # No version: bundled in the Kotlin Gradle plugin classpath, which the plugins DSL must not version-check.
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize" }

@@ -4631,54 +4631,6 @@
   <string name="privacy_notice_updated_homepage_message_privacy_notice" tools:ignore="UnusedResources">Privacy Notice</string>
   <!-- The second active link used in privacy_notice_updated_homepage_message -->
   <string name="privacy_notice_updated_homepage_message_learn_more" tools:ignore="UnusedResources">Learn more</string>
-  <!-- Google Lens prototype related strings -->
-  <string name="preferences_debug_settings_google_lens_integration">Enable Google Lens Integration</string>
-  <!-- Lens image search button content description -->
-  <string name="lens_search_content_description">Search with image</string>
-  <!-- Content description for the gallery picker button in the Lens camera screen -->
-  <string name="content_description_gallery">Choose from gallery to send to Google Lens</string>
-  <!-- Content description for the shutter button in the Lens camera screen -->
-  <string name="content_description_take_photo">Take photo and send to Google Lens</string>
-  <!-- Image context menu entry that sends the long-pressed image to Google Lens -->
-  <string name="context_menu_open_image_with_google_lens">Search with Google Lens</string>
-  <!-- Toast shown when the user denies the camera permission requested by the Lens camera screen -->
-  <string name="lens_camera_permission_denied">Permission denied</string>
-  <!--
-    Title shown at the top of the camera screen, next to the close button, telling the
-    user that the photo they capture will be sent to Google Lens for a visual search.
-  -->
-  <string name="lens_camera_title_lens">Google Lens</string>
-  <!--
-    Title shown at the top of the camera screen, next to the close button, telling the
-    user that the camera is being used to scan a QR code.
-  -->
-  <string name="lens_camera_title_qr">QR Code</string>
-  <!-- Title for the Google Lens Search Settings page feature toggle -->
-  <string name="search_settings_google_lens_title">Enable Google Lens search</string>
-  <!-- Description for the Google Lens Search Settings page feature toggle -->
-  <string name="search_settings_google_lens_description">Sends images and photos to Google for visual search.</string>
-  <!-- Caption shown under the Google Lens toggle clarifying when the feature is available -->
-  <string name="preferences_google_lens_availability_caption">Available only when Google is enabled above and is your active search engine while browsing.</string>
-  <!-- Title for the Google Lens AI feature toggle -->
-  <string name="ai_controls_google_lens_title">Google Lens</string>
-  <!-- Description for the Google Lens AI feature toggle -->
-  <string name="ai_controls_google_lens_description">Sends images and photos to Google for visual search.</string>
-  <!-- Content description for the Google Lens half of the camera mode toggle -->
-  <string name="lens_camera_mode_lens">Google Lens</string>
-  <!-- Content description for the QR scanner half of the camera mode toggle -->
-  <string name="lens_camera_mode_qr">QR scanner</string>
-  <!-- Toast shown when the user picks an image from the gallery in QR mode but no QR code is found in it -->
-  <string name="lens_camera_qr_no_code_found">No QR code found in image</string>
-  <!-- Title of the bottom sheet shown the first time the user opens the Google Lens camera screen -->
-  <string name="lens_opt_out_title">Find it with Google Lens</string>
-  <!-- Description of the bottom sheet shown the first time the user opens the Google Lens camera screen -->
-  <string name="lens_opt_out_description">Choose an image or use your camera to get results with Google Lens.</string>
-  <!-- Text of the link in the first-run Google Lens bottom sheet that opens the Search settings page -->
-  <string name="lens_opt_out_settings_link">Google Lens settings</string>
-  <!-- Button in the first-run Google Lens bottom sheet that dismisses it and starts the camera -->
-  <string name="lens_opt_out_try_it_now_button">Try it now</string>
-  <!-- Button in the first-run Google Lens bottom sheet that leaves Google Lens without using it -->
-  <string name="lens_opt_out_not_now_button">Not now</string>
   <!--
     Collections migration homepage card
 
