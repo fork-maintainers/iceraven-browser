@@ -98,7 +98,6 @@ class IPProtectionFragment : Fragment(), SystemInsetsPaddedFragment {
                 onVpnToggle = { enabled ->
                     if (enabled) {
                         Vpn.settingsTurnedOn.record(NoExtras())
-                        requireComponents.settings.hasAlreadyUsedVpn = true
                     } else {
                         Vpn.settingsTurnedOff.record(NoExtras())
                     }
@@ -122,6 +121,8 @@ class IPProtectionFragment : Fragment(), SystemInsetsPaddedFragment {
                 showDebugAction = requireComponents.settings.showSecretDebugMenuThisSession,
                 onDebugActionClick = { showDebugDialog = true },
                 onNavigateBack = { findNavController().popBackStack() },
+                onLocationClicked = { handleOnLocationClicked() },
+                isLocationSelectionEnabled = requireComponents.settings.isIPProtectionLocationsEnabled,
             )
 
             if (showDebugDialog) {
@@ -178,6 +179,12 @@ class IPProtectionFragment : Fragment(), SystemInsetsPaddedFragment {
             ),
             owner = this,
             view = view,
+        )
+    }
+
+    private fun handleOnLocationClicked() {
+        findNavController().navigate(
+            IPProtectionFragmentDirections.actionIpProtectionFragmentToIpProtectionLocationFragment(),
         )
     }
 

@@ -5,6 +5,7 @@
 <androidx.appcompat.widget.Toolbar
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigationToolbar"
     android:layout_width="0dp"
     android:layout_height="0dp"
@@ -13,7 +14,8 @@
     app:titleMarginEnd="16dp"
     app:titleTextAppearance="@style/AppBarTitleTextStyle"
     android:background="?attr/colorSurface"
-    android:elevation="8dp">
+    android:elevation="8dp"
+    tools:ignore="Overdraw">
 
     <FrameLayout
         android:id="@+id/toolbar_child_container"

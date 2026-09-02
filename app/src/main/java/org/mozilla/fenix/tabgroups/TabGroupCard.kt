@@ -4,7 +4,6 @@
 
 package org.mozilla.fenix.tabgroups
 
-import androidx.compose.animation.rememberSplineBasedDecay
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -26,6 +25,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberSwipeToDismissBoxState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
@@ -47,7 +47,6 @@ import mozilla.components.compose.base.annotation.FlexibleWindowLightDarkPreview
 import mozilla.components.compose.base.theme.surfaceDimVariant
 import mozilla.components.support.base.utils.MAX_URI_LENGTH
 import mozilla.components.ui.colors.NovaColors
-import org.mozilla.fenix.compose.SwipeToDismissState2
 import org.mozilla.fenix.compose.TabThumbnail
 import org.mozilla.fenix.compose.TabThumbnailImageData
 import org.mozilla.fenix.tabstray.TabsTrayTestTag
@@ -83,10 +82,12 @@ const val BOTTOM_END_THUMBNAIL_INDEX = 3
  * @param clickHandler: Handler for all click-handling inputs (long click, click, etc)
  * @param modifier: The Modifier
  * @param interactionState The tab item's interaction state (hover, drag, etc)
- * @param onDeleteTabGroupClick Invoked when the user clicks on delete tab group.
  * @param onEditTabGroupClick Invoked when the user clicks to edit the tab group.
  * @param onCloseTabGroupClick Invoked when the user clicks to close the tab group.
+ * @param onShareTabGroupClick Invoked when the user clicks to share the tab group.
+ * @param onDeleteTabGroupClick Invoked when the user clicks on delete tab group.
  */
+@Suppress("LongParameterList")
 @Composable
 fun TabGroupCard(
     group: TabsTrayItem.TabGroup,
@@ -94,9 +95,10 @@ fun TabGroupCard(
     clickHandler: TabsTrayItemClickHandler,
     modifier: Modifier = Modifier,
     interactionState: TabItemInteractionState,
-    onDeleteTabGroupClick: (TabsTrayItem.TabGroup) -> Unit,
     onEditTabGroupClick: () -> Unit,
     onCloseTabGroupClick: () -> Unit,
+    onShareTabGroupClick: (TabsTrayItem.TabGroup) -> Unit,
+    onDeleteTabGroupClick: (TabsTrayItem.TabGroup) -> Unit,
 ) {
     val containerColor = tabGridItemContainerColor(selectionState)
 
@@ -146,9 +148,10 @@ fun TabGroupCard(
 
                         TabGroupOptionButton(
                             selectionState = selectionState,
-                            onDeleteTabGroupClick = { onDeleteTabGroupClick(group) },
                             onEditTabGroupClick = onEditTabGroupClick,
                             onCloseTabGroupClick = onCloseTabGroupClick,
+                            onShareTabGroupClick = { onShareTabGroupClick(group) },
+                            onDeleteTabGroupClick = { onDeleteTabGroupClick(group) },
                         )
                     }
                 }
@@ -183,9 +186,10 @@ fun TabGroupCard(
 @Composable
 private fun TabGroupOptionButton(
     selectionState: TabsTrayItemSelectionState,
-    onDeleteTabGroupClick: () -> Unit,
     onEditTabGroupClick: () -> Unit,
     onCloseTabGroupClick: () -> Unit,
+    onShareTabGroupClick: () -> Unit,
+    onDeleteTabGroupClick: () -> Unit,
 ) {
     if (selectionState.multiSelectEnabled) {
         MultiSelectTabButton(
@@ -196,9 +200,12 @@ private fun TabGroupOptionButton(
         TabGroupMenuButton(
             modifier = Modifier.size(TabHeaderIconTouchTargetSize),
             includeCloseOption = true,
+            includeUngroupOption = true,
             onDeleteTabGroupClick = onDeleteTabGroupClick,
             onEditTabGroupClick = onEditTabGroupClick,
             onCloseTabGroupClick = onCloseTabGroupClick,
+            onShareTabGroupClick = onShareTabGroupClick,
+            onUngroupTabGroupClick = {},
         )
     }
 }
@@ -511,18 +518,14 @@ private fun TabGroupCardPreview(
                         title = "Kit's Blog",
                     ),
                 ),
-                thumbnailSizePx = 50,
-                selectionState = tabGroupCardState.selectionState,
-                modifier = Modifier.weight(1f),
-                swipeState = SwipeToDismissState2(
-                    density = LocalDensity.current,
-                    isRtl = false,
-                    decayAnimationSpec = rememberSplineBasedDecay(),
-                    enabled = false,
-                ),
+                swipeToDismissBoxState = rememberSwipeToDismissBoxState(),
+                swipingEnabled = true,
+                interactionState = tabGroupCardState.interactionState,
                 onCloseClick = {},
                 onClick = {},
-                interactionState = tabGroupCardState.interactionState,
+                modifier = Modifier.weight(1f),
+                thumbnailSizePx = 50,
+                selectionState = tabGroupCardState.selectionState,
             )
 
             TabGroupCard(
@@ -536,9 +539,10 @@ private fun TabGroupCardPreview(
                 ),
                 modifier = Modifier.weight(1f),
                 interactionState = tabGroupCardState.interactionState,
-                onDeleteTabGroupClick = {},
                 onEditTabGroupClick = {},
                 onCloseTabGroupClick = {},
+                onShareTabGroupClick = {},
+                onDeleteTabGroupClick = {},
             )
         }
     }

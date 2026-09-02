@@ -189,6 +189,7 @@ fun DownloadRenameDialog(
  * @param onFileNameChange Callback for when the user edits the text.
  * @param currentError The specific [RenameFileError] to display, if any.
  * @param modifier Modifier for layout adjustments.
+ * @param extension The non-editable file extension to display as a suffix.
  */
 @Composable
 fun DownloadRenameDialogTextField(
@@ -197,6 +198,7 @@ fun DownloadRenameDialogTextField(
     onFileNameChange: (TextFieldValue) -> Unit,
     currentError: RenameFileError?,
     modifier: Modifier = Modifier,
+    extension: String? = null,
 ) {
     val errorTextResource = when (currentError) {
         is RenameFileError.InvalidFileName ->
@@ -222,6 +224,15 @@ fun DownloadRenameDialogTextField(
                     text = it,
                     style = FirefoxTheme.typography.caption,
                     color = MaterialTheme.colorScheme.error,
+                )
+            }
+        },
+        suffix = extension?.let {
+            {
+                Text(
+                    text = ".$it",
+                    style = FirefoxTheme.typography.body1,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
             }
         },

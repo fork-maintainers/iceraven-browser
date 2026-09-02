@@ -139,9 +139,9 @@ events:
           A string containing the name of the item the user tapped. These items
           include:
           add_bookmark, add_to_homescreen, add_to_top_sites, addon_details, addons_manager,
-          back, back_long_press, bookmark, bookmarks, change_wallpaper, custom_back, custom_back_long_press,
+          back, back_long_press, bookmark, bookmarks, custom_back, custom_back_long_press,
           custom_desktop_view_off, custom_desktop_view_on, custom_find_in_page,
-          custom_forward, custom_forward_long_press, custom_share, desktop_view_off,
+          custom_forward, custom_forward_long_press, custom_share, customize_homepage, desktop_view_off,
           desktop_view_on, discover_more_extensions, dismiss_menu_banner, downloads,
           edit_bookmark, find_in_page, forward, forward_long_press, history, install_addon,
           installed_addon_details, menu_banner, new_tab, open_in_app, open_in_fenix, print_content,
@@ -4158,8 +4158,8 @@ customize_home:
           toggled.
 
           We currently track: most_visited_sites, jump_back_in,
-          recently_visited, bookmarks, pocket, contile, privacy_report, and world_cup.
-          We previously tracked bookmarks as recently_saved.
+          recently_visited, bookmarks, pocket, contile, privacy_report, and
+          weather. We previously tracked bookmarks as recently_saved.
       enabled:
         type: boolean
         description: "Whether or not the preference is *now* enabled"
@@ -5685,6 +5685,58 @@ error_page:
       - https://github.com/mozilla-mobile/fenix/pull/21316#issuecomment-944615938
       - https://github.com/mozilla-mobile/fenix/pull/27295
       - https://github.com/mozilla-mobile/firefox-android/pull/4039
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+    metadata:
+      tags:
+        - ErrorMessages
+  archived_version_opened:
+    type: event
+    description: |
+      Recorded when a user opens an archived version of an unreachable page from
+      an error page, via the Wayback Machine "View archived version" action.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2049844
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D308394
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+    metadata:
+      tags:
+        - ErrorMessages
+  archive_search_web_selected:
+    type: event
+    description: |
+      Recorded when a user chooses to search the web for an unreachable page from
+      an error page, after no archived version of it was found.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2049844
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D308394
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+    metadata:
+      tags:
+        - ErrorMessages
+  archive_button_clicked:
+    type: event
+    description: |
+      Recorded when a user clicks the "View archived version" button on an error
+      page to look up an archived copy, regardless of the lookup outcome. Measures
+      overall usage of the archive action.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2049844
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D308394
     data_sensitivity:
       - interaction
     notification_emails:
@@ -7709,6 +7761,26 @@ tabs_tray:
       tab_count:
         description: The number of selected tabs shared.
         type: quantity
+  share_tab_group:
+    type: event
+    description: |
+      User has chosen to share a tab group from the tabs tray.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2047731
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D314984
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+    metadata:
+      tags:
+        - Tabs
+    extra_keys:
+      tab_count:
+        description: The number of tabs in the shared tab group.
+        type: quantity
   bookmark_selected_tabs:
     type: event
     description: |
@@ -8621,8 +8693,6 @@ tab:
     notification_emails:
       - android-probes@mozilla.com
     expires: never
-    no_lint:
-      - COMMON_PREFIX
     metadata:
       tags:
         - Media
@@ -11392,32 +11462,6 @@ autoplay:
       tags:
         - SitePermissions
 
-cookie_banners:
-  setting_changed_pmb:
-    type: event
-    description: |
-      A user changed their setting in private mode.
-    extra_keys:
-      cookie_banner_setting:
-        description: |
-          The new setting for cookie banners: disabled,reject_all,
-          or reject_or_accept_all.
-        type: string
-    bugs:
-      - https://bugzilla.mozilla.org/show_bug.cgi?id=1796146
-    data_reviews:
-      - https://github.com/mozilla-mobile/fenix/pull/27561
-      - https://github.com/mozilla-mobile/firefox-android/pull/2597
-      - https://github.com/mozilla-mobile/firefox-android/pull/4039
-    data_sensitivity:
-      - interaction
-    notification_emails:
-      - android-probes@mozilla.com
-    expires: never
-    metadata:
-      tags:
-        - Privacy&Security
-
 site_permissions:
   prompt_shown:
     type: event
@@ -11633,24 +11677,6 @@ progressive_web_app:
       - https://github.com/mozilla-mobile/fenix/pull/23783#issuecomment-1041863879
       - https://github.com/mozilla-mobile/fenix/pull/28709#issuecomment-1410276888
       - https://github.com/mozilla-mobile/firefox-android/pull/2597
-      - https://github.com/mozilla-mobile/firefox-android/pull/4039
-    data_sensitivity:
-      - interaction
-    notification_emails:
-      - android-probes@mozilla.com
-    expires: never
-    metadata:
-      tags:
-        - PWA
-  onboarding_cancel:
-    type: event
-    description: |
-      User interacts with the onboarding PWA dialog cancel button which takes
-      them to the website.
-    bugs:
-      - https://bugzilla.mozilla.org/show_bug.cgi?id=1821030
-    data_reviews:
-      - https://github.com/mozilla-mobile/firefox-android/pull/1164
       - https://github.com/mozilla-mobile/firefox-android/pull/4039
     data_sensitivity:
       - interaction
@@ -13278,8 +13304,6 @@ wallpapers:
     data_sensitivity:
       - interaction
     expires: never
-    no_lint:
-      - COMMON_PREFIX
     metadata:
       tags:
         - Wallpapers
@@ -13311,8 +13335,6 @@ wallpapers:
     data_sensitivity:
       - interaction
     expires: never
-    no_lint:
-      - COMMON_PREFIX
     metadata:
       tags:
         - Wallpapers
@@ -15729,7 +15751,7 @@ toolbar:
           add_new_tab, add_new_tab_long_press, add_new_private_tab, tab_counter, tab_counter_long_press,
           menu, share, clear, refresh, stop, add_bookmark, edit_bookmark, security_indicator, qr_code,
           home, reader_mode, microphone, open_in_fenix, close, site_custom, search_engine_selector,
-          search_engine_selected, translate, summarize, lens.
+          search_engine_selected, translate, summarize, lens, shortcut_long_press, shortcut_edit_clicked.
         type: string
       extra:
         description: |
@@ -16246,179 +16268,29 @@ browser:
       - android-probes@mozilla.com
     expires: never
 
-world_cup:
-  view_schedule_on_countdown_clicked:
-    type: event
+referrals:
+  code:
+    type: string
+    lifetime: ping
+    send_in_pings:
+      - referrals
     description: |
-      A user has clicked on the view schedule button
+      The referral code extracted from the install referrer's `utm_content`
+      parameter on first run. Recorded and submitted via the separate `referrals`
+      ping so that the referral code is kept out of regular attribution data
+      (bug 2062793; desktop equivalent bug 2055255).
     bugs:
-      - https://bugzilla.mozilla.org/show_bug.cgi?id=2035767
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2062793
     data_reviews:
-      - https://phabricator.services.mozilla.com/D297350
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2062793
     data_sensitivity:
-      - interaction
+      - highly_sensitive
     notification_emails:
       - android-probes@mozilla.com
     expires: never
-  countdown_cross_action_clicked:
-    type: event
-    description: |
-      A user has clicked on the cross action
-    bugs:
-      - https://bugzilla.mozilla.org/show_bug.cgi?id=2035767
-    data_reviews:
-      - https://phabricator.services.mozilla.com/D297350
-    data_sensitivity:
-      - interaction
-    notification_emails:
-      - android-probes@mozilla.com
-    expires: never
-  country_selected:
-    type: event
-    description: |
-      A user has selected a country from the country selector bottom sheet
-    bugs:
-      - https://bugzilla.mozilla.org/show_bug.cgi?id=2037817
-    data_reviews:
-      - https://phabricator.services.mozilla.com/D300279
-    data_sensitivity:
-      - interaction
-    notification_emails:
-      - android-probes@mozilla.com
-    expires: never
-  skip_follow_team_clicked:
-    type: event
-    description: |
-      A user has tapped the "Skip" button and decided not to follow a team
-    bugs:
-      - https://bugzilla.mozilla.org/show_bug.cgi?id=2037817
-    data_reviews:
-      - https://phabricator.services.mozilla.com/D300279
-    data_sensitivity:
-      - interaction
-    notification_emails:
-      - android-probes@mozilla.com
-    expires: never
-  sports_widget_card_shown:
-    type: event
-    description: |
-      A card is shown in the sports widget. Fires once per widget mount as an impression
-      and once per subsequent swipe to a different page.
-    extra_keys:
-      source:
-        description: |
-          How the card became visible. One of: impression, swipe.
-          `impression` fires once per widget mount for the first card seen; `swipe` fires
-          when the user lands on a different page in the sports pager.
-        type: string
-      card_type:
-        description: |
-          Which card variant was shown. One of: error_load_failed,
-          error_connection_interrupted, countdown_promo, follow_team_promo,
-          following_promo, champions_winner, champions_third_place, match_group_stage,
-          match_round_of_32, match_round_of_16, match_quarter_final, match_semi_final,
-          match_third_place_playoff, match_final.
-        type: string
-    bugs:
-      - https://bugzilla.mozilla.org/show_bug.cgi?id=2037817
-    data_reviews:
-      - https://phabricator.services.mozilla.com/D300279
-    data_sensitivity:
-      - interaction
-    notification_emails:
-      - android-probes@mozilla.com
-    expires: never
-  sports_widget_dismissed:
-    type: event
-    description: |
-      A user has dismissed the sports widget from the sports widget menu
-    bugs:
-      - https://bugzilla.mozilla.org/show_bug.cgi?id=2037817
-    data_reviews:
-      - https://phabricator.services.mozilla.com/D300279
-    data_sensitivity:
-      - interaction
-    notification_emails:
-      - android-probes@mozilla.com
-    expires: never
-  sports_widget_shared:
-    type: event
-    description: |
-      A user has tapped the "Share" menu item to share the World Cup schedule
-      from the sports widget menu.
-    bugs:
-      - https://bugzilla.mozilla.org/show_bug.cgi?id=2044743
-    data_reviews:
-      - https://phabricator.services.mozilla.com/D305179
-    data_sensitivity:
-      - interaction
-    notification_emails:
-      - android-probes@mozilla.com
-    expires: never
-  refresh_clicked:
-    type: event
-    description: |
-      A user has clicked the refresh button
-    extra_keys:
-      source:
-        description: |
-          Where the interaction occurred. One of: live_match_header,
-          live_match_card_error_button (inside a match card),
-          sports_widget_card_error_button (standalone SportsWidgetErrorCard).
-        type: string
-    bugs:
-      - https://bugzilla.mozilla.org/show_bug.cgi?id=2037817
-    data_reviews:
-      - https://phabricator.services.mozilla.com/D300279
-    data_sensitivity:
-      - interaction
-    notification_emails:
-      - android-probes@mozilla.com
-    expires: never
-  get_custom_wallpaper_clicked:
-    type: event
-    description: |
-      A user has clicked the "Get custom wallpaper" menu item
-    bugs:
-      - https://bugzilla.mozilla.org/show_bug.cgi?id=2037817
-    data_reviews:
-      - https://phabricator.services.mozilla.com/D300279
-    data_sensitivity:
-      - interaction
-    notification_emails:
-      - android-probes@mozilla.com
-    expires: never
-  match_clicked:
-    type: event
-    description: |
-      A user has clicked on a match
-    bugs:
-      - https://bugzilla.mozilla.org/show_bug.cgi?id=2037817
-    data_reviews:
-      - https://phabricator.services.mozilla.com/D300279
-    data_sensitivity:
-      - interaction
-    notification_emails:
-      - android-probes@mozilla.com
-    expires: never
-  country_selector_displayed:
-    type: event
-    description: |
-      The country selector bottom sheet is displayed
-    extra_keys:
-      source:
-        description: |
-          Where the interaction occurred. One of: sports_logo, countdown_card_follow_team_button, keep_tabs_card_follow_team_button, sports_widget_menu.
-        type: string
-    bugs:
-      - https://bugzilla.mozilla.org/show_bug.cgi?id=2037817
-    data_reviews:
-      - https://phabricator.services.mozilla.com/D300279
-    data_sensitivity:
-      - interaction
-    notification_emails:
-      - android-probes@mozilla.com
-    expires: never
+    metadata:
+      tags:
+        - Attribution
 
 vpn:
   onboarding_shown:

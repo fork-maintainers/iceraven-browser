@@ -11,18 +11,14 @@ import org.mozilla.fenix.ui.efficiency.helpers.SelectorStrategy
 
 object ShareOverlaySelectors {
 
-    val SAVE_AS_PDF_BUTTON = Selector(
-        strategy = SelectorStrategy.UIAUTOMATOR_WITH_RES_ID,
-        value = "Save as PDF",
-        description = "Save as PDF share overlay button",
-        groups = listOf("saveAsPDF"),
-    )
-
+    // requiredForPage: this is the share sheet's root layout (fragment_share.xml), so it is what tells
+    // the framework we actually arrived. Without it the page had no presence anchor at all and
+    // navigateToPage() reported success while still sitting on the browser.
     val SHARING_LAYOUT = Selector(
         strategy = SelectorStrategy.UIAUTOMATOR_WITH_RES_ID,
         value = "sharingLayout",
         description = "Share overlay layout",
-        groups = listOf("shareTabLayout"),
+        groups = listOf("requiredForPage", "shareTabLayout"),
     )
 
     val DEVICES_LIST = Selector(
@@ -75,7 +71,6 @@ object ShareOverlaySelectors {
     )
 
     val all = listOf(
-        SAVE_AS_PDF_BUTTON,
         SHARING_LAYOUT,
         DEVICES_LIST,
         RECENT_APPS_CONTAINER,

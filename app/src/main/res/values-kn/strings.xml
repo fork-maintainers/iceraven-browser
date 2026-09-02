@@ -314,8 +314,6 @@
   <string name="pwa_site_controls_title_private">%1$s (ಖಾಸಗಿ ಮೋಡ್)</string>
   <!-- Text for the button to clear all history -->
   <string name="history_delete_all">ಇತಿಹಾಸವನ್ನು ಅಳಿಸಿ</string>
-  <!-- Text for the snackbar to confirm that multiple browsing history items has been deleted -->
-  <string name="history_delete_multiple_items_snackbar">ಇತಿಹಾಸವನ್ನು ಅಳಿಸಲಾಗಿದೆ</string>
   <!-- Text for the snackbar to confirm that a single browsing history item has been deleted. %1$s is the shortened URL of the deleted history item. -->
   <string name="history_delete_single_item_snackbar">%1$s ಅಳಿಸಲಾಗಿದೆ</string>
   <!-- Context description text for the button to delete a single history item -->
@@ -385,12 +383,6 @@
     Button label that take the user to the Android App setting
   -->
   <string name="phone_feature_go_to_settings">ಸಂಯೋಜನೆಗಳಿಗೆ ತೆರಳು</string>
-  <!--
-    Content description (not visible, for screen readers etc.): Quick settings sheet
-    to give users access to site specific information / settings. For example:
-    Secure settings status and a button to modify site permissions
-  -->
-  <string name="quick_settings_sheet">ತ್ವರಿತ ಸಿಧ್ದತೆಗಳ ಹಾಳೆ</string>
   <!-- Label that indicates that this option it the recommended one -->
   <string name="phone_feature_recommended">ಇದನ್ನು ಸಲಹೆ ಮಾಡಲಾಗುತ್ತದೆ</string>
   <!-- Button label for clearing all the information of site permissions -->
@@ -625,12 +617,6 @@
   <!--
     Enhanced Tracking Protection
 
-    Link displayed in enhanced tracking protection panel to access tracking protection settings
-  -->
-  <string name="etp_settings">ರಕ್ಷಣೆ ಸಿದ್ಧತೆಗಳು</string>
-  <!--
-    Enhanced Tracking Protection
-
     Preference title for enhanced tracking protection settings
   -->
   <string name="preference_enhanced_tracking_protection">ವರ್ಧಿತ ಟ್ರ್ಯಾಕಿಂಗ್ ರಕ್ಷಣೆ</string>
@@ -674,8 +660,6 @@
   <string name="preference_enhanced_tracking_protection_custom_cryptominers">ಕ್ರಿಪ್ಟೋಗಣಿಗಾರರು</string>
   <!-- Header for categories that are being being blocked by current Enhanced Tracking Protection settings -->
   <string name="enhanced_tracking_protection_blocked">ನಿರ್ಬಂಧಿಸಲಾಗಿದೆ</string>
-  <!-- Header for categories that are being not being blocked by current Enhanced Tracking Protection settings -->
-  <string name="enhanced_tracking_protection_allowed">ಅನುಮತಿಸಲಾದ‍</string>
   <!-- Category of trackers (social media trackers) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_social_media_trackers_title">ಸಾಮಾಜಿಕ ಮಾಧ್ಯಮ ಟ್ರ್ಯಾಕರ್‌ಗಳು</string>
   <!-- Description of social media trackers that can be blocked by Enhanced Tracking Protection -->
@@ -692,10 +676,6 @@
   <string name="etp_tracking_content_title">ಟ್ರ್ಯಾಕಿಂಗ್ ವಿಷಯ</string>
   <!-- Description of tracking content that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_tracking_content_description">ಟ್ರ್ಯಾಕಿಂಗ್ ಕೋಡ್ ಹೊಂದಿರುವ ಲೋಡ್ ಮಾಡುವುದರಿಂದ ಜಾಹೀರಾತುಗಳು, ವೀಡಿಯೊಗಳು ಮತ್ತು ಇತರ ವಿಷಯವನ್ನು ಹೊರಗೆ ನಿಲ್ಲಿಸುತ್ತದೆ. ಕೆಲವು ವೆಬ್‌ಸೈಟ್ ಕ್ರಿಯಾತ್ಮಕತೆಯ ಮೇಲೆ ಪರಿಣಾಮ ಬೀರಬಹುದು.</string>
-  <!-- Enhanced Tracking Protection message that protection is currently on for this site -->
-  <string name="etp_panel_on">ಈ ಸೈಟ್‌ಗಾಗಿ ರಕ್ಷಣೆಗಳು ಆನ್ ಆಗಿವೆ</string>
-  <!-- Enhanced Tracking Protection message that protection is currently off for this site -->
-  <string name="etp_panel_off">ಈ ಸೈಟ್‌ಗೆ ರಕ್ಷಣೆಗಳು ಆಫ್ ಆಗಿದೆ</string>
   <!-- Header for exceptions list for which sites enhanced tracking protection is always off -->
   <string name="enhanced_tracking_protection_exceptions">ಈ ವೆಬ್‌ಸೈಟ್‌ಗಳಿಗೆ ವರ್ಧಿತ ಟ್ರ್ಯಾಕಿಂಗ್ ಪ್ರೊಟೆಕ್ಷನ್ ಆಫ್ ಆಗಿದೆ</string>
   <!--
@@ -826,11 +806,6 @@
   <string name="confirm_clear_permission_site">ಈ ಸೈಟ್‌ಗಾಗಿ ಈ ಅನುಮತಿಯನ್ನು ತೆರವುಗೊಳಿಸಲು ನೀವು ಬಯಸುತ್ತೀರಾ?</string>
   <!-- label shown when there are not site exceptions to show in the site exception settings -->
   <string name="no_site_exceptions">ಸೈಟ್ ವಿನಾಯಿತಿಗಳಿಲ್ಲ</string>
-  <!--
-    text shown before the issuer name to indicate who its verified by, %1$s is the name of
-    the certificate authority that verified the ticket
-  -->
-  <string name="certificate_info_verified_by">ಇವರಿಂದ ಪರಿಶೀಲಿಸಲಾಗಿದೆ: %1$s</string>
   <!-- Positive action of a dialog asking to delete -->
   <string name="dialog_delete_positive">ಅಳಿಸು</string>
   <!-- Voice search button content description -->

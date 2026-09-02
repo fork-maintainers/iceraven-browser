@@ -496,8 +496,6 @@
   <string name="remove_top_site">Momtu</string>
   <!-- Text for the button to clear all history -->
   <string name="history_delete_all">Momtu aslol</string>
-  <!-- Text for the snackbar to confirm that multiple browsing history items has been deleted -->
-  <string name="history_delete_multiple_items_snackbar">Aslol momtaama</string>
   <!-- Text for the snackbar to confirm that a single browsing history item has been deleted. %1$s is the shortened URL of the deleted history item. -->
   <string name="history_delete_single_item_snackbar">Momtaama %1$s</string>
   <!-- Context description text for the button to delete a single history item -->
@@ -574,12 +572,6 @@
     Button label that take the user to the Android App setting
   -->
   <string name="phone_feature_go_to_settings">Yah to Teelte</string>
-  <!--
-    Content description (not visible, for screen readers etc.): Quick settings sheet
-    to give users access to site specific information / settings. For example:
-    Secure settings status and a button to modify site permissions
-  -->
-  <string name="quick_settings_sheet">Ɗerewol teelte jaawɗe</string>
   <!-- Label that indicates that this option it the recommended one -->
   <string name="phone_feature_recommended">Basiyaaɗi</string>
   <!-- Button label for clearing all the information of site permissions -->
@@ -792,12 +784,6 @@
   <!--
     Enhanced Tracking Protection
 
-    Link displayed in enhanced tracking protection panel to access tracking protection settings
-  -->
-  <string name="etp_settings">Reen teelte</string>
-  <!--
-    Enhanced Tracking Protection
-
     Preference title for enhanced tracking protection settings
   -->
   <string name="preference_enhanced_tracking_protection">Ndeenka Dewindol Ƴellitiika</string>
@@ -829,8 +815,6 @@
   <string name="preference_enhanced_tracking_protection_custom_tracking_content_2">E tabbe cuuriiɗe tan</string>
   <!-- Header for categories that are being being blocked by current Enhanced Tracking Protection settings -->
   <string name="enhanced_tracking_protection_blocked">Faddaama</string>
-  <!-- Header for categories that are being not being blocked by current Enhanced Tracking Protection settings -->
-  <string name="enhanced_tracking_protection_allowed">Yamiraama</string>
   <!-- Category of trackers (tracking content) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_tracking_content_title">Dewindagol loowdi</string>
   <!-- About page link text to open what's new link. %s is the name of the app (for example "Firefox"). -->

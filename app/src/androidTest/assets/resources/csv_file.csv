@@ -1,0 +1,4 @@
+id,name,type,size
+1,web_icon,png,1024
+2,smallZip,zip,2048
+3,textfile,txt,512

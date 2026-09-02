@@ -8,9 +8,11 @@ import android.os.Build.VERSION.SDK_INT
 import android.os.Build.VERSION_CODES
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import android.view.Window
 import androidx.core.view.WindowCompat.enableEdgeToEdge
 import androidx.core.view.doOnAttach
+import androidx.core.view.isEmpty
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -23,21 +25,8 @@ import mozilla.components.support.ktx.android.view.setupPersistentInsets
 /**
  * [FragmentLifecycleCallbacks] delegate for configuring the container activity
  * as edge-to-edge or not to match how the new fragment navigated to is wants to be displayed.
- *
- * @param startingFragment The currently shown fragment for which the appropriate edge-to-edge
- * strategy should be applied.
- * For the next fragment navigations the appropriate edge-to-edge strategy will be automatically applied.
  */
-class EdgeToEdgeFragmentLifecycleCallbacks(
-    private var startingFragment: Fragment? = null,
-) : FragmentLifecycleCallbacks() {
-
-    init {
-        startingFragment?.let {
-            setEdgeToEdgeStrategy(it)
-            startingFragment = null
-        }
-    }
+class EdgeToEdgeFragmentLifecycleCallbacks : FragmentLifecycleCallbacks() {
 
     override fun onFragmentViewCreated(
         fm: FragmentManager,
@@ -81,6 +70,10 @@ class EdgeToEdgeFragmentLifecycleCallbacks(
          * and configure the parent activity with a new edge-to-edge behavior depending on the current fragment.
          * This only works on if API33+.
          *
+         * Must be called before [android.app.Activity.setContentView] so the callbacks are registered
+         * before the content view and its fragments are created. This ensures the edge-to-edge strategy
+         * is applied to every fragment through [onFragmentViewCreated].
+         *
          * @param supportFragmentManager [FragmentManager] hosting all screens for which to set
          * a different edge-to-edge behavior.
          * @param window [Window] which will be shown as edge-to-edge or not depending on
@@ -91,11 +84,17 @@ class EdgeToEdgeFragmentLifecycleCallbacks(
             if (SDK_INT < VERSION_CODES.TIRAMISU) return
             enableEdgeToEdge(window)
 
-            val callbacks = EdgeToEdgeFragmentLifecycleCallbacks(supportFragmentManager.fragments.lastOrNull())
+            val contentView = window.peekDecorView()?.findViewById<ViewGroup>(android.R.id.content)
+            check(contentView == null || contentView.isEmpty()) {
+                "register() must be called before Activity.setContentView()"
+            }
 
             // Applying this recursively is needed because
             // NavHostFragment adds additional fragments as subfragments.
-            supportFragmentManager.registerFragmentLifecycleCallbacks(callbacks, true)
+            supportFragmentManager.registerFragmentLifecycleCallbacks(
+                EdgeToEdgeFragmentLifecycleCallbacks(),
+                true,
+            )
         }
     }
 }

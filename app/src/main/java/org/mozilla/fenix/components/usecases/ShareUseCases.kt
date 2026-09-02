@@ -4,9 +4,11 @@
 
 package org.mozilla.fenix.components.usecases
 
+import android.net.Uri
 import mozilla.components.browser.state.store.BrowserStore
 import mozilla.components.concept.engine.prompt.ShareData
 import org.mozilla.fenix.GleanMetrics.NativeShareSheet
+import org.mozilla.fenix.components.share.ShareSheetChooserAction
 import org.mozilla.fenix.components.share.ShareSheetLauncher
 import org.mozilla.fenix.components.share.ShareSource
 import org.mozilla.fenix.components.share.createPdfShareAction
@@ -33,6 +35,8 @@ class ShareUseCases(
      * @param url The url to share.
      * @param title The title of the page to share.
      * @param source The surface from which the share was initiated, used for telemetry.
+     * @param text Optional text to share alongside the url, e.g. supplied by the share deep link.
+     * @param subject Optional subject for the share. When `null` or empty, defaults to the title.
      * @param isPrivate Whether the tab is in private browsing mode.
      * @param isCustomTab Whether the share is being initiated from a custom tab.
      * @param navigateToShareFragment Lambda provided by the caller that provides navigation to the
@@ -44,6 +48,8 @@ class ShareUseCases(
         url: String?,
         title: String?,
         source: ShareSource,
+        text: String = "",
+        subject: String? = null,
         isPrivate: Boolean = false,
         isCustomTab: Boolean = false,
         navigateToShareFragment: () -> Unit,
@@ -61,6 +67,8 @@ class ShareUseCases(
                     id = id,
                     url = url,
                     title = title,
+                    text = text,
+                    subject = subject,
                     isPrivate = isPrivate,
                     isCustomTab = isCustomTab,
                 )
@@ -80,6 +88,9 @@ class ShareUseCases(
      * @param isPrivate Whether the items belong to private browsing mode.
      * @param subject Optional subject for the share. When `null`, the
      * underlying launcher defaults to the first item's title.
+     * @param chooserActions An array of chooser actions that will be added to the share intent chooser in the native
+     * share sheet.
+     * @param thumbnailUri Optional thumbnail shown in the system share sheet preview.
      * @param navigateToShareFragment Lambda provided by the caller that provides navigation to the
      * [ShareFragment]. Invoked as a fallback when the system share sheet nor the PDF share action applies.
      */
@@ -88,6 +99,8 @@ class ShareUseCases(
         source: ShareSource,
         isPrivate: Boolean = false,
         subject: String? = null,
+        chooserActions: List<ShareSheetChooserAction> = listOf(),
+        thumbnailUri: Uri? = null,
         navigateToShareFragment: () -> Unit,
     ) {
         if (settings.nativeShareSheetEnabled && isSystemShareSheetSupported) {
@@ -96,6 +109,8 @@ class ShareUseCases(
                 items = items,
                 isPrivate = isPrivate,
                 subject = subject,
+                chooserActions = chooserActions,
+                thumbnailUri = thumbnailUri,
             )
         } else {
             navigateToShareFragment()

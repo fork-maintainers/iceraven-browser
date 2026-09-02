@@ -9,6 +9,7 @@ import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.mozilla.fenix.R
+import org.mozilla.fenix.customannotations.Converted
 import org.mozilla.fenix.customannotations.SmokeTest
 import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.helpers.AppAndSystemHelper.registerAndCleanupIdlingResources
@@ -112,6 +113,11 @@ class SettingsAddonsTest {
     //   in list of detected addons on screen instead of hard-coded values.
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/561600
     // Installs 2 add-on and checks that the app doesn't crash while navigating the app
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.SettingsAddonsTest#noCrashWithAddonInstalledTest"],
+        bug = 2062856,
+        since = "2026-08",
+    )
     @SmokeTest
     @Test
     fun noCrashWithAddonInstalledTest() {
@@ -145,7 +151,11 @@ class SettingsAddonsTest {
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/561594
-    @Ignore("Failing: https://bugzilla.mozilla.org/show_bug.cgi?id=2033498")
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.SettingsAddonsTest#verifyUBlockWorksInPrivateModeTest"],
+        bug = 2062856,
+        since = "2026-08",
+    )
     @SmokeTest
     @Test
     fun verifyUBlockWorksInPrivateModeTest() {

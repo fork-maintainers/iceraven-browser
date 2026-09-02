@@ -8,13 +8,12 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
-import android.content.res.Resources
+import android.net.Uri
 import android.provider.Settings
 import android.view.ContextThemeWrapper
 import android.view.View
 import android.view.ViewGroup
 import android.view.accessibility.AccessibilityManager
-import androidx.annotation.DimenRes
 import androidx.annotation.StringRes
 import mozilla.components.compose.base.theme.layout.AcornWindowSize
 import mozilla.components.support.base.log.logger.Logger
@@ -102,6 +101,21 @@ fun Context.navigateToNotificationsSettings(
         it.action = Settings.ACTION_APP_NOTIFICATION_SETTINGS
         it.putExtra(Settings.EXTRA_APP_PACKAGE, this.packageName)
     }
+    startExternalActivitySafe(intent, onError)
+}
+
+/**
+ * Used to navigate to the system's "App Info" or "App Details" settings page for this application.
+ *
+ * @param onError Invoked when the activity described by the intent is not present on the device.
+ */
+fun Context.navigateToAppDetailsSettings(
+    onError: () -> Unit,
+) {
+    val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+        data = Uri.fromParts("package", packageName, null)
+    }
+
     startExternalActivitySafe(intent, onError)
 }
 
@@ -200,17 +214,3 @@ fun Context.recordEventInNimbus(eventId: String) = components.nimbus.events.reco
  */
 fun Context.isToolbarAtBottom() =
     components.settings.toolbarPosition == ToolbarPosition.BOTTOM
-
-/**
- * Returns the pixel size for the given dimension resource ID.
- *
- * This is a wrapper around [Resources.getDimensionPixelSize], reducing verbosity when accessing
- * dimension values from a [Context].
- *
- * @param resId Resource ID of the dimension.
- * @return The pixel size corresponding to the given dimension resource.
- */
-@Suppress("Resources.GetDimensionPixelSizeInsteadOfPixelSizeFor")
-fun Context.pixelSizeFor(
-    @DimenRes resId: Int,
-) = resources.getDimensionPixelSize(resId)

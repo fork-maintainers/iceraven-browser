@@ -26,6 +26,18 @@ class TabDrawerPage(composeRule: AndroidComposeTestRule<HomeActivityIntentTestRu
             ),
         )
 
+        // The tab counter is reachable from the browser too, so this edge is generally useful. It has to be
+        // the content-description variant: UIAutomator (not Compose, which can hang while GeckoView is
+        // active) AND not the testTag, because with shouldUseExpandedToolbar the counter moves to the bottom
+        // navigation bar and carries no tag there.
+        NavigationRegistry.register(
+            from = "BrowserPage",
+            to = pageName,
+            steps = listOf(
+                NavigationStep.Click(ToolbarSelectors.TAB_COUNTER_ANY_LAYOUT),
+            ),
+        )
+
         NavigationRegistry.register(
             from = pageName,
             to = "HomePage",
@@ -43,8 +55,18 @@ class TabDrawerPage(composeRule: AndroidComposeTestRule<HomeActivityIntentTestRu
         return TabDrawerSelectors.all.filter { it.groups.contains(group) }
     }
 
+    override fun navigateToPage(url: String, forceNavigation: Boolean): TabDrawerPage {
+        super.navigateToPage(url, forceNavigation)
+        return this
+    }
+
     fun closeTabWithTitle(title: String): TabDrawerPage {
         mozClickFirstWithParentText(TabDrawerSelectors.TAB_ITEM_CLOSE, title)
+        return this
+    }
+
+    fun verifyNoOpenTabsInNormalBrowsing(): TabDrawerPage {
+        mozVerifyElementsByGroup("emptyNormalBrowsingTabDrawerView")
         return this
     }
 
@@ -61,16 +83,20 @@ class TabDrawerPage(composeRule: AndroidComposeTestRule<HomeActivityIntentTestRu
         return this
     }
 
-    fun selectTabsAndCreateTabGroup(
-        tabTitle: String,
-        tabGroupTitle: String = "",
-        tabGroupColor: String = "",
-    ): TabDrawerPage {
+    private fun selectTabsAndTapAddToGroup(tabTitle: String) {
         mozClick(TabDrawerSelectors.THREE_DOT_BUTTON)
         mozClick(TabDrawerSelectors.SELECT_TABS_BUTTON)
         mozClick(TabDrawerSelectors.TAB_ITEM_WITH_TITLE(tabTitle))
         mozClick(TabDrawerSelectors.TAB_SELECTION_THREE_DOT_BUTTON)
         mozClick(TabDrawerSelectors.ADD_TO_GROUP_THREE_DOT_BUTTON)
+    }
+
+    fun selectTabsAndCreateFirstTabGroup(
+        tabTitle: String,
+        tabGroupTitle: String = "",
+        tabGroupColor: String = "",
+    ): TabDrawerPage {
+        selectTabsAndTapAddToGroup(tabTitle)
 
         if (tabGroupTitle.isNotEmpty()) {
             mozEnterText(tabGroupTitle, TabDrawerSelectors.CREATE_TAB_GROUP_NAME_TEXT_FIELD)
@@ -82,6 +108,32 @@ class TabDrawerPage(composeRule: AndroidComposeTestRule<HomeActivityIntentTestRu
 
         mozClick(TabDrawerSelectors.CREATE_TAB_GROUP_SAVE_BUTTON)
 
+        return this
+    }
+
+    fun selectTabsAndAddToExistingTabGroup(tabTitle: String, tabGroupTitle: String, numberOfTabs: Int, tabGroupColor: String): TabDrawerPage {
+        selectTabsAndTapAddToGroup(tabTitle)
+        mozClick(TabDrawerSelectors.TAB_GROUP_ITEM(tabGroupTitle, numberOfTabs, tabGroupColor))
+        return this
+    }
+
+    fun selectTabsAndAddToNewTabGroup(
+        tabTitle: String,
+        tabGroupTitle: String = "",
+        tabGroupColor: String = "",
+    ): TabDrawerPage {
+        selectTabsAndTapAddToGroup(tabTitle)
+        mozClick(TabDrawerSelectors.ADD_TO_NEW_TAB_GROUP_BUTTON)
+
+        if (tabGroupTitle.isNotEmpty()) {
+            mozEnterText(tabGroupTitle, TabDrawerSelectors.CREATE_TAB_GROUP_NAME_TEXT_FIELD)
+        }
+
+        if (tabGroupColor.isNotEmpty()) {
+            mozClick(TabDrawerSelectors.CREATE_TAB_GROUP_COLOR_BUTTON(tabGroupColor))
+        }
+
+        mozClick(TabDrawerSelectors.CREATE_TAB_GROUP_SAVE_BUTTON)
         return this
     }
 

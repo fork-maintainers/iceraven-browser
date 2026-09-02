@@ -49,7 +49,6 @@ class SettingsPrivacyTest {
             verifyPrivateBrowsingButton()
             verifyHTTPSOnlyModeButton()
             verifySettingsOptionSummary("HTTPS-Only Mode", "Off")
-            verifySettingsOptionSummary("Cookie Banner Blocker in private browsing", "")
             verifyEnhancedTrackingProtectionButton()
             verifySettingsOptionSummary("Enhanced Tracking Protection", "Standard")
             verifySiteSettingsButton()

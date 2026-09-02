@@ -4,8 +4,8 @@
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:aapt="http://schemas.android.com/aapt"
-    android:width="432dp"
-    android:height="432dp"
+    android:width="108dp"
+    android:height="108dp"
     android:viewportWidth="432"
     android:viewportHeight="432">
   <group>

@@ -4,23 +4,15 @@
 
 package org.mozilla.fenix.benchmark.baselineprofile
 
-import android.content.Intent
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.benchmark.macro.junit4.BaselineProfileRule
 import org.junit.Rule
 import org.junit.Test
-import org.mozilla.fenix.benchmark.utils.FENIX_HOME_DEEP_LINK
 import org.mozilla.fenix.benchmark.utils.HtmlAsset
 import org.mozilla.fenix.benchmark.utils.MockWebServerRule
 import org.mozilla.fenix.benchmark.utils.TARGET_PACKAGE
-import org.mozilla.fenix.benchmark.utils.closeTab
-import org.mozilla.fenix.benchmark.utils.completeOnboarding
-import org.mozilla.fenix.benchmark.utils.dismissWallpaperOnboarding
-import org.mozilla.fenix.benchmark.utils.isWallpaperOnboardingShown
-import org.mozilla.fenix.benchmark.utils.loadSite
-import org.mozilla.fenix.benchmark.utils.openNewPrivateTabOnTabsTray
-import org.mozilla.fenix.benchmark.utils.openTabsTray
+import org.mozilla.fenix.benchmark.utils.privateBrowsingJourney
 import org.mozilla.fenix.benchmark.utils.url
 
 /**
@@ -60,23 +52,9 @@ class PrivateBrowsingBaselineProfileGenerator {
     fun generateBaselineProfile() {
         rule.collect(
             packageName = TARGET_PACKAGE,
+            maxIterations = baselineProfileMaxIterations(),
         ) {
-            val intent = Intent(Intent.ACTION_VIEW, FENIX_HOME_DEEP_LINK)
-
-            startActivityAndWait(intent = intent)
-            device.completeOnboarding()
-
-            if (device.isWallpaperOnboardingShown()) {
-                device.dismissWallpaperOnboarding()
-            }
-
-            device.openTabsTray()
-            device.openNewPrivateTabOnTabsTray()
-            val url = mockRule.url(HtmlAsset.SIMPLE)
-            device.loadSite(url = url)
-
-            device.openTabsTray()
-            device.closeTab(siteName = HtmlAsset.SIMPLE.title, siteUrl = url)
+            privateBrowsingJourney(url = mockRule.url(HtmlAsset.SIMPLE))
         }
     }
 }

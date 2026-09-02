@@ -27,7 +27,6 @@ class SurveyExperimentIntegrationTest {
     val composeTestRule =
         AndroidComposeTestRuleV2(
             HomeActivityTestRule(
-                isPWAsPromptEnabled = false,
                 isDeleteSitePermissionsEnabled = true,
             ),
         ) { it.activity }

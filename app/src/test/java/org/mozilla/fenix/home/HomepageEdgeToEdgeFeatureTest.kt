@@ -267,6 +267,41 @@ class HomepageEdgeToEdgeFeatureTest {
     }
 
     @Test
+    fun `GIVEN homepage trending and recent searches are enabled WHEN the toolbar is selected with no query on EdgeToEdge wallpaper THEN status bar background uses surface color`() = runTest(testDispatcher) {
+        every { settings.enableHomepageEdgeToEdgeBackgroundFeature } returns true
+        every { settings.shouldUseBottomToolbar } returns false
+        every { settings.enableHomepageTrendingRecentSearch } returns true
+        val activity = Robolectric.buildActivity(Activity::class.java).create().get()
+        val decorView = activity.window.decorView as ViewGroup
+        val initialChildCount = decorView.childCount
+        val appStore = AppStore()
+        val toolbarStore = BrowserToolbarStore()
+        appStore.dispatch(AppAction.WallpaperAction.UpdateCurrentWallpaper(Wallpaper.EdgeToEdge))
+
+        HomepageEdgeToEdgeFeature(
+            appStore = appStore,
+            activity = activity,
+            settings = settings,
+            browsingModeManager = browsingModeManager,
+            toolbarStore = toolbarStore,
+            mainDispatcher = testDispatcher,
+        ).start()
+        testScheduler.advanceUntilIdle()
+
+        toolbarStore.dispatch(BrowserToolbarAction.EnterEditMode(isPrivate = false))
+        testScheduler.advanceUntilIdle()
+
+        assertEquals(
+            MaterialColors.getColor(
+                activity,
+                com.google.android.material.R.attr.colorSurface,
+                "Could not resolve color",
+            ),
+            (decorView.getChildAt(initialChildCount).background as ColorDrawable).color,
+        )
+    }
+
+    @Test
     fun `GIVEN tab strip is enabled WHEN search query is shown on EdgeToEdge wallpaper THEN status bar background is shown`() = runTest(testDispatcher) {
         every { settings.enableHomepageEdgeToEdgeBackgroundFeature } returns true
         every { settings.shouldUseBottomToolbar } returns false

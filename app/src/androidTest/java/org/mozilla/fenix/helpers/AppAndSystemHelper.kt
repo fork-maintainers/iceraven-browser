@@ -41,6 +41,7 @@ import kotlinx.coroutines.withContext
 import mozilla.appservices.places.BookmarkRoot
 import mozilla.components.browser.storage.sync.PlacesBookmarksStorage
 import mozilla.components.browser.storage.sync.PlacesHistoryStorage
+import mozilla.components.feature.top.sites.TopSite
 import mozilla.components.support.locale.LocaleManager.resetToSystemDefault
 import mozilla.components.support.locale.LocaleManager.setNewLocale
 import org.junit.Assert
@@ -229,6 +230,18 @@ object AppAndSystemHelper {
                     "deleteBookmarksStorage: Bookmark deleted. Bookmarks storage contains: ${bookmarks()}",
                 )
             }
+        }
+    }
+
+    suspend fun deletePinnedSitesStorage() {
+        val pinnedSiteStorage = appContext.components.core.pinnedSiteStorage
+        // getPinnedSites() also returns the application's default top sites; only remove the ones
+        // pinned by the user (e.g. via "Add to shortcuts") so we don't wipe the defaults other tests rely on.
+        val userPinnedSites = pinnedSiteStorage.getPinnedSites().filterIsInstance<TopSite.Pinned>()
+        Log.i(TAG, "deletePinnedSitesStorage before cleanup: User-pinned sites: $userPinnedSites")
+        userPinnedSites.forEach {
+            Log.i(TAG, "deletePinnedSitesStorage: Trying to delete $it pinned site from storage.")
+            pinnedSiteStorage.removePinnedSite(it)
         }
     }
 

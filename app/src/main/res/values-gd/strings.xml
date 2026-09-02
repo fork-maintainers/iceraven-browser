@@ -102,12 +102,6 @@
   <string name="open_in_app_cfr_negative_button_text">Leig seachad</string>
   <!-- Private browsing erase action "contextual feature recommendation" (CFR) -->
 
-  <!--
-    Address bar swipe "contextual feature recommendation" (CFR)
-
-    Text for the message displayed in the contextual feature recommendation popup promoting swipe of address bar.
-  -->
-  <string name="address_bar_swipe_cfr_message_2">Dèan grad-shlaighdeadh air a’ bhàr-inneal airson leum gu taba eile.</string>
   <!-- Text for the info dialog when camera permissions have been denied but user tries to access a camera feature. -->
   <string name="camera_permissions_needed_message">Tha feum air inntrigeadh dhan chamara. Tadhail air roghainnean Android, thoir gnogag air na ceadan is an uairsin air “Ceadaich”.</string>
   <!-- Text for the positive action button to go to Android Settings to grant permissions. -->
@@ -309,14 +303,6 @@
   <string name="browser_menu_default_banner_dismiss_promotion">Leig seachad an iomairt</string>
   <!-- Content description (not visible, for screen readers etc.) for recommended extensions in main menu -->
   <string name="browser_menu_recommended_extensions_content_description">Barrachd fiosrachaidh</string>
-  <!--
-    Menu "contextual feature recommendation" (CFR)
-
-    Text for the title in the contextual feature recommendation popup promoting the menu feature.
-  -->
-  <string name="menu_cfr_title">Ùr: clàr-taice nas taine</string>
-  <!-- Text for the message in the contextual feature recommendation popup promoting the menu feature. -->
-  <string name="menu_cfr_body">Faigh lorg air na tha a dhìth ort nas luaithe, eadar brabhsadh prìobhaideach is gnìomhan sàbhalaidh.</string>
   <!--
     Extensions management fragment
 
@@ -658,40 +644,8 @@
   <string name="preferences_pbm_lock_screen_title">Cleachd glas na sgrìn airson tabaichean a chur am falach ann am brabhsadh prìobhaideach</string>
   <!-- Informs the user how to access the tabs when "Use screen lock to hide tabs in private browsing" is enabled -->
   <string name="preferences_pbm_lock_screen_summary_3">Coimhead air tabaichean le lorg do mheòir, PIN no d’ aodann. Ma chuireas tu seo air, bacaidh seo glacadh agus co-roinneadh na sgrìn cuideachd.</string>
-  <!-- Label for cookie banner section in quick settings panel. -->
-  <string name="cookie_banner_blocker">Blocaiche bratach bhriosgaidean</string>
   <!-- Preference for removing cookie/consent banners from sites automatically in private mode. See reduce_cookie_banner_summary for additional context. -->
   <string name="preferences_cookie_banner_reduction_private_mode">Blocaiche bratach bhriosgaidean ann am brabhsadh prìobhaideach</string>
-  <!-- Text for indicating cookie banner handling is off this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_off_for_site">Dheth air an làrach seo</string>
-  <!-- Text for cancel button indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_cancel_button">Sguir dheth</string>
-  <!-- Text for request support button indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_request_support_button_2">Cuir an t-iarrtas</string>
-  <!-- Text for title indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_title_2">A bheil thu airson taic ris an làrach seo iarraidh?</string>
-  <!-- Label for the snackBar, after the user reports with success a website where cookie banner reducer did not work -->
-  <string name="cookie_banner_handling_report_site_snack_bar_text_2">Chaidh an t-iarrtas a chur</string>
-  <!-- Text for indicating cookie banner handling is on this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_on_for_site">Air air an làrach seo</string>
-  <!-- Text for indicating that a request for unsupported site was sent to Nimbus (it's a Mozilla library for experiments), this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_unsupported_site_request_submitted_2">Chaidh an t-iarrtas airson taic a chur</string>
-  <!-- Text for indicating cookie banner handling is currently not supported for this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_unsupported_site">Chan eil taic ris an làrach seo an-dràsta fhèin</string>
-  <!-- Title text for a detail explanation indicating cookie banner handling is on this site, this is shown as part of the cookie banner panel in the toolbar. %1$s is a shortened URL of the current site. -->
-  <string name="reduce_cookie_banner_details_panel_title_on_for_site_1">A bheil thu airson blocaiche bratach bhriosgaidean a chur air airson %1$s?</string>
-  <!-- Title text for a detail explanation indicating cookie banner handling is off this site, this is shown as part of the cookie banner panel in the toolbar. %1$s is a shortened URL of the current site. -->
-  <string name="reduce_cookie_banner_details_panel_title_off_for_site_1">A bheil thu airson blocaiche bratach bhriosgaidean a chur dheth airson %1$s?</string>
-  <!-- Title text for a detail explanation indicating cookie banner reducer didn't work for the current site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_title_unsupported_site_request_2">Chan urrainn dha %1$s iarrtasan airson bhriosgaidean air an làrach seo a dhiùltadh gu fèin-obrachail. ’S urrainn dhut iarrtas a chur gun tèid taic a chur ris an làrach seo san àm ri teachd.</string>
-  <!-- Long text for a detail explanation indicating what will happen if cookie banner handling is off for a site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_description_off_for_site_1">Cuir dheth seo is falamhaichidh %1$s na briosgaidean is ath-luchdaichidh e an làrach seo. Dh’fhaoidte gun dèid do chlàradh a-mach à làraichean no gun dèid basgaidean ceannachd fhalamhachadh.</string>
-  <!-- Long text for a detail explanation indicating what will happen if cookie banner handling is on for a site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_description_on_for_site_3">Cuir air seo is nì %1$s a dhìcheall airson gach bratach briosgaid a dhiùltadh gu fèin-obrachail air an làrach seo.</string>
-  <!-- Title for the cookie banner re-engagement CFR, the placeholder is replaced with app name. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="cookie_banner_cfr_title">Tha %1$s air briosgaidean ùr-dhiùltadh dhut</string>
-  <!-- Message for the cookie banner re-engagement CFR -->
-  <string name="cookie_banner_cfr_message">Nas lugha a’ briseadh a-steach ort, nas lugha de bhriosgaidean ’gad thracadh air an làrach seo.</string>
   <!-- Description of the preference to enable "HTTPS-Only" mode. -->
   <string name="preferences_https_only_summary">Nì seo oidhirp leis fhèin ceangal a dhèanamh ri làraichean le pròtacal crioptachadh HTTPS airson tèarainteachd a bharrachd.</string>
   <!-- Summary of https only preference if https only is set to off -->
@@ -1470,8 +1424,6 @@
   <string name="history_search_1">Cuir a-steach briathran-luirg</string>
   <!-- Text for the button to clear all history -->
   <string name="history_delete_all">Sguab an eachdraidh às</string>
-  <!-- Text for the snackbar to confirm that multiple browsing history items has been deleted -->
-  <string name="history_delete_multiple_items_snackbar">Chaidh an eachdraidh a sguabadh às</string>
   <!-- Text for the snackbar to confirm that a single browsing history item has been deleted. %1$s is the shortened URL of the deleted history item. -->
   <string name="history_delete_single_item_snackbar">Chaidh %1$s a sguabadh às</string>
   <!-- Context description text for the button to delete a single history item -->
@@ -1682,18 +1634,8 @@
   <string name="webcompat_reporter_label_url">URL</string>
   <!-- The error message of the URL text field when an invalid URL has been entered. -->
   <string name="webcompat_reporter_url_error_invalid">Cuir a-steach URL dligheach</string>
-  <!-- The label/title of a field in the Web Compat Reporter feature for explaining a high-level reason why the site is broken. -->
-  <string name="webcompat_reporter_label_whats_broken_2">Dè tha briste?</string>
-  <!-- The placeholder text for the dropdown where a user selects a high-level reason why the site is broken. -->
-  <string name="webcompat_reporter_choose_reason_2">Tagh adhbhar</string>
-  <!-- The error message of the dropdown, prompting the user to select a high-level reason why the site is broken. -->
-  <string name="webcompat_reporter_choose_reason_error">Tagh adhbhar</string>
-  <!-- The button text for navigating away from the feature to provide more information on the broken site's bug report. -->
-  <string name="webcompat_reporter_add_more_info">Cuir barrachd fiosrachaidh ris</string>
   <!-- The button text for the cancel button to leave the Web Compat Reporter feature. -->
   <string name="webcompat_reporter_cancel">Sguir dheth</string>
-  <!-- The button text for the send button to submit the provided form data. -->
-  <string name="webcompat_reporter_send">Cuir</string>
   <!-- Text for a snackbar to confirm the successful submission of a WebCompat report. -->
   <string name="webcompat_reporter_success_snackbar_text_2">Chaidh an aithris a chur</string>
   <!-- The button text for the preview report button to view a preview of the report. -->
@@ -1720,8 +1662,6 @@
   <string name="webcompat_reporter_reason_account2">Chun urrainn dhomh clàradh a-steach no clàradh</string>
   <!-- Broken site reason text for site asked to turn off ad blocker -->
   <string name="webcompat_reporter_reason_turn_off_adblocker">Dh’iarr an làrach bacaiche na sanasachd a chur dheth</string>
-  <!-- Broken site reason text for browser isn’t supported or blocked -->
-  <string name="webcompat_reporter_reason_notsupported">Chan eil taic ris a’ bhrabhsair no tha e air a bhacadh</string>
   <!-- Broken site reason text for something else -->
   <string name="webcompat_reporter_reason_other">Rudeigin eile</string>
   <!--
@@ -1879,12 +1819,6 @@
     Button label that take the user to the Android App setting
   -->
   <string name="phone_feature_go_to_settings">Tadhail air na roghainnean</string>
-  <!--
-    Content description (not visible, for screen readers etc.): Quick settings sheet
-    to give users access to site specific information / settings. For example:
-    Secure settings status and a button to modify site permissions
-  -->
-  <string name="quick_settings_sheet">Siota nan grad-roghainnean</string>
   <!-- Label that indicates that this option it the recommended one -->
   <string name="phone_feature_recommended">Molta</string>
   <!-- Button label for clearing all the information of site permissions -->
@@ -2257,12 +2191,6 @@
   <!--
     Enhanced Tracking Protection
 
-    Link displayed in enhanced tracking protection panel to access tracking protection settings
-  -->
-  <string name="etp_settings">Roghainnean an dìon</string>
-  <!--
-    Enhanced Tracking Protection
-
     Preference title for enhanced tracking protection settings
   -->
   <string name="preference_enhanced_tracking_protection">Dìon adhartach o thracadh</string>
@@ -2342,12 +2270,8 @@
   <string name="preference_enhanced_tracking_protection_custom_cryptominers">Criopto-mhèinneadairean</string>
   <!-- Preference for enhanced tracking protection for the custom protection settings -->
   <string name="preference_enhanced_tracking_protection_custom_known_fingerprinters">Lorgairean-meòir as aithne dhuinn</string>
-  <!-- Button label for navigating to the Enhanced Tracking Protection details -->
-  <string name="enhanced_tracking_protection_details">Mion-fhiosrachadh</string>
   <!-- Header for categories that are being being blocked by current Enhanced Tracking Protection settings -->
   <string name="enhanced_tracking_protection_blocked">Bacte</string>
-  <!-- Header for categories that are being not being blocked by current Enhanced Tracking Protection settings -->
-  <string name="enhanced_tracking_protection_allowed">Ceadaichte</string>
   <!-- Category of trackers (social media trackers) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_social_media_trackers_title">Tracaichean nam meadhanan sòisealta</string>
   <!-- Description of social media trackers that can be blocked by Enhanced Tracking Protection -->
@@ -2370,10 +2294,6 @@
   <string name="etp_tracking_content_title">Susbaint tracaidh</string>
   <!-- Description of tracking content that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_tracking_content_description">Cuiridh seo stad air luchdadh de shanasachd, videothan is susbaint eile on taobh a-muigh anns a bheil còd tracaidh. Dh’fhaoidte gum bi droch-bhuaidh aige seo air obrachadh de chuid a làraichean-lìn.</string>
-  <!-- Enhanced Tracking Protection message that protection is currently on for this site -->
-  <string name="etp_panel_on">Tha an dìon AIR air an làrach seo</string>
-  <!-- Enhanced Tracking Protection message that protection is currently off for this site -->
-  <string name="etp_panel_off">Tha an dìon DHETH air an làrach seo</string>
   <!-- Header for exceptions list for which sites enhanced tracking protection is always off -->
   <string name="enhanced_tracking_protection_exceptions">Tha an dìon adhartach o thracadh dheth air na làraichean seo</string>
   <!--
@@ -2398,13 +2318,6 @@
   <string name="etp_suspected_fingerprinters_description">Cuiridh seo an dìon airson lorgan-meòir airson stad a chur air lorgairean-meòir.</string>
   <!-- Category of trackers (fingerprinters) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_known_fingerprinters_title">Lorgairean-meòir as aithne dhuinn</string>
-  <!--
-    Description of the SmartBlock Enhanced Tracking Protection feature. The * symbol is intentionally hardcoded here,
-    as we use it on the UI to indicate which trackers have been partially unblocked.
-  -->
-  <string name="preference_etp_smartblock_description">Chaidh pàirt dhe na tracaichean comharraichte gu h-ìosal a dhì-bhacadh air an duilleag seo on a ghabh thu eadar-ghnìomh leotha *.</string>
-  <!-- Text displayed that links to website about enhanced tracking protection SmartBlock -->
-  <string name="preference_etp_smartblock_learn_more">Barrachd fiosrachaidh</string>
   <!--
     Content description (not visible, for screen readers etc.):
     Enhanced tracking protection exception preference icon for ETP settings.
@@ -2876,16 +2789,8 @@
   <string name="phone_feature_blocked_step_permissions"><![CDATA[2. Thoir gnogag air <b>Ceadan</b>]]></string>
   <!-- Third step for the allowing a permission (%1$s is the permission name, for example "Camera"). -->
   <string name="phone_feature_blocked_step_feature"><![CDATA[3. Cuir <b>%1$s</b> AIR]]></string>
-  <!-- Label that indicates a site is using a secure connection -->
-  <string name="quick_settings_sheet_secure_connection_2">Tha an ceangal tèarainte</string>
-  <!-- Label that indicates a site is using a insecure connection -->
-  <string name="quick_settings_sheet_insecure_connection_2">Chan eil an ceangal tèarainte</string>
-  <!-- Label that indicates a site is displaying a local document -->
-  <string name="quick_settings_sheet_local_page">Tha an duilleag seo ga stòradh air an uidheam agad.</string>
   <!-- Label to clear site data -->
   <string name="clear_site_data">Falamhaich na briosgaidean is dàta na làraich</string>
-  <!-- Confirmation message for a dialog confirming if the user wants to delete all data for current site. %s is the domain of the site. -->
-  <string name="confirm_clear_site_data"><![CDATA[A bheil thu cinnteach gu bheil thu airson brisgaidean is dàta na làraich <b>%s</b> fhalamhachadh?]]></string>
   <!-- Confirmation message for a dialog confirming if the user wants to delete all the permissions for all sites -->
   <string name="confirm_clear_permissions_on_all_sites">A bheil thu cinnteach gu bheil thu airson na ceadan air gach làrach fhalamhachadh?</string>
   <!-- Confirmation message for a dialog confirming if the user wants to delete all the permissions for a site -->
@@ -2898,11 +2803,6 @@
   <string name="browser_menu_add_to_shortcuts">Cuir ris na h-ath-ghoiridean</string>
   <!-- Browser menu button that removes a shortcut from the home fragment -->
   <string name="browser_menu_remove_from_shortcuts">Thoir air falbh on na h-ath-ghoiridean</string>
-  <!--
-    text shown before the issuer name to indicate who its verified by, %1$s is the name of
-    the certificate authority that verified the ticket
-  -->
-  <string name="certificate_info_verified_by">Air a dhearbhadh le: %1$s</string>
   <!-- Message in delete confirmation dialog for password -->
   <string name="login_deletion_confirmation_2">A bheil thu cinnteach gu bheil thu airson am facal-faire seo a sguabadh às?</string>
   <!-- Positive action of a dialog asking to delete -->

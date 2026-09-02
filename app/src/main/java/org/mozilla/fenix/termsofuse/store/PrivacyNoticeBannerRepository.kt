@@ -14,7 +14,7 @@ interface PrivacyNoticeBannerRepository {
     /**
      * Updates the preference that tracks the last time the user saw the Privacy Notice banner.
      */
-    fun updatePrivacyNoticeBannerDisplayedPreference(nowMillis: Long = System.currentTimeMillis())
+    fun updatePrivacyNoticeBannerDisplayedPreference()
 
     /**
      * Determines if the Privacy Notice banner should be shown.
@@ -27,14 +27,15 @@ interface PrivacyNoticeBannerRepository {
  */
 class DefaultPrivacyNoticeBannerRepository(
     private val settings: Settings,
+    private val currentTimeMillis: () -> Long = { System.currentTimeMillis() },
 ) : PrivacyNoticeBannerRepository {
-    override fun updatePrivacyNoticeBannerDisplayedPreference(nowMillis: Long) {
-        settings.privacyNoticeBannerLastDisplayedTimeInMillis = nowMillis
+    override fun updatePrivacyNoticeBannerDisplayedPreference() {
+        settings.privacyNoticeBannerLastDisplayedTimeInMillis = currentTimeMillis()
     }
 
     override fun shouldShowPrivacyNoticeBanner(): Boolean {
         val termsOfUseTime = if (settings.isTermsOfUsePublishedDebugDateEnabled) {
-            System.currentTimeMillis()
+            currentTimeMillis()
         } else {
             TOU_TIME_IN_MILLIS
         }

@@ -18,6 +18,7 @@ import org.mozilla.fenix.R
 import org.mozilla.fenix.components.metrics.MetricController
 import org.mozilla.fenix.components.metrics.MetricServiceType
 import org.mozilla.fenix.crashes.SettingsCrashReportCache
+import org.mozilla.fenix.debugsettings.gleandebugtools.DefaultGleanDebugToolsStorage
 import org.mozilla.fenix.ext.nav
 import org.mozilla.fenix.settings.SupportUtils
 import org.mozilla.fenix.utils.Settings
@@ -118,6 +119,7 @@ internal class DataChoicesMiddleware(
             settings.isExperimentationEnabled = false
             nimbusSdk.experimentParticipation = false
             engine.notifyTelemetryPrefChanged(false)
+            DefaultGleanDebugToolsStorage(settings).clearPersistedDebugViewTag()
         }
         // Reset experiment identifiers on both opt-in and opt-out; it's likely
         // that in future we will need to pass in the new telemetry client_id

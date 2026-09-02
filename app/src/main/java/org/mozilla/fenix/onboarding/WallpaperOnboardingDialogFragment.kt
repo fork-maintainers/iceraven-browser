@@ -4,7 +4,6 @@
 
 package org.mozilla.fenix.onboarding
 
-import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.DialogInterface
 import android.content.pm.ActivityInfo
@@ -54,7 +53,6 @@ class WallpaperOnboardingDialogFragment : BottomSheetDialogFragment() {
             }
         }
 
-    @SuppressLint("SourceLockedOrientationActivity")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(STYLE_NO_TITLE, R.style.WallpaperOnboardingDialogStyle)

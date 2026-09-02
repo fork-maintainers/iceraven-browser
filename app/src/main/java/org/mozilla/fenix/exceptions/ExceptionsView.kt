@@ -20,7 +20,7 @@ abstract class ExceptionsView<T : Any>(
     protected val interactor: ExceptionsInteractor<T>,
 ) {
 
-    @VisibleForTesting
+    @VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
     internal val binding = ComponentExceptionsBinding.inflate(
         LayoutInflater.from(container.context),
         container,

@@ -12,8 +12,8 @@ import androidx.preference.PreferenceFragmentCompat
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import mozilla.components.support.ktx.android.content.pixelSizeFor
 import org.mozilla.fenix.R
-import org.mozilla.fenix.ext.pixelSizeFor
 
 /**
  * Displays a custom [MaterialAlertDialogBuilder] for an [EditTextPreference].

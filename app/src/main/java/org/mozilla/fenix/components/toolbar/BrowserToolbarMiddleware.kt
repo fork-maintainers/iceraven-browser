@@ -109,12 +109,14 @@ import org.mozilla.fenix.components.appstate.snackbar.SnackbarState
 import org.mozilla.fenix.components.menu.MenuAccessPoint
 import org.mozilla.fenix.components.metrics.MetricsUtils
 import org.mozilla.fenix.components.share.ShareSource
+import org.mozilla.fenix.components.toolbar.BrowserToolbarTestTags.SITE_INFO_INSECURE_CONNECTION
 import org.mozilla.fenix.components.toolbar.BrowserToolbarTestTags.SITE_INFO_LOCAL_FILE
 import org.mozilla.fenix.components.toolbar.BrowserToolbarTestTags.SITE_INFO_SECURE
+import org.mozilla.fenix.components.toolbar.BrowserToolbarTestTags.SITE_INFO_TRACKING_PROTECTION_OFF
 import org.mozilla.fenix.components.toolbar.BrowserToolbarTestTags.SITE_INFO_UNKNOWN
-import org.mozilla.fenix.components.toolbar.BrowserToolbarTestTags.SITE_INFO_UNSECURE
 import org.mozilla.fenix.components.toolbar.DisplayActions.AddBookmarkClicked
 import org.mozilla.fenix.components.toolbar.DisplayActions.EditBookmarkClicked
+import org.mozilla.fenix.components.toolbar.DisplayActions.EditShortcutClicked
 import org.mozilla.fenix.components.toolbar.DisplayActions.HomepageClicked
 import org.mozilla.fenix.components.toolbar.DisplayActions.MenuClicked
 import org.mozilla.fenix.components.toolbar.DisplayActions.NavigateBackClicked
@@ -123,6 +125,7 @@ import org.mozilla.fenix.components.toolbar.DisplayActions.NavigateForwardClicke
 import org.mozilla.fenix.components.toolbar.DisplayActions.NavigateForwardLongClicked
 import org.mozilla.fenix.components.toolbar.DisplayActions.RefreshClicked
 import org.mozilla.fenix.components.toolbar.DisplayActions.ShareClicked
+import org.mozilla.fenix.components.toolbar.DisplayActions.ShortcutLongClicked
 import org.mozilla.fenix.components.toolbar.DisplayActions.StopRefreshClicked
 import org.mozilla.fenix.components.toolbar.DisplayActions.SummarizeClicked
 import org.mozilla.fenix.components.toolbar.DisplayActions.TranslateClicked
@@ -169,6 +172,8 @@ internal sealed class DisplayActions(override val source: Source) : BrowserToolb
     data class TranslateClicked(override val source: Source) : DisplayActions(source)
     data class HomepageClicked(override val source: Source) : DisplayActions(source)
     data class SummarizeClicked(override val source: Source) : DisplayActions(source)
+    data class ShortcutLongClicked(override val source: Source) : DisplayActions(source)
+    data class EditShortcutClicked(override val source: Source) : DisplayActions(source)
 }
 
 @VisibleForTesting
@@ -201,7 +206,8 @@ internal object BrowserToolbarTestTags {
     const val SITE_INFO_LOCAL_FILE = "browser.toolbar.site.info.local.file"
     const val SITE_INFO_UNKNOWN = "browser.toolbar.site.info.unknown"
     const val SITE_INFO_SECURE = "browser.toolbar.site.info.secure"
-    const val SITE_INFO_UNSECURE = "browser.toolbar.site.info.unsecure"
+    const val SITE_INFO_INSECURE_CONNECTION = "browser.toolbar.site.info.insecure.connection"
+    const val SITE_INFO_TRACKING_PROTECTION_OFF = "browser.toolbar.site.info.tracking.protection.off"
 }
 
 /**
@@ -650,6 +656,19 @@ class BrowserToolbarMiddleware(
                 next(action)
             }
 
+            is EditShortcutClicked -> {
+                navController.nav(
+                    R.id.browserFragment,
+                    BrowserFragmentDirections.actionGlobalCustomizationFragment(
+                        preferenceToScrollTo = uiContext.getString(
+                            R.string.pref_key_customization_category_toolbar_shortcut,
+                        ),
+                    ),
+                )
+
+                next(action)
+            }
+
             else -> next(action)
         }
     }
@@ -792,7 +811,7 @@ class BrowserToolbarMiddleware(
 
         val configs = listOfNotNull(
             primarySlotAction?.let {
-                ToolbarActionConfig(it) {
+                ToolbarActionConfig(it, true) {
                     !shouldUseExpandedToolbar || !isTallWindow || isWideWindow
                 }
             },
@@ -805,7 +824,13 @@ class BrowserToolbarMiddleware(
         )
 
         return configs.mapNotNull { config ->
-            config.takeIf { it.isVisible() }?.let { buildAction(it.action, Source.AddressBar.BrowserEnd) }
+            config.takeIf { it.isVisible() }?.let {
+                buildAction(
+                    toolbarAction = it.action,
+                    source = Source.AddressBar.BrowserEnd,
+                    isShortcut = it.isShortcut,
+                )
+            }
         }
     }
 
@@ -1158,6 +1183,7 @@ class BrowserToolbarMiddleware(
 
     private data class ToolbarActionConfig(
         val action: ToolbarAction,
+        val isShortcut: Boolean = false,
         val isVisible: () -> Boolean = { true },
     )
 
@@ -1165,11 +1191,12 @@ class BrowserToolbarMiddleware(
         appStore.state.searchState.selectedSearchEngine?.searchEngine
             ?: browserStore.state.search.selectedOrDefaultSearchEngine
 
-    @Suppress("LongMethod", "CognitiveComplexMethod")
+    @Suppress("LongMethod", "CyclomaticComplexMethod", "CognitiveComplexMethod")
     @VisibleForTesting
     internal fun buildAction(
         toolbarAction: ToolbarAction,
         source: Source = Source.Unknown,
+        isShortcut: Boolean = false,
     ): Action = when (toolbarAction) {
         ToolbarAction.NewTab -> ActionButtonRes(
             drawableResId = iconsR.drawable.mozac_ic_plus_24,
@@ -1313,9 +1340,15 @@ class BrowserToolbarMiddleware(
                     onClick = object : BrowserToolbarEvent {},
                     testTag = SITE_INFO_UNKNOWN,
                 )
-            } else if (
-                selectedTab.content.securityInfo.isSecure &&
-                selectedTab.trackingProtection.enabled &&
+            } else if (!selectedTab.content.securityInfo.isSecure) {
+                buildSiteInfoAction(
+                    drawableResId = iconsR.drawable.mozac_ic_shield_slash_24,
+                    contentDescription = toolbarR.string.mozac_browser_toolbar_content_description_site_info,
+                    highlighted = highlight,
+                    onClick = StartPageActions.SiteInfoClicked,
+                    testTag = SITE_INFO_INSECURE_CONNECTION,
+                )
+            } else if (selectedTab.trackingProtection.enabled &&
                 !selectedTab.trackingProtection.ignoredOnTrackingProtection
             ) {
                 buildSiteInfoAction(
@@ -1327,11 +1360,11 @@ class BrowserToolbarMiddleware(
                 )
             } else {
                 buildSiteInfoAction(
-                    drawableResId = iconsR.drawable.mozac_ic_shield_slash_24,
+                    drawableResId = iconsR.drawable.mozac_ic_shield_cross_24,
                     contentDescription = toolbarR.string.mozac_browser_toolbar_content_description_site_info,
                     highlighted = highlight,
                     onClick = StartPageActions.SiteInfoClicked,
-                    testTag = SITE_INFO_UNSECURE,
+                    testTag = SITE_INFO_TRACKING_PROTECTION_OFF,
                 )
             }
         }
@@ -1374,6 +1407,16 @@ class BrowserToolbarMiddleware(
             },
             onClick = SummarizeClicked(source),
         )
+    }.run {
+        when {
+            isShortcut && this is ActionButtonRes -> copy(
+                onLongClick = buildShortcutLongPressMenu(source),
+            )
+            isShortcut && this is ActionButton -> copy(
+                onLongClick = buildShortcutLongPressMenu(source),
+            )
+            else -> this
+        }
     }
 
     private fun buildSiteInfoAction(
@@ -1393,9 +1436,10 @@ class BrowserToolbarMiddleware(
                 highlighted = highlighted,
                 onClick = onClick,
                 testTag = testTag,
-            ).also {
-                ipProtectionStore.dispatch(IPProtectionAction.ProxyActiveShown)
-            }
+                onAnimationStarted = {
+                    ipProtectionStore.dispatch(IPProtectionAction.ProxyActiveShown)
+                },
+            )
         } else {
             ActionButtonRes(
                 drawableResId = drawableResId,
@@ -1405,6 +1449,17 @@ class BrowserToolbarMiddleware(
                 testTag = testTag,
             )
         }
+    }
+
+    private fun buildShortcutLongPressMenu(source: Source) = CombinedEventAndMenu(ShortcutLongClicked(source)) {
+        listOf(
+            BrowserToolbarMenuButton(
+                icon = null,
+                text = StringResText(R.string.toolbar_shortcut_menu_edit_option),
+                contentDescription = StringResContentDescription(R.string.toolbar_shortcut_menu_edit_option),
+                onClick = EditShortcutClicked(source),
+            ),
+        )
     }
 
     private fun Source.toMetricSource() = when (this) {

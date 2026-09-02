@@ -11,8 +11,12 @@ import org.mozilla.fenix.termsofuse.store.TermsOfUsePromptRepository
  * Helps determine when the Terms of Use prompt should show.
  *
  * @param repository the repository for data related to the Terms of Use prompt.
+ * @param currentTimeMillis provider for the current time in milliseconds, injectable for testing.
  */
-class TermsOfUseManager(private val repository: TermsOfUsePromptRepository) {
+class TermsOfUseManager(
+    private val repository: TermsOfUsePromptRepository,
+    private val currentTimeMillis: () -> Long = { System.currentTimeMillis() },
+) {
 
     private var isFirstCheckSinceAppStart: Boolean = false
 
@@ -38,7 +42,7 @@ class TermsOfUseManager(private val repository: TermsOfUsePromptRepository) {
     @VisibleForTesting
     internal fun shouldShowTermsOfUsePrompt(
         ignoreFirstCheckSinceAppStart: Boolean = false,
-        currentTimeInMillis: Long = System.currentTimeMillis(),
+        currentTimeInMillis: Long = currentTimeMillis(),
     ): Boolean = repository.canShowTermsOfUsePrompt() &&
             !repository.userPostponedAndWithinCooldownPeriod(currentTimeInMillis) &&
             isFirstCheckFromAppStart(ignoreFirstCheckSinceAppStart)

@@ -122,6 +122,44 @@ class IPProtectionOnboardingPromptTest {
             }
         }
 
+    @Test
+    fun `GIVEN showOnboardingBottomSheet is true and account is ready WHEN eligibility becomes Eligible THEN onShowOnboarding is invoked`() =
+        runTest(testDispatcher) {
+            val repository = FakeIPProtectionPromptRepository(
+                canShowIPProtectionPrompt = true,
+                showOnboardingBottomSheet = true,
+            )
+            var shownCount = 0
+            val store = buildStore(accountStatus = AccountStatus.NoAccount)
+
+                startBinding(repository, store) { shownCount++ }
+
+                store.dispatch(IPProtectionAction.EligibilityChanged(EligibilityStatus.Eligible))
+                testDispatcher.scheduler.advanceUntilIdle()
+
+                assertEquals(1, shownCount)
+            }
+        }
+
+    @Test
+    fun `GIVEN showOnboardingBottomSheet is false WHEN eligibility becomes Eligible THEN onShowOnboarding is not invoked`() =
+        runTest(testDispatcher) {
+            val repository = FakeIPProtectionPromptRepository(
+                canShowIPProtectionPrompt = false,
+                showOnboardingBottomSheet = false,
+            )
+            var shownCount = 0
+            val store = IPProtectionStore()
+
+                startBinding(repository, store) { shownCount++ }
+
+                store.dispatch(IPProtectionAction.EligibilityChanged(EligibilityStatus.Eligible))
+                testDispatcher.scheduler.advanceUntilIdle()
+
+                assertEquals(0, shownCount)
+            }
+        }
+
     private fun startBinding(
         repository: FakeIPProtectionPromptRepository,
         store: IPProtectionStore,

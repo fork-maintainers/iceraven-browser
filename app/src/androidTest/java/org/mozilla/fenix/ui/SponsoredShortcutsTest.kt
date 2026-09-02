@@ -79,6 +79,7 @@ class SponsoredShortcutsTest {
             defaultTopSitesList.values.forEach { value ->
                 verifyExistingTopSitesTabs(value)
             }
+             verifyAddShortcutButtonExists()
         }.openThreeDotMenu {
         }.clickSettingsButton {
         }.openHomepageSubMenu {
@@ -88,6 +89,7 @@ class SponsoredShortcutsTest {
         }.goBack {
         }.goBack(composeTestRule) {
             verifyNotExistingSponsoredTopSitesList()
+            verifyAddShortcutButtonExists()
         }
     }
 

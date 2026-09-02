@@ -176,15 +176,15 @@ class MenuNavigationMiddlewareTest {
     }
 
     @Test
-    fun `WHEN navigate to wallpaper action is dispatched THEN navigate to wallpaper settings`() = runTest {
+    fun `WHEN navigate to customize homepage action is dispatched THEN navigate to homepage settings`() = runTest {
         val store = createStore(this)
 
-        store.dispatch(MenuAction.Navigate.Wallpaper)
+        store.dispatch(MenuAction.Navigate.CustomizeHomepage)
         testScheduler.advanceUntilIdle()
 
         verify {
             navController.navigate(
-                MenuDialogFragmentDirections.actionGlobalWallpaperSettingsFragment(),
+                MenuDialogFragmentDirections.actionGlobalHomeSettingsFragment(),
                 null,
             )
         }

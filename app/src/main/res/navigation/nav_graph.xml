@@ -413,9 +413,6 @@
             android:id="@+id/action_browserFragment_to_createXiaomiShortcutFragment"
             app:destination="@id/createXiaomiShortcutFragment" />
         <action
-            android:id="@+id/action_browserFragment_to_pwaOnboardingDialogFragment"
-            app:destination="@id/pwaOnboardingDialogFragment" />
-        <action
             android:id="@+id/action_browserFragment_to_trustPanelFragment"
             app:destination="@id/trust_panel_graph" />
         <action
@@ -895,6 +892,18 @@
         <argument
             android:name="entrypoint"
             app:argType="org.mozilla.fenix.components.accounts.FenixFxAEntryPoint" />
+        <action
+          android:id="@+id/action_ipProtectionFragment_to_ipProtectionLocationFragment"
+          app:destination="@id/ipProtectionLocationsFragment"
+          app:enterAnim="@anim/slide_in_right"
+          app:exitAnim="@anim/slide_out_left"
+          app:popEnterAnim="@anim/slide_in_left"
+          app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+      android:id="@+id/ipProtectionLocationsFragment"
+      android:name="org.mozilla.fenix.settings.ipprotection.IPProtectionLocationsFragment"
+      android:label="@string/ip_protection_locations_title" >
     </fragment>
     <fragment
         android:id="@+id/aiControlsFragment"
@@ -1218,10 +1227,6 @@
         android:id="@+id/createXiaomiShortcutFragment"
         android:name="org.mozilla.fenix.shortcut.CreateXiaomiShortcutFragment"
         tools:layout="@layout/fragment_create_xiaomi_shortcut" />
-    <dialog
-        android:id="@+id/pwaOnboardingDialogFragment"
-        android:name="org.mozilla.fenix.shortcut.PwaOnboardingDialogFragment"
-        tools:layout="@layout/fragment_pwa_onboarding" />
 
     <dialog
         android:id="@+id/shareFragment"
@@ -1247,6 +1252,15 @@
             android:defaultValue="@null"
             app:argType="string"
             app:nullable="true" />
+        <argument
+            android:name="shareGroupTitle"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="shareGroupColor"
+            android:defaultValue="0"
+            app:argType="integer" />
     </dialog>
     <fragment
         android:id="@+id/accountProblemFragment"
@@ -1650,6 +1664,9 @@
             android:defaultValue="false"
             app:nullable="false"
             app:argType="boolean" />
+        <action
+            android:id="@+id/action_summarizationFragment_to_turnOnSyncFragment"
+            app:destination="@id/turnOnSyncFragment" />
     </dialog>
 
     <fragment

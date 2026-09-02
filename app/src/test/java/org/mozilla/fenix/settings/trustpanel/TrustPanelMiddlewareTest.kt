@@ -298,7 +298,7 @@ class TrustPanelMiddlewareTest {
         every { sessionContentState.private } returns false
 
         every { settings.getSitePermissionsCustomSettingsRules() } returns sitePermissionsRules
-        every { sitePermissionsRules.toSitePermissions(any(), any()) } returns newSitePermissions
+        every { sitePermissionsRules.toSitePermissions(any()) } returns newSitePermissions
         every {
             newSitePermissions.copy(
                 autoplayAudible = autoplayValue.autoplayAudibleStatus,

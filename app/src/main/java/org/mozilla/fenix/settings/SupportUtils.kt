@@ -77,6 +77,8 @@ object SupportUtils {
          */
         LOCAL_NETWORK_AND_DEVICE_ACCESS("control-personal-device-local-network-permissions-firefox-android"),
         PAGE_SUMMARIZATION("summarize-pages-android"),
+
+        CLOUD_SUPPORTED_FEATURES("accessing-cloud-supported-features-firefox"),
     }
 
     enum class MozillaPage(internal val path: String) {

@@ -506,8 +506,6 @@
   <string name="pwa_site_controls_title_private">%1$s (نجی موڈ)</string>
   <!-- Text for the button to clear all history -->
   <string name="history_delete_all">سابقات حذف کریں</string>
-  <!-- Text for the snackbar to confirm that multiple browsing history items has been deleted -->
-  <string name="history_delete_multiple_items_snackbar">سابقات حذف کردی گئی</string>
   <!-- Text for the snackbar to confirm that a single browsing history item has been deleted. %1$s is the shortened URL of the deleted history item. -->
   <string name="history_delete_single_item_snackbar">%1$s حذف ہو گیا</string>
   <!-- Context description text for the button to delete a single history item -->
@@ -586,12 +584,6 @@
     Button label that take the user to the Android App setting
   -->
   <string name="phone_feature_go_to_settings">سیٹنگز پر جائیں</string>
-  <!--
-    Content description (not visible, for screen readers etc.): Quick settings sheet
-    to give users access to site specific information / settings. For example:
-    Secure settings status and a button to modify site permissions
-  -->
-  <string name="quick_settings_sheet">کوئیک سیٹنگ شیٹ</string>
   <!-- Label that indicates that this option it the recommended one -->
   <string name="phone_feature_recommended">تجویز کردہ</string>
   <!-- Button label for clearing all the information of site permissions -->
@@ -838,12 +830,6 @@
   <!--
     Enhanced Tracking Protection
 
-    Link displayed in enhanced tracking protection panel to access tracking protection settings
-  -->
-  <string name="etp_settings">تحفظ کی سیٹنگز</string>
-  <!--
-    Enhanced Tracking Protection
-
     Preference title for enhanced tracking protection settings
   -->
   <string name="preference_enhanced_tracking_protection">توسيعى سراغ کاری تحفظ</string>
@@ -885,12 +871,8 @@
   <string name="preference_enhanced_tracking_protection_custom_tracking_content_2">صرف نجی ٹیب میں</string>
   <!-- Preference for enhanced tracking protection for the custom protection settings -->
   <string name="preference_enhanced_tracking_protection_custom_cryptominers">کریپٹومینر</string>
-  <!-- Button label for navigating to the Enhanced Tracking Protection details -->
-  <string name="enhanced_tracking_protection_details">تفصیلات</string>
   <!-- Header for categories that are being being blocked by current Enhanced Tracking Protection settings -->
   <string name="enhanced_tracking_protection_blocked">بلاک شدہ</string>
-  <!-- Header for categories that are being not being blocked by current Enhanced Tracking Protection settings -->
-  <string name="enhanced_tracking_protection_allowed">‏‏اجازت شدہ</string>
   <!-- Category of trackers (social media trackers) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_social_media_trackers_title">سوشل میڈیا ٹریکرز</string>
   <!-- Description of social media trackers that can be blocked by Enhanced Tracking Protection -->
@@ -903,10 +885,6 @@
   <string name="etp_tracking_content_title">ٹریکنگ مواد</string>
   <!-- Description of tracking content that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_tracking_content_description">ٹریکنگ کوڈ پر مشتمل اشتہارات ، ویڈیوز اور دیگر مواد کو لوڈ ہونے سے روکتا ہے۔ کچھ ویب سائٹ کی فعالیت کو متاثر کر سکتا ہے۔</string>
-  <!-- Enhanced Tracking Protection message that protection is currently on for this site -->
-  <string name="etp_panel_on">اس سائٹ کیلئے تحفظات جاری ہیں</string>
-  <!-- Enhanced Tracking Protection message that protection is currently off for this site -->
-  <string name="etp_panel_off">اس سائٹ کیلئے تحفظات بند ہیں</string>
   <!-- Header for exceptions list for which sites enhanced tracking protection is always off -->
   <string name="enhanced_tracking_protection_exceptions">ان ویب سائٹوں کے لیے توسیع شدہ سراغ کاری تحفظ بند ہے</string>
   <!--
@@ -921,8 +899,6 @@
     %s is the name of the app (for example "Firefox")
   -->
   <string name="open_source_licenses_title">OSS | %s لائبریریاں</string>
-  <!-- Text displayed that links to website about enhanced tracking protection SmartBlock -->
-  <string name="preference_etp_smartblock_learn_more">مزید سیکھیں</string>
   <!-- About page link text to open support link -->
   <string name="about_support">معاونت</string>
   <!-- About page link text to list of past crashes (like about:crashes on desktop) -->
@@ -1074,10 +1050,6 @@
   <string name="phone_feature_blocked_step_permissions"><![CDATA[2. <b>اجازتوں</b> پر دبایں]]></string>
   <!-- Third step for the allowing a permission (%1$s is the permission name, for example "Camera"). -->
   <string name="phone_feature_blocked_step_feature"><![CDATA[3. <b>%1$s</b> کو چالو کرنے کے لئے ٹو گل کریں]]></string>
-  <!-- Label that indicates a site is using a secure connection -->
-  <string name="quick_settings_sheet_secure_connection_2">کنکشن محفوظ ہے۔</string>
-  <!-- Label that indicates a site is using a insecure connection -->
-  <string name="quick_settings_sheet_insecure_connection_2">کنکشن محفوظ نہیں ہے</string>
   <!-- Label to clear site data -->
   <string name="clear_site_data">کوکیز اور سائٹ کا ڈیٹا صاف کریں۔</string>
   <!-- Confirmation message for a dialog confirming if the user wants to delete all the permissions for all sites -->
@@ -1088,11 +1060,6 @@
   <string name="confirm_clear_permission_site">کیا آپ واقعی اس سائٹ کے لئے اس اجازت کو ختم کرنا چاہتے ہیں؟</string>
   <!-- label shown when there are not site exceptions to show in the site exception settings -->
   <string name="no_site_exceptions">کوئی سائٹ استثنات نہیں ہے</string>
-  <!--
-    text shown before the issuer name to indicate who its verified by, %1$s is the name of
-    the certificate authority that verified the ticket
-  -->
-  <string name="certificate_info_verified_by">توثیق کردہ برائے: %1$s</string>
   <!-- Positive action of a dialog asking to delete -->
   <string name="dialog_delete_positive">حذف کریں</string>
   <!-- The error message in add login view when hostname field is blank. -->

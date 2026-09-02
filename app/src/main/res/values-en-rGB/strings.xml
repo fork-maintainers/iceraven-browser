@@ -108,12 +108,6 @@
   <string name="open_in_app_cfr_negative_button_text">Dismiss</string>
   <!-- Private browsing erase action "contextual feature recommendation" (CFR) -->
 
-  <!--
-    Address bar swipe "contextual feature recommendation" (CFR)
-
-    Text for the message displayed in the contextual feature recommendation popup promoting swipe of address bar.
-  -->
-  <string name="address_bar_swipe_cfr_message_2">Swipe the toolbar left or right to switch tabs.</string>
   <!-- Text for the info dialog when camera permissions have been denied but user tries to access a camera feature. -->
   <string name="camera_permissions_needed_message">Camera access needed. Go to Android settings, tap permissions, and tap allow.</string>
   <!-- Text for the positive action button to go to Android Settings to grant permissions. -->
@@ -268,7 +262,7 @@
   <!-- Browser menu caption label for the "Sign in" browser menu item described in `browser_menu_sign_in` -->
   <string name="browser_menu_sign_in_caption_3">Synchronise passwords, bookmarks and more</string>
   <!-- Browser menu label to sign back in to sync on the device when the user's account needs to be reauthenticated -->
-  <string name="browser_menu_sign_back_in_to_sync">Sign back in to synchroise</string>
+  <string name="browser_menu_sign_back_in_to_sync">Sign back in to synchronise</string>
   <!-- Browser menu caption label for the "Sign back in to sync" browser menu item described in `browser_menu_sign_back_in_to_sync` when there is an error in syncing -->
   <string name="browser_menu_syncing_paused_caption">Synchronisation paused</string>
   <!-- Browser menu caption label for an authenticated user -->
@@ -319,14 +313,6 @@
   <string name="browser_menu_default_banner_dismiss_promotion">Dismiss promotion</string>
   <!-- Content description (not visible, for screen readers etc.) for recommended extensions in main menu -->
   <string name="browser_menu_recommended_extensions_content_description">More info</string>
-  <!--
-    Menu "contextual feature recommendation" (CFR)
-
-    Text for the title in the contextual feature recommendation popup promoting the menu feature.
-  -->
-  <string name="menu_cfr_title">New: streamlined menu</string>
-  <!-- Text for the message in the contextual feature recommendation popup promoting the menu feature. -->
-  <string name="menu_cfr_body">Find what you need faster, from private browsing to save actions.</string>
   <!--
     Extensions management fragment
 
@@ -792,40 +778,8 @@
   <string name="preferences_pbm_lock_screen_title">Use screen lock to hide tabs in private browsing</string>
   <!-- Informs the user how to access the tabs when "Use screen lock to hide tabs in private browsing" is enabled -->
   <string name="preferences_pbm_lock_screen_summary_3">View tabs with your fingerprint, PIN, or face unlock. Turning this on also prevents screen capture and sharing.</string>
-  <!-- Label for cookie banner section in quick settings panel. -->
-  <string name="cookie_banner_blocker">Cookie Banner Blocker</string>
   <!-- Preference for removing cookie/consent banners from sites automatically in private mode. See reduce_cookie_banner_summary for additional context. -->
   <string name="preferences_cookie_banner_reduction_private_mode">Cookie Banner Blocker in private browsing</string>
-  <!-- Text for indicating cookie banner handling is off this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_off_for_site">Off for this site</string>
-  <!-- Text for cancel button indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_cancel_button">Cancel</string>
-  <!-- Text for request support button indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_request_support_button_2">Send request</string>
-  <!-- Text for title indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_title_2">Request support for this site?</string>
-  <!-- Label for the snackBar, after the user reports with success a website where cookie banner reducer did not work -->
-  <string name="cookie_banner_handling_report_site_snack_bar_text_2">Request sent</string>
-  <!-- Text for indicating cookie banner handling is on this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_on_for_site">On for this site</string>
-  <!-- Text for indicating that a request for unsupported site was sent to Nimbus (it's a Mozilla library for experiments), this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_unsupported_site_request_submitted_2">Support request sent</string>
-  <!-- Text for indicating cookie banner handling is currently not supported for this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_unsupported_site">Site currently not supported</string>
-  <!-- Title text for a detail explanation indicating cookie banner handling is on this site, this is shown as part of the cookie banner panel in the toolbar. %1$s is a shortened URL of the current site. -->
-  <string name="reduce_cookie_banner_details_panel_title_on_for_site_1">Turn on Cookie Banner Blocker for %1$s?</string>
-  <!-- Title text for a detail explanation indicating cookie banner handling is off this site, this is shown as part of the cookie banner panel in the toolbar. %1$s is a shortened URL of the current site. -->
-  <string name="reduce_cookie_banner_details_panel_title_off_for_site_1">Turn off Cookie Banner Blocker for %1$s?</string>
-  <!-- Title text for a detail explanation indicating cookie banner reducer didn't work for the current site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_title_unsupported_site_request_2">%1$s can’t automatically reject cookie requests on this site. You can send a request to support this site in the future.</string>
-  <!-- Long text for a detail explanation indicating what will happen if cookie banner handling is off for a site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_description_off_for_site_1">Turn off and %1$s will clear cookies and reload this site. This may sign you out or empty shopping baskets.</string>
-  <!-- Long text for a detail explanation indicating what will happen if cookie banner handling is on for a site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_description_on_for_site_3">Turn on and %1$s will try to automatically refuse all cookie banners on this site.</string>
-  <!-- Title for the cookie banner re-engagement CFR, the placeholder is replaced with app name. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="cookie_banner_cfr_title">%1$s just refused cookies for you</string>
-  <!-- Message for the cookie banner re-engagement CFR -->
-  <string name="cookie_banner_cfr_message">Less distractions, less cookies tracking you on this site.</string>
   <!-- Description of the preference to enable "HTTPS-Only" mode. -->
   <string name="preferences_https_only_summary">Automatically attempts to connect to sites using HTTPS encryption protocol for increased security.</string>
   <!-- Summary of https only preference if https only is set to off -->
@@ -870,12 +824,14 @@
   <string name="preferences_toolbar_shortcut">Toolbar shortcut</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_toolbar_select_shortcut">Select a shortcut</string>
+  <!-- Title of a menu option allowing to change the shortcut button shown in the toolbar -->
+  <string name="toolbar_shortcut_menu_edit_option">Edit shortcut</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_gestures">Gestures</string>
   <!-- Preference for settings related to visual options -->
   <string name="preferences_customize">Customise</string>
   <!-- Preference description shown in the banner prompting the user to sign in for sync features -->
-  <string name="preferences_sign_in_description">Synchronise tabs, bookmarks, passwords, and more.</string>
+  <string name="preferences_sign_in_description">Synchronise tabs, bookmarks, passwords and more.</string>
   <!-- Preference shown instead of account display name while account profile information isn't available yet. -->
   <string name="preferences_account_default_name_2" tools:ignore="BrandUsage">Mozilla account</string>
   <!-- Preference text for account title when there was an error syncing FxA -->
@@ -1011,7 +967,7 @@
 
     Preference to customize the configured AMO (addons.mozilla.org) collection
   -->
-  <string name="preferences_customize_extension_collection">Custom Extension collection</string>
+  <string name="preferences_customize_extension_collection">Custom extension collection</string>
   <!-- Button caption to confirm the add-on collection configuration -->
   <string name="customize_addon_collection_ok">OK</string>
   <!-- Button caption to abort the add-on collection configuration -->
@@ -1175,6 +1131,8 @@
   <string name="extension_process_crash_dialog_retry_button_text" tools:ignore="UnusedResources">Try restarting extensions</string>
   <!-- Button text on the extension crash dialog to prompt the user to continue with all extensions disabled. -->
   <string name="extension_process_crash_dialog_disable_extensions_button_text">Continue with extensions disabled</string>
+  <!-- Text shown in the snackbar action button that lets the user retry an add-on operation that just failed. -->
+  <string name="addon_failure_retry_action">Retry</string>
   <!--
     Account Preferences
 
@@ -1348,6 +1306,11 @@
   <string name="preference_light_theme">Light</string>
   <!-- Preference for using dark theme -->
   <string name="preference_dark_theme">Dark</string>
+  <!--
+    Preference for using the OLED theme. For localization, this can be translated as "True Black", "Maximum Darkness",
+    or "Full dark" if needed.
+  -->
+  <string name="preference_oled_theme">Darkest</string>
   <!-- Preference for using using dark or light theme automatically set by battery -->
   <string name="preference_auto_battery_theme">Set by Battery Saver</string>
   <!-- Preference for using following device theme -->
@@ -1494,6 +1457,16 @@
   <string name="preferences_inactive_tabs">Move old tabs to inactive</string>
   <!-- Title of inactive tabs preference -->
   <string name="preferences_inactive_tabs_title">Tabs you haven’t viewed for two weeks get moved to the inactive section.</string>
+  <!-- Title for the preference to enable or disable the tab groups feature -->
+  <string name="preferences_tab_groups_feature">Enable Tab Groups</string>
+  <!--
+    Privacy report
+
+    Category header of a preference that allows a user to enable or disable the privacy report feature
+  -->
+  <string name="preferences_privacy_report">Privacy report</string>
+  <!-- Title of the privacy report preference that allows a user to enable or disable the feature -->
+  <string name="preferences_privacy_report_title">Enable privacy report</string>
   <!--
     Studies
 
@@ -1716,6 +1689,8 @@
   <string name="tab_group_three_dot_menu_ungroup">Ungroup</string>
   <!-- Text shown on the delete button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_delete">Delete</string>
+  <!-- Text shown on the share button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_share">Share</string>
   <!-- Text shown on the close button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_close">Close</string>
   <!-- Title for the Ungroup tab group confirmation dialog. -->
@@ -1728,6 +1703,14 @@
   <string name="ungroup_tab_group_confirmation_dialog_confirm">Ungroup</string>
   <!-- Text shown on the cancel button in the Ungroup tab group confirmation dialog. -->
   <string name="ungroup_tab_group_confirmation_dialog_cancel">Cancel</string>
+  <!-- Custom accessibility action to reorder a tab up rather than dragging. -->
+  <string name="custom_accessibility_action_reorder_tab_up">Move tab up</string>
+  <!-- Custom accessibility action to reorder a tab left rather than dragging. -->
+  <string name="custom_accessibility_action_reorder_tab_left">Move tab left</string>
+  <!-- Custom accessibility action to reorder a tab right rather than dragging. -->
+  <string name="custom_accessibility_action_reorder_tab_right">Move tab right</string>
+  <!-- Custom accessibility action to reorder a tab down rather than dragging. -->
+  <string name="custom_accessibility_action_reorder_tab_down">Move tab down</string>
   <!--
     Color labels for tab groups, used for accessibility and selection UI.
 
@@ -1758,8 +1741,6 @@
   <string name="history_search_1">Enter search terms</string>
   <!-- Text for the button to clear all history -->
   <string name="history_delete_all">Delete history</string>
-  <!-- Text for the snackbar to confirm that multiple browsing history items has been deleted -->
-  <string name="history_delete_multiple_items_snackbar">History Deleted</string>
   <!-- Text for the snackbar to confirm that a single browsing history item has been deleted. %1$s is the shortened URL of the deleted history item. -->
   <string name="history_delete_single_item_snackbar">Deleted %1$s</string>
   <!-- Context description text for the button to delete a single history item -->
@@ -2005,22 +1986,10 @@
   <string name="webcompat_reporter_label_mandatory_description">Describe the problem in detail to help us investigate the issue</string>
   <!-- The label/title of a optional field in the Web Compat Reporter feature for adding additional information. -->
   <string name="webcompat_reporter_label_optional_description">Describe the problem in detail to help us investigate the issue (optional)</string>
-  <!-- The label/title of a field in the Web Compat Reporter feature for explaining a high-level reason why the site is broken. -->
-  <string name="webcompat_reporter_label_whats_broken_2">What’s broken?</string>
-  <!-- The placeholder text for the dropdown where a user selects a high-level reason why the site is broken. -->
-  <string name="webcompat_reporter_choose_reason_2">Choose a reason</string>
-  <!-- The error message of the dropdown, prompting the user to select a high-level reason why the site is broken. -->
-  <string name="webcompat_reporter_choose_reason_error">Please choose a reason</string>
-  <!-- The label/title of an optional field in the Web Compat Reporter feature for adding additional information. -->
-  <string name="webcompat_reporter_label_description_2">Describe the problem in detail to help us investigate the issue (optional)</string>
-  <!-- The button text for navigating away from the feature to provide more information on the broken site's bug report. -->
-  <string name="webcompat_reporter_add_more_info">Add more info</string>
   <!-- The button text for the cancel button to leave the Web Compat Reporter feature. -->
   <string name="webcompat_reporter_cancel">Cancel</string>
   <!-- The button text for the send button to submit the provided form data. -->
   <string name="webcompat_reporter_send_report">Send report</string>
-  <!-- The button text for the send button to submit the provided form data. -->
-  <string name="webcompat_reporter_send">Send</string>
   <!-- Text for a snackbar to confirm the successful submission of a WebCompat report. -->
   <string name="webcompat_reporter_success_snackbar_text_2">Report sent</string>
   <!-- Placeholder text for the description field to prompt the user on what they should type. -->
@@ -2061,8 +2030,6 @@
   <string name="webcompat_reporter_reason_notsupported_2">Browser is blocked or unsupported</string>
   <!-- Broken site reason text for the site being deceptive -->
   <string name="webcompat_reporter_reason_site_is_deceptive">This site is deceptive</string>
-  <!-- Broken site reason text for browser isn’t supported or blocked -->
-  <string name="webcompat_reporter_reason_notsupported">Browser isn’t supported or blocked</string>
   <!-- Broken site reason text for something else -->
   <string name="webcompat_reporter_reason_other">Something else</string>
   <!--
@@ -2234,12 +2201,6 @@
     Button label that take the user to the Android App setting
   -->
   <string name="phone_feature_go_to_settings">Go to Settings</string>
-  <!--
-    Content description (not visible, for screen readers etc.): Quick settings sheet
-    to give users access to site specific information / settings. For example:
-    Secure settings status and a button to modify site permissions
-  -->
-  <string name="quick_settings_sheet">Quick settings sheet</string>
   <!-- Label that indicates that this option it the recommended one -->
   <string name="phone_feature_recommended">Recommended</string>
   <!-- Button label for clearing all the information of site permissions -->
@@ -2345,9 +2306,9 @@
   <!-- Button to add new collection for the "select collection" step of the collection creator -->
   <string name="create_collection_add_new_collection">Add new collection</string>
   <!-- Button to select all tabs in the "select tabs" step of the collection creator -->
-  <string name="create_collection_select_all">Select All</string>
+  <string name="create_collection_select_all">Select all</string>
   <!-- Button to deselect all tabs in the "select tabs" step of the collection creator -->
-  <string name="create_collection_deselect_all">Deselect All</string>
+  <string name="create_collection_deselect_all">Deselect all</string>
   <!-- Text to prompt users to select the tabs to save in the "select tabs" step of the collection creator -->
   <string name="create_collection_save_to_collection_empty">Select tabs to save</string>
   <!--
@@ -2566,7 +2527,7 @@
   <!-- Title for the Delete browsing data on quit preference -->
   <string name="preferences_delete_browsing_data_on_quit">Delete browsing data on quit</string>
   <!-- Summary for the Delete browsing data on quit preference. "Quit" translation should match delete_browsing_data_on_quit_action translation. -->
-  <string name="preference_summary_delete_browsing_data_on_quit_2">Automatically deletes browsing data when you select \"Quit\" from the main menu</string>
+  <string name="preference_summary_delete_browsing_data_on_quit_2">Automatically deletes browsing data when you select “Quit” from the main menu</string>
   <!-- Title text of a delete browsing data dialog. -->
   <string name="delete_history_prompt_title">Time range to delete</string>
   <!-- Body text of a delete browsing data dialog. -->
@@ -2633,12 +2594,6 @@
   <string name="sign_out_cancel">Cancel</string>
   <!-- Error message snackbar shown after the user tried to select a default folder which cannot be altered -->
   <string name="bookmark_cannot_edit_root">Can’t edit default folders</string>
-  <!--
-    Enhanced Tracking Protection
-
-    Link displayed in enhanced tracking protection panel to access tracking protection settings
-  -->
-  <string name="etp_settings">Protection Settings</string>
   <!--
     Enhanced Tracking Protection
 
@@ -2723,7 +2678,7 @@
   <!-- Preference for Global Privacy Control for the custom privacy settings for Global Privacy Control. '&amp;' is replaced with the ampersand symbol: & -->
   <string name="preference_enhanced_tracking_protection_custom_global_privacy_control">Tell web sites not to share &amp; sell data</string>
   <!-- Preference for enhanced tracking protection for the custom protection settings for tracking content -->
-  <string name="preference_enhanced_tracking_protection_custom_tracking_content">Tracking Content</string>
+  <string name="preference_enhanced_tracking_protection_custom_tracking_content">Tracking content</string>
   <!-- Option for enhanced tracking protection for the custom protection settings for tracking content -->
   <string name="preference_enhanced_tracking_protection_custom_tracking_content_1">In all tabs</string>
   <!-- Option for enhanced tracking protection for the custom protection settings for tracking content -->
@@ -2732,12 +2687,8 @@
   <string name="preference_enhanced_tracking_protection_custom_cryptominers">Cryptominers</string>
   <!-- Preference for enhanced tracking protection for the custom protection settings -->
   <string name="preference_enhanced_tracking_protection_custom_known_fingerprinters">Known Fingerprinters</string>
-  <!-- Button label for navigating to the Enhanced Tracking Protection details -->
-  <string name="enhanced_tracking_protection_details">Details</string>
   <!-- Header for categories that are being being blocked by current Enhanced Tracking Protection settings -->
   <string name="enhanced_tracking_protection_blocked">Blocked</string>
-  <!-- Header for categories that are being not being blocked by current Enhanced Tracking Protection settings -->
-  <string name="enhanced_tracking_protection_allowed">Allowed</string>
   <!-- Category of trackers (social media trackers) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_social_media_trackers_title">Social Media Trackers</string>
   <!-- Description of social media trackers that can be blocked by Enhanced Tracking Protection -->
@@ -2760,10 +2711,6 @@
   <string name="etp_tracking_content_title">Tracking Content</string>
   <!-- Description of tracking content that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_tracking_content_description">Stops outside ads, videos, and other content from loading that contains tracking code. May affect some web site functionality.</string>
-  <!-- Enhanced Tracking Protection message that protection is currently on for this site -->
-  <string name="etp_panel_on">Protections are ON for this site</string>
-  <!-- Enhanced Tracking Protection message that protection is currently off for this site -->
-  <string name="etp_panel_off">Protections are OFF for this site</string>
   <!-- Header for exceptions list for which sites enhanced tracking protection is always off -->
   <string name="enhanced_tracking_protection_exceptions">Enhanced Tracking Protection is off for these web sites</string>
   <!--
@@ -2789,13 +2736,6 @@
   <!-- Category of trackers (fingerprinters) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_known_fingerprinters_title">Known Fingerprinters</string>
   <!--
-    Description of the SmartBlock Enhanced Tracking Protection feature. The * symbol is intentionally hardcoded here,
-    as we use it on the UI to indicate which trackers have been partially unblocked.
-  -->
-  <string name="preference_etp_smartblock_description">Some trackers marked below have been partially unblocked on this page because you interacted with them *.</string>
-  <!-- Text displayed that links to website about enhanced tracking protection SmartBlock -->
-  <string name="preference_etp_smartblock_learn_more">Learn more</string>
-  <!--
     Content description (not visible, for screen readers etc.):
     Enhanced tracking protection exception preference icon for ETP settings.
   -->
@@ -2805,7 +2745,7 @@
 
     Preference title for DNS over HTTPS settings
   -->
-  <string name="preference_doh_title">DNS Over HTTPS</string>
+  <string name="preference_doh_title">DNS over HTTPS</string>
   <!-- Description of the preference to enable "DNS over HTTPS". %1$s is replaced by a link using `preference_doh_learn_more` at text ("Learn More"). -->
   <string name="preference_doh_summary">Domain Name System (DNS) over HTTPS sends your request for a domain name through an encrypted connection, providing a secure DNS and making it harder for others to see which web site you’re about to access. %1$s</string>
   <!-- Used as text for the link in `preference_doh_title`, points to documentation about "DNS over HTTPS" -->
@@ -2957,7 +2897,7 @@
   <!-- Description of empty list of saved passwords. %s is the name of the app (for example "Firefox"). -->
   <string name="preferences_passwords_saved_logins_description_empty_text_2">The passwords you save or synchronise to %s will be listed here. All passwords you save are encrypted.</string>
   <!-- Clickable text for opening an external link for more information about Sync. -->
-  <string name="preferences_passwords_saved_logins_description_empty_learn_more_link_2">Learn more about Sync</string>
+  <string name="preferences_passwords_saved_logins_description_empty_learn_more_link_2">Learn more about sync</string>
   <!-- Preference to access list of login exceptions that we never save logins for -->
   <string name="preferences_passwords_exceptions">Exceptions</string>
   <!-- Empty description of list of login exceptions that we never save passwords for. %s is the name of the app (for example "Firefox"). -->
@@ -3129,6 +3069,10 @@
   <string name="ip_protection_toolbar_pill_label">VPN on</string>
   <!-- Accessibility description for the browser VPN pill in the address bar when the VPN has been activated -->
   <string name="ip_protection_toolbar_pill_description">VPN is active.</string>
+  <!-- Label shown next to the browser protection icon in the address bar when the browser VPN turns off -->
+  <string name="ip_protection_toolbar_pill_label_off">VPN off</string>
+  <!-- Accessibility description for the browser VPN pill in the address bar when the VPN has turned off -->
+  <string name="ip_protection_toolbar_pill_description_off">VPN is off.</string>
   <!-- Label for the button that starts the browser VPN authentication or authorization flow on the settings screen -->
   <string name="ip_protection_get_started">Get started</string>
   <!-- Label for the "connecting" state of the button that starts the browser VPN authentication or authorization flow on the settings screen -->
@@ -3178,6 +3122,8 @@
   <string name="ip_protection_location_picker_title" tools:ignore="UnusedResources">Choose VPN location</string>
   <!-- Description for what it means to use the Recommended setting and let the app automatically pick the best server location. -->
   <string name="ip_protection_location_fastest_description" tools:ignore="BrandUsage">Firefox finds the fastest location</string>
+  <!-- Description for an unavailable VPN location in the location list. -->
+  <string name="ip_protection_location_unavailable_description">Unavailable</string>
   <!-- Error message shown when the selected browser VPN location is unavailable. -->
   <string name="ip_protection_location_unavailable" tools:ignore="UnusedResources">Location unavailable. Choose another location.</string>
   <!-- Snackbar (in-app pop-up notification) text shown when the previously selected browser VPN location is unavailable and the recommended location was used instead. -->
@@ -3187,7 +3133,7 @@
   <!-- Description for the card shown to the user when we are unable to fetch server locations -->
   <string name="ip_protection_locations_unavailable_description">Switched to the recommended location.</string>
   <!-- Title for the browser VPN location selection screen (displayed in the app bar) -->
-  <string name="ip_protection_locations_title">Choose VPN Location</string>
+  <string name="ip_protection_locations_title">Choose VPN location</string>
   <!-- Content description for the browser VPN location selection screen top bar back button -->
   <string name="ip_protection_locations_navigate_back_button_content_description">Navigate backwards</string>
   <!-- Title for the card shown to the user when we are unable to fetch server locations -->
@@ -3297,7 +3243,7 @@
   <!-- The header for the subregion of an address when "province" should be used -->
   <string name="addresses_province">Province</string>
   <!-- The header for the zip code of an address -->
-  <string name="addresses_zip">Post Code</string>
+  <string name="addresses_zip">Postcode</string>
   <!-- The header for the country or region of an address -->
   <string name="addresses_country">Country or region</string>
   <!-- The header for the phone number of an address -->
@@ -3400,16 +3346,8 @@
   <string name="phone_feature_blocked_step_permissions"><![CDATA[2. Tap <b>Permissions</b>]]></string>
   <!-- Third step for the allowing a permission (%1$s is the permission name, for example "Camera"). -->
   <string name="phone_feature_blocked_step_feature"><![CDATA[3. Toggle <b>%1$s</b> to ON]]></string>
-  <!-- Label that indicates a site is using a secure connection -->
-  <string name="quick_settings_sheet_secure_connection_2">Connection is secure</string>
-  <!-- Label that indicates a site is using a insecure connection -->
-  <string name="quick_settings_sheet_insecure_connection_2">Connection is not secure</string>
-  <!-- Label that indicates a site is displaying a local document -->
-  <string name="quick_settings_sheet_local_page">This page is stored on your device.</string>
   <!-- Label to clear site data -->
   <string name="clear_site_data">Clear cookies and site data</string>
-  <!-- Confirmation message for a dialog confirming if the user wants to delete all data for current site. %s is the domain of the site. -->
-  <string name="confirm_clear_site_data"><![CDATA[Are you sure that you want to clear all the cookies and data for the site <b>%s</b>?]]></string>
   <!-- Confirmation message for a dialog confirming if the user wants to delete all the permissions for all sites -->
   <string name="confirm_clear_permissions_on_all_sites">Are you sure that you want to clear all the permissions on all sites?</string>
   <!-- Confirmation message for a dialog confirming if the user wants to delete all the permissions for a site -->
@@ -3422,11 +3360,6 @@
   <string name="browser_menu_add_to_shortcuts">Add to shortcuts</string>
   <!-- Browser menu button that removes a shortcut from the home fragment -->
   <string name="browser_menu_remove_from_shortcuts">Remove from shortcuts</string>
-  <!--
-    text shown before the issuer name to indicate who its verified by, %1$s is the name of
-    the certificate authority that verified the ticket
-  -->
-  <string name="certificate_info_verified_by">Verified By: %1$s</string>
   <!-- Message in delete confirmation dialog for password -->
   <string name="login_deletion_confirmation_2">Are you sure you want to delete this password?</string>
   <!-- Positive action of a dialog asking to delete -->
@@ -3454,7 +3387,7 @@
   <!-- This is the hint text that is shown inline on the hostname field of the create new login page. 'https://www.example.com' intentionally hardcoded here -->
   <string name="add_login_hostname_hint_text">https://www.example.com</string>
   <!-- This is an error message shown below the hostname field of the add login page when a hostname does not contain http or https. -->
-  <string name="add_login_hostname_invalid_text_3">Web address must contain \"https://\" or \"http://\"</string>
+  <string name="add_login_hostname_invalid_text_3">Web address must contain “https://” or “http://”</string>
   <!-- This is an error message shown below the hostname field of the add login page when a hostname is invalid. -->
   <string name="add_login_hostname_invalid_text_2">Valid hostname required</string>
   <!--
@@ -3490,6 +3423,16 @@
     which navigates the user to a screen displaying all the shortcuts.
   -->
   <string name="homepage_shortcuts_show_all_content_description">Show all shortcuts</string>
+  <!--
+    Label for the button in the shortcuts home screen section that expands the section to show
+    every shortcut.
+  -->
+  <string name="homepage_shortcuts_show_all">Show all</string>
+  <!--
+    Label for the button in the shortcuts home screen section that collapses the section back
+    to showing only the first shortcuts.
+  -->
+  <string name="homepage_shortcuts_show_less">Show less</string>
   <!-- Label for the "Add shortcut" button displayed as a tile. -->
   <string name="homepage_shortcuts_add_shortcut">Add shortcut</string>
   <!-- Title for the "Add to homepage" bottom sheet. -->
@@ -3497,7 +3440,7 @@
   <!-- Label for the "Add website" button in the "Add to homepage" bottom sheet. -->
   <string name="homepage_shortcuts_add_website">Add web site</string>
   <!-- Title text for the "Enter a Website URL" dialog for adding a shortcut. -->
-  <string name="homepage_shortcuts_add_website_title">Enter a Web Site URL</string>
+  <string name="homepage_shortcuts_add_website_title">Enter a Web site URL</string>
   <!-- Title for the "Popular sites" section in the "Add to homepage" bottom sheet. -->
   <string name="homepage_shortcuts_popular_sites">Popular sites</string>
   <!-- Title text displayed in the dialog when shortcuts limit is reached. -->
@@ -4081,7 +4024,7 @@
   <!-- The survey completion confirmation text -->
   <string name="micro_survey_feedback_confirmation">Thanks for your feedback!</string>
   <!-- Option for likert scale -->
-  <string name="likert_scale_option_1" tools:ignore="UnusedResources">Very Satisfied</string>
+  <string name="likert_scale_option_1" tools:ignore="UnusedResources">Very satisfied</string>
   <!-- Option for likert scale -->
   <string name="likert_scale_option_2" tools:ignore="UnusedResources">Satisfied</string>
   <!-- Option for likert scale -->
@@ -4089,7 +4032,7 @@
   <!-- Option for likert scale -->
   <string name="likert_scale_option_4" tools:ignore="UnusedResources">Dissatisfied</string>
   <!-- Option for likert scale -->
-  <string name="likert_scale_option_5" tools:ignore="UnusedResources">Very Dissatisfied</string>
+  <string name="likert_scale_option_5" tools:ignore="UnusedResources">Very dissatisfied</string>
   <!-- Option for likert scale -->
   <string name="likert_scale_option_6" tools:ignore="UnusedResources">I don’t use it</string>
   <!-- Option for likert scale. Note: The word "Firefox" should NOT be translated. -->
@@ -4721,6 +4664,16 @@
   <string name="privacy_notice_updated_homepage_message_privacy_notice" tools:ignore="UnusedResources">Privacy Notice</string>
   <!-- The second active link used in privacy_notice_updated_homepage_message -->
   <string name="privacy_notice_updated_homepage_message_learn_more" tools:ignore="UnusedResources">Learn more</string>
+  <!--
+    Collections migration homepage card
+
+    Title shown on the collections to tab groups migration card on the homepage.
+  -->
+  <string name="collections_migration_homepage_banner_title">Collections are now groups</string>
+  <!-- Message shown on the collections to tab groups migration card on the homepage. -->
+  <string name="collections_migration_homepage_card_message">There’s a simpler way to keep your tabs organised</string>
+  <!-- Link text shown on the collections to tab groups migration card that opens the tab groups page in the tab manager. -->
+  <string name="collections_migration_homepage_card_link">View my tab groups</string>
   <!-- Google Lens prototype related strings -->
   <string name="preferences_debug_settings_google_lens_integration">Enable Google Lens Integration</string>
   <!-- Lens image search button content description -->
@@ -4749,10 +4702,6 @@
   <string name="search_settings_google_lens_description">Sends images and photos to Google for visual search.</string>
   <!-- Caption shown under the Google Lens toggle clarifying when the feature is available -->
   <string name="preferences_google_lens_availability_caption">Available only when Google is enabled above and is your active search engine while browsing.</string>
-  <!-- Title for the Google Lens AI feature toggle -->
-  <string name="ai_controls_google_lens_title">Google Lens</string>
-  <!-- Description for the Google Lens AI feature toggle -->
-  <string name="ai_controls_google_lens_description">Sends images and photos to Google for visual search.</string>
   <!-- Content description for the Google Lens half of the camera mode toggle -->
   <string name="lens_camera_mode_lens">Google Lens</string>
   <!-- Content description for the QR scanner half of the camera mode toggle -->
@@ -4809,4 +4758,20 @@
   <string name="firefox_labs_feature_conflict">Feature isn’t available to try.</string>
   <!-- Text displayed on the Firefox Labs screen when there are no Labs experimental features present. -->
   <string name="firefox_labs_no_labs_available_description">No experimental features to try right now</string>
+  <!-- Title of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">Web site isolation</string>
+  <!-- Description of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">An extra barrier between web sites that helps protect your data across tabs. May affect performance, stability, web site compatibility and how browsing history is saved.</string>
+  <!--
+    PDF viewer toolbar and buttons
+
+    Content description for accessibility (used by screen readers): Description for the button that triggers the start of a signature workflow on the PDF displayed on the screen.
+  -->
+  <string name="pdf_tools_sign_content_description">Sign PDF</string>
+  <!-- Content description for accessibility (used by screen readers): Description of the button that downloads the PDF displayed on the screen to the user's device. -->
+  <string name="pdf_tools_download_content_description">Download PDF</string>
+  <!-- Content description for accessibility (used by screen readers): Description for the button that opens the printing dialogue window for the PDF displayed on the screen. -->
+  <string name="pdf_tools_print_content_description">Print PDF</string>
+  <!-- Content description for accessibility (used by screen readers): Description for the button that opens the sharing options for the PDF being displayed on the screen. -->
+  <string name="pdf_tools_share_content_description">Share PDF</string>
 </resources>

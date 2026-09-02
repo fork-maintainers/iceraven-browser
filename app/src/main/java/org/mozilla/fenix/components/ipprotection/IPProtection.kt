@@ -57,6 +57,7 @@ class IPProtection(
                     messages = snackbarMessages,
                 ),
                 IPProtectionTelemetryMiddleware(),
+                IPProtectionPreferencesMiddleware(DefaultIPProtectionRepository(settings)),
             ),
         )
     }
@@ -71,6 +72,10 @@ class IPProtection(
     }
 
     val feature by lazy {
+        // N.B. Temporary: requires a restart. Should update automatically once we support
+        // switching the auth provider without a restart.
+        engine.settings.ipProtectionAuthProvider = if (settings.ipProtectionUseGpi) "gpi" else "fxa"
+
         IPProtectionFeature(
             store = store,
             engine = engine,

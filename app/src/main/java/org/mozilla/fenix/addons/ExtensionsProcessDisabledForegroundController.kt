@@ -4,7 +4,6 @@
 
 package org.mozilla.fenix.addons
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.widget.Button
@@ -70,7 +69,6 @@ class ExtensionsProcessDisabledForegroundController(
          * @param builder to use for creating the dialog which can be styled as needed
          * @param appName to be added to the message. Necessary to be added as a param for testing
          */
-        @SuppressLint("InflateParams")
         private fun presentDialog(
             @UiContext context: Context,
             store: BrowserStore,

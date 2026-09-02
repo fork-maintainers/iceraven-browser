@@ -54,7 +54,6 @@ class SettingsSitePermissionsTest {
     val retryableComposeTestRule = RetryableComposeTestRule {
         AndroidComposeTestRuleV2(
             HomeActivityTestRule(
-                isPWAsPromptEnabled = false,
                 isDeleteSitePermissionsEnabled = true,
             ),
         ) { it.activity }

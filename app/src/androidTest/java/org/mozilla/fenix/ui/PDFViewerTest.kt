@@ -7,6 +7,7 @@ package org.mozilla.fenix.ui
 import androidx.core.net.toUri
 import org.junit.Rule
 import org.junit.Test
+import org.mozilla.fenix.customannotations.Converted
 import org.mozilla.fenix.customannotations.SmokeTest
 import org.mozilla.fenix.helpers.AppAndSystemHelper.assertExternalAppOpens
 import org.mozilla.fenix.helpers.AppAndSystemHelper.clickSystemHomeScreenShortcutAddButton
@@ -49,6 +50,11 @@ class PDFViewerTest {
     val memoryLeaksRule = DetectMemoryLeaksRule(composeTestRule = { composeTestRule })
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/2048140
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.PDFViewerTest#verifyPDFFileIsOpenedInTheSameTabTest"],
+        bug = 2060844,
+        since = "2026-08",
+    )
     @SmokeTest
     @Test
     fun verifyPDFFileIsOpenedInTheSameTabTest() {

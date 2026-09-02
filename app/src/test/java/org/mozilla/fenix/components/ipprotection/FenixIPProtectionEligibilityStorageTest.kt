@@ -56,6 +56,27 @@ class FenixIPProtectionEligibilityStorageTest {
     }
 
     @Test
+    fun `WHEN nimbus disabled but region in allowed list THEN status is Ineligible`() = runTest {
+        FxNimbus.features.ipProtection.withCachedValue(
+            IpProtection(enabled = false, allowedRegions = listOf("US", "CA")),
+        )
+        val browserStore = BrowserStore(
+            initialState = BrowserState(
+                search = SearchState(region = RegionState("US", "US")),
+            ),
+        )
+
+        val storage = FenixIPProtectionEligibilityStorage(
+            browserStore = browserStore,
+            sharedPref = sharedPreferences,
+            prefKey = prefKey,
+            lifecycleOwner = mockk(relaxed = true),
+        )
+
+        assertEquals(EligibilityStatus.Ineligible, storage.eligibilityStatus.first())
+    }
+
+    @Test
     fun `WHEN nimbus enabled and region in allowed list THEN status is Eligible`() = runTest {
         FxNimbus.features.ipProtection.withCachedValue(
             IpProtection(enabled = true, allowedRegions = listOf("US", "CA")),

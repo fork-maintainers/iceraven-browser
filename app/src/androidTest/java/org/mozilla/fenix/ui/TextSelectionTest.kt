@@ -261,7 +261,7 @@ class TextSelectionTest {
         }
         searchScreen(retryableComposeTestRule.current) {
             longClickToolbar()
-            verifyTextSelectionOptions("Copy", "Paste", "Cut")
+            verifyTextSelectionOptions("Copy", "Cut")
         }
     }
 

@@ -14,6 +14,8 @@ internal object TopSitesTestTag {
     const val ADD_SHORTCUT_ROOT = "$TOP_SITES.add_shortcut_item"
     const val ADD_SHORTCUT_TITLE = "$ADD_SHORTCUT_ROOT.add_shortcut_title"
 
+    const val ADD_WEBSITE = "$TOP_SITES.add_website"
+
     const val TOP_SITES_PAGER_INDICATOR = "$TOP_SITES.pager_indicator"
 
     // Contextual/DropDown menu

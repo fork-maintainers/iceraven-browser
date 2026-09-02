@@ -205,8 +205,14 @@ class TabPreview @JvmOverloads constructor(
                         highlighted = highlight,
                         onClick = object : BrowserToolbarEvent {},
                     )
+                } else if (tab?.content?.securityInfo?.isSecure != true) {
+                    ActionButtonRes(
+                        drawableResId = iconsR.drawable.mozac_ic_shield_slash_24,
+                        contentDescription = toolbarR.string.mozac_browser_toolbar_content_description_site_info,
+                        highlighted = highlight,
+                        onClick = object : BrowserToolbarEvent {},
+                    )
                 } else if (
-                    tab?.content?.securityInfo?.isSecure == true &&
                     tab.trackingProtection.enabled &&
                     !tab.trackingProtection.ignoredOnTrackingProtection
                 ) {
@@ -218,7 +224,7 @@ class TabPreview @JvmOverloads constructor(
                     )
                 } else {
                     ActionButtonRes(
-                        drawableResId = iconsR.drawable.mozac_ic_shield_slash_24,
+                        drawableResId = iconsR.drawable.mozac_ic_shield_cross_24,
                         contentDescription = toolbarR.string.mozac_browser_toolbar_content_description_site_info,
                         highlighted = highlight,
                         onClick = object : BrowserToolbarEvent {},

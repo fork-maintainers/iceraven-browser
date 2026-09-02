@@ -168,27 +168,6 @@ class SettingsRobot {
         Log.i(TAG, "verifyHTTPSOnlyModeButton: Verified that the \"HTTPS-Only Mode\" button is visible")
     }
 
-    fun verifyCookieBannerBlockerButton(enabled: Boolean) {
-        scrollToElementByText(getStringResource(R.string.preferences_cookie_banner_reduction_private_mode))
-        Log.i(TAG, "verifyCookieBannerBlockerButton: Trying to verify that the \"Cookie Banner Blocker in private browsing\" toggle is enabled: $enabled")
-        onView(withText(R.string.preferences_cookie_banner_reduction_private_mode))
-            .check(
-                matches(
-                    hasCousin(
-                        CoreMatchers.allOf(
-                            withClassName(endsWith("Switch")),
-                            if (enabled) {
-                                isChecked()
-                            } else {
-                                isNotChecked()
-                            },
-                        ),
-                    ),
-                ),
-            )
-        Log.i(TAG, "verifyCookieBannerBlockerButton: Verified that the \"Cookie Banner Blocker in private browsing\" toggle is enabled: $enabled")
-    }
-
     fun verifyEnhancedTrackingProtectionButton() {
         Log.i(TAG, "verifyEnhancedTrackingProtectionButton: Waiting for $waitingTime ms until finding the \"Privacy and Security\" heading")
         mDevice.wait(Until.findObject(By.text("Privacy and Security")), waitingTime)

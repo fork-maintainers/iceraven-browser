@@ -39,6 +39,9 @@
     <string name="secret_settings_category_features_title" translatable="false">Features</string>
     <string name="secret_settings_category_debug_title" translatable="false">Debug</string>
 
+    <!-- Title for the secret setting that enables the "Check Archived Version" button on error pages. -->
+    <string name="preferences_debug_settings_wayback_machine" translatable="false">Show Archived Version Button On Error Pages</string>
+
     <!-- Label for remote settings server preference -->
     <string name="preferences_debug_settings_remote_settings_server_label" translatable="false">Remote Settings Server (requires restart)</string>
     <!-- Label for Production server option -->
@@ -47,12 +50,6 @@
     <string name="preferences_remote_settings_server_stage_label" translatable="false">Staging</string>
     <!-- Label for Development server option -->
     <string name="preferences_remote_settings_server_dev_label" translatable="false">Development</string>
-    <!-- Label for Production server with v2 route option -->
-    <string name="preferences_remote_settings_server_prod_label_v2" translatable="false">Production V2</string>
-    <!-- Label for Staging server with v2 route option -->
-    <string name="preferences_remote_settings_server_stage_label_v2" translatable="false">Staging V2</string>
-    <!-- Label for Development server with v2 route option -->
-    <string name="preferences_remote_settings_server_dev_label_v2" translatable="false">Development V2</string>
     <!-- Toast message shown when starting to sync remote settings -->
     <string name="preferences_remote_settings_syncing" translatable="false">Syncing remote settings…</string>
     <!-- Toast message shown when remote settings sync completes successfully -->
@@ -106,6 +103,8 @@
     <string name="preferences_debug_settings_homepage_as_new_tab" translatable="false">Enable Homepage as a New Tab</string>
     <!-- Label for enabling the universal edge-to-edge wallpapers treatment on the homepage -->
     <string name="preferences_debug_settings_universal_edge_to_edge_wallpapers" translatable="false">Enable universal edge-to-edge wallpapers</string>
+    <!-- Label for hiding the Collections UI -->
+    <string name="preferences_debug_settings_hide_collections_ui" translatable="false">Hide Collections UI</string>
     <!-- Label for enabling Firefox Labs -->
     <string name="preferences_debug_settings_firefox_labs" translatable="false">Enable Firefox Labs</string>
     <!-- Label for enabling top sites pager layout -->
@@ -114,6 +113,8 @@
     <string name="preferences_debug_settings_add_shortcuts_improvement" translatable="false">Enable Add Shortcuts Improvement</string>
     <!-- Label for enabling Merino Client -->
     <string name="preferences_debug_settings_merino_client" translatable="false">Enable Merino Client</string>
+    <!-- Label for enabling Homepage Weather Widget -->
+    <string name="preferences_debug_settings_homepage_weather_widget" translatable="false">Enable Homepage Weather Widget</string>
     <!-- Label for enabling Mozilla Ads Client for Sponsored Stories -->
     <string name="preferences_debug_settings_ads_client_for_stories" translatable="false">Enable Ads Client for Stories</string>
     <!-- Label for enabling the custom tab extension -->
@@ -142,8 +143,6 @@
     <string name="preferences_debug_settings_enable_doh_settings" translatable="false">Enable DNS over HTTPS settings</string>
     <!-- Label for enabling the persistent onboarding -->
     <string name="preferences_debug_settings_enable_persistent_onboarding" translatable="false">Show onboarding on each app cold open</string>
-    <!-- Label for enabling Homepage Sports Widget -->
-    <string name="preferences_debug_settings_homepage_sports_widget" translatable="false">Enable Homepage Sports Widget</string>
     <!-- Label for enabling Homepage Customization -->
     <string name="preferences_debug_settings_homepage_customization" translatable="false">Enable Homepage Customization</string>
     <!-- Label for enabling trending and recent searches on the Homepage Search -->
@@ -188,6 +187,10 @@
 
     <!-- Label for enabling IPProtection through secret settings -->
     <string name="preferences_debug_settings_ip_protection" translatable="false">Enable IP Protection UI</string>
+    <string name="preferences_debug_settings_ip_protection_locations" translatable="false">Enable IP Protection Locations selection</string>
+
+    <!-- Label for forcing GPI (Google Play Integrity) authentication for IPProtection through secret settings -->
+    <string name="preferences_debug_settings_ip_protection_use_gpi" translatable="false">Use GPI authentication for IP Protection (requires restart)</string>
 
     <!-- Label for enabling LNA blocking -->
     <string name="preferences_debug_settings_enable_lna_blocking" translatable="false">Enable LNA request blocking</string>
@@ -200,6 +203,12 @@
 
     <!-- Label for enabling uninstall survey in secret settings. -->
     <string name="preferences_debug_settings_uninstall_survey">Enable Uninstall Survey</string>
+
+    <!-- Label for showing the OLED theme option in secret settings. -->
+    <string name="preferences_debug_settings_oled_theme" translatable="false">Show OLED Theme option</string>
+
+    <!-- Label for using the new PDF viewer tools in secret settings. -->
+    <string name="preferences_debug_settings_use_new_pdf_tools" translatable="false">Use New PDF Tools</string>
 
     <!-- Label for the defaults section and reset action in secret settings. -->
     <string name="preferences_debug_settings_reset_defaults" translatable="false">Reset switches to defaults</string>
@@ -247,15 +256,6 @@
     <string name="profiler_uploaded_url_to_clipboard">URL copied to clipboard successfully</string>
     <string name="profiler_service_notification_channel_name" translatable="false">App Profiling Status</string>
     <string name="profiler_service_description" translatable="false">App Profiling Status</string>
-
-    <!-- Debug drawer Homepage Sports Widget tool -->
-    <string name="debug_drawer_sports_widget_tool_title">Homepage Sports Widget Tool</string>
-    <string name="debug_drawer_sports_widget_tool_world_cup_started">World Cup has started</string>
-    <string name="debug_drawer_sports_widget_tool_one_week_to_world_cup">One week to World Cup</string>
-    <string name="debug_drawer_sports_widget_tool_skipped_follow_team">Skip follow your team</string>
-    <string name="debug_drawer_sports_widget_tool_use_mock_server">Use mock World Cup server</string>
-    <string name="debug_drawer_sports_widget_tool_mock_server_session">Mock server session</string>
-    <string name="debug_drawer_sports_widget_tool_apply_session">Apply</string>
 
     <!-- Debug drawer Distribution tools -->
     <string name="debug_drawer_distribution_tools_title">Distribution Tools</string>
@@ -404,6 +404,13 @@
 
     <!-- Label for the secret settings preference to enable Import Passwords -->
     <string name="preferences_debug_settings_import_passwords">Enable Import Passwords</string>
+
+    <!-- Summary for secret settings that are still being developed and not recommended to be enabled by nightly users. -->
+    <string name="preferences_debug_settings_development_phase_summary" translatable="false">In development phase</string>
+
+    <!-- Label for the Customize Home preference to show the weather widget on the homepage. -->
+    <string name="customize_toggle_weather" translatable="false">Weather</string>
+
     <!--  Firefox brand name  -->
     <string name="app_name_firefox" tools:ignore="BrandUsage">Firefox</string>
 </resources>

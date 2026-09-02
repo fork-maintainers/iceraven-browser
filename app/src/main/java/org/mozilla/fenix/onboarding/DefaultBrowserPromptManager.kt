@@ -9,8 +9,8 @@ import androidx.annotation.VisibleForTesting
 import mozilla.components.support.utils.Browsers
 import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.ext.isDefaultBrowserPromptSupported
+import org.mozilla.fenix.nimbus.FxNimbus
 import org.mozilla.fenix.onboarding.view.OnboardingPageUiData
-import org.mozilla.fenix.utils.Settings
 
 /**
  * An interface to calculate and persist the state of the default browser prompt.
@@ -53,18 +53,16 @@ class DefaultDefaultBrowserPromptStorage(
  * Handles the logic of prompting users to set Firefox as the default browser during onboarding.
  *
  * @param storage A [DefaultBrowserPromptStorage] implementation to persist and retrieve the prompt state.
- * @param settings A lazy provider to retrieve the up-to-date [Settings] instance.
  * @param promptToSetAsDefaultBrowser A callback to trigger the default browser prompt.
  */
 class DefaultBrowserPromptManager(
     private val storage: DefaultBrowserPromptStorage,
-    private val settings: () -> Settings,
     private val promptToSetAsDefaultBrowser: () -> Unit,
 ) {
 
     @VisibleForTesting
     internal fun canShowPrompt(): Boolean {
-        return settings().shouldShowSetAsDefaultPrompt() &&
+        return FxNimbus.features.defaultBrowserPrompt.value().enabled &&
             !storage.isDefaultBrowser &&
             storage.isDefaultBrowserPromptSupported &&
             !storage.promptToSetAsDefaultBrowserDisplayedInOnboarding

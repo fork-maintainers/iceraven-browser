@@ -36,6 +36,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import mozilla.components.compose.base.button.FilledButton
 import mozilla.components.compose.base.button.OutlinedButton
@@ -74,7 +75,7 @@ private fun SlideInFromBottomAnimation(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .offset(y = offsetState),
+            .offset { IntOffset(x = 0, y = offsetState.roundToPx()) },
     ) {
         content()
     }

@@ -236,14 +236,6 @@
   -->
   <string name="browser_menu_delete_browsing_data_on_quit">%1$s کوں چھوڑو</string>
   <!--
-    Menu "contextual feature recommendation" (CFR)
-
-    Text for the title in the contextual feature recommendation popup promoting the menu feature.
-  -->
-  <string name="menu_cfr_title">نواں: ہموار مینیو</string>
-  <!-- Text for the message in the contextual feature recommendation popup promoting the menu feature. -->
-  <string name="menu_cfr_body">نجی براؤزنگ کنوں کارروائیاں کوں بچاوݨ تائیں، تہاکوں جو کجھ چاہیدا ہے اوہ تیزی نال لبھو۔</string>
-  <!--
     Extensions management fragment
 
     Text displayed when there are no extensions to be shown
@@ -372,40 +364,8 @@
   <string name="preferences_add_private_browsing_shortcut">نجی براؤزنگ شاٹ کٹ شامل کرو</string>
   <!-- Preference for enabling "HTTPS-Only" mode -->
   <string name="preferences_https_only_title">ایچ ٹی ٹی پی ایس ــ صرف موڈ</string>
-  <!-- Label for cookie banner section in quick settings panel. -->
-  <string name="cookie_banner_blocker">کوکی بینر بلاک کرݨ آلا</string>
   <!-- Preference for removing cookie/consent banners from sites automatically in private mode. See reduce_cookie_banner_summary for additional context. -->
   <string name="preferences_cookie_banner_reduction_private_mode">نجی براؤزنگ وِچ کوکی بینر بلاکر</string>
-  <!-- Text for indicating cookie banner handling is off this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_off_for_site">ایں سائٹ کیتے بند کرو</string>
-  <!-- Text for cancel button indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_cancel_button">منسوخ</string>
-  <!-- Text for request support button indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_request_support_button_2">ارداس پٹھو</string>
-  <!-- Text for title indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_title_2">اِیں سائٹ کِیتے حمایت دی عرضی ݙیؤں؟</string>
-  <!-- Label for the snackBar, after the user reports with success a website where cookie banner reducer did not work -->
-  <string name="cookie_banner_handling_report_site_snack_bar_text_2">ارداس بھیڄ ڈتی</string>
-  <!-- Text for indicating cookie banner handling is on this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_on_for_site">ایں سائٹ کیتے چالو کرو</string>
-  <!-- Text for indicating that a request for unsupported site was sent to Nimbus (it's a Mozilla library for experiments), this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_unsupported_site_request_submitted_2">سہارا ارداس بھیڄ ݙتی</string>
-  <!-- Text for indicating cookie banner handling is currently not supported for this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_unsupported_site">سائٹ فی الحال سہارا تھئی کائنی</string>
-  <!-- Title text for a detail explanation indicating cookie banner handling is on this site, this is shown as part of the cookie banner panel in the toolbar. %1$s is a shortened URL of the current site. -->
-  <string name="reduce_cookie_banner_details_panel_title_on_for_site_1">کوکی بینر بلاکر کوں %1$s کِیتے چالو کروں؟</string>
-  <!-- Title text for a detail explanation indicating cookie banner handling is off this site, this is shown as part of the cookie banner panel in the toolbar. %1$s is a shortened URL of the current site. -->
-  <string name="reduce_cookie_banner_details_panel_title_off_for_site_1">کوکی بینر بلاکر کوں %1$s کِیتے بند کروں؟</string>
-  <!-- Title text for a detail explanation indicating cookie banner reducer didn't work for the current site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_title_unsupported_site_request_2">%1$s اِیں سائٹ اُتے کوکی دیاں عرضیاں کوں خود کار طریقے نال رَد کائنی کر سڳدے۔ تُساں مستقبل وِچ اِیں سائٹ دی حمایت کِیتے عرضی گَھل سڳدے ہِیوے۔</string>
-  <!-- Long text for a detail explanation indicating what will happen if cookie banner handling is off for a site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_description_off_for_site_1">بند کر ݙیؤ اَتے %1$s کوکیز صاف کریسی اَتے اِیں سائٹ کوں وَلا لوڈ کریسی۔ اِیہ تُہاکوں سائن آؤٹ یا شاپنگ کارٹس کوں خالی کر سڳدا ہِے۔</string>
-  <!-- Long text for a detail explanation indicating what will happen if cookie banner handling is on for a site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_description_on_for_site_3">چالو کرو اَتے %1$s اِیں سائٹ اُتے موجود کوکی بینرز کوں خود کار طریقے نال انکار کرݨ دی کوشِت کریسی۔</string>
-  <!-- Title for the cookie banner re-engagement CFR, the placeholder is replaced with app name. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="cookie_banner_cfr_title">%1$s نے صرف تُہاݙے کِیتے کوکیز کنوں انکار کر ݙِتّا</string>
-  <!-- Message for the cookie banner re-engagement CFR -->
-  <string name="cookie_banner_cfr_message">گَھٹ خلفشار، گھٹ کوکیز تُہاکوں اِیں سائٹ اُتے ٹریک کرین٘دیاں ہِن۔</string>
   <!-- Description of the preference to enable "HTTPS-Only" mode. -->
   <string name="preferences_https_only_summary">خودکار طور تے ودھدی ہوئی حفاظت کیتے ایچ ٹی ٹی پی ایس خفیہ کاری پروٹوکول ورتندے ہوئے سائٹاں کوں کنکٹ کرݨ دی کوشش کریندے۔</string>
   <!-- Summary of https only preference if https only is set to off -->
@@ -907,8 +867,6 @@
   <string name="history_search_1">ڳولݨ ٹرماں درج کرو</string>
   <!-- Text for the button to clear all history -->
   <string name="history_delete_all">تاریخ مٹاؤ</string>
-  <!-- Text for the snackbar to confirm that multiple browsing history items has been deleted -->
-  <string name="history_delete_multiple_items_snackbar">تاریخ مٹ ڳئی</string>
   <!-- Text for the snackbar to confirm that a single browsing history item has been deleted. %1$s is the shortened URL of the deleted history item. -->
   <string name="history_delete_single_item_snackbar">%1$s مٹ ڳیا</string>
   <!-- Context description text for the button to delete a single history item -->
@@ -947,8 +905,6 @@
   <string name="webcompat_reporter_url_error_invalid">براہ مہربانی ٹھیک URL درج کرو۔</string>
   <!-- The button text for the cancel button to leave the Web Compat Reporter feature. -->
   <string name="webcompat_reporter_cancel">منسوخ</string>
-  <!-- The button text for the send button to submit the provided form data. -->
-  <string name="webcompat_reporter_send">بھیڄو</string>
   <!-- Broken site reason text for something else -->
   <string name="webcompat_reporter_reason_other">ایندے علاوہ کجھ ٻیا</string>
   <!--
@@ -1045,12 +1001,6 @@
     Button label that take the user to the Android App setting
   -->
   <string name="phone_feature_go_to_settings">ترتیباں تے ون٘ڄو</string>
-  <!--
-    Content description (not visible, for screen readers etc.): Quick settings sheet
-    to give users access to site specific information / settings. For example:
-    Secure settings status and a button to modify site permissions
-  -->
-  <string name="quick_settings_sheet">تکھیاں ترتیباں شیٹ</string>
   <!-- Label that indicates that this option it the recommended one -->
   <string name="phone_feature_recommended">سفارش تھئے ہوئے</string>
   <!-- Button label for clearing all the information of site permissions -->
@@ -1397,12 +1347,6 @@
   <!--
     Enhanced Tracking Protection
 
-    Link displayed in enhanced tracking protection panel to access tracking protection settings
-  -->
-  <string name="etp_settings">حفاظتی ترتیباں</string>
-  <!--
-    Enhanced Tracking Protection
-
     Preference title for enhanced tracking protection settings
   -->
   <string name="preference_enhanced_tracking_protection">بہتر ٹریکنگ حفاظت</string>
@@ -1458,12 +1402,8 @@
   <string name="preference_enhanced_tracking_protection_custom_cryptominers">کریپٹومینرز</string>
   <!-- Preference for enhanced tracking protection for the custom protection settings -->
   <string name="preference_enhanced_tracking_protection_custom_known_fingerprinters">معلوم فنگر پرنٹرز</string>
-  <!-- Button label for navigating to the Enhanced Tracking Protection details -->
-  <string name="enhanced_tracking_protection_details">تفصیلاں</string>
   <!-- Header for categories that are being being blocked by current Enhanced Tracking Protection settings -->
   <string name="enhanced_tracking_protection_blocked">بلاک تھی ڳیا</string>
-  <!-- Header for categories that are being not being blocked by current Enhanced Tracking Protection settings -->
-  <string name="enhanced_tracking_protection_allowed">اجازت ݙتے ہوئے</string>
   <!-- Category of trackers (social media trackers) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_social_media_trackers_title">سوشل میڈیا ٹریکرز</string>
   <!-- Description of social media trackers that can be blocked by Enhanced Tracking Protection -->
@@ -1486,10 +1426,6 @@
   <string name="etp_tracking_content_title">ٹریکنگ مواد</string>
   <!-- Description of tracking content that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_tracking_content_description">ٹریکنگ کوڈ تے مشتمل اشتہارات ، ویڈیوز تے بئے مواد کوں لوڈ تھیوݨ کنوں روکیندا ہے۔ ویب سائٹ دی فعالیت کوں کجھ متاثر کر سڳدا ہے۔</string>
-  <!-- Enhanced Tracking Protection message that protection is currently on for this site -->
-  <string name="etp_panel_on">ایں سائٹ کیتے حفاظتاں چالو ہن۔</string>
-  <!-- Enhanced Tracking Protection message that protection is currently off for this site -->
-  <string name="etp_panel_off">ایں سائٹ کیتے حفاظتاں بند ہن۔</string>
   <!-- Header for exceptions list for which sites enhanced tracking protection is always off -->
   <string name="enhanced_tracking_protection_exceptions">بہترین ٹریکنگ حفاظت انہاں سائٹاں کیتے بند ہے</string>
   <!--
@@ -1514,13 +1450,6 @@
   <string name="etp_suspected_fingerprinters_description">مشکوک فنگر پرنٹرز روکݨ کیتے فنگر پرنٹنگ تحفظ کوں فعال کریندا ہے۔</string>
   <!-- Category of trackers (fingerprinters) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_known_fingerprinters_title">معلوم فنگر پرنٹرز</string>
-  <!--
-    Description of the SmartBlock Enhanced Tracking Protection feature. The * symbol is intentionally hardcoded here,
-    as we use it on the UI to indicate which trackers have been partially unblocked.
-  -->
-  <string name="preference_etp_smartblock_description">ہیٹھاں کجھ نشان زدہ ٹریکرز کوں ایں ورقے تے جزوی طور تے اݨ بلاک کر ݙتا ڳئے کیوں جو تساں انہاں نال تعامل کیتے*۔</string>
-  <!-- Text displayed that links to website about enhanced tracking protection SmartBlock -->
-  <string name="preference_etp_smartblock_learn_more">ٻیا سِکھو</string>
   <!--
     Content description (not visible, for screen readers etc.):
     Enhanced tracking protection exception preference icon for ETP settings.
@@ -1812,14 +1741,8 @@
   <string name="phone_feature_blocked_step_permissions"><![CDATA[٢. <b>اجازتاں</b> تے دباؤ]]></string>
   <!-- Third step for the allowing a permission (%1$s is the permission name, for example "Camera"). -->
   <string name="phone_feature_blocked_step_feature"><![CDATA[3. <b>%1$s</b> کوں چالو کرݨ کیتے ٹوگل کرو]]></string>
-  <!-- Label that indicates a site is using a secure connection -->
-  <string name="quick_settings_sheet_secure_connection_2">کنکشن محفوظ ہے۔</string>
-  <!-- Label that indicates a site is using a insecure connection -->
-  <string name="quick_settings_sheet_insecure_connection_2">کنکشن محفوظ کائنی۔</string>
   <!-- Label to clear site data -->
   <string name="clear_site_data">کوکیاں تے سائٹ ڈیٹا صاف کرو</string>
-  <!-- Confirmation message for a dialog confirming if the user wants to delete all data for current site. %s is the domain of the site. -->
-  <string name="confirm_clear_site_data"><![CDATA[بھلا تہاکوں پک ہے جو تساں سائٹ <b>%s</b> کیتے ساریاں کوکیاں تے ڈیٹا صاف کرݨ چاہندے ہو؟]]></string>
   <!-- Confirmation message for a dialog confirming if the user wants to delete all the permissions for all sites -->
   <string name="confirm_clear_permissions_on_all_sites">بھلا تہاکوں پک ہے جو تساں ساریاں سائٹاں کیتے ساریاں اجازتاں مکاوݨ چاہندے ہو؟</string>
   <!-- Confirmation message for a dialog confirming if the user wants to delete all the permissions for a site -->
@@ -1832,11 +1755,6 @@
   <string name="browser_menu_add_to_shortcuts">شارٹ کٹاں وچ شامل کرو</string>
   <!-- Browser menu button that removes a shortcut from the home fragment -->
   <string name="browser_menu_remove_from_shortcuts">شارٹ کٹاں کنوں ہٹاؤ</string>
-  <!--
-    text shown before the issuer name to indicate who its verified by, %1$s is the name of
-    the certificate authority that verified the ticket
-  -->
-  <string name="certificate_info_verified_by">ایندے ولوں پڑتال تھئی: %1$s</string>
   <!-- Message in delete confirmation dialog for password -->
   <string name="login_deletion_confirmation_2">بَھلا تُہاکُوں پَک ہِے جو تُساں اِیں پاس ورڈ کوں مٹاوݨ چاہن٘دے ہِیوے؟</string>
   <!-- Positive action of a dialog asking to delete -->

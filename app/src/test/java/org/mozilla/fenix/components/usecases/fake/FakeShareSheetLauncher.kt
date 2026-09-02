@@ -4,7 +4,9 @@
 
 package org.mozilla.fenix.components.usecases.fake
 
+import android.net.Uri
 import mozilla.components.concept.engine.prompt.ShareData
+import org.mozilla.fenix.components.share.ShareSheetChooserAction
 import org.mozilla.fenix.components.share.ShareSheetLauncher
 
 class FakeShareSheetLauncher : ShareSheetLauncher {
@@ -15,12 +17,17 @@ class FakeShareSheetLauncher : ShareSheetLauncher {
         val title: String?,
         val isPrivate: Boolean,
         val isCustomTab: Boolean,
+        val text: String = "",
+        val subject: String? = null,
+        val chooserActions: List<ShareSheetChooserAction> = listOf(),
     )
 
     data class ItemsShare(
         val items: List<ShareData>,
         val isPrivate: Boolean,
         val subject: String?,
+        val chooserActions: List<ShareSheetChooserAction> = listOf(),
+        val thumbnailUri: Uri? = null,
     )
 
     val urlShares: MutableList<UrlShare> = mutableListOf()
@@ -30,17 +37,22 @@ class FakeShareSheetLauncher : ShareSheetLauncher {
         id: String?,
         url: String,
         title: String?,
+        text: String,
+        subject: String?,
         isPrivate: Boolean,
         isCustomTab: Boolean,
+        chooserActions: List<ShareSheetChooserAction>,
     ) {
-        urlShares += UrlShare(id, url, title, isPrivate, isCustomTab)
+        urlShares += UrlShare(id, url, title, isPrivate, isCustomTab, text, subject, chooserActions)
     }
 
     override fun showSystemShareSheet(
         items: List<ShareData>,
         isPrivate: Boolean,
         subject: String?,
+        chooserActions: List<ShareSheetChooserAction>,
+        thumbnailUri: Uri?,
     ) {
-        itemsShares += ItemsShare(items, isPrivate, subject)
+        itemsShares += ItemsShare(items, isPrivate, subject, chooserActions, thumbnailUri)
     }
 }

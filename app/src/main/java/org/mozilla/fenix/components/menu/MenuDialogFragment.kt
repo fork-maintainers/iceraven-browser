@@ -55,7 +55,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlinx.serialization.json.Json
 import mozilla.components.browser.state.selector.findCustomTab
 import mozilla.components.browser.state.selector.selectedTab
 import mozilla.components.browser.state.state.SessionState
@@ -70,6 +69,7 @@ import mozilla.components.support.base.feature.ViewBoundFeatureWrapper
 import mozilla.components.support.ktx.android.util.dpToPx
 import mozilla.components.support.utils.ext.getWindowInsets
 import mozilla.components.support.utils.ext.isLandscape
+import mozilla.components.support.utils.ext.pixelSizeFor
 import mozilla.components.support.utils.ext.top
 import mozilla.telemetry.glean.private.NoExtras
 import org.mozilla.fenix.GleanMetrics.Events
@@ -103,7 +103,6 @@ import org.mozilla.fenix.ext.canGoBackInHistoryOrToStories
 import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.ext.openSetDefaultBrowserOption
 import org.mozilla.fenix.ext.openToBrowser
-import org.mozilla.fenix.ext.pixelSizeFor
 import org.mozilla.fenix.ext.requireComponents
 import org.mozilla.fenix.ext.runIfFragmentIsAttached
 import org.mozilla.fenix.ipprotection.ui.IPProtectionSnackbarBinding
@@ -128,7 +127,6 @@ import org.mozilla.fenix.utils.exitMenu
 import org.mozilla.fenix.utils.exitSubmenu
 import org.mozilla.fenix.webcompat.DefaultWebCompatReporterMoreInfoSender
 import org.mozilla.fenix.webcompat.middleware.DefaultWebCompatReporterRetrievalService
-import org.mozilla.fenix.webcompat.middleware.WebCompatInfoDeserializer
 import com.google.android.material.R as materialR
 
 private const val EXPANDED_OFFSET = 56
@@ -564,8 +562,8 @@ class MenuDialogFragment : BottomSheetDialogFragment() {
                                     onSettingsButtonClick = {
                                         menuStore.dispatch(MenuAction.Navigate.Settings)
                                     },
-                                    onWallpaperButtonClick = {
-                                        menuStore.dispatch(MenuAction.Navigate.Wallpaper)
+                                    onCustomizeHomepageButtonClick = {
+                                        menuStore.dispatch(MenuAction.Navigate.CustomizeHomepage)
                                     },
                                     onBookmarkPageMenuClick = {
                                         menuStore.dispatch(MenuAction.AddBookmark)
@@ -661,6 +659,7 @@ class MenuDialogFragment : BottomSheetDialogFragment() {
                                             isOpenInAppMenuHighlighted = isOpenInAppMenuHighlighted,
                                             translationInfo = translationInfo,
                                             showShortcuts = settings.showTopSitesFeature,
+                                            showSaveToCollection = settings.collections,
                                             isAndroidAutomotiveAvailable = context.isAndroidAutomotiveAvailable(),
                                             summarizationMenuState = summarizationMenuState,
                                             onWebCompatReporterClick = {
@@ -980,12 +979,6 @@ class MenuDialogFragment : BottomSheetDialogFragment() {
                 webCompatReporterRetrievalService =
                     DefaultWebCompatReporterRetrievalService(
                         browserStore = browserStore,
-                        webCompatInfoDeserializer = WebCompatInfoDeserializer(
-                            json = Json {
-                                ignoreUnknownKeys = true
-                                useAlternativeNames = false
-                            },
-                        ),
                     ),
             )
 

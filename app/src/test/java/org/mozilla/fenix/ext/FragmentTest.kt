@@ -88,6 +88,7 @@ class FragmentTest {
 
     @Test
     fun `GIVEN the composable toolbar and the microsurvey are shown at bottom WHEN getBottomToolbarHeight THEN returns the combined height`() {
+        every { mockContext.resources } returns testContext.resources
         every { settings.shouldShowMicrosurveyPrompt } returns true
         every { settings.toolbarPosition } returns ToolbarPosition.BOTTOM
 
@@ -109,6 +110,7 @@ class FragmentTest {
     @Test
     @Config(qualifiers = "h481dp") // navbar is only shown on screens taller than 480dp
     fun `GIVEN just the composable toolbar shown at bottom WHEN getBottomToolbarHeight THEN returns it's height`() {
+        every { mockContext.resources } returns testContext.resources
         every { settings.shouldShowMicrosurveyPrompt } returns false
         every { settings.toolbarPosition } returns ToolbarPosition.BOTTOM
 
@@ -124,6 +126,7 @@ class FragmentTest {
             screenHeightDp = 481
         }
         every { mockContext.resources.configuration } returns configuration
+        every { mockContext.resources } returns testContext.resources
         every { settings.shouldShowMicrosurveyPrompt } returns true
         every { settings.shouldUseExpandedToolbar } returns true
         every { settings.toolbarPosition } returns ToolbarPosition.BOTTOM
@@ -140,6 +143,7 @@ class FragmentTest {
             screenHeightDp = 481
         }
         every { mockContext.resources.configuration } returns configuration
+        every { mockContext.resources } returns testContext.resources
         every { settings.shouldShowMicrosurveyPrompt } returns true
         every { settings.shouldUseExpandedToolbar } returns true
         every { settings.toolbarPosition } returns ToolbarPosition.BOTTOM
@@ -183,6 +187,7 @@ class FragmentTest {
             screenHeightDp = 481
         }
         every { mockContext.resources.configuration } returns configuration
+        every { mockContext.resources } returns testContext.resources
         every { settings.shouldShowMicrosurveyPrompt } returns false
         every { settings.shouldUseExpandedToolbar } returns true
         every { settings.toolbarPosition } returns ToolbarPosition.BOTTOM

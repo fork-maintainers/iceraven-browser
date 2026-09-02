@@ -18,33 +18,54 @@ import org.mozilla.fenix.helpers.TestHelper.mDevice
 import org.mozilla.fenix.ui.efficiency.helpers.BasePage
 import org.mozilla.fenix.ui.efficiency.helpers.Selector
 import org.mozilla.fenix.ui.efficiency.navigation.NavigationRegistry
+import org.mozilla.fenix.ui.efficiency.navigation.NavigationStep
+import org.mozilla.fenix.ui.efficiency.selectors.BrowserPageSelectors
+import org.mozilla.fenix.ui.efficiency.selectors.MainMenuSelectors
 import org.mozilla.fenix.ui.efficiency.selectors.ShareOverlaySelectors
 
 class ShareOverlayPage(composeRule: AndroidComposeTestRule<HomeActivityIntentTestRule, *>) : BasePage(composeRule) {
     override val pageName = "ShareOverlayPage"
 
     init {
+        // Rooted at BrowserPage, with the menu-opening click inline, because Share exists only in the
+        // browser main menu. MainMenuPage is a single graph node standing for two different screens —
+        // the home menu and the browser menu — and it is reachable from HomePage in one step, so an
+        // edge from MainMenuPage let the planner route AppEntry -> HomePage -> MainMenuPage and then
+        // look for a Share item the home menu does not have. Duplicating the menu click here is the
+        // cost of that node being ambiguous; FindInPagePage and TabHistoryPage are rooted the same way.
         NavigationRegistry.register(
             from = "BrowserPage",
             to = pageName,
             steps = listOf(
-                // Will need to create selectors for different pages to have a nav path
+                NavigationStep.Click(BrowserPageSelectors.MAIN_MENU_BUTTON),
+                NavigationStep.Click(MainMenuSelectors.SHARE_BUTTON),
             ),
         )
+    }
+
+    // Reaching the share sheet means having a page to share, so an empty url still has to load one.
+    override fun navigateToPage(url: String, forceNavigation: Boolean): ShareOverlayPage {
+        super.navigateToPage(url = url.ifBlank { "example.com" }, forceNavigation = forceNavigation)
+        return this
     }
 
     override fun mozGetSelectorsByGroup(group: String): List<Selector> {
         return ShareOverlaySelectors.all.filter { it.groups.contains(group) }
     }
 
-    fun verifySharingWithSelectedApp(appName: String, content: String, subject: String): ShareOverlayPage {
+    fun verifySharingWithSelectedApp(
+        appName: String,
+        appPackageName: String,
+        content: String,
+        subject: String,
+    ): ShareOverlayPage {
         val sharingApp = mDevice.findObject(UiSelector().text(appName))
         assertTrue("Sharing app '$appName' not found on device", sharingApp.exists())
         sharingApp.clickAndWaitForNewWindow()
         val urlMatchers = content.split("\n\n").map { IntentMatchers.hasExtra(Intent.EXTRA_TEXT, containsString(it)) }
         val subjectMatchers = subject.split(", ").map { IntentMatchers.hasExtra(Intent.EXTRA_SUBJECT, containsString(it)) }
         Intents.intended(allOf(*(urlMatchers + subjectMatchers).toTypedArray()))
-        forceCloseApp(appName)
+        forceCloseApp(appPackageName)
         return this
     }
 }

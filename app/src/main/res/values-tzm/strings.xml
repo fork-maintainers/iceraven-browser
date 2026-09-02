@@ -278,8 +278,6 @@
   <string name="preferences_delete_browsing_data_downloads">Agamen</string>
   <!-- Text for the allow button for the data deletion dialog -->
   <string name="delete_browsing_data_prompt_allow">Kkes</string>
-  <!-- Header for categories that are being not being blocked by current Enhanced Tracking Protection settings -->
-  <string name="enhanced_tracking_protection_allowed">Ittusureg</string>
   <!-- About page link text to open know your rights link -->
   <string name="about_know_your_rights">Issin izerfan-nnek/m</string>
   <!-- Add button text for the Add to Homescreen dialog -->

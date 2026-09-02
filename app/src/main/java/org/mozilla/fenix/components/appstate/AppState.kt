@@ -20,7 +20,6 @@ import org.mozilla.fenix.components.appstate.recommendations.ContentRecommendati
 import org.mozilla.fenix.components.appstate.search.SearchState
 import org.mozilla.fenix.components.appstate.setup.checklist.SetupChecklistState
 import org.mozilla.fenix.components.appstate.snackbar.SnackbarState
-import org.mozilla.fenix.components.appstate.sports.SportsWidgetState
 import org.mozilla.fenix.components.appstate.webcompat.WebCompatState
 import org.mozilla.fenix.home.HomeFragment
 import org.mozilla.fenix.home.bookmarks.Bookmark
@@ -29,6 +28,7 @@ import org.mozilla.fenix.home.recenttabs.RecentTab
 import org.mozilla.fenix.home.recentvisits.RecentlyVisitedItem
 import org.mozilla.fenix.library.history.PendingDeletionHistory
 import org.mozilla.fenix.messaging.MessagingState
+import org.mozilla.fenix.microsurvey.MicrosurveyState
 import org.mozilla.fenix.reviewprompt.ReviewPromptState
 import org.mozilla.fenix.reviewprompt.ReviewPromptState.Unknown
 import org.mozilla.fenix.wallpapers.WallpaperState
@@ -60,6 +60,7 @@ import org.mozilla.fenix.wallpapers.WallpaperState
  * @property recentHistory The list of [RecentlyVisitedItem]s.
  * @property recommendationState The [ContentRecommendationsState] to display.
  * @property messaging State related messages.
+ * @property microsurvey The [MicrosurveyState] derived from the MICROSURVEY message surface.
  * @property pendingDeletionHistoryItems The set of History items marked for removal in the UI,
  * awaiting to be removed once the Undo snackbar hides away.
  * Also serves as an in memory cache of all stories mapped by category allowing for quick stories filtering.
@@ -84,8 +85,8 @@ import org.mozilla.fenix.wallpapers.WallpaperState
  * @property voiceSearchState The [VoiceSearchState] representing the current state of voice search functionality.
  * @property isDefaultBrowser Whether Firefox is the default browser or not.
  * @property blockedTrackersState The [BlockedTrackersState] with data about blocked trackers.
- * @property sportsWidgetState The [sportsWidgetState] to display.
  * @property longfoxEntryPointReady Whether the fox peek animation should play on the next homepage view.
+ * @property isTabsTrayVisible Whether TabsTray is shown.
  */
 data class AppState(
     val isForeground: Boolean = true,
@@ -104,6 +105,7 @@ data class AppState(
     val recentHistory: List<RecentlyVisitedItem> = emptyList(),
     val recommendationState: ContentRecommendationsState = ContentRecommendationsState(),
     val messaging: MessagingState = MessagingState(),
+    val microsurvey: MicrosurveyState = MicrosurveyState(),
     val pendingDeletionHistoryItems: Set<PendingDeletionHistory> = emptySet(),
     val wallpaperState: WallpaperState = WallpaperState.default,
     val standardSnackbarError: StandardSnackbarError? = null,
@@ -124,6 +126,6 @@ data class AppState(
     val voiceSearchState: VoiceSearchState = VoiceSearchState(),
     val isDefaultBrowser: Boolean = false,
     val blockedTrackersState: BlockedTrackersState = BlockedTrackersState(),
-    val sportsWidgetState: SportsWidgetState = SportsWidgetState(),
     val longfoxEntryPointReady: Boolean = false,
+    val isTabsTrayVisible: Boolean = false,
 ) : State

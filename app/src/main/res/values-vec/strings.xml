@@ -347,12 +347,6 @@
     Button label that take the user to the Android App setting
   -->
   <string name="phone_feature_go_to_settings">Và a ƚe inpostasion</string>
-  <!--
-    Content description (not visible, for screen readers etc.): Quick settings sheet
-    to give users access to site specific information / settings. For example:
-    Secure settings status and a button to modify site permissions
-  -->
-  <string name="quick_settings_sheet">Scheda de ƚe inpostasion ràpide</string>
   <!-- Label that indicates that this option it the recommended one -->
   <string name="phone_feature_recommended">Consijà</string>
   <!-- Button label for clearing all the information of site permissions -->
@@ -565,12 +559,6 @@
   <!--
     Enhanced Tracking Protection
 
-    Link displayed in enhanced tracking protection panel to access tracking protection settings
-  -->
-  <string name="etp_settings">Inpostasion protesion</string>
-  <!--
-    Enhanced Tracking Protection
-
     Preference title for enhanced tracking protection settings
   -->
   <string name="preference_enhanced_tracking_protection">Protesion antitraciamento avansà</string>
@@ -610,8 +598,6 @@
   <string name="preference_enhanced_tracking_protection_custom_cryptominers">Cryptominer</string>
   <!-- Header for categories that are being being blocked by current Enhanced Tracking Protection settings -->
   <string name="enhanced_tracking_protection_blocked">Blocà</string>
-  <!-- Header for categories that are being not being blocked by current Enhanced Tracking Protection settings -->
-  <string name="enhanced_tracking_protection_allowed">Consentìi</string>
   <!-- Category of trackers (social media trackers) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_social_media_trackers_title">Tracianti de i social media</string>
   <!-- Description of social media trackers that can be blocked by Enhanced Tracking Protection -->
@@ -628,10 +614,6 @@
   <string name="etp_tracking_content_title">Contenudi tracianti</string>
   <!-- Description of tracking content that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_tracking_content_description">Faghe moƚare el caricamento de anunci esterni, video e altri contenùi che i contien còdexe de traciamento. Pol influire so alcune funsionaƚità de’l sito web.</string>
-  <!-- Enhanced Tracking Protection message that protection is currently on for this site -->
-  <string name="etp_panel_on">Ƚe protesion ƚe xe ative par sto sito</string>
-  <!-- Enhanced Tracking Protection message that protection is currently off for this site -->
-  <string name="etp_panel_off">Ƚe protesion ƚe xe dixativà par sto sito</string>
   <!-- Header for exceptions list for which sites enhanced tracking protection is always off -->
   <string name="enhanced_tracking_protection_exceptions">Ƚa protesion antitraciamento avansà ƚa xe dixativà par sti siti</string>
   <!-- About page link text to open what's new link. %s is the name of the app (for example "Firefox"). -->
@@ -739,11 +721,6 @@
   <string name="confirm_clear_permission_site">Scanseƚare sto parmeso par sto sito?</string>
   <!-- label shown when there are not site exceptions to show in the site exception settings -->
   <string name="no_site_exceptions">Nisuna ecesion par i siti</string>
-  <!--
-    text shown before the issuer name to indicate who its verified by, %1$s is the name of
-    the certificate authority that verified the ticket
-  -->
-  <string name="certificate_info_verified_by">Verificà da: %1$s</string>
   <!-- Positive action of a dialog asking to delete -->
   <string name="dialog_delete_positive">Rimovi</string>
   <!-- Translations feature -->

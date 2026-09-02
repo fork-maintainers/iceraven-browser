@@ -529,8 +529,6 @@
   <string name="history_search_1">Escribe los termens de busqueda</string>
   <!-- Text for the button to clear all history -->
   <string name="history_delete_all">Borrar historial</string>
-  <!-- Text for the snackbar to confirm that multiple browsing history items has been deleted -->
-  <string name="history_delete_multiple_items_snackbar">Historial borrau</string>
   <!-- Text for the snackbar to confirm that a single browsing history item has been deleted. %1$s is the shortened URL of the deleted history item. -->
   <string name="history_delete_single_item_snackbar">S’ha borrau %1$s</string>
   <!-- Context description text for the button to delete a single history item -->
@@ -609,12 +607,6 @@
     Button label that take the user to the Android App setting
   -->
   <string name="phone_feature_go_to_settings">Ir a Achustes</string>
-  <!--
-    Content description (not visible, for screen readers etc.): Quick settings sheet
-    to give users access to site specific information / settings. For example:
-    Secure settings status and a button to modify site permissions
-  -->
-  <string name="quick_settings_sheet">Fuella d’achustes rapidos</string>
   <!-- Label that indicates that this option it the recommended one -->
   <string name="phone_feature_recommended">Recomendada</string>
   <!-- Button label for clearing all the information of site permissions -->
@@ -867,12 +859,6 @@
   <!--
     Enhanced Tracking Protection
 
-    Link displayed in enhanced tracking protection panel to access tracking protection settings
-  -->
-  <string name="etp_settings">Achustes de protección</string>
-  <!--
-    Enhanced Tracking Protection
-
     Preference title for enhanced tracking protection settings
   -->
   <string name="preference_enhanced_tracking_protection">Protección contra seguimiento amillorada</string>
@@ -916,8 +902,6 @@
   <string name="preference_enhanced_tracking_protection_custom_cryptominers">Criptominers</string>
   <!-- Header for categories that are being being blocked by current Enhanced Tracking Protection settings -->
   <string name="enhanced_tracking_protection_blocked">Blocau</string>
-  <!-- Header for categories that are being not being blocked by current Enhanced Tracking Protection settings -->
-  <string name="enhanced_tracking_protection_allowed">Permitiu</string>
   <!-- Category of trackers (social media trackers) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_social_media_trackers_title">Elementos de seguimiento de retz socials</string>
   <!-- Description of social media trackers that can be blocked by Enhanced Tracking Protection -->
@@ -934,10 +918,6 @@
   <string name="etp_tracking_content_title">Conteniu de seguimiento</string>
   <!-- Description of tracking content that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_tracking_content_description">Bloca la carga de anuncios externos, vídeos y conteniu que contienga codigo de seguimiento. Puede afectar a la funcionalidat d’o puesto web.</string>
-  <!-- Enhanced Tracking Protection message that protection is currently on for this site -->
-  <string name="etp_panel_on">Las proteccions son activadas pa este puesto</string>
-  <!-- Enhanced Tracking Protection message that protection is currently off for this site -->
-  <string name="etp_panel_off">Las proteccions son desactivadas pa este puesto</string>
   <!-- Header for exceptions list for which sites enhanced tracking protection is always off -->
   <string name="enhanced_tracking_protection_exceptions">La protección contra seguimiento amillorada ye desactivada pa estes puestos</string>
   <!--
@@ -1072,11 +1052,6 @@
   <string name="confirm_clear_permission_site">Seguro que quiers eliminar este permiso pa este puesto?</string>
   <!-- label shown when there are not site exceptions to show in the site exception settings -->
   <string name="no_site_exceptions">Sin excepcions pa lo puesto</string>
-  <!--
-    text shown before the issuer name to indicate who its verified by, %1$s is the name of
-    the certificate authority that verified the ticket
-  -->
-  <string name="certificate_info_verified_by">Verificau per: %1$s</string>
   <!-- Positive action of a dialog asking to delete -->
   <string name="dialog_delete_positive">Borrar</string>
   <!-- Voice search button content description -->

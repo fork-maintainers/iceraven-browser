@@ -29,6 +29,10 @@
 
     </androidx.preference.PreferenceCategory>
 
+    <androidx.preference.Preference
+        android:key="@string/pref_key_wallpapers"
+        android:title="@string/customize_wallpapers" />
+
     <androidx.preference.SwitchPreferenceCompat
         app:allowDividerAbove="true"
         android:key="@string/pref_key_show_top_sites"
@@ -40,16 +44,16 @@
         android:title="@string/preferences_show_top_recent_sites" />
 
     <androidx.preference.SwitchPreferenceCompat
+      android:key="@string/pref_key_show_homepage_weather_widget"
+      android:title="@string/customize_toggle_weather" />
+
+    <androidx.preference.SwitchPreferenceCompat
         android:key="@string/pref_key_privacy_report"
         android:title="@string/customize_toggle_privacy_report" />
 
     <androidx.preference.SwitchPreferenceCompat
         android:key="@string/pref_key_recent_tabs"
         android:title="@string/customize_toggle_jump_back_in" />
-
-    <androidx.preference.SwitchPreferenceCompat
-        android:key="@string/pref_key_show_homepage_sports_widget"
-        android:title="@string/customize_toggle_world_cup" />
 
     <androidx.preference.SwitchPreferenceCompat
         android:key="@string/pref_key_customization_bookmarks"
@@ -62,10 +66,6 @@
     <androidx.preference.SwitchPreferenceCompat
         android:key="@string/pref_key_pocket_homescreen_recommendations"
         android:title="@string/customize_toggle_pocket_3" />
-
-    <androidx.preference.Preference
-        android:key="@string/pref_key_wallpapers"
-        android:title="@string/customize_wallpapers" />
 
     <androidx.preference.PreferenceCategory
         android:layout="@layout/preference_cat_style"

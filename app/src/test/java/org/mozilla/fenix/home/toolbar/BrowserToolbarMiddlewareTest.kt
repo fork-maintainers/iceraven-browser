@@ -67,7 +67,6 @@ import org.mozilla.fenix.browser.browsingmode.BrowsingMode.Private
 import org.mozilla.fenix.browser.browsingmode.BrowsingModeManager
 import org.mozilla.fenix.browser.browsingmode.SimpleBrowsingModeManager
 import org.mozilla.fenix.components.AppStore
-import org.mozilla.fenix.components.UseCases
 import org.mozilla.fenix.components.appstate.AppAction
 import org.mozilla.fenix.components.appstate.AppAction.SearchAction.SearchEngineSelected
 import org.mozilla.fenix.components.appstate.AppAction.SearchAction.SearchStarted
@@ -599,6 +598,77 @@ class BrowserToolbarMiddlewareTest {
     }
 
     @Test
+    fun `GIVEN homepage as a new tab is disabled and expanded toolbar WHEN clicking the new tab button THEN start a new search`() = runTest {
+        every { testContext.components.settings.shouldUseExpandedToolbar } returns true
+        every { testContext.components.settings.enableHomepageAsNewTab } returns false
+        val fenixBrowserUseCases: FenixBrowserUseCases = mockk(relaxed = true)
+        val (_, toolbarStore) = buildMiddlewareAndAddToStore(fenixBrowserUseCases = fenixBrowserUseCases)
+        val newTabButton = toolbarStore.state.displayState.navigationActions[2] as ActionButtonRes
+
+        toolbarStore.dispatch(newTabButton.onClick as BrowserToolbarEvent)
+
+        verify(exactly = 0) { fenixBrowserUseCases.addNewHomepageTab(any(), any(), any()) }
+        verify { appStore.dispatch(SearchStarted()) }
+    }
+
+    @Test
+    fun `GIVEN homepage as a new tab is enabled and expanded toolbar WHEN clicking the new tab button THEN open a new homepage tab`() = runTest {
+        every { testContext.components.settings.shouldUseExpandedToolbar } returns true
+        every { testContext.components.settings.enableHomepageAsNewTab } returns true
+        val browsingModeManager = SimpleBrowsingModeManager(Normal)
+        val fenixBrowserUseCases: FenixBrowserUseCases = mockk(relaxed = true)
+        val (_, toolbarStore) = buildMiddlewareAndAddToStore(
+            fenixBrowserUseCases = fenixBrowserUseCases,
+            browsingModeManager = browsingModeManager,
+        )
+        val newTabButton = toolbarStore.state.displayState.navigationActions[2] as ActionButtonRes
+
+        toolbarStore.dispatch(newTabButton.onClick as BrowserToolbarEvent)
+
+        verify { fenixBrowserUseCases.addNewHomepageTab(private = false) }
+        verify(exactly = 0) { appStore.dispatch(SearchStarted()) }
+        assertEquals(Normal, browsingModeManager.mode)
+    }
+
+    @Test
+    fun `GIVEN homepage as a new tab is enabled and expanded toolbar in private browsing mode WHEN clicking the new tab button THEN open a new private homepage tab`() = runTest {
+        every { testContext.components.settings.shouldUseExpandedToolbar } returns true
+        every { testContext.components.settings.enableHomepageAsNewTab } returns true
+        val browsingModeManager = SimpleBrowsingModeManager(Private)
+        val fenixBrowserUseCases: FenixBrowserUseCases = mockk(relaxed = true)
+        val (_, toolbarStore) = buildMiddlewareAndAddToStore(
+            fenixBrowserUseCases = fenixBrowserUseCases,
+            browsingModeManager = browsingModeManager,
+        )
+        val newTabButton = toolbarStore.state.displayState.navigationActions[2] as ActionButtonRes
+
+        toolbarStore.dispatch(newTabButton.onClick as BrowserToolbarEvent)
+
+        verify { fenixBrowserUseCases.addNewHomepageTab(private = true) }
+        verify(exactly = 0) { appStore.dispatch(SearchStarted()) }
+        assertEquals(Private, browsingModeManager.mode)
+    }
+
+    @Test
+    fun `GIVEN homepage as a new tab is enabled and private browsing mode WHEN clicking on the long click menu option THEN open a new normal homepage tab`() {
+        every { testContext.components.settings.enableHomepageAsNewTab } returns true
+        val browsingModeManager = SimpleBrowsingModeManager(Private)
+        val fenixBrowserUseCases: FenixBrowserUseCases = mockk(relaxed = true)
+        val (_, toolbarStore) = buildMiddlewareAndAddToStore(
+            fenixBrowserUseCases = fenixBrowserUseCases,
+            browsingModeManager = browsingModeManager,
+        )
+        val tabCounterButton = toolbarStore.state.displayState.browserActionsEnd[0] as TabCounterAction
+        val tabCounterMenuItems = (tabCounterButton.onLongClick as CombinedEventAndMenu).menu.items()
+
+        toolbarStore.dispatch((tabCounterMenuItems[0] as BrowserToolbarMenuButton).onClick!!)
+
+        verify { fenixBrowserUseCases.addNewHomepageTab(private = false) }
+        verify(exactly = 0) { appStore.dispatch(SearchStarted()) }
+        assertEquals(Normal, browsingModeManager.mode)
+    }
+
+    @Test
     fun `GIVEN in normal browsing mode WHEN the page origin is clicked THEN start the search UX for normal browsing`() {
         val browsingModeManager = SimpleBrowsingModeManager(Normal)
         val navController: NavController = mockk(relaxed = true)
@@ -652,14 +722,11 @@ class BrowserToolbarMiddlewareTest {
         val clipboard = ClipboardHandler(testContext).also {
             it.text = clipboardUrl
         }
-        val browserUseCases: FenixBrowserUseCases = mockk(relaxed = true)
-        val useCases: UseCases = mockk {
-            every { fenixBrowserUseCases } returns browserUseCases
-        }
+        val fenixBrowserUseCases: FenixBrowserUseCases = mockk(relaxed = true)
         val selectedSearchEngine = appStore.state.searchState.selectedSearchEngine?.searchEngine
         val (_, toolbarStore) = buildMiddlewareAndAddToStore(
             clipboard = clipboard,
-            useCases = useCases,
+            fenixBrowserUseCases = fenixBrowserUseCases,
             navController = navController,
             browsingModeManager = browsingModeManager,
         )
@@ -667,7 +734,7 @@ class BrowserToolbarMiddlewareTest {
         toolbarStore.dispatch(LoadFromClipboardClicked)
 
         verify {
-            browserUseCases.loadUrlOrSearch(
+            fenixBrowserUseCases.loadUrlOrSearch(
                 searchTermOrURL = clipboardUrl,
                 newTab = true,
                 private = false,
@@ -986,7 +1053,7 @@ class BrowserToolbarMiddlewareTest {
         appStore: AppStore = this.appStore,
         browserStore: BrowserStore = this.browserStore,
         clipboard: ClipboardHandler = mockk(),
-        useCases: UseCases = mockk(),
+        fenixBrowserUseCases: FenixBrowserUseCases = mockk(),
         navController: NavController = mockk(),
         browsingModeManager: BrowsingModeManager = this.browsingModeManager,
         settings: Settings = testContext.components.settings,
@@ -999,7 +1066,7 @@ class BrowserToolbarMiddlewareTest {
             appStore = appStore,
             browserStore = browserStore,
             clipboard = clipboard,
-            useCases = useCases,
+            fenixBrowserUseCases = fenixBrowserUseCases,
             navController = navController,
             browsingModeManager = browsingModeManager,
             settings = settings,
@@ -1019,7 +1086,7 @@ class BrowserToolbarMiddlewareTest {
         appStore: AppStore = this.appStore,
         browserStore: BrowserStore = this.browserStore,
         clipboard: ClipboardHandler = mockk(),
-        useCases: UseCases = mockk(),
+        fenixBrowserUseCases: FenixBrowserUseCases = mockk(),
         navController: NavController = mockk(),
         browsingModeManager: BrowsingModeManager = this.browsingModeManager,
         settings: Settings = testContext.components.settings,
@@ -1031,7 +1098,7 @@ class BrowserToolbarMiddlewareTest {
         appStore = appStore,
         browserStore = browserStore,
         clipboard = clipboard,
-        useCases = useCases,
+        fenixBrowserUseCases = fenixBrowserUseCases,
         navController = navController,
         browsingModeManager = browsingModeManager,
         settings = settings,

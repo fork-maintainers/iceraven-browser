@@ -6,6 +6,7 @@
 
 <mozilla.components.feature.findinpage.view.FindInPageBar xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="56dp"
     android:background="?attr/colorSurface"
@@ -15,4 +16,5 @@
     android:visibility="gone"
     app:findInPageButtonsTint="?attr/colorOnSurface"
     app:findInPageNoMatchesTextColor="?attr/colorError"
-    app:findInPageResultCountTextColor="?attr/colorOnSurface" />
+    app:findInPageResultCountTextColor="?attr/colorOnSurface"
+    tools:ignore="Overdraw" />

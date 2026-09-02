@@ -177,6 +177,21 @@ object TabDrawerSelectors {
         groups = listOf("createTabGroupView"),
     )
 
+    val ADD_TO_NEW_TAB_GROUP_BUTTON = Selector(
+        strategy = SelectorStrategy.COMPOSE_BY_TAG,
+        value = TabsTrayTestTag.ADD_TO_NEW_TAB_GROUP,
+        description = "Add to new tab group button",
+        groups = listOf("addToTabGroupView"),
+    )
+
+    @Suppress("ktlint:standard:function-naming")
+    fun ADD_TO_EXISTING_TAB_GROUP_BUTTON(title: String = "") = Selector(
+        strategy = SelectorStrategy.COMPOSE_BY_TEXT,
+        value = title,
+        description = "Add to existing tab group button",
+        groups = listOf("addToTabGroupView"),
+    )
+
     @Suppress("ktlint:standard:function-naming")
     fun TAB_GROUP_ITEM(
         tabGroupTitle: String = "",
@@ -262,6 +277,13 @@ object TabDrawerSelectors {
         groups = listOf("requiredForPage"),
     )
 
+    val EMPTY_PRIVATE_TABS_LIST = Selector(
+        strategy = SelectorStrategy.COMPOSE_BY_TAG,
+        value = TabsTrayTestTag.EMPTY_PRIVATE_TABS_LIST,
+        description = "Empty private tabs list",
+        groups = listOf("emptyPrivateTabsList"),
+    )
+
     val PRIVATE_TABS_LIST = Selector(
         strategy = SelectorStrategy.COMPOSE_BY_TAG,
         value = TabsTrayTestTag.PRIVATE_TABS_LIST,
@@ -326,9 +348,12 @@ object TabDrawerSelectors {
         DELETE_TAB_GROUP_DIALOG_DELETE_GROUP_BUTTON,
         TAB_GROUP_BOTTOM_SHEET_HANDLE,
         FAB,
+        EMPTY_PRIVATE_TABS_LIST,
         PRIVATE_TABS_LIST,
         TAB_ITEM_CLOSE,
         TAB_ITEM_THUMBNAIL,
         TAB_ITEM_WITH_TITLE(),
+        ADD_TO_NEW_TAB_GROUP_BUTTON,
+        ADD_TO_EXISTING_TAB_GROUP_BUTTON(),
     )
 }

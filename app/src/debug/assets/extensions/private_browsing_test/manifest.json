@@ -1,0 +1,19 @@
+{
+    "manifest_version": 2,
+    "name": "Private Browsing Android Test",
+    "description": "Part of mobile/android/fenix/app/src/androidTest/java/org/mozilla/fenix/ui/ExtensionPrivateBrowsingTest.kt",
+    "version": "1.0",
+
+    "browser_specific_settings": {
+        "gecko_android": {},
+        "gecko": {
+            "id": "{ed6cc6f0-0f66-4ec4-85a0-e82fd3f0b045}"
+        }
+    },
+    "background": {
+        "scripts": ["background.js"]
+    },
+    "browser_action": {
+        "default_popup": "popup.html"
+    }
+}

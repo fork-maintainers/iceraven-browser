@@ -141,6 +141,7 @@ fun TabsTrayBanner(
                 selectedTabCount = state.mode.selectedTabs.size,
                 shouldShowInactiveButton = state.config.isInDebugMode,
                 shouldShowAddToTabGroupButton = state.config.tabGroupsEnabled,
+                shouldShowSaveToCollectionButton = state.config.collectionsEnabled,
                 onExitSelectModeClick = { onAction(TabsTrayAction.ExitSelectMode) },
                 onSaveToCollectionsClick = onSaveToCollectionClick,
                 onShareSelectedTabs = onShareSelectedTabsClick,
@@ -382,6 +383,7 @@ private fun BannerTab(
  * @param selectedTabCount The amount of selected tabs.
  * @param shouldShowInactiveButton Whether to show the inactive tabs menu item.
  * @param shouldShowAddToTabGroupButton Whether the add to tab group button should be displayed.
+ * @param shouldShowSaveToCollectionButton Whether the save to collection button should be displayed.
  * @param onExitSelectModeClick Invoked when the user clicks to exit selection mode.
  * @param onSaveToCollectionsClick Invoked when the user clicks on the save to collection button.
  * @param onShareSelectedTabs Invoked when the user clicks on the share tabs button.
@@ -397,6 +399,7 @@ private fun MultiSelectBanner(
     selectedTabCount: Int,
     shouldShowInactiveButton: Boolean,
     shouldShowAddToTabGroupButton: Boolean,
+    shouldShowSaveToCollectionButton: Boolean,
     onExitSelectModeClick: () -> Unit,
     onSaveToCollectionsClick: () -> Unit,
     onShareSelectedTabs: () -> Unit,
@@ -419,6 +422,7 @@ private fun MultiSelectBanner(
     val menuItems = generateMultiSelectBannerMenuItems(
         shouldShowInactiveButton = shouldShowInactiveButton,
         shouldShowAddToTabGroupButton = shouldShowAddToTabGroupButton,
+        shouldShowSaveToCollectionButton = shouldShowSaveToCollectionButton,
         onShareSelectedTabs = onShareSelectedTabs,
         onSaveToCollectionsClick = onSaveToCollectionsClick,
         onMakeSelectedTabsInactive = onMakeSelectedTabsInactive,
@@ -504,6 +508,7 @@ private fun MultiSelectBanner(
 private fun generateMultiSelectBannerMenuItems(
     shouldShowInactiveButton: Boolean,
     shouldShowAddToTabGroupButton: Boolean,
+    shouldShowSaveToCollectionButton: Boolean,
     onShareSelectedTabs: () -> Unit,
     onSaveToCollectionsClick: () -> Unit,
     onMakeSelectedTabsInactive: () -> Unit,
@@ -516,13 +521,17 @@ private fun generateMultiSelectBannerMenuItems(
             testTag = TabsTrayTestTag.SHARE_BUTTON,
             onClick = onShareSelectedTabs,
         ),
-        MenuItem.IconItem(
-            text = Text.Resource(R.string.tab_manager_multiselect_menu_item_add_to_collection),
-            drawableRes = iconsR.drawable.mozac_ic_collection_24,
-            testTag = TabsTrayTestTag.COLLECTIONS_BUTTON,
-            onClick = onSaveToCollectionsClick,
-        ),
     )
+    if (shouldShowSaveToCollectionButton) {
+        menuItems.add(
+            MenuItem.IconItem(
+                text = Text.Resource(R.string.tab_manager_multiselect_menu_item_add_to_collection),
+                drawableRes = iconsR.drawable.mozac_ic_collection_24,
+                testTag = TabsTrayTestTag.COLLECTIONS_BUTTON,
+                onClick = onSaveToCollectionsClick,
+            ),
+        )
+    }
     if (shouldShowInactiveButton) {
         menuItems.add(
             MenuItem.IconItem(

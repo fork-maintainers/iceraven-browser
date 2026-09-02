@@ -35,20 +35,9 @@ interface FeatureSettingsHelper {
     var isRecentlyVisitedFeatureEnabled: Boolean
 
     /**
-     * Whether the onboarding dialog for PWAs should be shown or not.
-     * It can show the first time a website that can be installed as a PWA is accessed.
-     */
-    var isPWAsPromptEnabled: Boolean
-
-    /**
      * Whether the "Site permissions" option is checked in the "Delete browsing data" screen or not.
      */
     var isDeleteSitePermissionsEnabled: Boolean
-
-    /**
-     * Whether the Homepage Sports Widget is visible or not.
-     */
-    var isHomepageSportsWidgetVisible: Boolean
 
     /**
      * The current "Enhanced Tracking Protection" policy.
@@ -125,6 +114,11 @@ interface FeatureSettingsHelper {
     var shouldUseExpandedToolbar: Boolean
 
     /**
+     * Enable or disable the tab strip (the "Show tab bar" customization).
+     */
+    var isTabStripEnabled: Boolean
+
+    /**
      * Whether the Native Share Sheet feature is enabled.
      */
     var nativeShareSheetEnabled: Boolean
@@ -133,6 +127,11 @@ interface FeatureSettingsHelper {
      * Whether the voice search entry point is shown in the display-mode browser toolbar.
      */
     var showVoiceSearchInDisplayToolbar: Boolean
+
+    /**
+     * Whether trending and recent searches are shown on the Homepage search.
+     */
+    var isHomepageTrendingRecentSearchEnabled: Boolean
 
     /**
      * Enable or disable the translations prompt after a page that can be translated is loaded.

@@ -35,20 +35,18 @@ import org.junit.runner.RunWith
 import org.mozilla.fenix.HomeActivity
 import org.mozilla.fenix.R
 import org.mozilla.fenix.components.AppStore
+import org.mozilla.fenix.components.share.ShareSheetChooserAction
 import org.mozilla.fenix.components.share.ShareSource
 import org.mozilla.fenix.components.usecases.FenixBrowserUseCases
 import org.mozilla.fenix.components.usecases.ShareUseCases
 import org.mozilla.fenix.ext.components
-import org.mozilla.fenix.ext.directionsEq
 import org.mozilla.fenix.helpers.FenixGleanTestRule
 import org.mozilla.fenix.library.history.History
 import org.mozilla.fenix.library.history.HistoryItemTimeGroup
 import org.mozilla.fenix.library.historymetadata.HistoryMetadataGroupFragmentAction
-import org.mozilla.fenix.library.historymetadata.HistoryMetadataGroupFragmentDirections
 import org.mozilla.fenix.library.historymetadata.HistoryMetadataGroupFragmentStore
 import org.mozilla.fenix.utils.Settings
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.annotation.Config
 import kotlin.test.assertNotNull
 import org.mozilla.fenix.GleanMetrics.History as GleanHistory
 
@@ -189,7 +187,25 @@ class HistoryMetadataGroupControllerTest {
     }
 
     @Test
-    fun `WHEN handleShare is invoked THEN share use case is called with the selected items`() {
+    fun `WHEN handleShare is invoked on a single tab THEN share use case is called with the selected items and send to devices and QR code chooser actions`() {
+        val expected = listOf(
+            ShareData(url = mozillaHistoryMetadataItem.url, title = mozillaHistoryMetadataItem.title),
+        )
+
+        controller.handleShare(setOf(mozillaHistoryMetadataItem))
+
+        verify {
+            shareUseCases.shareItems(
+                items = expected,
+                source = ShareSource.HISTORY_METADATA_GROUP,
+                chooserActions = listOf(ShareSheetChooserAction.SEND_TO_DEVICES, ShareSheetChooserAction.QR_CODE),
+                navigateToShareFragment = any(),
+            )
+        }
+    }
+
+    @Test
+    fun `WHEN handleShare is invoked on multiple tabs THEN share use case is called with the selected items and only send to devices chooser action`() {
         val expected = listOf(
             ShareData(url = mozillaHistoryMetadataItem.url, title = mozillaHistoryMetadataItem.title),
             ShareData(url = firefoxHistoryMetadataItem.url, title = firefoxHistoryMetadataItem.title),
@@ -201,6 +217,7 @@ class HistoryMetadataGroupControllerTest {
             shareUseCases.shareItems(
                 items = expected,
                 source = ShareSource.HISTORY_METADATA_GROUP,
+                chooserActions = listOf(ShareSheetChooserAction.SEND_TO_DEVICES),
                 navigateToShareFragment = any(),
             )
         }

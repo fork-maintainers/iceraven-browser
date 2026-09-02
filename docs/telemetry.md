@@ -1,4 +1,4 @@
-# Telemetry
+# Fenix telemetry
 
 Fenix uses Mozilla's telemetry service (Glean) to measure feature performance and engagement.
 

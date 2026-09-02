@@ -226,6 +226,7 @@ class HomeActivityTest {
             every { findFragmentByTag(any()) } returns null
         }
         every { activity.supportFragmentManager } returns fragmentManager
+        every { activity.applicationContext } returns testContext
 
         val intent = Intent().apply {
             putExtra(QR_CODE_URI_KEY, "content://cache/qr_code.png")
@@ -245,6 +246,7 @@ class HomeActivityTest {
             every { findFragmentByTag(any()) } returns null
         }
         every { activity.supportFragmentManager } returns fragmentManager
+        every { activity.applicationContext } returns testContext
 
         val intent = Intent().apply {
             putExtra(QR_CODE_URI_KEY, "content://cache/qr_code.png")

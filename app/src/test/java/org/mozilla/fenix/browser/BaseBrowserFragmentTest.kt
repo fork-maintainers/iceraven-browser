@@ -363,7 +363,7 @@ class BaseBrowserFragmentTest {
         every { fragment.view } returns mockk {
             every { context } returns testContext
         }
-        every { settings.browserToolbarHeight } returns 11
+        every { settings.getBrowserToolbarHeight(testContext) } returns 11
         every { settings.toolbarPosition } returns ToolbarPosition.BOTTOM
         every { settings.isDynamicToolbarEnabled } returns false
 
@@ -382,7 +382,7 @@ class BaseBrowserFragmentTest {
         every { fragment.view } returns mockk {
             every { context } returns testContext
         }
-        every { settings.browserToolbarHeight } returns 11
+        every { settings.getBrowserToolbarHeight(testContext) } returns 11
         every { settings.toolbarPosition } returns ToolbarPosition.TOP
         every { settings.isDynamicToolbarEnabled } returns true
         every { settings.shouldUseFixedTopToolbar } returns false
@@ -405,7 +405,7 @@ class BaseBrowserFragmentTest {
         every { fragment.view } returns mockk {
             every { context } returns testContext
         }
-        every { settings.browserToolbarHeight } returns 11
+        every { settings.getBrowserToolbarHeight(testContext) } returns 11
         every { settings.toolbarPosition } returns ToolbarPosition.TOP
         every { settings.isDynamicToolbarEnabled } returns true
         every { settings.shouldUseFixedTopToolbar } returns false
@@ -430,7 +430,7 @@ class BaseBrowserFragmentTest {
         every { fragment.view } returns mockk {
             every { context } returns testContext
         }
-        every { settings.browserToolbarHeight } returns 11
+        every { settings.getBrowserToolbarHeight(testContext) } returns 11
         every { settings.toolbarPosition } returns ToolbarPosition.TOP
         every { settings.isDynamicToolbarEnabled } returns true
         every { settings.shouldUseFixedTopToolbar } returns false
@@ -458,7 +458,7 @@ class BaseBrowserFragmentTest {
         every { fragment.view } returns mockk {
             every { context } returns testContext
         }
-        every { settings.browserToolbarHeight } returns 11
+        every { settings.getBrowserToolbarHeight(testContext) } returns 11
         every { settings.toolbarPosition } returns ToolbarPosition.TOP
         every { settings.isDynamicToolbarEnabled } returns true
         every { settings.shouldUseFixedTopToolbar } returns false
@@ -478,7 +478,7 @@ class BaseBrowserFragmentTest {
         every { fragment.view } returns mockk {
             every { context } returns testContext
         }
-        every { settings.browserToolbarHeight } returns 22
+        every { settings.getBrowserToolbarHeight(testContext) } returns 22
         every { settings.toolbarPosition } returns ToolbarPosition.TOP
         every { settings.isDynamicToolbarEnabled } returns true
         every { settings.shouldUseFixedTopToolbar } returns false
@@ -501,7 +501,7 @@ class BaseBrowserFragmentTest {
         every { fragment.view } returns mockk {
             every { context } returns testContext
         }
-        every { settings.browserToolbarHeight } returns 11
+        every { settings.getBrowserToolbarHeight(testContext) } returns 11
         every { settings.toolbarPosition } returns ToolbarPosition.BOTTOM
         every { settings.isDynamicToolbarEnabled } returns true
         every { settings.shouldUseFixedTopToolbar } returns false
@@ -521,7 +521,7 @@ class BaseBrowserFragmentTest {
         every { fragment.view } returns mockk {
             every { context } returns testContext
         }
-        every { settings.browserToolbarHeight } returns 11
+        every { settings.getBrowserToolbarHeight(testContext) } returns 11
         every { settings.toolbarPosition } returns ToolbarPosition.TOP
         every { settings.shouldShowMicrosurveyPrompt } returns true
         every { settings.isDynamicToolbarEnabled } returns true
@@ -546,7 +546,7 @@ class BaseBrowserFragmentTest {
         every { fragment.view } returns mockk {
             every { context } returns testContext
         }
-        every { settings.browserToolbarHeight } returns 11
+        every { settings.getBrowserToolbarHeight(testContext) } returns 11
         every { settings.toolbarPosition } returns ToolbarPosition.TOP
         every { settings.isDynamicToolbarEnabled } returns true
         every { settings.shouldUseFixedTopToolbar } returns false
@@ -571,7 +571,7 @@ class BaseBrowserFragmentTest {
         every { fragment.view } returns mockk {
             every { context } returns testContext
         }
-        every { settings.browserToolbarHeight } returns 11
+        every { settings.getBrowserToolbarHeight(testContext) } returns 11
         every { settings.toolbarPosition } returns ToolbarPosition.TOP
         every { settings.isDynamicToolbarEnabled } returns true
         every { settings.shouldUseFixedTopToolbar } returns false
@@ -597,7 +597,7 @@ class BaseBrowserFragmentTest {
         every { fragment.view } returns mockk {
             every { context } returns testContext
         }
-        every { settings.browserToolbarHeight } returns 11
+        every { settings.getBrowserToolbarHeight(testContext) } returns 11
         every { settings.toolbarPosition } returns ToolbarPosition.TOP
         every { settings.isDynamicToolbarEnabled } returns true
         every { settings.shouldUseFixedTopToolbar } returns false
@@ -684,7 +684,7 @@ class BaseBrowserFragmentTest {
         every { fragment.view } returns mockk {
             every { context } returns testContext
         }
-        every { settings.browserToolbarHeight } returns 11
+        every { settings.getBrowserToolbarHeight(testContext) } returns 11
         every { settings.toolbarPosition } returns ToolbarPosition.TOP
         every { settings.isDynamicToolbarEnabled } returns true
         every { settings.shouldUseExpandedToolbar } returns true
@@ -706,7 +706,7 @@ class BaseBrowserFragmentTest {
         every { fragment.view } returns mockk {
             every { context } returns testContext
         }
-        every { settings.browserToolbarHeight } returns 11
+        every { settings.getBrowserToolbarHeight(testContext) } returns 11
         every { settings.toolbarPosition } returns ToolbarPosition.TOP
         every { settings.isDynamicToolbarEnabled } returns true
         every { settings.shouldUseExpandedToolbar } returns true

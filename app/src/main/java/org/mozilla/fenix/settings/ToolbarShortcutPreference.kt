@@ -16,10 +16,10 @@ import androidx.core.view.updateLayoutParams
 import androidx.preference.Preference
 import androidx.preference.PreferenceViewHolder
 import com.google.android.material.color.MaterialColors
+import mozilla.components.support.ktx.android.content.pixelSizeFor
 import org.mozilla.fenix.GleanMetrics.CustomizationSettings
 import org.mozilla.fenix.R
 import org.mozilla.fenix.ext.isWideWindow
-import org.mozilla.fenix.ext.pixelSizeFor
 import org.mozilla.fenix.utils.view.addToRadioGroup
 import com.google.android.material.R as materialR
 

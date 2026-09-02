@@ -9,7 +9,7 @@ import android.appwidget.AppWidgetManager
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
-import android.content.pm.ShortcutManager
+import android.content.res.Resources
 import android.os.Environment
 import android.view.accessibility.AccessibilityManager
 import androidx.annotation.VisibleForTesting
@@ -17,10 +17,8 @@ import androidx.annotation.VisibleForTesting.Companion.PRIVATE
 import androidx.core.content.edit
 import androidx.lifecycle.LifecycleOwner
 import androidx.preference.PreferenceManager
-import mozilla.components.browser.engine.gecko.cookiebanners.ReportSiteDomainsRepository.Companion.REPORT_SITE_DOMAINS_REPOSITORY_NAME
 import mozilla.components.concept.engine.Engine
 import mozilla.components.concept.engine.Engine.HttpsOnlyMode
-import mozilla.components.concept.engine.EngineSession.CookieBannerHandlingMode
 import mozilla.components.feature.sitepermissions.SitePermissionsRules
 import mozilla.components.feature.sitepermissions.SitePermissionsRules.Action
 import mozilla.components.feature.sitepermissions.SitePermissionsRules.AutoplayAction
@@ -32,6 +30,7 @@ import mozilla.components.support.ktx.android.content.doesDeviceHaveHinge
 import mozilla.components.support.ktx.android.content.floatPreference
 import mozilla.components.support.ktx.android.content.intPreference
 import mozilla.components.support.ktx.android.content.longPreference
+import mozilla.components.support.ktx.android.content.pixelSizeFor
 import mozilla.components.support.ktx.android.content.stringPreference
 import mozilla.components.support.ktx.android.content.stringSetPreference
 import mozilla.components.support.locale.LocaleManager
@@ -56,10 +55,8 @@ import org.mozilla.fenix.ext.TALL_SCREEN_HEIGHT_DP
 import org.mozilla.fenix.ext.WIDE_SCREEN_WIDTH_DP
 import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.ext.getPreferenceKey
-import org.mozilla.fenix.ext.pixelSizeFor
 import org.mozilla.fenix.home.pocket.ContentRecommendationsFeatureHelper
 import org.mozilla.fenix.home.topsites.TopSitesConfigConstants.TOP_SITES_MAX_COUNT
-import org.mozilla.fenix.nimbus.CookieBannersSection
 import org.mozilla.fenix.nimbus.DefaultBrowserPrompt
 import org.mozilla.fenix.nimbus.FxNimbus
 import org.mozilla.fenix.nimbus.HomeScreenSection
@@ -88,6 +85,7 @@ private const val MAX_ANIMATION_FOREGROUND = 5
  * @param packageName Package name of the application.
  * @param packageManagerCompatHelper Helper for accessing [android.content.pm.PackageManager] methods.
  * @param isBenchmarkBuild Boolean that will be true only when the app is built for Baseline Profile or Macrobenchmark.
+ * @param currentTimeMillis provider for the current time in milliseconds, injectable for testing.
  */
 @Suppress("LargeClass", "TooManyFunctions")
 class Settings(
@@ -95,6 +93,7 @@ class Settings(
     private val packageName: String = appContext.packageName,
     private val packageManagerCompatHelper: PackageManagerCompatHelper = appContext.packageManagerCompatHelper,
     private val isBenchmarkBuild: Boolean = BuildConfig.IS_BENCHMARK_BUILD,
+    private val currentTimeMillis: () -> Long = { System.currentTimeMillis() },
 ) : PreferencesHolder {
     companion object {
         const val FENIX_PREFERENCES = "fenix_preferences"
@@ -119,8 +118,9 @@ class Settings(
 
         /**
          * The minimum number a search groups should contain.
+         *
+         * Mutable so that tests can lower the threshold.
          */
-        @VisibleForTesting
         internal var searchGroupMinimumSites: Int = 2
 
         private fun Action.toInt() = when (this) {
@@ -277,6 +277,14 @@ class Settings(
         get() = FxNimbus.features.homescreen.value().sectionsEnabled[HomeScreenSection.COLLECTIONS] == true
 
     /**
+     * Whether the Collections UI should be hidden.
+     */
+    var hideCollectionsUi by booleanPreference(
+        appContext.getPreferenceKey(R.string.pref_key_hide_collections),
+        default = { FxNimbus.features.collectionsToTabGroupsMigration.value().hideCollectionsUi },
+    )
+
+    /**
      * Indicates whether or not the Firefox Japan Guide default site should be shown.
      */
     val showFirefoxJpGuideDefaultSite: Boolean
@@ -383,7 +391,7 @@ class Settings(
     )
 
     val canShowCfr: Boolean
-        get() = (System.currentTimeMillis() - lastCfrShownTimeInMillis) > THREE_DAYS_MS
+        get() = (currentTimeMillis() - lastCfrShownTimeInMillis) > THREE_DAYS_MS
 
     val cfrPopupsEnabled by booleanPreference(
         appContext.getPreferenceKey(R.string.pref_cfr_popups_enabled),
@@ -417,6 +425,15 @@ class Settings(
 
     var adjustCreative by stringPreference(
         appContext.getPreferenceKey(R.string.pref_key_adjust_creative),
+        default = "",
+    )
+
+    /**
+     * The Glean debug view tag that may be persisted across app restarts. Empty when no tag is persisted. Only
+     * captured from a tag set through Glean's debug intent using `persistDebugViewTag` at startup.
+     */
+    var gleanDebugViewTag by stringPreference(
+        appContext.getPreferenceKey(R.string.pref_key_glean_debug_view_tag),
         default = "",
     )
 
@@ -487,6 +504,15 @@ class Settings(
 
     var isUserSkyflagAttributed by booleanPreference(
         appContext.getPreferenceKey(R.string.pref_key_is_user_skyflag_attributed),
+        default = false,
+    )
+
+    /**
+     * Whether the `referrals` ping has already been submitted for this profile. A referral code
+     * must only ever be reported once.
+     */
+    var referralPingSubmitted by booleanPreference(
+        appContext.getPreferenceKey(R.string.pref_key_referral_ping_submitted),
         default = false,
     )
 
@@ -932,6 +958,13 @@ class Settings(
     )
 
     /**
+     * Records the current time as the last time the user interacted with the [BrowserFragment].
+     */
+    fun recordLastBrowseActivity() {
+        lastBrowseActivity = currentTimeMillis()
+    }
+
+    /**
      * Indicates the last time when the user was interacting with the [HomeFragment],
      * This is useful to determine if the user has to start on the [HomeFragment]
      * or it should go directly to the [BrowserFragment].
@@ -943,6 +976,13 @@ class Settings(
         appContext.getPreferenceKey(R.string.pref_key_last_home_activity_time),
         default = 0L,
     )
+
+    /**
+     * Records the current time as the last time the user interacted with the [HomeFragment].
+     */
+    fun recordLastHomeActivity() {
+        lastHomeActivity = currentTimeMillis()
+    }
 
     private val openingScreenDefault: OpeningScreenOption
         get() = FxNimbus.features.homepageOpeningScreenDefault.value().defaultOption
@@ -1075,7 +1115,7 @@ class Settings(
     )
 
     @VisibleForTesting
-    internal fun timeNowInMillis(): Long = System.currentTimeMillis()
+    internal fun timeNowInMillis(): Long = currentTimeMillis()
 
     fun getTabTimeout(): Long = when {
         closeTabsAfterOneDay -> ONE_DAY_MS
@@ -1168,15 +1208,6 @@ class Settings(
             appContext.getString(R.string.remote_settings_server_dev) -> {
                 appContext.getString(R.string.preferences_remote_settings_server_dev_label)
             }
-            appContext.getString(R.string.remote_settings_server_prod_v2) -> {
-                appContext.getString(R.string.preferences_remote_settings_server_prod_label_v2)
-            }
-            appContext.getString(R.string.remote_settings_server_stage_v2) -> {
-                appContext.getString(R.string.preferences_remote_settings_server_stage_label_v2)
-            }
-            appContext.getString(R.string.remote_settings_server_dev_v2) -> {
-                appContext.getString(R.string.preferences_remote_settings_server_dev_label_v2)
-            }
             else -> {
                 appContext.getString(R.string.preferences_remote_settings_server_prod_label)
             }
@@ -1216,29 +1247,6 @@ class Settings(
         appContext.getPreferenceKey(R.string.pref_key_privacy_enable_global_privacy_control),
         false,
     )
-
-    var shouldUseCookieBannerPrivateMode by booleanPreference(
-        appContext.getPreferenceKey(R.string.pref_key_cookie_banner_private_mode),
-        default = { shouldUseCookieBannerPrivateModeDefaultValue },
-    )
-
-    val shouldUseCookieBannerPrivateModeDefaultValue: Boolean
-        get() = cookieBannersSection[CookieBannersSection.FEATURE_SETTING_VALUE_PBM] == 1
-
-    val shouldUseCookieBanner: Boolean
-        get() = cookieBannersSection[CookieBannersSection.FEATURE_SETTING_VALUE] == 1
-
-    val shouldShowCookieBannerUI: Boolean
-        get() = cookieBannersSection[CookieBannersSection.FEATURE_UI] == 1
-
-    val shouldEnableCookieBannerDetectOnly: Boolean
-        get() = cookieBannersSection[CookieBannersSection.FEATURE_SETTING_DETECT_ONLY] == 1
-
-    val shouldEnableCookieBannerGlobalRules: Boolean
-        get() = cookieBannersSection[CookieBannersSection.FEATURE_SETTING_GLOBAL_RULES] == 1
-
-    val shouldEnableCookieBannerGlobalRulesSubFrame: Boolean
-        get() = cookieBannersSection[CookieBannersSection.FEATURE_SETTING_GLOBAL_RULES_SUB_FRAMES] == 1
 
     /**
      * Declared as a function for performance purposes. This could be declared as a variable using
@@ -1720,40 +1728,6 @@ class Settings(
         default = false,
     )
 
-    fun incrementVisitedInstallableCount() = pwaInstallableVisitCount.increment()
-
-    @VisibleForTesting(otherwise = PRIVATE)
-    internal val pwaInstallableVisitCount = counterPreference(
-        appContext.getPreferenceKey(R.string.pref_key_install_pwa_visits),
-        maxCount = 3,
-    )
-
-    private val userNeedsToVisitInstallableSites: Boolean
-        get() = pwaInstallableVisitCount.underMaxCount()
-
-    val shouldShowPwaCfr: Boolean
-        get() {
-            if (!canShowCfr || !inAppMessagesEnabled || continuousOnboardingFeatureEnabled) return false
-            // We only want to show this on the 3rd time a user visits a site
-            if (userNeedsToVisitInstallableSites) return false
-
-            // ShortcutManager::pinnedShortcuts is only available on Oreo+
-            if (!userKnowsAboutPwas) {
-                val manager = appContext.getSystemService(ShortcutManager::class.java)
-                val alreadyHavePwaInstalled = manager != null && manager.pinnedShortcuts.size > 0
-
-                // Users know about PWAs onboarding if they already have PWAs installed.
-                userKnowsAboutPwas = alreadyHavePwaInstalled
-            }
-            // Show dialog only if user does not know abut PWAs
-            return !userKnowsAboutPwas
-        }
-
-    var userKnowsAboutPwas by booleanPreference(
-        appContext.getPreferenceKey(R.string.pref_key_user_knows_about_pwa),
-        default = false,
-    )
-
     var shouldShowOpenInAppBanner by booleanPreference(
         appContext.getPreferenceKey(R.string.pref_key_should_show_open_in_app_banner),
         default = true,
@@ -1971,7 +1945,7 @@ class Settings(
     }
 
     /**
-     * Indicates if the [REPORT_SITE_DOMAINS_REPOSITORY_NAME] DataStore has been deleted.
+     * Indicates if the `report_site_domains_preferences` DataStore has been deleted.
      */
     private var hasDeletedReportSiteDomainsDataStore by booleanPreference(
         appContext.getPreferenceKey(R.string.pref_key_deleted_report_site_domains_datastore),
@@ -1979,12 +1953,12 @@ class Settings(
     )
 
     /**
-     * Deletes the [REPORT_SITE_DOMAINS_REPOSITORY_NAME] DataStore left behind on existing
+     * Deletes the `report_site_domains_preferences` DataStore left behind on existing
      * application after the legacy cookie banner feature was removed.
      */
     fun deleteReportSiteDomainsDataStoreIfNeeded() {
         if (!hasDeletedReportSiteDomainsDataStore) {
-            File(appContext.filesDir, "datastore/$REPORT_SITE_DOMAINS_REPOSITORY_NAME.preferences_pb").delete()
+            File(appContext.filesDir, "datastore/report_site_domains_preferences.preferences_pb").delete()
             hasDeletedReportSiteDomainsDataStore = true
         }
     }
@@ -2257,10 +2231,6 @@ class Settings(
         return featureGate.isAddressFeatureEnabled()
     }
 
-    private val cookieBannersSection: Map<CookieBannersSection, Int>
-        get() =
-            FxNimbus.features.cookieBanners.value().sectionsEnabled
-
     var signedInFxaAccount by booleanPreference(
         appContext.getPreferenceKey(R.string.pref_key_fxa_signed_in),
         default = false,
@@ -2309,11 +2279,19 @@ class Settings(
      *
      * @param hasUserBeenOnboarded Boolean to indicate whether the user has been onboarded.
      * @param featureEnabled Boolean to indicate whether the feature is enabled.
+     * @param forceOnboardingForBenchmark Boolean that opts a Baseline Profile generator back into
+     * onboarding. In benchmark builds onboarding is suppressed by default so generators don't spend
+     * emulator time dismissing it; ignored in every shipped build.
      */
     fun shouldShowOnboarding(
         hasUserBeenOnboarded: Boolean,
         featureEnabled: Boolean = onboardingFeatureEnabled,
+        forceOnboardingForBenchmark: Boolean = false,
     ): Boolean {
+        if (isBenchmarkBuild && !forceOnboardingForBenchmark) {
+            return false
+        }
+
         val shouldShowByDefaultConditions = featureEnabled && !hasUserBeenOnboarded
 
         val shouldShow = shouldShowByDefaultConditions || enablePersistentOnboarding
@@ -2359,6 +2337,13 @@ class Settings(
     )
 
     /**
+     * Records the current time as the completion timestamp of the initial onboarding flow.
+     */
+    fun recordOnboardingCompleted() {
+        onboardingCompletedTimestamp = currentTimeMillis()
+    }
+
+    /**
      * Indicates if the continuous onboarding feature is enabled.
      */
     var continuousOnboardingFeatureEnabled by booleanPreference(
@@ -2395,7 +2380,7 @@ class Settings(
      */
     var shouldShowMarketingOnboarding by booleanPreference(
         appContext.getPreferenceKey(R.string.pref_key_should_show_marketing_onboarding),
-        default = true,
+        default = false,
     )
 
     var shouldUseMinimalBottomToolbarWhenEnteringText by booleanPreference(
@@ -2421,30 +2406,6 @@ class Settings(
             HttpsOnlyMode.ENABLED_PRIVATE_ONLY
         } else {
             HttpsOnlyMode.ENABLED
-        }
-    }
-
-    /**
-     * Get the current mode for cookie banner handling
-     */
-    fun getCookieBannerHandling(): CookieBannerHandlingMode {
-        return when (shouldUseCookieBanner) {
-            true -> CookieBannerHandlingMode.REJECT_ALL
-            false -> {
-                CookieBannerHandlingMode.DISABLED
-            }
-        }
-    }
-
-    /**
-     * Get the current mode for cookie banner handling
-     */
-    fun getCookieBannerHandlingPrivateMode(): CookieBannerHandlingMode {
-        return when (shouldUseCookieBannerPrivateMode) {
-            true -> CookieBannerHandlingMode.REJECT_ALL
-            false -> {
-                CookieBannerHandlingMode.DISABLED
-            }
         }
     }
 
@@ -2585,84 +2546,19 @@ class Settings(
     )
 
     /**
-     * Indicates if Homepage Sports Widget is enabled.
+     * Indicates if the Homepage Weather Widget is enabled.
      */
-    var enableHomepageSportsWidget by booleanPreference(
-        key = appContext.getPreferenceKey(R.string.pref_key_enable_homepage_sports_widget),
-        default = { FxNimbus.features.homepageSportsWidget.value().enabled },
+    var enableHomepageWeatherWidget by booleanPreference(
+        key = appContext.getPreferenceKey(R.string.pref_key_enable_homepage_weather_widget),
+        default = { FxNimbus.features.homepageWeatherWidget.value().enabled },
     )
 
     /**
-     * Nimbus override: when true, treat the user as being within one week of the World Cup
-     * kickoff regardless of the device date. The natural date-based check still applies when
-     * false (the default).
+     * Indicates if the Homepage Weather Widget should be visible on the homepage.
      */
-    val forceOneWeekToWorldCup: Boolean
-        get() = FxNimbus.features.homepageSportsWidget.value().forceOneWeekToWorldCup
-
-    /**
-     * Nimbus-controlled minimum interval, in seconds, between Sports Widget fetches.
-     * Backed by the `fetch-throttle-seconds` variable (default 60s). Read at construction
-     * time of [org.mozilla.fenix.home.sports.SportsWidgetMiddleware]; Nimbus updates take
-     * effect on the next app launch.
-     */
-    val sportsWidgetFetchThrottleSeconds: Int
-        get() = FxNimbus.features.homepageSportsWidget.value().fetchThrottleSeconds
-
-    /**
-     * Debug-only: when true, the Homepage Sports Widget calls the GCP-hosted mock World
-     * Cup server instead of production Merino. Combined with [mockWorldCupServerSession],
-     * the device hits the mock's `<session-id>/api/v1/wcs/...` routes so QA can simulate
-     * any tournament state ahead of kickoff.
-     */
-    var useMockWorldCupServer by booleanPreference(
-        key = appContext.getPreferenceKey(R.string.pref_key_use_mock_world_cup_server),
-        default = false,
-    )
-
-    /**
-     * Debug-only: session prefix issued by the mock server's UI (e.g. `jolly-narwhal-39`).
-     * Required when [useMockWorldCupServer] is true.
-     */
-    var mockWorldCupServerSession by stringPreference(
-        key = appContext.getPreferenceKey(R.string.pref_key_mock_world_cup_server_session),
-        default = "",
-    )
-
-    /**
-     * Indicates if the Homepage Sports Widget should be visible on the homepage.
-     * This is the user-controlled visibility toggle, independent of the
-     * [enableHomepageSportsWidget] feature flag.
-     */
-    var showHomepageSportsWidget by booleanPreference(
-        key = appContext.getPreferenceKey(R.string.pref_key_show_homepage_sports_widget),
+    var showHomepageWeatherWidget by booleanPreference(
+        key = appContext.getPreferenceKey(R.string.pref_key_show_homepage_weather_widget),
         default = true,
-    )
-
-    /**
-     * Indicates if the Homepage Countdown Widget should be visible on the homepage.
-     * This is independent of the [enableHomepageSportsWidget] feature flag and [showHomepageSportsWidget] setting.
-     */
-    var showHomepageCountdownWidget by booleanPreference(
-        key = appContext.getPreferenceKey(R.string.pref_key_show_homepage_countdown_widget),
-        default = true,
-    )
-
-    /**
-     * The set of ISO codes of the user's selected countries to follow for the sports widget.
-     */
-    var sportsSelectedCountries by stringSetPreference(
-        appContext.getPreferenceKey(R.string.pref_key_sports_selected_countries),
-        default = setOf(),
-    )
-
-    /**
-     * Whether the user has dismissed the sports widget "Follow your team" card via the
-     * "Skip" action. When true, the "Follow your team" card is not shown again.
-     */
-    var hasSkippedSportsFollowTeam by booleanPreference(
-        key = appContext.getPreferenceKey(R.string.pref_key_sports_has_skipped_follow_team),
-        default = false,
     )
 
     /**
@@ -2814,20 +2710,22 @@ class Settings(
 
     /**
      * Returns the height of the browser toolbar height.
+     *
+     * @param uiContext Activity/Fragment/View [Context] with [Resources] matching the display
+     * the UI is currently rendered on. Don't use application's context!
      */
-    val browserToolbarHeight: Int
-        get() {
-            val isTallWindow = appContext.resources.configuration.screenHeightDp > TALL_SCREEN_HEIGHT_DP
-            val isWideWindow = appContext.resources.configuration.screenWidthDp > WIDE_SCREEN_WIDTH_DP
-            val isBottomExpandedOnTallNarrowWindow = toolbarPosition == ToolbarPosition.BOTTOM &&
-                shouldUseExpandedToolbar && isTallWindow && !isWideWindow
-            val dimen = if (isBottomExpandedOnTallNarrowWindow) {
-                R.dimen.composable_browser_toolbar_height_small
-            } else {
-                R.dimen.composable_browser_toolbar_height
-            }
-            return appContext.pixelSizeFor(dimen)
+    fun getBrowserToolbarHeight(uiContext: Context): Int {
+        val isTallWindow = uiContext.resources.configuration.screenHeightDp > TALL_SCREEN_HEIGHT_DP
+        val isWideWindow = uiContext.resources.configuration.screenWidthDp > WIDE_SCREEN_WIDTH_DP
+        val isBottomExpandedOnTallNarrowWindow = toolbarPosition == ToolbarPosition.BOTTOM &&
+            shouldUseExpandedToolbar && isTallWindow && !isWideWindow
+        val dimen = if (isBottomExpandedOnTallNarrowWindow) {
+            R.dimen.composable_browser_toolbar_height_small
+        } else {
+            R.dimen.composable_browser_toolbar_height
         }
+        return uiContext.pixelSizeFor(dimen)
+    }
 
     /**
      * Indicates if the microsurvey feature is enabled.
@@ -2869,6 +2767,12 @@ class Settings(
         default = false,
     )
 
+    /** Forces GPI (Google Play Integrity) authentication for IPProtection, set through Secret Settings. */
+    var ipProtectionUseGpi by booleanPreference(
+        key = appContext.getPreferenceKey(R.string.pref_key_ip_protection_use_gpi),
+        default = false,
+    )
+
     /**
      * Indicates if the user has already toggled the VPN on.
      */
@@ -2890,12 +2794,28 @@ class Settings(
     )
 
     /**
+     * Indicates if the IPProtection onboarding bottom sheet feature variable is enabled via Nimbus.
+     */
+    val shouldShowIPProtectionOnboardingBottomSheet: Boolean
+        get() = FxNimbus.features.ipProtection.value().showOnboardingBottomSheet
+
+    /**
      * Indicates if the IPProtection feature is available for the user.
      *
      * The flag is backed by a Nimbus `ip-protection` feature, with an option to override it through secret settings.
      */
     val isIPProtectionAvailable: Boolean
         get() = FxNimbus.features.ipProtection.value().enabled || isIPProtectionEnabled
+
+    /**
+     * Persists IPProtection locations state set through Secret Settings.
+     *
+     * `true` makes the IPProtection location UI elements interactable.
+     */
+    var isIPProtectionLocationsEnabled by booleanPreference(
+        key = appContext.getPreferenceKey(R.string.pref_key_enable_ip_protection_locations),
+        default = Config.channel.isDebug,
+    )
 
     /**
      * Tracks how many times the summarize menu item has been shown.
@@ -2949,6 +2869,13 @@ class Settings(
     )
 
     /**
+     * Records the current time as the last time the Set as default Browser prompt was shown.
+     */
+    fun recordSetAsDefaultPromptShownTime() {
+        lastSetAsDefaultPromptShownTimeInMillis = currentTimeMillis()
+    }
+
+    /**
      * Number of times the Set as default Browser prompt has been displayed to the user.
      */
     var numberOfSetAsDefaultPromptShownTimes by intPreference(
@@ -2981,6 +2908,15 @@ class Settings(
     )
 
     /**
+     * Feature flag that indicates if the "Check Archived Version" button is shown on eligible
+     * error pages. Off by default; the toggle is only exposed via secret settings on Nightly.
+     */
+    var isWaybackMachineEnabled by booleanPreference(
+        key = appContext.getPreferenceKey(R.string.pref_key_enable_wayback_machine),
+        default = false,
+    )
+
+    /**
      * Indicates if the Set as default Browser prompt should be displayed to the user.
      */
     fun shouldShowSetAsDefaultPrompt(
@@ -2988,7 +2924,7 @@ class Settings(
     ): Boolean {
         if (!nimbusFeature.enabled) return false
 
-        val now = System.currentTimeMillis()
+        val now = currentTimeMillis()
 
         val daysOk = nimbusFeature.daysBetweenPrompts?.let { intervalDays ->
             (now - lastSetAsDefaultPromptShownTimeInMillis) > intervalDays * ONE_DAY_MS
@@ -3014,7 +2950,7 @@ class Settings(
      */
     fun setAsDefaultPromptCalled() {
         numberOfSetAsDefaultPromptShownTimes += 1
-        lastSetAsDefaultPromptShownTimeInMillis = System.currentTimeMillis()
+        recordSetAsDefaultPromptShownTime()
         coldStartsBetweenSetAsDefaultPrompts = 0
     }
 
@@ -3255,7 +3191,7 @@ class Settings(
      */
     fun shouldShowNewsButtonAnimation(): Boolean {
         return (newsButtonForegroundCount % MAX_ANIMATION_FOREGROUND == 0) &&
-            (System.currentTimeMillis() - newsButtonAnimationLastShownMillis >= ONE_WEEK_MS)
+            (currentTimeMillis() - newsButtonAnimationLastShownMillis >= ONE_WEEK_MS)
     }
 
     /**
@@ -3263,7 +3199,7 @@ class Settings(
      * and resetting [newsButtonForegroundCount].
      */
     fun recordNewsButtonAnimationShown() {
-        newsButtonAnimationLastShownMillis = System.currentTimeMillis()
+        newsButtonAnimationLastShownMillis = currentTimeMillis()
         newsButtonForegroundCount = 0
     }
 
@@ -3407,6 +3343,14 @@ class Settings(
     )
 
     /**
+     * Indicates if the OLED theme is enabled.
+     */
+    var enableOledTheme by booleanPreference(
+        key = appContext.getPreferenceKey(R.string.pref_key_enable_oled_theme),
+        default = { FxNimbus.features.oledTheme.value().enabled },
+    )
+
+    /**
      * Indicates if Homepage Customization is enabled.
      */
     var enableHomepageCustomization by booleanPreference(
@@ -3420,5 +3364,13 @@ class Settings(
     var enableHomepageTrendingRecentSearch by booleanPreference(
         key = appContext.getPreferenceKey(R.string.pref_key_enable_homepage_trending_recent_search),
         default = { FxNimbus.features.homepageTrendingRecentSearch.value().enabled },
+    )
+
+    /**
+     * Indicates if the Android PDF tools are enabled for the PDF viewer.
+     */
+    var enablePdfTools by booleanPreference(
+        key = appContext.getPreferenceKey(R.string.pref_key_enable_pdf_tools),
+        default = { FxNimbus.features.pdfViewer.value().androidUiTools },
     )
 }

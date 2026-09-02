@@ -33,4 +33,25 @@ class RecentlyClosedTabsPage(composeRule: AndroidComposeTestRule<HomeActivityInt
     override fun mozGetSelectorsByGroup(group: String): List<Selector> {
         return RecentlyClosedTabsSelectors.all.filter { it.groups.contains(group) }
     }
+
+    fun verifyRecentlyClosedItem(title: String, url: String): RecentlyClosedTabsPage {
+        mozVerify(RecentlyClosedTabsSelectors.RECENTLY_CLOSED_ITEM(title))
+        mozVerify(RecentlyClosedTabsSelectors.RECENTLY_CLOSED_ITEM_URL(url))
+        return this
+    }
+
+    fun openRecentlyClosedItem(title: String): RecentlyClosedTabsPage {
+        mozClick(RecentlyClosedTabsSelectors.RECENTLY_CLOSED_ITEM(title))
+        return this
+    }
+
+    fun deleteRecentlyClosedItem(): RecentlyClosedTabsPage {
+        mozClick(RecentlyClosedTabsSelectors.ITEM_DELETE_BUTTON)
+        return this
+    }
+
+    fun verifyEmptyRecentlyClosedList(): RecentlyClosedTabsPage {
+        mozVerify(RecentlyClosedTabsSelectors.EMPTY_RECENTLY_CLOSED_TABS_LIST)
+        return this
+    }
 }

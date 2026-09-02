@@ -7,6 +7,7 @@ package org.mozilla.fenix.ui.efficiency.tests
 import org.junit.Ignore
 import org.junit.Test
 import org.mozilla.fenix.customannotations.SmokeTest
+import org.mozilla.fenix.helpers.Constants
 import org.mozilla.fenix.helpers.MockBrowserDataHelper.createBookmarkItem
 import org.mozilla.fenix.helpers.MockBrowserDataHelper.generateBookmarkFolder
 import org.mozilla.fenix.helpers.TestAssetHelper.getGenericAsset
@@ -78,7 +79,8 @@ class BookmarksTest : BaseTest() {
             .mozClick(BookmarksSelectors.SHARE_BUTTON)
         on.shareOverlay.mozVerifyElementsByGroup("shareTabLayout")
         on.shareOverlay.verifySharingWithSelectedApp(
-            appName = "Gmail",
+            appName = Constants.GMAIL_APP_NAME,
+            appPackageName = Constants.PackageName.GMAIL_APP,
             content = defaultWebPage.url.toString(),
             subject = defaultWebPage.title,
         )

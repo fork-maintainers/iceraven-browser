@@ -9,11 +9,17 @@ import org.mozilla.fenix.ui.efficiency.helpers.SwipeDirection
 
 sealed class NavigationStep {
     data class Click(val selector: Selector) : NavigationStep()
+    data class LongClick(val selector: Selector) : NavigationStep()
     data class ClickIfPresent(val selector: Selector) : NavigationStep()
     data class Swipe(val selector: Selector, val direction: SwipeDirection = SwipeDirection.UP) : NavigationStep()
-    data class OpenNotificationsTray(val openNotificationsTrayAction: () -> Unit) : NavigationStep()
+
+    // No parameters: BasePage always calls mozOpenNotificationsTray(). It previously took an
+    // openNotificationsTrayAction lambda that was never invoked — dead weight, and a trap for anyone
+    // who passed a real action expecting it to run.
+    object OpenNotificationsTray : NavigationStep()
     data class Action(val action: () -> Unit) : NavigationStep()
     data class EnterText(val selector: Selector) : NavigationStep()
+    data class EnterTextValue(val selector: Selector, val text: String) : NavigationStep()
     data class PressEnter(val selector: Selector) : NavigationStep()
     object PressBack : NavigationStep()
     object WaitForIdle : NavigationStep()

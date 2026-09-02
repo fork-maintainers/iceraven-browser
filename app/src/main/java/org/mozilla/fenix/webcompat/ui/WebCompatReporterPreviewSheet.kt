@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.only
@@ -44,7 +43,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import mozilla.components.compose.base.BottomSheetHandle
-import mozilla.components.compose.base.button.FilledButton
 import org.mozilla.fenix.R
 import org.mozilla.fenix.components.menu.compose.ExpandableMenuItemAnimation
 import org.mozilla.fenix.components.menu.compose.MenuGroup
@@ -57,10 +55,8 @@ import mozilla.components.ui.icons.R as iconsR
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun WebCompatReporterPreviewSheet(
-    isSendButtonEnabled: Boolean,
     previewReporterItems: List<PreviewReporterItem>,
     onDismissRequest: () -> Unit,
-    onSendClick: () -> Unit,
 ) {
     ModalBottomSheet(
         onDismissRequest = onDismissRequest,
@@ -80,9 +76,7 @@ internal fun WebCompatReporterPreviewSheet(
         contentWindowInsets = { WindowInsets.safeDrawing.only(WindowInsetsSides.Bottom) },
     ) {
         PreviewSheetContent(
-            isSendButtonEnabled = isSendButtonEnabled,
             previewReporterItems = previewReporterItems,
-            onSendClick = onSendClick,
         )
     }
 }
@@ -90,15 +84,18 @@ internal fun WebCompatReporterPreviewSheet(
 @Composable
 private fun PreviewSheetContent(
     previewReporterItems: List<PreviewReporterItem>,
-    onSendClick: () -> Unit,
-    isSendButtonEnabled: Boolean,
 ) {
     val expandedItems = remember { mutableStateMapOf<String, Boolean>() }
 
     Column(
         modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = FirefoxTheme.layout.space.dynamic200),
+            .fillMaxWidth()
+            .verticalScroll(rememberScrollState())
+            .padding(
+                start = FirefoxTheme.layout.space.dynamic200,
+                end = FirefoxTheme.layout.space.dynamic200,
+                bottom = FirefoxTheme.layout.space.dynamic200,
+            ),
         horizontalAlignment = Alignment.Start,
     ) {
         Text(
@@ -108,31 +105,106 @@ private fun PreviewSheetContent(
 
         Spacer(modifier = Modifier.height(FirefoxTheme.layout.space.static200))
 
-        Column(
+        MenuGroup {
+            for (previewReporterItem in previewReporterItems) {
+                val isExpanded = expandedItems[previewReporterItem.title] == true
+                PreviewReporterItemRow(
+                    previewReporterItem = previewReporterItem,
+                    isExpanded = isExpanded,
+                    onExpandToggle = { expandedItems[previewReporterItem.title] = !isExpanded },
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun PreviewReporterItemRow(
+    previewReporterItem: PreviewReporterItem,
+    isExpanded: Boolean,
+    onExpandToggle: () -> Unit,
+) {
+    val rotation by animateFloatAsState(targetValue = if (isExpanded) 180f else 0f)
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(MaterialTheme.shapes.extraSmall),
+    ) {
+        Row(
             modifier = Modifier
-                .weight(1f)
-                .verticalScroll(rememberScrollState()),
+                .fillMaxWidth()
+                .background(
+                    color = if (isExpanded) {
+                        MaterialTheme.colorScheme.surfaceContainerHighest
+                    } else {
+                        MaterialTheme.colorScheme.surfaceContainerHigh
+                    },
+                )
+                .clickable(
+                    onClickLabel = stringResource(
+                        if (isExpanded) {
+                            R.string.a11y_action_label_collapse
+                        } else {
+                            R.string.a11y_action_label_expand
+                        },
+                    ),
+                    onClick = onExpandToggle,
+                )
+                .padding(FirefoxTheme.layout.space.static200),
+            verticalAlignment = Alignment.CenterVertically,
         ) {
-            MenuGroup {
-                for (previewReporterItem in previewReporterItems) {
-                    val isExpanded = expandedItems[previewReporterItem.title] == true
-                    PreviewReporterItemRow(
-                        previewReporterItem = previewReporterItem,
-                        isExpanded = isExpanded,
-                        onExpandToggle = { expandedItems[previewReporterItem.title] = !isExpanded },
+            Text(
+                text = previewReporterItem.title,
+                modifier = Modifier.weight(1f),
+                style = FirefoxTheme.typography.body1,
+                color = MaterialTheme.colorScheme.onSurface,
+            )
+
+            Row(
+                modifier = Modifier
+                    .background(
+                        color = MaterialTheme.colorScheme.surfaceContainerHighest,
+                        shape = MaterialTheme.shapes.large,
                     )
-                }
+                    .padding(all = 2.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Icon(
+                    painter = painterResource(id = iconsR.drawable.mozac_ic_chevron_down_20),
+                    contentDescription = null,
+                    modifier = Modifier.rotate(rotation),
+                    tint = MaterialTheme.colorScheme.onSurface,
+                )
             }
         }
 
-        FilledButton(
-            text = stringResource(id = R.string.webcompat_reporter_preview_bottom_sheet_send),
-            onClick = onSendClick,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = FirefoxTheme.layout.space.static200),
-            enabled = isSendButtonEnabled,
-        )
+        ExpandableMenuItemAnimation(isExpanded = isExpanded) {
+            PreviewReporterItemExpandedContent(previewReporterItem.data)
+        }
+    }
+}
+
+@Composable
+private fun PreviewReporterItemExpandedContent(data: Map<String, String>) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(color = MaterialTheme.colorScheme.surfaceContainerHigh),
+    ) {
+        Spacer(modifier = Modifier.height(FirefoxTheme.layout.space.static100))
+        for ((key, value) in data) {
+            Text(
+                text = "$key: $value",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = FirefoxTheme.layout.space.static200),
+                style = FirefoxTheme.typography.body2,
+                color = MaterialTheme.colorScheme.secondary,
+            )
+        }
+        Spacer(modifier = Modifier.height(FirefoxTheme.layout.space.static100))
     }
 }
 
@@ -255,9 +327,7 @@ private fun WebCompatReporterPreviewSheetContent() {
         )
     }
     PreviewSheetContent(
-        isSendButtonEnabled = true,
         previewReporterItems = previewReporterItems,
-        onSendClick = {},
     )
 }
 

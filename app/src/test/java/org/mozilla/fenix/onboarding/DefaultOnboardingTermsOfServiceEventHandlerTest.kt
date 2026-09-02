@@ -43,6 +43,7 @@ class DefaultOnboardingTermsOfServiceEventHandlerTest {
             showManagePrivacyPreferencesDialog = { showManagePrivacyPreferencesDialogCalled = true },
             settings = settings,
             startGlean = { gleanStarted = true },
+            currentTimeMillis = { TIME_IN_MILLIS },
         )
     }
 
@@ -82,7 +83,7 @@ class DefaultOnboardingTermsOfServiceEventHandlerTest {
 
     @Test
     fun onAcceptTermsButtonClicked() {
-        eventHandler.onAcceptTermsButtonClicked(nowMillis = TIME_IN_MILLIS)
+        eventHandler.onAcceptTermsButtonClicked()
 
         verify {
             telemetryRecorder.onTermsOfServiceManagerAcceptTermsButtonClick()

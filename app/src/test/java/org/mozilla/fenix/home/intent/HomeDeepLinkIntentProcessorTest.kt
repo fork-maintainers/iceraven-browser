@@ -262,6 +262,8 @@ class HomeDeepLinkIntentProcessorTest {
                 url = "https://example.com",
                 title = "TestTitle",
                 source = ShareSource.DEEP_LINK,
+                text = "TestText",
+                subject = "TestSubject",
                 navigateToShareFragment = capture(fallbackLambda),
             )
         } just Runs
@@ -274,6 +276,8 @@ class HomeDeepLinkIntentProcessorTest {
                 url = "https://example.com",
                 title = "TestTitle",
                 source = ShareSource.DEEP_LINK,
+                text = "TestText",
+                subject = "TestSubject",
                 navigateToShareFragment = any(),
             )
         }
@@ -391,6 +395,22 @@ class HomeDeepLinkIntentProcessorTest {
                 NavGraphDirections.actionGlobalProtectionsDashboard(
                     customTabSessionId = null,
                     source = ProtectionsDashboardFragment.SOURCE_DEEPLINK,
+                ),
+            )
+        }
+        verify { out wasNot Called }
+    }
+
+    @Test
+    fun `process settings_ip_protection deep link`() {
+        assertTrue(processorHome.process(testIntent("settings_ip_protection"), navController, out, settings))
+
+        verify { activity wasNot Called }
+        verify {
+            navController.navigate(
+                NavGraphDirections.actionGlobalIpProtectionFragment(
+                    entrypoint = FenixFxAEntryPoint.DeepLink,
+                    startAuthFlow = false,
                 ),
             )
         }

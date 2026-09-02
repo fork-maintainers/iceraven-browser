@@ -4,23 +4,15 @@
 
 package org.mozilla.fenix.benchmark.baselineprofile
 
-import android.content.Intent
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.benchmark.macro.junit4.BaselineProfileRule
 import org.junit.Rule
 import org.junit.Test
-import org.mozilla.fenix.benchmark.utils.FENIX_HOME_DEEP_LINK
 import org.mozilla.fenix.benchmark.utils.HtmlAsset
 import org.mozilla.fenix.benchmark.utils.MockWebServerRule
 import org.mozilla.fenix.benchmark.utils.TARGET_PACKAGE
-import org.mozilla.fenix.benchmark.utils.closeAllTabs
-import org.mozilla.fenix.benchmark.utils.completeOnboarding
-import org.mozilla.fenix.benchmark.utils.enterSearchMode
-import org.mozilla.fenix.benchmark.utils.loadSite
-import org.mozilla.fenix.benchmark.utils.openNewTabOnTabsTray
-import org.mozilla.fenix.benchmark.utils.openTabsTray
-import org.mozilla.fenix.benchmark.utils.switchTabs
+import org.mozilla.fenix.benchmark.utils.switchTabsJourney
 import org.mozilla.fenix.benchmark.utils.url
 
 /**
@@ -60,26 +52,12 @@ class SwitchTabsBaselineProfileGenerator {
     fun generateBaselineProfile() {
         rule.collect(
             packageName = TARGET_PACKAGE,
+            maxIterations = baselineProfileMaxIterations(),
         ) {
-            val intent = Intent(Intent.ACTION_VIEW, FENIX_HOME_DEEP_LINK)
-            intent.setPackage(packageName)
-
-            startActivityAndWait(intent = intent)
-            device.completeOnboarding()
-
-            device.enterSearchMode()
-            val simpleHtmlUrl = mockRule.url(HtmlAsset.SIMPLE)
-            device.loadSite(url = simpleHtmlUrl)
-
-            device.openTabsTray()
-            device.openNewTabOnTabsTray()
-            device.loadSite(url = mockRule.url(HtmlAsset.LONG))
-
-            device.openTabsTray()
-            device.switchTabs(siteName = HtmlAsset.SIMPLE.title, newTabUrl = simpleHtmlUrl)
-
-            device.openTabsTray()
-            device.closeAllTabs()
+            switchTabsJourney(
+                simpleHtmlUrl = mockRule.url(HtmlAsset.SIMPLE),
+                longHtmlUrl = mockRule.url(HtmlAsset.LONG),
+            )
         }
     }
 }

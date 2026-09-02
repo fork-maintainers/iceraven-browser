@@ -19,6 +19,7 @@ import org.mozilla.fenix.GleanMetrics.RecentlyClosedTabs
 import org.mozilla.fenix.R
 import org.mozilla.fenix.browser.browsingmode.BrowsingMode
 import org.mozilla.fenix.components.AppStore
+import org.mozilla.fenix.components.share.ShareSheetChooserAction
 import org.mozilla.fenix.components.share.ShareSource
 import org.mozilla.fenix.components.usecases.ShareUseCases
 import org.mozilla.fenix.ext.openToBrowser
@@ -112,6 +113,14 @@ class DefaultRecentlyClosedController(
         shareUseCases.shareItems(
             items = shareData,
             source = ShareSource.RECENTLY_CLOSED,
+            chooserActions = if (tabs.size == 1) {
+                listOf(
+                    ShareSheetChooserAction.SEND_TO_DEVICES,
+                    ShareSheetChooserAction.QR_CODE,
+                )
+            } else {
+                listOf(ShareSheetChooserAction.SEND_TO_DEVICES)
+            },
             navigateToShareFragment = {
                 navController.navigate(
                     RecentlyClosedFragmentDirections.actionGlobalShareFragment(

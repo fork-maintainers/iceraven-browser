@@ -17,12 +17,13 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
+import mozilla.components.support.base.log.logger.Logger
 import org.mozilla.fenix.ext.components
 import java.io.IOException
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
-import kotlin.coroutines.suspendCoroutine
 
 /**
  * Content Provider that enables stopping the Firefox Profiler and retrieving profile data via ADB.
@@ -38,6 +39,8 @@ class ProfilerProvider : ContentProvider() {
         private const val PATH_STOP_AND_UPLOAD = "stop-and-upload"
         private const val CODE_STOP_AND_UPLOAD = 1
     }
+
+    private val logger = Logger("ProfilerProvider")
 
     // Needed to inject dispatcher for tests
     internal var ioDispatcher: CoroutineDispatcher = Dispatchers.IO
@@ -107,13 +110,16 @@ class ProfilerProvider : ContentProvider() {
                 }
 
                 val data = withContext(Dispatchers.Main) {
-                    suspendCoroutine { continuation ->
+                    suspendCancellableCoroutine { continuation ->
                         profiler.stopProfiler(
                             onSuccess = { data -> continuation.resume(data) },
                             onError = { throwable ->
                                 continuation.resumeWithException(throwable)
                             },
                         )
+                        continuation.invokeOnCancellation {
+                            logger.info("Profiler stop operation cancelled")
+                        }
                     }
                 }
 

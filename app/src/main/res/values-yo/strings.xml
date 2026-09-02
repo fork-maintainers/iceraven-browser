@@ -581,8 +581,6 @@
   <string name="history_search_1">Tẹ àwọn ọ̀rọ̀ wíwá si</string>
   <!-- Text for the button to clear all history -->
   <string name="history_delete_all">Pa ìtàn rẹ́</string>
-  <!-- Text for the snackbar to confirm that multiple browsing history items has been deleted -->
-  <string name="history_delete_multiple_items_snackbar">Ìtàn ti Parẹ́</string>
   <!-- Text for the snackbar to confirm that a single browsing history item has been deleted. %1$s is the shortened URL of the deleted history item. -->
   <string name="history_delete_single_item_snackbar">Parẹ́ %1$s</string>
   <!-- Context description text for the button to delete a single history item -->
@@ -663,12 +661,6 @@
     Button label that take the user to the Android App setting
   -->
   <string name="phone_feature_go_to_settings">Lo sí ètò</string>
-  <!--
-    Content description (not visible, for screen readers etc.): Quick settings sheet
-    to give users access to site specific information / settings. For example:
-    Secure settings status and a button to modify site permissions
-  -->
-  <string name="quick_settings_sheet">Àwọn ìwé ètò kíákíá</string>
   <!-- Label that indicates that this option it the recommended one -->
   <string name="phone_feature_recommended">Ìgbàníyànjú</string>
   <!-- Button label for clearing all the information of site permissions -->
@@ -957,12 +949,6 @@
   <!--
     Enhanced Tracking Protection
 
-    Link displayed in enhanced tracking protection panel to access tracking protection settings
-  -->
-  <string name="etp_settings">Àwọn ètò Ìdáábòbò</string>
-  <!--
-    Enhanced Tracking Protection
-
     Preference title for enhanced tracking protection settings
   -->
   <string name="preference_enhanced_tracking_protection">Ètò ìdáàbòbò tó múnádóko</string>
@@ -1006,12 +992,8 @@
   <string name="preference_enhanced_tracking_protection_custom_tracking_content_2">Nínu táàbù ìkọ̀kọ̀ nìkan</string>
   <!-- Preference for enhanced tracking protection for the custom protection settings -->
   <string name="preference_enhanced_tracking_protection_custom_cryptominers">Àwọn kíríputomínà</string>
-  <!-- Button label for navigating to the Enhanced Tracking Protection details -->
-  <string name="enhanced_tracking_protection_details">Ẹ̀kúnrẹ́rẹ́</string>
   <!-- Header for categories that are being being blocked by current Enhanced Tracking Protection settings -->
   <string name="enhanced_tracking_protection_blocked">Ti dènà</string>
-  <!-- Header for categories that are being not being blocked by current Enhanced Tracking Protection settings -->
-  <string name="enhanced_tracking_protection_allowed">Ti fàyègbàá</string>
   <!-- Category of trackers (social media trackers) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_social_media_trackers_title">Olùtọpasẹ̀ Ìkànnì Ayélujára</string>
   <!-- Description of social media trackers that can be blocked by Enhanced Tracking Protection -->
@@ -1032,10 +1014,6 @@
   <string name="etp_tracking_content_title">Kóòdù ítọpasẹ̀</string>
   <!-- Description of tracking content that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_tracking_content_description">Dá àwọn ìpolówó dúró, àwọn fídíò àti àwọn àkóónú láti inú àwọn ìkójọpọ̀ tí kóòdù ìtọpasẹ̀ kún sínú rẹ̀. Ó lè ní àwọn ipa lóri ìṣiṣẹ́ sí ojú òpó wẹ́ẹ̀bù.</string>
-  <!-- Enhanced Tracking Protection message that protection is currently on for this site -->
-  <string name="etp_panel_on">Àwọn ìdáàbòbò wà ní TÍTÀN fún sáìtì yìí</string>
-  <!-- Enhanced Tracking Protection message that protection is currently off for this site -->
-  <string name="etp_panel_off">Àwọn ìdáábòbò wà ní PÍPA fún sáìtì yìí</string>
   <!-- Header for exceptions list for which sites enhanced tracking protection is always off -->
   <string name="enhanced_tracking_protection_exceptions">Ètò ìdáàbòbò tó múná ti wà ní pípa fún àwọn ojú òpó wẹ́ẹ̀bù yìí</string>
   <!--
@@ -1054,13 +1032,6 @@
   <string name="etp_redirect_trackers_title">Àtúnjúwe Àwọn ohun ìtọpasè</string>
   <!-- Description of redirect tracker cookies that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_redirect_trackers_description">Pa kúkíìsì rẹ́ ètò tí àwọn aṣàtúnjúwe ṣe sí ìtọpasẹ̀ àwọn ojú ọ̀pọ́ wẹ́ẹ̀bù tí a mọ̀.</string>
-  <!--
-    Description of the SmartBlock Enhanced Tracking Protection feature. The * symbol is intentionally hardcoded here,
-    as we use it on the UI to indicate which trackers have been partially unblocked.
-  -->
-  <string name="preference_etp_smartblock_description">Nínú àwọn olùtọpasẹ̀ tí o ṣàmìsí ní ìsàlẹ̀ ti jẹ́ ṣíṣí sílẹ̀ lóri ojú-ìwé yìí nítorí pé o ní àjọṣepọ̀ pẹ̀lú wọn *.</string>
-  <!-- Text displayed that links to website about enhanced tracking protection SmartBlock -->
-  <string name="preference_etp_smartblock_learn_more">Kọ́ si</string>
   <!-- About page link text to open support link -->
   <string name="about_support">Àtìlẹ́yìn</string>
   <!-- About page link text to list of past crashes (like about:crashes on desktop) -->
@@ -1269,14 +1240,8 @@
   <string name="phone_feature_blocked_step_permissions"><![CDATA[2. Fọwọ́ ba<b>ìgbàláàyè</b>]]></string>
   <!-- Third step for the allowing a permission (%1$s is the permission name, for example "Camera"). -->
   <string name="phone_feature_blocked_step_feature"><![CDATA[3. Yíipadà <b>%1$s</b> láti TÀN-ÁN]]></string>
-  <!-- Label that indicates a site is using a secure connection -->
-  <string name="quick_settings_sheet_secure_connection_2">Ààbò wá lórí ìbáṣepọ̀</string>
-  <!-- Label that indicates a site is using a insecure connection -->
-  <string name="quick_settings_sheet_insecure_connection_2">Kò sí ààbò lórí ìbáṣepọ̀</string>
   <!-- Label to clear site data -->
   <string name="clear_site_data">Pa àwọn àkójọ dátà aláfiránṣẹ́ ti wẹ́ẹ̀bù àti dátà sáìtì rẹ́</string>
-  <!-- Confirmation message for a dialog confirming if the user wants to delete all data for current site. %s is the domain of the site. -->
-  <string name="confirm_clear_site_data"><![CDATA[Ṣé ó dá ẹ lójú pé o fẹ́ yọ gbogbo àwọn àkójọ dátà aláfiránṣẹ́ ti wẹ́ẹ̀bù àti dátà fún sáìtì náà<b>%s</b>?]]></string>
   <!-- Confirmation message for a dialog confirming if the user wants to delete all the permissions for all sites -->
   <string name="confirm_clear_permissions_on_all_sites">Ṣé ó dá ẹ lójú pé o fẹ́ yọ gbogbo ìgbààyè yìí fún gbogbo sáìtì?</string>
   <!-- Confirmation message for a dialog confirming if the user wants to delete all the permissions for a site -->
@@ -1289,11 +1254,6 @@
   <string name="browser_menu_add_to_shortcuts">Ṣàfikún àwọn ọ̀nà-àbùjá</string>
   <!-- Browser menu button that removes a shortcut from the home fragment -->
   <string name="browser_menu_remove_from_shortcuts">Yọọ́ kúrò nínú àwọn ọ̀nà-àbùjá</string>
-  <!--
-    text shown before the issuer name to indicate who its verified by, %1$s is the name of
-    the certificate authority that verified the ticket
-  -->
-  <string name="certificate_info_verified_by">Jẹ́rìí sí láti ọwọ́: %1$s</string>
   <!-- Positive action of a dialog asking to delete -->
   <string name="dialog_delete_positive">Parẹ́</string>
   <!-- Negative action of a dialog asking to delete login -->

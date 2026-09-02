@@ -8,21 +8,16 @@ import androidx.compose.ui.test.junit4.AndroidComposeTestRule
 import org.mozilla.fenix.helpers.HomeActivityIntentTestRule
 import org.mozilla.fenix.ui.efficiency.helpers.BasePage
 import org.mozilla.fenix.ui.efficiency.helpers.Selector
-import org.mozilla.fenix.ui.efficiency.navigation.NavigationRegistry
 import org.mozilla.fenix.ui.efficiency.selectors.CollectionsSelectors
 
 class CollectionsPage(composeRule: AndroidComposeTestRule<HomeActivityIntentTestRule, *>) : BasePage(composeRule) {
     override val pageName = "CollectionsPage"
 
-    init {
-        NavigationRegistry.register(
-            from = "HomePage",
-            to = pageName,
-            steps = listOf(
-                // Will need to create selectors for different pages to have a nav path
-            ),
-        )
-    }
+    // No navigation edge is registered on purpose. This page previously registered one from HomePage
+    // with an empty step list, which made navigateToPage() a silent no-op. Collections are a section of
+    // the tabs tray rather than a screen of their own, and CollectionsTest only uses this page as a
+    // selector namespace after arriving by other means — it never calls navigateToPage() on it. With no
+    // edge, navigateToPage() fails loudly instead of pretending to have navigated.
 
     override fun mozGetSelectorsByGroup(group: String): List<Selector> {
         return CollectionsSelectors.all.filter { it.groups.contains(group) }

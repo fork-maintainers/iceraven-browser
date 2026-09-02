@@ -4,6 +4,7 @@
 
 package org.mozilla.fenix.components.usecases
 
+import androidx.core.net.toUri
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.spyk
@@ -23,6 +24,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mozilla.fenix.GleanMetrics.NativeShareSheet
+import org.mozilla.fenix.components.share.ShareSheetChooserAction
 import org.mozilla.fenix.components.share.ShareSource
 import org.mozilla.fenix.components.usecases.fake.FakeShareSheetLauncher
 import org.mozilla.fenix.helpers.FenixGleanTestRule
@@ -104,6 +106,12 @@ class ShareUseCasesTest {
                     title = "Mozilla",
                     isPrivate = false,
                     isCustomTab = false,
+                    chooserActions = listOf(
+                        ShareSheetChooserAction.SAVE_PDF,
+                        ShareSheetChooserAction.PRINT,
+                        ShareSheetChooserAction.SEND_TO_DEVICES,
+                        ShareSheetChooserAction.QR_CODE,
+                    ),
                 ),
             ),
             shareSheetLauncher.urlShares,
@@ -113,6 +121,42 @@ class ShareUseCasesTest {
         val events = NativeShareSheet.shown.testGetValue()
         assertEquals(1, events?.size)
         assertEquals("browser_menu", events?.single()?.extra?.get("source"))
+    }
+
+    @Config(sdk = [34])
+    @Test
+    fun `GIVEN text and subject WHEN shareUrl is called THEN they are forwarded to the system share sheet`() {
+        shareUseCases.shareUrl(
+            id = null,
+            url = "https://mozilla.org",
+            title = "Mozilla",
+            source = ShareSource.DEEP_LINK,
+            text = "Check this out",
+            subject = "A subject",
+            navigateToShareFragment = navigateToShareFragment,
+        )
+
+        assertEquals(
+            listOf(
+                FakeShareSheetLauncher.UrlShare(
+                    id = null,
+                    longUrl = "https://mozilla.org",
+                    title = "Mozilla",
+                    isPrivate = false,
+                    isCustomTab = false,
+                    text = "Check this out",
+                    subject = "A subject",
+                    chooserActions = listOf(
+                        ShareSheetChooserAction.SAVE_PDF,
+                        ShareSheetChooserAction.PRINT,
+                        ShareSheetChooserAction.SEND_TO_DEVICES,
+                        ShareSheetChooserAction.QR_CODE,
+                    ),
+                ),
+            ),
+            shareSheetLauncher.urlShares,
+        )
+        assertFalse(navigatedToShareFragment)
     }
 
     @Config(sdk = [34])
@@ -213,6 +257,35 @@ class ShareUseCasesTest {
         val events = NativeShareSheet.shown.testGetValue()
         assertEquals(1, events?.size)
         assertEquals("home", events?.single()?.extra?.get("source"))
+    }
+
+    @Config(sdk = [34])
+    @Test
+    fun `GIVEN chooserActions and a thumbnailUri WHEN shareItems is called THEN they are forwarded to the system share sheet`() {
+        val items = listOf(ShareData(url = "https://mozilla.org", title = "Mozilla"))
+        val thumbnailUri = "content://thumbnail".toUri()
+
+        shareUseCases.shareItems(
+            items = items,
+            source = ShareSource.TABS_TRAY,
+            subject = "My tab group",
+            chooserActions = ShareSheetChooserAction.tabChooserActions,
+            thumbnailUri = thumbnailUri,
+            navigateToShareFragment = navigateToShareFragment,
+        )
+
+        assertEquals(
+            listOf(
+                FakeShareSheetLauncher.ItemsShare(
+                    items = items,
+                    isPrivate = false,
+                    subject = "My tab group",
+                    chooserActions = ShareSheetChooserAction.tabChooserActions,
+                    thumbnailUri = thumbnailUri,
+                ),
+            ),
+            shareSheetLauncher.itemsShares,
+        )
     }
 
     @Config(sdk = [34])

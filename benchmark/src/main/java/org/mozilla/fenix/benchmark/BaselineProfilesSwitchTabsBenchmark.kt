@@ -4,7 +4,6 @@
 
 package org.mozilla.fenix.benchmark
 
-import android.content.Intent
 import android.os.SystemClock
 import androidx.benchmark.macro.BaselineProfileMode
 import androidx.benchmark.macro.CompilationMode
@@ -13,18 +12,11 @@ import androidx.benchmark.macro.StartupTimingMetric
 import androidx.benchmark.macro.junit4.MacrobenchmarkRule
 import org.junit.Rule
 import org.junit.Test
-import org.mozilla.fenix.benchmark.utils.FENIX_HOME_DEEP_LINK
 import org.mozilla.fenix.benchmark.utils.HtmlAsset
 import org.mozilla.fenix.benchmark.utils.MockWebServerRule
 import org.mozilla.fenix.benchmark.utils.TARGET_PACKAGE
-import org.mozilla.fenix.benchmark.utils.closeAllTabs
-import org.mozilla.fenix.benchmark.utils.completeOnboarding
-import org.mozilla.fenix.benchmark.utils.enterSearchMode
-import org.mozilla.fenix.benchmark.utils.loadSite
 import org.mozilla.fenix.benchmark.utils.measureRepeatedDefault
-import org.mozilla.fenix.benchmark.utils.openNewTabOnTabsTray
-import org.mozilla.fenix.benchmark.utils.openTabsTray
-import org.mozilla.fenix.benchmark.utils.switchTabs
+import org.mozilla.fenix.benchmark.utils.switchTabsJourney
 import org.mozilla.fenix.benchmark.utils.url
 
 /**
@@ -78,26 +70,10 @@ class BaselineProfilesSwitchTabsBenchmark {
                 pressHome()
             },
         ) {
-            val intent = Intent(Intent.ACTION_VIEW, FENIX_HOME_DEEP_LINK)
-            intent.setPackage(packageName)
-
-            startActivityAndWait(intent = intent)
-            device.completeOnboarding()
-
-            device.enterSearchMode()
-            val simpleHtmlUrl = mockRule.url(HtmlAsset.SIMPLE)
-            device.loadSite(url = simpleHtmlUrl)
-
-            device.openTabsTray()
-            device.openNewTabOnTabsTray()
-            device.loadSite(url = mockRule.url(HtmlAsset.LONG))
-
-            device.openTabsTray()
-            device.switchTabs(siteName = HtmlAsset.SIMPLE.title, newTabUrl = simpleHtmlUrl)
-
-            device.openTabsTray()
-            device.closeAllTabs()
-
+            switchTabsJourney(
+                simpleHtmlUrl = mockRule.url(HtmlAsset.SIMPLE),
+                longHtmlUrl = mockRule.url(HtmlAsset.LONG),
+            )
             SystemClock.sleep(1000)
             killProcess()
         }

@@ -42,14 +42,15 @@ private const val SECOND_IN_MILLISECOND = 1000L
 @Composable
 internal fun CrashTools(
     settings: Settings = components.settings,
+    currentTimeMillis: () -> Long = { System.currentTimeMillis() },
 ) {
     val appContext = LocalContext.current.applicationContext
 
-    var now = System.currentTimeMillis()
+    var now = currentTimeMillis()
     var genericDeferPeriod by remember { mutableLongStateOf(settings.crashReportDeferredUntil - now) }
     LaunchedEffect(Unit) {
         while (true) {
-            now = System.currentTimeMillis()
+            now = currentTimeMillis()
             genericDeferPeriod = settings.crashReportDeferredUntil - now
             delay(SECOND_IN_MILLISECOND)
         }

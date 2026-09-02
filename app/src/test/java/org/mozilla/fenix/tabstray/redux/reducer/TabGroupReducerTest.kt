@@ -258,6 +258,22 @@ class TabGroupReducerTest {
     }
 
     @Test
+    fun `WHEN the new tab group menu item is clicked THEN navigate to create a starter tab group`() {
+        val initialState = TabsTrayState()
+
+        val expectedFormState = initialState.initializeTabGroupForm(isStarterTabGroup = true)
+        val expectedBackStack = initialState.backStack + EditTabGroup
+
+        val resultState = TabGroupActionReducer.reduce(
+            state = initialState,
+            action = TabGroupAction.NewTabGroupMenuClicked,
+        )
+
+        assertEquals(expectedFormState, resultState.tabGroupState.formState)
+        assertEquals(expectedBackStack, resultState.backStack)
+    }
+
+    @Test
     fun `WHEN ThemeChanged is called THEN theme is updated`() {
         val initialFormState = TabGroupFormState(tabGroupId = "123", name = "123", theme = TabGroupTheme.Blue)
 

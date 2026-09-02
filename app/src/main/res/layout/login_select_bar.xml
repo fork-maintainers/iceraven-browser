@@ -3,10 +3,12 @@
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 <mozilla.components.feature.prompts.login.LoginSelectBar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/loginSelectBar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?attr/colorSurface"
     android:elevation="@dimen/browser_fragment_above_toolbar_panels_elevation"
     android:outlineProvider="none"
-    android:visibility="gone" />
+    android:visibility="gone"
+    tools:ignore="Overdraw" />

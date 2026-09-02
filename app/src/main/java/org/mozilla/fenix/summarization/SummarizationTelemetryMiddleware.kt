@@ -19,6 +19,7 @@ import mozilla.components.feature.summarize.ReceivedParsedDocument
 import mozilla.components.feature.summarize.SettingsBackClicked
 import mozilla.components.feature.summarize.SettingsClicked
 import mozilla.components.feature.summarize.ShakeConsentRequested
+import mozilla.components.feature.summarize.SignInSummarizationContentAction
 import mozilla.components.feature.summarize.SummarizationAction
 import mozilla.components.feature.summarize.SummarizationCompleted
 import mozilla.components.feature.summarize.SummarizationFailed
@@ -85,10 +86,12 @@ enum class ConnectionType {
  * @param connectionType current network [ConnectionType].
  * @param sessionId A UUID identifying this summarization session, shared across every event
  * recorded during the session. Defaults to a randomly generated UUID.
+ * @param currentTimeMillis provider for the current time in milliseconds, injectable for testing.
  */
 class SummarizationTelemetryMiddleware(
     private val connectionType: ConnectionType,
     sessionId: String = UUID.randomUUID().toString(),
+    private val currentTimeMillis: () -> Long = { System.currentTimeMillis() },
 ) : Middleware<SummarizationState, SummarizationAction> {
 
     private var sessionTelemetry = SummarizationSessionTelemetry(sessionId = sessionId)
@@ -109,52 +112,19 @@ class SummarizationTelemetryMiddleware(
             }
             is ContentExtracted -> handleExtractedContent(action.content)
             is LlmProviderAction.ProviderInitialized -> recordProviderInitialized()
+            is LlmProviderAction.SignInRequired -> recordSummarizationCompleted(success = false, action.reason)
             is ReceivedParsedDocument -> handleReceivedParsedDocument()
             is SummarizationCompleted -> recordSummarizationCompleted()
             is SummarizationFailed -> recordSummarizationCompleted(success = false, action.exception)
-            is ViewDismissed -> {
-                AiSummarize.closed.record(
-                    AiSummarize.ClosedExtra(
-                        model = sessionTelemetry.model,
-                        engineAvailable = action.isEngineAvailable,
-                        sessionId = sessionTelemetry.sessionId,
-                    ),
-                )
-
-                if (
-                    stateBefore is SummarizationState.ShakeConsentRequired ||
-                    stateBefore is SummarizationState.ShakeConsentWithDownloadRequired
-                ) {
-                    AiSummarize.consentDisplayed.record(
-                        AiSummarize.ConsentDisplayedExtra(
-                            agreed = false,
-                            sessionId = sessionTelemetry.sessionId,
-                        ),
-                    )
-                }
-            }
+            is ViewDismissed -> handleViewDismissed(stateBefore, action)
 
             is OnDeviceSummarizationShakeConsentAction.AllowClicked,
             is OffDeviceSummarizationShakeConsentAction.AllowClicked,
-            -> {
-                AiSummarize.consentDisplayed.record(
-                    AiSummarize.ConsentDisplayedExtra(
-                        agreed = true,
-                        sessionId = sessionTelemetry.sessionId,
-                    ),
-                )
-            }
+            -> recordConsentDisplayed(agreed = true)
 
             is OnDeviceSummarizationShakeConsentAction.CancelClicked,
             is OffDeviceSummarizationShakeConsentAction.CancelClicked,
-            -> {
-                AiSummarize.consentDisplayed.record(
-                    AiSummarize.ConsentDisplayedExtra(
-                        agreed = false,
-                        sessionId = sessionTelemetry.sessionId,
-                    ),
-                )
-            }
+            -> recordConsentDisplayed(agreed = false)
 
             DownloadConsentAction.AllowClicked,
             DownloadConsentAction.CancelClicked,
@@ -165,7 +135,6 @@ class SummarizationTelemetryMiddleware(
             DownloadInProgressAction.CancelClicked,
             ErrorAction.ErrorDismissed,
             ErrorAction.LearnMoreClicked,
-            LlmProviderAction.ProviderAvailable,
             OffDeviceSummarizationShakeConsentAction.LearnMoreClicked,
             OnDeviceSummarizationShakeConsentAction.LearnMoreClicked,
             PageLoadStarted,
@@ -173,6 +142,9 @@ class SummarizationTelemetryMiddleware(
             SettingsBackClicked,
             SettingsClicked,
             ShakeConsentRequested,
+            SignInSummarizationContentAction.DismissClicked,
+            SignInSummarizationContentAction.LearnMoreClicked,
+            SignInSummarizationContentAction.SignInClicked,
             -> {}
         }
     }
@@ -196,6 +168,32 @@ class SummarizationTelemetryMiddleware(
             ),
         )
         timerId = AiSummarize.duration.start()
+    }
+
+    private fun handleViewDismissed(stateBefore: SummarizationState, action: ViewDismissed) {
+        AiSummarize.closed.record(
+            AiSummarize.ClosedExtra(
+                model = sessionTelemetry.model,
+                engineAvailable = action.isEngineAvailable,
+                sessionId = sessionTelemetry.sessionId,
+            ),
+        )
+
+        if (
+            stateBefore is SummarizationState.ShakeConsentRequired ||
+            stateBefore is SummarizationState.ShakeConsentWithDownloadRequired
+        ) {
+            recordConsentDisplayed(agreed = false)
+        }
+    }
+
+    private fun recordConsentDisplayed(agreed: Boolean) {
+        AiSummarize.consentDisplayed.record(
+            AiSummarize.ConsentDisplayedExtra(
+                agreed = agreed,
+                sessionId = sessionTelemetry.sessionId,
+            ),
+        )
     }
 
     private fun handleExtractedContent(content: Content) {
@@ -273,7 +271,7 @@ class SummarizationTelemetryMiddleware(
                 model = sessionTelemetry.model,
                 sessionId = sessionTelemetry.sessionId,
                 success = success,
-                summarizeDurationMs = (System.currentTimeMillis() - sessionTelemetry.startTimeMillis).toInt(),
+                summarizeDurationMs = (currentTimeMillis() - sessionTelemetry.startTimeMillis).toInt(),
             ),
         )
     }

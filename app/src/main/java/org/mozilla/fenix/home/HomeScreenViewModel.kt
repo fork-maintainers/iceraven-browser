@@ -25,9 +25,10 @@ class HomeScreenViewModel : ViewModel() {
          */
         const val ALL_NORMAL_TABS = "all_normal"
 
-        /**
-         * Session code to use in [sessionToDelete] to specify all private tabs should be deleted.
-         */
+        /** Session code to use in [sessionToDelete] to specify all active normal tabs should be deleted. */
+        const val ALL_ACTIVE_NORMAL_TABS = "all_active_normal"
+
+        /** Session code to use in [sessionToDelete] to specify all private tabs should be deleted. */
         const val ALL_PRIVATE_TABS = "all_private"
     }
 }

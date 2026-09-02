@@ -100,6 +100,8 @@ class SearchSuggestionsProvidersBuilder(
         val searchBitmap = suggestionIconProvider.getSearchIconBitmap()
         val searchWithBitmap = suggestionIconProvider.getSearchWithIconBitmap()
 
+        val trendingSearchBitmap = suggestionIconProvider.getTrendingSearchIconBitmap()
+
         defaultSearchSuggestionProvider =
             SearchSuggestionProvider(
                 store = components.core.store,
@@ -120,7 +122,7 @@ class SearchSuggestionsProvidersBuilder(
                 fetchClient = components.core.client,
                 privateMode = browsingModeManager.mode.isPrivate,
                 searchUseCase = searchUseCase,
-                icon = searchBitmap,
+                icon = trendingSearchBitmap,
             )
 
         defaultSearchActionProvider =

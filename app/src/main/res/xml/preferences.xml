@@ -140,12 +140,6 @@
             app:isPreferenceVisible="false"
             android:title="@string/preference_doh_title" />
 
-        <org.mozilla.fenix.settings.cookiebannerhandling.CustomCBHSwitchPreference
-            android:key="@string/pref_key_cookie_banner_private_mode"
-            app:iconSpaceReserved="false"
-            app:isPreferenceVisible="false"
-            android:title="@string/preferences_cookie_banner_reduction_private_mode" />
-
         <androidx.preference.Preference
             android:key="@string/pref_key_tracking_protection_settings"
             app:iconSpaceReserved="false"
@@ -235,6 +229,11 @@
             android:key="@string/pref_key_enable_gecko_logs"
             app:iconSpaceReserved="false"
             android:title="@string/preferences_enable_gecko_logs" />
+
+        <androidx.preference.Preference
+            android:key="@string/pref_key_local_network_access"
+            app:iconSpaceReserved="false"
+            android:title="@string/preferences_local_network_access" />
     </PreferenceCategory>
 
     <androidx.preference.PreferenceCategory

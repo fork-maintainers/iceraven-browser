@@ -31,6 +31,7 @@ import org.mozilla.fenix.R
 import org.mozilla.fenix.browser.browsingmode.BrowsingModeManager
 import org.mozilla.fenix.components.usecases.FenixBrowserUseCases
 import org.mozilla.fenix.ext.tabsClosedUndoMessage
+import org.mozilla.fenix.home.HomeScreenViewModel.Companion.ALL_ACTIVE_NORMAL_TABS
 import org.mozilla.fenix.home.HomeScreenViewModel.Companion.ALL_NORMAL_TABS
 import org.mozilla.fenix.home.HomeScreenViewModel.Companion.ALL_PRIVATE_TABS
 import org.mozilla.fenix.utils.Settings
@@ -87,6 +88,60 @@ class TabsCleanupFeatureTest {
         )
 
         every { feature.showUndoSnackbar(any(), any()) } just Runs
+    }
+
+    @Test
+    fun `GIVEN all active normal tabs to delete WHEN feature is started THEN remove all active normal tabs and show undo snackbar`() {
+        val tabs =
+            listOf(
+                createTab(
+                    id = "1",
+                    url = "https://mozilla.org/1",
+                    private = false,
+                    lastAccess = System.currentTimeMillis(),
+                    createdAt = System.currentTimeMillis(),
+                ),
+                createTab(
+                    id = "2",
+                    url = "https://mozilla.org/2",
+                    private = false,
+                    lastAccess = System.currentTimeMillis(),
+                    createdAt = System.currentTimeMillis(),
+                ),
+                createTab(
+                    id = "3",
+                    url = "https://mozilla.org/3",
+                    private = false,
+                    lastAccess = System.currentTimeMillis(),
+                    createdAt = System.currentTimeMillis(),
+                ),
+                createTab(
+                    id = "inactive_tab",
+                    url = "https://mozilla.org/4",
+                    private = false,
+                    lastAccess = 0L,
+                    createdAt = 0L,
+                ),
+            )
+
+        every { settings.inactiveTabsAreEnabled } returns true
+        every { browserStore.state } returns BrowserState(tabs = tabs)
+        every { viewModel.sessionToDelete } returns ALL_ACTIVE_NORMAL_TABS
+
+        feature.start()
+
+        verify {
+            tabsUseCases.removeTabs(listOf("1", "2", "3"), setOf("inactive_tab"))
+
+            feature.showUndoSnackbar(
+                testContext.tabsClosedUndoMessage(3),
+                any(),
+            )
+
+            viewModel.sessionToDelete = null
+        }
+
+        verify(exactly = 0) { tabsUseCases.removeNormalTabs() }
     }
 
     @Test
@@ -334,16 +389,20 @@ class TabsCleanupFeatureTest {
     }
 
     @Test
-    fun `WHEN undo all tabs removed is called THEN undo tab removal`() {
+    fun `WHEN undo all tabs removed is called THEN undo tab removal and navigate to browser`() {
         feature.onUndoAllTabsRemoved(tabId = "")
 
         verify {
             tabsUseCases.undo.invoke()
+
+            navController.navigate(
+                HomeFragmentDirections.actionGlobalBrowser(null),
+            )
         }
     }
 
     @Test
-    fun `GIVEN a tab ID WHEN undo all tabs removed is called THEN undo tab removal and remove the tab`() {
+    fun `GIVEN a tab ID WHEN undo all tabs removed is called THEN undo tab removal, remove the tab and navigate to browser`() {
         val tabId = "1"
 
         feature.onUndoAllTabsRemoved(tabId = tabId)
@@ -351,6 +410,9 @@ class TabsCleanupFeatureTest {
         verifyOrder {
             tabsUseCases.undo.invoke()
             tabsUseCases.removeTab.invoke(tabId)
+            navController.navigate(
+                HomeFragmentDirections.actionGlobalBrowser(null),
+            )
         }
     }
 

@@ -13,7 +13,8 @@
     android:focusable="true"
     android:gravity="center_vertical"
     android:paddingStart="16dp"
-    android:paddingEnd="16dp">
+    android:paddingEnd="16dp"
+    tools:ignore="Overdraw">
 
     <LinearLayout
         android:id="@android:id/widget_frame"

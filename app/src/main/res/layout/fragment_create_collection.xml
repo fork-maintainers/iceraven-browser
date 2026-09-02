@@ -10,6 +10,7 @@
     android:layout_height="match_parent"
     android:background="?scrim"
     android:fitsSystemWindows="true"
-    tools:context="org.mozilla.fenix.collections.CollectionCreationFragment">
+    tools:context="org.mozilla.fenix.collections.CollectionCreationFragment"
+    tools:ignore="Overdraw">
 
 </FrameLayout>

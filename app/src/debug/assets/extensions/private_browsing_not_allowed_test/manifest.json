@@ -1,0 +1,18 @@
+{
+    "manifest_version": 2,
+    "name": "Private Browsing Not Allowed Android Test",
+    "description": "Part of mobile/android/fenix/app/src/androidTest/java/org/mozilla/fenix/ui/ExtensionPrivateBrowsingTest.kt",
+    "version": "1.0",
+
+    "browser_specific_settings": {
+        "gecko_android": {},
+        "gecko": {
+            "id": "{b2f4a1c3-6d7e-4f8a-9b0c-1d2e3f4a5b6c}"
+        }
+    },
+    "background": {
+        "scripts": ["background.js"]
+    },
+    "incognito": "not_allowed",
+    "permissions": ["nativeMessaging", "geckoViewAddons"]
+}

@@ -9,6 +9,7 @@ import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.mozilla.fenix.R
+import org.mozilla.fenix.customannotations.Converted
 import org.mozilla.fenix.customannotations.SkipLeaks
 import org.mozilla.fenix.customannotations.SmokeTest
 import org.mozilla.fenix.helpers.AppAndSystemHelper.registerAndCleanupIdlingResources
@@ -44,6 +45,11 @@ class RecentlyClosedTabsTest {
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/1065414
     // Verifies that a recently closed item is properly opened
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.RecentlyClosedTabsTest#openRecentlyClosedItemTest"],
+        bug = 2057411,
+        since = "2026-07",
+    )
     @SmokeTest
     @Test
     @SkipLeaks(reasons = ["https://bugzilla.mozilla.org/show_bug.cgi?id=1956220"])
@@ -75,6 +81,11 @@ class RecentlyClosedTabsTest {
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/2195812
     // Verifies that tapping the "x" button removes a recently closed item from the list
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.RecentlyClosedTabsTest#deleteRecentlyClosedTabsItemTest"],
+        bug = 2057411,
+        since = "2026-07",
+    )
     @SmokeTest
     @Test
     @SkipLeaks(reasons = ["https://bugzilla.mozilla.org/show_bug.cgi?id=1956220"])

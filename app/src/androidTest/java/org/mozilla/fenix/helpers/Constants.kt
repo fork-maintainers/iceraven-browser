@@ -8,6 +8,8 @@ import org.mozilla.fenix.helpers.DataGenerationHelper.getSponsoredShortcutTitle
 
 object Constants {
 
+    const val GMAIL_APP_NAME = "Gmail"
+
     // Tag used for logging
     const val TAG = "MozUITestLog"
 

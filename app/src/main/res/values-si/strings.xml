@@ -378,40 +378,8 @@
   <string name="preferences_add_private_browsing_shortcut">පෞද්. පිරික්සුම් කෙටිමඟක් යොදන්න</string>
   <!-- Preference for enabling "HTTPS-Only" mode -->
   <string name="preferences_https_only_title">HTTPS-පමණි ප්‍රකාරය</string>
-  <!-- Label for cookie banner section in quick settings panel. -->
-  <string name="cookie_banner_blocker">දත්තකඩ පතාක අවහිරය</string>
   <!-- Preference for removing cookie/consent banners from sites automatically in private mode. See reduce_cookie_banner_summary for additional context. -->
   <string name="preferences_cookie_banner_reduction_private_mode">පෞද්. පිරික්සීමෙහි දත්තකඩ පතාක අවහිරය</string>
-  <!-- Text for indicating cookie banner handling is off this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_off_for_site">මෙම අඩවියට අක්‍රියයි</string>
-  <!-- Text for cancel button indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_cancel_button">අවලංගු</string>
-  <!-- Text for request support button indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_request_support_button_2">ඉල්ලීම යවන්න</string>
-  <!-- Text for title indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_title_2">මෙම අඩවිය සඳහා සහාය ඉල්ලනවා ද?</string>
-  <!-- Label for the snackBar, after the user reports with success a website where cookie banner reducer did not work -->
-  <string name="cookie_banner_handling_report_site_snack_bar_text_2">ඉල්ලීම යැවිණි</string>
-  <!-- Text for indicating cookie banner handling is on this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_on_for_site">මෙම අඩවියට සක්‍රියයි</string>
-  <!-- Text for indicating that a request for unsupported site was sent to Nimbus (it's a Mozilla library for experiments), this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_unsupported_site_request_submitted_2">සහාය ඉල්ලීම යැවිණි</string>
-  <!-- Text for indicating cookie banner handling is currently not supported for this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_unsupported_site">අඩවියට සහාය නොදක්වයි</string>
-  <!-- Title text for a detail explanation indicating cookie banner handling is on this site, this is shown as part of the cookie banner panel in the toolbar. %1$s is a shortened URL of the current site. -->
-  <string name="reduce_cookie_banner_details_panel_title_on_for_site_1">%1$s සඳහා දත්තකඩ පතාක අවහිරය සක්‍රිය කරන්නද?</string>
-  <!-- Title text for a detail explanation indicating cookie banner handling is off this site, this is shown as part of the cookie banner panel in the toolbar. %1$s is a shortened URL of the current site. -->
-  <string name="reduce_cookie_banner_details_panel_title_off_for_site_1">%1$s සඳහා දත්තකඩ පතාක අවහිරය අක්‍රිය කරන්නද?</string>
-  <!-- Title text for a detail explanation indicating cookie banner reducer didn't work for the current site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_title_unsupported_site_request_2">%1$s මඟින් මෙම අඩවියේ දත්තකඩ ඉල්ලීම් ස්වයංක්‍රීයව ඉවතලීමට නොහැක. ඉදිරියේ දී මෙම අඩවිය සඳහා සහාය දැක්වීමට ඉල්ලීමක් යැවීමට හැකිය.</string>
-  <!-- Long text for a detail explanation indicating what will happen if cookie banner handling is off for a site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_description_off_for_site_1">අක්‍රිය කරන්න සහ %1$s දත්තකඩ මකා මෙම අඩවිය නැවත පූරණය කරනු ඇත. මෙය ඔබව නික්මවීමට හෝ බඩු කරත්ත හිස් කිරීමට ඉඩ ඇත.</string>
-  <!-- Long text for a detail explanation indicating what will happen if cookie banner handling is on for a site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_description_on_for_site_3">සක්‍රිය කළහොත් %1$s මෙම අඩවියේ දත්තකඩ පතාක ස්වයංක්‍රීයව ඉවතලීමට උත්සාහ කරයි.</string>
-  <!-- Title for the cookie banner re-engagement CFR, the placeholder is replaced with app name. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="cookie_banner_cfr_title">%1$s ඔබ වෙනුවෙන් දත්තකඩ ඉවතලිණි</string>
-  <!-- Message for the cookie banner re-engagement CFR -->
-  <string name="cookie_banner_cfr_message">බාධා අවමයි, මෙම අඩවියේ ඔබව ලුහුබඳින දත්තකඩ අවමයි.</string>
   <!-- Description of the preference to enable "HTTPS-Only" mode. -->
   <string name="preferences_https_only_summary">ඉහළ ආරක්‍ෂාවක් සඳහා HTTPS සංකේතන කෙටුම්පත භාවිතයෙන් අඩවි වෙත ස්වයංක්‍රීයව සම්බන්ධ වීමට තැත් කරයි.</string>
   <!-- Summary of https only preference if https only is set to off -->
@@ -901,8 +869,6 @@
   <string name="history_search_1">සෙවුම් පද යොදන්න</string>
   <!-- Text for the button to clear all history -->
   <string name="history_delete_all">ඉතිහාසය මකන්න</string>
-  <!-- Text for the snackbar to confirm that multiple browsing history items has been deleted -->
-  <string name="history_delete_multiple_items_snackbar">ඉතිහාසය මකා ඇත</string>
   <!-- Text for the snackbar to confirm that a single browsing history item has been deleted. %1$s is the shortened URL of the deleted history item. -->
   <string name="history_delete_single_item_snackbar">%1$s මැකිණි</string>
   <!-- Context description text for the button to delete a single history item -->
@@ -941,8 +907,6 @@
   <string name="webcompat_reporter_url_error_invalid">වලංගු ඒ.ස.නි. ලියන්න</string>
   <!-- The button text for the cancel button to leave the Web Compat Reporter feature. -->
   <string name="webcompat_reporter_cancel">අවලංගු</string>
-  <!-- The button text for the send button to submit the provided form data. -->
-  <string name="webcompat_reporter_send">යවන්න</string>
   <!-- Broken site reason text for something else -->
   <string name="webcompat_reporter_reason_other">වෙනත් යමක්</string>
   <!--
@@ -1045,12 +1009,6 @@
     Button label that take the user to the Android App setting
   -->
   <string name="phone_feature_go_to_settings">සැකසුම් වෙත යන්න</string>
-  <!--
-    Content description (not visible, for screen readers etc.): Quick settings sheet
-    to give users access to site specific information / settings. For example:
-    Secure settings status and a button to modify site permissions
-  -->
-  <string name="quick_settings_sheet">ඉක්මන් සැකසුම් පත්‍රය</string>
   <!-- Label that indicates that this option it the recommended one -->
   <string name="phone_feature_recommended">නිර්දේශිත</string>
   <!-- Button label for clearing all the information of site permissions -->
@@ -1397,12 +1355,6 @@
   <!--
     Enhanced Tracking Protection
 
-    Link displayed in enhanced tracking protection panel to access tracking protection settings
-  -->
-  <string name="etp_settings">රැකවරණ සැකසුම්</string>
-  <!--
-    Enhanced Tracking Protection
-
     Preference title for enhanced tracking protection settings
   -->
   <string name="preference_enhanced_tracking_protection">දියුණු කළ ලුහුබැඳීමේ රැකවරණය</string>
@@ -1456,12 +1408,8 @@
   <string name="preference_enhanced_tracking_protection_custom_tracking_content_2">පෞද්. පටිතිවලදී පමණි</string>
   <!-- Preference for enhanced tracking protection for the custom protection settings -->
   <string name="preference_enhanced_tracking_protection_custom_known_fingerprinters">දන්නා ඇඟිලි සටහන්</string>
-  <!-- Button label for navigating to the Enhanced Tracking Protection details -->
-  <string name="enhanced_tracking_protection_details">විස්තර</string>
   <!-- Header for categories that are being being blocked by current Enhanced Tracking Protection settings -->
   <string name="enhanced_tracking_protection_blocked">අවහිර කළ</string>
-  <!-- Header for categories that are being not being blocked by current Enhanced Tracking Protection settings -->
-  <string name="enhanced_tracking_protection_allowed">ඉඩ දී ඇත</string>
   <!-- Category of trackers (social media trackers) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_social_media_trackers_title">සමාජ මාධ්‍ය ලුහුබැඳීම්</string>
   <!-- Description of social media trackers that can be blocked by Enhanced Tracking Protection -->
@@ -1480,10 +1428,6 @@
   <string name="etp_tracking_content_title">ලුහුබැඳීමේ අන්තර්ගතය</string>
   <!-- Description of tracking content that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_tracking_content_description">ලුහුබැඳීමේ කේත අඩංගු බාහිර දැන්වීම්, දෘශ්‍යක සහ අනෙකුත් අන්තර්ගත පූරණය වීම නවත්වයි. ඇතැම් අඩවිවල ක්‍රියාකාරිත්වයට බලපෑ හැකිය.</string>
-  <!-- Enhanced Tracking Protection message that protection is currently on for this site -->
-  <string name="etp_panel_on">අඩවියට දියුණු කළ ලුහුබැඳීමේ රැකවරණය සක්‍රියයි</string>
-  <!-- Enhanced Tracking Protection message that protection is currently off for this site -->
-  <string name="etp_panel_off">අඩවියට දියුණු කළ ලුහුබැඳීමේ රැකවරණය අක්‍රියයි</string>
   <!-- Header for exceptions list for which sites enhanced tracking protection is always off -->
   <string name="enhanced_tracking_protection_exceptions">මෙම අඩවි සඳහා දියුණු කළ ලුහුබැඳීමේ රැකවරණය අක්‍රියයි</string>
   <!--
@@ -1506,13 +1450,6 @@
   <string name="etp_suspected_fingerprinters_title">සැක සහිත ඇඟිලි සටහන්</string>
   <!-- Category of trackers (fingerprinters) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_known_fingerprinters_title">දන්නා ඇඟිලි සටහන්</string>
-  <!--
-    Description of the SmartBlock Enhanced Tracking Protection feature. The * symbol is intentionally hardcoded here,
-    as we use it on the UI to indicate which trackers have been partially unblocked.
-  -->
-  <string name="preference_etp_smartblock_description">ඔබ පහත ලුහුබැඳීම් සමඟ අන්යෝන්‍යව කටයුතු කළ නිසා සලකුණු කර තිබෙන දෑ මෙම පිටුවෙහි අර්ධ වශයෙන් අවහිර කර ඇත *.</string>
-  <!-- Text displayed that links to website about enhanced tracking protection SmartBlock -->
-  <string name="preference_etp_smartblock_learn_more">තව දැනගන්න</string>
   <!--
     Content description (not visible, for screen readers etc.):
     Enhanced tracking protection exception preference icon for ETP settings.
@@ -1784,14 +1721,8 @@
   <string name="phone_feature_blocked_step_permissions"><![CDATA[2. <b>අවසර</b> තට්ටු කරන්න]]></string>
   <!-- Third step for the allowing a permission (%1$s is the permission name, for example "Camera"). -->
   <string name="phone_feature_blocked_step_feature"><![CDATA[3. <b>%1$s</b> සබල කරන්න]]></string>
-  <!-- Label that indicates a site is using a secure connection -->
-  <string name="quick_settings_sheet_secure_connection_2">සම්බන්‍ධතාව ආරක්‍ෂිතයි</string>
-  <!-- Label that indicates a site is using a insecure connection -->
-  <string name="quick_settings_sheet_insecure_connection_2">සම්බන්‍ධතාව අනාරක්‍ෂිතයි</string>
   <!-- Label to clear site data -->
   <string name="clear_site_data">දත්තකඩ හා අඩවි දත්ත මකන්න</string>
-  <!-- Confirmation message for a dialog confirming if the user wants to delete all data for current site. %s is the domain of the site. -->
-  <string name="confirm_clear_site_data"><![CDATA[<b>%s</b> අඩවිය සඳහා සමස්ත දත්තකඩ හා වෙනත් දත්ත හිස් කිරීමට වුවමනා ද?]]></string>
   <!-- Confirmation message for a dialog confirming if the user wants to delete all the permissions for all sites -->
   <string name="confirm_clear_permissions_on_all_sites">ඔබට සියළුම අඩවි සඳහා සියළු අවසර හිස් කිරීමට වුවමනා ද?</string>
   <!-- Confirmation message for a dialog confirming if the user wants to delete all the permissions for a site -->
@@ -1804,11 +1735,6 @@
   <string name="browser_menu_add_to_shortcuts">කෙටිමං වෙත දමන්න</string>
   <!-- Browser menu button that removes a shortcut from the home fragment -->
   <string name="browser_menu_remove_from_shortcuts">කෙටිමං වෙතින් ඉවත් කරන්න</string>
-  <!--
-    text shown before the issuer name to indicate who its verified by, %1$s is the name of
-    the certificate authority that verified the ticket
-  -->
-  <string name="certificate_info_verified_by">සත්‍යාපනය: %1$s</string>
   <!-- Positive action of a dialog asking to delete -->
   <string name="dialog_delete_positive">මකන්න</string>
   <!-- Negative action of a dialog asking to delete login -->

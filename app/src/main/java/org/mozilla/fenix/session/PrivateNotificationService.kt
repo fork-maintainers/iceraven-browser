@@ -82,6 +82,17 @@ class PrivateNotificationService : AbstractPrivateNotificationService() {
         // If the app is in normal mode there's no reason to direct the user away to
         // private mode as all private tabs have been deleted.
         if (inPrivateMode) {
+            if (components.settings.enableHomepageAsNewTab) {
+                // When Homepage as a New Tab is enabled, there must always be at least one tab, so reopen a
+                // new private homepage tab only if the user is in private browsing mode.
+                components.useCases.fenixBrowserUseCases.addNewHomepageTab(private = true)
+
+                // The reopened private tab keeps the notifications alive, so the
+                // one-shot erase action is never rebuilt by a service restart. Refresh the
+                // notification to ensure the erase action works for subsequent taps.
+                refreshNotification()
+            }
+
             val homeScreenIntent = Intent(this, HomeActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 putExtra(HomeActivity.PRIVATE_BROWSING_MODE, true)

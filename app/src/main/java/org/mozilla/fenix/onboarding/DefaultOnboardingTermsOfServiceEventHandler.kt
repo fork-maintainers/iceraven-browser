@@ -19,6 +19,7 @@ class DefaultOnboardingTermsOfServiceEventHandler(
     private val showManagePrivacyPreferencesDialog: () -> Unit,
     private val settings: Settings,
     private val startGlean: () -> Unit,
+    private val currentTimeMillis: () -> Long = { System.currentTimeMillis() },
 ) : OnboardingTermsOfServiceEventHandler {
 
     override fun onTermsOfServiceLinkClicked(url: String) {
@@ -44,11 +45,11 @@ class DefaultOnboardingTermsOfServiceEventHandler(
         showManagePrivacyPreferencesDialog()
     }
 
-    override fun onAcceptTermsButtonClicked(nowMillis: Long) {
+    override fun onAcceptTermsButtonClicked() {
         telemetryRecorder.onTermsOfServiceManagerAcceptTermsButtonClick()
         settings.hasAcceptedTermsOfService = true
         settings.termsOfUseAcceptedVersion = TOU_VERSION
-        settings.termsOfUseAcceptedTimeInMillis = nowMillis
+        settings.termsOfUseAcceptedTimeInMillis = currentTimeMillis()
         startGlean()
     }
 }

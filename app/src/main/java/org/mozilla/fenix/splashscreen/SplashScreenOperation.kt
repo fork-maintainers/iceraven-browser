@@ -5,13 +5,13 @@
 package org.mozilla.fenix.splashscreen
 
 import androidx.annotation.VisibleForTesting
+import kotlinx.coroutines.suspendCancellableCoroutine
 import mozilla.components.service.nimbus.NimbusApi
 import org.mozilla.experiments.nimbus.NimbusInterface
 import org.mozilla.experiments.nimbus.internal.EnrolledExperiment
 import org.mozilla.fenix.utils.Settings
 import kotlin.coroutines.Continuation
 import kotlin.coroutines.resume
-import kotlin.coroutines.suspendCoroutine
 
 /**
  * An async operation performed during the splash screen.
@@ -79,15 +79,20 @@ class FetchExperimentsOperation(
     internal var fetchNimbusObserver: NimbusInterface.Observer? = null
 
     override suspend fun run() {
-        suspendCoroutine { continuation ->
+        suspendCancellableCoroutine { continuation ->
             if (storage.nimbusExperimentsFetched) {
                 dataFetched = true
                 continuation.resume(Unit)
             } else {
-                fetchNimbusObserver = FetchNimbusObserver { dataFetched = true }.apply {
-                    fetchContinuation = continuation
-                    nimbus.register(this)
+                val observer = FetchNimbusObserver { dataFetched = true }.also {
+                    it.fetchContinuation = continuation
                 }
+                fetchNimbusObserver = observer
+                continuation.invokeOnCancellation {
+                    nimbus.unregister(observer)
+                    fetchNimbusObserver = null
+                }
+                nimbus.register(observer)
             }
         }
     }
@@ -121,25 +126,35 @@ class ApplyExperimentsOperation(
     internal var applyNimbusObserver: NimbusInterface.Observer? = null
 
     override suspend fun run() {
-        suspendCoroutine { continuation ->
+        suspendCancellableCoroutine { continuation ->
             if (storage.nimbusExperimentsFetched) {
                 dataFetched = true
                 continuation.resume(Unit)
             } else {
-                fetchNimbusObserver = FetchNimbusObserver { dataFetched = true }.apply {
-                    fetchContinuation = continuation
-                    nimbus.register(this)
+                val observer = FetchNimbusObserver { dataFetched = true }.also {
+                    it.fetchContinuation = continuation
                 }
+                fetchNimbusObserver = observer
+                continuation.invokeOnCancellation {
+                    nimbus.unregister(observer)
+                    fetchNimbusObserver = null
+                }
+                nimbus.register(observer)
             }
         }
 
-        suspendCoroutine { continuation ->
+        suspendCancellableCoroutine { continuation ->
             nimbus.applyPendingExperiments()
 
-            applyNimbusObserver = ApplyNimbusObserver { isDataApplied = true }.apply {
-                applyContinuation = continuation
-                nimbus.register(this)
+            val observer = ApplyNimbusObserver { isDataApplied = true }.also {
+                it.applyContinuation = continuation
             }
+            applyNimbusObserver = observer
+            continuation.invokeOnCancellation {
+                nimbus.unregister(observer)
+                applyNimbusObserver = null
+            }
+            nimbus.register(observer)
         }
     }
 

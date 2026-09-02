@@ -4,79 +4,60 @@
 
 package org.mozilla.fenix.webcompat.middleware
 
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import io.mockk.mockk
 import io.mockk.verify
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.test.runTest
-import kotlinx.serialization.json.addJsonObject
-import kotlinx.serialization.json.buildJsonArray
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
-import mozilla.components.browser.state.state.BrowserState
-import mozilla.components.browser.state.state.createTab
-import mozilla.components.browser.state.store.BrowserStore
-import mozilla.components.concept.engine.EngineSession
 import mozilla.components.support.test.middleware.CaptureActionsMiddleware
-import mozilla.components.support.test.robolectric.testContext
-import mozilla.telemetry.glean.private.NoReasonCodes
-import mozilla.telemetry.glean.private.PingType
-import mozilla.telemetry.glean.testing.GleanTestRule
+import org.json.JSONObject
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNotEquals
-import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
-import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mozilla.experiments.nimbus.internal.EnrolledExperiment
-import org.mozilla.fenix.GleanMetrics.BrokenSiteReport
-import org.mozilla.fenix.GleanMetrics.BrokenSiteReportBrowserInfo
-import org.mozilla.fenix.GleanMetrics.BrokenSiteReportBrowserInfoApp
-import org.mozilla.fenix.GleanMetrics.BrokenSiteReportBrowserInfoGraphics
-import org.mozilla.fenix.GleanMetrics.BrokenSiteReportBrowserInfoPrefs
-import org.mozilla.fenix.GleanMetrics.BrokenSiteReportBrowserInfoSystem
-import org.mozilla.fenix.GleanMetrics.BrokenSiteReportTabInfo
-import org.mozilla.fenix.GleanMetrics.BrokenSiteReportTabInfoAntitracking
-import org.mozilla.fenix.GleanMetrics.BrokenSiteReportTabInfoFrameworks
-import org.mozilla.fenix.GleanMetrics.Pings
 import org.mozilla.fenix.components.AppStore
 import org.mozilla.fenix.components.appstate.AppAction
-import org.mozilla.fenix.webcompat.WebCompatReporterMoreInfoSender
-import org.mozilla.fenix.webcompat.fake.FakeWebCompatReporterMoreInfoSender
-import org.mozilla.fenix.webcompat.middleware.WebCompatInfoDto.Companion.addWebCompatInfo
+import org.mozilla.fenix.webcompat.GleanBrokenSiteReportSender
+import org.mozilla.fenix.webcompat.middleware.WebCompatReporterSubmissionMiddleware.Companion.addActiveExperimentsToWebCompatInfo
+import org.mozilla.fenix.webcompat.middleware.WebCompatReporterSubmissionMiddleware.Companion.addWebCompatInfo
 import org.mozilla.fenix.webcompat.store.WebCompatReporterAction
 import org.mozilla.fenix.webcompat.store.WebCompatReporterState
 import org.mozilla.fenix.webcompat.store.WebCompatReporterStore
 import org.mozilla.fenix.webcompat.testdata.WebCompatTestData
-import kotlin.test.assertNotNull
+import org.robolectric.RobolectricTestRunner
 
-@RunWith(AndroidJUnit4::class) // for GleanTestRule
+class TestGleanBrokenSiteReportSender() : GleanBrokenSiteReportSender {
+    internal var lastSentDetails: JSONObject? = null
+    internal var lastSentDescription: String? = null
+    internal var lastSentReason: WebCompatReporterState.BrokenSiteReason? = null
+    internal var lastSentUrl: String? = null
+    internal var lastSentSendTabSpecificInfo: Boolean? = null
+    internal var lastSentSendBlockedUrls: Boolean? = null
+
+    override suspend fun sendGleanBrokenSiteReport(
+        details: JSONObject?,
+        description: String?,
+        reason: WebCompatReporterState.BrokenSiteReason,
+        url: String,
+        sendTabSpecificInfo: Boolean,
+        sendBlockedUrls: Boolean,
+    ) {
+        lastSentDetails = details
+        lastSentDescription = description
+        lastSentReason = reason
+        lastSentUrl = url
+        lastSentSendTabSpecificInfo = sendTabSpecificInfo
+        lastSentSendBlockedUrls = sendBlockedUrls
+    }
+}
+
+@RunWith(RobolectricTestRunner::class) // Otherwise JSONObject doesn't work properly
 class WebCompatReporterSubmissionMiddlewareTest {
     private val appStore: AppStore = mockk(relaxed = true)
 
-    @get:Rule
-    val gleanTestRule = GleanTestRule(testContext)
-
-    @Before
-    fun setUp() {
-        // TODO(bug 1934931): Glean currently does not re-register custom pings
-        // when the GleanTestRule automatically resets Glean after each test.
-        // We do it manually here for the tests to work.
-        val brokenSiteReport: PingType<NoReasonCodes> = PingType<NoReasonCodes>(
-            name = "broken-site-report",
-            includeClientId = false,
-            sendIfEmpty = false,
-            preciseTimestamps = true,
-            includeInfoSections = true,
-            enabled = true,
-            schedulesPings = listOf(),
-            reasonCodes = listOf(),
-            followsCollectionEnabled = true,
-            uploaderCapabilities = listOf(),
-        )
-    }
+    private val gleanBrokenSiteReportSender: TestGleanBrokenSiteReportSender = TestGleanBrokenSiteReportSender()
 
     @Test
     fun `GIVEN the URL is not changed WHEN WebCompatInfo is retrieved successfully THEN all report broken site pings are submitted`() = runTest {
@@ -108,179 +89,13 @@ class WebCompatReporterSubmissionMiddlewareTest {
             scope = this,
         )
 
-        val job = Pings.brokenSiteReport.testBeforeNextSubmit {
-            assertEquals(
-                "basic",
-                BrokenSiteReportTabInfoAntitracking.blockList.testGetValue(),
-            )
-            assertEquals(
-                false,
-                BrokenSiteReportTabInfoAntitracking.btpHasPurgedSite.testGetValue(),
-            )
-            assertEquals(
-                "standard",
-                BrokenSiteReportTabInfoAntitracking.etpCategory.testGetValue(),
-            )
-            assertEquals(
-                false,
-                BrokenSiteReportTabInfoAntitracking.hasMixedActiveContentBlocked.testGetValue(),
-            )
-            assertEquals(
-                false,
-                BrokenSiteReportTabInfoAntitracking.hasMixedDisplayContentBlocked.testGetValue(),
-            )
-            assertEquals(
-                false,
-                BrokenSiteReportTabInfoAntitracking.hasTrackingContentBlocked.testGetValue(),
-            )
-            assertEquals(
-                false,
-                BrokenSiteReportTabInfoAntitracking.isPrivateBrowsing.testGetValue(),
-            )
-
-            assertEquals(
-                buildJsonArray {
-                    addJsonObject {
-                        put("id", "id.temp")
-                        put("name", "name1")
-                        put("temporary", true)
-                        put("version", "version1")
-                    }
-
-                    addJsonObject {
-                        put("id", "id.perm")
-                        put("name", "name2")
-                        put("temporary", false)
-                        put("version", "version2")
-                    }
-                },
-                BrokenSiteReportBrowserInfo.addons.testGetValue(),
-            )
-
-            assertEquals(
-                buildJsonArray {
-                    addJsonObject {
-                        put("branch", "slug1")
-                        put("kind", "nimbusExperiment")
-                        put("slug", "slug1")
-                    }
-
-                    addJsonObject {
-                        put("branch", "slug2")
-                        put("kind", "nimbusExperiment")
-                        put("slug", "slug2")
-                    }
-                },
-                BrokenSiteReportBrowserInfo.experiments.testGetValue(),
-            )
-
-            assertEquals(
-                "testDefaultUserAgent",
-                BrokenSiteReportBrowserInfoApp.defaultUseragentString.testGetValue(),
-            )
-
-            assertEquals(
-                """[{"id":"device1"},{"id":"device2"},{"id":"device3"}]""",
-                BrokenSiteReportBrowserInfoGraphics.devicesJson.testGetValue(),
-            )
-            assertEquals(
-                """[{"id":"driver1"},{"id":"driver2"},{"id":"driver3"}]""",
-                BrokenSiteReportBrowserInfoGraphics.driversJson.testGetValue(),
-            )
-            assertEquals(
-                """{"id":"feature1"}""",
-                BrokenSiteReportBrowserInfoGraphics.featuresJson.testGetValue(),
-            )
-            assertEquals(
-                true,
-                BrokenSiteReportBrowserInfoGraphics.hasTouchScreen.testGetValue(),
-            )
-            assertEquals(
-                """[{"id":"monitor1"},{"id":"monitor2"},{"id":"monitor3"}]""",
-                BrokenSiteReportBrowserInfoGraphics.monitorsJson.testGetValue(),
-            )
-
-            assertEquals(
-                listOf("en-CA", "en-US"),
-                BrokenSiteReportBrowserInfoApp.defaultLocales.testGetValue(),
-            )
-
-            assertEquals(
-                false,
-                BrokenSiteReportBrowserInfoApp.fissionEnabled.testGetValue(),
-            )
-            assertEquals(
-                1L,
-                BrokenSiteReportBrowserInfoSystem.memory.testGetValue(),
-            )
-
-            assertEquals(
-                false,
-                BrokenSiteReportBrowserInfoPrefs.opaqueResponseBlocking.testGetValue(),
-            )
-            assertEquals(
-                false,
-                BrokenSiteReportBrowserInfoPrefs.installtriggerEnabled.testGetValue(),
-            )
-            assertEquals(
-                false,
-                BrokenSiteReportBrowserInfoPrefs.softwareWebrender.testGetValue(),
-            )
-            assertEquals(
-                1L,
-                BrokenSiteReportBrowserInfoPrefs.cookieBehavior.testGetValue(),
-            )
-            assertEquals(
-                false,
-                BrokenSiteReportBrowserInfoPrefs.globalPrivacyControlEnabled.testGetValue(),
-            )
-            assertEquals(
-                false,
-                BrokenSiteReportBrowserInfoPrefs.resistFingerprintingEnabled.testGetValue(),
-            )
-
-            assertEquals(
-                "1.5",
-                BrokenSiteReportBrowserInfoGraphics.devicePixelRatio.testGetValue(),
-            )
-
-            assertEquals(
-                true,
-                BrokenSiteReportTabInfoFrameworks.fastclick.testGetValue(),
-            )
-            assertEquals(
-                true,
-                BrokenSiteReportTabInfoFrameworks.marfeel.testGetValue(),
-            )
-            assertEquals(
-                true,
-                BrokenSiteReportTabInfoFrameworks.mobify.testGetValue(),
-            )
-
-            assertEquals(
-                listOf("en-CA", "en-US"),
-                BrokenSiteReportTabInfo.languages.testGetValue(),
-            )
-
-            assertEquals(
-                "testUserAgent",
-                BrokenSiteReportTabInfo.useragentString.testGetValue(),
-            )
-
-            assertEquals(store.state.enteredUrl, BrokenSiteReport.url.testGetValue())
-            assertEquals(
-                store.state.reason?.name?.lowercase(),
-                BrokenSiteReport.breakageCategory.testGetValue(),
-            )
-            assertEquals(
-                store.state.problemDescription,
-                BrokenSiteReport.description.testGetValue(),
-            )
-        }
-
         store.dispatch(WebCompatReporterAction.SendReportClicked)
         testScheduler.advanceUntilIdle()
-        job.join()
+
+        assertLastSentBasicInfoMatchesExpectations()
+
+        val expected = FakeWebCompatReporterRetrievalService().retrieveInfo()?.addActiveExperimentsToWebCompatInfo(nimbusExperimentsProvider)
+        assertEquals(expected.toString(), gleanBrokenSiteReportSender.lastSentDetails.toString())
     }
 
     @Test
@@ -323,157 +138,19 @@ class WebCompatReporterSubmissionMiddlewareTest {
             nimbusExperimentsProvider = nimbusExperimentsProvider,
         )
 
-        val job = Pings.brokenSiteReport.testBeforeNextSubmit {
-            assertEquals(
-                "basic",
-                BrokenSiteReportTabInfoAntitracking.blockList.testGetValue(),
-            )
-            assertEquals(
-                "standard",
-                BrokenSiteReportTabInfoAntitracking.etpCategory.testGetValue(),
-            )
-            assertNull(BrokenSiteReportTabInfoAntitracking.btpHasPurgedSite.testGetValue())
-            assertNull(BrokenSiteReportTabInfoAntitracking.hasMixedActiveContentBlocked.testGetValue())
-            assertNull(BrokenSiteReportTabInfoAntitracking.hasMixedDisplayContentBlocked.testGetValue())
-            assertNull(BrokenSiteReportTabInfoAntitracking.hasTrackingContentBlocked.testGetValue())
-            assertNull(BrokenSiteReportTabInfoAntitracking.isPrivateBrowsing.testGetValue())
-
-            assertEquals(
-                buildJsonArray {
-                    addJsonObject {
-                        put("id", "id.temp")
-                        put("name", "name1")
-                        put("temporary", true)
-                        put("version", "version1")
-                    }
-
-                    addJsonObject {
-                        put("id", "id.perm")
-                        put("name", "name2")
-                        put("temporary", false)
-                        put("version", "version2")
-                    }
-                },
-                BrokenSiteReportBrowserInfo.addons.testGetValue(),
-            )
-
-            assertEquals(
-                buildJsonArray {
-                    addJsonObject {
-                        put("branch", "slug1")
-                        put("kind", "nimbusExperiment")
-                        put("slug", "slug1")
-                    }
-
-                    addJsonObject {
-                        put("branch", "slug2")
-                        put("kind", "nimbusExperiment")
-                        put("slug", "slug2")
-                    }
-                },
-                BrokenSiteReportBrowserInfo.experiments.testGetValue(),
-            )
-
-            assertEquals(
-                "testDefaultUserAgent",
-                BrokenSiteReportBrowserInfoApp.defaultUseragentString.testGetValue(),
-            )
-
-            assertEquals(
-                """[{"id":"device1"},{"id":"device2"},{"id":"device3"}]""",
-                BrokenSiteReportBrowserInfoGraphics.devicesJson.testGetValue(),
-            )
-            assertEquals(
-                """[{"id":"driver1"},{"id":"driver2"},{"id":"driver3"}]""",
-                BrokenSiteReportBrowserInfoGraphics.driversJson.testGetValue(),
-            )
-            assertEquals(
-                """{"id":"feature1"}""",
-                BrokenSiteReportBrowserInfoGraphics.featuresJson.testGetValue(),
-            )
-            assertEquals(
-                true,
-                BrokenSiteReportBrowserInfoGraphics.hasTouchScreen.testGetValue(),
-            )
-            assertEquals(
-                """[{"id":"monitor1"},{"id":"monitor2"},{"id":"monitor3"}]""",
-                BrokenSiteReportBrowserInfoGraphics.monitorsJson.testGetValue(),
-            )
-
-            assertEquals(
-                listOf("en-CA", "en-US"),
-                BrokenSiteReportBrowserInfoApp.defaultLocales.testGetValue(),
-            )
-
-            assertEquals(
-                false,
-                BrokenSiteReportBrowserInfoApp.fissionEnabled.testGetValue(),
-            )
-            assertEquals(
-                1L,
-                BrokenSiteReportBrowserInfoSystem.memory.testGetValue(),
-            )
-
-            assertEquals(
-                false,
-                BrokenSiteReportBrowserInfoPrefs.opaqueResponseBlocking.testGetValue(),
-            )
-            assertEquals(
-                false,
-                BrokenSiteReportBrowserInfoPrefs.installtriggerEnabled.testGetValue(),
-            )
-            assertEquals(
-                false,
-                BrokenSiteReportBrowserInfoPrefs.softwareWebrender.testGetValue(),
-            )
-            assertEquals(
-                1L,
-                BrokenSiteReportBrowserInfoPrefs.cookieBehavior.testGetValue(),
-            )
-            assertEquals(
-                false,
-                BrokenSiteReportBrowserInfoPrefs.globalPrivacyControlEnabled.testGetValue(),
-            )
-            assertEquals(
-                false,
-                BrokenSiteReportBrowserInfoPrefs.resistFingerprintingEnabled.testGetValue(),
-            )
-
-            assertEquals(
-                "1.5",
-                BrokenSiteReportBrowserInfoGraphics.devicePixelRatio.testGetValue(),
-            )
-
-            assertNull(BrokenSiteReportTabInfoFrameworks.fastclick.testGetValue())
-            assertNull(BrokenSiteReportTabInfoFrameworks.marfeel.testGetValue())
-            assertNull(BrokenSiteReportTabInfoFrameworks.mobify.testGetValue())
-
-            assertNull(BrokenSiteReportTabInfo.languages.testGetValue())
-
-            assertNotEquals(store.state.tabUrl, BrokenSiteReport.url.testGetValue())
-            assertEquals(store.state.enteredUrl, BrokenSiteReport.url.testGetValue())
-            assertEquals(
-                store.state.reason?.name?.lowercase(),
-                BrokenSiteReport.breakageCategory.testGetValue(),
-            )
-            assertEquals(
-                store.state.problemDescription,
-                BrokenSiteReport.description.testGetValue(),
-            )
-
-            assertNull(BrokenSiteReportTabInfo.useragentString.testGetValue())
-        }
-
         store.dispatch(WebCompatReporterAction.SendReportClicked)
         testScheduler.advanceUntilIdle()
 
-        job.join()
+        assertLastSentBasicInfoMatchesExpectations(sentUrl = store.state.enteredUrl, shouldSendTabSpecificInfo = false)
+
+        val expected = FakeWebCompatReporterRetrievalService().retrieveInfo()?.addActiveExperimentsToWebCompatInfo(nimbusExperimentsProvider)
+        assertEquals(expected.toString(), gleanBrokenSiteReportSender.lastSentDetails.toString())
     }
 
     @Test
     fun `GIVEN WebCompatInfo is not retrieved successfully THEN only the form fields and active experiments are submitted`() = runTest {
         val webCompatReporterRetrievalService = object : WebCompatReporterRetrievalService {
-            override suspend fun retrieveInfo(): WebCompatInfoDto? = null
+            override suspend fun retrieveInfo(): JSONObject? = null
         }
 
         val nimbusExperimentsProvider: NimbusExperimentsProvider = FakeNimbusExperimentsProvider(
@@ -496,71 +173,11 @@ class WebCompatReporterSubmissionMiddlewareTest {
             nimbusExperimentsProvider = nimbusExperimentsProvider,
         )
 
-        val job = Pings.brokenSiteReport.testBeforeNextSubmit {
-            assertNull(BrokenSiteReportTabInfoAntitracking.blockList.testGetValue())
-            assertNull(BrokenSiteReportTabInfoAntitracking.btpHasPurgedSite.testGetValue())
-            assertNull(BrokenSiteReportTabInfoAntitracking.etpCategory.testGetValue())
-            assertNull(BrokenSiteReportTabInfoAntitracking.hasMixedActiveContentBlocked.testGetValue())
-            assertNull(BrokenSiteReportTabInfoAntitracking.hasMixedDisplayContentBlocked.testGetValue())
-            assertNull(BrokenSiteReportTabInfoAntitracking.hasTrackingContentBlocked.testGetValue())
-            assertNull(BrokenSiteReportTabInfoAntitracking.isPrivateBrowsing.testGetValue())
-
-            assertNull(BrokenSiteReportBrowserInfo.addons.testGetValue())
-
-            assertNull(BrokenSiteReportBrowserInfoApp.defaultUseragentString.testGetValue())
-
-            assertNull(BrokenSiteReportBrowserInfoGraphics.devicesJson.testGetValue())
-            assertNull(BrokenSiteReportBrowserInfoGraphics.driversJson.testGetValue())
-            assertNull(BrokenSiteReportBrowserInfoGraphics.featuresJson.testGetValue())
-            assertNull(BrokenSiteReportBrowserInfoGraphics.hasTouchScreen.testGetValue())
-            assertNull(BrokenSiteReportBrowserInfoGraphics.monitorsJson.testGetValue())
-            assertNull(BrokenSiteReportBrowserInfoApp.defaultLocales.testGetValue())
-
-            assertNull(BrokenSiteReportBrowserInfoApp.fissionEnabled.testGetValue())
-            assertNull(BrokenSiteReportBrowserInfoSystem.memory.testGetValue())
-
-            assertNull(BrokenSiteReportBrowserInfoPrefs.opaqueResponseBlocking.testGetValue())
-            assertNull(BrokenSiteReportBrowserInfoPrefs.installtriggerEnabled.testGetValue())
-            assertNull(BrokenSiteReportBrowserInfoPrefs.softwareWebrender.testGetValue())
-            assertNull(BrokenSiteReportBrowserInfoPrefs.cookieBehavior.testGetValue())
-            assertNull(BrokenSiteReportBrowserInfoPrefs.globalPrivacyControlEnabled.testGetValue())
-            assertNull(BrokenSiteReportBrowserInfoPrefs.resistFingerprintingEnabled.testGetValue())
-
-            assertNull(BrokenSiteReportBrowserInfoGraphics.devicePixelRatio.testGetValue())
-
-            assertNull(BrokenSiteReportTabInfoFrameworks.fastclick.testGetValue())
-            assertNull(BrokenSiteReportTabInfoFrameworks.marfeel.testGetValue())
-            assertNull(BrokenSiteReportTabInfoFrameworks.mobify.testGetValue())
-
-            assertNull(BrokenSiteReportTabInfo.languages.testGetValue())
-
-            assertEquals(store.state.enteredUrl, BrokenSiteReport.url.testGetValue())
-            assertEquals(
-                store.state.reason?.name?.lowercase(),
-                BrokenSiteReport.breakageCategory.testGetValue(),
-            )
-            assertEquals(
-                store.state.problemDescription,
-                BrokenSiteReport.description.testGetValue(),
-            )
-
-            assertEquals(
-                buildJsonArray {
-                    addJsonObject {
-                        put("branch", "slug1")
-                        put("kind", "nimbusExperiment")
-                        put("slug", "slug1")
-                    }
-                },
-                BrokenSiteReportBrowserInfo.experiments.testGetValue(),
-            )
-
-            assertNull(BrokenSiteReportTabInfo.useragentString.testGetValue())
-        }
-
         store.dispatch(WebCompatReporterAction.SendReportClicked)
         testScheduler.advanceUntilIdle()
-        job.join()
+
+        assertLastSentBasicInfoMatchesExpectations(shouldSendTabSpecificInfo = false)
+        assertEquals(null, gleanBrokenSiteReportSender.lastSentDetails)
     }
 
     @Test
@@ -573,21 +190,14 @@ class WebCompatReporterSubmissionMiddlewareTest {
             nimbusExperimentsProvider = nimbusExperimentsProvider,
         )
 
-        val job = Pings.brokenSiteReport.testBeforeNextSubmit {
-            val experiments = BrokenSiteReportBrowserInfo.experiments.testGetValue()
-
-            assertNotNull(experiments)
-
-            assertEquals(
-                buildJsonArray { },
-                experiments,
-            )
-        }
-
         store.dispatch(WebCompatReporterAction.SendReportClicked)
         testScheduler.advanceUntilIdle()
 
-        job.join()
+        assertLastSentBasicInfoMatchesExpectations()
+
+        val sentDetails = gleanBrokenSiteReportSender.lastSentDetails
+        val sentExperiments = sentDetails?.optJSONObject("browserInfo")?.optJSONObject("experiments")?.optJSONArray("value")
+        assertEquals("[]", sentExperiments.toString())
     }
 
     @Test
@@ -596,6 +206,7 @@ class WebCompatReporterSubmissionMiddlewareTest {
 
         val webCompatReporterSubmissionMiddleware = createMiddleware(
             scope = this,
+            gleanBrokenSiteReportSender = gleanBrokenSiteReportSender,
             service = FakeWebCompatReporterRetrievalService(),
         )
 
@@ -656,6 +267,7 @@ class WebCompatReporterSubmissionMiddlewareTest {
 
         val middleware = createMiddleware(
             scope = this,
+            gleanBrokenSiteReportSender = gleanBrokenSiteReportSender,
             service = FakeWebCompatReporterRetrievalService(),
         )
         val result = middleware.parseWebCompatPreviewJson(json)
@@ -678,12 +290,25 @@ class WebCompatReporterSubmissionMiddlewareTest {
         val json = buildJsonObject { }
         val middleware = createMiddleware(
             scope = this,
+            gleanBrokenSiteReportSender = gleanBrokenSiteReportSender,
             service = FakeWebCompatReporterRetrievalService(),
         )
 
         val result = middleware.parseWebCompatPreviewJson(json)
 
         assertTrue(result.isEmpty())
+    }
+
+    private fun assertLastSentBasicInfoMatchesExpectations(
+      sentUrl: String = "https://www.mozilla.org",
+      shouldSendTabSpecificInfo: Boolean = true,
+      shouldSendBlockedURLs: Boolean = false,
+    ) {
+        assertEquals(gleanBrokenSiteReportSender.lastSentDescription, "")
+        assertEquals(gleanBrokenSiteReportSender.lastSentReason, WebCompatReporterState.BrokenSiteReason.Slow)
+        assertEquals(gleanBrokenSiteReportSender.lastSentUrl, sentUrl)
+        assertEquals(gleanBrokenSiteReportSender.lastSentSendTabSpecificInfo, shouldSendTabSpecificInfo)
+        assertEquals(gleanBrokenSiteReportSender.lastSentSendBlockedUrls, shouldSendBlockedURLs)
     }
 
     private fun createStore(
@@ -702,6 +327,7 @@ class WebCompatReporterSubmissionMiddlewareTest {
             middleware = listOf(
                 createMiddleware(
                     service = service,
+                    gleanBrokenSiteReportSender = gleanBrokenSiteReportSender,
                     nimbusExperimentsProvider = nimbusExperimentsProvider,
                     scope = scope,
                 ),
@@ -709,20 +335,67 @@ class WebCompatReporterSubmissionMiddlewareTest {
         )
     }
 
+    @Test
+    fun `GIVEN a JSONObject with not-to-be-previewed items, WHEN addWebCompatInfo is called THEN it ignores those items`() = runTest {
+        val toAdd = buildJsonObject {
+            put(
+                "category",
+                buildJsonObject {
+                    put(
+                        "included_item1",
+                        buildJsonObject {
+                            put("value", "included1")
+                        },
+                    )
+                    put(
+                        "included_item2",
+                        buildJsonObject {
+                            put("doNotPreview", false)
+                            put("value", "included2")
+                        },
+                    )
+                    put(
+                        "ignored_item",
+                        buildJsonObject {
+                            put("doNotPreview", true)
+                            put("value", "included")
+                        },
+                    )
+                },
+            )
+        }
+
+        val result = buildJsonObject { }.addWebCompatInfo(JSONObject(toAdd.toString()))
+
+        val expected = buildJsonObject {
+            put(
+                "category",
+                buildJsonObject {
+                    put("included_item1", "included1")
+                    put("included_item2", "included2")
+                },
+            )
+        }
+
+        assertEquals(expected, result)
+    }
+
     private fun createMiddleware(
         service: WebCompatReporterRetrievalService,
+        gleanBrokenSiteReportSender: GleanBrokenSiteReportSender,
         scope: CoroutineScope,
         nimbusExperimentsProvider: NimbusExperimentsProvider = FakeNimbusExperimentsProvider(),
     ) = WebCompatReporterSubmissionMiddleware(
         appStore = appStore,
         webCompatReporterRetrievalService = service,
+        gleanBrokenSiteReportSender = gleanBrokenSiteReportSender,
         scope = scope,
         nimbusExperimentsProvider = nimbusExperimentsProvider,
     )
 
     private class FakeWebCompatReporterRetrievalService : WebCompatReporterRetrievalService {
 
-        override suspend fun retrieveInfo(): WebCompatInfoDto =
+        override suspend fun retrieveInfo(): JSONObject? =
             WebCompatTestData.createTestObject(blockedOrigins = listOf("https://exampleBlockedURLByETP.com"))
     }
 }

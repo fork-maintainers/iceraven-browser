@@ -28,7 +28,7 @@ object SettingsHomepageSelectors {
         strategy = SelectorStrategy.UIAUTOMATOR_WITH_TEXT,
         value = "Shortcuts",
         description = "the Shortcuts button",
-        groups = listOf("homepageSettings"),
+        groups = listOf("homepageSettings", "requiredForPage"),
     )
 
     val JUMP_BACK_IN_BUTTON = Selector(
@@ -59,6 +59,15 @@ object SettingsHomepageSelectors {
         groups = listOf("homepageSettings"),
     )
 
+    @Suppress("ktlint:standard:function-naming", "FunctionName")
+    fun OPENING_SCREEN_OPTION(openingScreenOption: String = "") = Selector(
+        strategy = SelectorStrategy.ESPRESSO_BY_ID_WITH_SIBLING_TEXT,
+        value = "radio_button",
+        secondaryValue = openingScreenOption,
+        description = "Opening screen option: $openingScreenOption",
+        groups = listOf("homepageSettings"),
+    )
+
     val all = listOf(
         SETTINGS_HOMEPAGE_TITLE,
         SHOW_TOP_SITES_TOGGLE,
@@ -67,5 +76,6 @@ object SettingsHomepageSelectors {
         RECENT_BOOKMARKS_BUTTON,
         RECENTLY_VISITED_BUTTON,
         POCKET_BUTTON,
+        OPENING_SCREEN_OPTION(),
     )
 }

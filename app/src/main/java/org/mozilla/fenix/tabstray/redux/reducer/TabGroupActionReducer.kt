@@ -33,7 +33,9 @@ object TabGroupActionReducer {
         return when (action) {
             is TabGroupAction.AddToTabGroup -> reduceAddToTabGroup(state)
             is TabGroupAction.AddToNewTabGroup -> state.navigateToCreateTabGroup()
-            is TabGroupAction.NewTabGroupFabClicked -> state.navigateToCreateTabGroup(isStarterTabGroup = true)
+            is TabGroupAction.NewTabGroupFabClicked,
+            is TabGroupAction.NewTabGroupMenuClicked,
+            -> state.navigateToCreateTabGroup(isStarterTabGroup = true)
             is TabGroupAction.OpenCreatedTabGroup -> state.navigateToExpandedTabGroup(action.group)
             is TabGroupAction.DragAndDropTwoTabs -> reduceDragAndDropTwoTabs(state, action)
             is TabGroupAction.NameChanged -> handleNameChange(state, action)

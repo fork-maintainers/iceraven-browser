@@ -9,6 +9,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
+import org.mozilla.fenix.customannotations.Converted
 import org.mozilla.fenix.customannotations.SmokeTest
 import org.mozilla.fenix.helpers.FenixTestRule
 import org.mozilla.fenix.helpers.HomeActivityIntentTestRule
@@ -55,6 +56,11 @@ class DownloadFileTypesTest(fileName: String) {
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/251028
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.DownloadFileTypesTest#allFilesAppearInDownloadsMenuTest"],
+        bug = 2060521,
+        since = "2026-08",
+    )
     @SmokeTest
     @Test
     fun allFilesAppearInDownloadsMenuTest() {

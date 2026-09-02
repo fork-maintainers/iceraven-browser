@@ -108,12 +108,6 @@
   <string name="open_in_app_cfr_negative_button_text">Zamknij</string>
   <!-- Private browsing erase action "contextual feature recommendation" (CFR) -->
 
-  <!--
-    Address bar swipe "contextual feature recommendation" (CFR)
-
-    Text for the message displayed in the contextual feature recommendation popup promoting swipe of address bar.
-  -->
-  <string name="address_bar_swipe_cfr_message_2">Przeciągnij pasek narzędzi w\u00a0lewo lub w\u00a0prawo, aby przełączyć karty.</string>
   <!-- Text for the info dialog when camera permissions have been denied but user tries to access a camera feature. -->
   <string name="camera_permissions_needed_message">Wymagany jest dostęp do aparatu. Przejdź do ustawień Androida, stuknij „Uprawnienia” i\u00a0stuknij „Zezwól”.</string>
   <!-- Text for the positive action button to go to Android Settings to grant permissions. -->
@@ -319,14 +313,6 @@
   <string name="browser_menu_default_banner_dismiss_promotion">Zamknij promocję</string>
   <!-- Content description (not visible, for screen readers etc.) for recommended extensions in main menu -->
   <string name="browser_menu_recommended_extensions_content_description">Więcej informacji</string>
-  <!--
-    Menu "contextual feature recommendation" (CFR)
-
-    Text for the title in the contextual feature recommendation popup promoting the menu feature.
-  -->
-  <string name="menu_cfr_title">Nowość: uproszczone menu</string>
-  <!-- Text for the message in the contextual feature recommendation popup promoting the menu feature. -->
-  <string name="menu_cfr_body">Szybciej znajduj to, czego potrzebujesz — od trybu prywatnego po opcje zachowywania.</string>
   <!--
     Extensions management fragment
 
@@ -793,40 +779,8 @@
   <string name="preferences_pbm_lock_screen_title">Używanie blokady ekranu do ukrywania kart w\u00a0trybie prywatnym</string>
   <!-- Informs the user how to access the tabs when "Use screen lock to hide tabs in private browsing" is enabled -->
   <string name="preferences_pbm_lock_screen_summary_3">Wyświetl karty za pomocą odcisku palca, kodu PIN lub rozpoznawania twarzy. Włączenie tej opcji uniemożliwia także przechwytywanie i\u00a0udostępnianie ekranu.</string>
-  <!-- Label for cookie banner section in quick settings panel. -->
-  <string name="cookie_banner_blocker">Blokowanie informacji o\u00a0ciasteczkach</string>
   <!-- Preference for removing cookie/consent banners from sites automatically in private mode. See reduce_cookie_banner_summary for additional context. -->
   <string name="preferences_cookie_banner_reduction_private_mode">Blokowanie informacji o\u00a0ciasteczkach w\u00a0trybie prywatnym</string>
-  <!-- Text for indicating cookie banner handling is off this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_off_for_site">Wyłączone na tej witrynie</string>
-  <!-- Text for cancel button indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_cancel_button">Anuluj</string>
-  <!-- Text for request support button indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_request_support_button_2">Wyślij prośbę</string>
-  <!-- Text for title indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_title_2">Poprosić o\u00a0dodanie obsługi tej witryny?</string>
-  <!-- Label for the snackBar, after the user reports with success a website where cookie banner reducer did not work -->
-  <string name="cookie_banner_handling_report_site_snack_bar_text_2">Wysłano prośbę</string>
-  <!-- Text for indicating cookie banner handling is on this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_on_for_site">Włączone na tej witrynie</string>
-  <!-- Text for indicating that a request for unsupported site was sent to Nimbus (it's a Mozilla library for experiments), this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_unsupported_site_request_submitted_2">Wysłano prośbę o\u00a0dodanie obsługi</string>
-  <!-- Text for indicating cookie banner handling is currently not supported for this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_unsupported_site">Witryna obecnie nie jest obsługiwana</string>
-  <!-- Title text for a detail explanation indicating cookie banner handling is on this site, this is shown as part of the cookie banner panel in the toolbar. %1$s is a shortened URL of the current site. -->
-  <string name="reduce_cookie_banner_details_panel_title_on_for_site_1">Włączyć blokowanie informacji o\u00a0ciasteczkach na witrynie %1$s?</string>
-  <!-- Title text for a detail explanation indicating cookie banner handling is off this site, this is shown as part of the cookie banner panel in the toolbar. %1$s is a shortened URL of the current site. -->
-  <string name="reduce_cookie_banner_details_panel_title_off_for_site_1">Wyłączyć blokowanie informacji o\u00a0ciasteczkach na witrynie %1$s?</string>
-  <!-- Title text for a detail explanation indicating cookie banner reducer didn't work for the current site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_title_unsupported_site_request_2">%1$s nie może automatycznie odrzucać próśb o\u00a0akceptację ciasteczek na tej witrynie. Można wysłać prośbę o\u00a0dodanie obsługi tej witryny w\u00a0przyszłości.</string>
-  <!-- Long text for a detail explanation indicating what will happen if cookie banner handling is off for a site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_description_off_for_site_1">Wyłącz, a\u00a0%1$s usunie ciasteczka i\u00a0ponownie wczyta tę stronę. Może to spowodować wylogowanie ze strony lub opróżnienie koszyka w\u00a0sklepie.</string>
-  <!-- Long text for a detail explanation indicating what will happen if cookie banner handling is on for a site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_description_on_for_site_3">Włącz, a\u00a0%1$s spróbuje automatycznie odrzucać wszystkie prośby o\u00a0akceptację ciasteczek na tej witrynie.</string>
-  <!-- Title for the cookie banner re-engagement CFR, the placeholder is replaced with app name. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="cookie_banner_cfr_title">%1$s właśnie odrzucił ciasteczka za Ciebie</string>
-  <!-- Message for the cookie banner re-engagement CFR -->
-  <string name="cookie_banner_cfr_message">Mniej odwracania uwagi, mniej ciasteczek śledzących Cię na tej witrynie.</string>
   <!-- Description of the preference to enable "HTTPS-Only" mode. -->
   <string name="preferences_https_only_summary">Automatycznie próbuje łączyć się ze stronami za pomocą protokołu szyfrowania HTTPS w\u00a0celu zwiększenia bezpieczeństwa.</string>
   <!-- Summary of https only preference if https only is set to off -->
@@ -871,6 +825,8 @@
   <string name="preferences_toolbar_shortcut">Skrót na pasku narzędzi</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_toolbar_select_shortcut">Wybierz skrót</string>
+  <!-- Title of a menu option allowing to change the shortcut button shown in the toolbar -->
+  <string name="toolbar_shortcut_menu_edit_option">Edytuj skrót</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_gestures">Gesty</string>
   <!-- Preference for settings related to visual options -->
@@ -1176,6 +1132,8 @@
   <string name="extension_process_crash_dialog_retry_button_text" tools:ignore="UnusedResources">Spróbuj ponownie włączyć rozszerzenia</string>
   <!-- Button text on the extension crash dialog to prompt the user to continue with all extensions disabled. -->
   <string name="extension_process_crash_dialog_disable_extensions_button_text">Kontynuuj z\u00a0wyłączonymi rozszerzeniami</string>
+  <!-- Text shown in the snackbar action button that lets the user retry an add-on operation that just failed. -->
+  <string name="addon_failure_retry_action">Spróbuj ponownie</string>
   <!--
     Account Preferences
 
@@ -1349,6 +1307,11 @@
   <string name="preference_light_theme">Jasny</string>
   <!-- Preference for using dark theme -->
   <string name="preference_dark_theme">Ciemny</string>
+  <!--
+    Preference for using the OLED theme. For localization, this can be translated as "True Black", "Maximum Darkness",
+    or "Full dark" if needed.
+  -->
+  <string name="preference_oled_theme">Najciemniejszy</string>
   <!-- Preference for using using dark or light theme automatically set by battery -->
   <string name="preference_auto_battery_theme">Według funkcji oszczędzania energii</string>
   <!-- Preference for using following device theme -->
@@ -1495,6 +1458,16 @@
   <string name="preferences_inactive_tabs">Przenoszenie starych kart do nieaktywnych</string>
   <!-- Title of inactive tabs preference -->
   <string name="preferences_inactive_tabs_title">Karty, których nie odwiedzono od dwóch tygodni są przenoszone do sekcji nieaktywnych.</string>
+  <!-- Title for the preference to enable or disable the tab groups feature -->
+  <string name="preferences_tab_groups_feature">Grupy kart</string>
+  <!--
+    Privacy report
+
+    Category header of a preference that allows a user to enable or disable the privacy report feature
+  -->
+  <string name="preferences_privacy_report">Inne funkcje</string>
+  <!-- Title of the privacy report preference that allows a user to enable or disable the feature -->
+  <string name="preferences_privacy_report_title">Informacja o prywatności</string>
   <!--
     Studies
 
@@ -1722,6 +1695,8 @@
   <string name="tab_group_three_dot_menu_ungroup">Rozgrupuj</string>
   <!-- Text shown on the delete button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_delete">Usuń</string>
+  <!-- Text shown on the share button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_share">Udostępnij</string>
   <!-- Text shown on the close button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_close">Zamknij</string>
   <!-- Title for the Ungroup tab group confirmation dialog. -->
@@ -1734,6 +1709,14 @@
   <string name="ungroup_tab_group_confirmation_dialog_confirm">Rozgrupuj</string>
   <!-- Text shown on the cancel button in the Ungroup tab group confirmation dialog. -->
   <string name="ungroup_tab_group_confirmation_dialog_cancel">Anuluj</string>
+  <!-- Custom accessibility action to reorder a tab up rather than dragging. -->
+  <string name="custom_accessibility_action_reorder_tab_up">Przenieś kartę w górę</string>
+  <!-- Custom accessibility action to reorder a tab left rather than dragging. -->
+  <string name="custom_accessibility_action_reorder_tab_left">Przenieś kartę w lewo</string>
+  <!-- Custom accessibility action to reorder a tab right rather than dragging. -->
+  <string name="custom_accessibility_action_reorder_tab_right">Przenieś kartę w prawo</string>
+  <!-- Custom accessibility action to reorder a tab down rather than dragging. -->
+  <string name="custom_accessibility_action_reorder_tab_down">Przenieś kartę w dół</string>
   <!--
     Color labels for tab groups, used for accessibility and selection UI.
 
@@ -1764,8 +1747,6 @@
   <string name="history_search_1">Szukaj</string>
   <!-- Text for the button to clear all history -->
   <string name="history_delete_all">Usuń historię</string>
-  <!-- Text for the snackbar to confirm that multiple browsing history items has been deleted -->
-  <string name="history_delete_multiple_items_snackbar">Usunięto historię</string>
   <!-- Text for the snackbar to confirm that a single browsing history item has been deleted. %1$s is the shortened URL of the deleted history item. -->
   <string name="history_delete_single_item_snackbar">Usunięto „%1$s”</string>
   <!-- Context description text for the button to delete a single history item -->
@@ -2012,22 +1993,10 @@
   <string name="webcompat_reporter_label_mandatory_description">Szczegółowo opisz problem, aby pomóc nam go zbadać</string>
   <!-- The label/title of a optional field in the Web Compat Reporter feature for adding additional information. -->
   <string name="webcompat_reporter_label_optional_description">Szczegółowo opisz problem, aby pomóc nam go zbadać (opcjonalne)</string>
-  <!-- The label/title of a field in the Web Compat Reporter feature for explaining a high-level reason why the site is broken. -->
-  <string name="webcompat_reporter_label_whats_broken_2">Co działa niepoprawnie?</string>
-  <!-- The placeholder text for the dropdown where a user selects a high-level reason why the site is broken. -->
-  <string name="webcompat_reporter_choose_reason_2">Wybierz powód</string>
-  <!-- The error message of the dropdown, prompting the user to select a high-level reason why the site is broken. -->
-  <string name="webcompat_reporter_choose_reason_error">Proszę wybrać powód</string>
-  <!-- The label/title of an optional field in the Web Compat Reporter feature for adding additional information. -->
-  <string name="webcompat_reporter_label_description_2">Szczegółowo opisz problem, aby pomóc nam go zbadać (opcjonalne)</string>
-  <!-- The button text for navigating away from the feature to provide more information on the broken site's bug report. -->
-  <string name="webcompat_reporter_add_more_info">Dodaj więcej informacji</string>
   <!-- The button text for the cancel button to leave the Web Compat Reporter feature. -->
   <string name="webcompat_reporter_cancel">Anuluj</string>
   <!-- The button text for the send button to submit the provided form data. -->
   <string name="webcompat_reporter_send_report">Wyślij zgłoszenie</string>
-  <!-- The button text for the send button to submit the provided form data. -->
-  <string name="webcompat_reporter_send">Wyślij</string>
   <!-- Text for a snackbar to confirm the successful submission of a WebCompat report. -->
   <string name="webcompat_reporter_success_snackbar_text_2">Wysłano zgłoszenie</string>
   <!-- Placeholder text for the description field to prompt the user on what they should type. -->
@@ -2068,8 +2037,6 @@
   <string name="webcompat_reporter_reason_notsupported_2">Przeglądarka nie jest obsługiwana lub została zablokowana</string>
   <!-- Broken site reason text for the site being deceptive -->
   <string name="webcompat_reporter_reason_site_is_deceptive">Ta strona jest próbą oszustwa</string>
-  <!-- Broken site reason text for browser isn’t supported or blocked -->
-  <string name="webcompat_reporter_reason_notsupported">Przeglądarka nie jest obsługiwana lub została zablokowana</string>
   <!-- Broken site reason text for something else -->
   <string name="webcompat_reporter_reason_other">Coś innego</string>
   <!--
@@ -2241,12 +2208,6 @@
     Button label that take the user to the Android App setting
   -->
   <string name="phone_feature_go_to_settings">Przejdź do ustawień</string>
-  <!--
-    Content description (not visible, for screen readers etc.): Quick settings sheet
-    to give users access to site specific information / settings. For example:
-    Secure settings status and a button to modify site permissions
-  -->
-  <string name="quick_settings_sheet">Ustawienia podręczne</string>
   <!-- Label that indicates that this option it the recommended one -->
   <string name="phone_feature_recommended">Zalecane</string>
   <!-- Button label for clearing all the information of site permissions -->
@@ -2643,12 +2604,6 @@
   <!--
     Enhanced Tracking Protection
 
-    Link displayed in enhanced tracking protection panel to access tracking protection settings
-  -->
-  <string name="etp_settings">Ustawienia ochrony</string>
-  <!--
-    Enhanced Tracking Protection
-
     Preference title for enhanced tracking protection settings
   -->
   <string name="preference_enhanced_tracking_protection">Wzmocniona ochrona przed śledzeniem</string>
@@ -2740,12 +2695,8 @@
   <string name="preference_enhanced_tracking_protection_custom_cryptominers">Elementy używające urządzenia użytkownika do generowania kryptowalut</string>
   <!-- Preference for enhanced tracking protection for the custom protection settings -->
   <string name="preference_enhanced_tracking_protection_custom_known_fingerprinters">Znane elementy śledzące przez zbieranie informacji o\u00a0konfiguracji</string>
-  <!-- Button label for navigating to the Enhanced Tracking Protection details -->
-  <string name="enhanced_tracking_protection_details">Informacje</string>
   <!-- Header for categories that are being being blocked by current Enhanced Tracking Protection settings -->
   <string name="enhanced_tracking_protection_blocked">Blokowane</string>
-  <!-- Header for categories that are being not being blocked by current Enhanced Tracking Protection settings -->
-  <string name="enhanced_tracking_protection_allowed">Dopuszczone</string>
   <!-- Category of trackers (social media trackers) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_social_media_trackers_title">Elementy śledzące serwisów społecznościowych</string>
   <!-- Description of social media trackers that can be blocked by Enhanced Tracking Protection -->
@@ -2768,10 +2719,6 @@
   <string name="etp_tracking_content_title">Treści z\u00a0elementami śledzącymi</string>
   <!-- Description of tracking content that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_tracking_content_description">Zatrzymuje wczytywanie zewnętrznych reklam, filmów i\u00a0innych treści zawierających elementy śledzące. Może powodować niepoprawne działanie niektórych stron.</string>
-  <!-- Enhanced Tracking Protection message that protection is currently on for this site -->
-  <string name="etp_panel_on">Ochrona jest włączona na tej witrynie</string>
-  <!-- Enhanced Tracking Protection message that protection is currently off for this site -->
-  <string name="etp_panel_off">Ochrona jest wyłączona na tej witrynie</string>
   <!-- Header for exceptions list for which sites enhanced tracking protection is always off -->
   <string name="enhanced_tracking_protection_exceptions">Wzmocniona ochrona przed śledzeniem jest wyłączona na tych witrynach</string>
   <!--
@@ -2796,13 +2743,6 @@
   <string name="etp_suspected_fingerprinters_description">Włącza ochronę przed elementami śledzącymi podejrzewanymi o\u00a0zbieranie informacji o\u00a0konfiguracji.</string>
   <!-- Category of trackers (fingerprinters) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_known_fingerprinters_title">Znane elementy śledzące przez zbieranie informacji o\u00a0konfiguracji</string>
-  <!--
-    Description of the SmartBlock Enhanced Tracking Protection feature. The * symbol is intentionally hardcoded here,
-    as we use it on the UI to indicate which trackers have been partially unblocked.
-  -->
-  <string name="preference_etp_smartblock_description">Niektóre elementy śledzące wskazane poniżej zostały częściowo odblokowane na tej stronie, ponieważ zostały użyte przez użytkownika *.</string>
-  <!-- Text displayed that links to website about enhanced tracking protection SmartBlock -->
-  <string name="preference_etp_smartblock_learn_more">Więcej informacji</string>
   <!--
     Content description (not visible, for screen readers etc.):
     Enhanced tracking protection exception preference icon for ETP settings.
@@ -3137,6 +3077,10 @@
   <string name="ip_protection_toolbar_pill_label">VPN jest włączony</string>
   <!-- Accessibility description for the browser VPN pill in the address bar when the VPN has been activated -->
   <string name="ip_protection_toolbar_pill_description">VPN jest aktywny.</string>
+  <!-- Label shown next to the browser protection icon in the address bar when the browser VPN turns off -->
+  <string name="ip_protection_toolbar_pill_label_off">VPN jest wyłączony</string>
+  <!-- Accessibility description for the browser VPN pill in the address bar when the VPN has turned off -->
+  <string name="ip_protection_toolbar_pill_description_off">VPN jest wyłączony.</string>
   <!-- Label for the button that starts the browser VPN authentication or authorization flow on the settings screen -->
   <string name="ip_protection_get_started">Zacznij teraz</string>
   <!-- Label for the "connecting" state of the button that starts the browser VPN authentication or authorization flow on the settings screen -->
@@ -3186,6 +3130,8 @@
   <string name="ip_protection_location_picker_title" tools:ignore="UnusedResources">Wybierz położenie VPN</string>
   <!-- Description for what it means to use the Recommended setting and let the app automatically pick the best server location. -->
   <string name="ip_protection_location_fastest_description" tools:ignore="BrandUsage">Firefox znajduje najszybsze położenie</string>
+  <!-- Description for an unavailable VPN location in the location list. -->
+  <string name="ip_protection_location_unavailable_description">Niedostępne</string>
   <!-- Error message shown when the selected browser VPN location is unavailable. -->
   <string name="ip_protection_location_unavailable" tools:ignore="UnusedResources">Położenie jest niedostępne. Wybierz inne.</string>
   <!-- Snackbar (in-app pop-up notification) text shown when the previously selected browser VPN location is unavailable and the recommended location was used instead. -->
@@ -3408,16 +3354,8 @@
   <string name="phone_feature_blocked_step_permissions"><![CDATA[2. Stuknij <b>Uprawnienia</b>]]></string>
   <!-- Third step for the allowing a permission (%1$s is the permission name, for example "Camera"). -->
   <string name="phone_feature_blocked_step_feature"><![CDATA[3. Włącz <b>%1$s</b>]]></string>
-  <!-- Label that indicates a site is using a secure connection -->
-  <string name="quick_settings_sheet_secure_connection_2">Połączenie jest zabezpieczone</string>
-  <!-- Label that indicates a site is using a insecure connection -->
-  <string name="quick_settings_sheet_insecure_connection_2">Połączenie nie jest zabezpieczone</string>
-  <!-- Label that indicates a site is displaying a local document -->
-  <string name="quick_settings_sheet_local_page">Strona wczytana z\u00a0tego urządzenia.</string>
   <!-- Label to clear site data -->
   <string name="clear_site_data">Usuń ciasteczka i\u00a0dane witryny</string>
-  <!-- Confirmation message for a dialog confirming if the user wants to delete all data for current site. %s is the domain of the site. -->
-  <string name="confirm_clear_site_data"><![CDATA[Czy na pewno usunąć wszystkie ciasteczka i\u00a0dane witryny <b>%s</b>?]]></string>
   <!-- Confirmation message for a dialog confirming if the user wants to delete all the permissions for all sites -->
   <string name="confirm_clear_permissions_on_all_sites">Czy na pewno przywrócić wszystkie uprawnienia na wszystkich witrynach na domyślne?</string>
   <!-- Confirmation message for a dialog confirming if the user wants to delete all the permissions for a site -->
@@ -3430,11 +3368,6 @@
   <string name="browser_menu_add_to_shortcuts">Dodaj do skrótów</string>
   <!-- Browser menu button that removes a shortcut from the home fragment -->
   <string name="browser_menu_remove_from_shortcuts">Usuń ze skrótów</string>
-  <!--
-    text shown before the issuer name to indicate who its verified by, %1$s is the name of
-    the certificate authority that verified the ticket
-  -->
-  <string name="certificate_info_verified_by">Zweryfikowane przez: %1$s</string>
   <!-- Message in delete confirmation dialog for password -->
   <string name="login_deletion_confirmation_2">Czy na pewno usunąć to hasło?</string>
   <!-- Positive action of a dialog asking to delete -->
@@ -3498,6 +3431,16 @@
     which navigates the user to a screen displaying all the shortcuts.
   -->
   <string name="homepage_shortcuts_show_all_content_description">Pokaż wszystkie skróty</string>
+  <!--
+    Label for the button in the shortcuts home screen section that expands the section to show
+    every shortcut.
+  -->
+  <string name="homepage_shortcuts_show_all">Wyświetl wszystkie</string>
+  <!--
+    Label for the button in the shortcuts home screen section that collapses the section back
+    to showing only the first shortcuts.
+  -->
+  <string name="homepage_shortcuts_show_less">Wyświetl mniej</string>
   <!-- Label for the "Add shortcut" button displayed as a tile. -->
   <string name="homepage_shortcuts_add_shortcut">Dodaj skrót</string>
   <!-- Title for the "Add to homepage" bottom sheet. -->
@@ -4737,6 +4680,16 @@
   <string name="privacy_notice_updated_homepage_message_privacy_notice" tools:ignore="UnusedResources">zasady ochrony prywatności</string>
   <!-- The second active link used in privacy_notice_updated_homepage_message -->
   <string name="privacy_notice_updated_homepage_message_learn_more" tools:ignore="UnusedResources">Więcej informacji</string>
+  <!--
+    Collections migration homepage card
+
+    Title shown on the collections to tab groups migration card on the homepage.
+  -->
+  <string name="collections_migration_homepage_banner_title">Kolekcje są teraz grupami</string>
+  <!-- Message shown on the collections to tab groups migration card on the homepage. -->
+  <string name="collections_migration_homepage_card_message">Jest prostszy sposób na zorganizowanie kart</string>
+  <!-- Link text shown on the collections to tab groups migration card that opens the tab groups page in the tab manager. -->
+  <string name="collections_migration_homepage_card_link">Wyświetl grupy kart</string>
   <!-- Google Lens prototype related strings -->
   <string name="preferences_debug_settings_google_lens_integration">Włącz integrację z Google Lens</string>
   <!-- Lens image search button content description -->
@@ -4765,10 +4718,6 @@
   <string name="search_settings_google_lens_description">Wysyła obrazy i zdjęcia do Google, aby wyszukać obrazem.</string>
   <!-- Caption shown under the Google Lens toggle clarifying when the feature is available -->
   <string name="preferences_google_lens_availability_caption">Dostępne tylko wtedy, gdy wyszukiwarka Google jest włączona i w danej chwili aktywna.</string>
-  <!-- Title for the Google Lens AI feature toggle -->
-  <string name="ai_controls_google_lens_title">Google Lens</string>
-  <!-- Description for the Google Lens AI feature toggle -->
-  <string name="ai_controls_google_lens_description">Wysyła obrazy i zdjęcia do Google, aby wyszukać obrazem.</string>
   <!-- Content description for the Google Lens half of the camera mode toggle -->
   <string name="lens_camera_mode_lens">Google Lens</string>
   <!-- Content description for the QR scanner half of the camera mode toggle -->
@@ -4825,4 +4774,20 @@
   <string name="firefox_labs_feature_conflict">Funkcja nie jest dostępna do wypróbowania.</string>
   <!-- Text displayed on the Firefox Labs screen when there are no Labs experimental features present. -->
   <string name="firefox_labs_no_labs_available_description">W\u00a0tej chwili nie ma żadnych funkcji eksperymentalnych do wypróbowania</string>
+  <!-- Title of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">Izolacja witryn</string>
+  <!-- Description of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">Dodatkowa bariera między witrynami, która pomaga chronić dane użytkownika między kartami. Może mieć wpływ na wydajność, stabilność, zgodność witryn i sposób zachowywania historii przeglądania.</string>
+  <!--
+    PDF viewer toolbar and buttons
+
+    Content description for accessibility (used by screen readers): Description for the button that triggers the start of a signature workflow on the PDF displayed on the screen.
+  -->
+  <string name="pdf_tools_sign_content_description">Podpisz plik PDF</string>
+  <!-- Content description for accessibility (used by screen readers): Description of the button that downloads the PDF displayed on the screen to the user's device. -->
+  <string name="pdf_tools_download_content_description">Pobierz plik PDF</string>
+  <!-- Content description for accessibility (used by screen readers): Description for the button that opens the printing dialogue window for the PDF displayed on the screen. -->
+  <string name="pdf_tools_print_content_description">Drukuj plik PDF</string>
+  <!-- Content description for accessibility (used by screen readers): Description for the button that opens the sharing options for the PDF being displayed on the screen. -->
+  <string name="pdf_tools_share_content_description">Udostępnij plik PDF</string>
 </resources>

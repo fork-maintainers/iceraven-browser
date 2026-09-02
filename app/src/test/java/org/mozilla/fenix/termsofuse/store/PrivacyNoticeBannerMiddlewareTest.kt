@@ -71,7 +71,7 @@ class PrivacyNoticeBannerMiddlewareTest {
     class FakePrivacyNoticeBannerRepository : PrivacyNoticeBannerRepository {
         var updatePrivacyNoticeBannerDisplayedPreferenceCalled = false
 
-        override fun updatePrivacyNoticeBannerDisplayedPreference(nowMillis: Long) {
+        override fun updatePrivacyNoticeBannerDisplayedPreference() {
             updatePrivacyNoticeBannerDisplayedPreferenceCalled = true
         }
 

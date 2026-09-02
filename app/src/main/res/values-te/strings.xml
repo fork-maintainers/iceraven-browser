@@ -233,8 +233,6 @@
   <string name="preferences_add_private_browsing_shortcut">అంతరంగిక విహరణ సత్వరమార్గాన్ని చేర్చు</string>
   <!-- Preference for enabling "HTTPS-Only" mode -->
   <string name="preferences_https_only_title">HTTPS-మాత్రమే రీతి</string>
-  <!-- Text for cancel button indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_cancel_button">రద్దుచేయి</string>
   <!-- Summary of https only preference if https only is set to on in all tabs -->
   <string name="preferences_https_only_on_all">అన్ని ట్యాబులలోనూ</string>
   <!-- Text displayed that links to website containing documentation about "HTTPS-Only" mode -->
@@ -557,8 +555,6 @@
   <string name="pwa_site_controls_title_private">%1$s (అంతరంగిక రీతి)</string>
   <!-- Text for the button to clear all history -->
   <string name="history_delete_all">చరిత్రను తొలగించు</string>
-  <!-- Text for the snackbar to confirm that multiple browsing history items has been deleted -->
-  <string name="history_delete_multiple_items_snackbar">చరిత్ర తొలగించబడింది</string>
   <!-- Text for the snackbar to confirm that a single browsing history item has been deleted. %1$s is the shortened URL of the deleted history item. -->
   <string name="history_delete_single_item_snackbar">%1$s తొలగించబడింది</string>
   <!-- Context description text for the button to delete a single history item -->
@@ -587,8 +583,6 @@
   <string name="download_multi_select_title">%1$d ఎంచుకున్నారు</string>
   <!-- The button text for the cancel button to leave the Web Compat Reporter feature. -->
   <string name="webcompat_reporter_cancel">రద్దుచేయి</string>
-  <!-- The button text for the send button to submit the provided form data. -->
-  <string name="webcompat_reporter_send">పంపించు</string>
   <!--
     Crashes
 
@@ -647,12 +641,6 @@
     Button label that take the user to the Android App setting
   -->
   <string name="phone_feature_go_to_settings">అమరికలకు వెళ్లు</string>
-  <!--
-    Content description (not visible, for screen readers etc.): Quick settings sheet
-    to give users access to site specific information / settings. For example:
-    Secure settings status and a button to modify site permissions
-  -->
-  <string name="quick_settings_sheet">త్వరిత అమరికల పత్రం</string>
   <!-- Label that indicates that this option it the recommended one -->
   <string name="phone_feature_recommended">సిఫార్సు చేయబడింది</string>
   <!-- Button label for clearing all the information of site permissions -->
@@ -933,12 +921,6 @@
   <!--
     Enhanced Tracking Protection
 
-    Link displayed in enhanced tracking protection panel to access tracking protection settings
-  -->
-  <string name="etp_settings">సంరక్షణ అమరికలు</string>
-  <!--
-    Enhanced Tracking Protection
-
     Preference title for enhanced tracking protection settings
   -->
   <string name="preference_enhanced_tracking_protection">మెరుగైన ట్రాకింగ్ సంరక్షణ</string>
@@ -980,12 +962,8 @@
   <string name="preference_enhanced_tracking_protection_custom_tracking_content_2">అంతరంగిక ట్యాబులలో మాత్రమే</string>
   <!-- Preference for enhanced tracking protection for the custom protection settings -->
   <string name="preference_enhanced_tracking_protection_custom_cryptominers">క్రిప్టోమైనర్లు</string>
-  <!-- Button label for navigating to the Enhanced Tracking Protection details -->
-  <string name="enhanced_tracking_protection_details">వివరాలు</string>
   <!-- Header for categories that are being being blocked by current Enhanced Tracking Protection settings -->
   <string name="enhanced_tracking_protection_blocked">నిరోధించబడినవి</string>
-  <!-- Header for categories that are being not being blocked by current Enhanced Tracking Protection settings -->
-  <string name="enhanced_tracking_protection_allowed">అనుమతించినవి</string>
   <!-- Category of trackers (social media trackers) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_social_media_trackers_title">సామాజిక మాధ్యమాల ట్రాకర్లు</string>
   <!-- Description of social media trackers that can be blocked by Enhanced Tracking Protection -->
@@ -1002,10 +980,6 @@
   <string name="etp_tracking_content_title">ట్రాకింగ్ విషయం</string>
   <!-- Description of tracking content that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_tracking_content_description">ట్రాకింగ్ సంకేతం కలిగివున్న బయటి ప్రకటనలను, వీడియోలను, ఇతర విషయాలను నిలిపివేస్తుంది. కొన్ని వెబ్‌సైట్ల పనితీరు ప్రభావితం కావచ్చు.</string>
-  <!-- Enhanced Tracking Protection message that protection is currently on for this site -->
-  <string name="etp_panel_on">సంరక్షణలు ఈ సైటులో చేతనంగా ఉన్నాయి</string>
-  <!-- Enhanced Tracking Protection message that protection is currently off for this site -->
-  <string name="etp_panel_off">సంరక్షణలు ఈ సైటులో అచేతనంగా ఉన్నాయి</string>
   <!-- Header for exceptions list for which sites enhanced tracking protection is always off -->
   <string name="enhanced_tracking_protection_exceptions">ఈ వెబ్‌సైట్లకు మెరుగైన ట్రాకింగ్ సంరక్షణ అచేతనమై ఉంటుంది</string>
   <!--
@@ -1024,8 +998,6 @@
   <string name="etp_redirect_trackers_title">దారిమళ్ళింపు ట్రాకర్లు</string>
   <!-- Description of redirect tracker cookies that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_redirect_trackers_description">తెలిసిన ట్రాకింగు వెబ్‌సైట్లు దారిమార్పుల ద్వారా అమర్చే కుకీలను తుడిచివేస్తుంది.</string>
-  <!-- Text displayed that links to website about enhanced tracking protection SmartBlock -->
-  <string name="preference_etp_smartblock_learn_more">ఇంకా తెలుసుకోండి</string>
   <!-- About page link text to open support link -->
   <string name="about_support">తోడ్పాటు</string>
   <!-- About page link text to list of past crashes (like about:crashes on desktop) -->
@@ -1208,14 +1180,8 @@
   <string name="phone_feature_blocked_step_permissions"><![CDATA[2. <b>అనుమతులు</b>ను తాకండి]]></string>
   <!-- Third step for the allowing a permission (%1$s is the permission name, for example "Camera"). -->
   <string name="phone_feature_blocked_step_feature"><![CDATA[3. చేతనించడానికి <b>%1$s</b>ను ఎంచుకోండి]]></string>
-  <!-- Label that indicates a site is using a secure connection -->
-  <string name="quick_settings_sheet_secure_connection_2">అనుసంధానం సురక్షితం</string>
-  <!-- Label that indicates a site is using a insecure connection -->
-  <string name="quick_settings_sheet_insecure_connection_2">అనుసంధానం సురక్షితం కాదు</string>
   <!-- Label to clear site data -->
   <string name="clear_site_data">కుకీలను, సైటు దత్తాంశాన్ని తుడిచివేయి</string>
-  <!-- Confirmation message for a dialog confirming if the user wants to delete all data for current site. %s is the domain of the site. -->
-  <string name="confirm_clear_site_data"><![CDATA[మీరు నిజంగానే <b>%s</b> సైటు సంబంధింత కుకీలను, డేబాను తుడిచివేయాలనుకుంటున్నారా?]]></string>
   <!-- Confirmation message for a dialog confirming if the user wants to delete all the permissions for all sites -->
   <string name="confirm_clear_permissions_on_all_sites">నిజంగానే సైట్లన్నిటిలోనూ అనుమతులన్నింటినీ తుడిచివేయాలనుకుంటున్నారా?</string>
   <!-- Confirmation message for a dialog confirming if the user wants to delete all the permissions for a site -->
@@ -1224,11 +1190,6 @@
   <string name="confirm_clear_permission_site">నిజంగానే ఈ సైటుకున్న ఈ అనుమతిని తుడిచివేయాలనుకుంటున్నారా?</string>
   <!-- label shown when there are not site exceptions to show in the site exception settings -->
   <string name="no_site_exceptions">సైటు మినహాయింపులేమీ లేవు</string>
-  <!--
-    text shown before the issuer name to indicate who its verified by, %1$s is the name of
-    the certificate authority that verified the ticket
-  -->
-  <string name="certificate_info_verified_by">తనిఖీ చేసినవారు: %1$s</string>
   <!-- Positive action of a dialog asking to delete -->
   <string name="dialog_delete_positive">తొలగించు</string>
   <!-- Negative action of a dialog asking to delete login -->

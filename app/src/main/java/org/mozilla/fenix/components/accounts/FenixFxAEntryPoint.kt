@@ -101,6 +101,8 @@ enum class FenixFxAEntryPoint(override val entryName: String) : FxAEntryPoint, P
      */
     IPProtectionTrustPanel("vpn_integration_android_protection_panel"),
 
+    ShakeToSummarize("shake_to_summarize"),
+
     /**
      * When serializing the value after navigating, the result is a nullable value. We have this
      * "unknown" as a default value in the odd chance that we receive an [entryName] is not part of this enum.

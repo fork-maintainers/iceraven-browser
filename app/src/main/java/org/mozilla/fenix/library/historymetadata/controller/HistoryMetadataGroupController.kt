@@ -18,6 +18,7 @@ import mozilla.telemetry.glean.private.NoExtras
 import org.mozilla.fenix.R
 import org.mozilla.fenix.components.AppStore
 import org.mozilla.fenix.components.appstate.AppAction
+import org.mozilla.fenix.components.share.ShareSheetChooserAction
 import org.mozilla.fenix.components.share.ShareSource
 import org.mozilla.fenix.components.usecases.FenixBrowserUseCases
 import org.mozilla.fenix.components.usecases.ShareUseCases
@@ -151,6 +152,11 @@ class DefaultHistoryMetadataGroupController(
         shareUseCases.shareItems(
             items = shareData,
             source = ShareSource.HISTORY_METADATA_GROUP,
+            chooserActions = if (items.size == 1) {
+                listOf(ShareSheetChooserAction.SEND_TO_DEVICES, ShareSheetChooserAction.QR_CODE)
+            } else {
+                listOf(ShareSheetChooserAction.SEND_TO_DEVICES)
+            },
             navigateToShareFragment = {
                 navController.navigate(
                     HistoryMetadataGroupFragmentDirections.actionGlobalShareFragment(

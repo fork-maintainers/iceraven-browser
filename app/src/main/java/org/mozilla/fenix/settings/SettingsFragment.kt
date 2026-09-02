@@ -4,9 +4,11 @@
 
 package org.mozilla.fenix.settings
 
-import android.annotation.SuppressLint
+import android.Manifest.permission.ACCESS_LOCAL_NETWORK
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -17,6 +19,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.VisibleForTesting
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -28,7 +31,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.SwitchPreferenceCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.CoroutineScope
@@ -55,7 +57,6 @@ import mozilla.telemetry.glean.private.NoExtras
 import org.mozilla.fenix.Config
 import org.mozilla.fenix.FeatureFlags
 import org.mozilla.fenix.GleanMetrics.Addons
-import org.mozilla.fenix.GleanMetrics.CookieBanners
 import org.mozilla.fenix.GleanMetrics.Events
 import org.mozilla.fenix.GleanMetrics.SettingsSearch
 import org.mozilla.fenix.GleanMetrics.TrackingProtection
@@ -70,6 +71,7 @@ import org.mozilla.fenix.e2e.SystemInsetsPaddedFragment
 import org.mozilla.fenix.ext.application
 import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.ext.getPreferenceKey
+import org.mozilla.fenix.ext.navigateToAppDetailsSettings
 import org.mozilla.fenix.ext.navigateToNotificationsSettings
 import org.mozilla.fenix.ext.openInNewTab
 import org.mozilla.fenix.ext.requireComponents
@@ -103,6 +105,16 @@ class SettingsFragment : PreferenceFragmentCompat(), SystemInsetsPaddedFragment 
         ProfilerViewModelFactory(requireActivity().application)
     }
     private val snackbarBinding = ViewBoundFeatureWrapper<SnackbarBinding>()
+
+    private val requestLocalNetworkPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission(),
+    ) { isGranted ->
+        localNetworkPermissionRequestAttempted = true
+        setupLocalNetworkPreference(isGranted)
+    }
+
+    private var localNetworkPermissionRequestAttempted = false
+
     private val dateTimeProvider: DateTimeProvider by lazy { DefaultDateTimeProvider() }
 
     @VisibleForTesting
@@ -234,7 +246,6 @@ class SettingsFragment : PreferenceFragmentCompat(), SystemInsetsPaddedFragment 
         )
     }
 
-    @SuppressLint("RestrictedApi")
     override fun onResume() {
         super.onResume()
 
@@ -341,7 +352,6 @@ class SettingsFragment : PreferenceFragmentCompat(), SystemInsetsPaddedFragment 
         }
     }
 
-    @SuppressLint("InflateParams")
     @Suppress("LongMethod", "CyclomaticComplexMethod")
     override fun onPreferenceTreeClick(preference: Preference): Boolean {
         // Hide the scrollbar so the animation looks smoother
@@ -459,6 +469,11 @@ class SettingsFragment : PreferenceFragmentCompat(), SystemInsetsPaddedFragment 
 
             resources.getString(R.string.pref_key_notifications) -> {
                 context?.navigateToNotificationsSettings {}
+                null
+            }
+
+            resources.getString(R.string.pref_key_local_network_access) -> {
+                handleLocalNetworkPermissionClick()
                 null
             }
 
@@ -629,7 +644,6 @@ class SettingsFragment : PreferenceFragmentCompat(), SystemInsetsPaddedFragment 
             preferenceStartProfiler?.isVisible = showSecretDebugMenuThisSession &&
                 (components.core.engine.profiler?.isProfilerActive() != null)
         }
-        setupCookieBannerPreference(settings)
         setupInstallAddonFromFilePreference(settings)
         setLinkSharingPreference()
         setupAmoCollectionOverridePreference(
@@ -642,6 +656,17 @@ class SettingsFragment : PreferenceFragmentCompat(), SystemInsetsPaddedFragment 
         setupNotificationPreference(
             NotificationManagerCompat.from(requireContext()).areNotificationsEnabled(),
         )
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.CINNAMON_BUN) {
+            setupLocalNetworkPreference(
+                ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    ACCESS_LOCAL_NETWORK,
+                ) == PackageManager.PERMISSION_GRANTED,
+            )
+        } else {
+            requirePreference<Preference>(R.string.pref_key_local_network_access).isVisible = false
+        }
         setupSearchPreference(
             components.core.store.state.search.selectedOrDefaultSearchEngine?.name,
         )
@@ -751,6 +776,38 @@ class SettingsFragment : PreferenceFragmentCompat(), SystemInsetsPaddedFragment 
         }
     }
 
+    private fun handleLocalNetworkPermissionClick() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.CINNAMON_BUN) {
+            val isGranted = ContextCompat.checkSelfPermission(
+                requireContext(),
+                ACCESS_LOCAL_NETWORK,
+            ) == PackageManager.PERMISSION_GRANTED
+
+            if (isGranted) {
+                context?.navigateToAppDetailsSettings {}
+            } else {
+                val shouldShowRationale = shouldShowRequestPermissionRationale(ACCESS_LOCAL_NETWORK)
+                if (shouldShowRationale || !localNetworkPermissionRequestAttempted) {
+                    requestLocalNetworkPermissionLauncher.launch(ACCESS_LOCAL_NETWORK)
+                } else {
+                    context?.navigateToAppDetailsSettings {}
+                }
+            }
+        } else {
+            context?.navigateToAppDetailsSettings {}
+        }
+    }
+
+    internal fun setupLocalNetworkPreference(isLocalNetworkAccessAllowed: Boolean) {
+        with(requirePreference<Preference>(R.string.pref_key_local_network_access)) {
+            summary = if (isLocalNetworkAccessAllowed) {
+                getString(R.string.local_network_access_allowed_summary)
+            } else {
+                getString(R.string.local_network_access_not_allowed_summary)
+            }
+        }
+    }
+
     @VisibleForTesting
     internal fun setupHomepagePreference(settings: Settings) {
         with(requirePreference<Preference>(R.string.pref_key_home)) {
@@ -806,36 +863,6 @@ class SettingsFragment : PreferenceFragmentCompat(), SystemInsetsPaddedFragment 
         findPreference<Preference>(getPreferenceKey(R.string.pref_key_email_masks))?.let {
             it.isVisible = settings.isEmailMaskFeatureEnabled &&
                     components.relayEligibilityStore.state.eligibilityState is Eligible
-        }
-    }
-
-    @VisibleForTesting
-    internal fun setupCookieBannerPreference(settings: Settings) {
-        FxNimbus.features.cookieBanners.recordExposure()
-        if (settings.shouldShowCookieBannerUI) {
-            with(requirePreference<SwitchPreferenceCompat>(R.string.pref_key_cookie_banner_private_mode)) {
-                isVisible = settings.shouldShowCookieBannerUI
-
-                onPreferenceChangeListener = object : SharedPreferenceUpdater() {
-                    override fun onPreferenceChange(
-                        preference: Preference,
-                        newValue: Any?,
-                    ): Boolean {
-                        val metricTag = if (newValue == true) {
-                            "reject_all"
-                        } else {
-                            "disabled"
-                        }
-                        val engineSettings = components.core.engine.settings
-                        settings.shouldUseCookieBannerPrivateMode = newValue as Boolean
-                        val mode = settings.getCookieBannerHandlingPrivateMode()
-                        engineSettings.cookieBannerHandlingModePrivateBrowsing = mode
-                        CookieBanners.settingChangedPmb.record(CookieBanners.SettingChangedPmbExtra(metricTag))
-                        components.useCases.sessionUseCases.reload()
-                        return super.onPreferenceChange(preference, newValue)
-                    }
-                }
-            }
         }
     }
 

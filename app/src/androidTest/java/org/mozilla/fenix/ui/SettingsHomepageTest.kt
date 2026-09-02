@@ -117,7 +117,7 @@ class SettingsHomepageTest {
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/1564999
     @Converted(
-        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.SettingsHomepageTest#verifyJumpBackInSectionTest"],
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.SettingsHomepageTest#jumpBackInOptionTest"],
         bug = 2042363,
         since = "2026-05",
     )
@@ -168,6 +168,11 @@ class SettingsHomepageTest {
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/1569831
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.SettingsHomepageTest#verifyOpeningScreenOptionsTest"],
+        bug = 2058818,
+        since = "2026-07",
+    )
     @SmokeTest
     @Test
     fun verifyOpeningScreenOptionsTest() {
@@ -248,9 +253,9 @@ class SettingsHomepageTest {
         }
     }
 
-    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/1676356
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/1676359
     @Test
-    fun verifyTheSelectedWallpaper() {
+    fun verifyWallpaperChangeFunctionalityTest() {
         homeScreen(retryableComposeTestRule.current) {
         }.openThreeDotMenu {
         }.clickSettingsButton {
@@ -261,18 +266,6 @@ class SettingsHomepageTest {
             clickTheDefaultWallpaper(retryableComposeTestRule.current)
             verifyDefaultWallpaperIsSelected(retryableComposeTestRule.current)
             verifyEdgeToEdgeWallpaperIsNotSelected(retryableComposeTestRule.current)
-        }
-    }
-
-    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/1676359
-    @Test
-    fun verifyWallpaperChangeFunctionalityTest() {
-        homeScreen(retryableComposeTestRule.current) {
-        }.openThreeDotMenu {
-        }.clickSettingsButton {
-        }.openHomepageSubMenu {
-        }.clickWallpapersMenuOption {
-            clickTheDefaultWallpaper(retryableComposeTestRule.current)
         }.goBack {
         }.goBack(retryableComposeTestRule.current) {
             exitMenu()

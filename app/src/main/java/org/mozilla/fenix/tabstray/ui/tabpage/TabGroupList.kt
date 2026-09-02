@@ -5,13 +5,13 @@
 package org.mozilla.fenix.tabstray.ui.tabpage
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -37,16 +37,18 @@ import org.mozilla.fenix.theme.FirefoxTheme
  * @param groups The list of tab groups to display.
  * @param modifier: The Modifier applied to the tab group list.
  * @param onTabGroupClick Invoked when the user clicks on a tab group.
- * @param onDeleteTabGroupClick Invoked when the user clicks on delete tab group.
  * @param onEditTabGroupClick Invoked when the user clicks to edit the tab group.
+ * @param onShareTabGroupClick Invoked when the user clicks to share the tab group.
+ * @param onDeleteTabGroupClick Invoked when the user clicks on delete tab group.
  */
 @Composable
 fun TabGroupList(
     groups: List<TabsTrayItem.TabGroup>,
     modifier: Modifier = Modifier,
     onTabGroupClick: (TabsTrayItem.TabGroup) -> Unit,
-    onDeleteTabGroupClick: (TabsTrayItem.TabGroup) -> Unit,
     onEditTabGroupClick: (TabsTrayItem.TabGroup) -> Unit,
+    onShareTabGroupClick: (TabsTrayItem.TabGroup) -> Unit,
+    onDeleteTabGroupClick: (TabsTrayItem.TabGroup) -> Unit,
 ) {
     Box(
         modifier = Modifier
@@ -62,6 +64,7 @@ fun TabGroupList(
                     top = FirefoxTheme.layout.space.dynamic200,
                     end = FirefoxTheme.layout.space.dynamic200,
                 ),
+            verticalArrangement = Arrangement.spacedBy(FirefoxTheme.layout.space.static25),
         ) {
             itemsIndexed(
                 items = groups,
@@ -81,7 +84,6 @@ fun TabGroupList(
                     tabGroup = group,
                     onClick = { onTabGroupClick(group) },
                     modifier = Modifier
-                        .background(MaterialTheme.colorScheme.surfaceContainerLowest)
                         .tabListItemShapeStyling(
                             tabShapeInfo = tabShapeInfo,
                             selectionState = TabsTrayItemSelectionState(
@@ -89,21 +91,20 @@ fun TabGroupList(
                                 multiSelectEnabled = false,
                                 focusEnabled = true,
                             ),
-                        ),
+                        )
+                        .background(MaterialTheme.colorScheme.surfaceBright),
                     selectionState = selectionState,
                     trailingContent = {
                         TabGroupMenuButton(
                             includeCloseOption = false,
-                            onDeleteTabGroupClick = { onDeleteTabGroupClick(group) },
                             onEditTabGroupClick = { onEditTabGroupClick(group) },
                             onCloseTabGroupClick = {},
+                            onShareTabGroupClick = { onShareTabGroupClick(group) },
+                            onUngroupTabGroupClick = {},
+                            onDeleteTabGroupClick = { onDeleteTabGroupClick(group) },
                         )
                     },
                 )
-
-                if (index != groups.lastIndex) {
-                    HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
-                }
             }
         }
     }
@@ -136,8 +137,9 @@ private fun TabGroupListPreview() {
                 ),
             ),
             onTabGroupClick = {},
-            onDeleteTabGroupClick = {},
             onEditTabGroupClick = {},
+            onShareTabGroupClick = {},
+            onDeleteTabGroupClick = {},
         )
     }
 }

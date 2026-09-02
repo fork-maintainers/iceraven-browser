@@ -46,6 +46,11 @@ interface IPProtectionPromptRepository {
      * the onboarding card again.
      */
     val hasAlreadyUsedIPProtection: Boolean
+
+    /**
+     * Indicates if the Nimbus feature flag for showing the onboarding bottom sheet is enabled.
+     */
+    val showOnboardingBottomSheet: Boolean
 }
 
 /**
@@ -68,7 +73,11 @@ class DefaultIPProtectionPromptRepository(
     override val hasAlreadyUsedIPProtection: Boolean
         get() = settings.hasAlreadyUsedVpn
 
+    override val showOnboardingBottomSheet: Boolean
+        get() = settings.shouldShowIPProtectionOnboardingBottomSheet
+
     override fun canShowIPProtectionPrompt(currentTimeMillis: Long): Boolean =
+        showOnboardingBottomSheet &&
         settings.isIPProtectionAvailable &&
             completedOnboardingOverAWeekAgo(currentTimeMillis) &&
             !isShowingPrompt &&

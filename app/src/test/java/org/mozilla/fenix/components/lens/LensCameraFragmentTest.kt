@@ -6,7 +6,6 @@ package org.mozilla.fenix.components.lens
 
 import android.content.Context
 import android.graphics.Insets
-import android.graphics.Matrix
 import android.graphics.Point
 import android.graphics.Rect
 import android.hardware.camera2.CameraAccessException
@@ -24,6 +23,7 @@ import android.os.HandlerThread
 import android.util.Size
 import android.view.Display
 import android.view.Surface
+import android.view.TextureView
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.view.WindowMetrics
@@ -33,7 +33,6 @@ import io.mockk.Runs
 import io.mockk.every
 import io.mockk.just
 import io.mockk.mockk
-import io.mockk.slot
 import io.mockk.spyk
 import io.mockk.verify
 import mozilla.components.feature.qr.QrAnalyzer
@@ -81,7 +80,7 @@ class LensCameraFragmentTest {
     @Test
     fun `GIVEN textureView is available WHEN startCamera is called THEN tryOpenCamera is invoked`() {
         val fragment = spyk(LensCameraFragment())
-        val textureView: AutoFitTextureView = mockk(relaxed = true)
+        val textureView: TextureView = mockk(relaxed = true)
         every { textureView.isAvailable } returns true
         every { textureView.width } returns 1920
         every { textureView.height } returns 1080
@@ -99,7 +98,7 @@ class LensCameraFragmentTest {
     @Test
     fun `GIVEN textureView is unavailable WHEN startCamera is called THEN surfaceTextureListener is set`() {
         val fragment = spyk(LensCameraFragment())
-        val textureView: AutoFitTextureView = mockk(relaxed = true)
+        val textureView: TextureView = mockk(relaxed = true)
         every { textureView.isAvailable } returns false
         fragment.textureView = textureView
         every { fragment.maybeStartBackgroundThread() } just Runs
@@ -222,7 +221,7 @@ class LensCameraFragmentTest {
         val fragment = spyk(LensCameraFragment())
         fragment.cameraDevice = mockk(relaxed = true)
 
-        val textureView: AutoFitTextureView = mockk(relaxed = true)
+        val textureView: TextureView = mockk(relaxed = true)
         every { textureView.surfaceTexture } returns mockk(relaxed = true)
         fragment.textureView = textureView
         fragment.previewSize = null
@@ -239,7 +238,7 @@ class LensCameraFragmentTest {
         every { imageReader.surface } returns null
         fragment.imageReader = imageReader
 
-        val textureView: AutoFitTextureView = mockk(relaxed = true)
+        val textureView: TextureView = mockk(relaxed = true)
         every { textureView.surfaceTexture } returns mockk(relaxed = true)
         fragment.textureView = textureView
 
@@ -489,58 +488,28 @@ class LensCameraFragmentTest {
     // --- configureTransform tests ---
 
     @Test
-    fun `GIVEN textureView and previewSize are set WHEN configureTransform is called THEN getScreenRotation is invoked`() {
+    fun `GIVEN previewSize is set WHEN configureTransform is called THEN the transform is applied to the textureView`() {
         val fragment = spyk(LensCameraFragment())
-        val textureView: AutoFitTextureView = mockk(relaxed = true)
-        fragment.textureView = textureView
-        fragment.previewSize = Size(4, 4)
-
-        fragment.configureTransform(4, 4)
-
-        verify { fragment.getScreenRotation() }
-    }
-
-    @Test
-    fun `GIVEN portrait rotation and QR mode WHEN configureTransform is called THEN matrix uses center-crop scale`() {
-        val fragment = spyk(LensCameraFragment())
-        val textureView: AutoFitTextureView = mockk(relaxed = true)
-        val matrixSlot = slot<Matrix>()
-        every { textureView.setTransform(capture(matrixSlot)) } just Runs
-        every { fragment.getScreenRotation() } returns Surface.ROTATION_0
-        fragment.textureView = textureView
-        // Landscape camera buffer mapped into a portrait view.
-        fragment.previewSize = Size(1920, 1080)
-        fragment.cameraMode.value = CameraMode.QR
-
-        fragment.configureTransform(viewWidth = 1080, viewHeight = 2400)
-
-        // QR mode picks max(scaleX, scaleY) so the buffer is cropped to fill the viewfinder.
-        // Effective scale = max(1080 / 1080, 2400 / 1920) = 1.25.
-        // postScale args = (1.25 * 1080/1080, 1.25 * 1920/2400) = (1.25, 1.0).
-        val values = FloatArray(9).also { matrixSlot.captured.getValues(it) }
-        assertEquals(1.25f, values[Matrix.MSCALE_X], 0.001f)
-        assertEquals(1.0f, values[Matrix.MSCALE_Y], 0.001f)
-    }
-
-    @Test
-    fun `GIVEN portrait rotation and LENS mode WHEN configureTransform is called THEN matrix uses letterbox scale`() {
-        val fragment = spyk(LensCameraFragment())
-        val textureView: AutoFitTextureView = mockk(relaxed = true)
-        val matrixSlot = slot<Matrix>()
-        every { textureView.setTransform(capture(matrixSlot)) } just Runs
+        val textureView: TextureView = mockk(relaxed = true)
         every { fragment.getScreenRotation() } returns Surface.ROTATION_0
         fragment.textureView = textureView
         fragment.previewSize = Size(1920, 1080)
-        fragment.cameraMode.value = CameraMode.LENS
 
         fragment.configureTransform(viewWidth = 1080, viewHeight = 2400)
 
-        // LENS mode picks min(scaleX, scaleY) so the buffer fits inside the view, leaving
-        // letterbox bands. Effective scale = min(1.0, 1.25) = 1.0.
-        // postScale args = (1.0 * 1080/1080, 1.0 * 1920/2400) = (1.0, 0.8).
-        val values = FloatArray(9).also { matrixSlot.captured.getValues(it) }
-        assertEquals(1.0f, values[Matrix.MSCALE_X], 0.001f)
-        assertEquals(0.8f, values[Matrix.MSCALE_Y], 0.001f)
+        verify { textureView.setTransform(any()) }
+    }
+
+    @Test
+    fun `GIVEN previewSize is null WHEN configureTransform is called THEN no transform is applied`() {
+        val fragment = spyk(LensCameraFragment())
+        val textureView: TextureView = mockk(relaxed = true)
+        fragment.textureView = textureView
+        fragment.previewSize = null
+
+        fragment.configureTransform(viewWidth = 1080, viewHeight = 2400)
+
+        verify(exactly = 0) { textureView.setTransform(any()) }
     }
 
     // --- Background thread and executor tests ---
@@ -707,6 +676,45 @@ class LensCameraFragmentTest {
 
         verify { fragment.handleResult(expectedUri) }
         verify { mockImage.close() }
+
+        tempDir.deleteRecursively()
+    }
+
+    @Test
+    fun `GIVEN a fixed clock WHEN processImage writes the capture THEN the filename contains the timestamp`() {
+        val fragment = spyk(LensCameraFragment(now = { 1234567890L }))
+        every { fragment.handleResult(any()) } just Runs
+
+        val tempDir = File(System.getProperty("java.io.tmpdir"), "lens_test_${System.nanoTime()}")
+        tempDir.mkdirs()
+
+        var capturedFile: File? = null
+        fragment.getUriForFile = { _, _, file ->
+            capturedFile = file
+            mockk()
+        }
+
+        val mockContext: Context = mockk()
+        every { mockContext.applicationContext } returns mockContext
+        every { mockContext.cacheDir } returns tempDir
+        every { mockContext.packageName } returns "org.mozilla.fenix"
+        every { fragment.context } returns mockContext
+
+        val buffer = ByteBuffer.wrap(byteArrayOf(1, 2, 3))
+        val mockPlane: Image.Plane = mockk()
+        every { mockPlane.buffer } returns buffer
+
+        val mockImage: Image = mockk()
+        every { mockImage.planes } returns arrayOf(mockPlane)
+        every { mockImage.close() } just Runs
+
+        val mockReader: ImageReader = mockk()
+        every { mockReader.acquireLatestImage() } returns mockImage
+
+        fragment.processImage(mockReader)
+        ShadowLooper.idleMainLooper()
+
+        assertEquals("lens_capture_1234567890.jpg", capturedFile?.name)
 
         tempDir.deleteRecursively()
     }

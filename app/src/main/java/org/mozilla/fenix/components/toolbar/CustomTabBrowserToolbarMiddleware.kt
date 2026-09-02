@@ -449,11 +449,18 @@ class CustomTabBrowserToolbarMiddleware(
                     onClick = object : BrowserToolbarEvent {},
                 ),
             )
+        } else if (!customTab.content.securityInfo.isSecure) {
+            add(
+                buildSiteInfoAction(
+                    drawableResId = iconsR.drawable.mozac_ic_shield_slash_24,
+                    contentDescription = toolbarR.string.mozac_browser_toolbar_content_description_site_info,
+                    onClick = SiteInfoClicked,
+                ),
+            )
         } else if (
-                customTab.content.securityInfo.isSecure &&
-                customTab.trackingProtection.enabled &&
-                !customTab.trackingProtection.ignoredOnTrackingProtection
-            ) {
+            customTab.trackingProtection.enabled &&
+            !customTab.trackingProtection.ignoredOnTrackingProtection
+        ) {
             add(
                 buildSiteInfoAction(
                     drawableResId = iconsR.drawable.mozac_ic_shield_checkmark_24,
@@ -464,7 +471,7 @@ class CustomTabBrowserToolbarMiddleware(
         } else {
             add(
                 buildSiteInfoAction(
-                    drawableResId = iconsR.drawable.mozac_ic_shield_slash_24,
+                    drawableResId = iconsR.drawable.mozac_ic_shield_cross_24,
                     contentDescription = toolbarR.string.mozac_browser_toolbar_content_description_site_info,
                     onClick = SiteInfoClicked,
                 ),
@@ -485,9 +492,10 @@ class CustomTabBrowserToolbarMiddleware(
                 contentDescriptionResId = R.string.ip_protection_toolbar_pill_description,
                 animated = !ipProtectionStore.state.proxyActiveShown,
                 onClick = onClick,
-            ).also {
-                ipProtectionStore.dispatch(IPProtectionAction.ProxyActiveShown)
-            }
+                onAnimationStarted = {
+                    ipProtectionStore.dispatch(IPProtectionAction.ProxyActiveShown)
+                },
+            )
         } else {
             ActionButtonRes(
                 drawableResId = drawableResId,

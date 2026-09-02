@@ -11,7 +11,7 @@
     android:clickable="true"
     android:focusable="true"
     android:paddingStart="@dimen/top_bar_alignment_margin_start"
-    tools:ignore="RtlSymmetry">
+    tools:ignore="RtlSymmetry,Overdraw">
 
     <ImageView
         android:id="@+id/add_icon"

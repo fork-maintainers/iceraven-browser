@@ -28,35 +28,9 @@ class WordmarkTest {
     val composeTestRule = createComposeRule()
 
     @Test
-    fun `When sports widget is enabled for normal theme, then the sports widget wordmark is found and displayed`() {
+    fun `When the normal theme is rendered, then the fenix wordmark is found and displayed`() {
         composeTestRule.setContent {
-            ComposableUnderTest(themeId = R.style.NormalTheme, sportsWidgetEnabled = true)
-        }
-
-        composeTestRule.onNodeWithTag(HOMEPAGE_WORDMARK_LOGO).assertIsDisplayed()
-        assertEquals(
-            expected = R.attr.fenixWordmarkSportLogo,
-            actual = composeTestRule.onNodeWithTag(HOMEPAGE_WORDMARK_LOGO).semanticResourceId(),
-        )
-    }
-
-    @Test
-    fun `When sports widget is enabled for private theme, then the sports widget wordmark is found and displayed`() {
-        composeTestRule.setContent {
-            ComposableUnderTest(themeId = R.style.PrivateTheme, sportsWidgetEnabled = true)
-        }
-
-        composeTestRule.onNodeWithTag(HOMEPAGE_WORDMARK_LOGO).assertIsDisplayed()
-        assertEquals(
-            expected = R.attr.fenixWordmarkSportLogo,
-            actual = composeTestRule.onNodeWithTag(HOMEPAGE_WORDMARK_LOGO).semanticResourceId(),
-        )
-    }
-
-    @Test
-    fun `When sports widget is disabled for normal theme, then the fenix wordmark is found and displayed`() {
-        composeTestRule.setContent {
-            ComposableUnderTest(themeId = R.style.NormalTheme, sportsWidgetEnabled = false)
+            ComposableUnderTest(themeId = R.style.NormalTheme)
         }
 
         composeTestRule.onNodeWithTag(HOMEPAGE_WORDMARK_LOGO).assertIsDisplayed()
@@ -67,9 +41,9 @@ class WordmarkTest {
     }
 
     @Test
-    fun `When sports widget is disabled for private theme, then the fenix wordmark is found and displayed`() {
+    fun `When the private theme is rendered, then the fenix wordmark is found and displayed`() {
         composeTestRule.setContent {
-            ComposableUnderTest(themeId = R.style.PrivateTheme, sportsWidgetEnabled = false)
+            ComposableUnderTest(themeId = R.style.PrivateTheme)
         }
 
         composeTestRule.onNodeWithTag(HOMEPAGE_WORDMARK_LOGO).assertIsDisplayed()
@@ -92,13 +66,10 @@ class WordmarkTest {
         }
 
     @Composable
-    private fun ComposableUnderTest(themeId: Int, sportsWidgetEnabled: Boolean) {
+    private fun ComposableUnderTest(themeId: Int) {
         val theme = LocalContext.current.withIsolatedTheme(themeId)
         CompositionLocalProvider(LocalContext provides theme) {
-            WordmarkLogo(
-                onLogoClicked = {},
-                isSportsWidgetEnabled = sportsWidgetEnabled,
-            )
+            WordmarkLogo()
         }
     }
 

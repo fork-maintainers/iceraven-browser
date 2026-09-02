@@ -262,6 +262,12 @@ class SettingsSearchTest {
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/2203309
     // Verifies setting as default a customized search engine name and URL
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.SettingsSearchTest#verifyCustomSearchEngineCanBeAddedFromSearchEngineMenuTest"],
+        bug = 2062943,
+        since = "2026-08",
+        notes = "Legacy also asserted the default-engine radio is checked inline; covered indirectly by the ported Settings > Search summary and search-selector-icon assertions.",
+    )
     @SmokeTest
     @Test
     fun verifyCustomSearchEngineCanBeAddedFromSearchEngineMenuTest() {
@@ -461,6 +467,11 @@ class SettingsSearchTest {
     // Test running on beta/release builds in CI:
     // caution when making changes to it, so they don't block the builds
     // Goes through the settings and changes the search suggestion toggle, then verifies it changes.
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.SettingsSearchTest#verifyShowSearchSuggestionsToggleTest"],
+        bug = 2062943,
+        since = "2026-08",
+    )
     @SmokeTest
     @Test
     fun verifyShowSearchSuggestionsToggleTest() {
@@ -640,6 +651,11 @@ class SettingsSearchTest {
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/2203340
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.SettingsSearchTest#verifySearchShortcutChangesAreReflectedInSearchSelectorMenuTest"],
+        bug = 2062943,
+        since = "2026-08",
+    )
     @SmokeTest
     @Test
     fun verifySearchShortcutChangesAreReflectedInSearchSelectorMenuTest() {

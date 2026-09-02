@@ -87,9 +87,9 @@ import mozilla.components.service.location.LocationService
 import mozilla.components.service.location.MozillaLocationService
 import mozilla.components.service.mars.MacTopSitesProvider
 import mozilla.components.service.mars.MacTopSitesRequestConfig
+import mozilla.components.service.mars.MacTopSitesUpdater
 import mozilla.components.service.mars.NEW_TAB_TILE_1_PLACEMENT_KEY
 import mozilla.components.service.mars.NEW_TAB_TILE_2_PLACEMENT_KEY
-import mozilla.components.service.mars.contile.ContileTopSitesUpdater
 import mozilla.components.service.merino.manifest.MerinoManifestProvider
 import mozilla.components.service.pocket.ContentRecommendationsRequestConfig
 import mozilla.components.service.pocket.PocketStoriesConfig
@@ -187,12 +187,6 @@ class Core(
             dohExceptionsList = context.components.settings.dohExceptionsList.toList(),
             globalPrivacyControlEnabled = context.components.settings.shouldEnableGlobalPrivacyControl,
             fdlibmMathEnabled = FxNimbus.features.fingerprintingProtection.value().fdlibmMath,
-            cookieBannerHandlingMode = context.components.settings.getCookieBannerHandling(),
-            cookieBannerHandlingModePrivateBrowsing = context.components.settings.getCookieBannerHandlingPrivateMode(),
-            cookieBannerHandlingDetectOnlyMode = context.components.settings.shouldEnableCookieBannerDetectOnly,
-            cookieBannerHandlingGlobalRules = context.components.settings.shouldEnableCookieBannerGlobalRules,
-            cookieBannerHandlingGlobalRulesSubFrames =
-                context.components.settings.shouldEnableCookieBannerGlobalRulesSubFrame,
             emailTrackerBlockingPrivateBrowsing = true,
             userCharacteristicPingCurrentVersion = FxNimbus.features.userCharacteristics.value().currentVersion,
             getDesktopMode = {
@@ -319,7 +313,7 @@ class Core(
     }
 
     private val locationService: LocationService by lazyMonitored {
-        if (Config.channel.isDebug || BuildConfig.MLS_TOKEN.isEmpty()) {
+        if (BuildConfig.MLS_TOKEN.isEmpty()) {
             LocationService.default()
         } else {
             MozillaLocationService(context, client, BuildConfig.MLS_TOKEN)
@@ -401,10 +395,6 @@ class Core(
                     isTranslationsEnabled = {
                         TranslationsEnabledSettings.dataStore(context).isEnabled.first()
                     },
-                ),
-                StartupMiddleware(
-                    applicationContext = context,
-                    repository = DefaultHomepageAsANewTabPreferenceRepository(context.components.settings),
                 ),
                 AboutHomeMiddleware(
                     homepageTitle = context.getString(R.string.tab_tray_homepage_tab),
@@ -644,8 +634,8 @@ class Core(
     }
 
     @Suppress("MagicNumber")
-    val contileTopSitesUpdater by lazyMonitored {
-        ContileTopSitesUpdater(
+    val macTopSitesUpdater by lazyMonitored {
+        MacTopSitesUpdater(
             context = context,
             provider = macTopSitesProvider,
             frequency = Frequency(3, TimeUnit.HOURS),

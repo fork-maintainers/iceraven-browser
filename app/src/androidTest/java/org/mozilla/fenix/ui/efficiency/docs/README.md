@@ -1,119 +1,82 @@
-# Android Test Automation Framework (POM + Factories)
+# ui/efficiency — Android UI test framework
 
-## Introduction
+A page-object + navigation-graph framework for Fenix UI tests. It makes UI tests **cheap to write and
+cheap to maintain**: a test describes only the _what_ (reach this screen, do this, verify that); the
+harness owns the _how_ (navigation, element resolution, retries). Most tests are ~5–20 lines.
 
-This framework brings a modern, scalable approach to Android UI testing using the **Page Object Model (POM)** and a new **Test Factory** layer. It unifies Espresso, UIAutomator2, and Jetpack Compose testing under one abstraction so tests read like user journeys and can be **composed** from reusable steps.
+## Why it exists (the two problems)
 
-Factories sit on top of POM and execute **Presence**, **Interaction**, and **Behavior** suites from a declarative **FeatureSpec**. This makes it easy to scale coverage with minimal boilerplate while keeping logs and artifacts developer-friendly.
+1. **Maintenance cost.** Hand-written UI tests duplicate selectors/navigation until upkeep outruns value
+   and teams abandon them. Here the expensive layer (selectors, page objects, navigation) is centralized
+   and shared, so a UI change is fixed once, not once per test.
+2. **Trust in failures.** Product bugs, harness bugs, and environment noise get conflated. The harness
+   attributes failures (structured `Eff` logs, on-failure screen dumps) so a red is actionable.
 
-> The concrete `features/*` specs and factory test classes included here are **demo & educational scaffolding**. They illustrate what the system will produce “over‑the‑wire.” As the team adopts data‑driven specs and the DSL, these demos will be replaced or removed.
+See `architecture.md` for the model and the rationale.
 
----
+## Directory map
 
-## Architecture Layers
-
-| Layer           | Responsibility                     | Example                                              |
-| --------------- | ---------------------------------- | ---------------------------------------------------- |
-| Selectors       | Describe how to find UI elements   | `Selector(byText = "Settings")`                      |
-| Pages           | Group selectors and expose actions | `SettingsPage.navigateToPage()`                      |
-| Steps           | Reusable actions/assertions        | `Navigate.To.Home()`, `Toggle.PrivateBrowsing(true)` |
-| Feature Specs   | Compose steps into suites          | `FeatureSpec(surfaces, interactions, behavior)`      |
-| Factories       | Execute suites + logging/artifacts | `PresenceFactory.run(spec, ctx)`                     |
-| Debug Utilities | Export artifacts & pause           | `DebugControls.onSuiteEnd()`                         |
-| Logging         | Human + machine logs, screenshots  | `SummarySink`, `JsonSink`, `ScreenshotTaker`         |
-
-### Diagram — Architecture Overview
-
-```mermaid
-flowchart LR
-  A["Selectors<br/>(UI element metadata)"] --> B["Page Objects<br/>(BasePage, PageContext)"]
-  B --> C["Steps<br/>(Navigate, Toggle, Verify...)"]
-  C --> D["Feature Specs<br/>(Presence, Interaction, Behavior)"]
-  D --> E["Factories<br/>(Presence, Interaction, Behavior)"]
-  E --> F["Logging Layer<br/>SummarySink, JsonSink, ScreenshotTaker"]
-  E --> G["Debug Utilities<br/>DebugControls, ShellExporter"]
-  F --> H["CI / Firebase Test Lab"]
-  G --> H
+```
+efficiency/
+├── core/         resolve() seam, UiElement facade, ScreenDump — the low-level element plumbing
+├── helpers/      BaseTest, BasePage (the moz* verb library + navigateToPage BFS routing)
+├── navigation/   NavigationEdge · NavigationRegistry · NavigationStep · PageCatalog  (the 4-file graph core)
+├── generation/   case-building infra + factories (reachability / pairs / interaction / behavior)
+├── devtools/     dev/debug tools, atomic test runners, effpretty (log renderer)
+├── logging/      structured test logging (the `Eff` logcat tag)
+├── pageObjects/  one <Screen>Page.kt per screen — models it, registers how to reach it
+├── selectors/    one <Screen>Selectors.kt per screen — the element locator catalog
+├── tests/        the actual @Test classes
+└── docs/         you are here
 ```
 
----
-
-## Dynamic Test Factories (Phase 1.5 Prototype)
-
-Factories consume a declarative `FeatureSpec` and run three tiers:
-
-- **Presence** – do expected elements render?
-- **Interaction** – are controls responsive?
-- **Behavior** – do minimal logical outcomes hold across pages?
+## Quickstart — a minimal test
 
 ```kotlin
-val PrivateBrowsingSpec = FeatureSpec(
-  key = FeatureKey.PRIVATE_BROWSING,
-  surfaces = list_of(
-    SurfaceCheck(
-      navigateStep = Navigate.To.Home(),
-      verifyStep = mozVerifyElementsByGroup("privateHomeHeader") { it.home }
-    )
-  )
-)
-```
+class BookmarksTest : BaseTest() {
+    private val mockWebServer get() = fenixTestRule.mockWebServer
 
-**Execution flow:**
-
-```mermaid
-flowchart TB
-  start((Test Start)) --> pre[Run Preconditions]
-  pre --> p["PresenceFactory.run()"]
-  p --> i["InteractionFactory.run()"]
-  i --> b["BehaviorFactory.run()"]
-  b --> logger[(StepLogger\nSummary + JSONL)]
-  b --> shots[[ScreenshotTaker]]
-  b --> dbg["DebugControls.onSuiteEnd()"]
-  logger --> finish((Test End / Artifacts Exported))
-  shots --> finish
-  dbg --> finish
-```
-
----
-
-## First Test
-
-```kotlin
-@Test
-fun verifyHomeLoads() {
-  on.homePage.navigateToPage()
-    .mozVerifyElementsByGroup("requiredForPage")
+    @SmokeTest @Test
+    fun openBookmarkInNewTabTest() {
+        val page = mockWebServer.getGenericAsset(1)
+        on.browserPage.navigateToPage(page.url.toString())   // reach a state
+        on.mainMenu.navigateToPage()                          // route via the nav graph
+            .mozClick(MainMenuSelectors.BOOKMARKS_BUTTON)     // interact
+        on.bookmarks.navigateToPage()                         // arriving here verifies it opened
+    }
 }
 ```
 
+`on` is the `PageContext` (every modeled screen hangs off it). `navigateToPage()` BFS-routes over the
+graph. Selectors are referenced from their catalog (`<Screen>Selectors.NAME`), never inlined.
+
+## How you actually work
+
+Follow the gate loop in **`converting-a-test.md`** (the daily driver for converting a legacy smoke test),
+and read the building-block guide for whatever piece is missing:
+
+| To…                                                       | Read                               |
+| --------------------------------------------------------- | ---------------------------------- |
+| Convert a legacy test end-to-end                          | `converting-a-test.md`             |
+| Find an element's real handles before choosing a selector | `guides/discovering-selectors.md`  |
+| Add locators to a catalog                                 | `guides/authoring-selectors.md`    |
+| Model a new screen                                        | `guides/creating-a-page-object.md` |
+| Reach a screen / add graph edges                          | `guides/adding-navigation.md`      |
+| Compose the test method                                   | `guides/writing-a-test.md`         |
+| Add a `moz*` verb or page helper                          | `guides/extending-basepage.md`     |
+| Run & debug a test                                        | `guides/debugging-tests.md`        |
+| The harness gotchas + review checklist                    | `gotchas.md`                       |
+| The helper scripts (run by hand)                          | `tooling.md`                       |
+
+## Best practices
+
+- Tests describe the _what_; wrap all Espresso/UIAutomator/Compose in page objects and `moz*` verbs.
+- Reuse an existing capability before adding one; add the smallest general block, not a test-specific hack.
+- Selector priority: Compose `testTag` → resource id → content-description → text (last resort).
+- Verify handles against the live UI (dump the screen), not against how a legacy robot matched.
+- A test that only passes on retry is flaky, not done.
+
 ---
 
-## Developer Workflow
-
-1. **Define selectors** → small, reusable UI descriptors
-2. **Create a page** → group selectors & expose actions
-3. **Register navigation** → declare how to reach pages
-4. **Compose specs or write tests** → use `FeatureSpec` or the DSL
-
----
-
-## Documents
-
-- [Test Automation Strategy](./TestAutomationStrategy.md)
-- [Test Factory Design Goals](./TestFactoryDesignGoals.md)
-- [FeatureSpec Data Model](./FeatureSpecDataModel.md)
-- [Architecture Overview](./ArchitectureOverview.md)
-- [Debug Utilities](./DebugUtilities.md)
-- [Factories Guide](./Factories.md)
-- [Feature Layer](./FeatureLayer.md)
-- [Logging Layer](./LoggingLayer.md)
-- [Steps Layer](./StepsLayer.md)
-
----
-
-## Best Practices
-
-- Prefer descriptive selector names & groups
-- Keep page objects small and focused
-- Use Given / When / Then phrasing
-- Don’t call Espresso/UIAutomator directly in tests—wrap in steps/pages
+_Maintenance note:_ these docs are the human source of truth; the `efficiency-test-authoring` skill distills
+them for agent use — keep them in sync.

@@ -15,6 +15,7 @@ import org.hamcrest.Matchers.equalTo
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.mozilla.fenix.customannotations.Converted
 import org.mozilla.fenix.customannotations.SmokeTest
 import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.helpers.AppAndSystemHelper.assertNativeAppOpens
@@ -108,6 +109,13 @@ class SettingsAdvancedTest {
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/2121046
     // Assumes Youtube is installed and enabled
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.SettingsOpenLinksInAppsTest#askBeforeOpeningOpenLinkInAppTest"],
+        bug = 2061722,
+        since = "2026-08",
+        notes = "Legacy verifyUrl(\"play.google.com\") was a no-op (BrowserRobot.verifyUrl swallows its timeout); " +
+            "the port asserts the open-in-app prompt instead, which is the real behavior under Ask.",
+    )
     @SmokeTest
     @Test
     fun askBeforeOpeningOpenLinkInAppTest() {
@@ -141,6 +149,11 @@ class SettingsAdvancedTest {
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/2121045
     // Assumes Youtube is installed and enabled
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.SettingsOpenLinksInAppsTest#askBeforeOpeningLinkInAppCancelTest"],
+        bug = 2061722,
+        since = "2026-08",
+    )
     @SmokeTest
     @Test
     fun askBeforeOpeningLinkInAppCancelTest() {
@@ -159,6 +172,11 @@ class SettingsAdvancedTest {
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/2288347
     // Assumes Youtube is installed and enabled
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.SettingsOpenLinksInAppsTest#askBeforeOpeningLinkInAppOpenTest"],
+        bug = 2061722,
+        since = "2026-08",
+    )
     @SmokeTest
     @Test
     fun askBeforeOpeningLinkInAppOpenTest() {

@@ -8,6 +8,7 @@ import androidx.test.filters.SdkSuppress
 import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
+import org.mozilla.fenix.customannotations.Converted
 import org.mozilla.fenix.customannotations.SmokeTest
 import org.mozilla.fenix.helpers.AppAndSystemHelper.setNetworkEnabled
 import org.mozilla.fenix.helpers.FenixTestRule
@@ -121,6 +122,11 @@ class SettingsDeleteBrowsingDataTest {
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/353531
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.SettingsDeleteBrowsingDataTest#deleteOpenTabsBrowsingDataTest"],
+        bug = 2062279,
+        since = "2026-08",
+    )
     @SmokeTest
     @Test
     fun deleteOpenTabsBrowsingDataTest() {
@@ -150,6 +156,11 @@ class SettingsDeleteBrowsingDataTest {
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/378864
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.SettingsDeleteBrowsingDataTest#deleteBrowsingHistoryTest"],
+        bug = 2062279,
+        since = "2026-08",
+    )
     @SmokeTest
     @Test
     fun deleteBrowsingHistoryTest() {
@@ -181,6 +192,11 @@ class SettingsDeleteBrowsingDataTest {
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/416041
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.SettingsDeleteBrowsingDataTest#deleteCookiesAndSiteDataTest"],
+        bug = 2062279,
+        since = "2026-08",
+    )
     @SmokeTest
     @Test
     fun deleteCookiesAndSiteDataTest() {

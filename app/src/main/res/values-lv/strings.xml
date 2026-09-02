@@ -6,9 +6,20 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
+  <!-- Label of button in create collection dialog for creating a new collection -->
+  <string name="tab_tray_add_new_collection">Pievienot jaunu krājumu</string>
   <!-- Private browsing erase action "contextual feature recommendation" (CFR) -->
 
+  <!--
+    Content description (not visible, for screen readers etc.): Label for plus icon used to add extension.
+    %1$s is the name of the extension (for example: ClearURLs).
+  -->
+  <string name="browser_menu_extension_plus_icon_content_description_2">Pievienot %1$s</string>
+  <!-- Browser menu toggle that adds a shortcut to the site on the device home screen. -->
+  <string name="browser_menu_add_to_homescreen">Pievienot sākuma ekrānam</string>
+  <!-- Browser menu toggle that adds a PWA of the site on the device home screen. -->
+  <string name="browser_menu_add_app_to_homescreen">Pievienot lietotni sākuma ekrānam</string>
   <!-- Title for the block AI enhancements toggle -->
   <string name="ai_controls_block_ai_title">Liegt MI uzlabojumus</string>
   <!-- Title for the block AI enhancements confirmation dialog -->
@@ -18,21 +29,94 @@
   <!-- Button in the search suggestions onboarding that allows search suggestions in private sessions -->
   <string name="search_suggestions_onboarding_allow_button">Atļaut</string>
   <!-- Search suggestion onboarding hint title text -->
-  <string name="search_suggestions_onboarding_title">Atļaut meklēšanas iestatījumus privātās sesijās?</string>
+  <string name="search_suggestions_onboarding_title">Atļaut meklēšanas ieteikumus privātās sesijās?</string>
   <!-- Search suggestion onboarding hint description text, %s is the name of the app (for example "Firefox"). -->
   <string name="search_suggestions_onboarding_text">%s kopīgos visu adreses joslā ievadīto ar noklusējuma meklētāju.</string>
   <!-- Menu option in the search selector menu to open the search settings -->
   <string name="search_settings_menu_item">Meklēšanas iestatījumi</string>
   <!-- ==== Project "Nova" onboarding strings ==== -->
 
+  <!-- "Add search widget" onboarding button. 'Firefox' is intentionally hardcoded. -->
+  <string name="nova_onboarding_add_search_widget_button" tools:ignore="BrandUsage">Pievienot Firefox logrīku</string>
   <!-- ==== End of Project "Nova" onboarding strings ==== -->
 
+  <!-- Preference for adding private browsing shortcut -->
+  <string name="preferences_add_private_browsing_shortcut">Pievienot privātās pārlūkošanas īsceļu</string>
+  <!-- Preference for accessibility -->
+  <string name="preferences_accessibility">Piekļūstamība</string>
+  <!-- Preference for changing where the AddressBar is positioned -->
+  <string name="preferences_toolbar_2">Adrešu joslas atrašanās vieta</string>
+  <!-- Title of a menu option allowing to change the shortcut button shown in the toolbar -->
+  <string name="toolbar_shortcut_menu_edit_option">Labot īsceļu</string>
+  <!-- Preference for settings related to visual options -->
+  <string name="preferences_customize">Pielāgot</string>
   <!--
     Add-on Permissions
 
     The title of the origin permission option allowing a user to enable the extension to run on all sites
   -->
   <string name="addons_permissions_allow_for_all_sites">Atļaut visām vietnēm</string>
+  <!-- The title of the required permissions section from addon's permissions screen. -->
+  <string name="addons_permissions_heading_required_permissions">Nepieciešamās atļaujas:</string>
+  <!-- Label for the menu item that opens the customize homepage settings screen. -->
+  <string name="browser_menu_customize_homepage">Pielāgot sākumlapu</string>
+  <!-- Snackbar label for action to retry downloading the wallpaper -->
+  <string name="wallpaper_download_error_snackbar_action">Mēģināt vēlreiz</string>
+  <!-- Error message snackbar shown after the user tried to apply the new icon but the Android OS threw an error while updating existing app shortcuts (e.g. private mode shortcut) -->
+  <string name="shortcuts_update_error">Lietotnes ikonas atjaunināšana neizdevās. Jānoņem esošās saīsnes un jāmēģina vēlreiz.</string>
+  <!-- Text shown in the snackbar action button that lets the user retry an add-on operation that just failed. -->
+  <string name="addon_failure_retry_action">Atkārtot</string>
+  <!-- Add bookmark shortcut in toolbar customization -->
+  <string name="toolbar_customize_shortcut_add_bookmark">Pievienot grāmatzīmi</string>
+  <!--
+    Preference for using the OLED theme. For localization, this can be translated as "True Black", "Maximum Darkness",
+    or "Full dark" if needed.
+  -->
+  <string name="preference_oled_theme">Vistumšākais</string>
+  <!-- Title for the preference to enable or disable the tab groups feature -->
+  <string name="preferences_tab_groups_feature">Iespējot ciļņu kopas</string>
+  <!--
+    Privacy report
+
+    Category header of a preference that allows a user to enable or disable the privacy report feature
+  -->
+  <string name="preferences_privacy_report">Privātuma atskaite</string>
+  <!-- Title of the privacy report preference that allows a user to enable or disable the feature -->
+  <string name="preferences_privacy_report_title">Iespējot privātuma atskaiti</string>
+  <!-- Content description (not visible, for screen readers etc.): Add tab button. Adds a news tab when pressed -->
+  <string name="add_tab">Pievienot cilni</string>
+  <!-- Content description (not visible, for screen readers etc.): Add tab button. Adds a news tab when pressed -->
+  <string name="add_private_tab">Pievienot privātu cilni</string>
+  <!-- Text shown in the multiselect menu for adding selected tabs to collections. -->
+  <string name="tab_manager_multiselect_menu_item_add_to_collection">Pievienot krājumam</string>
+  <!-- Text shown in the multiselect menu for adding selected tabs to a tab group. -->
+  <string name="tab_manager_multiselect_menu_item_add_to_tab_group">Pievienot kopai</string>
+  <!-- Title for adding more tabs to a tab group. -->
+  <string name="add_to_tab_group_title">Pievienot</string>
+  <!-- Content Description for "New tab group" panel. -->
+  <string name="add_to_new_tab_group_content_description">Pievienot jaunai ciļņu kopai</string>
+  <!-- Text shown on the share button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_share">Kopīgot</string>
+  <!-- Custom accessibility action to reorder a tab up rather than dragging. -->
+  <string name="custom_accessibility_action_reorder_tab_up">Pārvietot cilni augšup</string>
+  <!-- Custom accessibility action to reorder a tab left rather than dragging. -->
+  <string name="custom_accessibility_action_reorder_tab_left">Pārvietot cilni pa kreisi</string>
+  <!-- Custom accessibility action to reorder a tab right rather than dragging. -->
+  <string name="custom_accessibility_action_reorder_tab_right">Pārvietot cilni pa labi</string>
+  <!-- Custom accessibility action to reorder a tab down rather than dragging. -->
+  <string name="custom_accessibility_action_reorder_tab_down">Pārvietot cilni lejup</string>
+  <!-- Alert dialog confirmation before deleting multiple download items, this is the title. -->
+  <string name="download_delete_multi_select_dialog_confirmation">Vai tiešām izdzēst atlasītos vienumus?</string>
+  <!--
+    Bookmarks
+
+    Confirmation message for a dialog confirming if the user wants to delete multiple items.
+  -->
+  <string name="bookmark_delete_folders_confirmation_dialog">Vai tiešām izdzēst atlasītos vienumus?</string>
+  <!-- Screen title for adding a bookmarks folder -->
+  <string name="bookmark_add_folder">Pievienot mapi</string>
+  <!-- Content description for the bookmark list new folder navigation bar button -->
+  <string name="bookmark_add_new_folder_button_content_description">Pievienot jaunu mapi</string>
   <!-- Label that indicates that video and audio autoplay is only allowed over Wi-Fi -->
   <string name="preference_option_autoplay_allowed_wifi_only2">Liegt video un skaņu tikai tad, kad tiek izmantoti mobilie dati</string>
   <!-- Label for global setting that indicates that video autoplay is allowed, but audio autoplay is blocked -->
@@ -43,12 +127,100 @@
   <string name="preference_option_autoplay_blocked3">Liegt skaņu un video</string>
   <!-- Label for site specific setting that indicates that all video and audio autoplay is blocked -->
   <string name="quick_setting_option_autoplay_blocked">Liegt skaņu un video</string>
+  <!-- Button to add new collection for the "select collection" step of the collection creator -->
+  <string name="create_collection_add_new_collection">Pievienot jaunu krājumu</string>
+  <!-- Text displayed when sync is offline and cannot be accessed -->
+  <string name="sync_offline">Bezsaistē</string>
+  <!-- Tab collection deletion prompt dialog message. %1$s is the collection name. -->
+  <string name="tab_collection_dialog_message">Vai tiešām izdzēst %1$s?</string>
+  <!--
+    Dialog that appears after user tries to uncheck the baseline exceptions preference under Strict or Custom tracking protection
+
+    Title for the dialog that appears after disabling the baseline exceptions preference under Strict or Custom tracking protection
+  -->
+  <string name="preference_enhanced_tracking_protection_allow_list_dialog_title">Vai tiešām izslēgt labojumus?</string>
+  <!-- Content description for the "Add Site" button -->
+  <string name="preference_doh_add_site_description">Pievienot vietni</string>
+  <!-- Add button text for provider textfield under "DNS over HTTPS" -->
+  <string name="preference_doh_provider_custom_dialog_add">Pievienot</string>
+  <!-- Text displayed that links to adding website domain for "DNS over HTTPS" exceptions. -->
+  <string name="preference_doh_exceptions_add">Pievienot vietni</string>
+  <!-- Title text for the Add To Homescreen dialog -->
+  <string name="add_to_homescreen_title">Pievienot sākuma ekrānam</string>
+  <!-- Add button text for the Add to Homescreen dialog -->
+  <string name="add_to_homescreen_add">Pievienot</string>
+  <!-- Preference option for adding a password -->
+  <string name="preferences_logins_add_login_2">Pievienot paroli</string>
+  <!-- Content description, used by tools like screenreaders, to press on the add new login button. -->
+  <string name="saved_logins_add_new_login_button_content_description">Pievienot jaunu pieteikšanās vienumu</string>
+  <!-- Label shown next to the browser protection icon in the address bar when the browser VPN turns off -->
+  <string name="ip_protection_toolbar_pill_label_off">VPN izslēgts</string>
+  <!-- Accessibility description for the browser VPN pill in the address bar when the VPN has turned off -->
+  <string name="ip_protection_toolbar_pill_description_off">VPN ir izslēgts.</string>
+  <!-- Description for an unavailable VPN location in the location list. -->
+  <string name="ip_protection_location_unavailable_description">Nepieejams</string>
+  <!-- Preference option for adding a card -->
+  <string name="preferences_credit_cards_add_credit_card_2">Pievienot karti</string>
+  <!-- Preference option for adding an address -->
+  <string name="preferences_addresses_add_address">Pievienot adresi</string>
+  <!-- Title of the "Add card" screen -->
+  <string name="credit_cards_add_card">Pievienot karti</string>
+  <!-- Error message for card name on card validation -->
+  <string name="credit_cards_name_on_card_validation_error_message_2">Jāpievieno vārds</string>
+  <!-- Title of the "Add address" screen -->
+  <string name="addresses_add_address">Pievienot adresi</string>
   <!-- Title of the Add search engine screen -->
   <string name="search_engine_add_custom_search_engine_title">Pievienot meklētāju</string>
   <!-- Content description (not visible, for screen readers etc.): Title for the button that navigates to add new engine screen -->
   <string name="search_engine_add_custom_search_engine_button_content_description">Pievienot jaunu meklētāju</string>
+  <!-- Confirmation message for a dialog confirming if the user wants to delete all the permissions for all sites -->
+  <string name="confirm_clear_permissions_on_all_sites">Vai tiešām noņemt visu vietņu visas atļaujas?</string>
+  <!-- Confirmation message for a dialog confirming if the user wants to delete all the permissions for a site -->
+  <string name="confirm_clear_permissions_site">Vai tiešām notīrīt šīs vietnes atļaujas?</string>
+  <!-- Confirmation message for a dialog confirming if the user wants to set default value a permission for a site -->
+  <string name="confirm_clear_permission_site">Vai tiešām noņemt šai vietnei šo atļauju?</string>
+  <!-- Browser menu button that adds a shortcut to the home fragment -->
+  <string name="browser_menu_add_to_shortcuts">Pievienot īsceļiem</string>
+  <!-- Message in delete confirmation dialog for password -->
+  <string name="login_deletion_confirmation_2">Vai tiešām izdzēst šo paroli?</string>
+  <!-- The page title for adding new password. -->
+  <string name="add_login_2">Pievienot paroli</string>
+  <!--
+    Label for the button in the shortcuts home screen section that expands the section to show
+    every shortcut.
+  -->
+  <string name="homepage_shortcuts_show_all">Rādīt visus</string>
+  <!--
+    Label for the button in the shortcuts home screen section that collapses the section back
+    to showing only the first shortcuts.
+  -->
+  <string name="homepage_shortcuts_show_less">Rādīt mazāk</string>
+  <!-- Label for the "Add shortcut" button displayed as a tile. -->
+  <string name="homepage_shortcuts_add_shortcut">Pievienot īsceļu</string>
+  <!-- Title for the "Add to homepage" bottom sheet. -->
+  <string name="homepage_shortcuts_add_to_homepage">Pievienot sākumlapai</string>
+  <!-- Label for the "Add website" button in the "Add to homepage" bottom sheet. -->
+  <string name="homepage_shortcuts_add_website">Pievienot tīmekļvietni</string>
   <!-- Translations feature -->
 
+  <!-- Button text on the translations dialog when a translation error appears. -->
+  <string name="translations_bottom_sheet_positive_button_error">Mēģināt vēlreiz</string>
+  <!-- The title of the warning card informs the user that a translation could not be completed. -->
+  <string name="translation_error_could_not_translate_warning_text">Tulkošanas laikā radās sarežģījums. Lūgums mēģināt vēlreiz.</string>
+  <!-- The title of the warning card informs the user that the list of languages cannot be loaded. -->
+  <string name="translation_error_could_not_load_languages_warning_text">Nevarēja ielādēt valodas. Jāpārbauda savienojums ar internetu un jāmēģina vēlreiz.</string>
+  <!-- The button text to add tabs to the active tab group in the tab creation tool. -->
+  <string name="debug_drawer_tab_tools_tab_creation_tool_button_text_active">Pievienot izmantotajām cilnēm</string>
+  <!-- The button text to add tabs to the inactive tab group in the tab creation tool. -->
+  <string name="debug_drawer_tab_tools_tab_creation_tool_button_text_inactive">Pievienot neizmantotajām cilnēm</string>
+  <!-- The button text to add tabs to the private tab group in the tab creation tool. -->
+  <string name="debug_drawer_tab_tools_tab_creation_tool_button_text_private">Pievienot privātajām cilnēm</string>
+  <!--
+    Add-ons debug tools
+
+    The description of the Add-ons Tools in the Debug Drawer
+  -->
+  <string name="debug_drawer_addons_tools_title">Papildinājumu rīki</string>
   <!-- TextField Design System Component -->
 
   <!--
@@ -65,5 +237,34 @@
 
   <!-- ==== Experiment strings. ==== -->
 
+  <!-- Sports widget error card description shown when the user is offline. -->
+  <string name="sports_widget_error_connection_offline_description">Jāpārbauda savienojums ar internetu un jāmēģina vēlreiz.</string>
   <!-- ==== End of Terms of use popup prompt. ==== -->
+
+  <!--
+    Collections migration homepage card
+
+    Title shown on the collections to tab groups migration card on the homepage.
+  -->
+  <string name="collections_migration_homepage_banner_title">Krājumi tagad ir kopas</string>
+  <!-- Message shown on the collections to tab groups migration card on the homepage. -->
+  <string name="collections_migration_homepage_card_message">Ir vienkāršāks veids, ka turēt savas cilnes kārtībā</string>
+  <!-- Link text shown on the collections to tab groups migration card that opens the tab groups page in the tab manager. -->
+  <string name="collections_migration_homepage_card_link">Apskatīt manas ciļņu kopas</string>
+  <!-- Title of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">Tīmekļvietnes nošķiršana</string>
+  <!-- Description of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">Papildu šķērslis starp tīmekļvietnēm, kas palīdz aizsargāt datus cilnēs. Var ietekmēt veiktspēju, noturīgumu, tīmekļvietņu saderīgumu un to, kā tiek saglabāta pārlūkošanas vēsture.</string>
+  <!--
+    PDF viewer toolbar and buttons
+
+    Content description for accessibility (used by screen readers): Description for the button that triggers the start of a signature workflow on the PDF displayed on the screen.
+  -->
+  <string name="pdf_tools_sign_content_description">Parakstīt PDF</string>
+  <!-- Content description for accessibility (used by screen readers): Description of the button that downloads the PDF displayed on the screen to the user's device. -->
+  <string name="pdf_tools_download_content_description">Lejupielādēt PDF</string>
+  <!-- Content description for accessibility (used by screen readers): Description for the button that opens the printing dialogue window for the PDF displayed on the screen. -->
+  <string name="pdf_tools_print_content_description">Drukāt PDF</string>
+  <!-- Content description for accessibility (used by screen readers): Description for the button that opens the sharing options for the PDF being displayed on the screen. -->
+  <string name="pdf_tools_share_content_description">Kopīgot PDF</string>
 </resources>

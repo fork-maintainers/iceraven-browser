@@ -41,8 +41,9 @@ class TabGroupListTest {
                         groupClicked = true
                         clickedGroup = it
                     },
-                    onDeleteTabGroupClick = {},
                     onEditTabGroupClick = {},
+                    onShareTabGroupClick = {},
+                    onDeleteTabGroupClick = {},
                 )
             }
         }
@@ -70,6 +71,7 @@ class TabGroupListTest {
                         clickedGroup = it
                     },
                     onEditTabGroupClick = {},
+                    onShareTabGroupClick = {},
                 )
             }
         }
@@ -81,6 +83,26 @@ class TabGroupListTest {
 
         assertTrue(deleteClicked)
         assertEquals(group, clickedGroup)
+    }
+
+    @Test
+    fun verifyUngroupTabGroupNotDisplayed() {
+        composeTestRule.setContent {
+            FirefoxTheme {
+                TabGroupList(
+                    groups = listOf(createTabGroup(title = "Group 1")),
+                    onTabGroupClick = {},
+                    onDeleteTabGroupClick = {},
+                    onEditTabGroupClick = {},
+                    onShareTabGroupClick = {},
+                )
+            }
+        }
+
+        composeTestRule.onAllNodesWithTag(TabsTrayTestTag.TAB_GROUP_THREE_DOT_BUTTON)[0]
+            .performClick()
+
+        composeTestRule.onNodeWithTag(TabsTrayTestTag.UNGROUP_TAB_GROUP).assertDoesNotExist()
     }
 
     @Test
@@ -99,6 +121,7 @@ class TabGroupListTest {
                         editClicked = true
                         clickedGroup = it
                     },
+                    onShareTabGroupClick = {},
                 )
             }
         }
@@ -121,8 +144,9 @@ class TabGroupListTest {
                 TabGroupList(
                     groups = listOf(group),
                     onTabGroupClick = {},
-                    onDeleteTabGroupClick = {},
                     onEditTabGroupClick = {},
+                    onShareTabGroupClick = {},
+                    onDeleteTabGroupClick = {},
                 )
             }
         }

@@ -12,6 +12,7 @@ import org.junit.Before
 import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
+import org.mozilla.fenix.customannotations.Converted
 import org.mozilla.fenix.customannotations.SkipLeaks
 import org.mozilla.fenix.customannotations.SmokeTest
 import org.mozilla.fenix.helpers.FenixTestRule
@@ -212,6 +213,11 @@ class LoginsTest {
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/1508171
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.LoginsTest#verifyUpdatedLoginIsSavedTest"],
+        bug = 2060474,
+        since = "2026-08",
+    )
     @SmokeTest
     @Test
     fun verifyUpdatedLoginIsSavedTest() {
@@ -248,6 +254,11 @@ class LoginsTest {
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/1049971
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.LoginsTest#verifyMultipleLoginsSelectionsTest"],
+        bug = 2060474,
+        since = "2026-08",
+    )
     @SmokeTest
     @Test
     fun verifyMultipleLoginsSelectionsTest() {
@@ -496,6 +507,11 @@ class LoginsTest {
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/517818
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.SettingsPasswordsTest#verifyNeverSaveLoginOptionTest"],
+        bug = 2057407,
+        since = "2026-07",
+    )
     @SmokeTest
     @Test
     @SkipLeaks(reasons = ["https://bugzilla.mozilla.org/show_bug.cgi?id=1935209"])

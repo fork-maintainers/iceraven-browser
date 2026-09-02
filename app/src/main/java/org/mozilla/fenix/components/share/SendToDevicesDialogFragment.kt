@@ -4,21 +4,27 @@
 
 package org.mozilla.fenix.components.share
 
+import android.app.Dialog
 import android.content.Intent
+import android.content.res.Configuration
 import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.compose.runtime.collectAsState
 import androidx.core.content.getSystemService
 import androidx.core.net.toUri
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat.Type.systemBars
 import androidx.fragment.app.viewModels
 import androidx.fragment.compose.content
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.launch
@@ -30,7 +36,9 @@ import mozilla.components.concept.sync.TabPrivacy
 import mozilla.components.feature.accounts.push.SendTabUseCases
 import mozilla.components.feature.share.RecentAppsStorage
 import mozilla.components.service.fxa.manager.FxaAccountManager
+import mozilla.components.support.utils.ext.isLandscape
 import mozilla.components.support.utils.ext.packageManagerCompatHelper
+import mozilla.components.support.utils.ext.top
 import mozilla.telemetry.glean.private.NoExtras
 import org.mozilla.fenix.BuildConfig
 import org.mozilla.fenix.GleanMetrics.SyncAccount
@@ -40,6 +48,7 @@ import org.mozilla.fenix.share.DefaultShareController.Companion.ACTION_COPY_LINK
 import org.mozilla.fenix.share.ShareViewModel
 import org.mozilla.fenix.share.listadapters.AppShareOption
 import org.mozilla.fenix.share.listadapters.SyncShareOption
+import com.google.android.material.R as materialR
 
 /**
  * A [BottomSheetDialogFragment] that allows the user to send a tab to their other devices.
@@ -70,9 +79,7 @@ class SendToDevicesDialogFragment : BottomSheetDialogFragment() {
         SendTabUseCases(requireComponents.backgroundServices.accountManager)
     }
 
-    private var tabUrl: String? = null
-    private var tabTitle: String? = null
-    private var tabPrivacy: TabPrivacy = TabPrivacy.Normal
+    private var tabs: List<TabData> = emptyList()
     private var hasNavigatedToSignIn = false
 
     private val accountObserver = object : AccountObserver {
@@ -91,18 +98,31 @@ class SendToDevicesDialogFragment : BottomSheetDialogFragment() {
             uiState = uiState,
             onDismiss = { dismiss() },
             onSendToDevice = { option: SyncShareOption.SingleDevice ->
-                sendAndDismiss(
-                    sendTabToDevices(option.device.id, tabUrl ?: "", tabTitle ?: "", tabPrivacy),
-                )
+                sendAndDismiss(sendTabsToDevice(option.device.id, tabs))
             },
             onSendToAll = {
-                sendAndDismiss(sendTabToAllDevices(tabUrl ?: "", tabTitle ?: "", tabPrivacy))
+                sendAndDismiss(sendTabsToAllDevices(tabs))
             },
         )
     }
 
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        return super.onCreateDialog(savedInstanceState).apply {
+            setOnShowListener {
+                val bottomSheet = findViewById<View>(materialR.id.design_bottom_sheet) ?: return@setOnShowListener
+                ViewCompat.setOnApplyWindowInsetsListener(bottomSheet) { view, insets ->
+                    val systemBarInsets = insets.getInsets(systemBars())
+                    view.setPadding(0, systemBarInsets.top, 0, systemBarInsets.bottom)
+                    insets
+                }
+                bottomSheet.setBackgroundResource(R.drawable.bottom_sheet_with_top_rounded_corners)
+            }
+        }
+    }
+
     override fun onStart() {
         super.onStart()
+        updateSheetHeight()
         loadTabData(arguments)
         requireComponents.backgroundServices.accountManager.register(
             accountObserver,
@@ -111,13 +131,31 @@ class SendToDevicesDialogFragment : BottomSheetDialogFragment() {
         )
     }
 
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        updateSheetHeight()
+    }
+
+    private fun updateSheetHeight() {
+        val bottomSheet = dialog?.findViewById<View>(materialR.id.design_bottom_sheet) ?: return
+        BottomSheetBehavior.from(bottomSheet).peekHeight =
+            if (requireContext().isLandscape()) {
+                resources.displayMetrics.heightPixels
+            } else {
+                BottomSheetBehavior.PEEK_HEIGHT_AUTO
+            }
+    }
+
     internal fun loadTabData(bundle: Bundle?) {
-        tabUrl = bundle?.getString(EXTRA_URL)
-        tabTitle = bundle?.getString(EXTRA_TITLE)
-        tabPrivacy = if (bundle?.getString(EXTRA_PRIVACY) == PRIVACY_PRIVATE) {
+        val urls = bundle?.getStringArrayList(EXTRA_URLS).orEmpty()
+        val titles = bundle?.getStringArrayList(EXTRA_TITLES).orEmpty()
+        val privacy = if (bundle?.getString(EXTRA_PRIVACY) == PRIVACY_PRIVATE) {
             TabPrivacy.Private
         } else {
             TabPrivacy.Normal
+        }
+        tabs = urls.mapIndexed { i, url ->
+            TabData(url = url, title = titles.getOrNull(i).orEmpty(), privacy = privacy)
         }
     }
 
@@ -177,48 +215,44 @@ class SendToDevicesDialogFragment : BottomSheetDialogFragment() {
         }
     }
 
-    private fun sendTabToDevices(
+    private fun sendTabsToDevice(
         deviceId: String,
-        url: String,
-        title: String,
-        privacy: TabPrivacy,
+        tabs: List<TabData>,
     ): Deferred<Boolean> {
         return sendTabUseCases.sendToDeviceAsync.invoke(
             deviceId = deviceId,
-            tab = TabData(url = url, title = title, privacy = privacy),
+            tabs = tabs,
         )
     }
 
-    private fun sendTabToAllDevices(
-        url: String,
-        title: String,
-        privacy: TabPrivacy,
+    private fun sendTabsToAllDevices(
+        tabs: List<TabData>,
     ): Deferred<Boolean> {
         return sendTabUseCases.sendToAllAsync.invoke(
-            tab = TabData(url = url, title = title, privacy = privacy),
+            tabs = tabs,
         )
     }
 
     companion object {
         const val TAG = "SendToDevicesDialogFragment"
 
-        internal const val EXTRA_URL = "url"
-        internal const val EXTRA_TITLE = "title"
+        internal const val EXTRA_URLS = "urls"
+        internal const val EXTRA_TITLES = "titles"
         internal const val EXTRA_PRIVACY = "privacy"
         internal const val PRIVACY_PRIVATE = "PRIVATE"
         internal const val PRIVACY_NORMAL = "NORMAL"
 
         /**
-         * Creates a new instance of [SendToDevicesDialogFragment] with the provided URL, title, and privacy status.
-         * @param url The URL of the tab to be sent.
-         * @param title The title of the tab to be sent (optional).
-         * @param isPrivate Whether the tab is private or not.
+         * Creates a new instance of [SendToDevicesDialogFragment] with the provided URLs, titles, and privacy status.
+         * @param urls The URLs of the tabs to be sent.
+         * @param titles The titles of the tabs to be sent, aligned by index with [urls].
+         * @param isPrivate Whether the tabs are private or not.
          */
-        fun newInstance(url: String, title: String?, isPrivate: Boolean) =
+        fun newInstance(urls: List<String>, titles: List<String>, isPrivate: Boolean) =
             SendToDevicesDialogFragment().apply {
                 arguments = Bundle().apply {
-                    putString(EXTRA_URL, url)
-                    putString(EXTRA_TITLE, title)
+                    putStringArrayList(EXTRA_URLS, ArrayList(urls))
+                    putStringArrayList(EXTRA_TITLES, ArrayList(titles))
                     putString(EXTRA_PRIVACY, if (isPrivate) PRIVACY_PRIVATE else PRIVACY_NORMAL)
                 }
             }

@@ -39,6 +39,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import mozilla.components.compose.base.button.FilledButton
 import mozilla.components.compose.base.button.TextButton
+import mozilla.components.support.utils.ext.withExtension
 import org.mozilla.fenix.compose.list.IconListItem
 import org.mozilla.fenix.downloads.listscreen.DownloadRenameDialogTextField
 import org.mozilla.fenix.downloads.listscreen.store.RenameFileError
@@ -70,10 +71,18 @@ fun RenameAndChangeLocationDialogContent(
     onConfirm: () -> Unit,
     onCancel: () -> Unit,
 ) {
+    val (initialBaseName, extension) = remember {
+        // We use a keyless remember to ensure the base name and extension are only calculated
+        // once from the initial state, preventing them from being recalculated on every edit.
+        val file = File(dialogState.fileName)
+        file.nameWithoutExtension to file.extension
+    }
+
     var fileNameState by remember {
         mutableStateOf(
             TextFieldValue(
-                text = dialogState.fileName,
+                text = initialBaseName,
+                selection = TextRange(0, initialBaseName.length),
             ),
         )
     }
@@ -96,9 +105,10 @@ fun RenameAndChangeLocationDialogContent(
         else -> null
     }
 
-    val trimmedFileName = fileNameState.text.trim()
+    val trimmedBaseName = fileNameState.text.trim()
+    val fullName = trimmedBaseName.withExtension(extension)
 
-    val isConfirmEnabled = enableConfirmButton(fileName = trimmedFileName)
+    val isConfirmEnabled = enableConfirmButton(fileName = fullName)
 
     Column(
         modifier = Modifier.padding(all = FirefoxTheme.layout.space.static300),
@@ -118,15 +128,17 @@ fun RenameAndChangeLocationDialogContent(
 
             DownloadRenameDialogTextField(
                 fileNameState = fileNameState,
-                onFileNameChange = { newFileName ->
-                    fileNameState = newFileName
-                    onFileNameChange(newFileName.text)
+                onFileNameChange = { newFileNameState ->
+                    fileNameState = newFileNameState
+                    val newFullName = newFileNameState.text.withExtension(extension)
+                    onFileNameChange(newFullName)
                 },
                 currentError = currentError,
                 focusRequester = focusRequester,
                 modifier = Modifier.onFocusChanged { focusState ->
                     isFocused = focusState.isFocused
                 },
+                extension = extension.ifEmpty { null },
             )
 
             DirectorySelectionItem(

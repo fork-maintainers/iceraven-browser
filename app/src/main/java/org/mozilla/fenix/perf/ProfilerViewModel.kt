@@ -261,7 +261,6 @@ class ProfilerViewModel(
     }
 
     override fun onCleared() {
-        super.onCleared()
         stateReceiver?.let { application.unregisterReceiver(it) }
     }
 

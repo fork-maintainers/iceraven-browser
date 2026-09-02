@@ -50,7 +50,6 @@ class SettingsPageSummariesTest {
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/4036045
-    @Ignore("Disabling to ease uplift. See bug 2049060.")
     @Test
     fun verifyTheSummarizePagesToggleBehaviourTest() {
         val articlePage = mockWebServer.articleSummaryAsset
@@ -68,7 +67,6 @@ class SettingsPageSummariesTest {
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/4035976
-    @Ignore("Disabling to ease uplift. See bug 2049060.")
     @Test
     fun verifyTheShakeToSummarizeCFRTest() {
         val articlePage = mockWebServer.articleSummaryAsset
@@ -82,7 +80,6 @@ class SettingsPageSummariesTest {
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/4035977
-    @Ignore("Disabling to ease uplift. See bug 2049060.")
     @Test
     fun verifyTheShakeToSummarizeCFRIsOnlyDisplayedOnceTest() {
         val firstWebsite = mockWebServer.articleSummaryAsset

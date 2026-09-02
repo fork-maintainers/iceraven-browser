@@ -4,7 +4,6 @@
 
 package org.mozilla.fenix.ui
 
-import android.os.Build
 import androidx.test.filters.SdkSuppress
 import org.junit.Ignore
 import org.junit.Rule
@@ -13,19 +12,15 @@ import org.mozilla.fenix.customannotations.SmokeTest
 import org.mozilla.fenix.helpers.AppAndSystemHelper.runWithLauncherIntent
 import org.mozilla.fenix.helpers.FenixTestRule
 import org.mozilla.fenix.helpers.HomeActivityIntentTestRule
-import org.mozilla.fenix.helpers.TestAssetHelper.getGenericAsset
 import org.mozilla.fenix.helpers.TestHelper.closeApp
 import org.mozilla.fenix.helpers.TestHelper.restartApp
 import org.mozilla.fenix.helpers.perf.DetectMemoryLeaksRule
 import org.mozilla.fenix.ui.robots.homeScreen
-import org.mozilla.fenix.ui.robots.navigationToolbar
 import androidx.compose.ui.test.junit4.v2.AndroidComposeTestRule as AndroidComposeTestRuleV2
 
 class OnboardingTest {
     @get:Rule(order = 0)
     val fenixTestRule: FenixTestRule = FenixTestRule(grantNotifications = false)
-
-    private val mockWebServer get() = fenixTestRule.mockWebServer
 
     @get:Rule(order = 1)
     val composeTestRule =
@@ -40,6 +35,7 @@ class OnboardingTest {
     val memoryLeaksRule = DetectMemoryLeaksRule(composeTestRule = { composeTestRule })
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3349493
+    @SdkSuppress(minSdkVersion = 29)
     @SmokeTest
     @Test
     fun verifyTheTermsOfUseOnboardingCardTest() {
@@ -47,6 +43,7 @@ class OnboardingTest {
             homeScreen(composeTestRule) {
                 verifyTheTermsOfUseOnboardingCard()
                 clickTheOnboardingCardContinueButton()
+                clickTheSetAsDefaultBrowserDialogCancelButton()
                 verifyTheSetAsDefaultBrowserOnboardingCard()
             }
         }
@@ -68,113 +65,6 @@ class OnboardingTest {
         }
     }
 
-    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3349495
-    @SdkSuppress(minSdkVersion = 29)
-    @SmokeTest
-    @Test
-    fun verifyTheFirefoxSearchWidgetOnboardingCardTest() {
-        runWithLauncherIntent(composeTestRule.activityRule) {
-            homeScreen(composeTestRule) {
-                clickTheOnboardingCardContinueButton()
-                clickTheSetAsDefaultBrowserDialogCancelButton()
-                clickNotNowOnboardingCardButton()
-                verifyTheFirefoxSearchWidgetOnboardingCard()
-                clickNotNowOnboardingCardButton()
-                verifyTheStartSyncingOnboardingCard()
-                swipeRightTheStartSyncingOnboardingCard()
-                verifyTheFirefoxSearchWidgetOnboardingCard()
-            }
-        }
-    }
-
-    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3349496
-    @SdkSuppress(minSdkVersion = 29)
-    @SmokeTest
-    @Test
-    fun verifyTheStartSyncingOnboardingCardTest() {
-        runWithLauncherIntent(composeTestRule.activityRule) {
-            homeScreen(composeTestRule) {
-                clickTheOnboardingCardContinueButton()
-                clickTheSetAsDefaultBrowserDialogCancelButton()
-                clickNotNowOnboardingCardButton()
-                clickNotNowOnboardingCardButton()
-                verifyTheStartSyncingOnboardingCard()
-            }.clickTheStartSyncingOnboardingCardButton {
-                verifyTurnOnSyncMenu()
-            }.goBackToHomeScreen {
-                verifyTheStartSyncingOnboardingCard()
-                clickNotNowOnboardingCardButton()
-                // Check if the device is running on Android version lower than 13
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
-                    // If true, the "Choose address bar" onboarding card is displayed
-                    verifyTheChooseYourAddressBarOnboardingCard()
-                } else {
-                    // If the device is running on Android version higher or equal to 13 the "Turn on notifications" onboarding card is displayed
-                    verifyTheTurnOnNotificationsOnboardingCard()
-                }
-            }
-        }
-    }
-
-    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3349498
-    // If the device is running on Android version higher or equal to 13 the "Turn on notifications" onboarding card is displayed
-    @SdkSuppress(minSdkVersion = 33)
-    @SmokeTest
-    @Test
-    fun verifyTheNotificationsOnboardingCardTest() {
-        runWithLauncherIntent(composeTestRule.activityRule) {
-            homeScreen(composeTestRule) {
-                clickTheOnboardingCardContinueButton()
-                clickTheSetAsDefaultBrowserDialogCancelButton()
-                clickNotNowOnboardingCardButton()
-                clickNotNowOnboardingCardButton()
-                clickNotNowOnboardingCardButton()
-                verifyTheTurnOnNotificationsOnboardingCard()
-                clickNotNowOnboardingCardButton()
-                verifyTheChooseYourAddressBarOnboardingCard()
-                swipeRightTheChooseYourAddressBarOnboardingCard()
-                verifyTheTurnOnNotificationsOnboardingCard()
-                clickTheTurnOnNotificationsOnboardingCardButton()
-                verifyTheChooseYourAddressBarOnboardingCard()
-            }
-        }
-    }
-
-    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3349499
-    @SdkSuppress(minSdkVersion = 29)
-    @SmokeTest
-    @Test
-    fun verifyTheChooseYourAddressBarOnboardingCardTest() {
-        val genericPage = mockWebServer.getGenericAsset(1)
-
-        runWithLauncherIntent(composeTestRule.activityRule) {
-            homeScreen(composeTestRule) {
-                clickTheOnboardingCardContinueButton()
-                clickTheSetAsDefaultBrowserDialogCancelButton()
-                clickNotNowOnboardingCardButton()
-                clickNotNowOnboardingCardButton()
-                clickNotNowOnboardingCardButton()
-                // Check if the device is running on Android version lower than 13
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
-                    // If true, the "Choose address bar" onboarding card is displayed
-                    verifyTheChooseYourAddressBarOnboardingCard()
-                } else {
-                    // If the device is running on Android version higher or equal to 13 the "Turn on notifications" onboarding card is displayed
-                    verifyTheTurnOnNotificationsOnboardingCard()
-                    clickNotNowOnboardingCardButton()
-                    verifyTheChooseYourAddressBarOnboardingCard()
-                }
-                clickTheAddressBarOnboardingCardBottomOption()
-                clickTheOnboardingCardContinueButton()
-                verifyToolbarPosition(true)
-            }
-            navigationToolbar(composeTestRule) {
-            }.enterURLAndEnterToBrowser(genericPage.url) {
-                verifyPageContent(genericPage.content)
-            }
-        }
-    }
-
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3349492
     @SdkSuppress(minSdkVersion = 29)
     @Test
@@ -187,23 +77,6 @@ class OnboardingTest {
                 clickTheSetAsDefaultBrowserDialogCancelButton()
                 verifyTheSetAsDefaultBrowserOnboardingCard()
                 clickNotNowOnboardingCardButton()
-
-                verifyTheFirefoxSearchWidgetOnboardingCard()
-                clickNotNowOnboardingCardButton()
-
-                verifyTheStartSyncingOnboardingCard()
-                clickNotNowOnboardingCardButton()
-
-                // Check if the device is running on Android version lower than 13
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
-                    // If true, the "Choose address bar" onboarding card is displayed
-                    verifyTheChooseYourAddressBarOnboardingCard()
-                } else {
-                    // If the device is running on Android version higher or equal to 13 the "Turn on notifications" onboarding card is displayed
-                    verifyTheTurnOnNotificationsOnboardingCard()
-                    clickNotNowOnboardingCardButton()
-                    verifyTheChooseYourAddressBarOnboardingCard()
-                }
             }
         }
     }
@@ -235,15 +108,13 @@ class OnboardingTest {
             homeScreen(composeTestRule) {
                 verifyTheTermsOfUseOnboardingCard()
                 clickTheOnboardingCardContinueButton()
-                verifyTheSetAsDefaultBrowserOnboardingCard()
-                clickNotNowOnboardingCardButton()
-                verifyTheFirefoxSearchWidgetOnboardingCard()
-                swipeRightTheFirefoxSearchWidgetOnboardingCard()
+                clickTheSetAsDefaultBrowserDialogCancelButton()
                 verifyTheSetAsDefaultBrowserOnboardingCard()
                 closeApp(composeTestRule.activityRule)
                 restartApp(composeTestRule.activityRule)
                 verifyTheTermsOfUseOnboardingCard()
                 clickTheOnboardingCardContinueButton()
+                clickTheSetAsDefaultBrowserDialogCancelButton()
                 verifyTheSetAsDefaultBrowserOnboardingCard()
             }
         }
@@ -259,18 +130,6 @@ class OnboardingTest {
                 clickTheOnboardingCardContinueButton()
                 clickTheSetAsDefaultBrowserDialogCancelButton()
                 clickNotNowOnboardingCardButton()
-                clickNotNowOnboardingCardButton()
-                clickNotNowOnboardingCardButton()
-                // Check if the device is running on Android version lower than 13
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
-                    // If true, the "Choose address bar" onboarding card is displayed
-                    verifyTheChooseYourAddressBarOnboardingCard()
-                } else {
-                    // If the device is running on Android version higher or equal to 13 the "Turn on notifications" onboarding card is displayed
-                    clickNotNowOnboardingCardButton()
-                    composeTestRule.waitForIdle()
-                }
-                clickTheOnboardingCardContinueButton()
                 clickContinueIfMarketingCardShown()
             }
             homeScreen(composeTestRule) {

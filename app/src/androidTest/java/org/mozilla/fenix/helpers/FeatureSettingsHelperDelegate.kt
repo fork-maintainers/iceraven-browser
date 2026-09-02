@@ -8,7 +8,6 @@ import android.util.Log
 import kotlinx.coroutines.runBlocking
 import mozilla.components.feature.sitepermissions.SitePermissionsRules
 import org.mozilla.fenix.R
-import org.mozilla.fenix.components.appstate.AppAction
 import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.ext.getPreferenceKey
 import org.mozilla.fenix.helpers.Constants.TAG
@@ -32,11 +31,9 @@ class FeatureSettingsHelperDelegate : FeatureSettingsHelper {
         isPocketEnabled = settings.showPocketRecommendationsFeature,
         isRecentTabsFeatureEnabled = settings.showRecentTabsFeature,
         isRecentlyVisitedFeatureEnabled = settings.historyMetadataUIFeature,
-        isPWAsPromptEnabled = !settings.userKnowsAboutPwas,
         isWallpaperOnboardingEnabled = settings.showWallpaperOnboarding,
         isDeleteSitePermissionsEnabled = settings.deleteSitePermissions,
         isOpenInAppBannerEnabled = settings.shouldShowOpenInAppBanner,
-        isHomepageSportsWidgetVisible = settings.showHomepageSportsWidget,
         etpPolicy = getETPPolicy(settings),
         isLocationPermissionEnabled = getFeaturePermission(PhoneFeature.LOCATION, settings),
         isMicrosurveyEnabled = settings.microsurveyFeatureEnabled,
@@ -50,8 +47,10 @@ class FeatureSettingsHelperDelegate : FeatureSettingsHelper {
         shakeToSummarizeFeatureFlagEnabled = settings.shakeToSummarizeFeatureFlagEnabled,
         isPrivateModeAndStoriesEntryPointEnabled = settings.privateModeAndStoriesEntryPointEnabled,
         shouldUseExpandedToolbar = settings.shouldUseExpandedToolbar,
+        isTabStripEnabled = settings.isTabStripEnabled,
         nativeShareSheetEnabled = settings.nativeShareSheetEnabled,
         showVoiceSearchInDisplayToolbar = settings.showVoiceSearchInDisplayToolbar,
+        isHomepageTrendingRecentSearchEnabled = settings.enableHomepageTrendingRecentSearch,
     )
 
     /**
@@ -63,9 +62,7 @@ class FeatureSettingsHelperDelegate : FeatureSettingsHelper {
     override var isWallpaperOnboardingEnabled: Boolean by updatedFeatureFlags::isWallpaperOnboardingEnabled
     override var isRecentTabsFeatureEnabled: Boolean by updatedFeatureFlags::isRecentTabsFeatureEnabled
     override var isRecentlyVisitedFeatureEnabled: Boolean by updatedFeatureFlags::isRecentlyVisitedFeatureEnabled
-    override var isPWAsPromptEnabled: Boolean by updatedFeatureFlags::isPWAsPromptEnabled
     override var isOpenInAppBannerEnabled: Boolean by updatedFeatureFlags::isOpenInAppBannerEnabled
-    override var isHomepageSportsWidgetVisible: Boolean by updatedFeatureFlags::isHomepageSportsWidgetVisible
     override var etpPolicy: ETPPolicy by updatedFeatureFlags::etpPolicy
     override var isLocationPermissionEnabled: SitePermissionsRules.Action by updatedFeatureFlags::isLocationPermissionEnabled
     override var isMicrosurveyEnabled: Boolean by updatedFeatureFlags::isMicrosurveyEnabled
@@ -79,8 +76,10 @@ class FeatureSettingsHelperDelegate : FeatureSettingsHelper {
     override var shakeToSummarizeFeatureFlagEnabled: Boolean by updatedFeatureFlags::shakeToSummarizeFeatureFlagEnabled
     override var isPrivateModeAndStoriesEntryPointEnabled: Boolean by updatedFeatureFlags::isPrivateModeAndStoriesEntryPointEnabled
     override var shouldUseExpandedToolbar: Boolean by updatedFeatureFlags::shouldUseExpandedToolbar
+    override var isTabStripEnabled: Boolean by updatedFeatureFlags::isTabStripEnabled
     override var nativeShareSheetEnabled: Boolean by updatedFeatureFlags::nativeShareSheetEnabled
     override var showVoiceSearchInDisplayToolbar: Boolean by updatedFeatureFlags::showVoiceSearchInDisplayToolbar
+    override var isHomepageTrendingRecentSearchEnabled: Boolean by updatedFeatureFlags::isHomepageTrendingRecentSearchEnabled
 
     override fun applyFlagUpdates() {
         Log.i(TAG, "applyFlagUpdates: Trying to apply the updated feature flags: $updatedFeatureFlags")
@@ -100,14 +99,11 @@ class FeatureSettingsHelperDelegate : FeatureSettingsHelper {
         settings.showPocketRecommendationsFeature = featureFlags.isPocketEnabled
         settings.showRecentTabsFeature = featureFlags.isRecentTabsFeatureEnabled
         settings.historyMetadataUIFeature = featureFlags.isRecentlyVisitedFeatureEnabled
-        settings.userKnowsAboutPwas = !featureFlags.isPWAsPromptEnabled
         settings.showWallpaperOnboarding = featureFlags.isWallpaperOnboardingEnabled
         settings.deleteSitePermissions = featureFlags.isDeleteSitePermissionsEnabled
         settings.shouldShowOpenInAppBanner = featureFlags.isOpenInAppBannerEnabled
         settings.microsurveyFeatureEnabled = featureFlags.isMicrosurveyEnabled
         settings.shouldUseBottomToolbar = featureFlags.shouldUseBottomToolbar
-        settings.showHomepageSportsWidget = featureFlags.isHomepageSportsWidgetVisible
-        setSportsWidgetVisibility(featureFlags.isHomepageSportsWidgetVisible)
         setETPPolicy(featureFlags.etpPolicy)
         setPermissions(PhoneFeature.LOCATION, featureFlags.isLocationPermissionEnabled)
         settings.onboardingFeatureEnabled = featureFlags.onboardingFeatureEnabled
@@ -119,8 +115,10 @@ class FeatureSettingsHelperDelegate : FeatureSettingsHelper {
         settings.shakeToSummarizeFeatureFlagEnabled = featureFlags.shakeToSummarizeFeatureFlagEnabled
         settings.privateModeAndStoriesEntryPointEnabled = featureFlags.isPrivateModeAndStoriesEntryPointEnabled
         settings.shouldUseExpandedToolbar = featureFlags.shouldUseExpandedToolbar
+        settings.isTabStripEnabled = featureFlags.isTabStripEnabled
         settings.nativeShareSheetEnabled = featureFlags.nativeShareSheetEnabled
         settings.showVoiceSearchInDisplayToolbar = featureFlags.showVoiceSearchInDisplayToolbar
+        settings.enableHomepageTrendingRecentSearch = featureFlags.isHomepageTrendingRecentSearchEnabled
     }
 }
 
@@ -128,11 +126,9 @@ private data class FeatureFlags(
     var isPocketEnabled: Boolean,
     var isRecentTabsFeatureEnabled: Boolean,
     var isRecentlyVisitedFeatureEnabled: Boolean,
-    var isPWAsPromptEnabled: Boolean,
     var isWallpaperOnboardingEnabled: Boolean,
     var isDeleteSitePermissionsEnabled: Boolean,
     var isOpenInAppBannerEnabled: Boolean,
-    var isHomepageSportsWidgetVisible: Boolean,
     var etpPolicy: ETPPolicy,
     var isLocationPermissionEnabled: SitePermissionsRules.Action,
     var isMicrosurveyEnabled: Boolean,
@@ -146,8 +142,10 @@ private data class FeatureFlags(
     var shakeToSummarizeFeatureFlagEnabled: Boolean,
     var isPrivateModeAndStoriesEntryPointEnabled: Boolean,
     var shouldUseExpandedToolbar: Boolean,
+    var isTabStripEnabled: Boolean,
     var nativeShareSheetEnabled: Boolean,
     var showVoiceSearchInDisplayToolbar: Boolean,
+    var isHomepageTrendingRecentSearchEnabled: Boolean,
 )
 
 internal fun getETPPolicy(settings: Settings): ETPPolicy {
@@ -237,12 +235,5 @@ private fun setPermissions(feature: PhoneFeature, action: SitePermissionsRules.A
         Log.i(TAG, "setPermissions: Trying to set $action permission for $feature.")
         appContext.components.settings.setSitePermissionsPhoneFeatureAction(feature, action)
         Log.i(TAG, "setPermissions: Set $action permission for $feature.")
-    }
-}
-
-private fun setSportsWidgetVisibility(isVisible: Boolean) {
-    runBlocking {
-        appContext.components.appStore
-            .dispatch(AppAction.SportsWidgetAction.VisibilityChanged(isVisible))
     }
 }

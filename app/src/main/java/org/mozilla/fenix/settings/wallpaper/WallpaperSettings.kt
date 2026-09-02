@@ -4,7 +4,6 @@
 
 package org.mozilla.fenix.settings.wallpaper
 
-import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -71,7 +70,6 @@ import org.mozilla.fenix.wallpapers.Wallpaper
  * @param onLearnMoreClick Callback for when the learn more action is clicked from the group description.
  * Parameters are the URL that is clicked and the name of the collection.
  */
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun WallpaperSettings(
     wallpaperGroups: Map<Wallpaper.Collection, List<Wallpaper>>,
@@ -239,12 +237,12 @@ private fun WallpaperThumbnailItem(
     }
     val border = if (isSelected) {
         BorderStroke(
-            width = FirefoxTheme.layout.border.thick,
+            width = FirefoxTheme.layout.border.heaviest,
             color = MaterialTheme.colorScheme.primary,
         )
     } else if (wallpaper.name == Wallpaper.DEFAULT) {
         BorderStroke(
-            width = FirefoxTheme.layout.border.thick,
+            width = FirefoxTheme.layout.border.heaviest,
             color = MaterialTheme.colorScheme.outlineVariant,
         )
     } else {

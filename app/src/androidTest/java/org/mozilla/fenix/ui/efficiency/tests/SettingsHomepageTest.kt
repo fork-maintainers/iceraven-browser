@@ -8,13 +8,16 @@ import org.junit.Ignore
 import org.junit.Test
 import org.mozilla.fenix.customannotations.SmokeTest
 import org.mozilla.fenix.helpers.TestAssetHelper.getGenericAsset
+import org.mozilla.fenix.helpers.TestHelper.restartApp
 import org.mozilla.fenix.ui.efficiency.helpers.BaseTest
+import org.mozilla.fenix.ui.efficiency.selectors.HomeSelectors
 import org.mozilla.fenix.ui.efficiency.selectors.HomeSelectors.JUMP_BACK_IN_SECTION
 import org.mozilla.fenix.ui.efficiency.selectors.HomeSelectors.RECENT_BOOKMARKS_SECTION
 import org.mozilla.fenix.ui.efficiency.selectors.MainMenuSelectors.BOOKMARK_THIS_PAGE_BUTTON
+import org.mozilla.fenix.ui.efficiency.selectors.SettingsHomepageSelectors
 import org.mozilla.fenix.ui.efficiency.selectors.SettingsHomepageSelectors.JUMP_BACK_IN_BUTTON
 import org.mozilla.fenix.ui.efficiency.selectors.SettingsHomepageSelectors.RECENT_BOOKMARKS_BUTTON
-import org.mozilla.fenix.ui.robots.navigationToolbar
+import org.mozilla.fenix.ui.efficiency.selectors.SettingsSelectors
 
 class SettingsHomepageTest : BaseTest() {
 
@@ -57,5 +60,37 @@ class SettingsHomepageTest : BaseTest() {
             .mozClick(RECENT_BOOKMARKS_BUTTON)
         on.home.navigateToPage()
             .mozVerifyElementAbsent(RECENT_BOOKMARKS_SECTION)
+    }
+
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/1569831
+    @SmokeTest
+    @Test
+    fun verifyOpeningScreenOptionsTest() {
+        val genericURL = mockWebServer.getGenericAsset(1)
+
+        on.browserPage.navigateToPage(genericURL.url.toString())
+        on.settings.navigateToPage()
+            .mozVerify(SettingsSelectors.SETTING_OPTION_SUMMARY(settingName = "Homepage", settingSummary = "Open on homepage after four hours"))
+        on.settingsHomepage.navigateToPage()
+            .mozVerifyElementIsChecked(SettingsHomepageSelectors.OPENING_SCREEN_OPTION("Homepage after four hours of inactivity"))
+            .mozClick(SettingsHomepageSelectors.OPENING_SCREEN_OPTION("Last tab"))
+            .mozVerifyElementIsChecked(SettingsHomepageSelectors.OPENING_SCREEN_OPTION("Last tab"))
+
+        restartApp(composeRule.activityRule)
+
+        on.browserPage.navigateToPage()
+            .verifyUrl(genericURL.url.toString())
+        on.settings.navigateToPage()
+            .mozVerify(SettingsSelectors.SETTING_OPTION_SUMMARY(settingName = "Homepage", settingSummary = "Open on last tab"))
+        on.settingsHomepage.navigateToPage()
+            .mozClick(SettingsHomepageSelectors.OPENING_SCREEN_OPTION("Homepage"))
+            .mozVerifyElementIsChecked(SettingsHomepageSelectors.OPENING_SCREEN_OPTION("Homepage"))
+        on.settings.navigateToPage()
+            .mozVerify(SettingsSelectors.SETTING_OPTION_SUMMARY(settingName = "Homepage", settingSummary = "Open on homepage"))
+
+        restartApp(composeRule.activityRule)
+
+        on.home
+            .mozVerify(HomeSelectors.HOMEPAGE_VIEW)
     }
 }

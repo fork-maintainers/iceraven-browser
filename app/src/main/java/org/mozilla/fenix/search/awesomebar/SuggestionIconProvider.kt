@@ -41,6 +41,14 @@ interface SuggestionIconProvider {
     fun getSearchWithIconBitmap(): Bitmap?
 
     /**
+     * Provides a trending search icon, tinted with the primary text color.
+     * The result is cached for efficiency.
+     *
+     * @return A [Bitmap] of the trending search icon, or null if it cannot be loaded/created.
+     */
+    fun getTrendingSearchIconBitmap(): Bitmap?
+
+    /**
      * Provides a standard history icon.
      * The result is cached for efficiency.
      *
@@ -127,6 +135,15 @@ class DefaultSuggestionIconProvider(private val context: Context) : SuggestionIc
         AppCompatResources.getDrawable(context, R.drawable.ic_search_with)?.toBitmap()
     }
 
+    private val trendingSearchIconBitmapInstance: Bitmap? by lazy {
+        AppCompatResources.getDrawable(context, iconsR.drawable.mozac_ic_arrow_trending_24)?.apply {
+            colorFilter = createBlendModeColorFilterCompat(
+                primaryTextColor,
+                SRC_IN,
+            )
+        }?.toBitmap()
+    }
+
     private val historyIconBitmapInstance: Bitmap? by lazy {
         AppCompatResources.getDrawable(context, iconsR.drawable.mozac_ic_history_24)?.apply {
             colorFilter = createBlendModeColorFilterCompat(
@@ -142,6 +159,10 @@ class DefaultSuggestionIconProvider(private val context: Context) : SuggestionIc
 
     override fun getSearchWithIconBitmap(): Bitmap? {
         return searchWithIconBitmapInstance
+    }
+
+    override fun getTrendingSearchIconBitmap(): Bitmap? {
+        return trendingSearchIconBitmapInstance
     }
 
     override fun getHistoryIconBitmap(): Bitmap? {

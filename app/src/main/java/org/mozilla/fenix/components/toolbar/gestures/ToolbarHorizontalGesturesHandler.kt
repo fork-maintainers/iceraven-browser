@@ -23,6 +23,7 @@ import mozilla.components.browser.state.state.TabSessionState
 import mozilla.components.browser.state.state.isActive
 import mozilla.components.browser.state.store.BrowserStore
 import mozilla.components.feature.tabs.TabsUseCases
+import mozilla.components.support.ktx.android.content.pixelSizeFor
 import mozilla.components.support.ktx.android.view.getRectWithViewLocation
 import mozilla.components.support.utils.ext.bottom
 import mozilla.components.support.utils.ext.getWindowInsets
@@ -33,10 +34,9 @@ import org.mozilla.fenix.GleanMetrics.Events
 import org.mozilla.fenix.R
 import org.mozilla.fenix.browser.SwipeGestureListener
 import org.mozilla.fenix.browser.TabPreview
+import org.mozilla.fenix.components.toolbar.gestures.ToolbarHorizontalGesturesHandler.Companion.GESTURE_FINISH_PERCENT
 import org.mozilla.fenix.ext.components
-import org.mozilla.fenix.ext.getRectWithScreenLocation
 import org.mozilla.fenix.ext.maxActiveTime
-import org.mozilla.fenix.ext.pixelSizeFor
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
@@ -50,8 +50,8 @@ class ToolbarHorizontalGesturesHandler(
     private val activity: Activity,
     private val contentLayout: View,
     private val tabPreview: TabPreview,
-    private val toolbarLayout: View,
-    private val navBarLayout: View?,
+    private val toolbarLayoutRect: () -> Rect,
+    private val navBarLayoutRect: () -> Rect? = { null },
     private val store: BrowserStore,
     private val selectTabUseCase: TabsUseCases.SelectTabUseCase,
     private val onSwipeStarted: () -> Unit,
@@ -296,8 +296,8 @@ class ToolbarHorizontalGesturesHandler(
     }
 
     private fun PointF.isInToolbar(): Boolean {
-        val toolbarLocation = toolbarLayout.getRectWithScreenLocation()
-        val navBarLocation = navBarLayout?.getRectWithScreenLocation()
+        val toolbarLocation = toolbarLayoutRect()
+        val navBarLocation = navBarLayoutRect()
         // In Android 10, the system gesture touch area overlaps the bottom of the toolbar, so
         // lets make our swipe area taller by that amount
         activity.window.decorView.getWindowInsets()?.let { insets ->

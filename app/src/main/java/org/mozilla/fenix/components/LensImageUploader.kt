@@ -32,6 +32,7 @@ class LensImageUploader(
     private val context: Context,
     private val client: Client,
     private val userAgent: String,
+    private val currentTimeMillis: () -> Long = { System.currentTimeMillis() },
 ) {
 
     /**
@@ -48,23 +49,34 @@ class LensImageUploader(
 
     /**
      * Decodes, scales, compresses, and uploads the image at [imageUri] to Google Lens.
+     *
+     * @param imageUri The content URI of the image to upload.
+     * @param isPrivate When true, the upload runs in GeckoView's private cookie context so the
+     * returned Lens session matches the private tab the result is opened in.
      */
-    suspend fun upload(imageUri: Uri): UploadResult = withContext(Dispatchers.IO) {
+    suspend fun upload(imageUri: Uri, isPrivate: Boolean): UploadResult = withContext(Dispatchers.IO) {
         val bitmap = decodeBitmap(imageUri) ?: return@withContext UploadResult(resultUrl = null)
-        uploadBitmap(bitmap)
+        uploadBitmap(bitmap, isPrivate)
     }
 
     /**
      * Fetches the image at [imageUrl], then scales, compresses, and uploads it to Google Lens.
      * The browser's User-Agent and cookies are used to fetch the image, which succeeds for hosts
      * that block Lens's own server-side fetcher.
+     *
+     * @param imageUrl The URL of the image to fetch and upload.
+     * @param isPrivate When true, both the image download and the Lens upload run in GeckoView's
+     * private cookie context so the returned Lens session matches the private tab the result is
+     * opened in.
      */
-    suspend fun uploadFromUrl(imageUrl: String): UploadResult = withContext(Dispatchers.IO) {
-        val bitmap = fetchBitmap(imageUrl) ?: return@withContext UploadResult(resultUrl = null)
-        uploadBitmap(bitmap)
-    }
+    suspend fun uploadFromUrl(imageUrl: String, isPrivate: Boolean): UploadResult =
+        withContext(Dispatchers.IO) {
+            val bitmap = fetchBitmap(imageUrl, isPrivate)
+                ?: return@withContext UploadResult(resultUrl = null)
+            uploadBitmap(bitmap, isPrivate)
+        }
 
-    private fun uploadBitmap(bitmap: Bitmap): UploadResult {
+    private fun uploadBitmap(bitmap: Bitmap, isPrivate: Boolean): UploadResult {
         val scaled = scaleBitmap(bitmap)
         val scaledWidth = scaled.width
         val scaledHeight = scaled.height
@@ -105,6 +117,7 @@ class LensImageUploader(
             ),
             body = Request.Body(ByteArrayInputStream(bodyBytes)),
             cookiePolicy = Request.CookiePolicy.INCLUDE,
+            private = isPrivate,
             connectTimeout = Pair(CONNECT_TIMEOUT_MS.toLong(), TimeUnit.MILLISECONDS),
             readTimeout = Pair(READ_TIMEOUT_MS.toLong(), TimeUnit.MILLISECONDS),
             useCaches = true,
@@ -163,12 +176,13 @@ class LensImageUploader(
     }
 
     @VisibleForTesting
-    internal fun fetchBitmap(imageUrl: String): Bitmap? {
+    internal fun fetchBitmap(imageUrl: String, isPrivate: Boolean): Bitmap? {
         val request = Request(
             url = imageUrl,
             method = Request.Method.GET,
             headers = MutableHeaders("User-Agent" to userAgent),
             cookiePolicy = Request.CookiePolicy.INCLUDE,
+            private = isPrivate,
             connectTimeout = Pair(CONNECT_TIMEOUT_MS.toLong(), TimeUnit.MILLISECONDS),
             readTimeout = Pair(READ_TIMEOUT_MS.toLong(), TimeUnit.MILLISECONDS),
             useCaches = true,
@@ -242,7 +256,7 @@ class LensImageUploader(
         return "hl=${Locale.getDefault().language}" +
             "&vpw=${metrics.widthPixels}" +
             "&vph=${metrics.heightPixels}" +
-            "&st=${System.currentTimeMillis()}"
+            "&st=${currentTimeMillis()}"
     }
 
     private fun scaleBitmap(bitmap: Bitmap): Bitmap {

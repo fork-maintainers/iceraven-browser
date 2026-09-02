@@ -8,6 +8,7 @@ import org.mozilla.fenix.helpers.TestAssetHelper.getGenericAsset
 import org.mozilla.fenix.helpers.TestHelper.closeApp
 import org.mozilla.fenix.helpers.TestHelper.restartApp
 import org.mozilla.fenix.ui.efficiency.helpers.BaseTest
+import org.mozilla.fenix.ui.efficiency.selectors.HomeSelectors
 import org.mozilla.fenix.ui.efficiency.selectors.SearchBarSelectors
 import org.mozilla.fenix.ui.efficiency.selectors.TabDrawerSelectors
 import org.mozilla.fenix.ui.efficiency.selectors.TabDrawerSelectors.DELETE_TAB_GROUP_DIALOG_CANCEL_BUTTON
@@ -135,7 +136,7 @@ class TabbedBrowsingTest : BaseTest() {
         on.tabDrawer
             .navigateToPage()
         on.tabDrawer
-            .selectTabsAndCreateTabGroup(
+            .selectTabsAndCreateFirstTabGroup(
                 tabTitle = webPages[0].title,
                 tabGroupTitle = tabGroupTitle,
                 tabGroupColor = tabGroupColor,
@@ -144,12 +145,125 @@ class TabbedBrowsingTest : BaseTest() {
         closeApp(composeRule.activityRule)
         restartApp(composeRule.activityRule)
 
+        verifyGroup(
+            tabGroupTitle = tabGroupTitle,
+            tabGroupColor = tabGroupColor,
+        )
+    }
+
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/4034502
+    @Test
+    fun verifyCreationOfNewGroupWhenGroupExistsTest() {
+        val firstTabGroupTitle = "Mozilla"
+        val firstTabGroupColor = "Grey"
+        val secondTabGroupTitle = "Test"
+        val secondTabGroupColor = "Blue"
+
+        val webPages = mockWebServer.genericAssets
+        MockBrowserDataHelper.createTabItem(webPages[0].url.toString())
+        MockBrowserDataHelper.createTabItem(webPages[1].url.toString())
+        MockBrowserDataHelper.createTabItem(webPages[2].url.toString())
+
+        on.tabDrawer
+            .navigateToPage()
+        on.tabDrawer
+            .selectTabsAndCreateFirstTabGroup(
+                tabTitle = webPages[0].title,
+                tabGroupTitle = firstTabGroupTitle,
+                tabGroupColor = firstTabGroupColor,
+            )
+        on.tabDrawer
+            .selectTabsAndAddToNewTabGroup(
+                tabTitle = webPages[1].title,
+                tabGroupTitle = secondTabGroupTitle,
+                tabGroupColor = secondTabGroupColor,
+            )
+
+        closeApp(composeRule.activityRule)
+        restartApp(composeRule.activityRule)
+
+        verifyGroup(
+            tabGroupTitle = firstTabGroupTitle,
+            tabGroupColor = firstTabGroupColor,
+            numberOfTabs = 1,
+        )
+        verifyGroup(
+            tabGroupTitle = secondTabGroupTitle,
+            tabGroupColor = secondTabGroupColor,
+            numberOfTabs = 1,
+        )
+    }
+
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/4162826
+    @Test
+    fun verifyAddingTabToExistingGroupWhenGroupExistsTest() {
+        val tabGroupTitle = "Mozilla"
+        val tabGroupColor = "Grey"
+
+        val webPages = mockWebServer.genericAssets
+        MockBrowserDataHelper.createTabItem(webPages[0].url.toString())
+        MockBrowserDataHelper.createTabItem(webPages[1].url.toString())
+        MockBrowserDataHelper.createTabItem(webPages[2].url.toString())
+
+        on.tabDrawer
+            .navigateToPage()
+        on.tabDrawer
+            .selectTabsAndCreateFirstTabGroup(
+                tabTitle = webPages[0].title,
+                tabGroupTitle = tabGroupTitle,
+                tabGroupColor = tabGroupColor,
+            )
+        on.tabDrawer
+            .selectTabsAndAddToExistingTabGroup(
+                tabTitle = webPages[1].title,
+                tabGroupTitle = tabGroupTitle,
+                numberOfTabs = 1,
+                tabGroupColor = tabGroupColor,
+            )
+
+        closeApp(composeRule.activityRule)
+        restartApp(composeRule.activityRule)
+
+        verifyGroup(
+            tabGroupTitle = tabGroupTitle,
+            tabGroupColor = tabGroupColor,
+            numberOfTabs = 2,
+        )
+    }
+
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/2228470
+    @SmokeTest
+    @Test
+    fun privateTabsDoNotPersistAfterClosingAppTest() {
+        val firstWebPage = mockWebServer.getGenericAsset(1)
+        val secondWebPage = mockWebServer.getGenericAsset(2)
+
+        on.home
+            .mozClick(HomeSelectors.PRIVATE_BROWSING_BUTTON)
+        on.browserPage.navigateToPage(firstWebPage.url.toString())
+        on.tabDrawer.navigateToPage()
+            .mozClick(TabDrawerSelectors.FAB)
+        on.searchBar
+            .mozEnterText(secondWebPage.url.toString(), SearchBarSelectors.TOOLBAR_IN_EDIT_MODE)
+            .mozPressEnter(SearchBarSelectors.TOOLBAR_IN_EDIT_MODE)
+        on.browserPage.navigateToPage()
+
+        closeApp(composeRule.activityRule)
+        restartApp(composeRule.activityRule)
+
+        on.home
+            .mozVerify(HomeSelectors.PRIVATE_BROWSING_INFO_CARD_TITLE)
+        on.tabDrawer.navigateToPage()
+            .mozVerify(TabDrawerSelectors.EMPTY_PRIVATE_TABS_LIST)
+    }
+
+    private fun verifyGroup(tabGroupTitle: String, tabGroupColor: String, numberOfTabs: Int = 1) {
         on.home
             .navigateToPage()
         on.tabDrawer
             .navigateToPage()
             .mozVerify(TAB_ITEM_WITH_TITLE(tabTitle = tabGroupTitle))
         on.tabDrawer
-            .verifyTabGroupFromTabGroupPage(tabGroupTitle = tabGroupTitle, numberOfTabs = 1, tabGroupColor = tabGroupColor)
+            .verifyTabGroupFromTabGroupPage(tabGroupTitle = tabGroupTitle, numberOfTabs = numberOfTabs, tabGroupColor = tabGroupColor)
     }
 }

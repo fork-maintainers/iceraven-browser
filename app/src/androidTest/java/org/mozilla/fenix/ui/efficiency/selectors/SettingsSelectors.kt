@@ -31,7 +31,25 @@ object SettingsSelectors {
         strategy = SelectorStrategy.ESPRESSO_BY_TEXT,
         value = "General",
         description = "the General heading",
-        groups = listOf("generalSettingsSection"),
+        groups = listOf("generalSettingsSection", "settingsView"),
+    )
+
+    // The "Privacy and security" preference category heading. requiresScroll: it sits below the fold
+    // on a phone. Mirrors the legacy verifySettingsView (scrollToElementByText + onView(withText(...))).
+    val PRIVACY_AND_SECURITY_HEADING = Selector(
+        strategy = SelectorStrategy.UIAUTOMATOR_WITH_TEXT,
+        value = getStringResource(R.string.preferences_category_privacy_security),
+        description = "the Privacy and security heading",
+        groups = listOf("settingsView", "requiresScroll"),
+    )
+
+    // The "Extensions" settings entry, far down the settings list. requiresScroll for the same reason.
+    // Mirrors the legacy verifySettingsView (RecyclerView scrollTo preferences_extensions).
+    val EXTENSIONS_BUTTON = Selector(
+        strategy = SelectorStrategy.UIAUTOMATOR_WITH_TEXT,
+        value = getStringResource(R.string.preferences_extensions),
+        description = "the Extensions button",
+        groups = listOf("settingsView", "requiresScroll"),
     )
 
     val SETTINGS_TITLE = Selector(
@@ -46,6 +64,15 @@ object SettingsSelectors {
         value = "Search",
         description = "the Search button",
         groups = listOf("generalSettingsSection"),
+    )
+
+    // Espresso variant of the Search row, used to assert its summary (the default engine name) via a
+    // sibling-text check - the UiAutomator SEARCH_BUTTON cannot express hasSibling.
+    val SEARCH_SETTING_ROW = Selector(
+        strategy = SelectorStrategy.ESPRESSO_BY_TEXT,
+        value = "Search",
+        description = "the Search settings row",
+        groups = listOf(),
     )
 
     val TABS_BUTTON = Selector(
@@ -70,7 +97,7 @@ object SettingsSelectors {
     )
 
     val CUSTOMIZE_BUTTON = Selector(
-        strategy = SelectorStrategy.ESPRESSO_BY_TEXT,
+        strategy = SelectorStrategy.UIAUTOMATOR_WITH_TEXT,
         value = "Customize",
         description = "the Customize button",
         groups = listOf("generalSettingsSection"),
@@ -84,7 +111,7 @@ object SettingsSelectors {
     )
 
     val PASSWORDS_BUTTON = Selector(
-        strategy = SelectorStrategy.ESPRESSO_BY_TEXT,
+        strategy = SelectorStrategy.UIAUTOMATOR_WITH_TEXT,
         value = "Passwords",
         description = "the Passwords button",
         groups = listOf("generalSettingsSection"),
@@ -265,12 +292,24 @@ object SettingsSelectors {
         groups = listOf(),
     )
 
+    @Suppress("ktlint:standard:function-naming", "FunctionName")
+    fun SETTING_OPTION_SUMMARY(settingName: String = "", settingSummary: String = "") = Selector(
+        strategy = SelectorStrategy.ESPRESSO_BY_TEXT_WITH_SIBLING_TEXT,
+        value = settingName,
+        secondaryValue = settingSummary,
+        description = "Setting: $settingName with summary: $settingSummary",
+        groups = listOf("settingsOptionSummary"),
+    )
+
     val all = listOf(
         NAVIGATION_TOOLBAR,
         GO_BACK_BUTTON,
         GENERAL_HEADING,
+        PRIVACY_AND_SECURITY_HEADING,
+        EXTENSIONS_BUTTON,
         SETTINGS_TITLE,
         SEARCH_BUTTON,
+        SEARCH_SETTING_ROW,
         TABS_BUTTON,
         ACCESSIBILITY_BUTTON,
         AUTOFILL_BUTTON,
@@ -302,5 +341,6 @@ object SettingsSelectors {
         DOWNLOADS_BUTTON,
         OPEN_LINKS_IN_APPS_DEFAULT_SUMMARY,
         HTTPS_ONLY_MODE_ON_ALL_TABS_SUMMARY,
+        SETTING_OPTION_SUMMARY(),
     )
 }

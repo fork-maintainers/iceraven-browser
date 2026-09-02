@@ -13,8 +13,8 @@ object NavigationRegistry {
 
     private val graph = mutableMapOf<String, MutableList<NavigationEdge>>()
 
-    fun register(from: String, to: String, steps: List<NavigationStep>) {
-        val edge = NavigationEdge(from, to, steps)
+    fun register(from: String, to: String, steps: List<NavigationStep>, launch: LaunchConfig? = null) {
+        val edge = NavigationEdge(from, to, steps, launch)
         graph.getOrPut(from) { mutableListOf() }.add(edge)
 
         Log.i(TAG, "📌 Registered navigation: $from -> $to with ${steps.size} step(s)")
@@ -22,6 +22,10 @@ object NavigationRegistry {
             Log.i(TAG, "   Step ${index + 1}: $step")
         }
     }
+
+    /** The LaunchConfig declared on any edge leading INTO [page], if any. */
+    fun launchConfigFor(page: String): LaunchConfig? =
+        graph.values.flatten().firstOrNull { it.to == page && it.launch != null }?.launch
 
     fun findPath(from: String, to: String): List<NavigationStep>? {
         if (from == to) {

@@ -5,6 +5,7 @@
 package org.mozilla.fenix.tabgroups
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.DeviceConfigurationOverride
 import androidx.compose.ui.test.ForcedSize
@@ -24,6 +25,8 @@ import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mozilla.fenix.tabstray.LocalTabManagementFeatureHelper
+import org.mozilla.fenix.tabstray.TabManagementFeatureHelper
 import org.mozilla.fenix.tabstray.TabsTrayTestTag
 import org.mozilla.fenix.tabstray.browser.compose.TabItemInteractionState
 import org.mozilla.fenix.tabstray.data.TabGroupTheme
@@ -40,6 +43,15 @@ import org.mozilla.fenix.theme.FirefoxTheme
 class TabGroupCardTest {
     @get:Rule
     val composeTestRule = createComposeRule()
+
+    private val tabManagementFeatureHelper = object : TabManagementFeatureHelper {
+        override val openingAnimationEnabled: Boolean = false
+        override val tabGroupsEnabled: Boolean = true
+        override val tabGroupsDragAndDropEnabled: Boolean = false
+        override val ungroupTabGroupEnabled: Boolean = true
+        override val tabGroupsOnboardingEnabled: Boolean = false
+        override val tabGroupsLiveReorderEnabled: Boolean = false
+    }
 
     @Test
     fun verifyUIElementsPresent() {
@@ -142,7 +154,25 @@ class TabGroupCardTest {
             .performClick()
         composeTestRule.onNodeWithTag(TabsTrayTestTag.EDIT_TAB_GROUP).assertIsDisplayed()
         composeTestRule.onNodeWithTag(TabsTrayTestTag.CLOSE_TAB_GROUP).assertIsDisplayed()
+        composeTestRule.onNodeWithTag(TabsTrayTestTag.SHARE_TAB_GROUP).assertIsDisplayed()
+        composeTestRule.onNodeWithTag(TabsTrayTestTag.UNGROUP_TAB_GROUP).assertIsDisplayed()
         composeTestRule.onNodeWithTag(TabsTrayTestTag.DELETE_TAB_GROUP).assertIsDisplayed()
+    }
+
+    @Test
+    fun verifyUngroupNotDisplayedWhenFeatureDisabled() {
+        val ungroupDisabledHelper = object : TabManagementFeatureHelper by tabManagementFeatureHelper {
+            override val ungroupTabGroupEnabled: Boolean = false
+        }
+
+        composeTestRule.setContent {
+            FirefoxTheme {
+                ComposableUnderTest(featureHelper = ungroupDisabledHelper)
+            }
+        }
+        composeTestRule.onNodeWithTag(TabsTrayTestTag.TAB_GROUP_THREE_DOT_BUTTON)
+            .performClick()
+        composeTestRule.onNodeWithTag(TabsTrayTestTag.UNGROUP_TAB_GROUP).assertDoesNotExist()
     }
 
     @Test
@@ -338,20 +368,25 @@ class TabGroupCardTest {
         onDeleteTabGroupClick: (String) -> Unit = {},
         onEditTabGroupClick: (TabsTrayItem.TabGroup) -> Unit = {},
         onCloseTabGroupClick: (TabsTrayItem.TabGroup) -> Unit = {},
+        onShareTabGroupClick: (TabsTrayItem.TabGroup) -> Unit = {},
+        featureHelper: TabManagementFeatureHelper = tabManagementFeatureHelper,
     ) {
-        TabGroupCard(
-            group = group,
-            selectionState = TabsTrayItemSelectionState(),
-            clickHandler = TabsTrayItemClickHandler(
-                onClick = { onClick("Test") },
-                onLongClick = { onLongClick("Test") },
-                onCloseClick = {}, // Not implemented yet
-            ),
-            interactionState = interactionState,
-            modifier = modifier,
-            onDeleteTabGroupClick = { onDeleteTabGroupClick("Test") },
-            onEditTabGroupClick = { onEditTabGroupClick(group) },
-            onCloseTabGroupClick = { onCloseTabGroupClick(group) },
-        )
+        CompositionLocalProvider(LocalTabManagementFeatureHelper provides featureHelper) {
+            TabGroupCard(
+                group = group,
+                selectionState = TabsTrayItemSelectionState(),
+                clickHandler = TabsTrayItemClickHandler(
+                    onClick = { onClick("Test") },
+                    onLongClick = { onLongClick("Test") },
+                    onCloseClick = {}, // Not implemented yet
+                ),
+                interactionState = interactionState,
+                modifier = modifier,
+                onDeleteTabGroupClick = { onDeleteTabGroupClick("Test") },
+                onEditTabGroupClick = { onEditTabGroupClick(group) },
+                onCloseTabGroupClick = { onCloseTabGroupClick(group) },
+                onShareTabGroupClick = { onShareTabGroupClick(group) },
+            )
+        }
     }
 }

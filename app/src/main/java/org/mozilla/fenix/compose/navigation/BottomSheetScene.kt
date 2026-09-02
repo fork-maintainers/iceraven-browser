@@ -37,7 +37,7 @@ private val firstOpenDelay = 25.milliseconds
 @OptIn(ExperimentalMaterial3Api::class)
 @Suppress("LongParameterList")
 internal class BottomSheetScene<T : Any>(
-    override val key: T,
+    override val key: Any,
     override val previousEntries: List<NavEntry<T>>,
     override val overlaidEntries: List<NavEntry<T>>,
     private val entry: NavEntry<T>,
@@ -99,6 +99,27 @@ internal class BottomSheetScene<T : Any>(
             entry.Content()
         }
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other == null || this::class != other::class) return false
+
+        other as BottomSheetScene<*>
+
+        return key == other.key &&
+            previousEntries == other.previousEntries &&
+            overlaidEntries == other.overlaidEntries &&
+            entry == other.entry &&
+            modalBottomSheetProperties == other.modalBottomSheetProperties
+    }
+
+    override fun hashCode(): Int {
+        return key.hashCode() * 31 +
+            previousEntries.hashCode() * 31 +
+            overlaidEntries.hashCode() * 31 +
+            entry.hashCode() * 31 +
+            modalBottomSheetProperties.hashCode() * 31
+    }
 }
 
 /**
@@ -121,11 +142,8 @@ class BottomSheetSceneStrategy<T : Any> : SceneStrategy<T> {
 
         return bottomSheetProperties?.let { properties ->
             val underlyingEntries = entries.dropLast(bottomSheetEntries.size)
-            @Suppress("UNCHECKED_CAST")
             BottomSheetScene(
-                // Reuse the first trailing bottom sheet entry as the key,
-                // so future sheet destinations render in the same BottomSheet container.
-                key = bottomSheetEntries.first().contentKey as T,
+                key = lastEntry.contentKey,
                 previousEntries = underlyingEntries,
                 overlaidEntries = underlyingEntries,
                 entry = lastEntry,

@@ -12,10 +12,11 @@ import io.mockk.runs
 import io.mockk.spyk
 import io.mockk.verify
 import mozilla.components.concept.sync.OAuthAccount
+import mozilla.components.concept.sync.TabData
 import mozilla.components.concept.sync.TabPrivacy
 import mozilla.components.service.fxa.manager.FxaAccountManager
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNull
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -29,7 +30,13 @@ class SendToDevicesDialogFragmentTest {
 
     @Before
     fun setUp() {
-        fragment = spyk(SendToDevicesDialogFragment.newInstance("https://example.com", "Title", false))
+        fragment = spyk(
+            SendToDevicesDialogFragment.newInstance(
+                urls = listOf("https://example.com"),
+                titles = listOf("Title"),
+                isPrivate = false,
+            ),
+        )
         every { fragment.navigateToSignIn() } just runs
         every { fragment.onAuthenticated() } just runs
     }
@@ -37,43 +44,60 @@ class SendToDevicesDialogFragmentTest {
     // region loadTabData
 
     @Test
-    fun `GIVEN bundle with PRIVATE privacy WHEN loadTabData is called THEN tabPrivacy is Private`() {
-        val bundle = Bundle().apply { putString("privacy", "PRIVATE") }
-
-        fragment.loadTabData(bundle)
-
-        assertEquals(TabPrivacy.Private, fragment.tabPrivacyForTest)
-    }
-
-    @Test
-    fun `GIVEN bundle without privacy extra WHEN loadTabData is called THEN tabPrivacy defaults to Normal`() {
-        val bundle = Bundle().apply { putString("url", "https://example.com") }
-
-        fragment.loadTabData(bundle)
-
-        assertEquals(TabPrivacy.Normal, fragment.tabPrivacyForTest)
-    }
-
-    @Test
-    fun `GIVEN bundle with url and title WHEN loadTabData is called THEN tabUrl and tabTitle are updated`() {
+    fun `GIVEN bundle with PRIVATE privacy WHEN loadTabData is called THEN tabs use Private privacy`() {
         val bundle = Bundle().apply {
-            putString("url", "https://mozilla.org")
-            putString("title", "Mozilla")
+            putStringArrayList("urls", arrayListOf("https://example.com"))
+            putString("privacy", "PRIVATE")
         }
 
         fragment.loadTabData(bundle)
 
-        assertEquals("https://mozilla.org", fragment.tabUrlForTest)
-        assertEquals("Mozilla", fragment.tabTitleForTest)
+        assertEquals(listOf(TabPrivacy.Private), fragment.tabsForTest.map { it.privacy })
     }
 
     @Test
-    fun `GIVEN null bundle WHEN loadTabData is called THEN fields are null and privacy defaults to Normal`() {
+    fun `GIVEN bundle without privacy extra WHEN loadTabData is called THEN tabs default to Normal privacy`() {
+        val bundle = Bundle().apply { putStringArrayList("urls", arrayListOf("https://example.com")) }
+
+        fragment.loadTabData(bundle)
+
+        assertEquals(listOf(TabPrivacy.Normal), fragment.tabsForTest.map { it.privacy })
+    }
+
+    @Test
+    fun `GIVEN bundle with urls and titles WHEN loadTabData is called THEN tabs are updated`() {
+        val bundle = Bundle().apply {
+            putStringArrayList("urls", arrayListOf("https://mozilla.org", "https://example.com"))
+            putStringArrayList("titles", arrayListOf("Mozilla", "Example"))
+        }
+
+        fragment.loadTabData(bundle)
+
+        assertEquals(
+            listOf(
+                TabData("Mozilla", "https://mozilla.org", TabPrivacy.Normal),
+                TabData("Example", "https://example.com", TabPrivacy.Normal),
+            ),
+            fragment.tabsForTest,
+        )
+    }
+
+    @Test
+    fun `GIVEN a url with a missing title WHEN loadTabData is called THEN the tab title defaults to empty`() {
+        val bundle = Bundle().apply {
+            putStringArrayList("urls", arrayListOf("https://mozilla.org"))
+        }
+
+        fragment.loadTabData(bundle)
+
+        assertEquals(listOf(TabData("", "https://mozilla.org", TabPrivacy.Normal)), fragment.tabsForTest)
+    }
+
+    @Test
+    fun `GIVEN null bundle WHEN loadTabData is called THEN tabs are empty`() {
         fragment.loadTabData(null)
 
-        assertNull(fragment.tabUrlForTest)
-        assertNull(fragment.tabTitleForTest)
-        assertEquals(TabPrivacy.Normal, fragment.tabPrivacyForTest)
+        assertTrue(fragment.tabsForTest.isEmpty())
     }
 
     // endregion
@@ -111,11 +135,6 @@ class SendToDevicesDialogFragmentTest {
     // endregion
 }
 
-private val SendToDevicesDialogFragment.tabPrivacyForTest: TabPrivacy
-    get() = javaClass.getDeclaredField("tabPrivacy").apply { isAccessible = true }.get(this) as TabPrivacy
-
-private val SendToDevicesDialogFragment.tabUrlForTest: String?
-    get() = javaClass.getDeclaredField("tabUrl").apply { isAccessible = true }.get(this) as String?
-
-private val SendToDevicesDialogFragment.tabTitleForTest: String?
-    get() = javaClass.getDeclaredField("tabTitle").apply { isAccessible = true }.get(this) as String?
+@Suppress("UNCHECKED_CAST")
+private val SendToDevicesDialogFragment.tabsForTest: List<TabData>
+    get() = javaClass.getDeclaredField("tabs").apply { isAccessible = true }.get(this) as List<TabData>

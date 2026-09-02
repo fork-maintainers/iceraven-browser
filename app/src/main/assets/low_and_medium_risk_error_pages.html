@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width; user-scalable=false;" />
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src resource:; object-src 'none'"
+      content="default-src resource:; object-src 'none'; connect-src https://archive.org"
     />
     <link rel="stylesheet" type="text/css" href="shared_error_style.css" />
     <link
@@ -42,6 +42,20 @@
 
       <!-- Retry Button -->
       <button id="errorTryAgain"></button>
+
+      <!-- Offer an archived copy of the page when the live site is unreachable. Hidden by
+           default via the #viewArchivedButton stylesheet rule (an inline style attribute would
+           be blocked by the page CSP, and the [hidden] attribute is overridden by `button {
+           display: block }`); shown from JS via element.style, which CSP does not restrict. -->
+      <button id="viewArchivedButton" class="buttonTertiary"></button>
+      <div id="archiveWarningContent" class="warningContainer" hidden>
+        <span id="archiveNotFoundText"></span><br />
+        <a id="archiveSearchWebLink" href="#"></a>
+      </div>
+      <div id="archiveErrorContent" class="warningContainer" hidden>
+        <span id="archiveUnreachableText"></span><br />
+        <a id="archiveRetryLink" href="#"></a>
+      </div>
 
       <!-- Advanced Button -->
       <button id="advancedButton" class="buttonSecondary hidden"></button>

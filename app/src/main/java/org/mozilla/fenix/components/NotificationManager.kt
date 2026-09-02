@@ -29,8 +29,14 @@ import org.mozilla.fenix.utils.IntentUtils
 
 /**
  * Manages notification channels and allows displaying different types of notifications.
+ *
+ * @param context The Android application context.
+ * @param currentTimeMillis provider for the current time in milliseconds, injectable for testing.
  */
-class NotificationManager(private val context: Context) {
+class NotificationManager(
+    private val context: Context,
+    private val currentTimeMillis: () -> Long = { System.currentTimeMillis() },
+) {
     companion object {
         const val TABS_CLOSED_TAG = "TabsClosed"
         const val TOTAL_TABS_CLOSED_EXTRA = "org.mozilla.fenix.TOTAL_TABS_CLOSED_EXTRA"
@@ -103,7 +109,7 @@ class NotificationManager(private val context: Context) {
             addExtras(Bundle().apply { putInt(TOTAL_TABS_CLOSED_EXTRA, totalCount) })
 
             setSmallIcon(R.drawable.ic_status_logo)
-            setWhen(System.currentTimeMillis())
+            setWhen(currentTimeMillis())
             setAutoCancel(true)
             setDefaults(Notification.DEFAULT_VIBRATE or Notification.DEFAULT_SOUND)
 
@@ -144,7 +150,7 @@ class NotificationManager(private val context: Context) {
             val builder = NotificationCompat.Builder(context, RECEIVE_TABS_CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_status_logo)
                 .setSendTabTitle(context, device, tab)
-                .setWhen(System.currentTimeMillis())
+                .setWhen(currentTimeMillis())
                 .setContentText(tab.url)
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true)

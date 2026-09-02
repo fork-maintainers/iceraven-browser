@@ -46,7 +46,7 @@ import:
             enabled: true
         - channel: beta
           value:
-            enabled: false
+            enabled: true
         - channel: release
           value:
             enabled: false
@@ -170,55 +170,6 @@ features:
         gecko-pref:
           pref: "nimbus.qa.pref-bool-user"
           branch: "user"
-  cookie-banners:
-    description: Features for cookie banner handling.
-    variables:
-      sections-enabled:
-        description: "This property provides a lookup table of whether or not the given section should be enabled."
-        type: Map<CookieBannersSection, Int>
-        default:
-          {
-            "feature-ui": 0,
-            "feature-setting-value": 0,
-            "feature-setting-value-pbm": 0,
-            "feature-setting-detect-only": 0,
-            "feature-setting-global-rules": 1,
-            "feature-setting-global-rules-sub-frames": 1,
-          }
-    defaults:
-      - channel: developer
-        value: {
-          "sections-enabled": {
-            "feature-ui": 1,
-            "feature-setting-value": 0,
-            "feature-setting-value-pbm": 1,
-            "feature-setting-detect-only": 0,
-            "feature-setting-global-rules": 1,
-            "feature-setting-global-rules-sub-frames": 1,
-          }
-        }
-      - channel: nightly
-        value: {
-          "sections-enabled": {
-            "feature-ui": 0,
-            "feature-setting-value": 0,
-            "feature-setting-value-pbm": 0,
-            "feature-setting-detect-only": 0,
-            "feature-setting-global-rules": 1,
-            "feature-setting-global-rules-sub-frames": 1,
-          }
-        }
-      - channel: beta
-        value: {
-          "sections-enabled": {
-            "feature-ui": 0,
-            "feature-setting-value": 0,
-            "feature-setting-value-pbm": 0,
-            "feature-setting-detect-only": 0,
-            "feature-setting-global-rules": 1,
-            "feature-setting-global-rules-sub-frames": 1,
-          }
-        }
 
   onboarding:
     description: "A feature that configures the new user onboarding page.
@@ -336,24 +287,6 @@ features:
       - channel: beta
         value:
           enabled: true
-
-  import-bookmarks:
-    description: A feature that lets users import bookmarks from another browser.
-    variables:
-      enabled:
-        type: Boolean
-        description: If true, the import bookmarks feature will be enabled.
-        default: false
-    defaults:
-      - channel: developer
-        value:
-          enabled: false
-      - channel: nightly
-        value:
-          enabled: false
-      - channel: beta
-        value:
-          enabled: false
 
   import-bookmarks:
     description: A feature that lets users import bookmarks from another browser.
@@ -960,10 +893,6 @@ features:
         description: Whether to show the new AppLinksPromptFragment dialog when an app link is detected. If false, the old dialog is used.
         type: Boolean
         default: true
-    defaults:
-      - channel: release
-        value:
-          show-new-prompt: false
 
   tab-management-enhancements:
     description: Control the visibility of the tab management enhancements.
@@ -1082,6 +1011,14 @@ features:
           Whether or not to turn on local network / device access blocking
         type: Boolean
         default: false
+      block-insecure-contexts:
+        description: >
+          Whether or not LNA requests coming from insecure contexts should be
+          blocked outright, without prompting the user for permission
+        type: Option<Boolean>
+        gecko-pref:
+          pref: "network.lna.block_insecure_contexts"
+          branch: "default"
 
   isolated-content-processes:
     description: Feature that controls content process isolation.
@@ -1147,7 +1084,7 @@ features:
       show-onboarding-bottom-sheet:
         description: If true, the IP Protection onboarding bottom sheet is shown to the user.
         type: Boolean
-        default: false
+        default: true
       data-limit-gigabyte:
         description: Specifies the VPN data limit for unpaid users in GB (e.g. 50 GB).
         type: Int
@@ -1156,7 +1093,7 @@ features:
         description: Country codes whose users are eligible for IP Protection.
         type: List<String>
         default: [ "AU", "AT", "BE", "BG", "CA", "CL", "CO", "DK", "FI", "FR", "DE", "IE", "IT", "JP", "MY", "MX",
-                   "NL", "NZ", "NO", "PL", "PT", "SG", "ZA", "ES", "SE", "CH", "TH", "GB", "US" ]
+                   "NL", "NZ", "NO", "PL", "PT", "RO", "SG", "ZA", "ES", "SE", "CH", "TH", "GB", "US" ]
       promo-deadline:
         description: The final date for the promotion to end. This needs to be an ISO 8601 formatted date (i.e. YYYY-MM-DD).
         type: String
@@ -1293,40 +1230,13 @@ features:
           enabled: true
 
 
-  homepage-sports-widget:
-    description: Feature to enable Homepage Sports Widget for users on Firefox on Android.
+  homepage-weather-widget:
+    description: Feature to enable Homepage Weather Widget for users on Firefox for Android.
     variables:
       enabled:
-        description: If true, Homepage Sports Widget is enabled.
+        description: If true, Homepage Weather Widget is enabled.
         type: Boolean
         default: false
-      force-one-week-to-world-cup:
-        description: >
-          If true, treat the user as being within one week of the World Cup kickoff regardless of the
-          device date. Used to roll out the pre-tournament pager (follow your team + view-schedule cards)
-          ahead of the calendar date for testing or staggered launches. The natural date-based check
-          still applies when this is false (the default).
-        type: Boolean
-        default: false
-      fetch-throttle-seconds:
-        description: >
-          Minimum interval, in seconds, that the client will wait between Sports Widget fetches.
-          Guards the upstream Merino endpoint against refresh-button spam and Home/onResume thrash.
-          The default aligns with the upstream cache TTL — a shorter interval just returns the
-          same payload at the cost of battery and bandwidth. Lower this remotely only if the
-          upstream cache TTL is also lowered, otherwise users will see no fresher data.
-        type: Int
-        default: 60
-    defaults:
-      - channel: developer
-        value:
-          enabled: true
-      - channel: nightly
-        value:
-          enabled: true
-      - channel: beta
-        value:
-          enabled: true
 
   webcompat-reporter-enhancements:
     description: Feature to enable WebCompat Reporter enhancements for users on Firefox Android.
@@ -1385,6 +1295,37 @@ features:
         description: If true, trending and recent searches are shown on the Homepage Search.
         type: Boolean
         default: false
+    defaults:
+      - channel: nightly
+        value:
+          enabled: true
+      - channel: developer
+        value:
+          enabled: true
+
+  collections-to-tab-groups-migration:
+    description: Feature to migrate Collections to Tab Groups for users on Firefox for Android.
+    variables:
+      hide-collections-ui:
+        description: If true, the Collections UI is hidden.
+        type: Boolean
+        default: false
+
+  oled-theme:
+    description: Feature to provide the OLED theme option for users on Firefox for Android.
+    variables:
+      enabled:
+        description: If true, the OLED theme option is shown.
+        type: Boolean
+        default: false
+
+  pdf-viewer:
+    description: Feature for the PDF viewer tools for users on Firefox for Android.
+    variables:
+      android-ui-tools:
+        description: If true, the Android PDF UI tools are shown.
+        type: Boolean
+        default: false
 
 types:
   objects:
@@ -1426,29 +1367,6 @@ types:
           description: The collections section of the homepage.
         privacy-report:
           description: The privacy report section showing trackers blocked.
-
-    CookieBannersSection:
-      description: The identifiers for the sections of the MR 2022.
-      variants:
-        feature-ui:
-          description: An integer either 0 or 1 indicating if the UI for cookie banner handling should be visible,
-            0 to hide the UI and 1 to show the UI. The actual UI is composed by cookie banner section
-            in the settings page, the toolbar section and the re-engagement dialog.
-        feature-setting-value:
-          description: An integer either 0 or 1 indicating if cookie banner setting should be enabled or disabled,
-            0 for setting the value to disabled, 1  for enabling the setting with the value reject_all.
-        feature-setting-value-pbm:
-          description: An integer either 0 or 1 indicating if cookie banner setting should be enabled or disabled,
-            0 for setting the value to disabled, 1  for enabling the setting with the value reject_all.
-        feature-setting-detect-only:
-          description: An integer either 0 or 1 indicating if cookie banner detect only mode
-            should be enabled or disabled. 0 for setting to be disabled, and 1 for enabling the setting.
-        feature-setting-global-rules:
-          description: An integer either 0 or 1 indicating if cookie banner global rules
-            should be enabled or disabled. 0 for setting to be disabled, and 1 for enabling the setting.
-        feature-setting-global-rules-sub-frames:
-          description: An integer either 0 or 1 indicating if cookie banner global rules sub-frames
-            should be enabled or disabled. 0 for setting to be disabled, and 1 for enabling the setting.
 
     QueryParameterStrippingSection:
       description: The identifiers for the options for the Query Parameter Stripping feature.

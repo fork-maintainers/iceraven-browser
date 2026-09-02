@@ -9,7 +9,6 @@ import androidx.core.content.edit
 import io.mockk.every
 import io.mockk.spyk
 import io.mockk.verify
-import mozilla.components.browser.engine.gecko.cookiebanners.ReportSiteDomainsRepository.Companion.REPORT_SITE_DOMAINS_REPOSITORY_NAME
 import mozilla.components.concept.engine.Engine.HttpsOnlyMode.DISABLED
 import mozilla.components.concept.engine.Engine.HttpsOnlyMode.ENABLED
 import mozilla.components.concept.engine.Engine.HttpsOnlyMode.ENABLED_PRIVATE_ONLY
@@ -448,31 +447,6 @@ class SettingsTest {
     }
 
     @Test
-    fun showPwaFragment() {
-        // When just created
-        // Then
-        assertFalse(settings.shouldShowPwaCfr)
-
-        // When visited once
-        settings.incrementVisitedInstallableCount()
-
-        // Then
-        assertFalse(settings.shouldShowPwaCfr)
-
-        // When visited twice
-        settings.incrementVisitedInstallableCount()
-
-        // Then
-        assertFalse(settings.shouldShowPwaCfr)
-
-        // When visited thrice
-        settings.incrementVisitedInstallableCount()
-
-        // Then
-        assertTrue(settings.shouldShowPwaCfr)
-    }
-
-    @Test
     fun sitePermissionsPhoneFeatureCameraAction() {
         // When just created
         // Then
@@ -879,6 +853,45 @@ class SettingsTest {
     }
 
     @Test
+    fun `GIVEN a benchmark build WHEN onboarding is not forced THEN shouldShowOnboarding returns false`() {
+        val settings = Settings(appContext = testContext, isBenchmarkBuild = true)
+
+        assertFalse(
+            settings.shouldShowOnboarding(
+                featureEnabled = true,
+                hasUserBeenOnboarded = false,
+                forceOnboardingForBenchmark = false,
+            ),
+        )
+    }
+
+    @Test
+    fun `GIVEN a benchmark build WHEN onboarding is forced THEN shouldShowOnboarding returns true`() {
+        val settings = Settings(appContext = testContext, isBenchmarkBuild = true)
+
+        assertTrue(
+            settings.shouldShowOnboarding(
+                featureEnabled = true,
+                hasUserBeenOnboarded = false,
+                forceOnboardingForBenchmark = true,
+            ),
+        )
+    }
+
+    @Test
+    fun `GIVEN a benchmark build WHEN onboarding is forced and user is already onboarded THEN shouldShowOnboarding returns false`() {
+        val settings = Settings(appContext = testContext, isBenchmarkBuild = true)
+
+        assertFalse(
+            settings.shouldShowOnboarding(
+                featureEnabled = true,
+                hasUserBeenOnboarded = true,
+                forceOnboardingForBenchmark = true,
+            ),
+        )
+    }
+
+    @Test
     fun `GIVEN Https-only mode is disabled THEN the engine mode is HttpsOnlyMode#DISABLED`() {
         settings.shouldUseHttpsOnly = false
 
@@ -1035,7 +1048,7 @@ class SettingsTest {
     @Test
     fun `GIVEN an existing report site domains datastore WHEN deleteReportSiteDomainsDataStoreIfNeeded is called THEN the datastore is deleted`() {
         val settings = Settings(testContext)
-        val dataStoreFile = File(testContext.filesDir, "datastore/$REPORT_SITE_DOMAINS_REPOSITORY_NAME.preferences_pb")
+        val dataStoreFile = File(testContext.filesDir, "datastore/report_site_domains_preferences.preferences_pb")
         dataStoreFile.parentFile?.mkdirs()
         dataStoreFile.createNewFile()
         assertTrue(dataStoreFile.exists())
@@ -1048,7 +1061,7 @@ class SettingsTest {
     @Test
     fun `GIVEN the report site domains datastore was already deleted WHEN deleteReportSiteDomainsDataStoreIfNeeded is called again THEN the datastore is not deleted a second time`() {
         val settings = Settings(testContext)
-        val dataStoreFile = File(testContext.filesDir, "datastore/$REPORT_SITE_DOMAINS_REPOSITORY_NAME.preferences_pb")
+        val dataStoreFile = File(testContext.filesDir, "datastore/report_site_domains_preferences.preferences_pb")
         dataStoreFile.parentFile?.mkdirs()
         dataStoreFile.createNewFile()
 
@@ -1065,7 +1078,7 @@ class SettingsTest {
         val settings = spyk(settings)
         every { settings.toolbarPosition } returns ToolbarPosition.TOP
 
-        assertEquals(64, settings.browserToolbarHeight)
+        assertEquals(64, settings.getBrowserToolbarHeight(testContext))
     }
 
     @Test
@@ -1074,7 +1087,7 @@ class SettingsTest {
         every { settings.toolbarPosition } returns ToolbarPosition.BOTTOM
         every { settings.shouldUseExpandedToolbar } returns false
 
-        assertEquals(64, settings.browserToolbarHeight)
+        assertEquals(64, settings.getBrowserToolbarHeight(testContext))
     }
 
     @Test fun `GIVEN bottom composable toolbar is enabled and navigation bar is enabled WHEN querying the toolbar height THEN get the height of the composable toolbar`() {
@@ -1086,7 +1099,7 @@ class SettingsTest {
         every { settings.toolbarPosition } returns ToolbarPosition.BOTTOM
         every { settings.shouldUseExpandedToolbar } returns true
 
-        assertEquals(56, settings.browserToolbarHeight)
+        assertEquals(56, settings.getBrowserToolbarHeight(testContext))
     }
 
     @Test
@@ -1100,7 +1113,7 @@ class SettingsTest {
         every { settings.toolbarPosition } returns ToolbarPosition.BOTTOM
         every { settings.shouldUseExpandedToolbar } returns true
 
-        assertEquals(64, settings.browserToolbarHeight)
+        assertEquals(64, settings.getBrowserToolbarHeight(testContext))
     }
 
     @Test
@@ -1114,7 +1127,7 @@ class SettingsTest {
         every { settings.toolbarPosition } returns ToolbarPosition.BOTTOM
         every { settings.shouldUseExpandedToolbar } returns true
 
-        assertEquals(64, settings.browserToolbarHeight)
+        assertEquals(64, settings.getBrowserToolbarHeight(testContext))
     }
 
     @Test
@@ -1436,5 +1449,15 @@ class SettingsTest {
 
         val result = settings.deleteDownloadBehavior
         assertEquals(Settings.DeleteDownloadBehavior.REMOVE_FROM_HISTORY, result)
+    }
+
+    @Test
+    fun `WHEN recordLastBrowseActivity is called THEN it stores the injected current time`() {
+        val fixedTime = 1234L
+        val settings = Settings(testContext, currentTimeMillis = { fixedTime })
+
+        settings.recordLastBrowseActivity()
+
+        assertEquals(fixedTime, settings.lastBrowseActivity)
     }
 }

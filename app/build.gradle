@@ -280,7 +280,7 @@ android {
     }
 
     lint {
-        lintConfig = file("lint.xml")
+        lintConfig = file("../../shared-lint.xml")
         baseline = file("lint-baseline.xml")
         sarifReport = true
         sarifOutput = file("../build/reports/lint/lint-report.sarif.json")
@@ -420,6 +420,7 @@ android.defaultConfig.with {
     } catch (FileNotFoundException ignored) {
         buildConfigField 'String', 'WALLPAPER_URL', '""'
     }
+    buildConfigField 'String', 'SECRET_SETTINGS_OVERRIDES', '""'
 }
 
 android.buildTypes.debug.with {
@@ -441,6 +442,14 @@ android.buildTypes.debug.with {
     } else {
         buildConfigField "boolean", "LEAKCANARY", "true"
     }
+
+    // Read `secretSettings.*` entries from local.properties and pass them to the app.
+    def secretSettingsPrefix = "localProperties.secretSettings."
+    def secretSettingsOverrides = gradle.ext.properties
+            .findAll { it.key.startsWith(secretSettingsPrefix) }
+            .collect { it.key.substring(secretSettingsPrefix.length()) + "=" + it.value.toString().trim().toLowerCase() }
+            .join(";")
+    buildConfigField 'String', 'SECRET_SETTINGS_OVERRIDES', '"' + secretSettingsOverrides + '"'
 }
 
 // Generate Kotlin code for the Fenix Glean metrics.
@@ -815,11 +824,21 @@ def getSupportedLocales() {
 
 mozilla {
     ktlintSourcePaths = ["src/**/*.kt", "!**/build/**/*.kt"]
+    detektSourcePaths = [
+        "**/src/**/*.kt",
+        "!**/test/**", "!**/androidTest/**", "!**/build/**", "!**/resources/**", "!**/tmp/**",
+        "!**/longfox/**"
+    ]
+    detektConfig = "$projectDir/../config/detekt.yml"
+    detektBaseline = "$projectDir/../config/detekt-baseline.xml"
+    detektReports = [
+        "xml": "$projectDir/../build/reports/detekt/detekt.xml",
+        "html": "$projectDir/../build/reports/detekt.html",
+        "suppression-count": "$projectDir/../build/reports/suppressions.txt",
+    ]
 }
 
-tasks.register("detekt", Exec) {
-    group = "verification"
-    description = "Run detekt static analysis."
-    workingDir file("${gradle.mozconfig.topsrcdir}")
-    commandLine "./mach", "gradle", "-p", "mobile/android/fenix", ":detekt"
+dependencies {
+    detektPlugins project(":components:tooling-detekt")
+    detektPlugins project(":mozilla-detekt-rules")
 }

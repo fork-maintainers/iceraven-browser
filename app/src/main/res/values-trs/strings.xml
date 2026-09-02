@@ -106,12 +106,6 @@
   <string name="open_in_app_cfr_negative_button_text">Si gi\'hiaj guendô\'</string>
   <!-- Private browsing erase action "contextual feature recommendation" (CFR) -->
 
-  <!--
-    Address bar swipe "contextual feature recommendation" (CFR)
-
-    Text for the message displayed in the contextual feature recommendation popup promoting swipe of address bar.
-  -->
-  <string name="address_bar_swipe_cfr_message_2">Dūguachîn dukuán màn rasuun gān’an ne’ chrînt asi ne’ huà’t da’ gā’hue nādunāt riña a’ngô rakïj ñanj.</string>
   <!-- Text for the info dialog when camera permissions have been denied but user tries to access a camera feature. -->
   <string name="camera_permissions_needed_message">Gārasunj kâmara. Gūij riña sa nagi’hiát si’hiaj Android , nī gārayina si gā’hue gārasunj sa ni’ña.</string>
   <!-- Text for the positive action button to go to Android Settings to grant permissions. -->
@@ -315,14 +309,6 @@
   <string name="browser_menu_default_banner_dismiss_promotion">Nādugua’ sa gisîj</string>
   <!-- Content description (not visible, for screen readers etc.) for recommended extensions in main menu -->
   <string name="browser_menu_recommended_extensions_content_description">Gīni’in doj dàj hua rayi’î man</string>
-  <!--
-    Menu "contextual feature recommendation" (CFR)
-
-    Text for the title in the contextual feature recommendation popup promoting the menu feature.
-  -->
-  <string name="menu_cfr_title">Sa nākàa: nahuin rā’ñànj menû</string>
-  <!-- Text for the message in the contextual feature recommendation popup promoting the menu feature. -->
-  <string name="menu_cfr_body">Hìo doj gā’hue nārì’t nej sa nana’huî’t, riña aché nu huìt nda nā’nïnj sà’ nej sa gi’hiát.</string>
   <!--
     Extensions management fragment
 
@@ -769,40 +755,8 @@
   <string name="preferences_pbm_lock_screen_title">Nārán riña raga’a da’ gāchrī huìt nej rakïj ñanj riña aché nu huìt</string>
   <!-- Informs the user how to access the tabs when "Use screen lock to hide tabs in private browsing" is enabled -->
   <string name="preferences_pbm_lock_screen_summary_3">Gīni’hiāj riña nej rakïj ñanj ngà da’nga’ dêj ra’ât, PIN asi nāni’in riñant. Si nāchrūnt sun nan nī rugûñu’un da’ sī ginunt nārīt ñadu’hua raga’a.</string>
-  <!-- Label for cookie banner section in quick settings panel. -->
-  <string name="cookie_banner_blocker">Sa nará riña si Baner Kôki</string>
   <!-- Preference for removing cookie/consent banners from sites automatically in private mode. See reduce_cookie_banner_summary for additional context. -->
   <string name="preferences_cookie_banner_reduction_private_mode">Sa nará riña si Baner Kôki ngà aché nu huìt</string>
-  <!-- Text for indicating cookie banner handling is off this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_off_for_site">Nitāj si huā nî’nïn guendâ sitiô nan</string>
-  <!-- Text for cancel button indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_cancel_button">Dūyichin\'</string>
-  <!-- Text for request support button indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_request_support_button_2">Gā’nïnj si nùguàn’t gān’an</string>
-  <!-- Text for title indicating that cookie banner reduction is not supported for the current site, this is shown as part of the cookie banner details view. -->
-  <string name="cookie_banner_handling_details_site_is_not_supported_title_2">Gāchìnj nan’ānj doj sa huā rayi’î sitiô nan ân.</string>
-  <!-- Label for the snackBar, after the user reports with success a website where cookie banner reducer did not work -->
-  <string name="cookie_banner_handling_report_site_snack_bar_text_2">Ngà gan’ānj si nūguàn’t</string>
-  <!-- Text for indicating cookie banner handling is on this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_on_for_site">Huā nî’nïn guendâ sitiô nan</string>
-  <!-- Text for indicating that a request for unsupported site was sent to Nimbus (it's a Mozilla library for experiments), this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_unsupported_site_request_submitted_2">Ngà gan\\’ānj si nūguàn\\’t sa nutâ\'t</string>
-  <!-- Text for indicating cookie banner handling is currently not supported for this site, this is shown as part of the protections panel with the tracking protection toggle -->
-  <string name="reduce_cookie_banner_unsupported_site">Huā sa gāchin da’ gā’hue nāyi’nïn sitiô nan</string>
-  <!-- Title text for a detail explanation indicating cookie banner handling is on this site, this is shown as part of the cookie banner panel in the toolbar. %1$s is a shortened URL of the current site. -->
-  <string name="reduce_cookie_banner_details_panel_title_on_for_site_1">Nāchrūnt sa narán riña si baner kôki riña %1$s aj.</string>
-  <!-- Title text for a detail explanation indicating cookie banner handling is off this site, this is shown as part of the cookie banner panel in the toolbar. %1$s is a shortened URL of the current site. -->
-  <string name="reduce_cookie_banner_details_panel_title_off_for_site_1">Dūnâ’àjt nej si banêr nej kôki guendâ %1$s aj.</string>
-  <!-- Title text for a detail explanation indicating cookie banner reducer didn't work for the current site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_title_unsupported_site_request_2">%1$s na’hue gūxunj nej nuguan’ achín nì’hiaj nej kôki riña sitiô nan. Gā’hue gā’nïnjt ‘ngō nuguan’an riña sa nikāj ñu’ūnj sitiô nan.</string>
-  <!-- Long text for a detail explanation indicating what will happen if cookie banner handling is off for a site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_description_off_for_site_1">Sisī ginâ’a nī %1$s nādūre’ej nej kôki nī nāgi’hiaj nàkaj sitio nan. Gā’hue gāchìnj nì’hia si gāhuīt asi gī’hiaj hīu ruhuâ nej karrû li ruhuât gīrānt.</string>
-  <!-- Long text for a detail explanation indicating what will happen if cookie banner handling is on for a site, this is shown as part of the cookie banner panel in the toolbar. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="reduce_cookie_banner_details_panel_description_on_for_site_3">Sisī nànunj nī %1$s ginùn huin gi’hiaj ane daran’ nej baner kokî ‘na’ riña sitiô nan.</string>
-  <!-- Title for the cookie banner re-engagement CFR, the placeholder is replaced with app name. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="cookie_banner_cfr_title">\u0020%1$s gi’hiaj man ‘ngō sunūnj un riñant nī nū nāhuin rā’a man kôki</string>
-  <!-- Message for the cookie banner re-engagement CFR -->
-  <string name="cookie_banner_cfr_message">Naga’ nej sa rañu’ūj sò’, nitāj nìko kôki gānikò’ sò’ sitiô nan.</string>
   <!-- Description of the preference to enable "HTTPS-Only" mode. -->
   <string name="preferences_https_only_summary">Huin ruhuaj gātu riña nej sitio ngà ‘ngō da’nga’ gū’nàj HTTPS dadin’ dugumîn da’nga’ nan doj daran’ nej sa huā ‘hiát.</string>
   <!-- Summary of https only preference if https only is set to off -->
@@ -1479,8 +1433,6 @@
   <string name="history_search_1">Dūguatûj nuguan\'an</string>
   <!-- Text for the button to clear all history -->
   <string name="history_delete_all">Nādūre\' sa gini\'iājt</string>
-  <!-- Text for the snackbar to confirm that multiple browsing history items has been deleted -->
-  <string name="history_delete_multiple_items_snackbar">Ngà nare\' nej sa gini\'iājt</string>
   <!-- Text for the snackbar to confirm that a single browsing history item has been deleted. %1$s is the shortened URL of the deleted history item. -->
   <string name="history_delete_single_item_snackbar">Ngà nare\' %1$s</string>
   <!-- Context description text for the button to delete a single history item -->
@@ -1583,8 +1535,6 @@
   <string name="webcompat_reporter_label_url">URL</string>
   <!-- The button text for the cancel button to leave the Web Compat Reporter feature. -->
   <string name="webcompat_reporter_cancel">Dūyichin\'</string>
-  <!-- The button text for the send button to submit the provided form data. -->
-  <string name="webcompat_reporter_send">Ga\'nìnj gan\'an</string>
   <!-- Label for the “Send” button shown in the WebCompat Report preview panel, which the user taps to submit the report. -->
   <string name="webcompat_reporter_preview_bottom_sheet_send">Ga\'nìnj gan\'an</string>
   <!-- Text shown on the save button for the Edit URL confirmation dialog in the WebCompatReporter. -->
@@ -1662,12 +1612,6 @@
     Button label that take the user to the Android App setting
   -->
   <string name="phone_feature_go_to_settings">Gūij riña ga\'ue Nāgi\'iô\'</string>
-  <!--
-    Content description (not visible, for screen readers etc.): Quick settings sheet
-    to give users access to site specific information / settings. For example:
-    Secure settings status and a button to modify site permissions
-  -->
-  <string name="quick_settings_sheet">Ñanj \'na\' sa ga\'ue nāgi\'iô\' hīo doj</string>
   <!-- Label that indicates that this option it the recommended one -->
   <string name="phone_feature_recommended">Sā sà\'a huin ânj</string>
   <!-- Button label for clearing all the information of site permissions -->
@@ -2013,12 +1957,6 @@
   <!--
     Enhanced Tracking Protection
 
-    Link displayed in enhanced tracking protection panel to access tracking protection settings
-  -->
-  <string name="etp_settings">Riña gā\'ue nāgi\'iát riña sa dugumî sò\'</string>
-  <!--
-    Enhanced Tracking Protection
-
     Preference title for enhanced tracking protection settings
   -->
   <string name="preference_enhanced_tracking_protection">Sa huā hue\'ê doj guendâ nārán riña sa naga\'nāj a</string>
@@ -2072,12 +2010,8 @@
   <string name="preference_enhanced_tracking_protection_custom_tracking_content_2">Màn riña nej rakïj ñanj huìi</string>
   <!-- Preference for enhanced tracking protection for the custom protection settings -->
   <string name="preference_enhanced_tracking_protection_custom_cryptominers">Nej kriptominêro</string>
-  <!-- Button label for navigating to the Enhanced Tracking Protection details -->
-  <string name="enhanced_tracking_protection_details">A\'ngô nej sa nika</string>
   <!-- Header for categories that are being being blocked by current Enhanced Tracking Protection settings -->
   <string name="enhanced_tracking_protection_blocked">Nitāj si hūaj nāyi\'nïn</string>
-  <!-- Header for categories that are being not being blocked by current Enhanced Tracking Protection settings -->
-  <string name="enhanced_tracking_protection_allowed">Gā\'ue</string>
   <!-- Category of trackers (social media trackers) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_social_media_trackers_title">Nej sa naga\'nāj nej rêd sosiâl</string>
   <!-- Description of social media trackers that can be blocked by Enhanced Tracking Protection -->
@@ -2098,10 +2032,6 @@
   <string name="etp_tracking_content_title">Sa nīkāj sa naga\'nāj a</string>
   <!-- Description of tracking content that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_tracking_content_description">Naran riña nej nuguan\' duyinga\' nej sa ane\'e, sa ni\'io\' nī riña nej nuguan\' nīkāj sa naga\'nāj a. Ga\'ue gā\'uì\' yī\'ij dàj \'iaj sun nej sîtio.</string>
-  <!-- Enhanced Tracking Protection message that protection is currently on for this site -->
-  <string name="etp_panel_on">Ngà \'IAJ SUN nej sa dugumî sò\' riña sitiô nan</string>
-  <!-- Enhanced Tracking Protection message that protection is currently off for this site -->
-  <string name="etp_panel_off">NITĀJ SI \'IAJ SUN nej sa dugumî sò\' riña sitiô nan</string>
   <!-- Header for exceptions list for which sites enhanced tracking protection is always off -->
   <string name="enhanced_tracking_protection_exceptions">Nitāj si \'iaj sun sa nùkuaj narán riña sa naga\'nāj a riña nej sitiô nan</string>
   <!--
@@ -2120,13 +2050,6 @@
   <string name="etp_redirect_trackers_title">Nej sa naga’nāj nadunâ mān’an</string>
   <!-- Description of redirect tracker cookies that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_redirect_trackers_description">Nādure’ nej kokî ni’înt natûj mān’an riña nej sitio.</string>
-  <!--
-    Description of the SmartBlock Enhanced Tracking Protection feature. The * symbol is intentionally hardcoded here,
-    as we use it on the UI to indicate which trackers have been partially unblocked.
-  -->
-  <string name="preference_etp_smartblock_description">Nayi’nï̀nj akuan’ riña nej sa naga’nāj sò’ ‘na’ riña pajinâ nan dadin’ natsí rè’ man ni’hiāj rè’ *.</string>
-  <!-- Text displayed that links to website about enhanced tracking protection SmartBlock -->
-  <string name="preference_etp_smartblock_learn_more">Gāhuin chrūn doj</string>
   <!--
     Content description (not visible, for screen readers etc.):
     Enhanced tracking protection exception preference icon for ETP settings.
@@ -2406,14 +2329,8 @@
   <string name="phone_feature_blocked_step_permissions"><![CDATA[2. Gūru\'man ra\'a riña <b>nej sa achín nì\'iát</b>]]></string>
   <!-- Third step for the allowing a permission (%1$s is the permission name, for example "Camera"). -->
   <string name="phone_feature_blocked_step_feature"><![CDATA[3. Nāchrūn <b>%1$s</b>]]></string>
-  <!-- Label that indicates a site is using a secure connection -->
-  <string name="quick_settings_sheet_secure_connection_2">Huā seguridâ nikāj koneksiôn</string>
-  <!-- Label that indicates a site is using a insecure connection -->
-  <string name="quick_settings_sheet_insecure_connection_2">Nitāj seguridâ nikāj koneksiôn</string>
   <!-- Label to clear site data -->
   <string name="clear_site_data">Nādure’ nej kôki nī nej si datô sîtio</string>
-  <!-- Confirmation message for a dialog confirming if the user wants to delete all data for current site. %s is the domain of the site. -->
-  <string name="confirm_clear_site_data"><![CDATA[Huin ruhuâ hīât daran’ nej kôki nī nej si datô sitio nan <b>%s</b>anj]]></string>
   <!-- Confirmation message for a dialog confirming if the user wants to delete all the permissions for all sites -->
   <string name="confirm_clear_permissions_on_all_sites">Huin hīa ruhuât nādurê\' nej sa achín nì\'iaj nīkāj daran\' nej sitio aj.</string>
   <!-- Confirmation message for a dialog confirming if the user wants to delete all the permissions for a site -->
@@ -2426,11 +2343,6 @@
   <string name="browser_menu_add_to_shortcuts">Nā’nïnj man riña āksêso dīrêkto</string>
   <!-- Browser menu button that removes a shortcut from the home fragment -->
   <string name="browser_menu_remove_from_shortcuts">Nādure’ āsìj riña āksêso dīrêkto</string>
-  <!--
-    text shown before the issuer name to indicate who its verified by, %1$s is the name of
-    the certificate authority that verified the ticket
-  -->
-  <string name="certificate_info_verified_by">Ngà ganatsij sa gu\'nàj: %1$s</string>
   <!-- Positive action of a dialog asking to delete -->
   <string name="dialog_delete_positive">Nādūre\'</string>
   <!-- Negative action of a dialog asking to delete login -->

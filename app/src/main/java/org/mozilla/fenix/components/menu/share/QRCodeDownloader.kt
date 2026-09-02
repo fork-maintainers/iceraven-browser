@@ -24,6 +24,7 @@ import java.io.IOException
  * Utility class to download and save QR code images to the device's Downloads folder.
  * @param onResponse A callback function that is invoked with the [Context] and a [Boolean]
  * indicating success or failure of the save operation. By default, it shows a Toast message.
+ * @param currentTimeMillis provider for the current time in milliseconds, injectable for testing.
  */
 class QRCodeDownloader(
     private val onResponse: (Context, Boolean) -> Unit = { context, isSuccess ->
@@ -33,6 +34,7 @@ class QRCodeDownloader(
             Toast.LENGTH_SHORT,
         ).show()
     },
+    private val currentTimeMillis: () -> Long = { System.currentTimeMillis() },
 ) {
 
     /**
@@ -60,7 +62,7 @@ class QRCodeDownloader(
 
     private fun saveToDirectoryDownloads(bitmap: Bitmap, context: Context) {
         val downloadsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-        val file = File(downloadsDir, "qr_code_${System.currentTimeMillis()}.png")
+        val file = File(downloadsDir, "qr_code_${currentTimeMillis()}.png")
 
         try {
             FileOutputStream(file).use { outputStream ->
@@ -79,7 +81,7 @@ class QRCodeDownloader(
         context: Context,
     ) {
         val contentValues = ContentValues().apply {
-            put(MediaStore.Downloads.DISPLAY_NAME, "qr_code_${System.currentTimeMillis()}.png")
+            put(MediaStore.Downloads.DISPLAY_NAME, "qr_code_${currentTimeMillis()}.png")
             put(MediaStore.Downloads.MIME_TYPE, "image/png")
             put(MediaStore.Downloads.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS)
         }

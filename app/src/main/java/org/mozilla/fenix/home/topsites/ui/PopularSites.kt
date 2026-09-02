@@ -149,7 +149,7 @@ private fun FaviconCard(
             containerColor = MaterialTheme.colorScheme.surface,
         ),
         border = BorderStroke(
-            width = FirefoxTheme.layout.border.thin,
+            width = FirefoxTheme.layout.border.default,
             color = MaterialTheme.colorScheme.outlineVariant,
         ),
     ) {
@@ -178,7 +178,7 @@ private fun AddBadge() {
         modifier = Modifier.size(BADGE_SIZE.dp),
         shape = CircleShape,
         border = BorderStroke(
-            width = FirefoxTheme.layout.border.normal,
+            width = FirefoxTheme.layout.border.heavy,
             color = MaterialTheme.colorScheme.surfaceContainerHigh,
         ),
         colors = CardDefaults.cardColors(

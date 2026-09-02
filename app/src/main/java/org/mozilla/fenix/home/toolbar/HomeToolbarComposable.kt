@@ -146,7 +146,11 @@ internal class HomeToolbarComposable(
                 colorScheme = homepageToolbarColors(
                     isPrivateMode = isPrivateMode,
                     shouldUseEdgeToEdgeColors = hasWallpaperBackground &&
-                        (!isSearching || (currentQuery.isEmpty() && !queryWasPrefilled)),
+                        if (settings.enableHomepageTrendingRecentSearch) {
+                            !isSearching
+                        } else {
+                            !isSearching || (currentQuery.isEmpty() && !queryWasPrefilled)
+                        },
                 ),
             ) {
                 ToolbarContent(wallpaperTextColor = wallpaperTextColor)

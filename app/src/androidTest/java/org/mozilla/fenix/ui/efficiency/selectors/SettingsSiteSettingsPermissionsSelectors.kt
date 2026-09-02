@@ -13,7 +13,10 @@ object SettingsSiteSettingsPermissionsSelectors {
         strategy = SelectorStrategy.ESPRESSO_BY_ID,
         value = "ask_to_allow_radio",
         description = "Ask to allow radio button",
-        groups = listOf("askToAllow"),
+        // requiredForPage: the permission detail screen always shows the "Ask to allow" radio, so it is
+        // what proves we arrived. The page registers a real nav edge, so without an anchor here
+        // navigateToPage() would report success for whatever screen happened to be in front of it.
+        groups = listOf("requiredForPage", "askToAllow"),
     )
 
     val all = listOf(

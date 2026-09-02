@@ -187,6 +187,7 @@ class HomepageEdgeToEdgeFeature(
             !settings.isTabStripEnabled &&
                 toolbarState.isShowingResultsScreen && browsingModeManager.mode == BrowsingMode.Normal &&
                 (
+                    settings.enableHomepageTrendingRecentSearch ||
                     toolbarState.editState.query.current.isNotEmpty() ||
                     toolbarState.editState.queryWasPrefilled
                 ) ->

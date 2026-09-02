@@ -301,13 +301,13 @@ class MenuTelemetryMiddlewareTest {
     }
 
     @Test
-    fun `WHEN navigating to the wallpaper settings THEN record the change wallpaper browser menu telemetry`() {
+    fun `WHEN navigating to the homepage settings THEN record the change wallpaper browser menu telemetry`() {
         val store = createStore()
         assertNull(Events.browserMenuAction.testGetValue())
 
-        store.dispatch(MenuAction.Navigate.Wallpaper)
+        store.dispatch(MenuAction.Navigate.CustomizeHomepage)
 
-        assertTelemetryRecorded(Events.browserMenuAction, item = "change_wallpaper")
+        assertTelemetryRecorded(Events.browserMenuAction, item = "customize_homepage")
     }
 
     @Test

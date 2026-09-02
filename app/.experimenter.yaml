@@ -1,12 +1,4 @@
 ---
-cookie-banners:
-  description: Features for cookie banner handling.
-  hasExposure: true
-  exposureDescription: ""
-  variables:
-    sections-enabled:
-      type: json
-      description: This property provides a lookup table of whether or not the given section should be enabled.
 extensions-process:
   description: A feature to rollout the extensions process.
   hasExposure: true

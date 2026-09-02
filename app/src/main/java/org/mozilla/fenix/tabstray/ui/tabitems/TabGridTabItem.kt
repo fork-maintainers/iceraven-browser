@@ -22,8 +22,14 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SwipeToDismissBox
+import androidx.compose.material3.SwipeToDismissBoxState
+import androidx.compose.material3.SwipeToDismissBoxValue
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -44,8 +50,6 @@ import mozilla.components.concept.engine.utils.ABOUT_HOME_URL
 import mozilla.components.support.base.utils.MAX_URI_LENGTH
 import org.mozilla.fenix.R
 import org.mozilla.fenix.compose.Favicon
-import org.mozilla.fenix.compose.SwipeToDismissBox2
-import org.mozilla.fenix.compose.SwipeToDismissState2
 import org.mozilla.fenix.compose.TabThumbnail
 import org.mozilla.fenix.tabstray.TabsTrayTestTag
 import org.mozilla.fenix.tabstray.browser.compose.TabItemInteractionState
@@ -63,19 +67,25 @@ private val TabHeaderFaviconSize = 12.dp
  * long clicks, multiple selection, and media controls.
  *
  * @param tab The given tab to render as a grid item.
+ * @param swipeToDismissBoxState The swipe state of the item.
+ * @param swipingEnabled Whether swipe-to-dismiss is enabled.
+ * @param interactionState The tab item's interaction state (hover, drag, etc)
+ * @param onCloseClick Invoked when the close button is clicked.
+ * @param onClick Invoked when the item is clicked.
  * @param modifier The Modifier param
  * @param thumbnailSizePx The size of the tab's thumbnail in pixels.
  * @param selectionState: The tab's selection state.
  * @param shouldClickListen Whether or not the item should stop listening to click events.
- * @param swipeState The swipe state of the item.
- * @param onCloseClick Invoked when the close button is clicked.
- * @param onClick Invoked when the item is clicked.
  * @param onLongClick Invoked when the item is long clicked.
- * @param interactionState The tab item's interaction state (hover, drag, etc)
  */
 @Composable
 fun TabGridTabItem(
     tab: TabsTrayItem.Tab,
+    swipeToDismissBoxState: SwipeToDismissBoxState,
+    swipingEnabled: Boolean,
+    interactionState: TabItemInteractionState,
+    onCloseClick: (TabsTrayItem.Tab) -> Unit,
+    onClick: (TabsTrayItem) -> Unit,
     modifier: Modifier = Modifier,
     thumbnailSizePx: Int = 50,
     selectionState: TabsTrayItemSelectionState = TabsTrayItemSelectionState(
@@ -84,21 +94,23 @@ fun TabGridTabItem(
         isFocused = false,
     ),
     shouldClickListen: Boolean = true,
-    swipeState: SwipeToDismissState2,
-    onCloseClick: (TabsTrayItem.Tab) -> Unit,
-    onClick: (TabsTrayItem) -> Unit,
     onLongClick: ((TabsTrayItem) -> Unit)? = null,
-    interactionState: TabItemInteractionState,
 ) {
-    SwipeToDismissBox2(
+    // SwipeToDismissBox invokes onDismiss from a LaunchedEffect keyed on the callback, so an
+    // unstable lambda would re-close the tab on every recomposition that follows the dismissal.
+    val currentTab by rememberUpdatedState(tab)
+    val currentOnCloseClick by rememberUpdatedState(onCloseClick)
+    val onDismiss = remember { { _: SwipeToDismissBoxValue -> currentOnCloseClick(currentTab) } }
+
+    SwipeToDismissBox(
         modifier = modifier,
-        state = swipeState,
+        state = swipeToDismissBoxState,
         backgroundContent = {},
-        onItemDismiss = {
-            onCloseClick(tab)
-        },
+        gesturesEnabled = swipingEnabled,
+        onDismiss = onDismiss,
     ) {
         TabContent(
+            modifier = Modifier.fadeOnSwipeToDismiss(swipeToDismissBoxState),
             tab = tab,
             thumbnailSize = thumbnailSizePx,
             selectionState = selectionState,

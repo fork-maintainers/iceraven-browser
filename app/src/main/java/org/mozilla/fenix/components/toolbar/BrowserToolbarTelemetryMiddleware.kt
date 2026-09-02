@@ -13,6 +13,7 @@ import mozilla.components.lib.state.Store
 import org.mozilla.fenix.GleanMetrics.Toolbar
 import org.mozilla.fenix.components.toolbar.DisplayActions.AddBookmarkClicked
 import org.mozilla.fenix.components.toolbar.DisplayActions.EditBookmarkClicked
+import org.mozilla.fenix.components.toolbar.DisplayActions.EditShortcutClicked
 import org.mozilla.fenix.components.toolbar.DisplayActions.HomepageClicked
 import org.mozilla.fenix.components.toolbar.DisplayActions.MenuClicked
 import org.mozilla.fenix.components.toolbar.DisplayActions.NavigateBackClicked
@@ -21,6 +22,7 @@ import org.mozilla.fenix.components.toolbar.DisplayActions.NavigateForwardClicke
 import org.mozilla.fenix.components.toolbar.DisplayActions.NavigateForwardLongClicked
 import org.mozilla.fenix.components.toolbar.DisplayActions.RefreshClicked
 import org.mozilla.fenix.components.toolbar.DisplayActions.ShareClicked
+import org.mozilla.fenix.components.toolbar.DisplayActions.ShortcutLongClicked
 import org.mozilla.fenix.components.toolbar.DisplayActions.StopRefreshClicked
 import org.mozilla.fenix.components.toolbar.DisplayActions.SummarizeClicked
 import org.mozilla.fenix.components.toolbar.DisplayActions.TranslateClicked
@@ -34,6 +36,7 @@ import org.mozilla.fenix.telemetry.ACTION_ADD_BOOKMARK_CLICKED
 import org.mozilla.fenix.telemetry.ACTION_ADD_NEW_PRIVATE_TAB
 import org.mozilla.fenix.telemetry.ACTION_ADD_NEW_TAB
 import org.mozilla.fenix.telemetry.ACTION_EDIT_BOOKMARK_CLICKED
+import org.mozilla.fenix.telemetry.ACTION_EDIT_SHORTCUT_CLICKED
 import org.mozilla.fenix.telemetry.ACTION_HOME_CLICKED
 import org.mozilla.fenix.telemetry.ACTION_MENU_CLICKED
 import org.mozilla.fenix.telemetry.ACTION_NAVIGATE_BACK_CLICKED
@@ -44,6 +47,7 @@ import org.mozilla.fenix.telemetry.ACTION_READER_MODE_CLICKED
 import org.mozilla.fenix.telemetry.ACTION_REFRESH_CLICKED
 import org.mozilla.fenix.telemetry.ACTION_SECURITY_INDICATOR_CLICKED
 import org.mozilla.fenix.telemetry.ACTION_SHARE_CLICKED
+import org.mozilla.fenix.telemetry.ACTION_SHORTCUT_LONG_CLICKED
 import org.mozilla.fenix.telemetry.ACTION_STOP_CLICKED
 import org.mozilla.fenix.telemetry.ACTION_SUMMARIZE_CLICKED
 import org.mozilla.fenix.telemetry.ACTION_TAB_COUNTER_CLICKED
@@ -125,6 +129,12 @@ class BrowserToolbarTelemetryMiddleware : Middleware<BrowserToolbarState, Browse
             is SummarizeClicked -> {
                 trackToolbarEvent(ToolbarActionRecord.SummarizeClicked, action.source)
             }
+            is ShortcutLongClicked -> {
+                trackToolbarEvent(ToolbarActionRecord.ShortcutLongClicked, action.source)
+            }
+            is EditShortcutClicked -> {
+                trackToolbarEvent(ToolbarActionRecord.EditShortcutClicked, action.source)
+            }
             else -> {}
         }
 
@@ -152,6 +162,8 @@ class BrowserToolbarTelemetryMiddleware : Middleware<BrowserToolbarState, Browse
         data object HomepageClicked : ToolbarActionRecord(ACTION_HOME_CLICKED)
         data object SecurityIndicatorClicked : ToolbarActionRecord(ACTION_SECURITY_INDICATOR_CLICKED)
         data object SummarizeClicked : ToolbarActionRecord(ACTION_SUMMARIZE_CLICKED)
+        data object ShortcutLongClicked : ToolbarActionRecord(ACTION_SHORTCUT_LONG_CLICKED)
+        data object EditShortcutClicked : ToolbarActionRecord(ACTION_EDIT_SHORTCUT_CLICKED)
     }
 
     private fun trackToolbarEvent(

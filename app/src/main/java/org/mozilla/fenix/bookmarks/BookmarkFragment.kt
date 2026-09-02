@@ -32,6 +32,7 @@ import org.mozilla.fenix.components.QrScanFenixFeature
 import org.mozilla.fenix.components.VoiceSearchFeature
 import org.mozilla.fenix.components.accounts.FenixFxAEntryPoint
 import org.mozilla.fenix.components.appstate.AppAction
+import org.mozilla.fenix.components.share.ShareSheetChooserAction
 import org.mozilla.fenix.components.share.ShareSource
 import org.mozilla.fenix.e2e.SystemInsetsPaddedFragment
 import org.mozilla.fenix.ext.bookmarkStorage
@@ -149,9 +150,18 @@ class BookmarkFragment : Fragment(), SystemInsetsPaddedFragment {
                                 )
                             },
                             shareBookmarks = { bookmarks ->
+                                val shareItems = bookmarks.asShareDataArray().toList()
                                 requireComponents.useCases.shareUseCases.shareItems(
-                                    items = bookmarks.asShareDataArray().toList(),
+                                    items = shareItems,
                                     source = ShareSource.BOOKMARKS,
+                                    chooserActions = if (shareItems.size == 1) {
+                                        listOf(
+                                            ShareSheetChooserAction.SEND_TO_DEVICES,
+                                            ShareSheetChooserAction.QR_CODE,
+                                        )
+                                    } else {
+                                        listOf(ShareSheetChooserAction.SEND_TO_DEVICES)
+                                    },
                                     navigateToShareFragment = {
                                         navController.nav(
                                             R.id.bookmarkFragment,

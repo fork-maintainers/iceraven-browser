@@ -6,7 +6,9 @@ package org.mozilla.fenix.components
 
 import android.content.Context
 import android.content.res.Configuration
+import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.Rect
 import android.view.View
 import androidx.compose.material3.ColorScheme
 import androidx.compose.ui.graphics.toArgb
@@ -23,18 +25,22 @@ import org.mozilla.fenix.browser.browsingmode.BrowsingMode
 import org.mozilla.fenix.theme.Theme
 
 /**
- * HomeFragment delegate to take screenshot of homepage when view loads and display as a thumbnail in tabstray.
-
+ * Homepage delegate to take screenshot of homepage when view loads and display as a thumbnail in tabs tray.
+ *
  * @param context A [Context] used to check for low memory.
  * @param view The [View] to take screenshot of.
  * @param store The [BrowserStore] used to look up the current selected tab.
  * @param appStore The [AppStore] used to look up the current browsing mode.
+ * @param homepageContentBounds Lamba that provides the bounds of the homepage content (excluding the toolbar and
+ * system bar padding) within [view], used to crop the screenshot to the content only. Returns
+ * null when the bounds are unknown, in which case the full [view] is captured.
  */
 class HomepageThumbnailIntegration(
     private val context: Context,
     private val view: View,
     private val store: BrowserStore,
     private val appStore: AppStore,
+    private val homepageContentBounds: () -> Rect?,
 ) : LifecycleAwareFeature {
     private val feature by lazy {
         HomepageThumbnails(
@@ -61,8 +67,32 @@ class HomepageThumbnailIntegration(
             val canvas = Canvas(bitmap)
             canvas.drawColor(backgroundColor)
             view.draw(canvas)
-            requestHomepageScreenshot(bitmap)
+            requestHomepageScreenshot(bitmap.cropToBounds(homepageContentBounds()))
         }
+    }
+
+    /**
+     * Crops [this] bitmap to [bounds] so the thumbnail will only include the homepage content.
+     * Returns the original bitmap when [bounds] is null or does not describe a valid region within the bitmap.
+     */
+    private fun Bitmap.cropToBounds(bounds: Rect?): Bitmap {
+        if (bounds == null) {
+            return this
+        }
+
+        val left = bounds.left.coerceIn(0, width)
+        val top = bounds.top.coerceIn(0, height)
+        val right = bounds.right.coerceIn(left, width)
+        val bottom = bounds.bottom.coerceIn(top, height)
+
+        val croppedWidth = right - left
+        val croppedHeight = bottom - top
+
+        if (croppedWidth <= 0 || croppedHeight <= 0) {
+            return this
+        }
+
+        return Bitmap.createBitmap(this, left, top, croppedWidth, croppedHeight)
     }
 
     /**

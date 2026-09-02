@@ -7,7 +7,6 @@
     <ID>ClassAcronymCasing:CfrToolsStore.kt$CfrToolsAction$ResetLastCFRTimestampButtonClicked : CfrToolsAction</ID>
     <ID>ClassAcronymCasing:ClientUUID.kt$ClientUUID : UserIdProviderRequestHashProvider</ID>
     <ID>ClassAcronymCasing:ClientUUID.kt$PrefsBackedClientUUID : ClientUUID</ID>
-    <ID>ClassAcronymCasing:CustomCBHSwitchPreference.kt$CustomCBHSwitchPreference : SwitchPreferenceCompat</ID>
     <ID>ClassAcronymCasing:FakeClientUUID.kt$FakeClientUUID : ClientUUID</ID>
     <ID>ClassAcronymCasing:FenixFxAEntryPoint.kt$FenixFxAEntryPoint$CREATOR : Creator</ID>
     <ID>ClassAcronymCasing:InstallReferrerWorker.kt$UTMParams</ID>
@@ -133,9 +132,6 @@
     <ID>ForbiddenSuppress:StartupStateProvider.kt$StartupStateProvider$@Suppress("MagicNumber")</ID>
     <ID>ForbiddenSuppress:Stories.kt$@Suppress("CyclomaticComplexMethod", "LongMethod", "CognitiveComplexMethod")</ID>
     <ID>ForbiddenSuppress:String.kt$@Suppress("MagicNumber")</ID>
-    <ID>ForbiddenSuppress:SwipeToDismissBox2.kt$@Suppress("CognitiveComplexMethod")</ID>
-    <ID>ForbiddenSuppress:SwipeToDismissBox2.kt$@Suppress("DEPRECATION", "CognitiveComplexMethod")</ID>
-    <ID>ForbiddenSuppress:SwipeToDismissBox2.kt$@Suppress("MagicNumber")</ID>
     <ID>ForbiddenSuppress:SyncedTabsList.kt$@SuppressWarnings("LongMethod", "CognitiveComplexMethod")</ID>
     <ID>ForbiddenSuppress:TabLayout.kt$@Suppress("LongParameterList", "LongMethod")</ID>
     <ID>ForbiddenSuppress:TabLayout.kt$@Suppress("LongParameterList", "LongMethod", "CognitiveComplexMethod")</ID>
@@ -201,7 +197,6 @@
     <ID>HardcodedPaddingUsage:Collection.kt$( start = 16.dp, end = 8.dp, // (24.dp - 16.dp) hardcoded in ExpandableListHeader )</ID>
     <ID>HardcodedPaddingUsage:Collections.kt$(8.dp)</ID>
     <ID>HardcodedPaddingUsage:ContinuousOnboardingScreen.kt$(16.dp)</ID>
-    <ID>HardcodedPaddingUsage:CountdownPromoCard.kt$(16.dp)</ID>
     <ID>HardcodedPaddingUsage:CrashTools.kt$(all = 16.dp)</ID>
     <ID>HardcodedPaddingUsage:CustomReviewPrompt.kt$(16.dp)</ID>
     <ID>HardcodedPaddingUsage:CustomReviewPrompt.kt$(bottom = 16.dp)</ID>
@@ -239,7 +234,6 @@
     <ID>HardcodedPaddingUsage:EditTabGroup.kt$(end = 12.dp)</ID>
     <ID>HardcodedPaddingUsage:EditTabGroup.kt$(horizontal = 24.dp, vertical = 16.dp)</ID>
     <ID>HardcodedPaddingUsage:EditTabGroup.kt$(start = 24.dp)</ID>
-    <ID>HardcodedPaddingUsage:EliminatedBanner.kt$(16.dp)</ID>
     <ID>HardcodedPaddingUsage:ExceptionsListScreen.kt$( vertical = 12.dp, horizontal = 16.dp, )</ID>
     <ID>HardcodedPaddingUsage:ExceptionsListScreen.kt$(horizontal = 16.dp)</ID>
     <ID>HardcodedPaddingUsage:ExpandableListHeader.kt$(horizontal = 16.dp, vertical = 8.dp)</ID>
@@ -248,9 +242,6 @@
     <ID>HardcodedPaddingUsage:ExperimentalHomepageHeader.kt$(start = 4.dp)</ID>
     <ID>HardcodedPaddingUsage:ExtensionsMenuItem.kt$( start = if (count &gt; 0) 8.dp else 2.dp, top = 2.dp, bottom = 2.dp, end = 2.dp, )</ID>
     <ID>HardcodedPaddingUsage:FirefoxLabsScreen.kt$(horizontal = 16.dp, vertical = 24.dp)</ID>
-    <ID>HardcodedPaddingUsage:FlagContainer.kt$(16.dp)</ID>
-    <ID>HardcodedPaddingUsage:FollowTeamPromoCard.kt$(16.dp)</ID>
-    <ID>HardcodedPaddingUsage:FollowingPromoCard.kt$(16.dp)</ID>
     <ID>HardcodedPaddingUsage:FontSizeSlider.kt$(16.dp)</ID>
     <ID>HardcodedPaddingUsage:FontSizeSlider.kt$(6.dp)</ID>
     <ID>HardcodedPaddingUsage:FontSizeSlider.kt$(start = 72.dp, top = 16.dp, end = 16.dp, bottom = 16.dp)</ID>
@@ -346,8 +337,6 @@
     <ID>HardcodedPaddingUsage:SetupChecklist.kt$(horizontal = 16.dp, vertical = 12.dp)</ID>
     <ID>HardcodedPaddingUsage:Shortcuts.kt$(16.dp)</ID>
     <ID>HardcodedPaddingUsage:Snackbar.kt$(all = 16.dp)</ID>
-    <ID>HardcodedPaddingUsage:SportsCountrySelector.kt$(bottom = 8.dp)</ID>
-    <ID>HardcodedPaddingUsage:SportsWidgetErrorCard.kt$(16.dp)</ID>
     <ID>HardcodedPaddingUsage:StartupCrashScreen.kt$(horizontal = 16.dp)</ID>
     <ID>HardcodedPaddingUsage:StoryCard.kt$(16.dp)</ID>
     <ID>HardcodedPaddingUsage:StoryCard.kt$(all = 8.dp)</ID>
@@ -778,8 +767,6 @@
     <ID>UndocumentedPublicFunction:ProfilerMarkers.kt$ProfilerMarkers$fun addForDispatchTouchEvent(profiler: Profiler?, ev: MotionEvent?)</ID>
     <ID>UndocumentedPublicFunction:ProfilerMarkers.kt$ProfilerMarkers$fun addListenerForOnGlobalLayout(engine: Engine, activity: Activity, rootView: View)</ID>
     <ID>UndocumentedPublicFunction:ProfilerMarkers.kt$ProfilerMarkers$fun homeActivityOnStart(rootContainer: View, profiler: Profiler?)</ID>
-    <ID>UndocumentedPublicFunction:PwaOnboardingObserver.kt$PwaOnboardingObserver$fun start()</ID>
-    <ID>UndocumentedPublicFunction:PwaOnboardingObserver.kt$PwaOnboardingObserver$fun stop()</ID>
     <ID>UndocumentedPublicFunction:AutoplayValue.kt$AutoplayValue$abstract fun createSitePermissionsFromCustomRules(origin: String, settings: Settings): SitePermissions</ID>
     <ID>UndocumentedPublicFunction:AutoplayValue.kt$AutoplayValue$abstract fun isSelected(): Boolean</ID>
     <ID>UndocumentedPublicFunction:AutoplayValue.kt$AutoplayValue$abstract fun updateSitePermissions(sitePermissions: SitePermissions): SitePermissions</ID>

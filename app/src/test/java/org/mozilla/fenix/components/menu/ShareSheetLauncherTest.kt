@@ -116,6 +116,81 @@ class ShareSheetLauncherTest {
 
     @Config(sdk = [34])
     @Test
+    fun `GIVEN text and subject WHEN single url share is triggered THEN share is invoked with combined text and subject`() {
+        launcher.showSystemShareSheet(
+            id = null,
+            url = "https://www.mozilla.org",
+            title = "Mozilla",
+            text = "Check this out",
+            subject = "A subject",
+        )
+
+        verify {
+            mockShareDelegate.share(
+                text = "Check this out\nhttps://www.mozilla.org",
+                subject = "A subject",
+            )
+        }
+    }
+
+    @Config(sdk = [34])
+    @Test
+    fun `GIVEN a subject but no text WHEN single url share is triggered THEN share uses the url as text and subject over title`() {
+        launcher.showSystemShareSheet(
+            id = null,
+            url = "https://www.mozilla.org",
+            title = "Mozilla",
+            subject = "A subject",
+        )
+
+        verify {
+            mockShareDelegate.share(
+                text = "https://www.mozilla.org",
+                subject = "A subject",
+            )
+        }
+    }
+
+    @Config(sdk = [34])
+    @Test
+    fun `GIVEN text and subject and a valid tab id WHEN native share sheet triggered THEN chooser actions share receives combined text and subject`() {
+        launcher.showSystemShareSheet(
+            id = "123",
+            url = "https://www.mozilla.org",
+            title = "Mozilla",
+            text = "Check this out",
+            subject = "A subject",
+        )
+
+        verify {
+            mockShareDelegate.shareWithChooserActions(
+                text = "Check this out\nhttps://www.mozilla.org",
+                subject = "A subject",
+                actions = any(),
+            )
+        }
+    }
+
+    @Config(sdk = [34])
+    @Test
+    fun `GIVEN an empty subject but a title WHEN single url share is triggered THEN share falls back to the title`() {
+        launcher.showSystemShareSheet(
+            id = null,
+            url = "https://www.mozilla.org",
+            title = "Mozilla",
+            subject = "",
+        )
+
+        verify {
+            mockShareDelegate.share(
+                text = "https://www.mozilla.org",
+                subject = "Mozilla",
+            )
+        }
+    }
+
+    @Config(sdk = [34])
+    @Test
     fun `GIVEN a private tab WHEN native share sheet triggered THEN chooser actions share is still used`() {
         launcher.showSystemShareSheet(
             id = "123",
@@ -177,8 +252,9 @@ class ShareSheetLauncherTest {
         verify { mockCrashReporter.submitCaughtException(exception) }
     }
 
+    @Config(sdk = [34])
     @Test
-    fun `WHEN showSystemShareSheet is called with multiple items THEN share is invoked with urls joined by newlines`() {
+    fun `WHEN showSystemShareSheet is called with multiple items THEN chooser actions share is invoked with numbered urls joined by newlines`() {
         val items = listOf(
             ShareData(url = "https://mozilla.org", title = "Mozilla"),
             ShareData(url = "https://firefox.com", title = "Firefox"),
@@ -187,22 +263,46 @@ class ShareSheetLauncherTest {
         launcher.showSystemShareSheet(items = items)
 
         verify {
-            mockShareDelegate.share(
-                text = "https://mozilla.org\nhttps://firefox.com",
+            mockShareDelegate.shareWithChooserActions(
+                text = "1. https://mozilla.org\n2. https://firefox.com",
                 subject = "Mozilla",
+                actions = any(),
             )
         }
     }
 
+    @Config(sdk = [34])
     @Test
-    fun `WHEN showSystemShareSheet is called with a single item THEN share is invoked with that url`() {
+    fun `WHEN showSystemShareSheet is called with multiple items THEN only the send-to-devices chooser action is passed`() {
+        val actionsSlot = slot<Array<ChooserAction>>()
+        every { mockShareDelegate.shareWithChooserActions(any(), any(), capture(actionsSlot)) } just runs
+        val items = listOf(
+            ShareData(url = "https://mozilla.org", title = "Mozilla"),
+            ShareData(url = "https://firefox.com", title = "Firefox"),
+        )
+
+        launcher.showSystemShareSheet(items = items)
+
+        assertEquals(1, actionsSlot.captured.size)
+    }
+
+    @Config(sdk = [34])
+    @Test
+    fun `WHEN showSystemShareSheet is called with a single item THEN chooser actions share is invoked with that url`() {
         val items = listOf(ShareData(url = "https://mozilla.org", title = "Mozilla"))
 
         launcher.showSystemShareSheet(items = items)
 
-        verify { mockShareDelegate.share(text = "https://mozilla.org", subject = "Mozilla") }
+        verify {
+            mockShareDelegate.shareWithChooserActions(
+                text = "https://mozilla.org",
+                subject = "Mozilla",
+                actions = any(),
+            )
+        }
     }
 
+    @Config(sdk = [34])
     @Test
     fun `WHEN showSystemShareSheet is called with items containing null urls THEN null urls are excluded from share text`() {
         val items = listOf(
@@ -212,18 +312,26 @@ class ShareSheetLauncherTest {
 
         launcher.showSystemShareSheet(items = items)
 
-        verify { mockShareDelegate.share(text = "https://mozilla.org", subject = "Mozilla") }
+        verify {
+            mockShareDelegate.shareWithChooserActions(
+                text = "https://mozilla.org",
+                subject = "Mozilla",
+                actions = any(),
+            )
+        }
     }
 
+    @Config(sdk = [34])
     @Test
     fun `WHEN showSystemShareSheet is called with empty items THEN share is invoked with empty text`() {
         launcher.showSystemShareSheet(items = emptyList())
 
-        verify { mockShareDelegate.share(text = "", subject = "") }
+        verify { mockShareDelegate.shareWithChooserActions(text = "", subject = "", actions = any()) }
     }
 
+    @Config(sdk = [34])
     @Test
-    fun `WHEN showSystemShareSheet is called with multiple items and a subject THEN share is invoked with urls and subject`() {
+    fun `WHEN showSystemShareSheet is called with multiple items and a subject THEN chooser actions share is invoked with the subject`() {
         val items = listOf(
             ShareData(url = "https://mozilla.org", title = "Mozilla"),
             ShareData(url = "https://firefox.com", title = "Firefox"),
@@ -232,10 +340,30 @@ class ShareSheetLauncherTest {
         launcher.showSystemShareSheet(items = items, subject = "My collection")
 
         verify {
-            mockShareDelegate.share(
-                text = "https://mozilla.org\nhttps://firefox.com",
+            mockShareDelegate.shareWithChooserActions(
+                text = "1. https://mozilla.org\n2. https://firefox.com",
                 subject = "My collection",
+                actions = any(),
             )
         }
+    }
+
+    @Config(sdk = [33])
+    @Test
+    fun `GIVEN API level below 34 WHEN showSystemShareSheet is called with multiple items THEN basic share is used`() {
+        val items = listOf(
+            ShareData(url = "https://mozilla.org", title = "Mozilla"),
+            ShareData(url = "https://firefox.com", title = "Firefox"),
+        )
+
+        launcher.showSystemShareSheet(items = items)
+
+        verify {
+            mockShareDelegate.share(
+                text = "1. https://mozilla.org\n2. https://firefox.com",
+                subject = "Mozilla",
+            )
+        }
+        verify(exactly = 0) { mockShareDelegate.shareWithChooserActions(any(), any(), any()) }
     }
 }

@@ -4,11 +4,9 @@
 
 package org.mozilla.fenix.ext
 
-import android.content.res.Resources
 import android.graphics.Rect
 import android.view.TouchDelegate
 import android.view.View
-import androidx.annotation.DimenRes
 import androidx.annotation.Dimension
 import androidx.annotation.Dimension.Companion.DP
 import androidx.annotation.VisibleForTesting
@@ -75,20 +73,6 @@ fun View.getRectWithScreenLocation(): Rect {
         locationOnScreen[1] + height,
     )
 }
-
-/**
- * Returns the pixel size for the given dimension resource ID.
- *
- * This is a wrapper around [Resources.getDimensionPixelSize], reducing verbosity when accessing
- * dimension values from a [View].
- *
- * @param resId Resource ID of the dimension.
- * @return The pixel size corresponding to the given dimension resource.
- */
-@Suppress("Resources.GetDimensionPixelSizeInsteadOfPixelSizeFor")
-fun View.pixelSizeFor(
-    @DimenRes resId: Int,
-) = resources.getDimensionPixelSize(resId)
 
 /**
  * Used to get and set CoordinatorLayout Behavior on a View.

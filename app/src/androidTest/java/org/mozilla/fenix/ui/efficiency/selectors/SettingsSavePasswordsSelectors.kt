@@ -16,7 +16,15 @@ object SettingsSavePasswordsSelectors {
         groups = listOf("requiredForPage"),
     )
 
+    val NEVER_SAVE_OPTION = Selector(
+        strategy = SelectorStrategy.ESPRESSO_BY_TEXT,
+        value = "Never save",
+        description = "Never save option",
+        groups = listOf(),
+    )
+
     val all = listOf(
         ASK_TO_SAVE_OPTION,
+        NEVER_SAVE_OPTION,
     )
 }

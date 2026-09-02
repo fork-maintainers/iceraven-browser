@@ -78,12 +78,6 @@
   <string name="open_in_app_cfr_negative_button_text">Paslėpti</string>
   <!-- Private browsing erase action "contextual feature recommendation" (CFR) -->
 
-  <!--
-    Address bar swipe "contextual feature recommendation" (CFR)
-
-    Text for the message displayed in the contextual feature recommendation popup promoting swipe of address bar.
-  -->
-  <string name="address_bar_swipe_cfr_message_2">Norėdami perjungti korteles, braukite įrankių juostą kairėn arba dešinėn.</string>
   <!-- Text for the info dialog when camera permissions have been denied but user tries to access a camera feature. -->
   <string name="camera_permissions_needed_message">Reikia kameros prieigos. Eikite į „Android“ nustatymus, bakstelėkite „leidimus“, tada bakstelėkite „leisti“.</string>
   <!-- Text for the positive action button to go to Android Settings to grant permissions. -->
@@ -666,8 +660,6 @@
   <string name="history_search_1">Įveskite ieškomą tekstą</string>
   <!-- Text for the button to clear all history -->
   <string name="history_delete_all">Išvalyti žurnalą</string>
-  <!-- Text for the snackbar to confirm that multiple browsing history items has been deleted -->
-  <string name="history_delete_multiple_items_snackbar">Žurnalas išvalytas</string>
   <!-- Text for the snackbar to confirm that a single browsing history item has been deleted. %1$s is the shortened URL of the deleted history item. -->
   <string name="history_delete_single_item_snackbar">Pašalinta %1$s</string>
   <!-- Context description text for the button to delete a single history item -->
@@ -746,12 +738,6 @@
     Button label that take the user to the Android App setting
   -->
   <string name="phone_feature_go_to_settings">Eiti į nuostatas</string>
-  <!--
-    Content description (not visible, for screen readers etc.): Quick settings sheet
-    to give users access to site specific information / settings. For example:
-    Secure settings status and a button to modify site permissions
-  -->
-  <string name="quick_settings_sheet">Greitųjų nuostatų aprašas</string>
   <!-- Label that indicates that this option it the recommended one -->
   <string name="phone_feature_recommended">Rekomenduojama</string>
   <!-- Button label for clearing all the information of site permissions -->
@@ -1006,12 +992,6 @@
   <!--
     Enhanced Tracking Protection
 
-    Link displayed in enhanced tracking protection panel to access tracking protection settings
-  -->
-  <string name="etp_settings">Apsaugos nuostatos</string>
-  <!--
-    Enhanced Tracking Protection
-
     Preference title for enhanced tracking protection settings
   -->
   <string name="preference_enhanced_tracking_protection">Išplėsta apsauga nuo stebėjimo</string>
@@ -1053,12 +1033,8 @@
   <string name="preference_enhanced_tracking_protection_custom_tracking_content_2">Tik privačiosiose kortelėse</string>
   <!-- Preference for enhanced tracking protection for the custom protection settings -->
   <string name="preference_enhanced_tracking_protection_custom_cryptominers">Kriptovaliutų kasėjai</string>
-  <!-- Button label for navigating to the Enhanced Tracking Protection details -->
-  <string name="enhanced_tracking_protection_details">Išsamiau</string>
   <!-- Header for categories that are being being blocked by current Enhanced Tracking Protection settings -->
   <string name="enhanced_tracking_protection_blocked">Blokuojama</string>
-  <!-- Header for categories that are being not being blocked by current Enhanced Tracking Protection settings -->
-  <string name="enhanced_tracking_protection_allowed">Leidžiama</string>
   <!-- Category of trackers (social media trackers) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_social_media_trackers_title">Socialinių tinklų stebėjimo elementai</string>
   <!-- Description of social media trackers that can be blocked by Enhanced Tracking Protection -->
@@ -1075,10 +1051,6 @@
   <string name="etp_tracking_content_title">Stebėjimui naudojamas turinys</string>
   <!-- Description of tracking content that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_tracking_content_description">Blokuoja išorinių reklamų, vaizdų, ir kito stebėjimui skirto turinio įkėlimą. Gali sutrikti svetainių funkcionalumas.</string>
-  <!-- Enhanced Tracking Protection message that protection is currently on for this site -->
-  <string name="etp_panel_on">Apsaugos šioje svetainėje ĮJUNGTOS</string>
-  <!-- Enhanced Tracking Protection message that protection is currently off for this site -->
-  <string name="etp_panel_off">Apsaugos šioje svetainėje IŠJUNGTOS</string>
   <!-- Header for exceptions list for which sites enhanced tracking protection is always off -->
   <string name="enhanced_tracking_protection_exceptions">Išplėsta apsauga nuo stebėjimo šiose svetainėje išjungta</string>
   <!--
@@ -1097,13 +1069,6 @@
   <string name="etp_redirect_trackers_title">Nukreipimų stebėjimo elementai</string>
   <!-- Description of redirect tracker cookies that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_redirect_trackers_description">Išvalo slapukus, įrašomus nukreipiant į žinomas stebėjimo svetaines.</string>
-  <!--
-    Description of the SmartBlock Enhanced Tracking Protection feature. The * symbol is intentionally hardcoded here,
-    as we use it on the UI to indicate which trackers have been partially unblocked.
-  -->
-  <string name="preference_etp_smartblock_description">Kai kurie žemiau pažymėti stebėjimo elementai yra dalinai neblokuojami šiame tinklalapyje, nes su jais atlikote veiksmų *.</string>
-  <!-- Text displayed that links to website about enhanced tracking protection SmartBlock -->
-  <string name="preference_etp_smartblock_learn_more">Sužinoti daugiau</string>
   <!-- About page link text to open support link -->
   <string name="about_support">Žinynas</string>
   <!-- About page link text to list of past crashes (like about:crashes on desktop) -->
@@ -1264,14 +1229,8 @@
   <string name="phone_feature_blocked_step_permissions"><![CDATA[2. Bakstelėkite <b>Leidimai</b>]]></string>
   <!-- Third step for the allowing a permission (%1$s is the permission name, for example "Camera"). -->
   <string name="phone_feature_blocked_step_feature"><![CDATA[3. Įjunkite <b>%1$s</b>]]></string>
-  <!-- Label that indicates a site is using a secure connection -->
-  <string name="quick_settings_sheet_secure_connection_2">Ryšys yra saugus</string>
-  <!-- Label that indicates a site is using a insecure connection -->
-  <string name="quick_settings_sheet_insecure_connection_2">Ryšys nėra saugus</string>
   <!-- Label to clear site data -->
   <string name="clear_site_data">Valyti slapukus ir svetainių duomenis</string>
-  <!-- Confirmation message for a dialog confirming if the user wants to delete all data for current site. %s is the domain of the site. -->
-  <string name="confirm_clear_site_data"><![CDATA[Ar tikrai norite išvalyti visus <b>%s</b> svetainės slapukus ir duomenis?]]></string>
   <!-- Confirmation message for a dialog confirming if the user wants to delete all the permissions for all sites -->
   <string name="confirm_clear_permissions_on_all_sites">Ar tikrai norite išvalyti visus leidimus visose svetainėse?</string>
   <!-- Confirmation message for a dialog confirming if the user wants to delete all the permissions for a site -->
@@ -1280,11 +1239,6 @@
   <string name="confirm_clear_permission_site">Ar tikrai norite išvalyti šį leidimą šioje svetainėje?</string>
   <!-- label shown when there are not site exceptions to show in the site exception settings -->
   <string name="no_site_exceptions">Nėra išimčių svetainėms</string>
-  <!--
-    text shown before the issuer name to indicate who its verified by, %1$s is the name of
-    the certificate authority that verified the ticket
-  -->
-  <string name="certificate_info_verified_by">Tai liudija: %1$s</string>
   <!-- Positive action of a dialog asking to delete -->
   <string name="dialog_delete_positive">Pašalinti</string>
   <!-- The error message in add login view when hostname field is blank. -->

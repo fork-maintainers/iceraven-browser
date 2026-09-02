@@ -49,12 +49,14 @@ import org.mozilla.fenix.GleanMetrics.EngineTab as EngineMetrics
  * @param settings reference to the application [Settings].
  * @param metrics [MetricController] to pass events that have been mapped from actions.
  * @param crashReporting An instance of [CrashReporting] to report caught exceptions.
+ * @param currentTimeMillis provider for the current time in milliseconds, injectable for testing.
  */
 class TelemetryMiddleware(
     private val context: Context,
     private val settings: Settings,
     private val metrics: MetricController,
     private val crashReporting: CrashReporting? = null,
+    private val currentTimeMillis: () -> Long = { System.currentTimeMillis() },
 ) : Middleware<BrowserState, BrowserAction> {
 
     private val logger = Logger("TelemetryMiddleware")
@@ -227,7 +229,7 @@ class TelemetryMiddleware(
 
     private fun computeDurationSinceLastVisible(tab: SessionState): Int {
         val lastVisibleAt = (tab as? TabSessionState)?.lastVisibleAt?.takeIf { it != 0L } ?: return -1
-        val elapsed = System.currentTimeMillis() - lastVisibleAt
+        val elapsed = currentTimeMillis() - lastVisibleAt
         return (elapsed / 1000L).coerceIn(0L, Int.MAX_VALUE.toLong()).toInt()
     }
 

@@ -10,6 +10,7 @@ class FakeIPProtectionPromptRepository(
     private val canShowIPProtectionPrompt: Boolean = true,
     override var hasShownPrompt: Boolean = false,
     override val hasAlreadyUsedIPProtection: Boolean = false,
+    override val showOnboardingBottomSheet: Boolean = true,
 ) : IPProtectionPromptRepository {
     override var isShowingPrompt = false
 

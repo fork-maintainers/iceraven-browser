@@ -36,10 +36,8 @@ interface TermsOfUsePromptRepository {
 
     /**
      * Updates the Terms of Use related preferences when the user accepts the ToU.
-     *
-     *  @param nowMillis the current time in milliseconds.
      */
-    fun updateHasAcceptedTermsOfUsePreference(nowMillis: Long = System.currentTimeMillis())
+    fun updateHasAcceptedTermsOfUsePreference()
 
     /**
      * Updates the 'has postponed accepting terms of use' preference to true.
@@ -48,10 +46,8 @@ interface TermsOfUsePromptRepository {
 
     /**
      * Updates the 'last terms of use prompt time in millis' preference to the current time.
-     *
-     * @param currentTimeInMillis the current time in milliseconds.
      */
-    fun updateLastTermsOfUsePromptTimeInMillis(currentTimeInMillis: Long = System.currentTimeMillis())
+    fun updateLastTermsOfUsePromptTimeInMillis()
 
     /**
      * Increments the number of times the Terms of Use prompt has been displayed by 1.
@@ -70,9 +66,11 @@ interface TermsOfUsePromptRepository {
  * Default implementation of [TermsOfUsePromptRepository].
  *
  * @param settings the preferences settings
+ * @param currentTimeMillisProvider provider for the current time in milliseconds, injectable for testing.
  */
 class DefaultTermsOfUsePromptRepository(
     private val settings: Settings,
+    private val currentTimeMillisProvider: () -> Long = { System.currentTimeMillis() },
 ) : TermsOfUsePromptRepository {
 
     override var isShowingPrompt = false
@@ -97,18 +95,18 @@ class DefaultTermsOfUsePromptRepository(
     private fun hasExceededMaxDisplayCount(): Boolean =
         settings.termsOfUsePromptDisplayedCount >= settings.getTermsOfUseMaxDisplayCount()
 
-    override fun updateHasAcceptedTermsOfUsePreference(nowMillis: Long) {
+    override fun updateHasAcceptedTermsOfUsePreference() {
         settings.hasAcceptedTermsOfService = true
         settings.termsOfUseAcceptedVersion = TOU_VERSION
-        settings.termsOfUseAcceptedTimeInMillis = nowMillis
+        settings.termsOfUseAcceptedTimeInMillis = currentTimeMillisProvider()
     }
 
     override fun updateHasPostponedAcceptingTermsOfUsePreference() {
         settings.hasPostponedAcceptingTermsOfUse = true
     }
 
-    override fun updateLastTermsOfUsePromptTimeInMillis(currentTimeInMillis: Long) {
-        settings.lastTermsOfUsePromptTimeInMillis = currentTimeInMillis
+    override fun updateLastTermsOfUsePromptTimeInMillis() {
+        settings.lastTermsOfUsePromptTimeInMillis = currentTimeMillisProvider()
     }
 
     override fun incrementTermsOfUsePromptDisplayedCount() {

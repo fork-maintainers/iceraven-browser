@@ -58,6 +58,7 @@ class DefaultHistoryMetadataService(
             NamedThreadFactory("HistoryMetadataService"),
         ).asCoroutineDispatcher(),
     ),
+    private val currentTimeMillis: () -> Long = { System.currentTimeMillis() },
 ) : HistoryMetadataService {
 
     private val logger = Logger("DefaultHistoryMetadataService")
@@ -90,7 +91,7 @@ class DefaultHistoryMetadataService(
     }
 
     override fun updateMetadata(key: HistoryMetadataKey, tab: TabSessionState) {
-        val now = System.currentTimeMillis()
+        val now = currentTimeMillis()
         val lastAccess = tab.lastAccess
         if (lastAccess == 0L) {
             logger.debug("Not updating metadata for tab $tab - lastAccess=0")

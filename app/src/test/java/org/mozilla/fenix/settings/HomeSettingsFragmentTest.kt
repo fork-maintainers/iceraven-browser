@@ -20,13 +20,13 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mozilla.fenix.GleanMetrics.CustomizeHome
 import org.mozilla.fenix.GleanMetrics.Events
 import org.mozilla.fenix.R
 import org.mozilla.fenix.components.AppStore
 import org.mozilla.fenix.components.Components
 import org.mozilla.fenix.components.Core
 import org.mozilla.fenix.components.appstate.AppAction.ContentRecommendationsAction
-import org.mozilla.fenix.components.appstate.AppAction.SportsWidgetAction
 import org.mozilla.fenix.ext.getPreferenceKey
 import org.mozilla.fenix.helpers.FenixGleanTestRule
 import org.mozilla.fenix.home.pocket.ContentRecommendationsFeatureHelper
@@ -127,66 +127,6 @@ internal class HomeSettingsFragmentTest {
     }
 
     @Test
-    fun `GIVEN the Homepage Sports Widget feature is disabled WHEN accessing settings THEN the World Cup toggle is not visible`() {
-        every { appSettings.enableHomepageSportsWidget } returns false
-
-        activateFragment()
-
-        assertFalse(getSportsWidgetPreference().isVisible)
-    }
-
-    @Test
-    fun `GIVEN the feature is enabled and the World Cup has not ended WHEN accessing settings THEN the World Cup toggle is visible`() {
-        every { appSettings.enableHomepageSportsWidget } returns true
-        every { appSettings.showHomepageSportsWidget } returns true
-
-        activateFragment(worldCupHasEnded = false)
-
-        assertTrue(getSportsWidgetPreference().isVisible)
-        assertTrue(getSportsWidgetPreference().isChecked)
-    }
-
-    @Test
-    fun `GIVEN the feature is enabled but the World Cup has ended WHEN accessing settings THEN the World Cup toggle is not visible`() {
-        every { appSettings.enableHomepageSportsWidget } returns true
-        every { appSettings.showHomepageSportsWidget } returns true
-
-        activateFragment(worldCupHasEnded = true)
-
-        assertFalse(getSportsWidgetPreference().isVisible)
-    }
-
-    @Test
-    fun `WHEN toggling the World Cup setting off THEN the preference is persisted and a VisibilityChanged action is dispatched`() {
-        activateFragment()
-        val result = getSportsWidgetPreference().callChangeListener(false)
-
-        assertTrue(result)
-        verify {
-            appStore.dispatch(SportsWidgetAction.VisibilityChanged(isVisible = false))
-            appPrefsEditor.putBoolean(
-                homeSettingsFragment.getString(R.string.pref_key_show_homepage_sports_widget),
-                false,
-            )
-        }
-    }
-
-    @Test
-    fun `WHEN toggling the World Cup setting on THEN the preference is persisted and a VisibilityChanged action is dispatched`() {
-        activateFragment()
-        val result = getSportsWidgetPreference().callChangeListener(true)
-
-        assertTrue(result)
-        verify {
-            appStore.dispatch(SportsWidgetAction.VisibilityChanged(isVisible = true))
-            appPrefsEditor.putBoolean(
-                homeSettingsFragment.getString(R.string.pref_key_show_homepage_sports_widget),
-                true,
-            )
-        }
-    }
-
-    @Test
     fun `WHEN toggling the privacy report setting THEN events preference_toggled is recorded with the privacy_report key`() {
         activateFragment()
 
@@ -199,7 +139,28 @@ internal class HomeSettingsFragmentTest {
         assertEquals("true", events.single().extra?.get("enabled"))
     }
 
-    private fun activateFragment(worldCupHasEnded: Boolean = true) {
+    @Test
+    fun `WHEN toggling the weather setting THEN customize home preference_toggled is recorded with the weather key`() {
+        every { appSettings.enableHomepageWeatherWidget } returns true
+
+        activateFragment()
+
+        val result = getWeatherPreference().callChangeListener(true)
+
+        assertTrue(result)
+        val events = CustomizeHome.preferenceToggled.testGetValue()!!
+        assertEquals(1, events.size)
+        assertEquals("weather", events.single().extra?.get("preference_key"))
+        assertEquals("true", events.single().extra?.get("enabled"))
+        verify {
+            appPrefsEditor.putBoolean(
+                homeSettingsFragment.getString(R.string.pref_key_show_homepage_weather_widget),
+                true,
+            )
+        }
+    }
+
+    private fun activateFragment() {
         val activity = Robolectric.buildActivity(FragmentActivity::class.java).create().get()
         homeSettingsFragment = HomeSettingsFragment()
         homeSettingsFragment.worldCupHasEnded = { worldCupHasEnded }
@@ -227,13 +188,13 @@ internal class HomeSettingsFragmentTest {
             homeSettingsFragment.getPreferenceKey(R.string.pref_key_pocket_sponsored_stories),
         )!!
 
-    private fun getSportsWidgetPreference(): SwitchPreferenceCompat =
-        homeSettingsFragment.findPreference(
-            homeSettingsFragment.getPreferenceKey(R.string.pref_key_show_homepage_sports_widget),
-        )!!
-
     private fun getPrivacyReportPreference(): SwitchPreferenceCompat =
         homeSettingsFragment.findPreference(
             homeSettingsFragment.getPreferenceKey(R.string.pref_key_privacy_report),
+        )!!
+
+    private fun getWeatherPreference(): SwitchPreferenceCompat =
+        homeSettingsFragment.findPreference(
+            homeSettingsFragment.getPreferenceKey(R.string.pref_key_show_homepage_weather_widget),
         )!!
 }

@@ -15,8 +15,8 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
+import mozilla.components.compose.base.annotation.FlexibleWindowPreview
 import mozilla.components.compose.base.button.TextButton
 import org.mozilla.fenix.R
 import org.mozilla.fenix.theme.FirefoxTheme
@@ -75,7 +75,7 @@ fun CloseLastTabAndDeleteTabGroupConfirmationDialog(
     )
 }
 
-@Preview
+@FlexibleWindowPreview
 @Composable
 private fun CloseTabAndDeleteGroupConfirmationDialogPreview(
     @PreviewParameter(PreviewThemeProvider::class) theme: Theme,

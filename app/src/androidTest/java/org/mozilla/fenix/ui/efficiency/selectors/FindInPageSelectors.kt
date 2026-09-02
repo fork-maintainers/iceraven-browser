@@ -9,6 +9,14 @@ import org.mozilla.fenix.ui.efficiency.helpers.SelectorStrategy
 
 object FindInPageSelectors {
 
+    // The bar container itself — used to assert find-in-page is gone after it is closed.
+    val FIND_IN_PAGE_BAR = Selector(
+        strategy = SelectorStrategy.UIAUTOMATOR_WITH_RES_ID,
+        value = "findInPageView",
+        description = "Find in page bar",
+        groups = listOf(),
+    )
+
     val FIND_IN_PAGE_CLOSE_BUTTON = Selector(
         strategy = SelectorStrategy.UIAUTOMATOR_WITH_RES_ID,
         value = "find_in_page_close_btn",
@@ -46,6 +54,7 @@ object FindInPageSelectors {
     )
 
     val all = listOf(
+        FIND_IN_PAGE_BAR,
         FIND_IN_PAGE_CLOSE_BUTTON,
         FIND_IN_PAGE_QUERY,
         FIND_IN_PAGE_NEXT_BUTTON,

@@ -4,10 +4,12 @@
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:aapt="http://schemas.android.com/aapt"
+    xmlns:tools="http://schemas.android.com/tools"
     android:width="206dp"
     android:height="150dp"
     android:viewportWidth="206"
-    android:viewportHeight="150">
+    android:viewportHeight="150"
+    tools:ignore="VectorRaster">
   <group>
     <clip-path
         android:pathData="M0,0h206v150h-206z"/>

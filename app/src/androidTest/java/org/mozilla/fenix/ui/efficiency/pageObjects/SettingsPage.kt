@@ -8,15 +8,23 @@ import android.util.Log
 import androidx.compose.ui.test.junit4.AndroidComposeTestRule
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.intent.Intents.intended
+import androidx.test.espresso.intent.matcher.IntentMatchers.hasAction
 import androidx.test.espresso.matcher.ViewMatchers.Visibility
 import androidx.test.espresso.matcher.ViewMatchers.hasSibling
+import androidx.test.espresso.matcher.ViewMatchers.isChecked
+import androidx.test.espresso.matcher.ViewMatchers.isNotChecked
 import androidx.test.espresso.matcher.ViewMatchers.withEffectiveVisibility
+import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.uiautomator.UiScrollable
 import androidx.test.uiautomator.UiSelector
 import org.hamcrest.Matchers.allOf
+import org.mozilla.fenix.R
+import org.mozilla.fenix.helpers.DataGenerationHelper.getStringResource
 import org.mozilla.fenix.helpers.HomeActivityIntentTestRule
 import org.mozilla.fenix.helpers.TestAssetHelper.waitingTimeShort
+import org.mozilla.fenix.helpers.TestHelper.hasCousin
 import org.mozilla.fenix.ui.efficiency.helpers.BasePage
 import org.mozilla.fenix.ui.efficiency.helpers.Selector
 import org.mozilla.fenix.ui.efficiency.navigation.NavigationRegistry
@@ -110,6 +118,50 @@ class SettingsPage(composeRule: AndroidComposeTestRule<HomeActivityIntentTestRul
         )
     }
 
+    /**
+     * Assert the "Set as default browser" preference's Switch is in the given state. Mirrors legacy
+     * SettingsRobot.verifyDefaultBrowserToggle: the Switch (R.id.switch_widget) is a cousin of the
+     * preference title, so it is matched via hasCousin rather than as the title itself.
+     */
+    fun verifyDefaultBrowserToggle(isEnabled: Boolean): SettingsPage {
+        scrollToSettingText(getStringResource(R.string.preferences_set_as_default_browser))
+        onView(withText(R.string.preferences_set_as_default_browser)).check(
+            matches(
+                hasCousin(
+                    allOf(
+                        withId(R.id.switch_widget),
+                        if (isEnabled) isChecked() else isNotChecked(),
+                    ),
+                ),
+            ),
+        )
+        return this
+    }
+
+    fun clickDefaultBrowserSwitch(): SettingsPage {
+        scrollToSettingText(getStringResource(R.string.preferences_set_as_default_browser))
+        mozClick(SettingsSelectors.SET_AS_DEFAULT_BROWSER_BUTTON)
+        return this
+    }
+
+    /** Assert the system default-apps chooser was launched (the REQUEST_ROLE intent fired). */
+    fun verifyAndroidDefaultAppsMenuAppears(): SettingsPage {
+        intended(hasAction(DEFAULT_APPS_SETTINGS_ACTION))
+        return this
+    }
+
+    private fun scrollToSettingText(text: String) {
+        val appView = UiScrollable(UiSelector().scrollable(true))
+        appView.waitForExists(waitingTimeShort)
+        if (appView.exists()) {
+            try {
+                appView.scrollTextIntoView(text)
+            } catch (e: Exception) {
+                Log.w("SettingsPage", "scrollTextIntoView failed for '$text': ${e.message}")
+            }
+        }
+    }
+
     fun verifySettingOptionSummary(setting: String, summary: String): SettingsPage {
         val appView = UiScrollable(UiSelector().scrollable(true))
         appView.waitForExists(waitingTimeShort)
@@ -123,5 +175,9 @@ class SettingsPage(composeRule: AndroidComposeTestRule<HomeActivityIntentTestRul
         onView(allOf(withText(setting), hasSibling(withText(summary))))
             .check(matches(withEffectiveVisibility(Visibility.VISIBLE)))
         return this
+    }
+
+    private companion object {
+        const val DEFAULT_APPS_SETTINGS_ACTION = "android.app.role.action.REQUEST_ROLE"
     }
 }

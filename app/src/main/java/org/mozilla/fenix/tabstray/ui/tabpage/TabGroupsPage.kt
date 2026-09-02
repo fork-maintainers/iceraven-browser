@@ -41,15 +41,17 @@ private val EmptyPageWidth = 225.dp
  *
  * @param state The current snapshot of [TabGroupState].
  * @param onTabGroupClick Invoked when a group is clicked.
- * @param onDeleteTabGroupClick Invoked when a group is requested to be deleted.
  * @param onEditTabGroupClick Invoked when a group is requested to be edited.
+ * @param onShareTabGroupClick Invoked when a group is requested to be shared.
+ * @param onDeleteTabGroupClick Invoked when a group is requested to be deleted.
  */
 @Composable
 internal fun TabGroupsPage(
     state: TabGroupState,
     onTabGroupClick: (TabsTrayItem.TabGroup) -> Unit,
-    onDeleteTabGroupClick: (TabsTrayItem.TabGroup) -> Unit,
     onEditTabGroupClick: (TabsTrayItem.TabGroup) -> Unit,
+    onShareTabGroupClick: (TabsTrayItem.TabGroup) -> Unit,
+    onDeleteTabGroupClick: (TabsTrayItem.TabGroup) -> Unit,
 ) {
     if (state.groups.isNotEmpty()) {
         Column {
@@ -63,8 +65,9 @@ internal fun TabGroupsPage(
             TabGroupList(
                 groups = state.groups,
                 onTabGroupClick = onTabGroupClick,
-                onDeleteTabGroupClick = onDeleteTabGroupClick,
                 onEditTabGroupClick = onEditTabGroupClick,
+                onShareTabGroupClick = onShareTabGroupClick,
+                onDeleteTabGroupClick = onDeleteTabGroupClick,
             )
         }
     } else {
@@ -164,8 +167,9 @@ private fun TabGroupsPagePreview(
         TabGroupsPage(
             state = TabGroupState(groups = groups),
             onTabGroupClick = {},
-            onDeleteTabGroupClick = {},
             onEditTabGroupClick = {},
+            onShareTabGroupClick = {},
+            onDeleteTabGroupClick = {},
         )
     }
 }

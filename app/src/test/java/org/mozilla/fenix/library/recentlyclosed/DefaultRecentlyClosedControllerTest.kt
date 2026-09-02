@@ -35,6 +35,7 @@ import org.mozilla.fenix.R
 import org.mozilla.fenix.browser.browsingmode.BrowsingMode
 import org.mozilla.fenix.components.AppStore
 import org.mozilla.fenix.components.appstate.AppState
+import org.mozilla.fenix.components.share.ShareSheetChooserAction
 import org.mozilla.fenix.components.share.ShareSource
 import org.mozilla.fenix.components.usecases.ShareUseCases
 import org.mozilla.fenix.ext.directionsEq
@@ -221,7 +222,28 @@ class DefaultRecentlyClosedControllerTest {
     }
 
     @Test
-    fun `share multiple tabs`() {
+    fun `WHEN a single tab is shared THEN record telemetry and call share use cases with send to devices and QR code chooser actions`() {
+        val tabs = createFakeTabList(1)
+        assertNull(RecentlyClosedTabs.menuShare.testGetValue())
+
+        createController().handleShare(tabs.toSet())
+
+        val items = listOf(ShareData(url = tabs[0].url, title = tabs[0].title))
+        verify {
+            shareUseCases.shareItems(
+                items = items,
+                source = ShareSource.RECENTLY_CLOSED,
+                chooserActions = listOf(ShareSheetChooserAction.SEND_TO_DEVICES, ShareSheetChooserAction.QR_CODE),
+                navigateToShareFragment = any(),
+            )
+        }
+        assertNotNull(RecentlyClosedTabs.menuShare.testGetValue())
+        assertEquals(1, RecentlyClosedTabs.menuShare.testGetValue()!!.size)
+        assertNull(RecentlyClosedTabs.menuShare.testGetValue()!!.single().extra)
+    }
+
+    @Test
+    fun `WHEN multiple tabs are shared THEN record telemetry and call share use cases with send to devices chooser action`() {
         val tabs = createFakeTabList(2)
         assertNull(RecentlyClosedTabs.menuShare.testGetValue())
 
@@ -235,6 +257,7 @@ class DefaultRecentlyClosedControllerTest {
             shareUseCases.shareItems(
                 items = items,
                 source = ShareSource.RECENTLY_CLOSED,
+                chooserActions = listOf(ShareSheetChooserAction.SEND_TO_DEVICES),
                 navigateToShareFragment = any(),
             )
         }

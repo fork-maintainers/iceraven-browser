@@ -4,7 +4,6 @@
 
 package org.mozilla.fenix.benchmark.baselineprofile
 
-import android.content.Intent
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.benchmark.macro.junit4.BaselineProfileRule
@@ -12,17 +11,10 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mozilla.fenix.benchmark.utils.FENIX_HOME_DEEP_LINK
 import org.mozilla.fenix.benchmark.utils.HtmlAsset
 import org.mozilla.fenix.benchmark.utils.MockWebServerRule
 import org.mozilla.fenix.benchmark.utils.TARGET_PACKAGE
-import org.mozilla.fenix.benchmark.utils.completeOnboarding
-import org.mozilla.fenix.benchmark.utils.dismissWallpaperOnboarding
-import org.mozilla.fenix.benchmark.utils.enterSearchMode
-import org.mozilla.fenix.benchmark.utils.flingToBeginning
-import org.mozilla.fenix.benchmark.utils.flingToEnd
-import org.mozilla.fenix.benchmark.utils.isWallpaperOnboardingShown
-import org.mozilla.fenix.benchmark.utils.loadSite
+import org.mozilla.fenix.benchmark.utils.browserPageScrollJourney
 import org.mozilla.fenix.benchmark.utils.url
 
 /**
@@ -63,29 +55,9 @@ class BrowserPageScrollBaselineProfileGenerator {
     fun generateBaselineProfile() {
         rule.collect(
             packageName = TARGET_PACKAGE,
+            maxIterations = baselineProfileMaxIterations(),
         ) {
-            val intent = Intent(Intent.ACTION_VIEW, FENIX_HOME_DEEP_LINK)
-            intent.setPackage(packageName)
-
-            startActivityAndWait(intent)
-            device.completeOnboarding()
-
-            if (device.isWallpaperOnboardingShown()) {
-                device.dismissWallpaperOnboarding()
-            }
-
-            device.enterSearchMode()
-            device.loadSite(url = mockRule.url(HtmlAsset.LONG))
-
-            device.flingToEnd(
-                scrollableId = "$packageName:id/engineView",
-                maxSwipes = 1,
-            )
-
-            device.flingToBeginning(
-                scrollableId = "$packageName:id/engineView",
-                maxSwipes = 1,
-            )
+            browserPageScrollJourney(url = mockRule.url(HtmlAsset.LONG))
         }
     }
 }

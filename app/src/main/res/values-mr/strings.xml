@@ -314,8 +314,6 @@
   <string name="pwa_site_controls_title_private">%1$s (खाजगी मोड)</string>
   <!-- Text for the button to clear all history -->
   <string name="history_delete_all">इतिहास नष्ट करा</string>
-  <!-- Text for the snackbar to confirm that multiple browsing history items has been deleted -->
-  <string name="history_delete_multiple_items_snackbar">इतिहास पुसला</string>
   <!-- Text for the snackbar to confirm that a single browsing history item has been deleted. %1$s is the shortened URL of the deleted history item. -->
   <string name="history_delete_single_item_snackbar">%1$s हटविले</string>
   <!-- Context description text for the button to delete a single history item -->
@@ -385,12 +383,6 @@
     Button label that take the user to the Android App setting
   -->
   <string name="phone_feature_go_to_settings">सेटिंग मध्ये जा</string>
-  <!--
-    Content description (not visible, for screen readers etc.): Quick settings sheet
-    to give users access to site specific information / settings. For example:
-    Secure settings status and a button to modify site permissions
-  -->
-  <string name="quick_settings_sheet">द्रुत सेटिंग पत्रक</string>
   <!-- Label that indicates that this option it the recommended one -->
   <string name="phone_feature_recommended">शिफारसीय</string>
   <!-- Button label for clearing all the information of site permissions -->
@@ -623,12 +615,6 @@
   <!--
     Enhanced Tracking Protection
 
-    Link displayed in enhanced tracking protection panel to access tracking protection settings
-  -->
-  <string name="etp_settings">संरक्षण सेटिंग</string>
-  <!--
-    Enhanced Tracking Protection
-
     Preference title for enhanced tracking protection settings
   -->
   <string name="preference_enhanced_tracking_protection">वर्धित ट्रॅकिंग संरक्षण</string>
@@ -668,8 +654,6 @@
   <string name="preference_enhanced_tracking_protection_custom_cryptominers">क्रिप्टोमाइनर</string>
   <!-- Header for categories that are being being blocked by current Enhanced Tracking Protection settings -->
   <string name="enhanced_tracking_protection_blocked">अवरोधित</string>
-  <!-- Header for categories that are being not being blocked by current Enhanced Tracking Protection settings -->
-  <string name="enhanced_tracking_protection_allowed">अनुमती दिलेले</string>
   <!-- Category of trackers (social media trackers) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_social_media_trackers_title">सोशल मीडिया ट्रॅकर</string>
   <!-- Description of social media trackers that can be blocked by Enhanced Tracking Protection -->
@@ -686,10 +670,6 @@
   <string name="etp_tracking_content_title">ट्रॅकिंग मजकूर</string>
   <!-- Description of tracking content that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_tracking_content_description">ट्रॅकिंग कोड असलेल्या बाह्य जाहिराती, व्हिडिओ आणि इतर मजकूर लोड करण्यापासून थांबवा. वेबसाइटच्या कार्यक्षमतेवर परिणाम होऊ शकतो.</string>
-  <!-- Enhanced Tracking Protection message that protection is currently on for this site -->
-  <string name="etp_panel_on">या संकेतस्थळासाठी संरक्षण चालू आहे</string>
-  <!-- Enhanced Tracking Protection message that protection is currently off for this site -->
-  <string name="etp_panel_off">या संकेतस्थळासाठी संरक्षण बंद आहे</string>
   <!-- Header for exceptions list for which sites enhanced tracking protection is always off -->
   <string name="enhanced_tracking_protection_exceptions">या साइटसाठी वर्धित ट्रॅकिंग संरक्षण बंद आहे</string>
   <!--
@@ -808,11 +788,6 @@
   <string name="confirm_clear_permission_site">ह्या साईट वरील ही परवानगी नक्की साफ करायची का?</string>
   <!-- label shown when there are not site exceptions to show in the site exception settings -->
   <string name="no_site_exceptions">कुठलेही अपवाद संकेतस्थळ नाहीत</string>
-  <!--
-    text shown before the issuer name to indicate who its verified by, %1$s is the name of
-    the certificate authority that verified the ticket
-  -->
-  <string name="certificate_info_verified_by">%1$s : द्वारे सत्यापित</string>
   <!-- Positive action of a dialog asking to delete -->
   <string name="dialog_delete_positive">काढून टाका</string>
   <!-- Translations feature -->
