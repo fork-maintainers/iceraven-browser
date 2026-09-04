@@ -24,6 +24,7 @@ import org.gradle.api.tasks.testing.TestListener
 import org.gradle.api.tasks.testing.TestOutputEvent
 import org.gradle.api.tasks.testing.TestOutputListener
 import org.gradle.api.tasks.testing.TestResult
+import org.gradle.process.CommandLineArgumentProvider
 import java.io.File
 
 class ProjectPlugin : Plugin<Project> {
@@ -32,6 +33,9 @@ class ProjectPlugin : Plugin<Project> {
         val mozilla = project.extensions.create("mozilla", ProjectExtension::class.java)
         mozilla.androidComponentsProject.convention(false)
         mozilla.ktlintSourcePaths.convention(emptyList())
+        mozilla.detektSourcePaths.convention(emptyList())
+        mozilla.detektAutoCorrect.convention(true)
+        mozilla.detektReports.convention(emptyMap())
 
         val extraProperties = project.gradle.extensions.extraProperties
         val mozconfig = extraProperties["mozconfig"] as Map<String, Any>
@@ -55,6 +59,8 @@ class ProjectPlugin : Plugin<Project> {
         configureGleanSubstitution(project, extraProperties)
         configureGleanVersionResolution(project)
         configureKtlint(project, mozilla)
+        configureDetekt(project, mozilla)
+        configureAndroidComponentsLint(project, mozilla, topsrcdir)
         configureTestOutputFormatting(project)
         configurePackagingResourcesExcludes(project)
         registerPrintVariantsTask(project)
@@ -383,6 +389,157 @@ class ProjectPlugin : Plugin<Project> {
             outputs.file(project.file("build/reports/ktlint/ktlintFormat.json"))
                 .withPropertyName("ktlintFormatReport")
         }
+    }
+
+    private fun configureDetekt(project: Project, mozilla: ProjectExtension) {
+        val sourcePaths = mozilla.detektSourcePaths
+
+        val detektConfig = project.configurations.register("detektCli")
+        val detektDep = project.provider {
+            val versionCatalogs = project.extensions.getByType(VersionCatalogsExtension::class.java)
+            val libs = versionCatalogs.named("libs")
+            project.dependencies.create(libs.findLibrary("detekt-cli").get().get())
+        }
+        detektConfig.configure { dependencies.addLater(detektDep) }
+        val detektClasspath = project.files(detektConfig)
+
+        // Subproject's build.gradle can add dependencies like
+        // detektPlugins project(":components:tooling-detekt")
+        val detektPlugins = project.configurations.register("detektPlugins") {
+            isCanBeConsumed = false
+            isCanBeResolved = true
+        }
+        val detektPluginFiles = project.files(detektPlugins)
+
+        val projectDir = project.projectDir
+
+        fun JavaExec.configureCommon() {
+            classpath = detektClasspath
+            mainClass.set("io.gitlab.arturbosch.detekt.cli.Main")
+            // Resolve the include/exclude globs (with leading "!" meaning exclude)
+            // into a FileTree rooted at projectDir, so Gradle can use the actual
+            // Kotlin source set to compute UP-TO-DATE / build cache keys.
+            val detektSourceTree =
+                if (sourcePaths.get().none { !it.startsWith("!") }) {
+                    project.files()
+                } else {
+                    project.fileTree(projectDir).matching {
+                        sourcePaths.get().forEach { pattern ->
+                            if (pattern.startsWith("!")) {
+                                exclude(pattern.removePrefix("!"))
+                            } else {
+                                include(pattern)
+                            }
+                        }
+                    }
+                }
+            onlyIf { !detektSourceTree.isEmpty }
+
+            mozilla.detektConfig.orNull?.let {
+                val file = project.file(it)
+                args("--config", file.absolutePath)
+                inputs.file(file).withPropertyName("detektConfig")
+            }
+
+            inputs.files(detektSourceTree)
+                .withPropertyName("detektSources")
+                .withPathSensitivity(org.gradle.api.tasks.PathSensitivity.RELATIVE)
+                .skipWhenEmpty()
+            inputs.files(detektPluginFiles)
+                .withPropertyName("detektPlugins")
+                .optional(true)
+
+            val includes = sourcePaths.get().filter { !it.startsWith("!") }
+            val excludes = sourcePaths.get().filter { it.startsWith("!") }.map {it.removePrefix("!") }
+            args("--input", projectDir.absolutePath)
+            if (includes.isNotEmpty()) args("--includes", includes.joinToString(","))
+            if (excludes.isNotEmpty()) args("--excludes", excludes.joinToString(","))
+
+            argumentProviders.add(CommandLineArgumentProvider {
+                val plugins = detektPluginFiles.files.filter { it.exists() }
+                if (plugins.isNotEmpty()) {
+                    listOf("--plugins", plugins.joinToString(",") { it.absolutePath })
+                } else {
+                    emptyList()
+                }
+            })
+        }
+
+        project.tasks.register("detekt", JavaExec::class.java) {
+            group = "verification"
+            description = "Run detekt static analysis."
+            configureCommon()
+
+            if (mozilla.detektAutoCorrect.get()) {
+                args("--auto-correct")
+                jvmArgs("--add-opens", "java.base/java.lang=ALL-UNNAMED")
+            }
+
+            mozilla.detektBaseline.orNull?.let {
+                val file = project.file(it)
+                if (file.exists()) {
+                    args("--baseline", file.absolutePath)
+                    inputs.file(file).withPropertyName("detektBaseline").optional(true)
+                }
+            }
+            mozilla.detektReports.get().forEach { (id, path) -> args("--report", "$id:$path") }
+            mozilla.detektReports.get().values.forEach { outputs.file(project.file(it)) }
+            outputs.cacheIf { true }
+        }
+
+        project.tasks.register("detektBaseline", JavaExec::class.java) {
+            group = "verification"
+            description = "Regenerate the detekt baseline."
+            configureCommon()
+            val baselineFile = mozilla.detektBaseline.orNull?.let { project.file(it) }
+            onlyIf { baselineFile != null }
+            args("--create-baseline")
+            baselineFile?.let { args("--baseline", it.absolutePath) }
+        }
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    private fun configureAndroidComponentsLint(project: Project, mozilla: ProjectExtension, topsrcdir: String) {
+        val action = Action<AppliedPlugin> {
+            if (!mozilla.androidComponentsProject.get()) {
+                return@Action
+            }
+            val sarifOutput = File(
+                topsrcdir,
+                "android-components/build/reports/lint/lint-report-${project.name}.sarif.json",
+            )
+            val android = project.extensions.getByName("android")
+            val lint = android.javaClass.getMethod("getLint").invoke(android)
+            lint.javaClass.getMethod("setBaseline", File::class.java)
+                .invoke(lint, project.file("lint-baseline.xml"))
+            lint.javaClass.getMethod("setWarningsAsErrors", Boolean::class.javaPrimitiveType)
+                .invoke(lint, true)
+            lint.javaClass.getMethod("setAbortOnError", Boolean::class.javaPrimitiveType)
+                .invoke(lint, false)
+            lint.javaClass.getMethod("setSarifReport", Boolean::class.javaPrimitiveType)
+                .invoke(lint, true)
+            lint.javaClass.getMethod("setSarifOutput", File::class.java)
+                .invoke(lint, sarifOutput)
+            val disable = lint.javaClass.getMethod("getDisable").invoke(lint) as MutableSet<String>
+            disable.addAll(
+                listOf(
+                    "MissingTranslation",
+                    "ExtraTranslation",
+                    "MissingDefaultResource",
+                    // We do not want to enforce this as a generic rule for all languages (see #6117, #6056, #6118)
+                    "TypographyEllipsis",
+                    // https://github.com/mozilla-mobile/android-components/issues/10641
+                    "UnspecifiedImmutableFlag",
+                    // https://bugzilla.mozilla.org/show_bug.cgi?id=1795427
+                    "UnusedResources",
+                    // "We do not impose rules on locales"
+                    // https://github.com/mozilla-mobile/android-components/pull/11069
+                    "TypographyDashes",
+                ),
+            )
+        }
+        project.pluginManager.withPlugin("com.android.library", action)
+        project.pluginManager.withPlugin("com.android.application", action)
     }
 
     // Translates JUnit test events into Mozilla's TBPL-like textual format that Taskcluster
