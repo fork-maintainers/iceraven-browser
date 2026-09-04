@@ -27,7 +27,9 @@ class SettingsPlugin : Plugin<Settings> {
 
     override fun apply(settings: Settings) {
         val extension = settings.extensions.create<SettingsExtension>("mozilla")
-        extension.disableAndroidComponentsTasks.convention(false)
+        extension.disableAndroidComponentsTasks.convention(
+            settings.startParameter.projectProperties["disableAndroidComponentsTasks"]?.toBoolean() ?: false
+        )
 
         loadBuildConfig(settings)
 
@@ -64,8 +66,9 @@ class SettingsPlugin : Plugin<Settings> {
         // This could be improved by adding a `sample` flag (or similar) to
         // .buildconfig.yml so inclusion is driven by project metadata rather than
         // name-prefix matching.
+        val isAndroidLint = settings.startParameter.projectProperties.containsKey("android-lint")
         val shouldIncludeProject = { name: String, _: ProjectConfig ->
-            rootDir.contains("android-components") || !name.startsWith("components:samples")
+            isAndroidLint || rootDir.contains("android-components") || !name.startsWith("components:samples")
         }
 
         includeProjects(settings, buildConfig, baseDir, shouldIncludeProject)
