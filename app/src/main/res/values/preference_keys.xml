@@ -561,6 +561,8 @@
     <string name="pref_key_custom_homepage_url" translatable="false">pref_key_custom_homepage_url</string>
     <!-- search settings -->
     <string name="pref_key_search_browsing_history_in_private" translatable="false">pref_key_search_browsing_history_in_private</string>
+    <string name="pref_key_search_bookmarks_in_private" translatable="false">pref_key_search_bookmarks_in_private</string>
+    <string name="pref_key_search_synced_tabs_in_private" translatable="false">pref_key_search_synced_tabs_in_private</string>
 
     <!-- Post Install Data -->
     <string name="pref_key_first_week_post_install_last_three_days_activity_sent" translatable="false">pref_key_first_week_post_install_last_three_days_activity_sent</string>

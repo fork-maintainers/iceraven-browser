@@ -132,9 +132,21 @@ class SearchEngineFragment : PreferenceFragmentCompat(), SystemInsetsPaddedFragm
                 isChecked = context.components.settings.shouldShowBookmarkSuggestions
             }
 
+        val showBookmarkSuggestionsInPrivate =
+            requirePreference<CheckBoxPreference>(R.string.pref_key_search_bookmarks_in_private).apply {
+                isChecked = context.components.settings.shouldShowBookmarkSuggestionsInPrivate
+                isEnabled = context.components.settings.shouldShowBookmarkSuggestions
+            }
+
         val showSyncedTabsSuggestions =
             requirePreference<SwitchPreferenceCompat>(R.string.pref_key_search_synced_tabs).apply {
                 isChecked = context.components.settings.shouldShowSyncedTabsSuggestions
+            }
+
+        val showSyncedTabsSuggestionsInPrivate =
+            requirePreference<CheckBoxPreference>(R.string.pref_key_search_synced_tabs_in_private).apply {
+                isChecked = context.components.settings.shouldShowSyncedTabsSuggestionsInPrivate
+                isEnabled = context.components.settings.shouldShowSyncedTabsSuggestions
             }
 
         val showSessionSuggestions =
@@ -185,7 +197,9 @@ class SearchEngineFragment : PreferenceFragmentCompat(), SystemInsetsPaddedFragm
         showHistorySuggestions.onPreferenceChangeListener = SharedPreferenceUpdater()
         showHistorySuggestionsInPrivate.onPreferenceChangeListener = SharedPreferenceUpdater()
         showBookmarkSuggestions.onPreferenceChangeListener = SharedPreferenceUpdater()
+        showBookmarkSuggestionsInPrivate.onPreferenceChangeListener = SharedPreferenceUpdater()
         showSyncedTabsSuggestions.onPreferenceChangeListener = SharedPreferenceUpdater()
+        showSyncedTabsSuggestionsInPrivate.onPreferenceChangeListener = SharedPreferenceUpdater()
         showSessionSuggestions.onPreferenceChangeListener = SharedPreferenceUpdater()
         showClipboardSuggestions.onPreferenceChangeListener = SharedPreferenceUpdater()
         searchSuggestionsInPrivatePreference.onPreferenceChangeListener = SharedPreferenceUpdater()
@@ -203,6 +217,16 @@ class SearchEngineFragment : PreferenceFragmentCompat(), SystemInsetsPaddedFragm
 
         showHistorySuggestions.setOnPreferenceClickListener {
             showHistorySuggestionsInPrivate.isEnabled = showHistorySuggestions.isChecked
+            true
+        }
+
+        showBookmarkSuggestions.setOnPreferenceClickListener {
+            showBookmarkSuggestionsInPrivate.isEnabled = showBookmarkSuggestions.isChecked
+            true
+        }
+
+        showSyncedTabsSuggestions.setOnPreferenceClickListener {
+            showSyncedTabsSuggestionsInPrivate.isEnabled = showSyncedTabsSuggestions.isChecked
             true
         }
 

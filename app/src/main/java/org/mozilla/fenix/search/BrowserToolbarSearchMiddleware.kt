@@ -447,7 +447,13 @@ class BrowserToolbarSearchMiddleware(
                     false -> null
                 },
                 when (settings.shouldShowBookmarkSuggestions) {
-                    true -> components.core.bookmarksStorage
+                    true -> when(browsingModeManager.mode.isPrivate) {
+                        true -> when(settings.shouldShowBookmarkSuggestionsInPrivate) {
+                            true -> components.core.bookmarksStorage
+                            false -> null
+                        }
+                        false -> components.core.bookmarksStorage
+                    }
                     false -> null
                 },
                 components.core.domainsAutocompleteProvider,

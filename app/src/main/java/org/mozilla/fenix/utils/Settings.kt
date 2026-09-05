@@ -889,8 +889,18 @@ class Settings(
         default = true,
     )
 
+    val shouldShowBookmarkSuggestionsInPrivate by booleanPreference(
+        appContext.getPreferenceKey(R.string.pref_key_search_bookmarks_in_private),
+        default = true,
+    )
+
     val shouldShowSyncedTabsSuggestions by booleanPreference(
         appContext.getPreferenceKey(R.string.pref_key_search_synced_tabs),
+        default = true,
+    )
+
+    val shouldShowSyncedTabsSuggestionsInPrivate by booleanPreference(
+        appContext.getPreferenceKey(R.string.pref_key_search_synced_tabs_in_private),
         default = true,
     )
 
