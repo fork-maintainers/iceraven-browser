@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<!-- Shared Android lint rules for the Fenix and Focus applications. Referenced explicitly through
+     `lintConfig` in each app's build.gradle rather than being named lint.xml, so that it is never
+     picked up implicitly by another project through lint's directory hierarchy. -->
+<lint>
+    <!-- The android-lint mozlint task reports every issue in the lint report as a failure, including
+         the informational note lint emits about findings filtered by the baseline. Silence just that
+         note; the baseline itself still grandfathers the underlying findings. -->
+    <issue id="LintBaseline" severity="ignore" />
+
+    <!-- Lints that don't apply to our translation process -->
+    <issue id="MissingTranslation" severity="ignore" />
+    <issue id="MissingQuantity" severity="ignore" />
+    <issue id="ImpliedQuantity" severity="ignore" />
+    <issue id="PluralsCandidate" severity="ignore" />
+    <issue id="StringFormatCount" severity="ignore" />
+    <issue id="TypographyEllipsis" severity="ignore" />
+    <issue id="ExtraTranslation" severity="ignore" />
+    <issue id="Untranslatable" severity="ignore" />
+    <issue id="MissingDefaultResource" severity="ignore" />
+    <!-- Which plural forms a language needs and whether to use a fraction character are the translators'
+         call, and the localized files come from the l10n import, so only check the default strings. -->
+    <issue id="UnusedQuantity">
+        <ignore path="**/values-*/strings.xml" />
+    </issue>
+    <issue id="TypographyFractions">
+        <ignore path="**/values-*/strings.xml" />
+    </issue>
+    <issue id="BrandUsage" severity="error">
+        <ignore path="**/values-*/strings.xml" />
+        <ignore path="**/values/*_strings.xml" />
+        <ignore path="**/values/app.xml" />
+    </issue>
+    <issue id="IncorrectStraightQuote" severity="error">
+        <ignore path="**/values-*/strings.xml" />
+    </issue>
+    <issue id="IncorrectStraightDoubleQuote" severity="error">
+        <ignore path="**/values-*/strings.xml" />
+        <ignore path="**/values/*_strings.xml" />
+    </issue>
+    <issue id="IncorrectEllipsisCharacter" severity="error">
+        <ignore path="**/values-*/strings.xml" />
+    </issue>
+    <issue id="BlankString" severity="error">
+        <ignore path="**/values/*_strings.xml" />
+    </issue>
+    <issue id="PlaceholderComment" severity="error">
+        <ignore path="**/values-*/strings.xml" />
+        <ignore path="**/values/*_strings.xml" />
+    </issue>
+    <issue id="Typos" severity="error">
+        <ignore path="**/values-*/strings.xml" />
+    </issue>
+
+    <!-- Lints that are disabled by default -->
+    <issue id="ConvertToWebp" severity="warning" />
+
+    <!-- Performance: big wins from a theoretical perspective so we escalate to error. -->
+    <issue id="DrawAllocation" severity="error" />
+    <issue id="Wakelock" severity="error" />
+    <issue id="WakelockTimeout" severity="error" />
+    <issue id="Recycle" severity="error" />
+    <issue id="StaticFieldLeak" severity="error" />
+    <issue id="ViewTag" severity="error" />
+    <issue id="ViewHolder" severity="error" />
+    <issue id="HandlerLeak" severity="error" />
+    <issue id="NestedWeights" severity="error" />
+
+    <!-- Performance: quick-to-fix violations so we escalate to error.
+         We haven't validated that they have a significant impact though. -->
+    <issue id="ObsoleteLayoutParam" severity="error" />
+    <issue id="ObsoleteSdkInt" severity="error" />
+    <issue id="AnimatorKeep" severity="error" />
+    <issue id="DuplicateDivider" severity="error" />
+    <issue id="MergeRootFrame" severity="error" />
+    <issue id="UseOfBundledGooglePlayServices" severity="error" />
+    <issue id="UseValueOf" severity="error" />
+    <issue id="InefficientWeight" severity="error" />
+    <issue id="DisableBaselineAlignment" severity="error" />
+    <issue id="UselessLeaf" severity="error" />
+    <issue id="UselessParent" severity="error" />
+    <issue id="UnusedNamespace" severity="error" />
+    <issue id="UnusedResources" severity="error">
+        <!-- Localized strings are removed by the l10n import a while after the string is removed from
+             the default strings.xml, so the localized files temporarily hold unreferenced strings. -->
+        <ignore path="**/values-*/strings.xml" />
+    </issue>
+    <issue id="UseCompoundDrawables" severity="error" />
+    <issue id="Overdraw" severity="error" />
+
+    <!-- Performance: checks that we're unsure of the value of that we might want to investigate. -->
+    <issue id="UnpackedNativeCode" severity="informational" />
+    <issue id="LogConditional" severity="informational" />
+    <issue id="UseSparseArrays" severity="informational" /> <!-- hurts developer convenience of kotlin Map... -->
+
+    <!-- Ignore due to baseline bloat and lack of actionability -->
+    <issue id="VectorPath" severity="ignore" />
+
+    <!-- Correctness: checks with increased severity -->
+    <issue id="ModifierParameter" severity="error" />
+    <issue id="PrivateResource" severity="error" />
+
+</lint>
