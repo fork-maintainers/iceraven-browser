@@ -239,7 +239,7 @@ class PrivateBrowsingLockFeature(
         // Lock when the activity hits onStop unless it's a config-change restart or comes from
         // a custom tab.
         if (owner is Activity && !owner.isChangingConfigurations && !openInFirefoxRequested) {
-            maybeLockPrivateModeOnStop()
+            maybeLockPrivateMode()
         }
     }
 

@@ -50,9 +50,6 @@ class HomeSettingsFragment : PreferenceFragmentCompat(), SystemInsetsPaddedFragm
     @VisibleForTesting
     internal lateinit var fenixComponents: Components
 
-    @VisibleForTesting
-    internal var worldCupHasEnded: () -> Boolean = { hasWorldCupEnded() }
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         if (!::fenixComponents.isInitialized) {

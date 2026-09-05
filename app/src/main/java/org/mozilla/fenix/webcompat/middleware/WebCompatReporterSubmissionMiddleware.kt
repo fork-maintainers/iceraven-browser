@@ -254,25 +254,4 @@ class WebCompatReporterSubmissionMiddleware(
             PreviewReporterItem(title, data)
         }
     }
-
-    /**
-     * Dynamically parses a [JsonObject] into a list of [PreviewReporterItem].
-     * It iterates through each top-level key (e.g., "basic", "app") and
-     * collects its nested fields as a map of String to String.
-     */
-    @VisibleForTesting
-    internal fun parseWebCompatPreviewJson(webCompatJSON: JsonObject): List<PreviewReporterItem> {
-        return webCompatJSON.mapNotNull { (title, element) ->
-            val sectionObject = element as? JsonObject ?: return@mapNotNull null
-            val data = sectionObject.mapValues { (_, value) ->
-                if (value is JsonPrimitive) {
-                    value.content
-                } else {
-                    value.toString()
-                }
-            }
-
-            PreviewReporterItem(title, data)
-        }
-    }
 }
