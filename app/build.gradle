@@ -730,7 +730,6 @@ protobuf {
     // for more information.
     generateProtoTasks {
         all().each { task ->
-            task.dependsOn('createBuildDir')
             task.builtins {
                 java {
                     option 'lite'

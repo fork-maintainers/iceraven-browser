@@ -32,10 +32,6 @@ android {
     }
 }
 
-tasks.configureEach { task ->
-    task.dependsOn(":app:createBuildDir")
-}
-
 dependencies {
     implementation libs.androidx.activity.compose
     implementation libs.androidx.appcompat
