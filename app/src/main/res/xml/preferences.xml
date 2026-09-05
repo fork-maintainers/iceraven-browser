@@ -213,11 +213,6 @@
             app:iconSpaceReserved="false"
             app:isPreferenceVisible="@bool/IS_DEBUG" />
 
-        <androidx.preference.Preference
-            android:key="@string/pref_key_remote_improvements"
-            android:title="@string/preferences_remote_improvements"
-            app:iconSpaceReserved="false" />
-
         <androidx.preference.SwitchPreferenceCompat
             android:key="@string/pref_key_remote_debugging"
             android:title="@string/preferences_remote_debugging"

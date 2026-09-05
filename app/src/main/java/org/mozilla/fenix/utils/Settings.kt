@@ -822,7 +822,7 @@ class Settings(
      */
     var isRolloutsEnabled by booleanPreference(
         key = appContext.getPreferenceKey(R.string.pref_key_rollouts),
-        default = { appContext.components.nimbus.sdk.rolloutParticipation },
+        default = false,
     )
 
     /**
