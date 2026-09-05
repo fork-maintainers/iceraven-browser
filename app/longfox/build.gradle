@@ -28,7 +28,7 @@ android {
         buildConfig true
     }
     lint {
-        lintConfig = file("../../../shared-lint.xml")
+        lintConfig = file("../../shared-lint.xml")
     }
 }
 
