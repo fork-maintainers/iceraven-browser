@@ -128,7 +128,9 @@ class PythonEnvsPlugin implements Plugin<Project> {
                                 commandLine installer, "/InstallationType=JustMe", "/AddToPath=0", "/RegisterPython=0", "/S", "/D=${env.envDir}"
                             } else {
                                 if (!condaExec.exists()) {
-                                    commandLine "bash", installer, "-b", "-u", "-p", env.envDir
+                                    commandLine "bash", installer, "-b", "-p", env.envDir
+                                } else {
+                                    sleep(60 * 1000) // wait for conda to finish installation
                                 }
                             }
                         }
