@@ -122,14 +122,14 @@ class PythonEnvsPlugin implements Plugin<Project> {
                         }
 
                         project.logger.quiet("Bootstrapping to ${env.envDir}")
+                        File condaExec = new File(env.envDir, isWindows ? "Scripts/conda.exe" : "bin/conda")
                         execOps.exec {
                             if (isWindows) {
                                 commandLine installer, "/InstallationType=JustMe", "/AddToPath=0", "/RegisterPython=0", "/S", "/D=${env.envDir}"
                             } else {
-                                if (env.envDir.exists()) {
-                                    sleep(60 * 1000)
+                                if (!condaExec.exists()) {
+                                    commandLine "bash", installer, "-b", "-u", "-p", env.envDir
                                 }
-                                commandLine "bash", installer, "-b", "-u", "-p", env.envDir
                             }
                         }
 
