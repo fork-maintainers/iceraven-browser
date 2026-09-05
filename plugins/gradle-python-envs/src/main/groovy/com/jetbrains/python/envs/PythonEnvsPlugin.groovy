@@ -127,7 +127,7 @@ class PythonEnvsPlugin implements Plugin<Project> {
                                 commandLine installer, "/InstallationType=JustMe", "/AddToPath=0", "/RegisterPython=0", "/S", "/D=${env.envDir}"
                             } else {
                                 if (env.envDir.exists()) {
-                                    sleep(30 * 1000)
+                                    sleep(60 * 1000)
                                 }
                                 commandLine "bash", installer, "-b", "-u", "-p", env.envDir
                             }
