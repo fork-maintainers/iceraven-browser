@@ -879,6 +879,11 @@ class Settings(
         default = true,
     )
 
+    val shouldShowHistorySuggestionsInPrivate by booleanPreference(
+        appContext.getPreferenceKey(R.string.pref_key_search_browsing_history_in_private),
+        default = true,
+    )
+
     val shouldShowBookmarkSuggestions by booleanPreference(
         appContext.getPreferenceKey(R.string.pref_key_search_bookmarks),
         default = true,

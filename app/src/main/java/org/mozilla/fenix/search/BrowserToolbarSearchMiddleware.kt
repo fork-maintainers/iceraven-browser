@@ -437,7 +437,13 @@ class BrowserToolbarSearchMiddleware(
         return when (selectedSearchEngine?.id) {
             defaultEngineId -> listOfNotNull(
                 when (settings.shouldShowHistorySuggestions) {
-                    true -> components.core.historyStorage
+                    true -> when (browsingModeManager.mode.isPrivate) {
+                        true -> when(settings.shouldShowHistorySuggestionsInPrivate) {
+                            true -> components.core.historyStorage
+                            false -> null
+                        }
+                        false -> components.core.historyStorage
+                    }
                     false -> null
                 },
                 when (settings.shouldShowBookmarkSuggestions) {

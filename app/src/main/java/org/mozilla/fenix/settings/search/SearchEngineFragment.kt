@@ -121,6 +121,11 @@ class SearchEngineFragment : PreferenceFragmentCompat(), SystemInsetsPaddedFragm
                 isChecked = context.components.settings.shouldShowHistorySuggestions
             }
 
+        val showHistorySuggestionsInPrivate =
+            requirePreference<SwitchPreferenceCompat>(R.string.pref_key_search_browsing_history_in_private).apply {
+                isChecked = context.components.settings.shouldShowHistorySuggestionsInPrivate
+            }
+
         val showBookmarkSuggestions =
             requirePreference<SwitchPreferenceCompat>(R.string.pref_key_search_bookmarks).apply {
                 isChecked = context.components.settings.shouldShowBookmarkSuggestions
@@ -177,6 +182,7 @@ class SearchEngineFragment : PreferenceFragmentCompat(), SystemInsetsPaddedFragm
         }
         searchSuggestionsPreference.onPreferenceChangeListener = SharedPreferenceUpdater()
         showHistorySuggestions.onPreferenceChangeListener = SharedPreferenceUpdater()
+        showHistorySuggestionsInPrivate.onPreferenceChangeListener = SharedPreferenceUpdater()
         showBookmarkSuggestions.onPreferenceChangeListener = SharedPreferenceUpdater()
         showSyncedTabsSuggestions.onPreferenceChangeListener = SharedPreferenceUpdater()
         showSessionSuggestions.onPreferenceChangeListener = SharedPreferenceUpdater()
