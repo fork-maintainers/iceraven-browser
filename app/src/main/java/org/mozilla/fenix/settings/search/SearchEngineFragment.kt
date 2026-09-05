@@ -122,7 +122,7 @@ class SearchEngineFragment : PreferenceFragmentCompat(), SystemInsetsPaddedFragm
             }
 
         val showHistorySuggestionsInPrivate =
-            requirePreference<SwitchPreferenceCompat>(R.string.pref_key_search_browsing_history_in_private).apply {
+            requirePreference<CheckBoxPreference>(R.string.pref_key_search_browsing_history_in_private).apply {
                 isChecked = context.components.settings.shouldShowHistorySuggestionsInPrivate
             }
 
