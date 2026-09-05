@@ -126,7 +126,7 @@ class PythonEnvsPlugin implements Plugin<Project> {
                             if (isWindows) {
                                 commandLine installer, "/InstallationType=JustMe", "/AddToPath=0", "/RegisterPython=0", "/S", "/D=${env.envDir}"
                             } else {
-                                commandLine "bash", installer, "-b", "-p", env.envDir
+                                commandLine "bash", installer, "-b", "-u", "-p", env.envDir
                             }
                         }
 
