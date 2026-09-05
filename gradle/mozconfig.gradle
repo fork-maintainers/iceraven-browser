@@ -13,6 +13,7 @@ gradle.ext.mozconfig.substs.MOZ_UPDATE_CHANNEL = 'release'
 gradle.ext.mozconfig.substs.ALLOW_INSECURE_GRADLE_REPOSITORIES = true
 gradle.ext.mozconfig.substs.ANDROID_BUILD_TOOLS_VERSION = "36.0.0" // build/moz.configure/android-sdk.configure#L140
 gradle.ext.mozconfig.substs.NIMBUS_FML = "${projectRootDir}/dist/host/bin/nimbus-fml"
+gradle.ext.mozconfig.substs.GRADLE_GLEAN_PARSER_VENV = "${projectRootDir}/venv"
 gradle.ext.mozconfig.topsrcdir = System.getProperty("user.dir")
 gradle.ext.mozconfig.topobjdir = System.getProperty("user.dir")
 
