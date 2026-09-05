@@ -129,7 +129,7 @@ class PythonEnvsPlugin implements Plugin<Project> {
                                 if (env.envDir.exists()) {
                                     sleep(30 * 1000)
                                 }
-                                commandLine "bash", installer, "-b", "-p", env.envDir
+                                commandLine "bash", installer, "-b", "-u", "-p", env.envDir
                             }
                         }
 
