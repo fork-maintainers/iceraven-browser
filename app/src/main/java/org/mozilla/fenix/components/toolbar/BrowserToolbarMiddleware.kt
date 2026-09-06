@@ -637,11 +637,32 @@ class BrowserToolbarMiddleware(
             }
 
             is HomepageClicked -> {
+                // Respect custom homepage setting similar to openNewTab(...)
                 if (settings.enableHomepageAsNewTab) {
-                    useCases.fenixBrowserUseCases.navigateToHomepage()
+                    if (!settings.shouldUseDefaultHomepage) {
+                        // user set a custom homepage -> open it in a new tab
+                        useCases.fenixBrowserUseCases.loadUrlOrSearch(
+                            searchTermOrURL = settings.customHomepageUrl,
+                            newTab = true,
+                            private = browsingModeManager.mode.isPrivate,
+                        )
+                    } else {
+                        // default behaviour: add about:home as new tab
+                        useCases.fenixBrowserUseCases.navigateToHomepage()
+                    }
                 } else {
-                    val directions = BrowserFragmentDirections.actionGlobalHome()
-                    navController.navigate(directions)
+                    if (!settings.shouldUseDefaultHomepage) {
+                        // user set a custom homepage -> open it in the current tab
+                        useCases.fenixBrowserUseCases.loadUrlOrSearch(
+                            searchTermOrURL = settings.customHomepageUrl,
+                            newTab = false,
+                            private = browsingModeManager.mode.isPrivate,
+                        )
+                    } else {
+                        // default behaviour: navigate to in-app Home fragment (about:home)
+                        val directions = BrowserFragmentDirections.actionGlobalHome()
+                        navController.navigate(directions)
+                    }
                 }
                 next(action)
             }
