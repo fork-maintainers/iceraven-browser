@@ -490,7 +490,7 @@ class SecretSettingsFragment : PreferenceFragmentCompat(), SystemInsetsPaddedFra
         }
 
         requirePreference<SwitchPreferenceCompat>(R.string.pref_key_native_share_sheet).apply {
-            isVisible = Config.channel.isNightlyOrDebug
+            isVisible = Config.channel.isNightlyOrDebug || Config.channel.isFork
             isChecked = settings.nativeShareSheetEnabled
             onPreferenceChangeListener = SharedPreferenceUpdater()
         }
