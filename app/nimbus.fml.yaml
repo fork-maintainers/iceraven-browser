@@ -510,10 +510,11 @@ features:
     variables:
       shouldUseNimbus:
         description: >
+          THIS VALUE NO LONGER APPLIES; GeckoProvider.kt is used instead regardless.
           If true, the values for both SHIP and Fission set in this file apply.
           Otherwise, the values from modules/libpref/init/StaticPrefList.yaml apply.
         type: Boolean
-        default: true
+        default: false
       enabled:
         description: >
           Whether or not to enable fission. Fission is enabled when set to true. Fission is disabled when
