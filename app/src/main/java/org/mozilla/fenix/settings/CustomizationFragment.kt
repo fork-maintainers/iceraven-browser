@@ -400,6 +400,11 @@ class CustomizationFragment : PreferenceFragmentCompat(), SystemInsetsPaddedFrag
             isChecked = context.components.settings.shouldShowSignInButton
             onPreferenceChangeListener = SharedPreferenceUpdater()
         }
+        
+        requirePreference<SwitchPreferenceCompat>(R.string.pref_key_enable_fission).apply {
+            isChecked = context.components.settings.isFissionEnabled
+            onPreferenceChangeListener = SharedPreferenceUpdater()
+        }
     }
 
     override fun onPreferenceTreeClick(preference: Preference): Boolean {
