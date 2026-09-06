@@ -41,16 +41,16 @@ class DefaultAppIconRepository(
 
     override val groupedAppIcons: Map<IconGroupTitle, List<AppIcon>>
         get() = mapOf(
-            IconGroupTitle(R.string.alternative_app_icon_group_featured) to listOf(
-                AppIcon.AppRetro2004,
-                AppIcon.AppPixelated,
-                AppIcon.AppCuddling,
-                AppIcon.AppPride,
-                AppIcon.AppFlaming,
-                AppIcon.AppMinimal,
-                AppIcon.AppMomo,
-                AppIcon.AppCool,
-            ),
+            // IconGroupTitle(R.string.alternative_app_icon_group_featured) to listOf(
+            //     AppIcon.AppRetro2004,
+            //     AppIcon.AppPixelated,
+            //     AppIcon.AppCuddling,
+            //     AppIcon.AppPride,
+            //     AppIcon.AppFlaming,
+            //     AppIcon.AppMinimal,
+            //     AppIcon.AppMomo,
+            //     AppIcon.AppCool,
+            // ),
             IconGroupTitle(R.string.alternative_app_icon_group_solid_colors) to listOf(
                 AppIcon.AppDefault,
                 AppIcon.AppSolidLight,
