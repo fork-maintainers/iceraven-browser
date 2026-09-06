@@ -56,7 +56,7 @@ jobs:
           /usr/bin/ls -alh gradle/build/app/outputs/apk/forkRelease/
 
       - name: Create signed APKs
-        uses: ilharp/sign-android-release@v2
+        uses: akliuxingyuan/sign-android-release@v2.0.1
         with:
           releaseDir: gradle/build/app/outputs/apk/forkRelease/
           signingKey: ${{ secrets.DEBUG_SIGNING_KEY }}
@@ -71,17 +71,17 @@ jobs:
       - name: Upload arm64 apk
         uses: actions/upload-artifact@v7
         with:
-          path: gradle/build/app/outputs/apk/forkRelease/app-arm64-v8a-forkRelease-unsigned-signed.apk
+          path: gradle/build/app/outputs/apk/forkRelease/app-arm64-v8a-forkRelease.apk
           name: ${{ env.VERSION_NAME }}-arm64-v8a.apk
 
       - name: Upload armeabi apk
         uses: actions/upload-artifact@v7
         with:
-          path: gradle/build/app/outputs/apk/forkRelease/app-armeabi-v7a-forkRelease-unsigned-signed.apk
+          path: gradle/build/app/outputs/apk/forkRelease/app-armeabi-v7a-forkRelease.apk
           name: ${{ env.VERSION_NAME }}-armeabi-v7a.apk
 
       - name: Upload x86_64 apk
         uses: actions/upload-artifact@v7
         with:
-          path: gradle/build/app/outputs/apk/forkRelease/app-x86_64-forkRelease-unsigned-signed.apk
+          path: gradle/build/app/outputs/apk/forkRelease/app-x86_64-forkRelease.apk
           name: ${{ env.VERSION_NAME }}-x86_64.apk

@@ -50,7 +50,7 @@ jobs:
           /usr/bin/time -v ./gradlew app:assembleForkRelease -PversionName=${{ env.VERSION_NAME }} --stacktrace --no-daemon
 
       - name: Create signed APKs
-        uses: ilharp/sign-android-release@v2
+        uses: akliuxingyuan/sign-android-release@v2.0.1
         with:
           releaseDir: gradle/build/app/outputs/apk/forkRelease/
           signingKey: ${{ secrets.DEBUG_SIGNING_KEY }}
@@ -84,9 +84,9 @@ jobs:
         if: "contains(toJSON(github.event.ref_type), 'tag') && contains(toJSON(github.event.ref), 'iceraven')"
         run: |
           mkdir -p dist_apks
-          cp gradle/build/app/outputs/apk/forkRelease/app-arm64-v8a-forkRelease-unsigned-signed.apk dist_apks/${{ github.event.ref }}-arm64-v8a.apk
-          cp gradle/build/app/outputs/apk/forkRelease/app-armeabi-v7a-forkRelease-unsigned-signed.apk dist_apks/${{ github.event.ref }}-armeabi-v7a.apk
-          cp gradle/build/app/outputs/apk/forkRelease/app-x86_64-forkRelease-unsigned-signed.apk dist_apks/${{ github.event.ref }}-x86_64.apk
+          cp gradle/build/app/outputs/apk/forkRelease/app-arm64-v8a-forkRelease.apk dist_apks/${{ github.event.ref }}-arm64-v8a.apk
+          cp gradle/build/app/outputs/apk/forkRelease/app-armeabi-v7a-forkRelease.apk dist_apks/${{ github.event.ref }}-armeabi-v7a.apk
+          cp gradle/build/app/outputs/apk/forkRelease/app-x86_64-forkRelease.apk dist_apks/${{ github.event.ref }}-x86_64.apk
 
       - name: Release and Upload APKs
         if: "contains(toJSON(github.event.ref_type), 'tag') && contains(toJSON(github.event.ref), 'iceraven')"
