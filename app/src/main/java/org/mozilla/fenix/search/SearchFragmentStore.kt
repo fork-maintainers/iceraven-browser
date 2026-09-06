@@ -286,7 +286,7 @@ fun createInitialSearchFragmentState(
         showSyncedTabsSuggestionsForCurrentEngine = false,
         showAllSyncedTabsSuggestions = shouldShowSyncedTabsSuggestions(browsingMode, settings),
         showSessionSuggestionsForCurrentEngine = false,
-        showAllSessionSuggestions = true,
+        showAllSessionSuggestions = settings.shouldShowSessionSuggestions,
         showSponsoredSuggestions = browsingMode == BrowsingMode.Normal &&
             settings.enableFxSuggest && settings.showSponsoredSuggestions,
         showNonSponsoredSuggestions = browsingMode == BrowsingMode.Normal &&
@@ -491,7 +491,7 @@ private fun searchStateReducer(state: SearchFragmentState, action: SearchFragmen
                         action.settings.shouldShowSearchOptimizationSportCard,
                 showFlightsSuggestions = shouldShowCardSuggestions(action.settings) &&
                         action.settings.shouldShowSearchOptimizationFlightCard,
-                showAllSessionSuggestions = true,
+                showAllSessionSuggestions = action.settings.shouldShowSessionSuggestions,
                 showTrendingSearches = shouldShowTrendingSearchSuggestions(
                     browsingMode = action.browsingMode,
                     settings = action.settings,
@@ -516,7 +516,7 @@ private fun searchStateReducer(state: SearchFragmentState, action: SearchFragmen
                     shouldShowSyncedTabsSuggestions(action.browsingMode, action.settings) && !action.engine.isGeneral,
                 showAllSyncedTabsSuggestions = false,
                 showSessionSuggestionsForCurrentEngine = !action.engine.isGeneral,
-                showAllSessionSuggestions = false,
+                showAllSessionSuggestions = action.settings.shouldShowSessionSuggestions && !action.engine.isGeneral,
                 showSponsoredSuggestions = false,
                 showNonSponsoredSuggestions = false,
                 showStocksSuggestions = false,

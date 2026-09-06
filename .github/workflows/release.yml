@@ -40,19 +40,14 @@ jobs:
           sed -i '/about_content/s/Mozilla/@forkmaintainers/' app/src/*/res/values*/*strings.xml
           sed -i '/<string name="trackers_blocked_panel_categorical_num_trackers_blocked">/s/%s/%1$s/g; /<string name="trackers_blocked_panel_categorical_num_trackers_blocked">/s/%d/%2$d/g' app/src/*/res/values*/*strings.xml
 
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v6
 
       - name: Build forkRelease variant of app
-        uses: gradle/gradle-build-action@v2
         env:
-          # Try to stop the daemon from magically vanishing by adding random memory-related arguments.
-          # See <https://stackoverflow.com/a/70010526> and <https://stackoverflow.com/a/70756876>
-          # The runner seems to have ~6 gigs of memory, so we make sure to stay under that.
-          # We have Java 11 so we don't have a perm size anymore.
           GRADLE_OPTS: -Dorg.gradle.jvmargs="-XX:MaxMetaspaceSize=4g -Xms1g -Xmx7g -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/dev/stderr"
-        with:
-          gradle-home-cache-cleanup: true
-          gradle-executable: /usr/bin/time
-          arguments: -v ./gradlew app:assembleForkRelease -PversionName=${{ env.VERSION_NAME }} --stacktrace --no-daemon
+        run: |
+          /usr/bin/time -v ./gradlew app:assembleForkRelease -PversionName=${{ env.VERSION_NAME }} --stacktrace --no-daemon
 
       - name: Setup build tool version variable
         shell: bash
