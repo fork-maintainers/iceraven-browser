@@ -519,7 +519,7 @@ features:
           Whether or not to enable fission. Fission is enabled when set to true. Fission is disabled when
           set to false.
         type: Boolean
-        default: true
+        default: false
       isolationStrategy:
         description: >
           The web content isolation strategy to use with fission. "0" means "isolate nothing", similar to
