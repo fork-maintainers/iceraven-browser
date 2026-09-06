@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v7
         with:
           submodules: 'true'
           fetch-depth: 0
@@ -89,48 +89,23 @@ jobs:
           echo -e "## Change log\n" >> temp_changelog.md
           echo "[${PREVIOUS_RELEASE_TAG}...${CURRENT_RELEASE_TAG}](https://github.com/${{ github.repository }}/compare/${PREVIOUS_RELEASE_TAG}...${CURRENT_RELEASE_TAG})" >> temp_changelog.md
 
-      - name: Create Release
+      - name: Rename APKs for Release
         if: "contains(toJSON(github.event.ref_type), 'tag') && contains(toJSON(github.event.ref), 'iceraven')"
-        id: create_release
-        uses: actions/create-release@v1
+        run: |
+          mkdir -p dist_apks
+          cp gradle/build/app/outputs/apk/forkRelease/app-arm64-v8a-forkRelease.apk dist_apks/${{ github.event.ref }}-arm64-v8a.apk
+          cp gradle/build/app/outputs/apk/forkRelease/app-armeabi-v7a-forkRelease.apk dist_apks/${{ github.event.ref }}-armeabi-v7a.apk
+          cp gradle/build/app/outputs/apk/forkRelease/app-x86_64-forkRelease.apk dist_apks/${{ github.event.ref }}-x86_64.apk
+
+      - name: Release and Upload APKs
+        if: "contains(toJSON(github.event.ref_type), 'tag') && contains(toJSON(github.event.ref), 'iceraven')"
+        uses: softprops/action-gh-release@v3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.event.ref }}
-          release_name: "${{ env.CURRENT_RELEASE_TAG_CAPITALIZE }}"
+          name: "${{ env.CURRENT_RELEASE_TAG_CAPITALIZE }}"
           draft: false
           prerelease: false
           body_path: temp_changelog.md
-
-      - name: Upload arm64 apk
-        if: "contains(toJSON(github.event.ref_type), 'tag') && contains(toJSON(github.event.ref), 'iceraven')"
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: gradle/build/app/outputs/apk/forkRelease/app-arm64-v8a-forkRelease.apk
-          asset_name: ${{ github.event.ref }}-browser-arm64-v8a-forkRelease.apk
-          asset_content_type: application/vnd.android.package-archive
-
-      - name: Upload armeabi apk
-        if: "contains(toJSON(github.event.ref_type), 'tag') && contains(toJSON(github.event.ref), 'iceraven')"
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: gradle/build/app/outputs/apk/forkRelease/app-armeabi-v7a-forkRelease.apk
-          asset_name: ${{ github.event.ref }}-browser-armeabi-v7a-forkRelease.apk
-          asset_content_type: application/vnd.android.package-archive
-
-      - name: Upload x86_64 apk
-        if: "contains(toJSON(github.event.ref_type), 'tag') && contains(toJSON(github.event.ref), 'iceraven')"
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: gradle/build/app/outputs/apk/forkRelease/app-x86_64-forkRelease.apk
-          asset_name: ${{ github.event.ref }}-browser-x86_64-forkRelease.apk
-          asset_content_type: application/vnd.android.package-archive
+          files: dist_apks/*.apk

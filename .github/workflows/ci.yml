@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v7
         with:
           submodules: 'true'
           fetch-depth: 0
@@ -51,41 +51,39 @@ jobs:
         run: |
           /usr/bin/time -v ./gradlew app:assembleForkRelease -PversionName=${{ env.VERSION_NAME }} --stacktrace --no-daemon
 
-      - name: Setup build tool version variable
-        shell: bash
-        run: |
-          BUILD_TOOL_VERSION=$(ls /usr/local/lib/android/sdk/build-tools/ | tail -n 1)
-          echo "BUILD_TOOL_VERSION=$BUILD_TOOL_VERSION" >> $GITHUB_ENV
-
-      - name: Create signed APKs
-        uses: abhijitvalluri/sign-apks@v0.8
-        with:
-          releaseDirectory: gradle/build/app/outputs/apk/forkRelease/
-          signingKeyBase64: ${{ secrets.DEBUG_SIGNING_KEY }}
-          alias: ${{ secrets.DEBUG_ALIAS }}
-          keyStorePassword: ${{ secrets.DEBUG_KEY_STORE_PASSWORD }}
-          keyPassword: ${{ secrets.DEBUG_KEY_PASSWORD }}
-        env:
-          BUILD_TOOLS_VERSION: ${{ env.BUILD_TOOL_VERSION }}
-
       - name: Debug
         run: |
           /usr/bin/ls -alh gradle/build/app/outputs/apk/forkRelease/
 
+      - name: Create signed APKs
+        uses: ilharp/sign-android-release@v2
+        id: signed_files
+        with:
+          releaseDir: gradle/build/app/outputs/apk/forkRelease/
+          signingKey: ${{ secrets.DEBUG_SIGNING_KEY }}
+          keyAlias: ${{ secrets.DEBUG_ALIAS }}
+          keyStorePassword: ${{ secrets.DEBUG_KEY_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.DEBUG_KEY_PASSWORD }}
+
+      - name: Debug
+        run: |
+          /usr/bin/ls -alh gradle/build/app/outputs/apk/forkRelease/
+          echo ${{ steps.signed_files.outputs }}
+
       - name: Upload arm64 apk
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           path: gradle/build/app/outputs/apk/forkRelease/app-arm64-v8a-forkRelease.apk
-          name: ${{ env.VERSION_NAME }}-browser-arm64-v8a-forkRelease.apk
+          name: ${{ env.VERSION_NAME }}-arm64-v8a.apk
 
       - name: Upload armeabi apk
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           path: gradle/build/app/outputs/apk/forkRelease/app-armeabi-v7a-forkRelease.apk
-          name: ${{ env.VERSION_NAME }}-browser-armeabi-v7a-forkRelease.apk
+          name: ${{ env.VERSION_NAME }}-armeabi-v7a.apk
 
       - name: Upload x86_64 apk
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           path: gradle/build/app/outputs/apk/forkRelease/app-x86_64-forkRelease.apk
-          name: ${{ env.VERSION_NAME }}-browser-x86_64-forkRelease.apk
+          name: ${{ env.VERSION_NAME }}-x86_64.apk
