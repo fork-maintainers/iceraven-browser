@@ -40,6 +40,8 @@
     <string name="preferences_show_fullscreen_toast">Fullscreen toast</string>
     <string name="preferences_suggest_shipped_domains">Show shipped domains suggestions</string>
     <string name="preferences_show_sign_in_button">Show Sign in button</string>
+    <string name="preferences_enable_fission">Enable site isolation (Fission)</string>
+    <string name="preferences_enable_fission_description">Isolate sites into separate processes for improved security. May use more memory. Requires restarting the app.</string>
     <string name="preferences_set_homepage">Change homepage</string>
     <string name="preferences_default_homepage">Default Homepage</string>
     <string name="preferences_custom_homepage">Custom Homepage</string>
