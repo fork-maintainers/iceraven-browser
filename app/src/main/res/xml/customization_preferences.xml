@@ -172,5 +172,9 @@
         <androidx.preference.SwitchPreferenceCompat
             android:key="@string/pref_key_show_sign_in_button"
             android:title="@string/preferences_show_sign_in_button" />
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="@string/pref_key_enable_fission"
+            android:summary="@string/preferences_enable_fission_description"
+            android:title="@string/preferences_enable_fission" /> 
     </androidx.preference.PreferenceCategory>
 </androidx.preference.PreferenceScreen>

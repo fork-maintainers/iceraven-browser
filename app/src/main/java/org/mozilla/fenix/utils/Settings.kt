@@ -1593,7 +1593,12 @@ class Settings(
         appContext.getPreferenceKey(R.string.pref_key_show_sign_in_button),
         default = true,
     )
-
+    
+    var isFissionEnabled by booleanPreference(
+        appContext.getPreferenceKey(R.string.pref_key_enable_fission),
+        default = false,
+    )
+    
     var shouldUseDefaultHomepage by booleanPreference(
         appContext.getPreferenceKey(R.string.pref_key_default_homepage),
         default = true,

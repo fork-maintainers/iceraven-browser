@@ -124,11 +124,8 @@ object GeckoProvider {
             )
             .isolatedProcessEnabled(context.components.settings.isIsolatedProcessEnabled)
             .appZygoteProcessEnabled(context.components.settings.isAppZygoteEnabled)
-
-        if (FxNimbus.features.fission.value().shouldUseNimbus) {
-            builder
-                .fissionEnabled(FxNimbus.features.fission.value().enabled)
-        }
+            //Fission enabled based on set value for it in settings; Nimbus is thus bypassed 
+            .fissionEnabled(context.components.settings.isFissionEnabled)
 
         return builder.build()
     }

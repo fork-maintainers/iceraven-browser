@@ -555,6 +555,7 @@
     <string name="pref_key_show_fullscreen_toast" translatable="false">pref_key_show_fullscreen_toast</string>
     <string name="pref_key_suggest_shipped_domains" translatable="false">pref_key_suggest_shipped_domains</string>
     <string name="pref_key_show_sign_in_button" translatable="false">pref_key_show_sign_in_button</string>
+    <string name="pref_key_enable_fission" translatable="false">pref_key_enable_fission</string>
     <!-- homepage settings -->
     <string name="pref_key_default_homepage" translatable="false">pref_key_default_homepage</string>
     <string name="pref_key_custom_homepage" translatable="false">pref_key_custom_homepage</string>

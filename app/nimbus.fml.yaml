@@ -477,7 +477,8 @@ features:
     variables:
       shouldUseNimbus:
         description: >
-          If true, the values for both SHIP and Fission set in this file apply.
+          THIS VALUE NO LONGER APPLIES; GeckoProvider.kt is used instead regardless.
+          Original description: If true, the values for both SHIP and Fission set in this file apply.
           Otherwise, the values from modules/libpref/init/StaticPrefList.yaml apply.
         type: Boolean
         default: false
@@ -494,14 +495,7 @@ features:
           process. "2" means "isolate high value", Android-specific setting to only isolate sites
           considered "high value".
         type: Int
-        default: 0
-    defaults:
-      - channel: nightly
-        value:
-          isolationStrategy: 2
-      - channel: developer
-        value:
-          isolationStrategy: 2
+        default: 1
 
   suggest-shipped-domains:
     description: Feature that suggests domains from the shipped domain list.
