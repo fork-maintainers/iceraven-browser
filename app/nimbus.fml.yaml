@@ -511,7 +511,7 @@ features:
       shouldUseNimbus:
         description: >
           THIS VALUE NO LONGER APPLIES; GeckoProvider.kt is used instead regardless.
-          If true, the values for both SHIP and Fission set in this file apply.
+          Original description: If true, the values for both SHIP and Fission set in this file apply.
           Otherwise, the values from modules/libpref/init/StaticPrefList.yaml apply.
         type: Boolean
         default: false
