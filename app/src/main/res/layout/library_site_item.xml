@@ -32,6 +32,7 @@
                 android:padding="10dp"
                 android:background="@drawable/favicon_background"
                 android:backgroundTint="?accent"
+                android:contentDescription="@string/library_item_selected_content_description"
                 app:srcCompat="@drawable/mozac_ic_checkmark_24"
                 app:tint="?iconOnColor" />
     </ImageSwitcher>

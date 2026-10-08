@@ -22,15 +22,4 @@
             file="src/main/res/drawable-xxhdpi"/>
     </issue>
 
-    <issue
-        id="ContentDescription"
-        message="Missing `contentDescription` attribute on image"
-        errorLine1="        &lt;ImageView"
-        errorLine2="         ~~~~~~~~~">
-        <location
-            file="src/main/res/layout/library_site_item.xml"
-            line="26"
-            column="10"/>
-    </issue>
-
 </issues>
