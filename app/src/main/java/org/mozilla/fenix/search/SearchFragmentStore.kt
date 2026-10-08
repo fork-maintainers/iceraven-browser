@@ -236,7 +236,7 @@ fun createInitialSearchFragmentState(
     val tab = tabId?.let { components.core.store.state.findTab(it) }
     val currentTabData = tab?.let {
         CurrentTabData(
-            title = it.content.title,
+            title = it.content.searchTerms.takeIf { it.isNotBlank() } ?: it.content.title,
             url = it.content.url,
             icon = it.content.icon,
         )
@@ -304,6 +304,12 @@ fun createInitialSearchFragmentState(
 sealed class SearchFragmentAction : Action {
     /** Automated action for when the [SearchFragmentStore] is created to trigger all needed setup. */
     data object Init : SearchFragmentAction()
+
+    /** Action to update the tab from which search was started. */
+    data class SearchSourceTabUpdated(
+        val tabId: String?,
+        val currentTabData: CurrentTabData?,
+    ) : SearchFragmentAction()
 
     /**
      * Action for when a new search is started.
@@ -415,6 +421,12 @@ private fun searchStateReducer(state: SearchFragmentState, action: SearchFragmen
             // no-op. Expected to be handled in middlewares.
             state
         }
+
+        is SearchFragmentAction.SearchSourceTabUpdated ->
+            state.copy(
+                tabId = action.tabId,
+                currentTabData = action.currentTabData,
+            )
 
         is SearchFragmentAction.SearchDefaultEngineSelected ->
             state.copy(

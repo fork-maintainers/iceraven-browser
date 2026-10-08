@@ -212,7 +212,7 @@ class SearchFragmentStoreTest {
         assertEquals(
             EMPTY_SEARCH_FRAGMENT_STATE.copy(
                 query = "https://example.com",
-                currentTabData = CurrentTabData("", "https://example.com", null),
+                currentTabData = CurrentTabData("search terms", "https://example.com", null),
                 searchTerms = "search terms",
                 searchSuggestionsOrientedAtBottom = true,
                 showAllSessionSuggestions = true,

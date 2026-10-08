@@ -160,6 +160,12 @@ class FenixSearchMiddleware(
                 maybeShowSearchSuggestions(store, action.query)
             }
 
+            is SearchFragmentAction.SearchSourceTabUpdated -> {
+                next(action)
+
+                maybeShowSearchSuggestions(store, store.state.query)
+            }
+
             is SearchEnginesSelectedActions -> {
                 next(action)
 
