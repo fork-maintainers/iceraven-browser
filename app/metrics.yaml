@@ -16269,7 +16269,8 @@ toolbar:
           add_new_tab, add_new_tab_long_press, add_new_private_tab, tab_counter, tab_counter_long_press,
           menu, share, clear, refresh, stop, add_bookmark, edit_bookmark, security_indicator, qr_code,
           home, reader_mode, microphone, open_in_fenix, close, site_custom, search_engine_selector,
-          search_engine_selected, translate, summarize, lens, shortcut_long_press, shortcut_edit_clicked.
+          search_engine_selected, translate, summarize, lens, lens_qr, shortcut_long_press,
+          shortcut_edit_clicked.
         type: string
       extra:
         description: |
@@ -16289,9 +16290,11 @@ toolbar:
     bugs:
       - https://bugzilla.mozilla.org/show_bug.cgi?id=1971857
       - https://bugzilla.mozilla.org/show_bug.cgi?id=2043252
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2075000
     data_reviews:
       - https://phabricator.services.mozilla.com/D264134
       - https://phabricator.services.mozilla.com/D303181
+      - https://phabricator.services.mozilla.com/D328944
     data_sensitivity:
       - interaction
     notification_emails:

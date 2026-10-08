@@ -22,6 +22,7 @@ import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.distinctUntilChangedBy
+import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -95,6 +96,7 @@ import org.mozilla.fenix.components.appstate.AppAction.SearchAction.SearchEngine
 import org.mozilla.fenix.components.appstate.AppAction.SearchAction.SearchStarted
 import org.mozilla.fenix.components.appstate.VoiceSearchAction.VoiceInputRequestCleared
 import org.mozilla.fenix.components.appstate.VoiceSearchAction.VoiceInputRequested
+import org.mozilla.fenix.components.lens.CameraMode
 import org.mozilla.fenix.components.metrics.MetricsUtils
 import org.mozilla.fenix.components.search.BOOKMARKS_SEARCH_ENGINE_ID
 import org.mozilla.fenix.components.search.HISTORY_SEARCH_ENGINE_ID
@@ -168,6 +170,7 @@ class BrowserToolbarSearchMiddleware(
     private var syncAvailableSearchEnginesJob: Job? = null
     private var observeQRScannerInputJob: Job? = null
     private var observeLensInputJob: Job? = null
+    private var observeLensFlowEndJob: Job? = null
     private var observeVoiceInputJob: Job? = null
     private var updateAutocompleteJob: Job? = null
 
@@ -193,6 +196,7 @@ class BrowserToolbarSearchMiddleware(
                     searchEngine = this.reconcileSelectedEngine(),
                 )
                 observeVoiceInputResults(store)
+                observeLensFlowEnd(store)
                 syncCurrentSearchEngine(store)
                 syncAvailableEngines(store)
                 updateSearchEndPageActions(store)
@@ -207,6 +211,7 @@ class BrowserToolbarSearchMiddleware(
                 }
                 observeQRScannerInputJob?.cancel()
                 observeVoiceInputJob?.cancel()
+                observeLensFlowEndJob?.cancel()
             }
 
             is CommitUrl -> handleCommitingUrl(action.text)
@@ -310,8 +315,10 @@ class BrowserToolbarSearchMiddleware(
             }
 
             is LensButtonClicked -> {
-                recordButtonTapped(ACTION_LENS_CLICKED)
-                ToolbarGoogleLensButton.tapped.record(NoExtras())
+                if (settings.lensCameraLastMode != CameraMode.QR) {
+                    recordButtonTapped(ACTION_LENS_CLICKED)
+                    ToolbarGoogleLensButton.tapped.record(NoExtras())
+                }
                 observeLensInput()
                 // The Lens camera screen lets the user toggle to QR scanning; observe both
                 // result streams so a QR string returned from the Lens flow still lands in
@@ -559,27 +566,38 @@ class BrowserToolbarSearchMiddleware(
                 )
             )
         } else if (isValidSearchEngine) {
-            val isLensEnabled = settings.googleLensIntegrationEnabled && settings.googleLensIntegrationUserEnabled
+            add(buildCameraAction(selectedSearchEngine))
+        }
+    }
 
-            if (isLensEnabled && !browsingModeManager.mode.isPrivate && selectedSearchEngine.isGoogleSearchEngine()) {
-                add(
-                    ActionButtonRes(
-                        drawableResId = iconsR.drawable.mozac_ic_logo_google_lens_24,
-                        contentDescription = R.string.lens_search_content_description,
-                        state = ActionButton.State.DEFAULT,
-                        onClick = LensButtonClicked,
-                    )
+    private fun buildCameraAction(selectedSearchEngine: SearchEngine?): ActionButtonRes {
+        val isLensEnabled = settings.googleLensIntegrationEnabled && settings.googleLensIntegrationUserEnabled
+
+        if (!isLensEnabled || browsingModeManager.mode.isPrivate || !selectedSearchEngine.isGoogleSearchEngine()) {
+            return ActionButtonRes(
+                drawableResId = iconsR.drawable.mozac_ic_qr_code_24,
+                contentDescription = qrR.string.mozac_feature_qr_scanner,
+                state = ActionButton.State.DEFAULT,
+                onClick = QrScannerClicked,
+            )
+        }
+
+        // Both icons open the Lens camera, which reopens in the mode the user last selected.
+        return when (settings.lensCameraLastMode) {
+            CameraMode.LENS ->
+                ActionButtonRes(
+                    drawableResId = iconsR.drawable.mozac_ic_logo_google_lens_24,
+                    contentDescription = R.string.lens_search_content_description,
+                    state = ActionButton.State.DEFAULT,
+                    onClick = LensButtonClicked,
                 )
-            } else {
-                add(
-                    ActionButtonRes(
-                        drawableResId = iconsR.drawable.mozac_ic_qr_code_24,
-                        contentDescription = qrR.string.mozac_feature_qr_scanner,
-                        state = ActionButton.State.DEFAULT,
-                        onClick = QrScannerClicked,
-                    )
+            CameraMode.QR ->
+                ActionButtonRes(
+                    drawableResId = iconsR.drawable.mozac_ic_qr_code_24,
+                    contentDescription = qrR.string.mozac_feature_qr_scanner,
+                    state = ActionButton.State.DEFAULT,
+                    onClick = LensButtonClicked,
                 )
-            }
         }
     }
 
@@ -628,6 +646,24 @@ class BrowserToolbarSearchMiddleware(
                         // survives that, this navigation doesn't.
                         appStore.dispatch(AppAction.LensAction.LensResultConsumed)
                         navController.navigate(R.id.action_global_browser)
+                    }
+                }
+        }
+    }
+
+    /**
+     * Rebuilds the end actions whenever a Lens camera flow ends, so the Lens button reflects a camera mode the user
+     * switched to before leaving the camera without a result.
+     */
+    private fun observeLensFlowEnd(store: Store<BrowserToolbarState, BrowserToolbarAction>) {
+        observeLensFlowEndJob?.cancel()
+        observeLensFlowEndJob = appStore.observeWhileActive {
+            map { it.lensState.isRequesting || it.lensState.inProgress }
+                .distinctUntilChanged()
+                .drop(1)
+                .collect { isLensFlowActive ->
+                    if (!isLensFlowActive) {
+                        updateSearchEndPageActions(store)
                     }
                 }
         }
