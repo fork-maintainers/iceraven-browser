@@ -6,7 +6,6 @@ package org.mozilla.fenix.settings.autofill.ui
 
 import mozilla.components.concept.storage.Address
 import mozilla.components.concept.storage.CreditCard
-import mozilla.components.concept.storage.CreditCardNumber
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -54,7 +53,7 @@ class AutofillSettingsReducerTest {
                 CreditCard(
                     guid = "$it",
                     billingName = "name$it",
-                    encryptedCardNumber = CreditCardNumber.Encrypted("4111111111111111"),
+                    cardNumber = "4111111111111111",
                     cardNumberLast4 = "211$it",
                     expiryMonth = 12,
                     expiryYear = 2029,
@@ -114,7 +113,7 @@ class AutofillSettingsReducerTest {
                 CreditCard(
                     guid = "$it",
                     billingName = "name$it",
-                    encryptedCardNumber = CreditCardNumber.Encrypted("4111111111111111"),
+                    cardNumber = "4111111111111111",
                     cardNumberLast4 = "211$it",
                     expiryMonth = 12,
                     expiryYear = 2029,

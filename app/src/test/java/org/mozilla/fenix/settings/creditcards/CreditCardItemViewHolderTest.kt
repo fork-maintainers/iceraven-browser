@@ -9,7 +9,6 @@ import android.view.View
 import io.mockk.mockk
 import io.mockk.verify
 import mozilla.components.concept.storage.CreditCard
-import mozilla.components.concept.storage.CreditCardNumber
 import mozilla.components.support.test.robolectric.testContext
 import mozilla.components.support.utils.CreditCardNetworkType
 import org.junit.Assert.assertEquals
@@ -32,7 +31,7 @@ class CreditCardItemViewHolderTest {
         CreditCard(
             guid = "id",
             billingName = "Banana Apple",
-            encryptedCardNumber = CreditCardNumber.Encrypted("4111111111111110"),
+            cardNumber = "4111111111111110",
             cardNumberLast4 = "1110",
             expiryMonth = 1,
             expiryYear = 2030,
