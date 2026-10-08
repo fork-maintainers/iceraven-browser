@@ -116,7 +116,6 @@ import org.junit.runner.RunWith
 import org.mozilla.experiments.nimbus.NimbusEventStore
 import org.mozilla.fenix.GleanMetrics.Events
 import org.mozilla.fenix.GleanMetrics.ReaderMode
-import org.mozilla.fenix.GleanMetrics.Toolbar
 import org.mozilla.fenix.GleanMetrics.Translations
 import org.mozilla.fenix.NavGraphDirections
 import org.mozilla.fenix.R
@@ -146,7 +145,6 @@ import org.mozilla.fenix.components.appstate.AppState
 import org.mozilla.fenix.components.appstate.OrientationMode.Landscape
 import org.mozilla.fenix.components.appstate.OrientationMode.Portrait
 import org.mozilla.fenix.components.appstate.SupportedMenuNotifications
-import org.mozilla.fenix.components.lens.CameraMode
 import org.mozilla.fenix.components.menu.MenuAccessPoint
 import org.mozilla.fenix.components.search.BOOKMARKS_SEARCH_ENGINE_ID
 import org.mozilla.fenix.components.search.HISTORY_SEARCH_ENGINE_ID
@@ -185,15 +183,11 @@ import org.mozilla.fenix.components.usecases.FenixBrowserUseCases
 import org.mozilla.fenix.components.usecases.ShareUseCases
 import org.mozilla.fenix.ext.directionsEq
 import org.mozilla.fenix.helpers.FenixGleanTestRule
-import org.mozilla.fenix.search.EditPageEndActionsInteractions.LensButtonClicked
 import org.mozilla.fenix.settings.ShortcutType
 import org.mozilla.fenix.summarization.SummarizationNavigator
 import org.mozilla.fenix.summarization.onboarding.SummarizationFeatureDiscoveryConfiguration
 import org.mozilla.fenix.tabstray.redux.state.Page
 import org.mozilla.fenix.tabstray.ui.AccessPoint
-import org.mozilla.fenix.telemetry.ACTION_LENS_QR_CLICKED
-import org.mozilla.fenix.telemetry.SOURCE_ADDRESS_BAR
-import org.mozilla.fenix.telemetry.SURFACE_BROWSER
 import org.mozilla.fenix.translations.TranslationsEnabledSettings
 import org.mozilla.fenix.utils.Settings
 import org.mozilla.fenix.utils.Stories.markAsOpenedFromHomeScreen
@@ -4472,30 +4466,6 @@ class BrowserToolbarMiddlewareTest {
             state = state,
             onClick = SummarizeClicked(source),
         )
-
-    @Test
-    fun `GIVEN QR is the last Lens camera mode WHEN the Lens button is clicked THEN record the Lens QR button tap`() {
-        settings.lensCameraLastMode = CameraMode.QR
-        val toolbarStore = buildStore()
-        appStore.dispatch(SearchStarted(tabId = tabId))
-
-        toolbarStore.dispatch(LensButtonClicked)
-
-        val event = Toolbar.buttonTapped.testGetValue()?.single()
-        assertEquals(ACTION_LENS_QR_CLICKED, event?.extra?.get("item"))
-        assertEquals(SOURCE_ADDRESS_BAR, event?.extra?.get("source"))
-        assertEquals(SURFACE_BROWSER, event?.extra?.get("surface"))
-    }
-
-    @Test
-    fun `GIVEN Lens is the last Lens camera mode WHEN the Lens button is clicked THEN don't record a Lens QR button tap`() {
-        settings.lensCameraLastMode = CameraMode.LENS
-        val toolbarStore = buildStore()
-
-        toolbarStore.dispatch(LensButtonClicked)
-
-        assertNull(Toolbar.buttonTapped.testGetValue())
-    }
 
     private fun buildMiddleware(
         appStore: AppStore = this.appStore,

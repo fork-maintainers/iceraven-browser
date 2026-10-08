@@ -71,7 +71,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mozilla.fenix.GleanMetrics.Events
-import org.mozilla.fenix.GleanMetrics.Toolbar
 import org.mozilla.fenix.NavGraphDirections
 import org.mozilla.fenix.R
 import org.mozilla.fenix.browser.browsingmode.BrowsingMode.Normal
@@ -89,7 +88,6 @@ import org.mozilla.fenix.components.appstate.SupportedMenuNotifications
 import org.mozilla.fenix.components.appstate.VoiceSearchAction.VoiceInputRequested
 import org.mozilla.fenix.components.appstate.search.SearchState
 import org.mozilla.fenix.components.appstate.search.SelectedSearchEngine
-import org.mozilla.fenix.components.lens.CameraMode
 import org.mozilla.fenix.components.menu.MenuAccessPoint
 import org.mozilla.fenix.components.usecases.FenixBrowserUseCases
 import org.mozilla.fenix.ext.components
@@ -109,14 +107,10 @@ import org.mozilla.fenix.home.toolbar.TabCounterInteractions.AddNewPrivateTab
 import org.mozilla.fenix.home.toolbar.TabCounterInteractions.AddNewTab
 import org.mozilla.fenix.home.toolbar.TabCounterInteractions.TabCounterClicked
 import org.mozilla.fenix.home.toolbar.TabCounterInteractions.TabCounterLongClicked
-import org.mozilla.fenix.search.EditPageEndActionsInteractions.LensButtonClicked
 import org.mozilla.fenix.search.fixtures.assertSearchSelectorEquals
 import org.mozilla.fenix.search.fixtures.buildExpectedSearchSelector
 import org.mozilla.fenix.settings.ShortcutType
 import org.mozilla.fenix.tabstray.redux.state.Page
-import org.mozilla.fenix.telemetry.ACTION_LENS_QR_CLICKED
-import org.mozilla.fenix.telemetry.SOURCE_ADDRESS_BAR
-import org.mozilla.fenix.telemetry.SURFACE_HOME
 import org.mozilla.fenix.translations.TranslationsEnabledSettings
 import org.mozilla.fenix.utils.Settings
 import org.robolectric.Shadows.shadowOf
@@ -1503,29 +1497,6 @@ class BrowserToolbarMiddlewareTest {
             val primaryButton = toolbarStore.state.displayState.navigationActions.first() as ActionButtonRes
             assertEquals(expectedBookmarkButton, primaryButton)
         }
-
-    @Test
-    fun `GIVEN QR is the last Lens camera mode WHEN the Lens button is clicked THEN record the Lens QR button tap`() {
-        every { testContext.components.settings.lensCameraLastMode } returns CameraMode.QR
-        val (_, toolbarStore) = buildMiddlewareAndAddToStore()
-
-        toolbarStore.dispatch(LensButtonClicked)
-
-        val event = Toolbar.buttonTapped.testGetValue()?.single()
-        assertEquals(ACTION_LENS_QR_CLICKED, event?.extra?.get("item"))
-        assertEquals(SOURCE_ADDRESS_BAR, event?.extra?.get("source"))
-        assertEquals(SURFACE_HOME, event?.extra?.get("surface"))
-    }
-
-    @Test
-    fun `GIVEN Lens is the last Lens camera mode WHEN the Lens button is clicked THEN don't record a Lens QR button tap`() {
-        every { testContext.components.settings.lensCameraLastMode } returns CameraMode.LENS
-        val (_, toolbarStore) = buildMiddlewareAndAddToStore()
-
-        toolbarStore.dispatch(LensButtonClicked)
-
-        assertNull(Toolbar.buttonTapped.testGetValue())
-    }
 
     private fun navControllerShowingHome(): NavController =
         mockk(relaxed = true) { every { currentDestination } returns mockk { every { id } returns R.id.homeFragment } }

@@ -138,7 +138,10 @@ object BrowserToolbarStoreBuilder {
                                     settings = components.settings,
                                     scope = lifecycleScope,
                                 ),
-                                BrowserToolbarTelemetryMiddleware(),
+                                BrowserToolbarTelemetryMiddleware(
+                                    appStore = appStore,
+                                    settings = components.settings,
+                                ),
                             )
 
                         else ->

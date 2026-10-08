@@ -15,6 +15,11 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mozilla.fenix.GleanMetrics.Toolbar
+import org.mozilla.fenix.GleanMetrics.ToolbarGoogleLensButton
+import org.mozilla.fenix.components.AppStore
+import org.mozilla.fenix.components.appstate.AppState
+import org.mozilla.fenix.components.appstate.search.SearchState
+import org.mozilla.fenix.components.lens.CameraMode
 import org.mozilla.fenix.components.toolbar.BrowserToolbarTelemetryMiddleware.ToolbarActionRecord
 import org.mozilla.fenix.components.toolbar.DisplayActions.AddBookmarkClicked
 import org.mozilla.fenix.components.toolbar.DisplayActions.EditBookmarkClicked
@@ -37,11 +42,17 @@ import org.mozilla.fenix.components.toolbar.TabCounterInteractions.AddNewTab
 import org.mozilla.fenix.components.toolbar.TabCounterInteractions.TabCounterClicked
 import org.mozilla.fenix.components.toolbar.TabCounterInteractions.TabCounterLongClicked
 import org.mozilla.fenix.helpers.FenixGleanTestRule
+import org.mozilla.fenix.search.EditPageEndActionsInteractions.LensButtonClicked
+import org.mozilla.fenix.search.EditPageEndActionsInteractions.QrScannerClicked
 import org.mozilla.fenix.telemetry.ACTION_EDIT_SHORTCUT_CLICKED
+import org.mozilla.fenix.telemetry.ACTION_LENS_CLICKED
+import org.mozilla.fenix.telemetry.ACTION_LENS_QR_CLICKED
+import org.mozilla.fenix.telemetry.ACTION_QR_CLICKED
 import org.mozilla.fenix.telemetry.ACTION_SHORTCUT_LONG_CLICKED
 import org.mozilla.fenix.telemetry.SOURCE_ADDRESS_BAR
 import org.mozilla.fenix.telemetry.SOURCE_NAVIGATION_BAR
 import org.mozilla.fenix.telemetry.SURFACE_BROWSER
+import org.mozilla.fenix.utils.Settings
 
 @RunWith(AndroidJUnit4::class)
 class BrowserToolbarTelemetryMiddlewareTest {
@@ -266,5 +277,42 @@ class BrowserToolbarTelemetryMiddlewareTest {
         }
     }
 
-    private val buildStore = BrowserToolbarStore(middleware = listOf(BrowserToolbarTelemetryMiddleware()))
+    @Test
+    fun `WHEN the QR scanner button is clicked THEN record the QR button tap`() {
+        buildStore.dispatch(QrScannerClicked)
+
+        assertEditButtonTapRecorded(ACTION_QR_CLICKED)
+    }
+
+    @Test
+    fun `GIVEN Lens is the last Lens camera mode WHEN the Lens button is clicked THEN record the Lens button tap`() {
+        settings.lensCameraLastMode = CameraMode.LENS
+
+        buildStore.dispatch(LensButtonClicked)
+
+        assertEditButtonTapRecorded(ACTION_LENS_CLICKED)
+        assertNotNull(ToolbarGoogleLensButton.tapped.testGetValue())
+    }
+
+    @Test
+    fun `GIVEN QR is the last Lens camera mode WHEN the Lens button is clicked THEN record the Lens QR button tap`() {
+        settings.lensCameraLastMode = CameraMode.QR
+
+        buildStore.dispatch(LensButtonClicked)
+
+        assertEditButtonTapRecorded(ACTION_LENS_QR_CLICKED)
+        assertNull(ToolbarGoogleLensButton.tapped.testGetValue())
+    }
+
+    private fun assertEditButtonTapRecorded(item: String) {
+        val event = Toolbar.buttonTapped.testGetValue()?.single()
+        assertEquals(item, event?.extra?.get("item"))
+        assertEquals(SOURCE_ADDRESS_BAR, event?.extra?.get("source"))
+        assertEquals(SURFACE_BROWSER, event?.extra?.get("surface"))
+    }
+
+    private val settings = Settings(testContext)
+    private val appStore = AppStore(AppState(searchState = SearchState.EMPTY.copy(sourceTabId = "tabId")))
+    private val buildStore =
+        BrowserToolbarStore(middleware = listOf(BrowserToolbarTelemetryMiddleware(appStore, settings)))
 }

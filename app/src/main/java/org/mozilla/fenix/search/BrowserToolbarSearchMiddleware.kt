@@ -78,10 +78,7 @@ import mozilla.components.support.base.log.logger.Logger
 import mozilla.components.support.base.utils.NamedThreadFactory
 import mozilla.components.support.ktx.kotlin.isUrl
 import mozilla.components.ui.icons.R as iconsR
-import mozilla.telemetry.glean.private.NoExtras
 import org.mozilla.fenix.GleanMetrics.Events
-import org.mozilla.fenix.GleanMetrics.Toolbar
-import org.mozilla.fenix.GleanMetrics.ToolbarGoogleLensButton
 import org.mozilla.fenix.NavGraphDirections
 import org.mozilla.fenix.R
 import org.mozilla.fenix.browser.BrowserFragmentDirections
@@ -113,13 +110,9 @@ import org.mozilla.fenix.search.SearchSelectorEvents.SearchSettingsItemClicked
 import org.mozilla.fenix.search.ext.searchEngineShortcuts
 import org.mozilla.fenix.settings.SupportUtils
 import org.mozilla.fenix.telemetry.ACTION_CLEAR_CLICKED
-import org.mozilla.fenix.telemetry.ACTION_LENS_CLICKED
 import org.mozilla.fenix.telemetry.ACTION_MICROPHONE_CLICKED
-import org.mozilla.fenix.telemetry.ACTION_QR_CLICKED
 import org.mozilla.fenix.telemetry.ACTION_SEARCH_ENGINE_SELECTOR_CLICKED
-import org.mozilla.fenix.telemetry.SOURCE_ADDRESS_BAR
-import org.mozilla.fenix.telemetry.SURFACE_BROWSER
-import org.mozilla.fenix.telemetry.SURFACE_HOME
+import org.mozilla.fenix.telemetry.recordAddressBarButtonTapped
 import org.mozilla.fenix.utils.Settings
 
 @VisibleForTesting
@@ -260,24 +253,16 @@ class BrowserToolbarSearchMiddleware(
         appStore.dispatch(SearchEnded)
     }
 
-    private fun recordButtonTapped(item: String) {
-        val surface = if (appStore.state.searchState.sourceTabId == null) SURFACE_HOME else SURFACE_BROWSER
-        Toolbar.buttonTapped.record(
-            Toolbar.ButtonTappedExtra(
-                source = SOURCE_ADDRESS_BAR,
-                item = item,
-                surface = surface,
-            )
-        )
-    }
-
     private fun handleToolbarButtonsActions(
         store: Store<BrowserToolbarState, BrowserToolbarAction>,
         action: BrowserToolbarAction,
     ) =
         when (action) {
             is SearchSelectorClicked -> {
-                recordButtonTapped(ACTION_SEARCH_ENGINE_SELECTOR_CLICKED)
+                recordAddressBarButtonTapped(
+                    ACTION_SEARCH_ENGINE_SELECTOR_CLICKED,
+                    appStore.state.searchState.sourceTabId,
+                )
             }
 
             is SearchSettingsItemClicked -> {
@@ -299,7 +284,10 @@ class BrowserToolbarSearchMiddleware(
             }
 
             is ClearSearchClicked -> {
-                recordButtonTapped(ACTION_CLEAR_CLICKED)
+                recordAddressBarButtonTapped(
+                    ACTION_CLEAR_CLICKED,
+                    appStore.state.searchState.sourceTabId,
+                )
                 store.dispatch(SearchQueryUpdated(BrowserToolbarQuery("")))
             }
 
@@ -309,16 +297,11 @@ class BrowserToolbarSearchMiddleware(
             }
 
             is QrScannerClicked -> {
-                recordButtonTapped(ACTION_QR_CLICKED)
                 observeQrScannerInput(store)
                 appStore.dispatch(QrScannerRequested)
             }
 
             is LensButtonClicked -> {
-                if (settings.lensCameraLastMode != CameraMode.QR) {
-                    recordButtonTapped(ACTION_LENS_CLICKED)
-                    ToolbarGoogleLensButton.tapped.record(NoExtras())
-                }
                 observeLensInput()
                 // The Lens camera screen lets the user toggle to QR scanning; observe both
                 // result streams so a QR string returned from the Lens flow still lands in
@@ -328,7 +311,10 @@ class BrowserToolbarSearchMiddleware(
             }
 
             is VoiceSearchButtonClicked -> {
-                recordButtonTapped(ACTION_MICROPHONE_CLICKED)
+                recordAddressBarButtonTapped(
+                    ACTION_MICROPHONE_CLICKED,
+                    appStore.state.searchState.sourceTabId,
+                )
                 appStore.dispatch(VoiceInputRequested)
             }
 
