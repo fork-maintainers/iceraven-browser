@@ -31,6 +31,7 @@ import android.view.WindowManager
 import android.view.WindowMetrics
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
 import io.mockk.Runs
 import io.mockk.every
 import io.mockk.just
@@ -1113,6 +1114,38 @@ class LensCameraFragmentTest {
         verify(exactly = 0) { analyzer.reset() }
     }
 
+    @Test
+    fun `GIVEN the fragment is added WHEN handleModeChanged switches the mode THEN the new mode is reported as a fragment result`() {
+        val fragment = spyk(LensCameraFragment())
+        val fragmentManager: FragmentManager = mockk(relaxed = true)
+        every { fragment.isAdded } returns true
+        every { fragment.parentFragmentManager } returns fragmentManager
+        every { fragment.updatePreviewRequest() } just Runs
+        fragment.cameraMode.value = CameraMode.LENS
+
+        fragment.handleModeChanged(CameraMode.QR)
+
+        verify {
+            fragmentManager.setFragmentResult(
+                LensCameraFragment.MODE_CHANGED_REQUEST_KEY,
+                match { it.getString(LensCameraFragment.RESULT_CAMERA_MODE) == "QR" },
+            )
+        }
+    }
+
+    @Test
+    fun `GIVEN the fragment is added WHEN handleModeChanged keeps the same mode THEN no fragment result is reported`() {
+        val fragment = spyk(LensCameraFragment())
+        val fragmentManager: FragmentManager = mockk(relaxed = true)
+        every { fragment.isAdded } returns true
+        every { fragment.parentFragmentManager } returns fragmentManager
+        fragment.cameraMode.value = CameraMode.QR
+
+        fragment.handleModeChanged(CameraMode.QR)
+
+        verify(exactly = 0) { fragmentManager.setFragmentResult(any(), any()) }
+    }
+
     // --- onSaveInstanceState / onCreate tests ---
 
     @Test
@@ -1141,6 +1174,37 @@ class LensCameraFragmentTest {
         val fragment = LensCameraFragment()
 
         fragment.restoreFromState(null)
+
+        assertEquals(CameraMode.LENS, fragment.cameraMode.value)
+    }
+
+    @Test
+    fun `GIVEN savedInstanceState is null AND an initial mode argument of QR WHEN restoreFromState is called THEN cameraMode is QR`() {
+        val fragment = LensCameraFragment()
+        fragment.arguments = Bundle().apply { putString(LensCameraFragment.ARG_INITIAL_MODE, "QR") }
+
+        fragment.restoreFromState(null)
+
+        assertEquals(CameraMode.QR, fragment.cameraMode.value)
+    }
+
+    @Test
+    fun `GIVEN savedInstanceState is null AND an unknown initial mode argument WHEN restoreFromState is called THEN cameraMode stays at LENS default`() {
+        val fragment = LensCameraFragment()
+        fragment.arguments = Bundle().apply { putString(LensCameraFragment.ARG_INITIAL_MODE, "UNKNOWN") }
+
+        fragment.restoreFromState(null)
+
+        assertEquals(CameraMode.LENS, fragment.cameraMode.value)
+    }
+
+    @Test
+    fun `GIVEN savedInstanceState contains LENS AND an initial mode argument of QR WHEN restoreFromState is called THEN the saved mode wins`() {
+        val fragment = LensCameraFragment()
+        fragment.arguments = Bundle().apply { putString(LensCameraFragment.ARG_INITIAL_MODE, "QR") }
+        val savedState = Bundle().apply { putString("camera_mode", "LENS") }
+
+        fragment.restoreFromState(savedState)
 
         assertEquals(CameraMode.LENS, fragment.cameraMode.value)
     }

@@ -179,10 +179,9 @@ class LensCameraFragment(private val now: () -> Long = DefaultDateTimeProvider()
 
     @VisibleForTesting
     internal fun restoreFromState(savedInstanceState: Bundle?) {
+        val modeName = savedInstanceState?.getString(STATE_CAMERA_MODE) ?: arguments?.getString(ARG_INITIAL_MODE)
+        CameraMode.fromNameOrNull(modeName)?.let { cameraMode.value = it }
         savedInstanceState?.let { state ->
-            state.getString(STATE_CAMERA_MODE)?.let { name ->
-                cameraMode.value = CameraMode.valueOf(name)
-            }
             qrResultSent = state.getBoolean(STATE_QR_RESULT_SENT, false)
         }
     }
@@ -618,6 +617,12 @@ class LensCameraFragment(private val now: () -> Long = DefaultDateTimeProvider()
             qrResultSent = false
         }
         updatePreviewRequest()
+        if (isAdded) {
+            setFragmentResult(
+                MODE_CHANGED_REQUEST_KEY,
+                Bundle().apply { putString(RESULT_CAMERA_MODE, newMode.name) },
+            )
+        }
     }
 
     @VisibleForTesting
@@ -810,6 +815,13 @@ class LensCameraFragment(private val now: () -> Long = DefaultDateTimeProvider()
         const val RESULT_GALLERY_REQUEST = "lens_camera_gallery_request"
         const val RESULT_QR_GALLERY_REQUEST = "lens_camera_qr_gallery_request"
         const val RESULT_QR_STRING = "lens_camera_qr_string"
+
+        /** Fragment argument naming the [CameraMode] to open in when there is no saved state. */
+        const val ARG_INITIAL_MODE = "lens_camera_initial_mode"
+
+        /** Fragment result key emitted whenever the user switches [CameraMode], carrying [RESULT_CAMERA_MODE]. */
+        const val MODE_CHANGED_REQUEST_KEY = "lens_camera_mode_changed_key"
+        const val RESULT_CAMERA_MODE = "lens_camera_mode"
 
         private const val STATE_CAMERA_MODE = "camera_mode"
         private const val STATE_QR_RESULT_SENT = "qr_result_sent"

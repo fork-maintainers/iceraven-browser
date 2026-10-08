@@ -49,6 +49,7 @@ import org.mozilla.fenix.GleanMetrics.TopSites
 import org.mozilla.fenix.R
 import org.mozilla.fenix.autofill.address.RegionAddressFeatureGate
 import org.mozilla.fenix.browser.browsingmode.BrowsingMode
+import org.mozilla.fenix.components.lens.CameraMode
 import org.mozilla.fenix.components.settings.counterPreference
 import org.mozilla.fenix.components.settings.featureFlagBooleanPreference
 import org.mozilla.fenix.components.settings.lazyFeatureFlagBooleanPreference
@@ -3370,6 +3371,22 @@ class Settings(
             key = appContext.getPreferenceKey(R.string.pref_key_has_accepted_google_lens_first_run),
             default = false,
         )
+
+    private var lensCameraLastModeName by
+        stringPreference(
+            key = appContext.getPreferenceKey(R.string.pref_key_lens_camera_last_mode),
+            default = CameraMode.LENS.name,
+        )
+
+    /**
+     * The [CameraMode] the user last selected on the Google Lens camera screen. The camera screen opens in this mode
+     * and the address bar shows the matching icon.
+     */
+    var lensCameraLastMode: CameraMode
+        get() = CameraMode.fromNameOrNull(lensCameraLastModeName) ?: CameraMode.LENS
+        set(value) {
+            lensCameraLastModeName = value.name
+        }
 
     /** Whether the voice search entry point is shown in the display-mode browser toolbar. */
     var showVoiceSearchInDisplayToolbar by

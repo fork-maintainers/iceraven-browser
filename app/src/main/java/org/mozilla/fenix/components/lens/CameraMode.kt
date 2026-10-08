@@ -10,5 +10,10 @@ package org.mozilla.fenix.components.lens
  */
 enum class CameraMode {
     LENS,
-    QR,
+    QR;
+
+    companion object {
+        /** Returns the [CameraMode] whose name is [name], or null if there is none. */
+        fun fromNameOrNull(name: String?): CameraMode? = entries.firstOrNull { it.name == name }
+    }
 }
