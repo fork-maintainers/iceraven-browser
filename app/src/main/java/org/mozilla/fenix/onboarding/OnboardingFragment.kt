@@ -110,7 +110,12 @@ class OnboardingFragment : Fragment() {
         allOnboardingPages.find { it.type == OnboardingPageUiData.Type.MARKETING_DATA }
     }
 
-    /** The Sync sign-in page, only shown to installs attributed to a pairing campaign link. */
+    /**
+     * The Sync sign-in page available for pairing campaigns.
+     *
+     * Null if the page is absent or the prompt is disabled via Nimbus, preventing [addPairingSyncSignInFeature] from
+     * adding it when attribution resolves later.
+     */
     private val pairingSyncSignInPage by lazy {
         allOnboardingPages
             .find { it.type == OnboardingPageUiData.Type.SYNC_SIGN_IN }
@@ -118,14 +123,17 @@ class OnboardingFragment : Fragment() {
     }
 
     private val pagesToDisplay by lazy {
+        val settings = requireComponents.settings
+
         allOnboardingPages
-            .filterNot {
-                it.type == OnboardingPageUiData.Type.MARKETING_DATA &&
-                    !requireComponents.settings.shouldShowMarketingOnboarding
-            }
-            .filterNot {
-                it.type == OnboardingPageUiData.Type.SYNC_SIGN_IN &&
-                    (pairingSyncSignInPage == null || !requireComponents.settings.isUserPairingCampaignAttributed)
+            .filter { page ->
+                when (page.type) {
+                    OnboardingPageUiData.Type.MARKETING_DATA -> settings.shouldShowMarketingOnboarding
+                    OnboardingPageUiData.Type.SYNC_SIGN_IN ->
+                        pairingSyncSignInPage != null && settings.isUserPairingCampaignAttributed
+
+                    else -> true
+                }
             }
             .distinctBy { it.type }
             .toMutableStateList()
