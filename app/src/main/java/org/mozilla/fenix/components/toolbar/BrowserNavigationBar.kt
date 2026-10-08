@@ -12,7 +12,6 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -65,9 +64,13 @@ class BrowserNavigationBar(
                 val shouldShowTabGroupsStrip = remember {
                     customTabSessionId == null && settings.shouldShowTabGroupsStrip
                 }
+                val hasBottomStrips = remember { hasBottomStrip() }
 
                 FirefoxTheme {
-                    Column(modifier = Modifier.background(MaterialTheme.colorScheme.surface)) {
+                    TopDividerColumn(
+                        showDivider = hasBottomStrips,
+                        modifier = Modifier.background(MaterialTheme.colorScheme.surface),
+                    ) {
                         if (shouldShowTabStrip) {
                             tabStripContent().invoke()
                         }
@@ -112,6 +115,7 @@ class BrowserNavigationBar(
                     false -> Top
                 }
             }
+        val hasBottomStrip = remember { hasBottomStrip() }
         val isKeyboardVisible =
             if (hideWhenKeyboardShown) {
                 val keyboardState by keyboardAsState()
@@ -138,12 +142,16 @@ class BrowserNavigationBar(
                     NavigationBar(
                         actions = uiState.displayState.navigationActions,
                         toolbarGravity = toolbarGravity,
+                        showDivider = toolbarGravity == Top && !hasBottomStrip,
                         onInteraction = { toolbarStore.dispatch(it) },
                     )
                 }
             }
         }
     }
+
+    private fun hasBottomStrip() =
+        customTabSessionId == null && (settings.shouldShowTabStripAtBottom || settings.shouldShowTabGroupsStrip)
 
     private fun addToParent(view: NavigationBarComposeView) {
         container.addView(

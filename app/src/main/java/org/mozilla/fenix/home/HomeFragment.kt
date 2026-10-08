@@ -19,6 +19,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.displayCutoutPadding
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
@@ -111,6 +112,7 @@ import org.mozilla.fenix.components.appstate.AppState
 import org.mozilla.fenix.components.components
 import org.mozilla.fenix.components.metrics.installSourcePackage
 import org.mozilla.fenix.components.toolbar.ToolbarPosition
+import org.mozilla.fenix.components.toolbar.TopDividerColumn
 import org.mozilla.fenix.compose.snackbar.SnackbarState
 import org.mozilla.fenix.ext.application
 import org.mozilla.fenix.ext.components
@@ -741,15 +743,21 @@ class HomeFragment : Fragment(), UserInteractionHandler, OnLongPressedListener {
                                 }
                             },
                             bottomBar = {
-                                val tabGroupsStripColor =
+                                val bottomChromeColors =
                                     homepageToolbarColors(
-                                            isPrivateMode = isPrivateMode,
-                                            shouldUseEdgeToEdgeColors = isEdgeToEdgeBackgroundEnabled(),
-                                        )
-                                        .surface
+                                        isPrivateMode = isPrivateMode,
+                                        shouldUseEdgeToEdgeColors = isEdgeToEdgeBackgroundEnabled(),
+                                    )
+                                val tabGroupsStripColor = bottomChromeColors.surface
                                 if (isToolbarAtTop) {
                                     ToolbarSlot(captureToolbarBounds, { navbarBoundsInRoot = it }) {
-                                        Column {
+                                        TopDividerColumn(
+                                            showDivider =
+                                                settings.shouldShowTabStripAtBottom ||
+                                                    settings.shouldShowTabGroupsStrip,
+                                            modifier = Modifier.fillMaxWidth(),
+                                            dividerColor = bottomChromeColors.outlineVariant,
+                                        ) {
                                             if (settings.shouldShowTabStripAtBottom) {
                                                 TabStrip()
                                             }
@@ -761,7 +769,11 @@ class HomeFragment : Fragment(), UserInteractionHandler, OnLongPressedListener {
                                     }
                                 } else {
                                     ToolbarSlot(captureToolbarBounds, { toolbarBoundsInRoot = it }) {
-                                        Column {
+                                        TopDividerColumn(
+                                            showDivider = settings.shouldShowTabGroupsStrip,
+                                            modifier = Modifier.fillMaxWidth(),
+                                            dividerColor = bottomChromeColors.outlineVariant,
+                                        ) {
                                             if (settings.shouldShowTabGroupsStrip) {
                                                 TabGroupsStrip(containerColor = tabGroupsStripColor)
                                             }

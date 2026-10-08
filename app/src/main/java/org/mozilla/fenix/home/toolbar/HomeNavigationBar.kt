@@ -50,6 +50,7 @@ class HomeNavigationBar(
                     false -> Top
                 }
             }
+        val hasBottomStrip = remember { settings.shouldShowTabStripAtBottom || settings.shouldShowTabGroupsStrip }
         val isKeyboardVisible =
             if (hideWhenKeyboardShown) {
                 val keyboardState by keyboardAsState()
@@ -81,6 +82,7 @@ class HomeNavigationBar(
                     NavigationBar(
                         actions = uiState.displayState.navigationActions,
                         toolbarGravity = toolbarGravity,
+                        showDivider = toolbarGravity == Top && !hasBottomStrip,
                         onInteraction = { toolbarStore.dispatch(it) },
                     )
                 }
