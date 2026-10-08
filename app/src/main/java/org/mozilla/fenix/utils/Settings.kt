@@ -2449,6 +2449,16 @@ class Settings(
             default = { FxNimbus.features.continuousOnboarding.value().enabled },
         )
 
+    /**
+     * Whether the Sync sign-in card can be shown during initial onboarding for users whose Firefox install is
+     * attributed to a pairing campaign link.
+     */
+    var isPairingSignInPromptEnabled by
+        booleanPreference(
+            appContext.getPreferenceKey(R.string.pref_key_is_pairing_sign_in_prompt_enabled),
+            default = { FxNimbus.features.pairingSigninPrompt.value().enabled },
+        )
+
     /** The completion timestamp of the second day of continuous onboarding. */
     var secondDayOnboardingCompletedTimestamp by
         longPreference(

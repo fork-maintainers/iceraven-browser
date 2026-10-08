@@ -1279,10 +1279,12 @@ features:
         default: false
 
   pairing-signin-prompt:
-    description: Controls the day 1 sign-in prompt for users who installed Firefox through a pairing link.
+    description: >
+      Controls the Sync sign-in card shown during initial onboarding to users who installed Firefox
+      through a pairing link.
     variables:
       enabled:
-        description: Whether the day 1 sign-in prompt can be shown.
+        description: Whether the Sync sign-in card can be shown during initial onboarding.
         type: Boolean
         default: false
       campaign-utm-content:

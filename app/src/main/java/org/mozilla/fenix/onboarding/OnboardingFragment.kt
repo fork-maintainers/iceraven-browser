@@ -72,7 +72,8 @@ import org.mozilla.fenix.utils.maybeShowAddSearchWidgetPrompt
 class OnboardingFragment : Fragment() {
     private val logger = Logger("OnboardingFragment")
 
-    private val addMarketingFeature = ViewBoundFeatureWrapper<MarketingPageAdditionSupport>()
+    private val addMarketingFeature = ViewBoundFeatureWrapper<OnboardingPageAdditionSupport>()
+    private val addPairingSyncSignInFeature = ViewBoundFeatureWrapper<OnboardingPageAdditionSupport>()
 
     private val rtamoAttributionHandler by lazy {
         RtamoAttributionHandler(
@@ -109,11 +110,22 @@ class OnboardingFragment : Fragment() {
         allOnboardingPages.find { it.type == OnboardingPageUiData.Type.MARKETING_DATA }
     }
 
+    /** The Sync sign-in page, only shown to installs attributed to a pairing campaign link. */
+    private val pairingSyncSignInPage by lazy {
+        allOnboardingPages
+            .find { it.type == OnboardingPageUiData.Type.SYNC_SIGN_IN }
+            ?.takeIf { requireComponents.settings.isPairingSignInPromptEnabled }
+    }
+
     private val pagesToDisplay by lazy {
         allOnboardingPages
             .filterNot {
                 it.type == OnboardingPageUiData.Type.MARKETING_DATA &&
                     !requireComponents.settings.shouldShowMarketingOnboarding
+            }
+            .filterNot {
+                it.type == OnboardingPageUiData.Type.SYNC_SIGN_IN &&
+                    (pairingSyncSignInPage == null || !requireComponents.settings.isUserPairingCampaignAttributed)
             }
             .distinctBy { it.type }
             .toMutableStateList()
@@ -201,11 +213,23 @@ class OnboardingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         addMarketingFeature.set(
             feature =
-                MarketingPageAdditionSupport(
+                OnboardingPageAdditionSupport(
                     prefKey = requireContext().getString(R.string.pref_key_should_show_marketing_onboarding),
                     pagesToDisplay = pagesToDisplay,
-                    marketingPage = marketingPage,
                     settings = requireComponents.settings,
+                    page = marketingPage,
+                    lifecycleOwner = viewLifecycleOwner,
+                ),
+            owner = this,
+            view = view,
+        )
+        addPairingSyncSignInFeature.set(
+            feature =
+                OnboardingPageAdditionSupport(
+                    prefKey = requireContext().getString(R.string.pref_key_is_user_pairing_campaign_attributed),
+                    pagesToDisplay = pagesToDisplay,
+                    settings = requireComponents.settings,
+                    page = pairingSyncSignInPage,
                     lifecycleOwner = viewLifecycleOwner,
                 ),
             owner = this,

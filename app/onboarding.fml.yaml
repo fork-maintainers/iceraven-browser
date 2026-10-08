@@ -46,6 +46,15 @@ features:
               primary-button-label: nova_onboarding_set_to_default_button
               secondary-button-label: nova_onboarding_negative_button
 
+            sync-sign-in:
+              card-type: sync-sign-in
+              ordering: 15
+              title: nova_onboarding_sync_title
+              body: nova_onboarding_sync_subtitle
+              image-res: nova_onboarding_sync
+              primary-button-label: nova_onboarding_sync_button
+              secondary-button-label: nova_onboarding_negative_button
+
             marketing:
               card-type: marketing-data
               ordering: 20

@@ -27,7 +27,7 @@ import org.mozilla.fenix.onboarding.view.OnboardingPageUiData
 import org.mozilla.fenix.utils.Settings
 
 @RunWith(AndroidJUnit4::class)
-class MarketingPageAdditionSupportTest {
+class OnboardingPageAdditionSupportTest {
 
     private lateinit var pages: MutableList<OnboardingPageUiData>
     private lateinit var marketingPage: OnboardingPageUiData
@@ -67,11 +67,11 @@ class MarketingPageAdditionSupportTest {
     @Test
     fun `we should show marketing`() = runTest {
         val addPage =
-            MarketingPageAdditionSupport(
+            OnboardingPageAdditionSupport(
                 prefKey = prefKey,
                 pagesToDisplay = pages,
-                marketingPage = marketingPage,
                 settings = settings,
+                page = marketingPage,
                 mainContext = testScheduler,
                 ioContext = testScheduler,
                 lifecycleOwner = mockedLifecycleOwner,
@@ -88,11 +88,11 @@ class MarketingPageAdditionSupportTest {
     @Test
     fun `we should not show marketing`() = runTest {
         val addPage =
-            MarketingPageAdditionSupport(
+            OnboardingPageAdditionSupport(
                 prefKey = prefKey,
                 pagesToDisplay = pages,
-                marketingPage = marketingPage,
                 settings = settings,
+                page = marketingPage,
                 mainContext = testScheduler,
                 ioContext = testScheduler,
                 lifecycleOwner = mockedLifecycleOwner,
@@ -107,8 +107,128 @@ class MarketingPageAdditionSupportTest {
     }
 
     @Test
+    fun `GIVEN pairing attribution pref is true WHEN a page is eligible THEN the page is added`() = runTest {
+        val syncPage = pages.removeAt(0)
+        assertTrue(pages.isEmpty())
+
+        val addPage =
+            OnboardingPageAdditionSupport(
+                prefKey = testContext.getString(R.string.pref_key_is_user_pairing_campaign_attributed),
+                pagesToDisplay = pages,
+                settings = settings,
+                page = syncPage,
+                mainContext = testScheduler,
+                ioContext = testScheduler,
+                lifecycleOwner = mockedLifecycleOwner,
+            )
+        settings.isUserPairingCampaignAttributed = true
+
+        addPage.start()
+
+        testScheduler.runCurrent()
+
+        assertEquals(listOf(syncPage), pages)
+    }
+
+    @Test
+    fun `GIVEN pairing attribution pref is false WHEN a page is eligible THEN the page is not added`() = runTest {
+        val syncPage = pages.removeAt(0)
+        assertTrue(pages.isEmpty())
+
+        val addPage =
+            OnboardingPageAdditionSupport(
+                prefKey = testContext.getString(R.string.pref_key_is_user_pairing_campaign_attributed),
+                pagesToDisplay = pages,
+                settings = settings,
+                page = syncPage,
+                mainContext = testScheduler,
+                ioContext = testScheduler,
+                lifecycleOwner = mockedLifecycleOwner,
+            )
+        settings.isUserPairingCampaignAttributed = false
+
+        addPage.start()
+
+        testScheduler.runCurrent()
+
+        assertTrue(pages.isEmpty())
+    }
+
+    @Test
+    fun `GIVEN pairing attribution resolves after start WHEN the pref flips to true THEN the page is added`() =
+        runTest {
+            val syncPage = pages.removeAt(0)
+            assertTrue(pages.isEmpty())
+
+            val addPage =
+                OnboardingPageAdditionSupport(
+                    prefKey = testContext.getString(R.string.pref_key_is_user_pairing_campaign_attributed),
+                    pagesToDisplay = pages,
+                    settings = settings,
+                    page = syncPage,
+                    mainContext = testScheduler,
+                    ioContext = testScheduler,
+                    lifecycleOwner = mockedLifecycleOwner,
+                )
+            settings.isUserPairingCampaignAttributed = false
+
+            addPage.start()
+            testScheduler.runCurrent()
+            assertTrue(pages.isEmpty())
+
+            settings.isUserPairingCampaignAttributed = true
+            testScheduler.runCurrent()
+
+            assertEquals(listOf(syncPage), pages)
+        }
+
+    @Test
+    fun `GIVEN the pref was never written WHEN started THEN the page is not added`() = runTest {
+        val syncPage = pages.removeAt(0)
+        assertTrue(pages.isEmpty())
+
+        val addPage =
+            OnboardingPageAdditionSupport(
+                prefKey = testContext.getString(R.string.pref_key_is_user_pairing_campaign_attributed),
+                pagesToDisplay = pages,
+                settings = settings,
+                page = syncPage,
+                mainContext = testScheduler,
+                ioContext = testScheduler,
+                lifecycleOwner = mockedLifecycleOwner,
+            )
+
+        addPage.start()
+
+        testScheduler.runCurrent()
+
+        assertTrue(pages.isEmpty())
+    }
+
+    @Test
+    fun `GIVEN no eligible page WHEN the pref is true THEN nothing is added`() = runTest {
+        val addPage =
+            OnboardingPageAdditionSupport(
+                prefKey = testContext.getString(R.string.pref_key_is_user_pairing_campaign_attributed),
+                pagesToDisplay = pages,
+                settings = settings,
+                page = null,
+                mainContext = testScheduler,
+                ioContext = testScheduler,
+                lifecycleOwner = mockedLifecycleOwner,
+            )
+        settings.isUserPairingCampaignAttributed = true
+
+        addPage.start()
+
+        testScheduler.runCurrent()
+
+        assertTrue(pages.size == 1)
+    }
+
+    @Test
     fun `add page`() {
-        pages.addMarketingPageIfAbsent(marketingPage)
+        pages.addPageIfAbsent(marketingPage)
 
         assertTrue(pages.size == 2)
     }
@@ -117,7 +237,7 @@ class MarketingPageAdditionSupportTest {
     fun `do not add page if already present`() {
         pages.add(marketingPage)
 
-        pages.addMarketingPageIfAbsent(marketingPage)
+        pages.addPageIfAbsent(marketingPage)
 
         assertTrue(pages.size == 2)
     }

@@ -23,21 +23,26 @@ import org.mozilla.fenix.settings.OnSharedPreferenceChangeListener
 import org.mozilla.fenix.utils.Settings
 
 /**
- * Handles adding the marketing page to onboarding if certain conditions are met.
+ * Adds an onboarding page if the boolean preference for [prefKey] becomes true.
  *
- * @param prefKey the pref key identifier for the "should show marketing page" pref
- * @param pagesToDisplay the mutable list of onboarding pages we display
- * @param marketingPage the marketing page to add, or null if it's not eligible to be shown
- * @param settings settings class that holds shared preferences
- * @param mainContext the coroutine context for UI
- * @param ioContext the coroutine context for IO
- * @param lifecycleOwner the lifecycle owner
+ * Required for onboarding pages (cards) whose eligibility depends on the
+ * [org.mozilla.fenix.components.metrics.InstallReferrerHandlingService], which may resolve after the initial onboarding
+ * pages have been determined. This races with onboarding completion: if onboarding completes before the referrer
+ * resolves, the page will not be shown.
+ *
+ * @param prefKey the pref key identifier for the boolean pref that gates the page.
+ * @param pagesToDisplay the mutable list of onboarding pages we display.
+ * @param settings settings class that holds shared preferences.
+ * @param page the page to add, or null if it's not eligible to be shown.
+ * @param mainContext the coroutine context for UI.
+ * @param ioContext the coroutine context for IO.
+ * @param lifecycleOwner the lifecycle owner.
  */
-class MarketingPageAdditionSupport(
+class OnboardingPageAdditionSupport(
     private val prefKey: String,
     private val pagesToDisplay: MutableList<OnboardingPageUiData>,
-    private val marketingPage: OnboardingPageUiData?,
     private val settings: Settings,
+    private val page: OnboardingPageUiData?,
     private val mainContext: CoroutineContext = Dispatchers.Main,
     private val ioContext: CoroutineContext = Dispatchers.IO,
     private val lifecycleOwner: LifecycleOwner,
@@ -53,14 +58,12 @@ class MarketingPageAdditionSupport(
                         lifecycleOwner,
                         mainContext,
                         prefKey,
-                        settings.shouldShowMarketingOnboarding,
+                        false,
                     )
                     .distinctUntilChanged()
-                    .collect { shouldShowMarketingOnboarding ->
-                        if (shouldShowMarketingOnboarding) {
-                            marketingPage?.let {
-                                pagesToDisplay.addMarketingPageIfAbsent(it)
-                            }
+                    .collect { shouldShowPage ->
+                        if (shouldShowPage) {
+                            page?.let { pagesToDisplay.addPageIfAbsent(it) }
                         }
                     }
             }
@@ -71,9 +74,9 @@ class MarketingPageAdditionSupport(
     }
 }
 
-internal fun MutableList<OnboardingPageUiData>.addMarketingPageIfAbsent(marketingPage: OnboardingPageUiData) {
-    if (none { it.type == OnboardingPageUiData.Type.MARKETING_DATA }) {
-        add(marketingPage)
+internal fun MutableList<OnboardingPageUiData>.addPageIfAbsent(page: OnboardingPageUiData) {
+    if (none { it.type == page.type }) {
+        add(page)
     }
 }
 
