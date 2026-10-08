@@ -419,6 +419,16 @@ object MainMenuSelectors : SelectorContainer {
             groups = setOf(Group.BROWSER_VIEW_MAIN_MENU_MORE_ITEMS, Group.MORE_MAIN_MENU_SUB_LIST),
         )
 
+    // Only present in the "More settings" submenu while a private tab is in the foreground; not part of the
+    // MORE_MAIN_MENU_SUB_LIST group, which models the normal-browsing sub-list.
+    val MOVE_TO_NON_PRIVATE_TAB_BUTTON =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_CONTENT_DESCRIPTION,
+            value = getStringResource(R.string.browser_menu_move_to_non_private_tab),
+            description = "Main menu Move to non-private tab button",
+            groups = setOf(),
+        )
+
     val ADD_APP_TO_HOMESCREEN_BUTTON =
         Selector(
             strategy = SelectorStrategy.COMPOSE_BY_CONTENT_DESCRIPTION,

@@ -33,6 +33,11 @@ class SettingsPrivateBrowsingPage(composeRule: AndroidComposeTestRule<HomeActivi
         return this
     }
 
+    fun toggleOpenLinksInAPrivateTab(): SettingsPrivateBrowsingPage {
+        mozClick(SettingsPrivateBrowsingSelectors.OPEN_LINKS_IN_PRIVATE_TAB)
+        return this
+    }
+
     /**
      * NOTE: Temporary stub for the Test Factory demo.
      *
