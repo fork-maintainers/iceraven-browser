@@ -6,6 +6,7 @@ package org.mozilla.fenix.ui.efficiency.tests
 
 import org.junit.Test
 import org.mozilla.fenix.R
+import org.mozilla.fenix.customannotations.Critical
 import org.mozilla.fenix.customannotations.SmokeTest
 import org.mozilla.fenix.helpers.DataGenerationHelper.getStringResource
 import org.mozilla.fenix.helpers.TestAssetHelper
@@ -15,6 +16,7 @@ import org.mozilla.fenix.ui.efficiency.helpers.BaseTest
 import org.mozilla.fenix.ui.efficiency.helpers.SwipeDirection
 import org.mozilla.fenix.ui.efficiency.navigation.LaunchConfig
 import org.mozilla.fenix.ui.efficiency.selectors.BrowserPageSelectors
+import org.mozilla.fenix.ui.efficiency.selectors.CustomTabsSelectors
 import org.mozilla.fenix.ui.efficiency.selectors.MainMenuSelectors
 import org.mozilla.fenix.ui.efficiency.selectors.SearchBarSelectors
 import org.mozilla.fenix.ui.efficiency.selectors.SettingsTranslationSelectors
@@ -150,6 +152,22 @@ class TranslationsTest : BaseTest(LaunchConfig(isPageLoadTranslationsPromptEnabl
                 TestAssetHelper.waitingTimeLong,
             )
         on.browserPage.verifyPageContent("Article of the day")
+    }
+
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/2532977
+    @Critical
+    @Test
+    fun verifyATranslatableCustomTabTest() {
+        val customTabPage = mockWebServer.firstForeignWebPageAsset
+
+        on.customTabs.launchCustomTab(customTabPage.url.toString(), "TestMenuItem")
+        on.customTabs.openMainMenu().mozClick(CustomTabsSelectors.MENU_OPEN_IN_APP)
+        on.browserPage
+            .navigateToPage()
+            .openMainMenu()
+            .mozClick(MainMenuSelectors.MORE_BUTTON)
+            .mozClick(MainMenuSelectors.TRANSLATE_BUTTON)
+        on.browserPage.verifyTranslationSheetWithReload(customTabPage.url.toString())
     }
 
     private companion object {
