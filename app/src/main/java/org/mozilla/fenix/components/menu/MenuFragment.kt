@@ -6,6 +6,7 @@ package org.mozilla.fenix.components.menu
 
 import android.app.Dialog
 import android.content.res.Configuration
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.KeyEvent
@@ -22,6 +23,7 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.core.graphics.drawable.toDrawable
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat.Type.systemBars
 import androidx.fragment.compose.content
@@ -51,6 +53,7 @@ import org.mozilla.fenix.components.menu.compose.MenuDialogBottomSheet
 import org.mozilla.fenix.components.menu.compose.MenuHandleState
 import org.mozilla.fenix.components.menu.middleware.MenuMiddleware
 import org.mozilla.fenix.components.menu.middleware.MenuTelemetryMiddleware
+import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.ext.isToolbarAtBottom
 import org.mozilla.fenix.ext.openSetDefaultBrowserOption
 import org.mozilla.fenix.ext.requireComponents
@@ -61,6 +64,7 @@ private const val EXPANDED_OFFSET = 56
 private const val HIDING_FRICTION = 0.9f
 private const val MENU_ANIMATION_DURATION = 300L
 private const val MENU_ANIMATION_START_OFFSET_RATIO = 0.2f
+private const val PRIVATE_HOME_MENU_BACKGROUND_ALPHA = 100
 
 /** A bottom sheet fragment hosting the customizable menu. */
 class MenuFragment : BottomSheetDialogFragment() {
@@ -85,6 +89,17 @@ class MenuFragment : BottomSheetDialogFragment() {
             }
             .apply {
                 setOnShowListener {
+                    val safeActivity = activity ?: return@setOnShowListener
+                    val isPrivate = safeActivity.components.appStore.state.mode.isPrivate
+
+                    if (isPrivate && args.accessPoint == MenuAccessPoint.Home) {
+                        window?.setBackgroundDrawable(
+                            Color.BLACK.toDrawable().mutate().apply {
+                                alpha = PRIVATE_HOME_MENU_BACKGROUND_ALPHA
+                            }
+                        )
+                    }
+
                     val bottomSheet = findViewById<View?>(materialR.id.design_bottom_sheet)
 
                     bottomSheet?.let {
