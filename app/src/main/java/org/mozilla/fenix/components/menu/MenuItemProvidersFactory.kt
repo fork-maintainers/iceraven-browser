@@ -39,6 +39,7 @@ import org.mozilla.fenix.components.TabCollectionStorage
 import org.mozilla.fenix.components.UseCases
 import org.mozilla.fenix.components.accounts.MozillaAccountMenuItemProvider
 import org.mozilla.fenix.downloads.DownloadsMenuItemProvider
+import org.mozilla.fenix.home.CustomizeHomepageMenuItemProvider
 import org.mozilla.fenix.home.topsites.ShortcutMenuItemProvider
 import org.mozilla.fenix.ipprotection.VpnMenuItemProvider
 import org.mozilla.fenix.library.history.HistoryMenuItemProvider
@@ -301,6 +302,8 @@ class MenuItemProvidersFactory(
                     accessPoint = accessPoint,
                     scope = menuViewScope,
                 )
+
+            FenixMenuItem.CustomizeHomepage -> CustomizeHomepageMenuItemProvider()
 
             FenixMenuItem.Settings -> SettingsMenuItemProvider()
 

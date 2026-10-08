@@ -53,7 +53,8 @@ private const val NUMBER_OF_RECOMMENDED_ADDONS_TO_SHOW = 3
 private const val EXTENSION_ACTION_ICON_SIZE_DP = 24
 
 /**
- * [MenuItemProvider] for the menu item expanding to the user's extensions, or to a list of recommended ones.
+ * [MenuItemProvider] for the menu item expanding to the user's extensions, or to a list of recommended ones. On the
+ * home screen there is no page for extensions to act on, so the item only opens to the extensions manager.
  *
  * @param context Application scoped [Context] needed for various system interactions. Must not be tied to a screen, as
  *   this provider can outlive the menu it was built for, see [applicationScope].
@@ -93,15 +94,23 @@ class ExtensionsMenuItemProvider(
         )
 
     override val itemFlow: StateFlow<MenuItem?> =
-        extensions
-            .map { it.toMenuItem(context) }
-            .stateIn(
-                scope = viewLifecycleScope,
-                started = SharingStarted.Eagerly,
-                initialValue = extensions.value.toMenuItem(context),
-            )
+        when (target) {
+            MenuTarget.Home -> MutableStateFlow(extensions.value.toExtensionsManagerMenuItem(context))
+            MenuTarget.BrowserTab ->
+                extensions
+                    .map { it.toMenuItem(context) }
+                    .stateIn(
+                        scope = viewLifecycleScope,
+                        started = SharingStarted.Eagerly,
+                        initialValue = extensions.value.toMenuItem(context),
+                    )
+        }
 
     init {
+        if (target == MenuTarget.BrowserTab) observeExtensions(viewLifecycleScope, applicationScope)
+    }
+
+    private fun observeExtensions(viewLifecycleScope: CoroutineScope, applicationScope: CoroutineScope) {
         // AddonManager#getAddons will run until completion even if the coroutine is canceled, so it is deliberately
         // run on a scope outliving this menu. This provider can be kept alive by it for that long since everything it
         // holds is itself tied to the lifetime of the application.
@@ -255,6 +264,13 @@ private data class MenuAddon(
     val summary: String?,
     val addon: Addon,
 )
+
+private fun ExtensionsStatus.toExtensionsManagerMenuItem(context: Context) =
+    StandardMenuItem(
+        title = Text.Resource(R.string.browser_menu_extensions),
+        icon = icon(context),
+        onClickEvent = MenuAction.Navigate.ManageExtensions,
+    )
 
 /** What to show for the user's extensions, be it the extensions themselves or a way to get some. */
 private fun ExtensionsStatus.toMenuItem(context: Context): MenuItem {

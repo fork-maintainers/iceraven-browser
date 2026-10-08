@@ -6,13 +6,13 @@ package org.mozilla.fenix.addons
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import io.mockk.coEvery
+import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertIs
-import kotlin.test.assertNotEquals
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -353,11 +353,51 @@ class ExtensionsMenuItemProviderTest {
         return provider.itemFlow.value
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
-    fun `GIVEN the menu was opened from home WHEN building the item THEN ignore the selected tab`() = runTest {
-        val item = provider(browserStoreWith(extension(INSTALLED_ID)), MenuTarget.Home).itemFlow.value
+    fun `GIVEN the menu was opened from home WHEN building the item THEN only offer managing extensions`() = runTest {
+        val provider = provider(browserStoreWith(extension(INSTALLED_ID)), MenuTarget.Home)
 
-        assertNotEquals(MenuItemSummary(text = Text.String(ACTION_TITLE)), item?.summary)
+        runCurrent()
+
+        assertEquals(
+            StandardMenuItem(
+                title = Text.Resource(R.string.browser_menu_extensions),
+                icon = MenuItemIconRes(iconsR.drawable.mozac_ic_extension_24),
+                onClickEvent = MenuAction.Navigate.ManageExtensions,
+            ),
+            provider.itemFlow.value,
+        )
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun `GIVEN the menu was opened from home WHEN building the item THEN don't query the extensions`() = runTest {
+        provider(browserStoreWith(extension(INSTALLED_ID)), MenuTarget.Home)
+
+        runCurrent()
+
+        coVerify(exactly = 0) { addonManager.getAddons() }
+    }
+
+    @Test
+    fun `GIVEN the extensions process is disabled WHEN building the item for home THEN warn about it`() = runTest {
+        val browserStore = browserStoreWith(extension(INSTALLED_ID), isExtensionsProcessDisabled = true)
+
+        val item = provider(browserStore, MenuTarget.Home).itemFlow.value as StandardMenuItem
+
+        assertIs<MenuItemIconDrawable>(item.icon)
+        assertNull(item.summary)
+        assertEquals(MenuAction.Navigate.ManageExtensions, item.onClickEvent)
+    }
+
+    @Test
+    fun `GIVEN the menu was opened from home WHEN clicking the item THEN show the extensions manager`() = runTest {
+        val provider = provider(target = MenuTarget.Home)
+
+        provider.onEvent(MenuAction.Navigate.ManageExtensions, menu)
+
+        assertEquals(NavGraphDirections.actionGlobalAddonsManagementFragment(), menu.directions)
     }
 
     private fun TestScope.provider(

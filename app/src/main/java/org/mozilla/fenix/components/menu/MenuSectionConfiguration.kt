@@ -74,6 +74,9 @@ sealed interface FenixMenuItem {
     /** A menu item allowing to sign in or manage the current Mozilla account. */
     data object MozillaAccount : FenixMenuItem
 
+    /** A menu item allowing to customize what the homepage shows. */
+    data object CustomizeHomepage : FenixMenuItem
+
     /** A menu item allowing to open the application settings. */
     data object Settings : FenixMenuItem
 
