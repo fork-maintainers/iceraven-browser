@@ -986,7 +986,7 @@ features:
         description: >
           Whether or not to block LNA requests
         type: Boolean
-        default: false
+        default: true
       block-trackers:
         description: >
           Whether or not to block trackers
@@ -996,7 +996,7 @@ features:
         description: >
           Whether or not to turn on local network / device access blocking
         type: Boolean
-        default: false
+        default: true
       block-insecure-contexts:
         description: >
           Whether or not LNA requests coming from insecure contexts should be
