@@ -32,6 +32,12 @@ class HistoryPage(composeRule: AndroidComposeTestRule<HomeActivityIntentTestRule
             to = pageName,
             steps = listOf(NavigationStep.Click(MainMenuSelectors.HISTORY_BUTTON)),
         )
+
+        builder.register(
+            from = pageName,
+            to = "HomePage",
+            steps = listOf(NavigationStep.PressBack),
+        )
     }
 
     override val selectorCatalog = HistorySelectors
