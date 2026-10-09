@@ -8,6 +8,8 @@ package org.mozilla.fenix.ui.robots
 
 import android.util.Log
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertIsOff
+import androidx.compose.ui.test.assertIsOn
 import androidx.compose.ui.test.junit4.ComposeTestRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
@@ -46,43 +48,28 @@ class SettingsSubMenuPageSummariesRobot(private val composeTestRule: ComposeTest
         Log.i(TAG, "verifyPageSummariesView: Verified that the \"Shake to summarize\" option is displayed")
     }
 
-    fun verifySummarizePagesToggle(enabled: Boolean) {
-        Log.i(
-            TAG,
-            "verifySummarizePagesToggle: Trying to verify that the \"Summarize pages\" toggle is enabled: $enabled",
-        )
-        composeTestRule.summarizePagesOption().assertIsDisplayed()
-        Log.i(TAG, "verifySummarizePagesToggle: Verified that the \"Summarize pages\" toggle is displayed")
+    fun verifySummarizePagesToggle(isChecked: Boolean) {
+        if (isChecked) {
+            Log.i(
+                TAG,
+                "verifySummarizePagesToggle: Trying to verify that the \"Summarize pages\" toggle is enabled: $isChecked",
+            )
+            composeTestRule.summarizePagesOption().assertIsOn()
+            Log.i(TAG, "verifySummarizePagesToggle: Verified that the \"Summarize pages\" toggle is enabled")
+        } else {
+            Log.i(
+                TAG,
+                "verifySummarizePagesToggle: Trying to verify that the \"Summarize pages\" toggle is disabled: $isChecked",
+            )
+            composeTestRule.summarizePagesOption().assertIsOff()
+            Log.i(TAG, "verifySummarizePagesToggle: Verified that the \"Summarize pages\" toggle is disabled")
+        }
     }
 
     fun clickSummarizePagesToggle() {
         Log.i(TAG, "clickSummarizePagesToggle: Trying to click the \"Summarize pages\" toggle")
         composeTestRule.summarizePagesOption().performClick()
         Log.i(TAG, "clickSummarizePagesToggle: Clicked the \"Summarize pages\" toggle")
-    }
-
-    fun verifyTheSummarizedBottomSheet(isSuccessful: Boolean = false) {
-        if (isSuccessful) {
-            Log.i(
-                TAG,
-                "verifyTheSummarizedBottomSheet: Trying to verify that the \"Summary by Firefox\" bottom sheet is displayed.",
-            )
-            composeTestRule.summarizedBottomSheet().assertIsDisplayed()
-            Log.i(
-                TAG,
-                "verifyTheSummarizedBottomSheet: Verified that the \"Summary by Firefox\" bottom sheet is displayed.",
-            )
-        } else {
-            Log.i(
-                TAG,
-                "verifyTheSummarizedBottomSheet: Trying to verify that the \"Can't summarize right now\" error message is displayed.",
-            )
-            composeTestRule.summarizeErrorMessage().assertIsDisplayed()
-            Log.i(
-                TAG,
-                "verifyTheSummarizedBottomSheet: Verified that the \"Can't summarize right now\" error message is displayed.",
-            )
-        }
     }
 
     class Transition(private val composeTestRule: ComposeTestRule)
@@ -103,7 +90,3 @@ private fun ComposeTestRule.gesturesSubHeader() =
 
 private fun ComposeTestRule.shakeToSummarizeOption() =
     onNodeWithText(getStringResource(summarizeR.string.mozac_summarize_settings_shake_to_summarize))
-
-private fun ComposeTestRule.summarizedBottomSheet() = onNodeWithText("Summary by Firefox")
-
-private fun ComposeTestRule.summarizeErrorMessage() = onNodeWithText("Try again later.")

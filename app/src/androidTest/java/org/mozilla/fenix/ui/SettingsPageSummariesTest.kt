@@ -8,12 +8,15 @@ import androidx.compose.ui.test.junit4.v2.AndroidComposeTestRule as AndroidCompo
 import org.junit.Rule
 import org.junit.Test
 import org.mozilla.fenix.customannotations.Converted
+import org.mozilla.fenix.customannotations.Critical
 import org.mozilla.fenix.customannotations.SmokeTest
 import org.mozilla.fenix.helpers.FenixTestRule
 import org.mozilla.fenix.helpers.HomeActivityIntentTestRule
 import org.mozilla.fenix.helpers.TestAssetHelper.articleSummaryAsset
 import org.mozilla.fenix.helpers.TestAssetHelper.loremIpsumAsset
+import org.mozilla.fenix.helpers.TestHelper.exitMenu
 import org.mozilla.fenix.helpers.perf.DetectMemoryLeaksRule
+import org.mozilla.fenix.ui.robots.browserScreen
 import org.mozilla.fenix.ui.robots.homeScreen
 import org.mozilla.fenix.ui.robots.navigationToolbar
 
@@ -57,20 +60,58 @@ class SettingsPageSummariesTest {
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/4036045
+    @Converted(
+        replacedBy =
+            [
+                "org.mozilla.fenix.ui.efficiency.tests.SettingsPageSummariesTest#verifyTheSummarizePagesToggleBehaviourTest"
+            ],
+        bug = 2079744,
+        since = "2026-10",
+    )
+    @Critical
     @Test
     fun verifyTheSummarizePagesToggleBehaviourTest() {
+        composeTestRule.activityRule.applySettingsExceptions {
+            it.hasSeenShakeToSummarizeToolbarCfr = true
+        }
+
         val articlePage = mockWebServer.articleSummaryAsset
-        navigationToolbar(composeTestRule) {}
-            .enterURLAndEnterToBrowser(articlePage.url) {
-                waitForPageToLoad()
-                clickTheDismissButtonOnSummarizeCFR()
-            }
+
+        homeScreen(composeTestRule) {}
             .openThreeDotMenu {}
             .clickSettingsButton {}
             .openPageSummariesSubMenu(composeTestRule) {
                 verifySummarizePagesToggle(true)
                 clickSummarizePagesToggle()
                 verifySummarizePagesToggle(false)
+            }
+
+        exitMenu()
+
+        navigationToolbar(composeTestRule) {}
+            .enterURLAndEnterToBrowser(articlePage.url) {}
+            .openThreeDotMenu {
+                clickTheMoreButton()
+                verifySummarizePageButton(isDisplayed = false)
+            }
+            .dismissMainMenu {}
+            .openThreeDotMenu {}
+            .clickSettingsButton {}
+            .openPageSummariesSubMenu(composeTestRule) {
+                verifySummarizePagesToggle(false)
+                clickSummarizePagesToggle()
+                verifySummarizePagesToggle(true)
+            }
+
+        exitMenu()
+
+        browserScreen(composeTestRule) {}
+            .openThreeDotMenu {
+                clickTheMoreButton()
+                verifySummarizePageButton()
+            }
+            .clickSummarizePageButton {
+                verifyTheSignInToSummarizeBottomSheet()
             }
     }
 

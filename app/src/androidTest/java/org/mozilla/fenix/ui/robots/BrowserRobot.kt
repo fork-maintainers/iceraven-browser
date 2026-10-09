@@ -57,6 +57,7 @@ import mozilla.components.feature.app.links.R as applinksR
 import mozilla.components.feature.contextmenu.R as contextmenuR
 import mozilla.components.feature.downloads.R as downloadsR
 import mozilla.components.feature.prompts.R as promptsR
+import mozilla.components.feature.summarize.R as summarizeR
 import mozilla.components.lib.crash.store.CrashReportOption
 import org.junit.Assert.assertTrue
 import org.junit.Assert.fail
@@ -1579,6 +1580,57 @@ class BrowserRobot(private val composeTestRule: ComposeTestRule) {
         }
     }
 
+    fun verifyTheSummarizedBottomSheet(isSuccessful: Boolean = false) {
+        if (isSuccessful) {
+            Log.i(
+                TAG,
+                "verifyTheSummarizedBottomSheet: Trying to verify that the \"Summary by Firefox\" bottom sheet is displayed.",
+            )
+            composeTestRule.summarizedBottomSheet().assertIsDisplayed()
+            Log.i(
+                TAG,
+                "verifyTheSummarizedBottomSheet: Verified that the \"Summary by Firefox\" bottom sheet is displayed.",
+            )
+        } else {
+            Log.i(
+                TAG,
+                "verifyTheSummarizedBottomSheet: Trying to verify that the \"Can't summarize right now\" error message is displayed.",
+            )
+            composeTestRule.summarizeErrorMessage().assertIsDisplayed()
+            Log.i(
+                TAG,
+                "verifyTheSummarizedBottomSheet: Verified that the \"Can't summarize right now\" error message is displayed.",
+            )
+        }
+    }
+
+    fun verifyTheSignInToSummarizeBottomSheet() {
+        Log.i(
+            TAG,
+            "verifyTheSignInToSummarizeBottomSheet: Trying to verify that the \"Sign in to summarize\" bottom sheet is displayed.",
+        )
+        composeTestRule
+            .onNodeWithText(getStringResource(summarizeR.string.mozac_summarize_fxa_sign_in_title))
+            .assertIsDisplayed()
+        composeTestRule
+            .onNodeWithText(
+                getStringResource(summarizeR.string.mozac_summarize_fxa_sign_in_message) +
+                    " " +
+                    getStringResource(summarizeR.string.mozac_summarize_learn_more_link)
+            )
+            .assertIsDisplayed()
+        composeTestRule
+            .onNodeWithText(getStringResource(summarizeR.string.mozac_summarize_fxa_sign_in_button_positive))
+            .assertIsDisplayed()
+        composeTestRule
+            .onNodeWithText(getStringResource(summarizeR.string.mozac_summarize_error_dissmiss))
+            .assertIsDisplayed()
+        Log.i(
+            TAG,
+            "verifyTheSignInToSummarizeBottomSheet: Verified that the \"Sign in to summarize\" bottom sheet is displayed.",
+        )
+    }
+
     class Transition(private val composeTestRule: ComposeTestRule) {
         fun openThreeDotMenu(interact: ThreeDotMenuMainRobot.() -> Unit): ThreeDotMenuMainRobot.Transition {
             openMainMenuAndAwaitBottomSheet(composeTestRule)
@@ -2070,3 +2122,7 @@ private fun ComposeTestRule.summarizeCFRMessage() =
     onNodeWithText(getStringResource(R.string.browser_toolbar_summarize_cfr_description))
 
 private fun ComposeTestRule.summarizeCFRButton() = onNodeWithTag("cfr.dismiss")
+
+private fun ComposeTestRule.summarizedBottomSheet() = onNodeWithText("Summary by Firefox")
+
+private fun ComposeTestRule.summarizeErrorMessage() = onNodeWithText("Try again later.")
