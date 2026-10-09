@@ -1635,6 +1635,7 @@ class MainMenuTest {
         bug = 2063252,
         since = "2026-08",
     )
+    @SmokeTest
     @Test
     fun verifyTheMainMenuShareButtonFromCustomTabTest() {
         val customMenuItem = "TestMenuItem"
