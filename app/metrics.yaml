@@ -9256,6 +9256,304 @@ media_state:
       tags:
         - Media
 
+listen_to_page:
+  play_pressed:
+    type: event
+    description: |
+      The user pressed the play button to start or resume.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D331404
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  pause_pressed:
+    type: event
+    description: |
+      The user pressed the pause button.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D331404
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  skip_back_pressed:
+    type: event
+    description: |
+      The user pressed the skip-back button to jump backward.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D331404
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  skip_forward_pressed:
+    type: event
+    description: |
+      The user pressed the skip-forward button to jump forward.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D331404
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  seek_performed:
+    type: event
+    description: |
+      The user dragged the progress bar to a different position.
+    extra_keys:
+      direction:
+        description: |
+          Whether the seek moved the position `forward` or `backward`.
+        type: string
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D331404
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  voice_list_opened:
+    type: event
+    description: |
+      The user opened the voice list.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D331404
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  voice_list_dismissed:
+    type: event
+    description: |
+      The user dismissed the voice list without picking a voice.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D331404
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  voice_selected:
+    type: event
+    description: |
+      A voice was selected.
+    extra_keys:
+      is_default:
+        description: |
+          Whether the picked voice is the default voice.
+        type: boolean
+      source:
+        description: |
+          Source for the voice selection, either `user_selected` or `fallback`
+          (it was chosen automatically after the saved voice became unavailable).
+        type: string
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D331404
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  speed_list_opened:
+    type: event
+    description: |
+      The user opened the playback speed list.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D331404
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  speed_list_dismissed:
+    type: event
+    description: |
+      The user dismissed the playback speed list without picking a speed.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D331404
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  speed_selected:
+    type: event
+    description: |
+      A playback speed was selected.
+    extra_keys:
+      speed:
+        description: |
+          The selected speed as a multiple of the normal reading speed.
+        type: string
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D331404
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  requested:
+    type: event
+    description: |
+      The user requested to listen to the page.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D331404
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  content_ready:
+    type: event
+    description: |
+      The page was extracted and is ready to read.
+    extra_keys:
+      language:
+        description: |
+          The BCP 47 language the page is read in.
+        type: string
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D331404
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  playback_started:
+    type: event
+    description: |
+      Audio playback started.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D331404
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  playback_ended:
+    type: event
+    description: |
+      Audio playback ended.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D331404
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  stopped:
+    type: event
+    description: |
+      The listening session was stopped.
+    extra_keys:
+      source:
+        description: |
+          Session ended due to either the `close_button` or `tab_closed`
+          (the listened tab was closed or user navigated elsewhere).
+        type: string
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D331404
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  no_offline_voice:
+    type: event
+    description: |
+      No offline voice is available for the page's language.
+    extra_keys:
+      language:
+        description: |
+          The BCP 47 language of the page.
+        type: string
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D331404
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  content_unavailable:
+    type: event
+    description: |
+      The page had no readable content.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D331404
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  synthesis_failed:
+    type: event
+    description: |
+      The speech engine failed to produce audio.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D331404
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  playback_failed:
+    type: event
+    description: |
+      The player failed to read the page.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D331404
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+
 logins:
   password_detected:
     type: event

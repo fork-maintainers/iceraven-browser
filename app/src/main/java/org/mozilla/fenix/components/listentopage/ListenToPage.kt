@@ -54,7 +54,8 @@ class ListenToPage(
                         playbackController = ListenPlaybackController(context, scope),
                         settings = ListenSettings.dataStore(context),
                         scope = scope,
-                    )
+                    ),
+                    ListenToPageTelemetryMiddleware(),
                 ),
         )
     }
