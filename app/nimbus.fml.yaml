@@ -1329,6 +1329,16 @@ features:
         value:
           enabled: true
 
+  wayback-machine:
+    description: >
+      Feature that shows a "Check Archived Version" button on eligible error pages, linking to the
+      Wayback Machine.
+    variables:
+      enabled:
+        description: If true, the "Check Archived Version" button is shown on eligible error pages.
+        type: Boolean
+        default: false
+
 types:
   objects:
     GleanServerKnobsConfiguration:

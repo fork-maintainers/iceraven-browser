@@ -3006,14 +3006,11 @@ class Settings(
             default = false,
         )
 
-    /**
-     * Feature flag that indicates if the "Check Archived Version" button is shown on eligible error pages. Off by
-     * default; the toggle is only exposed via secret settings on Nightly.
-     */
+    /** Feature flag that indicates if the "Check Archived Version" button is shown on eligible error pages. */
     var isWaybackMachineEnabled by
         booleanPreference(
             key = appContext.getPreferenceKey(R.string.pref_key_enable_wayback_machine),
-            default = false,
+            default = { FxNimbus.features.waybackMachine.value().enabled },
         )
 
     /** Indicates if the Set as default Browser prompt should be displayed to the user. */
