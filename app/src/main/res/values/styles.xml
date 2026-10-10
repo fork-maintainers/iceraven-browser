@@ -111,8 +111,6 @@
         <!-- Layers -->
         <!-- Card background, Menu background, Dialog, Banner -->
         <item name="layer2">@color/fx_mobile_layer_color_2</item>
-        <!-- Search -->
-        <item name="layer3">@color/fx_mobile_layer_color_3</item>
 
         <!-- Action -->
         <!-- Primary button in a disabled state -->
@@ -408,8 +406,6 @@
         <!-- Layers -->
         <!-- Card background, Menu background, Dialog, Banner -->
         <item name="layer2">@color/fx_mobile_private_layer_color_2</item>
-        <!-- Search -->
-        <item name="layer3">@color/fx_mobile_private_layer_color_3</item>
 
         <!-- Action -->
         <!-- Primary button in a disabled state -->

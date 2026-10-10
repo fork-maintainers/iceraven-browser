@@ -8,8 +8,6 @@
     <!-- Layers -->
     <!-- Card background, Menu background, Dialog, Banner -->
     <attr name="layer2" format="reference" />
-    <!-- Search -->
-    <attr name="layer3" format="reference" />
     <attr name="scrim" format="reference" />
 
     <!-- Action -->

@@ -64,8 +64,6 @@
     <!-- Layers -->
     <!-- Card background, Menu background, Dialog, Banner -->
     <color name="fx_mobile_layer_color_2">@color/novaWhite</color>
-    <!-- Search -->
-    <color name="fx_mobile_layer_color_3">@color/photonLightGrey20</color>
     <!-- Warning background -->
     <color name="fx_mobile_layer_color_warning">@color/photonYellow20</color>
     <!-- Error background -->
