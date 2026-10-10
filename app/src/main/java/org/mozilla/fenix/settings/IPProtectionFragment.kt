@@ -23,9 +23,9 @@ import androidx.navigation.fragment.navArgs
 import java.time.LocalDate
 import mozilla.components.ExperimentalAndroidComponentsApi
 import mozilla.components.concept.engine.ipprotection.ServiceState
-import mozilla.components.feature.ipprotection.IPProtectionFxaAuthFlow
-import mozilla.components.feature.ipprotection.IPProtectionFxaAuthFlow.Companion.INTENT_ON_COMPLETE
 import mozilla.components.feature.ipprotection.IPProtectionWarningBinding
+import mozilla.components.feature.ipprotection.auth.fxa.IPProtectionFxaAuthFlow
+import mozilla.components.feature.ipprotection.auth.fxa.IPProtectionFxaAuthFlow.Companion.INTENT_ON_COMPLETE
 import mozilla.components.feature.ipprotection.debug.IPProtectionStateDebugContent
 import mozilla.components.feature.ipprotection.store.IPProtectionAction
 import mozilla.components.feature.ipprotection.store.state.AccountStatus
