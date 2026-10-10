@@ -9,8 +9,8 @@ import androidx.lifecycle.ProcessLifecycleOwner
 import mozilla.components.browser.state.store.BrowserStore
 import mozilla.components.concept.engine.Engine
 import mozilla.components.feature.ipprotection.IPProtectionFeature
-import mozilla.components.feature.ipprotection.IPProtectionStorageSynchronizer
 import mozilla.components.feature.ipprotection.auth.gpi.IPProtectionGpiProvider
+import mozilla.components.feature.ipprotection.storage.IPProtectionStorageSynchronizer
 import mozilla.components.feature.ipprotection.store.DefaultIPProtectionLocationRepository
 import mozilla.components.feature.ipprotection.store.IPProtectionLocationMiddleware
 import mozilla.components.feature.ipprotection.store.IPProtectionStore

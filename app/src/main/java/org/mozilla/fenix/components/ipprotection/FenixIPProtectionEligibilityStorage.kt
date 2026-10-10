@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import mozilla.components.browser.state.search.RegionState
 import mozilla.components.browser.state.store.BrowserStore
-import mozilla.components.feature.ipprotection.IPProtectionEligibilityStorage
+import mozilla.components.feature.ipprotection.storage.IPProtectionEligibilityStorage
 import mozilla.components.feature.ipprotection.store.state.EligibilityStatus
 import org.mozilla.fenix.nimbus.FxNimbus
 import org.mozilla.fenix.settings.registerOnSharedPreferenceChangeListener
