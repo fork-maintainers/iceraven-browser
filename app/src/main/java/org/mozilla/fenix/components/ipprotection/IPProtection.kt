@@ -22,6 +22,12 @@ import org.mozilla.fenix.Config
 import org.mozilla.fenix.R
 import org.mozilla.fenix.components.AppStore
 import org.mozilla.fenix.components.LogMiddleware
+import org.mozilla.fenix.ipprotection.store.DefaultIPProtectionRepository
+import org.mozilla.fenix.ipprotection.store.FenixIPProtectionEligibilityStorage
+import org.mozilla.fenix.ipprotection.store.IPProtectionPreferencesMiddleware
+import org.mozilla.fenix.ipprotection.store.IPProtectionSnackbarMessages
+import org.mozilla.fenix.ipprotection.store.IPProtectionSnackbarMiddleware
+import org.mozilla.fenix.ipprotection.store.IPProtectionTelemetryMiddleware
 import org.mozilla.fenix.utils.Settings
 
 /**

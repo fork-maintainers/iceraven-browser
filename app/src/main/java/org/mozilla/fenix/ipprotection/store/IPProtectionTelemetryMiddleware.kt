@@ -4,7 +4,7 @@
 
 @file:OptIn(ExperimentalAndroidComponentsApi::class)
 
-package org.mozilla.fenix.components.ipprotection
+package org.mozilla.fenix.ipprotection.store
 
 import android.os.SystemClock
 import mozilla.components.ExperimentalAndroidComponentsApi
