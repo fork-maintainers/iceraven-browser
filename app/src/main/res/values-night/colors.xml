@@ -93,7 +93,6 @@
     <!-- Normal theme colors for dark mode -->
     <color name="accent_normal_theme">@color/photonViolet50</color>
     <color name="accent_high_contrast_normal_theme">@color/photonViolet40</color>
-    <color name="neutral_faded_normal_theme">#1FFBFBFE</color>
     <color name="toggle_off_knob_normal_theme">@color/toggle_off_knob_dark_theme</color>
     <color name="toggle_off_track_normal_theme">@color/toggle_off_track_dark_theme</color>
     <color name="fill_link_from_clipboard_normal_theme">@color/photonViolet40</color>
