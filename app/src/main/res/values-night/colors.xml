@@ -95,7 +95,6 @@
     <color name="accent_high_contrast_normal_theme">@color/photonViolet40</color>
     <color name="toggle_off_knob_normal_theme">@color/toggle_off_knob_dark_theme</color>
     <color name="toggle_off_track_normal_theme">@color/toggle_off_track_dark_theme</color>
-    <color name="fill_link_from_clipboard_normal_theme">@color/photonViolet40</color>
     <color name="add_on_private_browsing_exterior_circle_background_normal_theme">@color/accent_normal_theme</color>
     <color name="prompt_login_edit_text_cursor_color_normal_theme">@color/photonViolet50</color>
     <color name="search_suggestion_indicator_icon_color_normal_theme">@color/photonGreen60</color>

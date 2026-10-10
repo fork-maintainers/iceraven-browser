@@ -145,7 +145,6 @@
         <item name="toolbarStartGradient">@color/fx_mobile_surface</item>
         <item name="toolbarCenterGradient">@color/fx_mobile_surface</item>
         <item name="toolbarEndGradient">@color/fx_mobile_surface</item>
-        <item name="fillLinkFromClipboard">@color/fill_link_from_clipboard_normal_theme</item>
         <item name="addOnPrivateBrowsingExteriorCircleBackground">@color/add_on_private_browsing_exterior_circle_background_normal_theme</item>
         <item name="mozacPromptLoginEditTextCursorColor">@color/prompt_login_edit_text_cursor_color_normal_theme</item>
         <item name="awesomeBarIndicatorColor">@color/search_suggestion_indicator_icon_color_normal_theme</item>
@@ -435,7 +434,6 @@
         <item name="toolbarStartGradient">@color/fx_mobile_private_surface</item>
         <item name="toolbarCenterGradient">@color/fx_mobile_private_surface</item>
         <item name="toolbarEndGradient">@color/fx_mobile_private_surface</item>
-        <item name="fillLinkFromClipboard">@color/accent_high_contrast_private_theme</item>
         <item name="addOnPrivateBrowsingExteriorCircleBackground">@color/accent_private_theme</item>
         <item name="mozacPromptLoginEditTextCursorColor">@color/prompt_login_edit_text_cursor_color_private_theme</item>
         <item name="awesomeBarIndicatorColor">@color/photonGreen60</item>

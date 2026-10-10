@@ -216,7 +216,6 @@
     <!-- Normal theme colors for light mode -->
     <color name="accent_normal_theme">@color/photonInk20</color>
     <color name="accent_high_contrast_normal_theme">@color/photonInk20</color>
-    <color name="fill_link_from_clipboard_normal_theme">@color/photonInk20</color>
     <color name="add_on_private_browsing_exterior_circle_background_normal_theme">@color/photonViolet70</color>
     <color name="prompt_login_edit_text_cursor_color_normal_theme">@color/photonInk20</color>
     <color name="search_suggestion_indicator_icon_color_normal_theme">@color/photonGreen70</color>
