@@ -49,7 +49,6 @@
     <attr name="accentBright" format="reference" />
     <attr name="accentHighContrast" format="reference" />
     <attr name="accentUsedOnDarkBackground" format="reference" />
-    <attr name="neutral" format="reference" />
     <attr name="neutralFaded" format="reference" />
 
     <!-- Misc -->
