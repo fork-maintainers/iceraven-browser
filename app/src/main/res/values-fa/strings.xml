@@ -3038,7 +3038,7 @@
 
     Title for the browser VPN entry in the settings list
   -->
-  <string name="preferences_ip_protection_title_2">VPN توکار</string>
+  <string name="preferences_ip_protection_title_2">VPN داخلی</string>
   <!-- Label for the BETA badge for the browser VPN entry in the settings list -->
   <string name="preferences_ip_protection_beta_badge_label">BETA</string>
   <!-- Title for the browser VPN settings screen (displayed in the app bar) -->
@@ -3048,7 +3048,7 @@
   <!-- Content description for the browser VPN settings screen top bar back button -->
   <string name="ip_protection_navigate_back_button_content_description">بازگشت به عقب</string>
   <!-- Headline for the browser VPN promo card. %s is the name of the app (for example "Firefox"). -->
-  <string name="ip_protection_promo_headline">‏VPN توکار %s</string>
+  <string name="ip_protection_promo_headline">‏VPN داخلی %s</string>
   <!-- Body text for the browser VPN settings header, shown when no promo is running. %s is a learn more link using ip_protection_learn_more as text. -->
   <string name="ip_protection_promo_body_2">با پنهان کردن موقعیت مکانی خود، حتی روی شبکه‌های Wi-Fi عمومی، با محافظت بیشتری وب‌گردی کنید. %s</string>
   <!-- Link text that opens additional information about the browser VPN -->
@@ -3107,7 +3107,7 @@
   <!-- Label for the "connecting" state of the button that starts the browser VPN authentication or authorization flow on the settings screen -->
   <string name="ip_protection_connecting">در حال اتصال…</string>
   <!-- Headline for the browser VPN onboarding card. %s is the name of the app (for example "Firefox"). -->
-  <string name="ip_protection_onboarding_card_headline">‏VPN توکار %s را امتحان کنید</string>
+  <string name="ip_protection_onboarding_card_headline">‏VPN داخلی %s را امتحان کنید</string>
   <!--
     The body of the VPN onboarding card.
     %1$s is a link using ip_protection_onboarding_body_link (“Browse with extra protection”) as text. It links to a support article about VPN on Firefox.

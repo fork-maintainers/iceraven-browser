@@ -1365,6 +1365,8 @@
   <string name="library_desktop_bookmarks_unfiled">نشووکا دیری</string>
   <!-- Option in Library to open History page -->
   <string name="library_history">ویرگار</string>
+  <!-- Content description (not visible, for screen readers etc.) for the check mark that replaces a site's icon in History and Recently closed tabs when the item is selected -->
+  <string name="library_item_selected_content_description">پسند وابیڌه</string>
   <!-- Settings Page Title -->
   <string name="settings_title">سامووا</string>
   <!-- Content description (not visible, for screen readers etc.): "Close button for library settings" -->

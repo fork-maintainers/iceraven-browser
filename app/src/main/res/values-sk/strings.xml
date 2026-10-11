@@ -465,7 +465,7 @@
   <!-- Button text to reopen firefox after the crash is processed %s is the name of the app (for example "Firefox") -->
   <string name="startup_crash_restart">Znovu otvoriť %s</string>
   <!-- Title for the usage data option in the privacy preferences dialog shown during onboarding. Note: The word "Mozilla" should NOT be translated. -->
-  <string name="onboarding_preferences_dialog_usage_data_title" tools:ignore="BrandUsage">Odosielať technické údaje a údaje o interakciách spoločnosti Mozilla</string>
+  <string name="onboarding_preferences_dialog_usage_data_title" tools:ignore="BrandUsage">Odosielať technické údaje a údaje o používaní spoločnosti Mozilla</string>
   <string name="onboarding_preferences_dialog_usage_data_description_2" tools:ignore="BrandUsage">Údaje o vašom zariadení, konfigurácii hardvéru a spôsobe používania Firefoxu pomáhajú zlepšovať funkcie, výkon a stabilitu pre každého.</string>
   <string name="onboarding_preferences_dialog_usage_data_learn_more_2">Ďalšie informácie</string>
   <!-- Positive button label for the privacy preferences dialog shown during onboarding. -->
@@ -481,7 +481,7 @@
   <!-- Used as text for the link in onboarding_term_of_service_line_two. -->
   <string name="onboarding_term_of_service_line_two_link_text">Vyhlásenie o ochrane osobných údajov</string>
   <!-- Line three of the terms of service onboarding page. 'Firefox' and 'Mozilla' are intentionally hardcoded. %1$s is replaced by an active link using onboarding_term_of_service_line_three_link_text as text (“Manage”). -->
-  <string name="onboarding_term_of_service_line_three" tools:ignore="BrandUsage">Aby bolo možné prehliadač vylepšovať, Firefox odosiela diagnostické údaje a údaje o interakciách do Mozilly. %1$s</string>
+  <string name="onboarding_term_of_service_line_three" tools:ignore="BrandUsage">Aby bolo možné prehliadač vylepšovať, Firefox odosiela diagnostické údaje a údaje o používaní do Mozilly. %1$s</string>
   <!-- Used as text for the link in onboarding_term_of_service_line_three. -->
   <string name="onboarding_term_of_service_line_three_link_text">Spravovať</string>
   <!-- Terms of use (ToU) onboarding redesign title. -->
@@ -510,7 +510,7 @@
     Terms of use (ToU) third body text. 'Firefox' and 'Mozilla' are intentionally hardcoded.
     %1$s is replaced by an active link using onboarding_redesign_tou_body_three_link_text as text (“Manage Settings”).
   -->
-  <string name="onboarding_redesign_tou_body_three" tools:ignore="BrandUsage,UnusedResources">Aby bolo možné prehliadač vylepšovať, Firefox odosiela diagnostické údaje a údaje o interakciách do Mozilly. %1$s</string>
+  <string name="onboarding_redesign_tou_body_three" tools:ignore="BrandUsage,UnusedResources">Aby bolo možné prehliadač vylepšovať, Firefox odosiela diagnostické údaje a údaje o používaní do Mozilly. %1$s</string>
   <!-- Used as text for the link in onboarding_redesign_tou_body_three. -->
   <string name="onboarding_redesign_tou_body_three_link_text" tools:ignore="UnusedResources">Spravovať nastavenia</string>
   <!-- Terms of use (ToU) onboarding page continue button label. -->
@@ -575,7 +575,7 @@
     Terms of use (ToU) onboarding body line three. 'Firefox' and 'Mozilla' are intentionally hardcoded.
     %1$s is replaced by an active link, using nova_onboarding_tou_body_line_3_link_text as text (“Manage Settings”).
   -->
-  <string name="nova_onboarding_tou_body_line_3" tools:ignore="BrandUsage">Aby bolo možné prehliadač vylepšovať, Firefox odosiela diagnostické údaje a údaje o interakciách do Mozilly. %1$s</string>
+  <string name="nova_onboarding_tou_body_line_3" tools:ignore="BrandUsage">Aby bolo možné prehliadač vylepšovať, Firefox odosiela diagnostické údaje a údaje o používaní do Mozilly. %1$s</string>
   <!-- Terms of use (ToU) onboarding body line three link text for nova_onboarding_tou_body_line_3. -->
   <string name="nova_onboarding_tou_body_line_3_link_text">Spravovať nastavenia</string>
   <!-- "Set to default" onboarding title. -->
@@ -1224,7 +1224,7 @@
   <!-- Text displayed when there are no exceptions, with learn more link that brings users to a tracking protection SUMO page -->
   <string name="exceptions_empty_message_learn_more_link">Ďalšie informácie</string>
   <!-- Preference switch for usage and technical data collection -->
-  <string name="preference_usage_data_2">Odosielať technické údaje a údaje o interakciách</string>
+  <string name="preference_usage_data_2">Odosielať technické údaje a údaje o používaní</string>
   <!-- Preference switch for usage and technical learn more link in new compose -->
   <string name="preference_usage_data_learn_more_2">Ďalšie informácie o technických údajoch</string>
   <!-- Preference description for marketing data collection. Note: The words "Firefox" should NOT be translated -->

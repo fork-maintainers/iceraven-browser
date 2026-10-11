@@ -1365,6 +1365,8 @@
   <string name="library_desktop_bookmarks_unfiled">სხვა სანიშნები</string>
   <!-- Option in Library to open History page -->
   <string name="library_history">ისტორია</string>
+  <!-- Content description (not visible, for screen readers etc.) for the check mark that replaces a site's icon in History and Recently closed tabs when the item is selected -->
+  <string name="library_item_selected_content_description">არჩეული</string>
   <!-- Settings Page Title -->
   <string name="settings_title">პარამეტრები</string>
   <!-- Content description (not visible, for screen readers etc.): "Close button for library settings" -->
@@ -2425,6 +2427,8 @@
   <string name="sync_send_tab_empty_state_title">მოწყობილობები არაა დაკავშირებული</string>
   <!-- Send tab to synced devices: Empty state message - Displayed when the user has no synced devices -->
   <string name="sync_send_tab_empty_state_description" tools:ignore="BrandUsage">ჩანართის გასაგზავნად, შედით Firefox-ში, სულ მცირე, კიდევ ერთი სხვა მოწყობილობიდან.</string>
+  <!-- Send tab to synced devices: Empty state link - Displayed when the user has no synced devices -->
+  <string name="sync_send_tab_empty_state_link">იხილეთ, როგორ უნდა დააერთოთ მოწყობილობა</string>
   <!-- Send tab to synced devices: Connectivity Error title -->
   <string name="sync_send_tab_error_connection_title">შეამოწმეთ ქსელთან კავშირი</string>
   <!-- Send tab to synced devices: Connectivity Error message - Suggested user action after internet connection has been established -->
@@ -4506,6 +4510,16 @@
   <string name="lens_camera_mode_qr">QR-წამკითხველი</string>
   <!-- Toast shown when the user picks an image from the gallery in QR mode but no QR code is found in it -->
   <string name="lens_camera_qr_no_code_found">QR-კოდი ვერ მოიძებნა სურათზე</string>
+  <!-- Status shown under an image picked from the gallery while it is being sent to Google Lens for a visual search -->
+  <string name="lens_camera_loading_status">მოძიება</string>
+  <!-- Button shown under an image picked from the gallery while it is being sent to Google Lens. Tapping it stops the search and returns to the camera. -->
+  <string name="lens_camera_loading_cancel_button">გაუქმება</string>
+  <!-- Snackbar message shown when an image picked from the gallery could not be opened or read, so it was never sent to Google Lens. Shown after returning to the camera. -->
+  <string name="lens_camera_image_load_failed">ეს სურათი ვერ ჩაიტვირთა. სცადეთ სხვა.</string>
+  <!-- Snackbar message shown when an image picked from the gallery could not be searched because of a network problem or an error from Google Lens. Shown after returning to the camera, next to the lens_camera_upload_failed_retry_button action. -->
+  <string name="lens_camera_upload_failed">შედეგებს ვერ აბრუნებს Google Lens</string>
+  <!-- Action in the snackbar shown when an image picked from the gallery could not be searched with Google Lens. Tapping it searches the same image again. -->
+  <string name="lens_camera_upload_failed_retry_button">ხელახლა ცდა</string>
   <!-- Title of the bottom sheet shown the first time the user opens the Google Lens camera screen -->
   <string name="lens_opt_out_title">მოსაძებნად Google Lens</string>
   <!-- Description of the bottom sheet shown the first time the user opens the Google Lens camera screen -->

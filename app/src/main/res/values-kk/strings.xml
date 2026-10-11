@@ -105,19 +105,19 @@
   <!-- Text for the positive action button -->
   <string name="open_in_app_cfr_positive_button_text">Баптауларға өту</string>
   <!-- Text for the negative action button -->
-  <string name="open_in_app_cfr_negative_button_text">Тайдыру</string>
+  <string name="open_in_app_cfr_negative_button_text">Елемеу</string>
   <!-- Text for the info dialog when camera permissions have been denied but user tries to access a camera feature. -->
   <string name="camera_permissions_needed_message">Камера рұқсаты керек. Android баптауларына өтіп, Рұқсаттарды ашып, \"Рұқсат ету\" таңдаңыз.</string>
   <!-- Text for the positive action button to go to Android Settings to grant permissions. -->
   <string name="camera_permissions_needed_positive_button_text">Баптауларға өту</string>
   <!-- Text for the negative action button to dismiss the dialog. -->
-  <string name="camera_permissions_needed_negative_button_text">Тайдыру</string>
+  <string name="camera_permissions_needed_negative_button_text">Елемеу</string>
   <!-- Text for the banner message to tell users about our auto close feature. -->
   <string name="tab_tray_close_tabs_banner_message">Ашық беттер өткен күнде, аптада немесе айда қаралмаған болса, автоматты түрде жабылатынын баптау.</string>
   <!-- Text for the positive action button to go to Settings for auto close tabs. -->
   <string name="tab_tray_close_tabs_banner_positive_button_text">Опцияларды қарау</string>
   <!-- Text for the negative action button to dismiss the Close Tabs Banner. -->
-  <string name="tab_tray_close_tabs_banner_negative_button_text">Тайдыру</string>
+  <string name="tab_tray_close_tabs_banner_negative_button_text">Елемеу</string>
   <!-- Text for the banner message to tell users about our inactive tabs feature. -->
   <string name="tab_tray_inactive_onboarding_message">Сіз екі апта бойы қарамаған беттер осында жылжытылады.</string>
   <!-- Text for the action link to go to Settings for inactive tabs. -->
@@ -1365,6 +1365,8 @@
   <string name="library_desktop_bookmarks_unfiled">Басқа бетбелгілер</string>
   <!-- Option in Library to open History page -->
   <string name="library_history">Шолу тарихы</string>
+  <!-- Content description (not visible, for screen readers etc.) for the check mark that replaces a site's icon in History and Recently closed tabs when the item is selected -->
+  <string name="library_item_selected_content_description">Таңдалған</string>
   <!-- Settings Page Title -->
   <string name="settings_title">Баптаулар</string>
   <!-- Content description (not visible, for screen readers etc.): "Close button for library settings" -->
@@ -2350,7 +2352,7 @@
   <!-- Text for error message when generating a PDF file Text. -->
   <string name="unable_to_save_to_pdf_error">PDF жасау мүмкін емес</string>
   <!-- Text for standard error snackbar dismiss button. -->
-  <string name="standard_snackbar_error_dismiss">Тайдыру</string>
+  <string name="standard_snackbar_error_dismiss">Елемеу</string>
   <!-- Text for error message when printing a page and it fails. -->
   <string name="unable_to_print_page_error">Бұл бетті басып шығару мүмкін емес</string>
   <!-- Text for the print feature in the share and browser menu -->

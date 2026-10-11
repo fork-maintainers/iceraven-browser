@@ -1367,6 +1367,8 @@
   <string name="library_desktop_bookmarks_unfiled">Ostatní záložky</string>
   <!-- Option in Library to open History page -->
   <string name="library_history">Historie</string>
+  <!-- Content description (not visible, for screen readers etc.) for the check mark that replaces a site's icon in History and Recently closed tabs when the item is selected -->
+  <string name="library_item_selected_content_description">Vybráno</string>
   <!-- Settings Page Title -->
   <string name="settings_title">Nastavení</string>
   <!-- Content description (not visible, for screen readers etc.): "Close button for library settings" -->
