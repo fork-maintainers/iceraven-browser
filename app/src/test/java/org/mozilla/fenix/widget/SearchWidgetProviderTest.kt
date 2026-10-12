@@ -4,10 +4,13 @@
 
 package org.mozilla.fenix.widget
 
+import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.view.View
+import android.widget.FrameLayout
 import io.mockk.Runs
 import io.mockk.every
 import io.mockk.just
@@ -190,6 +193,32 @@ class SearchWidgetProviderTest {
 
         assertNotNull(widgetProvider.createLensSearchIntent(context))
     }
+
+    @Test
+    fun `GIVEN the widget was drawn without the lens button WHEN it is redrawn with and then without a lens intent THEN the lens button is shown and then hidden`() {
+        val widgetProvider = SearchWidgetProvider()
+        val view =
+            widgetProvider.createLargeRemoteViews(lensSearchIntent = null).apply(testContext, FrameLayout(testContext))
+        assertEquals(View.GONE, view.findViewById<View>(R.id.button_search_widget_lens).visibility)
+
+        widgetProvider.createLargeRemoteViews(lensSearchIntent = pendingIntent()).reapply(testContext, view)
+        assertEquals(View.VISIBLE, view.findViewById<View>(R.id.button_search_widget_lens).visibility)
+
+        widgetProvider.createLargeRemoteViews(lensSearchIntent = null).reapply(testContext, view)
+        assertEquals(View.GONE, view.findViewById<View>(R.id.button_search_widget_lens).visibility)
+    }
+
+    private fun SearchWidgetProvider.createLargeRemoteViews(lensSearchIntent: PendingIntent?) =
+        createRemoteViews(
+            testContext,
+            R.layout.search_widget_large,
+            pendingIntent(),
+            null,
+            lensSearchIntent,
+            "Search",
+        )
+
+    private fun pendingIntent() = PendingIntent.getActivity(testContext, 0, Intent(), PendingIntent.FLAG_IMMUTABLE)
 
     private fun contextWithDefaultEngine(engineId: String): Context {
         val searchState =

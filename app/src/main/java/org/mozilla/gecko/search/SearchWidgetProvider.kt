@@ -184,7 +184,8 @@ class SearchWidgetProvider : AppWidgetProvider() {
         )
     }
 
-    private fun createRemoteViews(
+    @VisibleForTesting
+    internal fun createRemoteViews(
         context: Context,
         layout: Int,
         textSearchIntent: PendingIntent,
@@ -214,12 +215,14 @@ class SearchWidgetProvider : AppWidgetProvider() {
                     // Unlike "small" widget, "medium" and "large" sizes do not have separate layouts
                     // that exclude the microphone and lens icons, which is why we must hide them
                     // accordingly here.
-                    if (voiceSearchIntent == null) {
-                        setViewVisibility(R.id.button_search_widget_voice, View.GONE)
-                    }
-                    if (lensSearchIntent == null) {
-                        setViewVisibility(R.id.button_search_widget_lens, View.GONE)
-                    }
+                    setViewVisibility(
+                        R.id.button_search_widget_voice,
+                        if (voiceSearchIntent == null) View.GONE else View.VISIBLE,
+                    )
+                    setViewVisibility(
+                        R.id.button_search_widget_lens,
+                        if (lensSearchIntent == null) View.GONE else View.VISIBLE,
+                    )
                 }
             }
         }

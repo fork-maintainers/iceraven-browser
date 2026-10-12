@@ -44,6 +44,7 @@ import org.mozilla.fenix.ext.showToolbar
 import org.mozilla.fenix.ext.showToolbarWithIconButton
 import org.mozilla.fenix.theme.FirefoxTheme
 import org.mozilla.fenix.utils.SecretSettingsPrefDefaults
+import org.mozilla.gecko.search.SearchWidgetProvider
 
 /** Settings screen allowing users to configure options not intended for general release. */
 class SecretSettingsFragment : PreferenceFragmentCompat(), SystemInsetsPaddedFragment {
@@ -575,7 +576,14 @@ class SecretSettingsFragment : PreferenceFragmentCompat(), SystemInsetsPaddedFra
         requirePreference<SwitchPreferenceCompat>(R.string.pref_key_google_lens_integration).apply {
             isVisible = Config.channel.isNightlyOrDebug || Config.channel.isBeta
             isChecked = settings.googleLensIntegrationEnabled
-            onPreferenceChangeListener = SharedPreferenceUpdater()
+            onPreferenceChangeListener =
+                object : SharedPreferenceUpdater() {
+                    override fun onPreferenceChange(preference: Preference, newValue: Any?): Boolean {
+                        val persisted = super.onPreferenceChange(preference, newValue)
+                        SearchWidgetProvider.updateAllWidgets(context)
+                        return persisted
+                    }
+                }
         }
 
         requirePreference<SwitchPreferenceCompat>(R.string.pref_key_show_voice_search_in_display_toolbar).apply {
