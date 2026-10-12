@@ -22,6 +22,7 @@ import mozilla.components.feature.awesomebar.provider.HistoryStorageSuggestionPr
 import mozilla.components.feature.awesomebar.provider.SearchSuggestionProvider
 import mozilla.components.feature.awesomebar.provider.SessionSuggestionProvider
 import mozilla.components.feature.contextmenu.facts.ContextMenuFacts
+import mozilla.components.feature.downloads.facts.ShareResourceFacts
 import mozilla.components.feature.media.facts.MediaFacts
 import mozilla.components.feature.prompts.dialog.GeneratedPasswordFacts
 import mozilla.components.feature.prompts.dialog.LoginDialogFacts
@@ -59,6 +60,7 @@ import org.mozilla.fenix.GleanMetrics.MediaNotification
 import org.mozilla.fenix.GleanMetrics.NativeShareSheet
 import org.mozilla.fenix.GleanMetrics.PerfAwesomebar
 import org.mozilla.fenix.GleanMetrics.ProgressiveWebApp
+import org.mozilla.fenix.GleanMetrics.ShareSheet
 import org.mozilla.fenix.GleanMetrics.SitePermissions
 import org.mozilla.fenix.GleanMetrics.SyncedTabs
 import org.mozilla.fenix.GleanMetrics.TrackingProtection
@@ -725,6 +727,55 @@ class MetricControllerTest {
         assertNotNull(ContextualMenu.shareTapped.testGetValue())
         assertEquals(1, ContextualMenu.shareTapped.testGetValue()!!.size)
         assertNull(ContextualMenu.shareTapped.testGetValue()!!.single().extra)
+    }
+
+    @Test
+    fun `WHEN a share duration fact is processed THEN the share type, content type and duration are recorded`() {
+        val controller = createReleaseMetricController()
+        val fact =
+            Fact(
+                component = Component.FEATURE_DOWNLOADS,
+                action = Action.IMPLEMENTATION_DETAIL,
+                item = ShareResourceFacts.Items.SHARE_DURATION,
+                metadata =
+                    mapOf(
+                        ShareResourceFacts.MetadataKeys.SHARE_TYPE to ShareResourceFacts.ShareType.DIRECT,
+                        ShareResourceFacts.MetadataKeys.CONTENT_TYPE to ShareResourceFacts.ShareContentType.PDF,
+                        ShareResourceFacts.MetadataKeys.DURATION_MS to 150L,
+                    ),
+            )
+
+        with(controller) { fact.process() }
+
+        val extra = ShareSheet.shareFileResourceSuccess.testGetValue()?.single()?.extra
+        assertEquals("direct", extra?.get("share_type"))
+        assertEquals("pdf", extra?.get("content_type"))
+        assertEquals("150", extra?.get("duration_ms"))
+    }
+
+    @Test
+    fun `WHEN a share failed fact is processed THEN the share type, content type and failure reason are recorded`() {
+        val controller = createReleaseMetricController()
+        val fact =
+            Fact(
+                component = Component.FEATURE_DOWNLOADS,
+                action = Action.IMPLEMENTATION_DETAIL,
+                item = ShareResourceFacts.Items.SHARE_FAILED,
+                metadata =
+                    mapOf(
+                        ShareResourceFacts.MetadataKeys.SHARE_TYPE to ShareResourceFacts.ShareType.DIRECT,
+                        ShareResourceFacts.MetadataKeys.CONTENT_TYPE to ShareResourceFacts.ShareContentType.PDF,
+                        ShareResourceFacts.MetadataKeys.FAILURE_REASON to ShareResourceFacts.FailureReason.TIMEOUT,
+                    ),
+            )
+
+        with(controller) { fact.process() }
+
+        val extra = ShareSheet.shareFileResourceFail.testGetValue()?.single()?.extra
+        assertEquals("direct", extra?.get("share_type"))
+        assertEquals("pdf", extra?.get("content_type"))
+        assertEquals("timeout", extra?.get("failure_reason"))
+        assertNull(ShareSheet.shareFileResourceSuccess.testGetValue())
     }
 
     @Test

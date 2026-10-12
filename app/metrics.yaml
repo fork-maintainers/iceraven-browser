@@ -17712,7 +17712,72 @@ native_share_sheet:
     metadata:
       tags:
         - Sharing
-
+share_sheet:
+  share_file_resource_success:
+    type: event
+    description: |
+      Firefox showed the share sheet for a resource that required obtaining resource bytes to share.
+      Unsuccessful shares will be recorded in the share_file_resource_fail metric.
+    extra_keys:
+      share_type:
+        type: string
+        description: |
+          The way the bytes for the shared item was obtained. Possible values are: `direct` when the bytes
+          were already available (such as from the PDF viewer), `internet` when the bytes were
+          downloaded from a URL, and `local` when the bytes were available on device.
+      content_type:
+        type: string
+        description: |
+          The content type of the resource shared. Possible values are: `pdf` and `other`.
+      duration_ms:
+        type: quantity
+        description: |
+          The duration of time from when the resource began sharing until the share sheet was ready to appear.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2075336
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D332123
+    notification_emails:
+      - android-probes@mozilla.com
+    data_sensitivity:
+      - technical
+    expires: never
+    metadata:
+      tags:
+        - Sharing
+  share_file_resource_fail:
+    type: event
+    description: |
+      Firefox could not show the share sheet for a resource that required obtaining resource bytes to share.
+    extra_keys:
+      share_type:
+        type: string
+        description: |
+          The way the bytes for the shared item was obtained. Possible values are: `direct` when the bytes
+          were already available (such as from the PDF viewer), `internet` when the bytes were
+          downloaded from a URL, and `local` when the bytes were available on device.
+      content_type:
+        type: string
+        description: |
+          The content type of the resource shared. Possible values are: `pdf` and `other`.
+      failure_reason:
+        type: string
+        description: |
+          Why sharing did not complete. Possible reasons are: `timeout` when obtaining the bytes took longer
+          than allowed, `cancelled` when sharing was cancelled, and `error`
+          when sharing failed with an error.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2075336
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D332123
+    notification_emails:
+      - android-probes@mozilla.com
+    data_sensitivity:
+      - technical
+    expires: never
+    metadata:
+      tags:
+        - Sharing
 pdf_viewer:
   download_tapped:
     type: event
