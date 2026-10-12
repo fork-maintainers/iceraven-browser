@@ -80,7 +80,7 @@ import org.mozilla.fenix.components.toolbar.CustomTabBrowserToolbarMiddleware.Co
 import org.mozilla.fenix.components.toolbar.CustomTabBrowserToolbarMiddleware.Companion.EndPageActions.CustomButtonClicked
 import org.mozilla.fenix.components.toolbar.CustomTabBrowserToolbarMiddleware.Companion.StartBrowserActions.CloseClicked
 import org.mozilla.fenix.components.toolbar.CustomTabBrowserToolbarMiddleware.Companion.StartPageActions.SiteInfoClicked
-import org.mozilla.fenix.ext.nav
+import org.mozilla.fenix.customtabs.ExternalAppBrowserFragmentDirections
 import org.mozilla.fenix.helpers.FenixGleanTestRule
 import org.mozilla.fenix.telemetry.ACTION_CLOSE_CLICKED
 import org.mozilla.fenix.telemetry.ACTION_MENU_CLICKED
@@ -130,6 +130,7 @@ class CustomTabBrowserToolbarMiddlewareTest {
     private val closeTabDelegate: () -> Unit = {}
     private val settings: Settings = mockk {
         every { shouldUseBottomToolbar } returns true
+        every { isMenuCustomizationEnabled } returns false
     }
 
     @Test
@@ -1110,7 +1111,10 @@ class CustomTabBrowserToolbarMiddlewareTest {
 
     @Test
     fun `GIVEN a non-sandbox custom tab WHEN the menu button is clicked THEN navigate to menu with isSandboxCustomTab false`() {
-        val navController: NavController = mockk(relaxed = true)
+        val navController: NavController =
+            mockk(relaxed = true) {
+                every { currentDestination?.id } returns R.id.externalAppBrowserFragment
+            }
         val middleware = buildMiddleware(navController = navController, isSandboxCustomTab = false)
         val toolbarStore = buildStore(middleware)
 
@@ -1118,13 +1122,13 @@ class CustomTabBrowserToolbarMiddlewareTest {
         testDispatcher.scheduler.advanceUntilIdle()
 
         verify {
-            navController.nav(
-                R.id.externalAppBrowserFragment,
+            navController.navigate(
                 BrowserFragmentDirections.actionGlobalMenuDialogFragment(
                     accesspoint = MenuAccessPoint.External,
                     customTabSessionId = customTabId,
                     isSandboxCustomTab = false,
                 ),
+                null,
             )
         }
 
@@ -1137,7 +1141,10 @@ class CustomTabBrowserToolbarMiddlewareTest {
 
     @Test
     fun `GIVEN a sandbox custom tab WHEN the menu button is clicked THEN navigate to menu with isSandboxCustomTab true`() {
-        val navController: NavController = mockk(relaxed = true)
+        val navController: NavController =
+            mockk(relaxed = true) {
+                every { currentDestination?.id } returns R.id.externalAppBrowserFragment
+            }
         val middleware = buildMiddleware(navController = navController, isSandboxCustomTab = true)
         val toolbarStore = buildStore(middleware)
 
@@ -1145,13 +1152,13 @@ class CustomTabBrowserToolbarMiddlewareTest {
         testDispatcher.scheduler.advanceUntilIdle()
 
         verify {
-            navController.nav(
-                R.id.externalAppBrowserFragment,
+            navController.navigate(
                 BrowserFragmentDirections.actionGlobalMenuDialogFragment(
                     accesspoint = MenuAccessPoint.External,
                     customTabSessionId = customTabId,
                     isSandboxCustomTab = true,
                 ),
+                null,
             )
         }
 
@@ -1160,6 +1167,30 @@ class CustomTabBrowserToolbarMiddlewareTest {
         assertEquals(SOURCE_ADDRESS_BAR, telemetry.extra?.get("source"))
         assertEquals(ACTION_MENU_CLICKED, telemetry.extra?.get("item"))
         assertEquals(SURFACE_CUSTOM_TAB, telemetry.extra?.get("surface"))
+    }
+
+    @Test
+    fun `GIVEN menu customization is enabled WHEN the menu button is clicked THEN navigate to customizable menu`() {
+        every { settings.isMenuCustomizationEnabled } returns true
+        val navController: NavController =
+            mockk(relaxed = true) {
+                every { currentDestination?.id } returns R.id.externalAppBrowserFragment
+            }
+        val middleware = buildMiddleware(navController = navController)
+        val toolbarStore = buildStore(middleware)
+
+        toolbarStore.dispatch(MenuClicked)
+        testDispatcher.scheduler.advanceUntilIdle()
+
+        verify {
+            navController.navigate(
+                ExternalAppBrowserFragmentDirections.actionExternalAppBrowserFragmentToMenuFragment(
+                    accessPoint = MenuAccessPoint.External,
+                    customTabSessionId = customTabId,
+                ),
+                null,
+            )
+        }
     }
 
     @Test
@@ -1247,6 +1278,7 @@ class CustomTabBrowserToolbarMiddlewareTest {
             navController = navController,
             closeTabDelegate = closeTabDelegate,
             scope = testScope,
+            settings = settings,
             isSandboxCustomTab = isSandboxCustomTab,
         )
 

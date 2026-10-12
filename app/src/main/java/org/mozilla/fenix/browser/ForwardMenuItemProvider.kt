@@ -58,7 +58,11 @@ class ForwardMenuItemProvider(
         val tabId = target.browserSessionFrom(browserStore.state)?.id ?: return
 
         if (event.viewHistory) {
-            menu.navigate(NavGraphDirections.actionGlobalTabHistoryDialogFragment(activeSessionId = null))
+            menu.navigate(
+                NavGraphDirections.actionGlobalTabHistoryDialogFragment(
+                    activeSessionId = (target as? MenuTarget.CustomTab)?.customTabId
+                )
+            )
         } else {
             menu.dismiss()
             goForward(tabId = tabId)

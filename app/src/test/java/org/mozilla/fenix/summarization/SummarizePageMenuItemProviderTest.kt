@@ -20,6 +20,7 @@ import mozilla.components.browser.state.state.BrowserState
 import mozilla.components.browser.state.state.ContentState
 import mozilla.components.browser.state.state.EngineState
 import mozilla.components.browser.state.state.TabSessionState
+import mozilla.components.browser.state.state.createCustomTab
 import mozilla.components.browser.state.store.BrowserStore
 import mozilla.components.compose.base.text.Text
 import mozilla.components.compose.menu.data.StandardMenuItem
@@ -65,6 +66,23 @@ class SummarizePageMenuItemProviderTest {
     }
 
     @Test
+    fun `GIVEN a custom tab WHEN the page can be summarized THEN allow summarizing it`() = runTest {
+        val customTab =
+            createCustomTab(url = "https://mozilla.org", id = "customTabId", engineSession = mockk(relaxed = true))
+        val store = BrowserStore(BrowserState(customTabs = listOf(customTab)))
+        val provider =
+            provider(
+                browserStore = store,
+                eligibilityChecker = eligibilityChecker(isEligible = true),
+                target = MenuTarget.CustomTab("customTabId"),
+            )
+
+        runCurrent()
+
+        assertEquals(summarizePageItem(isEnabled = true), provider.itemFlow.value)
+    }
+
+    @Test
     fun `WHEN the page cannot be summarized THEN keep summarizing as not available`() = runTest {
         val provider = provider(eligibilityChecker = eligibilityChecker(isEligible = false))
 
@@ -101,6 +119,21 @@ class SummarizePageMenuItemProviderTest {
 
         assertEquals(
             MenuFragmentDirections.actionMenuFragmentToSummarizationFragment(sessionId = TAB_ID),
+            menu.directions,
+        )
+    }
+
+    @Test
+    fun `WHEN tapping summarize with a custom tab THEN show the summary of the custom tab`() = runTest {
+        val customTab = createCustomTab(url = "https://mozilla.org", id = CUSTOM_TAB_ID)
+        val store = BrowserStore(BrowserState(customTabs = listOf(customTab)))
+        val menu = FakeMenuHost()
+
+        provider(browserStore = store, target = MenuTarget.CustomTab(CUSTOM_TAB_ID))
+            .onEvent(MenuAction.Navigate.Summarizer, menu)
+
+        assertEquals(
+            MenuFragmentDirections.actionMenuFragmentToSummarizationFragment(sessionId = CUSTOM_TAB_ID),
             menu.directions,
         )
     }
@@ -249,5 +282,6 @@ class SummarizePageMenuItemProviderTest {
 
     private companion object {
         const val TAB_ID = "tab1"
+        const val CUSTOM_TAB_ID = "customTabId"
     }
 }

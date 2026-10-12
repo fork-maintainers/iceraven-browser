@@ -57,13 +57,17 @@ class ShareMenuItemProvider(
         val url = tab.getTabUrl()
         val shareData = ShareData(title = tab.content.title, url = url, private = tab.content.private)
 
+        val isCustomTab = target is MenuTarget.CustomTab
+        val source = if (isCustomTab) ShareSource.CUSTOM_TAB_MENU else ShareSource.BROWSER_MENU
+
         var shareScreen: NavDirections? = null
         shareUseCases.shareUrl(
             id = tab.id,
             url = url,
             title = tab.content.title,
-            source = ShareSource.BROWSER_MENU,
+            source = source,
             isPrivate = tab.content.private,
+            isCustomTab = isCustomTab,
             navigateToShareFragment = {
                 shareScreen =
                     NavGraphDirections.actionGlobalShareFragment(

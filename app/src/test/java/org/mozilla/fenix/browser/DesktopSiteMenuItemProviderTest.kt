@@ -15,6 +15,7 @@ import kotlinx.coroutines.test.runTest
 import mozilla.components.browser.state.state.BrowserState
 import mozilla.components.browser.state.state.ContentState
 import mozilla.components.browser.state.state.TabSessionState
+import mozilla.components.browser.state.state.createCustomTab
 import mozilla.components.browser.state.store.BrowserStore
 import mozilla.components.compose.base.text.Text
 import mozilla.components.compose.menu.data.MenuItemBadge
@@ -48,6 +49,15 @@ class DesktopSiteMenuItemProviderTest {
 
             assertEquals(expectedItem(isDesktopMode = false), provider.itemFlow.value)
         }
+
+    @Test
+    fun `GIVEN a custom tab WHEN building the desktop site menu item THEN offer switching to desktop mode`() = runTest {
+        val customTab = createCustomTab(url = "https://mozilla.org", id = "customTabId", desktopMode = false)
+        val browserStore = BrowserStore(BrowserState(customTabs = listOf(customTab)))
+        val provider = provider(browserStore, target = MenuTarget.CustomTab("customTabId"))
+
+        assertEquals(expectedItem(isDesktopMode = false), provider.itemFlow.value)
+    }
 
     @Test
     fun `GIVEN the desktop version is shown WHEN building the desktop site menu item THEN offer switching to mobile mode`() =
@@ -85,6 +95,18 @@ class DesktopSiteMenuItemProviderTest {
             assertTrue(menu.isDismissed)
             verify { requestDesktopSite(enable = true, tabId = TAB_ID) }
         }
+
+    @Test
+    fun `GIVEN a custom tab WHEN tapping desktop site THEN switch mode using the custom tab id`() = runTest {
+        val customTab = createCustomTab(url = "https://mozilla.org", id = CUSTOM_TAB_ID, desktopMode = false)
+        val store = BrowserStore(BrowserState(customTabs = listOf(customTab)))
+        val provider = provider(store, target = MenuTarget.CustomTab(CUSTOM_TAB_ID))
+
+        provider.onEvent(MenuAction.RequestDesktopSite, menu)
+
+        assertTrue(menu.isDismissed)
+        verify { requestDesktopSite(enable = true, tabId = CUSTOM_TAB_ID) }
+    }
 
     @Test
     fun `GIVEN the desktop version is shown WHEN clicking the item THEN close the menu and show the mobile one`() =
@@ -184,5 +206,6 @@ class DesktopSiteMenuItemProviderTest {
 
     private companion object {
         const val TAB_ID = "tab1"
+        const val CUSTOM_TAB_ID = "customTabId"
     }
 }

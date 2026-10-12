@@ -15,6 +15,7 @@ import kotlinx.coroutines.test.runTest
 import mozilla.components.browser.state.state.BrowserState
 import mozilla.components.browser.state.state.ContentState
 import mozilla.components.browser.state.state.TabSessionState
+import mozilla.components.browser.state.state.createCustomTab
 import mozilla.components.browser.state.store.BrowserStore
 import mozilla.components.compose.base.text.Text
 import mozilla.components.compose.menu.data.StandardMenuItem
@@ -80,6 +81,25 @@ class BackMenuItemProviderTest {
     }
 
     @Test
+    fun `GIVEN a custom tab WHEN long clicking the item THEN show its history with custom tab session ID in place of the menu`() =
+        runTest {
+            val provider =
+                createProvider(
+                    customTabBrowserStore(canGoBack = true),
+                    backgroundScope,
+                    target = MenuTarget.CustomTab("customTabId"),
+                )
+
+            provider.onEvent(MenuAction.Navigate.Back(viewHistory = true), menu)
+
+            assertEquals(
+                NavGraphDirections.actionGlobalTabHistoryDialogFragment(activeSessionId = "customTabId"),
+                menu.directions,
+            )
+            verify(exactly = 0) { goBack(any()) }
+        }
+
+    @Test
     fun `GIVEN no selected tab WHEN clicking the item THEN keep the menu open`() = runTest {
         val provider = createProvider(BrowserStore(), backgroundScope)
 
@@ -138,6 +158,23 @@ class BackMenuItemProviderTest {
                         )
                     ),
                 selectedTabId = TAB_ID,
+            )
+        )
+
+    private fun customTabBrowserStore(canGoBack: Boolean) =
+        BrowserStore(
+            BrowserState(
+                customTabs =
+                    listOf(
+                        createCustomTab(
+                                url = "https://custom.org",
+                                id = "customTabId",
+                            )
+                            .let { tab ->
+                                tab.copy(content = tab.content.copy(canGoBack = canGoBack))
+                            }
+                    ),
+                selectedTabId = null,
             )
         )
 

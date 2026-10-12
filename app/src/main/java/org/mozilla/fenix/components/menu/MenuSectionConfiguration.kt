@@ -65,6 +65,9 @@ sealed interface FenixMenuItem {
     /** A menu item allowing to open the current webpage in the app that handles it. */
     data object OpenInApp : FenixMenuItem
 
+    /** A menu item allowing to open the current custom tab in the main application. */
+    data object OpenInFirefox : FenixMenuItem
+
     /** A menu item allowing to save the current webpage as a PDF. */
     data object SaveAsPdf : FenixMenuItem
 

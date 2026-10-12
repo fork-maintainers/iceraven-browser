@@ -32,6 +32,7 @@ import org.mozilla.fenix.browser.ForwardMenuItemProvider
 import org.mozilla.fenix.browser.RefreshMenuItemProvider
 import org.mozilla.fenix.browser.ShareMenuItemProvider
 import org.mozilla.fenix.browser.applinks.OpenInAppMenuItemProvider
+import org.mozilla.fenix.browser.applinks.OpenInFirefoxMenuItemProvider
 import org.mozilla.fenix.browser.menu.MoreMenuItemsProvider
 import org.mozilla.fenix.browser.menu.MoveToNormalTabsMenuItemProvider
 import org.mozilla.fenix.browser.readermode.ReaderViewMenuItemProvider
@@ -182,6 +183,7 @@ class MenuItemProvidersFactoryTest {
             FenixMenuItem.AddToHomeScreen::class to AddToHomeScreenMenuItemProvider::class,
             FenixMenuItem.SaveToCollection::class to SaveToCollectionMenuItemProvider::class,
             FenixMenuItem.OpenInApp::class to OpenInAppMenuItemProvider::class,
+            FenixMenuItem.OpenInFirefox::class to OpenInFirefoxMenuItemProvider::class,
             FenixMenuItem.SaveAsPdf::class to SaveAsPdfMenuItemProvider::class,
             FenixMenuItem.Print::class to PrintMenuItemProvider::class,
             FenixMenuItem.MozillaAccount::class to MozillaAccountMenuItemProvider::class,

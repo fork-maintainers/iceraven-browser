@@ -21,6 +21,7 @@ import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
 import mozilla.components.browser.state.state.BrowserState
 import mozilla.components.browser.state.state.WebExtensionState
+import mozilla.components.browser.state.state.createCustomTab
 import mozilla.components.browser.state.state.createTab
 import mozilla.components.browser.state.state.extension.WebExtensionPromptRequest
 import mozilla.components.browser.state.store.BrowserStore
@@ -345,13 +346,36 @@ class ExtensionsMenuItemProviderTest {
 
     /** The menu item once everything known about the extensions was read and applied to it. */
     @OptIn(ExperimentalCoroutinesApi::class)
-    private fun TestScope.resolvedItem(browserStore: BrowserStore = browserStoreWith()): MenuItem? {
-        val provider = provider(browserStore)
+    private fun TestScope.resolvedItem(
+        browserStore: BrowserStore = browserStoreWith(),
+        target: MenuTarget = MenuTarget.BrowserTab,
+    ): MenuItem? {
+        val provider = provider(browserStore, target)
 
         runCurrent()
 
         return provider.itemFlow.value
     }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun `GIVEN the menu was opened from custom tab WHEN building the item THEN offer extensions for custom tab`() =
+        runTest {
+            coEvery { addonManager.getAddons() } returns listOf(addon(INSTALLED_ID, installed = true, enabled = true))
+            val customTabState = createCustomTab(url = "https://mozilla.org", id = TAB_ID)
+            val browserStore =
+                BrowserStore(
+                    BrowserState(
+                        customTabs = listOf(customTabState),
+                        extensions = mapOf(INSTALLED_ID to extension(INSTALLED_ID)),
+                    )
+                )
+
+            val item = resolvedItem(browserStore, MenuTarget.CustomTab(TAB_ID)) as ExpandableMenuItem
+
+            assertEquals(Text.Resource(R.string.browser_menu_extensions), item.title)
+            assertEquals(MenuItemSummary(text = Text.String(ACTION_TITLE)), item.summary)
+        }
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test

@@ -14,6 +14,7 @@ import kotlin.test.assertNull
 import kotlin.test.assertTrue
 import mozilla.components.browser.state.state.BrowserState
 import mozilla.components.browser.state.state.ReaderState
+import mozilla.components.browser.state.state.createCustomTab
 import mozilla.components.browser.state.state.createTab
 import mozilla.components.browser.state.store.BrowserStore
 import mozilla.components.compose.base.text.Text
@@ -64,6 +65,28 @@ class ShareMenuItemProviderTest {
                 title = TEST_TITLE,
                 source = ShareSource.BROWSER_MENU,
                 isPrivate = false,
+                isCustomTab = false,
+                navigateToShareFragment = any(),
+            )
+        }
+    }
+
+    @Test
+    fun `GIVEN a custom tab WHEN clicking the item THEN share its page with custom tab source`() {
+        val customTab = createCustomTab(url = TEST_URL, title = TEST_TITLE, id = TAB_ID)
+        val browserStore = BrowserStore(BrowserState(customTabs = listOf(customTab)))
+        val provider = createProvider(browserStore = browserStore, target = MenuTarget.CustomTab(TAB_ID))
+
+        provider.onEvent(MenuAction.Navigate.Share, menu)
+
+        verify {
+            shareUseCases.shareUrl(
+                id = TAB_ID,
+                url = TEST_URL,
+                title = TEST_TITLE,
+                source = ShareSource.CUSTOM_TAB_MENU,
+                isPrivate = false,
+                isCustomTab = true,
                 navigateToShareFragment = any(),
             )
         }

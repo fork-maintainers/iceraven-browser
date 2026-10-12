@@ -96,7 +96,8 @@ class ExtensionsMenuItemProvider(
     override val itemFlow: StateFlow<MenuItem?> =
         when (target) {
             MenuTarget.Home -> MutableStateFlow(extensions.value.toExtensionsManagerMenuItem(context))
-            MenuTarget.BrowserTab ->
+            MenuTarget.BrowserTab,
+            is MenuTarget.CustomTab ->
                 extensions
                     .map { it.toMenuItem(context) }
                     .stateIn(
@@ -107,7 +108,7 @@ class ExtensionsMenuItemProvider(
         }
 
     init {
-        if (target == MenuTarget.BrowserTab) observeExtensions(viewLifecycleScope, applicationScope)
+        if (target != MenuTarget.Home) observeExtensions(viewLifecycleScope, applicationScope)
     }
 
     private fun observeExtensions(viewLifecycleScope: CoroutineScope, applicationScope: CoroutineScope) {

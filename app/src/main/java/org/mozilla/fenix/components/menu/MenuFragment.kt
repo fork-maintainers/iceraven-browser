@@ -36,9 +36,12 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlin.getValue
+import mozilla.components.compose.base.text.Text
 import mozilla.components.compose.menu.Menu
+import mozilla.components.compose.menu.data.MenuAttribution
 import mozilla.components.compose.menu.store.MenuState
 import mozilla.components.compose.menu.store.MenuStore
+import mozilla.components.compose.menu.ui.MenuItemIconRes
 import mozilla.components.feature.automotive.isAndroidAutomotiveAvailable
 import mozilla.components.lib.state.helpers.StoreProvider.Companion.composableStore
 import mozilla.components.support.ktx.android.util.dpToPx
@@ -151,8 +154,28 @@ class MenuFragment : BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ) = content {
+        val context = requireContext()
+
         val menuStore by
-            composableStore(MenuState(emptyList())) {
+            composableStore(
+                MenuState(
+                    menuGroups = emptyList(),
+                    attribution =
+                        if (args.accessPoint == MenuAccessPoint.External) {
+                            MenuAttribution(
+                                title =
+                                    Text.Resource(
+                                        R.string.browser_menu_powered_by2,
+                                        listOf(context.getString(R.string.app_name)),
+                                    ),
+                                icon = MenuItemIconRes(R.drawable.ic_firefox),
+                                showAtTop = context.isToolbarAtBottom(),
+                            )
+                        } else {
+                            null
+                        },
+                )
+            ) {
                 buildMenuStore(it)
             }
 
@@ -219,7 +242,13 @@ class MenuFragment : BottomSheetDialogFragment() {
         return MenuItemProvidersFactory(
             context = context,
             accessPoint = args.accessPoint,
-            target = if (args.accessPoint == MenuAccessPoint.Home) MenuTarget.Home else MenuTarget.BrowserTab,
+            target =
+                when (args.accessPoint) {
+                    MenuAccessPoint.Home -> MenuTarget.Home
+                    MenuAccessPoint.Browser -> MenuTarget.BrowserTab
+                    MenuAccessPoint.External ->
+                        args.customTabSessionId?.let { MenuTarget.CustomTab(it) } ?: MenuTarget.BrowserTab
+                },
             browserStore = components.core.store,
             appStore = components.appStore,
             ipProtectionStore = components.ipProtection.store,
@@ -281,6 +310,7 @@ class MenuFragment : BottomSheetDialogFragment() {
                     isExpandedToolbarEnabled = requireComponents.settings.shouldUseExpandedToolbar,
                 )
             MenuAccessPoint.Home -> MenuConfigurations.home()
-            MenuAccessPoint.External -> MenuConfigurations.customTab()
+            MenuAccessPoint.External ->
+                MenuConfigurations.customTab(isToolbarAtBottom = requireContext().isToolbarAtBottom())
         }
 }

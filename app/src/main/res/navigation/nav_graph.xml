@@ -460,6 +460,15 @@
         <argument
             android:name="isSandboxCustomTab"
             app:argType="boolean" />
+        <action
+            android:id="@+id/action_externalAppBrowserFragment_to_menuFragment"
+            app:destination="@id/menu_graph">
+            <argument
+                android:name="customTabSessionId"
+                android:defaultValue="@null"
+                app:argType="string"
+                app:nullable="true" />
+        </action>
     </fragment>
 
     <fragment
@@ -1844,6 +1853,11 @@
     <argument
       android:name="accessPoint"
       app:argType="org.mozilla.fenix.components.menu.MenuAccessPoint" />
+    <argument
+      android:name="customTabSessionId"
+      android:defaultValue="@null"
+      app:nullable="true"
+      app:argType="string" />
 
     <dialog
       android:id="@+id/menuFragment"
@@ -1851,6 +1865,11 @@
       <argument
         android:name="accessPoint"
         app:argType="org.mozilla.fenix.components.menu.MenuAccessPoint" />
+      <argument
+        android:name="customTabSessionId"
+        android:defaultValue="@null"
+        app:argType="string"
+        app:nullable="true" />
 
       <action
         android:id="@+id/action_menuFragment_to_translationsDialogFragment"

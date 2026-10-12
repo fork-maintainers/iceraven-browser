@@ -23,6 +23,7 @@ import org.mozilla.fenix.components.menu.FenixMenuItem.More
 import org.mozilla.fenix.components.menu.FenixMenuItem.MoveToNormalTabs
 import org.mozilla.fenix.components.menu.FenixMenuItem.MozillaAccount
 import org.mozilla.fenix.components.menu.FenixMenuItem.OpenInApp
+import org.mozilla.fenix.components.menu.FenixMenuItem.OpenInFirefox
 import org.mozilla.fenix.components.menu.FenixMenuItem.Passwords
 import org.mozilla.fenix.components.menu.FenixMenuItem.Print
 import org.mozilla.fenix.components.menu.FenixMenuItem.Quit
@@ -48,6 +49,8 @@ object MenuConfigurations {
     @VisibleForTesting internal val BROWSER_MENU_GROUP_5_ID = "browser_group_5"
     @VisibleForTesting internal val BROWSER_MENU_GROUP_6_ID = "browser_group_6"
     @VisibleForTesting internal val HOME_MENU_GROUP_1_ID = "home_group_1"
+    @VisibleForTesting internal val CUSTOM_TAB_MENU_NAVIGATION_ID = "custom_tab_navigation"
+    @VisibleForTesting internal val CUSTOM_TAB_MENU_GROUP_1_ID = "custom_tab_group_1"
     @VisibleForTesting internal val HOME_MENU_GROUP_2_ID = "home_group_2"
     @VisibleForTesting internal val HOME_MENU_GROUP_3_ID = "home_group_3"
     @VisibleForTesting internal val HOME_MENU_GROUP_4_ID = "home_group_4"
@@ -158,5 +161,22 @@ object MenuConfigurations {
         )
 
     /** The menu shown in custom tabs. */
-    fun customTab(): List<MenuSectionConfiguration> = emptyList()
+    fun customTab(isToolbarAtBottom: Boolean): List<MenuSectionConfiguration> {
+        val navSection =
+            MenuSectionConfiguration(
+                id = CUSTOM_TAB_MENU_NAVIGATION_ID,
+                presentationMode = Grid,
+                items = listOf(Back, Forward, Share, Refresh),
+                isSticky = true,
+            )
+        val rest =
+            listOf(
+                MenuSectionConfiguration(
+                    id = CUSTOM_TAB_MENU_GROUP_1_ID,
+                    presentationMode = Row,
+                    items = listOf(OpenInFirefox, Bookmark, FindInPage, DesktopSite, Translate, SummarizePage),
+                )
+            )
+        return if (isToolbarAtBottom) rest + navSection else listOf(navSection) + rest
+    }
 }
