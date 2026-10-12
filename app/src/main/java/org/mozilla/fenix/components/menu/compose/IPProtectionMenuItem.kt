@@ -24,10 +24,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
-import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.tooling.preview.Preview
@@ -78,7 +76,6 @@ internal fun IPProtectionMenuItem(
                 .debouncedClickable(role = role) { onToggle() }
                 .semantics {
                     stateDescription = statusDescription
-                    liveRegion = LiveRegionMode.Polite
                 },
         colors = ListItemDefaults.colors(supportingColor = MaterialTheme.colorScheme.error),
         description = descriptionText(state),
