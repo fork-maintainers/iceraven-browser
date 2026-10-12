@@ -13,6 +13,7 @@ import androidx.compose.ui.test.junit4.AndroidComposeTestRule
 import androidx.compose.ui.test.onChildAt
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.waitUntilAtLeastOneExists
 import org.mozilla.fenix.helpers.HomeActivityIntentTestRule
 import org.mozilla.fenix.helpers.TestAssetHelper.waitingTime
 import org.mozilla.fenix.tabstray.TabsTrayTestTag
@@ -91,6 +92,17 @@ class TabDrawerPage(composeRule: AndroidComposeTestRule<HomeActivityIntentTestRu
         urls.forEach { url ->
             mozVerifyAnyHasChildWithText(TabDrawerSelectors.TAB_ITEM_ROOT, url)
         }
+        return this
+    }
+
+    /**
+     * Wait until each title has rendered in the tray, tree-agnostically (tabs created from a URL show the URL until the
+     * page's title loads). Unlike [verifyExistingOpenTabs] this matches in both grid and list view, where a list row
+     * merges its title into the row node rather than exposing it as a child.
+     */
+    @OptIn(ExperimentalTestApi::class)
+    fun waitForTabTitlesLoaded(vararg tabTitles: String): TabDrawerPage {
+        tabTitles.forEach { composeRule.waitUntilAtLeastOneExists(hasText(it), waitingTime) }
         return this
     }
 
@@ -270,6 +282,40 @@ class TabDrawerPage(composeRule: AndroidComposeTestRule<HomeActivityIntentTestRu
 
         mozClick(TabDrawerSelectors.CREATE_TAB_GROUP_SAVE_BUTTON)
 
+        return this
+    }
+
+    /**
+     * Select a tab group card in the tray's selection mode. A grid card exposes its title as a child node, but a list
+     * card exposes it only through its "Add to ..." content description, so the handle depends on [isListViewEnabled].
+     */
+    fun selectTabGroupCard(
+        tabGroupTitle: String,
+        numberOfTabs: Int,
+        tabGroupColor: String,
+        isListViewEnabled: Boolean,
+    ): TabDrawerPage {
+        val selector =
+            if (isListViewEnabled) {
+                TabDrawerSelectors.TAB_GROUP_ITEM(tabGroupTitle, numberOfTabs, tabGroupColor)
+            } else {
+                TabDrawerSelectors.TAB_ITEM_WITH_TITLE(tabGroupTitle)
+            }
+        mozClick(selector)
+        return this
+    }
+
+    /**
+     * Merge the already-selected tab groups into a new group from the multi-select menu, naming it [tabGroupTitle] and
+     * coloring it [tabGroupColor]. Assumes selection mode is active with the groups to merge selected.
+     */
+    fun mergeSelectedTabGroupsIntoNewGroup(tabGroupTitle: String, tabGroupColor: String): TabDrawerPage {
+        mozClick(TabDrawerSelectors.TAB_SELECTION_THREE_DOT_BUTTON)
+        mozClick(TabDrawerSelectors.ADD_TO_GROUP_THREE_DOT_BUTTON)
+        mozClick(TabDrawerSelectors.ADD_TO_NEW_TAB_GROUP_BUTTON)
+        mozEnterText(tabGroupTitle, TabDrawerSelectors.CREATE_TAB_GROUP_NAME_TEXT_FIELD)
+        mozClick(TabDrawerSelectors.CREATE_TAB_GROUP_COLOR_BUTTON(tabGroupColor))
+        mozClick(TabDrawerSelectors.CREATE_TAB_GROUP_SAVE_BUTTON)
         return this
     }
 

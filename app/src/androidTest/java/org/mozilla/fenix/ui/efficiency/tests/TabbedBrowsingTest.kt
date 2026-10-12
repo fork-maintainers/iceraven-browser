@@ -6,6 +6,7 @@ package org.mozilla.fenix.ui.efficiency.tests
 
 import org.junit.Test
 import org.mozilla.fenix.customannotations.Critical
+import org.mozilla.fenix.customannotations.SkipLeaks
 import org.mozilla.fenix.customannotations.SmokeTest
 import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.helpers.Constants
@@ -531,6 +532,78 @@ class TabbedBrowsingTest : BaseTest() {
             .mozVerify(HomeSelectors.PRIVATE_BROWSING_INFO_CARD_TITLE)
         on.tabDrawer.navigateToPage().verifyExistingOpenTabs(webPages[2].title, webPages[3].title)
         on.tabDrawer.mozVerify(TabDrawerSelectors.PRIVATE_TABS_LIST)
+    }
+
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/4034516
+    @Critical
+    @SkipLeaks(reasons = ["https://bugzilla.mozilla.org/show_bug.cgi?id=2079797"])
+    // Leak Canary: https://github.com/square/leakcanary/issues/2781
+    @Test
+    fun verifyMergeTabGroupsViaSelectionGridViewTest() {
+        appContext.components.settings.gridTabView = true
+        mergeTabGroupsViaSelection(isListViewEnabled = false)
+    }
+
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/4034516
+    @Critical
+    @SkipLeaks(reasons = ["https://bugzilla.mozilla.org/show_bug.cgi?id=2079797"])
+    // Leak Canary: https://github.com/square/leakcanary/issues/2781
+    @Test
+    fun verifyMergeTabGroupsViaSelectionListViewTest() {
+        appContext.components.settings.gridTabView = false
+        mergeTabGroupsViaSelection(isListViewEnabled = true)
+    }
+
+    private fun mergeTabGroupsViaSelection(isListViewEnabled: Boolean) {
+        appContext.components.settings.tabGroupsOnboardingEnabled = false
+
+        val firstGroup = "Group one"
+        val secondGroup = "Group two"
+        val thirdGroup = "Group three"
+        val mergedGroup = "Merged"
+
+        val webPages = mockWebServer.genericAssets
+        MockBrowserDataHelper.createTabItem(webPages[0].url.toString())
+        MockBrowserDataHelper.createTabItem(webPages[1].url.toString())
+        MockBrowserDataHelper.createTabItem(webPages[2].url.toString())
+
+        // Gate on the tab titles rendering (they show the URL until the mock pages finish loading).
+        on.tabDrawer.navigateToPage().waitForTabTitlesLoaded(webPages[0].title, webPages[1].title, webPages[2].title)
+        on.tabDrawer.selectTabsAndCreateFirstTabGroup(
+            tabTitle = webPages[0].title,
+            tabGroupTitle = firstGroup,
+            tabGroupColor = "Grey",
+        )
+        on.tabDrawer.selectTabsAndAddToNewTabGroup(
+            tabTitle = webPages[1].title,
+            tabGroupTitle = secondGroup,
+            tabGroupColor = "Blue",
+        )
+        on.tabDrawer.selectTabsAndAddToNewTabGroup(
+            tabTitle = webPages[2].title,
+            tabGroupTitle = thirdGroup,
+            tabGroupColor = "Red",
+        )
+
+        // Enter selection mode, select two of the three groups, and merge them into a new group.
+        on.tabDrawer.mozClick(TabDrawerSelectors.THREE_DOT_BUTTON)
+        on.tabDrawer.mozClick(TabDrawerSelectors.SELECT_TABS_BUTTON)
+        on.tabDrawer.selectTabGroupCard(firstGroup, numberOfTabs = 1, tabGroupColor = "Grey", isListViewEnabled)
+        on.tabDrawer.selectTabGroupCard(secondGroup, numberOfTabs = 1, tabGroupColor = "Blue", isListViewEnabled)
+        on.tabDrawer.mergeSelectedTabGroupsIntoNewGroup(mergedGroup, "Green")
+
+        // The merged group holds both tabs and shows in the tab groups tray; the merged-away groups are gone.
+        on.tabDrawer.verifyTabGroupFromTabGroupPage(
+            tabGroupTitle = mergedGroup,
+            numberOfTabs = 2,
+            tabGroupColor = "Green",
+        )
+        on.tabDrawer.mozWaitUntilAbsent(
+            TabDrawerSelectors.TAB_GROUP_ITEM(firstGroup, numberOfTabs = 1, tabGroupColor = "Grey")
+        )
+        on.tabDrawer.mozWaitUntilAbsent(
+            TabDrawerSelectors.TAB_GROUP_ITEM(secondGroup, numberOfTabs = 1, tabGroupColor = "Blue")
+        )
     }
 
     private fun verifyGroup(tabGroupTitle: String, tabGroupColor: String, numberOfTabs: Int = 1) {
