@@ -1466,6 +1466,7 @@ abstract class BaseBrowserFragment :
                     store = requireComponents.core.store,
                     accountManager = requireComponents.backgroundServices.accountManager,
                     serverConfig = requireComponents.backgroundServices.serverConfig,
+                    fxaCapabilities = requireComponents.backgroundServices.fxaCapabilities,
                     activityRef = WeakReference(getActivity()),
                 ),
             owner = this,
