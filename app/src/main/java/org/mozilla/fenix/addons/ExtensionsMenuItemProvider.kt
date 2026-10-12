@@ -93,18 +93,13 @@ class ExtensionsMenuItemProvider(
             )
         )
 
+    private val isCustomTab = target is MenuTarget.CustomTab
+
     override val itemFlow: StateFlow<MenuItem?> =
         when (target) {
             MenuTarget.Home -> MutableStateFlow(extensions.value.toExtensionsManagerMenuItem(context))
-            MenuTarget.BrowserTab,
-            is MenuTarget.CustomTab ->
-                extensions
-                    .map { it.toMenuItem(context) }
-                    .stateIn(
-                        scope = viewLifecycleScope,
-                        started = SharingStarted.Eagerly,
-                        initialValue = extensions.value.toMenuItem(context),
-                    )
+            MenuTarget.BrowserTab -> extensions.mapToMenuItem(viewLifecycleScope) { it.toMenuItem(context) }
+            is MenuTarget.CustomTab -> extensions.mapToMenuItem(viewLifecycleScope) { it.toCustomTabMenuItem(context) }
         }
 
     init {
@@ -221,6 +216,8 @@ class ExtensionsMenuItemProvider(
      * The action is resolved as late as possible - what the extension shows may have changed since the menu was built.
      */
     private fun clickExtensionAction(event: MenuAction.WebExtensionActionClicked, menu: MenuHost) {
+        if (isCustomTab) return
+
         val extensionAction =
             browserStore.state.findWebExtensionMenuAction(
                 extensionId = event.extensionId,
@@ -273,7 +270,53 @@ private fun ExtensionsStatus.toExtensionsManagerMenuItem(context: Context) =
         onClickEvent = MenuAction.Navigate.ManageExtensions,
     )
 
-/** What to show for the user's extensions, be it the extensions themselves or a way to get some. */
+private fun StateFlow<ExtensionsStatus>.mapToMenuItem(
+    scope: CoroutineScope,
+    toMenuItem: (ExtensionsStatus) -> MenuItem,
+): StateFlow<MenuItem?> =
+    map(toMenuItem)
+        .stateIn(
+            scope = scope,
+            started = SharingStarted.Eagerly,
+            initialValue = toMenuItem(value),
+        )
+
+private fun ExtensionsStatus.toCustomTabMenuItem(context: Context): MenuItem =
+    when {
+        isProcessDisabled || actions.isEmpty() ->
+            StandardMenuItem(
+                title = Text.Resource(R.string.browser_menu_extensions),
+                icon = icon(context),
+                summary =
+                    MenuItemSummary(
+                        text =
+                            Text.Resource(
+                                when (isProcessDisabled) {
+                                    true -> R.string.browser_menu_extensions_disabled_description
+                                    false -> R.string.browser_menu_no_extensions_installed_description
+                                }
+                            ),
+                        state = MenuItemState.DISABLED,
+                    ),
+                onClickEvent = MenuAction.OnExtensionsMenuClicked,
+                state = MenuItemState.DISABLED,
+            )
+        else ->
+            ExpandableMenuItem(
+                title = Text.Resource(R.string.browser_menu_extensions),
+                onClickEvent = MenuAction.OnExtensionsMenuClicked,
+                subMenuItems = actions.map { it.toMenuItem(ownedBy = null) },
+                icon = icon(context),
+                summary = summary,
+                actionButtonText = Text.String(actions.size.toString()),
+            )
+    }
+
+/**
+ * What to show for the user's extensions, be it the extensions themselves or a way to get some.
+ *
+ * @param context Application scoped [Context] needed for resources and system interactions.
+ */
 private fun ExtensionsStatus.toMenuItem(context: Context): MenuItem {
     // With the extensions process disabled, or with the user's extensions offering nothing and nothing to recommend
     // them either, there is nothing to expand to, so a plain item leading to the extensions manager is offered
@@ -297,7 +340,7 @@ private fun ExtensionsStatus.toMenuItem(context: Context): MenuItem {
     return ExpandableMenuItem(
         title = Text.Resource(R.string.browser_menu_extensions),
         onClickEvent = MenuAction.OnExtensionsMenuClicked,
-        subMenuItems = extensionItems() + moreExtensionsItem(),
+        subMenuItems = extensionItems() + listOfNotNull(moreExtensionsItem()),
         icon = icon(context),
         summary = summary,
         // Only what the user's own extensions offer is counted, recommendations are not something they have.
@@ -352,7 +395,7 @@ private fun ExtensionsStatus.extensionItems(): List<StandardMenuItem> =
         else -> recommended.map { it.toRecommendedItem() }
     }
 
-private fun ExtensionsStatus.moreExtensionsItem() =
+private fun ExtensionsStatus.moreExtensionsItem(): StandardMenuItem =
     when (installed.isEmpty()) {
         true ->
             StandardMenuItem(

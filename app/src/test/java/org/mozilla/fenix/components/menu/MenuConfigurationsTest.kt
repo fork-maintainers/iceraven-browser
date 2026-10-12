@@ -7,18 +7,25 @@ package org.mozilla.fenix.components.menu
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 import org.junit.Test
+import org.mozilla.fenix.components.menu.FenixMenuItem.Bookmark
 import org.mozilla.fenix.components.menu.FenixMenuItem.Bookmarks
 import org.mozilla.fenix.components.menu.FenixMenuItem.CustomizeHomepage
 import org.mozilla.fenix.components.menu.FenixMenuItem.DefaultBrowserBanner
+import org.mozilla.fenix.components.menu.FenixMenuItem.DesktopSite
 import org.mozilla.fenix.components.menu.FenixMenuItem.Downloads
 import org.mozilla.fenix.components.menu.FenixMenuItem.Extensions
+import org.mozilla.fenix.components.menu.FenixMenuItem.FindInPage
 import org.mozilla.fenix.components.menu.FenixMenuItem.History
 import org.mozilla.fenix.components.menu.FenixMenuItem.IPProtection
 import org.mozilla.fenix.components.menu.FenixMenuItem.MozillaAccount
+import org.mozilla.fenix.components.menu.FenixMenuItem.OpenInFirefox
 import org.mozilla.fenix.components.menu.FenixMenuItem.Passwords
 import org.mozilla.fenix.components.menu.FenixMenuItem.Quit
 import org.mozilla.fenix.components.menu.FenixMenuItem.Settings
+import org.mozilla.fenix.components.menu.FenixMenuItem.SummarizePage
+import org.mozilla.fenix.components.menu.FenixMenuItem.Translate
 import org.mozilla.fenix.components.menu.MenuConfigurations.BROWSER_MENU_NAVIGATION_ID
+import org.mozilla.fenix.components.menu.MenuConfigurations.CUSTOM_TAB_MENU_GROUP_1_ID
 import org.mozilla.fenix.components.menu.MenuConfigurations.HOME_MENU_GROUP_1_ID
 import org.mozilla.fenix.components.menu.MenuConfigurations.HOME_MENU_GROUP_2_ID
 import org.mozilla.fenix.components.menu.MenuConfigurations.HOME_MENU_GROUP_3_ID
@@ -69,6 +76,28 @@ class MenuConfigurationsTest {
                 section(HOME_MENU_GROUP_6_ID, Row, Quit),
             ),
             MenuConfigurations.home(),
+        )
+    }
+
+    @Test
+    fun `WHEN building the custom tab menu AND extensions are enabled THEN show items for custom tab including Extensions under DesktopSite`() {
+        val configuration = MenuConfigurations.customTab(isToolbarAtBottom = false, shouldShowExtensions = true)
+
+        val group1 = configuration.first { it.id == CUSTOM_TAB_MENU_GROUP_1_ID }
+        assertEquals(
+            listOf(OpenInFirefox, Bookmark, FindInPage, DesktopSite, Extensions, Translate, SummarizePage),
+            group1.items,
+        )
+    }
+
+    @Test
+    fun `WHEN building the custom tab menu AND extensions are disabled THEN show items for custom tab excluding Extensions`() {
+        val configuration = MenuConfigurations.customTab(isToolbarAtBottom = false, shouldShowExtensions = false)
+
+        val group1 = configuration.first { it.id == CUSTOM_TAB_MENU_GROUP_1_ID }
+        assertEquals(
+            listOf(OpenInFirefox, Bookmark, FindInPage, DesktopSite, Translate, SummarizePage),
+            group1.items,
         )
     }
 

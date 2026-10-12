@@ -311,6 +311,9 @@ class MenuFragment : BottomSheetDialogFragment() {
                 )
             MenuAccessPoint.Home -> MenuConfigurations.home()
             MenuAccessPoint.External ->
-                MenuConfigurations.customTab(isToolbarAtBottom = requireContext().isToolbarAtBottom())
+                MenuConfigurations.customTab(
+                    isToolbarAtBottom = requireContext().isToolbarAtBottom(),
+                    shouldShowExtensions = requireComponents.settings.shouldShowCustomTabExtensions,
+                )
         }
 }

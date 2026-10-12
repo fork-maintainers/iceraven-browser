@@ -161,7 +161,10 @@ object MenuConfigurations {
         )
 
     /** The menu shown in custom tabs. */
-    fun customTab(isToolbarAtBottom: Boolean): List<MenuSectionConfiguration> {
+    fun customTab(
+        isToolbarAtBottom: Boolean,
+        shouldShowExtensions: Boolean,
+    ): List<MenuSectionConfiguration> {
         val navSection =
             MenuSectionConfiguration(
                 id = CUSTOM_TAB_MENU_NAVIGATION_ID,
@@ -174,7 +177,16 @@ object MenuConfigurations {
                 MenuSectionConfiguration(
                     id = CUSTOM_TAB_MENU_GROUP_1_ID,
                     presentationMode = Row,
-                    items = listOf(OpenInFirefox, Bookmark, FindInPage, DesktopSite, Translate, SummarizePage),
+                    items =
+                        listOfNotNull(
+                            OpenInFirefox,
+                            Bookmark,
+                            FindInPage,
+                            DesktopSite,
+                            if (shouldShowExtensions) Extensions else null,
+                            Translate,
+                            SummarizePage,
+                        ),
                 )
             )
         return if (isToolbarAtBottom) rest + navSection else listOf(navSection) + rest

@@ -359,7 +359,7 @@ class ExtensionsMenuItemProviderTest {
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
-    fun `GIVEN the menu was opened from custom tab WHEN building the item THEN offer extensions for custom tab`() =
+    fun `GIVEN the menu was opened from custom tab WHEN building the item THEN offer extensions without manage extensions or settings button`() =
         runTest {
             coEvery { addonManager.getAddons() } returns listOf(addon(INSTALLED_ID, installed = true, enabled = true))
             val customTabState = createCustomTab(url = "https://mozilla.org", id = TAB_ID)
@@ -375,6 +375,117 @@ class ExtensionsMenuItemProviderTest {
 
             assertEquals(Text.Resource(R.string.browser_menu_extensions), item.title)
             assertEquals(MenuItemSummary(text = Text.String(ACTION_TITLE)), item.summary)
+            assertEquals(MenuItemState.DEFAULT, item.state)
+            assertEquals(1, item.subMenuItems.size)
+            assertNull(item.subMenuItems.first().actionButton)
+            assertEquals(MenuItemState.DEFAULT, item.subMenuItems.first().state)
+        }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun `GIVEN the menu was opened from custom tab WHEN clicking what an extension offers THEN keep the menu open and do not run action`() =
+        runTest {
+            var wasClicked = false
+            val extension = extension(INSTALLED_ID).copy(browserAction = extensionAction { wasClicked = true })
+            val customTabState = createCustomTab(url = "https://mozilla.org", id = TAB_ID)
+            val browserStore =
+                BrowserStore(
+                    BrowserState(
+                        customTabs = listOf(customTabState),
+                        extensions = mapOf(INSTALLED_ID to extension),
+                    )
+                )
+
+            val provider = provider(browserStore, MenuTarget.CustomTab(TAB_ID))
+            provider.onEvent(
+                MenuAction.WebExtensionActionClicked(extensionId = INSTALLED_ID, isPageAction = false),
+                menu,
+            )
+
+            assertFalse(menu.isUsed)
+            assertFalse(wasClicked)
+        }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun `GIVEN extensions process is disabled in custom tab WHEN building the item THEN show greyed out item with disabled summary and no action button`() =
+        runTest {
+            val customTabState = createCustomTab(url = "https://mozilla.org", id = TAB_ID)
+            val browserStore =
+                BrowserStore(
+                    BrowserState(
+                        customTabs = listOf(customTabState),
+                        extensionsProcessDisabled = true,
+                    )
+                )
+
+            val item = resolvedItem(browserStore, MenuTarget.CustomTab(TAB_ID)) as StandardMenuItem
+
+            assertEquals(Text.Resource(R.string.browser_menu_extensions), item.title)
+            assertEquals(
+                MenuItemSummary(
+                    text = Text.Resource(R.string.browser_menu_extensions_disabled_description),
+                    state = MenuItemState.DISABLED,
+                ),
+                item.summary,
+            )
+            assertEquals(MenuItemState.DISABLED, item.state)
+            assertNull(item.actionButton)
+        }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun `GIVEN the menu was opened from custom tab WHEN building expandable item THEN addon actions are shown without manage or discover items`() =
+        runTest {
+            coEvery { addonManager.getAddons() } returns listOf(addon(INSTALLED_ID, installed = true, enabled = true))
+            val customTabState = createCustomTab(url = "https://mozilla.org", id = TAB_ID)
+            val browserStore =
+                BrowserStore(
+                    BrowserState(
+                        customTabs = listOf(customTabState),
+                        extensions = mapOf(INSTALLED_ID to extension(INSTALLED_ID)),
+                    )
+                )
+
+            val item = resolvedItem(browserStore, MenuTarget.CustomTab(TAB_ID)) as ExpandableMenuItem
+
+            assertEquals(1, item.subMenuItems.size)
+            assertEquals(
+                MenuAction.WebExtensionActionClicked(extensionId = INSTALLED_ID, isPageAction = false),
+                item.subMenuItems.first().onClickEvent,
+            )
+            assertTrue(
+                item.subMenuItems.none {
+                    it.onClickEvent == MenuAction.Navigate.ManageExtensions ||
+                        it.onClickEvent == MenuAction.Navigate.DiscoverMoreExtensions
+                }
+            )
+        }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun `GIVEN the menu was opened from custom tab and no extensions apply WHEN building the item THEN show no extensions enabled and disable item`() =
+        runTest {
+            val customTabState = createCustomTab(url = "https://mozilla.org", id = TAB_ID)
+            val browserStore =
+                BrowserStore(
+                    BrowserState(
+                        customTabs = listOf(customTabState),
+                        extensions = emptyMap(),
+                    )
+                )
+
+            val item = resolvedItem(browserStore, MenuTarget.CustomTab(TAB_ID)) as StandardMenuItem
+
+            assertEquals(Text.Resource(R.string.browser_menu_extensions), item.title)
+            assertEquals(
+                MenuItemSummary(
+                    text = Text.Resource(R.string.browser_menu_no_extensions_installed_description),
+                    state = MenuItemState.DISABLED,
+                ),
+                item.summary,
+            )
+            assertEquals(MenuItemState.DISABLED, item.state)
         }
 
     @OptIn(ExperimentalCoroutinesApi::class)
