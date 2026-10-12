@@ -13,5 +13,7 @@ internal object TabGroupsStripReducer {
         when (action) {
             is TabGroupsStripAction.TabClicked ->
                 state.copy(tabs = state.tabs.map { it.copy(isFocused = it.id == action.tabId) })
+            TabGroupsStripAction.AddTabClicked -> state
+            TabGroupsStripAction.ExpandGroupClicked -> state
         }
 }

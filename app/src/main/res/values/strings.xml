@@ -1586,6 +1586,9 @@
   <string name="close_tab_and_delete_group_confirmation_dialog_cancel">Cancel</string>
   <!-- Content description for the three dot button next to a tab group" -->
   <string name="tab_group_three_dot_button_content_description">More options</string>
+  <!-- Content description for the Expand button on the contracted menu for a tab group:
+    when tapped, tabs are displayed in an expanded grid or list view, taking up the full screen. -->
+  <string name="tab_groups_strip_expand_group_content_description">Expand to show tabs in full screen</string>
   <!-- Text shown on the edit button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_edit">Edit</string>
   <!-- Text shown on the ungroup button for a tab group on the three dot menu -->

@@ -9,7 +9,6 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class TabGroupsStripReducerTest {
-
     @Test
     fun `WHEN TabClicked is dispatched THEN only the matching tab is selected`() {
         val state = stateWith(selectedId = "1")
@@ -35,6 +34,24 @@ class TabGroupsStripReducerTest {
         val result = TabGroupsStripReducer.reduce(state, TabGroupsStripAction.TabClicked("missing"))
 
         assertTrue(result.tabs.none { it.isFocused })
+    }
+
+    @Test
+    fun `WHEN AddTabClicked is dispatched THEN the state is unchanged`() {
+        val state = stateWith(selectedId = "1")
+
+        val result = TabGroupsStripReducer.reduce(state, TabGroupsStripAction.AddTabClicked)
+
+        assertEquals(state, result)
+    }
+
+    @Test
+    fun `WHEN ExpandGroupClicked is dispatched THEN the state is unchanged`() {
+        val state = stateWith(selectedId = "1")
+
+        val result = TabGroupsStripReducer.reduce(state, TabGroupsStripAction.ExpandGroupClicked)
+
+        assertEquals(state, result)
     }
 
     private fun stateWith(selectedId: String) =

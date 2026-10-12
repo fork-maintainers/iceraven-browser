@@ -14,4 +14,10 @@ sealed interface TabGroupsStripAction : Action {
      * @property tabId The ID of the clicked tab.
      */
     data class TabClicked(val tabId: String) : TabGroupsStripAction
+
+    /** The add tab button in the strip was clicked. */
+    data object AddTabClicked : TabGroupsStripAction
+
+    /** The expand button in the strip was clicked. */
+    data object ExpandGroupClicked : TabGroupsStripAction
 }

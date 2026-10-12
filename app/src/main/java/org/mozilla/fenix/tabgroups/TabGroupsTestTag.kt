@@ -11,6 +11,8 @@ internal object TabGroupsTestTag {
     // Tab Groups Strip
     const val TAB_GROUPS_STRIP = "$TAB_GROUPS.Strip"
     const val TAB_GROUPS_STRIP_TAB = "$TAB_GROUPS_STRIP.Tab"
+    const val TAB_GROUPS_STRIP_ADD_BUTTON = "$TAB_GROUPS_STRIP.AddButton"
+    const val TAB_GROUPS_STRIP_EXPAND_BUTTON = "$TAB_GROUPS_STRIP.ExpandButton"
 
     // Delete Tab Groups Confirmation Dialog
     const val DELETE_DIALOG_CONFIRM_BUTTON = "$TAB_GROUPS.DeleteDialog.ConfirmButton"
