@@ -62,6 +62,12 @@ class TabbedBrowsingTest {
     // val retryTestRule = RetryTestRule(3)
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/903599
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.TabbedBrowsingTest#closeAllTabsTest"],
+        bug = 2079703,
+        since = "2026-10",
+    )
+    @Critical
     @Test
     fun closeAllTabsTest() {
         val defaultWebPage = mockWebServer.getGenericAsset(1)
@@ -156,6 +162,12 @@ class TabbedBrowsingTest {
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/903591
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.TabbedBrowsingTest#closingPrivateTabsTest"],
+        bug = 2079703,
+        since = "2026-10",
+    )
+    @Critical
     @Test
     fun closingPrivateTabsTest() {
         val genericURL = mockWebServer.getGenericAsset(1)

@@ -424,6 +424,115 @@ class TabbedBrowsingTest : BaseTest() {
         on.tabDrawer.verifyExistingOpenTabs(webPages[0].title, webPages[1].title)
     }
 
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/903599
+    @Critical
+    @Test
+    fun closeAllTabsTest() {
+        val defaultWebPage = mockWebServer.getGenericAsset(1)
+
+        on.browserPage
+            .navigateToPage(defaultWebPage.url.toString())
+            .verifyPageContentWithReload(defaultWebPage.url.toString(), defaultWebPage.content)
+        on.tabDrawer
+            .navigateToPage()
+            .verifyNormalTabsList()
+            .mozClick(TabDrawerSelectors.THREE_DOT_BUTTON)
+            .mozVerify(TabDrawerSelectors.CLOSE_ALL_TABS_BUTTON)
+            .mozVerify(TabDrawerSelectors.SELECT_TABS_BUTTON)
+            .mozClick(TabDrawerSelectors.CLOSE_ALL_TABS_BUTTON)
+            .mozVerify(TabDrawerSelectors.CLOSE_ALL_TABS_CONFIRM_BUTTON)
+            .mozClick(TabDrawerSelectors.CLOSE_ALL_TABS_CONFIRM_BUTTON)
+        on.browserPage.verifyTabCounter("0")
+
+        on.home.navigateToPage()
+        on.home.switchToPrivateBrowsingMode()
+        on.browserPage
+            .navigateToPage(defaultWebPage.url.toString())
+            .verifyPageContentWithReload(defaultWebPage.url.toString(), defaultWebPage.content)
+        on.tabDrawer
+            .navigateToPage()
+            .mozVerify(TabDrawerSelectors.PRIVATE_TABS_LIST)
+            .mozClick(TabDrawerSelectors.THREE_DOT_BUTTON)
+            .mozVerify(TabDrawerSelectors.CLOSE_ALL_TABS_BUTTON)
+            .mozClick(TabDrawerSelectors.CLOSE_ALL_TABS_BUTTON)
+            .mozVerify(TabDrawerSelectors.CLOSE_ALL_TABS_CONFIRM_BUTTON)
+            .mozClick(TabDrawerSelectors.CLOSE_ALL_TABS_CONFIRM_BUTTON)
+        on.browserPage.verifyTabCounter("0", isPrivateBrowsingEnabled = true)
+    }
+
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/903591
+    @Critical
+    @Test
+    fun closingPrivateTabsTest() {
+        val defaultWebPage = mockWebServer.getGenericAsset(1)
+
+        on.home.navigateToPage()
+        on.home.switchToPrivateBrowsingMode()
+        on.browserPage
+            .navigateToPage(defaultWebPage.url.toString())
+            .verifyPageContentWithReload(defaultWebPage.url.toString(), defaultWebPage.content)
+        on.tabDrawer
+            .navigateToPage()
+            .verifyExistingOpenTabs(defaultWebPage.title)
+            .closeTabWithTitle(defaultWebPage.title)
+            .mozVerify(TabDrawerSelectors.PRIVATE_TAB_CLOSED_SNACKBAR)
+            .mozClick(TabDrawerSelectors.SNACKBAR_UNDO_BUTTON)
+        on.browserPage.verifyTabCounter("1", isPrivateBrowsingEnabled = true)
+    }
+
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/903589
+    @Critical
+    @Test
+    fun switchBetweenNormalAndPrivateBrowsingTest() {
+        appContext.components.settings.tabGroupsOnboardingEnabled = false
+
+        val webPages = mockWebServer.genericAssets
+
+        MockBrowserDataHelper.createTabItem(webPages[0].url.toString())
+        MockBrowserDataHelper.createTabItem(webPages[1].url.toString())
+
+        on.home.navigateToPage()
+        on.home.switchToPrivateBrowsingMode()
+        on.browserPage
+            .navigateToPage(webPages[2].url.toString())
+            .verifyPageContentWithReload(webPages[2].url.toString(), webPages[2].content)
+        on.tabDrawer.navigateToPage().mozClick(TabDrawerSelectors.FAB)
+        on.searchBar
+            .mozEnterText(webPages[3].url.toString(), SearchBarSelectors.TOOLBAR_IN_EDIT_MODE)
+            .mozPressEnter(SearchBarSelectors.TOOLBAR_IN_EDIT_MODE)
+        on.browserPage.navigateToPage().verifyPageContentWithReload(webPages[3].url.toString(), webPages[3].content)
+
+        // From private browsing, open the (private) tabs tray and switch pages across it.
+        on.tabDrawer.navigateToPage().verifyExistingOpenTabs(webPages[2].title, webPages[3].title)
+        on.tabDrawer.mozVerify(TabDrawerSelectors.PRIVATE_TABS_LIST)
+        on.tabDrawer.mozClick(TabDrawerSelectors.NORMAL_BROWSING_OPEN_TABS_BUTTON)
+        on.tabDrawer.mozVerify(TabDrawerSelectors.NORMAL_TABS_LIST)
+        on.tabDrawer.verifyExistingOpenTabs(webPages[0].title, webPages[1].title)
+        on.tabDrawer.mozClick(TabDrawerSelectors.PRIVATE_TABS_PAGE_BUTTON)
+        on.tabDrawer.mozVerify(TabDrawerSelectors.PRIVATE_TABS_LIST)
+
+        // New private tab lands on the private homepage; the browsing toggle returns to the normal homepage.
+        // The new-tab FAB opens the toolbar in edit mode, so back out of it (keyboard first, then edit mode).
+        on.tabDrawer.mozClick(TabDrawerSelectors.FAB)
+        on.searchBar.mozPressBackUntilGone(SearchBarSelectors.TOOLBAR_IN_EDIT_MODE)
+        on.home.navigateToPage().mozVerify(HomeSelectors.PRIVATE_BROWSING_INFO_CARD_TITLE)
+        on.home.mozClick(HomeSelectors.PRIVATE_BROWSING_BUTTON).mozVerify(ToolbarSelectors.TAB_COUNTER_WITH_COUNT(""))
+
+        // Tab counter opens the normal tray; a new tab returns to the normal homepage.
+        on.tabDrawer.navigateToPage().verifyExistingOpenTabs(webPages[0].title, webPages[1].title)
+        on.tabDrawer.mozVerify(TabDrawerSelectors.NORMAL_TABS_LIST)
+        on.tabDrawer.mozClick(TabDrawerSelectors.FAB)
+        on.searchBar.mozPressBackUntilGone(SearchBarSelectors.TOOLBAR_IN_EDIT_MODE)
+        on.home.navigateToPage().mozVerify(ToolbarSelectors.TAB_COUNTER_WITH_COUNT(""))
+
+        // Toggle back to private and confirm the private tray still holds the private tabs.
+        on.home
+            .mozClick(HomeSelectors.PRIVATE_BROWSING_BUTTON)
+            .mozVerify(HomeSelectors.PRIVATE_BROWSING_INFO_CARD_TITLE)
+        on.tabDrawer.navigateToPage().verifyExistingOpenTabs(webPages[2].title, webPages[3].title)
+        on.tabDrawer.mozVerify(TabDrawerSelectors.PRIVATE_TABS_LIST)
+    }
+
     private fun verifyGroup(tabGroupTitle: String, tabGroupColor: String, numberOfTabs: Int = 1) {
         on.home.navigateToPage()
         on.tabDrawer.navigateToPage().mozVerify(TAB_ITEM_WITH_TITLE(tabTitle = tabGroupTitle))

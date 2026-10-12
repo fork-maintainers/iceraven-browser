@@ -94,6 +94,14 @@ object TabDrawerSelectors : SelectorContainer {
             description = "Tabs closed snackbar for $count tabs",
         )
 
+    // "Private tab closed" base Compose snackbar shown after closing a single private tab; read on Compose.
+    val PRIVATE_TAB_CLOSED_SNACKBAR =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TEXT,
+            value = getStringResource(R.string.snackbar_private_tab_closed),
+            description = "Private tab closed snackbar",
+        )
+
     // The base snackbar's action button carries SNACKBAR_BUTTON_TEST_TAG, like the download snackbar's action button.
     val SNACKBAR_UNDO_BUTTON =
         Selector(
