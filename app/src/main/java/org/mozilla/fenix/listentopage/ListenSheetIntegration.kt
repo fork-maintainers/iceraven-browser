@@ -39,7 +39,6 @@ import mozilla.components.feature.listentopage.ArticleProgress
 import mozilla.components.feature.listentopage.ListenAction
 import mozilla.components.feature.listentopage.ListenState
 import mozilla.components.feature.listentopage.ListenStore
-import mozilla.components.feature.listentopage.PlaybackPhase
 import mozilla.components.feature.listentopage.PlayerMode
 import mozilla.components.feature.listentopage.ui.ArticleDetails
 import mozilla.components.feature.listentopage.ui.ListenSheet
@@ -212,12 +211,13 @@ private fun ListenSheetContent(
     ListenSheet(
         article = ArticleDetails(title = state.value.title, site = state.value.site, url = state.value.url),
         articleProgressState = articleProgressState,
-        playing = playback.phase == PlaybackPhase.Playing || playback.phase == PlaybackPhase.Buffering,
+        playbackPhase = playback.phase,
         speed = playback.speed,
         voiceState = state.value.voiceState,
         onAction = onAction,
         onExpandClicked = { onAction(ListenAction.ModeChanged(PlayerMode.Expanded)) },
         expanded = mode == PlayerMode.Expanded,
+        error = state.value.error,
         modifier =
             Modifier.fillMaxWidth()
                 .testTag(LISTEN_SHEET_TEST_TAG)
