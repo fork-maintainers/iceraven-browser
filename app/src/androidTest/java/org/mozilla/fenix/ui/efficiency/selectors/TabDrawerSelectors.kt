@@ -5,6 +5,7 @@
 package org.mozilla.fenix.ui.efficiency.selectors
 
 import mozilla.components.compose.base.R as composeBaseR
+import mozilla.components.compose.base.snackbar.SNACKBAR_BUTTON_TEST_TAG
 import org.mozilla.fenix.R
 import org.mozilla.fenix.helpers.DataGenerationHelper.getPluralStringResource
 import org.mozilla.fenix.helpers.DataGenerationHelper.getStringResource
@@ -83,6 +84,22 @@ object TabDrawerSelectors : SelectorContainer {
             strategy = SelectorStrategy.COMPOSE_BY_TAG,
             value = TabsTrayTestTag.EMPTY_NORMAL_TABS_LIST,
             description = "Empty normal tabs list placeholder",
+        )
+
+    // "Tabs closed: N" base Compose snackbar; its message isn't on the UIAutomator text tree, so read it on Compose.
+    fun TABS_CLOSED_SNACKBAR(count: Int = 2) =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TEXT,
+            value = getStringResource(R.string.snackbar_num_tabs_closed, count.toString()),
+            description = "Tabs closed snackbar for $count tabs",
+        )
+
+    // The base snackbar's action button carries SNACKBAR_BUTTON_TEST_TAG, like the download snackbar's action button.
+    val SNACKBAR_UNDO_BUTTON =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TAG,
+            value = SNACKBAR_BUTTON_TEST_TAG,
+            description = "Snackbar undo action button",
         )
 
     val TAB_ITEM_ROOT =
@@ -199,6 +216,22 @@ object TabDrawerSelectors : SelectorContainer {
             strategy = SelectorStrategy.COMPOSE_BY_TAG,
             value = TabsTrayTestTag.THREE_DOT_BUTTON,
             description = "Tab selection view three dot menu button",
+            groups = setOf(Group.TAB_SELECTION_VIEW),
+        )
+
+    val EXIT_MULTISELECT_BUTTON =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_CONTENT_DESCRIPTION,
+            value = getStringResource(R.string.tab_tray_close_multiselect_content_description),
+            description = "Exit multiselect mode button",
+            groups = setOf(Group.TAB_SELECTION_VIEW),
+        )
+
+    val CLOSE_SELECTED_TABS_BUTTON =
+        Selector(
+            strategy = SelectorStrategy.UIAUTOMATOR2_BY_DESCRIPTION_CONTAINS,
+            value = getStringResource(R.string.tab_manager_multiselect_menu_item_close_content_description),
+            description = "Close selected tabs button",
             groups = setOf(Group.TAB_SELECTION_VIEW),
         )
 

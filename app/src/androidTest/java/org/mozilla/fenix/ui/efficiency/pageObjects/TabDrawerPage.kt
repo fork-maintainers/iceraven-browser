@@ -4,6 +4,7 @@
 
 package org.mozilla.fenix.ui.efficiency.pageObjects
 
+import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.hasAnyChild
 import androidx.compose.ui.test.hasTestTag
@@ -13,6 +14,7 @@ import androidx.compose.ui.test.onChildAt
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import org.mozilla.fenix.helpers.HomeActivityIntentTestRule
+import org.mozilla.fenix.helpers.TestAssetHelper.waitingTime
 import org.mozilla.fenix.tabstray.TabsTrayTestTag
 import org.mozilla.fenix.ui.efficiency.helpers.BasePage
 import org.mozilla.fenix.ui.efficiency.helpers.SwipeDirection
@@ -130,14 +132,27 @@ class TabDrawerPage(composeRule: AndroidComposeTestRule<HomeActivityIntentTestRu
      * Ordering cannot be expressed with the mozVerify* family, which only answers "does any node match". The wait is
      * delegated to the harness first because the positional assert below is a one-shot check and would race a list that
      * is still populating.
+     *
+     * With [isListViewEnabled] the tabs tray renders rows that merge their title into the row node, so the grid path's
+     * child-text precondition and TAB_ITEM_ROOT child assert do not hold; the unmerged tree is read instead, matching
+     * the legacy robot's list-view branch.
      */
-    fun verifyOpenTabsOrder(position: Int, tabTitle: String): TabDrawerPage {
-        mozVerifyAnyHasChildWithText(TabDrawerSelectors.TAB_ITEM_ROOT, tabTitle)
-        composeRule
-            .onNodeWithTag(TabsTrayTestTag.NORMAL_TABS_LIST)
-            .onChildAt(position - 1)
-            .assert(hasTestTag(TabsTrayTestTag.TAB_ITEM_ROOT))
-            .assert(hasAnyChild(hasText(tabTitle)))
+    @OptIn(ExperimentalTestApi::class)
+    fun verifyOpenTabsOrder(position: Int, tabTitle: String, isListViewEnabled: Boolean = false): TabDrawerPage {
+        if (isListViewEnabled) {
+            composeRule.waitUntilAtLeastOneExists(hasText(tabTitle), waitingTime)
+            composeRule
+                .onNodeWithTag(TabsTrayTestTag.NORMAL_TABS_LIST, useUnmergedTree = true)
+                .onChildAt(position - 1)
+                .assert(hasAnyChild(hasText(tabTitle)))
+        } else {
+            mozVerifyAnyHasChildWithText(TabDrawerSelectors.TAB_ITEM_ROOT, tabTitle)
+            composeRule
+                .onNodeWithTag(TabsTrayTestTag.NORMAL_TABS_LIST)
+                .onChildAt(position - 1)
+                .assert(hasTestTag(TabsTrayTestTag.TAB_ITEM_ROOT))
+                .assert(hasAnyChild(hasText(tabTitle)))
+        }
         return this
     }
 

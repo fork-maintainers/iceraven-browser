@@ -7,10 +7,12 @@ package org.mozilla.fenix.ui.efficiency.tests
 import org.junit.Test
 import org.mozilla.fenix.customannotations.Critical
 import org.mozilla.fenix.customannotations.SmokeTest
+import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.helpers.Constants
 import org.mozilla.fenix.helpers.MockBrowserDataHelper
 import org.mozilla.fenix.helpers.TestAssetHelper.genericAssets
 import org.mozilla.fenix.helpers.TestAssetHelper.getGenericAsset
+import org.mozilla.fenix.helpers.TestHelper.appContext
 import org.mozilla.fenix.helpers.TestHelper.closeApp
 import org.mozilla.fenix.helpers.TestHelper.restartApp
 import org.mozilla.fenix.ui.efficiency.helpers.BaseTest
@@ -326,6 +328,100 @@ class TabbedBrowsingTest : BaseTest() {
             .mozClick(TabDrawerSelectors.TAB_SEARCH_RESULT(firstWebPage.title))
 
         on.browserPage.verifyPageContent(firstWebPage.content).mozVerify(ToolbarSelectors.TAB_COUNTER_WITH_COUNT("2"))
+    }
+
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/1126911
+    @Critical
+    @Test
+    fun verifyTabsTrayGridViewTest() {
+        appContext.components.settings.gridTabView = true
+        appContext.components.settings.tabGroupsOnboardingEnabled = false
+
+        val webPages = mockWebServer.genericAssets
+        MockBrowserDataHelper.createTabItem(webPages[0].url.toString())
+        MockBrowserDataHelper.createTabItem(webPages[1].url.toString())
+        MockBrowserDataHelper.createTabItem(webPages[2].url.toString())
+        MockBrowserDataHelper.createTabItem(webPages[3].url.toString())
+
+        on.tabDrawer
+            .navigateToPage()
+            .verifyNormalTabsList()
+            .verifyOpenTabsOrder(position = 1, tabTitle = webPages[0].title)
+            .verifyOpenTabsOrder(position = 2, tabTitle = webPages[1].title)
+            .verifyOpenTabsOrder(position = 3, tabTitle = webPages[2].title)
+            .verifyOpenTabsOrder(position = 4, tabTitle = webPages[3].title)
+    }
+
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3024942
+    @Critical
+    @Test
+    fun verifyTabsTrayListViewTest() {
+        appContext.components.settings.gridTabView = false
+        appContext.components.settings.tabGroupsOnboardingEnabled = false
+
+        val webPages = mockWebServer.genericAssets
+        MockBrowserDataHelper.createTabItem(webPages[0].url.toString())
+        MockBrowserDataHelper.createTabItem(webPages[1].url.toString())
+        MockBrowserDataHelper.createTabItem(webPages[2].url.toString())
+        MockBrowserDataHelper.createTabItem(webPages[3].url.toString())
+
+        on.tabDrawer
+            .navigateToPage()
+            .verifyNormalTabsList()
+            .verifyOpenTabsOrder(position = 1, tabTitle = webPages[0].title, isListViewEnabled = true)
+            .verifyOpenTabsOrder(position = 2, tabTitle = webPages[1].title, isListViewEnabled = true)
+            .verifyOpenTabsOrder(position = 3, tabTitle = webPages[2].title, isListViewEnabled = true)
+            .verifyOpenTabsOrder(position = 4, tabTitle = webPages[3].title, isListViewEnabled = true)
+    }
+
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/2443938
+    @Critical
+    @Test
+    fun selectMultipleTabsTest() {
+        appContext.components.settings.tabGroupsOnboardingEnabled = false
+
+        val webPages = mockWebServer.genericAssets
+        MockBrowserDataHelper.createTabItem(webPages[0].url.toString())
+        MockBrowserDataHelper.createTabItem(webPages[1].url.toString())
+        MockBrowserDataHelper.createTabItem(webPages[2].url.toString())
+
+        on.tabDrawer
+            .navigateToPage()
+            .verifyExistingOpenTabs(webPages[0].title, webPages[1].title)
+            .mozLongClick(TabDrawerSelectors.TAB_ITEM_WITH_TITLE(webPages[0].title))
+            .mozVerify(TabDrawerSelectors.SELECTION_COUNTER(1))
+            .mozClick(TabDrawerSelectors.TAB_ITEM_WITH_TITLE(webPages[1].title))
+            .mozVerify(TabDrawerSelectors.SELECTION_COUNTER(2))
+            .mozClick(TabDrawerSelectors.TAB_ITEM_WITH_TITLE(webPages[1].title))
+            .mozVerify(TabDrawerSelectors.SELECTION_COUNTER(1))
+            .mozClick(TabDrawerSelectors.EXIT_MULTISELECT_BUTTON)
+            .mozWaitUntilAbsent(TabDrawerSelectors.SELECTION_COUNTER(1))
+            .mozVerify(TabDrawerSelectors.NORMAL_BROWSING_OPEN_TABS_BUTTON)
+    }
+
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/1121915
+    @Critical
+    @Test
+    fun closePagesFromTabsSelectionScreenTest() {
+        appContext.components.settings.tabGroupsOnboardingEnabled = false
+
+        val webPages = mockWebServer.genericAssets
+        MockBrowserDataHelper.createTabItem(webPages[0].url.toString())
+        MockBrowserDataHelper.createTabItem(webPages[1].url.toString())
+        MockBrowserDataHelper.createTabItem(webPages[2].url.toString())
+
+        on.tabDrawer
+            .navigateToPage()
+            .verifyExistingOpenTabs(webPages[0].title, webPages[1].title)
+            .mozLongClick(TabDrawerSelectors.TAB_ITEM_WITH_TITLE(webPages[0].title))
+            .mozVerify(TabDrawerSelectors.SELECTION_COUNTER(1))
+            .mozClick(TabDrawerSelectors.TAB_ITEM_WITH_TITLE(webPages[1].title))
+            .mozVerify(TabDrawerSelectors.SELECTION_COUNTER(2))
+            .mozClick(TabDrawerSelectors.CLOSE_SELECTED_TABS_BUTTON)
+            .mozVerify(TabDrawerSelectors.TABS_CLOSED_SNACKBAR(2))
+            .mozClick(TabDrawerSelectors.SNACKBAR_UNDO_BUTTON)
+
+        on.tabDrawer.verifyExistingOpenTabs(webPages[0].title, webPages[1].title)
     }
 
     private fun verifyGroup(tabGroupTitle: String, tabGroupColor: String, numberOfTabs: Int = 1) {
