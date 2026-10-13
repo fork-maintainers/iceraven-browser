@@ -39,6 +39,7 @@ import androidx.compose.ui.layout.boundsInRoot
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.compose.ui.unit.dp
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
@@ -114,6 +115,7 @@ import org.mozilla.fenix.components.metrics.installSourcePackage
 import org.mozilla.fenix.components.toolbar.ToolbarPosition
 import org.mozilla.fenix.components.toolbar.TopDividerColumn
 import org.mozilla.fenix.compose.snackbar.SnackbarState
+import org.mozilla.fenix.compose.verticalFadingEdges
 import org.mozilla.fenix.ext.application
 import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.ext.hideToolbar
@@ -689,6 +691,8 @@ class HomeFragment : Fragment(), UserInteractionHandler, OnLongPressedListener {
                 val isPrivateMode = appState.value.mode.isPrivate
                 val currentWallpaper = appState.value.wallpaperState.currentWallpaper
                 val universalEdgeToEdge = settings.enableUniversalEdgeToEdgeWallpapers
+                val fadeContentEdges =
+                    universalEdgeToEdge && !isPrivateMode && !appState.value.searchState.isSearchActive
 
                 LaunchedEffect(currentWallpaper.name, isPrivateMode, universalEdgeToEdge) {
                     if (universalEdgeToEdge) {
@@ -790,6 +794,7 @@ class HomeFragment : Fragment(), UserInteractionHandler, OnLongPressedListener {
                                 collectionsMigrationCardState = collectionsMigrationCardState.value,
                                 settings = settings,
                                 innerPadding = innerPadding,
+                                fadeContentEdges = fadeContentEdges,
                                 microsurveyVisible = microsurveyVisible,
                                 microsurvey = appState.value.microsurvey.current,
                             )
@@ -862,6 +867,7 @@ class HomeFragment : Fragment(), UserInteractionHandler, OnLongPressedListener {
         collectionsMigrationCardState: CollectionsMigrationCardState,
         settings: Settings,
         innerPadding: PaddingValues,
+        fadeContentEdges: Boolean,
         microsurveyVisible: Boolean,
         microsurvey: MicrosurveyUIData?,
     ) {
@@ -898,6 +904,10 @@ class HomeFragment : Fragment(), UserInteractionHandler, OnLongPressedListener {
                 onTopSitesItemBound = {
                     StartupTimeline.onTopSitesItemBound(activity = (requireActivity() as HomeActivity))
                 },
+                modifier =
+                    Modifier.thenConditional(Modifier.verticalFadingEdges(HOMEPAGE_EDGE_FADE_LENGTH)) {
+                        fadeContentEdges
+                    },
             )
 
             if (microsurveyVisible) {
@@ -1702,5 +1712,8 @@ class HomeFragment : Fragment(), UserInteractionHandler, OnLongPressedListener {
         const val FOCUS_ON_ADDRESS_BAR = "focusOnAddressBar"
         const val START_VOICE_SEARCH = "startVoiceSearch"
         private const val SESSION_TO_DELETE = "sessionToDelete"
+
+        // Distance over which the homepage content fades out where it meets the toolbars.
+        private val HOMEPAGE_EDGE_FADE_LENGTH = 24.dp
     }
 }
