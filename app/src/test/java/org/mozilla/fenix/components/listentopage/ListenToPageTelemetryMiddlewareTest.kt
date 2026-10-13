@@ -84,18 +84,18 @@ class ListenToPageTelemetryMiddlewareTest {
 
     @Test
     fun `WHEN the progress bar is seeked ahead of the current position THEN record seek_performed forward`() {
-        val store = createStore(phase = PlaybackPhase.Playing, positionMs = 5_000L)
+        val store = createStore(phase = PlaybackPhase.Playing, positionMs = 5_000L, durationMs = 20_000L)
 
-        store.dispatch(ListenAction.Playback.SeekRequested(positionMs = 20_000L))
+        store.dispatch(ListenAction.Playback.SeekRequested(fraction = 0.75f))
 
         assertEquals("forward", ListenToPage.seekPerformed.testGetValue()!!.single().extra?.get("direction"))
     }
 
     @Test
     fun `WHEN the progress bar is seeked behind the current position THEN record seek_performed backward`() {
-        val store = createStore(phase = PlaybackPhase.Playing, positionMs = 20_000L)
+        val store = createStore(phase = PlaybackPhase.Playing, positionMs = 15_000L, durationMs = 20_000L)
 
-        store.dispatch(ListenAction.Playback.SeekRequested(positionMs = 5_000L))
+        store.dispatch(ListenAction.Playback.SeekRequested(fraction = 0.25f))
 
         assertEquals("backward", ListenToPage.seekPerformed.testGetValue()!!.single().extra?.get("direction"))
     }
@@ -323,6 +323,7 @@ class ListenToPageTelemetryMiddlewareTest {
     private fun createStore(
         phase: PlaybackPhase,
         positionMs: Long = 0L,
+        durationMs: Long = 0L,
         availableVoices: List<Voice> = emptyList(),
         languageTag: String? = null,
     ) =
@@ -331,7 +332,7 @@ class ListenToPageTelemetryMiddlewareTest {
                 ListenState(
                     languageTag = languageTag,
                     playbackState = PlaybackState(phase = phase),
-                    articleProgress = ArticleProgress(positionMs = positionMs),
+                    articleProgress = ArticleProgress(positionMs = positionMs, durationMs = durationMs),
                     voiceState = VoiceState(availableVoices = availableVoices),
                 ),
             reducer = ::listenReducer,

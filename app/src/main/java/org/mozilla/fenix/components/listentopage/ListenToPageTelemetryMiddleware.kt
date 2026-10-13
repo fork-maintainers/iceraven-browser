@@ -84,7 +84,7 @@ internal class ListenToPageTelemetryMiddleware : Middleware<ListenState, ListenA
 
             ListenAction.Playback.PlaybackFailed -> ListenToPage.playbackFailed.record(NoExtras())
             is ListenAction.Playback.SeekRequested -> {
-                val direction = if (action.positionMs >= store.state.articleProgress.positionMs) FORWARD else BACKWARD
+                val direction = if (action.fraction >= store.state.articleProgress.fraction) FORWARD else BACKWARD
                 ListenToPage.seekPerformed.record(ListenToPage.SeekPerformedExtra(direction = direction))
             }
 
