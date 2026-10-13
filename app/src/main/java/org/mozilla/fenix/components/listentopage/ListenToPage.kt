@@ -4,6 +4,7 @@
 
 package org.mozilla.fenix.components.listentopage
 
+import android.app.PendingIntent
 import android.content.Context
 import kotlinx.coroutines.CoroutineScope
 import mozilla.components.browser.state.selector.findTab
@@ -17,6 +18,25 @@ import mozilla.components.feature.listentopage.playback.DirectoryAudioFileCache
 import mozilla.components.feature.listentopage.playback.ListenPlaybackController
 import mozilla.components.feature.listentopage.settings.ListenSettings
 import mozilla.components.feature.listentopage.synthesis.SpeechSynthesizer
+import mozilla.components.feature.media.service.AbstractMediaSessionService
+import mozilla.components.support.base.ids.SharedIdsHelper
+
+private const val OPEN_TAB_PENDING_INTENT_TAG = "org.mozilla.fenix.listentopage.OPEN_TAB"
+
+internal fun Context.openTabPendingIntent(tabId: String): PendingIntent? {
+    val intent =
+        packageManager.getLaunchIntentForPackage(packageName)?.apply {
+            action = AbstractMediaSessionService.ACTION_SWITCH_TAB
+            putExtra(AbstractMediaSessionService.EXTRA_TAB_ID, tabId)
+        } ?: return null
+
+    return PendingIntent.getActivity(
+        this,
+        SharedIdsHelper.getIdForTag(this, OPEN_TAB_PENDING_INTENT_TAG),
+        intent,
+        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+    )
+}
 
 /**
  * Provides access to the components that read a page out loud.
@@ -51,7 +71,12 @@ class ListenToPage(
                             SpeechSynthesizer.android(context = context, audioCache = audioCache)
                         },
                         audioCache = audioCache,
-                        playbackController = ListenPlaybackController(context, scope),
+                        playbackController =
+                            ListenPlaybackController(
+                                context = context,
+                                scope = scope,
+                                sessionActivity = { tabId -> context.openTabPendingIntent(tabId) },
+                            ),
                         settings = ListenSettings.dataStore(context),
                         scope = scope,
                     ),
