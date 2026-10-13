@@ -66,7 +66,7 @@ class PrivacyReportNotificationScheduler(
         }
 
         val onboardingCompletedTimestamp = settings.onboardingCompletedTimestamp
-        val availability = privacyReportNotificationAvailability(applicationContext)
+        val availability = privacyReportNotificationAvailability(notificationManager)
         TrackingProtection.privacyReportNotificationAvailability.set(availability.telemetryId)
 
         if (availability == PrivacyReportNotificationAvailability.AVAILABLE) {
