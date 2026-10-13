@@ -38,9 +38,6 @@
     <attr name="colorSelectedText" format="reference" />
     <attr name="colorIconPrivate" format="reference" />
 
-    <!-- Color palette attributes -->
-    <attr name="accent" format="reference" />
-
     <!-- Misc -->
     <attr name="fenixLogo" format="reference" />
     <attr name="fenixWordmarkText" format="reference" />
