@@ -8,6 +8,8 @@
     android:layout_height="50dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="center"
+    android:paddingEnd="1dp"
+    android:paddingStart="0dp"
     android:background="@drawable/rounded_search_widget_background">
 
     <ImageView
@@ -39,7 +41,6 @@
         android:layout_height="48dp"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
-        android:layout_marginEnd="1dp"
         android:background="@android:color/transparent"
         android:contentDescription="@string/search_widget_voice"
         android:scaleType="centerInside"
@@ -53,6 +54,7 @@
         android:layout_height="48dp"
         android:layout_centerVertical="true"
         android:layout_toStartOf="@id/button_search_widget_voice"
+        android:layout_alignWithParentIfMissing="true"
         android:background="@android:color/transparent"
         android:contentDescription="@string/lens_search_content_description"
         android:scaleType="centerInside"

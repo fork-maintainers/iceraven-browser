@@ -208,6 +208,47 @@ class SearchWidgetProviderTest {
         assertEquals(View.GONE, view.findViewById<View>(R.id.button_search_widget_lens).visibility)
     }
 
+    @Test
+    fun `GIVEN lens is enabled WHEN the medium or large widget is laid out with or without voice search THEN the lens button sits beside the mic or at the end and does not cover the app icon`() {
+        val widgetProvider = SearchWidgetProvider()
+        listOf(R.layout.search_widget_medium, R.layout.search_widget_large).forEach { layout ->
+            listOf(true, false).forEach { voiceEnabled ->
+                val case = "layout=${testContext.resources.getResourceEntryName(layout)}, voiceEnabled=$voiceEnabled"
+                val view =
+                    widgetProvider
+                        .createRemoteViews(
+                            testContext,
+                            layout,
+                            pendingIntent(),
+                            if (voiceEnabled) pendingIntent() else null,
+                            pendingIntent(),
+                            "Search",
+                        )
+                        .apply(testContext, FrameLayout(testContext))
+                view.measure(
+                    View.MeasureSpec.makeMeasureSpec(WIDGET_WIDTH_PX, View.MeasureSpec.EXACTLY),
+                    View.MeasureSpec.makeMeasureSpec(WIDGET_HEIGHT_PX, View.MeasureSpec.EXACTLY),
+                )
+                view.layout(0, 0, WIDGET_WIDTH_PX, WIDGET_HEIGHT_PX)
+
+                val icon = view.findViewById<View>(R.id.button_search_widget_new_tab_icon)
+                val text = view.findViewById<View>(R.id.button_search_widget_new_tab)
+                val voice = view.findViewById<View>(R.id.button_search_widget_voice)
+                val lens = view.findViewById<View>(R.id.button_search_widget_lens)
+                val end = WIDGET_WIDTH_PX - view.paddingEnd
+                if (voiceEnabled) {
+                    assertEquals(case, end, voice.right)
+                    assertEquals(case, voice.left, lens.right)
+                } else {
+                    assertEquals(case, end, lens.right)
+                }
+                assertTrue(case, lens.left >= icon.right)
+                assertEquals(case, lens.left, text.right)
+                assertTrue(case, text.left < text.right)
+            }
+        }
+    }
+
     private fun SearchWidgetProvider.createLargeRemoteViews(lensSearchIntent: PendingIntent?) =
         createRemoteViews(
             testContext,
@@ -316,3 +357,6 @@ class SearchWidgetProviderTest {
         assertEquals(true, Metrics.searchWidgetInstalled.testGetValue())
     }
 }
+
+private const val WIDGET_WIDTH_PX = 800
+private const val WIDGET_HEIGHT_PX = 150
