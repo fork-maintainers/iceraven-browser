@@ -5,6 +5,7 @@
 package org.mozilla.fenix.ui.efficiency.selectors
 
 import mozilla.components.feature.app.links.R as applinksR
+import mozilla.components.feature.summarize.R as summarizeR
 import org.mozilla.fenix.R
 import org.mozilla.fenix.compose.snackbar.SNACKBAR_BUTTON_TEST_TAG
 import org.mozilla.fenix.compose.snackbar.SNACKBAR_TEST_TAG
@@ -23,6 +24,8 @@ object BrowserPageSelectors : SelectorContainer {
         NOT_TRANSLATED_PAGE_TRANSLATION_SHEET,
         TRANSLATED_PAGE_TRANSLATION_SHEET,
         ADDED_TO_SHORTCUTS_SNACKBAR,
+        SHAKE_TO_SUMMARIZE_CFR,
+        SIGN_IN_TO_SUMMARIZE_BOTTOM_SHEET,
     }
 
     val ENGINE_VIEW =
@@ -488,5 +491,66 @@ object BrowserPageSelectors : SelectorContainer {
                     appName,
                 ),
             description = "Open link in '$appName' app prompt",
+        )
+
+    val SHAKE_TO_SUMMARIZE_CFR_DISMISS_BUTTON =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TAG,
+            value = "cfr.dismiss",
+            description = "Shake to summarize CFR dismiss button",
+            groups = setOf(Group.SHAKE_TO_SUMMARIZE_CFR),
+        )
+
+    val SHAKE_TO_SUMMARIZE_CFR_MESSAGE =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TEXT,
+            value = getStringResource(R.string.browser_toolbar_summarize_cfr_description),
+            description = "Shake to summarize CFR  message",
+            groups = setOf(Group.SHAKE_TO_SUMMARIZE_CFR),
+        )
+
+    // The "Sign in to summarize" bottom sheet shown when an unauthenticated user taps Summarize page.
+    val SIGN_IN_TO_SUMMARIZE_TITLE =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TEXT,
+            value = getStringResource(summarizeR.string.mozac_summarize_fxa_sign_in_title),
+            description = "Sign in to summarize bottom sheet title",
+            groups = setOf(Group.SIGN_IN_TO_SUMMARIZE_BOTTOM_SHEET),
+        )
+
+    // The message and its inline "Learn more" link render as a single text node, so match them joined.
+    val SIGN_IN_TO_SUMMARIZE_MESSAGE =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TEXT,
+            value =
+                getStringResource(summarizeR.string.mozac_summarize_fxa_sign_in_message) +
+                    " " +
+                    getStringResource(summarizeR.string.mozac_summarize_learn_more_link),
+            description = "Sign in to summarize bottom sheet message",
+            groups = setOf(Group.SIGN_IN_TO_SUMMARIZE_BOTTOM_SHEET),
+        )
+
+    val SIGN_IN_TO_SUMMARIZE_SIGN_IN_BUTTON =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TEXT,
+            value = getStringResource(summarizeR.string.mozac_summarize_fxa_sign_in_button_positive),
+            description = "Sign in to summarize bottom sheet Sign in button",
+            groups = setOf(Group.SIGN_IN_TO_SUMMARIZE_BOTTOM_SHEET),
+        )
+
+    val SIGN_IN_TO_SUMMARIZE_DISMISS_BUTTON =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TEXT,
+            value = getStringResource(summarizeR.string.mozac_summarize_error_dissmiss),
+            description = "Sign in to summarize bottom sheet Dismiss button",
+            groups = setOf(Group.SIGN_IN_TO_SUMMARIZE_BOTTOM_SHEET),
+        )
+
+    val SIGN_IN_TO_SUMMARIZE_HANDLE =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TAG,
+            value = "shake.to.summarize.bottom.sheet.drag.handle",
+            description = "Sign in to summarize bottom sheet drag handle",
+            groups = setOf(Group.SIGN_IN_TO_SUMMARIZE_BOTTOM_SHEET),
         )
 }

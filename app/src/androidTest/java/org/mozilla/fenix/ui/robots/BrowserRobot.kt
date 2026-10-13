@@ -1544,7 +1544,7 @@ class BrowserRobot(private val composeTestRule: ComposeTestRule) {
                 TAG,
                 "verifyTheSummarizeCFR: Trying to verify the \"Shake your device to summarize this page in seconds\" CFR dismiss button is displayed.",
             )
-            composeTestRule.summarizeCFRButton().assertIsDisplayed()
+            composeTestRule.summarizeCFDismissButton().assertIsDisplayed()
             Log.i(
                 TAG,
                 "verifyTheSummarizeCFR: Verified the \"Shake your device to summarize this page in seconds\" CFR dismiss button is displayed.",
@@ -1568,7 +1568,7 @@ class BrowserRobot(private val composeTestRule: ComposeTestRule) {
         composeTestRule.waitUntilAtLeastOneExists(hasTestTag("cfr.dismiss"), waitingTime)
         Log.i(TAG, "clickTheDismissButtonOnSummarizeCFR: Waited for the summarize CFR dismiss button to exist")
         Log.i(TAG, "clickTheDismissButtonOnSummarizeCFR: Trying to click the \"X\" button on the summarize CFR")
-        composeTestRule.summarizeCFRButton().performClick()
+        composeTestRule.summarizeCFDismissButton().performClick()
         Log.i(TAG, "clickTheDismissButtonOnSummarizeCFR: Clicked the \"X\" button on the summarize CFR")
     }
 
@@ -2121,7 +2121,7 @@ private fun contextMenuOpenInExternalApp() =
 private fun ComposeTestRule.summarizeCFRMessage() =
     onNodeWithText(getStringResource(R.string.browser_toolbar_summarize_cfr_description))
 
-private fun ComposeTestRule.summarizeCFRButton() = onNodeWithTag("cfr.dismiss")
+private fun ComposeTestRule.summarizeCFDismissButton() = onNodeWithTag("cfr.dismiss")
 
 private fun ComposeTestRule.summarizedBottomSheet() = onNodeWithText("Summary by Firefox")
 
