@@ -117,8 +117,6 @@
         <item name="actionPrimaryDisabled">@color/fx_mobile_action_color_primary_disabled</item>
 
         <!-- Text -->
-        <!-- Text Inverted/On Color -->
-        <item name="textOnColorPrimary">@color/fx_mobile_text_color_oncolor_primary</item>
         <!-- Action Primary disabled text -->
         <item name="textActionPrimaryDisabled">@color/fx_mobile_text_color_action_primary_disabled</item>
 
@@ -398,8 +396,6 @@
         <item name="actionPrimaryDisabled">@color/fx_mobile_private_action_color_primary_disabled</item>
 
         <!-- Text -->
-        <!-- Text Inverted/On Color -->
-        <item name="textOnColorPrimary">@color/fx_mobile_private_text_color_oncolor_primary</item>
         <!-- Action Primary disabled text -->
         <item name="textActionPrimaryDisabled">@color/fx_mobile_private_text_color_action_primary_disabled</item>
 
