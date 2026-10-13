@@ -68,8 +68,6 @@
         <attr name="deleteBrowsingDataItemSubtitle" format="reference" />
     </declare-styleable>
 
-    <attr name="selectPromptHeaderTextColor" format="reference"/>
-
     <declare-styleable name="TextPercentageSeekBarPreference">
         <attr format="integer" name="min"/>
         <attr name="android:max"/>

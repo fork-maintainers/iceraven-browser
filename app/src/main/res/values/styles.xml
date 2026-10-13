@@ -146,7 +146,6 @@
         <item name="mozacPromptLoginEditTextCursorColor">@color/prompt_login_edit_text_cursor_color_normal_theme</item>
         <item name="awesomeBarIndicatorColor">@color/search_suggestion_indicator_icon_color_normal_theme</item>
         <item name="awesomeBarIndicatorBookmarkColor">@color/search_suggestion_indicator_icon_bookmark_color_normal_theme</item>
-        <item name="selectPromptHeaderTextColor">@color/fx_mobile_tertiary</item>
 
         <!-- Shared widget colors -->
         <item name="mozac_primary_text_color">@color/fx_mobile_on_surface</item>
@@ -293,7 +292,7 @@
     </style>
 
     <style name="SelectPromptHeaderTextStyle" parent="Header16TextStyle">
-        <item name="android:textColor">?selectPromptHeaderTextColor</item>
+        <item name="android:textColor">?attr/colorTertiary</item>
         <item name="drawableTint">?accentHighContrast</item>
     </style>
 
@@ -430,7 +429,6 @@
         <item name="mozacPromptLoginEditTextCursorColor">@color/prompt_login_edit_text_cursor_color_private_theme</item>
         <item name="awesomeBarIndicatorColor">@color/photonGreen60</item>
         <item name="awesomeBarIndicatorBookmarkColor">@color/photonBlue40</item>
-        <item name="selectPromptHeaderTextColor">@color/accent_high_contrast_private_theme</item>
 
         <!-- Shared widget colors -->
         <item name="mozac_primary_text_color">@color/fx_mobile_private_on_surface</item>
