@@ -146,7 +146,7 @@ abstract class AddonPopupBaseFragment :
                             shouldWidthMatchParent = true,
                             positiveButtonBackgroundColor =
                                 ThemeManager.resolveAttribute(
-                                    R.attr.accent,
+                                    materialR.attr.colorTertiary,
                                     requireContext(),
                                 ),
                             positiveButtonTextColor =

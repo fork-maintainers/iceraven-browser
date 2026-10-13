@@ -747,7 +747,7 @@ abstract class BaseBrowserFragment :
                         shouldWidthMatchParent = true,
                         positiveButtonBackgroundColor =
                             ThemeManager.resolveAttribute(
-                                R.attr.accent,
+                                materialR.attr.colorTertiary,
                                 context,
                             ),
                         positiveButtonTextColor =

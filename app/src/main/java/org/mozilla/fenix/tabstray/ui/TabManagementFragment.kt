@@ -991,7 +991,7 @@ class TabManagementFragment : Fragment() {
                         shouldWidthMatchParent = true,
                         positiveButtonBackgroundColor =
                             ThemeManager.resolveAttribute(
-                                R.attr.accent,
+                                materialR.attr.colorTertiary,
                                 requireContext(),
                             ),
                         positiveButtonTextColor =
