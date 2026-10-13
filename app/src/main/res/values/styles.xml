@@ -141,7 +141,6 @@
         <item name="accent">@color/accent_normal_theme</item>
         <item name="accentBright">@color/photonViolet70</item>
         <item name="accentHighContrast">@color/accent_high_contrast_normal_theme</item>
-        <item name="accentUsedOnDarkBackground">@color/fx_mobile_tertiary</item>
         <item name="addOnPrivateBrowsingExteriorCircleBackground">@color/add_on_private_browsing_exterior_circle_background_normal_theme</item>
         <item name="mozacPromptLoginEditTextCursorColor">@color/prompt_login_edit_text_cursor_color_normal_theme</item>
         <item name="awesomeBarIndicatorColor">@color/search_suggestion_indicator_icon_color_normal_theme</item>
@@ -423,7 +422,6 @@
         <item name="accent">@color/accent_private_theme</item>
         <item name="accentBright">@color/photonViolet70</item>
         <item name="accentHighContrast">@color/accent_high_contrast_private_theme</item>
-        <item name="accentUsedOnDarkBackground">@color/accent_high_contrast_private_theme</item>
         <item name="addOnPrivateBrowsingExteriorCircleBackground">@color/accent_private_theme</item>
         <item name="mozacPromptLoginEditTextCursorColor">@color/prompt_login_edit_text_cursor_color_private_theme</item>
         <item name="awesomeBarIndicatorColor">@color/photonGreen60</item>
@@ -644,7 +642,7 @@
         <item name="android:minHeight">40dp</item>
         <item name="android:layout_marginTop">32dp</item>
         <item name="android:textAlignment">center</item>
-        <item name="android:textColor">?accentUsedOnDarkBackground</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
         <item name="android:textFontWeight" tools:ignore="NewApi">@integer/font_weight_medium</item>
         <item name="android:fontWeight">@integer/font_weight_medium</item>
     </style>

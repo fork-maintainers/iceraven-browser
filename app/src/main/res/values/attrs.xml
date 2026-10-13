@@ -48,7 +48,6 @@
     <attr name="accent" format="reference" />
     <attr name="accentBright" format="reference" />
     <attr name="accentHighContrast" format="reference" />
-    <attr name="accentUsedOnDarkBackground" format="reference" />
 
     <!-- Misc -->
     <attr name="fenixLogo" format="reference" />
