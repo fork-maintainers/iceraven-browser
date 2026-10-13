@@ -238,6 +238,12 @@ class ContextMenusTest {
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/352050
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.ContextMenusTest#verifyContextMenuLinkVariationsTest"],
+        bug = 2080182,
+        since = "2026-10",
+    )
+    @Critical
     @Test
     fun verifyContextMenuLinkVariationsTest() {
         val pageLinks = mockWebServer.getGenericAsset(4)
