@@ -46,7 +46,6 @@
 
     <!-- Color palette attributes -->
     <attr name="accent" format="reference" />
-    <attr name="accentBright" format="reference" />
 
     <!-- Misc -->
     <attr name="fenixLogo" format="reference" />
