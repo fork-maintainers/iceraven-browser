@@ -2521,7 +2521,7 @@
   <!-- Title for Accessibility Text Automatic Size Scaling Preference -->
   <string name="preference_accessibility_auto_size_2">შრიფტის ავტომატური ზომა</string>
   <!-- Summary for Accessibility Text Automatic Size Scaling Preference -->
-  <string name="preference_accessibility_auto_size_summary">შრიფტის ზომის განსაზღვრა Android-პარამეტრებით. გათიშეთ ზომის შესაცვლელად.</string>
+  <string name="preference_accessibility_auto_size_summary">შრიფტის ზომას განსაზღვრავს Android პარამეტრებიდან. გათიშეთ ზომის შესაცვლელად.</string>
   <!-- Title for the Delete browsing data preference -->
   <string name="preferences_delete_browsing_data">დათვალიერების მონაცემების წაშლა</string>
   <!-- Title for the tabs item in Delete browsing data -->
@@ -3214,7 +3214,7 @@
   <!-- The label for the expiration date month of a credit card to be used by a11y services -->
   <string name="credit_cards_expiration_date_month">ვადის გასვლის თვე</string>
   <!-- The label for the expiration date year of a credit card to be used by a11y services -->
-  <string name="credit_cards_expiration_date_year">ვადის გასვლის წელიწადი</string>
+  <string name="credit_cards_expiration_date_year">ვადის გასვლის წელი</string>
   <!-- The header for the name on the credit card -->
   <string name="credit_cards_name_on_card">მფლობელის სახელი</string>
   <!-- The text for the "Delete card" menu item for deleting a credit card -->

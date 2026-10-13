@@ -216,7 +216,7 @@
   <!-- Browser menu button that opens a user's library -->
   <string name="browser_menu_library">کتابخانه</string>
   <!-- Browser menu toggle that requests a desktop site -->
-  <string name="browser_menu_desktop_site">سایت مخصوص رایانه</string>
+  <string name="browser_menu_desktop_site">وبگاه رومیزی</string>
   <!-- Browser menu toggle that adds a shortcut to the site on the device home screen. -->
   <string name="browser_menu_add_to_homescreen">افزودن به صفحهٔ اصلی</string>
   <!-- Browser menu toggle that adds a PWA of the site on the device home screen. -->
@@ -2287,7 +2287,7 @@
   <!-- Category header of a preference that allows a user to alter settings related to web content. -->
   <string name="preferences_category_content">محتوا</string>
   <!-- Preference for altering the default browsing mode. When enabled, the desktop site will always be requested. -->
-  <string name="preference_feature_desktop_mode_default">درخواست همیشگی سایت مخصوص رایانه</string>
+  <string name="preference_feature_desktop_mode_default">همیشه وبگاه به حالت رومیزی درخواست شود</string>
   <!--
     Collections
 
@@ -2382,9 +2382,9 @@
   <!-- Sub-header in the dialog to share a link to an app from the most-recent sorted list -->
   <string name="share_link_recent_apps_subheader">به‌تازگی استفاده‌شده</string>
   <!-- Text for the copy link action in the share screen. -->
-  <string name="share_copy_link_to_clipboard">کپی در کلیپ‌بورد</string>
+  <string name="share_copy_link_to_clipboard">رونوشت در تخته‌گیره</string>
   <!-- Toast shown after copying link to clipboard -->
-  <string name="toast_copy_link_to_clipboard">در کلیپ‌بورد کپی شد</string>
+  <string name="toast_copy_link_to_clipboard">در تخته‌گیره رونوشت شد</string>
   <!-- An option from the share dialog to sign into sync -->
   <string name="sync_sign_in">ورود به همگام‌سازی</string>
   <!-- An option from the share dialog to send link to all other sync devices -->
@@ -2606,7 +2606,7 @@
   <!-- Title of QR Pairing Fragment -->
   <string name="sync_scan_code">اسکن کد</string>
   <!-- Instructions on how to access pairing -->
-  <string name="sign_in_instructions" tools:ignore="BrandUsage"><![CDATA[در رایانهٔ خود Firefox را باز کرده و به <b>https://firefox.com/pair</b> بروید]]></string>
+  <string name="sign_in_instructions" tools:ignore="BrandUsage"><![CDATA[گشودن Firefox روی رایانه‌تان و رفتن به <b>https://firefox.com/pair</b>]]></string>
   <!-- Text shown for sign in pairing when ready -->
   <string name="sign_in_ready_for_scan">آماده برای اسکن</string>
   <!-- Text shown for settings option for sign with pairing -->
@@ -2892,7 +2892,7 @@
   <!-- Paste the text in the clipboard -->
   <string name="browser_toolbar_long_press_popup_paste">جای‌گذاری</string>
   <!-- Snackbar message shown after an URL has been copied to clipboard. -->
-  <string name="browser_toolbar_url_copied_to_clipboard_snackbar">نشانی در کلیپ‌بورد کپی شد</string>
+  <string name="browser_toolbar_url_copied_to_clipboard_snackbar">نشانی در تخته‌گیره رونوشت شد</string>
   <!-- Title text for the Add To Homescreen dialog -->
   <string name="add_to_homescreen_title">افزودن به صفحهٔ اصلی</string>
   <!-- Cancel button text for the Add to Homescreen dialog -->
@@ -2948,15 +2948,15 @@
   <!-- The header for the password for a login -->
   <string name="preferences_passwords_saved_logins_password">گذرواژه</string>
   <!-- Shown in snackbar to tell user that the password has been copied -->
-  <string name="logins_password_copied">گذرواژه در کلیپ‌بورد کپی شد</string>
+  <string name="logins_password_copied">نشانی در تخته‌گیره رونوشت شد</string>
   <!-- Shown in snackbar to tell user that the username has been copied -->
-  <string name="logins_username_copied">نام کاربری در کلیپ‌بورد کپی شد</string>
+  <string name="logins_username_copied">نام‌کاربری در تخته‌گیره رونوشت شد</string>
   <!-- Content Description (for screenreaders etc) read for the button to copy a password in logins -->
-  <string name="saved_logins_copy_password">کپی گذرواژه</string>
+  <string name="saved_logins_copy_password">رونوشت گذرواژه</string>
   <!-- Content Description (for screenreaders etc) read for the button to clear a password while editing a login -->
   <string name="saved_logins_clear_password">پاک کردن گذرواژه</string>
   <!-- Content Description (for screenreaders etc) read for the button to copy a username in logins -->
-  <string name="saved_login_copy_username">کپی نام کاربری</string>
+  <string name="saved_login_copy_username">رونوشت نام کاربری</string>
   <!-- Content Description (for screenreaders etc) read for the button to clear a username while editing a login -->
   <string name="saved_login_clear_username">پاک کردن نام کاربری</string>
   <!-- Content Description (for screenreaders etc) read for the button to clear the hostname field while creating a login -->

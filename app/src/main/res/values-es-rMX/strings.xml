@@ -2524,7 +2524,7 @@
   <!-- Title for the Delete browsing data on quit preference -->
   <string name="preferences_delete_browsing_data_on_quit">Eliminar datos de navegación al salir</string>
   <!-- Summary for the Delete browsing data on quit preference. "Quit" translation should match delete_browsing_data_on_quit_action translation. -->
-  <string name="preference_summary_delete_browsing_data_on_quit_2">Eliminar automáticamente los datos de navegación cuando selecciones \"Salir\" en el menú principal</string>
+  <string name="preference_summary_delete_browsing_data_on_quit_2">Eliminar automáticamente los datos de navegación cuando selecciones “Salir” en el menú principal</string>
   <!-- Title text of a delete browsing data dialog. -->
   <string name="delete_history_prompt_title">Rango de tiempo a eliminar</string>
   <!-- Body text of a delete browsing data dialog. -->
@@ -2653,7 +2653,7 @@
   <!-- Preference for enhanced tracking protection for the custom protection settings -->
   <string name="preference_enhanced_tracking_protection_custom">Personalizado</string>
   <!-- Preference description for enhanced tracking protection for the strict protection settings -->
-  <string name="preference_enhanced_tracking_protection_custom_description_2">Elige qué rastreadores y secuencias de comandos bloquear</string>
+  <string name="preference_enhanced_tracking_protection_custom_description_2">Elige qué rastreadores y secuencias de comandos bloquear.</string>
   <!-- Accessibility text for the Strict protection information icon -->
   <string name="preference_enhanced_tracking_protection_custom_info_button">Esto es lo que está bloqueado por la protección de rastreo estándar</string>
   <!--
@@ -3376,7 +3376,7 @@
   <!-- This is the hint text that is shown inline on the hostname field of the create new login page. 'https://www.example.com' intentionally hardcoded here -->
   <string name="add_login_hostname_hint_text">https://www.example.com</string>
   <!-- This is an error message shown below the hostname field of the add login page when a hostname does not contain http or https. -->
-  <string name="add_login_hostname_invalid_text_3">La dirección web debe contener \"https://\" o \"http://\"</string>
+  <string name="add_login_hostname_invalid_text_3">La dirección web debe contener “https://” o “http://”</string>
   <!-- This is an error message shown below the hostname field of the add login page when a hostname is invalid. -->
   <string name="add_login_hostname_invalid_text_2">Se requiere nombre de servidor válido</string>
   <!--
@@ -3667,7 +3667,7 @@
   -->
   <string name="automatic_translation_toolbar_title_preference">Traducción automática</string>
   <!-- Screen header presenting the automatic translation preference feature. It will appear under the toolbar. -->
-  <string name="automatic_translation_header_preference">Selecciona un idioma para administrar las preferencias de ”siempre traducir“ y ”nunca traducir“.</string>
+  <string name="automatic_translation_header_preference">Selecciona un idioma para administrar las preferencias de “siempre traducir” y “nunca traducir”.</string>
   <!-- The title of the warning card informs the user that the system could not load languages for translation settings. -->
   <string name="automatic_translation_error_warning_text">No se han podido cargar los idiomas. Inténtalo de nuevo más tarde.</string>
   <!--
@@ -3731,7 +3731,7 @@
   -->
   <string name="download_languages_language_item_preference">%1$s (%2$s)</string>
   <!-- The subhead of the download language preference screen will appear above the items that were not downloaded. -->
-  <string name="download_language_header_preference">Descargar Idiomas</string>
+  <string name="download_language_header_preference">Descargar idiomas</string>
   <!-- All languages list item. When the user presses this item, they can download all languages. -->
   <string name="download_language_all_languages_item_preference">Todos los idiomas</string>
   <!-- All languages list item. When the user presses this item, they can delete all languages that were downloaded. -->
@@ -4003,7 +4003,7 @@
   -->
   <string name="micro_survey_survey_header_2">Por favor, completa la encuesta</string>
   <!-- The privacy notice link -->
-  <string name="micro_survey_privacy_notice_2">Aviso de Privacidad</string>
+  <string name="micro_survey_privacy_notice_2">Aviso de privacidad</string>
   <!-- The submit button label text -->
   <string name="micro_survey_submit_button_label">Enviar</string>
   <!-- The survey completion header -->

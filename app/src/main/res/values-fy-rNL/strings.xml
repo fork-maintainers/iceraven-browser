@@ -128,7 +128,7 @@
     Text for the body for the auto-close dialog of the inactive tabs.
     %1$s is the name of the app (for example "Firefox").
   -->
-  <string name="tab_tray_inactive_auto_close_body_2">%1$s kin ljepblêden dy\'t jo de ôfrûne moanne net besjoen hawwe slute.</string>
+  <string name="tab_tray_inactive_auto_close_body_2">%1$s kin ljepblêden dy’t jo de ôfrûne moanne net besjoen hawwe slute.</string>
   <!-- Content description for close button in the auto-close dialog of the inactive tabs. -->
   <string name="tab_tray_inactive_auto_close_button_content_description">Slute</string>
   <!-- Text for turn on auto close tabs button in the auto-close dialog of the inactive tabs. -->
@@ -522,7 +522,7 @@
   <!-- Marketing onboarding page title. 'Firefox' is intentionally hardcoded. -->
   <string name="onboarding_marketing_redesign_title" tools:ignore="BrandUsage">Help ús Firefox groeie te litten</string>
   <!-- Marketing onboarding page opt-out checkbox. Unchecking the box does not increase data collection. Our data practices remain the same. 'Mozilla' is intentionally hardcoded. -->
-  <string name="onboarding_marketing_redesign_opt_out_checkbox" tools:ignore="BrandUsage,UnusedResources">Diel mei Mozilla\'s marketingtechnologypartners hoe’t jo Firefox ûntdutsen hawwe en dat jo it brûke. Dizze gegevens wurde nea ferkocht.</string>
+  <string name="onboarding_marketing_redesign_opt_out_checkbox" tools:ignore="BrandUsage,UnusedResources">Diel mei Mozilla’s marketingtechnologypartners hoe’t jo Firefox ûntdutsen hawwe en dat jo it brûke. Dizze gegevens wurde nea ferkocht.</string>
   <!-- Marketing onboarding page clickable link text to "learn more" on how data is used. -->
   <string name="onboarding_marketing_redesign_learn_more" tools:ignore="UnusedResources">Hoe’t wy gegevens brûke</string>
   <!-- Marketing onboarding page button label. Button to confirm choice and start browsing. -->
@@ -542,7 +542,7 @@
   <!-- Marketing onboarding page title variant. “One last thing” refers to the final step or action in the onboarding process that we’re asking users to take before they can start using the browser. -->
   <string name="onboarding_marketing_title_1" tools:ignore="UnusedResources">Noch ien ding</string>
   <!-- Marketing onboarding page body variant. 'Firefox' is intentionally hardcoded. -->
-  <string name="onboarding_marketing_body_1" tools:ignore="BrandUsage,UnusedResources">Diel mei Mozilla\'s marketingtechnologypartners hoe’t jo Firefox ûntdutsen hawwe en dat jo it brûke. Dizze gegevens wurde nea ferkocht.</string>
+  <string name="onboarding_marketing_body_1" tools:ignore="BrandUsage,UnusedResources">Diel mei Mozilla’s marketingtechnologypartners hoe’t jo Firefox ûntdutsen hawwe en dat jo it brûke. Dizze gegevens wurde nea ferkocht.</string>
   <!-- Marketing onboarding page button label variant. Button to confirm choice and start browsing. -->
   <string name="onboarding_marketing_positive_button_1" tools:ignore="UnusedResources">Akkoard en begjinne mei sneupen</string>
   <!-- "Continue" onboarding button. -->
@@ -614,7 +614,7 @@
   -->
   <string name="nova_onboarding_marketing_body" tools:ignore="BrandUsage,UnusedResources">Diel mei Mozilla’s marketingtechnologypartners hoe’t jo Firefox ûntdutsen hawwe en dat jo it brûke. Dizze gegevens wurde nea ferkocht. %1$s</string>
   <!-- Marketing onboarding body. 'Firefox' and 'Mozilla' are intentionally hardcoded. -->
-  <string name="nova_onboarding_marketing_body_2" tools:ignore="BrandUsage,UnusedResources">Diel mei Mozilla\'s marketingtechnologypartners hoe’t jo Firefox ûntdutsen hawwe en dat jo it brûke. Dizze gegevens wurde nea ferkocht.</string>
+  <string name="nova_onboarding_marketing_body_2" tools:ignore="BrandUsage,UnusedResources">Diel mei Mozilla’s marketingtechnologypartners hoe’t jo Firefox ûntdutsen hawwe en dat jo it brûke. Dizze gegevens wurde nea ferkocht.</string>
   <!-- Marketing onboarding body. 'Firefox' and 'Mozilla' are intentionally hardcoded. -->
   <string name="nova_onboarding_marketing_body_3" tools:ignore="BrandUsage,UnusedResources">Jo kinne ús helpe om mear minsken te berikken troch Mozilla tastimming te jaan om de kanalen wêr’t wy Firefox promoatsje te ynformearjen dat jo in Firefox-brûker binne.</string>
   <!--
@@ -1249,7 +1249,7 @@
     Preference description for marketing data collection.
     Note: The words "Firefox" and "Mozilla" should NOT be translated. “That you use it” is to mean that the user is opting in to sharing that they are continuing to use Firefox after installing it; not that Firefox is tracking their “usage” or what they’re using it for.
   -->
-  <string name="preferences_marketing_data_description_4" tools:ignore="BrandUsage">Diel mei Mozilla\'s marketingtechnologypartners hoe’t jo Firefox ûntdutsen hawwe en dat jo it brûke.</string>
+  <string name="preferences_marketing_data_description_4" tools:ignore="BrandUsage">Diel mei Mozilla’s marketingtechnologypartners hoe’t jo Firefox ûntdutsen hawwe en dat jo it brûke.</string>
   <!-- Learn more link for marketing data preference -->
   <string name="preferences_marketing_data_learn_more">Mear ynfo oer marketinggegevens</string>
   <!-- Title for studies preferences -->
@@ -1365,6 +1365,8 @@
   <string name="library_desktop_bookmarks_unfiled">Oare blêdwizers</string>
   <!-- Option in Library to open History page -->
   <string name="library_history">Skiednis</string>
+  <!-- Content description (not visible, for screen readers etc.) for the check mark that replaces a site's icon in History and Recently closed tabs when the item is selected -->
+  <string name="library_item_selected_content_description">Selektearre</string>
   <!-- Settings Page Title -->
   <string name="settings_title">Ynstellingen</string>
   <!-- Content description (not visible, for screen readers etc.): "Close button for library settings" -->
@@ -1946,7 +1948,7 @@
   <!-- Text for the filter button to show only images in the downloads list -->
   <string name="download_content_type_filter_image">Ofbyldingen</string>
   <!-- Text for the filter button to show only video files in the downloads list -->
-  <string name="download_content_type_filter_video">Fideo\'s</string>
+  <string name="download_content_type_filter_video">Fideo’s</string>
   <!-- Text for the filter button to show only documents in the downloads list -->
   <string name="download_content_type_filter_document">Dokuminten</string>
   <!-- Text for the filter button to show all other file types in the downloads list -->
@@ -2425,6 +2427,8 @@
   <string name="sync_send_tab_empty_state_title">Gjin apparaten ferbûn</string>
   <!-- Send tab to synced devices: Empty state message - Displayed when the user has no synced devices -->
   <string name="sync_send_tab_empty_state_description" tools:ignore="BrandUsage">Meld jo oan by Firefox op op syn minst ien oar apparaat om in ljepblêd te ferstjoeren.</string>
+  <!-- Send tab to synced devices: Empty state link - Displayed when the user has no synced devices -->
+  <string name="sync_send_tab_empty_state_link">Untdek hoe’t jo in apparaat keppelje</string>
   <!-- Send tab to synced devices: Connectivity Error title -->
   <string name="sync_send_tab_error_connection_title">Kontrolearje jo ynternetferbining</string>
   <!-- Send tab to synced devices: Connectivity Error message - Suggested user action after internet connection has been established -->
@@ -2737,7 +2741,7 @@
   <!-- Description of cryptominers that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_cryptominers_description">Foarkomt dat kwea-aardige skripts tagong krije ta jo apparaat om digitale faluta te minen.</string>
   <!-- Description of fingerprinters that can be blocked by Enhanced Tracking Protection -->
-  <string name="etp_known_fingerprinters_description">Foarkomt dat unyk identifisearbere gegevens oer jo apparaat sammele wurde dy\'t brûkt wurde kinne foar folchdoeleinen.</string>
+  <string name="etp_known_fingerprinters_description">Foarkomt dat unyk identifisearbere gegevens oer jo apparaat sammele wurde dy’t brûkt wurde kinne foar folchdoeleinen.</string>
   <!-- Category of trackers (tracking content) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_tracking_content_title">Folchynhâld</string>
   <!-- Description of tracking content that can be blocked by Enhanced Tracking Protection -->
@@ -3960,7 +3964,7 @@
     Text for the connection security panel to indicate who the certificate was verified by.
     %s is a placeholder for the name of the certificate authority that issued the certificate.
   -->
-  <string name="connection_security_panel_verified_by">Ferifiearre troch: %s</string>
+  <string name="connection_security_panel_verified_by">Ferifiearre troch %s</string>
   <!-- Content description (not visible, for screen readers etc.) for the handle used to drag the protections dashboard to the bottom of the screen and close it. -->
   <string name="tracker_protections_dashboard_close_handlebar_content_description">Dashboerd slute</string>
   <!--
@@ -4099,7 +4103,7 @@
   <!-- Uninstall survey answer option -->
   <string name="uninstall_survey_option_3_v2">Untbrekkende funksjes dy’t ik nedich haw</string>
   <!-- Uninstall survey answer option -->
-  <string name="uninstall_survey_option_4_v2">Fideo\'s, downloads of media wurken net</string>
+  <string name="uninstall_survey_option_4_v2">Fideo’s, downloads of media wurken net</string>
   <!-- Uninstall survey answer option -->
   <string name="uninstall_survey_option_5_v2">Swier te brûken of min ûntwurpen</string>
   <!-- Uninstall survey answer option -->
@@ -4506,6 +4510,16 @@
   <string name="lens_camera_mode_qr">QR-scanner</string>
   <!-- Toast shown when the user picks an image from the gallery in QR mode but no QR code is found in it -->
   <string name="lens_camera_qr_no_code_found">Gjin QR-koade fûn yn ôfbylding</string>
+  <!-- Status shown under an image picked from the gallery while it is being sent to Google Lens for a visual search -->
+  <string name="lens_camera_loading_status">Dit opsykje</string>
+  <!-- Button shown under an image picked from the gallery while it is being sent to Google Lens. Tapping it stops the search and returns to the camera. -->
+  <string name="lens_camera_loading_cancel_button">Annulearje</string>
+  <!-- Snackbar message shown when an image picked from the gallery could not be opened or read, so it was never sent to Google Lens. Shown after returning to the camera. -->
+  <string name="lens_camera_image_load_failed">Kin dizze ôfbylding net lade. Probearje in oare.</string>
+  <!-- Snackbar message shown when an image picked from the gallery could not be searched because of a network problem or an error from Google Lens. Shown after returning to the camera, next to the lens_camera_upload_failed_retry_button action. -->
+  <string name="lens_camera_upload_failed">Kin gjin resultaten ophelje fan Google Lens</string>
+  <!-- Action in the snackbar shown when an image picked from the gallery could not be searched with Google Lens. Tapping it searches the same image again. -->
+  <string name="lens_camera_upload_failed_retry_button">Opnij probearje</string>
   <!-- Title of the bottom sheet shown the first time the user opens the Google Lens camera screen -->
   <string name="lens_opt_out_title">Fyn it mei Google Lens</string>
   <!-- Description of the bottom sheet shown the first time the user opens the Google Lens camera screen -->

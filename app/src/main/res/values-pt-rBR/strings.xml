@@ -1365,6 +1365,8 @@
   <string name="library_desktop_bookmarks_unfiled">Outros favoritos</string>
   <!-- Option in Library to open History page -->
   <string name="library_history">Histórico</string>
+  <!-- Content description (not visible, for screen readers etc.) for the check mark that replaces a site's icon in History and Recently closed tabs when the item is selected -->
+  <string name="library_item_selected_content_description">Selecionado</string>
   <!-- Settings Page Title -->
   <string name="settings_title">Configurações</string>
   <!-- Content description (not visible, for screen readers etc.): "Close button for library settings" -->
@@ -1506,7 +1508,7 @@
   -->
   <string name="remote_improvements_title">Permitir melhorias remotas</string>
   <!-- Description for remote improvements. Note: The word "Firefox" should NOT be translated -->
-  <string name="remote_improvements_description" tools:ignore="BrandUsage">O Firefox \u0020melhora funcionalidades, desempenho e estabilidade a cada atualização. Alterações são aplicadas remotamente.</string>
+  <string name="remote_improvements_description" tools:ignore="BrandUsage">O Firefox melhora funcionalidades, desempenho e estabilidade a cada atualização. Alterações são aplicadas remotamente.</string>
   <!-- Learn more link for remote improvements, links to an article for more information about rollouts. -->
   <string name="remote_improvements_learn_more">Saiba mais</string>
   <!-- Title for remote improvements preference in Advanced settings -->
@@ -2016,7 +2018,7 @@
   <!-- Broken site reason text for site is slow -->
   <string name="webcompat_reporter_reason_slow2">O site está lento</string>
   <!-- Broken site reason text for video isn’t playing or loading -->
-  <string name="webcompat_reporter_reason_media2">O vídeo não está sendo carregado ou \u0020reproduzido</string>
+  <string name="webcompat_reporter_reason_media2">O vídeo não está sendo carregado ou reproduzido</string>
   <!-- Broken site reason text for missing content -->
   <string name="webcompat_reporter_reason_content2">Falta conteúdo</string>
   <!-- Broken site reason text for can’t sign in or register -->
@@ -2554,7 +2556,7 @@
   <!-- Title for the Delete browsing data on quit preference -->
   <string name="preferences_delete_browsing_data_on_quit">Limpar dados de navegação ao sair</string>
   <!-- Summary for the Delete browsing data on quit preference. "Quit" translation should match delete_browsing_data_on_quit_action translation. -->
-  <string name="preference_summary_delete_browsing_data_on_quit_2">Excluir automaticamente os dados de navegação selecionados abaixo ao tocar em \"Sair\" no menu principal</string>
+  <string name="preference_summary_delete_browsing_data_on_quit_2">Excluir automaticamente os dados de navegação selecionados abaixo ao tocar em “Sair” no menu principal</string>
   <!-- Title text of a delete browsing data dialog. -->
   <string name="delete_history_prompt_title">Intervalo de tempo a excluir</string>
   <!-- Body text of a delete browsing data dialog. -->
@@ -3412,7 +3414,7 @@
   <!-- This is the hint text that is shown inline on the hostname field of the create new login page. 'https://www.example.com' intentionally hardcoded here -->
   <string name="add_login_hostname_hint_text">https://www.example.com</string>
   <!-- This is an error message shown below the hostname field of the add login page when a hostname does not contain http or https. -->
-  <string name="add_login_hostname_invalid_text_3">O endereço web deve conter \"https://\" ou \"http://\"</string>
+  <string name="add_login_hostname_invalid_text_3">O endereço web deve conter “https://” ou “http://”</string>
   <!-- This is an error message shown below the hostname field of the add login page when a hostname is invalid. -->
   <string name="add_login_hostname_invalid_text_2">Nome de servidor válido é obrigatório</string>
   <!--
@@ -3957,7 +3959,7 @@
   <!-- Text for the connection security panel when the site is not secure. -->
   <string name="connection_security_panel_not_secure">Conexão não segura</string>
   <!-- Text for the connection security panel when accessed from local PDF. -->
-  <string name="connection_security_panel_local_pdf">Esta página está armazenada em seu dispositivo.</string>
+  <string name="connection_security_panel_local_pdf">Esta página está armazenada em seu dispositivo</string>
   <!--
     Text for the connection security panel to indicate who the certificate was verified by.
     %s is a placeholder for the name of the certificate authority that issued the certificate.

@@ -3414,7 +3414,7 @@
   <!-- This is the hint text that is shown inline on the hostname field of the create new login page. 'https://www.example.com' intentionally hardcoded here -->
   <string name="add_login_hostname_hint_text">https://www.example.com</string>
   <!-- This is an error message shown below the hostname field of the add login page when a hostname does not contain http or https. -->
-  <string name="add_login_hostname_invalid_text_3">L’adresse web doit contenir «\u00a0https://\u00a0» ou «\u00a0http://\u00a0».</string>
+  <string name="add_login_hostname_invalid_text_3">L’adresse web doit contenir «\u00a0https://\u00a0» ou «\u00a0http://\u00a0»</string>
   <!-- This is an error message shown below the hostname field of the add login page when a hostname is invalid. -->
   <string name="add_login_hostname_invalid_text_2">Un nom d’hôte valide est requis</string>
   <!--
@@ -4567,7 +4567,7 @@
   <!-- The description text that is displayed in the confirmation dialog on the Firefox Labs screen for toggling "off" experimental features. %s is the name of the app (for example "Firefox Nightly") -->
   <string name="firefox_labs_feature_disable_dialog_message">Pour désactiver cette fonctionnalité, redémarrez %s.</string>
   <!-- Helper text shown beneath a Firefox Labs item when it is blocked from being turned on. -->
-  <string name="firefox_labs_feature_conflict">Cette fonctionnalité n’est pas disponible à l‘essai.</string>
+  <string name="firefox_labs_feature_conflict">Cette fonctionnalité n’est pas disponible à l’essai.</string>
   <!-- Text displayed on the Firefox Labs screen when there are no Labs experimental features present. -->
   <string name="firefox_labs_no_labs_available_description">Aucune fonctionnalité expérimentale à essayer pour l’instant</string>
   <!-- Title of the Firefox Labs Sandboxing experiment. -->

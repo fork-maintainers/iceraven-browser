@@ -3467,7 +3467,7 @@
   <!-- Label for the "Add website" button in the "Add to homepage" bottom sheet. -->
   <string name="homepage_shortcuts_add_website">Bæta við vefsvæði</string>
   <!-- Title text for the "Enter a Website URL" dialog for adding a shortcut. -->
-  <string name="homepage_shortcuts_add_website_title">Sláðu inn slóð á vef</string>
+  <string name="homepage_shortcuts_add_website_title">Settu inn slóð á vef</string>
   <!-- Title for the "Popular sites" section in the "Add to homepage" bottom sheet. -->
   <string name="homepage_shortcuts_popular_sites">Vinsæl vefsvæði</string>
   <!-- Title text displayed in the dialog when shortcuts limit is reached. -->
@@ -3499,7 +3499,7 @@
   <!-- Button caption to confirm the edit of the top site. -->
   <string name="top_sites_edit_dialog_save">Vista</string>
   <!-- Error message when the user entered an invalid URL -->
-  <string name="top_sites_edit_dialog_url_error">Sláðu inn gilda vefslóð</string>
+  <string name="top_sites_edit_dialog_url_error">Settu inn gilda vefslóð</string>
   <!-- Label for the URL edit field in the edit top site dialog. -->
   <string name="top_sites_edit_dialog_url_title">Vefslóð</string>
   <!--
