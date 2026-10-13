@@ -293,7 +293,6 @@
 
     <style name="SelectPromptHeaderTextStyle" parent="Header16TextStyle">
         <item name="android:textColor">?attr/colorTertiary</item>
-        <item name="drawableTint">?accentHighContrast</item>
     </style>
 
 
