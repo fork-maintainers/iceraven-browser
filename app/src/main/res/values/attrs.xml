@@ -18,10 +18,6 @@
     <!-- Action Primary disabled text -->
     <attr name="textActionPrimaryDisabled" format="reference" />
 
-    <!-- Icon -->
-    <!-- Icon inverted (on color) -->
-    <attr name="iconOnColor" format="reference" />
-
     <!-- Material3 extended palettes -->
     <attr name="colorInformation" format="reference" />
     <attr name="colorOnInformation" format="reference" />

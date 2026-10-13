@@ -160,10 +160,6 @@
     <!-- Action Primary disabled text -->
     <color name="fx_mobile_private_text_color_action_primary_disabled">@color/photonLightGrey05A40</color>
 
-    <!-- Icon -->
-    <!-- Icon inverted (on color) -->
-    <color name="fx_mobile_private_icon_color_oncolor">@color/photonLightGrey05</color>
-
     <!-- OLED theme color variables -->
     <!-- The OLED theme inherits from the dark theme and only the tokens that differ are listed. -->
 
