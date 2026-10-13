@@ -28,6 +28,27 @@ object TranslationsSelectors : SelectorContainer {
             description = "the Translation settings button on the options sheet",
         )
 
+    val TRANSLATION_SHEET_BACK_BUTTON =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_CONTENT_DESCRIPTION,
+            value = "Navigate back",
+            description = "the Translation sheet back button",
+        )
+
+    val TRANSLATION_SHEET_HANDLE =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_CONTENT_DESCRIPTION,
+            value = getStringResource(R.string.translation_option_bottom_sheet_close_content_description),
+            description = "the Translation sheet handle",
+        )
+
+    val TRANSLATION_IN_PROGRESS_SNACK_BAR =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TEXT,
+            value = getStringResource(R.string.translation_in_progress_snackbar),
+            description = "the Translation in progress snackbar",
+        )
+
     /**
      * The "Never translate <language>" row on the options sheet. Uses the parameterized resource rather than the legacy
      * test's hand-concatenated "Never translate " + language literal.
@@ -45,6 +66,14 @@ object TranslationsSelectors : SelectorContainer {
             strategy = SelectorStrategy.COMPOSE_BY_TEXT_MERGED,
             value = getStringResource(R.string.translation_option_bottom_sheet_never_translate_in_language, language),
             description = "the Never translate $language row",
+        )
+
+    @Suppress("ktlint:standard:function-naming", "FunctionName")
+    fun ALWAYS_TRANSLATE_LANGUAGE(language: String = "") =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TEXT_MERGED,
+            value = getStringResource(R.string.translation_option_bottom_sheet_always_translate_in_language, language),
+            description = "the Always translate $language row",
         )
 
     val NEVER_TRANSLATE_DESCRIPTION =

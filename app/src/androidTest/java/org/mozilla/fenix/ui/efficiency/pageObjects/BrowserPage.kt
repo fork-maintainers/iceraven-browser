@@ -178,13 +178,18 @@ class BrowserPage(composeRule: AndroidComposeTestRule<HomeActivityIntentTestRule
         return this
     }
 
-    fun verifyTranslationSheetIsDisplayed(): BrowserPage {
+    fun verifyTranslationSheetIsDisplayed(isDisplayed: Boolean = true): BrowserPage {
         // The "translate from/to" dropdowns render a beat after the sheet frame, title and
         // buttons because they depend on the async page-settings fetch. mozVerifyElementsByGroup
         // is a single-shot check, so firing it the instant the sheet animates in can miss the
         // dropdowns and fail spuriously. Gate on the last-rendered dropdown before the group check.
-        mozVerify(BrowserPageSelectors.TRANSLATION_SHEET_TRANSLATE_TO, timeout = waitingTimeLong)
-        mozVerifyElementsByGroup(BrowserPageSelectors.Group.NOT_TRANSLATED_PAGE_TRANSLATION_SHEET)
+        if (isDisplayed) {
+            mozVerify(BrowserPageSelectors.TRANSLATION_SHEET_TRANSLATE_TO, timeout = waitingTimeLong)
+            mozVerifyElementsByGroup(BrowserPageSelectors.Group.NOT_TRANSLATED_PAGE_TRANSLATION_SHEET)
+        } else {
+            mozWaitUntilAbsent(BrowserPageSelectors.TRANSLATION_SHEET_TRANSLATE_TO, timeout = waitingTimeLong)
+            mozVerifyElementsByGroupAbsent(BrowserPageSelectors.Group.NOT_TRANSLATED_PAGE_TRANSLATION_SHEET)
+        }
         return this
     }
 

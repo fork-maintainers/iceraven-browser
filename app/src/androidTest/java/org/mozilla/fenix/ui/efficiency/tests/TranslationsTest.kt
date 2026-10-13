@@ -177,4 +177,39 @@ class TranslationsTest : BaseTest(LaunchConfig(isPageLoadTranslationsPromptEnabl
         // The mock page is fr-FR, so the engine reports French as the detected source language.
         const val LANGUAGE_TO_NEVER_TRANSLATE = "French"
     }
+
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3105343
+    @Critical
+    @Test
+    fun verifyTranslationBottomSheetNotDisplayedWhenPageIsOnAlwaysListTest() {
+        val testPage = mockWebServer.firstForeignWebPageAsset
+
+        on.browserPage
+            .navigateToPage(testPage.url.toString())
+            .verifyTranslationSheetWithReload(testPage.url.toString())
+            .mozClick(TranslationsSelectors.TRANSLATIONS_OPTIONS_BUTTON)
+            .mozClick(TranslationsSelectors.ALWAYS_TRANSLATE_LANGUAGE("French"))
+            .mozClick(TranslationsSelectors.TRANSLATION_SHEET_BACK_BUTTON)
+            .mozSwipeElementUntilAbsent(
+                TranslationsSelectors.TRANSLATION_SHEET_HANDLE,
+                SwipeDirection.DOWN,
+                maxSwipes = 3,
+            )
+            .mozWaitUntilAbsent(
+                TranslationsSelectors.TRANSLATION_IN_PROGRESS_SNACK_BAR,
+                TestAssetHelper.waitingTimeLong,
+            )
+        on.browserPage.verifyPageContent("Article of the day")
+        on.tabDrawer.navigateToPage().closeAllTabs()
+        on.home.navigateToPage()
+        on.browserPage
+            .navigateToPage(testPage.url.toString())
+            .verifyPageContent("Article of the day")
+            .verifyTranslationSheetIsDisplayed(isDisplayed = false)
+        on.mainMenu
+            .navigateToPage()
+            .mozClick(MainMenuSelectors.MORE_BUTTON)
+            .mozClick(MainMenuSelectors.TRANSLATE_BUTTON)
+        on.browserPage.verifyTranslationSheetWithReload(testPage.url.toString())
+    }
 }
