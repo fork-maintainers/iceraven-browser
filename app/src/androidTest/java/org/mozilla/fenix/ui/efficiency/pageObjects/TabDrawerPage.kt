@@ -128,6 +128,17 @@ class TabDrawerPage(composeRule: AndroidComposeTestRule<HomeActivityIntentTestRu
         return this
     }
 
+    /**
+     * Tap the footer pill to open the protections dashboard (driven via a locally-instantiated
+     * ProtectionsDashboardPage).
+     */
+    fun openTrackersBlockedDashboard(): TabDrawerPage {
+        // Footer in the lazy tabs list, so wait for it to compose before tapping (mozClick does not poll).
+        mozVerify(TabDrawerSelectors.TRACKERS_BLOCKED_DASHBOARD_PILL)
+        mozClick(TabDrawerSelectors.TRACKERS_BLOCKED_DASHBOARD_PILL)
+        return this
+    }
+
     fun typeInTabSearch(query: String): TabDrawerPage {
         mozEnterText(query, TabDrawerSelectors.TAB_SEARCH_FIELD)
         return this

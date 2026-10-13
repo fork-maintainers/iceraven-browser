@@ -12,6 +12,7 @@ import org.mozilla.fenix.helpers.DataGenerationHelper.getStringResource
 import org.mozilla.fenix.tabstray.TabsTrayTestTag
 import org.mozilla.fenix.tabstray.TabsTrayTestTag.CLOSE_TAB_GROUP
 import org.mozilla.fenix.tabstray.TabsTrayTestTag.GROUP_NAME
+import org.mozilla.fenix.trackingprotection.PROTECTION_STATUS_PILL_TEST_TAG
 import org.mozilla.fenix.ui.efficiency.helpers.PageReadinessProfiles
 import org.mozilla.fenix.ui.efficiency.helpers.Selector
 import org.mozilla.fenix.ui.efficiency.helpers.SelectorContainer
@@ -447,6 +448,14 @@ object TabDrawerSelectors : SelectorContainer {
             strategy = SelectorStrategy.COMPOSE_BY_TAG,
             value = TabsTrayTestTag.TAB_SEARCH_ICON,
             description = "Open tab search button",
+        )
+
+    // Tab-manager footer "widget" (TrackersBlockedCard pill); tapping it opens the protections dashboard.
+    val TRACKERS_BLOCKED_DASHBOARD_PILL =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TAG,
+            value = PROTECTION_STATUS_PILL_TEST_TAG,
+            description = "Trackers blocked dashboard pill (tab manager footer widget)",
         )
 
     // The tab search input is a Material3 SearchBar InputField, which exposes no testTag; its default
