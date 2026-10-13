@@ -4,6 +4,6 @@
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 
 <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="oval">
-    <solid android:color="@color/bookmark_favicon_background" />
+    <solid android:color="@android:color/white" />
     <size android:width="40dp" android:height="40dp"/>
 </shape>

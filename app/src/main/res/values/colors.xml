@@ -235,9 +235,6 @@
     <color name="homepage_tab_edge_to_edge_toolbar_outline">#00000000</color>
     <color name="homepage_tab_edge_to_edge_private_toolbar_outline">#564A75</color>
 
-    <!-- Bookmark buttons -->
-    <color name="bookmark_favicon_background">#DFDFE3</color>
-
     <!-- Toggle Colors -->
     <color name="toggle_off_knob_dark_theme">@color/photonLightGrey05</color>
     <color name="toggle_off_track_dark_theme">@color/photonLightGrey05</color>
