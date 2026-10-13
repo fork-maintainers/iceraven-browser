@@ -934,6 +934,84 @@ internal class InstallReferrerHandlingServiceTest {
         }
 
     @Test
+    fun `WHEN installReferrerResponse is null or blank THEN isQuoraAttribution returns false`() {
+        assertFalse(InstallReferrerHandlingService.isQuoraAttribution(null))
+        assertFalse(InstallReferrerHandlingService.isQuoraAttribution(""))
+        assertFalse(InstallReferrerHandlingService.isQuoraAttribution(" "))
+    }
+
+    @Test
+    fun `WHEN installReferrerResponse has utm_source quora THEN isQuoraAttribution returns true`() {
+        assertTrue(InstallReferrerHandlingService.isQuoraAttribution("utm_source=quora&utm_medium=paid"))
+    }
+
+    @Test
+    fun `WHEN installReferrerResponse has a mixed-case utm_source quora THEN isQuoraAttribution returns true`() {
+        assertTrue(InstallReferrerHandlingService.isQuoraAttribution("utm_source=Quora&utm_medium=paid"))
+        assertTrue(InstallReferrerHandlingService.isQuoraAttribution("utm_source%3DQUORA&utm_medium=paid"))
+    }
+
+    @Test
+    fun `WHEN installReferrerResponse has a malformed percent escape THEN isQuoraAttribution falls back to raw parsing`() {
+        assertTrue(InstallReferrerHandlingService.isQuoraAttribution("utm_source=quora&malformed=%"))
+    }
+
+    @Test
+    fun `WHEN installReferrerResponse has a non-Quora utm_source THEN isQuoraAttribution returns false`() {
+        assertFalse(InstallReferrerHandlingService.isQuoraAttribution("utm_source=google&utm_medium=cpc"))
+    }
+
+    @Test
+    fun `WHEN installReferrerResponse has a utm_source that merely starts with quora THEN isQuoraAttribution returns false`() {
+        assertFalse(InstallReferrerHandlingService.isQuoraAttribution("utm_source=quorable&utm_medium=cpc"))
+    }
+
+    @Test
+    fun `WHEN installReferrerResponse has no utm_source THEN isQuoraAttribution returns false`() {
+        assertFalse(InstallReferrerHandlingService.isQuoraAttribution("adjust_external_click_id=reddit_abc"))
+    }
+
+    @Test
+    fun `GIVEN a Quora-attributed referrer on OK response WHEN start is called THEN isUserQuoraAttributed is true`() =
+        runTest {
+            val referrer = "utm_source=quora&utm_medium=paid"
+            val service =
+                fakeService(
+                    responseCode = InstallReferrerClient.InstallReferrerResponse.OK,
+                    referrerResponse = referrer,
+                    scope = this,
+                )
+
+            service.start()
+            advanceUntilIdle()
+
+            assertTrue(testContext.components.settings.isUserQuoraAttributed)
+        }
+
+    @Test
+    fun `GIVEN a non-Quora referrer on OK response WHEN start is called THEN isUserQuoraAttributed is false`() =
+        runTest {
+            testContext.components.settings.isUserQuoraAttributed = true
+            val service =
+                fakeService(
+                    responseCode = InstallReferrerClient.InstallReferrerResponse.OK,
+                    referrerResponse = "utm_source=google&utm_medium=cpc",
+                    scope = this,
+                )
+
+            service.start()
+            advanceUntilIdle()
+
+            assertFalse(testContext.components.settings.isUserQuoraAttributed)
+        }
+
+    @Test
+    fun `WHEN installReferrerResponse is a Quora attribution THEN we should show marketing onboarding`() = runBlocking {
+        val quoraReferrer = "utm_source=quora&utm_medium=paid"
+        assertTrue(InstallReferrerHandlingService.shouldShowMarketingOnboarding(quoraReferrer, distributionIdManager))
+    }
+
+    @Test
     fun `WHEN installReferrerResponse is null or blank THEN isPairingCampaignAttribution returns false`() {
         assertFalse(InstallReferrerHandlingService.isPairingCampaignAttribution(null, "pairing123"))
         assertFalse(InstallReferrerHandlingService.isPairingCampaignAttribution("", "pairing123"))

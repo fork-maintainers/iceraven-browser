@@ -114,6 +114,8 @@ class InstallReferrerWorker(
             settings.isUserSkyflagAttributed =
                 InstallReferrerHandlingService.isSkyflagAttribution(installReferrerResponse)
 
+            settings.isUserQuoraAttributed = InstallReferrerHandlingService.isQuoraAttribution(installReferrerResponse)
+
             utmParams.recordInstallReferrer(settings)
         }
 

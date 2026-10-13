@@ -657,6 +657,43 @@ class InstallReferrerWorkerTest {
     }
 
     @Test
+    fun `WHEN handleSuccess receives a Quora-attributed referrer THEN isUserQuoraAttributed is set to true`() {
+        val worker = TestListenableWorkerBuilder<InstallReferrerWorker>(context).build()
+        val settings = Settings(context)
+        val referrer = "utm_source=quora&utm_medium=paid"
+
+        worker.handleSuccess(referrer, InstallReferrerClient.InstallReferrerResponse.OK, settings)
+
+        assertTrue(settings.isUserQuoraAttributed)
+    }
+
+    @Test
+    fun `WHEN handleSuccess receives a non-Quora referrer THEN isUserQuoraAttributed is set to false`() {
+        val worker = TestListenableWorkerBuilder<InstallReferrerWorker>(context).build()
+        val settings = Settings(context)
+        settings.isUserQuoraAttributed = true
+
+        worker.handleSuccess(
+            "utm_source=google&utm_medium=cpc",
+            InstallReferrerClient.InstallReferrerResponse.OK,
+            settings,
+        )
+
+        assertFalse(settings.isUserQuoraAttributed)
+    }
+
+    @Test
+    fun `WHEN handleSuccess receives a null referrer THEN isUserQuoraAttributed is not changed`() {
+        val worker = TestListenableWorkerBuilder<InstallReferrerWorker>(context).build()
+        val settings = Settings(context)
+        settings.isUserQuoraAttributed = true
+
+        worker.handleSuccess(null, InstallReferrerClient.InstallReferrerResponse.OK, settings)
+
+        assertTrue(settings.isUserQuoraAttributed)
+    }
+
+    @Test
     fun `GIVEN a referral referrer WHEN handleSuccess runs THEN the referrals ping is submitted with the code`() {
         val worker = TestListenableWorkerBuilder<InstallReferrerWorker>(context).build()
         val settings = Settings(context)

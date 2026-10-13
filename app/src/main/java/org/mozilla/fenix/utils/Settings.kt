@@ -528,6 +528,12 @@ class Settings(
             default = false,
         )
 
+    var isUserQuoraAttributed by
+        booleanPreference(
+            appContext.getPreferenceKey(R.string.pref_key_is_user_quora_attributed),
+            default = false,
+        )
+
     var isUserPairingCampaignAttributed by
         booleanPreference(
             appContext.getPreferenceKey(R.string.pref_key_is_user_pairing_campaign_attributed),
