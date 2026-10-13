@@ -20,6 +20,10 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -182,6 +186,8 @@ class MenuFragment : BottomSheetDialogFragment() {
         FirefoxTheme {
             BackHandler { dismissAllowingStateLoss() }
 
+            var isHeaderDark by remember { mutableStateOf(false) }
+
             MenuDialogBottomSheet(
                 modifier =
                     Modifier.padding(vertical = FirefoxTheme.layout.space.static200)
@@ -190,7 +196,8 @@ class MenuFragment : BottomSheetDialogFragment() {
                 menuHandleState =
                     MenuHandleState(
                         contentDescription =
-                            stringResource(R.string.browser_close_main_menu_handlebar_content_description)
+                            stringResource(R.string.browser_close_main_menu_handlebar_content_description),
+                        useDarkBackground = isHeaderDark,
                     ),
                 snackbarHostState = snackbarHostState,
                 cornerShape =
@@ -199,7 +206,10 @@ class MenuFragment : BottomSheetDialogFragment() {
                         bottomEnd = CornerSize(0.dp),
                     ),
             ) {
-                Menu(menuStore)
+                Menu(
+                    store = menuStore,
+                    onHeaderDarkBackgroundChanged = { isHeaderDark = it },
+                )
             }
         }
     }
