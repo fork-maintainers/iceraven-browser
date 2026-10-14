@@ -1783,7 +1783,7 @@
   <!-- Title for the dialog that prompts the user to choose an app for downloading a file. -->
   <string name="download_app_dialog_title">Stáhnout soubor pomocí:</string>
   <!-- Text for the snackbar to confirm that a single download item has been removed. %1$s is the name of the download item. -->
-  <string name="download_delete_single_item_snackbar_2">Smazáno “%1$s”</string>
+  <string name="download_delete_single_item_snackbar_2">Smazáno „%1$s“</string>
   <!-- Text for the snackbar to confirm that downloads are in progress. -->
   <string name="download_in_progress_snackbar">Probíhá stahování…</string>
   <!-- Text for the snackbar action button to view in progress download details. -->
@@ -2089,7 +2089,7 @@
   <!-- Screen title for adding a bookmarks folder -->
   <string name="bookmark_add_folder">Přidat složku</string>
   <!-- Snackbar title that confirms a bookmark was saved into a folder. %s is the name of the folder the bookmark was saved into. -->
-  <string name="bookmark_saved_in_folder_snackbar">Uloženo do “%s”</string>
+  <string name="bookmark_saved_in_folder_snackbar">Uloženo do „%s“</string>
   <!-- Snackbar title describing failure to add a new folder -->
   <string name="bookmark_error_add_folder">Nelze přidat složku</string>
   <!-- Snackbar title describing failure to edit an existing folder -->
@@ -2502,7 +2502,7 @@
   <!-- Text shown in snackbar when user closes multiple inactive tabs. %1$s will be replaced with the number of tabs closed. -->
   <string name="snackbar_num_tabs_closed">Zavřené panely: %1$s</string>
   <!-- Text shown in snackbar when user bookmarks a list of tabs. %s is the name of the folder the bookmark was saved into. -->
-  <string name="snackbar_message_bookmarks_saved_in_2">Záložky uloženy do složky “%s”</string>
+  <string name="snackbar_message_bookmarks_saved_in_2">Záložky uloženy do složky „%s“</string>
   <!-- Text shown in snackbar when user adds a site to shortcuts -->
   <string name="snackbar_added_to_shortcuts">Přidáno do zkratek</string>
   <!-- Text shown in snackbar when user closes a private tab -->
@@ -2590,7 +2590,7 @@
   <!-- Text for the snackbar to show the user that the deletion of browsing data is in progress -->
   <string name="deleting_browsing_data_in_progress">Mazání soukromých dat…</string>
   <!-- Dialog message to the user asking to delete all history items inside the opened group. %s is a history group name. -->
-  <string name="delete_all_history_group_prompt_message">Smazat všechny stránky v %s</string>
+  <string name="delete_all_history_group_prompt_message">Smazat všechny stránky v „%s“</string>
   <!-- Text for the cancel button for the history group deletion dialog -->
   <string name="delete_history_group_prompt_cancel">Zrušit</string>
   <!-- Text for the allow button for the history group dialog -->
@@ -2852,7 +2852,7 @@
   <!-- Text displayed above provider textfield under "DNS over HTTPS" -->
   <string name="preference_doh_provider_custom_dialog_textfield">Poskytovatel</string>
   <!-- Error text displayed for provider textfield under "DNS over HTTPS" if the URL does not start with "https://" or its scheme is not "https" -->
-  <string name="preference_doh_provider_custom_dialog_error_https">URL musí začínat “https://”</string>
+  <string name="preference_doh_provider_custom_dialog_error_https">URL musí začínat „https://“</string>
   <!-- Error text displayed for provider textfield under "DNS over HTTPS" if the URL is invalid -->
   <string name="preference_doh_provider_custom_dialog_error_invalid">Neplatná URL</string>
   <!-- Cancel button text for provider textfield under "DNS over HTTPS" -->
@@ -3370,7 +3370,7 @@
   <!-- Placeholder text shown in the Search Suggestion String TextField before a user enters text -->
   <string name="search_add_custom_engine_suggest_string_hint">URL API pro návrhy našeptávače</string>
   <!-- Description text for the Search Suggestion String TextField. The %s is part of the string -->
-  <string name="search_add_custom_engine_suggest_string_example_2" formatted="false">Text vyhledávání nahraďte výrazem “%s”. Například: \nhttps://suggestqueries.google.com/complete/search?client=firefox&amp;q=%s</string>
+  <string name="search_add_custom_engine_suggest_string_example_2" formatted="false">Text vyhledávání nahraďte výrazem „%s“. Například: \nhttps://suggestqueries.google.com/complete/search?client=firefox&amp;q=%s</string>
   <!-- The text for the "Save" button for saving a custom search engine -->
   <string name="search_custom_engine_save_button">Uložit</string>
   <!-- Text shown when a user leaves the name field empty -->

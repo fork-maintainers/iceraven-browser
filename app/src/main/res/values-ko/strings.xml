@@ -1282,7 +1282,7 @@
   <!-- Preference for using simple toolbar -->
   <string name="preference_simple_toolbar">단순</string>
   <!-- Preference for using expanded toolbar -->
-  <string name="preference_expanded_toolbar">확장됨</string>
+  <string name="preference_expanded_toolbar">확장</string>
   <!-- New tab shortcut in toolbar customization -->
   <string name="toolbar_customize_shortcut_new_tab">새 탭 열기</string>
   <!-- Share shortcut in toolbar customization -->
