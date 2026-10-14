@@ -1890,6 +1890,13 @@
       <action
         android:id="@+id/action_menuFragment_to_loginsListFragment"
         app:destination="@id/savedLogins" />
+
+      <action
+        android:id="@+id/action_menuFragment_to_storiesFragment"
+        app:destination="@id/storiesFragment"
+        app:popUpTo="@id/storiesFragment"
+        app:popUpToInclusive="false"
+        app:launchSingleTop="true" />
     </dialog>
   </navigation>
 

@@ -181,6 +181,7 @@ class MenuItemProvidersFactory(
                     browserStore = browserStore,
                     target = target,
                     goBack = useCases.sessionUseCases.goBack,
+                    settings = settings,
                     scope = menuViewScope,
                 )
 

@@ -63,7 +63,8 @@ class MenuItemsRegistryTest {
                 configuration = MenuConfigurations.browser(isToolbarAtBottom = false, isExpandedToolbarEnabled = false),
                 resolver = { item ->
                     when (item) {
-                        FenixMenuItem.Back -> BackMenuItemProvider(browserStore, session, mockk(), backgroundScope)
+                        FenixMenuItem.Back ->
+                            BackMenuItemProvider(browserStore, session, mockk(), mockk(), backgroundScope)
                         FenixMenuItem.Forward ->
                             ForwardMenuItemProvider(browserStore, session, mockk(), backgroundScope)
                         FenixMenuItem.Share -> ShareMenuItemProvider(browserStore, session, mockk())
