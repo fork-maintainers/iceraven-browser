@@ -357,7 +357,6 @@ class ExtensionsMenuItemProviderTest {
         return provider.itemFlow.value
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun `GIVEN the menu was opened from custom tab WHEN building the item THEN offer extensions without manage extensions or settings button`() =
         runTest {
@@ -450,10 +449,7 @@ class ExtensionsMenuItemProviderTest {
             val item = resolvedItem(browserStore, MenuTarget.CustomTab(TAB_ID)) as ExpandableMenuItem
 
             assertEquals(1, item.subMenuItems.size)
-            assertEquals(
-                MenuAction.WebExtensionActionClicked(extensionId = INSTALLED_ID, isPageAction = false),
-                item.subMenuItems.first().onClickEvent,
-            )
+            assertEquals(Text.String(ACTION_TITLE), item.subMenuItems.first().title)
             assertTrue(
                 item.subMenuItems.none {
                     it.onClickEvent == MenuAction.Navigate.ManageExtensions ||
@@ -462,7 +458,26 @@ class ExtensionsMenuItemProviderTest {
             )
         }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun `GIVEN the menu was opened from custom tab WHEN building the item THEN extensions' actions cannot be clicked`() =
+        runTest {
+            coEvery { addonManager.getAddons() } returns listOf(addon(INSTALLED_ID, installed = true, enabled = true))
+            val customTabState = createCustomTab(url = "https://mozilla.org", id = TAB_ID)
+            val browserStore =
+                BrowserStore(
+                    BrowserState(
+                        customTabs = listOf(customTabState),
+                        extensions = mapOf(INSTALLED_ID to extension(INSTALLED_ID)),
+                    )
+                )
+
+            val item = resolvedItem(browserStore, MenuTarget.CustomTab(TAB_ID)) as ExpandableMenuItem
+
+            assertNull(item.subMenuItems.single().onClickEvent)
+            // The item itself can still be expanded to see them.
+            assertEquals(MenuAction.OnExtensionsMenuClicked, item.onClickEvent)
+        }
+
     @Test
     fun `GIVEN the menu was opened from custom tab and no extensions apply WHEN building the item THEN show no extensions enabled and disable item`() =
         runTest {
