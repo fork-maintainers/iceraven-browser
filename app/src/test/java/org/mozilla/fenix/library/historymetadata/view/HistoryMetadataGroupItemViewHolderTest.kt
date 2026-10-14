@@ -61,4 +61,16 @@ class HistoryMetadataGroupItemViewHolderTest {
         assertEquals(item.title, binding.historyLayout.titleView.text)
         assertEquals(item.url, binding.historyLayout.urlView.text)
     }
+
+    @Test
+    fun `GIVEN a percent encoded url on bind THEN show it decoded but keep the record unchanged`() {
+        every { testContext.components.core.icons } returns BrowserIcons(testContext, mockk(relaxed = true))
+        val encoded = item.copy(url = "https://mozilla.org/%D1%82%D0%B5%D1%81%D1%82%20file")
+
+        HistoryMetadataGroupItemViewHolder(binding.root, interactor, selectionHolder)
+            .bind(encoded, isPendingDeletion = false)
+
+        assertEquals("https://mozilla.org/тест%20file", binding.historyLayout.urlView.text)
+        assertEquals("https://mozilla.org/%D1%82%D0%B5%D1%81%D1%82%20file", encoded.url)
+    }
 }

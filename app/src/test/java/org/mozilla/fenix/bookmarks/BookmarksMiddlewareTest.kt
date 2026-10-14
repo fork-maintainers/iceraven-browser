@@ -3365,6 +3365,81 @@ class BookmarksMiddlewareTest {
         }
 
     @Test
+    fun `GIVEN only the title was edited WHEN leaving the edit screen THEN the stored URL is saved unchanged`() =
+        runTest {
+            val url = "http://example.com/a%2Fb?q=%D1%82%D0%B5%D1%81%D1%82%20%D1%81&r=%2520&s=%26"
+            val bookmark =
+                BookmarkItem.Bookmark(
+                    title = "Example Domain",
+                    guid = "guid",
+                    url = url,
+                    previewImageUrl = "",
+                    position = 0u,
+                )
+            coEvery { navController.popBackStack() } returns true
+
+            val store =
+                buildMiddleware(this)
+                    .makeStore(
+                        BookmarksState.default.copy(
+                            bookmarksEditBookmarkState =
+                                BookmarksEditBookmarkState(
+                                    bookmark = bookmark,
+                                    folder = BookmarkItem.Folder("Bookmarks", "folderGuid", position = 0u),
+                                )
+                        )
+                    )
+            testScheduler.advanceUntilIdle()
+
+            store.dispatch(EditBookmarkAction.TitleChanged("New title"))
+            store.dispatch(BackClicked)
+            testScheduler.advanceUntilIdle()
+
+            coVerify(exactly = 1) {
+                bookmarksStorage.updateNode("guid", match<BookmarkInfo> { it.url == url && it.title == "New title" })
+            }
+        }
+
+    @Test
+    fun `GIVEN the URL was edited WHEN leaving the edit screen THEN the typed URL is saved`() = runTest {
+        val bookmark =
+            BookmarkItem.Bookmark(
+                title = "Example Domain",
+                guid = "guid",
+                url = "http://example.com/?%D1%82%D0%B5%D1%81%D1%82",
+                previewImageUrl = "",
+                position = 0u,
+            )
+        coEvery { navController.popBackStack() } returns true
+
+        val store =
+            buildMiddleware(this)
+                .makeStore(
+                    BookmarksState.default.copy(
+                        bookmarksEditBookmarkState =
+                            BookmarksEditBookmarkState(
+                                bookmark = bookmark,
+                                folder = BookmarkItem.Folder("Bookmarks", "folderGuid", position = 0u),
+                            )
+                    )
+                )
+        testScheduler.advanceUntilIdle()
+
+        store.dispatch(EditBookmarkAction.URLChanged("http://example.com/?проверка"))
+        assertEquals("http://example.com/?проверка", store.state.bookmarksEditBookmarkState?.urlText)
+
+        store.dispatch(BackClicked)
+        testScheduler.advanceUntilIdle()
+
+        coVerify(exactly = 1) {
+            bookmarksStorage.updateNode(
+                "guid",
+                match<BookmarkInfo> { it.url == "http://example.com/?проверка" },
+            )
+        }
+    }
+
+    @Test
     fun `WHEN RootOverflowMenuClicked is dispatched THEN state is updated and no side effects occur`() = runTest {
         val store = buildMiddleware(this).makeStore()
         testScheduler.advanceUntilIdle()

@@ -69,7 +69,10 @@ class BrowserToolbarToFenixSearchMapperMiddleware(
                                 inPrivateMode = browsingModeManager.mode.isPrivate,
                                 searchStartedForCurrentUrl =
                                     editState.isQueryPrefilled &&
-                                        browserStore?.state?.selectedTab?.content?.url == editState.query.current,
+                                        isCurrentUrl(
+                                            editState.query.current,
+                                            browserStore?.state?.selectedTab?.content?.url,
+                                        ),
                             )
                         )
 

@@ -1464,6 +1464,36 @@ class BookmarksReducerTest {
     }
 
     @Test
+    fun `GIVEN a percent encoded bookmark WHEN the edit screen loads THEN the URL field shows readable text`() {
+        val bookmark =
+            BookmarkItem.Bookmark(
+                url = "http://example.com/?%D1%82%D0%B5%D1%81%D1%82%20%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0",
+                title = "Example Domain",
+                previewImageUrl = "",
+                guid = "guid",
+                position = null,
+            )
+        val parent = BookmarkItem.Folder("Bookmarks", "folderGuid", null)
+
+        val result =
+            bookmarksReducer(BookmarksState.default, BookmarkToEditLoaded(bookmark = bookmark, folder = parent))
+
+        assertEquals("http://example.com/?тест страница", result.bookmarksEditBookmarkState?.urlText)
+        assertEquals(bookmark.url, result.bookmarksEditBookmarkState?.bookmark?.url)
+    }
+
+    @Test
+    fun `GIVEN the edit screen is open WHEN the URL is typed into THEN the typed text is kept as is`() {
+        val bookmark = BookmarkItem.Bookmark("http://example.com/?%D1%82%D0%B5%D1%81%D1%82", "title", "", "guid", null)
+        var state = bookmarksReducer(BookmarksState.default, EditBookmarkClicked(bookmark))
+
+        state = bookmarksReducer(state, EditBookmarkAction.URLChanged("http://example.com/?%D1%82"))
+
+        assertEquals("http://example.com/?%D1%82", state.bookmarksEditBookmarkState?.urlText)
+        assertEquals("http://example.com/?%D1%82", state.bookmarksEditBookmarkState?.bookmark?.url)
+    }
+
+    @Test
     fun `GIVEN selected items WHEN a multi-select menu action is taken THEN the items are unselected`() {
         val item = BookmarkItem.Bookmark("ur", "title", "url", "guid", null)
         val parent = BookmarkItem.Folder("title", "guid", null)

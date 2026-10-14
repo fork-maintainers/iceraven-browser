@@ -44,6 +44,7 @@ import mozilla.components.compose.browser.toolbar.store.ToolbarGravity.Bottom
 import mozilla.components.compose.browser.toolbar.store.ToolbarGravity.Top
 import mozilla.components.compose.browser.toolbar.ui.BrowserToolbarQuery
 import mozilla.components.lib.state.ext.observeAsComposableState
+import mozilla.components.support.ktx.util.URLStringUtils
 import org.mozilla.fenix.R
 import org.mozilla.fenix.browser.browsingmode.BrowsingModeManager
 import org.mozilla.fenix.components.AppStore
@@ -281,7 +282,7 @@ internal class HomeToolbarComposable(
             browserStore.state.findTab(directToSearchConfig.sessionId)?.let {
                 toolbarStore.dispatch(
                     SearchQueryUpdated(
-                        query = BrowserToolbarQuery(it.getUrl() ?: ""),
+                        query = BrowserToolbarQuery(URLStringUtils.toLosslessEditableUrl(it.getUrl().orEmpty())),
                         isQueryPrefilled = true,
                     )
                 )

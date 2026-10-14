@@ -390,6 +390,23 @@ class BrowserToolbarMiddlewareTest {
         }
 
     @Test
+    fun `GIVEN a percent encoded URL WHEN the page origin is set THEN show it losslessly decoded`() =
+        runTest(testDispatcher) {
+            val tab = createTab("https://mozilla.com/%D1%82%D0%B5%D1%81%D1%82%20file?q=hello%20world")
+            val browserStore = BrowserStore(BrowserState(tabs = listOf(tab), selectedTabId = tab.id))
+            val toolbarStore = buildStore(buildMiddleware(browserStore = browserStore))
+
+            assertEquals(
+                "mozilla.com/тест%20file?q=hello%20world",
+                toolbarStore.state.displayState.pageOrigin.url?.toString(),
+            )
+            assertEquals(
+                "https://mozilla.com/%D1%82%D0%B5%D1%81%D1%82%20file?q=hello%20world",
+                browserStore.state.tabs.first().content.url,
+            )
+        }
+
+    @Test
     fun `GIVEN narrow window WHEN changing to wide window THEN keep browser end actions`() =
         runTest(testDispatcher) {
             val appStore = AppStore(initialState = AppState(orientation = Portrait))
