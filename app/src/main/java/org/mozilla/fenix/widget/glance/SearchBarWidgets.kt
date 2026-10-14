@@ -4,6 +4,7 @@
 
 package org.mozilla.fenix.widget.glance
 
+import android.appwidget.AppWidgetManager
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
@@ -53,6 +54,7 @@ import org.mozilla.fenix.R
 import org.mozilla.fenix.iconpicker.DefaultAppIconRepository
 import org.mozilla.fenix.iconpicker.DefaultPackageManagerWrapper
 import org.mozilla.fenix.widget.SearchWidgetIntents
+import org.mozilla.fenix.widget.SearchWidgets
 
 /** Different styles of the Glance search bar widget offered. */
 enum class SearchBarWidgetStyle {
@@ -90,20 +92,34 @@ class SearchBarWidget(private val style: SearchBarWidgetStyle) : GlanceAppWidget
     }
 }
 
-/** Receiver for the [SearchBarWidgetStyle.FULL_WIDTH] search bar widget. */
-class SearchBarWidgetReceiver : GlanceAppWidgetReceiver() {
-    override val glanceAppWidget: GlanceAppWidget = SearchBarWidget(SearchBarWidgetStyle.FULL_WIDTH)
+/** Base receiver for a search bar widget of the given [style], keeping the installed widget state up to date. */
+abstract class BaseSearchBarWidgetReceiver(style: SearchBarWidgetStyle) : GlanceAppWidgetReceiver() {
+    override val glanceAppWidget: GlanceAppWidget = SearchBarWidget(style)
+
+    override fun onEnabled(context: Context) {
+        super.onEnabled(context)
+        SearchWidgets.syncInstalledState(context)
+    }
+
+    override fun onDisabled(context: Context) {
+        super.onDisabled(context)
+        SearchWidgets.syncInstalledState(context)
+    }
+
+    override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
+        super.onUpdate(context, appWidgetManager, appWidgetIds)
+        SearchWidgets.syncInstalledState(context)
+    }
 }
+
+/** Receiver for the [SearchBarWidgetStyle.FULL_WIDTH] search bar widget. */
+class SearchBarWidgetReceiver : BaseSearchBarWidgetReceiver(SearchBarWidgetStyle.FULL_WIDTH)
 
 /** Receiver for the [SearchBarWidgetStyle.FULL_WIDTH_WITH_LENS] search bar widget. */
-class SearchBarWithLensWidgetReceiver : GlanceAppWidgetReceiver() {
-    override val glanceAppWidget: GlanceAppWidget = SearchBarWidget(SearchBarWidgetStyle.FULL_WIDTH_WITH_LENS)
-}
+class SearchBarWithLensWidgetReceiver : BaseSearchBarWidgetReceiver(SearchBarWidgetStyle.FULL_WIDTH_WITH_LENS)
 
 /** Receiver for the [SearchBarWidgetStyle.COMPACT] search bar widget. */
-class CompactSearchBarWidgetReceiver : GlanceAppWidgetReceiver() {
-    override val glanceAppWidget: GlanceAppWidget = SearchBarWidget(SearchBarWidgetStyle.COMPACT)
-}
+class CompactSearchBarWidgetReceiver : BaseSearchBarWidgetReceiver(SearchBarWidgetStyle.COMPACT)
 
 /**
  * What a search bar widget shows and what its buttons launch.

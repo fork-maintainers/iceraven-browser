@@ -42,6 +42,7 @@ import org.mozilla.fenix.widget.glance.SearchBarWithLensWidgetReceiver
 import org.mozilla.gecko.search.SearchWidgetProvider
 import org.mozilla.gecko.search.SearchWidgetProviderSize
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.Shadows.shadowOf
 
 @RunWith(RobolectricTestRunner::class)
 class SearchWidgetProviderTest {
@@ -327,6 +328,7 @@ class SearchWidgetProviderTest {
         every { testContext.components.settings } returns settings
         val widgetProvider = SearchWidgetProvider()
         assertFalse(settings.searchWidgetInstalled)
+        bindWidget(SearchWidgetProvider::class.java)
 
         widgetProvider.onEnabled(testContext)
 
@@ -348,18 +350,51 @@ class SearchWidgetProviderTest {
     }
 
     @Test
+    fun `GIVEN a new search bar widget is still on the homescreen WHEN the legacy search widget is removed THEN the widget stays installed`() {
+        val settings = Settings(testContext)
+        every { testContext.components.settings } returns settings
+        settings.searchWidgetInstalled = true
+        bindWidget(CompactSearchBarWidgetReceiver::class.java)
+
+        SearchWidgetProvider().onDisabled(testContext)
+
+        assertTrue(settings.searchWidgetInstalled)
+    }
+
+    @Test
+    fun `WHEN a new search bar widget is added on homescreen THEN record telemetry and persist that the widget is installed`() {
+        val settings = Settings(testContext)
+        every { testContext.components.settings } returns settings
+        assertFalse(settings.searchWidgetInstalled)
+        bindWidget(SearchBarWithLensWidgetReceiver::class.java)
+
+        SearchBarWithLensWidgetReceiver().onEnabled(testContext)
+
+        assertTrue(settings.searchWidgetInstalled)
+        assertEquals(true, Metrics.searchWidgetInstalled.testGetValue())
+    }
+
+    @Test
     fun `GIVEN not knowing search widget is installed WHEN a widget is updated THEN record telemetry and persist that the widget is installed`() {
         val settings = Settings(testContext)
         every { testContext.components.settings } returns settings
         every { testContext.components.core.store } returns BrowserStore(BrowserState())
         val widgetProvider = SearchWidgetProvider()
         assertFalse(settings.searchWidgetInstalled)
+        bindWidget(SearchWidgetProvider::class.java)
 
         widgetProvider.onUpdate(testContext, mockk(), intArrayOf())
 
         assertTrue(testContext.components.settings.searchWidgetInstalled)
         assertEquals(true, Metrics.searchWidgetInstalled.testGetValue())
     }
+
+    private fun bindWidget(provider: Class<*>) {
+        val appWidgetManager = shadowOf(AppWidgetManager.getInstance(testContext))
+        appWidgetManager.bindAppWidgetId(nextWidgetId++, ComponentName(testContext, provider))
+    }
+
+    private var nextWidgetId = 1
 }
 
 private const val WIDGET_WIDTH_PX = 800

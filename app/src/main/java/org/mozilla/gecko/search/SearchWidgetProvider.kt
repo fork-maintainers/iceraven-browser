@@ -17,18 +17,13 @@ import android.widget.RemoteViews
 import androidx.annotation.Dimension
 import androidx.annotation.Dimension.Companion.DP
 import androidx.annotation.VisibleForTesting
-import org.mozilla.fenix.GleanMetrics.Metrics
 import org.mozilla.fenix.R
-import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.iconpicker.DefaultAppIconRepository
 import org.mozilla.fenix.iconpicker.DefaultPackageManagerWrapper
 import org.mozilla.fenix.utils.IntentUtils
-import org.mozilla.fenix.utils.Settings
 import org.mozilla.fenix.widget.SearchWidgetIntents
-import org.mozilla.fenix.widget.glance.CompactSearchBarWidgetReceiver
+import org.mozilla.fenix.widget.SearchWidgets
 import org.mozilla.fenix.widget.glance.SearchBarWidget
-import org.mozilla.fenix.widget.glance.SearchBarWidgetReceiver
-import org.mozilla.fenix.widget.glance.SearchBarWithLensWidgetReceiver
 
 class SearchWidgetProvider : AppWidgetProvider() {
     // Implementation note:
@@ -37,16 +32,15 @@ class SearchWidgetProvider : AppWidgetProvider() {
     // The existing name replicates the name and package we used in Fennec.
 
     override fun onEnabled(context: Context) {
-        recordWidgetIsInstalled(context.components.settings)
+        SearchWidgets.syncInstalledState(context)
     }
 
     override fun onDisabled(context: Context) {
-        context.components.settings.searchWidgetInstalled = false
-        Metrics.searchWidgetInstalled.set(false)
+        SearchWidgets.syncInstalledState(context)
     }
 
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
-        recordWidgetIsInstalled(context.components.settings)
+        SearchWidgets.syncInstalledState(context)
 
         val textSearchIntent = createTextSearchIntent(context)
         val voiceSearchIntent = createVoiceSearchIntent(context)
@@ -100,13 +94,6 @@ class SearchWidgetProvider : AppWidgetProvider() {
                 text,
             )
         appWidgetManager.updateAppWidget(appWidgetId, views)
-    }
-
-    private fun recordWidgetIsInstalled(settings: Settings) {
-        if (!settings.searchWidgetInstalled) {
-            settings.searchWidgetInstalled = true
-            Metrics.searchWidgetInstalled.set(true)
-        }
     }
 
     /** Builds pending intent that opens the browser and starts a new text search. */
@@ -239,24 +226,18 @@ class SearchWidgetProvider : AppWidgetProvider() {
         fun updateAllWidgets(context: Context, appWidgetManager: AppWidgetManager) {
             SearchBarWidget.refresh()
 
-            listOf(
-                    SearchWidgetProvider::class.java,
-                    SearchBarWidgetReceiver::class.java,
-                    SearchBarWithLensWidgetReceiver::class.java,
-                    CompactSearchBarWidgetReceiver::class.java,
-                )
-                .forEach { provider ->
-                    val widgetIds = appWidgetManager.getAppWidgetIds(ComponentName(context, provider))
+            SearchWidgets.providers.forEach { provider ->
+                val widgetIds = appWidgetManager.getAppWidgetIds(ComponentName(context, provider))
 
-                    if (widgetIds.isNotEmpty()) {
-                        context.sendBroadcast(
-                            Intent(context, provider).apply {
-                                action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
-                                putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, widgetIds)
-                            }
-                        )
-                    }
+                if (widgetIds.isNotEmpty()) {
+                    context.sendBroadcast(
+                        Intent(context, provider).apply {
+                            action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
+                            putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, widgetIds)
+                        }
+                    )
                 }
+            }
         }
 
         @VisibleForTesting

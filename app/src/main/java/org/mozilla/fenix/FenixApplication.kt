@@ -152,6 +152,7 @@ import org.mozilla.fenix.theme.ThemeProvider
 import org.mozilla.fenix.utils.Settings
 import org.mozilla.fenix.utils.isLargeScreenSize
 import org.mozilla.fenix.wallpapers.Wallpaper
+import org.mozilla.fenix.widget.SearchWidgets
 import org.mozilla.fenix.widget.glance.SearchBarWidgetPreviews
 
 private const val RAM_THRESHOLD_MEGABYTES = 1024
@@ -1013,6 +1014,7 @@ open class FenixApplication : Application(), Provider, ThemeProvider {
             adjustNetwork.set(settings.adjustNetwork)
 
             settings.migrateSearchWidgetInstalledPrefIfNeeded()
+            SearchWidgets.syncInstalledState(applicationContext, settings)
             searchWidgetInstalled.set(settings.searchWidgetInstalled)
 
             val openTabsCount = settings.openTabsCount
