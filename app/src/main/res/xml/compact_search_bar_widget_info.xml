@@ -8,7 +8,7 @@
     android:minWidth="220dp"
     android:minHeight="48dp"
     android:resizeMode="horizontal"
-    android:previewImage="@drawable/fenix_search_widget"
+    android:previewImage="@drawable/compact_search_bar_widget_preview"
     android:initialLayout="@layout/glance_default_loading_layout"
     android:widgetCategory="home_screen">
 </appwidget-provider>
