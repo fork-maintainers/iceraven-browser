@@ -4,6 +4,7 @@
 
 package org.mozilla.fenix.browser
 
+import androidx.compose.ui.semantics.Role
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -108,6 +109,7 @@ private fun DesktopSiteStatus.toMenuItem(): MenuItem {
                         state = state,
                     )
             },
+        role = Role.Switch,
         state = state,
     )
 }

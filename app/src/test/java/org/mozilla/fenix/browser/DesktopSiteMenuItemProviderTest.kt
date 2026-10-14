@@ -4,6 +4,7 @@
 
 package org.mozilla.fenix.browser
 
+import androidx.compose.ui.semantics.Role
 import io.mockk.mockk
 import io.mockk.verify
 import kotlin.test.assertEquals
@@ -79,6 +80,7 @@ class DesktopSiteMenuItemProviderTest {
                     onClickEvent = MenuAction.RequestDesktopSite,
                     badge = null,
                     state = MenuItemState.DISABLED,
+                    role = Role.Switch,
                 ),
                 provider.itemFlow.value,
             )
@@ -202,6 +204,7 @@ class DesktopSiteMenuItemProviderTest {
                     state = if (isDesktopMode) MenuItemState.ACTIVE else MenuItemState.DEFAULT,
                 ),
             state = if (isDesktopMode) MenuItemState.ACTIVE else MenuItemState.DEFAULT,
+            role = Role.Switch,
         )
 
     private companion object {
