@@ -202,7 +202,13 @@ class MenuFragment : BottomSheetDialogFragment() {
                 menuHandleState =
                     MenuHandleState(
                         contentDescription =
-                            stringResource(R.string.browser_close_main_menu_handlebar_content_description),
+                            stringResource(
+                                when (args.accessPoint) {
+                                    MenuAccessPoint.External ->
+                                        R.string.browser_custom_tab_menu_handlebar_content_description
+                                    else -> R.string.browser_close_main_menu_handlebar_content_description
+                                }
+                            ),
                         useDarkBackground = isHeaderDark,
                     ),
                 snackbarHostState = snackbarHostState,
