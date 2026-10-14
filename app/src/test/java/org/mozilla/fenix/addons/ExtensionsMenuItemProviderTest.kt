@@ -107,25 +107,15 @@ class ExtensionsMenuItemProviderTest {
         runTest {
             coEvery { addonManager.getAddons() } returns listOf(addon(INSTALLED_ID, installed = true, enabled = false))
 
-            assertEquals(
-                StandardMenuItem(
-                    title = Text.Resource(R.string.browser_menu_extensions),
-                    icon = MenuItemIconRes(iconsR.drawable.mozac_ic_extension_24),
-                    summary =
-                        MenuItemSummary(
-                            text = Text.Resource(R.string.browser_menu_no_extensions_installed_description)
-                        ),
-                    onClickEvent = MenuAction.Navigate.ManageExtensions,
-                    actionButton =
-                        MenuItemActionButton(
-                            icon = iconsR.drawable.mozac_ic_settings_24,
-                            contentDescription = Text.Resource(R.string.browser_menu_manage_extensions),
-                            onClickEvent = MenuAction.Navigate.ManageExtensions,
-                            showDivider = true,
-                        ),
-                ),
-                resolvedItem(),
-            )
+            assertEquals(nothingToShowItem, resolvedItem())
+        }
+
+    @Test
+    fun `GIVEN no extensions are installed and there are none to recommend WHEN building the menu item THEN say no extensions are enabled and allow managing them`() =
+        runTest {
+            coEvery { addonManager.getAddons() } returns emptyList()
+
+            assertEquals(nothingToShowItem, resolvedItem())
         }
 
     @Test
@@ -150,14 +140,12 @@ class ExtensionsMenuItemProviderTest {
     }
 
     @Test
-    fun `WHEN querying the extensions fails THEN still offer discovering some`() = runTest {
-        coEvery { addonManager.getAddons() } throws AddonManagerException(Exception("boom"))
+    fun `GIVEN no extensions are installed WHEN querying the extensions fails THEN say no extensions are enabled and allow managing them`() =
+        runTest {
+            coEvery { addonManager.getAddons() } throws AddonManagerException(Exception("boom"))
 
-        val item = resolvedItem() as ExpandableMenuItem
-
-        assertEquals(1, item.subMenuItems.size)
-        assertEquals(MenuAction.Navigate.DiscoverMoreExtensions, item.subMenuItems.single().onClickEvent)
-    }
+            assertEquals(nothingToShowItem, resolvedItem())
+        }
 
     @Test
     fun `GIVEN extensions offer something for the page WHEN opening the menu THEN list what they offer right away`() =
@@ -346,6 +334,21 @@ class ExtensionsMenuItemProviderTest {
 
     /** The menu item once everything known about the extensions was read and applied to it. */
     @OptIn(ExperimentalCoroutinesApi::class)
+    private val nothingToShowItem =
+        StandardMenuItem(
+            title = Text.Resource(R.string.browser_menu_extensions),
+            icon = MenuItemIconRes(iconsR.drawable.mozac_ic_extension_24),
+            summary = MenuItemSummary(text = Text.Resource(R.string.browser_menu_no_extensions_installed_description)),
+            onClickEvent = MenuAction.Navigate.ManageExtensions,
+            actionButton =
+                MenuItemActionButton(
+                    icon = iconsR.drawable.mozac_ic_settings_24,
+                    contentDescription = Text.Resource(R.string.browser_menu_manage_extensions),
+                    onClickEvent = MenuAction.Navigate.ManageExtensions,
+                    showDivider = true,
+                ),
+        )
+
     private fun TestScope.resolvedItem(
         browserStore: BrowserStore = browserStoreWith(),
         target: MenuTarget = MenuTarget.BrowserTab,

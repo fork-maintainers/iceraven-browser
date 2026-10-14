@@ -130,6 +130,8 @@ class ExtensionsMenuItemProvider(
                 addonManager.getAddons()
             } catch (e: AddonManagerException) {
                 logger.error("Failed to query extensions", e)
+                // When there is nothing to recommend, there is nothing more to wait for.
+                extensions.update { it.copy(hasCheckedExtensions = true) }
                 return
             }
 
@@ -236,7 +238,8 @@ class ExtensionsMenuItemProvider(
  * Everything the extensions menu item needs to know about the user's extensions.
  *
  * @property isProcessDisabled Whether the extensions process was disabled after repeated crashes.
- * @property hasCheckedExtensions Whether the extensions were already queried, which tells which ones to recommend.
+ * @property hasCheckedExtensions Whether querying the extensions finished (which tells which ones to recommend), even
+ *   if it failed.
  * @property hasInstalledExtensions Whether the user installed any extensions, whether enabled or not.
  * @property actions What the user's extensions offer for the current page, to list when the item is expanded.
  * @property installed The installed and enabled extensions, each the owner of one or more of [actions].
