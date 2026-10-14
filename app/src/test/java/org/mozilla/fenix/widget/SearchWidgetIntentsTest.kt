@@ -47,6 +47,17 @@ class SearchWidgetIntentsTest {
     }
 
     @Test
+    fun `WHEN a private text search intent is built THEN it opens to search in private mode`() {
+        val intent = SearchWidgetIntents.textSearch(testContext, isPrivateBrowsingMode = true)
+
+        assertEquals(
+            StartSearchIntentProcessor.SEARCH_WIDGET,
+            intent.getStringExtra(HomeActivity.OPEN_TO_SEARCH),
+        )
+        assertTrue(intent.getBooleanExtra(HomeActivity.PRIVATE_BROWSING_MODE, false))
+    }
+
+    @Test
     fun `GIVEN voice search is disabled WHEN a voice search intent is built THEN it is null`() {
         every { testContext.components.settings.shouldShowVoiceSearch } returns false
         stubSpeechRecognizer()

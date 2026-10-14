@@ -36,6 +36,9 @@ import org.mozilla.fenix.R
 import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.helpers.FenixGleanTestRule
 import org.mozilla.fenix.utils.Settings
+import org.mozilla.fenix.widget.glance.CompactSearchBarWidgetReceiver
+import org.mozilla.fenix.widget.glance.SearchBarWidgetReceiver
+import org.mozilla.fenix.widget.glance.SearchBarWithLensWidgetReceiver
 import org.mozilla.gecko.search.SearchWidgetProvider
 import org.mozilla.gecko.search.SearchWidgetProviderSize
 import org.robolectric.RobolectricTestRunner
@@ -279,27 +282,28 @@ class SearchWidgetProviderTest {
     @Test
     fun `GIVEN widgets set on screen shown WHEN updateAllWidgets is called THEN it sends a broadcast to update all widgets`() {
         val widgetManager: AppWidgetManager = mockk()
-        val componentNameCaptor = slot<ComponentName>()
         val widgetsToUpdate = intArrayOf(1, 2)
-        every { widgetManager.getAppWidgetIds(capture(componentNameCaptor)) } returns widgetsToUpdate
+        every { widgetManager.getAppWidgetIds(any<ComponentName>()) } returns widgetsToUpdate
         val context: Context = mockk(relaxed = true)
-        val intentCaptor = slot<Intent>()
-        every { context.sendBroadcast(capture(intentCaptor)) } just Runs
+        val intents = mutableListOf<Intent>()
+        every { context.sendBroadcast(capture(intents)) } just Runs
 
         SearchWidgetProvider.updateAllWidgets(context, widgetManager)
 
-        verify { context.sendBroadcast(any()) }
-        assertEquals(SearchWidgetProvider::class.java.name, componentNameCaptor.captured.className)
         assertEquals(
-            SearchWidgetProvider::class.java.name,
-            intentCaptor.captured.component!!.className,
+            listOf(
+                SearchWidgetProvider::class.java.name,
+                SearchBarWidgetReceiver::class.java.name,
+                SearchBarWithLensWidgetReceiver::class.java.name,
+                CompactSearchBarWidgetReceiver::class.java.name,
+            ),
+            intents.map { it.component!!.className },
         )
-        assertEquals(AppWidgetManager.ACTION_APPWIDGET_UPDATE, intentCaptor.captured.action)
-        @Suppress("DEPRECATION")
-        assertEquals(
-            widgetsToUpdate,
-            intentCaptor.captured.extras!!.get(AppWidgetManager.EXTRA_APPWIDGET_IDS),
-        )
+        intents.forEach { intent ->
+            assertEquals(AppWidgetManager.ACTION_APPWIDGET_UPDATE, intent.action)
+            @Suppress("DEPRECATION")
+            assertEquals(widgetsToUpdate, intent.extras!!.get(AppWidgetManager.EXTRA_APPWIDGET_IDS))
+        }
     }
 
     @Test

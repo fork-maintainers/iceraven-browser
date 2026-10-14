@@ -124,4 +124,9 @@
     <color name="mozac_ui_tabcounter_default_text" tools:ignore="UnusedResources">@color/fx_mobile_on_surface</color>
 
     <color name="preference_scroll_highlight">@color/fx_mobile_surface_container_highest</color>
+
+    <!-- Glance search bar widgets -->
+    <color name="search_bar_widget_background">@color/novaGray65</color>
+    <color name="search_bar_widget_button_background">@color/novaGray75</color>
+    <color name="search_bar_widget_divider">@color/novaGray55</color>
 </resources>

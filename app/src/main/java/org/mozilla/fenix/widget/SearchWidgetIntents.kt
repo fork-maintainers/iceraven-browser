@@ -18,11 +18,16 @@ import org.mozilla.fenix.widget.VoiceSearchActivity.Companion.SPEECH_PROCESSING
 /** Builds the intents launched by the device home screen Firefox search widgets. */
 object SearchWidgetIntents {
 
-    /** Intent that opens the browser and starts a new text search. */
-    fun textSearch(context: Context): Intent =
+    /**
+     * Intent that opens the browser and starts a new text search, in a private tab if [isPrivateBrowsingMode] is true.
+     */
+    fun textSearch(context: Context, isPrivateBrowsingMode: Boolean = false): Intent =
         Intent(context, IntentReceiverActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             putExtra(HomeActivity.OPEN_TO_SEARCH, StartSearchIntentProcessor.SEARCH_WIDGET)
+            if (isPrivateBrowsingMode) {
+                putExtra(HomeActivity.PRIVATE_BROWSING_MODE, true)
+            }
         }
 
     /** Intent that starts a new voice search, or null if voice search is disabled or unavailable. */

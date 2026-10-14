@@ -25,6 +25,10 @@ import org.mozilla.fenix.iconpicker.DefaultPackageManagerWrapper
 import org.mozilla.fenix.utils.IntentUtils
 import org.mozilla.fenix.utils.Settings
 import org.mozilla.fenix.widget.SearchWidgetIntents
+import org.mozilla.fenix.widget.glance.CompactSearchBarWidgetReceiver
+import org.mozilla.fenix.widget.glance.SearchBarWidget
+import org.mozilla.fenix.widget.glance.SearchBarWidgetReceiver
+import org.mozilla.fenix.widget.glance.SearchBarWithLensWidgetReceiver
 
 class SearchWidgetProvider : AppWidgetProvider() {
     // Implementation note:
@@ -233,16 +237,26 @@ class SearchWidgetProvider : AppWidgetProvider() {
          * @param appWidgetManager An instance of [AppWidgetManager].
          */
         fun updateAllWidgets(context: Context, appWidgetManager: AppWidgetManager) {
-            val widgetIds = appWidgetManager.getAppWidgetIds(ComponentName(context, SearchWidgetProvider::class.java))
+            SearchBarWidget.refresh()
 
-            if (widgetIds.isNotEmpty()) {
-                context.sendBroadcast(
-                    Intent(context, SearchWidgetProvider::class.java).apply {
-                        action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
-                        putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, widgetIds)
-                    }
+            listOf(
+                    SearchWidgetProvider::class.java,
+                    SearchBarWidgetReceiver::class.java,
+                    SearchBarWithLensWidgetReceiver::class.java,
+                    CompactSearchBarWidgetReceiver::class.java,
                 )
-            }
+                .forEach { provider ->
+                    val widgetIds = appWidgetManager.getAppWidgetIds(ComponentName(context, provider))
+
+                    if (widgetIds.isNotEmpty()) {
+                        context.sendBroadcast(
+                            Intent(context, provider).apply {
+                                action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
+                                putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, widgetIds)
+                            }
+                        )
+                    }
+                }
         }
 
         @VisibleForTesting

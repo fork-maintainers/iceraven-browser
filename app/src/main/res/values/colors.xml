@@ -293,4 +293,9 @@
     <!-- Private mode circle fill colors for mozac_ic_private_mode_circle_fill_72 -->
     <color name="mozac_ic_private_mode_circle_fill_72_background_color" tools:ignore="UnusedResources">@color/fx_mobile_icon_private</color>
     <color name="mozac_ic_private_mode_circle_fill_72_icon_color" tools:ignore="UnusedResources">@color/private_mode_mask_gradient</color>
+
+    <!-- Glance search bar widgets -->
+    <color name="search_bar_widget_background">@color/novaWhite</color>
+    <color name="search_bar_widget_button_background">@color/novaGray10</color>
+    <color name="search_bar_widget_divider">@color/novaGray15</color>
 </resources>
