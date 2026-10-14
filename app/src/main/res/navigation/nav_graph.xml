@@ -213,6 +213,11 @@
         android:id="@+id/action_global_protections_dashboard"
         app:destination="@+id/global_protections_dashboard"/>
 
+    <action
+        android:id="@+id/action_global_pairFragment"
+        app:destination="@+id/pairFragment"
+        app:launchSingleTop="true"/>
+
     <fragment
         android:id="@+id/tabManagementFragment"
         android:name="org.mozilla.fenix.tabstray.ui.TabManagementFragment">
