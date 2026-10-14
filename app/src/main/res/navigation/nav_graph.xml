@@ -473,6 +473,10 @@
                 android:defaultValue="@null"
                 app:argType="string"
                 app:nullable="true" />
+            <argument
+                android:name="isSandboxCustomTab"
+                android:defaultValue="false"
+                app:argType="boolean" />
         </action>
     </fragment>
 
@@ -1863,6 +1867,10 @@
       android:defaultValue="@null"
       app:nullable="true"
       app:argType="string" />
+    <argument
+      android:name="isSandboxCustomTab"
+      android:defaultValue="false"
+      app:argType="boolean" />
 
     <dialog
       android:id="@+id/menuFragment"
@@ -1875,6 +1883,10 @@
         android:defaultValue="@null"
         app:argType="string"
         app:nullable="true" />
+      <argument
+        android:name="isSandboxCustomTab"
+        android:defaultValue="false"
+        app:argType="boolean" />
 
       <action
         android:id="@+id/action_menuFragment_to_translationsDialogFragment"

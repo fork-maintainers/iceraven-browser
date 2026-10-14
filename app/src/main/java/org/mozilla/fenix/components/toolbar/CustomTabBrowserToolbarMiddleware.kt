@@ -283,6 +283,7 @@ class CustomTabBrowserToolbarMiddleware(
                             ExternalAppBrowserFragmentDirections.actionExternalAppBrowserFragmentToMenuFragment(
                                 accessPoint = MenuAccessPoint.External,
                                 customTabSessionId = customTabId,
+                                isSandboxCustomTab = isSandboxCustomTab,
                             )
 
                         else ->
