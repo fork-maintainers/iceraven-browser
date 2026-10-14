@@ -319,6 +319,18 @@ class Core(
         }
     }
 
+    /**
+     * Retained so that its [mozilla.appservices.remotesettings.RemoteSettingsClient] stays reachable for the lifetime
+     * of the process. application-services only holds a weak reference to each client and skips collections whose
+     * client has been collected, so a short-lived repository would opt `search-telemetry-v2` out of syncing entirely.
+     */
+    val serpTelemetryRepository by lazyMonitored {
+        SerpTelemetryRepository(
+            collectionName = COLLECTION_NAME,
+            remoteSettingsService = context.components.remoteSettingsService.value,
+        )
+    }
+
     /** The [BrowserStore] holds the global [BrowserState]. */
     val store by lazyMonitored {
         val searchExtraParamsNimbus = FxNimbus.features.searchExtraParams.value()
@@ -420,12 +432,7 @@ class Core(
                 icons.install(engine, this)
 
                 applicationScope.launch {
-                    val providerList =
-                        SerpTelemetryRepository(
-                                collectionName = COLLECTION_NAME,
-                                remoteSettingsService = context.components.remoteSettingsService.value,
-                            )
-                            .updateProviderList()
+                    val providerList = serpTelemetryRepository.updateProviderList()
                     // Install the "ads" WebExtension to get the links in an partner page.
                     adsTelemetry.install(engine, this@apply, providerList)
                     // Install the "cookies" WebExtension and tracks user interaction with SERPs.
