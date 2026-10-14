@@ -417,6 +417,15 @@ object TabDrawerSelectors : SelectorContainer {
             groups = setOf(Group.TAB_ITEM),
         )
 
+    // "Playing media" indicator, present only while playbackState == PLAYING. Kept out of Group.TAB_ITEM:
+    // being state-dependent, a group check would wrongly require it on every tab.
+    val TAB_ITEM_MEDIA_INDICATOR =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TAG,
+            value = TabsTrayTestTag.TAB_ITEM_MEDIA_INDICATOR,
+            description = "Tab item media playing indicator",
+        )
+
     fun TAB_ITEM_WITH_TITLE(tabTitle: String = "") =
         Selector(
             strategy = SelectorStrategy.COMPOSE_ON_ALL_NODES_BY_TAG_WITH_CHILD_TEXT_ON_FIRST,

@@ -297,6 +297,35 @@ class TabDrawerRobot(private val composeTestRule: ComposeTestRule) {
         Log.i(TAG, "verifyTabCloseButton: Verified that the close tab button exists")
     }
 
+    // Indicator lives only in the unmerged tree: it is merged into the tab item's clickable root.
+    /** Verifies the media indicator on a tab, shown while its media session is PLAYING. */
+    fun verifyTabMediaIndicator() {
+        Log.i(TAG, "verifyTabMediaIndicator: Waiting for $waitingTime ms until the tab media indicator exists")
+        composeTestRule.waitUntil(waitingTime) {
+            composeTestRule
+                .onAllNodesWithTag(TabsTrayTestTag.TAB_ITEM_MEDIA_INDICATOR, useUnmergedTree = true)
+                .fetchSemanticsNodes()
+                .isNotEmpty()
+        }
+        Log.i(TAG, "verifyTabMediaIndicator: Trying to verify that the tab media indicator exists")
+        composeTestRule.tabMediaIndicator().assertExists()
+        Log.i(TAG, "verifyTabMediaIndicator: Verified that the tab media indicator exists")
+    }
+
+    /** Verifies the media indicator is gone, as happens once the tab's media is paused. */
+    fun verifyTabMediaIndicatorDoesNotExist() {
+        Log.i(TAG, "verifyTabMediaIndicatorDoesNotExist: Waiting for $waitingTime ms until the media indicator is gone")
+        composeTestRule.waitUntil(waitingTime) {
+            composeTestRule
+                .onAllNodesWithTag(TabsTrayTestTag.TAB_ITEM_MEDIA_INDICATOR, useUnmergedTree = true)
+                .fetchSemanticsNodes()
+                .isEmpty()
+        }
+        Log.i(TAG, "verifyTabMediaIndicatorDoesNotExist: Trying to verify that the tab media indicator does not exist")
+        composeTestRule.tabMediaIndicator().assertDoesNotExist()
+        Log.i(TAG, "verifyTabMediaIndicatorDoesNotExist: Verified that the tab media indicator does not exist")
+    }
+
     fun verifyTabTrayIsOpen() {
         Log.i(TAG, "verifyTabTrayIsOpen: Trying to verify that the tabs tray exists")
         composeTestRule.tabsTray().assertExists()
@@ -727,6 +756,10 @@ private fun ComposeTestRule.closeTabButton() = onNodeWithTag(TabsTrayTestTag.TAB
 
 /** Obtains an open tab's thumbnail when there's only one tab open. */
 private fun ComposeTestRule.tabThumbnail() = onNodeWithTag(TabsTrayTestTag.TAB_ITEM_THUMBNAIL)
+
+/** Obtains a tab's media-playing indicator (unmerged tree; see verifyTabMediaIndicator). */
+private fun ComposeTestRule.tabMediaIndicator() =
+    onNodeWithTag(TabsTrayTestTag.TAB_ITEM_MEDIA_INDICATOR, useUnmergedTree = true)
 
 /** Obtains the three dot button in the Tabs Tray banner. */
 private fun ComposeTestRule.threeDotButton() = onNodeWithTag(TabsTrayTestTag.THREE_DOT_BUTTON)

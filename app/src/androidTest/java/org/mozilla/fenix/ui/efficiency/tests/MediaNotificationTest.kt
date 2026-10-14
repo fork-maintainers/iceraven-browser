@@ -5,8 +5,11 @@
 package org.mozilla.fenix.ui.efficiency.tests
 
 import mozilla.components.concept.engine.mediasession.MediaSession
+import mozilla.components.feature.media.R as mediaR
 import org.junit.Test
+import org.mozilla.fenix.customannotations.Critical
 import org.mozilla.fenix.customannotations.SmokeTest
+import org.mozilla.fenix.helpers.DataGenerationHelper.getStringResource
 import org.mozilla.fenix.helpers.TestAssetHelper.audioPageAsset
 import org.mozilla.fenix.helpers.TestAssetHelper.videoPageAsset
 import org.mozilla.fenix.ui.efficiency.helpers.BaseTest
@@ -75,5 +78,38 @@ class MediaNotificationTest : BaseTest() {
             .openNotificationTray()
             .verifyNotificationDoesNotExist(NotificationSelectors.SYSTEM_NOTIFICATION(audioTestPage.title))
             .closeNotificationTray()
+    }
+
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/903595
+    @Critical
+    @Test
+    fun mediaSystemNotificationInPrivateModeTest() {
+        val audioTestPage = mockWebServer.audioPageAsset
+        // Private mode redacts the notification title to a generic string, not the page title.
+        val privateMediaNotification = getStringResource(mediaR.string.mozac_feature_media_notification_private_mode)
+
+        on.home.navigateToPage()
+        on.home.switchToPrivateBrowsingMode()
+
+        on.browserPage
+            .navigateToPage(audioTestPage.url.toString())
+            .clickMediaPlayButton()
+            .verifyMediaPlaybackState(MediaSession.PlaybackState.PLAYING)
+
+        // While playing, the tab carries the "Playing media" indicator.
+        on.tabDrawer.navigateToPage().verifyMediaTabIndicatorDisplayed()
+        on.browserPage.navigateToPage()
+
+        on.notification
+            .openNotificationTray()
+            .verifyNotificationExists(NotificationSelectors.SYSTEM_NOTIFICATION(privateMediaNotification))
+            .clickMediaNotificationControlButton("Pause")
+            .verifyMediaNotificationButtonState("Play")
+            .closeNotificationTray()
+
+        on.browserPage.verifyMediaPlaybackState(MediaSession.PlaybackState.PAUSED)
+
+        // Pausing clears the PLAYING state, so the indicator is gone.
+        on.tabDrawer.navigateToPage().verifyMediaTabIndicatorNotDisplayed()
     }
 }

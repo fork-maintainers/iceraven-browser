@@ -9,6 +9,7 @@ import mozilla.components.concept.engine.mediasession.MediaSession
 import org.junit.Rule
 import org.junit.Test
 import org.mozilla.fenix.customannotations.Converted
+import org.mozilla.fenix.customannotations.Critical
 import org.mozilla.fenix.customannotations.SmokeTest
 import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.helpers.FenixTestRule
@@ -20,7 +21,6 @@ import org.mozilla.fenix.helpers.TestAssetHelper.audioPageAsset
 import org.mozilla.fenix.helpers.TestAssetHelper.videoPageAsset
 import org.mozilla.fenix.helpers.TestHelper.appContext
 import org.mozilla.fenix.helpers.TestHelper.mDevice
-import org.mozilla.fenix.helpers.TestHelper.verifySnackBarText
 import org.mozilla.fenix.helpers.perf.DetectMemoryLeaksRule
 import org.mozilla.fenix.ui.robots.browserScreen
 import org.mozilla.fenix.ui.robots.clickPageObject
@@ -141,14 +141,19 @@ class MediaNotificationTest {
     }
 
     // TestRail: https://mozilla.testrail.io/index.php?/cases/view/903595
+    @Converted(
+        replacedBy =
+            ["org.mozilla.fenix.ui.efficiency.tests.MediaNotificationTest#mediaSystemNotificationInPrivateModeTest"],
+        bug = 2079212,
+        since = "2026-10",
+    )
+    @Critical
     @Test
     fun mediaSystemNotificationInPrivateModeTest() {
         val audioTestPage = mockWebServer.audioPageAsset
 
-        // RetryTestRule.cleanup() does not clear tabs between retries (its removeTabs
-        // parameter is hardcoded to false at the call site), so tabs from a failed
-        // attempt accumulate and break closeTab()'s single-tab assumption. Clear them
-        // explicitly here so the tab drawer starts with a single tab on every attempt.
+        // RetryTestRule does not clear tabs between retries; the tray-wide indicator assertions below need
+        // exactly the one private tab this test opens, so drop any leftovers.
         appContext.components.useCases.tabsUseCases.removeAllTabs()
 
         homeScreen(composeTestRule) {}
@@ -160,6 +165,11 @@ class MediaNotificationTest {
                 clickPageObject(composeTestRule, MatcherHelper.itemWithText("Play"))
                 assertPlaybackState(browserStore, MediaSession.PlaybackState.PLAYING)
             }
+            // While playing, the tab carries the "Playing media" indicator.
+            .openTabDrawer(composeTestRule) {
+                verifyTabMediaIndicator()
+            }
+            .closeTabDrawer {}
             .openNotificationShade {
                 verifySystemNotificationExists("A site is playing media")
                 clickMediaNotificationControlButton("Pause")
@@ -171,19 +181,9 @@ class MediaNotificationTest {
         browserScreen(composeTestRule) {
                 assertPlaybackState(browserStore, MediaSession.PlaybackState.PAUSED)
             }
+            // Pausing clears the PLAYING state, so the indicator is gone.
             .openTabDrawer(composeTestRule) {
-                closeTab()
-                verifySnackBarText(composeTestRule, "Private tab closed")
+                verifyTabMediaIndicatorDoesNotExist()
             }
-
-        mDevice.openNotification()
-
-        notificationShade {
-            verifySystemNotificationDoesNotExist("A site is playing media")
-        }
-
-        // close notification shade before and go back to regular mode before the next test
-        mDevice.pressBack()
-        homeScreen(composeTestRule) {}.togglePrivateBrowsingMode()
     }
 }

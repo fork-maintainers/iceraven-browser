@@ -77,6 +77,17 @@ class TabDrawerPage(composeRule: AndroidComposeTestRule<HomeActivityIntentTestRu
         return this
     }
 
+    fun verifyMediaTabIndicatorDisplayed(): TabDrawerPage {
+        mozVerify(TabDrawerSelectors.TAB_ITEM_MEDIA_INDICATOR)
+        return this
+    }
+
+    // Polls until gone: the tray clears the indicator a recomposition after the store pause the test asserted.
+    fun verifyMediaTabIndicatorNotDisplayed(): TabDrawerPage {
+        mozWaitUntilAbsent(TabDrawerSelectors.TAB_ITEM_MEDIA_INDICATOR)
+        return this
+    }
+
     fun verifyNoOpenTabsInNormalBrowsing(): TabDrawerPage {
         mozVerifyElementsByGroup(TabDrawerSelectors.Group.EMPTY_NORMAL_BROWSING_TAB_DRAWER_VIEW)
         return this
