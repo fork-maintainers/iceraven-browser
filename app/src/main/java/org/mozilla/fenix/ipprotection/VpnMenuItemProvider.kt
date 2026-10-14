@@ -15,6 +15,7 @@ import mozilla.components.compose.menu.data.MenuItem
 import mozilla.components.compose.menu.data.MenuItemActionButton
 import mozilla.components.compose.menu.data.MenuItemBadge
 import mozilla.components.compose.menu.data.MenuItemSummary
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.data.StandardMenuItem
 import mozilla.components.compose.menu.store.MenuEvent
 import mozilla.components.compose.menu.ui.MenuItemIconRes
@@ -110,7 +111,7 @@ class VpnMenuItemProvider(
 
 private fun IPProtectionMenuState.toMenuItem() =
     StandardMenuItem(
-        title = Text.Resource(R.string.ip_protection_toggle_label),
+        title = MenuItemTitle(Text.Resource(R.string.ip_protection_toggle_label)),
         icon = MenuItemIconRes(iconsR.drawable.mozac_ic_globe_24),
         // Only a toggle while it can actually be toggled - otherwise tapping it opens the VPN settings instead.
         role =

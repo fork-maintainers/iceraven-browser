@@ -23,6 +23,7 @@ import kotlinx.coroutines.launch
 import mozilla.components.compose.base.text.Text
 import mozilla.components.compose.menu.data.MenuItem
 import mozilla.components.compose.menu.data.MenuItemSummary
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.data.StandardMenuItem
 import mozilla.components.compose.menu.store.MenuEvent
 import mozilla.components.compose.menu.ui.MenuItemIcon
@@ -100,7 +101,7 @@ class MozillaAccountMenuItemProvider(
         val title = title ?: return null
 
         return StandardMenuItem(
-            title = title,
+            title = MenuItemTitle(title),
             summary = summary,
             icon = icon,
             onClickEvent =

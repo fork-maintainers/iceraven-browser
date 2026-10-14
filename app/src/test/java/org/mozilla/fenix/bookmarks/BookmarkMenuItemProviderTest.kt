@@ -21,6 +21,7 @@ import mozilla.components.browser.state.state.createCustomTab
 import mozilla.components.browser.state.state.createTab
 import mozilla.components.browser.state.store.BrowserStore
 import mozilla.components.compose.base.text.Text
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.data.StandardMenuItem
 import mozilla.components.compose.menu.ui.MenuItemIconRes
 import mozilla.components.compose.menu.ui.MenuItemState
@@ -244,14 +245,14 @@ class BookmarkMenuItemProviderTest {
 
         val addBookmarkItem =
             StandardMenuItem(
-                title = Text.Resource(R.string.browser_menu_bookmark_this_page_2),
+                title = MenuItemTitle(Text.Resource(R.string.browser_menu_bookmark_this_page_2)),
                 icon = MenuItemIconRes(iconsR.drawable.mozac_ic_bookmark_24),
                 onClickEvent = MenuAction.AddBookmark,
             )
 
         val editBookmarkItem =
             StandardMenuItem(
-                title = Text.Resource(R.string.browser_menu_edit_bookmark),
+                title = MenuItemTitle(Text.Resource(R.string.browser_menu_edit_bookmark)),
                 icon = MenuItemIconRes(iconsR.drawable.mozac_ic_bookmark_fill_24),
                 onClickEvent = MenuAction.Navigate.EditBookmark(guidToEdit = BOOKMARK_GUID),
                 state = MenuItemState.ACTIVE,

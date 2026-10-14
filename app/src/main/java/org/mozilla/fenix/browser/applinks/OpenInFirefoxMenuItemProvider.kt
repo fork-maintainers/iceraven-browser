@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import mozilla.components.compose.base.text.Text
 import mozilla.components.compose.menu.data.MenuItem
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.data.StandardMenuItem
 import mozilla.components.compose.menu.store.MenuEvent
 import mozilla.components.compose.menu.ui.MenuItemIconRes
@@ -32,7 +33,7 @@ class OpenInFirefoxMenuItemProvider(
     override val itemFlow: StateFlow<MenuItem?> =
         MutableStateFlow(
             StandardMenuItem(
-                title = Text.Resource(R.string.browser_menu_open_in_fenix, listOf(appName)),
+                title = MenuItemTitle(Text.Resource(R.string.browser_menu_open_in_fenix, listOf(appName))),
                 icon = MenuItemIconRes(iconsR.drawable.mozac_ic_external_link_24),
                 onClickEvent = MenuAction.OpenInFirefox,
             )

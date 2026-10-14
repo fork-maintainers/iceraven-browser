@@ -18,6 +18,7 @@ import mozilla.components.browser.state.state.createCustomTab
 import mozilla.components.browser.state.state.createTab
 import mozilla.components.browser.state.store.BrowserStore
 import mozilla.components.compose.base.text.Text
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.data.StandardMenuItem
 import mozilla.components.compose.menu.ui.MenuItemIconRes
 import mozilla.components.concept.engine.prompt.ShareData
@@ -44,7 +45,7 @@ class ShareMenuItemProviderTest {
 
         assertEquals(
             StandardMenuItem(
-                title = Text.Resource(R.string.browser_menu_share),
+                title = MenuItemTitle(Text.Resource(R.string.browser_menu_share)),
                 icon = MenuItemIconRes(iconsR.drawable.mozac_ic_share_android_24),
                 onClickEvent = MenuAction.Navigate.Share,
             ),

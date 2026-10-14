@@ -12,6 +12,7 @@ import mozilla.components.browser.state.state.BrowserState
 import mozilla.components.browser.state.state.createTab
 import mozilla.components.browser.state.store.BrowserStore
 import mozilla.components.compose.base.text.Text
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.data.StandardMenuItem
 import mozilla.components.compose.menu.ui.MenuItemIconRes
 import mozilla.components.feature.session.SessionUseCases
@@ -33,7 +34,7 @@ class SaveAsPdfMenuItemProviderTest {
         val provider = createProvider()
         val expectedItem =
             StandardMenuItem(
-                title = Text.Resource(R.string.browser_menu_save_as_pdf_2),
+                title = MenuItemTitle(Text.Resource(R.string.browser_menu_save_as_pdf_2)),
                 icon = MenuItemIconRes(iconsR.drawable.mozac_ic_save_file_24),
                 onClickEvent = MenuAction.SaveAsPdfRequested,
             )

@@ -23,6 +23,7 @@ import mozilla.components.compose.menu.data.MenuItem
 import mozilla.components.compose.menu.data.MenuItemActionButton
 import mozilla.components.compose.menu.data.MenuItemBadge
 import mozilla.components.compose.menu.data.MenuItemSummary
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.data.StandardMenuItem
 import mozilla.components.compose.menu.store.MenuEvent
 import mozilla.components.compose.menu.ui.MenuItemIcon
@@ -269,7 +270,7 @@ private data class MenuAddon(
 
 private fun ExtensionsStatus.toExtensionsManagerMenuItem(context: Context) =
     StandardMenuItem(
-        title = Text.Resource(R.string.browser_menu_extensions),
+        title = MenuItemTitle(Text.Resource(R.string.browser_menu_extensions)),
         icon = icon(context),
         onClickEvent = MenuAction.Navigate.ManageExtensions,
     )
@@ -289,7 +290,7 @@ private fun ExtensionsStatus.toCustomTabMenuItem(menuTarget: MenuTarget, context
     when {
         isProcessDisabled || actions.isEmpty() ->
             StandardMenuItem(
-                title = Text.Resource(R.string.browser_menu_extensions),
+                title = MenuItemTitle(Text.Resource(R.string.browser_menu_extensions)),
                 icon = icon(context),
                 summary =
                     MenuItemSummary(
@@ -307,7 +308,7 @@ private fun ExtensionsStatus.toCustomTabMenuItem(menuTarget: MenuTarget, context
             )
         else ->
             ExpandableMenuItem(
-                title = Text.Resource(R.string.browser_menu_extensions),
+                title = MenuItemTitle(Text.Resource(R.string.browser_menu_extensions)),
                 onClickEvent = MenuAction.OnExtensionsMenuClicked,
                 subMenuItems = actions.map { it.toMenuItem(menuTarget = menuTarget, ownedBy = null) },
                 icon = icon(context),
@@ -328,7 +329,7 @@ private fun ExtensionsStatus.toMenuItem(menuTarget: MenuTarget, context: Context
     // instead.
     if (isProcessDisabled || hasNothingToShow) {
         return StandardMenuItem(
-            title = Text.Resource(R.string.browser_menu_extensions),
+            title = MenuItemTitle(Text.Resource(R.string.browser_menu_extensions)),
             icon = icon(context),
             summary = summary,
             onClickEvent = MenuAction.Navigate.ManageExtensions,
@@ -343,7 +344,7 @@ private fun ExtensionsStatus.toMenuItem(menuTarget: MenuTarget, context: Context
     }
 
     return ExpandableMenuItem(
-        title = Text.Resource(R.string.browser_menu_extensions),
+        title = MenuItemTitle(Text.Resource(R.string.browser_menu_extensions)),
         onClickEvent = MenuAction.OnExtensionsMenuClicked,
         subMenuItems = extensionItems(menuTarget) + listOfNotNull(moreExtensionsItem()),
         icon = icon(context),
@@ -411,12 +412,14 @@ private fun ExtensionsStatus.moreExtensionsItem(): StandardMenuItem =
     when (installed.isEmpty()) {
         true ->
             StandardMenuItem(
-                title = Text.Resource(R.string.browser_menu_discover_more_extensions),
+                title = MenuItemTitle(Text.Resource(R.string.browser_menu_discover_more_extensions)),
                 onClickEvent = MenuAction.Navigate.DiscoverMoreExtensions,
+                // Hint that this opens a website rather than staying in the menu.
+                trailingIcon = iconsR.drawable.mozac_ic_external_link_24,
             )
         else ->
             StandardMenuItem(
-                title = Text.Resource(R.string.browser_menu_manage_extensions),
+                title = MenuItemTitle(Text.Resource(R.string.browser_menu_manage_extensions)),
                 onClickEvent = MenuAction.Navigate.ManageExtensions,
             )
     }
@@ -430,7 +433,7 @@ private fun ExtensionsStatus.moreExtensionsItem(): StandardMenuItem =
  */
 private fun WebExtensionMenuAction.toMenuItem(menuTarget: MenuTarget, ownedBy: Addon?) =
     StandardMenuItem(
-        title = Text.String(label),
+        title = MenuItemTitle(Text.String(label)),
         // Extensions the user already has installed are listed by what they offer for the current page, with a summary
         // for what the extension does being shown only for recommended extensions.
         summary = null,
@@ -460,7 +463,7 @@ private fun WebExtensionMenuAction.toMenuItem(menuTarget: MenuTarget, ownedBy: A
 
 private fun MenuAddon.toRecommendedItem() =
     StandardMenuItem(
-        title = Text.String(name),
+        title = MenuItemTitle(Text.String(name), maxLines = 1),
         summary = menuSummary,
         icon = addon.menuIcon,
         onClickEvent = MenuAction.Navigate.AddonDetails(addon),

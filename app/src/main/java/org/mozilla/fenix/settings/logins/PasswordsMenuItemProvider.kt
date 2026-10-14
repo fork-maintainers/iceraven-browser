@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import mozilla.components.compose.base.text.Text
 import mozilla.components.compose.menu.data.MenuItem
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.data.StandardMenuItem
 import mozilla.components.compose.menu.store.MenuEvent
 import mozilla.components.compose.menu.ui.MenuItemIconRes
@@ -30,7 +31,7 @@ class PasswordsMenuItemProvider(isAutofillSupported: Boolean) : MenuItemProvider
             when (isAutofillSupported) {
                 true ->
                     StandardMenuItem(
-                        title = Text.Resource(R.string.browser_menu_passwords),
+                        title = MenuItemTitle(Text.Resource(R.string.browser_menu_passwords)),
                         icon = MenuItemIconRes(iconsR.drawable.mozac_ic_login_24),
                         onClickEvent = MenuAction.Navigate.Passwords,
                     )

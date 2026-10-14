@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.stateIn
 import mozilla.components.browser.state.store.BrowserStore
 import mozilla.components.compose.base.text.Text
 import mozilla.components.compose.menu.data.MenuItem
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.data.StandardMenuItem
 import mozilla.components.compose.menu.store.MenuEvent
 import mozilla.components.compose.menu.ui.MenuItemIconRes
@@ -79,10 +80,12 @@ class OpenInAppMenuItemProvider(
 
         return StandardMenuItem(
             title =
-                when (val appName = externalApp?.appName?.takeIf { it.isNotEmpty() }) {
-                    null -> Text.Resource(R.string.browser_menu_open_app_link)
-                    else -> Text.Resource(R.string.browser_menu_open_in_fenix, listOf(appName))
-                },
+                MenuItemTitle(
+                    when (val appName = externalApp?.appName?.takeIf { it.isNotEmpty() }) {
+                        null -> Text.Resource(R.string.browser_menu_open_app_link)
+                        else -> Text.Resource(R.string.browser_menu_open_in_fenix, listOf(appName))
+                    }
+                ),
             icon =
                 MenuItemIconRes(
                     iconsR.drawable.mozac_ic_more_grid_24,

@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import mozilla.components.compose.base.text.Text
 import mozilla.components.compose.menu.data.MenuItem
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.data.StandardMenuItem
 import mozilla.components.compose.menu.store.MenuEvent
 import mozilla.components.compose.menu.ui.MenuItemIconRes
@@ -45,7 +46,10 @@ class QuitMenuItemProvider(
             when (deletesBrowsingDataOnQuit) {
                 true ->
                     StandardMenuItem(
-                        title = Text.Resource(R.string.browser_menu_delete_browsing_data_on_quit, listOf(appName)),
+                        title =
+                            MenuItemTitle(
+                                Text.Resource(R.string.browser_menu_delete_browsing_data_on_quit, listOf(appName))
+                            ),
                         icon = MenuItemIconRes(iconsR.drawable.mozac_ic_cross_circle_fill_24),
                         onClickEvent = MenuAction.DeleteBrowsingDataAndQuit,
                         state = MenuItemState.WARNING,

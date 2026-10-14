@@ -8,6 +8,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 import mozilla.components.compose.base.text.Text
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.data.StandardMenuItem
 import mozilla.components.compose.menu.ui.MenuItemIconRes
 import mozilla.components.ui.icons.R as iconsR
@@ -25,7 +26,7 @@ class HistoryMenuItemProviderTest {
 
         assertEquals(
             StandardMenuItem(
-                title = Text.Resource(R.string.library_history),
+                title = MenuItemTitle(Text.Resource(R.string.library_history)),
                 icon = MenuItemIconRes(iconsR.drawable.mozac_ic_history_24),
                 onClickEvent = MenuAction.Navigate.History,
             ),

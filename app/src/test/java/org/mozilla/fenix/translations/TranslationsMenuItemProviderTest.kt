@@ -22,6 +22,7 @@ import mozilla.components.browser.state.state.createCustomTab
 import mozilla.components.browser.state.store.BrowserStore
 import mozilla.components.compose.base.text.Text
 import mozilla.components.compose.menu.data.MenuItemBadge
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.data.StandardMenuItem
 import mozilla.components.compose.menu.ui.MenuItemIconRes
 import mozilla.components.compose.menu.ui.MenuItemState
@@ -76,7 +77,7 @@ class TranslationsMenuItemProviderTest {
 
             assertEquals(
                 StandardMenuItem(
-                    title = Text.Resource(R.string.browser_menu_translated),
+                    title = MenuItemTitle(Text.Resource(R.string.browser_menu_translated)),
                     icon = MenuItemIconRes(iconsR.drawable.mozac_ic_translate_active_24),
                     onClickEvent = MenuAction.Navigate.Translate,
                     badge = MenuItemBadge(text = Text.String(LANGUAGE_NAME), state = MenuItemState.ACTIVE),
@@ -236,7 +237,7 @@ class TranslationsMenuItemProviderTest {
 
     private fun translatePageItem(canTranslate: Boolean = true) =
         StandardMenuItem(
-            title = Text.Resource(R.string.browser_menu_translate_page_2),
+            title = MenuItemTitle(Text.Resource(R.string.browser_menu_translate_page_2)),
             icon = MenuItemIconRes(iconsR.drawable.mozac_ic_translate_24),
             onClickEvent = MenuAction.Navigate.Translate,
             state =

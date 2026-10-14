@@ -13,6 +13,7 @@ import kotlinx.coroutines.launch
 import mozilla.components.browser.state.store.BrowserStore
 import mozilla.components.compose.base.text.Text
 import mozilla.components.compose.menu.data.MenuItem
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.data.StandardMenuItem
 import mozilla.components.compose.menu.store.MenuEvent
 import mozilla.components.compose.menu.ui.MenuItemIconRes
@@ -123,14 +124,14 @@ class BookmarkMenuItemProvider(
 
 private val ADD_BOOKMARK_ITEM =
     StandardMenuItem(
-        title = Text.Resource(R.string.browser_menu_bookmark_this_page_2),
+        title = MenuItemTitle(Text.Resource(R.string.browser_menu_bookmark_this_page_2)),
         icon = MenuItemIconRes(iconsR.drawable.mozac_ic_bookmark_24),
         onClickEvent = MenuAction.AddBookmark,
     )
 
 private fun editBookmarkItem(guidToEdit: String) =
     StandardMenuItem(
-        title = Text.Resource(R.string.browser_menu_edit_bookmark),
+        title = MenuItemTitle(Text.Resource(R.string.browser_menu_edit_bookmark)),
         icon = MenuItemIconRes(iconsR.drawable.mozac_ic_bookmark_fill_24),
         onClickEvent = MenuAction.Navigate.EditBookmark(guidToEdit = guidToEdit),
         state = MenuItemState.ACTIVE,

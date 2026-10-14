@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import mozilla.components.compose.base.text.Text
 import mozilla.components.compose.menu.data.MenuItem
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.data.StandardMenuItem
 import mozilla.components.compose.menu.store.MenuEvent
 import mozilla.components.compose.menu.ui.MenuItemIconRes
@@ -50,7 +51,7 @@ class DownloadsMenuItemProvider(
 
     private fun createMenuItem(isHighlighted: Boolean) =
         StandardMenuItem(
-            title = Text.Resource(R.string.library_downloads),
+            title = MenuItemTitle(Text.Resource(R.string.library_downloads)),
             icon =
                 MenuItemIconRes(
                     iconsR.drawable.mozac_ic_download_24,

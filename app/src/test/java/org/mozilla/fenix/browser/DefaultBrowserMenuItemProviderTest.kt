@@ -15,6 +15,7 @@ import kotlin.test.assertTrue
 import mozilla.components.compose.base.text.Text
 import mozilla.components.compose.menu.data.BannerMenuItem
 import mozilla.components.compose.menu.data.MenuItemSummary
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.ui.MenuItemIconRes
 import org.junit.Test
 import org.mozilla.fenix.R
@@ -34,7 +35,7 @@ class DefaultBrowserMenuItemProviderTest {
 
         assertEquals(
             BannerMenuItem(
-                title = Text.Resource(R.string.browser_menu_default_banner_title, listOf(APP_NAME)),
+                title = MenuItemTitle(Text.Resource(R.string.browser_menu_default_banner_title, listOf(APP_NAME))),
                 summary =
                     MenuItemSummary(
                         text = Text.Resource(R.string.browser_menu_default_banner_subtitle_2),

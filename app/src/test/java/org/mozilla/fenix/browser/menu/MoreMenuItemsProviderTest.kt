@@ -17,6 +17,7 @@ import mozilla.components.browser.state.state.BrowserState
 import mozilla.components.browser.state.state.createTab
 import mozilla.components.browser.state.store.BrowserStore
 import mozilla.components.compose.base.text.Text
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.data.StandardMenuItem
 import mozilla.components.compose.menu.ui.MenuItemIconRes
 import mozilla.components.compose.menu.ui.MenuItemState
@@ -177,8 +178,14 @@ class MoreMenuItemsProviderTest {
 
     private companion object {
         val translateItem =
-            StandardMenuItem(title = Text.String("Translate"), onClickEvent = MenuAction.Navigate.Translate)
+            StandardMenuItem(
+                title = MenuItemTitle(Text.String("Translate")),
+                onClickEvent = MenuAction.Navigate.Translate,
+            )
         val summarizeItem =
-            StandardMenuItem(title = Text.String("Summarize"), onClickEvent = MenuAction.Navigate.Summarizer)
+            StandardMenuItem(
+                title = MenuItemTitle(Text.String("Summarize")),
+                onClickEvent = MenuAction.Navigate.Summarizer,
+            )
     }
 }

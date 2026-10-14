@@ -18,6 +18,7 @@ import mozilla.components.browser.state.state.TabSessionState
 import mozilla.components.browser.state.state.createCustomTab
 import mozilla.components.browser.state.store.BrowserStore
 import mozilla.components.compose.base.text.Text
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.data.StandardMenuItem
 import mozilla.components.compose.menu.ui.MenuItemIconRes
 import mozilla.components.compose.menu.ui.MenuItemState
@@ -187,7 +188,7 @@ class ForwardMenuItemProviderTest {
 
     private fun expectedItem(canGoForward: Boolean) =
         StandardMenuItem(
-            title = Text.Resource(R.string.browser_menu_forward),
+            title = MenuItemTitle(Text.Resource(R.string.browser_menu_forward)),
             icon = MenuItemIconRes(iconsR.drawable.mozac_ic_forward_24),
             onClickEvent = MenuAction.Navigate.Forward(viewHistory = false),
             onLongClickEvent = MenuAction.Navigate.Forward(viewHistory = true),

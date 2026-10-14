@@ -19,6 +19,7 @@ import mozilla.components.browser.state.state.TabSessionState
 import mozilla.components.browser.state.state.createCustomTab
 import mozilla.components.browser.state.store.BrowserStore
 import mozilla.components.compose.base.text.Text
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.data.StandardMenuItem
 import mozilla.components.compose.menu.ui.MenuItemIconRes
 import mozilla.components.compose.menu.ui.MenuItemState
@@ -317,7 +318,7 @@ class BackMenuItemProviderTest {
 
     private fun expectedItem(canGoBack: Boolean) =
         StandardMenuItem(
-            title = Text.Resource(R.string.browser_menu_back),
+            title = MenuItemTitle(Text.Resource(R.string.browser_menu_back)),
             icon = MenuItemIconRes(iconsR.drawable.mozac_ic_back_24),
             onClickEvent = MenuAction.Navigate.Back(viewHistory = false),
             onLongClickEvent = MenuAction.Navigate.Back(viewHistory = true),

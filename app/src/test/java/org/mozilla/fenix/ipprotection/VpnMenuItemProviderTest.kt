@@ -24,6 +24,7 @@ import mozilla.components.compose.base.text.Text
 import mozilla.components.compose.menu.data.MenuItemActionButton
 import mozilla.components.compose.menu.data.MenuItemBadge
 import mozilla.components.compose.menu.data.MenuItemSummary
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.data.StandardMenuItem
 import mozilla.components.compose.menu.ui.MenuItemIconRes
 import mozilla.components.compose.menu.ui.MenuItemState
@@ -212,7 +213,7 @@ class VpnMenuItemProviderTest {
         role: Role = Switch,
     ) =
         StandardMenuItem(
-            title = Text.Resource(R.string.ip_protection_toggle_label),
+            title = MenuItemTitle(Text.Resource(R.string.ip_protection_toggle_label)),
             icon = MenuItemIconRes(iconsR.drawable.mozac_ic_globe_24),
             role = role,
             onClickEvent = MenuAction.IPProtectionToggle,

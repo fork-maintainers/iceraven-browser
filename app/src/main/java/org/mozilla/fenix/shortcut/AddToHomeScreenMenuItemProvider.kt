@@ -13,6 +13,7 @@ import kotlinx.coroutines.launch
 import mozilla.components.browser.state.store.BrowserStore
 import mozilla.components.compose.base.text.Text
 import mozilla.components.compose.menu.data.MenuItem
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.data.StandardMenuItem
 import mozilla.components.compose.menu.store.MenuEvent
 import mozilla.components.compose.menu.ui.MenuItemIconRes
@@ -68,11 +69,13 @@ class AddToHomeScreenMenuItemProvider(
 
         return StandardMenuItem(
             title =
-                Text.Resource(
-                    when (webAppUseCases.isInstallable()) {
-                        true -> R.string.browser_menu_add_app_to_homescreen
-                        else -> R.string.browser_menu_add_to_homescreen
-                    }
+                MenuItemTitle(
+                    Text.Resource(
+                        when (webAppUseCases.isInstallable()) {
+                            true -> R.string.browser_menu_add_app_to_homescreen
+                            else -> R.string.browser_menu_add_to_homescreen
+                        }
+                    )
                 ),
             icon = MenuItemIconRes(iconsR.drawable.mozac_ic_add_to_homescreen_24),
             onClickEvent = MenuAction.Navigate.AddToHomeScreen,

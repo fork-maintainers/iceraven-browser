@@ -16,6 +16,7 @@ import mozilla.components.browser.state.store.BrowserStore
 import mozilla.components.compose.base.text.Text
 import mozilla.components.compose.menu.data.MenuItem
 import mozilla.components.compose.menu.data.MenuItemBadge
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.data.StandardMenuItem
 import mozilla.components.compose.menu.store.MenuEvent
 import mozilla.components.compose.menu.ui.MenuItemIconRes
@@ -96,7 +97,7 @@ private fun SessionState.isReaderViewActive() = (this as? TabSessionState)?.read
 
 private fun translatedItem(language: String?) =
     StandardMenuItem(
-        title = Text.Resource(R.string.browser_menu_translated),
+        title = MenuItemTitle(Text.Resource(R.string.browser_menu_translated)),
         icon = MenuItemIconRes(iconsR.drawable.mozac_ic_translate_active_24),
         onClickEvent = MenuAction.Navigate.Translate,
         badge = language?.let { MenuItemBadge(text = Text.String(it), state = MenuItemState.ACTIVE) },
@@ -105,7 +106,7 @@ private fun translatedItem(language: String?) =
 
 private fun translatableItem(canTranslate: Boolean) =
     StandardMenuItem(
-        title = Text.Resource(R.string.browser_menu_translate_page_2),
+        title = MenuItemTitle(Text.Resource(R.string.browser_menu_translate_page_2)),
         icon = MenuItemIconRes(iconsR.drawable.mozac_ic_translate_24),
         onClickEvent = MenuAction.Navigate.Translate,
         state =

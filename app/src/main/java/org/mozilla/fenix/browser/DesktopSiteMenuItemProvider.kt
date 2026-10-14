@@ -15,6 +15,7 @@ import mozilla.components.browser.state.store.BrowserStore
 import mozilla.components.compose.base.text.Text
 import mozilla.components.compose.menu.data.MenuItem
 import mozilla.components.compose.menu.data.MenuItemBadge
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.data.StandardMenuItem
 import mozilla.components.compose.menu.store.MenuEvent
 import mozilla.components.compose.menu.ui.MenuItemIconRes
@@ -87,7 +88,7 @@ private fun DesktopSiteStatus.toMenuItem(): MenuItem {
         }
 
     return StandardMenuItem(
-        title = Text.Resource(R.string.browser_menu_desktop_site),
+        title = MenuItemTitle(Text.Resource(R.string.browser_menu_desktop_site)),
         icon = MenuItemIconRes(iconsR.drawable.mozac_ic_device_desktop_24),
         onClickEvent =
             when (isDesktopMode) {

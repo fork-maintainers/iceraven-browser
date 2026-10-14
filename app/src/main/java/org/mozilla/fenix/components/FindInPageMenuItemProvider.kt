@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import mozilla.components.compose.base.text.Text
 import mozilla.components.compose.menu.data.MenuItem
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.data.StandardMenuItem
 import mozilla.components.compose.menu.store.MenuEvent
 import mozilla.components.compose.menu.ui.MenuItemIconRes
@@ -29,7 +30,7 @@ class FindInPageMenuItemProvider(private val appStore: AppStore) : MenuItemProvi
     override val itemFlow: StateFlow<MenuItem?> =
         MutableStateFlow(
             StandardMenuItem(
-                title = Text.Resource(R.string.browser_menu_find_in_page),
+                title = MenuItemTitle(Text.Resource(R.string.browser_menu_find_in_page)),
                 icon = MenuItemIconRes(iconsR.drawable.mozac_ic_search_24),
                 onClickEvent = MenuAction.FindInPage,
             )

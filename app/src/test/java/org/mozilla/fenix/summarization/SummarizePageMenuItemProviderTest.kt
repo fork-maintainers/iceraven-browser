@@ -23,6 +23,7 @@ import mozilla.components.browser.state.state.TabSessionState
 import mozilla.components.browser.state.state.createCustomTab
 import mozilla.components.browser.state.store.BrowserStore
 import mozilla.components.compose.base.text.Text
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.data.StandardMenuItem
 import mozilla.components.compose.menu.ui.MenuItemIconRes
 import mozilla.components.compose.menu.ui.MenuItemState
@@ -268,7 +269,7 @@ class SummarizePageMenuItemProviderTest {
         isHighlighted: Boolean = false,
     ) =
         StandardMenuItem(
-            title = Text.Resource(R.string.browser_menu_summarize_page),
+            title = MenuItemTitle(Text.Resource(R.string.browser_menu_summarize_page)),
             icon = MenuItemIconRes(iconsR.drawable.mozac_ic_lightning_24, isHighlighted = isHighlighted),
             onClickEvent = MenuAction.Navigate.Summarizer,
             onShownEvent = MenuAction.OnSummarizationMenuExposed,

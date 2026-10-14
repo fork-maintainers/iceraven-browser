@@ -9,6 +9,7 @@ import kotlin.test.assertFalse
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 import mozilla.components.compose.base.text.Text
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.data.StandardMenuItem
 import mozilla.components.compose.menu.ui.MenuItemIconRes
 import mozilla.components.ui.icons.R as iconsR
@@ -26,7 +27,7 @@ class PasswordsMenuItemProviderTest {
 
         assertEquals(
             StandardMenuItem(
-                title = Text.Resource(R.string.browser_menu_passwords),
+                title = MenuItemTitle(Text.Resource(R.string.browser_menu_passwords)),
                 icon = MenuItemIconRes(iconsR.drawable.mozac_ic_login_24),
                 onClickEvent = MenuAction.Navigate.Passwords,
             ),

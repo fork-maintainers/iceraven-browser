@@ -11,6 +11,7 @@ import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 import kotlinx.coroutines.test.runTest
 import mozilla.components.compose.base.text.Text
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.data.StandardMenuItem
 import mozilla.components.compose.menu.ui.MenuItemIconRes
 import mozilla.components.ui.icons.R as iconsR
@@ -31,7 +32,7 @@ class OpenInFirefoxMenuItemProviderTest {
 
         assertEquals(
             StandardMenuItem(
-                title = Text.Resource(R.string.browser_menu_open_in_fenix, listOf(APP_NAME)),
+                title = MenuItemTitle(Text.Resource(R.string.browser_menu_open_in_fenix, listOf(APP_NAME))),
                 icon = MenuItemIconRes(iconsR.drawable.mozac_ic_external_link_24),
                 onClickEvent = MenuAction.OpenInFirefox,
             ),

@@ -14,6 +14,7 @@ import mozilla.components.browser.state.state.SessionState
 import mozilla.components.browser.state.store.BrowserStore
 import mozilla.components.compose.base.text.Text
 import mozilla.components.compose.menu.data.MenuItem
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.data.StandardMenuItem
 import mozilla.components.compose.menu.store.MenuEvent
 import mozilla.components.compose.menu.ui.MenuItemIconRes
@@ -75,7 +76,7 @@ private fun SessionState?.forwardItem(): MenuItem {
     val state = if (canGoForward) MenuItemState.DEFAULT else MenuItemState.DISABLED
 
     return StandardMenuItem(
-        title = Text.Resource(R.string.browser_menu_forward),
+        title = MenuItemTitle(Text.Resource(R.string.browser_menu_forward)),
         icon = MenuItemIconRes(iconsR.drawable.mozac_ic_forward_24),
         onClickEvent = MenuAction.Navigate.Forward(viewHistory = false),
         onLongClickEvent = MenuAction.Navigate.Forward(viewHistory = true),

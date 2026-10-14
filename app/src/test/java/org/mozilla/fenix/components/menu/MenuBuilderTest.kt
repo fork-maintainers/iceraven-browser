@@ -13,6 +13,7 @@ import kotlinx.coroutines.test.runTest
 import mozilla.components.compose.base.text.Text
 import mozilla.components.compose.menu.data.ExpandableMenuItem
 import mozilla.components.compose.menu.data.MenuItem
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.data.MenuItemsGroup
 import mozilla.components.compose.menu.data.StandardMenuItem
 import mozilla.components.compose.menu.store.MenuEvent
@@ -202,7 +203,7 @@ class MenuBuilderTest {
                 ): ExpandableMenuItem? {
                     receivedChildren = subMenuItems
 
-                    itemFlow.value = moreItem.copy(title = Text.String("Newer header"))
+                    itemFlow.value = moreItem.copy(title = MenuItemTitle(Text.String("Newer header")))
                     return super.updateWithSubMenuItems(item, subMenuItems)
                 }
             }
@@ -237,9 +238,9 @@ class MenuBuilderTest {
         val builder = createExpandingMenuBuilder(MutableStateFlow(findInPageItem), header)
         assertEquals(moreItem.title, builder.menuStructure.first().single().items.single().title)
 
-        header.value = moreItem.copy(title = Text.String("Updated More"))
+        header.value = moreItem.copy(title = MenuItemTitle(Text.String("Updated More")))
 
-        assertEquals(Text.String("Updated More"), builder.menuStructure.first().single().items.single().title)
+        assertEquals(Text.String("Updated More"), builder.menuStructure.first().single().items.single().title.text)
     }
 
     @Test
@@ -302,14 +303,17 @@ class MenuBuilderTest {
             )
 
         builder.menuStructure.first()
-        header.value = moreItem.copy(title = Text.String("Updated More"))
+        header.value = moreItem.copy(title = MenuItemTitle(Text.String("Updated More")))
         builder.menuStructure.first()
-        val updatedFindInPage = findInPageItem.copy(title = Text.String("Updated Find in page"))
+        val updatedFindInPage = findInPageItem.copy(title = MenuItemTitle(Text.String("Updated Find in page")))
         expandingTo.value = updatedFindInPage
 
         assertEquals(
             listOf(
-                moreItem.copy(title = Text.String("Updated More"), subMenuItems = listOf(updatedFindInPage)),
+                moreItem.copy(
+                    title = MenuItemTitle(Text.String("Updated More")),
+                    subMenuItems = listOf(updatedFindInPage),
+                ),
                 updatedFindInPage,
             ),
             builder.menuStructure.first().single().items,
@@ -336,13 +340,14 @@ class MenuBuilderTest {
     private companion object {
         const val MENU_GROUP_ID = "section"
 
-        val readerViewItem = StandardMenuItem(title = Text.String("Item"), onClickEvent = TestMenuEvent)
+        val readerViewItem = StandardMenuItem(title = MenuItemTitle(Text.String("Item")), onClickEvent = TestMenuEvent)
 
-        val findInPageItem = StandardMenuItem(title = Text.String("Find in page"), onClickEvent = TestMenuEvent)
+        val findInPageItem =
+            StandardMenuItem(title = MenuItemTitle(Text.String("Find in page")), onClickEvent = TestMenuEvent)
 
         val moreItem =
             ExpandableMenuItem(
-                title = Text.String("More"),
+                title = MenuItemTitle(Text.String("More")),
                 onClickEvent = TestMenuEvent,
                 subMenuItems = emptyList(),
             )

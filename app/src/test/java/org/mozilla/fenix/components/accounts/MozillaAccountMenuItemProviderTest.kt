@@ -21,6 +21,7 @@ import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
 import mozilla.components.compose.base.text.Text
 import mozilla.components.compose.menu.data.MenuItemSummary
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.data.StandardMenuItem
 import mozilla.components.compose.menu.ui.MenuItemIconBitmap
 import mozilla.components.compose.menu.ui.MenuItemIconDrawable
@@ -137,7 +138,7 @@ class MozillaAccountMenuItemProviderTest {
 
             val item = provider().itemFlow.value as StandardMenuItem
 
-            assertEquals(Text.String(DISPLAY_NAME), item.title)
+            assertEquals(Text.String(DISPLAY_NAME), item.title.text)
             assertEquals(
                 MenuItemSummary(
                     text = Text.Resource(R.string.browser_menu_syncing_paused_caption),
@@ -161,7 +162,7 @@ class MozillaAccountMenuItemProviderTest {
 
             val item = provider().itemFlow.value as StandardMenuItem
 
-            assertEquals(Text.Resource(R.string.browser_menu_sign_back_in_to_sync), item.title)
+            assertEquals(Text.Resource(R.string.browser_menu_sign_back_in_to_sync), item.title.text)
         }
 
     @Test
@@ -179,7 +180,7 @@ class MozillaAccountMenuItemProviderTest {
 
         syncState.value = SyncState(account = account, accountState = Authenticated)
 
-        assertEquals(Text.String(DISPLAY_NAME), provider.itemFlow.first { it != null }?.title)
+        assertEquals(Text.String(DISPLAY_NAME), provider.itemFlow.first { it != null }?.title?.text)
     }
 
     @Test
@@ -220,13 +221,13 @@ class MozillaAccountMenuItemProviderTest {
     fun `WHEN the account changes THEN update the item`() = runTest {
         syncState.value = SyncState(accountState = NotAuthenticated)
         val provider = provider()
-        assertEquals(Text.Resource(R.string.browser_menu_sign_in), provider.itemFlow.value?.title)
+        assertEquals(Text.Resource(R.string.browser_menu_sign_in), provider.itemFlow.value?.title?.text)
 
         syncState.value = SyncState(account = account, accountState = Authenticated)
 
-        val updated = provider.itemFlow.first { it?.title == Text.String(DISPLAY_NAME) }
+        val updated = provider.itemFlow.first { it?.title?.text == Text.String(DISPLAY_NAME) }
 
-        assertEquals(Text.String(DISPLAY_NAME), updated?.title)
+        assertEquals(Text.String(DISPLAY_NAME), updated?.title?.text)
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
@@ -318,7 +319,7 @@ class MozillaAccountMenuItemProviderTest {
         accountState: AccountState,
     ) =
         StandardMenuItem(
-            title = title,
+            title = MenuItemTitle(title),
             summary = MenuItemSummary(text = summary, maxLines = SUMMARY_MAX_LINES),
             icon = MenuItemIconRes(iconsR.drawable.mozac_ic_avatar_circle_24),
             onClickEvent =

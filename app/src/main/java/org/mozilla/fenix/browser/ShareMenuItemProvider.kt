@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.StateFlow
 import mozilla.components.browser.state.store.BrowserStore
 import mozilla.components.compose.base.text.Text
 import mozilla.components.compose.menu.data.MenuItem
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.data.StandardMenuItem
 import mozilla.components.compose.menu.store.MenuEvent
 import mozilla.components.compose.menu.ui.MenuItemIconRes
@@ -40,7 +41,7 @@ class ShareMenuItemProvider(
     override val itemFlow: StateFlow<MenuItem?> =
         MutableStateFlow(
             StandardMenuItem(
-                title = Text.Resource(R.string.browser_menu_share),
+                title = MenuItemTitle(Text.Resource(R.string.browser_menu_share)),
                 icon = MenuItemIconRes(iconsR.drawable.mozac_ic_share_android_24),
                 onClickEvent = MenuAction.Navigate.Share,
             )
