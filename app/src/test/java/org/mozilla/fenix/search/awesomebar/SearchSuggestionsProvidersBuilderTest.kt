@@ -1154,7 +1154,7 @@ class SearchSuggestionsProvidersBuilderTest {
     }
 
     @Test
-    fun `GIVEN a search from the default engine with no suggestions asked WHEN configuring providers THEN add only search engine suggestion provider`() {
+    fun `GIVEN a search from the default engine with no suggestions asked WHEN configuring providers THEN retain explicit search`() {
         val settings: Settings = mockk(relaxed = true)
         every { components.settings } returns settings
         every { browsingModeManager.mode } returns BrowsingMode.Normal
@@ -1176,7 +1176,7 @@ class SearchSuggestionsProvidersBuilderTest {
 
         assertEquals(0, result.filterIsInstance<HistoryStorageSuggestionProvider>().size)
         assertEquals(0, result.filterIsInstance<BookmarksStorageSuggestionProvider>().size)
-        assertEquals(0, result.filterIsInstance<SearchActionProvider>().size)
+        assertEquals(1, result.filterIsInstance<SearchActionProvider>().size)
         assertEquals(0, result.filterIsInstance<SearchSuggestionProvider>().size)
         assertEquals(0, result.filterIsInstance<SyncedTabsStorageSuggestionProvider>().size)
         assertEquals(0, result.filterIsInstance<SessionSuggestionProvider>().size)
