@@ -2030,6 +2030,13 @@ class Settings(
             default = false,
         )
 
+    /** The app version code that last published the generated search bar widget previews. */
+    var searchBarWidgetPreviewsVersion by
+        intPreference(
+            appContext.getPreferenceKey(R.string.pref_key_search_bar_widget_previews_version),
+            default = 0,
+        )
+
     /** Indicates if the "pocket_recommendations" database has been deleted. */
     private var hasDeletedLegacyPocketDatabase by
         booleanPreference(

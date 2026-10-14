@@ -152,6 +152,7 @@ import org.mozilla.fenix.theme.ThemeProvider
 import org.mozilla.fenix.utils.Settings
 import org.mozilla.fenix.utils.isLargeScreenSize
 import org.mozilla.fenix.wallpapers.Wallpaper
+import org.mozilla.fenix.widget.glance.SearchBarWidgetPreviews
 
 private const val RAM_THRESHOLD_MEGABYTES = 1024
 private const val BYTES_TO_MEGABYTES_CONVERSION = 1024.0 * 1024.0
@@ -507,6 +508,7 @@ open class FenixApplication : Application(), Provider, ThemeProvider {
         queueNimbusFetchInForeground(queue)
         queueDownloadWallpapers(queue)
         queueUpdateAutofillServiceState(queue)
+        queuePublishSearchBarWidgetPreviews(queue)
 
         if (components.settings.enableFxSuggest) {
             queueSuggestIngest(queue)
@@ -631,6 +633,13 @@ open class FenixApplication : Application(), Provider, ThemeProvider {
         runOnVisualCompleteness(queue) {
             applicationScope.launch(ioDispatcher) {
                 updateAutofillServiceState()
+            }
+        }
+
+    private fun queuePublishSearchBarWidgetPreviews(queue: RunWhenReadyQueue) =
+        runOnVisualCompleteness(queue) {
+            applicationScope.launch(ioDispatcher) {
+                SearchBarWidgetPreviews.publishIfNeeded(this@FenixApplication)
             }
         }
 
