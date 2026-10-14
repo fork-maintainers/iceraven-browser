@@ -290,8 +290,7 @@ class MenuFragment : BottomSheetDialogFragment() {
                     MenuAccessPoint.Home -> MenuTarget.Home
                     MenuAccessPoint.Browser -> MenuTarget.BrowserTab
                     MenuAccessPoint.External ->
-                        args.customTabSessionId?.let { MenuTarget.CustomTab(it, args.isSandboxCustomTab) }
-                            ?: MenuTarget.BrowserTab
+                        args.customTabSessionId?.let { MenuTarget.CustomTab(it) } ?: MenuTarget.BrowserTab
                 },
             browserStore = components.core.store,
             appStore = components.appStore,

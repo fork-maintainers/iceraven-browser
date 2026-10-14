@@ -25,7 +25,7 @@ sealed interface MenuTarget {
     }
 
     /** The menu will be shown for a custom tab, so its menu items should target that custom tab. */
-    data class CustomTab(val customTabId: String, val isSandboxed: Boolean = false) : MenuTarget {
+    data class CustomTab(val customTabId: String) : MenuTarget {
         override fun browserSessionFrom(state: BrowserState): SessionState? = state.findCustomTab(customTabId)
     }
 }
