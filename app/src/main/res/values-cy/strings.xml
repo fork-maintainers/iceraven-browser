@@ -313,6 +313,8 @@
   <string name="browser_menu_default_banner_title">Gwnewch %1$s eich porwr arferol</string>
   <!-- Label text within the set as default banner -->
   <string name="browser_menu_default_banner_subtitle_2">Cyflym, preifat, ac wedi\'i wneud ar eich cyfer chi.</string>
+  <!-- Content description (not visible, for screen readers etc.) for the button that dismisses the set as default banner in the menu -->
+  <string name="browser_menu_default_banner_dismiss_promotion">Cau\'r hyrwyddo</string>
   <!-- Content description (not visible, for screen readers etc.) for recommended extensions in main menu -->
   <string name="browser_menu_recommended_extensions_content_description">Rhagor o wybodaeth</string>
   <!--
@@ -1714,6 +1716,11 @@
   <string name="close_tab_and_delete_group_confirmation_dialog_cancel">Na</string>
   <!-- Content description for the three dot button next to a tab group" -->
   <string name="tab_group_three_dot_button_content_description">Rhagor o ddewisiadau</string>
+  <!--
+    Content description for the Expand button on the contracted menu for a tab group:
+    when tapped, tabs are displayed in an expanded grid or list view, taking up the full screen.
+  -->
+  <string name="tab_groups_strip_expand_group_content_description">Ehangwch i ddangos tabiau ar sgrin lawn</string>
   <!-- Text shown on the edit button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_edit">Golygu</string>
   <!-- Text shown on the ungroup button for a tab group on the three dot menu -->

@@ -841,7 +841,7 @@
   <!-- Preference for translations -->
   <string name="preferences_translations">Preklady</string>
   <!-- Preference for data collection -->
-  <string name="preferences_data_collection">Zber údajov</string>
+  <string name="preferences_data_collection">Zhromažďovanie údajov</string>
   <!-- Preference for developers -->
   <string name="preferences_remote_debugging">Vzdialené ladenie cez USB</string>
   <!-- Preference title for switch preference to show search suggestions -->
@@ -2747,7 +2747,7 @@
   <!-- Category of trackers (cross-site tracking cookies) that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_cookies_title_2">Cookies tretích strán</string>
   <!-- Description of cross-site tracking cookies that can be blocked by Enhanced Tracking Protection -->
-  <string name="etp_cookies_description">Blokuje cookies, ktoré používajú reklamné siete a firmy na zber údajov z mnohých stránok.</string>
+  <string name="etp_cookies_description">Blokuje súbory cookie, ktoré reklamné siete a analytické spoločnosti používajú na zhromažďovanie údajov o prehliadaní na mnohých webových stránkach.</string>
   <!-- Description of cross-site tracking cookies that can be blocked by Enhanced Tracking Protection -->
   <string name="etp_cookies_description_2">Úplná ochrana súborov cookie izoluje súbory cookie na webe, na ktorom sa nachádzate, takže sledovacie prvky, ako sú reklamné siete, ich nemôžu použiť na to, aby vás sledovali na iných weboch.</string>
   <!-- Category of trackers (cryptominers) that can be blocked by Enhanced Tracking Protection -->

@@ -313,6 +313,8 @@
   <string name="browser_menu_default_banner_title">Čińće %1$s k swojemu standardej</string>
   <!-- Label text within the set as default banner -->
   <string name="browser_menu_default_banner_subtitle_2">Spěšny, priwatny a za was sčinjeny.</string>
+  <!-- Content description (not visible, for screen readers etc.) for the button that dismisses the set as default banner in the menu -->
+  <string name="browser_menu_default_banner_dismiss_promotion">Wabjenje začinić</string>
   <!-- Content description (not visible, for screen readers etc.) for recommended extensions in main menu -->
   <string name="browser_menu_recommended_extensions_content_description">Dalše informacije</string>
   <!--
@@ -380,7 +382,7 @@
   <!-- Title for the voice search AI feature toggle -->
   <string name="ai_controls_voice_search_title">Hłosowe pytanje</string>
   <!-- Description for the voice search AI feature toggle -->
-  <string name="ai_controls_voice_search_description">Awdio so přez Google Speech Services do teksta přetworja.</string>
+  <string name="ai_controls_voice_search_description">Awdijo so přez Google Speech Services do teksta přetworja.</string>
   <!-- Title for the block AI enhancements confirmation dialog -->
   <string name="ai_controls_block_dialog_title">Polěpšenja KI blokować?</string>
   <!-- Body text for the block AI enhancements confirmation dialog. %1$s is the name of the app (for example "Firefox"). -->
@@ -1704,6 +1706,11 @@
   <string name="close_tab_and_delete_group_confirmation_dialog_cancel">Přetorhnyć</string>
   <!-- Content description for the three dot button next to a tab group" -->
   <string name="tab_group_three_dot_button_content_description">Dalše nastajenja</string>
+  <!--
+    Content description for the Expand button on the contracted menu for a tab group:
+    when tapped, tabs are displayed in an expanded grid or list view, taking up the full screen.
+  -->
+  <string name="tab_groups_strip_expand_group_content_description">Wočinić, zo byšće rajtarki w połnej wobrazowce pokazał</string>
   <!-- Text shown on the edit button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_edit">Wobdźěłać</string>
   <!-- Text shown on the ungroup button for a tab group on the three dot menu -->
@@ -2267,21 +2274,21 @@
   <!-- Summary of tracking protection preference if tracking protection is set to custom -->
   <string name="tracking_protection_custom">Swójski</string>
   <!-- Label for global setting that indicates that all video and audio autoplay is allowed -->
-  <string name="preference_option_autoplay_allowed2">Awdio a widejo dowolić</string>
+  <string name="preference_option_autoplay_allowed2">Awdijo a widejo dowolić</string>
   <!-- Label for site specific setting that indicates that all video and audio autoplay is allowed -->
-  <string name="quick_setting_option_autoplay_allowed">Awdio a widejo dowolić</string>
+  <string name="quick_setting_option_autoplay_allowed">Awdijo a widejo dowolić</string>
   <!-- Label that indicates that video and audio autoplay is only allowed over Wi-Fi -->
-  <string name="preference_option_autoplay_allowed_wifi_only2">Awdio a widejo jenož za mobilny zwisk blokować</string>
+  <string name="preference_option_autoplay_allowed_wifi_only2">Awdijo a widejo jenož za mobilny zwisk blokować</string>
   <!-- Subtext that explains 'autoplay on Wi-Fi only' option -->
-  <string name="preference_option_autoplay_allowed_wifi_subtext">Awdio a widejo so přez WLAN wothrawatej</string>
+  <string name="preference_option_autoplay_allowed_wifi_subtext">Awdijo a widejo so přez WLAN wothrawatej</string>
   <!-- Label for global setting that indicates that video autoplay is allowed, but audio autoplay is blocked -->
-  <string name="preference_option_autoplay_block_audio2">Jenož awdio blokować</string>
+  <string name="preference_option_autoplay_block_audio2">Jenož awdijo blokować</string>
   <!-- Label for site specific setting that indicates that video autoplay is allowed, but audio autoplay is blocked -->
-  <string name="quick_setting_option_autoplay_block_audio">Jenož awdio blokować</string>
+  <string name="quick_setting_option_autoplay_block_audio">Jenož awdijo blokować</string>
   <!-- Label for global setting that indicates that all video and audio autoplay is blocked -->
-  <string name="preference_option_autoplay_blocked3">Awdio a widejo blokować</string>
+  <string name="preference_option_autoplay_blocked3">Awdijo a widejo blokować</string>
   <!-- Label for site specific setting that indicates that all video and audio autoplay is blocked -->
-  <string name="quick_setting_option_autoplay_blocked">Awdio a widejo blokować</string>
+  <string name="quick_setting_option_autoplay_blocked">Awdijo a widejo blokować</string>
   <!-- Summary of delete browsing data on quit preference if it is set to on -->
   <string name="delete_browsing_data_quit_on">Zapinjeny</string>
   <!-- Summary of delete browsing data on quit preference if it is set to off -->
