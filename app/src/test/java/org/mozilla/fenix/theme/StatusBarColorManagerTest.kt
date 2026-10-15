@@ -63,20 +63,6 @@ class StatusBarColorManagerTest {
         }
 
     @Test
-    fun `GIVEN tab strip is enabled and edge-to-edge wallpaper WHEN the home fragment resumes THEN the gradient is hidden`() =
-        runTest(testDispatcher) {
-            val manager =
-                buildStatusBarColorManager(
-                    isTabStripEnabled = true,
-                    appStore = buildAppStore(Wallpaper.EdgeToEdge),
-                )
-            manager.onFragmentResumed(fragmentManager, homeFragment)
-            testScheduler.advanceUntilIdle()
-
-            verify { tabStripStatusBarView.hide() }
-        }
-
-    @Test
     fun `GIVEN tab strip is enabled and edge-to-edge wallpaper WHEN the browser fragment resumes THEN the gradient is still shown`() =
         runTest(testDispatcher) {
             val manager =
@@ -131,6 +117,69 @@ class StatusBarColorManagerTest {
             testScheduler.advanceUntilIdle()
 
             verify { tabStripStatusBarView.hide() }
+        }
+
+    @Test
+    fun `GIVEN universal edge-to-edge wallpapers and a non-default wallpaper WHEN the home fragment resumes THEN the gradient is hidden`() =
+        runTest(testDispatcher) {
+            every { settings.enableUniversalEdgeToEdgeWallpapers } returns true
+            val manager =
+                buildStatusBarColorManager(
+                    isTabStripEnabled = true,
+                    appStore = buildAppStore(nonDefaultWallpaper()),
+                )
+            manager.onFragmentResumed(fragmentManager, homeFragment)
+            testScheduler.advanceUntilIdle()
+
+            verify { tabStripStatusBarView.hide() }
+            verify(exactly = 0) { tabStripStatusBarView.show() }
+        }
+
+    @Test
+    fun `GIVEN universal edge-to-edge wallpapers, a non-default wallpaper and an active search WHEN the home fragment resumes THEN the gradient is shown`() =
+        runTest(testDispatcher) {
+            every { settings.enableUniversalEdgeToEdgeWallpapers } returns true
+            val manager =
+                buildStatusBarColorManager(
+                    isTabStripEnabled = true,
+                    appStore = buildAppStore(nonDefaultWallpaper(), isSearchActive = true),
+                )
+            manager.onFragmentResumed(fragmentManager, homeFragment)
+            testScheduler.advanceUntilIdle()
+
+            verify { tabStripStatusBarView.show() }
+        }
+
+    @Test
+    fun `GIVEN universal edge-to-edge wallpapers and the default wallpaper WHEN the home fragment resumes THEN the gradient is hidden`() =
+        runTest(testDispatcher) {
+            every { settings.enableUniversalEdgeToEdgeWallpapers } returns true
+            val manager =
+                buildStatusBarColorManager(
+                    isTabStripEnabled = true,
+                    appStore = buildAppStore(Wallpaper.Default),
+                )
+            manager.onFragmentResumed(fragmentManager, homeFragment)
+            testScheduler.advanceUntilIdle()
+
+            verify { tabStripStatusBarView.hide() }
+            verify(exactly = 0) { tabStripStatusBarView.show() }
+        }
+
+    @Test
+    fun `GIVEN universal edge-to-edge wallpapers and the edge-to-edge wallpaper WHEN the home fragment resumes THEN the gradient is hidden`() =
+        runTest(testDispatcher) {
+            every { settings.enableUniversalEdgeToEdgeWallpapers } returns true
+            val manager =
+                buildStatusBarColorManager(
+                    isTabStripEnabled = true,
+                    appStore = buildAppStore(Wallpaper.EdgeToEdge),
+                )
+            manager.onFragmentResumed(fragmentManager, homeFragment)
+            testScheduler.advanceUntilIdle()
+
+            verify { tabStripStatusBarView.hide() }
+            verify(exactly = 0) { tabStripStatusBarView.show() }
         }
 
     @Test
@@ -203,6 +252,8 @@ class StatusBarColorManagerTest {
                         ),
                 )
         )
+
+    private fun nonDefaultWallpaper() = Wallpaper.Default.copy(name = "amethyst")
 
     private fun buildStatusBarColorManager(
         isTabStripEnabled: Boolean,

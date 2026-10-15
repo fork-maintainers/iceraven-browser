@@ -693,15 +693,10 @@ class HomeFragment : Fragment(), UserInteractionHandler, OnLongPressedListener {
                 val isPrivateMode = appState.value.mode.isPrivate
                 val currentWallpaper = appState.value.wallpaperState.currentWallpaper
                 val universalEdgeToEdge = settings.enableUniversalEdgeToEdgeWallpapers
-                val showToolbarScrim =
-                    universalEdgeToEdge &&
-                        !isPrivateMode &&
-                        !Wallpaper.isLocalWallpaper(currentWallpaper.name) &&
-                        !appState.value.searchState.isSearchActive
+                val showToolbarScrim = shouldShowToolbarScrim(appState.value)
                 var topBarHeight by remember { mutableIntStateOf(0) }
                 var bottomBarHeight by remember { mutableIntStateOf(0) }
-                val fadeContentEdges =
-                    universalEdgeToEdge && !isPrivateMode && !appState.value.searchState.isSearchActive
+                val fadeContentEdges = isOverUniversalEdgeToEdgeWallpaper(appState.value)
 
                 LaunchedEffect(currentWallpaper.name, isPrivateMode, universalEdgeToEdge) {
                     if (universalEdgeToEdge) {
@@ -1058,12 +1053,26 @@ class HomeFragment : Fragment(), UserInteractionHandler, OnLongPressedListener {
         appStore.dispatch(AppAction.UpdateFirstFrameDrawn(drawn = true))
     }
 
+    /** Whether the homepage is drawn over a universal edge-to-edge wallpaper, outside private mode and search. */
+    private fun isOverUniversalEdgeToEdgeWallpaper(appState: AppState): Boolean =
+        requireComponents.settings.enableUniversalEdgeToEdgeWallpapers &&
+            !appState.mode.isPrivate &&
+            !appState.searchState.isSearchActive
+
+    /** Whether the gradient scrims are drawn behind the homepage toolbars over a universal edge-to-edge wallpaper. */
+    private fun shouldShowToolbarScrim(appState: AppState): Boolean =
+        isOverUniversalEdgeToEdgeWallpaper(appState) &&
+            !Wallpaper.isLocalWallpaper(appState.wallpaperState.currentWallpaper.name)
+
     @Composable
     private fun TabStrip(toolbarStore: BrowserToolbarStore? = null) {
         // Tabs will not be shown as selected on the homepage when Homepage as a New Tab is not
         // enabled.
         val isSelectDisabled = !requireComponents.settings.enableHomepageAsNewTab
         val toolbarState: BrowserToolbarState? = toolbarStore?.observeAsComposableState { it }?.value
+        // Tab strip doesn't show the gradient when displayed over edge to edge wallpaper.
+        val isOverEdgeToEdgeWallpaper =
+            requireComponents.appStore.observeAsComposableState { isOverUniversalEdgeToEdgeWallpaper(it) }.value
 
         FirefoxTheme {
             TabStrip(
@@ -1074,6 +1083,7 @@ class HomeFragment : Fragment(), UserInteractionHandler, OnLongPressedListener {
                         toolbarState = toolbarState,
                         browsingModeManager = (requireActivity() as HomeActivity).browsingModeManager,
                         settings = requireComponents.settings,
+                        isOverEdgeToEdgeWallpaper = isOverEdgeToEdgeWallpaper,
                     ),
                 hideWhenKeyboardShown = requireComponents.settings.shouldUseBottomTabStrip,
                 onAddTabClick = {
