@@ -342,10 +342,7 @@ class Components(
                             SettingsBackedPocketSettings(settings),
                             performance.visualCompletenessQueue,
                         ),
-                        MessagingMiddleware(
-                            controller = nimbus.messaging,
-                            settings = settings,
-                        ),
+                        MessagingMiddleware(controller = nimbus.messaging),
                         MetricsMiddleware(
                             metrics = analytics.metrics,
                             nimbusEventStore = nimbus.events,

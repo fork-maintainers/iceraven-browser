@@ -21,13 +21,11 @@ import org.mozilla.fenix.components.appstate.AppAction.MessagingAction.Restore
 import org.mozilla.fenix.components.appstate.AppAction.MessagingAction.UpdateMessageToShow
 import org.mozilla.fenix.components.appstate.AppAction.MessagingAction.UpdateMessages
 import org.mozilla.fenix.components.appstate.AppState
-import org.mozilla.fenix.utils.Settings
 
 typealias AppStoreMiddlewareContext = Store<AppState, AppAction>
 
 class MessagingMiddleware(
     private val controller: NimbusMessagingControllerInterface,
-    private val settings: Settings,
     private val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.IO),
 ) : Middleware<AppState, AppAction> {
 
