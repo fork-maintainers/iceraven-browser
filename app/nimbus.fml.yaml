@@ -693,7 +693,7 @@ features:
         description: >
           Whether or not to enable the universal edge-to-edge wallpaper treatment.
         type: Boolean
-        default: false
+        default: true
 
   homepage-hide-frecent-top-sites:
     description: Hides frecent top sites on the homepage.
