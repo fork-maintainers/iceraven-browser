@@ -153,6 +153,7 @@ import mozilla.components.support.ktx.android.view.hideKeyboard
 import mozilla.components.support.ktx.kotlinx.coroutines.flow.ifAnyChanged
 import mozilla.components.support.locale.ActivityContextWrapper
 import mozilla.components.support.utils.DefaultDownloadFileUtils
+import mozilla.components.support.utils.ext.isLandscape
 import mozilla.components.support.utils.ext.pixelSizeFor
 import mozilla.components.ui.widgets.R as widgetsR
 import mozilla.components.ui.widgets.behavior.EngineViewClippingBehavior
@@ -226,7 +227,6 @@ import org.mozilla.fenix.ext.requireComponents
 import org.mozilla.fenix.ext.runIfFragmentIsAttached
 import org.mozilla.fenix.ext.secure
 import org.mozilla.fenix.ext.tabClosedUndoMessage
-import org.mozilla.fenix.ext.updateMicrosurveyPromptForConfigurationChange
 import org.mozilla.fenix.messaging.FenixMessageSurfaceId
 import org.mozilla.fenix.messaging.MessagingFeature
 import org.mozilla.fenix.microsurvey.ui.MicrosurveyRequestPrompt
@@ -2380,12 +2380,16 @@ abstract class BaseBrowserFragment :
         reinitializeEngineView()
 
         // If the microsurvey feature is visible, we should update it's state.
-        if (shouldShowMicrosurveyPrompt(requireContext())) {
-            updateMicrosurveyPromptForConfigurationChange(
-                parent = binding.browserLayout,
-                bottomToolbarContainerView = _bottomToolbarContainerView?.toolbarContainerView,
-                reinitializeMicrosurveyPrompt = ::initializeMicrosurveyPrompt,
-            )
+        if (shouldShowMicrosurveyPrompt(requireContext()) && !requireContext().isLandscape()) {
+            // Already having a bottomContainer after switching back to portrait mode will happen when address bar
+            // is positioned at bottom and also as an edge case if configurationChange is called after onCreateView
+            // with the same orientation. Observed on a foldable emulator while going from single screen portrait
+            // mode to landscape tablet, back and forth.
+            _bottomToolbarContainerView?.toolbarContainerView?.let {
+                binding.browserLayout.removeView(it)
+            }
+
+            initializeMicrosurveyPrompt()
         }
 
         view?.let { setupIMEInsetsHandling(it) }
