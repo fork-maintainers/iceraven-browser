@@ -11,7 +11,6 @@ import java.io.ByteArrayInputStream
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertIs
-import kotlin.test.assertNull
 import kotlin.test.assertTrue
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -33,7 +32,6 @@ import mozilla.components.concept.fetch.Response
 import mozilla.components.concept.sync.Avatar
 import mozilla.components.service.fxa.manager.AccountState
 import mozilla.components.service.fxa.manager.AccountState.Authenticated
-import mozilla.components.service.fxa.manager.AccountState.Authenticating
 import mozilla.components.service.fxa.manager.AccountState.AuthenticationProblem
 import mozilla.components.service.fxa.manager.AccountState.NotAuthenticated
 import mozilla.components.service.fxa.manager.AccountState.Unknown
@@ -164,24 +162,6 @@ class MozillaAccountMenuItemProviderTest {
 
             assertEquals(Text.Resource(R.string.browser_menu_sign_back_in_to_sync), item.title.text)
         }
-
-    @Test
-    fun `GIVEN signing in is in progress WHEN providing the item THEN don't show it`() = runTest {
-        syncState.value = SyncState(account = account, accountState = Authenticating(oAuthUrl = OAUTH_URL))
-
-        assertNull(provider().itemFlow.value)
-    }
-
-    @Test
-    fun `WHEN signing in finishes THEN show the account it was signed in to`() = runTest {
-        syncState.value = SyncState(accountState = Authenticating(oAuthUrl = OAUTH_URL))
-        val provider = provider()
-        assertNull(provider.itemFlow.value)
-
-        syncState.value = SyncState(account = account, accountState = Authenticated)
-
-        assertEquals(Text.String(DISPLAY_NAME), provider.itemFlow.first { it != null }?.title?.text)
-    }
 
     @Test
     fun `GIVEN the signed in account has an avatar WHEN it is loaded THEN show it`() = runTest {
@@ -336,7 +316,6 @@ class MozillaAccountMenuItemProviderTest {
         const val DISPLAY_NAME = "Mozilla user"
         const val EMAIL = "user@mozilla.org"
         const val AVATAR_URL = "https://mozilla.org/avatar.png"
-        const val OAUTH_URL = "https://mozilla.org/oauth"
         const val SUMMARY_MAX_LINES = 2
 
         val account =

@@ -33,7 +33,6 @@ import mozilla.components.compose.menu.ui.MenuItemIconRes
 import mozilla.components.compose.menu.ui.MenuItemState
 import mozilla.components.concept.fetch.Client
 import mozilla.components.service.fxa.manager.AccountState.Authenticated
-import mozilla.components.service.fxa.manager.AccountState.Authenticating
 import mozilla.components.service.fxa.manager.AccountState.AuthenticationProblem
 import mozilla.components.service.fxa.manager.AccountState.NotAuthenticated
 import mozilla.components.service.fxa.manager.AccountState.Unknown
@@ -95,12 +94,8 @@ class MozillaAccountMenuItemProvider(
         mutableItem.value = state.toMenuItem(icon = MenuItemIconBitmap(avatar))
     }
 
-    private fun SyncState.toMenuItem(icon: MenuItemIcon = defaultIcon): MenuItem? {
-        // Currently while authenticating there is not menu item title or summary to show
-        // so it's better to not show the menu item at all.
-        val title = title ?: return null
-
-        return StandardMenuItem(
+    private fun SyncState.toMenuItem(icon: MenuItemIcon = defaultIcon): MenuItem =
+        StandardMenuItem(
             title = MenuItemTitle(title),
             summary = summary,
             icon = icon,
@@ -110,7 +105,6 @@ class MozillaAccountMenuItemProvider(
                     accesspoint = accessPoint,
                 ),
         )
-    }
 
     private val SyncState.defaultIcon: MenuItemIcon
         get() =
@@ -131,7 +125,6 @@ class MozillaAccountMenuItemProvider(
                     NavGraphDirections.actionGlobalAccountProblemFragment(
                         entrypoint = event.accesspoint.toFenixFxAEntryPoint()
                     )
-                is Authenticating,
                 NotAuthenticated,
                 Unknown ->
                     NavGraphDirections.actionGlobalTurnOnSync(entrypoint = event.accesspoint.toFenixFxAEntryPoint())
@@ -140,8 +133,8 @@ class MozillaAccountMenuItemProvider(
     }
 }
 
-/** What to call the account, or `null` while there is nothing to say about it yet. */
-private val SyncState.title: Text?
+/** What to call the account. */
+private val SyncState.title: Text
     get() =
         when (accountState) {
             NotAuthenticated,
@@ -156,11 +149,9 @@ private val SyncState.title: Text?
                 account?.displayName?.let(Text::String)
                     ?: account?.email?.let(Text::String)
                     ?: Text.Resource(R.string.browser_menu_account_settings)
-
-            is Authenticating -> null
         }
 
-private val SyncState.summary: MenuItemSummary?
+private val SyncState.summary: MenuItemSummary
     get() =
         when (accountState) {
             NotAuthenticated,
@@ -182,7 +173,6 @@ private val SyncState.summary: MenuItemSummary?
                     text = Text.Resource(R.string.browser_menu_signed_in_caption),
                     maxLines = 2,
                 )
-            is Authenticating -> null
         }
 
 private fun Bitmap.toCircularBitmap(): Bitmap {
