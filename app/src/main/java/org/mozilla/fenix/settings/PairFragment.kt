@@ -46,7 +46,8 @@ class PairFragment : Fragment(R.layout.fragment_pair), UserInteractionHandler, S
                 onScanResult = { pairingUrl ->
                     // By the time we get a scan result, we may not be attached to the context anymore.
                     // See https://github.com/mozilla-mobile/fenix/issues/15812
-                    if (context == null) {
+                    // The scanner returns an empty result when the user navigates back.
+                    if (context == null || pairingUrl.isBlank()) {
                         exitPairing()
                         return@QrFeature
                     }
