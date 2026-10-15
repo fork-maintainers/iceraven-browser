@@ -65,6 +65,7 @@ import org.mozilla.fenix.home.bookmarks.view.Bookmarks
 import org.mozilla.fenix.home.bookmarks.view.BookmarksMenuItem
 import org.mozilla.fenix.home.collections.Collections
 import org.mozilla.fenix.home.collections.CollectionsMigrationPromoCard
+import org.mozilla.fenix.home.collections.CollectionsMigrationPromoSource
 import org.mozilla.fenix.home.collections.CollectionsState
 import org.mozilla.fenix.home.collections.migration.CollectionsMigrationCardAction
 import org.mozilla.fenix.home.collections.migration.CollectionsMigrationCardAction.ViewTabGroupsClicked
@@ -553,7 +554,10 @@ private fun CollectionsSection(
 
         CollectionsState.MigrationCard -> {
             CollectionsSectionContent {
-                CollectionsMigrationPromoCard(onClick = { onCollectionsMigrationCardAction(ViewTabGroupsClicked) })
+                CollectionsMigrationPromoCard(
+                    source = CollectionsMigrationPromoSource.HOMEPAGE,
+                    onClick = { onCollectionsMigrationCardAction(ViewTabGroupsClicked) },
+                )
             }
         }
 

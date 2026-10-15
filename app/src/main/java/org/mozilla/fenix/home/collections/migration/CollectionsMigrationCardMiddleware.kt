@@ -6,6 +6,8 @@ package org.mozilla.fenix.home.collections.migration
 
 import mozilla.components.lib.state.Middleware
 import mozilla.components.lib.state.Store
+import mozilla.telemetry.glean.private.NoExtras
+import org.mozilla.fenix.GleanMetrics.CollectionsMigration
 
 /**
  * [Middleware] that reacts to various [CollectionsMigrationCardAction]s.
@@ -21,8 +23,10 @@ class CollectionsMigrationCardMiddleware(private val repository: CollectionsMigr
         action: CollectionsMigrationCardAction,
     ) {
         when (action) {
-            is CollectionsMigrationCardAction.ViewTabGroupsClicked ->
+            is CollectionsMigrationCardAction.ViewTabGroupsClicked -> {
+                CollectionsMigration.promoClick.record(NoExtras())
                 repository.updateCollectionsMigrationCardVisibility(visible = false)
+            }
         }
 
         next(action)
