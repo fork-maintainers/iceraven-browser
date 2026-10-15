@@ -69,7 +69,7 @@
       ],
       "targeting": "(('address-bar-focus-mode-android' in active_experiments) || ((app_version|versionCompare('157.!') >= 0)))",
       "startDate": "2026-09-25",
-      "enrollmentEndDate": null,
+      "enrollmentEndDate": "2026-10-13",
       "endDate": null,
       "proposedDuration": 21,
       "proposedEnrollment": 7,
