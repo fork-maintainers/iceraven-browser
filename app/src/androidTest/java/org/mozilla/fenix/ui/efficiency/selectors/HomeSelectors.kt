@@ -123,12 +123,29 @@ object HomeSelectors : SelectorContainer {
             groups = setOf(Group.CONTINUE),
         )
 
-    val RECENT_BOOKMARKS_SECTION =
+    val BOOKMARKS_SECTION_TITLE =
         Selector(
-            strategy = SelectorStrategy.UIAUTOMATOR_WITH_TEXT,
+            strategy = SelectorStrategy.COMPOSE_BY_TEXT,
             value = getStringResource(R.string.home_bookmarks_title),
             description = "Bookmarks section header",
             groups = setOf(Group.RECENT_BOOKMARKS_SECTION),
+        )
+
+    val BOOKMARKS_SECTION_SHOW_ALL_BUTTON =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_CONTENT_DESCRIPTION,
+            value = getStringResource(R.string.home_bookmarks_show_all_content_description),
+            description = "Bookmarks section 'Show All' button",
+            groups = setOf(Group.RECENT_BOOKMARKS_SECTION),
+        )
+
+    @Suppress("ktlint:standard:function-naming", "FunctionName")
+    fun BOOKMARKS_SECTION_ITEM(bookmarkTitle: String = "") =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TAG_AND_TEXT,
+            value = "bookmark.title",
+            secondaryValue = bookmarkTitle,
+            description = "Bookmarks item with title: $bookmarkTitle",
         )
 
     val PRIVATE_BROWSING_INFO_CARD_TITLE =

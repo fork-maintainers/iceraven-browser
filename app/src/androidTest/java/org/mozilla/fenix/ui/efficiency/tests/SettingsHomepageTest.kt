@@ -11,8 +11,8 @@ import org.mozilla.fenix.helpers.TestAssetHelper.getGenericAsset
 import org.mozilla.fenix.helpers.TestHelper.restartApp
 import org.mozilla.fenix.ui.efficiency.helpers.BaseTest
 import org.mozilla.fenix.ui.efficiency.selectors.HomeSelectors
+import org.mozilla.fenix.ui.efficiency.selectors.HomeSelectors.BOOKMARKS_SECTION_TITLE
 import org.mozilla.fenix.ui.efficiency.selectors.HomeSelectors.CONTINUE_SECTION
-import org.mozilla.fenix.ui.efficiency.selectors.HomeSelectors.RECENT_BOOKMARKS_SECTION
 import org.mozilla.fenix.ui.efficiency.selectors.MainMenuSelectors.BOOKMARK_THIS_PAGE_BUTTON
 import org.mozilla.fenix.ui.efficiency.selectors.SettingsHomepageSelectors
 import org.mozilla.fenix.ui.efficiency.selectors.SettingsHomepageSelectors.CONTINUE_BUTTON
@@ -50,7 +50,7 @@ class SettingsHomepageTest : BaseTest() {
         on.browserPage.navigateToPage()
         on.home.navigateToPage().mozVerifyElementsByGroup(HomeSelectors.Group.RECENT_BOOKMARKS_SECTION)
         on.settingsHomepage.navigateToPage().mozClick(RECENT_BOOKMARKS_BUTTON)
-        on.home.navigateToPage().mozVerifyElementAbsent(RECENT_BOOKMARKS_SECTION)
+        on.home.navigateToPage().mozVerifyElementAbsent(BOOKMARKS_SECTION_TITLE)
     }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/1569831

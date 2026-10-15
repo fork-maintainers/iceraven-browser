@@ -302,4 +302,37 @@ class BookmarksTest : BaseTest() {
                 BookmarksSelectors.BOOKMARK_ITEM_TITLE(secondWebPage.url.toString()),
             )
     }
+
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/2833692
+    @Critical
+    @Test
+    fun verifyBookmarksOnHomeScreenTest() {
+        composeRule.activityRule.applySettingsExceptions {
+            it.isRecentTabsFeatureEnabled = false
+            it.isRecentlyVisitedFeatureEnabled = false
+            it.isBookmarksHomeFeatureEnabled = true
+        }
+
+        val bookmarkFolderName = "My Folder"
+        val firstWebPage = mockWebServer.getGenericAsset(1)
+        val secondWebPage = mockWebServer.getGenericAsset(2)
+
+        val newFolder = generateBookmarkFolder(title = bookmarkFolderName, position = null)
+        createBookmarkItem(secondWebPage.url.toString(), secondWebPage.title, null, newFolder)
+
+        on.browserPage
+            .navigateToPage(firstWebPage.url.toString())
+            .mozClick(HomeSelectors.MAIN_MENU_BUTTON)
+            .mozClick(MainMenuSelectors.BOOKMARK_THIS_PAGE_BUTTON)
+
+        on.home
+            .navigateToPage()
+            .mozVerify(HomeSelectors.BOOKMARKS_SECTION_ITEM(firstWebPage.title))
+            .mozVerify(HomeSelectors.BOOKMARKS_SECTION_ITEM(secondWebPage.title))
+            .mozVerifyElementsByGroup(HomeSelectors.Group.RECENT_BOOKMARKS_SECTION)
+            .mozClick(HomeSelectors.BOOKMARKS_SECTION_SHOW_ALL_BUTTON)
+        on.bookmarks
+            .mozVerify(BookmarksSelectors.BOOKMARK_ITEM_TITLE(firstWebPage.title))
+            .mozVerify(BookmarksSelectors.BOOKMARK_ITEM_TITLE(bookmarkFolderName))
+    }
 }
