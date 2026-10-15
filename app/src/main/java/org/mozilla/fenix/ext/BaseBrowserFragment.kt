@@ -9,6 +9,10 @@ import org.mozilla.fenix.R
 import org.mozilla.fenix.browser.BaseBrowserFragment
 import org.mozilla.fenix.components.toolbar.ToolbarPosition
 
+/** Returns true if the microsurvey prompt is shown above the bottom toolbar. */
+internal fun BaseBrowserFragment.isMicrosurveyPromptVisible(): Boolean =
+    requireComponents.settings.microsurveyFeatureEnabled && requireComponents.appStore.state.microsurvey.current != null
+
 /**
  * Returns the height of the bottom toolbar.
  *
@@ -30,7 +34,7 @@ internal fun BaseBrowserFragment.getBottomToolbarHeight(
 ): Int {
     val settings = requireComponents.settings
 
-    val isMicrosurveyEnabled = settings.shouldShowMicrosurveyPrompt
+    val isMicrosurveyVisible = isMicrosurveyPromptVisible()
     val isToolbarAtBottom = settings.toolbarPosition == ToolbarPosition.BOTTOM
     val isNavBarEnabled = settings.shouldUseExpandedToolbar && isTallWindow() && !isWideWindow()
     val shouldShowTabStrip = includeTabStripIfAvailable && settings.shouldShowTabStripAtBottom
@@ -38,7 +42,7 @@ internal fun BaseBrowserFragment.getBottomToolbarHeight(
     val navBarDimen = if (isToolbarAtBottom) R.dimen.browser_navbar_height_small else R.dimen.browser_navbar_height
 
     val microsurveyHeight =
-        if (isMicrosurveyEnabled) {
+        if (isMicrosurveyVisible) {
             pixelSizeFor(R.dimen.browser_microsurvey_height)
         } else {
             0

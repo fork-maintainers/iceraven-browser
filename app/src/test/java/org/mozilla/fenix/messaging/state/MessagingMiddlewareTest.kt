@@ -8,7 +8,6 @@ import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.mockk
-import io.mockk.verify
 import kotlinx.coroutines.test.runTest
 import mozilla.components.service.nimbus.messaging.Message
 import mozilla.components.service.nimbus.messaging.MessageData
@@ -441,7 +440,7 @@ class MessagingMiddlewareTest {
     }
 
     @Test
-    fun `GIVEN a microsurvey message that surpassed the maxDisplayCount WHEN onMessagedDisplayed THEN remove the message, consume it & reset the pref`() =
+    fun `GIVEN a microsurvey message that surpassed the maxDisplayCount WHEN onMessagedDisplayed THEN remove the message`() =
         runTest {
             val message =
                 createMessage(metadata = createMetadata(displayCount = 4), data = MessageData(surface = "microsurvey"))
@@ -470,7 +469,6 @@ class MessagingMiddlewareTest {
             store.dispatch(Evaluate(FenixMessageSurfaceId.MICROSURVEY))
             testScheduler.advanceUntilIdle()
 
-            verify { settings.shouldShowMicrosurveyPrompt = false }
             assertEquals(0, store.state.messaging.messages.size)
             assertEquals(1, store.state.messaging.messageToShow.size)
         }

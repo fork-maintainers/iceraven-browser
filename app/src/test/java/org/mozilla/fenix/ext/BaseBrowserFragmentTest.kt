@@ -17,7 +17,10 @@ import org.junit.runner.RunWith
 import org.mozilla.fenix.R
 import org.mozilla.fenix.browser.BaseBrowserFragment
 import org.mozilla.fenix.browser.BrowserFragment
+import org.mozilla.fenix.components.appstate.AppState
 import org.mozilla.fenix.components.toolbar.ToolbarPosition
+import org.mozilla.fenix.microsurvey.MicrosurveyState
+import org.mozilla.fenix.microsurvey.ui.ext.MicrosurveyUIData
 import org.mozilla.fenix.utils.Settings
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
@@ -28,6 +31,15 @@ class BaseBrowserFragmentTest {
     private val settings: Settings = spyk(Settings(testContext))
     private lateinit var mockContext: Context
     private lateinit var fragment: BaseBrowserFragment
+    private val microsurvey =
+        MicrosurveyUIData(
+            id = "microsurvey-id",
+            promptTitle = "Prompt title",
+            icon = 0,
+            question = "Question?",
+            answers = listOf("Yes", "No"),
+            maxNumberLines = 3,
+        )
 
     @Before
     fun setup() {
@@ -46,12 +58,19 @@ class BaseBrowserFragmentTest {
         every { mockContext.resources.getDimensionPixelSize(R.dimen.browser_navbar_height) } returns 60
         every { mockContext.resources.getDimensionPixelSize(R.dimen.browser_navbar_height_small) } returns 48
         every { settings.tabGroupsStripEnabled } returns false
+        setMicrosurveyPromptVisible(false)
+    }
+
+    private fun setMicrosurveyPromptVisible(visible: Boolean) {
+        every { settings.microsurveyFeatureEnabled } returns visible
+        every { mockContext.components.appStore.state } returns
+            AppState(microsurvey = MicrosurveyState(current = if (visible) microsurvey else null))
     }
 
     @Test
     fun `GIVEN the toolbar and the microsurvey are shown at bottom WHEN getBottomToolbarHeight THEN returns the combined height`() {
         every { mockContext.resources } returns testContext.resources
-        every { settings.shouldShowMicrosurveyPrompt } returns true
+        setMicrosurveyPromptVisible(true)
         every { settings.toolbarPosition } returns ToolbarPosition.BOTTOM
 
         val bottomToolbarHeight = fragment.getBottomToolbarHeight()
@@ -61,7 +80,7 @@ class BaseBrowserFragmentTest {
 
     @Test
     fun `GIVEN just the microsurvey is shown at bottom WHEN getBottomToolbarHeight THEN returns it's height`() {
-        every { settings.shouldShowMicrosurveyPrompt } returns true
+        setMicrosurveyPromptVisible(true)
         every { settings.toolbarPosition } returns ToolbarPosition.TOP
 
         val bottomToolbarHeight = fragment.getBottomToolbarHeight()
@@ -73,7 +92,7 @@ class BaseBrowserFragmentTest {
     @Config(qualifiers = "h481dp") // navbar is only shown on screens taller than 480dp
     fun `GIVEN just the toolbar shown at bottom WHEN getBottomToolbarHeight THEN returns it's height`() {
         every { mockContext.resources } returns testContext.resources
-        every { settings.shouldShowMicrosurveyPrompt } returns false
+        setMicrosurveyPromptVisible(false)
         every { settings.toolbarPosition } returns ToolbarPosition.BOTTOM
 
         val bottomToolbarHeight = fragment.getBottomToolbarHeight()
@@ -90,7 +109,7 @@ class BaseBrowserFragmentTest {
             }
         every { mockContext.resources.configuration } returns configuration
         every { mockContext.resources } returns testContext.resources
-        every { settings.shouldShowMicrosurveyPrompt } returns true
+        setMicrosurveyPromptVisible(true)
         every { settings.shouldUseExpandedToolbar } returns true
         every { settings.toolbarPosition } returns ToolbarPosition.BOTTOM
 
@@ -108,7 +127,7 @@ class BaseBrowserFragmentTest {
             }
         every { mockContext.resources.configuration } returns configuration
         every { mockContext.resources } returns testContext.resources
-        every { settings.shouldShowMicrosurveyPrompt } returns true
+        setMicrosurveyPromptVisible(true)
         every { settings.shouldUseExpandedToolbar } returns true
         every { settings.toolbarPosition } returns ToolbarPosition.BOTTOM
 
@@ -149,7 +168,7 @@ class BaseBrowserFragmentTest {
             }
         every { mockContext.resources.configuration } returns configuration
         every { mockContext.resources } returns testContext.resources
-        every { settings.shouldShowMicrosurveyPrompt } returns true
+        setMicrosurveyPromptVisible(true)
         every { settings.shouldUseExpandedToolbar } returns true
         every { settings.toolbarPosition } returns ToolbarPosition.BOTTOM
         every { settings.shouldShowTabStripAtBottom } returns true
@@ -221,7 +240,7 @@ class BaseBrowserFragmentTest {
                 screenHeightDp = 481
             }
         every { mockContext.resources.configuration } returns configuration
-        every { settings.shouldShowMicrosurveyPrompt } returns true
+        setMicrosurveyPromptVisible(true)
         every { settings.shouldUseExpandedToolbar } returns true
         every { settings.toolbarPosition } returns ToolbarPosition.TOP
 
@@ -232,7 +251,7 @@ class BaseBrowserFragmentTest {
 
     @Test
     fun `GIVEN navigation bar and microsurvey is shown at bottom WHEN getBottomToolbarHeight with excluded navigation bar THEN the microsurvey height`() {
-        every { settings.shouldShowMicrosurveyPrompt } returns true
+        setMicrosurveyPromptVisible(true)
         every { settings.shouldUseExpandedToolbar } returns true
         every { settings.toolbarPosition } returns ToolbarPosition.TOP
 
@@ -250,7 +269,7 @@ class BaseBrowserFragmentTest {
             }
         every { mockContext.resources.configuration } returns configuration
         every { mockContext.resources } returns testContext.resources
-        every { settings.shouldShowMicrosurveyPrompt } returns false
+        setMicrosurveyPromptVisible(false)
         every { settings.shouldUseExpandedToolbar } returns true
         every { settings.toolbarPosition } returns ToolbarPosition.BOTTOM
 
@@ -267,7 +286,7 @@ class BaseBrowserFragmentTest {
                 screenHeightDp = 481
             }
         every { mockContext.resources.configuration } returns configuration
-        every { settings.shouldShowMicrosurveyPrompt } returns false
+        setMicrosurveyPromptVisible(false)
         every { settings.shouldUseExpandedToolbar } returns true
         every { settings.toolbarPosition } returns ToolbarPosition.TOP
 
@@ -284,7 +303,7 @@ class BaseBrowserFragmentTest {
                 screenHeightDp = 480
             }
         every { mockContext.resources.configuration } returns configuration
-        every { settings.shouldShowMicrosurveyPrompt } returns false
+        setMicrosurveyPromptVisible(false)
         every { settings.shouldUseExpandedToolbar } returns true
         every { settings.toolbarPosition } returns ToolbarPosition.TOP
 

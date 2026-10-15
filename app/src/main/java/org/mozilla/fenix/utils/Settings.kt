@@ -2972,13 +2972,6 @@ class Settings(
             default = false,
         )
 
-    /** Indicates if a microsurvey should be shown to the user. */
-    var shouldShowMicrosurveyPrompt by
-        booleanPreference(
-            appContext.getPreferenceKey(R.string.pref_key_should_show_microsurvey_prompt),
-            default = false,
-        )
-
     /** Last time the Set as default Browser prompt has been displayed to the user. */
     var lastSetAsDefaultPromptShownTimeInMillis by
         longPreference(

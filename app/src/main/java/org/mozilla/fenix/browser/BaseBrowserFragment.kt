@@ -219,6 +219,7 @@ import org.mozilla.fenix.ext.getBottomToolbarHeight
 import org.mozilla.fenix.ext.getPreferenceKey
 import org.mozilla.fenix.ext.getTopToolbarHeight
 import org.mozilla.fenix.ext.hideToolbar
+import org.mozilla.fenix.ext.isMicrosurveyPromptVisible
 import org.mozilla.fenix.ext.isOnline
 import org.mozilla.fenix.ext.isToolbarAtBottom
 import org.mozilla.fenix.ext.nav
@@ -1957,20 +1958,22 @@ abstract class BaseBrowserFragment :
         browserToolbar.layout.elevation = 0.0f
     }
 
-    /** Listens for the microsurvey message and initializes the microsurvey prompt if one is available. */
+    /**
+     * Listens for the microsurvey message, initializes the microsurvey prompt if one is available, and updates the
+     * engine view insets when the prompt is shown or hidden.
+     */
     private fun listenForMicrosurveyMessage(context: Context) {
+        var wasMicrosurveyVisible = isMicrosurveyPromptVisible()
         binding.root.consumeFrom(context.components.appStore, viewLifecycleOwner) { state ->
             val isMicrosurveyVisible = state.microsurvey.current != null
-            if (isMicrosurveyVisible != context.components.settings.shouldShowMicrosurveyPrompt) {
-                context.components.settings.shouldShowMicrosurveyPrompt = isMicrosurveyVisible
-            }
             if (isMicrosurveyVisible && _bottomToolbarContainerView == null) {
                 initializeMicrosurveyPrompt()
+            } else if (isMicrosurveyVisible != wasMicrosurveyVisible) {
+                reinitializeEngineView()
             }
+            wasMicrosurveyVisible = isMicrosurveyVisible
         }
     }
-
-    private fun shouldShowMicrosurveyPrompt(context: Context) = context.components.settings.shouldShowMicrosurveyPrompt
 
     private fun isToolbarDynamic(context: Context) =
         !context.components.settings.shouldUseFixedTopToolbar && context.components.settings.isDynamicToolbarEnabled
@@ -2380,7 +2383,7 @@ abstract class BaseBrowserFragment :
         reinitializeEngineView()
 
         // If the microsurvey feature is visible, we should update it's state.
-        if (shouldShowMicrosurveyPrompt(requireContext()) && !requireContext().isLandscape()) {
+        if (isMicrosurveyPromptVisible() && !requireContext().isLandscape()) {
             // Already having a bottomContainer after switching back to portrait mode will happen when address bar
             // is positioned at bottom and also as an edge case if configurationChange is called after onCreateView
             // with the same orientation. Observed on a foldable emulator while going from single screen portrait

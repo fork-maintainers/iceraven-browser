@@ -684,10 +684,6 @@ class HomeFragment : Fragment(), UserInteractionHandler, OnLongPressedListener {
                         !appState.value.mode.isPrivate &&
                         appState.value.microsurvey.current != null
 
-                LaunchedEffect(microsurveyVisible) {
-                    settings.shouldShowMicrosurveyPrompt = microsurveyVisible
-                }
-
                 val isPrivateMode = appState.value.mode.isPrivate
                 val currentWallpaper = appState.value.wallpaperState.currentWallpaper
                 val universalEdgeToEdge = settings.enableUniversalEdgeToEdgeWallpapers
