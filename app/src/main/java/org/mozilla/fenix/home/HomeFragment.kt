@@ -32,12 +32,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.boundsInRoot
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.unit.dp
@@ -154,6 +158,7 @@ import org.mozilla.fenix.home.toolbar.FenixHomeToolbar
 import org.mozilla.fenix.home.toolbar.HomeNavigationBar
 import org.mozilla.fenix.home.toolbar.HomeToolbarComposable
 import org.mozilla.fenix.home.toolbar.HomeToolbarComposable.Companion.DirectToSearchConfig
+import org.mozilla.fenix.home.toolbar.WallpaperToolbarScrim
 import org.mozilla.fenix.home.toolbar.homepageToolbarColors
 import org.mozilla.fenix.home.topsites.DefaultTopSitesView
 import org.mozilla.fenix.home.topsites.TopSitesBinding
@@ -688,6 +693,13 @@ class HomeFragment : Fragment(), UserInteractionHandler, OnLongPressedListener {
                 val isPrivateMode = appState.value.mode.isPrivate
                 val currentWallpaper = appState.value.wallpaperState.currentWallpaper
                 val universalEdgeToEdge = settings.enableUniversalEdgeToEdgeWallpapers
+                val showToolbarScrim =
+                    universalEdgeToEdge &&
+                        !isPrivateMode &&
+                        !Wallpaper.isLocalWallpaper(currentWallpaper.name) &&
+                        !appState.value.searchState.isSearchActive
+                var topBarHeight by remember { mutableIntStateOf(0) }
+                var bottomBarHeight by remember { mutableIntStateOf(0) }
                 val fadeContentEdges =
                     universalEdgeToEdge && !isPrivateMode && !appState.value.searchState.isSearchActive
 
@@ -713,6 +725,13 @@ class HomeFragment : Fragment(), UserInteractionHandler, OnLongPressedListener {
                             WallpaperBackground(currentWallpaper)
                         }
 
+                        if (showToolbarScrim) {
+                            WallpaperToolbarScrim(
+                                topContentHeight = topBarHeight,
+                                bottomContentHeight = bottomBarHeight,
+                            )
+                        }
+
                         Scaffold(
                             modifier =
                                 Modifier.fillMaxSize()
@@ -725,6 +744,7 @@ class HomeFragment : Fragment(), UserInteractionHandler, OnLongPressedListener {
                                     settings = settings,
                                     isToolbarAtTop = isToolbarAtTop,
                                     captureToolbarBounds = captureToolbarBounds,
+                                    modifier = Modifier.onSizeChanged { topBarHeight = it.height },
                                 )
                             },
                             bottomBar = {
@@ -733,6 +753,7 @@ class HomeFragment : Fragment(), UserInteractionHandler, OnLongPressedListener {
                                     isToolbarAtTop = isToolbarAtTop,
                                     isPrivateMode = isPrivateMode,
                                     captureToolbarBounds = captureToolbarBounds,
+                                    modifier = Modifier.onSizeChanged { bottomBarHeight = it.height },
                                 )
                             },
                             containerColor = Color.Transparent,
