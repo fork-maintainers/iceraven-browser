@@ -12,7 +12,7 @@ Data reviews are needed on all patches that add new telemetry or modify existing
 Any change that touches metrics will be automatically flagged with a `needs-data-classification` tag by Phabricator.
 If a change adds/updates data collection in a way that doesn’t automatically trigger this rule, this tag should be added manually (and if appropriate, please file a bug to update the herald rule so it happens automatically next time).
 
-More details about this process can be found in the [in-tree docs](https://firefox-source-docs.mozilla.org/contributing/data-review.html) and [wiki](https://wiki.mozilla.org/Data_Collection).
+More details about this process can be found in the {doc}`in-tree docs </contributing/data-review>` and [wiki](https://wiki.mozilla.org/Data_Collection).
 Add a link for the bug adding or changing a metric or ping to the `bugs` and `data_reviews` lists
 
 Example:
