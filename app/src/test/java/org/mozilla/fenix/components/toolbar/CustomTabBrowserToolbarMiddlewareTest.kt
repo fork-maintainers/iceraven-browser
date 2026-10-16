@@ -45,7 +45,7 @@ import mozilla.components.compose.browser.toolbar.concept.PageOrigin.Companion.P
 import mozilla.components.compose.browser.toolbar.store.BrowserToolbarInteraction.BrowserToolbarEvent
 import mozilla.components.compose.browser.toolbar.store.BrowserToolbarStore
 import mozilla.components.compose.browser.toolbar.store.ProgressBarConfig
-import mozilla.components.concept.engine.ipprotection.IPProtectionHandler.StateInfo
+import mozilla.components.concept.engine.ipprotection.ProxyState
 import mozilla.components.concept.engine.ipprotection.ServiceState
 import mozilla.components.concept.engine.permission.SitePermissionsStorage
 import mozilla.components.feature.customtabs.R as customtabsR
@@ -598,14 +598,8 @@ class CustomTabBrowserToolbarMiddlewareTest {
         assertEquals(1, toolbarPageActions.size)
         assertIs<ActionButtonRes>(toolbarPageActions[0])
 
-        ipProtectionStore.dispatch(
-            IPProtectionAction.EngineStateChanged(
-                StateInfo(
-                    serviceState = ServiceState.Ready,
-                    proxyState = StateInfo.PROXY_STATE_ACTIVE,
-                )
-            )
-        )
+        ipProtectionStore.dispatch(IPProtectionAction.ServiceStateChanged(ServiceState.Ready))
+        ipProtectionStore.dispatch(IPProtectionAction.ProxyStateChanged(ProxyState.ACTIVE))
         testDispatcher.scheduler.advanceUntilIdle()
 
         toolbarPageActions = toolbarStore.state.displayState.pageActionsStart
@@ -642,14 +636,8 @@ class CustomTabBrowserToolbarMiddlewareTest {
             assertEquals(1, toolbarPageActions.size)
             assertIs<AnimatedPillActionRes>(toolbarPageActions[0])
 
-            ipProtectionStore.dispatch(
-                IPProtectionAction.EngineStateChanged(
-                    StateInfo(
-                        serviceState = ServiceState.Ready,
-                        proxyState = StateInfo.PROXY_STATE_READY,
-                    )
-                )
-            )
+            ipProtectionStore.dispatch(IPProtectionAction.ServiceStateChanged(ServiceState.Ready))
+            ipProtectionStore.dispatch(IPProtectionAction.ProxyStateChanged(ProxyState.READY))
             testDispatcher.scheduler.advanceUntilIdle()
 
             toolbarPageActions = toolbarStore.state.displayState.pageActionsStart
@@ -682,14 +670,8 @@ class CustomTabBrowserToolbarMiddlewareTest {
                 )
             val toolbarStore = buildStore(middleware)
 
-            ipProtectionStore.dispatch(
-                IPProtectionAction.EngineStateChanged(
-                    StateInfo(
-                        serviceState = ServiceState.Ready,
-                        proxyState = StateInfo.PROXY_STATE_READY,
-                    )
-                )
-            )
+            ipProtectionStore.dispatch(IPProtectionAction.ServiceStateChanged(ServiceState.Ready))
+            ipProtectionStore.dispatch(IPProtectionAction.ProxyStateChanged(ProxyState.READY))
             testDispatcher.scheduler.advanceUntilIdle()
             assertIs<AnimatedPillActionRes>(toolbarStore.state.displayState.pageActionsStart[0])
 

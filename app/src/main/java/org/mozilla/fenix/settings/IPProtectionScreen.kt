@@ -62,7 +62,6 @@ import mozilla.components.compose.base.button.IconButton
 import mozilla.components.compose.base.modifier.debouncedToggleable
 import mozilla.components.compose.base.theme.PreviewThemeProvider
 import mozilla.components.compose.base.theme.Theme
-import mozilla.components.concept.engine.ipprotection.IPProtectionHandler
 import mozilla.components.concept.engine.ipprotection.ServiceState
 import mozilla.components.feature.ipprotection.store.state.Authorized
 import mozilla.components.feature.ipprotection.store.state.BYTES_PER_GB
@@ -87,7 +86,7 @@ private val PROMO_ILLUSTRATION_SIZE = 60.dp
 /**
  * The main VPN / IP Protection settings screen.
  *
- * @param state Current [IPProtectionHandler.StateInfo] to render.
+ * @param state Current [IPProtectionState] to render.
  * @param snackbarHostState The [SnackbarHostState] used to display snackbars.
  * @param readyToUse Whether the user is entitled to use the service.
  * @param syncingData Whether the data sync is in progress.

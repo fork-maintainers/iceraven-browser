@@ -9,7 +9,7 @@ package org.mozilla.fenix.components.menu
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
 import mozilla.components.ExperimentalAndroidComponentsApi
-import mozilla.components.concept.engine.ipprotection.IPProtectionHandler.StateInfo
+import mozilla.components.concept.engine.ipprotection.ProxyState
 import mozilla.components.concept.engine.ipprotection.ServiceState
 import mozilla.components.feature.ipprotection.store.IPProtectionAction
 import mozilla.components.feature.ipprotection.store.IPProtectionStore
@@ -53,14 +53,8 @@ class IPProtectionMenuBindingTest {
 
         assertEquals(IPProtectionMenuStatus.Disabled, result?.status)
 
-        ipProtectionStore.dispatch(
-            IPProtectionAction.EngineStateChanged(
-                StateInfo(
-                    serviceState = ServiceState.Ready,
-                    proxyState = StateInfo.PROXY_STATE_ACTIVE,
-                )
-            )
-        )
+        ipProtectionStore.dispatch(IPProtectionAction.ServiceStateChanged(ServiceState.Ready))
+        ipProtectionStore.dispatch(IPProtectionAction.ProxyStateChanged(ProxyState.ACTIVE))
         testDispatcher.scheduler.advanceUntilIdle()
 
         assertEquals(IPProtectionMenuStatus.Enabled, result?.status)
@@ -70,41 +64,28 @@ class IPProtectionMenuBindingTest {
     fun `WHEN proxy status maps to menu status THEN all statuses are mapped correctly`() = runTest {
         val cases =
             listOf(
-                StateInfo(serviceState = ServiceState.Uninitialized) to IPProtectionMenuStatus.Disabled,
-                StateInfo(
-                    serviceState = ServiceState.Ready,
-                    proxyState = StateInfo.PROXY_STATE_READY,
-                ) to IPProtectionMenuStatus.Disabled,
-                StateInfo(
-                    serviceState = ServiceState.Ready,
-                    proxyState = StateInfo.PROXY_STATE_ACTIVATING,
-                ) to IPProtectionMenuStatus.Activating,
-                StateInfo(
-                    serviceState = ServiceState.Ready,
-                    proxyState = StateInfo.PROXY_STATE_ACTIVE,
-                ) to IPProtectionMenuStatus.Enabled,
-                StateInfo(
-                    serviceState = ServiceState.Ready,
-                    proxyState = StateInfo.PROXY_STATE_PAUSED,
-                ) to IPProtectionMenuStatus.DataLimitReached,
-                StateInfo(
-                    serviceState = ServiceState.Ready,
-                    proxyState = StateInfo.PROXY_STATE_ERROR,
-                ) to IPProtectionMenuStatus.ConnectionError,
-                StateInfo(serviceState = ServiceState.Unauthenticated) to IPProtectionMenuStatus.AuthRequired,
+                (ServiceState.Uninitialized to null) to IPProtectionMenuStatus.Disabled,
+                (ServiceState.Ready to ProxyState.READY) to IPProtectionMenuStatus.Disabled,
+                (ServiceState.Ready to ProxyState.ACTIVATING) to IPProtectionMenuStatus.Activating,
+                (ServiceState.Ready to ProxyState.ACTIVE) to IPProtectionMenuStatus.Enabled,
+                (ServiceState.Ready to ProxyState.PAUSED) to IPProtectionMenuStatus.DataLimitReached,
+                (ServiceState.Ready to ProxyState.ERROR) to IPProtectionMenuStatus.ConnectionError,
+                (ServiceState.Unauthenticated to null) to IPProtectionMenuStatus.AuthRequired,
             )
 
-        for ((stateInfo, expectedStatus) in cases) {
+        for ((states, expectedStatus) in cases) {
+            val (serviceState, proxyState) = states
             var result: IPProtectionMenuState? = null
             val ipProtectionStore = IPProtectionStore()
 
-            ipProtectionStore.dispatch(IPProtectionAction.EngineStateChanged(stateInfo))
+            ipProtectionStore.dispatch(IPProtectionAction.ServiceStateChanged(serviceState))
+            proxyState?.let { ipProtectionStore.dispatch(IPProtectionAction.ProxyStateChanged(it)) }
             testDispatcher.scheduler.advanceUntilIdle()
 
             startBinding(ipProtectionStore) { result = it }
 
             assertEquals(
-                "StateInfo $stateInfo should map to $expectedStatus",
+                "$serviceState/$proxyState should map to $expectedStatus",
                 expectedStatus,
                 result?.status,
             )
