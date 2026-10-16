@@ -6,6 +6,7 @@ package org.mozilla.fenix.ui.efficiency.selectors
 
 import mozilla.components.compose.browser.toolbar.concept.BrowserToolbarTestTags.ADDRESSBAR_URL_BOX
 import mozilla.components.compose.browser.toolbar.concept.BrowserToolbarTestTags.TABS_COUNTER
+import mozilla.components.ui.tabcounter.R as tabcounterR
 import org.mozilla.fenix.R
 import org.mozilla.fenix.components.toolbar.BrowserToolbarTestTags.SITE_INFO_INSECURE_CONNECTION
 import org.mozilla.fenix.components.toolbar.BrowserToolbarTestTags.SITE_INFO_SECURE
@@ -24,6 +25,7 @@ object ToolbarSelectors : SelectorContainer {
         EXPANDED_TOOLBAR_IN_LANDSCAPE_ITEM,
         HOME_SCREEN_TOOLBAR,
         BROWSER_VIEW_TOOLBAR_ITEMS,
+        TAB_COUNTER_SHORTCUT_MENU,
     }
 
     val TOOLBAR =
@@ -97,6 +99,32 @@ object ToolbarSelectors : SelectorContainer {
             strategy = SelectorStrategy.UIAUTOMATOR_WITH_DESCRIPTION_CONTAINS,
             value = "New private tab",
             description = "New private tab button",
+        )
+
+    // Items in the shortcut menu raised by long-pressing the tab counter: Compose text nodes, distinct
+    // from the NEW_TAB_BUTTON / NEW_PRIVATE_TAB_BUTTON toolbar buttons matched by content-description.
+    val TAB_COUNTER_SHORTCUT_NEW_TAB =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TEXT,
+            value = getStringResource(tabcounterR.string.mozac_browser_menu_new_tab),
+            description = "Tab counter shortcut menu 'New tab' item",
+            groups = setOf(Group.TAB_COUNTER_SHORTCUT_MENU),
+        )
+
+    val TAB_COUNTER_SHORTCUT_NEW_PRIVATE_TAB =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TEXT,
+            value = getStringResource(tabcounterR.string.mozac_browser_menu_new_private_tab),
+            description = "Tab counter shortcut menu 'New private tab' item",
+            groups = setOf(Group.TAB_COUNTER_SHORTCUT_MENU),
+        )
+
+    val TAB_COUNTER_SHORTCUT_CLOSE_TAB =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TEXT,
+            value = getStringResource(tabcounterR.string.mozac_close_tab),
+            description = "Tab counter shortcut menu 'Close tab' item",
+            groups = setOf(Group.TAB_COUNTER_SHORTCUT_MENU),
         )
 
     val EXPANDED_TOOLBAR_ADD_BOOKMARK_BUTTON =

@@ -189,6 +189,16 @@ object BrowserPageSelectors : SelectorContainer {
             description = "Snackbar message '$text'",
         )
 
+    // Compose variant of SNACKBAR_MESSAGE, for snackbars whose message is a Compose text node absent
+    // from the UIAutomator text tree (e.g. the "Tab closed" undo snackbar).
+    @Suppress("ktlint:standard:function-naming", "FunctionName")
+    fun SNACKBAR_MESSAGE_COMPOSE(text: String = "") =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TEXT,
+            value = text,
+            description = "Snackbar message '$text' (Compose)",
+        )
+
     val TRANSLATION_SHEET =
         Selector(
             strategy = SelectorStrategy.UIAUTOMATOR2_BY_RES,
