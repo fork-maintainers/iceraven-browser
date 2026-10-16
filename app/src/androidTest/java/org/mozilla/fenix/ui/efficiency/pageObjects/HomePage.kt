@@ -4,7 +4,11 @@
 
 package org.mozilla.fenix.ui.efficiency.pageObjects
 
+import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.junit4.AndroidComposeTestRule
+import androidx.compose.ui.test.onAllNodesWithTag
+import androidx.compose.ui.test.onFirst
 import org.mozilla.fenix.helpers.HomeActivityIntentTestRule
 import org.mozilla.fenix.helpers.TestAssetHelper.waitingTimeShort
 import org.mozilla.fenix.ui.efficiency.helpers.BasePage
@@ -41,6 +45,20 @@ class HomePage(composeRule: AndroidComposeTestRule<HomeActivityIntentTestRule, *
     @Suppress("UnusedParameter")
     fun visitWebsite(url: String) {
         throw UnsupportedOperationException("visitWebsite is not supported by ${this::class.simpleName}")
+    }
+
+    /**
+     * Read the title of the first popular-site suggestion in the "Add to homepage" bottom sheet. The suggestions are
+     * data-driven (top-ranked Merino manifest domains minus the current top sites), so the title is unknown at
+     * authoring time and must be read from the live cell. The title node lives inside the cell's merging clickable
+     * container, so it is only addressable in the unmerged tree.
+     */
+    fun getFirstPopularSiteTitle(): String {
+        composeRule.waitForIdle()
+        val titleTag = HomeSelectors.ADD_TO_HOMEPAGE_BOTTOM_SHEET_POPULAR_SITES_ITEM_TITLE.value
+        val node = composeRule.onAllNodesWithTag(titleTag, useUnmergedTree = true).onFirst().fetchSemanticsNode()
+        return node.config.getOrNull(SemanticsProperties.Text)?.joinToString("") { it.text }
+            ?: error("First popular site cell has no title text")
     }
 
     /**

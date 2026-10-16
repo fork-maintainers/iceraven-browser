@@ -34,6 +34,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTag
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -109,7 +112,11 @@ private fun PopularSiteItem(
                     role = Role.Button,
                     onClick = onClick,
                 )
-                .width(TOP_SITES_ITEM_SIZE.dp),
+                .width(TOP_SITES_ITEM_SIZE.dp)
+                .semantics {
+                    testTagsAsResourceId = true
+                    testTag = "add.to.home.page.popular.site.item"
+                },
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Box(contentAlignment = Alignment.BottomEnd) {
@@ -129,6 +136,11 @@ private fun PopularSiteItem(
             overflow = TextOverflow.Ellipsis,
             maxLines = 2,
             style = FirefoxTheme.typography.caption.copy(fontWeight = FontWeight.W700),
+            modifier =
+                Modifier.semantics {
+                    testTagsAsResourceId = true
+                    testTag = "add.to.home.page.popular.site.item.title"
+                },
         )
     }
 }
