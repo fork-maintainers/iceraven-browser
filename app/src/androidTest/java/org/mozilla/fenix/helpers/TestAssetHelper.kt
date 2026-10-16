@@ -80,6 +80,9 @@ object TestAssetHelper {
     val MockWebServer.saveLoginAsset
         get() = createTestAsset("pages/password.html")
 
+    val MockWebServer.signupFormAsset
+        get() = createTestAsset("pages/signupForm.html")
+
     val MockWebServer.addressFormAsset
         get() = createTestAsset("pages/addressForm.html")
 

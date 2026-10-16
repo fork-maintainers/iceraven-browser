@@ -35,6 +35,7 @@ import org.mozilla.fenix.helpers.TestHelper.appContext
 import org.mozilla.fenix.helpers.TestHelper.mDevice
 import org.mozilla.fenix.helpers.TestHelper.packageName
 import org.mozilla.fenix.helpers.ext.waitNotNull
+import org.mozilla.fenix.ui.efficiency.core.driveUntil
 import org.mozilla.fenix.ui.efficiency.helpers.BasePage
 import org.mozilla.fenix.ui.efficiency.helpers.Selector
 import org.mozilla.fenix.ui.efficiency.navigation.NavigationGraph
@@ -369,6 +370,53 @@ class BrowserPage(composeRule: AndroidComposeTestRule<HomeActivityIntentTestRule
 
     fun verifySaveLoginPromptIsNotDisplayed(): BrowserPage {
         mozVerifyElementAbsent(BrowserPageSelectors.SAVE_LOGIN_PROMPT)
+        return this
+    }
+
+    // --- Strong (generated) password prompt ---
+
+    /** Focus the password field, which offers a strong password when no saved login matches. */
+    fun clickPasswordField(): BrowserPage {
+        mozVerify(BrowserPageSelectors.PASSWORD_WEB_FIELD, timeout = waitingTimeLong)
+        mozClick(BrowserPageSelectors.PASSWORD_WEB_FIELD_CLICKABLE)
+        return this
+    }
+
+    fun verifyStrongPasswordPromptIsDisplayed(): BrowserPage {
+        mozVerify(BrowserPageSelectors.STRONG_PASSWORD_SHEET_TITLE, timeout = waitingTimeLong)
+        return this
+    }
+
+    /** Raise the generated-password sheet via the "Use strong password" bar; the bar can lag the field focus. */
+    fun clickSuggestStrongPasswordBar(attempts: Int = 3): BrowserPage {
+        mozVerify(BrowserPageSelectors.PASSWORD_WEB_FIELD, timeout = waitingTimeLong)
+        // The bar appears asynchronously after the field takes focus, so re-focus until it shows.
+        driveUntil(
+            verb = "focus_password_field_for_strong_password_bar",
+            selector = BrowserPageSelectors.SUGGEST_STRONG_PASSWORD_BAR,
+            attempts = attempts,
+            want = true,
+            dumpOnFailure = true,
+            settle = { SystemClock.sleep(500) },
+            step = { mozClick(BrowserPageSelectors.PASSWORD_WEB_FIELD_CLICKABLE) },
+        )
+        mozClick(BrowserPageSelectors.SUGGEST_STRONG_PASSWORD_BAR)
+        return this
+    }
+
+    /** Accept the generated password: it is autofilled and the login is saved. */
+    fun clickUseStrongPassword(): BrowserPage {
+        mozClick(BrowserPageSelectors.STRONG_PASSWORD_USE_PASSWORD_BUTTON)
+        mozWaitUntilAbsent(BrowserPageSelectors.STRONG_PASSWORD_SHEET_TITLE, timeout = waitingTimeLong)
+        return this
+    }
+
+    /** Read the generated password autofilled into the web password field. */
+    fun getGeneratedPassword(): String = mozReadText(BrowserPageSelectors.PASSWORD_WEB_FIELD)
+
+    fun verifyUpdateUsernamePromptIsDisplayed(): BrowserPage {
+        mozVerify(BrowserPageSelectors.SAVE_LOGIN_PROMPT)
+        mozVerify(BrowserPageSelectors.UPDATE_USERNAME_PROMPT_MESSAGE)
         return this
     }
 

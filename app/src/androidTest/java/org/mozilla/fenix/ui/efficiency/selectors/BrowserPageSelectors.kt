@@ -5,6 +5,7 @@
 package org.mozilla.fenix.ui.efficiency.selectors
 
 import mozilla.components.feature.app.links.R as applinksR
+import mozilla.components.feature.prompts.R as promptsR
 import mozilla.components.feature.summarize.R as summarizeR
 import org.mozilla.fenix.R
 import org.mozilla.fenix.compose.snackbar.SNACKBAR_BUTTON_TEST_TAG
@@ -294,6 +295,14 @@ object BrowserPageSelectors : SelectorContainer {
             description = "Web form password field",
         )
 
+    // Same field via UiObject2 for a coordinate-tap click: UiObject.click() on a GeckoView web input is flaky (A57).
+    val PASSWORD_WEB_FIELD_CLICKABLE =
+        Selector(
+            strategy = SelectorStrategy.UIAUTOMATOR2_BY_RAW_RES,
+            value = "password",
+            description = "Web form password field (clickable)",
+        )
+
     val TOGGLE_PASSWORD_WEB_BUTTON =
         Selector(
             strategy = SelectorStrategy.UIAUTOMATOR_WITH_COMPOSE_TAG,
@@ -562,5 +571,40 @@ object BrowserPageSelectors : SelectorContainer {
             value = "shake.to.summarize.bottom.sheet.drag.handle",
             description = "Sign in to summarize bottom sheet drag handle",
             groups = setOf(Group.SIGN_IN_TO_SUMMARIZE_BOTTOM_SHEET),
+        )
+
+    // --- Strong (generated) password prompt ---
+
+    // The "Use strong password" bar above the keyboard; absent on the first engagement, where the sheet auto-opens.
+    val SUGGEST_STRONG_PASSWORD_BAR =
+        Selector(
+            strategy = SelectorStrategy.UIAUTOMATOR2_BY_RES,
+            value = "suggestStrongPasswordBar",
+            description = "Suggest strong password bar",
+        )
+
+    // Title of the generated-password sheet; also distinguishes it from the save/update-login prompt it shares a
+    // container with.
+    val STRONG_PASSWORD_SHEET_TITLE =
+        Selector(
+            strategy = SelectorStrategy.UIAUTOMATOR2_BY_TEXT,
+            value = getStringResource(promptsR.string.mozac_feature_prompts_suggest_strong_password_title),
+            description = "Strong password sheet title",
+        )
+
+    val STRONG_PASSWORD_USE_PASSWORD_BUTTON =
+        Selector(
+            strategy = SelectorStrategy.UIAUTOMATOR2_BY_TEXT,
+            value = getStringResource(promptsR.string.mozac_feature_prompts_suggest_strong_password_use_password),
+            description = "Strong password sheet 'Use password' button",
+        )
+
+    // Save-login headline for the add-username update. The save_message res-id is shared, so the text pins the case.
+    val UPDATE_USERNAME_PROMPT_MESSAGE =
+        Selector(
+            strategy = SelectorStrategy.UIAUTOMATOR_WITH_RES_ID_AND_TEXT,
+            value = "save_message",
+            secondaryValue = getStringResource(promptsR.string.mozac_feature_prompt_login_add_username_headline_2),
+            description = "Update username prompt headline",
         )
 }

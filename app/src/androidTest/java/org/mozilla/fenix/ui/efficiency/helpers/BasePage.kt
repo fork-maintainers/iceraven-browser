@@ -519,6 +519,25 @@ abstract class BasePage(protected val composeRule: AndroidComposeTestRule<HomeAc
     /** On screen right now? Never throws, never waits, so it can drive control flow. */
     fun mozIsElementPresent(selector: Selector): Boolean = mozVerifyElement(selector, applyPreconditions = false)
 
+    /** Read an element's text once it is non-blank; an async fill (e.g. an autofilled password) can lag the action. */
+    fun mozReadText(
+        selector: Selector,
+        timeout: Long = TestAssetHelper.waitingTime,
+        interval: Long = 300,
+    ): String {
+        var text = ""
+        require(
+            verb = "read_text",
+            selector = selector,
+            expectation = "has non-blank text",
+            policy = WaitPolicy.Poll(timeout, interval),
+            applyPreconditions = false,
+            predicate = { it.text()?.isNotBlank() == true },
+            action = { text = it.text().orEmpty() },
+        )
+        return text
+    }
+
     fun mozVerifyElementAbsent(selector: Selector) = requireAbsent("verify_absent", selector)
 
     fun mozWaitUntilAbsent(
