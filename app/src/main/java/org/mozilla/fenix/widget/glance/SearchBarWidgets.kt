@@ -56,6 +56,18 @@ import org.mozilla.fenix.iconpicker.DefaultPackageManagerWrapper
 import org.mozilla.fenix.widget.SearchWidgetIntents
 import org.mozilla.fenix.widget.SearchWidgets
 
+private val space = AcornSpace.Small
+
+private const val SEARCH_BAR_HEIGHT_DP = 56
+private val searchBarHeight = SEARCH_BAR_HEIGHT_DP.dp
+private val compactSearchPillHeight = 40.dp
+private val buttonSize = 40.dp
+private val buttonIconSize = 24.dp
+private val appIconSize = 32.dp
+private val compactAppIconSize = 24.dp
+private val dividerWidth = 1.dp
+private val dividerHeight = 24.dp
+
 /** Different styles of the Glance search bar widget offered. */
 enum class SearchBarWidgetStyle {
     /** Full width bar with private and voice search buttons separated by a divider. */
@@ -124,16 +136,12 @@ class CompactSearchBarWidgetReceiver : BaseSearchBarWidgetReceiver(SearchBarWidg
 /**
  * What a search bar widget shows and what its buttons launch.
  *
- * @property textSearch Intent launched by the search label, or null if it is not clickable.
- * @property privateSearch Intent launched by the private search button, or null if it is not clickable.
  * @property voiceSearch Intent launched by the voice search button, or null if it is not clickable.
  * @property lensSearch Intent launched by the image search button, or null if it is not clickable.
  * @property showVoice Whether the voice search button is shown, by default when [voiceSearch] is not null.
  * @property showLens Whether the image search button is shown, by default when [lensSearch] is not null.
  */
 private class SearchBarState(
-    val textSearch: Intent?,
-    val privateSearch: Intent?,
     val voiceSearch: Intent?,
     val lensSearch: Intent?,
     val showVoice: Boolean = voiceSearch != null,
@@ -142,18 +150,14 @@ private class SearchBarState(
     companion object {
         fun live(context: Context): SearchBarState {
             return SearchBarState(
-                textSearch = SearchWidgetIntents.textSearch(context),
-                privateSearch = SearchWidgetIntents.textSearch(context, isPrivateBrowsingMode = true),
                 voiceSearch = SearchWidgetIntents.maybeVoiceSearch(context),
                 lensSearch = SearchWidgetIntents.maybeLensSearch(context),
             )
         }
 
-        /** State for the widget picker preview, which shows every button and handles no clicks. */
+        /** State for the widget picker preview, which shows every button. */
         val preview =
             SearchBarState(
-                textSearch = null,
-                privateSearch = null,
                 voiceSearch = null,
                 lensSearch = null,
                 showVoice = true,
@@ -180,30 +184,20 @@ private fun Context.withNightMode(night: Boolean): Context {
     return createConfigurationContext(configuration)
 }
 
-private val space = AcornSpace.Small
-
-private const val SEARCH_BAR_HEIGHT_DP = 56
-private val searchBarHeight = SEARCH_BAR_HEIGHT_DP.dp
-private val compactSearchPillHeight = 40.dp
-private val buttonSize = 40.dp
-private val buttonIconSize = 24.dp
-private val dividerWidth = 1.dp
-private val dividerHeight = 24.dp
-
 @Composable
 private fun SearchBar(style: SearchBarWidgetStyle, state: SearchBarState) {
     when (style) {
-        SearchBarWidgetStyle.FULL_WIDTH -> PlainSearchBar(state)
-        SearchBarWidgetStyle.FULL_WIDTH_WITH_LENS -> SearchBarWithLens(state)
+        SearchBarWidgetStyle.FULL_WIDTH -> FullWidthSearchBar(state)
+        SearchBarWidgetStyle.FULL_WIDTH_WITH_LENS -> FullWidthSearchBarWithLens(state)
         SearchBarWidgetStyle.COMPACT -> CompactSearchBar(state)
     }
 }
 
 @Composable
-private fun PlainSearchBar(state: SearchBarState) {
+private fun FullWidthSearchBar(state: SearchBarState) {
     SearchBarContainer(modifier = GlanceModifier.fillMaxWidth().padding(horizontal = space.static150)) {
-        SearchLabel(state, modifier = GlanceModifier.defaultWeight(), iconSize = 32.dp)
-        IconButton(privateButton(state), filled = false)
+        SearchLabel(modifier = GlanceModifier.defaultWeight(), iconSize = appIconSize)
+        IconButton(privateButton(LocalContext.current), filled = false)
         if (state.showVoice) {
             Box(
                 modifier =
@@ -218,16 +212,16 @@ private fun PlainSearchBar(state: SearchBarState) {
 }
 
 @Composable
-private fun SearchBarWithLens(state: SearchBarState) {
+private fun FullWidthSearchBarWithLens(state: SearchBarState) {
     val buttons =
         listOfNotNull(
             lensButton(state).takeIf { state.showLens },
-            privateButton(state),
+            privateButton(LocalContext.current),
             voiceButton(state).takeIf { state.showVoice },
         )
 
     SearchBarContainer(modifier = GlanceModifier.fillMaxWidth().padding(horizontal = space.static150)) {
-        SearchLabel(state, modifier = GlanceModifier.defaultWeight(), iconSize = 32.dp)
+        SearchLabel(modifier = GlanceModifier.defaultWeight(), iconSize = appIconSize)
         ActionButtons(buttons, spacing = space.static100)
     }
 }
@@ -236,19 +230,18 @@ private fun SearchBarWithLens(state: SearchBarState) {
 private fun CompactSearchBar(state: SearchBarState) {
     val buttons =
         listOfNotNull(
-            privateButton(state),
+            privateButton(LocalContext.current),
             voiceButton(state).takeIf { state.showVoice },
             lensButton(state).takeIf { state.showLens },
         )
 
     SearchBarContainer(modifier = GlanceModifier.padding(horizontal = space.static100)) {
         SearchLabel(
-            state,
             modifier =
                 GlanceModifier.height(compactSearchPillHeight)
                     .background(ImageProvider(R.drawable.search_bar_widget_pill_background))
                     .padding(start = space.static150, end = space.static200),
-            iconSize = 24.dp,
+            iconSize = compactAppIconSize,
         )
         Spacer(GlanceModifier.width(space.static150))
         ActionButtons(buttons, spacing = 6.dp)
@@ -261,11 +254,11 @@ private data class ActionButtonState(
     val intent: Intent?,
 )
 
-private fun privateButton(state: SearchBarState) =
+private fun privateButton(context: Context) =
     ActionButtonState(
         iconsR.drawable.mozac_ic_private_mode_24,
         R.string.search_widget_private_search,
-        state.privateSearch,
+        SearchWidgetIntents.textSearch(context, isPrivateBrowsingMode = true),
     )
 
 private fun voiceButton(state: SearchBarState) =
@@ -299,12 +292,11 @@ private fun SearchBarContainer(
 /**
  * The app icon followed by the "Search" label, opening a new text search when clicked.
  *
- * @param state The widget state.
  * @param modifier Modifier applied to the clickable row.
  * @param iconSize Size of the app icon.
  */
 @Composable
-private fun SearchLabel(state: SearchBarState, modifier: GlanceModifier, iconSize: Dp) {
+private fun SearchLabel(modifier: GlanceModifier, iconSize: Dp) {
     val context = LocalContext.current
     val appIcon =
         DefaultAppIconRepository(
@@ -315,7 +307,7 @@ private fun SearchLabel(state: SearchBarState, modifier: GlanceModifier, iconSiz
             .iconForegroundId
 
     Row(
-        modifier = modifier.clickableIfNotNull(state.textSearch),
+        modifier = modifier.clickable(actionStartActivity(SearchWidgetIntents.textSearch(context))),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Image(

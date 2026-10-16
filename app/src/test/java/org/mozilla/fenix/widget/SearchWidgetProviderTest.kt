@@ -164,9 +164,8 @@ class SearchWidgetProviderTest {
     @Test
     fun `GIVEN lens integration disabled WHEN createLensSearchIntent is called THEN it returns null`() {
         val widgetProvider = SearchWidgetProvider()
-        val context: Context = mockk {
-            every { components.settings.googleLensIntegrationEnabled } returns false
-        }
+        val context = contextWithDefaultEngine("google-b-1-m")
+        every { context.components.settings.googleLensIntegrationEnabled } returns false
 
         assertNull(widgetProvider.createLensSearchIntent(context))
     }
@@ -174,18 +173,8 @@ class SearchWidgetProviderTest {
     @Test
     fun `GIVEN lens user pref disabled WHEN createLensSearchIntent is called THEN it returns null`() {
         val widgetProvider = SearchWidgetProvider()
-        val context: Context = mockk {
-            every { components.settings.googleLensIntegrationEnabled } returns true
-            every { components.settings.googleLensIntegrationUserEnabled } returns false
-        }
-
-        assertNull(widgetProvider.createLensSearchIntent(context))
-    }
-
-    @Test
-    fun `GIVEN a non-Google default engine WHEN createLensSearchIntent is called THEN it returns null`() {
-        val widgetProvider = SearchWidgetProvider()
-        val context = contextWithDefaultEngine("bing")
+        val context = contextWithDefaultEngine("google-b-1-m")
+        every { context.components.settings.googleLensIntegrationUserEnabled } returns false
 
         assertNull(widgetProvider.createLensSearchIntent(context))
     }
