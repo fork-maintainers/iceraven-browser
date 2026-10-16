@@ -860,6 +860,8 @@
   <string name="preferences_search_synced_tabs">Buscar pestañas sincronizadas</string>
   <!-- Preference for account settings -->
   <string name="preferences_account_settings">Configuración de la cuenta</string>
+  <!-- Preference for account and sync settings -->
+  <string name="preferences_account_and_sync_settings">Cuenta y sincronización</string>
   <!-- Preference for enabling url autocomplete -->
   <string name="preferences_enable_autocomplete_urls">Autocompletar URLs</string>
   <!-- Preference title for switch preference to show sponsored Firefox Suggest search suggestions -->
@@ -2585,6 +2587,8 @@
   <string name="sign_in_create_account_text" tools:ignore="BrandUsage"><![CDATA[¿No tienes cuenta? <u>Crea una</u> para sincronizar Firefox entre dispositivos.]]></string>
   <!-- Text shown in confirmation dialog to sign out of account. %s is the name of the app (for example "Firefox"). -->
   <string name="sign_out_confirmation_message_2">%s dejará de sincronizarse con tu cuenta, pero no se borrarán los datos de navegación de este dispositivo.</string>
+  <!-- Text for the primary action button of the confirmation dialog shown when the user signs out of their account -->
+  <string name="sign_out_dialog_confirm_button">Cerrar sesión</string>
   <!-- Option to continue signing out of account shown in confirmation dialog to sign out of account -->
   <string name="sign_out_disconnect">Desconectar</string>
   <!-- Option to cancel signing out shown in confirmation dialog to sign out of account -->
@@ -4472,6 +4476,10 @@
   <string name="lens_camera_mode_qr">Escáner de QR</string>
   <!-- Toast shown when the user picks an image from the gallery in QR mode but no QR code is found in it -->
   <string name="lens_camera_qr_no_code_found">No se encontró ningún código QR en la imagen</string>
+  <!-- Button shown under an image picked from the gallery while it is being sent to Google Lens. Tapping it stops the search and returns to the camera. -->
+  <string name="lens_camera_loading_cancel_button">Cancelar</string>
+  <!-- Action in the snackbar shown when an image picked from the gallery could not be searched with Google Lens. Tapping it searches the same image again. -->
+  <string name="lens_camera_upload_failed_retry_button">Intentar de nuevo</string>
   <!-- Title of the bottom sheet shown the first time the user opens the Google Lens camera screen -->
   <string name="lens_opt_out_title">Búscalo con Google Lens</string>
   <!-- Description of the bottom sheet shown the first time the user opens the Google Lens camera screen -->
@@ -4560,4 +4568,6 @@
   <string name="reader_mode_panel_content_description">Opciones del modo lectura</string>
   <!-- Content description for the button in reader mode panel that turns on the read aloud feature (playback of content begins when button is pressed) -->
   <string name="reader_mode_panel_listen_content_description">Leer en voz alta</string>
+  <!-- Content description for media player displayed in Reader Mode when the Listen to Page (Read Aloud) feature is selected -->
+  <string name="reader_mode_panel_media_player_content_description">Reproductor de audio</string>
 </resources>

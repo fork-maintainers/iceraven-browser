@@ -313,6 +313,8 @@
   <string name="browser_menu_default_banner_title">Tornar o %1$s como padrão</string>
   <!-- Label text within the set as default banner -->
   <string name="browser_menu_default_banner_subtitle_2">Rápido, privativo e feito para você.</string>
+  <!-- Content description (not visible, for screen readers etc.) for the button that dismisses the set as default banner in the menu -->
+  <string name="browser_menu_default_banner_dismiss_promotion">Descartar promoção</string>
   <!-- Content description (not visible, for screen readers etc.) for recommended extensions in main menu -->
   <string name="browser_menu_recommended_extensions_content_description">Mais informações</string>
   <!--
@@ -346,7 +348,7 @@
 
     Toolbar title for the Page summaries settings fragment
   -->
-  <string name="preferences_page_summaries">Resumos de páginas</string>
+  <string name="preferences_page_summaries">Resumo de páginas</string>
   <!--
     AI Controls settings
 
@@ -775,7 +777,7 @@
   <!-- Preference title for using the screen lock to hide tabs in private browsing -->
   <string name="preferences_pbm_lock_screen_title">Usar o bloqueio de tela para ocultar abas na navegação privativa</string>
   <!-- Informs the user how to access the tabs when "Use screen lock to hide tabs in private browsing" is enabled -->
-  <string name="preferences_pbm_lock_screen_summary_3">Veja abas com desbloqueio de impressão digital, PIN ou reconhecimento facial. Ativar isso também impede captura e compartilhamento de tela.</string>
+  <string name="preferences_pbm_lock_screen_summary_3">Ver abas com desbloqueio de impressão digital, PIN ou reconhecimento facial. Ativar isto também impede captura e compartilhamento de tela.</string>
   <!-- Description of the preference to enable "HTTPS-Only" mode. -->
   <string name="preferences_https_only_summary">Tentar se conectar com sites usando automaticamente o protocolo de criptografia HTTPS para maior segurança.</string>
   <!-- Summary of https only preference if https only is set to off -->
@@ -1694,6 +1696,11 @@
   <string name="close_tab_and_delete_group_confirmation_dialog_cancel">Cancelar</string>
   <!-- Content description for the three dot button next to a tab group" -->
   <string name="tab_group_three_dot_button_content_description">Mais opções</string>
+  <!--
+    Content description for the Expand button on the contracted menu for a tab group:
+    when tapped, tabs are displayed in an expanded grid or list view, taking up the full screen.
+  -->
+  <string name="tab_groups_strip_expand_group_content_description">Expandir para mostrar abas em tela inteira</string>
   <!-- Text shown on the edit button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_edit">Editar</string>
   <!-- Text shown on the ungroup button for a tab group on the three dot menu -->
@@ -2691,7 +2698,7 @@
   <!-- Preference for enhanced tracking protection for the custom protection settings -->
   <string name="preference_enhanced_tracking_protection_custom">Personalizado</string>
   <!-- Preference description for enhanced tracking protection for the strict protection settings -->
-  <string name="preference_enhanced_tracking_protection_custom_description_2">Escolha que rastreadores e scripts bloquear.</string>
+  <string name="preference_enhanced_tracking_protection_custom_description_2">Escolher quais rastreadores e scripts bloquear.</string>
   <!-- Accessibility text for the Strict protection information icon -->
   <string name="preference_enhanced_tracking_protection_custom_info_button">O que é bloqueado pela proteção personalizada contra rastreamento</string>
   <!--
@@ -2705,9 +2712,9 @@
   <!-- Option for enhanced tracking protection for the custom protection settings for cookies -->
   <string name="preference_enhanced_tracking_protection_custom_cookies_2">Cookies de sites não visitados</string>
   <!-- Option for enhanced tracking protection for the custom protection settings for cookies -->
-  <string name="preference_enhanced_tracking_protection_custom_cookies_3">Todos os cookies de terceiros (pode atrapalhar alguns sites)</string>
+  <string name="preference_enhanced_tracking_protection_custom_cookies_3">Bloquear todos os cookies de terceiros (pode atrapalhar alguns sites)</string>
   <!-- Option for enhanced tracking protection for the custom protection settings for cookies -->
-  <string name="preference_enhanced_tracking_protection_custom_cookies_4">Todos os cookies (atrapalha vários sites)</string>
+  <string name="preference_enhanced_tracking_protection_custom_cookies_4">Bloquear todos os cookies (atrapalha vários sites)</string>
   <!-- Option for enhanced tracking protection for the custom protection settings for cookies -->
   <string name="preference_enhanced_tracking_protection_custom_cookies_5">Isolar cookies entre sites</string>
   <!-- Preference for Global Privacy Control for the custom privacy settings for Global Privacy Control. '&amp;' is replaced with the ampersand symbol: & -->
@@ -3024,7 +3031,7 @@
   <!-- Title for the Suggest Email Masks toggle -->
   <string name="preferences_email_masks_suggest_title">Sugerir máscaras de email</string>
   <!-- Summary for the Suggest Email Masks toggle. -->
-  <string name="preferences_email_masks_suggest_summary">Oculte seu email real para proteger sua caixa de entrada de spam. Alguns sites não oferecem suporte a máscaras de email.</string>
+  <string name="preferences_email_masks_suggest_summary">Ocultar email real para proteger a caixa de entrada contra spam. Alguns sites não oferecem suporte a máscaras de email.</string>
   <!-- Text that links to additional information about the Email Masks -->
   <string name="preferences_email_masks_suggest_learn_more">Saiba mais</string>
   <!-- Title for the Manage Email Masks links to Firefox Relay dashboard -->
@@ -3081,7 +3088,7 @@
   <!-- Badge label shown in the menu item when the browser VPN has an error -->
   <string name="ip_protection_menu_error">Erro</string>
   <!-- Badge label shown in the VPN menu item when the user is eligible for the feature but needs to authenticate / authorize to enable it -->
-  <string name="ip_protection_menu_try_vpn_cta">Experimente gratuitamente</string>
+  <string name="ip_protection_menu_try_vpn_cta">Experimente de graça</string>
   <!-- Content description for the chevron button that opens the browser VPN settings screen -->
   <string name="ip_protection_navigate_settings">Abrir configurações de VPN</string>
   <!--

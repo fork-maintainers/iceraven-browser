@@ -313,6 +313,8 @@
   <string name="browser_menu_default_banner_title">Đặt %1$s làm trình duyệt mặc định của bạn</string>
   <!-- Label text within the set as default banner -->
   <string name="browser_menu_default_banner_subtitle_2">Nhanh chóng, riêng tư, dành riêng cho bạn.</string>
+  <!-- Content description (not visible, for screen readers etc.) for the button that dismisses the set as default banner in the menu -->
+  <string name="browser_menu_default_banner_dismiss_promotion">Bỏ qua quảng cáo</string>
   <!-- Content description (not visible, for screen readers etc.) for recommended extensions in main menu -->
   <string name="browser_menu_recommended_extensions_content_description">Thông tin thêm</string>
   <!--
@@ -1364,6 +1366,8 @@
   <string name="library_desktop_bookmarks_unfiled">Dấu trang khác</string>
   <!-- Option in Library to open History page -->
   <string name="library_history">Lịch sử</string>
+  <!-- Content description (not visible, for screen readers etc.) for the check mark that replaces a site's icon in History and Recently closed tabs when the item is selected -->
+  <string name="library_item_selected_content_description">Đã chọn</string>
   <!-- Settings Page Title -->
   <string name="settings_title">Cài đặt</string>
   <!-- Content description (not visible, for screen readers etc.): "Close button for library settings" -->
@@ -1687,6 +1691,11 @@
   <string name="close_tab_and_delete_group_confirmation_dialog_cancel">Huỷ bỏ</string>
   <!-- Content description for the three dot button next to a tab group" -->
   <string name="tab_group_three_dot_button_content_description">Tùy chọn khác</string>
+  <!--
+    Content description for the Expand button on the contracted menu for a tab group:
+    when tapped, tabs are displayed in an expanded grid or list view, taking up the full screen.
+  -->
+  <string name="tab_groups_strip_expand_group_content_description">Mở rộng để hiển thị các thẻ ở chế độ toàn màn hình</string>
   <!-- Text shown on the edit button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_edit">Chỉnh sửa</string>
   <!-- Text shown on the ungroup button for a tab group on the three dot menu -->

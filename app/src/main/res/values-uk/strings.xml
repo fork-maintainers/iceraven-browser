@@ -313,6 +313,8 @@
   <string name="browser_menu_default_banner_title">Зробити %1$s типовим браузером</string>
   <!-- Label text within the set as default banner -->
   <string name="browser_menu_default_banner_subtitle_2">Швидкий, приватний, створений для вас.</string>
+  <!-- Content description (not visible, for screen readers etc.) for the button that dismisses the set as default banner in the menu -->
+  <string name="browser_menu_default_banner_dismiss_promotion">Відхилити промоакцію</string>
   <!-- Content description (not visible, for screen readers etc.) for recommended extensions in main menu -->
   <string name="browser_menu_recommended_extensions_content_description">Докладніше</string>
   <!--
@@ -1366,6 +1368,8 @@
   <string name="library_desktop_bookmarks_unfiled">Інші закладки</string>
   <!-- Option in Library to open History page -->
   <string name="library_history">Історія</string>
+  <!-- Content description (not visible, for screen readers etc.) for the check mark that replaces a site's icon in History and Recently closed tabs when the item is selected -->
+  <string name="library_item_selected_content_description">Вибрано</string>
   <!-- Settings Page Title -->
   <string name="settings_title">Налаштування</string>
   <!-- Content description (not visible, for screen readers etc.): "Close button for library settings" -->
@@ -1697,6 +1701,11 @@
   <string name="close_tab_and_delete_group_confirmation_dialog_cancel">Скасувати</string>
   <!-- Content description for the three dot button next to a tab group" -->
   <string name="tab_group_three_dot_button_content_description">Інші налаштування</string>
+  <!--
+    Content description for the Expand button on the contracted menu for a tab group:
+    when tapped, tabs are displayed in an expanded grid or list view, taking up the full screen.
+  -->
+  <string name="tab_groups_strip_expand_group_content_description">Розгорнути, щоб показати вкладки на весь екран</string>
   <!-- Text shown on the edit button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_edit">Змінити</string>
   <!-- Text shown on the ungroup button for a tab group on the three dot menu -->

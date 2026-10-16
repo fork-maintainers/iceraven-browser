@@ -313,6 +313,8 @@
   <string name="browser_menu_default_banner_title">Ustaw przeglądarkę %1$s jako domyślną</string>
   <!-- Label text within the set as default banner -->
   <string name="browser_menu_default_banner_subtitle_2">Szybka, prywatna i\u00a0specjalnie dla Ciebie.</string>
+  <!-- Content description (not visible, for screen readers etc.) for the button that dismisses the set as default banner in the menu -->
+  <string name="browser_menu_default_banner_dismiss_promotion">Zamknij propozycję</string>
   <!-- Content description (not visible, for screen readers etc.) for recommended extensions in main menu -->
   <string name="browser_menu_recommended_extensions_content_description">Więcej informacji</string>
   <!--
@@ -1366,6 +1368,8 @@
   <string name="library_desktop_bookmarks_unfiled">Pozostałe zakładki</string>
   <!-- Option in Library to open History page -->
   <string name="library_history">Historia</string>
+  <!-- Content description (not visible, for screen readers etc.) for the check mark that replaces a site's icon in History and Recently closed tabs when the item is selected -->
+  <string name="library_item_selected_content_description">Zaznaczone</string>
   <!-- Settings Page Title -->
   <string name="settings_title">Ustawienia</string>
   <!-- Content description (not visible, for screen readers etc.): "Close button for library settings" -->
@@ -1697,6 +1701,11 @@
   <string name="close_tab_and_delete_group_confirmation_dialog_cancel">Anuluj</string>
   <!-- Content description for the three dot button next to a tab group" -->
   <string name="tab_group_three_dot_button_content_description">Więcej opcji</string>
+  <!--
+    Content description for the Expand button on the contracted menu for a tab group:
+    when tapped, tabs are displayed in an expanded grid or list view, taking up the full screen.
+  -->
+  <string name="tab_groups_strip_expand_group_content_description">Rozwiń, aby wyświetlić karty na pełnym ekranie</string>
   <!-- Text shown on the edit button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_edit">Edytuj</string>
   <!-- Text shown on the ungroup button for a tab group on the three dot menu -->
@@ -2431,6 +2440,8 @@
   <string name="sync_send_tab_empty_state_title">Brak połączonych urządzeń</string>
   <!-- Send tab to synced devices: Empty state message - Displayed when the user has no synced devices -->
   <string name="sync_send_tab_empty_state_description" tools:ignore="BrandUsage">Aby wysłać kartę, zaloguj się w\u00a0Firefoksie na co najmniej jednym innym urządzeniu.</string>
+  <!-- Send tab to synced devices: Empty state link - Displayed when the user has no synced devices -->
+  <string name="sync_send_tab_empty_state_link">Dowiedz się, jak połączyć urządzenie</string>
   <!-- Send tab to synced devices: Connectivity Error title -->
   <string name="sync_send_tab_error_connection_title">Sprawdź połączenie z\u00a0Internetem</string>
   <!-- Send tab to synced devices: Connectivity Error message - Suggested user action after internet connection has been established -->
@@ -4521,6 +4532,16 @@
   <string name="lens_camera_mode_qr">Skaner kodów QR</string>
   <!-- Toast shown when the user picks an image from the gallery in QR mode but no QR code is found in it -->
   <string name="lens_camera_qr_no_code_found">Na obrazie nie odnaleziono kodu QR</string>
+  <!-- Status shown under an image picked from the gallery while it is being sent to Google Lens for a visual search -->
+  <string name="lens_camera_loading_status">Wyszukiwanie</string>
+  <!-- Button shown under an image picked from the gallery while it is being sent to Google Lens. Tapping it stops the search and returns to the camera. -->
+  <string name="lens_camera_loading_cancel_button">Anuluj</string>
+  <!-- Snackbar message shown when an image picked from the gallery could not be opened or read, so it was never sent to Google Lens. Shown after returning to the camera. -->
+  <string name="lens_camera_image_load_failed">Nie można wczytać tego obrazu. Wybierz inny.</string>
+  <!-- Snackbar message shown when an image picked from the gallery could not be searched because of a network problem or an error from Google Lens. Shown after returning to the camera, next to the lens_camera_upload_failed_retry_button action. -->
+  <string name="lens_camera_upload_failed">Nie można pobrać wyników z\u00a0Google Lens</string>
+  <!-- Action in the snackbar shown when an image picked from the gallery could not be searched with Google Lens. Tapping it searches the same image again. -->
+  <string name="lens_camera_upload_failed_retry_button">Spróbuj ponownie</string>
   <!-- Title of the bottom sheet shown the first time the user opens the Google Lens camera screen -->
   <string name="lens_opt_out_title">Znajdź w\u00a0Google Lens</string>
   <!-- Description of the bottom sheet shown the first time the user opens the Google Lens camera screen -->

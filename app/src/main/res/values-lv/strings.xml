@@ -38,6 +38,8 @@
   <string name="browser_menu_page_badge_text">Jaunums</string>
   <!-- Browser menu label for adding a tab to a tab group -->
   <string name="browser_menu_add_to_tab_group">Pievienot kopai</string>
+  <!-- Content description (not visible, for screen readers etc.) for the button that dismisses the set as default banner in the menu -->
+  <string name="browser_menu_default_banner_dismiss_promotion">Noraidīt piedāvājumu</string>
   <!-- Link text for learning more about AI controls -->
   <string name="ai_controls_learn_more">Uzzināt vairāk</string>
   <!-- Title for the block AI enhancements toggle -->
@@ -214,6 +216,11 @@
   <string name="add_to_tab_group_title">Pievienot</string>
   <!-- Content Description for "New tab group" panel. -->
   <string name="add_to_new_tab_group_content_description">Pievienot jaunai ciļņu kopai</string>
+  <!--
+    Content description for the Expand button on the contracted menu for a tab group:
+    when tapped, tabs are displayed in an expanded grid or list view, taking up the full screen.
+  -->
+  <string name="tab_groups_strip_expand_group_content_description">Izvērst, lai parādītu cilnes pilnekrāna skatā</string>
   <!-- Text shown on the share button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_share">Kopīgot</string>
   <!-- Custom accessibility action to reorder a tab up rather than dragging. -->
