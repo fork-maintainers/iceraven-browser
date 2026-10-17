@@ -7,6 +7,16 @@
 -->
 
 <resources xmlns:tools="http://schemas.android.com/tools">
+  <!-- Placeholder text shown in the search bar before a user enters text for the default engine -->
+  <string name="search_hint">Meklē vai ievadi adresi</string>
+  <!-- Shorter placeholder text shown in the search bar when an additional action (voice search) is rendered alongside the hint. -->
+  <string name="search_hint_short">Meklēt</string>
+  <!-- Placeholder text shown in the search bar before a user enters text for a general engine -->
+  <string name="search_hint_general_engine">Meklēt tīmeklī</string>
+  <!-- Placeholder text shown in search bar when using history search -->
+  <string name="history_search_hint">Meklēt vēsturē</string>
+  <!-- Placeholder text shown in search bar when using bookmarks search -->
+  <string name="bookmark_search_hint">Meklēt grāmatzīmes</string>
   <!-- Content description for the toolbar back button while searching bookmarks -->
   <string name="bookmark_close_search_description">Doties atpakaļ un aizvērt meklēšanu</string>
   <!-- Placeholder text shown in search bar when using tabs search -->
@@ -48,17 +58,28 @@
   <string name="ai_controls_block_dialog_title">Liegt MI uzlabojumus?</string>
   <!-- Block button text in the block AI enhancements confirmation dialog -->
   <string name="ai_controls_block_dialog_block">Liegt</string>
+  <!-- Placeholder text shown in the search bar before a user enters text -->
+  <string name="locale_search_hint">Meklēt valodu</string>
   <!-- Button in the search suggestions onboarding that allows search suggestions in private sessions -->
   <string name="search_suggestions_onboarding_allow_button">Atļaut</string>
   <!-- Search suggestion onboarding hint title text -->
   <string name="search_suggestions_onboarding_title">Atļaut meklēšanas ieteikumus privātajās sesijās?</string>
   <!-- Search suggestion onboarding hint description text, %s is the name of the app (for example "Firefox"). -->
   <string name="search_suggestions_onboarding_text">%s kopīgos visu adreses joslā ievadīto ar noklusējuma meklētāju.</string>
+  <!-- Search engine suggestion title text. %s is the name of the suggested engine. -->
+  <string name="search_engine_suggestions_title">Meklēt %s</string>
   <!-- Menu option in the search selector menu to open the search settings -->
   <string name="search_settings_menu_item">Meklēšanas iestatījumi</string>
+  <!--
+    Content description (not visible, for screen readers etc.): Search engine icon.
+    %s is the search engine name (for example: DuckDuckGo).
+  -->
+  <string name="search_engine_icon_content_description_1">Meklētājs: %s</string>
   <!-- Learn more link for the crash reporting option in the privacy preferences dialog shown during onboarding. -->
   <string name="onboarding_preferences_dialog_crash_reporting_learn_more_2">Uzzināt vairāk</string>
   <string name="onboarding_preferences_dialog_usage_data_learn_more_2">Uzzināt vairāk</string>
+  <!-- Used as text for the link in onboarding_redesign_tou_body_three. -->
+  <string name="onboarding_redesign_tou_body_three_link_text" tools:ignore="UnusedResources">Pārvaldīt iestatījumus</string>
   <!-- Terms of use (ToU) onboarding page continue button label. -->
   <string name="onboarding_redesign_tou_agree_and_continue_button_label" tools:ignore="UnusedResources">Turpināt</string>
   <!-- Onboarding label for 'Continue' button. -->
@@ -67,12 +88,28 @@
   <string name="nova_onboarding_continue_button">Turpināt</string>
   <!-- "Continue browsing" onboarding button. -->
   <string name="nova_onboarding_continue_browsing_button" tools:ignore="UnusedResources">Turpināt pārlūkošanu</string>
+  <!-- Terms of use (ToU) onboarding body line three link text for nova_onboarding_tou_body_line_3. -->
+  <string name="nova_onboarding_tou_body_line_3_link_text">Pārvaldīt iestatījumus</string>
   <!-- "Set to default" onboarding button. -->
   <string name="nova_onboarding_set_to_default_button">Iestatīt kā noklusējuma pārlūku</string>
   <!-- Marketing onboarding body link text. -->
   <string name="nova_onboarding_marketing_body_link_text_1">Uzzināt vairāk</string>
   <!-- "Add search widget" onboarding button. 'Firefox' is intentionally hardcoded. -->
   <string name="nova_onboarding_add_search_widget_button" tools:ignore="BrandUsage">Pievienot Firefox logrīku</string>
+  <!-- Text preview for smaller sized widgets -->
+  <string name="search_widget_text_short">Meklēt</string>
+  <!-- Text preview for larger sized widgets -->
+  <string name="search_widget_text_long">Meklēt tīmeklī</string>
+  <!-- Content description (not visible, for screen readers etc.): Button in the search widget that starts a search in a private tab -->
+  <string name="search_widget_private_search">Privāta meklēšana</string>
+  <!-- Widget description in the widget picker screen for the search bar widget that includes buttons for private search and for voice search -->
+  <string name="search_bar_widget_description">Meklēšanas josla ar privātu un balss meklēšanu</string>
+  <!-- Widget description in the widget picker screen for the search bar widget that includes buttons for image search, private search and voice search -->
+  <string name="search_bar_with_lens_widget_description">Meklēšanas josla ar attēlu, privātu un balss meklēšanu</string>
+  <!-- Widget description in the widget picker screen for the compact search bar widget -->
+  <string name="compact_search_bar_widget_description">Cieša meklēšanas josla</string>
+  <!-- Preference for settings related to Search -->
+  <string name="preferences_search">Meklēt</string>
   <!-- Preference for settings related to Search engines -->
   <string name="preferences_search_engines">Meklētāji</string>
   <!-- Preference for settings related to Search engines suggestions -->
@@ -95,10 +132,16 @@
   <string name="toolbar_shortcut_menu_edit_option">Labot īsceļu</string>
   <!-- Preference for settings related to visual options -->
   <string name="preferences_customize">Pielāgot</string>
+  <!-- Preference title for switch preference to suggest browsing history when searching -->
+  <string name="preferences_search_browsing_history">Meklēt pārlūkošanas vēsturē</string>
+  <!-- Preference title for switch preference to suggest bookmarks when searching -->
+  <string name="preferences_search_bookmarks">Meklēt grāmatzīmes</string>
   <!-- Preference title for switch preference to suggest synced tabs when searching -->
   <string name="preferences_search_synced_tabs">Meklēt vienādotajās cilnēs</string>
   <!-- Preference for account and sync settings -->
   <string name="preferences_account_and_sync_settings">Konts un vienādošana</string>
+  <!-- Snackbar action label shown when user shares a link -->
+  <string name="link_shared_snackbar_action">Pārvaldīt iestatījumus</string>
   <!-- Preference for open links in third party apps always open in apps option -->
   <string name="preferences_open_links_in_apps_always">Vienmēr</string>
   <!-- Preference title for choosing an app to handle downloads -->
@@ -258,6 +301,10 @@
   <string name="bookmark_add_folder">Pievienot mapi</string>
   <!-- Content description for the bookmark list new folder navigation bar button -->
   <string name="bookmark_add_new_folder_button_content_description">Pievienot jaunu mapi</string>
+  <!-- Content description for bookmark search floating action button -->
+  <string name="bookmark_search_button_content_description">Meklēt grāmatzīmes</string>
+  <!-- Content description for select folder screen search action button ("search" is a verb) -->
+  <string name="select_bookmark_search_button_content_description">Meklēt mapes</string>
   <!-- Label that indicates that video and audio autoplay is only allowed over Wi-Fi -->
   <string name="preference_option_autoplay_allowed_wifi_only2">Liegt video un skaņu tikai tad, kad tiek izmantoti mobilie dati</string>
   <!-- Label for global setting that indicates that video autoplay is allowed, but audio autoplay is blocked -->
@@ -319,6 +366,8 @@
   <string name="notification_privacy_report_headline_no_trackers">%1$s aiztur izsekotājus, kamēr Tu pārlūko. Tie būs redzami šeit.</string>
   <!-- Tab collection deletion prompt dialog message. %1$s is the collection name. -->
   <string name="tab_collection_dialog_message">Vai tiešām izdzēst %1$s?</string>
+  <!-- Summary for Accessibility Text Automatic Size Scaling Preference -->
+  <string name="preference_accessibility_auto_size_summary">Fonta izmērs atbildīs Taviem Android iestatījumiem. Atspējot, lai šeit pārvaldītu fonta lielumu.</string>
   <!-- Title for the downloads item in Delete browsing data -->
   <string name="preferences_delete_browsing_data_downloads">Lejupielādes</string>
   <!-- Title of the confirmation dialog shown when the user signs out of their account -->
@@ -351,6 +400,8 @@
   <string name="add_to_homescreen_add">Pievienot</string>
   <!-- Preference option for adding a password -->
   <string name="preferences_logins_add_login_2">Pievienot paroli</string>
+  <!-- Hint for search box in passwords list -->
+  <string name="preferences_passwords_saved_logins_search_2">Meklēt paroles</string>
   <!-- Content description, used by tools like screenreaders, to press on the add new login button. -->
   <string name="saved_logins_add_new_login_button_content_description">Pievienot jaunu pieteikšanās vienumu</string>
   <!-- Text that links to additional information about the Email Masks -->
@@ -389,6 +440,14 @@
   <string name="search_engine_add_custom_search_engine_title">Pievienot meklētāju</string>
   <!-- Content description (not visible, for screen readers etc.): Title for the button that navigates to add new engine screen -->
   <string name="search_engine_add_custom_search_engine_button_content_description">Pievienot jaunu meklētāju</string>
+  <!-- Placeholder text shown in the Search Engine Name text field before a user enters text -->
+  <string name="search_add_custom_engine_name_hint_2">Meklētāja nosaukums</string>
+  <!-- Label for the TextField in which user enters custom search engine URL -->
+  <string name="search_add_custom_engine_url_label">Meklēšanas virknes URL</string>
+  <!-- Label for the TextField in which user enters custom search engine suggestion URL -->
+  <string name="search_add_custom_engine_suggest_url_label">Meklēšanas ieteikumu API (izvēles)</string>
+  <!-- Placeholder text shown in the Search Suggestion String TextField before a user enters text -->
+  <string name="search_add_custom_engine_suggest_string_hint">Meklēšanas ieteikumu API URL</string>
   <!-- Confirmation message for a dialog confirming if the user wants to delete all the permissions for all sites -->
   <string name="confirm_clear_permissions_on_all_sites">Vai tiešām noņemt visu vietņu visas atļaujas?</string>
   <!-- Confirmation message for a dialog confirming if the user wants to delete all the permissions for a site -->
@@ -421,6 +480,8 @@
   <string name="homepage_shortcuts_add_website">Pievienot tīmekļvietni</string>
   <!-- Confirmation dialog button text when top sites limit is reached. -->
   <string name="top_sites_max_limit_confirmation_button">Labi, sapratu</string>
+  <!-- Title for search suggestions when Google is the default search suggestion engine. -->
+  <string name="google_search_engine_suggestion_header">Google meklēšana</string>
   <!--
     Default browser experiment
 
@@ -495,6 +556,8 @@
     Title of Settings Search. "Search" is a verb here
   -->
   <string name="settings_search_title">Meklēt iestatījumus</string>
+  <!-- Content description (not visible, for screen readers etc.) for the button to clear the search field for settings search -->
+  <string name="content_description_settings_search_clear_search">Notīrīt meklēšanas lauku</string>
   <!-- Section header for recent search results -->
   <string name="settings_search_recent_searches_section_header">Neseni meklēšanas iznākumi</string>
   <!-- Content Description for the button to open Settings Search (to search through settings). -->
@@ -509,6 +572,10 @@
   <string name="collections_migration_homepage_card_message">Ir vienkāršāks veids, ka turēt savas cilnes kārtībā</string>
   <!-- Link text shown on the collections to tab groups migration card that opens the tab groups page in the tab manager. -->
   <string name="collections_migration_homepage_card_link">Apskatīt manas ciļņu kopas</string>
+  <!-- Lens image search button content description -->
+  <string name="lens_search_content_description">Meklēt ar attēlu</string>
+  <!-- Image context menu entry that sends the long-pressed image to Google Lens -->
+  <string name="context_menu_open_image_with_google_lens">Meklēt ar Google Lens</string>
   <!-- Status shown under an image picked from the gallery while it is being sent to Google Lens for a visual search -->
   <string name="lens_camera_loading_status">Uzmeklē šo</string>
   <!-- Button shown under an image picked from the gallery while it is being sent to Google Lens. Tapping it stops the search and returns to the camera. -->

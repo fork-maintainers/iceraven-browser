@@ -709,6 +709,8 @@
   <string name="search_widget_text_long">Søk på nettet</string>
   <!-- Content description (not visible, for screen readers etc.): Voice search -->
   <string name="search_widget_voice">Stemmesøk</string>
+  <!-- Content description (not visible, for screen readers etc.): Button in the search widget that starts a search in a private tab -->
+  <string name="search_widget_private_search">Privat søk</string>
   <!--
     Preferences
 

@@ -313,6 +313,8 @@
   <string name="browser_menu_default_banner_title">Meitsje %1$s jo standert</string>
   <!-- Label text within the set as default banner -->
   <string name="browser_menu_default_banner_subtitle_2">Fluch, privee, en makke foar jo.</string>
+  <!-- Content description (not visible, for screen readers etc.) for the button that dismisses the set as default banner in the menu -->
+  <string name="browser_menu_default_banner_dismiss_promotion">Promoasje slute</string>
   <!-- Content description (not visible, for screen readers etc.) for recommended extensions in main menu -->
   <string name="browser_menu_recommended_extensions_content_description">Mear ynfo</string>
   <!--
@@ -707,6 +709,14 @@
   <string name="search_widget_text_long">Sykje op it web</string>
   <!-- Content description (not visible, for screen readers etc.): Voice search -->
   <string name="search_widget_voice">Sprutsen sykopdracht</string>
+  <!-- Content description (not visible, for screen readers etc.): Button in the search widget that starts a search in a private tab -->
+  <string name="search_widget_private_search">Privee sykje</string>
+  <!-- Widget description in the widget picker screen for the search bar widget that includes buttons for private search and for voice search -->
+  <string name="search_bar_widget_description">Sykbalke mei privee en sprutsen sykopdrachten</string>
+  <!-- Widget description in the widget picker screen for the search bar widget that includes buttons for image search, private search and voice search -->
+  <string name="search_bar_with_lens_widget_description">Sykbalke mei ôfbylding, privee en sprutsen sykopdrachten</string>
+  <!-- Widget description in the widget picker screen for the compact search bar widget -->
+  <string name="compact_search_bar_widget_description">Kompakte sykbalke</string>
   <!--
     Preferences
 
@@ -1694,6 +1704,11 @@
   <string name="close_tab_and_delete_group_confirmation_dialog_cancel">Annulearje</string>
   <!-- Content description for the three dot button next to a tab group" -->
   <string name="tab_group_three_dot_button_content_description">Mear opsjes</string>
+  <!--
+    Content description for the Expand button on the contracted menu for a tab group:
+    when tapped, tabs are displayed in an expanded grid or list view, taking up the full screen.
+  -->
+  <string name="tab_groups_strip_expand_group_content_description">Utklappe om ljepblêden yn folslein skerm te toanen</string>
   <!-- Text shown on the edit button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_edit">Bewurkje</string>
   <!-- Text shown on the ungroup button for a tab group on the three dot menu -->

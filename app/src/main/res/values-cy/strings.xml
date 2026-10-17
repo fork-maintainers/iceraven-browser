@@ -713,6 +713,14 @@
   <string name="search_widget_text_long">Chwilio’r we</string>
   <!-- Content description (not visible, for screen readers etc.): Voice search -->
   <string name="search_widget_voice">Chwilio llais</string>
+  <!-- Content description (not visible, for screen readers etc.): Button in the search widget that starts a search in a private tab -->
+  <string name="search_widget_private_search">Chwiliad preifat</string>
+  <!-- Widget description in the widget picker screen for the search bar widget that includes buttons for private search and for voice search -->
+  <string name="search_bar_widget_description">Bar chwilio gyda chwiliad preifat a llais</string>
+  <!-- Widget description in the widget picker screen for the search bar widget that includes buttons for image search, private search and voice search -->
+  <string name="search_bar_with_lens_widget_description">Bar chwilio gyda delwedd, chwiliad preifat a llais</string>
+  <!-- Widget description in the widget picker screen for the compact search bar widget -->
+  <string name="compact_search_bar_widget_description">Bar chwilio cryno</string>
   <!--
     Preferences
 
@@ -1720,7 +1728,7 @@
     Content description for the Expand button on the contracted menu for a tab group:
     when tapped, tabs are displayed in an expanded grid or list view, taking up the full screen.
   -->
-  <string name="tab_groups_strip_expand_group_content_description">Ehangwch i ddangos tabiau ar sgrin lawn</string>
+  <string name="tab_groups_strip_expand_group_content_description">Ehangu i ddangos tabiau ar sgrin lawn</string>
   <!-- Text shown on the edit button for a tab group on the three dot menu -->
   <string name="tab_group_three_dot_menu_edit">Golygu</string>
   <!-- Text shown on the ungroup button for a tab group on the three dot menu -->

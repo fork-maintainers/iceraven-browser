@@ -70,7 +70,7 @@
   -->
   <string name="home_bookmarks_title">북마크</string>
   <!-- Content description for the button which navigates the user to show all of their bookmarks. -->
-  <string name="home_bookmarks_show_all_content_description">모든 북마크 표시</string>
+  <string name="home_bookmarks_show_all_content_description">모든 북마크 보기</string>
   <!-- Text for the menu button to remove a recently saved bookmark from the user's home screen -->
   <string name="home_bookmarks_menu_item_remove">제거</string>
   <!-- About content. %1$s is the name of the app (for example "Firefox"). -->
@@ -152,7 +152,7 @@
   -->
   <string name="recent_tabs_header_2">이어하기</string>
   <!-- Button text for showing all the tabs in the tabs tray -->
-  <string name="recent_tabs_show_all">모두 표시</string>
+  <string name="recent_tabs_show_all">모두 보기</string>
   <!-- Text for button in synced tab card that opens synced tabs tray -->
   <string name="recent_tabs_see_all_synced_tabs_button_text">동기화된 탭 모두 보기</string>
   <!-- Accessibility description for device icon used for recent synced tab -->
@@ -177,7 +177,7 @@
   -->
   <string name="recently_visited_menu_item_remove">삭제</string>
   <!-- Content description for the button which navigates the user to show all of their history. -->
-  <string name="past_explorations_show_all_content_description_2">모든 지난 탐색 표시</string>
+  <string name="past_explorations_show_all_content_description_2">모든 지난 탐색 보기</string>
   <!--
     Browser Fragment
 
@@ -708,6 +708,14 @@
   <string name="search_widget_text_long">웹 검색</string>
   <!-- Content description (not visible, for screen readers etc.): Voice search -->
   <string name="search_widget_voice">음성 검색</string>
+  <!-- Content description (not visible, for screen readers etc.): Button in the search widget that starts a search in a private tab -->
+  <string name="search_widget_private_search">사생활 보호 검색</string>
+  <!-- Widget description in the widget picker screen for the search bar widget that includes buttons for private search and for voice search -->
+  <string name="search_bar_widget_description">사생활 보호 및 음성 검색의 검색 창</string>
+  <!-- Widget description in the widget picker screen for the search bar widget that includes buttons for image search, private search and voice search -->
+  <string name="search_bar_with_lens_widget_description">이미지, 사생활 보호 및 음성 검색의 검색 창</string>
+  <!-- Widget description in the widget picker screen for the compact search bar widget -->
+  <string name="compact_search_bar_widget_description">간단한 검색 창</string>
   <!--
     Preferences
 
