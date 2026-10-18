@@ -714,11 +714,11 @@
   <!-- Content description (not visible, for screen readers etc.): Voice search -->
   <string name="search_widget_voice">Chwilio llais</string>
   <!-- Content description (not visible, for screen readers etc.): Button in the search widget that starts a search in a private tab -->
-  <string name="search_widget_private_search">Chwiliad preifat</string>
+  <string name="search_widget_private_search">Chwilio preifat</string>
   <!-- Widget description in the widget picker screen for the search bar widget that includes buttons for private search and for voice search -->
-  <string name="search_bar_widget_description">Bar chwilio gyda chwiliad preifat a llais</string>
+  <string name="search_bar_widget_description">Bar chwilio gyda chwilio preifat a llais</string>
   <!-- Widget description in the widget picker screen for the search bar widget that includes buttons for image search, private search and voice search -->
-  <string name="search_bar_with_lens_widget_description">Bar chwilio gyda delwedd, chwiliad preifat a llais</string>
+  <string name="search_bar_with_lens_widget_description">Bar chwilio gyda delwedd, chwilio preifat a llais</string>
   <!-- Widget description in the widget picker screen for the compact search bar widget -->
   <string name="compact_search_bar_widget_description">Bar chwilio cryno</string>
   <!--

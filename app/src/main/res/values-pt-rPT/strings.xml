@@ -714,9 +714,9 @@
   <!-- Widget description in the widget picker screen for the search bar widget that includes buttons for private search and for voice search -->
   <string name="search_bar_widget_description">Barra de pesquisa com pesquisa privada e por voz</string>
   <!-- Widget description in the widget picker screen for the search bar widget that includes buttons for image search, private search and voice search -->
-  <string name="search_bar_with_lens_widget_description">Barra de pesquisa com pesquisa de imagens, privada e por voz</string>
+  <string name="search_bar_with_lens_widget_description">Barra de pesquisa com imagem, pesquisa privada e pesquisa por voz</string>
   <!-- Widget description in the widget picker screen for the compact search bar widget -->
-  <string name="compact_search_bar_widget_description">Barra de pesquisa compactada</string>
+  <string name="compact_search_bar_widget_description">Barra de pesquisa compacta</string>
   <!--
     Preferences
 
