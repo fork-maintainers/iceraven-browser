@@ -352,7 +352,7 @@ class Core(
                 ProfileMarkerMiddleware(markerName = "BrowserStore", profiler = engine.profiler),
                 LogMiddleware(tag = "BrowserStore", shouldIncludeDetailedData = { Config.channel.isDebug }),
                 LastAccessMiddleware(),
-                RecentlyClosedMiddleware(recentlyClosedTabsStorage, RECENTLY_CLOSED_MAX),
+                RecentlyClosedMiddleware(recentlyClosedTabsStorage, RECENTLY_CLOSED_MAX, applicationScope),
                 DownloadMiddleware(
                     applicationContext = context,
                     downloadServiceClass = DownloadService::class.java,
@@ -409,7 +409,7 @@ class Core(
                 ),
                 AboutHomeMiddleware(homepageTitle = context.getString(R.string.tab_tray_homepage_tab)),
                 BrowserVisualCompletenessMiddleware(visualCompletenessQueue),
-                TabGroupMiddleware(tabGroupRepository = tabGroupRepository),
+                TabGroupMiddleware(tabGroupRepository = tabGroupRepository, scope = applicationScope),
             )
 
         BrowserStore(
