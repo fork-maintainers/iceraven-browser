@@ -9324,7 +9324,8 @@ listen_to_page:
   play_pressed:
     type: event
     description: |
-      The user pressed the play button to start or resume.
+      The user pressed the play button to resume. Playback starts on its own
+      when the audio icon is tapped, which `requested` records.
     bugs:
       - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
     data_reviews:
