@@ -13,7 +13,6 @@ import org.mozilla.fenix.ui.efficiency.helpers.PageReadinessProfiles
 import org.mozilla.fenix.ui.efficiency.helpers.Selector
 import org.mozilla.fenix.ui.efficiency.helpers.SelectorContainer
 import org.mozilla.fenix.ui.efficiency.helpers.SelectorGroup
-import org.mozilla.fenix.ui.efficiency.helpers.SelectorLifecycle
 import org.mozilla.fenix.ui.efficiency.helpers.SelectorStrategy
 import org.mozilla.fenix.ui.efficiency.helpers.SwipeDirection
 
@@ -37,15 +36,6 @@ object MainMenuSelectors : SelectorContainer {
             value = MenuDialogTestTag.EXTENSIONS,
             description = "Main menu Extensions item anchor",
             readiness = PageReadinessProfiles.IDENTITY_ANCHOR,
-        )
-
-    val NEW_PRIVATE_TAB_BUTTON =
-        Selector(
-            strategy = SelectorStrategy.COMPOSE_BY_TEXT,
-            value = getStringResource(R.string.browser_menu_new_private_tab),
-            description = "Main menu New private tab button",
-            // Removed in https://bugzilla.mozilla.org/show_bug.cgi?id=1966222 as part of the menu redesign effort
-            lifecycle = SelectorLifecycle.RemovedIn(141),
         )
 
     val EXTENSIONS_BUTTON =

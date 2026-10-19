@@ -163,7 +163,7 @@ class OnboardingMapperTest {
         val lineTwoLinkUrl = "LinkTwo"
         val lineThreeText =
             "To help improve the browser, Firefox sends diagnostic and interaction data to Mozilla. %1\$s"
-        val lineThreeLinkText = "Manage"
+        val lineThreeLinkText = "Manage settings"
 
         val expected =
             OnboardingPageUiData(
@@ -187,14 +187,14 @@ class OnboardingMapperTest {
 
         val nimbusTermsOfServiceData =
             TermsOfServiceData(
-                lineOneText = StringHolder(R.string.onboarding_term_of_service_line_one_2, ""),
-                lineOneLinkText = StringHolder(R.string.onboarding_term_of_service_line_one_link_text_2, ""),
+                lineOneText = StringHolder(R.string.nova_onboarding_tou_body_line_1, ""),
+                lineOneLinkText = StringHolder(R.string.nova_onboarding_tou_body_line_1_link_text, ""),
                 lineOneLinkUrl = StringHolder(null, lineOneLinkUrl),
-                lineTwoText = StringHolder(R.string.onboarding_term_of_service_line_two_2, ""),
-                lineTwoLinkText = StringHolder(R.string.onboarding_term_of_service_line_two_link_text, ""),
+                lineTwoText = StringHolder(R.string.nova_onboarding_tou_body_line_2, ""),
+                lineTwoLinkText = StringHolder(R.string.nova_onboarding_tou_body_line_2_link_text, ""),
                 lineTwoLinkUrl = StringHolder(null, lineTwoLinkUrl),
-                lineThreeText = StringHolder(R.string.onboarding_term_of_service_line_three, ""),
-                lineThreeLinkText = StringHolder(R.string.onboarding_term_of_service_line_three_link_text, ""),
+                lineThreeText = StringHolder(R.string.nova_onboarding_tou_body_line_3, ""),
+                lineThreeLinkText = StringHolder(R.string.nova_onboarding_tou_body_line_3_link_text, ""),
             )
 
         val termsOfServiceCardData =
@@ -443,7 +443,7 @@ class OnboardingMapperTest {
         val cardDataWithoutType =
             OnboardingCardData(
                 cardType = null,
-                imageRes = R.drawable.ic_onboarding_search_widget,
+                imageRes = R.drawable.ic_onboarding_welcome,
                 title = StringHolder(null, "add search widget title"),
                 body = StringHolder(null, "add search widget body"),
                 primaryButtonLabel = StringHolder(null, "add search widget primary button text"),
@@ -481,7 +481,7 @@ private val defaultBrowserPageUiData =
 private val addSearchWidgetPageUiData =
     OnboardingPageUiData(
         type = OnboardingPageUiData.Type.ADD_SEARCH_WIDGET,
-        imageRes = R.drawable.ic_onboarding_search_widget,
+        imageRes = R.drawable.ic_onboarding_welcome,
         title = "add search widget title",
         description = "add search widget body",
         primaryButtonLabel = "add search widget primary button text",
@@ -516,7 +516,7 @@ private val toolbarPageUiData =
 private val notificationPageUiData =
     OnboardingPageUiData(
         type = OnboardingPageUiData.Type.NOTIFICATION_PERMISSION,
-        imageRes = R.drawable.ic_notification_permission,
+        imageRes = R.drawable.ic_onboarding_welcome,
         title = "notification title",
         description = "notification body",
         primaryButtonLabel = "notification primary button text",
@@ -552,7 +552,7 @@ private val defaultBrowserCardDataNoDisqualifiers =
 private val addSearchWidgetCardDataNoConditions =
     OnboardingCardData(
         cardType = OnboardingCardType.ADD_SEARCH_WIDGET,
-        imageRes = R.drawable.ic_onboarding_search_widget,
+        imageRes = R.drawable.ic_onboarding_welcome,
         title = StringHolder(null, "add search widget title"),
         body = StringHolder(null, "add search widget body"),
         primaryButtonLabel = StringHolder(null, "add search widget primary button text"),
@@ -565,7 +565,7 @@ private val addSearchWidgetCardDataNoConditions =
 private val addSearchWidgetCardData =
     OnboardingCardData(
         cardType = OnboardingCardType.ADD_SEARCH_WIDGET,
-        imageRes = R.drawable.ic_onboarding_search_widget,
+        imageRes = R.drawable.ic_onboarding_welcome,
         title = StringHolder(null, "add search widget title"),
         body = StringHolder(null, "add search widget body"),
         primaryButtonLabel = StringHolder(null, "add search widget primary button text"),
@@ -589,7 +589,7 @@ private val syncCardData =
 private val notificationCardData =
     OnboardingCardData(
         cardType = OnboardingCardType.NOTIFICATION_PERMISSION,
-        imageRes = R.drawable.ic_notification_permission,
+        imageRes = R.drawable.ic_onboarding_welcome,
         title = StringHolder(null, "notification title"),
         body = StringHolder(null, "notification body"),
         primaryButtonLabel = StringHolder(null, "notification primary button text"),

@@ -365,9 +365,6 @@ class DefaultSessionControlControllerTest {
             mockk<TabCollection> {
                 every { title } returns "Collection"
             }
-        every {
-            activity.resources.getString(R.string.tab_collection_dialog_message, "Collection")
-        } returns "Are you sure you want to delete Collection?"
 
         var actualCollection: TabCollection? = null
 

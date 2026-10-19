@@ -1409,15 +1409,6 @@ class BrowserRobot(private val composeTestRule: ComposeTestRule) {
         Log.i(TAG, "clickSiteDoesNotLoadReason: Clicked the \"Site doesn’t load\" reason option")
     }
 
-    fun clickBrokenSiteFormCancelButton(composeTestRule: ComposeTestRule) {
-        Log.i(TAG, "clickBrokenSiteFormCancelButton: Trying to click the \"Cancel\" button")
-        composeTestRule
-            .onNodeWithText(getStringResource(R.string.webcompat_reporter_cancel))
-            .performScrollTo()
-            .performClick()
-        Log.i(TAG, "clickBrokenSiteFormCancelButton: Clicked the \"Cancel\" button")
-    }
-
     fun clickBrokenSiteFormSendButton(composeTestRule: ComposeTestRule) {
         Log.i(TAG, "clickBrokenSiteFormSendButton: Trying to close the keyboard.")
         closeSoftKeyboard()

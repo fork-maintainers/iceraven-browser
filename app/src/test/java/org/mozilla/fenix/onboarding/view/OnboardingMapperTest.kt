@@ -91,7 +91,7 @@ class OnboardingMapperTest {
     fun `GIVEN a notification page WHEN mapToOnboardingPageState is called THEN creates the expected OnboardingPageState`() {
         val expected =
             OnboardingPageState(
-                imageRes = R.drawable.ic_notification_permission,
+                imageRes = R.drawable.ic_onboarding_welcome,
                 title = "notification title",
                 description = "notification body",
                 primaryButton = Action("notification primary button text", unitLambda),
@@ -101,7 +101,7 @@ class OnboardingMapperTest {
         val onboardingPageUiData =
             OnboardingPageUiData(
                 type = OnboardingPageUiData.Type.NOTIFICATION_PERMISSION,
-                imageRes = R.drawable.ic_notification_permission,
+                imageRes = R.drawable.ic_onboarding_welcome,
                 title = "notification title",
                 description = "notification body",
                 primaryButtonLabel = "notification primary button text",
@@ -129,7 +129,7 @@ class OnboardingMapperTest {
     fun `GIVEN an add search widget page WHEN mapToOnboardingPageState is called THEN creates the expected OnboardingPageState`() {
         val expected =
             OnboardingPageState(
-                imageRes = R.drawable.ic_onboarding_search_widget,
+                imageRes = R.drawable.ic_onboarding_welcome,
                 title = "add search widget title",
                 description = "add search widget body with link text",
                 primaryButton = Action("add search widget primary button text", unitLambda),
@@ -139,7 +139,7 @@ class OnboardingMapperTest {
         val onboardingPageUiData =
             OnboardingPageUiData(
                 type = OnboardingPageUiData.Type.ADD_SEARCH_WIDGET,
-                imageRes = R.drawable.ic_onboarding_search_widget,
+                imageRes = R.drawable.ic_onboarding_welcome,
                 title = "add search widget title",
                 description = "add search widget body with link text",
                 primaryButtonLabel = "add search widget primary button text",

@@ -69,9 +69,6 @@
     <string name="about_content" tools:ignore="BrandUsage">%1$s is produced by Mozilla.</string>
 
     <!-- Private Browsing -->
-    <string name="private_browsing_common_myths">
-       Common myths about private browsing
-    </string>
     <!-- Text to be announced by the accessibility service to inform the user that the private browsing mode is currently active. -->
     <string name="private_browsing_a11y_session_announcement">Private browsing session</string>
 
@@ -234,8 +231,6 @@
     <string name="browser_menu_syncing_paused_caption">Syncing paused</string>
     <!-- Browser menu caption label for an authenticated user -->
     <string name="browser_menu_signed_in_caption">Manage what you back up and sync</string>
-    <!-- Browser menu label that creates a private tab -->
-    <string name="browser_menu_new_private_tab">New private tab</string>
     <!-- Browser menu label that navigates to the Password screen -->
     <string name="browser_menu_passwords">Passwords</string>
     <!-- Content description (not visible, for screen readers etc.) for the handle used to drag the main menu at the bottom of the screen. -->
@@ -421,18 +416,6 @@
 
     <!-- Terms of service onboarding title card label. 'Firefox' intentionally hardcoded here-->
     <string name="onboarding_welcome_to_firefox" tools:ignore="BrandUsage">Welcome to Firefox</string>
-    <!-- Line one of the terms of service onboarding page. %1$s is replaced by an active link, using onboarding_term_of_service_line_one_link_text_2 as text (“Firefox Terms of Use”). -->
-    <string name="onboarding_term_of_service_line_one_2">By continuing, you agree to the %1$s.</string>
-    <!-- Used as text for the link in onboarding_term_of_service_line_one_2. -->
-    <string name="onboarding_term_of_service_line_one_link_text_2" tools:ignore="BrandUsage">Firefox Terms of Use</string>
-    <!-- Line two of the terms of service onboarding page. 'Firefox' is intentionally hardcoded. %1$s is replaced by an active link, using onboarding_term_of_service_line_two_link_text as text (“Privacy Notice”). -->
-    <string name="onboarding_term_of_service_line_two_2" tools:ignore="BrandUsage">Firefox cares about your privacy. Learn more in our %1$s.</string>
-    <!-- Used as text for the link in onboarding_term_of_service_line_two. -->
-    <string name="onboarding_term_of_service_line_two_link_text">Privacy Notice</string>
-    <!-- Line three of the terms of service onboarding page. 'Firefox' and 'Mozilla' are intentionally hardcoded. %1$s is replaced by an active link using onboarding_term_of_service_line_three_link_text as text (“Manage”). -->
-    <string name="onboarding_term_of_service_line_three" tools:ignore="BrandUsage">To help improve the browser, Firefox sends diagnostic and interaction data to Mozilla. %1$s</string>
-    <!-- Used as text for the link in onboarding_term_of_service_line_three. -->
-    <string name="onboarding_term_of_service_line_three_link_text">Manage</string>
 
     <!-- Terms of use (ToU) onboarding redesign title. -->
     <string name="onboarding_redesign_tou_title" tools:ignore="UnusedResources">Launch the ultimate Android browser</string>
@@ -693,8 +676,6 @@
     <string name="compact_search_bar_widget_description">Compact search bar</string>
 
     <!-- Preferences -->
-    <!-- Title for the settings page-->
-    <string name="settings">Settings</string>
     <!-- Preference category for general settings -->
     <string name="preferences_category_general">General</string>
     <!-- Preference category for all links about Fenix -->
@@ -1504,8 +1485,6 @@
     <string name="open_tabs_menu">Open tabs menu</string>
     <!-- Content description (not visible, for screen readers etc.): Return to tab manager -->
     <string name="tab_manager_search_bar_back_content_description">Return to tab manager</string>
-    <!-- Open tabs menu item to save tabs to collection -->
-    <string name="tabs_menu_save_to_collection1">Save tabs to collection</string>
     <!-- Text for the menu button to delete a collection -->
     <string name="collection_delete">Delete collection</string>
     <!-- Text for the menu button to rename a collection -->
@@ -1850,8 +1829,6 @@
     <string name="webcompat_reporter_label_mandatory_description">Describe the problem in detail to help us investigate the issue</string>
     <!-- The label/title of a optional field in the Web Compat Reporter feature for adding additional information. -->
     <string name="webcompat_reporter_label_optional_description">Describe the problem in detail to help us investigate the issue (optional)</string>
-    <!-- The button text for the cancel button to leave the Web Compat Reporter feature. -->
-    <string name="webcompat_reporter_cancel">Cancel</string>
     <!-- The button text for the send button to submit the provided form data. -->
     <string name="webcompat_reporter_send_report">Send report</string>
     <!-- Text for a snackbar to confirm the successful submission of a WebCompat report. -->
@@ -2341,8 +2318,6 @@
     <string name="qr_scanner_dialog_invalid">Web address not valid.</string>
     <!-- QR code scanner prompt dialog positive option when there is an error -->
     <string name="qr_scanner_dialog_invalid_ok">OK</string>
-    <!-- Tab collection deletion prompt dialog message. %1$s is the collection name. -->
-    <string name="tab_collection_dialog_message">Are you sure you want to delete %1$s?</string>
     <!-- Sample text for accessibility font size -->
     <string name="accessibility_text_size_sample_text_1">This is sample text. It is here to show how text will appear when you increase or decrease the size with this setting.</string>
     <!-- Summary for Accessibility Text Size Scaling Preference -->
@@ -3193,10 +3168,6 @@
     <string name="browser_menu_remove_from_shortcuts">Remove from shortcuts</string>
     <!-- Message in delete confirmation dialog for password -->
     <string name="login_deletion_confirmation_2">Are you sure you want to delete this password?</string>
-    <!-- Positive action of a dialog asking to delete  -->
-    <string name="dialog_delete_positive">Delete</string>
-    <!-- Negative action of a dialog asking to delete login -->
-    <string name="dialog_delete_negative">Cancel</string>
     <!--  The page title for editing a saved password. -->
     <string name="edit_2">Edit password</string>
     <!--  The page title for adding new password. -->
@@ -3617,9 +3588,6 @@
     <string name="protection_panel_etp_toggle_enabled_description_2">If something looks broken on this site, try turning it off.</string>
     <!-- Description text for the Enhanced Tracking Protection toggle when tracking protection is disabled. -->
     <string name="protection_panel_etp_toggle_disabled_description_2">Turning on tracking protection is recommended.</string>
-    <!-- Text for displaying the total number of trackers blocked in the protection panel.
-        %d is a placeholder for the number of trackers blocked. -->
-    <string name="protection_panel_num_trackers_blocked">Trackers blocked: %d</string>
     <!-- Text for when tracking protection is disabled and no trackers are blocked. -->
     <string name="protection_panel_etp_disabled_no_trackers_blocked">Trackers aren’t blocked</string>
     <!-- Link text to navigate to privacy and security settings from the protection panel. -->
