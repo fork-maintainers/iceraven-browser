@@ -212,4 +212,27 @@ class TranslationsTest : BaseTest(LaunchConfig(isPageLoadTranslationsPromptEnabl
             .mozClick(MainMenuSelectors.TRANSLATE_BUTTON)
         on.browserPage.verifyTranslationSheetWithReload(testPage.url.toString())
     }
+
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3167207
+    @Critical
+    @Test
+    fun verifyTheShowOriginalOptionFromTheTranslationBannerTest() {
+        val testPage = mockWebServer.firstForeignWebPageAsset
+
+        on.browserPage
+            .navigateToPage(testPage.url.toString())
+            .verifyTranslationSheetWithReload(testPage.url.toString())
+            .mozClickIfPresent(BrowserPageSelectors.TRANSLATION_SHEET_TRANSLATE_BUTTON)
+            .mozWaitUntilAbsent(BrowserPageSelectors.TRANSLATION_SHEET_TRANSLATE_BUTTON)
+        on.browserPage
+            .verifyPageContent("Article of the day")
+            .mozVerify(BrowserPageSelectors.TRANSLATION_BANNER_TRANSLATED_FROM_TO("French", "English"))
+            .mozVerifyElementsByGroup(BrowserPageSelectors.Group.TRANSLATION_BANNER)
+            .mozClick(BrowserPageSelectors.TRANSLATION_BANNER_OPEN_TRANSLATION_SHEET_CHEVRON)
+            .mozVerify(BrowserPageSelectors.TRANSLATED_SHEET_TITLE("French", "English"))
+            .mozVerifyElementsByGroup(BrowserPageSelectors.Group.TRANSLATED_PAGE_TRANSLATION_SHEET)
+            .mozClick(BrowserPageSelectors.TRANSLATED_SHEET_SHOW_ORIGINAL_BUTTON)
+            .mozWaitUntilAbsent(BrowserPageSelectors.TRANSLATED_SHEET_SHOW_ORIGINAL_BUTTON)
+        on.browserPage.verifyPageContent(testPage.content)
+    }
 }

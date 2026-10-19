@@ -302,8 +302,8 @@ class MainMenuTest : BaseTest() {
             .openMainMenu()
             .mozClick(MainMenuSelectors.MORE_BUTTON)
             .mozClick(MainMenuSelectors.TRANSLATED_BUTTON)
-            .mozClickIfPresent(BrowserPageSelectors.TRANSLATION_SHEET_SHOW_ORIGINAL_BUTTON)
-            .mozWaitUntilAbsent(BrowserPageSelectors.TRANSLATION_SHEET_SHOW_ORIGINAL_BUTTON)
+            .mozClickIfPresent(BrowserPageSelectors.TRANSLATED_SHEET_SHOW_ORIGINAL_BUTTON)
+            .mozWaitUntilAbsent(BrowserPageSelectors.TRANSLATED_SHEET_SHOW_ORIGINAL_BUTTON)
         on.browserPage
             .verifyPageContent(testPage.content)
             .openMainMenu()
