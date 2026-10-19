@@ -9,6 +9,7 @@ import org.mozilla.fenix.settings.ai.AIControlsSearchProvider
 import org.mozilla.fenix.settings.datachoices.DataChoicesSearchProvider
 import org.mozilla.fenix.settings.labs.FirefoxLabsSettingsSearchProvider
 import org.mozilla.fenix.settings.pagesummaries.PageSummariesSettingsSearchProvider
+import org.mozilla.fenix.settings.search.GoogleLensSettingsSearchProvider
 import org.mozilla.fenix.settings.settingssearch.SettingsSearchProvider
 import org.mozilla.fenix.summarization.onboarding.SummarizationFeatureDiscoveryConfiguration
 
@@ -33,4 +34,5 @@ internal fun settingsSearchProviders(
         PageSummariesSettingsSearchProvider(summarizationFeatureConfiguration),
         FirefoxLabsSettingsSearchProvider(),
         ToolbarShortcutSettingsSearchProvider,
+        GoogleLensSettingsSearchProvider,
     )
