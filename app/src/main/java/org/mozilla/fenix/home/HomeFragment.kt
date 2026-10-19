@@ -1209,7 +1209,7 @@ class HomeFragment : Fragment(), UserInteractionHandler, OnLongPressedListener {
 
     @VisibleForTesting
     internal fun removeCollection(tabCollection: TabCollection) {
-        lifecycleScope.launch(IO) {
+        requireComponents.applicationScope.launch {
             requireComponents.core.tabCollectionStorage.removeCollection(tabCollection)
         }
     }
@@ -1743,6 +1743,7 @@ class HomeFragment : Fragment(), UserInteractionHandler, OnLongPressedListener {
                     appStore = requireComponents.appStore,
                     navControllerRef = WeakReference(findNavController()),
                     viewLifecycleScope = viewLifecycleOwner.lifecycleScope,
+                    applicationScope = requireComponents.applicationScope,
                     shareUseCases = requireComponents.useCases.shareUseCases,
                     showAddSearchWidgetPrompt = ::showAddSearchWidgetPrompt,
                     requestSetDefaultBrowserPrompt = {
