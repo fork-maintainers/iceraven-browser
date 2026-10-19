@@ -12,7 +12,9 @@
           release and beta builds do not claim the staging domain. See the matching production
           filter in the main manifest.
         -->
-        <activity android:name=".IntentReceiverActivity">
+        <activity
+            android:name=".IntentReceiverActivity"
+            android:exported="true">
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
