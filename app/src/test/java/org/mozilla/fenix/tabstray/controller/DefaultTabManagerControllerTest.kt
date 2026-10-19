@@ -2248,6 +2248,96 @@ class DefaultTabManagerControllerTest {
     }
 
     @Test
+    fun `GIVEN homepage as a new tab is enabled and the homepage tab is selected WHEN a synced tab is clicked THEN the url is loaded in the current tab`() {
+        val url = "https://mozilla.org"
+        val tab = mockk<Tab>()
+        val entry = mockk<TabEntry>()
+        every { tab.active() } returns entry
+        every { entry.url } returns url
+        every { settings.enableHomepageAsNewTab } returns true
+        every { browserStore.state } returns
+            mockk {
+                every { tabs } returns listOf(testNormalTab, testHomeTab)
+                every { selectedTabId } returns testHomeTab.id
+            }
+        fenixBrowserUseCases =
+            FenixBrowserUseCases(
+                appStore = AppStore(initialState = AppState(mode = BrowsingMode.Normal)),
+                tabsUseCases = tabsUseCases,
+                loadUrlUseCase = loadUrlUseCase,
+                searchUseCases = searchUseCases,
+                homepageTitle = homepageTitle,
+                profiler = profiler,
+            )
+        assertNull(Events.syncedTabOpened.testGetValue())
+
+        createController().handleSyncedTabClicked(tab)
+
+        assertNotNull(Events.syncedTabOpened.testGetValue())
+        verify {
+            loadUrlUseCase.invoke(
+                url = url,
+                flags = EngineSession.LoadUrlFlags.none(),
+                originalInput = url,
+            )
+        }
+        verify(exactly = 0) {
+            tabsUseCases.addTab.invoke(
+                url = url,
+                flags = EngineSession.LoadUrlFlags.none(),
+                private = false,
+                historyMetadata = null,
+                originalInput = url,
+            )
+        }
+    }
+
+    @Test
+    fun `GIVEN homepage as a new tab is enabled and a non-homepage tab is selected WHEN a synced tab is clicked THEN the url is opened in a new tab`() {
+        val url = "https://mozilla.org"
+        val tab = mockk<Tab>()
+        val entry = mockk<TabEntry>()
+        every { tab.active() } returns entry
+        every { entry.url } returns url
+        every { settings.enableHomepageAsNewTab } returns true
+        every { browserStore.state } returns
+            mockk {
+                every { tabs } returns listOf(testNormalTab, testHomeTab)
+                every { selectedTabId } returns testNormalTab.id
+            }
+        fenixBrowserUseCases =
+            FenixBrowserUseCases(
+                appStore = AppStore(initialState = AppState(mode = BrowsingMode.Normal)),
+                tabsUseCases = tabsUseCases,
+                loadUrlUseCase = loadUrlUseCase,
+                searchUseCases = searchUseCases,
+                homepageTitle = homepageTitle,
+                profiler = profiler,
+            )
+        assertNull(Events.syncedTabOpened.testGetValue())
+
+        createController().handleSyncedTabClicked(tab)
+
+        assertNotNull(Events.syncedTabOpened.testGetValue())
+        verify {
+            tabsUseCases.addTab.invoke(
+                url = url,
+                flags = EngineSession.LoadUrlFlags.none(),
+                private = false,
+                historyMetadata = null,
+                originalInput = url,
+            )
+        }
+        verify(exactly = 0) {
+            loadUrlUseCase.invoke(
+                url = url,
+                flags = EngineSession.LoadUrlFlags.none(),
+                originalInput = url,
+            )
+        }
+    }
+
+    @Test
     fun `WHEN a synced tab is closed THEN a command to close the tab is queued AND an undo snackbar is shown`() {
         var showUndoSnackbarForSyncedTabInvoked = false
         val controller =
