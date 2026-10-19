@@ -319,6 +319,12 @@
   <string name="translation_toolbar_expand_action">Hap fletën e përkthimeve</string>
   <!-- Content description for the translate toolbar action that closes the translations toolbar. -->
   <string name="translation_toolbar_close_action">Hidhe tej mesazhin</string>
+  <!-- Title for the block AI enhancements confirmation dialog -->
+  <string name="ai_controls_block_dialog_title">Të bllokohen zgjerime IA?</string>
+  <!-- Cancel button text in the block AI enhancements confirmation dialog -->
+  <string name="ai_controls_block_dialog_cancel">Anuloje</string>
+  <!-- Block button text in the block AI enhancements confirmation dialog -->
+  <string name="ai_controls_block_dialog_block">Bllokoje</string>
   <!--
     Locale Settings Fragment
 
@@ -366,6 +372,8 @@
   <string name="search_suggestions_delete_history_item_snackbar">U fshi %1$s prej historiku</string>
   <!-- Content description (not visible, for screen readers etc.): Button shown near a history search result allowing to delete it from browsing history. -->
   <string name="mozac_browser_awesomebar_remove_suggestion" tools:ignore="UnusedResources">Fshije këtë zë historiku</string>
+  <!-- Button in the app links prompt that keeps the user in the browser instead of opening the external app. %1$s is the name of the app (for example "Firefox"). -->
+  <string name="applinks_prompt_negative_button">Qëndro në %1$s</string>
   <!--
     Home onboarding
 
@@ -541,6 +549,16 @@
   <string name="nova_onboarding_marketing_body" tools:ignore="BrandUsage,UnusedResources">Ndani me partnerë marketingu të Mozilla-s se si e zbuluat Firefox-in dhe se e përdorni. Këto të dhëna s’shiten kurrë. %1$s</string>
   <!-- Marketing onboarding body link text. -->
   <string name="nova_onboarding_marketing_body_link_text">Si i përdorim të dhënat</string>
+  <!-- Marketing onboarding body link text. -->
+  <string name="nova_onboarding_marketing_body_link_text_1">Mësoni Më Tepër</string>
+  <!-- Marketing onboarding primary button text. 'Firefox' is intentionally hardcoded. -->
+  <string name="nova_onboarding_marketing_primary_button_text" tools:ignore="BrandUsage,UnusedResources">Ndihmoni Firefox-in</string>
+  <!-- Marketing onboarding primary button text. -->
+  <string name="nova_onboarding_marketing_primary_button_text_3">Po</string>
+  <!-- Marketing onboarding secondary button text. -->
+  <string name="nova_onboarding_marketing_secondary_button_text" tools:ignore="UnusedResources">Jo, Faleminderit</string>
+  <!-- Marketing onboarding secondary button text. -->
+  <string name="nova_onboarding_marketing_secondary_button_text_2">Jo</string>
   <!-- Notifications onboarding title. 'Firefox' is intentionally hardcoded. -->
   <string name="nova_onboarding_notifications_title" tools:ignore="BrandUsage,UnusedResources">Njoftimet ju ndihmojnë të jini më të parrezik në Firefox</string>
   <!-- Notifications onboarding subtitle. 'Firefox' is intentionally hardcoded. -->
@@ -590,6 +608,8 @@
   <string name="search_widget_text_long">Kërkoni në web</string>
   <!-- Content description (not visible, for screen readers etc.): Voice search -->
   <string name="search_widget_voice">Kërkim zanor</string>
+  <!-- Content description (not visible, for screen readers etc.): Button in the search widget that starts a search in a private tab -->
+  <string name="search_widget_private_search">Kërkim privat</string>
   <!--
     Preferences
 
@@ -697,6 +717,8 @@
   <string name="preferences_toolbar_shortcut">Shkurtore paneli</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_toolbar_select_shortcut">Përzgjidhni një shkurtore</string>
+  <!-- Title of a menu option allowing to change the shortcut button shown in the toolbar -->
+  <string name="toolbar_shortcut_menu_edit_option">Përpunoni shkurtore</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_gestures">Gjeste</string>
   <!-- Preference for settings related to visual options -->
@@ -782,6 +804,15 @@
   <string name="preference_downloads_folder_permission_lost" tools:ignore="UnusedResources">S’keni leje të përdorni këtë dosje. Provoni të zgjidhni një tjetër.</string>
   <!-- Preference title for choosing an app to handle downloads -->
   <string name="preferences_choose_app_for_downloads">Administroni shkarkime me aplikacion tjetër</string>
+  <!-- Preference category for deleting or removing downloads -->
+  <string name="preferences_category_delete_or_remove_downloads">Fshini ose hiqni shkarkime</string>
+  <string name="preferences_downloads_delete_from_device">Fshije prej pajisjes</string>
+  <string name="preferences_downloads_delete_from_device_description">Kartela u fshi nga pajisja juaj dhe u hoq nga historik shkarkimesh</string>
+  <string name="preferences_downloads_remove_from_download_history">Hiqe nga historik shkarkimesh</string>
+  <string name="preferences_downloads_remove_from_download_history_description">Kartela u hoq nga historiku juaj i shkarkimeve, por ruhet ende në pajisjen tuaj</string>
+  <string name="preferences_downloads_ask_when_to_delete_files">Pyetmë, kur fshij kartela</string>
+  <!-- Preference for downloads -->
+  <string name="preferences_downloads_2">Rregullime Shkarkimesh</string>
   <!-- Preference for enabling gecko engine logs -->
   <string name="preferences_enable_gecko_logs">Aktivizo regjistra Gecko</string>
   <!-- Message to indicate users that we are quitting the application to apply the changes -->
@@ -840,6 +871,8 @@
     Title for the customize home screen section with privacy report.
   -->
   <string name="customize_toggle_privacy_report">Raport privatësie</string>
+  <!-- Title for a customize home screen section. Continue is a section that displays the most recent browser tab, so users can continue browsing where they left off. -->
+  <string name="customize_toggle_continue">Vazhdo</string>
   <!-- Title for the customize home screen section with bookmarks. -->
   <string name="customize_toggle_bookmarks">Faqerojtës</string>
   <!--
@@ -853,6 +886,8 @@
   <string name="customize_toggle_pocket_sponsored">Histori të sponsorizuara</string>
   <!-- Title for the opening wallpaper settings screen -->
   <string name="customize_wallpapers">Sfonde</string>
+  <!-- Label for the menu item that opens the customize homepage settings screen. -->
+  <string name="browser_menu_customize_homepage">Përshtatni faqe hyrëse</string>
   <!-- Title for the customize home screen section with sponsored shortcuts. -->
   <string name="customize_toggle_contile">Shkurtore të sponsorizuara</string>
   <!--
@@ -977,6 +1012,8 @@
   <string name="extension_process_crash_dialog_retry_button_text" tools:ignore="UnusedResources">Provoni të rinisni zgjerime</string>
   <!-- Button text on the extension crash dialog to prompt the user to continue with all extensions disabled. -->
   <string name="extension_process_crash_dialog_disable_extensions_button_text">Vazhdo me zgjerime të çaktivizuara</string>
+  <!-- Text shown in the snackbar action button that lets the user retry an add-on operation that just failed. -->
+  <string name="addon_failure_retry_action">Riprovo</string>
   <!--
     Account Preferences
 
@@ -1001,6 +1038,10 @@
   <string name="preferences_sign_out">Dilni</string>
   <!-- Preference displays and allows changing current FxA device name -->
   <string name="preferences_sync_device_name">Emër pajisjeje</string>
+  <!-- Preference category for Device name -->
+  <string name="preferences_device_name_category">Emër pajisjeje</string>
+  <!-- Label for the Preference that displays and allows changing current device name on Mozilla Account -->
+  <string name="preferences_sync_change_device_name">Ndryshoni emër pajisjeje</string>
   <!-- Text shown when user enters empty device name -->
   <string name="empty_device_name_error">Emri i pajisjes s’mund të jetë i zbrazët.</string>
   <!-- Label indicating that sync is in progress -->
@@ -1132,6 +1173,8 @@
   <string name="toolbar_customize_shortcut_homepage">Faqe hyrëse</string>
   <!-- Back shortcut in toolbar customization -->
   <string name="toolbar_customize_shortcut_back">Mbrapsht</string>
+  <!-- Label for choosing in toolbar customization settings to not use any custom shortcut button. -->
+  <string name="toolbar_customize_shortcut_none">Asnjë</string>
   <!--
     App icon Preferences
 
@@ -1421,6 +1464,66 @@
     <item quantity="one">%1$d skedë</item>
     <item quantity="other">%1$d skeda</item>
   </plurals>
+  <plurals name="expanded_tab_group_header_description">
+    <!--
+      Accessibility description for the header of an expanded tab group.
+      %1$s is the group name, %2$d is the number of tabs, %3$s is the color name.
+    -->
+    <item quantity="one">%1$s grup skedash me %2$d skedë, ngjyrë %3$s</item>
+    <item quantity="other">%1$s grup skedash me %2$d skeda, ngjyrë %3$s</item>
+  </plurals>
+  <!-- Title for the Delete tab group confirmation dialog. -->
+  <string name="delete_tab_group_confirmation_dialog_title">Të fshihet grup skedash?</string>
+  <!-- Text shown in the body of the Delete tab group confirmation dialog. -->
+  <string name="delete_tab_group_confirmation_dialog_body">Kjo sjell fshirjen përgjithnjë të grupit.</string>
+  <!-- Text shown on the confirm button in the Delete tab group confirmation dialog. -->
+  <string name="delete_tab_group_confirmation_dialog_confirm">Fshije grupin</string>
+  <!-- Text shown on the cancel button in the Delete tab group confirmation dialog. -->
+  <string name="delete_tab_group_confirmation_dialog_cancel">Anuloje</string>
+  <!-- Title for the Close last tab and delete tab group confirmation dialog. -->
+  <string name="close_tab_and_delete_group_confirmation_dialog_title">Të mbyllet skedat dhe të fshihet grupi?</string>
+  <!-- Text shown in the body of the Close last tab and delete tab group confirmation dialog. -->
+  <string name="close_tab_and_delete_group_confirmation_dialog_body">Kjo sjell fshirjen përgjithnjë të grupit.</string>
+  <!-- Text shown on the confirm button in the Close last tab and delete tab group confirmation dialog. -->
+  <string name="close_tab_and_delete_group_confirmation_dialog_confirm">Fshije grupin</string>
+  <!-- Text shown on the cancel button in the Close last tab and delete tab group confirmation dialog. -->
+  <string name="close_tab_and_delete_group_confirmation_dialog_cancel">Anuloje</string>
+  <!-- Content description for the three dot button next to a tab group" -->
+  <string name="tab_group_three_dot_button_content_description">Më tepër mundësi</string>
+  <!-- Text shown on the edit button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_edit">Përpunoni</string>
+  <!-- Text shown on the delete button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_delete">Fshije</string>
+  <!-- Text shown on the share button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_share">Ndajeni me të tjerët</string>
+  <!-- Text shown on the close button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_close">Mbylle</string>
+  <!-- Text shown on the Don't Ask Again checkbox button in the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_dont_ask_again">Mos pyet sërish</string>
+  <!-- Text shown on the cancel button in the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_cancel">Anuloje</string>
+  <!--
+    Color labels for tab groups, used for accessibility and selection UI.
+
+    Tab group color: Yellow
+  -->
+  <string name="tab_group_color_yellow">E verdhë</string>
+  <!-- Tab group color: Orange -->
+  <string name="tab_group_color_orange">Portokalli</string>
+  <!-- Tab group color: Red -->
+  <string name="tab_group_color_red">E kuqe</string>
+  <!-- Tab group color: Pink -->
+  <string name="tab_group_color_pink">E trëndafiltë</string>
+  <!-- Tab group color: Purple -->
+  <string name="tab_group_color_purple">E purpur</string>
+  <!-- Tab group color: Blue -->
+  <string name="tab_group_color_blue">Blu</string>
+  <!-- Tab group color: Cyan -->
+  <string name="tab_group_color_cyan">Blu e gjelbër</string>
+  <!-- Tab group color: Green -->
+  <string name="tab_group_color_green">E gjelbër</string>
+  <!-- Tab group color: Grey -->
+  <string name="tab_group_color_grey">Gri</string>
   <!--
     History
 
@@ -1487,6 +1590,11 @@
     This button will dismiss the dialog.
   -->
   <string name="download_file_has_not_enough_storage_dialog_cancel_button_text">Anuloje</string>
+  <plurals name="downloads_delete_dialog_title">
+    <!-- Title for the download deletion confirmation dialog. The message changes depending on how many files are selected. %d is the number of files to be deleted. -->
+    <item quantity="one">Të fshihet kartela?</item>
+    <item quantity="other">Të fshihen %d kartela?</item>
+  </plurals>
   <!-- Text for the button to delete a single downloaded file item -->
   <string name="download_delete_item">Fshije</string>
   <!-- Content description for the toolbar "Navigate back" button -->
@@ -1518,6 +1626,14 @@
   <string name="download_delete_multi_select_dialog_confirm">Fshije</string>
   <!-- Alert dialog confirmation before deleting multiple download items, this is the negative action. -->
   <string name="download_delete_multi_select_dialog_cancel">Anuloje</string>
+  <!-- Alert dialog confirmation before deleting a single download item or many download items, this is one of the radio buttons within the dialog box for the user to select. -->
+  <string name="download_delete_dialog_from_device">Fshije prej pajisjes</string>
+  <!-- Alert dialog confirmation before deleting a single download item or many download items, this is one of the radio buttons within the dialog box for the user to select. -->
+  <string name="download_delete_dialog_from_history">Thjesht hiqe nga historik shkarkimesh</string>
+  <!-- Alert dialog confirmation before deleting a single download item or many download items, this is the negative action. -->
+  <string name="download_delete_dialog_cancel">Anuloje</string>
+  <!-- Alert dialog confirmation before deleting a single download item or many download items, this is the positive action. -->
+  <string name="download_delete_dialog_confirm">Ripohojeni</string>
   <!-- Title for the alert dialog confirmation before renaming a download item. -->
   <string name="download_rename_dialog_title">Riemërtojeni kartelën</string>
   <!-- Label for the name field in the alert dialog confirmation before renaming a download item. -->
@@ -1985,6 +2101,8 @@
   <string name="sync_send_to_all">Dërgoje te krejt pajisjet</string>
   <!-- An option from the share dialog to reconnect to sync -->
   <string name="sync_reconnect">Rilidhu për Njëkohësim</string>
+  <!-- Label for the button in the share dialog that sends the tab to the selected sync devices -->
+  <string name="sync_send_to_selected_devices">Dërgoje</string>
   <!-- Text displayed when sync is offline and cannot be accessed -->
   <string name="sync_offline">Jo në linjë</string>
   <!-- An option to connect additional devices -->
@@ -2007,6 +2125,20 @@
   <string name="sent_from_firefox_template" tools:ignore="UnusedResources">%1$s\n\nDërguar nga %2$s 🦊 Provoni shfletuesin për celular: %3$s</string>
   <!-- A short message template for the shared link with a footer. %1$s is the shared link, %2$s is the app name (e.g. Firefox) and %3$s is a download link for the app. -->
   <string name="sent_from_firefox_template_short" tools:ignore="UnusedResources">%1$s\n\nDërguar nga %2$s 🦊 %3$s</string>
+  <!-- Send tab to synced devices: Authentication error button - Allows user to re-authenticate -->
+  <string name="sync_send_tab_error_auth_button">Hyni</string>
+  <!-- Send tab to synced devices: Authentication error button - Allows user to remove the currently connected account -->
+  <string name="sync_send_tab_error_auth_remove_account">Hiqe llogarinë</string>
+  <!-- Send tab to synced devices: Empty state title - Displayed when the user has no synced devices -->
+  <string name="sync_send_tab_empty_state_title">Pa pajisje të lidhura</string>
+  <!-- Send tab to synced devices: Empty state link - Displayed when the user has no synced devices -->
+  <string name="sync_send_tab_empty_state_link">Mësoni si të lidhet një pajisje</string>
+  <!-- Send tab to synced devices: Connectivity Error title -->
+  <string name="sync_send_tab_error_connection_title">Kontrolloni lidhjen tuaj internet</string>
+  <!-- Send tab to synced devices: Connectivity Error message - Suggested user action after internet connection has been established -->
+  <string name="sync_send_tab_error_connection_text">Mandej provoni të ridërgoni skedën tuaj.</string>
+  <!-- Send tab to synced devices: Connectivity Error button - When tapped, refreshes the list of connected devices. -->
+  <string name="sync_send_tab_error_connection_button">Riprovo</string>
   <!--
     Notifications
 
@@ -2028,6 +2160,12 @@
     The app name is in the text, due to limitations with localizing Nimbus experiments
   -->
   <string name="nimbus_notification_default_browser_text" tools:ignore="BrandUsage,UnusedResources">Bëjeni Firefox-in shfletuesin tuaj parazgjedhje</string>
+  <!--
+    Privacy report notification
+
+    Name of the weekly privacy report notification channel. Displayed in the "App notifications" system settings for the app.
+  -->
+  <string name="notification_privacy_report_channel_name">Raport privatësie</string>
   <!--
     Survey
 
@@ -2554,6 +2692,8 @@
   <string name="saved_logins_sort_strategy_last_used">Përdorur së fundi</string>
   <!-- Content description (not visible, for screen readers etc.) -->
   <string name="saved_logins_menu_dropdown_chevron_icon_content_description_2">Menu renditjeje fjalëkalimesh</string>
+  <!-- Label for button to import passwords from file. -->
+  <string name="passwords_import_menu_button">Importoje prej kartele</string>
   <!--
     Email Masks
 
@@ -2572,6 +2712,44 @@
   <string name="email_masks_max_free_tier_reached">Keni përdorur 5 maska falas email-i, ndaj kemi zgjedhur një për ju që ta ripërdorni.</string>
   <!-- The message displayed when there was an error with the email mask or Firefox Account services. -->
   <string name="email_masks_error_retrieving_masks">Maskat e email-it s’janë të përdorshme tani. Riprovoni pas pak minutash.</string>
+  <!--
+    Firefox browser VPN (a browser-only proxy, distinct from the Mozilla VPN service)
+
+    Title for the browser VPN entry in the settings list
+  -->
+  <string name="preferences_ip_protection_title_2">VPN e brendshme</string>
+  <!-- Label for the BETA badge for the browser VPN entry in the settings list -->
+  <string name="preferences_ip_protection_beta_badge_label">BETA</string>
+  <!-- Title for the browser VPN settings screen (displayed in the app bar) -->
+  <string name="ip_protection_settings_title">VPN e brendshme</string>
+  <!-- Label for the browser VPN toggle on the settings screen -->
+  <string name="ip_protection_toggle_label">VPN</string>
+  <!-- Content description for the browser VPN settings screen top bar back button -->
+  <string name="ip_protection_navigate_back_button_content_description">Shko mbrapsht</string>
+  <!-- Link text that opens additional information about the browser VPN -->
+  <string name="ip_protection_learn_more">Mësoni më tepër</string>
+  <!-- Label for the monthly data allowance section on the browser VPN settings screen -->
+  <string name="ip_protection_data_limit_label">Kufi mujor të dhënash</string>
+  <!-- Header for the browser VPN `location` section -->
+  <string name="ip_protection_location_section">Vendndodhje</string>
+  <!-- Label for the recommended automatic location option on the browser VPN settings screen -->
+  <string name="ip_protection_location_recommended_label">E rekomanduar</string>
+  <!-- Badge label shown in the menu item when the browser VPN is active -->
+  <string name="preferences_ip_protection_on">On</string>
+  <!-- Badge label shown in the menu item when the browser VPN is off -->
+  <string name="preferences_ip_protection_off">Off</string>
+  <!-- Badge label shown in the menu item while the browser VPN is connecting -->
+  <string name="ip_protection_menu_connecting">Po lidhet…</string>
+  <!-- Badge label shown in the menu item when the browser VPN is paused -->
+  <string name="ip_protection_menu_paused">I ndalur</string>
+  <!-- Badge label shown in the menu item when the browser VPN has an error -->
+  <string name="ip_protection_menu_error">Gabim</string>
+  <!-- Badge label shown in the VPN menu item when the user is eligible for the feature but needs to authenticate / authorize to enable it -->
+  <string name="ip_protection_menu_try_vpn_cta">Provojeni falas</string>
+  <!-- Content description for the chevron button that opens the browser VPN settings screen -->
+  <string name="ip_protection_navigate_settings">Hap rregullime VPN-je</string>
+  <!-- Label for the button that starts the browser VPN authentication or authorization flow on the settings screen -->
+  <string name="ip_protection_get_started">Fillojani</string>
   <!--
     Autofill
 
@@ -2853,6 +3031,12 @@
     which navigates the user to a screen displaying all the shortcuts.
   -->
   <string name="homepage_shortcuts_show_all_content_description">Shfaqi tërë shkurtoret</string>
+  <!-- Label for the "Add website" button in the "Add to homepage" bottom sheet. -->
+  <string name="homepage_shortcuts_add_website">Shtoni sajt</string>
+  <!-- Title text for the "Enter a Website URL" dialog for adding a shortcut. -->
+  <string name="homepage_shortcuts_add_website_title">Jepni një URL Sajti</string>
+  <!-- Title for the "Popular sites" section in the "Add to homepage" bottom sheet. -->
+  <string name="homepage_shortcuts_popular_sites">Sajte popullore</string>
   <!-- Title text displayed in the dialog when shortcuts limit is reached. -->
   <string name="shortcut_max_limit_title">U mbërrit në kufi shkurtoresh</string>
   <!-- Content description text displayed in the dialog when shortcut limit is reached. -->
@@ -3020,6 +3204,8 @@
   <string name="translation_error_could_not_translate_warning_text">Pati një problem me përkthimin. Ju lutemi, riprovoni.</string>
   <!-- The title of the warning card informs the user that the list of languages cannot be loaded. -->
   <string name="translation_error_could_not_load_languages_warning_text">S’u ngarkuan dot gjuhë. Kontrolloni lidhjen tuaj internet dhe riprovoni.</string>
+  <!-- The title of the warning card informs the user that translations from a language are not supported yet. %1$s is the name of the source language. -->
+  <string name="translation_error_language_not_supported_warning_text_2">Na ndjeni, s’mbulojmë ende përkthime nga %1$s.</string>
   <!-- Snackbar title shown if the user closes the Translation Request dialogue and a translation is in progress. -->
   <string name="translation_in_progress_snackbar">Po përkthehet…</string>
   <!--
@@ -3073,6 +3259,10 @@
   <string name="translation_settings_automatic_never_translate_sites">Mos i përkthe kurrë këta sajte</string>
   <!-- Button text for the button that will take the user to the download languages dialog. On the download languages dialog, the user can manage which languages they would like to download for translations. -->
   <string name="translation_settings_download_language">Shkarko gjuhë</string>
+  <!-- Toggle switch title and description for the translation settings control. -->
+  <string name="translation_settings_control_title">Përkthime</string>
+  <!-- Clickable text for the translations settings item that links to a website. -->
+  <string name="translation_settings_control_learn_more">Mësoni më tepër</string>
   <!--
     Automatic translation preference screen
 
@@ -3230,6 +3420,11 @@
     %s is the name of the app (for example "Firefox").
   -->
   <string name="protection_panel_banner_protected_title">%s është në punë</string>
+  <!--
+    Description text for the protection panel banner when privacy dashboard is enabled.
+    and there are no trackers blocked.
+  -->
+  <string name="protection_panel_banner_protected_no_blocked_trackers_description">Jeni i mbrojtur.</string>
   <!-- Label text for the Enhanced Tracking Protection toggle. -->
   <string name="protection_panel_etp_toggle_label">Mbrojtje e Thelluar Nga Gjurmimi</string>
   <!-- Toggle if Enhanced Tracking Protection is turned on -->
@@ -3271,6 +3466,8 @@
     %s is a placeholder for the name of the certificate authority that issued the certificate.
   -->
   <string name="connection_security_panel_verified_by">Verifikuar nga %s</string>
+  <!-- Content description (not visible, for screen readers etc.) for the handle used to drag the protections dashboard to the bottom of the screen and close it. -->
+  <string name="tracker_protections_dashboard_close_handlebar_content_description">Mbylle pultin</string>
   <!--
     Text for the connection security panel when the site uses a QWAC.
     %s is a placeholder for the organization for which the certificate was issued.
@@ -3746,4 +3943,36 @@
   <string name="privacy_notice_updated_homepage_message_privacy_notice" tools:ignore="UnusedResources">Shënim Mbi Privatësinë</string>
   <!-- The second active link used in privacy_notice_updated_homepage_message -->
   <string name="privacy_notice_updated_homepage_message_learn_more" tools:ignore="UnusedResources">Mësoni më tepër</string>
+  <!--
+    Collections migration homepage card
+
+    Title shown on the collections to tab groups migration card on the homepage.
+  -->
+  <string name="collections_migration_homepage_banner_title">Koleksionet tanimë janë grupe</string>
+  <!-- Message shown on the collections to tab groups migration card on the homepage. -->
+  <string name="collections_migration_homepage_card_message">Ka një rrugë më të thjeshtë për t’i mbajtur të sistemuara skedat tuaja</string>
+  <!-- Button shown under an image picked from the gallery while it is being sent to Google Lens. Tapping it stops the search and returns to the camera. -->
+  <string name="lens_camera_loading_cancel_button">Anuloje</string>
+  <!-- Action in the snackbar shown when an image picked from the gallery could not be searched with Google Lens. Tapping it searches the same image again. -->
+  <string name="lens_camera_upload_failed_retry_button">Riprovoni</string>
+  <!-- The title used in a confirmation dialog on the Firefox Labs screen when restoring the application to its defaults by turning "off" any experimental features. -->
+  <string name="firefox_labs_restore_defaults_dialog_title">Lyp rinisje</string>
+  <!-- The description used in a confirmation dialog on the Firefox Labs screen when restoring the application to its defaults by turning "off" any experimental features. %s is the name of the app (for example "Firefox Nightly") -->
+  <string name="firefox_labs_restore_defaults_dialog_message">Që të rikthehen parazgjedhjet, rinisni %s.</string>
+  <!-- The description text that is displayed in the confirmation dialog on the Firefox Labs screen for toggling "on" experimental features. %s is the name of the app (for example "Firefox Nightly") -->
+  <string name="firefox_labs_feature_enable_dialog_message">Që të aktivizohet kjo veçori, rinisni %s.</string>
+  <!-- The description text that is displayed in the confirmation dialog on the Firefox Labs screen for toggling "off" experimental features. %s is the name of the app (for example "Firefox Nightly") -->
+  <string name="firefox_labs_feature_disable_dialog_message">Që të çaktivizohet kjo veçori, rinisni %s.</string>
+  <!-- Content description for accessibility (used by screen readers): Description of the button that downloads the PDF displayed on the screen to the user's device. -->
+  <string name="pdf_tools_download_content_description">Shkarkojeni si PDF</string>
+  <!--
+    PDF viewer add a signature dialog
+
+    The title of the dialog for adding a signature to a PDF.
+  -->
+  <string name="pdf_tools_signature_title">Shtoni një nënshkrim</string>
+  <!-- The text for the button that erases the text the user entered in the "add a signature" field. -->
+  <string name="pdf_tools_signature_clear_button">Spastroje</string>
+  <!-- The text for the button that adds the signature the user has typed to the PDF. -->
+  <string name="pdf_tools_signature_add_button">Shtoje</string>
 </resources>

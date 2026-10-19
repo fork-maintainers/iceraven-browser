@@ -313,6 +313,8 @@
   <string name="browser_menu_default_banner_title">Definisce %1$s cum’è navigatore predefinitu</string>
   <!-- Label text within the set as default banner -->
   <string name="browser_menu_default_banner_subtitle_2">Rapidu, cunfidenziale è cuncepitu per voi.</string>
+  <!-- Content description (not visible, for screen readers etc.) for the button that dismisses the set as default banner in the menu -->
+  <string name="browser_menu_default_banner_dismiss_promotion">Ricusà a pruposta</string>
   <!-- Content description (not visible, for screen readers etc.) for recommended extensions in main menu -->
   <string name="browser_menu_recommended_extensions_content_description">Sapene di più</string>
   <!--
@@ -707,6 +709,8 @@
   <string name="search_widget_text_long">Ricercà nant’à u web</string>
   <!-- Content description (not visible, for screen readers etc.): Voice search -->
   <string name="search_widget_voice">Ricerca vucale</string>
+  <!-- Content description (not visible, for screen readers etc.): Button in the search widget that starts a search in a private tab -->
+  <string name="search_widget_private_search">Ricerca privata</string>
   <!--
     Preferences
 
@@ -1365,6 +1369,8 @@
   <string name="library_desktop_bookmarks_unfiled">Altre indette</string>
   <!-- Option in Library to open History page -->
   <string name="library_history">Cronolugia</string>
+  <!-- Content description (not visible, for screen readers etc.) for the check mark that replaces a site's icon in History and Recently closed tabs when the item is selected -->
+  <string name="library_item_selected_content_description">Selezziunatu</string>
   <!-- Settings Page Title -->
   <string name="settings_title">Parametri</string>
   <!-- Content description (not visible, for screen readers etc.): "Close button for library settings" -->
@@ -4506,6 +4512,10 @@
   <string name="lens_camera_mode_qr">Analiza di codice QR</string>
   <!-- Toast shown when the user picks an image from the gallery in QR mode but no QR code is found in it -->
   <string name="lens_camera_qr_no_code_found">Nisunu codice QR trovu in a fiura</string>
+  <!-- Button shown under an image picked from the gallery while it is being sent to Google Lens. Tapping it stops the search and returns to the camera. -->
+  <string name="lens_camera_loading_cancel_button">Abbandunà</string>
+  <!-- Action in the snackbar shown when an image picked from the gallery could not be searched with Google Lens. Tapping it searches the same image again. -->
+  <string name="lens_camera_upload_failed_retry_button">Pruvà torna</string>
   <!-- Title of the bottom sheet shown the first time the user opens the Google Lens camera screen -->
   <string name="lens_opt_out_title">Truvatelu cù Google Lens</string>
   <!-- Description of the bottom sheet shown the first time the user opens the Google Lens camera screen -->
