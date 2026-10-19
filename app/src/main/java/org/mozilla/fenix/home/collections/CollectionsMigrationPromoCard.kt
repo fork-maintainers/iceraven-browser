@@ -60,7 +60,7 @@ fun CollectionsMigrationPromoCard(
             },
         illustration = {
             Image(
-                painter = painterResource(R.drawable.mozac_ic_kit_tab_groups),
+                painter = painterResource(id = R.drawable.mozac_ic_kit_tab_groups_list_view),
                 contentDescription = null,
             )
         },
