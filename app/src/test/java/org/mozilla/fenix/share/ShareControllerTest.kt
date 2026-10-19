@@ -12,6 +12,8 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDirections
 import androidx.navigation.NavOptions
 import io.mockk.Runs
+import io.mockk.coEvery
+import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.just
 import io.mockk.mockk
@@ -100,7 +102,6 @@ class ShareControllerTest {
                     recentAppStorage,
                     this,
                     this,
-                    testDispatcher,
                     dismiss = dismiss,
                 )
 
@@ -136,12 +137,11 @@ class ShareControllerTest {
                     recentAppStorage,
                     this,
                     this,
-                    testDispatcher,
                     FenixFxAEntryPoint.ShareMenu,
                     dismiss,
                 )
             every { activityContext.startActivity(capture(shareIntent)) } just Runs
-            every { recentAppStorage.updateRecentApp(appShareOption.activityName) } just Runs
+            coEvery { recentAppStorage.updateRecentApp(appShareOption.activityName) } just Runs
             every { sentFromFirefoxManager.maybeAppendShareText(any(), any()) } returns textToShare
 
             testController.handleShareToApp(appShareOption)
@@ -170,7 +170,7 @@ class ShareControllerTest {
             assertEquals(appPackageName, shareIntent.captured.component!!.packageName)
             assertEquals(appClassName, shareIntent.captured.component!!.className)
 
-            verify { recentAppStorage.updateRecentApp(appShareOption.activityName) }
+            coVerify { recentAppStorage.updateRecentApp(appShareOption.activityName) }
             verifyOrder {
                 activityContext.startActivity(shareIntent.captured)
                 dismissSink.onDismiss(ShareController.Result.SUCCESS)
@@ -204,13 +204,12 @@ class ShareControllerTest {
                     recentAppStorage,
                     this,
                     this,
-                    testDispatcher,
                     FenixFxAEntryPoint.ShareMenu,
                     dismiss,
                 )
 
             every { activityContext.startActivity(capture(shareIntent)) } just Runs
-            every { recentAppStorage.updateRecentApp(appShareOption.activityName) } just Runs
+            coEvery { recentAppStorage.updateRecentApp(appShareOption.activityName) } just Runs
 
             testController.handleShareToApp(appShareOption)
 
@@ -252,13 +251,12 @@ class ShareControllerTest {
                     recentAppStorage,
                     this,
                     this,
-                    testDispatcher,
                     FenixFxAEntryPoint.ShareMenu,
                     dismiss,
                 )
 
             every { activityContext.startActivity(capture(shareIntent)) } just Runs
-            every { recentAppStorage.updateRecentApp(appShareOption.activityName) } just Runs
+            coEvery { recentAppStorage.updateRecentApp(appShareOption.activityName) } just Runs
 
             testController.handleShareToApp(appShareOption)
 
@@ -297,12 +295,11 @@ class ShareControllerTest {
                     sentFromFirefoxManager = sentFromFirefoxManager,
                     navController = mockk(),
                     recentAppsStorage = recentAppStorage,
-                    viewLifecycleScope = this,
+                    scope = this,
                     applicationScope = this,
-                    ioDispatcher = testDispatcher,
                     dismiss = dismiss,
                 )
-            every { recentAppStorage.updateRecentApp(appShareOption.activityName) } just Runs
+            coEvery { recentAppStorage.updateRecentApp(appShareOption.activityName) } just Runs
             every { activityContext.startActivity(capture(shareIntent)) } throws SecurityException()
             every { activityContext.getString(R.string.share_error_snackbar) } returns "Cannot share to this app"
 
@@ -338,12 +335,11 @@ class ShareControllerTest {
                     sentFromFirefoxManager = sentFromFirefoxManager,
                     navController = mockk(),
                     recentAppsStorage = recentAppStorage,
-                    viewLifecycleScope = this,
+                    scope = this,
                     applicationScope = this,
-                    ioDispatcher = testDispatcher,
                     dismiss = dismiss,
                 )
-            every { recentAppStorage.updateRecentApp(appShareOption.activityName) } just Runs
+            coEvery { recentAppStorage.updateRecentApp(appShareOption.activityName) } just Runs
             every { activityContext.startActivity(capture(shareIntent)) } throws ActivityNotFoundException()
             every { activityContext.getString(R.string.share_error_snackbar) } returns "Cannot share to this app"
 
@@ -371,9 +367,8 @@ class ShareControllerTest {
                     sentFromFirefoxManager = sentFromFirefoxManager,
                     navController = mockk(),
                     recentAppsStorage = recentAppStorage,
-                    viewLifecycleScope = this,
+                    scope = this,
                     applicationScope = this,
-                    ioDispatcher = testDispatcher,
                     dismiss = dismiss,
                 )
 
@@ -400,9 +395,8 @@ class ShareControllerTest {
                     sentFromFirefoxManager = sentFromFirefoxManager,
                     navController = mockk(),
                     recentAppsStorage = recentAppStorage,
-                    viewLifecycleScope = this,
+                    scope = this,
                     applicationScope = this,
-                    ioDispatcher = testDispatcher,
                     dismiss = dismiss,
                 )
 
@@ -435,9 +429,8 @@ class ShareControllerTest {
                     sentFromFirefoxManager = sentFromFirefoxManager,
                     navController = mockk(),
                     recentAppsStorage = recentAppStorage,
-                    viewLifecycleScope = this,
+                    scope = this,
                     applicationScope = this,
-                    ioDispatcher = testDispatcher,
                     dismiss = dismiss,
                 )
 
@@ -460,9 +453,8 @@ class ShareControllerTest {
                     sentFromFirefoxManager = sentFromFirefoxManager,
                     navController = mockk(),
                     recentAppsStorage = recentAppStorage,
-                    viewLifecycleScope = this,
+                    scope = this,
                     applicationScope = this,
-                    ioDispatcher = testDispatcher,
                     dismiss = dismiss,
                 )
 
@@ -490,9 +482,8 @@ class ShareControllerTest {
                     sentFromFirefoxManager = sentFromFirefoxManager,
                     navController = mockk(),
                     recentAppsStorage = recentAppStorage,
-                    viewLifecycleScope = this,
+                    scope = this,
                     applicationScope = this,
-                    ioDispatcher = testDispatcher,
                     dismiss = dismiss,
                 )
 
@@ -520,9 +511,8 @@ class ShareControllerTest {
                     sentFromFirefoxManager = sentFromFirefoxManager,
                     navController = mockk(),
                     recentAppsStorage = recentAppStorage,
-                    viewLifecycleScope = this,
+                    scope = this,
                     applicationScope = this,
-                    ioDispatcher = testDispatcher,
                     dismiss = dismiss,
                 )
 
@@ -550,9 +540,8 @@ class ShareControllerTest {
                     sentFromFirefoxManager = sentFromFirefoxManager,
                     navController = mockk(),
                     recentAppsStorage = recentAppStorage,
-                    viewLifecycleScope = this,
+                    scope = this,
                     applicationScope = this,
-                    ioDispatcher = testDispatcher,
                     dismiss = dismiss,
                 )
 
@@ -576,7 +565,6 @@ class ShareControllerTest {
                     recentAppStorage,
                     this,
                     this,
-                    testDispatcher,
                     FenixFxAEntryPoint.ShareMenu,
                     dismiss,
                 )
@@ -638,7 +626,6 @@ class ShareControllerTest {
                     recentAppStorage,
                     this,
                     this,
-                    testDispatcher,
                     FenixFxAEntryPoint.ShareMenu,
                     dismiss,
                 )
@@ -701,7 +688,6 @@ class ShareControllerTest {
                     recentAppStorage,
                     this,
                     this,
-                    testDispatcher,
                     FenixFxAEntryPoint.ShareMenu,
                     dismiss,
                 )
@@ -738,7 +724,6 @@ class ShareControllerTest {
                     recentAppStorage,
                     this,
                     this,
-                    testDispatcher,
                     FenixFxAEntryPoint.ShareMenu,
                     dismiss,
                 )
@@ -773,7 +758,6 @@ class ShareControllerTest {
                     recentAppStorage,
                     this,
                     this,
-                    testDispatcher,
                     FenixFxAEntryPoint.ShareMenu,
                     dismiss,
                 )
@@ -810,7 +794,6 @@ class ShareControllerTest {
                     recentAppStorage,
                     this,
                     this,
-                    testDispatcher,
                     FenixFxAEntryPoint.ShareMenu,
                     dismiss,
                 )
@@ -847,7 +830,6 @@ class ShareControllerTest {
                     recentAppStorage,
                     this,
                     this,
-                    testDispatcher,
                     FenixFxAEntryPoint.ShareMenu,
                     dismiss,
                 )
@@ -879,9 +861,8 @@ class ShareControllerTest {
                     sentFromFirefoxManager = sentFromFirefoxManager,
                     navController = navController,
                     recentAppsStorage = recentAppStorage,
-                    viewLifecycleScope = this,
+                    scope = this,
                     applicationScope = this,
-                    ioDispatcher = testDispatcher,
                     dismiss = dismiss,
                 )
 
@@ -906,7 +887,6 @@ class ShareControllerTest {
                     recentAppStorage,
                     this,
                     this,
-                    testDispatcher,
                     FenixFxAEntryPoint.ShareMenu,
                     dismiss,
                 )
@@ -929,9 +909,8 @@ class ShareControllerTest {
                     sentFromFirefoxManager = sentFromFirefoxManager,
                     navController = navController,
                     recentAppsStorage = recentAppStorage,
-                    viewLifecycleScope = this,
+                    scope = this,
                     applicationScope = this,
-                    ioDispatcher = testDispatcher,
                     dismiss = dismiss,
                 )
 

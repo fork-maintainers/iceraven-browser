@@ -109,7 +109,7 @@ class ShareFragment : AppCompatDialogFragment() {
                     printUseCase = requireComponents.useCases.sessionUseCases.printContent,
                     sentFromFirefoxManager = requireComponents.core.sentFromFirefoxManager,
                     recentAppsStorage = RecentAppsStorage(requireContext()),
-                    viewLifecycleScope = viewLifecycleOwner.lifecycleScope,
+                    scope = viewLifecycleOwner.lifecycleScope,
                     applicationScope = requireComponents.applicationScope,
                     dismiss = { result ->
                         consumePrompt {
