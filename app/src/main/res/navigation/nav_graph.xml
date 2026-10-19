@@ -1514,6 +1514,11 @@
             android:id="@+id/searchEngineFragment"
             android:name="org.mozilla.fenix.settings.search.SearchEngineFragment"
             android:label="@string/preferences_search">
+            <argument
+                android:name="preference_to_scroll_to"
+                android:defaultValue="@null"
+                app:argType="string"
+                app:nullable="true" />
             <action
                 android:id="@+id/action_searchEngineFragment_to_defaultEngineFragment"
                 app:destination="@+id/defaultEngineFragment" />
