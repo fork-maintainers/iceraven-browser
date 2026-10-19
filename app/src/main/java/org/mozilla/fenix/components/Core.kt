@@ -304,7 +304,10 @@ class Core(
     }
 
     val geckoSitePermissionsStorage by lazyMonitored {
-        GeckoSitePermissionsStorage(geckoRuntime, OnDiskSitePermissionsStorage(context))
+        GeckoSitePermissionsStorage(
+            geckoRuntime,
+            OnDiskSitePermissionsStorage(context, coroutineScope = applicationScope),
+        )
     }
 
     val sessionStorage: SessionStorage by lazyMonitored {

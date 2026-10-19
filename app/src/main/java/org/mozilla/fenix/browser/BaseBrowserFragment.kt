@@ -1354,6 +1354,7 @@ abstract class BaseBrowserFragment :
                     },
                     shouldShowDoNotAskAgainCheckBox = context.components.appStore.state.mode != BrowsingMode.Private,
                     store = store,
+                    coroutineScope = requireComponents.applicationScope,
                     shouldHide = {
                         // if the fragment is detached,
                         // returning true will hide the site permission prompt rather than crash
