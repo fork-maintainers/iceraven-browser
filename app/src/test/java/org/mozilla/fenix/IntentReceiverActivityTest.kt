@@ -19,6 +19,7 @@ import io.mockk.just
 import io.mockk.mockk
 import io.mockk.spyk
 import io.mockk.verify
+import kotlin.test.assertFalse
 import kotlin.test.assertNotNull
 import kotlinx.coroutines.test.runTest
 import mozilla.components.feature.intent.processing.IntentProcessor
@@ -34,6 +35,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mozilla.fenix.GleanMetrics.Events
+import org.mozilla.fenix.GleanMetrics.SyncAuth
 import org.mozilla.fenix.components.IntentProcessorType
 import org.mozilla.fenix.components.IntentProcessors
 import org.mozilla.fenix.customtabs.ExternalAppBrowserActivity
@@ -72,6 +74,7 @@ class IntentReceiverActivityTest {
         every { intentProcessors.externalDeepLinkIntentProcessor } returns mockIntentProcessor()
         every { intentProcessors.webNotificationsIntentProcessor } returns mockIntentProcessor()
         every { intentProcessors.passwordManagerIntentProcessor } returns mockIntentProcessor()
+        every { settings.isUserPairingCampaignAttributed } returns false
 
         coEvery { intentProcessors.intentProcessor.process(any()) } returns true
     }
@@ -344,6 +347,100 @@ class IntentReceiverActivityTest {
         val actualIntent = shadow.peekNextStartedActivity()
 
         assertEquals(HomeActivity::class.java.name, actualIntent.component?.className)
+    }
+
+    @Test
+    fun `GIVEN a pairing link intent WHEN processing the intent THEN pairingLinkOpened is recorded`() = runTest {
+        val intent =
+            Intent(
+                Intent.ACTION_VIEW,
+                "https://accounts.firefox.com/pair#channel_id=test_id&channel_key=test_key&v=2".toUri(),
+            )
+        assertNull(SyncAuth.pairingLinkOpened.testGetValue())
+
+        val activity = Robolectric.buildActivity(IntentReceiverActivity::class.java, intent).get()
+        attachMocks(activity)
+        activity.processIntent(intent)
+
+        val snapshot = SyncAuth.pairingLinkOpened.testGetValue()
+
+        assertEquals(1, snapshot?.size)
+        assertEquals("false", snapshot?.single()?.extra?.get("campaign_attributed"))
+    }
+
+    @Test
+    fun `GIVEN a pairing link intent and a pairing campaign install WHEN processing the intent THEN pairingLinkOpened is recorded as campaign attributed`() =
+        runTest {
+            every { settings.isUserPairingCampaignAttributed } returns true
+            val intent =
+                Intent(
+                    Intent.ACTION_VIEW,
+                    "https://accounts.firefox.com/pair#channel_id=test_id&channel_key=test_key&v=2".toUri(),
+                )
+            assertNull(SyncAuth.pairingLinkOpened.testGetValue())
+
+            val activity = Robolectric.buildActivity(IntentReceiverActivity::class.java, intent).get()
+            attachMocks(activity)
+            activity.processIntent(intent)
+
+            val snapshot = SyncAuth.pairingLinkOpened.testGetValue()
+
+            assertEquals(1, snapshot?.size)
+            assertEquals("true", snapshot?.single()?.extra?.get("campaign_attributed"))
+        }
+
+    @Test
+    fun `GIVEN a non-pairing link intent WHEN processing the intent THEN pairingLinkOpened is not recorded`() =
+        runTest {
+            val intent =
+                Intent(
+                    Intent.ACTION_VIEW,
+                    "https://accounts.firefox.com/signin".toUri(),
+                )
+
+            val activity = Robolectric.buildActivity(IntentReceiverActivity::class.java, intent).get()
+            attachMocks(activity)
+            activity.processIntent(intent)
+
+            assertNull(SyncAuth.pairingLinkOpened.testGetValue())
+        }
+
+    @Test
+    fun `GIVEN a production pairing link intent WHEN isFxaPairingLink is called THEN it returns true`() {
+        assertTrue(
+            isFxaPairingLink("https://accounts.firefox.com/pair#channel_id=test_id&channel_key=test_key&v=2".toUri())
+        )
+    }
+
+    @Test
+    fun `GIVEN a stage pairing link intent WHEN isFxaPairingLink is called THEN it returns true`() {
+        assertTrue(
+            isFxaPairingLink(
+                "https://accounts.stage.mozaws.net/pair#channel_id=test_id&channel_key=test_key&v=2".toUri()
+            )
+        )
+    }
+
+    @Test
+    fun `GIVEN a non-pairing link intent WHEN isFxaPairingLink is called THEN it returns false`() {
+        assertFalse(isFxaPairingLink("https://example.com".toUri()))
+    }
+
+    @Test
+    fun `GIVEN a pairing link intent with an unexpected scheme WHEN isFxaPairingLink is called THEN it returns false`() {
+        assertFalse(
+            isFxaPairingLink("http://accounts.firefox.com/pair#channel_id=test_id&channel_key=test_key&v=2".toUri())
+        )
+    }
+
+    @Test
+    fun `GIVEN a pairing link intent with an unexpected path WHEN isFxaPairingLink is called THEN it returns false`() {
+        assertFalse(isFxaPairingLink("https://accounts.firefox.com/signin".toUri()))
+    }
+
+    @Test
+    fun `GIVEN a null uri intent WHEN isFxaPairingLink is called THEN it returns false`() {
+        assertFalse(isFxaPairingLink(null))
     }
 
     private fun attachMocks(activity: Activity) {

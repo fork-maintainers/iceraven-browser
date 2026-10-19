@@ -1299,7 +1299,7 @@ features:
       campaign-utm-content:
         description: The "utm_content" value used to identify installs from the pairing campaign.
         type: String
-        default: ""
+        default: "DTM_SYNC_PAIR_V2"
 
   pdf-viewer:
     description: Feature for the PDF viewer tools for users on Firefox for Android.
