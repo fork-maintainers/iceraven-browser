@@ -18,6 +18,7 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.mozilla.fenix.customannotations.SmokeTest
 import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.helpers.TestHelper.appContext
 import org.mozilla.fenix.ui.efficiency.helpers.BaseTest
@@ -72,6 +73,7 @@ class GoogleLensSearchTest : BaseTest() {
     // Kept as a single test for now (opt-out sheet, then gallery upload) to stay 1:1 with the one manual case, rather
     // than
     // split per the "one test, one assertion" rule.
+    @SmokeTest
     @Test
     fun verifyGoogleLensFunctionalityTest() {
         // Lens button is shown for Google + normal mode, and tapping it raises the first-run opt-out sheet.
