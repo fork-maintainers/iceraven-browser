@@ -11,10 +11,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import mozilla.components.feature.addons.Addon
 import mozilla.components.feature.addons.ui.showInformationDialog
 import mozilla.components.feature.addons.ui.translateName
@@ -56,10 +54,7 @@ class AddonDetailsFragment :
 
     override fun showUpdaterDialog(addon: Addon) {
         viewLifecycleOwner.lifecycleScope.launch(Main) {
-            val updateAttempt =
-                withContext(IO) {
-                    updateAttemptStorage.findUpdateAttemptBy(addon.id)
-                }
+            val updateAttempt = updateAttemptStorage.findUpdateAttemptBy(addon.id)
             updateAttempt?.showInformationDialog(requireContext())
         }
     }
