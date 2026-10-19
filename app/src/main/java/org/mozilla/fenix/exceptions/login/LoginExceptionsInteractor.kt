@@ -13,18 +13,18 @@ import org.mozilla.fenix.exceptions.ExceptionsInteractor
 interface LoginExceptionsInteractor : ExceptionsInteractor<LoginException>
 
 class DefaultLoginExceptionsInteractor(
-    private val ioScope: CoroutineScope,
+    private val scope: CoroutineScope,
     private val loginExceptionStorage: LoginExceptionStorage,
 ) : LoginExceptionsInteractor {
 
     override fun onDeleteAll() {
-        ioScope.launch {
+        scope.launch {
             loginExceptionStorage.deleteAllLoginExceptions()
         }
     }
 
     override fun onDeleteOne(item: LoginException) {
-        ioScope.launch {
+        scope.launch {
             loginExceptionStorage.removeLoginException(item)
         }
     }

@@ -4,8 +4,8 @@
 
 package org.mozilla.fenix.exceptions.login
 
+import io.mockk.coVerify
 import io.mockk.mockk
-import io.mockk.verify
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runTest
@@ -23,7 +23,7 @@ class LoginExceptionsInteractorTest {
     @Before
     fun setup() {
         loginExceptionStorage = mockk(relaxed = true)
-        interactor = DefaultLoginExceptionsInteractor(scope, loginExceptionStorage)
+        interactor = DefaultLoginExceptionsInteractor(scope = scope, loginExceptionStorage = loginExceptionStorage)
     }
 
     @Test
@@ -31,7 +31,7 @@ class LoginExceptionsInteractorTest {
         interactor.onDeleteAll()
         testScheduler.advanceUntilIdle()
 
-        verify { loginExceptionStorage.deleteAllLoginExceptions() }
+        coVerify { loginExceptionStorage.deleteAllLoginExceptions() }
     }
 
     @Test
@@ -40,6 +40,6 @@ class LoginExceptionsInteractorTest {
         interactor.onDeleteOne(exceptionsItem)
         testScheduler.advanceUntilIdle()
 
-        verify { loginExceptionStorage.removeLoginException(exceptionsItem) }
+        coVerify { loginExceptionStorage.removeLoginException(exceptionsItem) }
     }
 }
