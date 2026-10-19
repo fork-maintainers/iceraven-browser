@@ -32,6 +32,7 @@
             android:authorities="${applicationId}.profiler"
             android:exported="true"
             android:enabled="true"
+            tools:ignore="ExportedContentProvider"
             tools:replace="android:exported,android:enabled" />
 
     </application>

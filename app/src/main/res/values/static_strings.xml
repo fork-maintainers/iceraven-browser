@@ -372,9 +372,9 @@
 
     <!-- Firefox Labs -->
     <!-- The name of an experimental feature displayed in the Firefox Labs screen. This feature appends a star to the Settings toolbar title. This string is for testing purposes only. -->
-    <string name="firefox_labs_test_lab_title">Add a star to settings</string>
+    <string name="firefox_labs_test_lab_title" tools:ignore="UnusedResources">Add a star to settings</string>
     <!-- The description of the "Add a star to settings" feature in the Firefox Labs screen. This string is for testing purposes only. -->
-    <string name="firefox_labs_test_lab_description">Appends a star to the settings toolbar title. (Experiment is for testing purposes only.)</string>
+    <string name="firefox_labs_test_lab_description" tools:ignore="UnusedResources">Appends a star to the settings toolbar title. (Experiment is for testing purposes only.)</string>
 
     <!-- Debug drawer tab group tools -->
     <!-- The title of the debug drawer tab to help populate tab groups-->
