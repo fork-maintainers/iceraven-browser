@@ -113,7 +113,7 @@ private val tabStripIconSize
  * @param tabsUseCases The [TabsUseCases] instance to perform tab actions.
  * @param hideWhenKeyboardShown Whether or not to hide the tabs strip when the keyboard is shown.
  * @param onAddTabClick Invoked when the add tab button is clicked.
- * @param onCloseTabClick Invoked when a tab is closed.
+ * @param onCloseTabClick Invoked when a tab other than the last remaining open tab is closed.
  * @param onLastTabClose Invoked when the last remaining open tab is closed.
  * @param onSelectedTabClick Invoked when a tab is selected.
  * @param onTabCounterClick Invoked when tab counter is clicked.
@@ -545,11 +545,14 @@ private fun closeTab(
     onLastTabClose: (isPrivate: Boolean) -> Unit,
     onCloseTabClick: (isPrivate: Boolean) -> Unit,
 ) {
-    if (numberOfTabs == 1) {
+    val isLastTab = numberOfTabs == 1
+    if (isLastTab) {
         onLastTabClose(isPrivate)
     }
     tabsUseCases.removeTab(tabId)
-    onCloseTabClick(isPrivate)
+    if (!isLastTab) {
+        onCloseTabClick(isPrivate)
+    }
     TabStripMetrics.closeTab.record()
 }
 

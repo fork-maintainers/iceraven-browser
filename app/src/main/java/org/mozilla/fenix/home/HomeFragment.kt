@@ -102,6 +102,7 @@ import org.mozilla.fenix.browser.TabPreview
 import org.mozilla.fenix.browser.browsingmode.BrowsingMode
 import org.mozilla.fenix.browser.tabstrip.TabStrip
 import org.mozilla.fenix.browser.tabstrip.TabStripColors
+import org.mozilla.fenix.browser.tabstrip.ext.handleTabStripLastTabClosed
 import org.mozilla.fenix.components.Components
 import org.mozilla.fenix.components.HomepageThumbnailIntegration
 import org.mozilla.fenix.components.LensFeature
@@ -1105,7 +1106,18 @@ class HomeFragment : Fragment(), UserInteractionHandler, OnLongPressedListener {
                         (requireActivity() as HomeActivity).openToBrowser(BrowserDirection.FromHome)
                     }
                 },
-                onLastTabClose = {},
+                onLastTabClose = { isPrivate ->
+                    handleTabStripLastTabClosed(
+                        isHomepageAsNewTabEnabled = requireComponents.settings.enableHomepageAsNewTab,
+                        isLastTabClosedPrivate = isPrivate,
+                        navigateFromId = R.id.homeFragment,
+                        appStore = requireComponents.appStore,
+                        browsingMode = browsingModeManager.mode,
+                        navController = findNavController(),
+                    ) {
+                        showUndoSnackbar(requireContext().tabClosedUndoMessage(isPrivate))
+                    }
+                },
                 onCloseTabClick = { isPrivate ->
                     showUndoSnackbar(requireContext().tabClosedUndoMessage(isPrivate))
                 },

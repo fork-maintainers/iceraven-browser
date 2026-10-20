@@ -30,6 +30,7 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
@@ -273,6 +274,12 @@ class TabManagementFragment : Fragment() {
             val state by tabsTrayStore.stateFlow.collectAsState()
             val appState by requireComponents.appStore.stateFlow.collectAsState()
             snackbarHostState = remember { SnackbarHostState() }
+            SideEffect(Unit) {
+                requireComponents.appStore.state.wasLastTabClosedPrivate?.let { isPrivate ->
+                    showUndoSnackbarForTab(isPrivate)
+                    requireComponents.appStore.dispatch(AppAction.TabStripAction.UpdateLastTabClosed(null))
+                }
+            }
             val trackersBlockedCount =
                 when (showPrivacyReport) {
                     true -> appState.blockedTrackersState.trackersBlockedCount

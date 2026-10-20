@@ -187,6 +187,7 @@ import org.mozilla.fenix.browser.store.BrowserScreenMiddleware
 import org.mozilla.fenix.browser.store.BrowserScreenState
 import org.mozilla.fenix.browser.store.BrowserScreenStore
 import org.mozilla.fenix.browser.tabstrip.TabStrip
+import org.mozilla.fenix.browser.tabstrip.ext.handleTabStripLastTabClosed
 import org.mozilla.fenix.components.AppStore
 import org.mozilla.fenix.components.FenixAutocompletePrompt
 import org.mozilla.fenix.components.FenixEmailMaskPrompt
@@ -1602,8 +1603,17 @@ abstract class BaseBrowserFragment :
                     }
                 },
                 onLastTabClose = { isPrivate ->
-                    requireComponents.appStore.dispatch(AppAction.TabStripAction.UpdateLastTabClosed(isPrivate))
-                    findNavController().navigate(BrowserFragmentDirections.actionGlobalHome())
+                    handleTabStripLastTabClosed(
+                        isHomepageAsNewTabEnabled = settings.enableHomepageAsNewTab,
+                        isLastTabClosedPrivate = isPrivate,
+                        navigateFromId = R.id.browserFragment,
+                        appStore = requireComponents.appStore,
+                        browsingMode = requireComponents.appStore.state.mode,
+                        navController = findNavController(),
+                    ) {
+                        requireComponents.appStore.dispatch(AppAction.TabStripAction.UpdateLastTabClosed(isPrivate))
+                        findNavController().navigate(BrowserFragmentDirections.actionGlobalHome())
+                    }
                 },
                 onSelectedTabClick = {},
                 onCloseTabClick = { isPrivate ->
