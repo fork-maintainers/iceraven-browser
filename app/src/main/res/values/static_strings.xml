@@ -294,7 +294,6 @@
     <string name="debug_drawer_ip_protection_uninitialized" translatable="false">IP protection has not initialized yet. Open a tab and wait for the service to warm up.</string>
     <string name="debug_drawer_ip_protection_unavailable" translatable="false">IP protection is not available here. Check the Nimbus configuration and the region.</string>
     <string name="debug_drawer_ip_protection_signed_out" translatable="false">Sign in to your Mozilla account to use IP protection.</string>
-    <string name="debug_drawer_ip_protection_opted_out" translatable="false">IP protection is opted out.</string>
 
   <!-- Debug drawer Listen to Page tools -->
   <string name="debug_drawer_listen_to_page_tools_title">Listen to Page Tools</string>

@@ -17498,8 +17498,7 @@ vpn:
         description: >
           Service state when the engine reported the failure. Not the state that
           issued the request: the reply is asynchronous, so the two can differ.
-          One of "uninitialized", "unavailable", "unauthenticated", "opted_out",
-          "ready".
+          One of "uninitialized", "unavailable", "unauthenticated", "ready".
         type: string
       proxy_state:
         description: >
@@ -17690,7 +17689,7 @@ vpn:
       service_state:
         description: >
           Service state when the reset was recorded. One of "uninitialized", "unavailable",
-          "unauthenticated", "opted_out", "ready".
+          "unauthenticated", "ready".
         type: string
       proxy_state:
         description: >

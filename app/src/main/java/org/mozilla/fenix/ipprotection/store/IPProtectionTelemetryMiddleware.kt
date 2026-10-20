@@ -288,7 +288,6 @@ private val ServiceState.label: String
             ServiceState.Uninitialized -> "uninitialized"
             ServiceState.Unavailable -> "unavailable"
             ServiceState.Unauthenticated -> "unauthenticated"
-            ServiceState.OptedOut -> "opted_out"
             ServiceState.Ready -> "ready"
         }
 
