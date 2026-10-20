@@ -23,6 +23,8 @@
   <string name="content_description_normal_browsing">Shfletim normal</string>
   <!-- Placeholder text shown in the search bar before a user enters text for the default engine -->
   <string name="search_hint">Bëni kërkim, ose jepni adresë</string>
+  <!-- Shorter placeholder text shown in the search bar when an additional action (voice search) is rendered alongside the hint. -->
+  <string name="search_hint_short">Kërko</string>
   <!-- Placeholder text shown in the search bar before a user enters text for a general engine -->
   <string name="search_hint_general_engine">Kërkoni në Web</string>
   <!-- Placeholder text shown in search bar when using history search -->
@@ -139,6 +141,12 @@
   <string name="home_screen_shortcut_open_new_private_tab_2">Skedë e re private</string>
   <!-- Shortcut action to open Passwords screen -->
   <string name="home_screen_shortcut_passwords">Fjalëkalime</string>
+  <!--
+    Recent Tabs
+
+    Header text on the homescreen for continuing to browse the most recent browser tab
+  -->
+  <string name="recent_tabs_header_2">Vazhdo</string>
   <!-- Button text for showing all the tabs in the tabs tray -->
   <string name="recent_tabs_show_all">Shfaqi krejt</string>
   <!-- Text for button in synced tab card that opens synced tabs tray -->
@@ -273,8 +281,12 @@
   <string name="browser_menu_summarize_page">Përmblidhe faqen</string>
   <!-- Browser menu badge text for summarization feature -->
   <string name="browser_menu_summarize_page_badge">E re</string>
+  <!-- Browser menu badge text for new, highlighted feature -->
+  <string name="browser_menu_page_badge_text">E re</string>
   <!-- Browser menu label for navigating to the Web Compat Reporter feature, which provides users the ability to send bug reports for broken sites. -->
   <string name="browser_menu_webcompat_reporter_2">Njoftoni për sajt të dëmtuar</string>
+  <!-- Browser menu label for adding a tab to a tab group -->
+  <string name="browser_menu_add_to_tab_group">Shtoje në grup</string>
   <!-- Browser menu label that is displayed when the current page has been translated by the translation feature. -->
   <string name="browser_menu_translated">E përkthyer</string>
   <!-- Browser menu label for the print feature -->
@@ -291,6 +303,8 @@
   <string name="browser_menu_default_banner_title">Bëjeni %1$s-in parazgjedhjen tuaj</string>
   <!-- Label text within the set as default banner -->
   <string name="browser_menu_default_banner_subtitle_2">I shpejtë, privat dhe krijuar për ju.</string>
+  <!-- Content description (not visible, for screen readers etc.) for the button that dismisses the set as default banner in the menu -->
+  <string name="browser_menu_default_banner_dismiss_promotion">Hidhe tej promovimin</string>
   <!-- Content description (not visible, for screen readers etc.) for recommended extensions in main menu -->
   <string name="browser_menu_recommended_extensions_content_description">Më tepër hollësi</string>
   <!--
@@ -319,8 +333,38 @@
   <string name="translation_toolbar_expand_action">Hap fletën e përkthimeve</string>
   <!-- Content description for the translate toolbar action that closes the translations toolbar. -->
   <string name="translation_toolbar_close_action">Hidhe tej mesazhin</string>
+  <!--
+    Page summaries
+
+    Toolbar title for the Page summaries settings fragment
+  -->
+  <string name="preferences_page_summaries">Përmbledhje faqesh</string>
+  <!--
+    AI Controls settings
+
+    Title for the AI controls settings screen
+  -->
+  <string name="preferences_ai_controls">Kontrolle IA</string>
+  <!-- Headline text for the AI controls banner. %s is the name of the app (for example "Firefox"). -->
+  <string name="ai_controls_banner_headline">Keni përherë një zgjedhje në %s</string>
+  <!-- Link text for learning more about AI controls -->
+  <string name="ai_controls_learn_more">Mësoni më tepër</string>
+  <!-- Link text to see what AI enhancements are and aren’t included -->
+  <string name="ai_controls_see_whats_included">Shihni ç’përfshihet dhe s’përfshihet</string>
+  <!-- Title for the translations AI feature toggle -->
+  <string name="ai_controls_translations_title">Përkthime</string>
+  <!-- Description for the translations AI feature toggle -->
+  <string name="ai_controls_translations_description">Krejt përkthimet mbeten private në pajisjen tuaj.</string>
+  <!-- Link text to navigate to more translations settings -->
+  <string name="ai_controls_more_translations_settings">Më tepër rregullime përkthimi</string>
+  <!-- Link text to navigate to more page summary settings -->
+  <string name="ai_controls_more_page_summary_settings">Më tepër rregullime përmbledhjesh faqesh</string>
+  <!-- Title for the voice search AI feature toggle -->
+  <string name="ai_controls_voice_search_title">Kërkim zanor</string>
   <!-- Title for the block AI enhancements confirmation dialog -->
   <string name="ai_controls_block_dialog_title">Të bllokohen zgjerime IA?</string>
+  <!-- Label shown above the list of features that will be blocked in the block AI dialog -->
+  <string name="ai_controls_block_dialog_what_will_be_blocked">Çfarë do të bllokohet:</string>
   <!-- Cancel button text in the block AI enhancements confirmation dialog -->
   <string name="ai_controls_block_dialog_cancel">Anuloje</string>
   <!-- Block button text in the block AI enhancements confirmation dialog -->
@@ -1732,6 +1776,16 @@
   <!-- Text for the filter button to show all other file types in the downloads list -->
   <string name="download_content_type_filter_other_1">Tjetër</string>
   <!--
+    Title for the alert dialog to rename a file and/or change its download location before downloading it.
+    %s is the formatted size of the file (e.g., "12.5 MB").
+  -->
+  <string name="download_rename_and_change_location_dialog_title">Të shkarkohet kartela?\n(%s)</string>
+  <!--
+    Title for the alert dialog to rename a file and/or change its download location
+    when the file size is not available before downloading it.
+  -->
+  <string name="download_rename_and_change_location_dialog_title_with_unknown_size">Të shkarkohet kartela?</string>
+  <!--
     WebCompat Reporter
 
     The title of the Web Compat Reporter feature. This is displayed in the top app bar.
@@ -1747,12 +1801,18 @@
   <string name="webcompat_reporter_url_error_invalid">Ju lutemi, jepni një URL të vlefshme</string>
   <!-- The button text for the cancel button to leave the Web Compat Reporter feature. -->
   <string name="webcompat_reporter_cancel">Anuloje</string>
+  <!-- The button text for the send button to submit the provided form data. -->
+  <string name="webcompat_reporter_send_report">Dërgoje njoftimin</string>
   <!-- Text for a snackbar to confirm the successful submission of a WebCompat report. -->
   <string name="webcompat_reporter_success_snackbar_text_2">Njoftimi u dërgua</string>
   <!-- The button text for the preview report button to view a preview of the report. -->
   <string name="webcompat_reporter_preview_report">Bëni Paraparje të Raportimit</string>
   <!-- The title shown at the top of the WebCompat Report preview panel. This appears after the user taps the “Preview” button before sending a report. -->
   <string name="webcompat_reporter_preview_bottom_sheet_header">Paraparje Raportimi</string>
+  <!-- Text shown on the save button for the Edit URL confirmation dialog in the WebCompatReporter. -->
+  <string name="webcompat_reporter_edit_url_dialog_save">Ruaje</string>
+  <!-- Text shown on the dismiss button for the Edit URL confirmation dialog in the WebCompatReporter. -->
+  <string name="webcompat_reporter_edit_url_dialog_dismiss">Hidhe tej</string>
   <!--
     These reason strings are dropdown options on a WebCompat reporter form, indicating what is broken on the site.
 
@@ -1862,6 +1922,12 @@
   <string name="bookmark_sort_menu_a_to_z">Renditi nga A në Z</string>
   <!-- Label for button to sort bookmarks in reverse alphabetical order in the bookmark sorting overflow menu. -->
   <string name="bookmark_sort_menu_z_to_a">Renditi nga Z në A</string>
+  <!-- Label for button to import bookmarks from file. -->
+  <string name="bookmark_import_menu_button">Importoje prej kartele</string>
+  <!-- Snackbar message shown when a bookmark import attempt fails. -->
+  <string name="bookmark_import_failure_snackbar">S’u importuan dot faqerojtës. Riprovoni.</string>
+  <!-- Default name for the folder created when importing bookmarks from a file. -->
+  <string name="bookmark_import_destination_default_name">Faqerojtës të importuar</string>
   <!--
     Bookmark multi select title in app bar
     %1$d is the number of bookmarks selected
@@ -1910,6 +1976,8 @@
   <string name="bookmark_select_folder_close_folder_content_description">Mbylle dosjen: %s</string>
   <!-- Content description for the "close" button in bookmarks screen. -->
   <string name="bookmark_close_button_content_description">Mbylli faqerojtësit</string>
+  <!-- Content description for the Import bookmarks button in bookmarks screen. -->
+  <string name="bookmark_import_bookmarks_button_content_description">Importoje prej kartele</string>
   <!-- Title for the bookmark list empty state -->
   <string name="bookmark_empty_list_title">Ende pa faqerojtës</string>
   <!-- Bookmark screen folder description. %s is the count of bookmark folder children -->
@@ -1922,6 +1990,10 @@
   <string name="bookmark_select_folder_new_folder_button_title">Dosje e re</string>
   <!-- Bookmark snackbar message for moving a single item. %1$s is the title of the item being moved and %2$s is the new parent folder of the bookmark -->
   <string name="bookmark_moved_single_item">U kalua %1$s te %2$s</string>
+  <!-- Text for bookmark search page when there are no results. -->
+  <string name="bookmark_no_search_results">S’u gjetën përputhje.</string>
+  <!-- Additional text for bookmark search page when there are no results. -->
+  <string name="bookmark_no_search_results_additional_text">Provoni një tjetër kërkim!</string>
   <!--
     Site Permissions
 
@@ -2087,6 +2159,14 @@
   <string name="menu_print">Shtypni</string>
   <!-- Sub-header in the dialog to share a link to another sync device -->
   <string name="share_device_subheader">Dërgojeni në pajisje</string>
+  <!-- Text for the QR code action in the native share sheet -->
+  <string name="share_qr_code">Kod QR</string>
+  <!-- Title shown in the QR code display screen -->
+  <string name="qr_code_display_title">Kod QR</string>
+  <!-- Content description for the close button in the QR code display screen -->
+  <string name="qr_code_display_close">Mbylle</string>
+  <!-- Label for the download button on the QR code display screen -->
+  <string name="qr_code_display_download">Shkarkoje</string>
   <!-- Sub-header in the dialog to share a link to an app from the full list -->
   <string name="share_link_all_apps_subheader">Krejt veprimet</string>
   <!-- Sub-header in the dialog to share a link to an app from the most-recent sorted list -->
@@ -2313,6 +2393,8 @@
   <string name="sign_in_create_account_text" tools:ignore="BrandUsage"><![CDATA[Pa llogari? <u>Krijoni një të tillë</u> që të njëkohësoni Firefox-in mes pajisjesh.]]></string>
   <!-- Text shown in confirmation dialog to sign out of account. %s is the name of the app (for example "Firefox"). -->
   <string name="sign_out_confirmation_message_2">%s-i do të reshtë së njëkohësuari me llogarinë tuaj, por nuk do të fshihet ndonjë nga të dhënat e shfletimeve tuaja në këtë pajisje.</string>
+  <!-- Text for the primary action button of the confirmation dialog shown when the user signs out of their account -->
+  <string name="sign_out_dialog_confirm_button">Dilni</string>
   <!-- Option to continue signing out of account shown in confirmation dialog to sign out of account -->
   <string name="sign_out_disconnect">Shkëputu</string>
   <!-- Option to cancel signing out shown in confirmation dialog to sign out of account -->
@@ -2750,6 +2832,22 @@
   <string name="ip_protection_navigate_settings">Hap rregullime VPN-je</string>
   <!-- Label for the button that starts the browser VPN authentication or authorization flow on the settings screen -->
   <string name="ip_protection_get_started">Fillojani</string>
+  <!-- Label for the "connecting" state of the button that starts the browser VPN authentication or authorization flow on the settings screen -->
+  <string name="ip_protection_connecting">Po lidhet…</string>
+  <!-- Used as text for a link in ip_protection_onboarding_body. Make sure to adapt capitalization if the link is in the middle of the sentence. -->
+  <string name="ip_protection_onboarding_body_link">Shfletoni me mbrojtje ekstra</string>
+  <!-- Used as text for a link in ip_protection_onboarding_body. Make sure to adapt capitalization if the link is in the middle of the sentence. -->
+  <string name="ip_protection_onboarding_body_link_promo">Mësoni më tepër</string>
+  <!-- Label for the dismiss button on the onboarding bottom sheet. -->
+  <string name="ip_protection_onboarding_not_now_button">Jo tani</string>
+  <!-- Snackbar (in-app pop-up notification) action button text that takes the user to the VPN settings screen. -->
+  <string name="ip_protection_open_settings_snackbar_action">Rregullime</string>
+  <!-- Title shown on the browser VPN settings screen for location selection section. -->
+  <string name="ip_protection_location_title" tools:ignore="UnusedResources">Vendndodhje</string>
+  <!-- Label for the Recommended server location option which is automatically selected by the browser. -->
+  <string name="ip_protection_recommended_location" tools:ignore="UnusedResources">E rekomanduar</string>
+  <!-- Label for the button that takes the user to get the standalone Mozilla VPN product. -->
+  <string name="ip_protection_mozilla_vpn_upsell_button" tools:ignore="UnusedResources,BrandUsage">Merrni Mozilla VPN</string>
   <!--
     Autofill
 
@@ -3031,6 +3129,18 @@
     which navigates the user to a screen displaying all the shortcuts.
   -->
   <string name="homepage_shortcuts_show_all_content_description">Shfaqi tërë shkurtoret</string>
+  <!--
+    Label for the button in the shortcuts home screen section that expands the section to show
+    every shortcut.
+  -->
+  <string name="homepage_shortcuts_show_all">Shfaqi krejt</string>
+  <!--
+    Label for the button in the shortcuts home screen section that collapses the section back
+    to showing only the first shortcuts.
+  -->
+  <string name="homepage_shortcuts_show_less">Shfaq më pak</string>
+  <!-- Label for the "Add shortcut" button displayed as a tile. -->
+  <string name="homepage_shortcuts_add_shortcut">Shtoni shkurtore</string>
   <!-- Label for the "Add website" button in the "Add to homepage" bottom sheet. -->
   <string name="homepage_shortcuts_add_website">Shtoni sajt</string>
   <!-- Title text for the "Enter a Website URL" dialog for adding a shortcut. -->
@@ -3951,10 +4061,38 @@
   <string name="collections_migration_homepage_banner_title">Koleksionet tanimë janë grupe</string>
   <!-- Message shown on the collections to tab groups migration card on the homepage. -->
   <string name="collections_migration_homepage_card_message">Ka një rrugë më të thjeshtë për t’i mbajtur të sistemuara skedat tuaja</string>
+  <!--
+    Title shown at the top of the camera screen, next to the close button, telling the
+    user that the camera is being used to scan a QR code.
+  -->
+  <string name="lens_camera_title_qr">Kod QR</string>
+  <!-- Content description for the QR scanner half of the camera mode toggle -->
+  <string name="lens_camera_mode_qr">Skanues QR-esh</string>
   <!-- Button shown under an image picked from the gallery while it is being sent to Google Lens. Tapping it stops the search and returns to the camera. -->
   <string name="lens_camera_loading_cancel_button">Anuloje</string>
   <!-- Action in the snackbar shown when an image picked from the gallery could not be searched with Google Lens. Tapping it searches the same image again. -->
   <string name="lens_camera_upload_failed_retry_button">Riprovoni</string>
+  <!-- Button in the first-run Google Lens bottom sheet that dismisses it and starts the camera -->
+  <string name="lens_opt_out_try_it_now_button">Provojeni tani</string>
+  <!-- Button in the first-run Google Lens bottom sheet that leaves Google Lens without using it -->
+  <string name="lens_opt_out_not_now_button">Jo tani</string>
+  <!--
+    Firefox Labs
+
+    Firefox Labs is the name of a screen in Settings to allow users to learn about
+    experimental and in-development features, and turn those features on and off.
+    The "Labs" portion can be localized, "Firefox" must be treated as a brand and kept
+    in English.
+  -->
+  <string name="firefox_labs_title" tools:ignore="BrandUsage">Firefox Labs</string>
+  <!-- Button text on the Firefox Labs screen for restoring all toggles back to the default settings. The button will turn off any experimental features. -->
+  <string name="firefox_labs_restore_default_button_text">Rikthe parazgjedhjet</string>
+  <!-- The title used in a confirmation dialog on the Firefox Labs screen when toggling "on" or "off" an experimental feature that requires a restart. -->
+  <string name="firefox_labs_feature_dialog_title">Lyp rinisje</string>
+  <!-- The text on the dialog on the Firefox Labs screen for the positive button when toggling "on" and "off" experimental features. This prompts the user to confirm that they want to restart the app. -->
+  <string name="firefox_labs_dialog_restart_button">Rinise</string>
+  <!-- The text on the dialog on the Firefox Labs screen for the negative button when toggling "on" and "off" experimental features. This is used to cancel the action and return to the previous screen. -->
+  <string name="firefox_labs_dialog_cancel_button">Anuloje</string>
   <!-- The title used in a confirmation dialog on the Firefox Labs screen when restoring the application to its defaults by turning "off" any experimental features. -->
   <string name="firefox_labs_restore_defaults_dialog_title">Lyp rinisje</string>
   <!-- The description used in a confirmation dialog on the Firefox Labs screen when restoring the application to its defaults by turning "off" any experimental features. %s is the name of the app (for example "Firefox Nightly") -->
@@ -3963,6 +4101,8 @@
   <string name="firefox_labs_feature_enable_dialog_message">Që të aktivizohet kjo veçori, rinisni %s.</string>
   <!-- The description text that is displayed in the confirmation dialog on the Firefox Labs screen for toggling "off" experimental features. %s is the name of the app (for example "Firefox Nightly") -->
   <string name="firefox_labs_feature_disable_dialog_message">Që të çaktivizohet kjo veçori, rinisni %s.</string>
+  <!-- Title of the Firefox Labs Sandboxing experiment. -->
+  <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">Izolim sajti</string>
   <!-- Content description for accessibility (used by screen readers): Description of the button that downloads the PDF displayed on the screen to the user's device. -->
   <string name="pdf_tools_download_content_description">Shkarkojeni si PDF</string>
   <!--
@@ -3975,4 +4115,6 @@
   <string name="pdf_tools_signature_clear_button">Spastroje</string>
   <!-- The text for the button that adds the signature the user has typed to the PDF. -->
   <string name="pdf_tools_signature_add_button">Shtoje</string>
+  <!-- Content description for media player displayed in Reader Mode when the Listen to Page (Read Aloud) feature is selected -->
+  <string name="reader_mode_panel_media_player_content_description">Lojtës Mediash</string>
 </resources>

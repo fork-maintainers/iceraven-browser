@@ -21,16 +21,26 @@
   <string name="content_description_private_browsing">Gera nepen</string>
   <!-- Placeholder text shown in the search bar before a user enters text for the default engine -->
   <string name="search_hint">Lêgerîn an jî navnîşan</string>
+  <!-- Shorter placeholder text shown in the search bar when an additional action (voice search) is rendered alongside the hint. -->
+  <string name="search_hint_short">Lêgerîn</string>
   <!-- Placeholder text shown in the search bar before a user enters text for a general engine -->
   <string name="search_hint_general_engine">Di webê de bigere</string>
   <!-- Placeholder text shown in search bar when using history search -->
   <string name="history_search_hint">Raboriya lêgerînê</string>
   <!-- Placeholder text shown in search bar when using bookmarks search -->
   <string name="bookmark_search_hint">Di bijareyan de bigere</string>
+  <!-- Content description for the toolbar back button while searching bookmarks -->
+  <string name="bookmark_close_search_description">Vegere û lêgerînê bigire</string>
   <!-- Placeholder text shown in search bar when using tabs search -->
   <string name="tab_search_hint">Di hilpekînan de bigere</string>
   <!-- Placeholder text shown in the search bar when using application search engines -->
   <string name="application_search_hint">Peyvên lêgerînê binivîse</string>
+  <!-- The header text displayed on the private tabs page when no private tabs are open -->
+  <string name="tab_manager_empty_private_tabs_page_header">Gera nepen</string>
+  <!-- The supplementary text displayed on the private tabs page when no private tabs are open. %1$s is the name of the app (for example "Firefox") -->
+  <string name="tab_manager_empty_private_tabs_page_description">%1$s dê ti raborî yan jî çerezên te bi bîr neyne, lê nîşaneyên nû dê bên tomarkirin.</string>
+  <!-- The header text displayed on the normal tabs page when no normal tabs are open -->
+  <string name="tab_manager_empty_normal_tabs_page_header">Ji bo destpêkirina lêgerînê hilpekîneke nû biafirnîne</string>
   <!-- Tab tray multi select title in app bar. %1$d is the number of tabs selected -->
   <string name="tab_tray_multi_select_title">%1$d hilpekîn hatin bijartin</string>
   <!-- Tab tray multi select title in app bar when no tabs are selected -->
@@ -65,6 +75,11 @@
     Title for info card on private homescreen in True Private Browsing Mode.
   -->
   <string name="felt_privacy_desc_card_title">Li ser vê cîhazê tu şop nehêle</string>
+  <!--
+    Description of private browsing mode displayed to users on the homepage when they enable private mode.
+    %1$s is the name of the app (for example "Firefox").
+  -->
+  <string name="felt_privacy_info_card_subtitle_3">Dema ku tu hemû hilpekînên xwe yên nepen digirî, %1$s çerez, raborî û daneyên malpera te jê dibe.</string>
   <!--
     Clickable portion of the explanation for private browsing that links the user to our
     about privacy page.
@@ -118,6 +133,14 @@
   <string name="home_screen_shortcut_open_new_private_tab_2">Hilpekîna veşartî ya nû</string>
   <!-- Shortcut action to open Passwords screen -->
   <string name="home_screen_shortcut_passwords">Şîfre</string>
+  <!-- Shortcut action to open uninstall survey -->
+  <string name="home_screen_shortcut_uninstall_survey">Jê rakî, lê çima?</string>
+  <!--
+    Recent Tabs
+
+    Header text on the homescreen for continuing to browse the most recent browser tab
+  -->
+  <string name="recent_tabs_header_2">Bidomîne</string>
   <!-- Button text for showing all the tabs in the tabs tray -->
   <string name="recent_tabs_show_all">Gişî nîşan bide</string>
   <!-- Text for button in synced tab card that opens synced tabs tray -->
@@ -174,6 +197,8 @@
   <string name="browser_menu_extensions_disabled_description">Demkî hatiye neçalakkirin</string>
   <!-- The description of the browser menu appears when the user hasn't installed any extensions. -->
   <string name="browser_menu_no_extensions_installed_description">Tu pêvek nehatine çalakkirin</string>
+  <!-- The description of the browser menu appears when the user hasn't installed any extensions and there are recommended extensions. -->
+  <string name="browser_menu_try_a_recommended_extension_description">Pêvekeke pêşniyarkirî biceribîne</string>
   <!-- Browser menu button that opens account settings -->
   <string name="browser_menu_account_settings">Agahiyên hesêb</string>
   <!-- Browser menu button that opens the settings menu -->
@@ -198,6 +223,8 @@
   <string name="browser_menu_save_to_collection_2">Li koleksiyonê tomar bike</string>
   <!-- Browser menu button that open a share menu to share the current site -->
   <string name="browser_menu_share">Parve bike</string>
+  <!-- Browser menu button that goes to the homepage screen -->
+  <string name="browser_menu_homepage">Serrûpel</string>
   <!--
     Browser menu button shown in custom tabs that opens the current tab in Fenix
     %1$s is the name of the app (for example "Firefox").
@@ -236,19 +263,48 @@
   <string name="browser_main_menu_content_description_navigation_header">Navîgasyon</string>
   <!-- Content description (not visible, for screen readers etc.) for bottom sheet handlebar custom tab menu. -->
   <string name="browser_custom_tab_menu_handlebar_content_description">Menuya hilpekîna taybet bigire</string>
+  <!-- URL bar indicator shown on a cached version of the website, when the tab is reloading, but the content is not live yet -->
+  <string name="browser_toolbar_cached_page_indicator">Di pêşbîrê de qeydkirî</string>
+  <!-- Message shown when a cached website has finished reloading and the tab is now showing the live version of the page -->
+  <string name="browser_toolbar_live_page_toast">Rûpela zindî</string>
   <!-- Browser menu label that bookmarks the currently visited page -->
   <string name="browser_menu_bookmark_this_page_2">Têxe nav favoriyan</string>
   <!-- Browser menu label that navigates to the edit bookmark screen for the current bookmarked page -->
   <string name="browser_menu_edit_bookmark">Favoriyan serast bike</string>
+  <!-- Browser menu label that the saves the currently visited page as a PDF -->
+  <string name="browser_menu_save_as_pdf_2">Wekî PDF qeyd bike</string>
+  <!-- Browser menu label for moving the current private tab to a non-private tab -->
+  <string name="browser_menu_move_to_non_private_tab">Bibe nav hilpekîna nenepen</string>
+  <!-- Browser menu label for navigating to the translation feature, which provides language translation options the current visited page -->
+  <string name="browser_menu_translate_page_2">Rûpelê wergerîne</string>
   <!-- Browser menu label for navigating to the summarization feature, which provides site summarization for the current visited page -->
   <string name="browser_menu_summarize_page">Kurteya rûpelê çêke</string>
   <!-- Browser menu badge text for summarization feature -->
   <string name="browser_menu_summarize_page_badge">Nû</string>
+  <!-- Browser menu badge text for new, highlighted feature -->
+  <string name="browser_menu_page_badge_text">Nû</string>
+  <!-- Browser menu label for navigating to the Web Compat Reporter feature, which provides users the ability to send bug reports for broken sites. -->
+  <string name="browser_menu_webcompat_reporter_2">Malpera şikestî rapor bike</string>
+  <!-- Browser menu label for adding a tab to a tab group -->
+  <string name="browser_menu_add_to_tab_group">Li komê zêde bike</string>
+  <!-- Browser menu label that is displayed when the current page has been translated by the translation feature. -->
+  <string name="browser_menu_translated">Wergerandî</string>
+  <!-- Browser menu label for the print feature -->
+  <string name="browser_menu_print_2">Çap bike</string>
   <!--
     Browser menu label for the Delete browsing data on quit feature.
     %1$s is the name of the app (for example "Firefox").
   -->
   <string name="browser_menu_delete_browsing_data_on_quit">Ji %1$s`ê derkeve</string>
+  <!--
+    Content description for a banner within the menu which prompt the user to make this app their default browser.
+    %1$s is the name of the app (for example "Firefox").
+  -->
+  <string name="browser_menu_default_banner_title">%1$sê bike geroka xwe ya standard</string>
+  <!-- Label text within the set as default banner -->
+  <string name="browser_menu_default_banner_subtitle_2">Bilez, nepen, û ji bo te hatiye çêkirin.</string>
+  <!-- Content description (not visible, for screen readers etc.) for the button that dismisses the set as default banner in the menu -->
+  <string name="browser_menu_default_banner_dismiss_promotion">Pêşniyarkirinê bigire</string>
   <!-- Content description (not visible, for screen readers etc.) for recommended extensions in main menu -->
   <string name="browser_menu_recommended_extensions_content_description">Agahiyên zêdetir</string>
   <!--
@@ -263,6 +319,70 @@
     Content description for the translate page toolbar button that opens the translations dialog when no translation has occurred.
   -->
   <string name="browser_toolbar_translate">Rûpelê wergerîne</string>
+  <!-- CFR description for the browser toolbar describing the "Shake to summarize feature" -->
+  <string name="browser_toolbar_summarize_cfr_description">Ji bo di çend çirkeyan de kurteya vê rûpelê çêkî, cîhaza xwe bihejîne. ⚡️</string>
+  <!--
+    Translation Toolbar
+
+    Translation toolbar label that is displayed when the current page has been translated by the translation feature.
+    %1$s is the name of the language that is displayed in the original page. (For example: English)
+    %2$s is the name of the language which the page was translated to. (For example: French)
+  -->
+  <string name="translation_toolbar_translated_from_and_to" tools:ignore="UnusedResources">Ji %1$s bo %2$s hat wergerandin</string>
+  <!-- Content description for the translate toolbar action that opens the translations dialog. -->
+  <string name="translation_toolbar_expand_action">Rûpela wergerandinê veke</string>
+  <!-- Content description for the translate toolbar action that closes the translations toolbar. -->
+  <string name="translation_toolbar_close_action">Peyamê bigire</string>
+  <!--
+    Page summaries
+
+    Toolbar title for the Page summaries settings fragment
+  -->
+  <string name="preferences_page_summaries">Kurteyên rûpelan</string>
+  <!--
+    AI Controls settings
+
+    Title for the AI controls settings screen
+  -->
+  <string name="preferences_ai_controls">Kontrolên ZÇ</string>
+  <!-- Headline text for the AI controls banner. %s is the name of the app (for example "Firefox"). -->
+  <string name="ai_controls_banner_headline">Di %s`ê de her tim vebijarkeke te heye</string>
+  <!-- Supporting text for the AI controls banner. %s is a learn more link using ai_controls_learn_more as text. -->
+  <string name="ai_controls_banner_supporting_text_2">Tu dikarî hilbijêrî ka tu yê taybetiyên bi ZÇ dixebitin bi kar bînî yan ne. %s</string>
+  <!-- Link text for learning more about AI controls -->
+  <string name="ai_controls_learn_more">Zêdetir bizane</string>
+  <!-- Title for the block AI enhancements toggle -->
+  <string name="ai_controls_block_ai_title">Pêşvebirinên ZÇ asteng bike</string>
+  <!-- Description for the block AI enhancements toggle. %s is the name of the app (for example "Firefox"). -->
+  <string name="ai_controls_block_ai_description">Astengkirin tê vê wateyê ku tu yê başkirinên ZÇ yên nû û yên heyî di %s`ê de yan jî pop-upên têkildarî wan nebînî.</string>
+  <!-- Link text to see what AI enhancements are and aren’t included -->
+  <string name="ai_controls_see_whats_included">Binêre ka çi tê de ye û çi ne tê de ye</string>
+  <!-- Banner text shown when AI enhancements are blocked -->
+  <string name="ai_controls_blocked_info_banner">Pêşvebirinên ZÇ yên nû û yên heyî bi xweberî têne astengkirin. Taybetmendiyên diyar li jêrê veke.</string>
+  <!-- Section header for the AI-powered features list -->
+  <string name="ai_controls_ai_powered_features">Taybetmendiyên bi hêza ZÇ</string>
+  <!-- Title for the translations AI feature toggle -->
+  <string name="ai_controls_translations_title">Wergerandin</string>
+  <!-- Description for the translations AI feature toggle -->
+  <string name="ai_controls_translations_description">Hemû wergerandin li ser cîhaza te nepen dimînin.</string>
+  <!-- Link text to navigate to more translations settings -->
+  <string name="ai_controls_more_translations_settings">Eyarên wergerandinê yên din</string>
+  <!-- Link text to navigate to more page summary settings -->
+  <string name="ai_controls_more_page_summary_settings">Eyarên kurteya rûpelê yên zêdetir</string>
+  <!-- Title for the voice search AI feature toggle -->
+  <string name="ai_controls_voice_search_title">Lêgerîna dengî</string>
+  <!-- Description for the voice search AI feature toggle -->
+  <string name="ai_controls_voice_search_description">Deng ji aliyê Google Speech Service`ê ve li nivîsê tên guhestin.</string>
+  <!-- Title for the block AI enhancements confirmation dialog -->
+  <string name="ai_controls_block_dialog_title">Pêşvebirinên ZÇ asteng bikî?</string>
+  <!-- Body text for the block AI enhancements confirmation dialog. %1$s is the name of the app (for example "Firefox"). -->
+  <string name="ai_controls_block_dialog_body">Tu yê di %1$s`ê de pêşvebirinên ZÇ yên nû yan yên heyî, yan jî pop-upên têkildarî wan nebînî. Paşê, tu dikarî astengiya hemû tiştên dixwazî rakî.\n\nAstengkirin bandorê li ser pêvekên ku sepanên ZÇ yên %1$s`ê bi kar tînin jî dike.</string>
+  <!-- Label shown above the list of features that will be blocked in the block AI dialog -->
+  <string name="ai_controls_block_dialog_what_will_be_blocked">Çi dê bên astengkirin:</string>
+  <!-- Cancel button text in the block AI enhancements confirmation dialog -->
+  <string name="ai_controls_block_dialog_cancel">Betal bike</string>
+  <!-- Block button text in the block AI enhancements confirmation dialog -->
+  <string name="ai_controls_block_dialog_block">Asteng bike</string>
   <!--
     Locale Settings Fragment
 
@@ -306,6 +426,12 @@
     The colon character (in "%s:") is intended to have the screen reader make a small pause between the search engine name and the description of the button.
   -->
   <string name="search_engine_selector_content_description">%s: hilbijêra motora lêgerînê</string>
+  <!-- Text for the snackbar shown to confirm the deletion of a single browsing history item. %1$s is the shortened URL of the deleted history entry or the the actual deleted search term. Only one such item is deleted at a time. -->
+  <string name="search_suggestions_delete_history_item_snackbar">%1$s ji raboriyê hat jêbirin</string>
+  <!-- Content description (not visible, for screen readers etc.): Button shown near a history search result allowing to delete it from browsing history. -->
+  <string name="mozac_browser_awesomebar_remove_suggestion" tools:ignore="UnusedResources">Vê qeydiya raboriyê jê bibe</string>
+  <!-- Button in the app links prompt that keeps the user in the browser instead of opening the external app. %1$s is the name of the app (for example "Firefox"). -->
+  <string name="applinks_prompt_negative_button">Di %1$s`ê de bimîne</string>
   <!--
     Home onboarding
 
@@ -316,8 +442,14 @@
   <string name="onboarding_preferences_dialog_title" tools:ignore="BrandUsage">Alîkariya me bike ku em Firefoxê çêtir bikin</string>
   <!-- Title for the crash reporting option in the privacy preferences dialog shown during onboarding. -->
   <string name="onboarding_preferences_dialog_crash_reporting_title">Raporên têkçûnê bixweber bişîne</string>
+  <!-- Description for the crash reporting option in the privacy preferences dialog shown during onboarding. -->
+  <string name="onboarding_preferences_dialog_crash_reporting_description">Raporên têkçûnê dihêlin ku em pirsgirêkên gerokê teşhîs bikin û çareser bikin. Dibe ku daneyên kesane yan hesas bikevin nav raporan.</string>
   <!-- Learn more link for the crash reporting option in the privacy preferences dialog shown during onboarding. -->
   <string name="onboarding_preferences_dialog_crash_reporting_learn_more_2">Zêdetir bizane</string>
+  <!-- Title for the startup crash page. %s is the name of the app (for example "Firefox") -->
+  <string name="startup_crash_title">%sdivê ji nû ve bê destpêkirin</string>
+  <!-- Body text for the startup crash page. %s is the name of the app (for example "Firefox") -->
+  <string name="startup_crash_body">Di vekirina %s de pirsgirêkek çêbû.\n\nŞandina raporeke têkçûnê ji me re dibe alîkar ku em pirsgirêkên gerokê teşhîs bikin û çareser bikin. Rapor dikarin daneyên kesane an hesas di nav xwe de bigirin.</string>
   <string name="onboarding_preferences_dialog_usage_data_learn_more_2">Zêdetir bizane</string>
   <!-- Positive button label for the privacy preferences dialog shown during onboarding. -->
   <string name="onboarding_preferences_dialog_positive_button">Qediya</string>
@@ -338,12 +470,50 @@
     %1$s is replaced by an active link, using onboarding_redesign_tou_body_two_link_text as text (“Privacy Notice”).
   -->
   <string name="onboarding_redesign_tou_body_two" tools:ignore="BrandUsage,UnusedResources">Firefox girîngiyê dide nepeniya te. Di %1$s-ên me de bêtir fêr bibe.</string>
+  <!-- Used as text for the link in onboarding_redesign_tou_body_three. -->
+  <string name="onboarding_redesign_tou_body_three_link_text" tools:ignore="UnusedResources">Eyaran bi rê ve bibe</string>
+  <!-- Terms of use (ToU) onboarding page continue button label. -->
+  <string name="onboarding_redesign_tou_agree_and_continue_button_label" tools:ignore="UnusedResources">Bidomîne</string>
+  <!-- Onboarding label for 'Continue' button. -->
+  <string name="onboarding_redesign_continue_button" tools:ignore="UnusedResources">Bidomîne</string>
   <!-- Set to default browser onboarding redesign title. -->
   <string name="onboarding_redesign_set_default_browser_title" tools:ignore="UnusedResources">Parastina şopandina otomatîk bi awayê standard bistîne</string>
   <!-- Marketing onboarding page title variant. “One last thing” refers to the final step or action in the onboarding process that we’re asking users to take before they can start using the browser. -->
   <string name="onboarding_marketing_title_1" tools:ignore="UnusedResources">Tiştekî dawî</string>
   <!-- Marketing onboarding page button label variant. Button to confirm choice and start browsing. -->
   <string name="onboarding_marketing_positive_button_1" tools:ignore="UnusedResources">Piştrast bike û dest bi gerê bike</string>
+  <!-- "Continue" onboarding button. -->
+  <string name="nova_onboarding_continue_button">Bidomîne</string>
+  <!-- "Continue browsing" onboarding button. -->
+  <string name="nova_onboarding_continue_browsing_button" tools:ignore="UnusedResources">Gerê bidomîne</string>
+  <!--
+    Terms of use (ToU) onboarding body line two. 'Firefox' is intentionally hardcoded.
+    %1$s is replaced by an active link, using nova_onboarding_tou_body_line_2_link_text as text (“Privacy Notice”).
+  -->
+  <string name="nova_onboarding_tou_body_line_2" tools:ignore="BrandUsage">Firefox girîngiyê dide nepeniya te. Di %1$s’ên me de zêdetir bizane.</string>
+  <!-- Terms of use (ToU) onboarding body line three link text for nova_onboarding_tou_body_line_3. -->
+  <string name="nova_onboarding_tou_body_line_3_link_text">Eyaran bi rê ve bibe</string>
+  <!-- "Set to default" onboarding title. -->
+  <string name="nova_onboarding_set_to_default_title_2">Hemû girêdanên xwe bi nepeniya entegrekirî veke</string>
+  <!-- Marketing onboarding body link text. -->
+  <string name="nova_onboarding_marketing_body_link_text_1">Zêdetir Bizane</string>
+  <!-- "Add search widget" onboarding title. -->
+  <string name="nova_onboarding_add_search_widget_title">Hemû lêgerînan nepentir bike</string>
+  <!-- "Add search widget" onboarding subtitle. 'Firefox' is intentionally hardcoded. -->
+  <string name="nova_onboarding_add_search_widget_subtitle" tools:ignore="BrandUsage">Hemû lêgerînan ji ekrana sereke ya telefona xwe bide destpêkirin û bizane ku parastinên otomatîkî yên Firefoxê li pişta te ne.</string>
+  <!-- Customize prompt onboarding title. -->
+  <string name="nova_onboarding_customize_prompt_title" tools:ignore="UnusedResources">Şexsîkirina wê hêsan e û bi her tikandinê re nepentir e</string>
+  <plurals name="nova_onboarding_customize_prompt_body" tools:ignore="UnusedResources">
+    <!--
+      Customize prompt onboarding body.
+      %1$s is replaced by the product name (for example "Firefox"),
+      %2$,d is replaced by the number of trackers blocked. The comma represents the thousand
+      separator (e.g. 1,000 in English), and it will automatically use the correct character
+      for your locale (don't change or remove it).
+    -->
+    <item quantity="one">Dema tu di webê de digeriyayî %1$s`ê şopînerek asteng kir.</item>
+    <item quantity="other">Dema tu di webê de digeriyayî %1$s`ê %2$,d şopîner asteng kirin.</item>
+  </plurals>
   <!--
     Widget Picker
 
@@ -362,6 +532,14 @@
   <string name="search_widget_text_long">Di web’ê de bigere</string>
   <!-- Content description (not visible, for screen readers etc.): Voice search -->
   <string name="search_widget_voice">Lêgerîna dengî</string>
+  <!-- Content description (not visible, for screen readers etc.): Button in the search widget that starts a search in a private tab -->
+  <string name="search_widget_private_search">Lêgerîna nepenî</string>
+  <!-- Widget description in the widget picker screen for the search bar widget that includes buttons for private search and for voice search -->
+  <string name="search_bar_widget_description">Darikê lêgerînê yê bi lêgerîna nepenî û dengî</string>
+  <!-- Widget description in the widget picker screen for the search bar widget that includes buttons for image search, private search and voice search -->
+  <string name="search_bar_with_lens_widget_description">Darikê lêgerînê bi wêne, nepen û dengî</string>
+  <!-- Widget description in the widget picker screen for the compact search bar widget -->
+  <string name="compact_search_bar_widget_description">Darikê lêgerînê yê kompakt</string>
   <!--
     Preferences
 
@@ -372,6 +550,12 @@
   <string name="preferences_category_general">Giştî</string>
   <!-- Preference category for all links about Fenix -->
   <string name="preferences_category_about">Derbar</string>
+  <!-- Preference category for settings related to changing the default search engine -->
+  <string name="preferences_category_select_default_search_engine_2">Motora lêgerînê ya satndard ji bo gera normal</string>
+  <!-- Preference category for settings related to changing the private browsing search engine -->
+  <string name="preferences_category_select_private_search_engine">Motora lêgerînê ya gera nepen</string>
+  <!-- Option to set the private browsing mode to use the normal default search engine -->
+  <string name="search_engine_use_default">Heman motora lêgerînê ya wekî gera normal bi kar bîne</string>
   <!-- Preference for settings related to managing search shortcuts for the quick search menu -->
   <string name="preferences_manage_search_shortcuts_2">Motorên lêgerînê yên alternatîv birêve bibin</string>
   <!-- Summary for preference for settings related to managing search shortcuts for the quick search menu -->
@@ -473,6 +657,8 @@
   <string name="preferences_show_search_suggestions_in_private">Di rûniştinên veşartî de nîşan bide</string>
   <!-- Preference title for switch preference to show trending search suggestions -->
   <string name="preferences_show_trending_search_suggestions">Pêşniyarên rojevî nîşan bide</string>
+  <!-- Preference title for switch preference to show recent search suggestions -->
+  <string name="preferences_show_recent_search_suggestions">Lêgerînên borî bibîne</string>
   <!-- Preference title for switch preference to show a clipboard suggestion when searching -->
   <string name="preferences_show_clipboard_suggestions">Pêşniyarên panoyê nîşan bide</string>
   <!-- Preference title for switch preference to suggest browsing history when searching -->
@@ -487,6 +673,10 @@
   <string name="preferences_enable_autocomplete_urls">Navnîşanan bixweber dagire</string>
   <!-- Preference title for switch preference to show sponsored Firefox Suggest search suggestions -->
   <string name="preferences_show_sponsored_suggestions">Pêşniyarên ji sponsoran</string>
+  <!-- Summary for preference to show Firefox Suggest search suggestions for web content -->
+  <string name="preferences_show_nonsponsored_suggestions_summary">Ji webê pşniyarên têkildarî lêgerîna xwe bistîne</string>
+  <!-- Snackbar action label shown when user shares a link -->
+  <string name="link_shared_snackbar_action">Eyaran bi rê ve bibe</string>
   <!-- Preference for open links in third party apps -->
   <string name="preferences_open_links_in_apps">Girêdanan di sepanan de veke</string>
   <!-- Preference for open links in third party apps always open in apps option -->
@@ -497,6 +687,8 @@
   <string name="preferences_open_links_in_apps_never">Ti caran</string>
   <!-- Preference title for choosing an app to handle downloads -->
   <string name="preferences_choose_app_for_downloads">Jêbarkirinan bi sepaneke din bi rê ve bibe</string>
+  <!-- Preference for downloads -->
+  <string name="preferences_downloads_2">Eyarên Jêbarkirinê</string>
   <!-- Preference for extensions -->
   <string name="preferences_extensions">Pêvek</string>
   <!-- Preference for notifications -->
@@ -515,6 +707,8 @@
   <string name="customize_addon_collection_hint">Navê koleksiyonê</string>
   <!-- Hint displayed on input field for custom collection user ID -->
   <string name="customize_addon_collection_user_hint">Xwediyê koleksiyonê (nasnameya bikarhêner)</string>
+  <!-- Title for a customize home screen section. Continue is a section that displays the most recent browser tab, so users can continue browsing where they left off. -->
+  <string name="customize_toggle_continue">Bidomîne</string>
   <!-- Title for the customize home screen section with bookmarks. -->
   <string name="customize_toggle_bookmarks">Favorî</string>
   <!--
@@ -528,6 +722,8 @@
   <string name="customize_toggle_pocket_sponsored">Nûçeyên sponsorkirî</string>
   <!-- Title for the opening wallpaper settings screen -->
   <string name="customize_wallpapers">Wêneyên dîwêr</string>
+  <!-- Label for the menu item that opens the customize homepage settings screen. -->
+  <string name="browser_menu_customize_homepage">Serrûpelê taybet bike</string>
   <!-- Title for the customize home screen section with sponsored shortcuts. -->
   <string name="customize_toggle_contile">Kurteriyên bi sponsor</string>
   <!--
@@ -600,8 +796,12 @@
   <string name="alternative_app_icon_option_momo">Momo</string>
   <!-- Subtitle for the "Momo" themed alternative app icon variant in the icon picker screen. The app icon was created by artist @heyheymomodraws and features a unique hand-drawn style with a friendly fox. -->
   <string name="alternative_app_icon_option_momo_subtitle">Ji hêla @heyheymomodraws ve hatiye afirandin</string>
+  <!-- Message to warn users that applying an alternative app icon may require an app restart and will remove existing shortcuts because of the OS limitations. Whether or not the app closes depends on what version of Android it is, so we use the word "may" instead of "will". %1$s is replaced by the brand name (e.g. Firefox). -->
+  <string name="restart_and_shortcuts_removal_warning_dialog_body">Guhertina îkonê dê hemû malper û kurtebirên ku te li ser ekrana xwe ya sereke tomar kirine jê bibe. \n\nDibe ku %1$s bê girtin. Ji bo ji nû ve vekî, îkona xwe ya nû bikirtîne.</string>
   <!-- Dialog button text for cancelling app icon change -->
   <string name="restart_warning_dialog_button_negative">Betal</string>
+  <!-- Error message snackbar shown after the user tried to apply the new icon but the Android OS threw an error while updating existing app shortcuts (e.g. private mode shortcut) -->
+  <string name="shortcuts_update_error">Nûvekirina îkona sepanê bi ser neket. Kurtebirên heyî jê bibe û dîsa biceribîne.</string>
   <!--
     Add-ons general availability nimbus message
 
@@ -698,6 +898,13 @@
   <string name="exceptions_empty_message_description">Istisna dihêlin ku tu bikaribî ji bo malperên hilbijartî parastina ji şopandinê bigirî.</string>
   <!-- Text displayed when there are no exceptions, with learn more link that brings users to a tracking protection SUMO page -->
   <string name="exceptions_empty_message_learn_more_link">Zêdetir bizane</string>
+  <!-- Preference switch for usage and technical learn more link in new compose -->
+  <string name="preference_usage_data_learn_more_2">Derbarê daneyên teknîkî de zêdetir bizane</string>
+  <string name="preferences_daily_usage_ping_learn_more">Derbarê pinga bikarnîna rojane de zêdetir bizane</string>
+  <!-- Text for sumo link to learn more about crash reports in data collection screen -->
+  <string name="preferences_crashes_learn_more">Derbarê raporên têkçûnê de zêdetir bizane</string>
+  <!-- Learn more link for marketing data preference -->
+  <string name="preferences_marketing_data_learn_more">Derbarên daneyên bazirganiyê de zêdetir bizane</string>
   <!-- Title for studies preferences -->
   <string name="preference_experiments_2">Lêkolîn</string>
   <!-- Summary for studies preferences -->
@@ -740,6 +947,8 @@
   <string name="preference_gestures_website_pull_to_refresh">Ji bo nûkirinê bikişîne</string>
   <!-- Preference for using the dynamic toolbar -->
   <string name="preference_gestures_dynamic_toolbar">Ji bo darikê amûran veşêrî, bişemitîne</string>
+  <!-- Preference for switching for the shake to summarize toggle in page summaries and customize settings -->
+  <string name="preferences_shake_to_summarize">Ji bo çêkirina kurteyê, bihejîne</string>
   <!--
     Library
 
@@ -862,10 +1071,22 @@
   <string name="studies_active">Çalak</string>
   <!-- Learn more link for studies, links to an article for more information about studies. -->
   <string name="studies_learn_more">Zêdetir bizane</string>
+  <!--
+    Remote Improvements (Rollouts)
+
+    Title of the Remote Improvements (rollouts) data preference
+  -->
+  <string name="remote_improvements_title">Destûrê bide başkirinên ji dûr ve</string>
+  <!-- Learn more link for remote improvements, links to an article for more information about rollouts. -->
+  <string name="remote_improvements_learn_more">Zêdetir bizane</string>
+  <!-- Title for remote improvements preference in Advanced settings -->
+  <string name="preferences_remote_improvements">Başkirinên ji dûr ve</string>
   <!-- Content description (not visible, for screen readers etc.): Add tab button. Adds a news tab when pressed -->
   <string name="add_tab">Hilpekînê tevlî bike</string>
   <!-- Content description (not visible, for screen readers etc.): Add tab button. Adds a news tab when pressed -->
   <string name="add_private_tab">Hilpekîna veşartî tevlî bike</string>
+  <!-- Text for the tab search bar placeholder -->
+  <string name="tab_manager_search_bar_placeholder">Li hilpekînên xwe bigere</string>
   <!-- Text shown in the menu to view recently closed tabs -->
   <string name="tab_tray_menu_recently_closed">Hilpekînên herî dawî hatine girtin</string>
   <!-- Text shown in the menu to view account settings -->
@@ -880,6 +1101,8 @@
   <string name="remove_tab_from_collection">Hilpekînê ji koleksiyê rake</string>
   <!-- Text for button to enter multiselect mode in tabs tray -->
   <string name="tabs_tray_select_tabs">Hilpekînan hilbijêre</string>
+  <!-- Additional text for tab manager search page when there are no results. -->
+  <string name="tab_manager_no_search_results_additional_text">Lêgerîneke din bi kar bîne!</string>
   <!-- Content description (not visible, for screen readers etc.): Close tab button. Closes the current session when pressed -->
   <string name="close_tab">Hilpekînê bigire</string>
   <!-- Content description (not visible, for screen readers etc.): Close tab <title> button. %s is the tab title -->
@@ -902,6 +1125,8 @@
   <string name="delete_from_history">Ji raboriyê rake</string>
   <!-- Postfix for private WebApp titles. %1$s is the name of the app (for example "Firefox"). -->
   <string name="pwa_site_controls_title_private">%1$s (Moda Veşartî)</string>
+  <!-- Content description (not visible, for screen readers etc.) for the button to open the Tab Search feature to search through tabs. -->
+  <string name="tab_manager_open_tab_search">Lêgerîna hilpekînan veke</string>
   <!--
     History
 
@@ -938,6 +1163,8 @@
   <string name="download_delete_item">Jê bibe</string>
   <!-- Content description for the toolbar "Navigate to Downloads Settings" button -->
   <string name="download_navigate_settings_description">Here Sazkariyên Jêbarkirinan</string>
+  <!-- Content description for the toolbar back button while searching the downloads -->
+  <string name="download_close_search_description">Vegere û lêgerînê bigire</string>
   <string name="download_clear_search_description">Paqij bike</string>
   <!-- Text for the button to share the download URL -->
   <string name="download_share_url">URL`ê parve bike</string>
@@ -979,6 +1206,8 @@
   <string name="download_content_type_filter_document">Belge</string>
   <!-- Text for the filter button to show all other file types in the downloads list -->
   <string name="download_content_type_filter_other_1">Yên din</string>
+  <!-- The button text for navigating to the SUMO link to learn more about reporting a broken site. -->
+  <string name="webcompat_reporter_learn_more">Zêdetir bizane</string>
   <!-- The text field label of the URL text field. This is displayed above the user-inputted URL. -->
   <string name="webcompat_reporter_label_url">URL</string>
   <!-- The error message of the URL text field when an invalid URL has been entered. -->
@@ -1003,6 +1232,9 @@
   <string name="unsubmitted_crash_dialog_negative_button">Bigire</string>
   <!-- Unsubmitted crash dialog positive button to submit crash report -->
   <string name="unsubmitted_crash_dialog_positive_button">Rapora qezayê bişîne</string>
+  <string name="unsubmitted_crash_dialog_learn_more">Zêdetir bizane</string>
+  <!-- Unsubmitted crash dialog button to open a web page with more details on the feature and privacy policy -->
+  <string name="unsubmitted_crash_requested_by_devs_learn_more">Zêdetir Bizane</string>
   <!--
     Bookmarks
 
@@ -1071,10 +1303,14 @@
   <string name="bookmark_delete_folder_content_description">Peldankê hilbijêre</string>
   <!-- Content description for bookmark search floating action button -->
   <string name="bookmark_search_button_content_description">Li favoriyan bigere</string>
+  <!-- Content description for select folder screen search action button ("search" is a verb) -->
+  <string name="select_bookmark_search_button_content_description">Peldankên lêgerînê</string>
   <!-- Title for the bookmark list empty state -->
   <string name="bookmark_empty_list_title">Hê favorî nîn in</string>
   <!-- Description for the bookmark list empty state when you're in an empty folder. -->
   <string name="bookmark_empty_list_folder_description">Malperan di dema vekirinê de têxe favoriyan da dikaribî paşê xwe bigihînî wan.</string>
+  <!-- Additional text for bookmark search page when there are no results. -->
+  <string name="bookmark_no_search_results_additional_text">Lêgerîneke din bi kar bîne!</string>
   <!--
     Site Permissions
 
@@ -1155,6 +1391,10 @@
   <string name="studies_on">Vekirî</string>
   <!-- Summary of studies data on quit preference if it is set to off -->
   <string name="studies_off">Girtî</string>
+  <!-- Category header of a preference that allows a user to alter settings related to web content. -->
+  <string name="preferences_category_content">Naverok</string>
+  <!-- Preference for altering the default browsing mode. When enabled, the desktop site will always be requested. -->
+  <string name="preference_feature_desktop_mode_default">Her tim malpera sermaseyê bixwaze</string>
   <!--
     Collections
 
@@ -1268,6 +1508,8 @@
     The app name is in the text, due to limitations with localizing Nimbus experiments
   -->
   <string name="nimbus_notification_default_browser_text" tools:ignore="BrandUsage,UnusedResources">Firefoxê bike geroka xwe ya standard</string>
+  <!-- Description of the weekly privacy report notification channel. Displayed in the "App notifications" system settings for the app. %1$s is the app name (e.g. Firefox) -->
+  <string name="notification_privacy_report_channel_description">%1$s nîşan dide ka dema tu di webê de digeriyayî çend şopîner asteng kirine.</string>
   <!--
     Survey
 
@@ -1419,6 +1661,15 @@
   <string name="preference_enhanced_tracking_protection_explanation_2">%s te li hemberî piraniya şopgerên naskirî yên tevgerên te yên li ser înternetê dişopînin, diparêze.</string>
   <!-- Text displayed that links to website about enhanced tracking protection -->
   <string name="preference_enhanced_tracking_protection_explanation_learn_more">Zêdetir bizane</string>
+  <plurals name="trackers_blocked_count_2">
+    <!--
+      Trackers blocked card on homepage
+
+      Text shown on the trackers blocked card. %d is the number of trackers blocked.
+    -->
+    <item quantity="one">Şopînerek (%d) hate astengkirin</item>
+    <item quantity="other">%d şopîner hatin astengkirin</item>
+  </plurals>
   <!-- Preference for enhanced tracking protection for the standard protection settings -->
   <string name="preference_enhanced_tracking_protection_standard_default_1">Standard (heyî)</string>
   <!-- Preference description for enhanced tracking protection for the standard protection settings -->
@@ -1429,6 +1680,8 @@
   <string name="preference_enhanced_tracking_protection_strict">Tund</string>
   <!-- Preference description for enhanced tracking protection for the strict protection settings -->
   <string name="preference_enhanced_tracking_protection_strict_description_4">Parastina ji şopandinê ya bihêztir û performansa zûtir, lê dibe ku hin malper birêkûpêk nexebitin.</string>
+  <!-- Learn more text for the enhanced tracking protection options to fix issues caused by tracker blocking -->
+  <string name="preference_enhanced_tracking_protection_allow_list_learn_more">Zêdetir bizane</string>
   <!-- Accessibility text for the Strict protection information icon -->
   <string name="preference_enhanced_tracking_protection_strict_info_button">Bi parastina ji şopandinê ya tund çi tên astengkirin?</string>
   <!-- Preference for enhanced tracking protection for the custom protection settings -->
@@ -1514,8 +1767,16 @@
   <string name="preference_doh_title">DNS li ser HTTPS</string>
   <!-- Description of the preference to enable "DNS over HTTPS". %1$s is replaced by a link using `preference_doh_learn_more` at text ("Learn More"). -->
   <string name="preference_doh_summary">Sîstema Navê Domainê (DNS) li ser HTTPS daxwaza te ya ji bo navekî domainê bi rêya girêdaneke şîfrekirî dişîne, DNS-ek ewle peyda dike û ji bo yên din zehmettir dike ku bibînin tu yê têkevî kîjan malperê. %1$s</string>
+  <!-- Used as text for the link in `preference_doh_title`, points to documentation about "DNS over HTTPS" -->
+  <string name="preference_doh_learn_more">Zêdetir bizane</string>
   <!-- Title displayed for "Default Protection" option under "DNS over HTTPS" -->
   <string name="preference_doh_default_protection">Parastina Standard</string>
+  <!-- Bullet point 2 for "Default Protection" information page under "DNS over HTTPS" -->
+  <string name="preference_doh_default_protection_info_2">Heke pirsgirêkek bi pêşkêşkara te ya DNS ya ewle re çêbe, çareserkera DNS ya standard tê bikaranîn</string>
+  <!-- Bullet point 2 for "Increased Protection" information page under "DNS over HTTPS" -->
+  <string name="preference_doh_increased_protection_info_2">Tenê heke bi DNSa ewle re problemek hebe, DNSa standard bi kar bîne</string>
+  <!-- Summary displayed for "Off" option under "DNS over HTTPS" -->
+  <string name="preference_doh_off_summary">Çareserkara DNSa xwe ya ewle bi kar bîne</string>
   <!-- About page link text to open support link -->
   <string name="about_support">Piştgirî</string>
   <!-- About page link text to list of past crashes (like about:crashes on desktop) -->
@@ -1582,6 +1843,8 @@
   <string name="preferences_passwords_exceptions">Istisna</string>
   <!-- Text on button to remove all saved login exceptions -->
   <string name="preferences_passwords_exceptions_remove_all">Hemû istisnayan jê bibe</string>
+  <!-- Hint for search box in passwords list -->
+  <string name="preferences_passwords_saved_logins_search_2">Li şîfreyan bigere</string>
   <!-- The header for the site that a login is for -->
   <string name="preferences_passwords_saved_logins_site">Malper</string>
   <!-- The header for the username for a login -->
@@ -1602,6 +1865,8 @@
   <string name="saved_login_clear_username">Navê bikarhêner paqij bike</string>
   <!-- Content Description (for screenreaders etc) read for the button to clear the hostname field while creating a login -->
   <string name="saved_login_clear_hostname">Hewangehê paqiij bike</string>
+  <!-- Content description, used by tools like screenreaders, to press on the clear search text button. -->
+  <string name="saved_logins_clear_search_text_button_content_description">Nivîsa lêgerînê jê bibe</string>
   <!-- Content Description (for screenreaders etc) read for the button to open a site in logins -->
   <string name="saved_login_open_site">Malperê di gerokê de veke</string>
   <!-- Content Description (for screenreaders etc) read for the button to reveal a password in logins -->
@@ -1622,6 +1887,44 @@
   <string name="saved_logins_sort_strategy_alphabetically">Nav (A-Z)</string>
   <!-- Saved logins sorting strategy menu item -by last used- (if selected, it will sort saved logins by last used) -->
   <string name="saved_logins_sort_strategy_last_used">Bikaranîna dawî</string>
+  <!-- Text that links to additional information about the Email Masks -->
+  <string name="preferences_email_masks_suggest_learn_more">Zêdetir bizane</string>
+  <!--
+    Firefox browser VPN (a browser-only proxy, distinct from the Mozilla VPN service)
+
+    Title for the browser VPN entry in the settings list
+  -->
+  <string name="preferences_ip_protection_title_2">VPNa entegrekirî</string>
+  <!-- Title for the browser VPN settings screen (displayed in the app bar) -->
+  <string name="ip_protection_settings_title">VPNa entegrekirî</string>
+  <!-- Headline for the browser VPN promo card. %s is the name of the app (for example "Firefox"). -->
+  <string name="ip_protection_promo_headline">VPNa entegrekirî ya %s’ê</string>
+  <!-- Body text for the browser VPN settings header, shown when no promo is running. %s is a learn more link using ip_protection_learn_more as text. -->
+  <string name="ip_protection_promo_body_2">Bi veşartina cîgeha xwe bi parastina zêde bigere, her wisa di torên Wi-Fiyê yên giştî de jî. %s</string>
+  <!-- Link text that opens additional information about the browser VPN -->
+  <string name="ip_protection_learn_more">Zêdetir bizane</string>
+  <!-- Badge label shown in the VPN menu item when the user is eligible for the feature but needs to authenticate / authorize to enable it -->
+  <string name="ip_protection_menu_try_vpn_cta">Belaş biceribîne</string>
+  <!-- Content description for the chevron button that opens the browser VPN settings screen -->
+  <string name="ip_protection_navigate_settings">Eyarên VPNê veke</string>
+  <!-- Label for the button that starts the browser VPN authentication or authorization flow on the settings screen -->
+  <string name="ip_protection_get_started">Dest pê bike</string>
+  <!-- Headline for the browser VPN onboarding card. %s is the name of the app (for example "Firefox"). -->
+  <string name="ip_protection_onboarding_card_headline">VPNa entegrekirî ya %s’ê bi kar bîne</string>
+  <!-- Used as text for a link in ip_protection_onboarding_body. Make sure to adapt capitalization if the link is in the middle of the sentence. -->
+  <string name="ip_protection_onboarding_body_link">Bi parastina zêdek bigere</string>
+  <!--
+    The body of the VPN onboarding card for a promotion that provides unlimited data bandwidth for a certain time.
+    %1$s is a localized date (for example "Jun 9") indicating the end of the promotional period.
+    %2$s is a link using ip_protection_onboarding_body_link_promo (“Learn more”) as text. It links to a support article about VPN on Firefox.
+  -->
+  <string name="ip_protection_onboarding_body_promo">Ji bo ku geroka te nepentir û şopandina wê zehmettir bibe, vê çalak bike. Niha biceribîne da ku heta %1$s rêjeya bantê bêsînor bi kar bînî. %2$s</string>
+  <!-- Used as text for a link in ip_protection_onboarding_body. Make sure to adapt capitalization if the link is in the middle of the sentence. -->
+  <string name="ip_protection_onboarding_body_link_promo">Zêdetir bizane</string>
+  <!-- Snackbar (in-app pop-up notification) action button text that takes the user to the VPN settings screen. -->
+  <string name="ip_protection_open_settings_snackbar_action">Eyar</string>
+  <!-- Description shown on the browser VPN settings screen prompting the user to turn the VPN on. -->
+  <string name="ip_protection_settings_description" tools:ignore="UnusedResources">Ji bo ku geroka te nepentir û şopandina wê zehmettir bibe, VPNê çalak bike.</string>
   <!--
     Autofill
 
@@ -1732,10 +2035,20 @@
   <string name="search_add_custom_engine_name_label">Nav</string>
   <!-- Placeholder text shown in the Search Engine Name text field before a user enters text -->
   <string name="search_add_custom_engine_name_hint_2">Navê motora lêgerînê</string>
+  <!-- Label for the TextField in which user enters custom search engine URL -->
+  <string name="search_add_custom_engine_url_label">URLa rêza lêgerînê</string>
+  <!-- Placeholder text shown in the Search String TextField before a user enters text -->
+  <string name="search_add_custom_engine_search_string_hint_2">URLa ji bo lêgerînê bê bikaranîn</string>
   <!-- Description text for the Search String TextField. The %s is part of the string -->
   <string name="search_add_custom_engine_search_string_example" formatted="false">Lêpirsînê bi “%s”ê pev biguherîne. Mînak:\nhttps://www.google.com/search?q=%s</string>
   <!-- Accessibility description for the form in which details about the custom search engine are entered -->
   <string name="search_add_custom_engine_form_description">Hûrgiliyên motora lêgerînê ya taybet</string>
+  <!-- Label for the TextField in which user enters custom search engine suggestion URL -->
+  <string name="search_add_custom_engine_suggest_url_label">APIya pêşniyara lêgerînê (vebijarkî)</string>
+  <!-- Placeholder text shown in the Search Suggestion String TextField before a user enters text -->
+  <string name="search_add_custom_engine_suggest_string_hint">URLa APIya pêşniyara lêgerînê</string>
+  <!-- Description text for the Search Suggestion String TextField. The %s is part of the string -->
+  <string name="search_add_custom_engine_suggest_string_example_2" formatted="false">Lêpirsînê bi “%s” biguherîne. Mînak:\nhttps://suggestqueries.google.com/complete/search?client=firefox&amp;q=%s</string>
   <!-- The text for the "Save" button for saving a custom search engine -->
   <string name="search_custom_engine_save_button">Qeyd bike</string>
   <!-- Text shown when a user leaves the name field empty -->
@@ -1806,6 +2119,19 @@
   <string name="synced_tabs_expand_group">Koma hilpekînan ya senkronîzekirî berfireh bike</string>
   <!-- Content description for collapsing a group of synced tabs. -->
   <string name="synced_tabs_collapse_group">Koma hilpekînan ya senkronîzekirî berteng bike</string>
+  <!--
+    Top Sites
+
+    Title text displayed for the shortcuts home screen section.
+  -->
+  <string name="homepage_shortcuts_title">Kurtebir</string>
+  <!--
+    Context description text for the "Show all" button in the shortcuts home screen section
+    which navigates the user to a screen displaying all the shortcuts.
+  -->
+  <string name="homepage_shortcuts_show_all_content_description">Hemû kurtebiran nîşan bide</string>
+  <!-- Label for the "Add shortcut" button displayed as a tile. -->
+  <string name="homepage_shortcuts_add_shortcut">Kurtebirê lê zêde bike</string>
   <!-- Title text displayed in the dialog when shortcuts limit is reached. -->
   <string name="shortcut_max_limit_title">Tu gihîştî sînorê kurteriyan</string>
   <!-- Content description text displayed in the dialog when shortcut limit is reached. -->
@@ -1860,6 +2186,14 @@
   <string name="google_search_engine_suggestion_header">Lêgerîna Googleê</string>
   <!-- Title for search suggestions when the default search suggestion engine is anything other than Google. %s is default search engine name. -->
   <string name="other_default_search_engine_suggestion_header">Lêgerîna %sê</string>
+  <!-- Title for recent search suggestions. -->
+  <string name="recent_searches_header">Lêgerînên borî</string>
+  <!--
+    Default browser experiment
+
+    Default browser card title
+  -->
+  <string name="default_browser_experiment_card_title">Geroka xwe ya standard biguherîne</string>
   <!-- Default browser card text -->
   <string name="default_browser_experiment_card_text" tools:ignore="BrandUsage">Bila lînkên ji malperan, e-posteyan û peyaman xweber di Firefoxê de bên vekirin.</string>
   <!-- Content description radio buttons with a link to more information -->
@@ -1981,6 +2315,8 @@
   <string name="translation_settings_automatic_never_translate_sites">Van rûpelan qet wernegerîne</string>
   <!-- Button text for the button that will take the user to the download languages dialog. On the download languages dialog, the user can manage which languages they would like to download for translations. -->
   <string name="translation_settings_download_language">Zimanan jêbar bike</string>
+  <!-- Clickable text for the translations settings item that links to a website. -->
+  <string name="translation_settings_control_learn_more">Zêdetir bizane</string>
   <!--
     Automatic translation preference screen
 
@@ -2118,6 +2454,39 @@
   <string name="download_language_file_dialog_positive_button_text_all_languages">Jêbar bike û wergerîne</string>
   <!-- Button text on the data saving mode warning dialog used by the translations feature to allow users to cancel the action and not perform a download of the language file. -->
   <string name="download_language_file_dialog_negative_button_text">Betal bike</string>
+  <plurals name="protection_panel_banner_protected_blocked_trackers_description">
+    <!--
+      Description text for the protection panel banner when privacy dashboard is enabled.
+      %1$d is the number of trackers blocked.
+    -->
+    <item quantity="one">Şopînerek li ser vê malperê hate astengkirin.</item>
+    <item quantity="other">%1$d şopîner li ser vê malperê hatine astengkirin.</item>
+  </plurals>
+  <!--
+    Text for displaying the total number of trackers blocked in the protection panel.
+    %d is a placeholder for the number of trackers blocked.
+  -->
+  <string name="protection_panel_num_trackers_blocked">Şopînerên hatine astengkirin: %d</string>
+  <!-- Text for when tracking protection is disabled and no trackers are blocked. -->
+  <string name="protection_panel_etp_disabled_no_trackers_blocked">Şopînerên nehatine astengkirin</string>
+  <!-- Link text to navigate to privacy and security settings from the protection panel. -->
+  <string name="protection_panel_privacy_and_security_settings_2">Eyarên Nepeniyê</string>
+  <plurals name="trackers_blocked_panel_total_num_trackers_blocked_2">
+    <!--
+      Text for displaying the total number of trackers blocked in the trackers blocked panel.
+      %1$d is a placeholder for the number of trackers blocked.
+    -->
+    <item quantity="one">Şopînerek li ser vê malperê hate astengkirin</item>
+    <item quantity="other">%1$d şopîner li ser vê malperê hatine astengkirin</item>
+  </plurals>
+  <plurals name="trackers_blocked_panel_num_trackers_blocked_this_week_2">
+    <!--
+      Text for displaying the number of trackers blocked this week in the trackers blocked panel.
+      %1$d is a placeholder for the number of trackers blocked this week.
+    -->
+    <item quantity="one">Şopînerek vê hefteyê hate astengkirin</item>
+    <item quantity="other">%1$d şopîner vê hefteyê hatin astengkirin</item>
+  </plurals>
   <!--
     Description text for a dialog confirming whether the user wants to delete all data for current site.
     %s is a placeholder for the base domain of website.
@@ -2146,9 +2515,81 @@
   <!-- The inactive tab count category in the tab count section in Tab Tools. -->
   <string name="debug_drawer_tab_tools_tab_count_inactive">Neçalak</string>
   <!--
+    Microsurvey
+    Note: Some strings are marked as unused as they are referenced via the Nimbus experimentation
+    platform and have no persistent reference in code
+
+    Prompt view
+
+    The microsurvey prompt title. Note: The word "Firefox" should NOT be translated
+  -->
+  <string name="micro_survey_prompt_title" tools:ignore="BrandUsage,UnusedResources">Alîkariya me bike ku em Firefoxê çêtir bikin. Tenê deqeyekê digire.</string>
+  <!-- The continue button label -->
+  <string name="micro_survey_continue_button_label" tools:ignore="UnusedResources">Bidomîne</string>
+  <!-- Option for likert scale. Note: The word "Firefox" should NOT be translated. -->
+  <string name="likert_scale_option_7" tools:ignore="BrandUsage,UnusedResources">Ez li ser Firefoxê lêgerînê bi kar naynim</string>
+  <!-- Text shown in prompt for printing microsurvey. "sec" It's an abbreviation for "second". Note: The word "Firefox" should NOT be translated. -->
+  <string name="microsurvey_prompt_printing_title" tools:ignore="BrandUsage,UnusedResources">Alîkariya me bike ku em çapkirina di Firefoxê de çêtir bikin. Tenê deqeyekê digire</string>
+  <!-- Text shown in prompt for search microsurvey. Note: The word "Firefox" should NOT be translated. -->
+  <string name="microsurvey_prompt_search_title" tools:ignore="BrandUsage,UnusedResources">Alîkariyê bike da ku lêgerîn di Firefoxê de baştir bibe. Tenê deqeyekê digire</string>
+  <!-- Text shown in prompt for sync microsurvey. Note: The word "Firefox" should NOT be translated. -->
+  <string name="microsurvey_prompt_sync_title" tools:ignore="BrandUsage,UnusedResources">Alîkariya me bike ku em syncê di Firefoxê de çêtir bikin. Tenê deqeyekê digire</string>
+  <!-- Text shown in the survey title for search experience microsurvey. Note: The word "Firefox" should NOT be translated. -->
+  <string name="microsurvey_search_title" tools:ignore="BrandUsage,UnusedResources">Tu ji ezmûna lêgerîna di Firefox de çiqas razî yî?</string>
+  <!--
     Beta Label Component !
 
     Text shown as a label or tag to indicate a feature or area is still undergoing active development. Note that here "Beta" should not be translated, as it is used as an icon styled element.
   -->
   <string name="beta_feature">BETA</string>
+  <!-- The title of the search widget task for the setup checklist -->
+  <string name="setup_checklist_task_search_widget_2">Widgeta lêgerînê keşf bike</string>
+  <!-- The title of the 'customize' group in the setup checklist. %1$s is the name of the app (for example "Firefox"). -->
+  <string name="setup_checklist_group_customize">%1$sa xwe taybet bike</string>
+  <!--
+    Settings Search Strings
+
+    Title of Settings Search. "Search" is a verb here
+  -->
+  <string name="settings_search_title">Eyarên lêgerînê</string>
+  <!-- Content description (not visible, for screen readers etc.) for the button to clear the search field for settings search -->
+  <string name="content_description_settings_search_clear_search">Lêgerînê Paqij Bike</string>
+  <!-- Message displayed when the search field in the Settings Search screen is empty -->
+  <string name="settings_search_empty_query_placeholder">Lêgerînên dawiyê nîn in</string>
+  <!-- Section header for recent search results -->
+  <string name="settings_search_recent_searches_section_header">Encamên lêgerînên dawiyê</string>
+  <!-- Sub-message displayed when the search field is not empty but search results is empty. -->
+  <string name="settings_search_no_results_message">Dibe ku lêgerîneke cuda biceribînî?</string>
+  <!-- Content Description for the button to open Settings Search (to search through settings). -->
+  <string name="settings_search_button_content_description">Bişkoka lêgerîna eyaran</string>
+  <!-- Learn more link in the pop up prompt message that links to a site with more information about the terms of use -->
+  <string name="terms_of_use_prompt_link_learn_more">Zêdetir bizane</string>
+  <!--
+    Copy for the Terms of Use popup prompt body line two.
+    %1$s is the string terms_of_use_prompt_body_line_two_alternative_link ("here") that is a link to the Terms of Use
+  -->
+  <string name="terms_of_use_prompt_body_line_two_alternative" tools:ignore="UnusedResources">Agahiyên zêdetir %1$s.</string>
+  <!-- The second active link used in privacy_notice_updated_homepage_message -->
+  <string name="privacy_notice_updated_homepage_message_learn_more" tools:ignore="UnusedResources">Zêdetir bizane</string>
+  <!-- Lens image search button content description -->
+  <string name="lens_search_content_description">Bi wêneyan bigere</string>
+  <!-- Image context menu entry that sends the long-pressed image to Google Lens -->
+  <string name="context_menu_open_image_with_google_lens">Bi Google Lens bigere</string>
+  <!-- Title for the Google Lens Search Settings page feature toggle -->
+  <string name="search_settings_google_lens_title">Lêgerîna Google Lens çalak bike</string>
+  <!-- Description for the Google Lens Search Settings page feature toggle -->
+  <string name="search_settings_google_lens_description">Ji bo lêgerîna dîtbarî rism û wêneyan ji Googleê re dişîne.</string>
+  <!-- Caption shown under the Google Lens toggle clarifying when the feature is available -->
+  <string name="preferences_google_lens_availability_caption">Berdest e, tenê heke Google li jorê hatibe çalakkirin û wekî geroka te ya standard hatibe eyarkirin.</string>
+  <!-- Text of the link in the first-run Google Lens bottom sheet that opens the Search settings page -->
+  <string name="lens_opt_out_settings_link">Eyarên Google Lensê</string>
+  <!--
+    Firefox Labs
+
+    Firefox Labs is the name of a screen in Settings to allow users to learn about
+    experimental and in-development features, and turn those features on and off.
+    The "Labs" portion can be localized, "Firefox" must be treated as a brand and kept
+    in English.
+  -->
+  <string name="firefox_labs_title" tools:ignore="BrandUsage">Firefox Labs</string>
 </resources>

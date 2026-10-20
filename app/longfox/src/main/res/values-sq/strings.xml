@@ -9,4 +9,6 @@
 <resources>
   <!-- %1$d is a placeholder for the score value. -->
   <string name="score">Vlerësim: %1$d</string>
+  <!-- Back button -->
+  <string name="back">mbrapsht</string>
 </resources>

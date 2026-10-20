@@ -416,7 +416,7 @@
   <!-- Search suggestion onboarding hint title text -->
   <string name="search_suggestions_onboarding_title">Tillate søkeforslag i private økter?</string>
   <!-- Search suggestion onboarding hint description text, %s is the name of the app (for example "Firefox"). -->
-  <string name="search_suggestions_onboarding_text">%s deler alt du skriver i adressefeltet med standard søkemotor.</string>
+  <string name="search_suggestions_onboarding_text">%s deler alt du skriver i adresselinjen med standard søkemotor.</string>
   <!-- Search engine suggestion title text. %s is the name of the suggested engine. -->
   <string name="search_engine_suggestions_title">Søk %s</string>
   <!-- Search engine suggestion description text -->
@@ -709,6 +709,14 @@
   <string name="search_widget_text_long">Søk på nettet</string>
   <!-- Content description (not visible, for screen readers etc.): Voice search -->
   <string name="search_widget_voice">Stemmesøk</string>
+  <!-- Content description (not visible, for screen readers etc.): Button in the search widget that starts a search in a private tab -->
+  <string name="search_widget_private_search">Privat søk</string>
+  <!-- Widget description in the widget picker screen for the search bar widget that includes buttons for private search and for voice search -->
+  <string name="search_bar_widget_description">Søkelinje med privat- og stemmesøk</string>
+  <!-- Widget description in the widget picker screen for the search bar widget that includes buttons for image search, private search and voice search -->
+  <string name="search_bar_with_lens_widget_description">Søkelinje med bilde-, privat- og stemmesøk</string>
+  <!-- Widget description in the widget picker screen for the compact search bar widget -->
+  <string name="compact_search_bar_widget_description">Kompakt søkelinje</string>
   <!--
     Preferences
 

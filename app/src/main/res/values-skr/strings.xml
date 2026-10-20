@@ -1106,7 +1106,7 @@
   <!-- Message to warn users that applying an alternative app icon may require an app restart. Whether or not the app closes depends on what version of Android it is, so we use the word "may" instead of "will". %1$s is replaced by the brand name (e.g. Firefox). -->
   <string name="restart_warning_dialog_body_2">ایپ بند تھی سڳدی ہے۔ %1$s کوں ولا کھولݨ کیتے صرف آپݨے نویں چمکدار آئیکن تے ٹیپ کرو۔</string>
   <!-- Message to warn users that applying an alternative app icon may require an app restart and will remove existing shortcuts because of the OS limitations. Whether or not the app closes depends on what version of Android it is, so we use the word "may" instead of "will". %1$s is replaced by the brand name (e.g. Firefox). -->
-  <string name="restart_and_shortcuts_removal_warning_dialog_body">آئیکن تبدیل کرݨ نال تہاڈی ہوم سکرین تے محفوظ کیتے گئے ساریاں سائٹس اور شارٹ کٹس ختم تھی ویسن۔</string>
+  <string name="restart_and_shortcuts_removal_warning_dialog_body">آئیکان تبدیل کرݨ نال تہاݙی ہوم سکرین تے محفوظ کیتے گئے ساریاں سائٹاں تے شارٹ کٹس %1$s بند تھی سڳدن۔ ولدا کھولݨ کیتے نویں آئیکان تے انگل تھپکاؤ</string>
   <!-- Dialog button text for confirming the possible app restart and new icon selection -->
   <string name="restart_warning_dialog_button_positive_2">آئیکن تبدیل کرو</string>
   <!-- Dialog button text for cancelling app icon change -->

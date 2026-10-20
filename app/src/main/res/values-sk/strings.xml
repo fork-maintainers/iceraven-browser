@@ -1010,7 +1010,7 @@
   <!-- Title for the customize home screen section with Pocket. -->
   <string name="customize_toggle_pocket_3">Príbehy</string>
   <!-- Title for the customize home screen section with sponsored Pocket stories. -->
-  <string name="customize_toggle_pocket_sponsored">Sponzorované príbehy</string>
+  <string name="customize_toggle_pocket_sponsored">Sponzorované články</string>
   <!-- Title for the opening wallpaper settings screen -->
   <string name="customize_wallpapers">Tapety</string>
   <!-- Label for the menu item that opens the customize homepage settings screen. -->
