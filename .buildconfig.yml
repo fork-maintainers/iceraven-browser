@@ -18,6 +18,7 @@ projects:
     - components:compose-base
     - components:compose-browser-toolbar
     - components:compose-cfr
+    - components:compose-draggable
     - components:compose-menu
     - components:concept-accelerometer
     - components:concept-ai-controls

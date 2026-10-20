@@ -17,10 +17,10 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNull
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestScope
+import mozilla.components.compose.draggable.ItemInteractionHandler
+import mozilla.components.compose.draggable.NoOpItemInteractionHandler
 import org.junit.Test
 import org.mozilla.fenix.tabstray.browser.compose.ListReorderState
-import org.mozilla.fenix.tabstray.controller.ItemInteractionHandler
-import org.mozilla.fenix.tabstray.controller.NoOpItemInteractionHandler
 
 class ReorderableListTest {
     private val testDispatcher = StandardTestDispatcher()

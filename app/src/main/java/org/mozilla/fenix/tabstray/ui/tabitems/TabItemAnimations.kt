@@ -8,8 +8,6 @@ import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
-import androidx.compose.foundation.lazy.LazyItemScope
-import androidx.compose.foundation.lazy.grid.LazyGridItemScope
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SwipeToDismissBoxDefaults
 import androidx.compose.material3.SwipeToDismissBoxState
@@ -35,7 +33,7 @@ import androidx.compose.ui.unit.Dp
 import kotlin.math.abs
 import mozilla.components.compose.base.modifier.thenConditional
 import mozilla.components.compose.base.theme.AcornCorners
-import org.mozilla.fenix.tabstray.browser.compose.ItemInteractionState
+import mozilla.components.compose.draggable.ItemInteractionState
 import org.mozilla.fenix.theme.FirefoxTheme
 
 /** Object holding alpha values for tab items */
@@ -315,71 +313,6 @@ private fun Modifier.tabItemInteractionAnimation(
 }
 
 /**
- * The default animations for a GridItem.
- *
- * @param lazyGridItemScope The [LazyGridItemScope] (needed to define animateItem())
- * @param suppressTransitions Whether transition animations should be suppressed. Items are by default clipped to their
- *   bounds while fade in/out animations are playing, so this can be helpful if you would like to e.g. play an
- *   overshooting scale animation for an item entering composition.
- */
-@Composable
-fun Modifier.defaultGridItemAnimation(
-    lazyGridItemScope: LazyGridItemScope,
-    suppressTransitions: Boolean,
-): Modifier =
-    with(lazyGridItemScope) {
-        this@defaultGridItemAnimation.animateItem(
-            fadeOutSpec =
-                if (suppressTransitions) {
-                    null
-                } else {
-                    spring(dampingRatio = Spring.DampingRatioNoBouncy, stiffness = Spring.StiffnessMediumLow)
-                },
-            placementSpec =
-                if (suppressTransitions) {
-                    null
-                } else {
-                    spring(dampingRatio = Spring.DampingRatioNoBouncy, stiffness = Spring.StiffnessMediumLow)
-                },
-            fadeInSpec =
-                if (suppressTransitions) {
-                    null
-                } else {
-                    spring(dampingRatio = Spring.DampingRatioNoBouncy, stiffness = Spring.StiffnessMedium)
-                },
-        )
-    }
-
-/**
- * The default animations for a tab ListItem.
- *
- * @param lazyListItemScope The [LazyItemScope] (needed to define animateItem())
- * @param suppressTransitions Whether transition animations should be suppressed
- */
-@Composable
-fun Modifier.defaultListItemAnimation(
-    lazyListItemScope: LazyItemScope,
-    suppressTransitions: Boolean,
-): Modifier =
-    with(lazyListItemScope) {
-        this@defaultListItemAnimation.animateItem(
-            fadeOutSpec =
-                if (suppressTransitions) {
-                    null
-                } else {
-                    spring(dampingRatio = Spring.DampingRatioNoBouncy, stiffness = Spring.StiffnessMediumLow)
-                },
-            placementSpec =
-                if (suppressTransitions) {
-                    null
-                } else {
-                    spring(dampingRatio = Spring.DampingRatioNoBouncy, stiffness = Spring.StiffnessMediumLow)
-                },
-            fadeInSpec = spring(dampingRatio = Spring.DampingRatioNoBouncy, stiffness = Spring.StiffnessMedium),
-        )
-    }
-
-/**
  * Creates a [SwipeToDismissBoxState] for the tab item identified by [tabId].
  *
  * Deliberately not [androidx.compose.material3.rememberSwipeToDismissBoxState], which saves its current value: a lazy
@@ -451,14 +384,6 @@ internal var SemanticsPropertyReceiver.alpha by AlphaKey
 /** Semantic property for accessing a tab grid's column count. */
 internal val TabGridColumnCountKey = SemanticsPropertyKey<Int>("TabGridColumnCount")
 internal var SemanticsPropertyReceiver.tabGridColumnCount by TabGridColumnCountKey
-
-/** Elevation parameters for interactable tab items. */
-object Elevation {
-    const val SWIPE_ACTIVE = 10f
-    const val ENTERING_ITEM = 2f
-    const val DRAGGED_ITEM = 1f
-    const val NO_INTERACTION = 0f
-}
 
 /** Scale parameters for interactable tab items. */
 object Scale {

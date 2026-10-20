@@ -37,8 +37,8 @@ import androidx.compose.ui.unit.toSize
 import androidx.compose.ui.zIndex
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import org.mozilla.fenix.tabstray.browser.compose.ItemInteractionState
-import org.mozilla.fenix.tabstray.controller.ItemInteractionHandler
+import mozilla.components.compose.draggable.ItemInteractionHandler
+import mozilla.components.compose.draggable.ItemInteractionState
 
 /**
  * Remember the reordering state for reordering grid items.
