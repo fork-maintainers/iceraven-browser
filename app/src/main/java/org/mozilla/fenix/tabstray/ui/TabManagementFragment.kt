@@ -896,7 +896,7 @@ class TabManagementFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        if (activity?.isChangingConfigurations == false) {
+        if (activity?.isChangingConfigurations == false || isRemoving) {
             requireComponents.appStore.dispatch(AppAction.UpdateTabsTrayVisibility(false))
         }
         super.onDestroyView()
