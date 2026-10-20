@@ -76,6 +76,9 @@ class HomeActivityTestRule(
         nativeShareSheetEnabled: Boolean = false,
         showVoiceSearchInDisplayToolbar: Boolean = false,
         isHomepageTrendingRecentSearchEnabled: Boolean = false,
+        isGoogleLensIntegrationEnabled: Boolean = true,
+        isGoogleLensIntegrationUserEnabled: Boolean = true,
+        isFxSuggestEnabled: Boolean = true,
         showAddressBarInFocusMode: Boolean = false,
         crashReportOption: CrashReportOption = settings.crashReportOption(),
     ) : this(initialTouchMode, launchActivity, skipOnboarding) {
@@ -104,6 +107,9 @@ class HomeActivityTestRule(
         this.nativeShareSheetEnabled = nativeShareSheetEnabled
         this.showVoiceSearchInDisplayToolbar = showVoiceSearchInDisplayToolbar
         this.isHomepageTrendingRecentSearchEnabled = isHomepageTrendingRecentSearchEnabled
+        this.isGoogleLensIntegrationEnabled = isGoogleLensIntegrationEnabled
+        this.isGoogleLensIntegrationUserEnabled = isGoogleLensIntegrationUserEnabled
+        this.isFxSuggestEnabled = isFxSuggestEnabled
         this.showAddressBarInFocusMode = showAddressBarInFocusMode
         this.crashReportOption = crashReportOption
     }
@@ -226,6 +232,9 @@ internal constructor(
         nativeShareSheetEnabled: Boolean = false,
         showVoiceSearchInDisplayToolbar: Boolean = false,
         isHomepageTrendingRecentSearchEnabled: Boolean = false,
+        isGoogleLensIntegrationEnabled: Boolean = true,
+        isGoogleLensIntegrationUserEnabled: Boolean = true,
+        isFxSuggestEnabled: Boolean = true,
         showAddressBarInFocusMode: Boolean = false,
         crashReportOption: CrashReportOption = settings.crashReportOption(),
     ) : this(initialTouchMode, launchActivity, skipOnboarding) {
@@ -256,6 +265,9 @@ internal constructor(
         this.nativeShareSheetEnabled = nativeShareSheetEnabled
         this.showVoiceSearchInDisplayToolbar = showVoiceSearchInDisplayToolbar
         this.isHomepageTrendingRecentSearchEnabled = isHomepageTrendingRecentSearchEnabled
+        this.isGoogleLensIntegrationEnabled = isGoogleLensIntegrationEnabled
+        this.isGoogleLensIntegrationUserEnabled = isGoogleLensIntegrationUserEnabled
+        this.isFxSuggestEnabled = isFxSuggestEnabled
         this.showAddressBarInFocusMode = showAddressBarInFocusMode
         this.crashReportOption = crashReportOption
     }
@@ -333,6 +345,9 @@ internal constructor(
         nativeShareSheetEnabled = settings.nativeShareSheetEnabled
         isHomepageTrendingRecentSearchEnabled = settings.enableHomepageTrendingRecentSearch
         isTabStripEnabled = settings.isTabStripEnabled
+        isGoogleLensIntegrationEnabled = settings.googleLensIntegrationEnabled
+        isGoogleLensIntegrationUserEnabled = settings.googleLensIntegrationUserEnabled
+        isFxSuggestEnabled = settings.enableFxSuggest
         showAddressBarInFocusMode = settings.showAddressBarInFocusMode
         crashReportOption = settings.crashReportOption()
     }

@@ -184,6 +184,14 @@ object HomeSelectors : SelectorContainer {
             groups = setOf(Group.TOP_SITE_ITEM),
         )
 
+    val FIRST_TOP_SITE_ITEM =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_ON_ALL_NODES_BY_TAG_ON_FIRST,
+            value = "top_sites_list.top_site_item",
+            description = "First top site item",
+            groups = setOf(Group.TOP_SITE_ITEM),
+        )
+
     val ADD_SHORTCUT_BUTTON =
         Selector(
             strategy = SelectorStrategy.COMPOSE_BY_TAG,

@@ -51,7 +51,7 @@ class SettingsAddonsTest : BaseTest() {
         on.browserPage
             .navigateToPage(trackingProtectionPage.url.toString())
             .verifyUrl(trackingProtectionPage.url.toString())
-        on.home.navigateToPage().mozClick(HomeSelectors.TOP_SITE_ITEM("Wikipedia"))
+        on.home.navigateToPage().mozClick(HomeSelectors.FIRST_TOP_SITE_ITEM)
         on.browserPage.mozVerify(BrowserPageSelectors.ENGINE_VIEW).navigateToPage()
         on.settings.navigateToPage().mozVerifyElementsByGroup(SettingsSelectors.Group.SETTINGS_VIEW)
     }

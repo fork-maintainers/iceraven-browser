@@ -101,6 +101,15 @@ interface FeatureSettingsHelper {
     /** Whether trending and recent searches are shown on the Homepage search. */
     var isHomepageTrendingRecentSearchEnabled: Boolean
 
+    /** Whether Google Lens feature is enabled. */
+    var isGoogleLensIntegrationEnabled: Boolean
+
+    /** Whether Google Lens integration is enabled for the user. */
+    var isGoogleLensIntegrationUserEnabled: Boolean
+
+    /** Whether FxSuggest feature is enabled. */
+    var isFxSuggestEnabled: Boolean
+
     /** Whether the current URL is shown separate from the addressbar when tapped. */
     var showAddressBarInFocusMode: Boolean
 
