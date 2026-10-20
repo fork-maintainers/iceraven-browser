@@ -65,7 +65,7 @@ import org.mozilla.fenix.theme.FirefoxTheme
  */
 @Composable
 internal fun TabGroupsStripContent(
-    state: TabGroupsStripState,
+    state: TabGroupsStripState.TabGroupStripVisible,
     onTabClick: (String) -> Unit,
     onAddTabClick: () -> Unit,
     onExpandGroupClick: () -> Unit,
@@ -277,7 +277,8 @@ private fun AddTabButton(onClick: () -> Unit) {
 @Composable
 @Preview
 private fun TabGroupsStripContentPreview(
-    @PreviewParameter(TabGroupsStripStatePreviewParameterProvider::class) themedState: ThemedValue<TabGroupsStripState>
+    @PreviewParameter(TabGroupsStripStatePreviewParameterProvider::class)
+    themedState: ThemedValue<TabGroupsStripState.TabGroupStripVisible>
 ) {
     val store = remember { TabGroupsStripStore(initialState = themedState.value) }
     val state by store.stateFlow.collectAsState()
@@ -285,7 +286,7 @@ private fun TabGroupsStripContentPreview(
     FirefoxTheme(theme = themedState.theme) {
         Box(modifier = Modifier.background(MaterialTheme.colorScheme.surface)) {
             TabGroupsStripContent(
-                state = state,
+                state = state as TabGroupsStripState.TabGroupStripVisible,
                 onTabClick = { store.dispatch(TabGroupsStripAction.TabClicked(it)) },
                 onAddTabClick = { store.dispatch(TabGroupsStripAction.AddTabClicked) },
                 onExpandGroupClick = { store.dispatch(TabGroupsStripAction.ExpandGroupClicked) },
@@ -296,17 +297,19 @@ private fun TabGroupsStripContentPreview(
 }
 
 private class TabGroupsStripStatePreviewParameterProvider :
-    ThemedValueProvider<TabGroupsStripState>(
+    ThemedValueProvider<TabGroupsStripState.TabGroupStripVisible>(
         baseValues = tabGroupsStripPreviewStates.map { it.second }.asSequence(),
         getDisplayName = { index, _ -> tabGroupsStripPreviewStates[index].first },
     )
 
 private const val FILLED_STRIP_TAB_COUNT = 15
 
-private val tabGroupsStripPreviewStates: List<Pair<String, TabGroupsStripState>> =
+private val tabGroupsStripPreviewStates: List<Pair<String, TabGroupsStripState.TabGroupStripVisible>> =
     listOf(
         "Few tabs" to
-            TabGroupsStripState(
+            TabGroupsStripState.TabGroupStripVisible(
+                groupId = "1",
+                groupTitle = "Group",
                 tabs =
                     listOf(
                         TabGroupsStripState.Tab(
@@ -327,10 +330,12 @@ private val tabGroupsStripPreviewStates: List<Pair<String, TabGroupsStripState>>
                             title = "Wikipedia",
                             isFocused = false,
                         ),
-                    )
+                    ),
             ),
         "Filled strip" to
-            TabGroupsStripState(
+            TabGroupsStripState.TabGroupStripVisible(
+                groupId = "1",
+                groupTitle = "Group",
                 tabs =
                     List(FILLED_STRIP_TAB_COUNT) { index ->
                         TabGroupsStripState.Tab(
@@ -339,6 +344,6 @@ private val tabGroupsStripPreviewStates: List<Pair<String, TabGroupsStripState>>
                             title = "Tab $index",
                             isFocused = index == 0,
                         )
-                    }
+                    },
             ),
     )

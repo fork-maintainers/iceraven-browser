@@ -36,7 +36,9 @@ class TabGroupsStripContentTest {
     private val expandButtonWidth = 24.dp
 
     private val state =
-        TabGroupsStripState(
+        TabGroupsStripState.TabGroupStripVisible(
+            groupId = "group",
+            groupTitle = "Group",
             tabs =
                 listOf("1", "2", "3").map { id ->
                     TabGroupsStripState.Tab(
@@ -45,7 +47,7 @@ class TabGroupsStripContentTest {
                         title = "Tab $id",
                         isFocused = id == "1",
                     )
-                }
+                },
         )
 
     @Test
@@ -122,7 +124,9 @@ class TabGroupsStripContentTest {
     fun `WHEN there are enough tabs to overflow THEN the add tab and expand buttons are still shown`() {
         val overflowingTabCount = 15
         val overflowingState =
-            TabGroupsStripState(
+            TabGroupsStripState.TabGroupStripVisible(
+                groupId = "group",
+                groupTitle = "Group",
                 tabs =
                     List(overflowingTabCount) { index ->
                         TabGroupsStripState.Tab(
@@ -131,7 +135,7 @@ class TabGroupsStripContentTest {
                             title = "Tab $index",
                             isFocused = index == 0,
                         )
-                    }
+                    },
             )
 
         setContent {

@@ -7,13 +7,25 @@ package org.mozilla.fenix.tabgroups.strip.redux
 import androidx.compose.runtime.Immutable
 import mozilla.components.lib.state.State
 
-/**
- * The state held by the [TabGroupsStripStore].
- *
- * @property tabs The tabs of the active tab's group, shown in the strip.
- */
-@Immutable
-data class TabGroupsStripState(val tabs: List<Tab> = emptyList()) : State {
+/** The state held by the [TabGroupsStripStore]. */
+sealed interface TabGroupsStripState : State {
+    /** The active tab is not in a group, so the tab strip is hidden. */
+    @Immutable data object TabGroupStripHidden : TabGroupsStripState
+
+    /**
+     * The active tab is in a group, so the tab strip is shown.
+     *
+     * @property groupId The ID of the active tab's group.
+     * @property groupTitle The title of the active tab's group.
+     * @property tabs The tabs of the active tab's group, shown in the strip.
+     */
+    @Immutable
+    data class TabGroupStripVisible(
+        val groupId: String,
+        val groupTitle: String,
+        val tabs: List<Tab> = emptyList(),
+    ) : TabGroupsStripState
+
     /**
      * A tab shown in the strip.
      *
