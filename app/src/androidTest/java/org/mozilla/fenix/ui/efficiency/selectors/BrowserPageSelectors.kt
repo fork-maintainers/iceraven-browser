@@ -567,6 +567,14 @@ object BrowserPageSelectors : SelectorContainer {
             description = "Open link in '$appName' app prompt",
         )
 
+    val PDF_DOWNLOAD_BUTTON =
+        Selector(
+            strategy = SelectorStrategy.UIAUTOMATOR_WITH_RAW_RES_ID_CONTAINING_TEXT,
+            value = "download",
+            secondaryValue = "Download",
+            description = "PDF viewer download button",
+        )
+
     val SHAKE_TO_SUMMARIZE_CFR_DISMISS_BUTTON =
         Selector(
             strategy = SelectorStrategy.COMPOSE_BY_TAG,
