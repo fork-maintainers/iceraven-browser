@@ -7,12 +7,14 @@ package org.mozilla.fenix.ui.efficiency.tests
 import mozilla.components.concept.engine.mediasession.MediaSession
 import mozilla.components.feature.media.R as mediaR
 import org.junit.Test
+import org.junit.runner.Description
 import org.mozilla.fenix.customannotations.Critical
 import org.mozilla.fenix.customannotations.SmokeTest
 import org.mozilla.fenix.helpers.DataGenerationHelper.getStringResource
 import org.mozilla.fenix.helpers.TestAssetHelper.audioPageAsset
 import org.mozilla.fenix.helpers.TestAssetHelper.videoPageAsset
 import org.mozilla.fenix.ui.efficiency.helpers.BaseTest
+import org.mozilla.fenix.ui.efficiency.helpers.EfficiencyExecutionRequirements
 import org.mozilla.fenix.ui.efficiency.selectors.NotificationSelectors
 
 /**
@@ -21,6 +23,15 @@ import org.mozilla.fenix.ui.efficiency.selectors.NotificationSelectors
  *   media notifications, not media itself.
  */
 class MediaNotificationTest : BaseTest() {
+
+    // The looping audio player redraws continuously, so UiAutomator never sees an idle screen and every lookup would
+    // wait out the full default idle timeout while it plays.
+    override fun executionRequirements(description: Description): EfficiencyExecutionRequirements =
+        if (description.methodName == "mediaSystemNotificationInPrivateModeTest") {
+            super.executionRequirements(description).copy(uiAutomatorIdleTimeoutMillis = 1_000L)
+        } else {
+            super.executionRequirements(description)
+        }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/1347033
     // Converted from legacy MediaNotificationTest.verifyVideoPlaybackSystemNotificationTest

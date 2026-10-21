@@ -32,6 +32,8 @@ data class EfficiencyExecutionRequirements(
     val clearNotifications: Boolean = true,
     val clearSharedDownloads: Boolean = true,
     val mockWebServer: MockWebServerRequirement = MockWebServerRequirement.AVAILABLE,
+    /** UiAutomator's wait-for-idle timeout for the test, or null to keep UiAutomator's default. */
+    val uiAutomatorIdleTimeoutMillis: Long? = null,
 ) {
     fun asMeta(): Map<String, Any?> =
         mapOf(

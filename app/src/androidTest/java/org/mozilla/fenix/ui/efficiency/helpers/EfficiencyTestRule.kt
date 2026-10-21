@@ -8,6 +8,7 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
 import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.uiautomator.Configurator
 import androidx.test.uiautomator.UiDevice
 import kotlinx.coroutines.runBlocking
 import mockwebserver3.MockWebServer
@@ -99,6 +100,7 @@ private class EfficiencyTestEnvironment(private val context: EfficiencyExecution
             }
         }
         applyPostNotificationPermission(requirements.postNotificationPermission)
+        requirements.uiAutomatorIdleTimeoutMillis?.let { Configurator.getInstance().waitForIdleTimeout = it }
     }
 
     private fun clearExternalState() {
@@ -182,6 +184,7 @@ private class EfficiencyTestEnvironment(private val context: EfficiencyExecution
             systemUiClipboardAccess = systemUiClipboardAccess(),
             postNotificationPermission = if (Build.VERSION.SDK_INT >= 33) hasPostNotificationPermission() else null,
             foregroundWindow = focusedWindow(),
+            uiAutomatorIdleTimeoutMillis = Configurator.getInstance().waitForIdleTimeout,
         )
     }
 
@@ -224,6 +227,7 @@ private class EfficiencyTestEnvironment(private val context: EfficiencyExecution
         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
             snapshot.systemUiClipboardAccess?.let(::allowOrPreventSystemUIFromReadingTheClipboard)
         }
+        Configurator.getInstance().waitForIdleTimeout = snapshot.uiAutomatorIdleTimeoutMillis
     }
 
     private fun verifyRestored(snapshot: EnvironmentSnapshot) {
@@ -243,6 +247,9 @@ private class EfficiencyTestEnvironment(private val context: EfficiencyExecution
                 snapshot.systemUiClipboardAccess != initial.systemUiClipboardAccess
         ) {
             violations += "systemUiClipboardAccess=${snapshot.systemUiClipboardAccess}"
+        }
+        if (snapshot.uiAutomatorIdleTimeoutMillis != initial.uiAutomatorIdleTimeoutMillis) {
+            violations += "uiAutomatorIdleTimeoutMillis=${snapshot.uiAutomatorIdleTimeoutMillis}"
         }
         check(violations.isEmpty()) {
             "Device environment was not restored for ${context.testId}: ${violations.joinToString()}"
@@ -292,6 +299,7 @@ private class EfficiencyTestEnvironment(private val context: EfficiencyExecution
         val systemUiClipboardAccess: Boolean?,
         val postNotificationPermission: Boolean?,
         val foregroundWindow: String,
+        val uiAutomatorIdleTimeoutMillis: Long,
     ) {
         fun asMeta(): Map<String, Any?> =
             mapOf(
