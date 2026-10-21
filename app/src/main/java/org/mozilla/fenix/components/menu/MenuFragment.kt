@@ -15,16 +15,30 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.OvershootInterpolator
 import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.gestures.awaitEachGesture
+import androidx.compose.foundation.gestures.awaitFirstDown
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.hapticfeedback.HapticFeedback
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.input.pointer.AwaitPointerEventScope
+import androidx.compose.ui.input.pointer.PointerEventPass
+import androidx.compose.ui.input.pointer.PointerEventTimeoutCancellationException
+import androidx.compose.ui.input.pointer.PointerId
+import androidx.compose.ui.input.pointer.PointerInputScope
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.graphics.drawable.toDrawable
@@ -33,6 +47,7 @@ import androidx.core.view.WindowInsetsCompat.Type.systemBars
 import androidx.fragment.compose.content
 import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.R as materialR
@@ -58,12 +73,14 @@ import mozilla.components.support.utils.ext.top
 import mozilla.telemetry.glean.private.NoExtras
 import org.mozilla.fenix.GleanMetrics.Events
 import org.mozilla.fenix.R
+import org.mozilla.fenix.components.menu.compose.CustomizeMenuPopup
 import org.mozilla.fenix.components.menu.compose.MenuDialogBottomSheet
 import org.mozilla.fenix.components.menu.compose.MenuHandleState
 import org.mozilla.fenix.components.menu.middleware.MenuMiddleware
 import org.mozilla.fenix.components.menu.middleware.MenuTelemetryMiddleware
 import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.ext.isToolbarAtBottom
+import org.mozilla.fenix.ext.nav
 import org.mozilla.fenix.ext.openSetDefaultBrowserOption
 import org.mozilla.fenix.ext.requireComponents
 import org.mozilla.fenix.ipprotection.ui.IPProtectionSnackbarBinding
@@ -189,38 +206,83 @@ class MenuFragment : BottomSheetDialogFragment() {
                 buildMenuStore(it)
             }
 
+        MenuFragmentContent(menuStore = menuStore)
+    }
+
+    @Composable
+    private fun MenuFragmentContent(menuStore: MenuStore) {
+        val context = requireContext()
+        val haptics = LocalHapticFeedback.current
+        val isMenuCustomizationAllowed = remember {
+            args.accessPoint == MenuAccessPoint.Browser &&
+                context.components.settings.isMenuCustomizationEnabled &&
+                context.components.settings.isMenuCustomizationScreenEnabled
+        }
+
         FirefoxTheme {
             BackHandler { dismissAllowingStateLoss() }
 
             var isHeaderDark by remember { mutableStateOf(false) }
+            var showCustomizeMenuPopup by remember { mutableStateOf(false) }
+            var popupOffset by remember { mutableStateOf<Offset?>(null) }
 
-            MenuDialogBottomSheet(
+            Box(
                 modifier =
-                    Modifier.padding(vertical = FirefoxTheme.layout.space.static200)
-                        .width(FirefoxTheme.layout.space.static400),
-                onRequestDismiss = ::dismiss,
-                menuHandleState =
-                    MenuHandleState(
-                        contentDescription =
-                            stringResource(
-                                when (args.accessPoint) {
-                                    MenuAccessPoint.External ->
-                                        R.string.browser_custom_tab_menu_handlebar_content_description
-                                    else -> R.string.browser_close_main_menu_handlebar_content_description
+                    Modifier.then(
+                        if (isMenuCustomizationAllowed) {
+                            Modifier.pointerInput(Unit) {
+                                detectLongPress(haptics) { offset ->
+                                    popupOffset = offset
+                                    showCustomizeMenuPopup = true
                                 }
-                            ),
-                        useDarkBackground = isHeaderDark,
-                    ),
-                snackbarHostState = snackbarHostState,
-                cornerShape =
-                    MaterialTheme.shapes.extraLarge.copy(
-                        bottomStart = CornerSize(0.dp),
-                        bottomEnd = CornerSize(0.dp),
-                    ),
+                            }
+                        } else {
+                            Modifier
+                        }
+                    )
             ) {
-                Menu(
-                    store = menuStore,
-                    onHeaderDarkBackgroundChanged = { isHeaderDark = it },
+                MenuDialogBottomSheet(
+                    modifier =
+                        Modifier.padding(vertical = FirefoxTheme.layout.space.static200)
+                            .width(FirefoxTheme.layout.space.static400),
+                    onRequestDismiss = ::dismiss,
+                    menuHandleState =
+                        MenuHandleState(
+                            contentDescription =
+                                stringResource(
+                                    when (args.accessPoint) {
+                                        MenuAccessPoint.External ->
+                                            R.string.browser_custom_tab_menu_handlebar_content_description
+                                        else -> R.string.browser_close_main_menu_handlebar_content_description
+                                    }
+                                ),
+                            useDarkBackground = isHeaderDark,
+                        ),
+                    snackbarHostState = snackbarHostState,
+                    cornerShape =
+                        MaterialTheme.shapes.extraLarge.copy(
+                            bottomStart = CornerSize(0.dp),
+                            bottomEnd = CornerSize(0.dp),
+                        ),
+                ) {
+                    Menu(
+                        store = menuStore,
+                        onHeaderDarkBackgroundChanged = { isHeaderDark = it },
+                    )
+                }
+
+                CustomizeMenuPopupContainer(
+                    popupOffset = popupOffset,
+                    showPopup = showCustomizeMenuPopup,
+                    onDismiss = { showCustomizeMenuPopup = false },
+                    onCustomizeMenuClick = {
+                        showCustomizeMenuPopup = false
+                        nav(
+                            id = R.id.menuFragment,
+                            directions = MenuFragmentDirections.actionMenuFragmentToFenixCustomizeMenuFragment(),
+                            options = NavOptions.Builder().setPopUpTo(R.id.menuFragment, true).build(),
+                        )
+                    },
                 )
             }
         }
@@ -360,4 +422,71 @@ class MenuFragment : BottomSheetDialogFragment() {
                     shouldShowExtensions = requireComponents.settings.shouldShowCustomTabExtensions,
                 )
         }
+}
+
+@Composable
+private fun CustomizeMenuPopupContainer(
+    popupOffset: Offset?,
+    showPopup: Boolean,
+    onDismiss: () -> Unit,
+    onCustomizeMenuClick: () -> Unit,
+) {
+    if (showPopup) {
+        CustomizeMenuPopup(
+            popupOffset = popupOffset,
+            onDismissRequest = onDismiss,
+            onCustomizeMenuClick = onCustomizeMenuClick,
+        )
+    }
+}
+
+private suspend fun PointerInputScope.detectLongPress(
+    haptics: HapticFeedback,
+    onLongPress: (Offset) -> Unit,
+) {
+    awaitEachGesture {
+        val down = awaitFirstDown(requireUnconsumed = false, pass = PointerEventPass.Initial)
+        val startPosition = down.position
+
+        if (awaitLongPressOrCancellation(down.id, startPosition)) {
+            haptics.performHapticFeedback(HapticFeedbackType.LongPress)
+            onLongPress(startPosition)
+            consumeRemainingPointerEvents()
+        }
+    }
+}
+
+private suspend fun AwaitPointerEventScope.awaitLongPressOrCancellation(
+    pointerId: PointerId,
+    startPosition: Offset,
+): Boolean {
+    return try {
+        withTimeout(viewConfiguration.longPressTimeoutMillis) {
+            while (true) {
+                val event = awaitPointerEvent(PointerEventPass.Initial)
+                val pointerChange = event.changes.firstOrNull { it.id == pointerId } ?: event.changes.firstOrNull()
+
+                if (pointerChange == null || !pointerChange.pressed) {
+                    return@withTimeout false
+                }
+
+                val dx = pointerChange.position.x - startPosition.x
+                val dy = pointerChange.position.y - startPosition.y
+                val touchSlop = viewConfiguration.touchSlop
+                if (dx * dx + dy * dy > touchSlop * touchSlop) {
+                    return@withTimeout false
+                }
+            }
+        }
+        false
+    } catch (_: PointerEventTimeoutCancellationException) {
+        true
+    }
+}
+
+private suspend fun AwaitPointerEventScope.consumeRemainingPointerEvents() {
+    do {
+        val event = awaitPointerEvent(PointerEventPass.Initial)
+        event.changes.forEach { it.consume() }
+    } while (event.changes.any { it.pressed })
 }

@@ -156,6 +156,8 @@
     <string name="past_explorations_show_all_content_description_2">Show all past explorations</string>
 
     <!-- Browser Fragment -->
+    <!-- Label for popup button that appears when long-pressing the main menu. Tapping it allows the user to customize the main menu layout. -->
+    <string name="customize_menu">Customize menu</string>
     <!-- Content description (not visible, for screen readers etc.): Navigate backward (browsing history) -->
     <string name="browser_menu_back">Back</string>
     <!-- Content description (not visible, for screen readers etc.): Navigate forward (browsing history) -->

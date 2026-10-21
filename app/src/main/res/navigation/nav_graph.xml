@@ -1919,8 +1919,17 @@
         app:popUpTo="@id/storiesFragment"
         app:popUpToInclusive="false"
         app:launchSingleTop="true" />
+
+      <action
+        android:id="@+id/action_menuFragment_to_fenixCustomizeMenuFragment"
+        app:destination="@id/fenixCustomizeMenuFragment" />
     </dialog>
   </navigation>
+
+    <fragment
+      android:id="@+id/fenixCustomizeMenuFragment"
+      android:name="org.mozilla.fenix.components.menu.FenixCustomizeMenuFragment"
+      android:label="FenixCustomizeMenuFragment" />
 
     <navigation
         android:id="@+id/trust_panel_graph"

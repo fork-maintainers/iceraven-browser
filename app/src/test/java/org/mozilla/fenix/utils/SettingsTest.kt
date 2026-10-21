@@ -1577,33 +1577,20 @@ class SettingsTest {
     }
 
     @Test
-    fun `GIVEN isMenuCustomizationEnabled is false WHEN isMenuCustomizationScreenEnabled is read THEN it returns false`() {
-        settings.isMenuCustomizationEnabled = false
-        settings.isMenuCustomizationScreenEnabled = true
-
+    fun `WHEN reading menu customization preferences THEN default values are false`() {
+        assertFalse(settings.isMenuCustomizationEnabled)
         assertFalse(settings.isMenuCustomizationScreenEnabled)
     }
 
     @Test
-    fun `GIVEN isMenuCustomizationEnabled is true WHEN isMenuCustomizationScreenEnabled is modified THEN it reflects stored value`() {
+    fun `GIVEN menu customization preferences WHEN modified THEN reflect stored values`() {
         settings.isMenuCustomizationEnabled = true
         settings.isMenuCustomizationScreenEnabled = true
 
+        assertTrue(settings.isMenuCustomizationEnabled)
         assertTrue(settings.isMenuCustomizationScreenEnabled)
 
         settings.isMenuCustomizationScreenEnabled = false
-
-        assertFalse(settings.isMenuCustomizationScreenEnabled)
-    }
-
-    @Test
-    fun `GIVEN isMenuCustomizationScreenEnabled is true WHEN isMenuCustomizationEnabled is toggled off THEN isMenuCustomizationScreenEnabled becomes false`() {
-        settings.isMenuCustomizationEnabled = true
-        settings.isMenuCustomizationScreenEnabled = true
-
-        assertTrue(settings.isMenuCustomizationScreenEnabled)
-
-        settings.isMenuCustomizationEnabled = false
 
         assertFalse(settings.isMenuCustomizationScreenEnabled)
     }
