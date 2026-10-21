@@ -9682,6 +9682,47 @@ listen_to_page:
     notification_emails:
       - android-probes@mozilla.com
     expires: never
+  session_max_thermal_status:
+    type: labeled_counter
+    description: |
+      The number of listening sessions grouped by the hottest thermal status
+      the device reported while audio was playing, from the first audio until
+      the article ends, fails or the player is closed. Time spent paused is
+      not observed. Only recorded on Android 11 and later on devices whose
+      thermal HAL can forecast thermal headroom, which indicates devices
+      advanced enough to give accurate measurements.
+    labels:
+      - none
+      - light
+      - moderate
+      - severe
+      - critical
+      - emergency
+      - shutdown
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D333063
+    data_sensitivity:
+      - technical
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  thermal_throttling_entered:
+    type: counter
+    description: |
+      The number of times the device's thermal status rose to moderate or
+      hotter while a page was being read out, on the same devices and over
+      the same part of the session as session_max_thermal_status.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D333063
+    data_sensitivity:
+      - technical
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
 
 logins:
   password_detected:

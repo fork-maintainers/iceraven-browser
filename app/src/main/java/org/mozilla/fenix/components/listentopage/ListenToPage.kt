@@ -6,6 +6,10 @@ package org.mozilla.fenix.components.listentopage
 
 import android.app.PendingIntent
 import android.content.Context
+import android.os.Build
+import android.os.PowerManager
+import androidx.core.content.ContextCompat
+import androidx.core.content.getSystemService
 import kotlinx.coroutines.CoroutineScope
 import mozilla.components.browser.state.selector.findTab
 import mozilla.components.browser.state.store.BrowserStore
@@ -88,8 +92,15 @@ class ListenToPage(
                         scope = scope,
                     ),
                     ListenToPageTelemetryMiddleware(),
+                    thermalStatusMonitor()?.let { ListenThermalMiddleware(monitor = it) },
                 ),
         )
+    }
+
+    private fun thermalStatusMonitor(): ThermalStatusMonitor? {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) return null
+        val powerManager = context.getSystemService<PowerManager>() ?: return null
+        return PowerManagerThermalStatusMonitor(powerManager, ContextCompat.getMainExecutor(context))
     }
 
     // One cache for the whole feature: the synthesizer writes the audio into it and the middleware empties it when the
