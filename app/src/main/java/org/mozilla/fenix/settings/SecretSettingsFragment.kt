@@ -601,6 +601,25 @@ class SecretSettingsFragment : PreferenceFragmentCompat(), SystemInsetsPaddedFra
         requirePreference<SwitchPreferenceCompat>(R.string.pref_key_enable_menu_customization).apply {
             isVisible = Config.channel.isNightlyOrDebug
             isChecked = context.components.settings.isMenuCustomizationEnabled
+            onPreferenceChangeListener =
+                object : SharedPreferenceUpdater() {
+                    override fun onPreferenceChange(preference: Preference, newValue: Any?): Boolean {
+                        val enabled = newValue as? Boolean ?: false
+                        requirePreference<SwitchPreferenceCompat>(R.string.pref_key_enable_menu_customization_screen)
+                            .apply {
+                                if (!enabled) {
+                                    isChecked = false
+                                }
+                                isVisible = enabled
+                            }
+                        return super.onPreferenceChange(preference, newValue)
+                    }
+                }
+        }
+
+        requirePreference<SwitchPreferenceCompat>(R.string.pref_key_enable_menu_customization_screen).apply {
+            isVisible = Config.channel.isNightlyOrDebug && context.components.settings.isMenuCustomizationEnabled
+            isChecked = context.components.settings.isMenuCustomizationScreenEnabled
             onPreferenceChangeListener = SharedPreferenceUpdater()
         }
     }
