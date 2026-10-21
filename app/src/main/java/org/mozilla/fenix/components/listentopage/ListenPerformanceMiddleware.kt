@@ -88,7 +88,7 @@ class ListenPerformanceMiddleware(
 
             // Only a wait after audio has played is a gap. The waits for the opening and for a replay are not.
             ListenAction.Playback.PlaybackWaiting ->
-                if (previous.playbackState.phase == PlaybackPhase.Playing) startChunkGap(cause = "waiting")
+                if (previous.playbackState.phase == PlaybackPhase.Playing) startChunkGap(ChunkGapCause.Waiting)
 
             is ListenAction.Playback.PlaybackStarted -> onPlaying()
 
@@ -97,7 +97,7 @@ class ListenPerformanceMiddleware(
                     PlaybackPhase.Playing -> onPlaying()
                     PlaybackPhase.Paused -> cancel(CHUNK_GAP, action)
                     PlaybackPhase.Buffering if previous.playbackState.phase == PlaybackPhase.Playing ->
-                        startChunkGap(cause = "buffering")
+                        startChunkGap(ChunkGapCause.Buffering)
                     else -> Unit
                 }
 
@@ -118,13 +118,18 @@ class ListenPerformanceMiddleware(
         }
     }
 
-    private fun startChunkGap(cause: String) {
+    private fun startChunkGap(cause: ChunkGapCause) {
         if (seekOrVoiceChangePending) return
-        start(
-            markerName = CHUNK_GAP,
-            text = "cause=$cause",
-            onEnd = { durationMs -> ListenToPage.chunkGapDuration.accumulateSamples(listOf(durationMs)) },
-        )
+
+        val started =
+            start(
+                markerName = CHUNK_GAP,
+                text = "cause=${cause.name.lowercase()}",
+                onEnd = { durationMs -> ListenToPage.chunkGapDuration.accumulateSamples(listOf(durationMs)) },
+            )
+        if (started && cause == ChunkGapCause.Waiting) {
+            ListenToPage.audioRanOut.add()
+        }
     }
 
     private fun onPlaying() {
@@ -133,11 +138,17 @@ class ListenPerformanceMiddleware(
         end(CHUNK_GAP)
     }
 
-    private fun start(markerName: String, text: String? = null, onEnd: ((durationMs: Long) -> Unit)? = null) {
-        if (markerName in spans) return
+    // Returns whether this call started a new marker span
+    private fun start(
+        markerName: String,
+        text: String? = null,
+        onEnd: ((durationMs: Long) -> Unit)? = null,
+    ): Boolean {
+        if (markerName in spans) return false
         val profilerStartTime = profiler.takeIf { it.isProfilerActive() }?.getProfilerTime()
         spans[markerName] = Span(elapsedMs(), profilerStartTime, text, onEnd)
         logger.debug("$markerName started ($text)")
+        return true
     }
 
     private fun end(markerName: String) {
@@ -198,6 +209,14 @@ class ListenPerformanceMiddleware(
         scope.launch {
             profiler.addMarker(CHUNK_SYNTHESIS, endTime - chunk.synthesisMs, endTime, text)
         }
+    }
+
+    private enum class ChunkGapCause {
+        // Waiting on synthesis
+        Waiting,
+
+        // The media player experienced an internal buffering state
+        Buffering,
     }
 
     private class Span(

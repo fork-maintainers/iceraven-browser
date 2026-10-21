@@ -9666,6 +9666,22 @@ listen_to_page:
     notification_emails:
       - android-probes@mozilla.com
     expires: never
+  audio_ran_out:
+    type: counter
+    description: |
+      The number of times the listen player finished reading every chunk that
+      had been synthesized before the next chunk was ready, indicating that
+      playback had to wait for new synthesis. Not impacted by user seeks, skips,
+      or changes to the currently selected voice.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D333062
+    data_sensitivity:
+      - technical
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
 
 logins:
   password_detected:

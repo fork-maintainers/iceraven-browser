@@ -298,6 +298,66 @@ class ListenPerformanceMiddlewareTest {
         assertNull(ListenToPage.chunkGapDuration.testGetValue())
     }
 
+    @Test
+    fun `WHEN the player runs out of audio THEN it is counted`() {
+        val store = createStore(playing)
+
+        store.dispatch(ListenAction.Playback.PlaybackWaiting)
+
+        assertEquals(1, ListenToPage.audioRanOut.testGetValue())
+    }
+
+    @Test
+    fun `WHEN running out is reported more than once before audio plays THEN it is only counted once`() {
+        val store = createStore(playing)
+
+        store.dispatch(ListenAction.Playback.PlaybackWaiting)
+        store.dispatch(ListenAction.Playback.PlaybackWaiting)
+
+        assertEquals(1, ListenToPage.audioRanOut.testGetValue())
+    }
+
+    @Test
+    fun `WHEN the player runs out of audio twice THEN both are counted`() {
+        val store = createStore(playing)
+
+        store.dispatch(ListenAction.Playback.PlaybackWaiting)
+        store.dispatch(ListenAction.Playback.PlaybackStarted(ChunkState(index = 3), positionMs = 0))
+        store.dispatch(ListenAction.Playback.PlaybackWaiting)
+
+        assertEquals(2, ListenToPage.audioRanOut.testGetValue())
+    }
+
+    @Test
+    fun `WHEN the player waits for the opening THEN it is not counted as audio running out`() {
+        val store = createStore()
+
+        store.dispatch(LISTEN_REQUESTED)
+        store.dispatch(ListenAction.Playback.PlaybackWaiting)
+        store.dispatch(ListenAction.Playback.PlaybackStarted(ChunkState(index = 0), positionMs = 0))
+
+        assertNull(ListenToPage.audioRanOut.testGetValue())
+    }
+
+    @Test
+    fun `WHEN the player is waiting after a seek THEN it is not counted as audio running out`() {
+        val store = createStore(playing)
+
+        store.dispatch(ListenAction.Playback.SeekRequested(fraction = 0.5f))
+        store.dispatch(ListenAction.Playback.PlaybackWaiting)
+
+        assertNull(ListenToPage.audioRanOut.testGetValue())
+    }
+
+    @Test
+    fun `WHEN the player buffers between queued chunks THEN it is not counted as audio running out`() {
+        val store = createStore(playing)
+
+        store.dispatch(ListenAction.Playback.StateChangeObserved(PlaybackState(phase = PlaybackPhase.Buffering)))
+
+        assertNull(ListenToPage.audioRanOut.testGetValue())
+    }
+
     private fun createStore(initialState: ListenState = ListenState()) =
         ListenStore(
             initialState = initialState,
