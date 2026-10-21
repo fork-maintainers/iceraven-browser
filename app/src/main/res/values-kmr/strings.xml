@@ -450,6 +450,15 @@
   <string name="startup_crash_title">%sdivê ji nû ve bê destpêkirin</string>
   <!-- Body text for the startup crash page. %s is the name of the app (for example "Firefox") -->
   <string name="startup_crash_body">Di vekirina %s de pirsgirêkek çêbû.\n\nŞandina raporeke têkçûnê ji me re dibe alîkar ku em pirsgirêkên gerokê teşhîs bikin û çareser bikin. Rapor dikarin daneyên kesane an hesas di nav xwe de bigirin.</string>
+  <!-- Button text to submit a startup crash report -->
+  <string name="startup_crash_positive">Rapora têkçûnê bişîne</string>
+  <!-- Button text to continue and not send a startup crash report -->
+  <string name="startup_crash_negative">Na, spas</string>
+  <!-- Button text to reopen firefox after the crash is processed %s is the name of the app (for example "Firefox") -->
+  <string name="startup_crash_restart">%s`ê ji nû ve veke</string>
+  <!-- Title for the usage data option in the privacy preferences dialog shown during onboarding. Note: The word "Mozilla" should NOT be translated. -->
+  <string name="onboarding_preferences_dialog_usage_data_title" tools:ignore="BrandUsage">Agahiyên teknîkî û danûstandinê ji Mozillayê re bişîne</string>
+  <string name="onboarding_preferences_dialog_usage_data_description_2" tools:ignore="BrandUsage">Daneyên têkildarî cîhaza te, avaniha reqalavê û şêwaza bikaranîna te ya Firefoxê alîkariya me dikin ku em taybetiyan, performansê û biryardariyê ji bo her kesî çêtir bikin.</string>
   <string name="onboarding_preferences_dialog_usage_data_learn_more_2">Zêdetir bizane</string>
   <!-- Positive button label for the privacy preferences dialog shown during onboarding. -->
   <string name="onboarding_preferences_dialog_positive_button">Qediya</string>
@@ -463,44 +472,196 @@
   <string name="onboarding_term_of_service_line_two_2" tools:ignore="BrandUsage">Firefox girîngiyê dide nepeniya we. Di %1$s-ên me de bêtir fêr bibin.</string>
   <!-- Used as text for the link in onboarding_term_of_service_line_two. -->
   <string name="onboarding_term_of_service_line_two_link_text">Danezana Nihêniyê</string>
+  <!-- Line three of the terms of service onboarding page. 'Firefox' and 'Mozilla' are intentionally hardcoded. %1$s is replaced by an active link using onboarding_term_of_service_line_three_link_text as text (“Manage”). -->
+  <string name="onboarding_term_of_service_line_three" tools:ignore="BrandUsage">Ji bo çêtirkirina gerokê, Firefox daneyên teşhîs û têkiliyê ji Mozillayê re dişîne. %1$s</string>
   <!-- Used as text for the link in onboarding_term_of_service_line_three. -->
   <string name="onboarding_term_of_service_line_three_link_text">Birêvebirin</string>
+  <!-- Terms of use (ToU) onboarding redesign title. -->
+  <string name="onboarding_redesign_tou_title" tools:ignore="UnusedResources">Geroka Androidê ya herî pêşketî bide xebitandin</string>
+  <!-- Terms of use (ToU) first subheader. -->
+  <string name="onboarding_redesign_tou_subheader_one" tools:ignore="UnusedResources">Malperan bi leza birûskê veke</string>
+  <!-- Terms of use (ToU) second subheader. -->
+  <string name="onboarding_redesign_tou_subheader_two" tools:ignore="UnusedResources">Parastina şopandinê ya otomatîk</string>
+  <!-- Terms of use (ToU) third subheader. -->
+  <string name="onboarding_redesign_tou_subheader_three" tools:ignore="UnusedResources">Bi hezaran şexsîkirin</string>
+  <!--
+    Terms of use (ToU) first body text. %1$s is replaced by an active link,
+    using onboarding_redesign_tou_body_one_link_text as text (“Firefox Terms of Use”).
+  -->
+  <string name="onboarding_redesign_tou_body_one" tools:ignore="UnusedResources">Bi berdewamkirinê, tu %1$s qebûl dikî.</string>
+  <!-- Used as text for the link in onboarding_redesign_tou_body_one. -->
+  <string name="onboarding_redesign_tou_body_one_link_text" tools:ignore="BrandUsage,UnusedResources">Mercên Bikaranîna Firefoxê</string>
   <!--
     Terms of use (ToU) second body text. 'Firefox' is intentionally hardcoded.
     %1$s is replaced by an active link, using onboarding_redesign_tou_body_two_link_text as text (“Privacy Notice”).
   -->
   <string name="onboarding_redesign_tou_body_two" tools:ignore="BrandUsage,UnusedResources">Firefox girîngiyê dide nepeniya te. Di %1$s-ên me de bêtir fêr bibe.</string>
+  <!-- Used as text for the link in onboarding_redesign_tou_body_two. -->
+  <string name="onboarding_redesign_tou_body_two_link_text" tools:ignore="UnusedResources">Danezana Nepeniyê</string>
+  <!--
+    Terms of use (ToU) third body text. 'Firefox' and 'Mozilla' are intentionally hardcoded.
+    %1$s is replaced by an active link using onboarding_redesign_tou_body_three_link_text as text (“Manage Settings”).
+  -->
+  <string name="onboarding_redesign_tou_body_three" tools:ignore="BrandUsage,UnusedResources">Ji bo çêtirkirina gerokê, Firefox daneyên teşhîs û têkiliyê ji Mozillayê re dişîne. %1$s</string>
   <!-- Used as text for the link in onboarding_redesign_tou_body_three. -->
   <string name="onboarding_redesign_tou_body_three_link_text" tools:ignore="UnusedResources">Eyaran bi rê ve bibe</string>
   <!-- Terms of use (ToU) onboarding page continue button label. -->
   <string name="onboarding_redesign_tou_agree_and_continue_button_label" tools:ignore="UnusedResources">Bidomîne</string>
+  <!-- Onboarding header for the toolbar selection card. -->
+  <string name="onboarding_redesign_customize_toolbar_title" tools:ignore="UnusedResources">Bila darikê navnîşanan loi ku derê be?</string>
   <!-- Onboarding label for 'Continue' button. -->
   <string name="onboarding_redesign_continue_button" tools:ignore="UnusedResources">Bidomîne</string>
+  <!-- Marketing onboarding page title. 'Firefox' is intentionally hardcoded. -->
+  <string name="onboarding_marketing_redesign_title" tools:ignore="BrandUsage">Alîkariya pêşxistina Firefoxê bike</string>
+  <!-- Marketing onboarding page opt-out checkbox. Unchecking the box does not increase data collection. Our data practices remain the same. 'Mozilla' is intentionally hardcoded. -->
+  <string name="onboarding_marketing_redesign_opt_out_checkbox" tools:ignore="BrandUsage,UnusedResources">Bi hevkarên bazargeriyê yên Mozillayê re parve bike ka te Firefox çawa keşf kir û wê çawa bi kar tînî. Ev dane qet nayên firotin.</string>
+  <!-- Marketing onboarding page clickable link text to "learn more" on how data is used. -->
+  <string name="onboarding_marketing_redesign_learn_more" tools:ignore="UnusedResources">Em daneyan çawa bi kar tînin</string>
+  <!-- Marketing onboarding page button label. Button to confirm choice and start browsing. -->
+  <string name="onboarding_marketing_redesign_positive_button" tools:ignore="UnusedResources">Bipejirîne</string>
   <!-- Set to default browser onboarding redesign title. -->
   <string name="onboarding_redesign_set_default_browser_title" tools:ignore="UnusedResources">Parastina şopandina otomatîk bi awayê standard bistîne</string>
+  <!-- Set to default browser onboarding redesign body. -->
+  <string name="onboarding_redesign_set_default_browser_body" tools:ignore="UnusedResources">Tu dikarî bi tiliyekê rê li şirketan bigirî ku tikandinên te neşopînin.</string>
+  <!-- Sync onboarding redesign title. 'Firefox' is intentionally hardcoded. -->
+  <string name="onboarding_redesign_sync_title" tools:ignore="BrandUsage,UnusedResources">Li her dera ku tu Firefoxê bi kar tînî, senkronîze bike</string>
+  <!-- Sync onboarding redesign body. -->
+  <string name="onboarding_redesign_sync_body" tools:ignore="UnusedResources">Li ser hemû cîhayan xwe bigihîne favoriyan, tab û şîfreyan. Hemû bi şîfrekirinê têne parastin.</string>
+  <!-- Sync onboarding redesign positive button text. -->
+  <string name="onboarding_redesign_sync_positive_button" tools:ignore="UnusedResources">Dest bi senkronîzekirinê bike</string>
+  <!-- Sync onboarding redesign negative button text. -->
+  <string name="onboarding_redesign_sync_negative_button" tools:ignore="UnusedResources">Ne niha</string>
   <!-- Marketing onboarding page title variant. “One last thing” refers to the final step or action in the onboarding process that we’re asking users to take before they can start using the browser. -->
   <string name="onboarding_marketing_title_1" tools:ignore="UnusedResources">Tiştekî dawî</string>
+  <!-- Marketing onboarding page body variant. 'Firefox' is intentionally hardcoded. -->
+  <string name="onboarding_marketing_body_1" tools:ignore="BrandUsage,UnusedResources">Bi hevkarên bazargeriyê yên Mozillayê re parve bike ka te Firefox çawa keşf kir û wê çawa bi kar tînî. Ev dane qet nayên firotin.</string>
   <!-- Marketing onboarding page button label variant. Button to confirm choice and start browsing. -->
   <string name="onboarding_marketing_positive_button_1" tools:ignore="UnusedResources">Piştrast bike û dest bi gerê bike</string>
   <!-- "Continue" onboarding button. -->
   <string name="nova_onboarding_continue_button">Bidomîne</string>
   <!-- "Continue browsing" onboarding button. -->
   <string name="nova_onboarding_continue_browsing_button" tools:ignore="UnusedResources">Gerê bidomîne</string>
+  <!-- "Not now" onboarding button. -->
+  <string name="nova_onboarding_negative_button">Ne niha</string>
+  <!-- "Skip" onboarding button. -->
+  <string name="nova_onboarding_skip_button" tools:ignore="UnusedResources">Derbas bike</string>
+  <!-- Terms of use (ToU) onboarding title. -->
+  <string name="nova_onboarding_tou_title" tools:ignore="UnusedResources">Xwe ji azadiyê re amade bike</string>
+  <!-- Terms of use (ToU) onboarding subtitle. -->
+  <string name="nova_onboarding_tou_subtitle">Zû, ewle, û îxanetê li te nake.\nGera li ser înternetê êdî çêtir e.</string>
+  <!--
+    Terms of use (ToU) onboarding body line one.
+    %1$s is replaced by an active link, using nova_onboarding_tou_body_line_1_link_text as text (“Firefox Terms of Use”).
+  -->
+  <string name="nova_onboarding_tou_body_line_1">Bi berdewamkirinê, tu %1$s qebûl dikî.</string>
+  <!-- Terms of use (ToU) onboarding body line one link text for nova_onboarding_tou_body_line_1. 'Firefox' is intentionally hardcoded. -->
+  <string name="nova_onboarding_tou_body_line_1_link_text" tools:ignore="BrandUsage">Mercên Bikaranînê Firefoxê</string>
   <!--
     Terms of use (ToU) onboarding body line two. 'Firefox' is intentionally hardcoded.
     %1$s is replaced by an active link, using nova_onboarding_tou_body_line_2_link_text as text (“Privacy Notice”).
   -->
   <string name="nova_onboarding_tou_body_line_2" tools:ignore="BrandUsage">Firefox girîngiyê dide nepeniya te. Di %1$s’ên me de zêdetir bizane.</string>
+  <!-- Terms of use (ToU) onboarding body line two link text for nova_onboarding_tou_body_line_2. -->
+  <string name="nova_onboarding_tou_body_line_2_link_text">Danezana Nihêniyê</string>
+  <!--
+    Terms of use (ToU) onboarding body line three. 'Firefox' and 'Mozilla' are intentionally hardcoded.
+    %1$s is replaced by an active link, using nova_onboarding_tou_body_line_3_link_text as text (“Manage Settings”).
+  -->
+  <string name="nova_onboarding_tou_body_line_3" tools:ignore="BrandUsage">Ji bo çêtirkirina gerokê, Firefox daneyên teşhîs û têkiliyê ji Mozillayê re dişîne. %1$s</string>
   <!-- Terms of use (ToU) onboarding body line three link text for nova_onboarding_tou_body_line_3. -->
   <string name="nova_onboarding_tou_body_line_3_link_text">Eyaran bi rê ve bibe</string>
   <!-- "Set to default" onboarding title. -->
+  <string name="nova_onboarding_set_to_default_title" tools:ignore="UnusedResources">Ji şopînerên tirsnak re bibêje, de bi wê de</string>
+  <!-- "Set to default" onboarding title. -->
   <string name="nova_onboarding_set_to_default_title_2">Hemû girêdanên xwe bi nepeniya entegrekirî veke</string>
+  <!-- "Set to default" onboarding subtitle. -->
+  <string name="nova_onboarding_set_to_default_subtitle">Em daneyên te diparêzin û otomatîk rê li şîrketan digirin ku tikandinên te neşopînin.</string>
+  <!-- "Set to default" onboarding button. -->
+  <string name="nova_onboarding_set_to_default_button">Bike geroka sereke</string>
+  <!-- Toolbar selection onboarding title. -->
+  <string name="nova_onboarding_toolbar_selection_title">Ji xwe re darikê navnîşanan hilbijêre</string>
+  <!-- Toolbar selection onboarding "top" option label. -->
+  <string name="nova_onboarding_toolbar_selection_top_label">Jor</string>
+  <!-- Toolbar selection onboarding "bottom" option label. -->
+  <string name="nova_onboarding_toolbar_selection_bottom_label">Jêr</string>
+  <!-- Theme selection onboarding title. -->
+  <string name="nova_onboarding_theme_selection_title" tools:ignore="UnusedResources">Temaya xwe hilbijêre</string>
+  <!-- Theme selection onboarding "automatic" option label. -->
+  <string name="nova_onboarding_theme_selection_automatic_label" tools:ignore="UnusedResources">Otomatîk</string>
+  <!-- Theme selection onboarding "light" option label. -->
+  <string name="nova_onboarding_theme_selection_light_label" tools:ignore="UnusedResources">Ronî</string>
+  <!-- Theme selection onboarding "dark" option label. -->
+  <string name="nova_onboarding_theme_selection_dark_label" tools:ignore="UnusedResources">Tarî</string>
+  <!-- Sync onboarding title. -->
+  <string name="nova_onboarding_sync_title">Ji ciyê lê mayî dewam bike</string>
+  <!-- Sync onboarding subtitle. -->
+  <string name="nova_onboarding_sync_subtitle">Li ser hemû cîhazan xwe bilez bigihîne favorî, şîfre û tiştên din. Daneyên te yên şexsî bi şîfrekirinê ewle û parastî dimînin.</string>
+  <!-- Sync onboarding button. -->
+  <string name="nova_onboarding_sync_button">Dest bi senkronîzekirinê bike</string>
+  <!-- Marketing onboarding title. -->
+  <string name="nova_onboarding_marketing_title">Alîkariya me bike ku em înterneteke çêtir ava bikin</string>
+  <!--
+    Marketing onboarding body. 'Firefox' and 'Mozilla' are intentionally hardcoded.
+    %1$s is replaced by an active link, using nova_onboarding_marketing_body_link_text as text (“How we use the data”).
+  -->
+  <string name="nova_onboarding_marketing_body" tools:ignore="BrandUsage,UnusedResources">Bi hevkarên bazargeriyê yên Mozillayê re parve bike ka te Firefox çawa keşf kir û wê çawa bi kar tînî. Ev dane qet nayên firotin. %1$s</string>
+  <!-- Marketing onboarding body. 'Firefox' and 'Mozilla' are intentionally hardcoded. -->
+  <string name="nova_onboarding_marketing_body_2" tools:ignore="BrandUsage,UnusedResources">Bi hevkarên bazargeriyê yên Mozillayê re parve bike ka te Firefox çawa keşf kir û wê çawa bi kar tînî. Ev dane qet nayên firotin.</string>
+  <!-- Marketing onboarding body. 'Firefox' and 'Mozilla' are intentionally hardcoded. -->
+  <string name="nova_onboarding_marketing_body_3" tools:ignore="BrandUsage,UnusedResources">Heke tu destûrê bidî ku em li kanalên ku Mozilla Firefoxê dide nasandin diyar bikin ku tu bikarhênera/ê Firefoxê yî, em ê dikaribin xwe bigihînin zêdetir bikarhêneran.</string>
+  <!--
+    Marketing onboarding body. 'Firefox' and 'Mozilla' are intentionally hardcoded.
+    “Platform you came from” refers to the external app, website, store, campaign, or other source that directed the user to Firefox.
+  -->
+  <string name="nova_onboarding_marketing_body_4" tools:ignore="BrandUsage,UnusedResources">Heke tu destûrê bidî ku em li kanalên ku Mozilla Firefoxê dide nasandin diyar bikin ku tu Firefoxê bi kar tînî, em ê dikaribin xwe bigihînin zêdetir bikarhêneran.</string>
+  <!--
+    Marketing onboarding body. 'Firefox' and 'Mozilla' are intentionally hardcoded.
+    “Platform you came from” refers to the external app, website, store, campaign, or other source that directed the user to Firefox.
+  -->
+  <string name="nova_onboarding_marketing_body_5" tools:ignore="BrandUsage,UnusedResources">Heke tu destûrê bidî ku Mozilla ji ciyê tu jê hatî re bibêje tu Firefoxê bi kar tînî, em ê dikaribin xwe bigihînin zêdetir bikarhêneran.</string>
+  <!--
+    Marketing onboarding body. 'Firefox' and 'Mozilla' are intentionally hardcoded.
+    “Platform you came from” refers to the external app, website, store, campaign, or other source that directed the user to Firefox.
+    %1$s is replaced by an active link, using nova_onboarding_marketing_body_link_text as text (“How we use the data”).
+  -->
+  <string name="nova_onboarding_marketing_body_6" tools:ignore="BrandUsage,UnusedResources">Heke tu destûrê bidî ku Mozilla ji ciyê tu jê hatî re bibêje tu Firefoxê bi kar tînî, em ê dikaribin xwe bigihînin zêdetir bikarhêneran. %1$s</string>
+  <!--
+    Marketing onboarding body. 'Firefox' and 'Mozilla' are intentionally hardcoded.
+    “Platform you came from” refers to the external app, website, store, campaign, or other source that directed the user to Firefox.
+    %1$s is replaced by an active link, using nova_onboarding_marketing_body_link_text_1 as text (“Learn More”).
+  -->
+  <string name="nova_onboarding_marketing_body_7" tools:ignore="BrandUsage">Heke tu destûrê bidî ku Mozilla ji ciyê tu jê hatî re bibêje tu Firefoxê bi kar tînî, em ê dikaribin xwe bigihînin zêdetir bikarhêneran. %1$s</string>
+  <!-- Marketing onboarding additional body text. 'Firefox' is intentionally hardcoded. -->
+  <string name="nova_onboarding_marketing_body_line_two" tools:ignore="BrandUsage">Firefox bi serbilindî serbixwe ye û ji bo parastina weba vekirî li dijî monopolên teknolojiyê dilsoz e.</string>
+  <!--
+    Marketing onboarding additional body text. 'Firefox' is intentionally hardcoded.
+    “Allowing” refers to the main button “Allow and Continue”; the ask for the user is to allow communicating back to the platform.
+  -->
+  <string name="nova_onboarding_marketing_body_line_three" tools:ignore="BrandUsage">Ji kerema xwe re li hin dê bifikire, ka tu yê bi vê destûrdanê alîkariya serkeftinê bikî.</string>
+  <!-- Marketing onboarding body link text. -->
+  <string name="nova_onboarding_marketing_body_link_text">Em daneyan çawa bi kar tînin</string>
   <!-- Marketing onboarding body link text. -->
   <string name="nova_onboarding_marketing_body_link_text_1">Zêdetir Bizane</string>
+  <!-- Marketing onboarding primary button text. 'Firefox' is intentionally hardcoded. -->
+  <string name="nova_onboarding_marketing_primary_button_text" tools:ignore="BrandUsage,UnusedResources">Alîkariya Firefoxê bike</string>
+  <!-- Marketing onboarding primary button text. -->
+  <string name="nova_onboarding_marketing_primary_button_text_3">Erê</string>
+  <!-- Marketing onboarding secondary button text. -->
+  <string name="nova_onboarding_marketing_secondary_button_text" tools:ignore="UnusedResources">Na, spas</string>
+  <!-- Marketing onboarding secondary button text. -->
+  <string name="nova_onboarding_marketing_secondary_button_text_2">Na</string>
+  <!-- Notifications onboarding title. 'Firefox' is intentionally hardcoded. -->
+  <string name="nova_onboarding_notifications_title" tools:ignore="BrandUsage,UnusedResources">Agahdarî dihêlin ku tu bi Firefoxê re ewletir bî</string>
+  <!-- Notifications onboarding subtitle. 'Firefox' is intentionally hardcoded. -->
+  <string name="nova_onboarding_notifications_subtitle" tools:ignore="BrandUsage,UnusedResources">Taybetmendiyên nepenîtiyê yên herî dawî yên Firefoxê kifş bike da ku çêtir bizanî ka xwe çawa biparêzî.</string>
+  <!-- Notifications onboarding button. -->
+  <string name="nova_onboarding_notifications_button">Agahdariyan veke</string>
   <!-- "Add search widget" onboarding title. -->
   <string name="nova_onboarding_add_search_widget_title">Hemû lêgerînan nepentir bike</string>
   <!-- "Add search widget" onboarding subtitle. 'Firefox' is intentionally hardcoded. -->
   <string name="nova_onboarding_add_search_widget_subtitle" tools:ignore="BrandUsage">Hemû lêgerînan ji ekrana sereke ya telefona xwe bide destpêkirin û bizane ku parastinên otomatîkî yên Firefoxê li pişta te ne.</string>
+  <!-- "Add search widget" onboarding button. 'Firefox' is intentionally hardcoded. -->
+  <string name="nova_onboarding_add_search_widget_button" tools:ignore="BrandUsage">Widgeta Firefoxê lê zêde bike</string>
   <!-- Customize prompt onboarding title. -->
   <string name="nova_onboarding_customize_prompt_title" tools:ignore="UnusedResources">Şexsîkirina wê hêsan e û bi her tikandinê re nepentir e</string>
   <plurals name="nova_onboarding_customize_prompt_body" tools:ignore="UnusedResources">
@@ -514,6 +675,12 @@
     <item quantity="one">Dema tu di webê de digeriyayî %1$s`ê şopînerek asteng kir.</item>
     <item quantity="other">Dema tu di webê de digeriyayî %1$s`ê %2$,d şopîner asteng kirin.</item>
   </plurals>
+  <!-- Customize prompt onboarding positive button. -->
+  <string name="nova_onboarding_customize_prompt_positive_button" tools:ignore="UnusedResources">Dest bi şexsîkirinê bike</string>
+  <!-- App icon onboarding title. -->
+  <string name="nova_onboarding_app_icon_prompt_title" tools:ignore="UnusedResources">Îkoneke sepanê ya şexsî hilbijêre</string>
+  <!-- App icon onboarding body. -->
+  <string name="nova_onboarding_app_icon_prompt_body" tools:ignore="UnusedResources">Dirûveke şexsî bide ekrana malê.</string>
   <!--
     Widget Picker
 
@@ -568,6 +735,8 @@
   <string name="preferences_search">Lêgerîn</string>
   <!-- Preference for settings related to Search engines -->
   <string name="preferences_search_engines">Motorên lêgerînê</string>
+  <!-- Settings item to add a search widget on the device's homescreen. -->
+  <string name="preferences_add_search_widget_from_settings">Widgeta ekrana malê</string>
   <!-- Preference for settings related to Search engines suggestions -->
   <string name="preferences_search_engines_suggestions">Pêşniyarên ji motorên lêgerînê</string>
   <!-- Preference Category for settings related to Search address bar -->
@@ -605,6 +774,8 @@
   <string name="preferences_https_only_title">Moda Tenê-HTTPS</string>
   <!-- Preference title for using the screen lock to hide tabs in private browsing -->
   <string name="preferences_pbm_lock_screen_title">Ji bo veşartina hilpekînan di geroka taybet de kilîtkirina ekranê bikar bîne</string>
+  <!-- Informs the user how to access the tabs when "Use screen lock to hide tabs in private browsing" is enabled -->
+  <string name="preferences_pbm_lock_screen_summary_3">Hilpekînên xwe bi şoptilî, PIN yan rûyê xwe bibîne. Çalakkirina vê yekê di heman demê de pêşî li kişandin û parvekirina wêneyê ekranê digire.</string>
   <!-- Description of the preference to enable "HTTPS-Only" mode. -->
   <string name="preferences_https_only_summary">Ji bo ewlekariya zêdetir hewlê bide ku bi protokola şîfrekirî ya HTTPSê bi awayekî xweber têkeve malperan.</string>
   <!-- Summary of https only preference if https only is set to off -->
@@ -627,18 +798,40 @@
   <string name="errorpage_httpsonly_message_summary">Lê îhtîmal heye ku sedem êrîşek be jî. Heke tu têkevî vê malperê, agahiyên xwe yên girîng pê re parve neke. Heke dewam bikî moda Tenê-HTTPS dê ji bo vê malperê bi awayê demdemî girtî be.</string>
   <!-- Preference for accessibility -->
   <string name="preferences_accessibility">Gihînbarî</string>
+  <!-- Preference to override the Mozilla account server -->
+  <string name="preferences_override_account_server" tools:ignore="BrandUsage">Servera hesabê Mozillayê ya şesxî</string>
   <!-- Preference to override the Sync token server -->
   <string name="preferences_override_sync_tokenserver">Servera Sync’ê ya taybet</string>
   <!-- Preference category for account information -->
   <string name="preferences_category_account">Hesab</string>
+  <!-- Preference category for sync controls. Sync can be translated, it's just short for ”Synchronization” in English. -->
+  <string name="preferences_category_sync_controls">Senkronîzekirin</string>
+  <!-- Preference for changing where the AddressBar is positioned -->
+  <string name="preferences_toolbar_2">Ciyê darikê navnîşanan</string>
+  <!-- Preference for changing toolbar layout -->
+  <string name="preferences_toolbar_layout">Dirbê panela amûran</string>
   <!-- Preference for changing default theme to dark or light mode -->
   <string name="preferences_theme">Rûkar</string>
   <!-- Preference for customizing the home screen -->
   <string name="preferences_home_2">Serrûpel</string>
+  <!-- Preference for customizing the app icon -->
+  <string name="preferences_app_icon">Îkona sepanê</string>
+  <!-- Preference for showing the tab strip -->
+  <string name="preferences_tab_strip">Xuyakirina darikê sepanan</string>
+  <!-- Preference for gestures based actions -->
+  <string name="preferences_toolbar_shortcut">Kurtebira darikê amûran</string>
+  <!-- Preference for gestures based actions -->
+  <string name="preferences_toolbar_select_shortcut">Kurtebirekê hilbijêre</string>
+  <!-- Title of a menu option allowing to change the shortcut button shown in the toolbar -->
+  <string name="toolbar_shortcut_menu_edit_option">Kurtebiran serast bike</string>
   <!-- Preference for gestures based actions -->
   <string name="preferences_gestures">Hereketên tiliyan</string>
   <!-- Preference for settings related to visual options -->
   <string name="preferences_customize">Taybet bike</string>
+  <!-- Preference description shown in the banner prompting the user to sign in for sync features -->
+  <string name="preferences_sign_in_description">Hilpekînan, favoriyan, şîfreyan û hêj bêtir senkronîze bike.</string>
+  <!-- Preference shown instead of account display name while account profile information isn't available yet. -->
+  <string name="preferences_account_default_name_2" tools:ignore="BrandUsage">Hesabê Mozillayê</string>
   <!-- Preference text for account title when there was an error syncing FxA -->
   <string name="preferences_account_sync_error">Ji bo senkronîzekirinê bidomînî, dîsa girê bide</string>
   <!-- Preference for language -->
@@ -669,12 +862,34 @@
   <string name="preferences_search_synced_tabs">Di hilpekînên senkronîzekirî de lê bigere</string>
   <!-- Preference for account settings -->
   <string name="preferences_account_settings">Sazkariyên hesêb</string>
+  <!-- Preference for account and sync settings -->
+  <string name="preferences_account_and_sync_settings">Hesab û senkronîzekirin</string>
   <!-- Preference for enabling url autocomplete -->
   <string name="preferences_enable_autocomplete_urls">Navnîşanan bixweber dagire</string>
   <!-- Preference title for switch preference to show sponsored Firefox Suggest search suggestions -->
   <string name="preferences_show_sponsored_suggestions">Pêşniyarên ji sponsoran</string>
+  <!--
+    Summary for preference to show sponsored Firefox Suggest search suggestions.
+    %1$s is the name of the app (for example "Firefox").
+  -->
+  <string name="preferences_show_sponsored_suggestions_summary">Bi pêşniyarên sponsorgerî yên carinan xuya dibin, piştgiriyê bide %1$s`ê</string>
+  <!--
+    Preference title for switch preference to show Firefox Suggest search suggestions for web content.
+    %1$s is the name of the app (for example "Firefox").
+  -->
+  <string name="preferences_show_nonsponsored_suggestions">Pêşniyarên ji %1$s`ê</string>
   <!-- Summary for preference to show Firefox Suggest search suggestions for web content -->
   <string name="preferences_show_nonsponsored_suggestions_summary">Ji webê pşniyarên têkildarî lêgerîna xwe bistîne</string>
+  <!-- Preference title for switch preference to show search optimization cards -->
+  <string name="preferences_show_search_optimization_cards" tools:ignore="BrandUsage">Di dema nivîsandinê de pêşniyaran ji Mozilla bistîne</string>
+  <!-- Preference for link sharing -->
+  <string name="preferences_link_sharing">Parvekirina lînkan</string>
+  <!-- Title for the link sharing toggle. %1$s is replaced by the brand name (e.g. Firefox). -->
+  <string name="link_sharing_toggle_title">Girêdana jêbarkirinê ya %1$s li parvekirinên WhatsApp-ê zêde bike</string>
+  <!-- Body for the link sharing toggle.  %1$s is replaced by the brand name (e.g. Firefox). -->
+  <string name="link_sharing_toggle_body">Dema tu li ser Whatsapêê lînkan parve dikî, bi %1$s hevalên xwe vexwîne bo gera zûtir û ewletir.</string>
+  <!-- Snackbar message shown when user shares a link -->
+  <string name="link_shared_snackbar_message">Lînk hat parvekirin</string>
   <!-- Snackbar action label shown when user shares a link -->
   <string name="link_shared_snackbar_action">Eyaran bi rê ve bibe</string>
   <!-- Preference for open links in third party apps -->
@@ -685,20 +900,76 @@
   <string name="preferences_open_links_in_apps_ask">Beriya vekirinê bipirse</string>
   <!-- Preference for open links in third party apps never open in apps option -->
   <string name="preferences_open_links_in_apps_never">Ti caran</string>
+  <!-- Preference category for file storage. -->
+  <string name="preferences_category_file_storage">Hilanîna pelan</string>
+  <!-- Preference title for downloads default location. -->
+  <string name="preferences_downloads_default_location_title">Ciyê jêbarkirinê ya standard</string>
+  <!--
+    Message shown as the summary of the download location preference when the
+    app has lost the permission to access a previously selected custom folder.
+  -->
+  <string name="preference_downloads_folder_permission_lost" tools:ignore="UnusedResources">Destûra te nîn e ku vê peldankê bi kar bînî. Peldankeek din biceribîne.</string>
   <!-- Preference title for choosing an app to handle downloads -->
   <string name="preferences_choose_app_for_downloads">Jêbarkirinan bi sepaneke din bi rê ve bibe</string>
+  <!-- Message shown when no app is available to let the user pick a download folder. -->
+  <string name="preferences_downloads_no_folder_picker_available">Hilbijêra peldankan li ser vê cîhazê venabe.</string>
+  <!-- Preference category for deleting or removing downloads -->
+  <string name="preferences_category_delete_or_remove_downloads">Jêbarkirinan jê bibe yan jî rake</string>
+  <string name="preferences_downloads_delete_from_device">Ji ser cîhazê jê bibe</string>
+  <string name="preferences_downloads_delete_from_device_description">Pel ji cîhaza te hat jêbirin û ji raboriya jêbarkirinan hat rakirin</string>
+  <string name="preferences_downloads_remove_from_download_history">Ji raboriya jêbarkirinan rake</string>
+  <string name="preferences_downloads_remove_from_download_history_description">Pel ji raboriya te ya jêbarkirinan hat rakirin, lê hê jî li ser cîhaya te ye</string>
+  <string name="preferences_downloads_ask_when_to_delete_files">Dema ez pelan jê dibim, bipirse</string>
   <!-- Preference for downloads -->
   <string name="preferences_downloads_2">Eyarên Jêbarkirinê</string>
+  <!-- Preference for enabling gecko engine logs -->
+  <string name="preferences_enable_gecko_logs">Tomarên Gecko çalak bike</string>
+  <!-- Message to indicate users that we are quitting the application to apply the changes -->
+  <string name="quit_application">Ji bo sepandina guhertinan ji sepanê derdikeve…</string>
   <!-- Preference for extensions -->
   <string name="preferences_extensions">Pêvek</string>
+  <!-- Preference for installing a local extension -->
+  <string name="preferences_install_local_extension">Pêvekê ji dosyeyê saz bike</string>
   <!-- Preference for notifications -->
   <string name="preferences_notifications">Danezan</string>
   <!-- Summary for notification preference indicating notifications are allowed -->
   <string name="notifications_allowed_summary">Destûr hat dayîn</string>
   <!-- Summary for notification preference indicating notifications are not allowed -->
   <string name="notifications_not_allowed_summary">Destûr nehat dayîn</string>
+  <!-- Preference for local network access / nearby devices in Android 17 -->
+  <string name="preferences_local_network_access">Gihîştina Tora Herêmî / Amûrên Nêzîk</string>
+  <!-- Summary for local network access preference indicating access is allowed -->
+  <string name="local_network_access_allowed_summary">Destûr hat dayîn</string>
+  <!-- Summary for local network access preference indicating access is not allowed -->
+  <string name="local_network_access_not_allowed_summary">Destûr nehat dayîn</string>
+  <!--
+    Add-on Permissions
+
+    The title of the origin permission option allowing a user to enable the extension to run on all sites
+  -->
+  <string name="addons_permissions_allow_for_all_sites">Ji bo hemû malperan destûrê bide</string>
+  <!-- The subtitle for the allow for all sites preference toggle -->
+  <string name="addons_permissions_allow_for_all_sites_subtitle">Heke baweriya te bi vê pêvekê hbe, tu dikarî ji bo hemû malperan destûrê bidiyê.</string>
+  <!-- The text shown when an extension does not require permissions -->
+  <string name="addons_does_not_require_permissions">Ji vê pêvekê re ti destûr hewce nakin.</string>
+  <!-- The description of data collection permissions listed in the addon's permissions screen.  %1$s is a formatted list of permissions. -->
+  <string name="addons_permissions_required_data_collection_description_2">Pêşdebir dibêje ku ev pêvek van berhev dike: %1$s</string>
+  <!-- The description of the "none" data collection permission, when the extension doesn't collect anything according to the developer. -->
+  <string name="addons_permissions_none_required_data_collection_description">Pêşdebir dibêje ku ev pêvek ne hewceyî berhevkirina daneyan e.</string>
+  <!-- The title of the required permissions section from addon's permissions screen. -->
+  <string name="addons_permissions_heading_required_permissions">Destûrên pêwist:</string>
   <!-- The title of the optional permissions section from addon's permissions screen. -->
   <string name="addons_permissions_heading_optional_permissions">Destûrên vebijarkî:</string>
+  <!-- The title of the required data collection permissions section from addon's permissions screen. -->
+  <string name="addons_permissions_heading_required_data_collection">Berhevkirina daneyên pêwist:</string>
+  <!-- The title of the optional data collection permissions section from addon's permissions screen. -->
+  <string name="addons_permissions_heading_optional_data_collection">Berhevkirina daneyan ya vebijarkî:</string>
+  <!--
+    Add-on Preferences
+
+    Preference to customize the configured AMO (addons.mozilla.org) collection
+  -->
+  <string name="preferences_customize_extension_collection">Koleksiyona pêvekan ya şexsî</string>
   <!-- Button caption to confirm the add-on collection configuration -->
   <string name="customize_addon_collection_ok">Baş e</string>
   <!-- Button caption to abort the add-on collection configuration -->
@@ -707,6 +978,14 @@
   <string name="customize_addon_collection_hint">Navê koleksiyonê</string>
   <!-- Hint displayed on input field for custom collection user ID -->
   <string name="customize_addon_collection_user_hint">Xwediyê koleksiyonê (nasnameya bikarhêner)</string>
+  <!-- Toast shown after confirming the custom extension collection configuration -->
+  <string name="toast_customize_extension_collection_done">Koleksiyona pêvekan hat guhertin. Ji bo sepandina guhertinan ji bernamokê derdikeve…</string>
+  <!--
+    Customize Home
+
+    Title for the customize home screen section with privacy report.
+  -->
+  <string name="customize_toggle_privacy_report">Rapora nepeniyê</string>
   <!-- Title for a customize home screen section. Continue is a section that displays the most recent browser tab, so users can continue browsing where they left off. -->
   <string name="customize_toggle_continue">Bidomîne</string>
   <!-- Title for the customize home screen section with bookmarks. -->
@@ -744,6 +1023,10 @@
   <string name="wallpaper_classic_title">Klasîk %s</string>
   <!-- Text for artist series wallpapers title. "Artist series" represents a collection of artist collaborated wallpapers. -->
   <string name="wallpaper_artist_series_title">Seriyên hunermendan</string>
+  <!-- Description text for the artist series wallpapers with learn more link. %s is a learn more link using wallpaper_learn_more as text. "Independent voices" is the name of the wallpaper collection -->
+  <string name="wallpaper_artist_series_description_with_learn_more">Koleksiyona Dengên Serbixwe. %s</string>
+  <!-- Description text for the artist series wallpapers. "Independent voices" is the name of the wallpaper collection -->
+  <string name="wallpaper_artist_series_description">Koleksiyona Dengên Serbixwe.</string>
   <!-- Wallpaper onboarding dialog header text. -->
   <string name="wallpapers_onboarding_dialog_title_text">Rengên cuda biceribîne</string>
   <!-- Wallpaper onboarding dialog body text. -->
@@ -796,6 +1079,14 @@
   <string name="alternative_app_icon_option_momo">Momo</string>
   <!-- Subtitle for the "Momo" themed alternative app icon variant in the icon picker screen. The app icon was created by artist @heyheymomodraws and features a unique hand-drawn style with a friendly fox. -->
   <string name="alternative_app_icon_option_momo_subtitle">Ji hêla @heyheymomodraws ve hatiye afirandin</string>
+  <!-- Title for the "Cuddling" themed alternative app icon variant in the icon picker screen. The app icon features a playful design with an adorable aesthetic. -->
+  <string name="alternative_app_icon_option_cuddling">Hembêzkirin</string>
+  <!-- Title for the "Flaming" themed alternative app icon variant in the icon picker screen. The app icon features a fiery design, with the Firefox logo surrounded by flames for a bold, energetic look. -->
+  <string name="alternative_app_icon_option_flaming">Pêt</string>
+  <!-- Title for the "Cool" themed alternative app icon variant in the icon picker screen. The app icon uses a warm orange-to-yellow gradient background with a sleek, modern twist on the Firefox logo, giving it a fresh and stylish appearance. -->
+  <string name="alternative_app_icon_option_cool">Rind</string>
+  <!-- Title for the "Solid colors" group of alternative app icon variants in the icon picker screen. This group contains icons with flat, uniform color backgrounds. -->
+  <string name="alternative_app_icon_group_solid_colors">Rengên yekreng</string>
   <!-- Message to warn users that applying an alternative app icon may require an app restart and will remove existing shortcuts because of the OS limitations. Whether or not the app closes depends on what version of Android it is, so we use the word "may" instead of "will". %1$s is replaced by the brand name (e.g. Firefox). -->
   <string name="restart_and_shortcuts_removal_warning_dialog_body">Guhertina îkonê dê hemû malper û kurtebirên ku te li ser ekrana xwe ya sereke tomar kirine jê bibe. \n\nDibe ku %1$s bê girtin. Ji bo ji nû ve vekî, îkona xwe ya nû bikirtîne.</string>
   <!-- Dialog button text for cancelling app icon change -->
@@ -1127,6 +1418,40 @@
   <string name="pwa_site_controls_title_private">%1$s (Moda Veşartî)</string>
   <!-- Content description (not visible, for screen readers etc.) for the button to open the Tab Search feature to search through tabs. -->
   <string name="tab_manager_open_tab_search">Lêgerîna hilpekînan veke</string>
+  <!-- Text shown on the confirm button in the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_confirm">Ji komê derxistin</string>
+  <!-- Text shown on the cancel button in the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_cancel">Betal bike</string>
+  <!-- Custom accessibility action to reorder a tab up rather than dragging. -->
+  <string name="custom_accessibility_action_reorder_tab_up">Hilpekînê veguhezîne jorê</string>
+  <!-- Custom accessibility action to reorder a tab left rather than dragging. -->
+  <string name="custom_accessibility_action_reorder_tab_left">Hilpekînê veguhezîne çepê</string>
+  <!-- Custom accessibility action to reorder a tab right rather than dragging. -->
+  <string name="custom_accessibility_action_reorder_tab_right">Hilpekînê veguhezîne rastê</string>
+  <!-- Custom accessibility action to reorder a tab down rather than dragging. -->
+  <string name="custom_accessibility_action_reorder_tab_down">Hilpekînê veguhezîne jêrê</string>
+  <!--
+    Color labels for tab groups, used for accessibility and selection UI.
+
+    Tab group color: Yellow
+  -->
+  <string name="tab_group_color_yellow">Zer</string>
+  <!-- Tab group color: Orange -->
+  <string name="tab_group_color_orange">Porteqalî</string>
+  <!-- Tab group color: Red -->
+  <string name="tab_group_color_red">Sor</string>
+  <!-- Tab group color: Pink -->
+  <string name="tab_group_color_pink">Pembe</string>
+  <!-- Tab group color: Purple -->
+  <string name="tab_group_color_purple">Mor</string>
+  <!-- Tab group color: Blue -->
+  <string name="tab_group_color_blue">Şîn</string>
+  <!-- Tab group color: Cyan -->
+  <string name="tab_group_color_cyan">Şînê vekirî</string>
+  <!-- Tab group color: Green -->
+  <string name="tab_group_color_green">Kesk</string>
+  <!-- Tab group color: Grey -->
+  <string name="tab_group_color_grey">Gewr</string>
   <!--
     History
 
@@ -1146,6 +1471,23 @@
   <string name="history_multi_select_title">%1$d hate bijartin</string>
   <!-- Text shown when no history exists -->
   <string name="history_empty_message">Raborî tune</string>
+  <!--
+    Downloads
+
+    Text for the snackbar to confirm that a multiple download items have been removed. %1$s is the number of removed download items.
+    %1$d is the number of items deleted.
+  -->
+  <string name="download_delete_multiple_items_snackbar_2">Hêman hatin jêbirin: %1$d</string>
+  <!-- Title for the dialog that prompts the user to choose an app for downloading a file. -->
+  <string name="download_app_dialog_title">Dosyeyê bi vê jêbar bike:</string>
+  <!-- Text for the snackbar to confirm that a single download item has been removed. %1$s is the name of the download item. -->
+  <string name="download_delete_single_item_snackbar_2">“%1$s” hat jêbirin</string>
+  <!-- Text for the snackbar to confirm that downloads are in progress. -->
+  <string name="download_in_progress_snackbar">Jêbarkirin dewam dike…</string>
+  <!-- Text for the snackbar action button to view in progress download details. -->
+  <string name="download_in_progress_snackbar_action_details">Hûrgilî</string>
+  <!-- Text for the snackbar to confirm that a download has completed. -->
+  <string name="download_completed_snackbar">Jêbarkirin qediya</string>
   <!-- Text for the snackbar action button to open a completed download. -->
   <string name="download_completed_snackbar_action_open">Veke</string>
   <!-- Text for the snackbar action button to undo deleting a download. -->
@@ -1159,25 +1501,103 @@
     %1$d is the number of downloads selected
   -->
   <string name="download_multi_select_title">%1$d hatin bijartin</string>
+  <!-- Title for the dialog that is shown when there is not enough storage space to download a file. -->
+  <string name="download_file_has_not_enough_storage_dialog_title">Cî têrê nake</string>
+  <!--
+    Message for the dialog that is shown when there is not enough storage space to download a file.
+    %s is the name of the file to download.
+  -->
+  <string name="download_file_has_not_enough_storage_dialog_message"><![CDATA[Di vê cîhazê de têra xwe cî nîn e ji bo daxistina <b>%s</b>.]]></string>
+  <!--
+    Text for the confirm button in the dialog that is shown when there is not enough storage space to download a file.
+    This button will navigate the user to the device's storage management settings.
+  -->
+  <string name="download_file_has_not_enough_storage_dialog_confirm_button_text">Dosyeyan bi rê ve bibe</string>
+  <!--
+    Text for the cancel button in the dialog that is shown when there is not enough storage space to download a file.
+    This button will dismiss the dialog.
+  -->
+  <string name="download_file_has_not_enough_storage_dialog_cancel_button_text">Betal bike</string>
+  <plurals name="downloads_delete_dialog_title">
+    <!-- Title for the download deletion confirmation dialog. The message changes depending on how many files are selected. %d is the number of files to be deleted. -->
+    <item quantity="one">Dosyeyê jê bibe?</item>
+    <item quantity="other">%d dosyeyan jê bibe?</item>
+  </plurals>
   <!-- Text for the button to delete a single downloaded file item -->
   <string name="download_delete_item">Jê bibe</string>
+  <!-- Content description for the toolbar "Navigate back" button -->
+  <string name="download_navigate_back_description">Paşve here</string>
   <!-- Content description for the toolbar "Navigate to Downloads Settings" button -->
   <string name="download_navigate_settings_description">Here Sazkariyên Jêbarkirinan</string>
   <!-- Content description for the toolbar back button while searching the downloads -->
   <string name="download_close_search_description">Vegere û lêgerînê bigire</string>
+  <!--
+    Content description for the search bar clear text button on the downloads screen
+
+    Content description for pause action button on the downloads screen
+  -->
+  <string name="download_pause_action">Bisekinîne</string>
+  <!-- Content description for resume action button on the downloads screen -->
+  <string name="download_resume_action">Bidomîne</string>
+  <!-- Content description for retry download action button on the downloads screen -->
+  <string name="download_retry_action">Dîsa biceribîne</string>
   <string name="download_clear_search_description">Paqij bike</string>
   <!-- Text for the button to share the download URL -->
   <string name="download_share_url">URL`ê parve bike</string>
   <!-- Text for the button to share the download file -->
   <string name="download_share_file">Dosyeyê parve bike</string>
+  <!-- Text for the button to rename the download file -->
+  <string name="download_rename_file">Navê pelê biguherîne</string>
   <!-- Alert dialog confirmation before deleting multiple download items, this is the title. -->
   <string name="download_delete_multi_select_dialog_confirmation">Tu ji dil dixwazî hêmayên nîşankirî jê bibî?</string>
   <!-- Alert dialog confirmation before deleting multiple download items, this is the positive action. -->
   <string name="download_delete_multi_select_dialog_confirm">Jê bibe</string>
   <!-- Alert dialog confirmation before deleting multiple download items, this is the negative action. -->
   <string name="download_delete_multi_select_dialog_cancel">Betal bike</string>
+  <!-- Alert dialog confirmation before deleting a single download item or many download items, this is one of the radio buttons within the dialog box for the user to select. -->
+  <string name="download_delete_dialog_from_device">Ji ser cîhazê jê bibe</string>
+  <!-- Alert dialog confirmation before deleting a single download item or many download items, this is one of the radio buttons within the dialog box for the user to select. -->
+  <string name="download_delete_dialog_from_history">Tenê ji raboriya jêbarkirinan jê bibe</string>
+  <!-- Alert dialog confirmation before deleting a single download item or many download items, this is the negative action. -->
+  <string name="download_delete_dialog_cancel">Betal bike</string>
+  <!-- Alert dialog confirmation before deleting a single download item or many download items, this is the positive action. -->
+  <string name="download_delete_dialog_confirm">Bipejirîne</string>
+  <!-- Title for the alert dialog confirmation before renaming a download item. -->
+  <string name="download_rename_dialog_title">Navê pelê biguherîne</string>
+  <!-- Label for the name field in the alert dialog confirmation before renaming a download item. -->
+  <string name="download_rename_dialog_label">Nav</string>
+  <string name="download_rename_dialog_confirm_button">Tomar bike</string>
+  <string name="download_rename_dialog_cancel_button">Betal bike</string>
+  <!--
+    Error message when renaming with a name that already exists.
+    %s is the proposed file name.
+  -->
+  <string name="download_rename_error_exists_error">Pelekî bi navê “%s” jixwe li vê derê heye</string>
+  <!-- Error message when renaming with an invalid file name. -->
+  <string name="download_rename_error_invalid_name_error">Di navên peln de “/” nayê qebûlkirin</string>
+  <!-- Error message shown when a user tries to rename a downloaded file but only changes the casing (e.g., "file.txt" to "File.txt"). -->
+  <string name="download_rename_error_case_only_error">Navê ku te nivîsand tenê tîpên mezin an biçûk diguherîne. Navekî pelê yê cuda biceribîne.</string>
+  <!-- Title for the alert dialog when the file cannot be renamed. -->
+  <string name="download_rename_error_cannot_rename_title">Navê pelê nayê guhertin</string>
+  <!-- Description message for the alert dialog when the file cannot be renamed. -->
+  <string name="download_rename_error_cannot_rename_description">Ji ber sînorkirinên sîstemê an depoyê, navê vî pelî nayê guhertin.</string>
+  <string name="download_rename_error_dismiss_button">BAŞ E</string>
+  <!--
+    Title for the alert dialog to change file extension.
+    %s is the file type to change to.
+  -->
+  <string name="change_file_extension_title">Cureyê pelî biguherîne bo %s?</string>
+  <string name="change_file_extension_description">Ev dibe ku pelî di sepaneke cûda de veke û ji bo cîhaza te xeternak be.</string>
+  <string name="change_file_extension_cancel_button">Betal bike</string>
+  <string name="change_file_extension_confirm_button">Belê, biguherîne</string>
   <!-- Text for the header of in progress downloads -->
   <string name="download_header_in_progress">Dewam dike</string>
+  <!--
+    Time period headers for downloads
+
+    Text for the header that groups the downloads for today
+  -->
+  <string name="download_time_period_today">Îro</string>
   <!-- Text for the header that groups the downloads the past 7 days -->
   <string name="download_time_period_last_7_days">7 rojên dawiyê</string>
   <!-- Text for the header that groups the downloads older than other groups -->
@@ -1265,6 +1685,22 @@
   <string name="bookmark_menu_open_all_in_private_tabs_button">Gişî di hilpekînên veşartî de veke</string>
   <!-- Bookmark overflow menu delete button -->
   <string name="bookmark_menu_delete_button">Jê bibe</string>
+  <!-- Label for button to sort bookmarks by user-defined sort order in the bookmark sorting overflow menu. -->
+  <string name="bookmark_sort_menu_custom">Li gorî daxwaza şexsî rêz bike</string>
+  <!-- Label for button to sort bookmarks by newest in the bookmark sorting overflow menu. -->
+  <string name="bookmark_sort_menu_newest">Li gorî herî nû rêz bike</string>
+  <!-- Label for button to sort bookmarks by oldest in the bookmark sorting overflow menu. -->
+  <string name="bookmark_sort_menu_oldest">Li gorî herî kevn rêz bike</string>
+  <!-- Label for button to sort bookmarks in alphabetical order in the bookmark sorting overflow menu. -->
+  <string name="bookmark_sort_menu_a_to_z">Li gorî A heta Z rêz bike</string>
+  <!-- Label for button to sort bookmarks in reverse alphabetical order in the bookmark sorting overflow menu. -->
+  <string name="bookmark_sort_menu_z_to_a">Li gorî Z heta A rêz bike</string>
+  <!-- Label for button to import bookmarks from file. -->
+  <string name="bookmark_import_menu_button">Ji dosyeyê îtxal bike</string>
+  <!-- Snackbar message shown when a bookmark import attempt fails. -->
+  <string name="bookmark_import_failure_snackbar">Favorî nehatin îtxalkirin. Dîsa biceribîne.</string>
+  <!-- Default name for the folder created when importing bookmarks from a file. -->
+  <string name="bookmark_import_destination_default_name">Favoriyên îtxalkirî</string>
   <!--
     Bookmark multi select title in app bar
     %1$d is the number of bookmarks selected
@@ -1305,10 +1741,30 @@
   <string name="bookmark_search_button_content_description">Li favoriyan bigere</string>
   <!-- Content description for select folder screen search action button ("search" is a verb) -->
   <string name="select_bookmark_search_button_content_description">Peldankên lêgerînê</string>
+  <!-- Content description for the overflow menu for a bookmark item. %s is a folder name or bookmark title. -->
+  <string name="bookmark_item_menu_button_content_description">Menuya Hêmayan ji bo %s</string>
+  <!-- Content description for the chevron that will open a folder on the select folder screen and display its children. %s is the title of the folder that will be opened -->
+  <string name="bookmark_select_folder_expand_folder_content_description">Peldankê berfireh bike: %s</string>
+  <!-- Content description for the chevron that will close a folder on the select folder screen so that its children are no longer visible. %s is the title of the folder that will be closed -->
+  <string name="bookmark_select_folder_close_folder_content_description">Peldankê bigire: %s</string>
+  <!-- Content description for the "close" button in bookmarks screen. -->
+  <string name="bookmark_close_button_content_description">Favoriyan bigire</string>
+  <!-- Content description for the Import bookmarks button in bookmarks screen. -->
+  <string name="bookmark_import_bookmarks_button_content_description">Ji dosyeyê îtxal bike</string>
   <!-- Title for the bookmark list empty state -->
   <string name="bookmark_empty_list_title">Hê favorî nîn in</string>
+  <!-- Title for the bookmark list empty state at the root level. -->
+  <string name="bookmark_empty_list_root_title">Hemû fsvoriyên xwe yên bijare bi hev re bihêle</string>
+  <!-- Bookmark screen folder description. %s is the count of bookmark folder children -->
+  <string name="bookmarks_folder_description">Favoriyên di peldankê de: %s</string>
+  <!-- Text for the button to navigate to sync authentication -->
+  <string name="bookmark_empty_list_guest_cta">Têkeve Sync’ê</string>
   <!-- Description for the bookmark list empty state when you're in an empty folder. -->
   <string name="bookmark_empty_list_folder_description">Malperan di dema vekirinê de têxe favoriyan da dikaribî paşê xwe bigihînî wan.</string>
+  <!-- Description for the add new folder button when selecting a folder. -->
+  <string name="bookmark_select_folder_new_folder_button_title">Peldanka nû</string>
+  <!-- Bookmark snackbar message for moving a single item. %1$s is the title of the item being moved and %2$s is the new parent folder of the bookmark -->
+  <string name="bookmark_moved_single_item">%1$s bo %2$s hat guhestin</string>
   <!-- Additional text for bookmark search page when there are no results. -->
   <string name="bookmark_no_search_results_additional_text">Lêgerîneke din bi kar bîne!</string>
   <!--
@@ -1458,6 +1914,18 @@
   <string name="menu_print">Çap bike</string>
   <!-- Sub-header in the dialog to share a link to another sync device -->
   <string name="share_device_subheader">Bişîne cîhazê</string>
+  <!-- Text for the QR code action in the native share sheet -->
+  <string name="share_qr_code">Koda QR</string>
+  <!-- Title shown in the QR code display screen -->
+  <string name="qr_code_display_title">Koda QR</string>
+  <!-- Content description for the close button in the QR code display screen -->
+  <string name="qr_code_display_close">Bigire</string>
+  <!-- Label for the download button on the QR code display screen -->
+  <string name="qr_code_display_download">Jêbar bike</string>
+  <!-- Toast shown when the QR code is successfully saved to Downloads -->
+  <string name="qr_code_download_success">Koda QR li Jêbarkiriyan hat tomarkirin</string>
+  <!-- Toast shown when saving the QR code to Downloads fails -->
+  <string name="qr_code_download_failure">Tomarkirina koda QR bi ser neket</string>
   <!-- Sub-header in the dialog to share a link to an app from the full list -->
   <string name="share_link_all_apps_subheader">Hemû çalakî</string>
   <!-- Sub-header in the dialog to share a link to an app from the most-recent sorted list -->
@@ -1472,6 +1940,10 @@
   <string name="sync_send_to_all">Ji hemû cîhazan re bişîne</string>
   <!-- An option from the share dialog to reconnect to sync -->
   <string name="sync_reconnect">Dîsa li Sync’ê girê bide</string>
+  <!-- Label for the button in the share dialog that sends the tab to the selected sync devices -->
+  <string name="sync_send_to_selected_devices">Bişîne</string>
+  <!-- Content description announced when a device is selected in the share dialog -->
+  <string name="send_to_devices_device_selected_content_description">Hate bijartin</string>
   <!-- Text displayed when sync is offline and cannot be accessed -->
   <string name="sync_offline">Derhêl</string>
   <!-- An option to connect additional devices -->
