@@ -9793,6 +9793,37 @@ listen_to_page:
     notification_emails:
       - android-probes@mozilla.com
     expires: never
+  seek_latency:
+    type: timing_distribution
+    time_unit: millisecond
+    description: |
+      The time between a user seeking until audio played again, for seeks
+      whose chunk had to be synthesized. A seek interrupted by another seek,
+      a voice change or a pause is not recorded.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D334356
+    data_sensitivity:
+      - technical
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  seek_latency_queued:
+    type: timing_distribution
+    time_unit: millisecond
+    description: |
+      The same as seek_latency, for seeks to audio the player already had
+      queued, which need no synthesis.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D334356
+    data_sensitivity:
+      - technical
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
   session_max_thermal_status:
     type: labeled_counter
     description: |

@@ -223,7 +223,7 @@ class ListenPerformanceMiddlewareTest {
             store.dispatch(ListenAction.Playback.PlaybackWaiting)
             store.dispatch(ListenAction.Playback.PlaybackStarted(ChunkState(index = 3), positionMs = 0))
 
-            assertTrue("Gap recorded after $request", profiler.markers.isEmpty())
+            assertTrue("Gap recorded after $request", profiler.markers.none { it.name == CHUNK_GAP })
         }
     }
 
@@ -237,7 +237,7 @@ class ListenPerformanceMiddlewareTest {
         store.dispatch(ListenAction.Playback.PlaybackWaiting)
         store.dispatch(ListenAction.Playback.PlaybackStarted(ChunkState(index = 4), positionMs = 0))
 
-        assertEquals(CHUNK_GAP, profiler.markers.single().name)
+        assertEquals(1, profiler.markers.count { it.name == CHUNK_GAP })
     }
 
     @Test
@@ -294,6 +294,122 @@ class ListenPerformanceMiddlewareTest {
             profiler.markers,
         )
         assertNull(ListenToPage.chunkGapDuration.testGetValue())
+    }
+
+    @Test
+    fun `WHEN a seek finds its chunk queued THEN its latency is recorded as queued`() {
+        val store = createStore(playing)
+
+        store.dispatch(ListenAction.Playback.SeekRequested(fraction = 0.5f))
+        now += 40
+        store.dispatch(ListenAction.Playback.StateChangeObserved(PlaybackState(phase = PlaybackPhase.Playing)))
+
+        assertEquals(
+            listOf(Marker(SEEK_LATENCY, startTime = 0.0, endTime = 40.0, text = "path=queued")),
+            profiler.markers,
+        )
+        assertEquals(1L, ListenToPage.seekLatencyQueued.testGetValue()?.count)
+        assertNull(ListenToPage.seekLatency.testGetValue())
+    }
+
+    @Test
+    fun `WHEN a seek has to remake its chunk THEN its latency is recorded as remade`() {
+        val store = createStore(playing)
+
+        store.dispatch(ListenAction.Playback.SeekRequested(fraction = 0.5f))
+        store.dispatch(ListenAction.Playback.PlaybackWaiting)
+        now += 900
+        store.dispatch(ListenAction.Playback.PlaybackStarted(ChunkState(index = 3), positionMs = 0))
+
+        assertEquals(
+            listOf(Marker(SEEK_LATENCY, startTime = 0.0, endTime = 900.0, text = "path=remade")),
+            profiler.markers,
+        )
+        assertEquals(1L, ListenToPage.seekLatency.testGetValue()?.count)
+        assertNull(ListenToPage.seekLatencyQueued.testGetValue())
+    }
+
+    @Test
+    fun `WHEN the reader skips forward or back THEN the seek latency is recorded`() {
+        listOf(ListenAction.Controls.RewindClicked, ListenAction.Controls.ForwardClicked).forEach { skip ->
+            profiler.markers.clear()
+            val store = createStore(playing)
+
+            store.dispatch(skip)
+            store.dispatch(ListenAction.Playback.PlaybackStarted(ChunkState(index = 3), positionMs = 0))
+
+            assertEquals("No latency after $skip", SEEK_LATENCY, profiler.markers.single().name)
+        }
+    }
+
+    @Test
+    fun `WHEN a seek is interrupted by another seek THEN only the later one is recorded`() {
+        val store = createStore(playing)
+
+        store.dispatch(ListenAction.Playback.SeekRequested(fraction = 0.5f))
+        now = 100
+        store.dispatch(ListenAction.Controls.RewindClicked)
+        now = 300
+        store.dispatch(ListenAction.Playback.PlaybackStarted(ChunkState(index = 3), positionMs = 0))
+
+        assertEquals(
+            listOf(Marker(SEEK_LATENCY, startTime = 100.0, endTime = 300.0, text = "path=queued")),
+            profiler.markers,
+        )
+        assertEquals(1L, ListenToPage.seekLatencyQueued.testGetValue()?.count)
+    }
+
+    @Test
+    fun `WHEN a seek is interrupted by a voice change THEN it is not recorded`() {
+        val store = createStore(playing)
+
+        store.dispatch(ListenAction.Playback.SeekRequested(fraction = 0.5f))
+        store.dispatch(ListenAction.Voices.VoiceSelected(Voice("en-gb", Locale.UK)))
+        store.dispatch(ListenAction.Playback.PlaybackStarted(ChunkState(index = 3), positionMs = 0))
+
+        assertTrue(profiler.markers.none { it.name.startsWith(SEEK_LATENCY) })
+        assertNull(ListenToPage.seekLatencyQueued.testGetValue())
+    }
+
+    @Test
+    fun `WHEN playback is paused during a seek THEN it is not recorded`() {
+        val pauses =
+            listOf(
+                ListenAction.Controls.PlayPauseClicked,
+                ListenAction.Playback.StateChangeObserved(PlaybackState(phase = PlaybackPhase.Paused)),
+            )
+
+        pauses.forEach { pause ->
+            val store = createStore(playing)
+
+            store.dispatch(ListenAction.Playback.SeekRequested(fraction = 0.5f))
+            store.dispatch(pause)
+            store.dispatch(ListenAction.Playback.PlaybackStarted(ChunkState(index = 3), positionMs = 0))
+
+            assertTrue("Latency recorded after $pause", profiler.markers.none { it.name.startsWith(SEEK_LATENCY) })
+        }
+    }
+
+    @Test
+    fun `WHEN the reader seeks while paused THEN no latency is recorded`() {
+        val store = createStore(ListenState(playbackState = PlaybackState(phase = PlaybackPhase.Paused)))
+
+        store.dispatch(ListenAction.Playback.SeekRequested(fraction = 0.5f))
+        store.dispatch(ListenAction.Playback.StateChangeObserved(PlaybackState(phase = PlaybackPhase.Playing)))
+
+        assertTrue(profiler.markers.none { it.name.startsWith(SEEK_LATENCY) })
+    }
+
+    @Test
+    fun `WHEN playback fails during a seek THEN a failed seek latency marker is recorded`() {
+        val store = createStore(playing)
+
+        store.dispatch(ListenAction.Playback.SeekRequested(fraction = 0.5f))
+        store.dispatch(ListenAction.Playback.PlaybackWaiting)
+        store.dispatch(ListenAction.Synthesis.SynthesisFailed)
+
+        assertTrue(profiler.markers.any { it.name == "$SEEK_LATENCY.Failed" })
+        assertNull(ListenToPage.seekLatency.testGetValue())
     }
 
     @Test
@@ -691,6 +807,7 @@ class ListenPerformanceMiddlewareTest {
         const val TIME_TO_FIRST_AUDIO = "ListenToPage.TimeToFirstAudio"
         val LISTEN_REQUESTED = ListenAction.Session.ListenRequested(tabId = "tab", url = "https://example.com")
         const val CHUNK_GAP = "ListenToPage.ChunkGap"
+        const val SEEK_LATENCY = "ListenToPage.SeekLatency"
         const val EXTRACTION = "$TIME_TO_FIRST_AUDIO.Extraction"
         const val PREPARATION = "$TIME_TO_FIRST_AUDIO.Preparation"
         const val OPENING_SYNTHESIS = "$TIME_TO_FIRST_AUDIO.OpeningSynthesis"

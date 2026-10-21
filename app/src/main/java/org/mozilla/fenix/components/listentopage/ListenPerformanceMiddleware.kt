@@ -53,6 +53,9 @@ class ListenPerformanceMiddleware(
     // How long each phase of time to first audio took this session, in the order they ended.
     private var phaseDurationsMs = emptyMap<String, Long>()
 
+    // Whether the seek being measured had to have its chunk made again, rather than finding it queued.
+    private var seekRemade = false
+
     override fun invoke(
         store: Store<ListenState, ListenAction>,
         next: (ListenAction) -> Unit,
@@ -90,19 +93,21 @@ class ListenPerformanceMiddleware(
             ListenAction.Playback.PlaybackFailed -> failAll(action)
 
             // Reading starts without a press, so this pauses or resumes it.
-            ListenAction.Controls.PlayPauseClicked -> cancel(CHUNK_GAP, action)
+            ListenAction.Controls.PlayPauseClicked -> {
+                cancel(CHUNK_GAP, action)
+                cancel(SEEK_LATENCY, action)
+            }
 
             is ListenAction.Voices.VoiceSelected,
             is ListenAction.Playback.SeekRequested,
             ListenAction.Controls.RewindClicked,
-            ListenAction.Controls.ForwardClicked -> {
-                seekOrVoiceChangePending = true
-                cancel(CHUNK_GAP, action)
-            }
+            ListenAction.Controls.ForwardClicked -> onPlaybackMoved(action, previous.playbackState.phase)
 
-            // Only a wait after audio has played is a gap. The waits for the opening and for a replay are not.
-            ListenAction.Playback.PlaybackWaiting ->
+            ListenAction.Playback.PlaybackWaiting -> {
+                if (SEEK_LATENCY in spans) seekRemade = true
+                // Only a wait after audio has played is a gap. The waits for the opening and for a replay are not.
                 if (previous.playbackState.phase == PlaybackPhase.Playing) startChunkGap(ChunkGapCause.Waiting)
+            }
 
             is ListenAction.Playback.PlaybackStarted -> onPlaying()
 
@@ -148,6 +153,29 @@ class ListenPerformanceMiddleware(
         if (end(PLAYBACK_START)) recordPhaseSum()
         end(TIME_TO_FIRST_AUDIO)
         end(CHUNK_GAP)
+        end(SEEK_LATENCY, text = "path=${if (seekRemade) REMADE else QUEUED}")
+    }
+
+    /**
+     * A seek or voice change moved playback. An open seek span is dropped, since we drop synthesis for it.
+     * User-initiated pauses are also discounted, as we don't want those large gaps represented in the data.
+     */
+    private fun onPlaybackMoved(action: ListenAction, phase: PlaybackPhase) {
+        seekOrVoiceChangePending = true
+        cancel(CHUNK_GAP, action)
+        cancel(SEEK_LATENCY, action)
+
+        val isSeek = action !is ListenAction.Voices.VoiceSelected
+        if (isSeek && (phase == PlaybackPhase.Playing || phase == PlaybackPhase.Buffering)) {
+            seekRemade = false
+            start(
+                markerName = SEEK_LATENCY,
+                onEnd = { durationMs ->
+                    val metric = if (seekRemade) ListenToPage.seekLatency else ListenToPage.seekLatencyQueued
+                    metric.accumulateSamples(listOf(durationMs))
+                },
+            )
+        }
     }
 
     // Returns whether this call started a new marker span
@@ -163,9 +191,9 @@ class ListenPerformanceMiddleware(
         return true
     }
 
-    private fun end(markerName: String): Boolean {
+    private fun end(markerName: String, text: String? = null): Boolean {
         val span = spans.remove(markerName) ?: return false
-        val durationMs = record(markerName, span, span.text)
+        val durationMs = record(markerName, span, text ?: span.text)
         span.onEnd?.invoke(durationMs)
         return true
     }
@@ -237,7 +265,10 @@ class ListenPerformanceMiddleware(
     private fun ListenAction.Playback.StateChangeObserved.handleStateChange(prevState: ListenState) =
         when (playbackState.phase) {
             PlaybackPhase.Playing -> onPlaying()
-            PlaybackPhase.Paused -> cancel(CHUNK_GAP, this)
+            PlaybackPhase.Paused -> {
+                cancel(CHUNK_GAP, this)
+                cancel(SEEK_LATENCY, this)
+            }
             PlaybackPhase.Buffering if prevState.playbackState.phase == PlaybackPhase.Playing ->
                 startChunkGap(ChunkGapCause.Buffering)
             else -> Unit
@@ -317,6 +348,9 @@ class ListenPerformanceMiddleware(
         const val PHASE_SUM = "$TIME_TO_FIRST_AUDIO.PhaseSum"
         val PHASES = setOf(EXTRACTION, PREPARATION, OPENING_SYNTHESIS, PLAYBACK_START)
         const val CHUNK_GAP = "ListenToPage.ChunkGap"
+        const val SEEK_LATENCY = "ListenToPage.SeekLatency"
+        const val QUEUED = "queued"
+        const val REMADE = "remade"
         const val FAILED_SUFFIX = ".Failed"
     }
 }
