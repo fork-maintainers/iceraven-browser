@@ -9,6 +9,7 @@ import android.view.View
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.children
 import androidx.core.view.isVisible
+import androidx.core.view.marginBottom
 import mozilla.components.compose.base.theme.layout.AcornWindowSize
 import org.mozilla.fenix.R
 
@@ -40,31 +41,41 @@ internal class PdfOverlayBehavior(
 
     /**
      * Each piece of chrome is translated away independently, so the space vacated along the overlay's edge is the total
-     * of their translations. Once all of it is hidden this equals the inset, leaving the overlay flush with the edge.
+     * of their translations. Once all of it is hidden this equals the chrome height, leaving the overlay flush with the
+     * edge.
      */
     private fun List<View>.translationY(): Float = map { it.translationY }.sum()
 
     override fun layoutDependsOn(parent: CoordinatorLayout, child: View, dependency: View): Boolean =
         dependency.id in trackedIds(parent)
 
-    override fun onLayoutChild(parent: CoordinatorLayout, child: View, layoutDirection: Int): Boolean {
+    override fun onMeasureChild(
+        parent: CoordinatorLayout,
+        child: View,
+        parentWidthMeasureSpec: Int,
+        widthUsed: Int,
+        parentHeightMeasureSpec: Int,
+        heightUsed: Int,
+    ): Boolean {
         val params = child.layoutParams as? CoordinatorLayout.LayoutParams ?: return false
         val chrome = trackedChrome(parent)
-        val inset = chrome.sumOf { it.height }
+        val chromeHeight = chrome.sumOf { it.measuredHeight }
 
         if (isAnchoredToTop(parent)) {
             params.gravity = Gravity.TOP
-            params.topMargin = inset
+            params.topMargin = chromeHeight
             params.bottomMargin = 0
         } else {
             params.gravity = Gravity.BOTTOM
             params.topMargin = 0
-            params.bottomMargin = inset
+            params.bottomMargin = chromeHeight + chrome.sumOf { it.marginBottom }
         }
 
-        child.translationY = chrome.translationY()
+        return false
+    }
 
-        // The margins are read by the default layout that follows, so it does not need taking over.
+    override fun onLayoutChild(parent: CoordinatorLayout, child: View, layoutDirection: Int): Boolean {
+        child.translationY = trackedChrome(parent).translationY()
         return false
     }
 
