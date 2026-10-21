@@ -41,16 +41,23 @@ class ListenPerformanceMiddleware(
 
     private val spans = mutableMapOf<String, Span>()
 
+    // Track whether a seek or voice change has stopped audio until plays again. We want to avoid measuring this as part
+    // of a gap between chunks - that should solely be synthesis time.
+    private var seekOrVoiceChangePending = false
+
     override fun invoke(
         store: Store<ListenState, ListenAction>,
         next: (ListenAction) -> Unit,
         action: ListenAction,
     ) {
+        val previous = store.state
+
         next(action)
 
         when (action) {
             // Reading starts as soon as the reader asks to listen, so that is when the wait for audio starts.
             is ListenAction.Session.ListenRequested -> {
+                seekOrVoiceChangePending = false
                 cancelAll(action)
                 start(
                     markerName = TIME_TO_FIRST_AUDIO,
@@ -58,34 +65,50 @@ class ListenPerformanceMiddleware(
                 )
             }
 
-            is ListenAction.Session.StopRequested -> cancelAll(action)
+            is ListenAction.Session.StopRequested -> {
+                seekOrVoiceChangePending = false
+                cancelAll(action)
+            }
 
             ListenAction.Content.ContentUnavailable,
             ListenAction.Voices.NoOfflineVoicesAvailable,
             ListenAction.Synthesis.SynthesisFailed,
             ListenAction.Playback.PlaybackFailed -> failAll(action)
 
-            is ListenAction.Playback.PlaybackStarted -> end(TIME_TO_FIRST_AUDIO)
+            // Reading starts without a press, so this pauses or resumes it.
+            ListenAction.Controls.PlayPauseClicked -> cancel(CHUNK_GAP, action)
+
+            is ListenAction.Voices.VoiceSelected,
+            is ListenAction.Playback.SeekRequested,
+            ListenAction.Controls.RewindClicked,
+            ListenAction.Controls.ForwardClicked -> {
+                seekOrVoiceChangePending = true
+                cancel(CHUNK_GAP, action)
+            }
+
+            // Only a wait after audio has played is a gap. The waits for the opening and for a replay are not.
+            ListenAction.Playback.PlaybackWaiting ->
+                if (previous.playbackState.phase == PlaybackPhase.Playing) startChunkGap(cause = "waiting")
+
+            is ListenAction.Playback.PlaybackStarted -> onPlaying()
 
             is ListenAction.Playback.StateChangeObserved ->
-                if (action.playbackState.phase == PlaybackPhase.Playing) {
-                    end(TIME_TO_FIRST_AUDIO)
+                when (action.playbackState.phase) {
+                    PlaybackPhase.Playing -> onPlaying()
+                    PlaybackPhase.Paused -> cancel(CHUNK_GAP, action)
+                    PlaybackPhase.Buffering if previous.playbackState.phase == PlaybackPhase.Playing ->
+                        startChunkGap(cause = "buffering")
+                    else -> Unit
                 }
 
             is ListenAction.Content.ContentReady,
-            is ListenAction.Voices.VoiceSelected,
             is ListenAction.Voices.AvailableVoicesLoaded,
-            ListenAction.Controls.PlayPauseClicked,
-            ListenAction.Controls.RewindClicked,
-            ListenAction.Controls.ForwardClicked,
             ListenAction.Controls.VoicesClicked,
             ListenAction.Controls.VoicesDismissed,
             ListenAction.Controls.PlaybackSpeedClicked,
             ListenAction.Controls.PlaybackSpeedDismissed,
             is ListenAction.Controls.PlaybackSpeedSelected,
             is ListenAction.Playback.ArticleProgressReverted,
-            is ListenAction.Playback.SeekRequested,
-            ListenAction.Playback.PlaybackWaiting,
             ListenAction.Playback.PlaybackEnded,
             is ListenAction.ModeChanged,
             ListenAction.ErrorDismissed -> Unit
@@ -93,6 +116,21 @@ class ListenPerformanceMiddleware(
             // The session's own actions, which are internal to it.
             else -> Unit
         }
+    }
+
+    private fun startChunkGap(cause: String) {
+        if (seekOrVoiceChangePending) return
+        start(
+            markerName = CHUNK_GAP,
+            text = "cause=$cause",
+            onEnd = { durationMs -> ListenToPage.chunkGapDuration.accumulateSamples(listOf(durationMs)) },
+        )
+    }
+
+    private fun onPlaying() {
+        seekOrVoiceChangePending = false
+        end(TIME_TO_FIRST_AUDIO)
+        end(CHUNK_GAP)
     }
 
     private fun start(markerName: String, text: String? = null, onEnd: ((durationMs: Long) -> Unit)? = null) {
@@ -128,6 +166,11 @@ class ListenPerformanceMiddleware(
             }
         }
         return durationMs
+    }
+
+    private fun cancel(markerName: String, action: ListenAction) {
+        spans.remove(markerName) ?: return
+        logger.debug("$markerName cancelled by ${action::class.simpleName}")
     }
 
     private fun cancelAll(action: ListenAction) {
@@ -167,6 +210,7 @@ class ListenPerformanceMiddleware(
     private companion object {
         const val CHUNK_SYNTHESIS = "ListenToPage.ChunkSynthesis"
         const val TIME_TO_FIRST_AUDIO = "ListenToPage.TimeToFirstAudio"
+        const val CHUNK_GAP = "ListenToPage.ChunkGap"
         const val FAILED_SUFFIX = ".Failed"
     }
 }

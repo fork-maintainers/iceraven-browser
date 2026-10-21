@@ -9649,6 +9649,23 @@ listen_to_page:
     notification_emails:
       - android-probes@mozilla.com
     expires: never
+  chunk_gap_duration:
+    type: timing_distribution
+    time_unit: millisecond
+    description: |
+      The time playback was silent between two chunks of a page. Counted from
+      when the player ran out of audio or started to buffer until it played
+      again. Gaps caused by the user seeking, skipping, changing voice or
+      pausing are not recorded.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D333061
+    data_sensitivity:
+      - technical
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
 
 logins:
   password_detected:

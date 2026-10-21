@@ -4,6 +4,7 @@
 
 package org.mozilla.fenix.components.listentopage
 
+import java.util.Locale
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
@@ -13,6 +14,7 @@ import mozilla.components.feature.listentopage.ListenState
 import mozilla.components.feature.listentopage.ListenStore
 import mozilla.components.feature.listentopage.PlaybackPhase
 import mozilla.components.feature.listentopage.PlaybackState
+import mozilla.components.feature.listentopage.Voice
 import mozilla.components.feature.listentopage.facts.ListenToPageFacts
 import mozilla.components.feature.listentopage.listenReducer
 import mozilla.components.support.base.Component
@@ -145,6 +147,157 @@ class ListenPerformanceMiddlewareTest {
         assertEquals(1L, ListenToPage.timeToFirstAudio.testGetValue()?.count)
     }
 
+    @Test
+    fun `WHEN the player runs out of audio THEN a chunk gap is recorded until the next chunk plays`() {
+        val store = createStore(playing)
+
+        store.dispatch(ListenAction.Playback.PlaybackWaiting)
+        now += 800
+        store.dispatch(ListenAction.Playback.PlaybackStarted(ChunkState(index = 3), positionMs = 0))
+
+        assertEquals(
+            listOf(Marker(CHUNK_GAP, startTime = 0.0, endTime = 800.0, text = "cause=waiting")),
+            profiler.markers,
+        )
+        assertEquals(1L, ListenToPage.chunkGapDuration.testGetValue()?.count)
+    }
+
+    @Test
+    fun `WHEN the player waits for the opening THEN no chunk gap is recorded`() {
+        val store = createStore()
+
+        store.dispatch(ListenAction.Playback.PlaybackWaiting)
+        store.dispatch(ListenAction.Playback.PlaybackStarted(ChunkState(index = 0), positionMs = 0))
+
+        assertTrue(profiler.markers.isEmpty())
+        assertNull(ListenToPage.chunkGapDuration.testGetValue())
+    }
+
+    @Test
+    fun `WHEN an article that ended is played again THEN no chunk gap is recorded`() {
+        val store = createStore(ListenState(playbackState = PlaybackState(phase = PlaybackPhase.Ended)))
+
+        store.dispatch(ListenAction.Playback.PlaybackWaiting)
+        store.dispatch(ListenAction.Playback.PlaybackStarted(ChunkState(index = 0), positionMs = 0))
+
+        assertTrue(profiler.markers.isEmpty())
+        assertNull(ListenToPage.chunkGapDuration.testGetValue())
+    }
+
+    @Test
+    fun `WHEN the player buffers while playing THEN a chunk gap is recorded until it plays again`() {
+        val store = createStore(playing)
+
+        store.dispatch(ListenAction.Playback.StateChangeObserved(PlaybackState(phase = PlaybackPhase.Buffering)))
+        now += 50
+        store.dispatch(ListenAction.Playback.StateChangeObserved(PlaybackState(phase = PlaybackPhase.Playing)))
+
+        assertEquals(
+            listOf(Marker(CHUNK_GAP, startTime = 0.0, endTime = 50.0, text = "cause=buffering")),
+            profiler.markers,
+        )
+    }
+
+    @Test
+    fun `WHEN the player buffers before it has played THEN no chunk gap is recorded`() {
+        val store = createStore()
+
+        store.dispatch(ListenAction.Playback.StateChangeObserved(PlaybackState(phase = PlaybackPhase.Buffering)))
+        store.dispatch(ListenAction.Playback.StateChangeObserved(PlaybackState(phase = PlaybackPhase.Playing)))
+
+        assertTrue(profiler.markers.isEmpty())
+    }
+
+    @Test
+    fun `WHEN the player waits after a seek or voice change THEN no chunk gap is recorded`() {
+        val requests =
+            listOf(
+                ListenAction.Playback.SeekRequested(fraction = 0.5f),
+                ListenAction.Controls.RewindClicked,
+                ListenAction.Controls.ForwardClicked,
+                ListenAction.Voices.VoiceSelected(Voice("en-gb", Locale.UK)),
+            )
+
+        requests.forEach { request ->
+            val store = createStore(playing)
+
+            store.dispatch(request)
+            store.dispatch(ListenAction.Playback.PlaybackWaiting)
+            store.dispatch(ListenAction.Playback.PlaybackStarted(ChunkState(index = 3), positionMs = 0))
+
+            assertTrue("Gap recorded after $request", profiler.markers.isEmpty())
+        }
+    }
+
+    @Test
+    fun `WHEN audio plays after a seek THEN later chunk gaps are recorded again`() {
+        val store = createStore(playing)
+        store.dispatch(ListenAction.Playback.SeekRequested(fraction = 0.5f))
+        store.dispatch(ListenAction.Playback.PlaybackWaiting)
+        store.dispatch(ListenAction.Playback.PlaybackStarted(ChunkState(index = 3), positionMs = 0))
+
+        store.dispatch(ListenAction.Playback.PlaybackWaiting)
+        store.dispatch(ListenAction.Playback.PlaybackStarted(ChunkState(index = 4), positionMs = 0))
+
+        assertEquals(CHUNK_GAP, profiler.markers.single().name)
+    }
+
+    @Test
+    fun `WHEN a session stops during a seek THEN the next session records chunk gaps`() {
+        val store = createStore(playing)
+        store.dispatch(ListenAction.Playback.SeekRequested(fraction = 0.5f))
+        store.dispatch(ListenAction.Session.StopRequested())
+
+        store.dispatch(LISTEN_REQUESTED)
+        store.dispatch(ListenAction.Playback.PlaybackStarted(ChunkState(index = 0), positionMs = 0))
+        store.dispatch(ListenAction.Playback.PlaybackWaiting)
+        store.dispatch(ListenAction.Playback.PlaybackStarted(ChunkState(index = 1), positionMs = 0))
+
+        assertEquals(CHUNK_GAP, profiler.markers.last().name)
+    }
+
+    @Test
+    fun `WHEN playback is paused during a chunk gap THEN the gap is not recorded`() {
+        val pauses =
+            listOf(
+                ListenAction.Controls.PlayPauseClicked,
+                ListenAction.Playback.StateChangeObserved(PlaybackState(phase = PlaybackPhase.Paused)),
+            )
+
+        pauses.forEach { pause ->
+            val store = createStore(playing)
+
+            store.dispatch(ListenAction.Playback.PlaybackWaiting)
+            store.dispatch(pause)
+            store.dispatch(ListenAction.Playback.PlaybackStarted(ChunkState(index = 3), positionMs = 0))
+
+            assertTrue("Gap recorded after $pause", profiler.markers.isEmpty())
+        }
+        assertNull(ListenToPage.chunkGapDuration.testGetValue())
+    }
+
+    @Test
+    fun `WHEN playback fails during a chunk gap THEN a failed chunk gap marker is recorded`() {
+        val store = createStore(playing)
+
+        store.dispatch(ListenAction.Playback.PlaybackWaiting)
+        now += 1200
+        store.dispatch(ListenAction.Playback.PlaybackFailed)
+
+        assertEquals(
+            listOf(
+                Marker(
+                    name = "$CHUNK_GAP.Failed",
+                    startTime = 0.0,
+                    endTime = 1200.0,
+                    text = "failed=PlaybackFailed, cause=waiting",
+                )
+            ),
+            profiler.markers,
+        )
+        assertNull(ListenToPage.chunkGapDuration.testGetValue())
+    }
+
     private fun createStore(initialState: ListenState = ListenState()) =
         ListenStore(
             initialState = initialState,
@@ -233,5 +386,8 @@ class ListenPerformanceMiddlewareTest {
     private companion object {
         const val TIME_TO_FIRST_AUDIO = "ListenToPage.TimeToFirstAudio"
         val LISTEN_REQUESTED = ListenAction.Session.ListenRequested(tabId = "tab", url = "https://example.com")
+        const val CHUNK_GAP = "ListenToPage.ChunkGap"
+
+        val playing = ListenState(playbackState = PlaybackState(phase = PlaybackPhase.Playing))
     }
 }
