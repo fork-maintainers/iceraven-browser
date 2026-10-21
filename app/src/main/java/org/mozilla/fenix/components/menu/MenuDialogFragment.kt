@@ -64,6 +64,7 @@ import mozilla.components.concept.engine.translate.findLanguage
 import mozilla.components.feature.addons.Addon
 import mozilla.components.feature.automotive.isAndroidAutomotiveAvailable
 import mozilla.components.feature.ipprotection.store.IPProtectionAction
+import mozilla.components.feature.ipprotection.store.state.IPProtectionStatus
 import mozilla.components.feature.ipprotection.store.state.isEligible
 import mozilla.components.lib.state.helpers.StoreProvider.Companion.fragmentStore
 import mozilla.components.service.fxa.manager.AccountState.NotAuthenticated
@@ -94,7 +95,6 @@ import org.mozilla.fenix.components.menu.middleware.MenuTelemetryMiddleware
 import org.mozilla.fenix.components.menu.store.BrowserMenuState
 import org.mozilla.fenix.components.menu.store.ExtensionMenuState
 import org.mozilla.fenix.components.menu.store.IPProtectionMenuState
-import org.mozilla.fenix.components.menu.store.IPProtectionMenuStatus
 import org.mozilla.fenix.components.menu.store.MenuAction
 import org.mozilla.fenix.components.menu.store.MenuState
 import org.mozilla.fenix.components.menu.store.MenuStore
@@ -1037,27 +1037,32 @@ class MenuDialogFragment : BottomSheetDialogFragment() {
         store: MenuStore,
     ) {
         when (ipProtectionMenuState.status) {
-            IPProtectionMenuStatus.Disabled -> {
+            IPProtectionStatus.Disabled -> {
                 Vpn.menuTurnedOn.record()
                 components.ipProtection.store.dispatch(IPProtectionAction.Toggle)
             }
 
-            IPProtectionMenuStatus.Enabled -> {
+            IPProtectionStatus.Enabled -> {
                 Vpn.menuTurnedOff.record()
                 components.ipProtection.store.dispatch(IPProtectionAction.Toggle)
             }
 
-            IPProtectionMenuStatus.AuthRequired -> {
+            IPProtectionStatus.AuthRequired -> {
                 // If authorization is required, the user clicked the "Try it" button.
                 Vpn.menuTryItTapped.record(NoExtras())
                 store.dispatch(MenuAction.Navigate.IPProtectionSettings)
             }
 
-            IPProtectionMenuStatus.Activating,
-            IPProtectionMenuStatus.DataLimitReached,
-            IPProtectionMenuStatus.ConnectionError -> {
+            IPProtectionStatus.AwaitingService -> store.dispatch(MenuAction.Navigate.IPProtectionSettings)
+
+            IPProtectionStatus.Activating,
+            IPProtectionStatus.DataLimitReached,
+            IPProtectionStatus.ConnectionError -> {
                 components.ipProtection.store.dispatch(IPProtectionAction.Toggle)
             }
+
+            IPProtectionStatus.Unavailable,
+            IPProtectionStatus.Uninitialized -> Unit
         }
     }
 

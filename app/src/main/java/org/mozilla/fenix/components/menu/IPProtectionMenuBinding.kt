@@ -12,16 +12,12 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import mozilla.components.ExperimentalAndroidComponentsApi
-import mozilla.components.concept.engine.ipprotection.ServiceState
 import mozilla.components.feature.ipprotection.store.IPProtectionStore
-import mozilla.components.feature.ipprotection.store.state.AccountStatus
-import mozilla.components.feature.ipprotection.store.state.Authorized
 import mozilla.components.feature.ipprotection.store.state.IPProtectionState
-import mozilla.components.feature.ipprotection.store.state.Uninitialized
+import mozilla.components.feature.ipprotection.store.state.ipProtectionStatus
 import mozilla.components.feature.ipprotection.store.state.maxDataGb
 import mozilla.components.lib.state.helpers.AbstractBinding
 import org.mozilla.fenix.components.menu.store.IPProtectionMenuState
-import org.mozilla.fenix.components.menu.store.IPProtectionMenuStatus
 
 /**
  * Helper for observing [IPProtectionState] and dispatching menu state updates.
@@ -49,19 +45,6 @@ class IPProtectionMenuBinding(
 /** Maps this [IPProtectionState] to the [IPProtectionMenuState] used to configure the menu item. */
 internal fun IPProtectionState.toMenuState() =
     IPProtectionMenuState(
-        status = this.toMenuStatus(),
+        status = ipProtectionStatus,
         dataLimitGb = if (maxDataBytes > 0) maxDataGb.toInt() else -1,
     )
-
-private fun IPProtectionState.toMenuStatus() =
-    when {
-        serviceStatus == ServiceState.Unauthenticated -> IPProtectionMenuStatus.AuthRequired
-        proxyStatus is Uninitialized || proxyStatus is Authorized.Idle -> IPProtectionMenuStatus.Disabled
-        proxyStatus is Authorized.Activating -> IPProtectionMenuStatus.Activating
-        proxyStatus is Authorized.Active -> IPProtectionMenuStatus.Enabled
-        proxyStatus is Authorized.DataLimitReached -> IPProtectionMenuStatus.DataLimitReached
-        proxyStatus is Authorized.ConnectionError -> IPProtectionMenuStatus.ConnectionError
-        accountState.status == AccountStatus.NeedsAuthentication ||
-            accountState.status == AccountStatus.NeedsAuthorization -> IPProtectionMenuStatus.AuthRequired
-        else -> IPProtectionMenuStatus.Disabled
-    }

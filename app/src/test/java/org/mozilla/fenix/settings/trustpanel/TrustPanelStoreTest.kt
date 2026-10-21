@@ -10,6 +10,7 @@ import kotlinx.coroutines.test.runTest
 import mozilla.components.browser.state.state.content.PermissionHighlightsState
 import mozilla.components.concept.engine.permission.SitePermissions
 import mozilla.components.concept.engine.permission.SitePermissions.Status.ALLOWED
+import mozilla.components.feature.ipprotection.store.state.IPProtectionStatus
 import mozilla.components.feature.sitepermissions.SitePermissionsRules.Action.ASK_TO_ALLOW
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -17,7 +18,6 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mozilla.fenix.components.menu.store.IPProtectionMenuState
-import org.mozilla.fenix.components.menu.store.IPProtectionMenuStatus
 import org.mozilla.fenix.settings.PhoneFeature
 import org.mozilla.fenix.settings.sitepermissions.AUTOPLAY_ALLOW_ALL
 import org.mozilla.fenix.settings.trustpanel.store.AutoplayValue
@@ -274,7 +274,7 @@ class TrustPanelStoreTest {
             val store = TrustPanelStore(initialState = TrustPanelState())
             val newState =
                 IPProtectionMenuState(
-                    status = IPProtectionMenuStatus.Enabled,
+                    status = IPProtectionStatus.Enabled,
                     dataLimitGb = 5,
                 )
 

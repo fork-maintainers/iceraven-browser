@@ -15,81 +15,41 @@ import mozilla.components.feature.ipprotection.store.IPProtectionAction
 import mozilla.components.feature.ipprotection.store.IPProtectionStore
 import mozilla.components.feature.ipprotection.store.state.Authorized
 import mozilla.components.feature.ipprotection.store.state.BYTES_PER_GB
+import mozilla.components.feature.ipprotection.store.state.EligibilityStatus
 import mozilla.components.feature.ipprotection.store.state.IPProtectionState
+import mozilla.components.feature.ipprotection.store.state.IPProtectionStatus
+import mozilla.components.feature.ipprotection.store.state.ProxyStatus
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.mozilla.fenix.components.menu.store.IPProtectionMenuState
-import org.mozilla.fenix.components.menu.store.IPProtectionMenuStatus
 
 class IPProtectionMenuBindingTest {
     private val testDispatcher = StandardTestDispatcher()
 
     @Test
-    fun `GIVEN proxy is uninitialized WHEN binding starts THEN dispatch Disabled status`() = runTest {
-        var result: IPProtectionMenuState? = null
-        val ipProtectionStore = IPProtectionStore()
+    fun `GIVEN IP protection has not reported its state WHEN binding starts THEN dispatch Uninitialized status`() =
+        runTest {
+            var result: IPProtectionMenuState? = null
+            val ipProtectionStore = IPProtectionStore()
 
-        startBinding(ipProtectionStore) { result = it }
+            startBinding(ipProtectionStore) { result = it }
 
-        assertEquals(IPProtectionMenuStatus.Disabled, result?.status)
-    }
-
-    @Test
-    fun `GIVEN proxy is active WHEN binding starts THEN dispatch Enabled status`() = runTest {
-        var result: IPProtectionMenuState? = null
-        val ipProtectionStore = IPProtectionStore(initialState = IPProtectionState(proxyStatus = Authorized.Active))
-
-        startBinding(ipProtectionStore) { result = it }
-
-        assertEquals(IPProtectionMenuStatus.Enabled, result?.status)
-    }
+            assertEquals(IPProtectionStatus.Uninitialized, result?.status)
+        }
 
     @Test
     fun `WHEN proxy status changes THEN dispatch updated menu state`() = runTest {
         var result: IPProtectionMenuState? = null
-        val ipProtectionStore = IPProtectionStore()
+        val ipProtectionStore = IPProtectionStore(initialState = readyState(Authorized.Idle))
 
         startBinding(ipProtectionStore) { result = it }
 
-        assertEquals(IPProtectionMenuStatus.Disabled, result?.status)
+        assertEquals(IPProtectionStatus.Disabled, result?.status)
 
-        ipProtectionStore.dispatch(IPProtectionAction.ServiceStateChanged(ServiceState.Ready))
         ipProtectionStore.dispatch(IPProtectionAction.ProxyStateChanged(ProxyState.ACTIVE))
         testDispatcher.scheduler.advanceUntilIdle()
 
-        assertEquals(IPProtectionMenuStatus.Enabled, result?.status)
-    }
-
-    @Test
-    fun `WHEN proxy status maps to menu status THEN all statuses are mapped correctly`() = runTest {
-        val cases =
-            listOf(
-                (ServiceState.Uninitialized to null) to IPProtectionMenuStatus.Disabled,
-                (ServiceState.Ready to ProxyState.READY) to IPProtectionMenuStatus.Disabled,
-                (ServiceState.Ready to ProxyState.ACTIVATING) to IPProtectionMenuStatus.Activating,
-                (ServiceState.Ready to ProxyState.ACTIVE) to IPProtectionMenuStatus.Enabled,
-                (ServiceState.Ready to ProxyState.PAUSED) to IPProtectionMenuStatus.DataLimitReached,
-                (ServiceState.Ready to ProxyState.ERROR) to IPProtectionMenuStatus.ConnectionError,
-                (ServiceState.Unauthenticated to null) to IPProtectionMenuStatus.AuthRequired,
-            )
-
-        for ((states, expectedStatus) in cases) {
-            val (serviceState, proxyState) = states
-            var result: IPProtectionMenuState? = null
-            val ipProtectionStore = IPProtectionStore()
-
-            ipProtectionStore.dispatch(IPProtectionAction.ServiceStateChanged(serviceState))
-            proxyState?.let { ipProtectionStore.dispatch(IPProtectionAction.ProxyStateChanged(it)) }
-            testDispatcher.scheduler.advanceUntilIdle()
-
-            startBinding(ipProtectionStore) { result = it }
-
-            assertEquals(
-                "$serviceState/$proxyState should map to $expectedStatus",
-                expectedStatus,
-                result?.status,
-            )
-        }
+        assertEquals(IPProtectionStatus.Enabled, result?.status)
     }
 
     @Test
@@ -119,6 +79,13 @@ class IPProtectionMenuBindingTest {
 
         assertEquals(-1, result?.dataLimitGb)
     }
+
+    private fun readyState(proxyStatus: ProxyStatus) =
+        IPProtectionState(
+            eligibilityStatus = EligibilityStatus.Eligible,
+            serviceStatus = ServiceState.Ready,
+            proxyStatus = proxyStatus,
+        )
 
     private fun startBinding(
         ipProtectionStore: IPProtectionStore,

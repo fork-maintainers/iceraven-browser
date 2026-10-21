@@ -7,6 +7,7 @@ package org.mozilla.fenix.settings
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.test.assertHasNoClickAction
+import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.assertIsOff
 import androidx.compose.ui.test.hasContentDescription
@@ -19,6 +20,8 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import mozilla.components.ExperimentalAndroidComponentsApi
 import mozilla.components.compose.base.theme.Theme
 import mozilla.components.concept.engine.ipprotection.ServiceState
+import mozilla.components.feature.ipprotection.store.state.AccountState
+import mozilla.components.feature.ipprotection.store.state.AccountStatus
 import mozilla.components.feature.ipprotection.store.state.Authorized
 import mozilla.components.feature.ipprotection.store.state.BYTES_PER_GB
 import mozilla.components.feature.ipprotection.store.state.EligibilityStatus
@@ -45,7 +48,7 @@ class IPProtectionScreenTest {
             IPProtectionState(
                 eligibilityStatus = EligibilityStatus.Eligible,
                 proxyStatus = Authorized.DataLimitReached,
-                serviceStatus = ServiceState.Uninitialized,
+                serviceStatus = ServiceState.Ready,
                 maxDataBytes = maxDataGb.toLong() * BYTES_PER_GB.toLong(),
                 remainingDataBytes = 0L,
             )
@@ -204,6 +207,51 @@ class IPProtectionScreenTest {
             .assertHasNoClickAction()
     }
 
+    @Test
+    fun `GIVEN the user has to sign in WHEN rendering the screen THEN an enabled Get started button is shown`() {
+        setScreen(
+            state =
+                IPProtectionState(
+                    eligibilityStatus = EligibilityStatus.Eligible,
+                    serviceStatus = ServiceState.Unauthenticated,
+                    accountState = AccountState(AccountStatus.NoAccount),
+                )
+        )
+
+        composeTestRule.onNodeWithText(testContext.getString(R.string.ip_protection_get_started)).assertIsEnabled()
+        composeTestRule
+            .onNodeWithText(testContext.getString(R.string.ip_protection_location_section))
+            .assertDoesNotExist()
+    }
+
+    @Test
+    fun `GIVEN the service has not accepted the signed-in account yet WHEN rendering the screen THEN a disabled Connecting button is shown`() {
+        setScreen(
+            state =
+                IPProtectionState(
+                    eligibilityStatus = EligibilityStatus.Eligible,
+                    serviceStatus = ServiceState.Unauthenticated,
+                    accountState = AccountState(AccountStatus.Authenticated),
+                )
+        )
+
+        composeTestRule.onNodeWithText(testContext.getString(R.string.ip_protection_connecting)).assertIsNotEnabled()
+        composeTestRule.onNodeWithText(testContext.getString(R.string.ip_protection_get_started)).assertDoesNotExist()
+    }
+
+    @Test
+    fun `GIVEN the service is unavailable WHEN rendering the screen THEN the Get started button is disabled`() {
+        setScreen(
+            state =
+                IPProtectionState(
+                    eligibilityStatus = EligibilityStatus.Eligible,
+                    serviceStatus = ServiceState.Unavailable,
+                )
+        )
+
+        composeTestRule.onNodeWithText(testContext.getString(R.string.ip_protection_get_started)).assertIsNotEnabled()
+    }
+
     private fun setScreen(
         state: IPProtectionState,
         promoDate: String? = null,
@@ -215,8 +263,6 @@ class IPProtectionScreenTest {
                 IPProtectionScreen(
                     state = state,
                     snackbarHostState = SnackbarHostState(),
-                    readyToUse = true,
-                    syncingData = false,
                     promoDate = promoDate,
                     onVpnToggle = {},
                     onLearnMoreClick = onLearnMoreClick,
