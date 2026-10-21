@@ -5,6 +5,7 @@
 package org.mozilla.fenix.components.listentopage
 
 import android.os.SystemClock
+import java.util.Locale
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -19,6 +20,7 @@ import mozilla.components.support.base.Component
 import mozilla.components.support.base.facts.Fact
 import mozilla.components.support.base.facts.FactProcessor
 import mozilla.components.support.base.log.logger.Logger
+import mozilla.telemetry.glean.private.TimingDistributionMetricType
 import org.mozilla.fenix.GleanMetrics.ListenToPage
 
 /**
@@ -48,6 +50,9 @@ class ListenPerformanceMiddleware(
     // of a gap between chunks - that should solely be synthesis time.
     private var seekOrVoiceChangePending = false
 
+    // How long each phase of time to first audio took this session, in the order they ended.
+    private var phaseDurationsMs = emptyMap<String, Long>()
+
     override fun invoke(
         store: Store<ListenState, ListenAction>,
         next: (ListenAction) -> Unit,
@@ -66,7 +71,7 @@ class ListenPerformanceMiddleware(
                     markerName = TIME_TO_FIRST_AUDIO,
                     onEnd = { durationMs -> ListenToPage.timeToFirstAudio.accumulateSamples(listOf(durationMs)) },
                 )
-                start(EXTRACTION, onEnd = { ListenToPage.extractionDuration.accumulateSamples(listOf(it)) })
+                startPhase(EXTRACTION, ListenToPage.extractionDuration)
             }
 
             is ListenAction.Session.StopRequested -> {
@@ -121,7 +126,7 @@ class ListenPerformanceMiddleware(
 
     /** Starts the preparation, which runs from the article being ready until its opening starts to be synthesized. */
     private fun startPreparation() {
-        start(PREPARATION, onEnd = { ListenToPage.preparationDuration.accumulateSamples(listOf(it)) })
+        startPhase(PREPARATION, ListenToPage.preparationDuration)
     }
 
     private fun startChunkGap(cause: ChunkGapCause) {
@@ -140,7 +145,7 @@ class ListenPerformanceMiddleware(
 
     private fun onPlaying() {
         seekOrVoiceChangePending = false
-        end(PLAYBACK_START)
+        if (end(PLAYBACK_START)) recordPhaseSum()
         end(TIME_TO_FIRST_AUDIO)
         end(CHUNK_GAP)
     }
@@ -165,12 +170,43 @@ class ListenPerformanceMiddleware(
         return true
     }
 
+    /** Starts a phase of time to first audio, which records its duration into [metric] and the phase sum. */
+    private fun startPhase(markerName: String, metric: TimingDistributionMetricType) {
+        start(
+            markerName,
+            onEnd = { durationMs ->
+                metric.accumulateSamples(listOf(durationMs))
+                phaseDurationsMs = phaseDurationsMs + (markerName to durationMs)
+            },
+        )
+    }
+
+    /**
+     * Records the sum of every phase of time to first audio, ending now. The phases do not have to be contiguous, since
+     * play can be pressed long after extraction, so the marker covers their total duration rather than when they ran.
+     */
+    private fun recordPhaseSum() {
+        val phases = phaseDurationsMs
+        phaseDurationsMs = emptyMap()
+        if (phases.keys != PHASES) return
+
+        val totalMs = phases.values.sum()
+        val text = phases.entries.joinToString { (name, ms) -> "${name.removePrefix("$TIME_TO_FIRST_AUDIO.")}=$ms" }
+        logger.debug("$PHASE_SUM took ${totalMs}ms ($text)")
+
+        val endTime = profiler.getProfilerTime() ?: return
+        scope.launch {
+            profiler.addMarker(PHASE_SUM, endTime - totalMs, endTime, text)
+        }
+    }
+
     private fun failAll(action: ListenAction) {
         val reason = "failed=${action::class.simpleName}"
         spans.forEach { (markerName, span) ->
             record("$markerName$FAILED_SUFFIX", span, listOfNotNull(reason, span.text).joinToString())
         }
         spans.clear()
+        phaseDurationsMs = emptyMap()
     }
 
     private fun record(markerName: String, span: Span, text: String?): Long {
@@ -195,6 +231,7 @@ class ListenPerformanceMiddleware(
     private fun cancelAll(action: ListenAction) {
         spans.keys.forEach { logger.debug("$it cancelled by ${action::class.simpleName}") }
         spans.clear()
+        phaseDurationsMs = emptyMap()
     }
 
     private fun ListenAction.Playback.StateChangeObserved.handleStateChange(prevState: ListenState) =
@@ -212,10 +249,7 @@ class ListenPerformanceMiddleware(
         when (fact.item) {
             ListenToPageFacts.Items.OPENING_SYNTHESIS_STARTED ->
                 if (end(PREPARATION)) {
-                    start(
-                        OPENING_SYNTHESIS,
-                        onEnd = { ListenToPage.openingSynthesisDuration.accumulateSamples(listOf(it)) },
-                    )
+                    startPhase(OPENING_SYNTHESIS, ListenToPage.openingSynthesisDuration)
                 }
 
             ListenToPageFacts.Items.CHUNK_SYNTHESIZED -> fact.recordChunkSynthesized()
@@ -227,16 +261,22 @@ class ListenPerformanceMiddleware(
         val chunk =
             metadata?.get(ListenToPageFacts.MetadataKeys.CHUNK_SYNTHESIS) as? ListenToPageFacts.ChunkSynthesis ?: return
         if (chunk.index == 0 && end(OPENING_SYNTHESIS)) {
-            start(PLAYBACK_START, onEnd = { ListenToPage.playbackStartDuration.accumulateSamples(listOf(it)) })
+            startPhase(PLAYBACK_START, ListenToPage.playbackStartDuration)
         }
 
-        val text = "index=${chunk.index}, length=${chunk.length}, audioMs=${chunk.audioMs}, engine=$engine"
+        val text =
+            "index=${chunk.index}, length=${chunk.length}, audioMs=${chunk.audioMs}, " +
+                "megabytes=${chunk.fileKilobytes?.toMegabytes()}, engine=$engine"
 
         logger.debug("$CHUNK_SYNTHESIS took ${chunk.synthesisMs}ms ($text)")
 
         // The opening is a single sentence and has its own measurement, so it is kept out of the other chunks' samples.
         if (chunk.index != 0) {
             ListenToPage.chunkSynthesisDuration.accumulateSamples(listOf(chunk.synthesisMs))
+        }
+        chunk.fileKilobytes?.let { kilobytes ->
+            val size = if (chunk.index == 0) ListenToPage.openingChunkAudioSize else ListenToPage.chunkAudioSize
+            size.accumulate(kilobytes)
         }
 
         val endTime = profiler.getProfilerTime() ?: return
@@ -274,7 +314,14 @@ class ListenPerformanceMiddleware(
         const val PREPARATION = "$TIME_TO_FIRST_AUDIO.Preparation"
         const val OPENING_SYNTHESIS = "$TIME_TO_FIRST_AUDIO.OpeningSynthesis"
         const val PLAYBACK_START = "$TIME_TO_FIRST_AUDIO.PlaybackStart"
+        const val PHASE_SUM = "$TIME_TO_FIRST_AUDIO.PhaseSum"
+        val PHASES = setOf(EXTRACTION, PREPARATION, OPENING_SYNTHESIS, PLAYBACK_START)
         const val CHUNK_GAP = "ListenToPage.ChunkGap"
         const val FAILED_SUFFIX = ".Failed"
     }
 }
+
+/** These kilobytes in megabytes, to two decimal places, for reading in a marker or the log. */
+private fun Long.toMegabytes(): String = String.format(Locale.ROOT, "%.2f", this / KILOBYTES_PER_MEGABYTE)
+
+private const val KILOBYTES_PER_MEGABYTE = 1024.0

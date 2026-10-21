@@ -376,6 +376,7 @@ class ListenPerformanceMiddlewareTest {
                 Marker(PREPARATION, startTime = 100.0, endTime = 150.0, text = null),
                 Marker(OPENING_SYNTHESIS, startTime = 150.0, endTime = 400.0, text = null),
                 Marker(PLAYBACK_START, startTime = 400.0, endTime = 500.0, text = null),
+                Marker(PHASE_SUM, startTime = 0.0, endTime = 500.0, text = PHASE_SUM_TEXT),
                 Marker(TIME_TO_FIRST_AUDIO, startTime = 0.0, endTime = 500.0, text = null),
             ),
             phaseMarkers(),
@@ -399,6 +400,41 @@ class ListenPerformanceMiddlewareTest {
         middleware.process(openingSynthesisStartedFact())
 
         assertEquals(Marker(PREPARATION, startTime = 100.0, endTime = 5_050.0, text = null), profiler.markers.last())
+    }
+
+    @Test
+    fun `WHEN a phase fails THEN no phase sum is recorded`() {
+        val store = createStore()
+        store.dispatch(LISTEN_REQUESTED)
+        store.dispatch(ListenAction.Content.ContentReady(languageTag = "en-US"))
+        middleware.process(openingSynthesisStartedFact())
+        store.dispatch(ListenAction.Synthesis.SynthesisFailed)
+
+        store.dispatch(ListenAction.Playback.PlaybackStarted(ChunkState(index = 0), positionMs = 0))
+
+        assertTrue(profiler.markers.none { it.name == PHASE_SUM })
+    }
+
+    @Test
+    fun `WHEN a session stops after extraction THEN the next session's phase sum only counts its own phases`() {
+        val store = createStore()
+        store.dispatch(LISTEN_REQUESTED)
+        now = 1_000
+        store.dispatch(ListenAction.Content.ContentReady(languageTag = "en-US"))
+        store.dispatch(ListenAction.Session.StopRequested())
+
+        now = 2_000
+        store.dispatch(LISTEN_REQUESTED)
+        now = 2_100
+        store.dispatch(ListenAction.Content.ContentReady(languageTag = "en-US"))
+        now = 2_150
+        middleware.process(openingSynthesisStartedFact())
+        now = 2_400
+        middleware.process(chunkSynthesizedFact(index = 0))
+        now = 2_500
+        store.dispatch(ListenAction.Playback.PlaybackStarted(ChunkState(index = 0), positionMs = 0))
+
+        assertEquals(PHASE_SUM_TEXT, profiler.markers.single { it.name == PHASE_SUM }.text)
     }
 
     @Test
@@ -503,13 +539,19 @@ class ListenPerformanceMiddlewareTest {
             metadata =
                 mapOf(
                     ListenToPageFacts.MetadataKeys.CHUNK_SYNTHESIS to
-                        ListenToPageFacts.ChunkSynthesis(index, length = 25, synthesisMs = 250, audioMs = 2_500)
+                        ListenToPageFacts.ChunkSynthesis(
+                            index,
+                            length = 25,
+                            synthesisMs = 250,
+                            audioMs = 2_500,
+                            fileKilobytes = 120,
+                        )
                 ),
         )
 
     @Test
     fun `WHEN a chunk is synthesized THEN its duration is recorded`() {
-        processFact(chunkSynthesizedFact(ListenToPageFacts.ChunkSynthesis(2, 600, 400, 60_000)))
+        processFact(chunkSynthesizedFact(ListenToPageFacts.ChunkSynthesis(2, 600, 400, 60_000, null)))
 
         assertEquals(1L, ListenToPage.chunkSynthesisDuration.testGetValue()?.count)
     }
@@ -518,7 +560,7 @@ class ListenPerformanceMiddlewareTest {
     fun `WHEN a chunk is synthesized THEN a marker ending now spans its synthesis`() {
         now = 1000
 
-        processFact(chunkSynthesizedFact(ListenToPageFacts.ChunkSynthesis(2, 600, 400, 60_000)))
+        processFact(chunkSynthesizedFact(ListenToPageFacts.ChunkSynthesis(2, 600, 400, 60_000, null)))
 
         assertEquals(
             listOf(
@@ -526,7 +568,7 @@ class ListenPerformanceMiddlewareTest {
                     name = "ListenToPage.ChunkSynthesis",
                     startTime = 600.0,
                     endTime = 1000.0,
-                    text = "index=2, length=600, audioMs=60000, engine=null",
+                    text = "index=2, length=600, audioMs=60000, megabytes=null, engine=null",
                 )
             ),
             profiler.markers,
@@ -537,7 +579,7 @@ class ListenPerformanceMiddlewareTest {
     fun `WHEN the profiler is not running THEN a chunk's duration is still recorded`() {
         profiler.active = false
 
-        processFact(chunkSynthesizedFact(ListenToPageFacts.ChunkSynthesis(2, 600, 400, null)))
+        processFact(chunkSynthesizedFact(ListenToPageFacts.ChunkSynthesis(2, 600, 400, null, null)))
 
         assertTrue(profiler.markers.isEmpty())
         assertEquals(1L, ListenToPage.chunkSynthesisDuration.testGetValue()?.count)
@@ -546,7 +588,7 @@ class ListenPerformanceMiddlewareTest {
     @Test
     fun `WHEN a fact comes from another component THEN it is ignored`() {
         processFact(
-            chunkSynthesizedFact(ListenToPageFacts.ChunkSynthesis(2, 600, 400, null))
+            chunkSynthesizedFact(ListenToPageFacts.ChunkSynthesis(2, 600, 400, null, null))
                 .copy(component = Component.FEATURE_DOWNLOADS)
         )
 
@@ -556,7 +598,9 @@ class ListenPerformanceMiddlewareTest {
 
     @Test
     fun `WHEN a chunk fact carries no chunk synthesis THEN it is ignored`() {
-        processFact(chunkSynthesizedFact(ListenToPageFacts.ChunkSynthesis(2, 600, 400, null)).copy(metadata = null))
+        processFact(
+            chunkSynthesizedFact(ListenToPageFacts.ChunkSynthesis(2, 600, 400, null, null)).copy(metadata = null)
+        )
 
         assertTrue(profiler.markers.isEmpty())
         assertNull(ListenToPage.chunkSynthesisDuration.testGetValue())
@@ -573,9 +617,48 @@ class ListenPerformanceMiddlewareTest {
     fun `WHEN an engine is bound THEN later chunk markers name it`() {
         processFact(engineBoundFact("com.example.tts"))
 
-        processFact(chunkSynthesizedFact(ListenToPageFacts.ChunkSynthesis(2, 600, 400, 60_000)))
+        processFact(chunkSynthesizedFact(ListenToPageFacts.ChunkSynthesis(2, 600, 400, 60_000, null)))
 
-        assertEquals("index=2, length=600, audioMs=60000, engine=com.example.tts", profiler.markers.single().text)
+        assertEquals(
+            "index=2, length=600, audioMs=60000, megabytes=null, engine=com.example.tts",
+            profiler.markers.single().text,
+        )
+    }
+
+    @Test
+    fun `WHEN the opening chunk is synthesized THEN its size is recorded apart from later chunks`() {
+        processFact(chunkSynthesizedFact(ListenToPageFacts.ChunkSynthesis(0, 25, 100, 2_500, 117)))
+
+        assertEquals(1L, ListenToPage.openingChunkAudioSize.testGetValue()?.count)
+        // Glean keeps memory in bytes whatever unit it was given in.
+        assertEquals(117L * 1024, ListenToPage.openingChunkAudioSize.testGetValue()?.sum)
+        assertNull(ListenToPage.chunkAudioSize.testGetValue())
+    }
+
+    @Test
+    fun `WHEN a later chunk is synthesized THEN its size is recorded apart from the opening`() {
+        processFact(chunkSynthesizedFact(ListenToPageFacts.ChunkSynthesis(3, 600, 400, 60_000, 2_813)))
+
+        assertEquals(2_813L * 1024, ListenToPage.chunkAudioSize.testGetValue()?.sum)
+        assertNull(ListenToPage.openingChunkAudioSize.testGetValue())
+    }
+
+    @Test
+    fun `WHEN a chunk has a size THEN its marker shows it in megabytes`() {
+        processFact(chunkSynthesizedFact(ListenToPageFacts.ChunkSynthesis(3, 600, 400, 60_000, 2_949)))
+
+        assertEquals(
+            "index=3, length=600, audioMs=60000, megabytes=2.88, engine=null",
+            profiler.markers.single().text,
+        )
+    }
+
+    @Test
+    fun `WHEN a chunk has no size THEN no size is recorded`() {
+        processFact(chunkSynthesizedFact(ListenToPageFacts.ChunkSynthesis(3, 600, 400, 60_000, null)))
+
+        assertNull(ListenToPage.chunkAudioSize.testGetValue())
+        assertEquals(1L, ListenToPage.chunkSynthesisDuration.testGetValue()?.count)
     }
 
     private val factMiddleware by lazy {
@@ -612,6 +695,11 @@ class ListenPerformanceMiddlewareTest {
         const val PREPARATION = "$TIME_TO_FIRST_AUDIO.Preparation"
         const val OPENING_SYNTHESIS = "$TIME_TO_FIRST_AUDIO.OpeningSynthesis"
         const val PLAYBACK_START = "$TIME_TO_FIRST_AUDIO.PlaybackStart"
+        const val PHASE_SUM = "$TIME_TO_FIRST_AUDIO.PhaseSum"
+
+        // The phases of each full sequence below: 100ms of extraction, 50 of preparation, 250 of opening synthesis
+        // and 100 until playback starts.
+        const val PHASE_SUM_TEXT = "Extraction=100, Preparation=50, OpeningSynthesis=250, PlaybackStart=100"
 
         val playing = ListenState(playbackState = PlaybackState(phase = PlaybackPhase.Playing))
     }

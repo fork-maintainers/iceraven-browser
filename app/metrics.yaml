@@ -9728,6 +9728,38 @@ listen_to_page:
     notification_emails:
       - android-probes@mozilla.com
     expires: never
+  opening_chunk_audio_size:
+    type: memory_distribution
+    memory_unit: kilobyte
+    description: |
+      The size on disk of the audio the speech engine made for the opening
+      chunk of a page, which is a single sentence. It is recorded each time
+      the opening is made, which includes after a voice change or a seek back
+      to the start of the article.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D333066
+    data_sensitivity:
+      - technical
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  chunk_audio_size:
+    type: memory_distribution
+    memory_unit: kilobyte
+    description: |
+      The size on disk of the audio the speech engine made for each chunk of a
+      page after the opening.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D333066
+    data_sensitivity:
+      - technical
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
   chunk_gap_duration:
     type: timing_distribution
     time_unit: millisecond
