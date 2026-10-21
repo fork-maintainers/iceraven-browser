@@ -407,6 +407,11 @@ class SecretSettingsFragment : PreferenceFragmentCompat(), SystemInsetsPaddedFra
             onPreferenceChangeListener = SharedPreferenceUpdater()
         }
 
+        requirePreference<SwitchPreferenceCompat>(R.string.pref_key_enable_sync_decoupling).apply {
+            isChecked = settings.syncDecouplingEnabled
+            onPreferenceChangeListener = SharedPreferenceUpdater()
+        }
+
         requirePreference<SwitchPreferenceCompat>(R.string.pref_key_enable_homepage_customization).apply {
             isChecked = settings.enableHomepageCustomization
             onPreferenceChangeListener = SharedPreferenceUpdater()

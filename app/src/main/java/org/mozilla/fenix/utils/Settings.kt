@@ -3530,6 +3530,13 @@ class Settings(
             default = { FxNimbus.features.accountSyncDecoupleM1.value().enabled },
         )
 
+    /** Whether or not accounts & sync decoupling is enabled */
+    var syncDecouplingEnabled by
+        booleanPreference(
+            key = appContext.getPreferenceKey(R.string.pref_key_enable_sync_decoupling),
+            default = { FxNimbus.features.accountSyncDecouple.value().enabled },
+        )
+
     private var powerSavingModeAutoPreference by
         booleanPreference(
             key = appContext.getPreferenceKey(R.string.pref_key_power_saving_mode_auto_enabled),

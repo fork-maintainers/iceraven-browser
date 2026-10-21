@@ -135,7 +135,13 @@ class BackgroundServices(
             if (areCredentialsSyncable) SyncEngine.CreditCards else null,
             if (settings.isAddressSyncEnabled) SyncEngine.Addresses else null,
         )
-    private val syncConfig = SyncConfig(supportedEngines, PeriodicSyncConfig(periodMinutes = 240)) // four hours
+    private val syncConfig by lazyMonitored {
+        SyncConfig(
+            supportedEngines = supportedEngines,
+            periodicSyncConfig = PeriodicSyncConfig(periodMinutes = 240), // four hours
+            syncDecouplingEnabled = settings.syncDecouplingEnabled,
+        )
+    }
 
     /**
      * A set of [FxaCapability] that Fenix supports, which we use in our

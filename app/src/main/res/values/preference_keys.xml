@@ -512,6 +512,7 @@
     <string name="pref_key_enable_menu_customization" translatable="false">pref_key_enable_menu_customization</string>
     <string name="pref_key_enable_menu_customization_screen" translatable="false">pref_key_enable_menu_customization_screen</string>
     <string name="pref_key_enable_account_settings_new_ui" translatable="false">pref_key_enable_account_settings_new_ui</string>
+    <string name="pref_key_enable_sync_decoupling" translatable="false">pref_key_enable_sync_decoupling</string>
     <!-- Preference for the feature flag -->
     <string name="pref_key_enable_shake_to_summarize" translatable="false">pref_key_enable_shake_to_summarize</string>
     <string name="pref_key_enable_weekly_privacy_notification" translatable="false">pref_key_enable_weekly_privacy_notification</string>

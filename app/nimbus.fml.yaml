@@ -1338,6 +1338,14 @@ features:
         value:
           enabled: true
 
+  account-sync-decouple:
+    description: Control the "sync & account decoupling" feature
+    variables:
+      enabled:
+        description: If true, the flows for enabling sync & account decoupling are enabled.
+        type: Boolean
+        default: false
+
   wayback-machine:
     description: >
       Feature that shows a "Check Archived Version" button on eligible error pages, linking to the
