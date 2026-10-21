@@ -4170,7 +4170,7 @@
 
     <!-- PDF viewer toolbar and buttons -->
     <!-- Content description for accessibility (used by screen readers): Description for the button that triggers the start of a signature workflow on the PDF displayed on the screen. -->
-    <string name="pdf_tools_sign_content_description">Sign PDF</string>
+    <string name="pdf_tools_sign_content_description_2">Add a signature</string>
     <!-- Content description for accessibility (used by screen readers): Description of the button that downloads the PDF displayed on the screen to the user's device. -->
     <string name="pdf_tools_download_content_description">Download PDF</string>
     <!-- Content description for accessibility (used by screen readers): Description for the button that opens the printing dialogue window for the PDF displayed on the screen. -->

@@ -114,7 +114,7 @@ private fun PdfToolbarButtons(
             if (onSignClick != null) {
                 PdfToolbarButton(
                     icon = iconsR.drawable.mozac_ic_signature_24,
-                    contentDescription = R.string.pdf_tools_sign_content_description,
+                    contentDescription = R.string.pdf_tools_sign_content_description_2,
                     testTag = PdfToolsTestTag.SIGN_BUTTON,
                     onClick = onSignClick,
                 )
@@ -208,7 +208,7 @@ private fun SignPdfFab(onClick: () -> Unit) {
     PdfToolsSurface(modifier = Modifier.width(FirefoxTheme.layout.size.static600)) {
         PdfToolbarButton(
             icon = iconsR.drawable.mozac_ic_signature_24,
-            contentDescription = R.string.pdf_tools_sign_content_description,
+            contentDescription = R.string.pdf_tools_sign_content_description_2,
             testTag = PdfToolsTestTag.SIGN_FAB,
             onClick = onClick,
             modifier = Modifier.fillMaxSize(),
