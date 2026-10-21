@@ -13,7 +13,11 @@ import mozilla.components.feature.listentopage.ListenState
 import mozilla.components.feature.listentopage.ListenStore
 import mozilla.components.feature.listentopage.PlaybackPhase
 import mozilla.components.feature.listentopage.PlaybackState
+import mozilla.components.feature.listentopage.facts.ListenToPageFacts
 import mozilla.components.feature.listentopage.listenReducer
+import mozilla.components.support.base.Component
+import mozilla.components.support.base.facts.Action
+import mozilla.components.support.base.facts.Fact
 import mozilla.components.support.test.robolectric.testContext
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
@@ -153,6 +157,77 @@ class ListenPerformanceMiddlewareTest {
                         elapsedMs = { now },
                     )
                 ),
+        )
+
+    @Test
+    fun `WHEN a chunk is synthesized THEN its duration is recorded`() {
+        processFact(chunkSynthesizedFact(ListenToPageFacts.ChunkSynthesis(2, 600, 400, 60_000)))
+
+        assertEquals(1L, ListenToPage.chunkSynthesisDuration.testGetValue()?.count)
+    }
+
+    @Test
+    fun `WHEN a chunk is synthesized THEN a marker ending now spans its synthesis`() {
+        now = 1000
+
+        processFact(chunkSynthesizedFact(ListenToPageFacts.ChunkSynthesis(2, 600, 400, 60_000)))
+
+        assertEquals(
+            listOf(
+                Marker(
+                    name = "ListenToPage.ChunkSynthesis",
+                    startTime = 600.0,
+                    endTime = 1000.0,
+                    text = "index=2, length=600, audioMs=60000",
+                )
+            ),
+            profiler.markers,
+        )
+    }
+
+    @Test
+    fun `WHEN the profiler is not running THEN a chunk's duration is still recorded`() {
+        profiler.active = false
+
+        processFact(chunkSynthesizedFact(ListenToPageFacts.ChunkSynthesis(2, 600, 400, null)))
+
+        assertTrue(profiler.markers.isEmpty())
+        assertEquals(1L, ListenToPage.chunkSynthesisDuration.testGetValue()?.count)
+    }
+
+    @Test
+    fun `WHEN a fact comes from another component THEN it is ignored`() {
+        processFact(
+            chunkSynthesizedFact(ListenToPageFacts.ChunkSynthesis(2, 600, 400, null))
+                .copy(component = Component.FEATURE_DOWNLOADS)
+        )
+
+        assertTrue(profiler.markers.isEmpty())
+        assertNull(ListenToPage.chunkSynthesisDuration.testGetValue())
+    }
+
+    @Test
+    fun `WHEN a chunk fact carries no chunk synthesis THEN it is ignored`() {
+        processFact(chunkSynthesizedFact(ListenToPageFacts.ChunkSynthesis(2, 600, 400, null)).copy(metadata = null))
+
+        assertTrue(profiler.markers.isEmpty())
+        assertNull(ListenToPage.chunkSynthesisDuration.testGetValue())
+    }
+
+    private fun processFact(fact: Fact) =
+        ListenPerformanceMiddleware(
+                profiler = profiler,
+                scope = CoroutineScope(UnconfinedTestDispatcher()),
+                elapsedMs = { now },
+            )
+            .process(fact)
+
+    private fun chunkSynthesizedFact(chunkSynthesis: ListenToPageFacts.ChunkSynthesis) =
+        Fact(
+            component = Component.FEATURE_LISTENTOPAGE,
+            action = Action.IMPLEMENTATION_DETAIL,
+            item = ListenToPageFacts.Items.CHUNK_SYNTHESIZED,
+            metadata = mapOf(ListenToPageFacts.MetadataKeys.CHUNK_SYNTHESIS to chunkSynthesis),
         )
 
     private companion object {

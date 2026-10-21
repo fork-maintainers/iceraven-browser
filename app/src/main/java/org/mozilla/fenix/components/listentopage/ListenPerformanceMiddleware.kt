@@ -12,23 +12,30 @@ import mozilla.components.concept.base.profiler.Profiler
 import mozilla.components.feature.listentopage.ListenAction
 import mozilla.components.feature.listentopage.ListenState
 import mozilla.components.feature.listentopage.PlaybackPhase
+import mozilla.components.feature.listentopage.facts.ListenToPageFacts
 import mozilla.components.lib.state.Middleware
 import mozilla.components.lib.state.Store
+import mozilla.components.support.base.Component
+import mozilla.components.support.base.facts.Fact
+import mozilla.components.support.base.facts.FactProcessor
 import mozilla.components.support.base.log.logger.Logger
 import org.mozilla.fenix.GleanMetrics.ListenToPage
 
 /**
  * [Middleware] that records profiler markers for how long the listen to page feature takes to respond to the user.
  *
+ * It is also a [FactProcessor] for measurements the feature records that aren't surfaced as actions. The middleware has
+ * to be registered for the facts to be processed correctly..
+ *
  * @param profiler Records the markers.
  * @param scope The scope markers are added on. It has to be the main thread, see bug 1960730.
- * @param elapsedMs Reads a monotonic clock, so that durations can be measured under a test's virtual time.
+ * @param elapsedMs Gets current time.
  */
 class ListenPerformanceMiddleware(
     private val profiler: Profiler,
     private val scope: CoroutineScope = CoroutineScope(Dispatchers.Main),
     private val elapsedMs: () -> Long = SystemClock::elapsedRealtime,
-) : Middleware<ListenState, ListenAction> {
+) : Middleware<ListenState, ListenAction>, FactProcessor {
 
     private val logger = Logger("ListenPerformance")
 
@@ -128,6 +135,28 @@ class ListenPerformanceMiddleware(
         spans.clear()
     }
 
+    override fun process(fact: Fact) {
+        if (fact.component != Component.FEATURE_LISTENTOPAGE) return
+
+        when (fact.item) {
+            ListenToPageFacts.Items.CHUNK_SYNTHESIZED -> fact.recordChunkSynthesized()
+        }
+    }
+
+    private fun Fact.recordChunkSynthesized() {
+        val chunk =
+            metadata?.get(ListenToPageFacts.MetadataKeys.CHUNK_SYNTHESIS) as? ListenToPageFacts.ChunkSynthesis ?: return
+        val text = "index=${chunk.index}, length=${chunk.length}, audioMs=${chunk.audioMs}"
+
+        logger.debug("$CHUNK_SYNTHESIS took ${chunk.synthesisMs}ms ($text)")
+        ListenToPage.chunkSynthesisDuration.accumulateSamples(listOf(chunk.synthesisMs))
+
+        val endTime = profiler.getProfilerTime() ?: return
+        scope.launch {
+            profiler.addMarker(CHUNK_SYNTHESIS, endTime - chunk.synthesisMs, endTime, text)
+        }
+    }
+
     private class Span(
         val startTimeMs: Long,
         val profilerStartTime: Double?,
@@ -136,6 +165,7 @@ class ListenPerformanceMiddleware(
     )
 
     private companion object {
+        const val CHUNK_SYNTHESIS = "ListenToPage.ChunkSynthesis"
         const val TIME_TO_FIRST_AUDIO = "ListenToPage.TimeToFirstAudio"
         const val FAILED_SUFFIX = ".Failed"
     }

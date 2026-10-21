@@ -9634,6 +9634,21 @@ listen_to_page:
     notification_emails:
       - android-probes@mozilla.com
     expires: never
+  chunk_synthesis_duration:
+    type: timing_distribution
+    time_unit: millisecond
+    description: |
+      The time the speech engine took to make the audio of one chunk of a
+      page.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D333060
+    data_sensitivity:
+      - technical
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
 
 logins:
   password_detected:

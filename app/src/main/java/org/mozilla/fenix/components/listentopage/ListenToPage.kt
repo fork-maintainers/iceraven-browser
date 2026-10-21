@@ -20,6 +20,7 @@ import mozilla.components.feature.listentopage.playback.ListenPlaybackController
 import mozilla.components.feature.listentopage.settings.ListenSettings
 import mozilla.components.feature.listentopage.synthesis.SpeechSynthesizer
 import mozilla.components.feature.media.service.AbstractMediaSessionService
+import mozilla.components.support.base.facts.register
 import mozilla.components.support.base.ids.SharedIdsHelper
 
 private const val OPEN_TAB_PENDING_INTENT_TAG = "org.mozilla.fenix.listentopage.OPEN_TAB"
@@ -56,12 +57,14 @@ class ListenToPage(
 ) {
 
     val store by lazy {
+        val performanceMiddleware = profiler?.let { ListenPerformanceMiddleware(profiler = it) }?.also { it.register() }
+
         ListenStore(
             initialState = ListenState(),
             reducer = ::listenReducer,
             middleware =
                 listOfNotNull(
-                    profiler?.let { ListenPerformanceMiddleware(profiler = it) },
+                    performanceMiddleware,
                     ListenMiddleware(
                         browserStore = browserStore,
                         contentProvider =
