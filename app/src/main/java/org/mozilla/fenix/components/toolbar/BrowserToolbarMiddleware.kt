@@ -1299,13 +1299,13 @@ class BrowserToolbarMiddleware(
                     drawableResId =
                         if (browserScreenStore.state.readerModeStatus.isActive) {
                             if (settings.listenToPageFeatureFlagEnabled) {
-                                iconsR.drawable.mozac_ic_reader_view_audio_fill_24
+                                iconsR.drawable.mozac_ic_reader_view_headphones_fill_24
                             } else {
                                 iconsR.drawable.mozac_ic_reader_view_fill_24
                             }
                         } else {
                             if (settings.listenToPageFeatureFlagEnabled) {
-                                iconsR.drawable.mozac_ic_reader_view_audio_24
+                                iconsR.drawable.mozac_ic_reader_view_headphones_24
                             } else {
                                 iconsR.drawable.mozac_ic_reader_view_24
                             }

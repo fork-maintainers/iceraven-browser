@@ -3086,7 +3086,7 @@ class BrowserToolbarMiddlewareTest {
 
         val result = middleware.buildAction(toolbarAction = ToolbarAction.ReaderMode) as ActionButtonRes
 
-        assertEquals(iconsR.drawable.mozac_ic_reader_view_audio_24, result.drawableResId)
+        assertEquals(iconsR.drawable.mozac_ic_reader_view_headphones_24, result.drawableResId)
         assertEquals(R.string.browser_menu_read, result.contentDescription)
         assertEquals(ActionButton.State.DEFAULT, result.state)
         assertEquals(ReaderModeClicked(false), result.onClick)
@@ -3126,7 +3126,7 @@ class BrowserToolbarMiddlewareTest {
 
         val result = middleware.buildAction(toolbarAction = ToolbarAction.ReaderMode) as ActionButtonRes
 
-        assertEquals(iconsR.drawable.mozac_ic_reader_view_audio_fill_24, result.drawableResId)
+        assertEquals(iconsR.drawable.mozac_ic_reader_view_headphones_fill_24, result.drawableResId)
         assertEquals(R.string.browser_menu_read_close, result.contentDescription)
         assertEquals(ActionButton.State.ACTIVE, result.state)
         assertEquals(ReaderModeClicked(true), result.onClick)
