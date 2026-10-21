@@ -243,6 +243,9 @@ import org.mozilla.fenix.settings.downloads.DownloadLocationManager
 import org.mozilla.fenix.snackbar.FenixSnackbarDelegate
 import org.mozilla.fenix.snackbar.SnackbarBinding
 import org.mozilla.fenix.tabgroups.TabGroupsStrip
+import org.mozilla.fenix.tabgroups.strip.redux.TabGroupsStripAction
+import org.mozilla.fenix.tabgroups.strip.redux.TabGroupsStripMiddleware
+import org.mozilla.fenix.tabgroups.strip.redux.TabGroupsStripStore
 import org.mozilla.fenix.tabstray.ext.toDisplayTitle
 import org.mozilla.fenix.tabstray.redux.state.Page
 import org.mozilla.fenix.theme.FirefoxTheme
@@ -476,6 +479,10 @@ abstract class BaseBrowserFragment :
             requireComponents.core.store,
             isCustomTabSession = customTabSessionId != null,
         )
+
+        if (customTabSessionId == null) {
+            tabGroupsStripStore.dispatch(TabGroupsStripAction.InitializeDataObservation)
+        }
 
         observePrivateModeLock {
             findNavController()
@@ -1624,7 +1631,19 @@ abstract class BaseBrowserFragment :
         }
     }
 
-    private fun buildTabGroupsStrip(): @Composable () -> Unit = { TabGroupsStrip() }
+    private val tabGroupsStripStore by lazy {
+        TabGroupsStripStore(
+            middleware =
+                listOf(
+                    TabGroupsStripMiddleware(
+                        tabDataCoordinator = requireComponents.tabDataCoordinator,
+                        scope = lifecycleScope,
+                    )
+                )
+        )
+    }
+
+    private fun buildTabGroupsStrip(): @Composable () -> Unit = { TabGroupsStrip(store = tabGroupsStripStore) }
 
     private fun buildAwesomeBar(
         activity: HomeActivity,

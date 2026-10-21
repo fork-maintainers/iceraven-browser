@@ -191,6 +191,9 @@ import org.mozilla.fenix.search.awesomebar.AwesomeBarComposable
 import org.mozilla.fenix.snackbar.FenixSnackbarDelegate
 import org.mozilla.fenix.snackbar.SnackbarBinding
 import org.mozilla.fenix.tabgroups.TabGroupsStrip
+import org.mozilla.fenix.tabgroups.strip.redux.TabGroupsStripAction
+import org.mozilla.fenix.tabgroups.strip.redux.TabGroupsStripMiddleware
+import org.mozilla.fenix.tabgroups.strip.redux.TabGroupsStripStore
 import org.mozilla.fenix.tabstray.redux.state.Page
 import org.mozilla.fenix.tabstray.ui.AccessPoint
 import org.mozilla.fenix.termsofuse.store.DefaultPrivacyNoticeBannerRepository
@@ -249,6 +252,18 @@ class HomeFragment : Fragment(), UserInteractionHandler, OnLongPressedListener {
     }
 
     private val dateTimeProvider: DateTimeProvider by lazy { DefaultDateTimeProvider() }
+
+    private val tabGroupsStripStore by lazy {
+        TabGroupsStripStore(
+            middleware =
+                listOf(
+                    TabGroupsStripMiddleware(
+                        tabDataCoordinator = requireComponents.tabDataCoordinator,
+                        scope = lifecycleScope,
+                    )
+                )
+        )
+    }
 
     private lateinit var privacyNoticeBannerStore: PrivacyNoticeBannerStore
     private lateinit var collectionsMigrationCardStore: CollectionsMigrationCardStore
@@ -585,6 +600,10 @@ class HomeFragment : Fragment(), UserInteractionHandler, OnLongPressedListener {
         initIpProtectionBindings(view = view)
         initContinuousOnboardingFeature()
 
+        if (requireComponents.settings.shouldShowTabGroupsStrip) {
+            tabGroupsStripStore.dispatch(TabGroupsStripAction.InitializeDataObservation)
+        }
+
         privacyNoticeBannerStore =
             PrivacyNoticeBannerStore(
                 initialState =
@@ -858,7 +877,7 @@ class HomeFragment : Fragment(), UserInteractionHandler, OnLongPressedListener {
                     TabStrip()
                 }
                 if (settings.shouldShowTabGroupsStrip) {
-                    TabGroupsStrip(containerColor = colors.surface)
+                    TabGroupsStrip(store = tabGroupsStripStore, containerColor = colors.surface)
                 }
                 homeNavigationBar?.Content()
             }
@@ -879,7 +898,7 @@ class HomeFragment : Fragment(), UserInteractionHandler, OnLongPressedListener {
                 dividerColor = colors.outlineVariant,
             ) {
                 if (settings.shouldShowTabGroupsStrip) {
-                    TabGroupsStrip(containerColor = colors.surface)
+                    TabGroupsStrip(store = tabGroupsStripStore, containerColor = colors.surface)
                 }
                 toolbarView.Content()
             }
