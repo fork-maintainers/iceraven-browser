@@ -144,6 +144,17 @@ object BrowserPageSelectors : SelectorContainer {
             description = "Page content '$text'",
         )
 
+    // PAGE_CONTENT for a long-press. UiObject.longClick() reports failure when no window update lands
+    // inside its acknowledgment timeout, which GeckoView text selection does not reliably produce even
+    // though the selection toolbar opens. UiObject2.longClick() just injects the gesture.
+    @Suppress("FunctionName")
+    fun PAGE_CONTENT_LONG_PRESS_TARGET(text: String = "") =
+        Selector(
+            strategy = SelectorStrategy.UIAUTOMATOR2_BY_TEXT_CONTAINS,
+            value = text,
+            description = "Page content '$text' long-press target",
+        )
+
     // An item on the GeckoView text-selection floating action bar (and the app's paste popup),
     // matched by exact visible text. Mirrors the legacy clickContextMenuItem, which located items
     // with By.text(item) — covers "Select all", "Copy", "Search", "Private Search", "Paste".

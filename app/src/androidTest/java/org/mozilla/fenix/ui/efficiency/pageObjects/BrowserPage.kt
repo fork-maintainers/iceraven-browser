@@ -462,7 +462,7 @@ class BrowserPage(composeRule: AndroidComposeTestRule<HomeActivityIntentTestRule
      * mirroring the legacy longClickPageObject's waitForExists.
      */
     fun longClickWebContentText(text: String): BrowserPage {
-        val selector = BrowserPageSelectors.PAGE_CONTENT(text)
+        val selector = BrowserPageSelectors.PAGE_CONTENT_LONG_PRESS_TARGET(text)
         mozVerify(selector, timeout = waitingTimeLong)
         mozLongClick(selector)
         return this
