@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import mozilla.components.feature.qr.QrFeature
+import mozilla.components.service.fxa.FxaService
 import mozilla.components.service.fxa.manager.SCOPE_PROFILE
 import mozilla.components.service.fxa.manager.SCOPE_SESSION
 import mozilla.components.service.fxa.manager.SCOPE_SYNC
@@ -52,10 +53,11 @@ class PairFragment : Fragment(R.layout.fragment_pair), UserInteractionHandler, S
                         return@QrFeature
                     }
                     requireComponents.services.accountsAuthFeature.beginPairingAuthentication(
-                        requireContext(),
-                        pairingUrl,
-                        args.entrypoint,
-                        setOf(SCOPE_SYNC, SCOPE_PROFILE, SCOPE_SESSION),
+                        context = requireContext(),
+                        pairingUrl = pairingUrl,
+                        entrypoint = args.entrypoint,
+                        service = FxaService.Sync.identifier,
+                        scopes = setOf(SCOPE_SYNC, SCOPE_PROFILE, SCOPE_SESSION),
                     )
                     val vibrator = requireContext().getSystemService<Vibrator>()!!
                     vibrator.vibrate(
