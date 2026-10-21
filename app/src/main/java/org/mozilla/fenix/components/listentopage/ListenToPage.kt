@@ -26,6 +26,7 @@ import mozilla.components.feature.listentopage.synthesis.SpeechSynthesizer
 import mozilla.components.feature.media.service.AbstractMediaSessionService
 import mozilla.components.support.base.facts.register
 import mozilla.components.support.base.ids.SharedIdsHelper
+import mozilla.components.support.locale.LocaleManager
 
 private const val OPEN_TAB_PENDING_INTENT_TAG = "org.mozilla.fenix.listentopage.OPEN_TAB"
 
@@ -75,6 +76,10 @@ class ListenToPage(
                             ContentProvider.fromPage(
                                 pageContentExtractor = pageExtractor,
                                 pageMetadataExtractor = pageExtractor,
+                                fallbackLanguageTag = {
+                                    (LocaleManager.getCurrentLocale(context) ?: LocaleManager.getSystemDefault())
+                                        .toLanguageTag()
+                                },
                             ),
                         // A provider, not an instance: building one binds the speech engine over IPC, and the
                         // middleware closes it when a session stops, so it needs a way to get another.
