@@ -41,6 +41,9 @@ class ListenPerformanceMiddleware(
 
     private val spans = mutableMapOf<String, Span>()
 
+    // The engine is reported from the thread that binds it, and chunks from the thread that synthesizes them.
+    @Volatile private var engine: String? = null
+
     // Track whether a seek or voice change has stopped audio until plays again. We want to avoid measuring this as part
     // of a gap between chunks - that should solely be synthesis time.
     private var seekOrVoiceChangePending = false
@@ -216,6 +219,7 @@ class ListenPerformanceMiddleware(
                 }
 
             ListenToPageFacts.Items.CHUNK_SYNTHESIZED -> fact.recordChunkSynthesized()
+            ListenToPageFacts.Items.ENGINE_BOUND -> fact.recordEngineBound()
         }
     }
 
@@ -226,7 +230,7 @@ class ListenPerformanceMiddleware(
             start(PLAYBACK_START, onEnd = { ListenToPage.playbackStartDuration.accumulateSamples(listOf(it)) })
         }
 
-        val text = "index=${chunk.index}, length=${chunk.length}, audioMs=${chunk.audioMs}"
+        val text = "index=${chunk.index}, length=${chunk.length}, audioMs=${chunk.audioMs}, engine=$engine"
 
         logger.debug("$CHUNK_SYNTHESIS took ${chunk.synthesisMs}ms ($text)")
 
@@ -239,6 +243,13 @@ class ListenPerformanceMiddleware(
         scope.launch {
             profiler.addMarker(CHUNK_SYNTHESIS, endTime - chunk.synthesisMs, endTime, text)
         }
+    }
+
+    private fun Fact.recordEngineBound() {
+        val packageName = value ?: return
+        engine = packageName
+        logger.debug("Speech engine bound: $packageName")
+        ListenToPage.ttsEngine.set(packageName)
     }
 
     private enum class ChunkGapCause {

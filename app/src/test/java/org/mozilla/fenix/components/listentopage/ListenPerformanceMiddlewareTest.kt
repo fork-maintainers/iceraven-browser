@@ -526,7 +526,7 @@ class ListenPerformanceMiddlewareTest {
                     name = "ListenToPage.ChunkSynthesis",
                     startTime = 600.0,
                     endTime = 1000.0,
-                    text = "index=2, length=600, audioMs=60000",
+                    text = "index=2, length=600, audioMs=60000, engine=null",
                 )
             ),
             profiler.markers,
@@ -562,13 +562,39 @@ class ListenPerformanceMiddlewareTest {
         assertNull(ListenToPage.chunkSynthesisDuration.testGetValue())
     }
 
-    private fun processFact(fact: Fact) =
+    @Test
+    fun `WHEN an engine is bound THEN it is recorded`() {
+        processFact(engineBoundFact("com.example.tts"))
+
+        assertEquals("com.example.tts", ListenToPage.ttsEngine.testGetValue())
+    }
+
+    @Test
+    fun `WHEN an engine is bound THEN later chunk markers name it`() {
+        processFact(engineBoundFact("com.example.tts"))
+
+        processFact(chunkSynthesizedFact(ListenToPageFacts.ChunkSynthesis(2, 600, 400, 60_000)))
+
+        assertEquals("index=2, length=600, audioMs=60000, engine=com.example.tts", profiler.markers.single().text)
+    }
+
+    private val factMiddleware by lazy {
         ListenPerformanceMiddleware(
-                profiler = profiler,
-                scope = CoroutineScope(UnconfinedTestDispatcher()),
-                elapsedMs = { now },
-            )
-            .process(fact)
+            profiler = profiler,
+            scope = CoroutineScope(UnconfinedTestDispatcher()),
+            elapsedMs = { now },
+        )
+    }
+
+    private fun processFact(fact: Fact) = factMiddleware.process(fact)
+
+    private fun engineBoundFact(packageName: String) =
+        Fact(
+            component = Component.FEATURE_LISTENTOPAGE,
+            action = Action.IMPLEMENTATION_DETAIL,
+            item = ListenToPageFacts.Items.ENGINE_BOUND,
+            value = packageName,
+        )
 
     private fun chunkSynthesizedFact(chunkSynthesis: ListenToPageFacts.ChunkSynthesis) =
         Fact(
