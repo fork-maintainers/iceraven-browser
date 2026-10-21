@@ -8,19 +8,23 @@ import android.content.pm.ActivityInfo
 import androidx.compose.ui.test.junit4.AndroidComposeTestRule
 import org.junit.Test
 import org.mozilla.fenix.HomeActivity
+import org.mozilla.fenix.customannotations.Critical
 import org.mozilla.fenix.customannotations.SmokeTest
 import org.mozilla.fenix.helpers.AppAndSystemHelper.enableOrDisableBackGestureNavigationOnDevice
 import org.mozilla.fenix.helpers.AppAndSystemHelper.setScreenOrientation
 import org.mozilla.fenix.helpers.Constants
 import org.mozilla.fenix.helpers.HomeActivityIntentTestRule
 import org.mozilla.fenix.helpers.TestAssetHelper.getGenericAsset
+import org.mozilla.fenix.helpers.TestAssetHelper.tallPageAsset
 import org.mozilla.fenix.ui.efficiency.helpers.BaseTest
+import org.mozilla.fenix.ui.efficiency.helpers.SwipeDirection
 import org.mozilla.fenix.ui.efficiency.navigation.LaunchConfig
 import org.mozilla.fenix.ui.efficiency.selectors.BookmarksSelectors
 import org.mozilla.fenix.ui.efficiency.selectors.BrowserPageSelectors
 import org.mozilla.fenix.ui.efficiency.selectors.HomeSelectors
 import org.mozilla.fenix.ui.efficiency.selectors.MainMenuSelectors
 import org.mozilla.fenix.ui.efficiency.selectors.SearchBarSelectors
+import org.mozilla.fenix.ui.efficiency.selectors.SettingsCustomizeSelectors
 import org.mozilla.fenix.ui.efficiency.selectors.ShareOverlaySelectors
 import org.mozilla.fenix.ui.efficiency.selectors.ToolbarSelectors
 
@@ -278,5 +282,30 @@ class NavigationToolbarExpandedTest : BaseTest(LaunchConfig(shouldUseExpandedToo
         on.browserPage.navigateToPage(website.url.toString())
         on.tabDrawer.navigateToPage()
         on.tabDrawer.verifyExistingOpenTabs(website.title)
+    }
+
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3333216
+    @Critical
+    @Test
+    fun verifyTheScrollToHideToolbarOptionTest() {
+        val tallPage = mockWebServer.tallPageAsset
+
+        on.settingsCustomize
+            .navigateToPage()
+            .mozVerifyOptionSwitchIsChecked(SettingsCustomizeSelectors.SCROLL_TO_HIDE_TOOLBAR_OPTION)
+            .mozClick(SettingsCustomizeSelectors.SCROLL_TO_HIDE_TOOLBAR_OPTION)
+            .mozVerifyOptionSwitchIsNotChecked(SettingsCustomizeSelectors.SCROLL_TO_HIDE_TOOLBAR_OPTION)
+        on.browserPage
+            .navigateToPage(tallPage.url.toString())
+            .verifyPageContent(tallPage.content)
+            .mozVerify(ToolbarSelectors.TOOLBAR)
+        on.browserPage.scrollWebContent(SwipeDirection.UP).mozVerify(ToolbarSelectors.TOOLBAR)
+        on.settingsCustomize
+            .navigateToPage()
+            .mozVerifyOptionSwitchIsNotChecked(SettingsCustomizeSelectors.SCROLL_TO_HIDE_TOOLBAR_OPTION)
+            .mozClick(SettingsCustomizeSelectors.SCROLL_TO_HIDE_TOOLBAR_OPTION)
+            .mozVerifyOptionSwitchIsChecked(SettingsCustomizeSelectors.SCROLL_TO_HIDE_TOOLBAR_OPTION)
+        on.browserPage.navigateToPage().mozVerify(ToolbarSelectors.TOOLBAR)
+        on.browserPage.scrollWebContent(SwipeDirection.UP).mozWaitUntilAbsent(ToolbarSelectors.TOOLBAR)
     }
 }

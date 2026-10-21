@@ -38,6 +38,7 @@ import org.mozilla.fenix.helpers.ext.waitNotNull
 import org.mozilla.fenix.ui.efficiency.core.driveUntil
 import org.mozilla.fenix.ui.efficiency.helpers.BasePage
 import org.mozilla.fenix.ui.efficiency.helpers.Selector
+import org.mozilla.fenix.ui.efficiency.helpers.SwipeDirection
 import org.mozilla.fenix.ui.efficiency.navigation.NavigationGraph
 import org.mozilla.fenix.ui.efficiency.navigation.NavigationOptions
 import org.mozilla.fenix.ui.efficiency.navigation.NavigationStep
@@ -648,6 +649,20 @@ class BrowserPage(composeRule: AndroidComposeTestRule<HomeActivityIntentTestRule
     fun openMainMenu(): BrowserPage {
         mozClick(BrowserPageSelectors.MAIN_MENU_BUTTON)
 
+        return this
+    }
+
+    // --- Dynamic navigation toolbar ---
+
+    /**
+     * Scroll the web content by flinging the screen [times] times. Swiping up flings the page down (which auto-hides
+     * the dynamic navigation toolbar); swiping down flings it back up (which brings the toolbar back). This flings the
+     * screen from its center rather than swiping the engine view: a swipe that starts at the engine view's bottom edge
+     * is grabbed by the system navigation gesture and backgrounds the app. A single fling does not always move the
+     * toolbar far enough, so callers fling a few times before asserting.
+     */
+    fun scrollWebContent(direction: SwipeDirection, times: Int = 3): BrowserPage {
+        repeat(times) { mozSwipeScreen(direction) }
         return this
     }
 

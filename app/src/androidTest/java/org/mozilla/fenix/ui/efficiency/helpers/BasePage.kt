@@ -946,6 +946,20 @@ abstract class BasePage(protected val composeRule: AndroidComposeTestRule<HomeAc
         return this
     }
 
+    /**
+     * Fling the whole screen from its center toward [direction], with no element to aim at. Unlike [mozSwipeElement],
+     * this needs no selector resolution and never starts the gesture from a screen edge, so it won't be grabbed by the
+     * system navigation gesture (which backgrounds the app). Used to scroll web content, where the only reliable target
+     * is the viewport itself.
+     */
+    fun mozSwipeScreen(direction: SwipeDirection): BasePage {
+        val cmd = rep().start(TimedReporter.Type.CMD, "swipe_screen", "Swiping screen $direction...")
+        Gestures.onScreen(direction)
+        mDevice.waitForIdle()
+        cmd.ok("Swiped screen $direction")
+        return this
+    }
+
     fun mozPressBackUntilGone(selector: Selector, maxPresses: Int = 5) =
         driveUntil(
             verb = "press_back_until_gone",

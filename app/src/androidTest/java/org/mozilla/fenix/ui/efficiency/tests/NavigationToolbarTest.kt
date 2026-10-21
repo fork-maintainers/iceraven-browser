@@ -13,6 +13,7 @@ import org.mozilla.fenix.helpers.DataGenerationHelper.getStringResource
 import org.mozilla.fenix.helpers.MockBrowserDataHelper
 import org.mozilla.fenix.helpers.TestAssetHelper.genericAssets
 import org.mozilla.fenix.helpers.TestAssetHelper.getGenericAsset
+import org.mozilla.fenix.helpers.TestAssetHelper.tallPageAsset
 import org.mozilla.fenix.ui.efficiency.helpers.BaseTest
 import org.mozilla.fenix.ui.efficiency.helpers.SwipeDirection
 import org.mozilla.fenix.ui.efficiency.selectors.BrowserPageSelectors
@@ -145,5 +146,19 @@ class NavigationToolbarTest : BaseTest() {
         on.browserPage.mozVerify(
             BrowserPageSelectors.SNACKBAR_MESSAGE_COMPOSE(getStringResource(R.string.snackbar_tab_closed))
         )
+    }
+
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/570165
+    @Critical
+    @Test
+    fun verifyNavigationToolbarIsDynamicWhileSetToTopTest() {
+        val tallPage = mockWebServer.tallPageAsset
+
+        on.browserPage
+            .navigateToPage(tallPage.url.toString())
+            .verifyPageContent(tallPage.content)
+            .mozVerify(ToolbarSelectors.TOOLBAR)
+        on.browserPage.scrollWebContent(SwipeDirection.UP).mozWaitUntilAbsent(ToolbarSelectors.TOOLBAR)
+        on.browserPage.scrollWebContent(SwipeDirection.DOWN).mozVerify(ToolbarSelectors.TOOLBAR)
     }
 }

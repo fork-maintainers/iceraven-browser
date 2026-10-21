@@ -43,6 +43,14 @@ object TestAssetHelper {
                     "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt",
             )
 
+    val MockWebServer.tallPageAsset
+        get() =
+            createTestAsset(
+                path = "pages/tallPage.html",
+                content = "Page content: tall page",
+                title = "Tall page",
+            )
+
     val MockWebServer.refreshAsset
         get() =
             createTestAsset(

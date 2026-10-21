@@ -6,7 +6,7 @@ package org.mozilla.fenix.ui.efficiency.selectors
 
 import org.mozilla.fenix.R
 import org.mozilla.fenix.helpers.DataGenerationHelper.getStringResource
-import org.mozilla.fenix.ui.efficiency.helpers.PageReadinessProfiles
+import org.mozilla.fenix.ui.efficiency.helpers.PageReadinessProfile
 import org.mozilla.fenix.ui.efficiency.helpers.Selector
 import org.mozilla.fenix.ui.efficiency.helpers.SelectorContainer
 import org.mozilla.fenix.ui.efficiency.helpers.SelectorGroup
@@ -32,7 +32,11 @@ object SettingsCustomizeSelectors : SelectorContainer {
             value = getStringResource(R.string.preference_tab_strip_show),
             description = "Show tab bar toggle",
             groups = setOf(Group.CUSTOMIZE_SETTINGS),
-            readiness = PageReadinessProfiles.READY_CONTENT,
+            // INTERACTIVE only (not NAVIGATION_READY): this toggle sits above the lower gesture options, so
+            // interacting with one (e.g. "Scroll to hide toolbar") scrolls it off the top. The always-visible
+            // navigation-toolbar title is the page's NAVIGATION_READY anchor; gating navigation on this toggle too
+            // would fail the source-page readiness check when leaving the screen from a scrolled position.
+            readiness = setOf(PageReadinessProfile.INTERACTIVE),
             scrollDirection = SwipeDirection.UP,
         )
 
@@ -83,6 +87,14 @@ object SettingsCustomizeSelectors : SelectorContainer {
             strategy = SelectorStrategy.UIAUTOMATOR_WITH_DESCRIPTION_CONTAINS,
             value = "Navigate up",
             description = "Navigate back toolbar button",
+        )
+
+    val SCROLL_TO_HIDE_TOOLBAR_OPTION =
+        Selector(
+            strategy = SelectorStrategy.ESPRESSO_BY_TEXT,
+            value = getStringResource(R.string.preference_gestures_dynamic_toolbar),
+            description = "Scroll to hide toolbar option",
+            scrollDirection = SwipeDirection.UP,
         )
 
     override val scrollTraversalOrder: Map<SelectorGroup, List<Selector>> =
