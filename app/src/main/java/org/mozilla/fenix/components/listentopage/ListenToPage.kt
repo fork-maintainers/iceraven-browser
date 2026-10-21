@@ -9,6 +9,7 @@ import android.content.Context
 import kotlinx.coroutines.CoroutineScope
 import mozilla.components.browser.state.selector.findTab
 import mozilla.components.browser.state.store.BrowserStore
+import mozilla.components.concept.base.profiler.Profiler
 import mozilla.components.feature.listentopage.ListenMiddleware
 import mozilla.components.feature.listentopage.ListenState
 import mozilla.components.feature.listentopage.ListenStore
@@ -45,11 +46,13 @@ internal fun Context.openTabPendingIntent(tabId: String): PendingIntent? {
  * @param context Used to reach the speech engine, the audio cache and the playback service.
  * @param scope The application scope. The [store] outlives any screen, because the audio keeps playing when the app is
  *   in the background, so its work cannot be tied to a fragment or a view model.
+ * @param profiler Profiler to log performance markers for the feature.
  */
 class ListenToPage(
     private val browserStore: BrowserStore,
     private val context: Context,
     private val scope: CoroutineScope,
+    private val profiler: Profiler?,
 ) {
 
     val store by lazy {
@@ -57,7 +60,8 @@ class ListenToPage(
             initialState = ListenState(),
             reducer = ::listenReducer,
             middleware =
-                listOf(
+                listOfNotNull(
+                    profiler?.let { ListenPerformanceMiddleware(profiler = it) },
                     ListenMiddleware(
                         browserStore = browserStore,
                         contentProvider =

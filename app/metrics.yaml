@@ -9618,6 +9618,22 @@ listen_to_page:
     notification_emails:
       - android-probes@mozilla.com
     expires: never
+  time_to_first_audio:
+    type: timing_distribution
+    time_unit: millisecond
+    description: |
+      The time between the user asking to listen to a page and the player
+      starting to read it out. Sessions that are stopped or fail before any
+      audio plays are not recorded.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D333059
+    data_sensitivity:
+      - technical
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
 
 logins:
   password_detected:

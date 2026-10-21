@@ -503,7 +503,12 @@ class Components(
     }
 
     val listenToPage by lazyMonitored {
-        ListenToPage(browserStore = core.store, context = context, scope = applicationScope)
+        ListenToPage(
+            browserStore = core.store,
+            context = context,
+            scope = applicationScope,
+            profiler = core.engine.profiler,
+        )
     }
 
     val aiFeatureRegistry by lazyMonitored {
