@@ -25,7 +25,7 @@ import org.mozilla.fenix.GleanMetrics.ListenToPage
  * [Middleware] that records profiler markers for how long the listen to page feature takes to respond to the user.
  *
  * It is also a [FactProcessor] for measurements the feature records that aren't surfaced as actions. The middleware has
- * to be registered for the facts to be processed correctly..
+ * to be registered for the facts to be processed correctly.
  *
  * @param profiler Records the markers.
  * @param scope The scope markers are added on. It has to be the main thread, see bug 1960730.
@@ -63,11 +63,17 @@ class ListenPerformanceMiddleware(
                     markerName = TIME_TO_FIRST_AUDIO,
                     onEnd = { durationMs -> ListenToPage.timeToFirstAudio.accumulateSamples(listOf(durationMs)) },
                 )
+                start(EXTRACTION, onEnd = { ListenToPage.extractionDuration.accumulateSamples(listOf(it)) })
             }
 
             is ListenAction.Session.StopRequested -> {
                 seekOrVoiceChangePending = false
                 cancelAll(action)
+            }
+
+            is ListenAction.Content.ContentReady -> {
+                end(EXTRACTION)
+                if (TIME_TO_FIRST_AUDIO in spans) startPreparation()
             }
 
             ListenAction.Content.ContentUnavailable,
@@ -92,16 +98,8 @@ class ListenPerformanceMiddleware(
 
             is ListenAction.Playback.PlaybackStarted -> onPlaying()
 
-            is ListenAction.Playback.StateChangeObserved ->
-                when (action.playbackState.phase) {
-                    PlaybackPhase.Playing -> onPlaying()
-                    PlaybackPhase.Paused -> cancel(CHUNK_GAP, action)
-                    PlaybackPhase.Buffering if previous.playbackState.phase == PlaybackPhase.Playing ->
-                        startChunkGap(ChunkGapCause.Buffering)
-                    else -> Unit
-                }
+            is ListenAction.Playback.StateChangeObserved -> action.handleStateChange(previous)
 
-            is ListenAction.Content.ContentReady,
             is ListenAction.Voices.AvailableVoicesLoaded,
             ListenAction.Controls.VoicesClicked,
             ListenAction.Controls.VoicesDismissed,
@@ -116,6 +114,11 @@ class ListenPerformanceMiddleware(
             // The session's own actions, which are internal to it.
             else -> Unit
         }
+    }
+
+    /** Starts the preparation, which runs from the article being ready until its opening starts to be synthesized. */
+    private fun startPreparation() {
+        start(PREPARATION, onEnd = { ListenToPage.preparationDuration.accumulateSamples(listOf(it)) })
     }
 
     private fun startChunkGap(cause: ChunkGapCause) {
@@ -134,6 +137,7 @@ class ListenPerformanceMiddleware(
 
     private fun onPlaying() {
         seekOrVoiceChangePending = false
+        end(PLAYBACK_START)
         end(TIME_TO_FIRST_AUDIO)
         end(CHUNK_GAP)
     }
@@ -151,10 +155,11 @@ class ListenPerformanceMiddleware(
         return true
     }
 
-    private fun end(markerName: String) {
-        val span = spans.remove(markerName) ?: return
+    private fun end(markerName: String): Boolean {
+        val span = spans.remove(markerName) ?: return false
         val durationMs = record(markerName, span, span.text)
         span.onEnd?.invoke(durationMs)
+        return true
     }
 
     private fun failAll(action: ListenAction) {
@@ -189,10 +194,27 @@ class ListenPerformanceMiddleware(
         spans.clear()
     }
 
+    private fun ListenAction.Playback.StateChangeObserved.handleStateChange(prevState: ListenState) =
+        when (playbackState.phase) {
+            PlaybackPhase.Playing -> onPlaying()
+            PlaybackPhase.Paused -> cancel(CHUNK_GAP, this)
+            PlaybackPhase.Buffering if prevState.playbackState.phase == PlaybackPhase.Playing ->
+                startChunkGap(ChunkGapCause.Buffering)
+            else -> Unit
+        }
+
     override fun process(fact: Fact) {
         if (fact.component != Component.FEATURE_LISTENTOPAGE) return
 
         when (fact.item) {
+            ListenToPageFacts.Items.OPENING_SYNTHESIS_STARTED ->
+                if (end(PREPARATION)) {
+                    start(
+                        OPENING_SYNTHESIS,
+                        onEnd = { ListenToPage.openingSynthesisDuration.accumulateSamples(listOf(it)) },
+                    )
+                }
+
             ListenToPageFacts.Items.CHUNK_SYNTHESIZED -> fact.recordChunkSynthesized()
         }
     }
@@ -200,10 +222,18 @@ class ListenPerformanceMiddleware(
     private fun Fact.recordChunkSynthesized() {
         val chunk =
             metadata?.get(ListenToPageFacts.MetadataKeys.CHUNK_SYNTHESIS) as? ListenToPageFacts.ChunkSynthesis ?: return
+        if (chunk.index == 0 && end(OPENING_SYNTHESIS)) {
+            start(PLAYBACK_START, onEnd = { ListenToPage.playbackStartDuration.accumulateSamples(listOf(it)) })
+        }
+
         val text = "index=${chunk.index}, length=${chunk.length}, audioMs=${chunk.audioMs}"
 
         logger.debug("$CHUNK_SYNTHESIS took ${chunk.synthesisMs}ms ($text)")
-        ListenToPage.chunkSynthesisDuration.accumulateSamples(listOf(chunk.synthesisMs))
+
+        // The opening is a single sentence and has its own measurement, so it is kept out of the other chunks' samples.
+        if (chunk.index != 0) {
+            ListenToPage.chunkSynthesisDuration.accumulateSamples(listOf(chunk.synthesisMs))
+        }
 
         val endTime = profiler.getProfilerTime() ?: return
         scope.launch {
@@ -229,6 +259,10 @@ class ListenPerformanceMiddleware(
     private companion object {
         const val CHUNK_SYNTHESIS = "ListenToPage.ChunkSynthesis"
         const val TIME_TO_FIRST_AUDIO = "ListenToPage.TimeToFirstAudio"
+        const val EXTRACTION = "$TIME_TO_FIRST_AUDIO.Extraction"
+        const val PREPARATION = "$TIME_TO_FIRST_AUDIO.Preparation"
+        const val OPENING_SYNTHESIS = "$TIME_TO_FIRST_AUDIO.OpeningSynthesis"
+        const val PLAYBACK_START = "$TIME_TO_FIRST_AUDIO.PlaybackStart"
         const val CHUNK_GAP = "ListenToPage.ChunkGap"
         const val FAILED_SUFFIX = ".Failed"
     }

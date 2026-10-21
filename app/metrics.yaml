@@ -9634,12 +9634,76 @@ listen_to_page:
     notification_emails:
       - android-probes@mozilla.com
     expires: never
+  extraction_duration:
+    type: timing_distribution
+    time_unit: millisecond
+    description: |
+      The time taken to extract the article text and language from the page.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D333064
+    data_sensitivity:
+      - technical
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  preparation_duration:
+    type: timing_distribution
+    time_unit: millisecond
+    description: |
+      The phase of time_to_first_audio from the article text being ready
+      until the speech engine starts to make the opening audio. It covers
+      loading the voices and binding the speech engine.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D333064
+    data_sensitivity:
+      - technical
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  opening_synthesis_duration:
+    type: timing_distribution
+    time_unit: millisecond
+    description: |
+      The phase of time_to_first_audio in which the speech engine makes the
+      audio of the opening sentence.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D333064
+    data_sensitivity:
+      - technical
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  playback_start_duration:
+    type: timing_distribution
+    time_unit: millisecond
+    description: |
+      The last phase of time_to_first_audio, from the opening audio being made
+      until the player reports reading it out. It covers chunking the rest of
+      the article and starting the player.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D333064
+    data_sensitivity:
+      - technical
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
   chunk_synthesis_duration:
     type: timing_distribution
     time_unit: millisecond
     description: |
       The time the speech engine took to make the audio of one chunk of a
-      page.
+      page. The first chunk, the opening sentence, is left out every time it
+      is made, because it is far shorter than the chunks after it. It is made
+      again after a voice change or a seek back to the start of the article.
+      See opening_synthesis_duration.
     bugs:
       - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
     data_reviews:

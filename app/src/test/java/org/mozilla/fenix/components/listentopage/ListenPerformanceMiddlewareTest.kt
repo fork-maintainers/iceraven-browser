@@ -110,15 +110,13 @@ class ListenPerformanceMiddlewareTest {
         store.dispatch(ListenAction.Synthesis.SynthesisFailed)
 
         assertEquals(
-            listOf(
-                Marker(
-                    name = "$TIME_TO_FIRST_AUDIO.Failed",
-                    startTime = 0.0,
-                    endTime = 300.0,
-                    text = "failed=SynthesisFailed",
-                )
+            Marker(
+                name = "$TIME_TO_FIRST_AUDIO.Failed",
+                startTime = 0.0,
+                endTime = 300.0,
+                text = "failed=SynthesisFailed",
             ),
-            profiler.markers,
+            profiler.markers.first { it.name == "$TIME_TO_FIRST_AUDIO.Failed" },
         )
         assertNull(ListenToPage.timeToFirstAudio.testGetValue())
     }
@@ -358,17 +356,154 @@ class ListenPerformanceMiddlewareTest {
         assertNull(ListenToPage.audioRanOut.testGetValue())
     }
 
-    private fun createStore(initialState: ListenState = ListenState()) =
-        ListenStore(
-            initialState = initialState,
-            reducer = ::listenReducer,
-            middleware =
-                listOf(
-                    ListenPerformanceMiddleware(
-                        profiler = profiler,
-                        scope = CoroutineScope(UnconfinedTestDispatcher()),
-                        elapsedMs = { now },
-                    )
+    @Test
+    fun `WHEN listening is requested THEN each phase of time to first audio is recorded in sequence`() {
+        val store = createStore()
+
+        store.dispatch(LISTEN_REQUESTED)
+        now = 100
+        store.dispatch(ListenAction.Content.ContentReady(languageTag = "en-US"))
+        now = 150
+        middleware.process(openingSynthesisStartedFact())
+        now = 400
+        middleware.process(chunkSynthesizedFact(index = 0))
+        now = 500
+        store.dispatch(ListenAction.Playback.PlaybackStarted(ChunkState(index = 0), positionMs = 0))
+
+        assertEquals(
+            listOf(
+                Marker(EXTRACTION, startTime = 0.0, endTime = 100.0, text = null),
+                Marker(PREPARATION, startTime = 100.0, endTime = 150.0, text = null),
+                Marker(OPENING_SYNTHESIS, startTime = 150.0, endTime = 400.0, text = null),
+                Marker(PLAYBACK_START, startTime = 400.0, endTime = 500.0, text = null),
+                Marker(TIME_TO_FIRST_AUDIO, startTime = 0.0, endTime = 500.0, text = null),
+            ),
+            phaseMarkers(),
+        )
+        assertEquals(1L, ListenToPage.extractionDuration.testGetValue()?.count)
+        assertEquals(1L, ListenToPage.preparationDuration.testGetValue()?.count)
+        assertEquals(1L, ListenToPage.openingSynthesisDuration.testGetValue()?.count)
+        assertEquals(1L, ListenToPage.playbackStartDuration.testGetValue()?.count)
+    }
+
+    @Test
+    fun `WHEN play is pressed after extraction THEN preparation still starts when the article is ready`() {
+        val store = createStore()
+        store.dispatch(LISTEN_REQUESTED)
+        now = 100
+        store.dispatch(ListenAction.Content.ContentReady(languageTag = "en-US"))
+
+        now = 5_000
+        store.dispatch(ListenAction.Controls.PlayPauseClicked)
+        now = 5_050
+        middleware.process(openingSynthesisStartedFact())
+
+        assertEquals(Marker(PREPARATION, startTime = 100.0, endTime = 5_050.0, text = null), profiler.markers.last())
+    }
+
+    @Test
+    fun `WHEN the opening is made again outside time to first audio THEN no phase is recorded`() {
+        val store = createStore(playing)
+
+        middleware.process(openingSynthesisStartedFact())
+        middleware.process(chunkSynthesizedFact(index = 0))
+        store.dispatch(ListenAction.Playback.PlaybackStarted(ChunkState(index = 0), positionMs = 0))
+
+        assertTrue(phaseMarkers().isEmpty())
+    }
+
+    @Test
+    fun `WHEN the opening chunk is synthesized THEN it ends the opening phase without a chunk sample`() {
+        val store = createStore()
+        store.dispatch(LISTEN_REQUESTED)
+        store.dispatch(ListenAction.Content.ContentReady(languageTag = "en-US"))
+        middleware.process(openingSynthesisStartedFact())
+
+        middleware.process(chunkSynthesizedFact(index = 0))
+
+        assertTrue(phaseMarkers().any { it.name == OPENING_SYNTHESIS })
+        assertTrue(profiler.markers.any { it.name == "ListenToPage.ChunkSynthesis" })
+        assertNull(ListenToPage.chunkSynthesisDuration.testGetValue())
+    }
+
+    @Test
+    fun `WHEN a later chunk is synthesized during the opening THEN the opening phase continues`() {
+        val store = createStore()
+        store.dispatch(LISTEN_REQUESTED)
+        store.dispatch(ListenAction.Content.ContentReady(languageTag = "en-US"))
+        middleware.process(openingSynthesisStartedFact())
+
+        middleware.process(chunkSynthesizedFact(index = 1))
+
+        assertTrue(profiler.markers.none { it.name == OPENING_SYNTHESIS })
+    }
+
+    @Test
+    fun `WHEN synthesis fails during the opening THEN the opening phase is recorded as failed`() {
+        val store = createStore()
+        store.dispatch(LISTEN_REQUESTED)
+        store.dispatch(ListenAction.Content.ContentReady(languageTag = "en-US"))
+        middleware.process(openingSynthesisStartedFact())
+
+        store.dispatch(ListenAction.Synthesis.SynthesisFailed)
+
+        assertTrue(profiler.markers.any { it.name == "$OPENING_SYNTHESIS.Failed" })
+        assertNull(ListenToPage.openingSynthesisDuration.testGetValue())
+    }
+
+    @Test
+    fun `WHEN the page has no content THEN extraction is recorded as failed`() {
+        val store = createStore()
+        store.dispatch(LISTEN_REQUESTED)
+
+        store.dispatch(ListenAction.Content.ContentUnavailable)
+
+        assertEquals(listOf("$TIME_TO_FIRST_AUDIO.Failed", "$EXTRACTION.Failed"), profiler.markers.map { it.name })
+        assertNull(ListenToPage.extractionDuration.testGetValue())
+    }
+
+    @Test
+    fun `WHEN an opening fact comes from another component THEN preparation does not end`() {
+        val store = createStore()
+        store.dispatch(LISTEN_REQUESTED)
+        store.dispatch(ListenAction.Content.ContentReady(languageTag = "en-US"))
+
+        middleware.process(openingSynthesisStartedFact().copy(component = Component.FEATURE_DOWNLOADS))
+
+        assertTrue(profiler.markers.none { it.name == PREPARATION })
+    }
+
+    private lateinit var middleware: ListenPerformanceMiddleware
+
+    /** The markers of time to first audio and its phases, without the per-chunk markers recorded alongside them. */
+    private fun phaseMarkers() = profiler.markers.filter { it.name.startsWith(TIME_TO_FIRST_AUDIO) }
+
+    private fun createStore(initialState: ListenState = ListenState()): ListenStore {
+        middleware =
+            ListenPerformanceMiddleware(
+                profiler = profiler,
+                scope = CoroutineScope(UnconfinedTestDispatcher()),
+                elapsedMs = { now },
+            )
+        return ListenStore(initialState = initialState, reducer = ::listenReducer, middleware = listOf(middleware))
+    }
+
+    private fun openingSynthesisStartedFact() =
+        Fact(
+            component = Component.FEATURE_LISTENTOPAGE,
+            action = Action.IMPLEMENTATION_DETAIL,
+            item = ListenToPageFacts.Items.OPENING_SYNTHESIS_STARTED,
+        )
+
+    private fun chunkSynthesizedFact(index: Int) =
+        Fact(
+            component = Component.FEATURE_LISTENTOPAGE,
+            action = Action.IMPLEMENTATION_DETAIL,
+            item = ListenToPageFacts.Items.CHUNK_SYNTHESIZED,
+            metadata =
+                mapOf(
+                    ListenToPageFacts.MetadataKeys.CHUNK_SYNTHESIS to
+                        ListenToPageFacts.ChunkSynthesis(index, length = 25, synthesisMs = 250, audioMs = 2_500)
                 ),
         )
 
@@ -447,6 +582,10 @@ class ListenPerformanceMiddlewareTest {
         const val TIME_TO_FIRST_AUDIO = "ListenToPage.TimeToFirstAudio"
         val LISTEN_REQUESTED = ListenAction.Session.ListenRequested(tabId = "tab", url = "https://example.com")
         const val CHUNK_GAP = "ListenToPage.ChunkGap"
+        const val EXTRACTION = "$TIME_TO_FIRST_AUDIO.Extraction"
+        const val PREPARATION = "$TIME_TO_FIRST_AUDIO.Preparation"
+        const val OPENING_SYNTHESIS = "$TIME_TO_FIRST_AUDIO.OpeningSynthesis"
+        const val PLAYBACK_START = "$TIME_TO_FIRST_AUDIO.PlaybackStart"
 
         val playing = ListenState(playbackState = PlaybackState(phase = PlaybackPhase.Playing))
     }
