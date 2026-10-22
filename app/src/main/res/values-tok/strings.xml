@@ -123,11 +123,7 @@
   <string name="recently_visited_menu_item_remove">o weka</string>
   <!-- Content description for the button which navigates the user to show all of their history. -->
   <string name="past_explorations_show_all_content_description_2">o lukin e poki lukin ale</string>
-  <!--
-    Browser Fragment
-
-    Content description (not visible, for screen readers etc.): Navigate backward (browsing history)
-  -->
+  <!-- Content description (not visible, for screen readers etc.): Navigate backward (browsing history) -->
   <string name="browser_menu_back">o tawa pini</string>
   <!-- Content description (not visible, for screen readers etc.): Navigate forward (browsing history) -->
   <string name="browser_menu_forward">o tawa kama</string>
@@ -313,7 +309,11 @@
     Title for the settings page
   -->
   <string name="settings">nasin ilo</string>
-  <!-- Preference category for general settings -->
+  <!--
+    Preferences
+
+    Preference category for general settings
+  -->
   <string name="preferences_category_general">nasin ilo</string>
   <!-- Preference category for all links about Fenix -->
   <string name="preferences_category_about">sona poka</string>

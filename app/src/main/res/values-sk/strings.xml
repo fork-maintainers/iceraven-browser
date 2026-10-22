@@ -77,7 +77,11 @@
   <string name="about_content" tools:ignore="BrandUsage">%1$s vyvíja Mozilla.</string>
   <!-- Private Browsing -->
   <string name="private_browsing_common_myths">Časté mýty o súkromnom prehliadaní</string>
-  <!-- Text to be announced by the accessibility service to inform the user that the private browsing mode is currently active. -->
+  <!--
+    Private Browsing
+
+    Text to be announced by the accessibility service to inform the user that the private browsing mode is currently active.
+  -->
   <string name="private_browsing_a11y_session_announcement">Súkromné prehliadanie</string>
   <!--
     True Private Browsing Mode
@@ -181,8 +185,10 @@
   <!--
     Browser Fragment
 
-    Content description (not visible, for screen readers etc.): Navigate backward (browsing history)
+    Label for popup button that appears when long-pressing the main menu. Tapping it allows the user to customize the main menu layout.
   -->
+  <string name="customize_menu">Upraviť ponuku</string>
+  <!-- Content description (not visible, for screen readers etc.): Navigate backward (browsing history) -->
   <string name="browser_menu_back">Naspäť</string>
   <!-- Content description (not visible, for screen readers etc.): Navigate forward (browsing history) -->
   <string name="browser_menu_forward">Dopredu</string>
@@ -725,7 +731,11 @@
     Title for the settings page
   -->
   <string name="settings">Nastavenia</string>
-  <!-- Preference category for general settings -->
+  <!--
+    Preferences
+
+    Preference category for general settings
+  -->
   <string name="preferences_category_general">Všeobecné</string>
   <!-- Preference category for all links about Fenix -->
   <string name="preferences_category_about">O aplikácii</string>

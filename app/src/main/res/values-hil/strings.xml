@@ -19,11 +19,7 @@
   <string name="content_description_menu">Madamo nga pilian</string>
   <!-- Label of editable text in create collection dialog for naming a new collection -->
   <string name="tab_tray_add_new_collection_name">Ngalan</string>
-  <!--
-    Browser Fragment
-
-    Content description (not visible, for screen readers etc.): Navigate backward (browsing history)
-  -->
+  <!-- Content description (not visible, for screen readers etc.): Navigate backward (browsing history) -->
   <string name="browser_menu_back">Balikan</string>
   <!-- Browser menu button that opens the extensions manager -->
   <string name="browser_menu_extensions">Mga extension</string>

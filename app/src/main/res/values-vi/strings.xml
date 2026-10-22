@@ -77,7 +77,11 @@
   <string name="about_content" tools:ignore="BrandUsage">%1$s - Một sản phẩm của Mozilla.</string>
   <!-- Private Browsing -->
   <string name="private_browsing_common_myths">Những lầm tưởng phổ biến về duyệt web riêng tư</string>
-  <!-- Text to be announced by the accessibility service to inform the user that the private browsing mode is currently active. -->
+  <!--
+    Private Browsing
+
+    Text to be announced by the accessibility service to inform the user that the private browsing mode is currently active.
+  -->
   <string name="private_browsing_a11y_session_announcement">Phiên duyệt web riêng tư</string>
   <!--
     True Private Browsing Mode
@@ -178,11 +182,7 @@
   <string name="recently_visited_menu_item_remove">Xóa</string>
   <!-- Content description for the button which navigates the user to show all of their history. -->
   <string name="past_explorations_show_all_content_description_2">Hiện tất cả các khám phá trước đây</string>
-  <!--
-    Browser Fragment
-
-    Content description (not visible, for screen readers etc.): Navigate backward (browsing history)
-  -->
+  <!-- Content description (not visible, for screen readers etc.): Navigate backward (browsing history) -->
   <string name="browser_menu_back">Quay lại</string>
   <!-- Content description (not visible, for screen readers etc.): Navigate forward (browsing history) -->
   <string name="browser_menu_forward">Tiến</string>
@@ -722,7 +722,11 @@
     Title for the settings page
   -->
   <string name="settings">Cài đặt</string>
-  <!-- Preference category for general settings -->
+  <!--
+    Preferences
+
+    Preference category for general settings
+  -->
   <string name="preferences_category_general">Tổng quát</string>
   <!-- Preference category for all links about Fenix -->
   <string name="preferences_category_about">Giới thiệu</string>

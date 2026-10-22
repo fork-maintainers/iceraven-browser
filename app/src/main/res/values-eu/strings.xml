@@ -77,7 +77,11 @@
   <string name="about_content" tools:ignore="BrandUsage">%1$s Mozillak egina da.</string>
   <!-- Private Browsing -->
   <string name="private_browsing_common_myths">Nabigatze pribatuari buruzko ohiko mitoak</string>
-  <!-- Text to be announced by the accessibility service to inform the user that the private browsing mode is currently active. -->
+  <!--
+    Private Browsing
+
+    Text to be announced by the accessibility service to inform the user that the private browsing mode is currently active.
+  -->
   <string name="private_browsing_a11y_session_announcement">Nabigatze pribatuko saioa</string>
   <!--
     True Private Browsing Mode
@@ -181,8 +185,10 @@
   <!--
     Browser Fragment
 
-    Content description (not visible, for screen readers etc.): Navigate backward (browsing history)
+    Label for popup button that appears when long-pressing the main menu. Tapping it allows the user to customize the main menu layout.
   -->
+  <string name="customize_menu">Pertsonalizatu menua</string>
+  <!-- Content description (not visible, for screen readers etc.): Navigate backward (browsing history) -->
   <string name="browser_menu_back">Atzera</string>
   <!-- Content description (not visible, for screen readers etc.): Navigate forward (browsing history) -->
   <string name="browser_menu_forward">Aurrera</string>
@@ -723,7 +729,11 @@
     Title for the settings page
   -->
   <string name="settings">Ezarpenak</string>
-  <!-- Preference category for general settings -->
+  <!--
+    Preferences
+
+    Preference category for general settings
+  -->
   <string name="preferences_category_general">Orokorra</string>
   <!-- Preference category for all links about Fenix -->
   <string name="preferences_category_about">Honi buruz</string>
@@ -2817,7 +2827,7 @@
   <!-- Bullet point 3 for "Default Protection" information page under "DNS over HTTPS". %1$s is replaced by a link using `preference_doh_learn_more` at text ("Learn More"). -->
   <string name="preference_doh_default_protection_info_3">Erabili hornitzaile lokala, ahal bada. %1$s</string>
   <!-- Bullet point 4 for "Default Protection" information page under "DNS over HTTPS" -->
-  <string name="preference_doh_default_protection_info_4">Desaktibatu VPNa, gurasoen kontrola edo enpresako politikak aktibo daudenean</string>
+  <string name="preference_doh_default_protection_info_4">Desaktibatu VPNa, guraso-murriztapenak edo enpresako politikak aktibo daudenean</string>
   <!-- Bullet point 5 for "Default Protection" information page under "DNS over HTTPS". %1$s is the name of the application (e.g. Fenix). %2$s is replaced by a link using `preference_doh_learn_more` at text ("Learn More"). -->
   <string name="preference_doh_default_protection_info_5">Desaktibatu sareak %1$s(r)i esaten dionean ez lukeela DNS segurua erabili behar. %2$s</string>
   <!-- Title displayed for "Increased Protection" option under "DNS over HTTPS" -->

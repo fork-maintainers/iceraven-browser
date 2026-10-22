@@ -73,7 +73,11 @@
   <string name="about_content" tools:ignore="BrandUsage">%1$s നിർമ്മിച്ചത് മോസില്ലയാണ്.</string>
   <!-- Private Browsing -->
   <string name="private_browsing_common_myths">സ്വകാര്യ തിരച്ചിലിനെക്കുറിച്ചുള്ള പൊതുവായ തെറ്റിദ്ധാരണങ്ങൾ</string>
-  <!-- Text to be announced by the accessibility service to inform the user that the private browsing mode is currently active. -->
+  <!--
+    Private Browsing
+
+    Text to be announced by the accessibility service to inform the user that the private browsing mode is currently active.
+  -->
   <string name="private_browsing_a11y_session_announcement">സ്വകാര്യ തിരച്ചിൽ നേരം</string>
   <!--
     True Private Browsing Mode
@@ -166,11 +170,7 @@
   <string name="recently_visited_menu_item_remove">കളയുക</string>
   <!-- Content description for the button which navigates the user to show all of their history. -->
   <string name="past_explorations_show_all_content_description_2">പഴയകാല ആരായലുകൾ</string>
-  <!--
-    Browser Fragment
-
-    Content description (not visible, for screen readers etc.): Navigate backward (browsing history)
-  -->
+  <!-- Content description (not visible, for screen readers etc.): Navigate backward (browsing history) -->
   <string name="browser_menu_back">പുറകോട്ട്</string>
   <!-- Content description (not visible, for screen readers etc.): Navigate forward (browsing history) -->
   <string name="browser_menu_forward">മുന്നോട്ട്</string>
@@ -575,7 +575,11 @@
     Title for the settings page
   -->
   <string name="settings">ക്രമീകരണങ്ങൾ</string>
-  <!-- Preference category for general settings -->
+  <!--
+    Preferences
+
+    Preference category for general settings
+  -->
   <string name="preferences_category_general">പൊതുവായവ</string>
   <!-- Preference category for all links about Fenix -->
   <string name="preferences_category_about">വിവരം</string>

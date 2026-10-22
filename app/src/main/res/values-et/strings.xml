@@ -59,7 +59,11 @@
   <string name="about_content" tools:ignore="BrandUsage">%1$s on Mozilla poolt toodetud.</string>
   <!-- Private Browsing -->
   <string name="private_browsing_common_myths">Levinumad müüdid privaatse veebilehitsemise kohta</string>
-  <!-- Text to be announced by the accessibility service to inform the user that the private browsing mode is currently active. -->
+  <!--
+    Private Browsing
+
+    Text to be announced by the accessibility service to inform the user that the private browsing mode is currently active.
+  -->
   <string name="private_browsing_a11y_session_announcement">Privaatse veebilehitsemise seanss</string>
   <!--
     True Private Browsing Mode
@@ -147,11 +151,7 @@
   <string name="recently_visited_menu_item_remove">Eemalda</string>
   <!-- Content description for the button which navigates the user to show all of their history. -->
   <string name="past_explorations_show_all_content_description_2">Kuva varasemat ajalugu</string>
-  <!--
-    Browser Fragment
-
-    Content description (not visible, for screen readers etc.): Navigate backward (browsing history)
-  -->
+  <!-- Content description (not visible, for screen readers etc.): Navigate backward (browsing history) -->
   <string name="browser_menu_back">Tagasi</string>
   <!-- Content description (not visible, for screen readers etc.): Navigate forward (browsing history) -->
   <string name="browser_menu_forward">Edasi</string>
@@ -298,7 +298,11 @@
     Title for the settings page
   -->
   <string name="settings">Sätted</string>
-  <!-- Preference category for general settings -->
+  <!--
+    Preferences
+
+    Preference category for general settings
+  -->
   <string name="preferences_category_general">Üldine</string>
   <!-- Preference category for all links about Fenix -->
   <string name="preferences_category_about">Teave</string>

@@ -77,7 +77,11 @@
   <string name="about_content" tools:ignore="BrandUsage">%1$s는 Mozilla에서 제작했습니다.</string>
   <!-- Private Browsing -->
   <string name="private_browsing_common_myths">사생활 보호 모드에 관한 흔한 오해</string>
-  <!-- Text to be announced by the accessibility service to inform the user that the private browsing mode is currently active. -->
+  <!--
+    Private Browsing
+
+    Text to be announced by the accessibility service to inform the user that the private browsing mode is currently active.
+  -->
   <string name="private_browsing_a11y_session_announcement">사생활 보호 세션</string>
   <!--
     True Private Browsing Mode
@@ -181,8 +185,10 @@
   <!--
     Browser Fragment
 
-    Content description (not visible, for screen readers etc.): Navigate backward (browsing history)
+    Label for popup button that appears when long-pressing the main menu. Tapping it allows the user to customize the main menu layout.
   -->
+  <string name="customize_menu">메뉴 사용자 지정</string>
+  <!-- Content description (not visible, for screen readers etc.): Navigate backward (browsing history) -->
   <string name="browser_menu_back">뒤로</string>
   <!-- Content description (not visible, for screen readers etc.): Navigate forward (browsing history) -->
   <string name="browser_menu_forward">앞으로</string>
@@ -722,7 +728,11 @@
     Title for the settings page
   -->
   <string name="settings">설정</string>
-  <!-- Preference category for general settings -->
+  <!--
+    Preferences
+
+    Preference category for general settings
+  -->
   <string name="preferences_category_general">일반</string>
   <!-- Preference category for all links about Fenix -->
   <string name="preferences_category_about">소개</string>

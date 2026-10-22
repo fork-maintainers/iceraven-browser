@@ -77,7 +77,11 @@
   <string name="about_content" tools:ignore="BrandUsage">%1$s wird von Mozilla hergestellt.</string>
   <!-- Private Browsing -->
   <string name="private_browsing_common_myths">Häufige Missverständnisse über das Surfen im Privaten Modus</string>
-  <!-- Text to be announced by the accessibility service to inform the user that the private browsing mode is currently active. -->
+  <!--
+    Private Browsing
+
+    Text to be announced by the accessibility service to inform the user that the private browsing mode is currently active.
+  -->
   <string name="private_browsing_a11y_session_announcement">Private Surf-Sitzung</string>
   <!--
     True Private Browsing Mode
@@ -181,8 +185,10 @@
   <!--
     Browser Fragment
 
-    Content description (not visible, for screen readers etc.): Navigate backward (browsing history)
+    Label for popup button that appears when long-pressing the main menu. Tapping it allows the user to customize the main menu layout.
   -->
+  <string name="customize_menu">Menü anpassen</string>
+  <!-- Content description (not visible, for screen readers etc.): Navigate backward (browsing history) -->
   <string name="browser_menu_back">Zurück</string>
   <!-- Content description (not visible, for screen readers etc.): Navigate forward (browsing history) -->
   <string name="browser_menu_forward">Vor</string>
@@ -723,7 +729,11 @@
     Title for the settings page
   -->
   <string name="settings">Einstellungen</string>
-  <!-- Preference category for general settings -->
+  <!--
+    Preferences
+
+    Preference category for general settings
+  -->
   <string name="preferences_category_general">Allgemein</string>
   <!-- Preference category for all links about Fenix -->
   <string name="preferences_category_about">Über</string>

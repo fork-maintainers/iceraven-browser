@@ -63,7 +63,11 @@
   <string name="about_content" tools:ignore="BrandUsage">Is é Mozilla a tháirgeann %1$s.</string>
   <!-- Private Browsing -->
   <string name="private_browsing_common_myths">Gnáthmhiotais maidir le brabhsáil phríobháideach</string>
-  <!-- Text to be announced by the accessibility service to inform the user that the private browsing mode is currently active. -->
+  <!--
+    Private Browsing
+
+    Text to be announced by the accessibility service to inform the user that the private browsing mode is currently active.
+  -->
   <string name="private_browsing_a11y_session_announcement">Seisiún brabhsála príobháidí</string>
   <!--
     Home screen icons - Long press shortcuts
@@ -77,11 +81,7 @@
   <string name="recent_tabs_show_all">Taispeáin gach ceann</string>
   <!-- Content description for the button which navigates the user to show all of their history. -->
   <string name="past_explorations_show_all_content_description_2">Taispeáin gach taiscéalaíocht san am atá caite</string>
-  <!--
-    Browser Fragment
-
-    Content description (not visible, for screen readers etc.): Navigate backward (browsing history)
-  -->
+  <!-- Content description (not visible, for screen readers etc.): Navigate backward (browsing history) -->
   <string name="browser_menu_back">Ar Ais</string>
   <!-- Content description (not visible, for screen readers etc.): Navigate forward (browsing history) -->
   <string name="browser_menu_forward">Ar Aghaidh</string>
@@ -193,7 +193,11 @@
     Title for the settings page
   -->
   <string name="settings">Socruithe</string>
-  <!-- Preference category for general settings -->
+  <!--
+    Preferences
+
+    Preference category for general settings
+  -->
   <string name="preferences_category_general">Ginearálta</string>
   <!-- Preference category for all links about Fenix -->
   <string name="preferences_category_about">Maidir Leis</string>

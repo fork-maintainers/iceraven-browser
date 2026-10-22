@@ -19,6 +19,8 @@
   <string name="content_description_menu">Vebijarkên zêdetir</string>
   <!-- Content description (not visible, for screen readers etc.): "Private Browsing" menu button. -->
   <string name="content_description_private_browsing">Gera nepen</string>
+  <!-- Content description (not visible, for screen readers etc.): "Normal Browsing" menu button. -->
+  <string name="content_description_normal_browsing">Gera normal</string>
   <!-- Placeholder text shown in the search bar before a user enters text for the default engine -->
   <string name="search_hint">Lêgerîn an jî navnîşan</string>
   <!-- Shorter placeholder text shown in the search bar when an additional action (voice search) is rendered alongside the hint. -->
@@ -67,7 +69,11 @@
   <string name="about_content" tools:ignore="BrandUsage">%1$s berhemeke Mozillayê ye.</string>
   <!-- Private Browsing -->
   <string name="private_browsing_common_myths">Efsaneyên berbelav ên têkildarî gerîna veşartî</string>
-  <!-- Text to be announced by the accessibility service to inform the user that the private browsing mode is currently active. -->
+  <!--
+    Private Browsing
+
+    Text to be announced by the accessibility service to inform the user that the private browsing mode is currently active.
+  -->
   <string name="private_browsing_a11y_session_announcement">Rûniştina gerîna veşartî</string>
   <!--
     True Private Browsing Mode
@@ -168,11 +174,7 @@
   <string name="recently_visited_menu_item_remove">Rake</string>
   <!-- Content description for the button which navigates the user to show all of their history. -->
   <string name="past_explorations_show_all_content_description_2">Hemî gerên berê nîşan bide</string>
-  <!--
-    Browser Fragment
-
-    Content description (not visible, for screen readers etc.): Navigate backward (browsing history)
-  -->
+  <!-- Content description (not visible, for screen readers etc.): Navigate backward (browsing history) -->
   <string name="browser_menu_back">Paşve</string>
   <!-- Content description (not visible, for screen readers etc.): Navigate forward (browsing history) -->
   <string name="browser_menu_forward">Pêşve</string>
@@ -713,7 +715,11 @@
     Title for the settings page
   -->
   <string name="settings">Sazkarî</string>
-  <!-- Preference category for general settings -->
+  <!--
+    Preferences
+
+    Preference category for general settings
+  -->
   <string name="preferences_category_general">Giştî</string>
   <!-- Preference category for all links about Fenix -->
   <string name="preferences_category_about">Derbar</string>

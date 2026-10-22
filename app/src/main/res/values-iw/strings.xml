@@ -77,7 +77,11 @@
   <string name="about_content" tools:ignore="BrandUsage">‏%1$s נוצר על־ידי Mozilla.</string>
   <!-- Private Browsing -->
   <string name="private_browsing_common_myths">מיתוסים נפוצים על גלישה פרטית</string>
-  <!-- Text to be announced by the accessibility service to inform the user that the private browsing mode is currently active. -->
+  <!--
+    Private Browsing
+
+    Text to be announced by the accessibility service to inform the user that the private browsing mode is currently active.
+  -->
   <string name="private_browsing_a11y_session_announcement">הפעלה בגלישה פרטית</string>
   <!--
     True Private Browsing Mode
@@ -178,11 +182,7 @@
   <string name="recently_visited_menu_item_remove">הסרה</string>
   <!-- Content description for the button which navigates the user to show all of their history. -->
   <string name="past_explorations_show_all_content_description_2">הצגת כל מחקרי העבר</string>
-  <!--
-    Browser Fragment
-
-    Content description (not visible, for screen readers etc.): Navigate backward (browsing history)
-  -->
+  <!-- Content description (not visible, for screen readers etc.): Navigate backward (browsing history) -->
   <string name="browser_menu_back">חזרה</string>
   <!-- Content description (not visible, for screen readers etc.): Navigate forward (browsing history) -->
   <string name="browser_menu_forward">קדימה</string>
@@ -724,7 +724,11 @@
     Title for the settings page
   -->
   <string name="settings">הגדרות</string>
-  <!-- Preference category for general settings -->
+  <!--
+    Preferences
+
+    Preference category for general settings
+  -->
   <string name="preferences_category_general">כללי</string>
   <!-- Preference category for all links about Fenix -->
   <string name="preferences_category_about">על אודות</string>
