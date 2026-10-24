@@ -178,6 +178,12 @@
   <string name="recently_visited_menu_item_remove">Hiqe</string>
   <!-- Content description for the button which navigates the user to show all of their history. -->
   <string name="past_explorations_show_all_content_description_2">Shfaq krejt eksplorimet e kaluara</string>
+  <!--
+    Browser Fragment
+
+    Label for popup button that appears when long-pressing the main menu. Tapping it allows the user to customize the main menu layout.
+  -->
+  <string name="customize_menu">Përshtateni menunë</string>
   <!-- Content description (not visible, for screen readers etc.): Navigate backward (browsing history) -->
   <string name="browser_menu_back">Mbrapsht</string>
   <!-- Content description (not visible, for screen readers etc.): Navigate forward (browsing history) -->
@@ -668,6 +674,8 @@
   <string name="preferences_category_general">Të përgjithshme</string>
   <!-- Preference category for all links about Fenix -->
   <string name="preferences_category_about">Mbi</string>
+  <!-- Option to set the private browsing mode to use the normal default search engine -->
+  <string name="search_engine_use_default">Përdor të njëjtin motor kërkimesh si në shfletim të zakonshëm</string>
   <!-- Preference for settings related to managing search shortcuts for the quick search menu -->
   <string name="preferences_manage_search_shortcuts_2">Administroni motorë alternativë kërkimesh</string>
   <!-- Summary for preference for settings related to managing search shortcuts for the quick search menu -->
@@ -749,6 +757,8 @@
   <string name="preferences_override_sync_tokenserver">Shërbyes vetjak Sync</string>
   <!-- Preference category for account information -->
   <string name="preferences_category_account">Llogari</string>
+  <!-- Preference category for sync controls. Sync can be translated, it's just short for ”Synchronization” in English. -->
+  <string name="preferences_category_sync_controls">Njëkohësim</string>
   <!-- Preference for changing where the AddressBar is positioned -->
   <string name="preferences_toolbar_2">Vendndodhje shtylle adresash</string>
   <!-- Preference for changing toolbar layout -->
@@ -805,6 +815,8 @@
   <string name="preferences_search_synced_tabs">Kërko në skeda të njëkohësuara</string>
   <!-- Preference for account settings -->
   <string name="preferences_account_settings">Rregullime llogarie</string>
+  <!-- Preference for account and sync settings -->
+  <string name="preferences_account_and_sync_settings">Llogari dhe njëkohësim</string>
   <!-- Preference for enabling url autocomplete -->
   <string name="preferences_enable_autocomplete_urls">Vetëplotësim URL-sh</string>
   <!-- Preference title for switch preference to show sponsored Firefox Suggest search suggestions -->
@@ -852,6 +864,8 @@
   <string name="preference_downloads_folder_permission_lost" tools:ignore="UnusedResources">S’keni leje të përdorni këtë dosje. Provoni të zgjidhni një tjetër.</string>
   <!-- Preference title for choosing an app to handle downloads -->
   <string name="preferences_choose_app_for_downloads">Administroni shkarkime me aplikacion tjetër</string>
+  <!-- Message shown when no app is available to let the user pick a download folder. -->
+  <string name="preferences_downloads_no_folder_picker_available">S’arrihet të hapet zgjedhës dosjesh në këtë pajisje.</string>
   <!-- Preference category for deleting or removing downloads -->
   <string name="preferences_category_delete_or_remove_downloads">Fshini ose hiqni shkarkime</string>
   <string name="preferences_downloads_delete_from_device">Fshije prej pajisjes</string>
@@ -875,6 +889,12 @@
   <string name="notifications_allowed_summary">Të lejuar</string>
   <!-- Summary for notification preference indicating notifications are not allowed -->
   <string name="notifications_not_allowed_summary">Nuk lejohen</string>
+  <!-- Preference for local network access / nearby devices in Android 17 -->
+  <string name="preferences_local_network_access">Hyrje Në Rrjet Vendor / Pajisje Atypari</string>
+  <!-- Summary for local network access preference indicating access is allowed -->
+  <string name="local_network_access_allowed_summary">E lejuar</string>
+  <!-- Summary for local network access preference indicating access is not allowed -->
+  <string name="local_network_access_not_allowed_summary">E palejuar</string>
   <!--
     Add-on Permissions
 
@@ -1325,6 +1345,8 @@
     Title of preference for tabs management
   -->
   <string name="preferences_tabs">Skeda</string>
+  <!-- Title of preference that allows a user to specify the tab layout -->
+  <string name="preferences_tab_layout">Skemë skedash</string>
   <!-- Option for a list tab view -->
   <string name="tab_view_list">Listë</string>
   <!-- Option for a grid tab view -->
@@ -1369,8 +1391,28 @@
   <string name="opening_screen_last_tab_summary">Hape në skedën e fundit</string>
   <!-- Summary for homepage preference indicating opening the homepage when re-opening the app after four hours of inactivity -->
   <string name="opening_screen_after_four_hours_of_inactivity_summary">Hape në faqen hyrëse pas katër orësh</string>
+  <!--
+    Tab organization
+
+    Category header for the preferences that control how tabs are organized
+  -->
+  <string name="preferences_tab_organization">Sistemim skedash</string>
+  <!-- Title of the preference that allows a user to enable or disable the inactive tabs feature -->
+  <string name="preferences_inactive_tabs_toggle_title">Skeda jo aktive</string>
   <!-- Summary of the preference that allows a user to enable or disable the inactive tabs feature. -->
   <string name="preferences_inactive_tabs_title">Skedat që s’i keni parë gjatë dy javësh, kalohen te ndarja joaktive.</string>
+  <!-- Title of the preference that allows a user to enable or disable the tab groups feature -->
+  <string name="preferences_tab_groups_title">Grupe skedash</string>
+  <!-- Summary of the preference that allows a user to enable or disable the tab groups feature -->
+  <string name="preferences_tab_groups_description">Sistemojini skedat tuaj në grupe që mund t’i emërtoni dhe ruani.</string>
+  <!--
+    Privacy report
+
+    Category header of a preference that allows a user to enable or disable the privacy report feature
+  -->
+  <string name="preferences_privacy_report">Raport privatësie</string>
+  <!-- Title of the privacy report preference that allows a user to enable or disable the feature -->
+  <string name="preferences_privacy_report_title">Aktivizo raport privatësie</string>
   <!--
     Studies
 
@@ -1409,6 +1451,14 @@
     The %1$s will be replaced by the number of opened private tabs
   -->
   <string name="tabs_header_private_tabs_counter_title">Skeda Private të Hapura: %1$s. Prekeni që të ndërroni skeda.</string>
+  <plurals name="tabs_header_tab_group_counter_title">
+    <!--
+      Title for the list of tab groups used by a11y services
+      The %1$d will be replaced by the number of opened tab groups
+    -->
+    <item quantity="one">%1$d grup skedash hapur. Që të këmbeni skeda, prekeni.</item>
+    <item quantity="other">%1$d grupe skedash hapur. Që të këmbeni skeda, prekeni.</item>
+  </plurals>
   <!--
     Title for the list of tabs in the synced tabs used by a11y services
     The %1$s will be replaced by the number of opened synced tabs
@@ -1418,10 +1468,14 @@
   <string name="add_tab">Shtoni skedë</string>
   <!-- Content description (not visible, for screen readers etc.): Add tab button. Adds a news tab when pressed -->
   <string name="add_private_tab">Shtoni skedë private</string>
+  <!-- Content description (not visible, for screen readers etc.): Create tab group button. Opens the create tab group sheet when pressed -->
+  <string name="create_tab_group_content_description">Krijoni grup skedash</string>
   <!-- Text for the tab search bar placeholder -->
   <string name="tab_manager_search_bar_placeholder">Kërkoni te skedat tuaja</string>
   <!-- Text shown in the menu to view recently closed tabs -->
   <string name="tab_tray_menu_recently_closed">Skeda të mbyllura së fundi</string>
+  <!-- Text shown in the menu to select all tabs. -->
+  <string name="tab_tray_menu_select_all_tabs">Përzgjidhe krejt</string>
   <!-- Text shown in the menu to view account settings -->
   <string name="tab_tray_menu_account_settings">Rregullime llogarie</string>
   <!-- Text shown in the menu to view tab settings -->
@@ -1484,6 +1538,12 @@
   <string name="pwa_site_controls_title_private">%1$s (Mënyrë Private)</string>
   <!-- Content description (not visible, for screen readers etc.) for the button to open the Tab Search feature to search through tabs. -->
   <string name="tab_manager_open_tab_search">Hap kërkim skedash</string>
+  <!-- Title for introducing tab groups via an onboarding card shown in the tab manager. -->
+  <string name="tab_group_onboarding_item_title">Krijoni një grup skedash</string>
+  <!-- Description for tab groups onboarding shown in the tab manager when in grid view. -->
+  <string name="tab_group_onboarding_grid_item_description">Që të grupohen, tërhiqni një skedë deri te një tjetër.</string>
+  <!-- Description for tab groups onboarding shown in the tab manager when in list view. -->
+  <string name="tab_group_onboarding_list_item_description">Që të krijohet një grup, përzgjidhni skeda të shumta.</string>
   <!--
     Tab Group
 
@@ -1835,6 +1895,8 @@
   <string name="webcompat_reporter_reason_account2">S’bëj dot hyrjen, ose regjistrimin</string>
   <!-- Broken site reason text for site asked to turn off ad blocker -->
   <string name="webcompat_reporter_reason_turn_off_adblocker">Sajti kërkoi të aktivizohet bllokuesi i reklamave</string>
+  <!-- Broken site reason text for the site being deceptive -->
+  <string name="webcompat_reporter_reason_site_is_deceptive">Ky sajt është i rrejshëm</string>
   <!-- Broken site reason text for something else -->
   <string name="webcompat_reporter_reason_other">Diçka tjetër</string>
   <!--
@@ -1984,6 +2046,8 @@
   <string name="bookmark_import_bookmarks_button_content_description">Importoje prej kartele</string>
   <!-- Title for the bookmark list empty state -->
   <string name="bookmark_empty_list_title">Ende pa faqerojtës</string>
+  <!-- Title for the bookmark list empty state at the root level. -->
+  <string name="bookmark_empty_list_root_title">Mbajini tok krejt faqerojtësit tuaj të parapëlqyer</string>
   <!-- Bookmark screen folder description. %s is the count of bookmark folder children -->
   <string name="bookmarks_folder_description">Faqerojtës në dosje: %s</string>
   <!-- Text for the button to navigate to sync authentication -->
@@ -2834,10 +2898,20 @@
   <string name="ip_protection_menu_try_vpn_cta">Provojeni falas</string>
   <!-- Content description for the chevron button that opens the browser VPN settings screen -->
   <string name="ip_protection_navigate_settings">Hap rregullime VPN-je</string>
+  <!-- Label shown next to the browser protection icon in the address bar when the browser VPN is active -->
+  <string name="ip_protection_toolbar_pill_label">VPN on</string>
+  <!-- Accessibility description for the browser VPN pill in the address bar when the VPN has been activated -->
+  <string name="ip_protection_toolbar_pill_description">VPN-ja është aktive.</string>
+  <!-- Label shown next to the browser protection icon in the address bar when the browser VPN turns off -->
+  <string name="ip_protection_toolbar_pill_label_off">VPN off</string>
+  <!-- Accessibility description for the browser VPN pill in the address bar when the VPN has turned off -->
+  <string name="ip_protection_toolbar_pill_description_off">VPN-ja s’është aktive.</string>
   <!-- Label for the button that starts the browser VPN authentication or authorization flow on the settings screen -->
   <string name="ip_protection_get_started">Fillojani</string>
   <!-- Label for the "connecting" state of the button that starts the browser VPN authentication or authorization flow on the settings screen -->
   <string name="ip_protection_connecting">Po lidhet…</string>
+  <!-- Headline for the browser VPN onboarding card. %s is the name of the app (for example "Firefox"). -->
+  <string name="ip_protection_onboarding_card_headline">Provoni VPN-në e brendshme të %s-it</string>
   <!-- Used as text for a link in ip_protection_onboarding_body. Make sure to adapt capitalization if the link is in the middle of the sentence. -->
   <string name="ip_protection_onboarding_body_link">Shfletoni me mbrojtje ekstra</string>
   <!-- Used as text for a link in ip_protection_onboarding_body. Make sure to adapt capitalization if the link is in the middle of the sentence. -->
@@ -2852,6 +2926,10 @@
   <string name="ip_protection_recommended_location" tools:ignore="UnusedResources">E rekomanduar</string>
   <!-- Label for the button that takes the user to get the standalone Mozilla VPN product. -->
   <string name="ip_protection_mozilla_vpn_upsell_button" tools:ignore="UnusedResources,BrandUsage">Merrni Mozilla VPN</string>
+  <!-- Title for the browser VPN location selection screen (displayed in the app bar) -->
+  <string name="ip_protection_locations_title">Zgjidhni vendndodhje VPN-je</string>
+  <!-- Content description for the browser VPN location selection screen top bar back button -->
+  <string name="ip_protection_locations_navigate_back_button_content_description">Shko mbrapsht</string>
   <!--
     Autofill
 

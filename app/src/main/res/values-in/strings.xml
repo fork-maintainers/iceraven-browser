@@ -182,6 +182,12 @@
   <string name="recently_visited_menu_item_remove">Hapus</string>
   <!-- Content description for the button which navigates the user to show all of their history. -->
   <string name="past_explorations_show_all_content_description_2">Tampilkan semua eksplorasi lampau</string>
+  <!--
+    Browser Fragment
+
+    Label for popup button that appears when long-pressing the main menu. Tapping it allows the user to customize the main menu layout.
+  -->
+  <string name="customize_menu">Sesuaikan menu</string>
   <!-- Content description (not visible, for screen readers etc.): Navigate backward (browsing history) -->
   <string name="browser_menu_back">Kembali</string>
   <!-- Content description (not visible, for screen readers etc.): Navigate forward (browsing history) -->

@@ -3486,7 +3486,7 @@
   -->
   <string name="homepage_shortcuts_show_less">Εμφάνιση λιγότερων</string>
   <!-- Label for the "Add shortcut" button displayed as a tile. -->
-  <string name="homepage_shortcuts_add_shortcut">Προσθήκη συντόμευσης</string>
+  <string name="homepage_shortcuts_add_shortcut">Νέα συντόμευση</string>
   <!-- Title for the "Add to homepage" bottom sheet. -->
   <string name="homepage_shortcuts_add_to_homepage">Προσθήκη στην αρχική σελίδα</string>
   <!-- Label for the "Add website" button in the "Add to homepage" bottom sheet. -->

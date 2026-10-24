@@ -457,17 +457,17 @@
   <!-- Title for the privacy preferences dialog shown during onboarding. Note: The word "Firefox" should NOT be translated. -->
   <string name="onboarding_preferences_dialog_title" tools:ignore="BrandUsage">Pomôžte nám zlepšiť Firefox</string>
   <!-- Title for the crash reporting option in the privacy preferences dialog shown during onboarding. -->
-  <string name="onboarding_preferences_dialog_crash_reporting_title">Automaticky odosielať správy o zlyhaní</string>
+  <string name="onboarding_preferences_dialog_crash_reporting_title">Automaticky odosielať hlásenia o zlyhaní</string>
   <!-- Description for the crash reporting option in the privacy preferences dialog shown during onboarding. -->
-  <string name="onboarding_preferences_dialog_crash_reporting_description">Správy o zlyhaní nám umožňujú diagnostikovať a opraviť problémy s prehliadačom. Hlásenia môžu obsahovať osobné alebo citlivé údaje.</string>
+  <string name="onboarding_preferences_dialog_crash_reporting_description">Hlásenia o zlyhaní nám umožňujú diagnostikovať a opraviť problémy s prehliadačom. Hlásenia môžu obsahovať osobné alebo citlivé údaje.</string>
   <!-- Learn more link for the crash reporting option in the privacy preferences dialog shown during onboarding. -->
   <string name="onboarding_preferences_dialog_crash_reporting_learn_more_2">Ďalšie informácie</string>
   <!-- Title for the startup crash page. %s is the name of the app (for example "Firefox") -->
   <string name="startup_crash_title">%s sa musí reštartovať</string>
   <!-- Body text for the startup crash page. %s is the name of the app (for example "Firefox") -->
-  <string name="startup_crash_body">Pri otváraní %su sa vyskytol problém.\n\nOdoslanie hlásenia o zlyhaní nám pomáha diagnostikovať a opraviť problémy s prehliadačom. Hlásenia môžu obsahovať osobné alebo citlivé údaje.</string>
+  <string name="startup_crash_body">Pri otváraní prehliadača %s sa vyskytol problém.\n\nOdoslanie hlásenia o zlyhaní nám pomáha diagnostikovať a opraviť problémy s prehliadačom. Hlásenia môžu obsahovať osobné alebo citlivé údaje.</string>
   <!-- Button text to submit a startup crash report -->
-  <string name="startup_crash_positive">Odoslať správu o zlyhaní</string>
+  <string name="startup_crash_positive">Odoslať hlásenie o zlyhaní</string>
   <!-- Button text to continue and not send a startup crash report -->
   <string name="startup_crash_negative">Nie, ďakujem</string>
   <!-- Button text to reopen firefox after the crash is processed %s is the name of the app (for example "Firefox") -->
@@ -1256,13 +1256,13 @@
   <!-- Title for the crash reporting option in the privacy preferences dialog shown during onboarding. -->
   <string name="crash_reporting_snack_bar_message">Hlásenie odoslané</string>
   <!-- Text for sumo link to learn more about crash reports in data collection screen -->
-  <string name="preferences_crashes_learn_more">Ďalšie informácie o správach o zlyhaní</string>
+  <string name="preferences_crashes_learn_more">Ďalšie informácie o hláseniach o zlyhaní</string>
   <!-- Title Headers for data collection settings screen -->
-  <string name="crash_reports_data_category">Správy o zlyhaní</string>
+  <string name="crash_reports_data_category">Hlásenia o zlyhaní</string>
   <string name="usage_data_category">Údaje o používaní</string>
   <string name="studies_data_category">Štúdie</string>
   <string name="technical_data_category">Technické údaje</string>
-  <string name="crash_reporting_description">Správy o zlyhaní nám umožňujú diagnostikovať a opraviť problémy s prehliadačom. Hlásenia môžu obsahovať osobné alebo citlivé údaje.</string>
+  <string name="crash_reporting_description">Hlásenia o zlyhaní nám umožňujú diagnostikovať a opraviť problémy s prehliadačom. Hlásenia môžu obsahovať osobné alebo citlivé údaje.</string>
   <!-- Section title for campaign measurement in data collections screen -->
   <string name="preferences_marketing_data_title">Meranie kampane</string>
   <!-- Preference switch for campaign measurement data (marketing data) collection -->
@@ -2075,7 +2075,7 @@
   -->
   <string name="tab_crash_title_2">Ospravedlňujeme sa. %1$s nedokáže načítať túto stránku.</string>
   <!-- Send crash report checkbox text on the tab crash page -->
-  <string name="tab_crash_send_report" tools:ignore="BrandUsage">Odoslať správu o zlyhaní Mozille</string>
+  <string name="tab_crash_send_report" tools:ignore="BrandUsage">Odoslať hlásenie o zlyhaní Mozille</string>
   <!-- Close tab button text on the tab crash page -->
   <string name="tab_crash_close">Zavrieť kartu</string>
   <!-- Restore tab button text on the tab crash page -->
@@ -2083,11 +2083,11 @@
   <!-- Unsubmitted crash dialog title, %s is the name of the app (for example "Firefox"). -->
   <string name="unsubmitted_crash_dialog_title_2">%s zlyhal. Odoslať hlásenie?</string>
   <!-- Single unsubmitted crash matching remote settings. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="unsubmitted_crash_requested_by_devs_dialog_title">Máte neodoslanú správu o zlyhaní súvisiacu s vyšetrovanými zlyhaniami. Jej odoslanie nám pomôže vylepšiť %1$s. Zatvorením tohto upozornenia sa táto správa ignoruje.</string>
+  <string name="unsubmitted_crash_requested_by_devs_dialog_title">Máte neodoslané hlásenie o zlyhaní súvisiace s vyšetrovanými zlyhaniami. Jeho odoslanie nám pomôže vylepšiť %1$s. Zatvorením tohto upozornenia sa toto hlásenie ignoruje.</string>
   <!-- Multiple unsubmitted crashes matching remote settings. %1$d is the number of unsent crash reports, %2$s is the name of the app (for example "Firefox"). -->
   <string name="unsubmitted_crashes_requested_by_devs_dialog_title">Máte neodoslané hlásenia o zlyhaní (%1$d) súvisiace s vyšetrovanými zlyhaniami. Ich odoslaním nám pomôžete vylepšiť %2$s. Zatvorením tohto upozornenia sa tieto hlásenia ignorujú.</string>
   <!-- Unsubmitted crash dialog checkbox label for automatically sending reports in the future -->
-  <string name="unsubmitted_crash_dialog_checkbox_label">Automaticky odosielať správy o zlyhaní</string>
+  <string name="unsubmitted_crash_dialog_checkbox_label">Automaticky odosielať hlásenia o zlyhaní</string>
   <!-- Unsubmitted crash dialog negative button to dismiss the dialog -->
   <string name="unsubmitted_crash_dialog_negative_button">Zavrieť</string>
   <!-- Unsubmitted crash dialog negative button to dismiss the dialog -->
@@ -2097,9 +2097,9 @@
   <!-- Unsubmitted crash dialog positive button to submit crash report -->
   <string name="unsubmitted_crash_dialog_positive_button_2">ODOSLAŤ</string>
   <!-- Unsubmitted crash dialog positive button to submit crash report -->
-  <string name="unsubmitted_crash_dialog_positive_button">Odoslať správu o zlyhaní</string>
+  <string name="unsubmitted_crash_dialog_positive_button">Odoslať hlásenie o zlyhaní</string>
   <!-- Body text for crash report dialog. %s is the link text in the annotated string (ie. "Learn More") -->
-  <string name="unsubmitted_crash_dialog_body">Správy o zlyhaní nám pomáhajú diagnostikovať a opraviť problémy s prehliadačom. Hlásenia môžu obsahovať osobné alebo citlivé údaje. %s</string>
+  <string name="unsubmitted_crash_dialog_body">Hlásenia o zlyhaní nám pomáhajú diagnostikovať a opraviť problémy s prehliadačom. Hlásenia môžu obsahovať osobné alebo citlivé údaje. %s</string>
   <string name="unsubmitted_crash_dialog_learn_more">Ďalšie informácie</string>
   <!-- Unsubmitted crash dialog button to open a web page with more details on the feature and privacy policy -->
   <string name="unsubmitted_crash_requested_by_devs_learn_more">Ďalšie informácie</string>

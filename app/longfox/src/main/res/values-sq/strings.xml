@@ -9,6 +9,9 @@
 <resources>
   <!-- %1$d is a placeholder for the score value. -->
   <string name="score">Vlerësim: %1$d</string>
+  <string name="tap_to_play">prekeni që të luhet!</string>
+  <string name="sound_on">🔈 tingujt hapur</string>
+  <string name="sound_off">🔇 tingujt mbyllur</string>
   <!-- Back button -->
   <string name="back">mbrapsht</string>
 </resources>

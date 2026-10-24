@@ -30,6 +30,12 @@
   -->
   <string name="recent_tabs_header_2">Turpināt</string>
   <!--
+    Browser Fragment
+
+    Label for popup button that appears when long-pressing the main menu. Tapping it allows the user to customize the main menu layout.
+  -->
+  <string name="customize_menu">Pielāgot izvēlni</string>
+  <!--
     Content description (not visible, for screen readers etc.): Label for plus icon used to add extension.
     %1$s is the name of the extension (for example: ClearURLs).
   -->
