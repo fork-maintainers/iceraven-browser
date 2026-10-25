@@ -360,7 +360,7 @@
 
     Title for the AI controls settings screen
   -->
-  <string name="preferences_ai_controls">Nastavenia AI</string>
+  <string name="preferences_ai_controls">Nastavenia umelej inteligencie</string>
   <!-- Headline text for the AI controls banner. %s is the name of the app (for example "Firefox"). -->
   <string name="ai_controls_banner_headline">Vo %se máte vždy na výber</string>
   <!-- Supporting text for the AI controls banner. %s is a learn more link using ai_controls_learn_more as text. -->
@@ -368,7 +368,7 @@
   <!-- Link text for learning more about AI controls -->
   <string name="ai_controls_learn_more">Ďalšie informácie</string>
   <!-- Title for the block AI enhancements toggle -->
-  <string name="ai_controls_block_ai_title">Blokovať vylepšenia pomocou AI</string>
+  <string name="ai_controls_block_ai_title">Blokovať funkcie využívajúce umelú inteligenciu</string>
   <!-- Description for the block AI enhancements toggle. %s is the name of the app (for example "Firefox"). -->
   <string name="ai_controls_block_ai_description">Blokovanie znamená, že vo %se neuvidíte nové ani aktuálne vylepšenia pomocou umelej inteligencie, ani vyskakovacie okná o nich.</string>
   <!-- Link text to see what AI enhancements are and aren’t included -->
@@ -428,7 +428,7 @@
   <!-- Search engine suggestion description text -->
   <string name="search_engine_suggestions_description">Vyhľadať na webe priamo z panela s adresou</string>
   <!-- Menu option in the search selector menu to open the search settings -->
-  <string name="search_settings_menu_item">Hľadať v nastaveniach</string>
+  <string name="search_settings_menu_item">Nastavenia vyhľadávania</string>
   <!-- Header text for the search selector menu -->
   <string name="search_header_menu_item_2">Tentokrát hľadať v:</string>
   <!--
@@ -1250,9 +1250,9 @@
   <!-- Preference description for marketing data collection. Note: The words "Firefox" should NOT be translated -->
   <string name="preferences_usage_data_description_1" tools:ignore="BrandUsage">Údaje o vašom zariadení, konfigurácii hardvéru a používaní nám pomáhajú zlepšovať funkcie, výkon a stabilitu Firefoxu.</string>
   <!-- Preference switch for daily usage ping data collection -->
-  <string name="preferences_daily_usage_ping_title">Ping denného používania</string>
+  <string name="preferences_daily_usage_ping_title">Denný signál o používaní</string>
   <string name="preferences_daily_usage_ping_description" tools:ignore="BrandUsage">Toto pomáha spoločnosti Mozilla odhadnúť počet aktívnych používateľov.</string>
-  <string name="preferences_daily_usage_ping_learn_more">Ďalšie informácie o pingu denného používania</string>
+  <string name="preferences_daily_usage_ping_learn_more">Ďalšie informácie o dennom signáli o používaní</string>
   <!-- Title for the crash reporting option in the privacy preferences dialog shown during onboarding. -->
   <string name="crash_reporting_snack_bar_message">Hlásenie odoslané</string>
   <!-- Text for sumo link to learn more about crash reports in data collection screen -->

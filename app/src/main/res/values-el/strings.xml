@@ -22,7 +22,7 @@
   <!-- Content description (not visible, for screen readers etc.): "Normal Browsing" menu button. -->
   <string name="content_description_normal_browsing">Κανονική περιήγηση</string>
   <!-- Placeholder text shown in the search bar before a user enters text for the default engine -->
-  <string name="search_hint">Αναζήτηση όρου ή εισαγωγή διεύθυνσης</string>
+  <string name="search_hint">Αναζήτηση ή εισαγωγή διεύθυνσης</string>
   <!-- Shorter placeholder text shown in the search bar when an additional action (voice search) is rendered alongside the hint. -->
   <string name="search_hint_short">Αναζήτηση</string>
   <!-- Placeholder text shown in the search bar before a user enters text for a general engine -->
@@ -414,7 +414,7 @@
 
     Button in the search view that lets a user navigate to the site in their clipboard
   -->
-  <string name="awesomebar_clipboard_title">Συμπλήρωση συνδέσμου από το πρόχειρο</string>
+  <string name="awesomebar_clipboard_title">Εισαγωγή συνδέσμου από το πρόχειρο</string>
   <!-- Button in the search suggestions onboarding that allows search suggestions in private sessions -->
   <string name="search_suggestions_onboarding_allow_button">Αποδοχή</string>
   <!-- Button in the search suggestions onboarding that does not allow search suggestions in private sessions -->
@@ -2210,7 +2210,7 @@
   <!-- Text for the button to navigate to sync authentication -->
   <string name="bookmark_empty_list_guest_cta">Σύνδεση για συγχρονισμό</string>
   <!-- Description for the bookmark list empty state when you're in an empty folder. -->
-  <string name="bookmark_empty_list_folder_description">Προσθέστε σελιδοδείκτες καθώς περιηγείστε, ώστε να βρείτε αργότερα τις αγαπημένες σας ιστοσελίδες.</string>
+  <string name="bookmark_empty_list_folder_description">Προσθέστε σελιδοδείκτες καθώς περιηγείστε, ώστε να βρείτε αργότερα τους αγαπημένους σας ιστοτόπους.</string>
   <!-- Description for the add new folder button when selecting a folder. -->
   <string name="bookmark_select_folder_new_folder_button_title">Νέος φάκελος</string>
   <!-- Bookmark snackbar message for moving a single item. %1$s is the title of the item being moved and %2$s is the new parent folder of the bookmark -->
@@ -4124,7 +4124,7 @@
   <!-- Uninstall survey answer option -->
   <string name="uninstall_survey_option_1_v2">Είναι αργό ή αναξιόπιστο</string>
   <!-- Uninstall survey answer option -->
-  <string name="uninstall_survey_option_2_v2">Οι ιστοσελίδες δεν λειτουργούσαν σωστά</string>
+  <string name="uninstall_survey_option_2_v2">Οι ιστότοποι δεν λειτουργούσαν σωστά</string>
   <!-- Uninstall survey answer option -->
   <string name="uninstall_survey_option_3_v2">Χρειάζομαι λειτουργίες που λείπουν</string>
   <!-- Uninstall survey answer option -->

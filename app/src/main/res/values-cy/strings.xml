@@ -187,7 +187,7 @@
 
     Label for popup button that appears when long-pressing the main menu. Tapping it allows the user to customize the main menu layout.
   -->
-  <string name="customize_menu">Addasu ddewislen</string>
+  <string name="customize_menu">Cyfaddasu dewislen</string>
   <!-- Content description (not visible, for screen readers etc.): Navigate backward (browsing history) -->
   <string name="browser_menu_back">Nôl</string>
   <!-- Content description (not visible, for screen readers etc.): Navigate forward (browsing history) -->
