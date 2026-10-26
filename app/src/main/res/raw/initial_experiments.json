@@ -362,7 +362,7 @@
       "channel": "release",
       "userFacingName": "Homescreen Default Content Android - New Users V2",
       "userFacingDescription": "Homescreen Default Content Android",
-      "isEnrollmentPaused": false,
+      "isEnrollmentPaused": true,
       "isRollout": false,
       "bucketConfig": {
         "randomizationUnit": "nimbus_id",
@@ -453,7 +453,7 @@
       ],
       "targeting": "(('homescreen-default-content-android-new-users-v2' in active_experiments) || ((isFirstRun == 'true') && (app_version|versionCompare('158.!') >= 0)))",
       "startDate": "2026-10-08",
-      "enrollmentEndDate": null,
+      "enrollmentEndDate": "2026-10-26",
       "endDate": null,
       "proposedDuration": 21,
       "proposedEnrollment": 15,
