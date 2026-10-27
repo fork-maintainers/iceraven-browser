@@ -319,8 +319,6 @@
   <string name="browser_menu_default_banner_title">將 %1$s 設為您的預設瀏覽器</string>
   <!-- Label text within the set as default banner -->
   <string name="browser_menu_default_banner_subtitle_2">快速上網，確保隱私，為您量身打造。</string>
-  <!-- Content description (not visible, for screen readers etc.) for the button that dismisses the set as default banner in the menu -->
-  <string name="browser_menu_default_banner_dismiss_promotion">關閉宣傳內容</string>
   <!-- Content description (not visible, for screen readers etc.) for recommended extensions in main menu -->
   <string name="browser_menu_recommended_extensions_content_description">更多資訊</string>
   <!--
@@ -4586,6 +4584,12 @@
   <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">網站隔離</string>
   <!-- Description of the Firefox Labs Sandboxing experiment. -->
   <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">在不同網站間再加入一道屏障，幫助保護您跨分頁間的資料。可能會影響效能、穩定性、網站相容性以及瀏覽紀錄的儲存方式。</string>
+  <!--
+    PDF viewer toolbar and buttons
+
+    Content description for accessibility (used by screen readers): Description for the button that triggers the start of a signature workflow on the PDF displayed on the screen.
+  -->
+  <string name="pdf_tools_sign_content_description_2">加入簽章</string>
   <!--
     PDF viewer toolbar and buttons
 

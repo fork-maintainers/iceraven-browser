@@ -319,8 +319,6 @@
   <string name="browser_menu_default_banner_title">Définir %1$s comme navigateur par défaut</string>
   <!-- Label text within the set as default banner -->
   <string name="browser_menu_default_banner_subtitle_2">Rapide, confidentiel et conçu pour vous.</string>
-  <!-- Content description (not visible, for screen readers etc.) for the button that dismisses the set as default banner in the menu -->
-  <string name="browser_menu_default_banner_dismiss_promotion">Fermer l’offre</string>
   <!-- Content description (not visible, for screen readers etc.) for recommended extensions in main menu -->
   <string name="browser_menu_recommended_extensions_content_description">Plus d’infos</string>
   <!--
@@ -4599,6 +4597,12 @@
   <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">Isolement de sites web</string>
   <!-- Description of the Firefox Labs Sandboxing experiment. -->
   <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">Une couche de protection supplémentaire entre les sites web pour mieux sécuriser vos données d’un onglet à l’autre. L’isolement peut avoir un effet sur les performances, la stabilité, la compatibilité des sites web et la façon dont l’historique de navigation est enregistré.</string>
+  <!--
+    PDF viewer toolbar and buttons
+
+    Content description for accessibility (used by screen readers): Description for the button that triggers the start of a signature workflow on the PDF displayed on the screen.
+  -->
+  <string name="pdf_tools_sign_content_description_2">Ajout d’une signature</string>
   <!--
     PDF viewer toolbar and buttons
 

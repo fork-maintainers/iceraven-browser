@@ -319,8 +319,6 @@
   <string name="browser_menu_default_banner_title">Сделать %1$s вашим браузером по умолчанию</string>
   <!-- Label text within the set as default banner -->
   <string name="browser_menu_default_banner_subtitle_2">Быстрый, приватный и созданный для вас.</string>
-  <!-- Content description (not visible, for screen readers etc.) for the button that dismisses the set as default banner in the menu -->
-  <string name="browser_menu_default_banner_dismiss_promotion">Скрыть предложение</string>
   <!-- Content description (not visible, for screen readers etc.) for recommended extensions in main menu -->
   <string name="browser_menu_recommended_extensions_content_description">Подробнее</string>
   <!--
@@ -4614,6 +4612,12 @@
   <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">Изоляция сайтов</string>
   <!-- Description of the Firefox Labs Sandboxing experiment. -->
   <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">Дополнительный барьер между веб-сайтами, который помогает защитить ваши данные на вкладках. Может повлиять на производительность, стабильность, совместимость с веб-сайтами, а также на сохранение истории просмотров.</string>
+  <!--
+    PDF viewer toolbar and buttons
+
+    Content description for accessibility (used by screen readers): Description for the button that triggers the start of a signature workflow on the PDF displayed on the screen.
+  -->
+  <string name="pdf_tools_sign_content_description_2">Добавить подпись</string>
   <!--
     PDF viewer toolbar and buttons
 

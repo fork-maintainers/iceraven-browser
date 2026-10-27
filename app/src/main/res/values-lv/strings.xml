@@ -54,8 +54,6 @@
   <string name="browser_menu_page_badge_text">Jaunums</string>
   <!-- Browser menu label for adding a tab to a tab group -->
   <string name="browser_menu_add_to_tab_group">Pievienot kopai</string>
-  <!-- Content description (not visible, for screen readers etc.) for the button that dismisses the set as default banner in the menu -->
-  <string name="browser_menu_default_banner_dismiss_promotion">Noraidīt piedāvājumu</string>
   <!-- Link text for learning more about AI controls -->
   <string name="ai_controls_learn_more">Uzzināt vairāk</string>
   <!-- Title for the block AI enhancements toggle -->
@@ -596,6 +594,12 @@
   <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">Tīmekļvietnes nošķiršana</string>
   <!-- Description of the Firefox Labs Sandboxing experiment. -->
   <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">Papildu šķērslis starp tīmekļvietnēm, kas palīdz aizsargāt datus cilnēs. Var ietekmēt veiktspēju, noturīgumu, tīmekļvietņu saderīgumu un to, kā tiek saglabāta pārlūkošanas vēsture.</string>
+  <!--
+    PDF viewer toolbar and buttons
+
+    Content description for accessibility (used by screen readers): Description for the button that triggers the start of a signature workflow on the PDF displayed on the screen.
+  -->
+  <string name="pdf_tools_sign_content_description_2">Pievienot parakstu</string>
   <!--
     PDF viewer toolbar and buttons
 

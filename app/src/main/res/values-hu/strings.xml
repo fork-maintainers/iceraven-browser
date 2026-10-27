@@ -182,6 +182,12 @@
   <string name="recently_visited_menu_item_remove">Eltávolítás</string>
   <!-- Content description for the button which navigates the user to show all of their history. -->
   <string name="past_explorations_show_all_content_description_2">Összes korábbi felfedezés megjelenítése</string>
+  <!--
+    Browser Fragment
+
+    Label for popup button that appears when long-pressing the main menu. Tapping it allows the user to customize the main menu layout.
+  -->
+  <string name="customize_menu">Menü testreszabása</string>
   <!-- Content description (not visible, for screen readers etc.): Navigate backward (browsing history) -->
   <string name="browser_menu_back">Vissza</string>
   <!-- Content description (not visible, for screen readers etc.): Navigate forward (browsing history) -->
@@ -313,8 +319,6 @@
   <string name="browser_menu_default_banner_title">A %1$s alapértelmezetté tétele</string>
   <!-- Label text within the set as default banner -->
   <string name="browser_menu_default_banner_subtitle_2">Gyors, privát, és Önnek készült.</string>
-  <!-- Content description (not visible, for screen readers etc.) for the button that dismisses the set as default banner in the menu -->
-  <string name="browser_menu_default_banner_dismiss_promotion">Promóció eltüntetése</string>
   <!-- Content description (not visible, for screen readers etc.) for recommended extensions in main menu -->
   <string name="browser_menu_recommended_extensions_content_description">További információk</string>
   <!--
@@ -4593,6 +4597,12 @@
   <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">Webhelyek elkülönítése</string>
   <!-- Description of the Firefox Labs Sandboxing experiment. -->
   <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">További védelem a webhelyek között, amely segít megvédeni az adatait a lapok között. Befolyásolhatja a teljesítményt, a stabilitást, a webhely-kompatibilitást, és a böngészési előzmények mentési módját.</string>
+  <!--
+    PDF viewer toolbar and buttons
+
+    Content description for accessibility (used by screen readers): Description for the button that triggers the start of a signature workflow on the PDF displayed on the screen.
+  -->
+  <string name="pdf_tools_sign_content_description_2">Aláírás hozzáadása</string>
   <!--
     PDF viewer toolbar and buttons
 

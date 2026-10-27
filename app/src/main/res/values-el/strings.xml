@@ -319,8 +319,6 @@
   <string name="browser_menu_default_banner_title">Ορίστε το %1$s ως προεπιλογή</string>
   <!-- Label text within the set as default banner -->
   <string name="browser_menu_default_banner_subtitle_2">Γρήγορο, ιδιωτικό και φτιαγμένο για εσάς.</string>
-  <!-- Content description (not visible, for screen readers etc.) for the button that dismisses the set as default banner in the menu -->
-  <string name="browser_menu_default_banner_dismiss_promotion">Απόρριψη προωθητικής ενέργειας</string>
   <!-- Content description (not visible, for screen readers etc.) for recommended extensions in main menu -->
   <string name="browser_menu_recommended_extensions_content_description">Περισσότερες πληροφορίες</string>
   <!--
@@ -4599,6 +4597,12 @@
   <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">Απομόνωση ιστοτόπων</string>
   <!-- Description of the Firefox Labs Sandboxing experiment. -->
   <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">Ένα επιπλέον εμπόδιο μεταξύ των ιστοτόπων που προστατεύει τα δεδομένα σας σε όλες τις καρτέλες. Ενδέχεται να επηρεάσει τις επιδόσεις, τη σταθερότητα, τη συμβατότητα των ιστοτόπων και τον τρόπο αποθήκευσης του ιστορικού περιήγησης.</string>
+  <!--
+    PDF viewer toolbar and buttons
+
+    Content description for accessibility (used by screen readers): Description for the button that triggers the start of a signature workflow on the PDF displayed on the screen.
+  -->
+  <string name="pdf_tools_sign_content_description_2">Προσθήκη υπογραφής</string>
   <!--
     PDF viewer toolbar and buttons
 

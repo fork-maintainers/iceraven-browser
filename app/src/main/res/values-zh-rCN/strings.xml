@@ -313,8 +313,6 @@
   <string name="browser_menu_default_banner_title">将 %1$s 设为默认浏览器</string>
   <!-- Label text within the set as default banner -->
   <string name="browser_menu_default_banner_subtitle_2">快速、私密，专属于您。</string>
-  <!-- Content description (not visible, for screen readers etc.) for the button that dismisses the set as default banner in the menu -->
-  <string name="browser_menu_default_banner_dismiss_promotion">关闭推广内容</string>
   <!-- Content description (not visible, for screen readers etc.) for recommended extensions in main menu -->
   <string name="browser_menu_recommended_extensions_content_description">更多信息</string>
   <!--

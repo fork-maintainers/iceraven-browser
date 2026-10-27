@@ -55,6 +55,14 @@
   <string name="tab_tray_select_collection">Koleksiyonê hilbijêre</string>
   <!-- Content description for close button while in multiselect mode in tab tray -->
   <string name="tab_tray_close_multiselect_content_description">Ji moda bijartina-pir derkeve</string>
+  <!-- The header text displayed on the synced tabs page when the user is not logged into an account. -->
+  <string name="tab_manager_empty_synced_tabs_page_header">Hilpekînan ji hemû cîhazan wergire</string>
+  <!-- The supplementary text displayed on the synced tabs page when the user is not logged into an account. -->
+  <string name="tab_manager_empty_synced_tabs_page_description">Ji bo birêvebirina hilpekînên senkronîzekirî ji hemû cîhazên xwe, têkevê.</string>
+  <!-- The action text displayed on the synced tabs page when the user is not logged into an account, prompting the user to sign into their account. When clicked, it takes the user to the account sign-in flow. -->
+  <string name="tab_manager_empty_synced_tabs_page_sign_in_cta">Têkevê</string>
+  <!-- Text for the button used to show all stories -->
+  <string name="homepage_all_stories">Hemû raborî</string>
   <!--
     Home - Bookmarks
 
@@ -174,6 +182,12 @@
   <string name="recently_visited_menu_item_remove">Rake</string>
   <!-- Content description for the button which navigates the user to show all of their history. -->
   <string name="past_explorations_show_all_content_description_2">Hemî gerên berê nîşan bide</string>
+  <!--
+    Browser Fragment
+
+    Label for popup button that appears when long-pressing the main menu. Tapping it allows the user to customize the main menu layout.
+  -->
+  <string name="customize_menu">Menuyê taybet bike</string>
   <!-- Content description (not visible, for screen readers etc.): Navigate backward (browsing history) -->
   <string name="browser_menu_back">Paşve</string>
   <!-- Content description (not visible, for screen readers etc.): Navigate forward (browsing history) -->
@@ -305,8 +319,6 @@
   <string name="browser_menu_default_banner_title">%1$sê bike geroka xwe ya standard</string>
   <!-- Label text within the set as default banner -->
   <string name="browser_menu_default_banner_subtitle_2">Bilez, nepen, û ji bo te hatiye çêkirin.</string>
-  <!-- Content description (not visible, for screen readers etc.) for the button that dismisses the set as default banner in the menu -->
-  <string name="browser_menu_default_banner_dismiss_promotion">Pêşniyarkirinê bigire</string>
   <!-- Content description (not visible, for screen readers etc.) for recommended extensions in main menu -->
   <string name="browser_menu_recommended_extensions_content_description">Agahiyên zêdetir</string>
   <!--
@@ -1093,8 +1105,18 @@
   <string name="alternative_app_icon_option_cool">Rind</string>
   <!-- Title for the "Solid colors" group of alternative app icon variants in the icon picker screen. This group contains icons with flat, uniform color backgrounds. -->
   <string name="alternative_app_icon_group_solid_colors">Rengên yekreng</string>
+  <!-- Title for the "Gradients" group of alternative app icon variants in the icon picker screen. This group contains icons with gradient backgrounds inspired by natural light conditions. -->
+  <string name="alternative_app_icon_group_gradients">Gradîent</string>
+  <!-- Title for the "Featured" group of alternative app icon variants in the icon picker screen. This group includes retro, pixel art, themed, and artist-created icons. -->
+  <string name="alternative_app_icon_group_featured">Pêşkêşkirî</string>
+  <!-- Title to show in alert when user selects an alternative app icon -->
+  <string name="restart_warning_dialog_title">Sembola sepanê biguherînî?</string>
+  <!-- Message to warn users that applying an alternative app icon may require an app restart. Whether or not the app closes depends on what version of Android it is, so we use the word "may" instead of "will". %1$s is replaced by the brand name (e.g. Firefox). -->
+  <string name="restart_warning_dialog_body_2">Dibe ku sepan bê girtin. Tenê li îkona xwe ya nû ya geş bitikîne da ku %1$s ji nû ve vekî.</string>
   <!-- Message to warn users that applying an alternative app icon may require an app restart and will remove existing shortcuts because of the OS limitations. Whether or not the app closes depends on what version of Android it is, so we use the word "may" instead of "will". %1$s is replaced by the brand name (e.g. Firefox). -->
   <string name="restart_and_shortcuts_removal_warning_dialog_body">Guhertina îkonê dê hemû malper û kurtebirên ku te li ser ekrana xwe ya sereke tomar kirine jê bibe. \n\nDibe ku %1$s bê girtin. Ji bo ji nû ve vekî, îkona xwe ya nû bikirtîne.</string>
+  <!-- Dialog button text for confirming the possible app restart and new icon selection -->
+  <string name="restart_warning_dialog_button_positive_2">Îkonê biguherîne</string>
   <!-- Dialog button text for cancelling app icon change -->
   <string name="restart_warning_dialog_button_negative">Betal</string>
   <!-- Error message snackbar shown after the user tried to apply the new icon but the Android OS threw an error while updating existing app shortcuts (e.g. private mode shortcut) -->
@@ -1125,6 +1147,8 @@
   <string name="extension_process_crash_dialog_retry_button_text" tools:ignore="UnusedResources">Dîsdestpêkirina pêvekan biceribîne</string>
   <!-- Button text on the extension crash dialog to prompt the user to continue with all extensions disabled. -->
   <string name="extension_process_crash_dialog_disable_extensions_button_text">Pêvekan neîalak bike û wisa dewam bike</string>
+  <!-- Text shown in the snackbar action button that lets the user retry an add-on operation that just failed. -->
+  <string name="addon_failure_retry_action">Dîsa biceribîne</string>
   <!--
     Account Preferences
 
@@ -1137,6 +1161,12 @@
   <string name="preferences_sync_now">Aniha senkronîze bike</string>
   <!-- Preference category for sync -->
   <string name="preferences_sync_category">Bila çi bên senkronîzekirin, hilbijêre</string>
+  <!-- Preference category for sync controls -->
+  <string name="preferences_category_sync">Daneyên senkronîzekirî</string>
+  <!-- Summary for the sync preference category. -->
+  <string name="preferences_sync_category_summary">Tiştên ku li ser hemû cîhazên xwe yên girêdayî têne senkronîzekirin bi rê ve bibe</string>
+  <!-- Summary for the sync preference category, when user has disabled all synchronisation items. -->
+  <string name="preferences_sync_category_no_engine_selected_summary">Tu tiştek senkronîze nekiriye. Hilbijêre ka çi li ser cîhazên te senkronîze bimînin.</string>
   <!-- Preference for syncing history -->
   <string name="preferences_sync_history">Raborî</string>
   <!-- Preference for syncing bookmarks -->
@@ -1149,6 +1179,10 @@
   <string name="preferences_sign_out">Derkeve</string>
   <!-- Preference displays and allows changing current FxA device name -->
   <string name="preferences_sync_device_name">Navê cîhazê</string>
+  <!-- Preference category for Device name -->
+  <string name="preferences_device_name_category">Navê cîhazê</string>
+  <!-- Label for the Preference that displays and allows changing current device name on Mozilla Account -->
+  <string name="preferences_sync_change_device_name">Navê cîhazê biguherîne</string>
   <!-- Text shown when user enters empty device name -->
   <string name="empty_device_name_error">Navê cîhazê nabe vala bimîne.</string>
   <!-- Label indicating that sync is in progress -->
@@ -1184,6 +1218,16 @@
   <!-- %s is the device name -->
   <string name="fxa_tab_received_from_notification_name">Hilpekîna ji %s ve hat</string>
   <!--
+    Close Synced Tabs
+
+    The title for a notification shown when the user closes tabs that are currently
+    open on this device from another device that's signed in to the same Mozilla account.
+    %1$s is a placeholder for the app name; %2$d is the number of tabs closed.
+  -->
+  <string name="fxa_tabs_closed_notification_title">%1$s hilpekînên girtî: %2$d</string>
+  <!-- The body for a "closed synced tabs" notification. -->
+  <string name="fxa_tabs_closed_text">Hilpekînên dawiyê hatine girtin bibîne</string>
+  <!--
     Advanced Preferences
 
     Preference for tracking protection exceptions
@@ -1195,17 +1239,47 @@
   <string name="exceptions_empty_message_description">Istisna dihêlin ku tu bikaribî ji bo malperên hilbijartî parastina ji şopandinê bigirî.</string>
   <!-- Text displayed when there are no exceptions, with learn more link that brings users to a tracking protection SUMO page -->
   <string name="exceptions_empty_message_learn_more_link">Zêdetir bizane</string>
+  <!-- Preference switch for usage and technical data collection -->
+  <string name="preference_usage_data_2">Daneyên teknîkî û danûstandinê bişîne</string>
   <!-- Preference switch for usage and technical learn more link in new compose -->
   <string name="preference_usage_data_learn_more_2">Derbarê daneyên teknîkî de zêdetir bizane</string>
+  <!-- Preference description for marketing data collection. Note: The words "Firefox" should NOT be translated -->
+  <string name="preferences_usage_data_description_1" tools:ignore="BrandUsage">Daneyên têkildarî cîhaza te, avaniha reqalavê û şêwaza bikaranîna te ya Firefoxê alîkariya me dikin ku em taybetiyan, performansê û biryardariyê ji bo her kesî çêtir bikin.</string>
+  <!-- Preference switch for daily usage ping data collection -->
+  <string name="preferences_daily_usage_ping_title">Pinga bikaranîna rojane</string>
+  <string name="preferences_daily_usage_ping_description" tools:ignore="BrandUsage">Ev alîkariya Mozillayê dike ku bikarhênerên çalak texmîn bike.</string>
   <string name="preferences_daily_usage_ping_learn_more">Derbarê pinga bikarnîna rojane de zêdetir bizane</string>
+  <!-- Title for the crash reporting option in the privacy preferences dialog shown during onboarding. -->
+  <string name="crash_reporting_snack_bar_message">Raport hat şandin</string>
   <!-- Text for sumo link to learn more about crash reports in data collection screen -->
   <string name="preferences_crashes_learn_more">Derbarê raporên têkçûnê de zêdetir bizane</string>
+  <!-- Title Headers for data collection settings screen -->
+  <string name="crash_reports_data_category">Raporên Têkçûnê</string>
+  <string name="usage_data_category">Daneyên bikaranînê</string>
+  <string name="studies_data_category">Lêkolîn</string>
+  <string name="technical_data_category">Daneyên Teknîkî</string>
+  <string name="crash_reporting_description">Raporên têkçûnê dihêlin ku em pirsgirêkên gerokê teşhîs bikin û çareser bikin. Dibe ku daneyên kesane yan hesas bikevin nav raporan.</string>
+  <!-- Section title for campaign measurement in data collections screen -->
+  <string name="preferences_marketing_data_title">Pîvana kampanyayê</string>
+  <!-- Preference switch for campaign measurement data (marketing data) collection -->
+  <string name="preferences_marketing_data_2">Daneyên pîvandina kampanyayê</string>
+  <!--
+    Preference description for marketing data collection.
+    Note: The words "Firefox" and "Mozilla" should NOT be translated. “That you use it” is to mean that the user is opting in to sharing that they are continuing to use Firefox after installing it; not that Firefox is tracking their “usage” or what they’re using it for.
+  -->
+  <string name="preferences_marketing_data_description_4" tools:ignore="BrandUsage">Bi hevkarên bazargeriyê yên Mozillayê re parve bike ka te Firefox çawa keşf kir û wê çawa bi kar tînî.</string>
   <!-- Learn more link for marketing data preference -->
   <string name="preferences_marketing_data_learn_more">Derbarên daneyên bazirganiyê de zêdetir bizane</string>
   <!-- Title for studies preferences -->
   <string name="preference_experiments_2">Lêkolîn</string>
   <!-- Summary for studies preferences -->
   <string name="preference_experiments_summary_2" tools:ignore="BrandUsage">Destûrê bide Mozillayê ku lêkolînan saz bike û bimeşîne</string>
+  <!--
+    Turn On Sync Preferences
+
+    Header of the Sign in preference view
+  -->
+  <string name="preferences_sign_in">Têkevê</string>
   <!-- Preference for reconnecting to FxA sync -->
   <string name="preferences_sync_sign_in_to_reconnect">Ji bo dîsa girê bibî, têkeve</string>
   <!-- Preference for removing FxA account -->
@@ -1224,6 +1298,30 @@
   <string name="preference_top_toolbar">Li jorê</string>
   <!-- Preference for using bottom toolbar -->
   <string name="preference_bottom_toolbar">Li jêrê</string>
+  <!-- Preference for using simple toolbar -->
+  <string name="preference_simple_toolbar">Asan</string>
+  <!-- Preference for using expanded toolbar -->
+  <string name="preference_expanded_toolbar">Firehkirî</string>
+  <!-- New tab shortcut in toolbar customization -->
+  <string name="toolbar_customize_shortcut_new_tab">Hilpekîneke nû veke</string>
+  <!-- Share shortcut in toolbar customization -->
+  <string name="toolbar_customize_shortcut_share">Parve bike</string>
+  <!-- Add bookmark shortcut in toolbar customization -->
+  <string name="toolbar_customize_shortcut_add_bookmark">Têxe nav favoriyan</string>
+  <!-- Translate shortcut in toolbar customization. "Translate" is a verb -->
+  <string name="toolbar_customize_shortcut_translate">Wergerîne</string>
+  <!-- Homepage shortcut in toolbar customization -->
+  <string name="toolbar_customize_shortcut_homepage">Serrûpel</string>
+  <!-- Back shortcut in toolbar customization -->
+  <string name="toolbar_customize_shortcut_back">Paşve</string>
+  <!-- Label for choosing in toolbar customization settings to not use any custom shortcut button. -->
+  <string name="toolbar_customize_shortcut_none">Qet</string>
+  <!--
+    App icon Preferences
+
+    Title for the preference that lets the user pick a new app icon
+  -->
+  <string name="preference_select_app_icon_title">Îkona Sepanê Hilbijêre</string>
   <!--
     Theme Preferences
 
@@ -1232,10 +1330,27 @@
   <string name="preference_light_theme">Ronî</string>
   <!-- Preference for using dark theme -->
   <string name="preference_dark_theme">Tarî</string>
+  <!--
+    Preference for using the OLED theme. For localization, this can be translated as "True Black", "Maximum Darkness",
+    or "Full dark" if needed.
+  -->
+  <string name="preference_oled_theme">Tarîtirîn</string>
   <!-- Preference for using using dark or light theme automatically set by battery -->
   <string name="preference_auto_battery_theme">Li gorî teserufa bateryayê</string>
   <!-- Preference for using following device theme -->
   <string name="preference_follow_device_theme">Rûkara cîhazê bi kar bîne</string>
+  <!--
+    Tab Strip Preferences
+
+    Preferences for showing tab strip
+  -->
+  <string name="preference_tab_strip_show">Darikê hilpekînan nîşan bide</string>
+  <!-- Preference for tab bar placement (top or bottom of the screen) -->
+  <string name="preference_tab_strip_location_header">Ciyê darikê hilpekînan</string>
+  <!-- Preference for using top tab strip -->
+  <string name="preference_top_tab_strip">Jorê</string>
+  <!-- Preference for using bottom tab strip -->
+  <string name="preference_bottom_tab_strip">Jêrê</string>
   <!--
     Gestures Preferences
 
@@ -1244,6 +1359,10 @@
   <string name="preference_gestures_website_pull_to_refresh">Ji bo nûkirinê bikişîne</string>
   <!-- Preference for using the dynamic toolbar -->
   <string name="preference_gestures_dynamic_toolbar">Ji bo darikê amûran veşêrî, bişemitîne</string>
+  <!-- Preference for showing the opened tabs by swiping up on the toolbar -->
+  <string name="preference_gestures_swipe_toolbar_show_tabs_2">Ji bo dîtina hilpekînên vekirî, amûrê bi bi jorê ve bihejîne</string>
+  <!-- Preference for switching tabs by swiping horizontally on the addressbar -->
+  <string name="preference_gestures_swipe_toolbar_switch_tabs_2">Ji bo derbasbnûna di nav hilpekînan de, darika amûran bi kêlekê ve biherikîne</string>
   <!-- Preference for switching for the shake to summarize toggle in page summaries and customize settings -->
   <string name="preferences_shake_to_summarize">Ji bo çêkirina kurteyê, bihejîne</string>
   <!--
@@ -1264,6 +1383,8 @@
   <string name="library_desktop_bookmarks_unfiled">Favoriyên din</string>
   <!-- Option in Library to open History page -->
   <string name="library_history">Raborî</string>
+  <!-- Content description (not visible, for screen readers etc.) for the check mark that replaces a site's icon in History and Recently closed tabs when the item is selected -->
+  <string name="library_item_selected_content_description">Hilbijartî</string>
   <!-- Settings Page Title -->
   <string name="settings_title">Sazkarî</string>
   <!-- Content description (not visible, for screen readers etc.): "Close button for library settings" -->
@@ -1314,6 +1435,8 @@
     Title of preference for tabs management
   -->
   <string name="preferences_tabs">Hilpekîn</string>
+  <!-- Title of preference that allows a user to specify the tab layout -->
+  <string name="preferences_tab_layout">Şêweya hilpekînan</string>
   <!-- Option for a list tab view -->
   <string name="tab_view_list">Lîste</string>
   <!-- Option for a grid tab view -->
@@ -1330,6 +1453,10 @@
   <string name="close_tabs_after_one_month">Piştî mehekê</string>
   <!-- Title of preference that allows a user to specify the auto-close settings for open tabs -->
   <string name="preference_auto_close_tabs" tools:ignore="UnusedResources">Hilpekînên vekirî bixweber bigire</string>
+  <!-- Content description (not visible, for screen readers etc.): Close tab button -->
+  <string name="tab_manager_close_tabs">Bigire</string>
+  <!-- Content description for the media playback indicator in the tabs tray. -->
+  <string name="tab_indicator_media_playing">Medya tê lêdan</string>
   <!--
     Opening screen
 
@@ -1356,8 +1483,18 @@
   <string name="opening_screen_last_tab_summary">Hilpekîna dawî veke</string>
   <!-- Summary for homepage preference indicating opening the homepage when re-opening the app after four hours of inactivity -->
   <string name="opening_screen_after_four_hours_of_inactivity_summary">Piştî çar saetan serrûpelê veke</string>
+  <!--
+    Tab organization
+
+    Category header for the preferences that control how tabs are organized
+  -->
+  <string name="preferences_tab_organization">Rêxistina hilpekînan</string>
+  <!-- Title of the preference that allows a user to enable or disable the inactive tabs feature -->
+  <string name="preferences_inactive_tabs_toggle_title">Hilpekînên neçalak</string>
   <!-- Summary of the preference that allows a user to enable or disable the inactive tabs feature. -->
   <string name="preferences_inactive_tabs_title">Hilpekînên ku te du hefte venekirine dikevin beşa hilpekînên neçalak.</string>
+  <!-- Title of the preference that allows a user to enable or disable the tab groups feature -->
+  <string name="preferences_tab_groups_title">Komên hilpekînan</string>
   <!--
     Studies
 
@@ -1424,6 +1561,71 @@
   <string name="pwa_site_controls_title_private">%1$s (Moda Veşartî)</string>
   <!-- Content description (not visible, for screen readers etc.) for the button to open the Tab Search feature to search through tabs. -->
   <string name="tab_manager_open_tab_search">Lêgerîna hilpekînan veke</string>
+  <plurals name="tab_group_tabs_count_subtitle">
+    <!--
+      Subtitle for the number of tabs in a tab group.
+      %1$d is the number of tabs in a tab group.
+    -->
+    <item quantity="one">Hilpekînek</item>
+    <item quantity="other">%1$d hilpekîn</item>
+  </plurals>
+  <plurals name="add_to_exiting_tab_group_content_description">
+    <!--
+      Accessibility description for add to existing tab group.
+      %1$s is the group name, %2$d is the number of tabs, %3$s is the color name.
+    -->
+    <item quantity="one">Têxe nav koma hilpekînan ya %1$s,hilpekînek, reng %3$s</item>
+    <item quantity="other">Têxe nav koma hilpekînan ya %1$s, %2$d hilpekîn, reng %3$s</item>
+  </plurals>
+  <!-- Content description for the grabber/handle of the tab group bottom sheet. -->
+  <string name="tab_group_sheet_dismiss_description">Koma hilpekînan bibîne, destgirê kaşkirinê teng bike</string>
+  <plurals name="expanded_tab_group_header_description">
+    <!--
+      Accessibility description for the header of an expanded tab group.
+      %1$s is the group name, %2$d is the number of tabs, %3$s is the color name.
+    -->
+    <item quantity="one">%1$s koma hilpekînan bi %2$d hilpekîn, reng %3$s</item>
+    <item quantity="other">%1$s koma hilpekînan bi %2$d hilpekîn, reng %3$s</item>
+  </plurals>
+  <!-- Title for the Delete tab group confirmation dialog. -->
+  <string name="delete_tab_group_confirmation_dialog_title">Koma hilpekînan jê bibî?</string>
+  <!-- Text shown in the body of the Delete tab group confirmation dialog. -->
+  <string name="delete_tab_group_confirmation_dialog_body">Ev komê bi awayekî mayînde jê dibe.</string>
+  <!-- Text shown on the confirm button in the Delete tab group confirmation dialog. -->
+  <string name="delete_tab_group_confirmation_dialog_confirm">Komê jê bibe</string>
+  <!-- Text shown on the cancel button in the Delete tab group confirmation dialog. -->
+  <string name="delete_tab_group_confirmation_dialog_cancel">Betal bike</string>
+  <!-- Title for the Close last tab and delete tab group confirmation dialog. -->
+  <string name="close_tab_and_delete_group_confirmation_dialog_title">Hilpekînê bigire û komê jê bibe?</string>
+  <!-- Text shown in the body of the Close last tab and delete tab group confirmation dialog. -->
+  <string name="close_tab_and_delete_group_confirmation_dialog_body">Ev komê bi awayekî mayînde jê dibe.</string>
+  <!-- Text shown on the confirm button in the Close last tab and delete tab group confirmation dialog. -->
+  <string name="close_tab_and_delete_group_confirmation_dialog_confirm">Komê jê bibe</string>
+  <!-- Text shown on the cancel button in the Close last tab and delete tab group confirmation dialog. -->
+  <string name="close_tab_and_delete_group_confirmation_dialog_cancel">Betal bike</string>
+  <!-- Content description for the three dot button next to a tab group" -->
+  <string name="tab_group_three_dot_button_content_description">Vebijarkên zêdetir</string>
+  <!--
+    Content description for the Expand button on the contracted menu for a tab group:
+    when tapped, tabs are displayed in an expanded grid or list view, taking up the full screen.
+  -->
+  <string name="tab_groups_strip_expand_group_content_description">Berfireh bike da ku hilpekînan li ser ekrana tevahî nîşan bide</string>
+  <!-- Text shown on the edit button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_edit">Sererast bike</string>
+  <!-- Text shown on the ungroup button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_ungroup">Ji komê derxe</string>
+  <!-- Text shown on the delete button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_delete">Jê bibe</string>
+  <!-- Text shown on the share button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_share">Parve bike</string>
+  <!-- Text shown on the close button for a tab group on the three dot menu -->
+  <string name="tab_group_three_dot_menu_close">Bigire</string>
+  <!-- Title for the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_title">Bila koma hilpekînan ji hev bê belavkirin?</string>
+  <!-- Text shown in the body of the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_body">Hilpekîn dê li ser vê cîhazê vekirî bimînin, lê kom dê bê jêbirin.</string>
+  <!-- Text shown on the Don't Ask Again checkbox button in the Ungroup tab group confirmation dialog. -->
+  <string name="ungroup_tab_group_confirmation_dialog_dont_ask_again">Careke din nepirse</string>
   <!-- Text shown on the confirm button in the Ungroup tab group confirmation dialog. -->
   <string name="ungroup_tab_group_confirmation_dialog_confirm">Ji komê derxistin</string>
   <!-- Text shown on the cancel button in the Ungroup tab group confirmation dialog. -->
@@ -1604,10 +1806,45 @@
     Text for the header that groups the downloads for today
   -->
   <string name="download_time_period_today">Îro</string>
+  <!-- Text for the header that groups the downloads for yesterday -->
+  <string name="download_time_period_yesterday">Duh</string>
   <!-- Text for the header that groups the downloads the past 7 days -->
   <string name="download_time_period_last_7_days">7 rojên dawiyê</string>
+  <!-- Text for the header that groups the downloads the past 30 days -->
+  <string name="download_time_period_last_30_days">30 rojên dawiyê</string>
   <!-- Text for the header that groups the downloads older than other groups -->
   <string name="download_time_period_older">Kevntir</string>
+  <!-- Description of an in progress download item, displayed in the downloads list when the download has just started. -->
+  <string name="download_item_in_progress_description_preparing">Jêbarkirin tê amadekirin…</string>
+  <!--
+    Description of an in progress download item, displayed in the downloads list when the download time remaining is known.
+    %1$s is the current file size that has been downloaded.
+    %2$s is the total size of the downloaded file.
+    %3$s is the amount of time remaining to complete the download.
+  -->
+  <string name="download_item_in_progress_description_2">%1$s / %2$s • di %3$s de.</string>
+  <!--
+    Description of an in progress download item, displayed in the downloads list when the estimated download time remaining is still being calculated.
+    %1$s is the current file size that has been downloaded.
+    %2$s is the total size of the downloaded file.
+  -->
+  <string name="download_item_in_progress_description_pending">%1$s / %2$s • li bendê ye</string>
+  <!--
+    Description of an in progress download item, displayed in the downloads list when the total download size is unknown. This results in the estimated download time remaining to be unknown also.
+    %1$s is the current file size that has been downloaded.
+  -->
+  <string name="download_item_in_progress_description_unknown_total_size">%1$s • dema nayê zanîn</string>
+  <!--
+    Description of a paused download item, displayed in the downloads list.
+    %1$s is the current file size that has been downloaded.
+    %2$s is the total size of the downloaded file.
+  -->
+  <string name="download_item_paused_description">%1$s / %2$s • hatiye rawestandin</string>
+  <!--
+    Description of a paused download item, displayed in the downloads list when the total download size is unknown.
+    %1$s is the current file size that has been downloaded.
+  -->
+  <string name="download_item_paused_description_unknown_total_size">%1$s • hatiye rawestandin</string>
   <!-- Text to indicate that a download has failed to download. -->
   <string name="download_item_status_failed">Jêbarkirin bi ser neket</string>
   <!-- Text for the snackbar action button to view failed download details. -->
@@ -1632,14 +1869,68 @@
   <string name="download_content_type_filter_document">Belge</string>
   <!-- Text for the filter button to show all other file types in the downloads list -->
   <string name="download_content_type_filter_other_1">Yên din</string>
+  <!--
+    Title for the alert dialog to rename a file and/or change its download location before downloading it.
+    %s is the formatted size of the file (e.g., "12.5 MB").
+  -->
+  <string name="download_rename_and_change_location_dialog_title">Dosyeyê jêbar bikî?\n(%s)</string>
+  <!--
+    Title for the alert dialog to rename a file and/or change its download location
+    when the file size is not available before downloading it.
+  -->
+  <string name="download_rename_and_change_location_dialog_title_with_unknown_size">Dosyeyê jêbar bikî?</string>
+  <!--
+    WebCompat Reporter
+
+    The title of the Web Compat Reporter feature. This is displayed in the top app bar.
+  -->
+  <string name="webcompat_reporter_screen_title">Malpera şikestî rapor bike</string>
+  <!-- The description of the Web Compat Reporter feature, which has a "learn more" button text for navigating to a SUMO link to learn more about reporting a broken site. %1$s is the name of the app (for example "Firefox") and %2$s is the learn more button. -->
+  <string name="webcompat_reporter_description_3">Rapora te alîkariya me dike ku em pirsgirêkên di %1$s de fam bikin û rast bikin da ku ew ji bo her kesî çêtir bibe. %2$s</string>
   <!-- The button text for navigating to the SUMO link to learn more about reporting a broken site. -->
   <string name="webcompat_reporter_learn_more">Zêdetir bizane</string>
   <!-- The text field label of the URL text field. This is displayed above the user-inputted URL. -->
   <string name="webcompat_reporter_label_url">URL</string>
   <!-- The error message of the URL text field when an invalid URL has been entered. -->
   <string name="webcompat_reporter_url_error_invalid">Ji kerema xwe re URLeke derbasdar binivîse</string>
+  <!-- The label/title of a field in the Web Compat Reporter feature for explaining a high-level reason why the site is broken. -->
+  <string name="webcompat_reporter_label_whats_broken_3">Çi naxebite?</string>
+  <!-- Content description for the icon button that clears the selected broken site reason in the WebCompat Reporter. -->
+  <string name="webcompat_reporter_clear_reason_content_description">Sedema bijartî paqij bike</string>
+  <!-- The error message of the description when the user selects "Something else" as the reason, but left the description empty or too short. -->
+  <string name="webcompat_reporter_description_error">Ji kerema xwe herî kêm 10 karakteran binivîse</string>
+  <!-- The label/title of a mandatory field in the Web Compat Reporter feature for adding additional information. -->
+  <string name="webcompat_reporter_label_mandatory_description">Pirsgirêkê bi berfirehî rave bike da ku alîkariya me bike ku em li ser wê lêkolînê bikin</string>
+  <!-- The label/title of a optional field in the Web Compat Reporter feature for adding additional information. -->
+  <string name="webcompat_reporter_label_optional_description">Pirsgirêkê bi berfirehî rave bike da ku alîkariya me bike ku em li ser wê lêkolînê bikin (vebijarkî)</string>
   <!-- The button text for the cancel button to leave the Web Compat Reporter feature. -->
   <string name="webcompat_reporter_cancel">Betal bike</string>
+  <!-- The button text for the send button to submit the provided form data. -->
+  <string name="webcompat_reporter_send_report">Raporê bişîne</string>
+  <!-- Text for a snackbar to confirm the successful submission of a WebCompat report. -->
+  <string name="webcompat_reporter_success_snackbar_text_2">Rapor hat şandin</string>
+  <!-- Placeholder text for the description field to prompt the user on what they should type. -->
+  <string name="webcompat_reporter_problem_description_placeholder_text_2">Çi qewimî? Te çi hêvî dikir? Ji kerema xwe gavên ji bo dubarekirina pirsgirêkê peyda bike.</string>
+  <!-- Label of the checkbox on the “Report broken site” screen for sending URLS blocked by Enhanced Tracking Protection. -->
+  <string name="webcompat_reporter_etp_checkbox_text_2">Lîsteya tiştên ku ji hêla parastina şopandinê ve hatine astengkirin bişîne</string>
+  <!-- The button text for the preview report button to view a preview of the report. -->
+  <string name="webcompat_reporter_preview_report">Pêşdîtina Raporê</string>
+  <!-- The title shown at the top of the WebCompat Report preview panel. This appears after the user taps the “Preview” button before sending a report. -->
+  <string name="webcompat_reporter_preview_bottom_sheet_header">Pêşdîtina Raporê</string>
+  <!-- Title for the Edit URL confirmation dialog in the WebCompatReporter -->
+  <string name="webcompat_reporter_edit_url_dialog_title">Navnîşana malperê biguherîne</string>
+  <!-- Text shown on the save button for the Edit URL confirmation dialog in the WebCompatReporter. -->
+  <string name="webcompat_reporter_edit_url_dialog_save">Tomar bike</string>
+  <!-- Text shown on the dismiss button for the Edit URL confirmation dialog in the WebCompatReporter. -->
+  <string name="webcompat_reporter_edit_url_dialog_dismiss">Bigire</string>
+  <!--
+    These reason strings are dropdown options on a WebCompat reporter form, indicating what is broken on the site.
+
+    Broken site reason text for site doesn’t load
+  -->
+  <string name="webcompat_reporter_reason_load">Malper nayê barkirin</string>
+  <!-- Broken site reason text for can’t pay, check out or shop -->
+  <string name="webcompat_reporter_reason_checkout">Peredan û kirîn pêk nayên</string>
   <!--
     Crashes
 

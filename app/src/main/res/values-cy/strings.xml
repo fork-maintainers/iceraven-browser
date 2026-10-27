@@ -319,8 +319,6 @@
   <string name="browser_menu_default_banner_title">Gwnewch %1$s eich porwr arferol</string>
   <!-- Label text within the set as default banner -->
   <string name="browser_menu_default_banner_subtitle_2">Cyflym, preifat, ac wedi\'i wneud ar eich cyfer chi.</string>
-  <!-- Content description (not visible, for screen readers etc.) for the button that dismisses the set as default banner in the menu -->
-  <string name="browser_menu_default_banner_dismiss_promotion">Cau\'r hyrwyddo</string>
   <!-- Content description (not visible, for screen readers etc.) for recommended extensions in main menu -->
   <string name="browser_menu_recommended_extensions_content_description">Rhagor o wybodaeth</string>
   <!--
@@ -4659,6 +4657,12 @@
   <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">Ynysu gwefan</string>
   <!-- Description of the Firefox Labs Sandboxing experiment. -->
   <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">Rhwystr ychwanegol rhwng gwefannau sy\'n helpu i ddiogelu eich data ar draws tabiau. Gall effeithio ar berfformiad, sefydlogrwydd, cydnawsedd gwefannau, a sut mae hanes pori\'n cael ei gadw.</string>
+  <!--
+    PDF viewer toolbar and buttons
+
+    Content description for accessibility (used by screen readers): Description for the button that triggers the start of a signature workflow on the PDF displayed on the screen.
+  -->
+  <string name="pdf_tools_sign_content_description_2">Ychwanegu llofnod</string>
   <!--
     PDF viewer toolbar and buttons
 

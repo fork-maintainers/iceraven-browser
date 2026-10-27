@@ -319,8 +319,6 @@
   <string name="browser_menu_default_banner_title">Jadikan %1$s baku Anda</string>
   <!-- Label text within the set as default banner -->
   <string name="browser_menu_default_banner_subtitle_2">Cepat, pribadi, dan dibuat untuk Anda.</string>
-  <!-- Content description (not visible, for screen readers etc.) for the button that dismisses the set as default banner in the menu -->
-  <string name="browser_menu_default_banner_dismiss_promotion">Tutup promosi</string>
   <!-- Content description (not visible, for screen readers etc.) for recommended extensions in main menu -->
   <string name="browser_menu_recommended_extensions_content_description">Informasi lebih lanjut</string>
   <!--

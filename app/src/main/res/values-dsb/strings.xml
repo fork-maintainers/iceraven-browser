@@ -319,8 +319,6 @@
   <string name="browser_menu_default_banner_title">Cyńśo %1$s k swójomu standardoju</string>
   <!-- Label text within the set as default banner -->
   <string name="browser_menu_default_banner_subtitle_2">Malsny, priwatny a za was gótowany.</string>
-  <!-- Content description (not visible, for screen readers etc.) for the button that dismisses the set as default banner in the menu -->
-  <string name="browser_menu_default_banner_dismiss_promotion">Wabjenje zachyśiś</string>
   <!-- Content description (not visible, for screen readers etc.) for recommended extensions in main menu -->
   <string name="browser_menu_recommended_extensions_content_description">Dalšne informacije</string>
   <!--
@@ -4629,6 +4627,12 @@
   <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">Izolacija websedła</string>
   <!-- Description of the Firefox Labs Sandboxing experiment. -->
   <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">Pśidatna bariera mjazy websedłami, kótaraž pomaga, waše daty na wšych rejtarikach šćitaś. Móžo wugbaśe, stabilnosć, kompatibelnosć websedła a nałog składowanja historije pśeglědowanja wobwliwowaś.</string>
+  <!--
+    PDF viewer toolbar and buttons
+
+    Content description for accessibility (used by screen readers): Description for the button that triggers the start of a signature workflow on the PDF displayed on the screen.
+  -->
+  <string name="pdf_tools_sign_content_description_2">Signaturu pśidaś</string>
   <!--
     PDF viewer toolbar and buttons
 

@@ -319,8 +319,6 @@
   <string name="browser_menu_default_banner_title">Bruk %1$s som standard</string>
   <!-- Label text within the set as default banner -->
   <string name="browser_menu_default_banner_subtitle_2">Raskt, privat og laga for deg.</string>
-  <!-- Content description (not visible, for screen readers etc.) for the button that dismisses the set as default banner in the menu -->
-  <string name="browser_menu_default_banner_dismiss_promotion">Ignorer marknadsføring</string>
   <!-- Content description (not visible, for screen readers etc.) for recommended extensions in main menu -->
   <string name="browser_menu_recommended_extensions_content_description">Meir informasjon</string>
   <!--
@@ -4599,6 +4597,12 @@
   <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">Nettstadisolering</string>
   <!-- Description of the Firefox Labs Sandboxing experiment. -->
   <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">Ein ekstra barriere mellom nettstadar som bidreg til å verne dataa dine på tvers av faner. Kan påverke yting, stabilitet, nettstadkompatibilitet og korleis nettlesarloggen blir lagra.</string>
+  <!--
+    PDF viewer toolbar and buttons
+
+    Content description for accessibility (used by screen readers): Description for the button that triggers the start of a signature workflow on the PDF displayed on the screen.
+  -->
+  <string name="pdf_tools_sign_content_description_2">Legg til ein signatur</string>
   <!--
     PDF viewer toolbar and buttons
 

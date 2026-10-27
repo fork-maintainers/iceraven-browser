@@ -319,8 +319,6 @@
   <string name="browser_menu_default_banner_title">%1$s ن پؽش فرز خوتووݩ کۊنین</string>
   <!-- Label text within the set as default banner -->
   <string name="browser_menu_default_banner_subtitle_2">زل، سیخومی وو وورکل وابیڌه مخسۊس ایسا.</string>
-  <!-- Content description (not visible, for screen readers etc.) for the button that dismisses the set as default banner in the menu -->
-  <string name="browser_menu_default_banner_dismiss_promotion">رڌ کردن تبلیقات</string>
   <!-- Content description (not visible, for screen readers etc.) for recommended extensions in main menu -->
   <string name="browser_menu_recommended_extensions_content_description">دووسمندیا قلوه</string>
   <!--
@@ -4599,6 +4597,12 @@
   <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">سوا کردن وبگه</string>
   <!-- Description of the Firefox Labs Sandboxing experiment. -->
   <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">ی مانع ازافی منجا وبگه یل ک سی زفت وابیڌن داده یل ایسا من بلگه یل موختلف هیاری اده. گاشڌ ری عملکرد پایداری، سازگاری وبگه وو بارت زفت کردن ویرگار گشتن تئسیر بنه.</string>
+  <!--
+    PDF viewer toolbar and buttons
+
+    Content description for accessibility (used by screen readers): Description for the button that triggers the start of a signature workflow on the PDF displayed on the screen.
+  -->
+  <string name="pdf_tools_sign_content_description_2">ی امزا ازاف کۊنین</string>
   <!--
     PDF viewer toolbar and buttons
 

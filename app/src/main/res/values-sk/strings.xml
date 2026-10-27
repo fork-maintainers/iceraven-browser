@@ -319,8 +319,6 @@
   <string name="browser_menu_default_banner_title">Nastaviť %1$s ako predvolený</string>
   <!-- Label text within the set as default banner -->
   <string name="browser_menu_default_banner_subtitle_2">Rýchly, súkromný a vytvorený pre vás.</string>
-  <!-- Content description (not visible, for screen readers etc.) for the button that dismisses the set as default banner in the menu -->
-  <string name="browser_menu_default_banner_dismiss_promotion">Zavrieť propagáciu</string>
   <!-- Content description (not visible, for screen readers etc.) for recommended extensions in main menu -->
   <string name="browser_menu_recommended_extensions_content_description">Ďalšie informácie</string>
   <!--
@@ -435,7 +433,7 @@
     Content description (not visible, for screen readers etc.): Search engine icon.
     %s is the search engine name (for example: DuckDuckGo).
   -->
-  <string name="search_engine_icon_content_description_1">Vyhľadávací modul: %s</string>
+  <string name="search_engine_icon_content_description_1">Vyhľadávač: %s</string>
   <!--
     Content description (not visible, for screen readers etc.) of the search engine selector from the search toolbar.
     %s is the search engine name (for example: DuckDuckGo).
@@ -756,7 +754,7 @@
   <!-- Preference for settings related to Search -->
   <string name="preferences_search">Vyhľadávanie</string>
   <!-- Preference for settings related to Search engines -->
-  <string name="preferences_search_engines">Vyhľadávacie moduly</string>
+  <string name="preferences_search_engines">Vyhľadávače</string>
   <!-- Settings item to add a search widget on the device's homescreen. -->
   <string name="preferences_add_search_widget_from_settings">Miniaplikácia na domovskú obrazovku</string>
   <!-- Preference for settings related to Search engines suggestions -->
@@ -4384,7 +4382,7 @@
   <!-- The title of the explore extensions task for the setup checklist -->
   <string name="setup_checklist_task_explore_extensions">Pozrite si ďalšie rozšírenia</string>
   <!-- The title of the search widget task for the setup checklist -->
-  <string name="setup_checklist_task_search_widget_2">Preskúmať vyhľadávací widget</string>
+  <string name="setup_checklist_task_search_widget_2">Preskúmajte vyhľadávaciu miniaplikáciu</string>
   <!--
     ===== Setup checklist feature: Group titles =====
 
@@ -4629,6 +4627,12 @@
   <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">Izolácia webových stránok</string>
   <!-- Description of the Firefox Labs Sandboxing experiment. -->
   <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">Dodatočná bariéra medzi webovými stránkami, ktorá pomáha chrániť vaše údaje naprieč kartami. Môže ovplyvniť výkon, stabilitu, kompatibilitu webových stránok a spôsob ukladania histórie prehliadania.</string>
+  <!--
+    PDF viewer toolbar and buttons
+
+    Content description for accessibility (used by screen readers): Description for the button that triggers the start of a signature workflow on the PDF displayed on the screen.
+  -->
+  <string name="pdf_tools_sign_content_description_2">Pridať podpis</string>
   <!--
     PDF viewer toolbar and buttons
 
