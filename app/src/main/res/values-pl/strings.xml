@@ -182,6 +182,12 @@
   <string name="recently_visited_menu_item_remove">Usuń</string>
   <!-- Content description for the button which navigates the user to show all of their history. -->
   <string name="past_explorations_show_all_content_description_2">Wyświetl wszystkie wcześniejsze odkrycia</string>
+  <!--
+    Browser Fragment
+
+    Label for popup button that appears when long-pressing the main menu. Tapping it allows the user to customize the main menu layout.
+  -->
+  <string name="customize_menu">Dostosuj menu</string>
   <!-- Content description (not visible, for screen readers etc.): Navigate backward (browsing history) -->
   <string name="browser_menu_back">Wstecz</string>
   <!-- Content description (not visible, for screen readers etc.): Navigate forward (browsing history) -->
@@ -4606,6 +4612,12 @@
   <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">Izolacja witryn</string>
   <!-- Description of the Firefox Labs Sandboxing experiment. -->
   <string name="firefox_labs_website_isolation_description" tools:ignore="UnusedResources">Dodatkowa bariera między witrynami, która pomaga chronić dane użytkownika między kartami. Może mieć wpływ na wydajność, stabilność, zgodność witryn i\u00a0sposób zachowywania historii przeglądania.</string>
+  <!--
+    PDF viewer toolbar and buttons
+
+    Content description for accessibility (used by screen readers): Description for the button that triggers the start of a signature workflow on the PDF displayed on the screen.
+  -->
+  <string name="pdf_tools_sign_content_description_2">Dodaj podpis</string>
   <!--
     PDF viewer toolbar and buttons
 
