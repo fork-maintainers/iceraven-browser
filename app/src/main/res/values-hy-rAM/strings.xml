@@ -4602,6 +4602,12 @@
 
     Content description for accessibility (used by screen readers): Description for the button that triggers the start of a signature workflow on the PDF displayed on the screen.
   -->
+  <string name="pdf_tools_sign_content_description_2">Ավելացնել ստորագրություն</string>
+  <!--
+    PDF viewer toolbar and buttons
+
+    Content description for accessibility (used by screen readers): Description for the button that triggers the start of a signature workflow on the PDF displayed on the screen.
+  -->
   <string name="pdf_tools_sign_content_description">Ստորագրել PDF-ը</string>
   <!-- Content description for accessibility (used by screen readers): Description of the button that downloads the PDF displayed on the screen to the user's device. -->
   <string name="pdf_tools_download_content_description">Ներբեռնել PDF-ը</string>

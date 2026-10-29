@@ -4617,6 +4617,12 @@
 
     Content description for accessibility (used by screen readers): Description for the button that triggers the start of a signature workflow on the PDF displayed on the screen.
   -->
+  <string name="pdf_tools_sign_content_description_2">Adaugă o semnătură</string>
+  <!--
+    PDF viewer toolbar and buttons
+
+    Content description for accessibility (used by screen readers): Description for the button that triggers the start of a signature workflow on the PDF displayed on the screen.
+  -->
   <string name="pdf_tools_sign_content_description">Semnează PDF-ul</string>
   <!-- Content description for accessibility (used by screen readers): Description of the button that downloads the PDF displayed on the screen to the user's device. -->
   <string name="pdf_tools_download_content_description">Descarcă PDF-ul</string>

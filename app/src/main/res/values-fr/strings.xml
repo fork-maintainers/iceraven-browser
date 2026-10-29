@@ -4602,7 +4602,7 @@
 
     Content description for accessibility (used by screen readers): Description for the button that triggers the start of a signature workflow on the PDF displayed on the screen.
   -->
-  <string name="pdf_tools_sign_content_description_2">Ajout d’une signature</string>
+  <string name="pdf_tools_sign_content_description_2">Ajouter une signature</string>
   <!--
     PDF viewer toolbar and buttons
 
