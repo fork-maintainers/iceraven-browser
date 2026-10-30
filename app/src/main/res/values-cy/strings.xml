@@ -922,6 +922,10 @@
   <string name="preferences_open_links_in_apps_ask">Gofyn cyn agor</string>
   <!-- Preference for open links in third party apps never open in apps option -->
   <string name="preferences_open_links_in_apps_never">Byth</string>
+  <!-- Preference category header for media related open links in apps settings -->
+  <string name="preferences_media_category">Cyfrwng</string>
+  <!-- Preference label for choosing whether links open in the YouTube app -->
+  <string name="preferences_open_links_in_youtube">Agor dolenni yn YouTube app</string>
   <!-- Preference category for file storage. -->
   <string name="preferences_category_file_storage">Cadw ffeiliau</string>
   <!-- Preference title for downloads default location. -->
@@ -1986,6 +1990,8 @@
   <string name="download_search_no_results_found">Heb ganfod canlyniadau</string>
   <!-- Text for the "Select all" button, which selects all downloaded items in the downloads list. -->
   <string name="download_select_all_items">Dewis y cyfan</string>
+  <!-- Shown in the downloads list in place of a website name when a file came from a data: or blob: URL that has no website address. "data" refers to the data: URL scheme. -->
+  <string name="download_item_source_data">(data)</string>
   <!--
     Downloads Content Type Filters
 
@@ -4689,14 +4695,24 @@
   <string name="pdf_tools_signature_clear_button">Clirio</string>
   <!-- The text for the button that adds the signature the user has typed to the PDF. -->
   <string name="pdf_tools_signature_add_button">Ychwanegu</string>
+  <!-- Content description for accessibility (used by screen readers): Description for the loading indicator when a signature is in the process of being added to a PDF. -->
+  <string name="pdf_tools_signature_adding_content_description">Ychwanegu llofnod</string>
+  <!--
+    Listen to page
+
+    Content description for the reader view panel: a group of buttons floating over the content, which allow customizing the reader view or activating the Listen to Page feature
+  -->
+  <string name="reader_mode_panel_content_description_2">Opsiynau Gweld Darllenydd</string>
   <!--
     Listen to page
 
     Content description for the reader mode panel: a group of buttons floating over the content
   -->
   <string name="reader_mode_panel_content_description">Dewisiadau Modd Darllenydd</string>
-  <!-- Content description for the button in reader mode panel that turns on the read aloud feature (playback of content begins when button is pressed) -->
+  <!-- Content description for the button in the reader view panel that turns on the Listen to Page feature (playback of content begins when button is pressed) -->
   <string name="reader_mode_panel_listen_content_description">Darllen yn Uchel</string>
-  <!-- Content description for media player displayed in Reader Mode when the Listen to Page (Read Aloud) feature is selected -->
+  <!-- Content description for media player displayed in Reader view when the Listen to Page (Read Aloud) feature is selected -->
   <string name="reader_mode_panel_media_player_content_description">Chwaraewr Cyfryngau</string>
+  <!-- Content description for the reader view button Reader view facilitates readability and has a Listen to Page feature. Button icon is a document with headphones, and is displayed next to the page URL when the feature is available. -->
+  <string name="browser_menu_read_or_listen">Darllenydd gweld, darllen neu wrando ar dudalen</string>
 </resources>

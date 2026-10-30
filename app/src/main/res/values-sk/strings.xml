@@ -154,7 +154,7 @@
 
     Header text on the homescreen for continuing to browse the most recent browser tab
   -->
-  <string name="recent_tabs_header_2">Pokračovať</string>
+  <string name="recent_tabs_header_2">Na pokračovanie</string>
   <!-- Button text for showing all the tabs in the tabs tray -->
   <string name="recent_tabs_show_all">Zobraziť všetky</string>
   <!-- Text for button in synced tab card that opens synced tabs tray -->
@@ -316,7 +316,7 @@
     Content description for a banner within the menu which prompt the user to make this app their default browser.
     %1$s is the name of the app (for example "Firefox").
   -->
-  <string name="browser_menu_default_banner_title">Nastaviť %1$s ako predvolený</string>
+  <string name="browser_menu_default_banner_title">Nastavte si %1$s ako predvolený prehliadač</string>
   <!-- Label text within the set as default banner -->
   <string name="browser_menu_default_banner_subtitle_2">Rýchly, súkromný a vytvorený pre vás.</string>
   <!-- Content description (not visible, for screen readers etc.) for recommended extensions in main menu -->
@@ -358,7 +358,7 @@
 
     Title for the AI controls settings screen
   -->
-  <string name="preferences_ai_controls">Nastavenia umelej inteligencie</string>
+  <string name="preferences_ai_controls">Umelá inteligencia</string>
   <!-- Headline text for the AI controls banner. %s is the name of the app (for example "Firefox"). -->
   <string name="ai_controls_banner_headline">Vo %se máte vždy na výber</string>
   <!-- Supporting text for the AI controls banner. %s is a learn more link using ai_controls_learn_more as text. -->
@@ -885,7 +885,7 @@
   <!-- Preference for account and sync settings -->
   <string name="preferences_account_and_sync_settings">Účet a synchronizácia</string>
   <!-- Preference for enabling url autocomplete -->
-  <string name="preferences_enable_autocomplete_urls">Automaticky dokončovať URL adresy</string>
+  <string name="preferences_enable_autocomplete_urls">Automaticky dokončovať adresy URL</string>
   <!-- Preference title for switch preference to show sponsored Firefox Suggest search suggestions -->
   <string name="preferences_show_sponsored_suggestions">Návrhy od sponzorov</string>
   <!--
@@ -920,6 +920,10 @@
   <string name="preferences_open_links_in_apps_ask">Pred otvorením sa opýtať</string>
   <!-- Preference for open links in third party apps never open in apps option -->
   <string name="preferences_open_links_in_apps_never">Nikdy</string>
+  <!-- Preference category header for media related open links in apps settings -->
+  <string name="preferences_media_category">Médiá</string>
+  <!-- Preference label for choosing whether links open in the YouTube app -->
+  <string name="preferences_open_links_in_youtube">Otvárať odkazy v aplikácii YouTube</string>
   <!-- Preference category for file storage. -->
   <string name="preferences_category_file_storage">Úložisko súborov</string>
   <!-- Preference title for downloads default location. -->
@@ -1005,9 +1009,9 @@
 
     Title for the customize home screen section with privacy report.
   -->
-  <string name="customize_toggle_privacy_report">Správa o ochrane osobných údajov</string>
+  <string name="customize_toggle_privacy_report">Správa o ochrane súkromia</string>
   <!-- Title for a customize home screen section. Continue is a section that displays the most recent browser tab, so users can continue browsing where they left off. -->
-  <string name="customize_toggle_continue">Pokračovať</string>
+  <string name="customize_toggle_continue">Na pokračovanie</string>
   <!-- Title for the customize home screen section with bookmarks. -->
   <string name="customize_toggle_bookmarks">Záložky</string>
   <!--
@@ -1022,7 +1026,7 @@
   <!-- Title for the opening wallpaper settings screen -->
   <string name="customize_wallpapers">Tapety</string>
   <!-- Label for the menu item that opens the customize homepage settings screen. -->
-  <string name="browser_menu_customize_homepage">Upraviť domovskú stránku</string>
+  <string name="browser_menu_customize_homepage">Prispôsobiť domovskú stránku</string>
   <!-- Title for the customize home screen section with sponsored shortcuts. -->
   <string name="customize_toggle_contile">Sponzorované skratky</string>
   <!--
@@ -1464,11 +1468,11 @@
 
     Title of a preference that allows a user to choose what screen to show after opening the app
   -->
-  <string name="preferences_opening_screen">Úvodná obrazovka</string>
+  <string name="preferences_opening_screen">Po spustení zobraziť</string>
   <!-- Option for always opening the homepage when re-opening the app -->
   <string name="opening_screen_homepage">Domovská stránka</string>
   <!-- Option for always opening the user's last-open tab when re-opening the app -->
-  <string name="opening_screen_last_tab">Posledná karta</string>
+  <string name="opening_screen_last_tab">Naposledy otvorená stránka</string>
   <!-- Option for always opening the homepage when re-opening the app after four hours of inactivity -->
   <string name="opening_screen_after_four_hours_of_inactivity">Domovská stránka po štyroch hodinách nečinnosti</string>
   <!-- Summary for tabs preference when auto closing tabs setting is set to manual close -->
@@ -1504,7 +1508,7 @@
 
     Category header of a preference that allows a user to enable or disable the privacy report feature
   -->
-  <string name="preferences_privacy_report">Správa o ochrane osobných údajov</string>
+  <string name="preferences_privacy_report">Správa o ochrane súkromia</string>
   <!-- Title of the privacy report preference that allows a user to enable or disable the feature -->
   <string name="preferences_privacy_report_title">Povoliť správu o ochrane súkromia</string>
   <!--
@@ -1974,6 +1978,8 @@
   <string name="download_search_no_results_found">Nenašli sa žiadne výsledky</string>
   <!-- Text for the "Select all" button, which selects all downloaded items in the downloads list. -->
   <string name="download_select_all_items">Vybrať všetko</string>
+  <!-- Shown in the downloads list in place of a website name when a file came from a data: or blob: URL that has no website address. "data" refers to the data: URL scheme. -->
+  <string name="download_item_source_data">(data)</string>
   <!--
     Downloads Content Type Filters
 
@@ -2171,7 +2177,7 @@
   <!-- Bookmark folder editing screen title -->
   <string name="edit_bookmark_folder_fragment_title">Upraviť priečinok</string>
   <!-- Bookmark URL editing field label -->
-  <string name="bookmark_url_label">URL</string>
+  <string name="bookmark_url_label">Adresa URL</string>
   <!-- Text indicating which folder a bookmark or folder will be saved in -->
   <string name="bookmark_save_in_label">Uložiť v</string>
   <!-- Label for a text input field for a bookmark or folder name -->
@@ -2179,7 +2185,7 @@
   <!-- Bookmark select folder screen title -->
   <string name="bookmark_select_folder_fragment_label">Výber priečinku</string>
   <!-- Bookmark editing error missing or improper URL -->
-  <string name="bookmark_invalid_url_error">Neplatná URL adresa</string>
+  <string name="bookmark_invalid_url_error">Neplatná adresa URL</string>
   <!--
     Bookmark snackbar message on deletion
     %1$s is the host part of the URL of the bookmark deleted, if any
@@ -2496,7 +2502,7 @@
 
     Name of the weekly privacy report notification channel. Displayed in the "App notifications" system settings for the app.
   -->
-  <string name="notification_privacy_report_channel_name">Správa o ochrane osobných údajov</string>
+  <string name="notification_privacy_report_channel_name">Správa o ochrane súkromia</string>
   <!-- Description of the weekly privacy report notification channel. Displayed in the "App notifications" system settings for the app. %1$s is the app name (e.g. Firefox) -->
   <string name="notification_privacy_report_channel_description">%1$s zobrazuje počet sledovacích prvkov zablokovaných počas prehliadania.</string>
   <!-- Body text for the weekly privacy report notification for when trackers have been blocked. %1$s is the app name (e.g. Firefox) -->
@@ -2875,9 +2881,9 @@
   <!-- Text displayed above provider textfield under "DNS over HTTPS" -->
   <string name="preference_doh_provider_custom_dialog_textfield">Poskytovateľ</string>
   <!-- Error text displayed for provider textfield under "DNS over HTTPS" if the URL does not start with "https://" or its scheme is not "https" -->
-  <string name="preference_doh_provider_custom_dialog_error_https">Webová adresa musí začínať reťazcom “https://”</string>
+  <string name="preference_doh_provider_custom_dialog_error_https">Adresa URL musí začínať reťazcom “https://”</string>
   <!-- Error text displayed for provider textfield under "DNS over HTTPS" if the URL is invalid -->
-  <string name="preference_doh_provider_custom_dialog_error_invalid">Neplatná URL adresa</string>
+  <string name="preference_doh_provider_custom_dialog_error_invalid">Neplatná adresa URL</string>
   <!-- Cancel button text for provider textfield under "DNS over HTTPS" -->
   <string name="preference_doh_provider_custom_dialog_cancel">Zrušiť</string>
   <!-- Add button text for provider textfield under "DNS over HTTPS" -->
@@ -2929,7 +2935,7 @@
   <!-- Paste the text in the clipboard -->
   <string name="browser_toolbar_long_press_popup_paste">Prilepiť</string>
   <!-- Snackbar message shown after an URL has been copied to clipboard. -->
-  <string name="browser_toolbar_url_copied_to_clipboard_snackbar">Adresa bola skopírovaná do schránky</string>
+  <string name="browser_toolbar_url_copied_to_clipboard_snackbar">Adresa URL bola skopírovaná do schránky</string>
   <!-- Title text for the Add To Homescreen dialog -->
   <string name="add_to_homescreen_title">Pridať na domovskú obrazovku</string>
   <!-- Cancel button text for the Add to Homescreen dialog -->
@@ -3504,7 +3510,7 @@
   <!-- Label for the "Add website" button in the "Add to homepage" bottom sheet. -->
   <string name="homepage_shortcuts_add_website">Pridať webovú stránku</string>
   <!-- Title text for the "Enter a Website URL" dialog for adding a shortcut. -->
-  <string name="homepage_shortcuts_add_website_title">Zadajte URL adresu webovej stránky</string>
+  <string name="homepage_shortcuts_add_website_title">Zadajte adres URL webovej stránky</string>
   <!-- Title for the "Popular sites" section in the "Add to homepage" bottom sheet. -->
   <string name="homepage_shortcuts_popular_sites">Populárne stránky</string>
   <!-- Title text displayed in the dialog when shortcuts limit is reached. -->
@@ -3520,7 +3526,7 @@
   <!-- Hint for renaming title of a shortcut -->
   <string name="shortcut_name_hint">Názov skratky</string>
   <!-- Hint for editing URL of a shortcut. -->
-  <string name="shortcut_url_hint">Adresa skratky</string>
+  <string name="shortcut_url_hint">Adresa URL skratky</string>
   <!-- Dialog button text for canceling the rename top site prompt. -->
   <string name="top_sites_rename_dialog_cancel">Zrušiť</string>
   <!-- Text for the menu button to open the homepage settings. -->
@@ -3536,7 +3542,7 @@
   <!-- Button caption to confirm the edit of the top site. -->
   <string name="top_sites_edit_dialog_save">Uložiť</string>
   <!-- Error message when the user entered an invalid URL -->
-  <string name="top_sites_edit_dialog_url_error">Zadajte platnú adresu</string>
+  <string name="top_sites_edit_dialog_url_error">Zadajte platnú adresu URL</string>
   <!-- Label for the URL edit field in the edit top site dialog. -->
   <string name="top_sites_edit_dialog_url_title">Adresa URL</string>
   <!--
@@ -4659,14 +4665,24 @@
   <string name="pdf_tools_signature_clear_button">Vymazať</string>
   <!-- The text for the button that adds the signature the user has typed to the PDF. -->
   <string name="pdf_tools_signature_add_button">Pridať</string>
+  <!-- Content description for accessibility (used by screen readers): Description for the loading indicator when a signature is in the process of being added to a PDF. -->
+  <string name="pdf_tools_signature_adding_content_description">Pridáva sa podpis</string>
+  <!--
+    Listen to page
+
+    Content description for the reader view panel: a group of buttons floating over the content, which allow customizing the reader view or activating the Listen to Page feature
+  -->
+  <string name="reader_mode_panel_content_description_2">Možnosti zobrazenia Čítačka</string>
   <!--
     Listen to page
 
     Content description for the reader mode panel: a group of buttons floating over the content
   -->
   <string name="reader_mode_panel_content_description">Možnosti režimu Čítačka</string>
-  <!-- Content description for the button in reader mode panel that turns on the read aloud feature (playback of content begins when button is pressed) -->
+  <!-- Content description for the button in the reader view panel that turns on the Listen to Page feature (playback of content begins when button is pressed) -->
   <string name="reader_mode_panel_listen_content_description">Čítať nahlas</string>
-  <!-- Content description for media player displayed in Reader Mode when the Listen to Page (Read Aloud) feature is selected -->
+  <!-- Content description for media player displayed in Reader view when the Listen to Page (Read Aloud) feature is selected -->
   <string name="reader_mode_panel_media_player_content_description">Prehrávač médií</string>
+  <!-- Content description for the reader view button Reader view facilitates readability and has a Listen to Page feature. Button icon is a document with headphones, and is displayed next to the page URL when the feature is available. -->
+  <string name="browser_menu_read_or_listen">Zobrazenie Čítačka, čítanie alebo počúvanie stránky</string>
 </resources>

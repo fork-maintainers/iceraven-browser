@@ -4195,6 +4195,6 @@
   <string name="pdf_tools_signature_clear_button">Spastroje</string>
   <!-- The text for the button that adds the signature the user has typed to the PDF. -->
   <string name="pdf_tools_signature_add_button">Shtoje</string>
-  <!-- Content description for media player displayed in Reader Mode when the Listen to Page (Read Aloud) feature is selected -->
+  <!-- Content description for media player displayed in Reader view when the Listen to Page (Read Aloud) feature is selected -->
   <string name="reader_mode_panel_media_player_content_description">Lojtës Mediash</string>
 </resources>
