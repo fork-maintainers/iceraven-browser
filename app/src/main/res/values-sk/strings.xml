@@ -368,11 +368,11 @@
   <!-- Title for the block AI enhancements toggle -->
   <string name="ai_controls_block_ai_title">Blokovať funkcie využívajúce umelú inteligenciu</string>
   <!-- Description for the block AI enhancements toggle. %s is the name of the app (for example "Firefox"). -->
-  <string name="ai_controls_block_ai_description">Blokovanie znamená, že vo %se neuvidíte nové ani aktuálne vylepšenia pomocou umelej inteligencie, ani vyskakovacie okná o nich.</string>
+  <string name="ai_controls_block_ai_description">Ak zapnete blokovanie, %s vám nebude zobrazovať existujúce ani nové funkcie využívajúce umelú inteligenciu. Nebudú sa zobrazovať ani kontextové okná, ktoré vás na tieto funkcie upozorňujú.</string>
   <!-- Link text to see what AI enhancements are and aren’t included -->
   <string name="ai_controls_see_whats_included">Pozrite sa, čo je a čo nie je zahrnuté</string>
   <!-- Banner text shown when AI enhancements are blocked -->
-  <string name="ai_controls_blocked_info_banner">Nové a aktuálne vylepšenia umelej inteligencie sú štandardne blokované. Nižšie nájdete možnosť odblokovania konkrétnych funkcií.</string>
+  <string name="ai_controls_blocked_info_banner">Nové aj existujúce funkcie využívajúce umelú inteligenciu sú teraz blokované. Nižšie však nájdete možnosť odblokovania konkrétnych funkcií.</string>
   <!-- Section header for the AI-powered features list -->
   <string name="ai_controls_ai_powered_features">Funkcie s umelou inteligenciou</string>
   <!-- Title for the translations AI feature toggle -->
@@ -388,15 +388,15 @@
   <!-- Description for the voice search AI feature toggle -->
   <string name="ai_controls_voice_search_description">Zvuk sa prevádza na text pomocou služby Google Speech Services.</string>
   <!-- Title for the block AI enhancements confirmation dialog -->
-  <string name="ai_controls_block_dialog_title">Zablokovať vylepšenia umelej inteligencie?</string>
+  <string name="ai_controls_block_dialog_title">Zablokovať funkcie využívajúce umelú inteligenciu?</string>
   <!-- Body text for the block AI enhancements confirmation dialog. %1$s is the name of the app (for example "Firefox"). -->
-  <string name="ai_controls_block_dialog_body">Vo %1$se sa nezobrazia nové ani aktuálne vylepšenia umelej inteligencie, ani kontextové okná o nich. Následne môžete odblokovať čokoľvek, čo chcete naďalej používať.\n\nBlokovanie ovplyvňuje aj rozšírenia, ktoré využívajú umelú inteligenciu od %1$su.</string>
+  <string name="ai_controls_block_dialog_body">%1$s vám nebude zobrazovať existujúce ani nové funkcie využívajúce umelú inteligenciu, ani kontextové informácie o nich. Po zablokovaní môžete odblokovať čokoľvek, čo chcete naďalej používať.\n\nBlokovanie ovplyvňuje aj rozšírenia, ktoré využívajú umelú inteligenciu od %1$su.</string>
   <!-- Label shown above the list of features that will be blocked in the block AI dialog -->
   <string name="ai_controls_block_dialog_what_will_be_blocked">Čo bude blokované:</string>
   <!-- Cancel button text in the block AI enhancements confirmation dialog -->
   <string name="ai_controls_block_dialog_cancel">Zrušiť</string>
   <!-- Block button text in the block AI enhancements confirmation dialog -->
-  <string name="ai_controls_block_dialog_block">Blokovať</string>
+  <string name="ai_controls_block_dialog_block">Zablokovať</string>
   <!--
     Locale Settings Fragment
 
@@ -1530,7 +1530,7 @@
 
     Title of the Remote Improvements (rollouts) data preference
   -->
-  <string name="remote_improvements_title">Povoliť vzdialené vylepšenia</string>
+  <string name="remote_improvements_title">Povoliť vylepšenia na diaľku</string>
   <!-- Description for remote improvements. Note: The word "Firefox" should NOT be translated -->
   <string name="remote_improvements_description" tools:ignore="BrandUsage">Firefox vylepší funkcie, výkon a stabilitu medzi aktualizáciami. Zmeny sa aplikujú na diaľku.</string>
   <!-- Learn more link for remote improvements, links to an article for more information about rollouts. -->
@@ -2583,7 +2583,7 @@
   <!-- Title for the cookies and site data items in Delete browsing data -->
   <string name="preferences_delete_browsing_data_cookies_and_site_data">Cookies a údaje stránok</string>
   <!-- Subtitle for the cookies item in Delete browsing data -->
-  <string name="preferences_delete_browsing_data_cookies_subtitle">Príde k vášmu odhláseniu z väčšiny webových stránok</string>
+  <string name="preferences_delete_browsing_data_cookies_subtitle">Budete odhlásení z väčšiny stránok</string>
   <!-- Title for the cached images and files item in Delete browsing data -->
   <string name="preferences_delete_browsing_data_cached_files">Obrázky a súbory vo vyrovnávacej pamäti</string>
   <!-- Subtitle for the cached images and files item in Delete browsing data -->
@@ -4628,7 +4628,7 @@
   <!-- Helper text shown beneath a Firefox Labs item when it is blocked from being turned on. -->
   <string name="firefox_labs_feature_conflict">Funkcia nie je k dispozícii na vyskúšanie.</string>
   <!-- Text displayed on the Firefox Labs screen when there are no Labs experimental features present. -->
-  <string name="firefox_labs_no_labs_available_description">Momentálne nie sú k dispozícii žiadne experimentálne funkcie na vyskúšanie</string>
+  <string name="firefox_labs_no_labs_available_description">Momentálne nie sú k dispozícii na vyskúšanie žiadne experimentálne funkcie.</string>
   <!-- Title of the Firefox Labs Sandboxing experiment. -->
   <string name="firefox_labs_website_isolation_title" tools:ignore="UnusedResources">Izolácia webových stránok</string>
   <!-- Description of the Firefox Labs Sandboxing experiment. -->

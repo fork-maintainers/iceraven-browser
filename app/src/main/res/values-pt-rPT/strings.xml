@@ -4642,7 +4642,7 @@
 
     Content description for the reader view panel: a group of buttons floating over the content, which allow customizing the reader view or activating the Listen to Page feature
   -->
-  <string name="reader_mode_panel_content_description_2">Opções de visualização de leitura</string>
+  <string name="reader_mode_panel_content_description_2">Opções da Vista de Leitura</string>
   <!--
     Listen to page
 
@@ -4654,5 +4654,5 @@
   <!-- Content description for media player displayed in Reader view when the Listen to Page (Read Aloud) feature is selected -->
   <string name="reader_mode_panel_media_player_content_description">Reprodutor Multimédia</string>
   <!-- Content description for the reader view button Reader view facilitates readability and has a Listen to Page feature. Button icon is a document with headphones, and is displayed next to the page URL when the feature is available. -->
-  <string name="browser_menu_read_or_listen">Ver, ler ou ouvir a página</string>
+  <string name="browser_menu_read_or_listen">Vista de leitura, ler ou ouvir a página</string>
 </resources>

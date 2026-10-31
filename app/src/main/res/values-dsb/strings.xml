@@ -920,6 +920,10 @@
   <string name="preferences_open_links_in_apps_ask">Pśed wócynjenim se pšašaś</string>
   <!-- Preference for open links in third party apps never open in apps option -->
   <string name="preferences_open_links_in_apps_never">Nigda</string>
+  <!-- Preference category header for media related open links in apps settings -->
+  <string name="preferences_media_category">Medije</string>
+  <!-- Preference label for choosing whether links open in the YouTube app -->
+  <string name="preferences_open_links_in_youtube">Wótkaze w nałoženju YouTube wócyniś</string>
   <!-- Preference category for file storage. -->
   <string name="preferences_category_file_storage">Datajowy składowak</string>
   <!-- Preference title for downloads default location. -->
@@ -1974,6 +1978,8 @@
   <string name="download_search_no_results_found">Žedne wuslědki namakane</string>
   <!-- Text for the "Select all" button, which selects all downloaded items in the downloads list. -->
   <string name="download_select_all_items">Wšykne wubraś</string>
+  <!-- Shown in the downloads list in place of a website name when a file came from a data: or blob: URL that has no website address. "data" refers to the data: URL scheme. -->
+  <string name="download_item_source_data">(daty)</string>
   <!--
     Downloads Content Type Filters
 
@@ -4659,6 +4665,14 @@
   <string name="pdf_tools_signature_clear_button">Lašowaś</string>
   <!-- The text for the button that adds the signature the user has typed to the PDF. -->
   <string name="pdf_tools_signature_add_button">Pśidaś</string>
+  <!-- Content description for accessibility (used by screen readers): Description for the loading indicator when a signature is in the process of being added to a PDF. -->
+  <string name="pdf_tools_signature_adding_content_description">Signaturu pśidaś</string>
+  <!--
+    Listen to page
+
+    Content description for the reader view panel: a group of buttons floating over the content, which allow customizing the reader view or activating the Listen to Page feature
+  -->
+  <string name="reader_mode_panel_content_description_2">Nastajenja cytańskego naglěda</string>
   <!--
     Listen to page
 
@@ -4669,4 +4683,6 @@
   <string name="reader_mode_panel_listen_content_description">Głosnje cytaś</string>
   <!-- Content description for media player displayed in Reader view when the Listen to Page (Read Aloud) feature is selected -->
   <string name="reader_mode_panel_media_player_content_description">Medijowy wótgrawak</string>
+  <!-- Content description for the reader view button Reader view facilitates readability and has a Listen to Page feature. Button icon is a document with headphones, and is displayed next to the page URL when the feature is available. -->
+  <string name="browser_menu_read_or_listen">Cytański naglěd, bok cytaś abo na nju słuchaś</string>
 </resources>

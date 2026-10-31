@@ -4654,5 +4654,5 @@
   <!-- Content description for media player displayed in Reader view when the Listen to Page (Read Aloud) feature is selected -->
   <string name="reader_mode_panel_media_player_content_description">Reproductor de medios</string>
   <!-- Content description for the reader view button Reader view facilitates readability and has a Listen to Page feature. Button icon is a document with headphones, and is displayed next to the page URL when the feature is available. -->
-  <string name="browser_menu_read_or_listen">Vista de lectura, lectura o escucha de la página</string>
+  <string name="browser_menu_read_or_listen">Vista de lectura, leer o escuchar la página</string>
 </resources>

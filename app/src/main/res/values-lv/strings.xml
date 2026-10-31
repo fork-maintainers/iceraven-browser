@@ -148,6 +148,10 @@
   <string name="link_shared_snackbar_action">Pārvaldīt iestatījumus</string>
   <!-- Preference for open links in third party apps always open in apps option -->
   <string name="preferences_open_links_in_apps_always">Vienmēr</string>
+  <!-- Preference category header for media related open links in apps settings -->
+  <string name="preferences_media_category">Informācijas nesēji</string>
+  <!-- Preference label for choosing whether links open in the YouTube app -->
+  <string name="preferences_open_links_in_youtube">Atvērt saites YouTube lietotnē</string>
   <!-- Preference title for choosing an app to handle downloads -->
   <string name="preferences_choose_app_for_downloads">Pārvaldīt lejupielādes ar citu lietotni</string>
   <!-- Message shown when no app is available to let the user pick a download folder. -->
@@ -290,6 +294,8 @@
   <string name="download_search_placeholder">Meklēt lejupielādes</string>
   <!-- Text to indicate that no downloads match the search query. -->
   <string name="download_search_no_results_found">Nekas netika atrasts</string>
+  <!-- Shown in the downloads list in place of a website name when a file came from a data: or blob: URL that has no website address. "data" refers to the data: URL scheme. -->
+  <string name="download_item_source_data">(dati)</string>
   <!-- The button text for navigating to the SUMO link to learn more about reporting a broken site. -->
   <string name="webcompat_reporter_learn_more">Uzzināt vairāk</string>
   <string name="unsubmitted_crash_dialog_learn_more">Uzzināt vairāk</string>
@@ -626,6 +632,14 @@
   <string name="pdf_tools_signature_clear_button">Notīrīt</string>
   <!-- The text for the button that adds the signature the user has typed to the PDF. -->
   <string name="pdf_tools_signature_add_button">Pievienot</string>
+  <!-- Content description for accessibility (used by screen readers): Description for the loading indicator when a signature is in the process of being added to a PDF. -->
+  <string name="pdf_tools_signature_adding_content_description">Pievieno parakstu</string>
+  <!--
+    Listen to page
+
+    Content description for the reader view panel: a group of buttons floating over the content, which allow customizing the reader view or activating the Listen to Page feature
+  -->
+  <string name="reader_mode_panel_content_description_2">Lasītāja skata iespējas</string>
   <!--
     Listen to page
 
@@ -636,4 +650,6 @@
   <string name="reader_mode_panel_listen_content_description">Lasīt skaļi</string>
   <!-- Content description for media player displayed in Reader view when the Listen to Page (Read Aloud) feature is selected -->
   <string name="reader_mode_panel_media_player_content_description">Informācijas nesēju atskaņotājs</string>
+  <!-- Content description for the reader view button Reader view facilitates readability and has a Listen to Page feature. Button icon is a document with headphones, and is displayed next to the page URL when the feature is available. -->
+  <string name="browser_menu_read_or_listen">Lasītāja skats, lasīt vai klausīties lapu</string>
 </resources>

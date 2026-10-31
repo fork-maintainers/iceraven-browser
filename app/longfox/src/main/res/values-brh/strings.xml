@@ -20,13 +20,13 @@
     %1$d is a placeholder for the current high score. HISCORE is an
     abbreviation for "Highest Score".
   -->
-  <string name="hiscore">رکارڈ: %1$d</string>
+  <string name="hiscore">ریکارڈ: %1$d</string>
   <string name="sound_on">توار ملوک اے</string>
   <string name="sound_off">توار بند اے</string>
   <!-- Back button -->
   <string name="back">پدی</string>
   <!-- Share hiscore action label. hiscore is an abbreviation for "Highest Score" -->
-  <string name="share_hiscore">رکارڈ اے بشخبو</string>
+  <string name="share_hiscore">ریکارڈ اے بشخبو</string>
   <!--
     The longest fox is your best game achievement so far (based on your highest score).
     %1$d is a placeholder for the current highest score.

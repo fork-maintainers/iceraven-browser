@@ -2198,6 +2198,15 @@
   <string name="preference_enhanced_tracking_protection">Amparu megioradu contra sa sighidura</string>
   <!-- Text displayed that links to website about enhanced tracking protection -->
   <string name="preference_enhanced_tracking_protection_explanation_learn_more">Àteras informatziones</string>
+  <plurals name="trackers_blocked_count_2">
+    <!--
+      Trackers blocked card on homepage
+
+      Text shown on the trackers blocked card. %d is the number of trackers blocked.
+    -->
+    <item quantity="one">%d sighidore blocadu</item>
+    <item quantity="other">%d sighidores blocados</item>
+  </plurals>
   <!-- Preference for enhanced tracking protection for the standard protection settings -->
   <string name="preference_enhanced_tracking_protection_standard_default_1">Istàndard (predefinidu)</string>
   <!-- Preference description for enhanced tracking protection for the standard protection settings -->
@@ -3267,6 +3276,14 @@
     %s is the name of the app (for example "Firefox").
   -->
   <string name="protection_panel_banner_protected_title">%s t’amparat</string>
+  <plurals name="protection_panel_banner_protected_blocked_trackers_description">
+    <!--
+      Description text for the protection panel banner when privacy dashboard is enabled.
+      %1$d is the number of trackers blocked.
+    -->
+    <item quantity="one">%1$d sighidore blocadu in custu situ.</item>
+    <item quantity="other">%1$d sighidores blocados in custu situ.</item>
+  </plurals>
   <!-- Label text for the Enhanced Tracking Protection toggle. -->
   <string name="protection_panel_etp_toggle_label">Amparu megioradu contra sa sighidura</string>
   <!-- Toggle if Enhanced Tracking Protection is turned on -->
@@ -3284,6 +3301,22 @@
   <string name="protection_panel_privacy_and_security_settings_2">Cunfiguratziones de riservadesa</string>
   <!-- Title text for the protection panel permissions section. -->
   <string name="protection_panel_permissions_title">Permissos</string>
+  <plurals name="trackers_blocked_panel_total_num_trackers_blocked_2">
+    <!--
+      Text for displaying the total number of trackers blocked in the trackers blocked panel.
+      %1$d is a placeholder for the number of trackers blocked.
+    -->
+    <item quantity="one">%1$d sighidore blocadu in custu situ</item>
+    <item quantity="other">%1$d sighidores blocados in custu situ</item>
+  </plurals>
+  <plurals name="trackers_blocked_panel_num_trackers_blocked_this_week_2">
+    <!--
+      Text for displaying the number of trackers blocked this week in the trackers blocked panel.
+      %1$d is a placeholder for the number of trackers blocked this week.
+    -->
+    <item quantity="one">%1$d sighidore blocadu custa chida</item>
+    <item quantity="other">%1$d sighidores blocados custa chida</item>
+  </plurals>
   <!-- Button text on the clear site data dialog to allow users to confirm they wish to clear the site data. -->
   <string name="clear_site_data_dialog_positive_button_text">Isbòida</string>
   <!-- Button text on the clear site data dialog to allow users to cancel the action and not clear the site data. -->
