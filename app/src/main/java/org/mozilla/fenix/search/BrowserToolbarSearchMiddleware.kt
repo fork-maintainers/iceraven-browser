@@ -629,7 +629,7 @@ class BrowserToolbarSearchMiddleware(
                 }
         }
     }
-settings.shouldShowQRScanSearch
+
     private fun observeLensInput() {
         observeLensInputJob?.cancel()
         observeLensInputJob = appStore.observeWhileActive {
@@ -649,7 +649,7 @@ settings.shouldShowQRScanSearch
     }
 
     /**
-     * Rebuilds the end actions whenever a Lens camesettings.shouldShowQRScanSearchra flow ends, so the Lens button reflects a camera mode the user
+     * Rebuilds the end actions whenever a Lens camera flow ends, so the Lens button reflects a camera mode the user
      * switched to before leaving the camera without a result.
      */
     private fun observeLensFlowEnd(store: Store<BrowserToolbarState, BrowserToolbarAction>) {
