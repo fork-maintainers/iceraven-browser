@@ -77,8 +77,6 @@
   <string name="about_content" tools:ignore="BrandUsage">%1$s موزلّا ولوں تیار تھیا ہے۔</string>
   <!-- Private Browsing -->
   <string name="private_browsing_common_myths">نجی براؤزنگ بارے عام فرضی قصے</string>
-  <!-- Text to be announced by the accessibility service to inform the user that the private browsing mode is currently active. -->
-  <string name="private_browsing_a11y_session_announcement">نجی براؤزنگ سیشن</string>
   <!--
     Private Browsing
 
