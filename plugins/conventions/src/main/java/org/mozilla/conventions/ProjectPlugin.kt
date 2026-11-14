@@ -12,6 +12,7 @@ import org.gradle.api.artifacts.DependencySubstitution
 import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.api.artifacts.component.ModuleComponentIdentifier
 import org.gradle.api.artifacts.component.ModuleComponentSelector
+import org.gradle.api.artifacts.component.ProjectComponentIdentifier
 import org.gradle.api.logging.Logger
 import org.gradle.api.logging.StandardOutputListener
 import org.gradle.api.artifacts.ArtifactView
@@ -76,7 +77,7 @@ class ProjectPlugin : Plugin<Project> {
         configureKtfmt(project, mozilla)
         configureDetekt(project, mozilla)
         configureAndroidComponentsLint(project, mozilla, topsrcdir)
-        configureTestOutputFormatting(project)
+        configureUnitTests(project)
         configurePackagingResourcesExcludes(project)
         registerPrintVariantsTask(project)
         configureNativeLibsForTests(project, substs)
@@ -402,9 +403,14 @@ class ProjectPlugin : Plugin<Project> {
                     }
                     capabilitiesResolution {
                         withCapability("org.mozilla.telemetry:glean-native") {
+                            // GeckoView provides Glean either as an in-build project or as a
+                            // published module, depending on the build composition.
                             val toBeSelected = candidates.find {
-                                it.id is ModuleComponentIdentifier &&
-                                    (it.id as ModuleComponentIdentifier).module.contains("geckoview")
+                                when (val id = it.id) {
+                                    is ProjectComponentIdentifier -> id.projectName.contains("geckoview")
+                                    is ModuleComponentIdentifier -> id.module.contains("geckoview")
+                                    else -> false
+                                }
                             }
                             if (toBeSelected != null) {
                                 select(toBeSelected)
@@ -577,17 +583,26 @@ class ProjectPlugin : Plugin<Project> {
         project.pluginManager.withPlugin("com.android.application", action)
     }
 
-    // Translates JUnit test events into Mozilla's TBPL-like textual format that Taskcluster
-    // log parsing expects. See also: testing/mozbase/mozlog/mozlog/formatters/tbplformatter.py
-    private fun configureTestOutputFormatting(project: Project) {
+    private fun configureUnitTests(project: Project) {
+        val automation = project.providers.environmentVariable("MOZ_AUTOMATION").isPresent
+        val fetches = project.providers.environmentVariable("MOZ_FETCHES_DIR")
         project.pluginManager.withPlugin("com.android.base") {
             project.tasks.withType(Test::class.java).configureEach {
                 systemProperty("robolectric.logging", "stdout")
                 systemProperty("logging.test-mode", "true")
                 systemProperty("javax.net.ssl.trustStoreType", "JKS")
+                if (automation) {
+                    systemProperty(
+                        "robolectric.dependency.dir",
+                        File(fetches.get(), "robolectric-android-all").path,
+                    )
+                }
 
                 testLogging.events = emptySet()
 
+                // Translates JUnit test events into Mozilla's TBPL-like textual format that
+                // Taskcluster log parsing expects.
+                // See also: testing/mozbase/mozlog/mozlog/formatters/tbplformatter.py
                 val listener = MozillaTestOutputListener(logger)
                 addTestListener(listener)
                 addTestOutputListener(listener)
