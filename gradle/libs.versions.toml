@@ -5,8 +5,8 @@ android-lint = "32.4.1"
 
 # Kotlin
 coroutines = "1.11.0"
-kotlin = "2.4.20"
-serialization = "1.11.0"
+kotlin = "2.4.21"
+serialization = "1.12.0"
 
 # AndroidX
 activity = "1.13.0"
@@ -19,7 +19,7 @@ benchmark = "1.5.0"
 biometric = "1.1.0"
 browser = "1.10.0"
 cardview = "1.0.0"
-collection = "1.6.0"
+collection = "1.7.0"
 compose-bom = "2026.09.00"
 concurrent = "1.3.0"
 constraintlayout = "2.2.2"
@@ -34,12 +34,13 @@ drawerlayout = "1.2.0"
 emoji2 = "1.7.0"
 exifinterface = "1.4.2"
 fragment = "1.9.1"
+glance = "1.2.0"
 lifecycle = "2.11.0"
 media = "1.7.1"
 media3 = "1.11.1"
 navigation = "2.10.2"
 navigation3 = "1.2.0"
-paging = "3.5.1"
+paging = "3.5.2"
 palette = "1.0.0"
 preference = "1.2.1"
 profileinstaller = "1.4.1"
@@ -57,7 +58,7 @@ work = "2.12.0"
 accompanist = "0.37.3"
 firebase-messaging = "25.0.2"
 installreferrer = "2.2"
-ksp = "2.3.11"
+ksp = "2.3.12"
 material = "1.14.0"
 mlkit-prompt = "1.0.0-beta4"
 osslicenses-plugin = "0.13.0"
@@ -69,14 +70,14 @@ play-services-fido = "21.3.1"
 protobuf = "4.36.1"
 
 # Gradle plugins
-dependency-analysis = "3.19.1"
+dependency-analysis = "3.19.2"
 jacoco = "0.8.15"
 kaml = "0.104.0"
 protobuf-plugin = "0.10.0"
 python-envs-plugin = "0.0.31"
 semanticdb-javac = "0.12.0"
 semanticdb-kotlinc = "0.11.0"
-tomlj = "1.1.1"
+tomlj = "2.2.0"
 
 # Linters
 androidx-lint = "1.0.0"
@@ -85,10 +86,10 @@ androidx-lint = "1.0.0"
 detekt = "1.23.8"
 google-java-format = "1.28.0"
 ktfmt = "0.64"
-spotless = "8.10.2"
+spotless = "8.10.3"
 
 # Mozilla
-glean = "70.2.1"
+glean = "70.3.0"
 
 # Testing libraries
 androidx-test = "1.7.0"
@@ -102,7 +103,7 @@ hamcrest = "2.2"
 junit4 = "4.13.2"
 junit6 = "6.1.3"
 leakcanary = "2.14"
-mockito = "5.23.0"
+mockito = "5.24.0"
 mockk = "1.14.11"
 robolectric = "4.17"
 
@@ -110,7 +111,7 @@ robolectric = "4.17"
 adjust = "5.8.0"
 androidsvg = "1.4"
 disklrucache = "2.0.2"
-jetbrains-markdown = "0.7.16"
+jetbrains-markdown = "0.7.17"
 jna = "5.19.1"
 json = "20260814"
 jsoup = "1.23.2"
@@ -170,6 +171,9 @@ androidx-fragment = { module = "androidx.fragment:fragment", version.ref = "frag
 androidx-fragment-compose = { module = "androidx.fragment:fragment-compose", version.ref = "fragment" }
 androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragment" }
 androidx-fragment-testing = { module = "androidx.fragment:fragment-testing", version.ref = "fragment" }
+androidx-glance-appwidget = { module = "androidx.glance:glance-appwidget", version.ref = "glance" }
+androidx-glance-appwidget-preview = { module = "androidx.glance:glance-appwidget-preview", version.ref = "glance" }
+androidx-glance-preview = { module = "androidx.glance:glance-preview", version.ref = "glance" }
 androidx-lifecycle-common = { module = "androidx.lifecycle:lifecycle-common", version.ref = "lifecycle" }
 androidx-lifecycle-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle" }
 androidx-lifecycle-livedata = { module = "androidx.lifecycle:lifecycle-livedata", version.ref = "lifecycle" }
