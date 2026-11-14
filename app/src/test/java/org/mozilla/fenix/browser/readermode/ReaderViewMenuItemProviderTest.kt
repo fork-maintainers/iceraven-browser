@@ -17,6 +17,7 @@ import mozilla.components.browser.state.state.ReaderState
 import mozilla.components.browser.state.state.createTab
 import mozilla.components.browser.state.store.BrowserStore
 import mozilla.components.compose.base.text.Text
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.data.StandardMenuItem
 import mozilla.components.compose.menu.ui.MenuItemIconRes
 import mozilla.components.ui.icons.R as iconsR
@@ -46,7 +47,7 @@ class ReaderViewMenuItemProviderTest {
 
         assertEquals(
             StandardMenuItem(
-                title = Text.Resource(R.string.browser_menu_customize_reader_view_2),
+                title = MenuItemTitle(Text.Resource(R.string.browser_menu_customize_reader_view_2)),
                 icon = MenuItemIconRes(iconsR.drawable.mozac_ic_tool_24),
                 onClickEvent = MenuAction.CustomizeReaderView,
             ),

@@ -17,6 +17,7 @@ import mozilla.components.browser.state.state.BrowserState
 import mozilla.components.browser.state.state.createTab
 import mozilla.components.browser.state.store.BrowserStore
 import mozilla.components.compose.base.text.Text
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.data.StandardMenuItem
 import mozilla.components.compose.menu.ui.MenuItemIconRes
 import mozilla.components.compose.menu.ui.MenuItemState
@@ -225,7 +226,7 @@ class OpenInAppMenuItemProviderTest {
         isHighlighted: Boolean = false,
     ) =
         StandardMenuItem(
-            title = title,
+            title = MenuItemTitle(title),
             icon = MenuItemIconRes(iconsR.drawable.mozac_ic_more_grid_24, isHighlighted = isHighlighted),
             onClickEvent = MenuAction.OpenInApp,
             state = state,

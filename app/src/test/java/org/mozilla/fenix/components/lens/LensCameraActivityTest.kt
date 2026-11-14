@@ -75,6 +75,7 @@ class LensCameraActivityTest {
         // Most tests exercise the camera flow, which is only reached once the opt-out sheet has
         // been acknowledged; the opt-out tests below override this.
         every { settings.hasAcceptedGoogleLensFirstRun } returns true
+        every { settings.lensCameraLastMode } returns CameraMode.LENS
         // FirefoxTheme, used by the opt-out sheet, resolves the theme through FenixApplication,
         // which reads the AppStore's browsing mode.
         every { testContext.components.appStore } returns AppStore()
@@ -89,6 +90,74 @@ class LensCameraActivityTest {
             LensCameraActivity::class.java.name,
             intent.component?.className,
         )
+    }
+
+    @Test
+    fun `GIVEN an initial mode WHEN newIntent is called THEN the mode is carried as an extra`() {
+        val intent = LensCameraActivity.newIntent(testContext, isPrivate = false, initialMode = CameraMode.QR)
+
+        assertEquals("QR", intent.getStringExtra(LensCameraActivity.EXTRA_INITIAL_MODE))
+    }
+
+    @Test
+    fun `GIVEN no initial mode WHEN newIntent is called THEN no mode extra is set`() {
+        val intent = LensCameraActivity.newIntent(testContext, isPrivate = false)
+
+        assertFalse(intent.hasExtra(LensCameraActivity.EXTRA_INITIAL_MODE))
+    }
+
+    @Test
+    fun `GIVEN an initial mode extra WHEN resolveInitialMode is called THEN the extra wins over the last used mode`() {
+        every { settings.lensCameraLastMode } returns CameraMode.QR
+        val intent = LensCameraActivity.newIntent(testContext, isPrivate = false, initialMode = CameraMode.LENS)
+        val activity = Robolectric.buildActivity(LensCameraActivity::class.java, intent).create().get()
+
+        assertEquals(CameraMode.LENS, activity.resolveInitialMode())
+    }
+
+    @Test
+    fun `GIVEN no initial mode extra WHEN resolveInitialMode is called THEN the last used mode is returned`() {
+        every { settings.lensCameraLastMode } returns CameraMode.QR
+        val activity = Robolectric.buildActivity(LensCameraActivity::class.java).create().get()
+
+        assertEquals(CameraMode.QR, activity.resolveInitialMode())
+    }
+
+    @Test
+    fun `GIVEN an unknown initial mode extra WHEN resolveInitialMode is called THEN the last used mode is returned`() {
+        every { settings.lensCameraLastMode } returns CameraMode.QR
+        val intent =
+            LensCameraActivity.newIntent(testContext, isPrivate = false)
+                .putExtra(LensCameraActivity.EXTRA_INITIAL_MODE, "UNKNOWN")
+        val activity = Robolectric.buildActivity(LensCameraActivity::class.java, intent).create().get()
+
+        assertEquals(CameraMode.QR, activity.resolveInitialMode())
+    }
+
+    @Test
+    fun `GIVEN the last used mode is QR WHEN the camera fragment is added THEN it is told to open in QR mode`() {
+        every { settings.lensCameraLastMode } returns CameraMode.QR
+        val activity = Robolectric.buildActivity(LensCameraActivity::class.java).create().get()
+
+        activity.handlePermissionResult(isGranted = true)
+        activity.supportFragmentManager.executePendingTransactions()
+
+        val fragment = activity.supportFragmentManager.findFragmentById(R.id.lens_fragment_container_view)
+        assertEquals("QR", fragment?.arguments?.getString(LensCameraFragment.ARG_INITIAL_MODE))
+    }
+
+    @Test
+    fun `WHEN the camera fragment reports a mode change THEN it is saved as the last used mode and the activity stays open`() {
+        val activity = Robolectric.buildActivity(LensCameraActivity::class.java).setup().get()
+
+        activity.supportFragmentManager.setFragmentResult(
+            LensCameraFragment.MODE_CHANGED_REQUEST_KEY,
+            Bundle().apply { putString(LensCameraFragment.RESULT_CAMERA_MODE, "QR") },
+        )
+        activity.supportFragmentManager.executePendingTransactions()
+
+        verify { settings.lensCameraLastMode = CameraMode.QR }
+        assertFalse(activity.isFinishing)
     }
 
     @Test

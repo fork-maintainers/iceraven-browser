@@ -76,11 +76,7 @@
   <string name="history_metadata_header_2">Jillaaɗe sakket</string>
   <!-- Content description for the button which navigates the user to show all of their history. -->
   <string name="past_explorations_show_all_content_description_2">Hollu jillanɗe ɓennuɗe fof</string>
-  <!--
-    Browser Fragment
-
-    Content description (not visible, for screen readers etc.): Navigate backward (browsing history)
-  -->
+  <!-- Content description (not visible, for screen readers etc.): Navigate backward (browsing history) -->
   <string name="browser_menu_back">Caggal</string>
   <!-- Content description (not visible, for screen readers etc.): Navigate forward (browsing history) -->
   <string name="browser_menu_forward">Yeeso</string>
@@ -151,7 +147,11 @@
     Title for the settings page
   -->
   <string name="settings">Teelte</string>
-  <!-- Preference category for general settings -->
+  <!--
+    Preferences
+
+    Preference category for general settings
+  -->
   <string name="preferences_category_general">Kuuɓal</string>
   <!-- Preference category for all links about Fenix -->
   <string name="preferences_category_about">Baɗte</string>

@@ -29,6 +29,14 @@ object SearchBarSelectors : SelectorContainer {
             readiness = PageReadinessProfiles.IDENTITY_ANCHOR,
         )
 
+    // Voice search (microphone) button in the edit-mode search bar; present only when voice search is enabled.
+    val VOICE_SEARCH_BUTTON =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_CONTENT_DESCRIPTION,
+            value = getStringResource(R.string.voice_search_content_description),
+            description = "the Voice search button",
+        )
+
     val URL_TEXT =
         Selector(
             strategy = SelectorStrategy.UIAUTOMATOR_WITH_RES_ID,

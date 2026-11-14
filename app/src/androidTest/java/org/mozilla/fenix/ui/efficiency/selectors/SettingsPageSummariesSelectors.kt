@@ -32,6 +32,16 @@ object SettingsPageSummariesSelectors : SelectorContainer {
             readiness = PageReadinessProfiles.READY_CONTENT,
         )
 
+    // The "Summarize pages" row is a toggleable Row (Role.Switch); its ToggleableState lives on the merged
+    // node, not on the inner text node COMPOSE_BY_TEXT resolves, so the on/off checks must use the merged
+    // tree. Toggling the switch is a click on this same row.
+    val SUMMARIZE_PAGES_TOGGLE =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TEXT_MERGED,
+            value = getStringResource(summarizeR.string.mozac_summarize_settings_summarize_pages),
+            description = "the Summarize pages toggle",
+        )
+
     val LEARN_MORE_LINK =
         Selector(
             strategy = SelectorStrategy.COMPOSE_BY_TEXT,

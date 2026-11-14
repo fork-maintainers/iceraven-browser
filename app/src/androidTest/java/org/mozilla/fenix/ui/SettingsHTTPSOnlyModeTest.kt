@@ -140,6 +140,7 @@ class SettingsHTTPSOnlyModeTest {
         bug = 2076438,
         since = "2026-10",
     )
+    @Critical
     @Test
     fun httpsOnlyModeExceptionPersistsForCurrentSessionTest() {
         homeScreen(composeTestRule) {}

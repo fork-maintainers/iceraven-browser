@@ -64,8 +64,6 @@
     <!-- Layers -->
     <!-- Card background, Menu background, Dialog, Banner -->
     <color name="fx_mobile_layer_color_2">@color/novaWhite</color>
-    <!-- Search -->
-    <color name="fx_mobile_layer_color_3">@color/photonLightGrey20</color>
     <!-- Warning background -->
     <color name="fx_mobile_layer_color_warning">@color/photonYellow20</color>
     <!-- Error background -->
@@ -159,14 +157,8 @@
     <color name="fx_mobile_private_action_color_primary_disabled">@color/photonInk20A20</color>
 
     <!-- Text -->
-    <!-- Text Inverted/On Color -->
-    <color name="fx_mobile_private_text_color_oncolor_primary">@color/photonLightGrey05</color>
     <!-- Action Primary disabled text -->
     <color name="fx_mobile_private_text_color_action_primary_disabled">@color/photonLightGrey05A40</color>
-
-    <!-- Icon -->
-    <!-- Icon inverted (on color) -->
-    <color name="fx_mobile_private_icon_color_oncolor">@color/photonLightGrey05</color>
 
     <!-- OLED theme color variables -->
     <!-- The OLED theme inherits from the dark theme and only the tokens that differ are listed. -->
@@ -212,18 +204,10 @@
 
     <!-- Private theme color palette -->
     <color name="accent_private_theme">@color/photonViolet50</color>
-    <color name="accent_high_contrast_private_theme">#AA71FF</color>
-    <color name="neutral_private_theme">@color/photonGrey20</color>
-    <color name="neutral_faded_private_theme">#1FFBFBFE</color>
     <color name="prompt_login_edit_text_cursor_color_private_theme">@color/photonViolet50</color>
 
     <!-- Normal theme colors for light mode -->
     <color name="accent_normal_theme">@color/photonInk20</color>
-    <color name="accent_high_contrast_normal_theme">@color/photonInk20</color>
-    <color name="neutral_normal_theme">@color/photonGrey30</color>
-    <color name="neutral_faded_normal_theme">@color/photonGrey20</color>
-    <color name="fill_link_from_clipboard_normal_theme">@color/photonInk20</color>
-    <color name="add_on_private_browsing_exterior_circle_background_normal_theme">@color/photonViolet70</color>
     <color name="prompt_login_edit_text_cursor_color_normal_theme">@color/photonInk20</color>
     <color name="search_suggestion_indicator_icon_color_normal_theme">@color/photonGreen70</color>
     <color name="search_suggestion_indicator_icon_bookmark_color_normal_theme">@color/photonBlue50</color>
@@ -250,9 +234,6 @@
     <color name="homepage_tab_edge_to_edge_toolbar_background">#00000000</color>
     <color name="homepage_tab_edge_to_edge_toolbar_outline">#00000000</color>
     <color name="homepage_tab_edge_to_edge_private_toolbar_outline">#564A75</color>
-
-    <!-- Bookmark buttons -->
-    <color name="bookmark_favicon_background">#DFDFE3</color>
 
     <!-- Toggle Colors -->
     <color name="toggle_off_knob_dark_theme">@color/photonLightGrey05</color>
@@ -312,4 +293,9 @@
     <!-- Private mode circle fill colors for mozac_ic_private_mode_circle_fill_72 -->
     <color name="mozac_ic_private_mode_circle_fill_72_background_color" tools:ignore="UnusedResources">@color/fx_mobile_icon_private</color>
     <color name="mozac_ic_private_mode_circle_fill_72_icon_color" tools:ignore="UnusedResources">@color/private_mode_mask_gradient</color>
+
+    <!-- Glance search bar widgets -->
+    <color name="search_bar_widget_background">@color/novaWhite</color>
+    <color name="search_bar_widget_button_background">@color/novaGray10</color>
+    <color name="search_bar_widget_divider">@color/novaGray15</color>
 </resources>

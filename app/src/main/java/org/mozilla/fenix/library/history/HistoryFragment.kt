@@ -112,6 +112,7 @@ import org.mozilla.fenix.ext.nav
 import org.mozilla.fenix.ext.requireComponents
 import org.mozilla.fenix.ext.runIfFragmentIsAttached
 import org.mozilla.fenix.ext.setTextColor
+import org.mozilla.fenix.home.toolbar.BrowserToolbarTelemetryMiddleware
 import org.mozilla.fenix.library.LibraryPageFragment
 import org.mozilla.fenix.library.history.HistoryFragmentAction.SearchClicked
 import org.mozilla.fenix.library.history.HistoryFragmentAction.SearchDismissed
@@ -779,6 +780,10 @@ class HistoryFragment :
                             browsingModeManager = (requireActivity() as HomeActivity).browsingModeManager,
                             settings = requireComponents.settings,
                             scope = lifecycleScope,
+                        ),
+                        BrowserToolbarTelemetryMiddleware(
+                            appStore = requireComponents.appStore,
+                            settings = requireComponents.settings,
                         ),
                     ),
             )

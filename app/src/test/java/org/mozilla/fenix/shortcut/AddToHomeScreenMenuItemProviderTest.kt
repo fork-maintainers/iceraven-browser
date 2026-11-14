@@ -20,6 +20,7 @@ import mozilla.components.browser.state.state.BrowserState
 import mozilla.components.browser.state.state.createTab
 import mozilla.components.browser.state.store.BrowserStore
 import mozilla.components.compose.base.text.Text
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.data.StandardMenuItem
 import mozilla.components.compose.menu.ui.MenuItemIconRes
 import mozilla.components.feature.pwa.WebAppUseCases
@@ -132,11 +133,13 @@ class AddToHomeScreenMenuItemProviderTest {
     private fun expectedItem(isInstallable: Boolean) =
         StandardMenuItem(
             title =
-                Text.Resource(
-                    when (isInstallable) {
-                        true -> R.string.browser_menu_add_app_to_homescreen
-                        else -> R.string.browser_menu_add_to_homescreen
-                    }
+                MenuItemTitle(
+                    Text.Resource(
+                        when (isInstallable) {
+                            true -> R.string.browser_menu_add_app_to_homescreen
+                            else -> R.string.browser_menu_add_to_homescreen
+                        }
+                    )
                 ),
             icon = MenuItemIconRes(iconsR.drawable.mozac_ic_add_to_homescreen_24),
             onClickEvent = MenuAction.Navigate.AddToHomeScreen,

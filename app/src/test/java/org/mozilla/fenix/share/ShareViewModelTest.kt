@@ -87,7 +87,7 @@ class ShareViewModelTest {
             every { appEntity.activityName } returns "Activity"
             val recentAppOptions = listOf(appEntity)
 
-            every { storage.getRecentAppsUpTo(RECENT_APPS_LIMIT) } returns recentAppOptions
+            coEvery { storage.getRecentAppsUpTo(RECENT_APPS_LIMIT) } returns recentAppOptions
             coEvery { viewModel.buildAppsList(any()) } returns appOptions
             coEvery { viewModel.buildDeviceList(any()) } returns listOf(SyncShareOption.Offline)
 
@@ -147,7 +147,7 @@ class ShareViewModelTest {
         runTest(testDispatcher) {
             val appOptions = listOf(AppShareOption("Label", mockk(), "Package", "Activity"))
 
-            every { storage.getRecentAppsUpTo(RECENT_APPS_LIMIT) } returns emptyList()
+            coEvery { storage.getRecentAppsUpTo(RECENT_APPS_LIMIT) } returns emptyList()
             coEvery { viewModel.buildAppsList(any()) } returns appOptions
 
             viewModel.initDataLoad()
@@ -163,7 +163,7 @@ class ShareViewModelTest {
     @Test
     fun `WHEN no apps found THEN at least have copy to clipboard available`() =
         runTest(testDispatcher) {
-            every { storage.getRecentAppsUpTo(RECENT_APPS_LIMIT) } returns emptyList()
+            coEvery { storage.getRecentAppsUpTo(RECENT_APPS_LIMIT) } returns emptyList()
             coEvery { viewModel.getIntentActivities(any()) } returns emptyList()
             coEvery { viewModel.buildAppsList(any()) } returns emptyList()
 

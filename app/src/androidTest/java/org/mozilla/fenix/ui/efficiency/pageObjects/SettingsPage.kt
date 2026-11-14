@@ -142,6 +142,15 @@ class SettingsPage(composeRule: AndroidComposeTestRule<HomeActivityIntentTestRul
         )
         builder.register(
             from = pageName,
+            to = "SettingsAiControlsPage",
+            steps =
+                listOf(
+                    NavigationStep.Swipe(SettingsSelectors.AI_CONTROLS_BUTTON),
+                    NavigationStep.Click(SettingsSelectors.AI_CONTROLS_BUTTON),
+                ),
+        )
+        builder.register(
+            from = pageName,
             to = "GooglePlayPage",
             steps =
                 listOf(

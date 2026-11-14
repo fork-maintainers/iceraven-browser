@@ -9,6 +9,7 @@ import org.mozilla.fenix.R
 import org.mozilla.fenix.compose.snackbar.SNACKBAR_BUTTON_TEST_TAG
 import org.mozilla.fenix.downloads.DownloadsScreenTestTag
 import org.mozilla.fenix.downloads.listscreen.DownloadsListTestTag
+import org.mozilla.fenix.helpers.DataGenerationHelper.getPluralStringResource
 import org.mozilla.fenix.helpers.DataGenerationHelper.getStringResource
 import org.mozilla.fenix.ui.efficiency.helpers.PageReadinessProfiles
 import org.mozilla.fenix.ui.efficiency.helpers.Selector
@@ -24,6 +25,7 @@ object DownloadsSelectors : SelectorContainer {
         DOWNLOAD_IN_PROGRESS_SNACKBAR,
         DOWNLOAD_LINKS,
         DOWNLOADS_LIST,
+        DELETE_DOWNLOADED_ITEM_DIALOG,
     }
 
     val DOWNLOADS_TOOLBAR_TITLE =
@@ -211,5 +213,67 @@ object DownloadsSelectors : SelectorContainer {
             strategy = SelectorStrategy.COMPOSE_BY_TAG,
             value = SNACKBAR_BUTTON_TEST_TAG,
             description = "Undo delete download snackbar button",
+        )
+
+    @Suppress("FunctionName")
+    fun DELETE_DOWNLOAD_SNACKBAR_MESSAGE(fileName: String = "") =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TEXT,
+            value = getStringResource(R.string.download_delete_single_item_snackbar_2, fileName),
+            description = "Deleted download snackbar for: $fileName",
+        )
+
+    val MORE_OPTIONS_BUTTON =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_CONTENT_DESCRIPTION,
+            value = "More options",
+            description = "More options button",
+        )
+
+    val MORE_OPTIONS_DELETE_BUTTON =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TEXT,
+            value = getStringResource(R.string.download_delete_item),
+            description = "More options delete button",
+        )
+
+    val DELETE_FILE_DIALOG_TITLE =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TEXT,
+            value = getPluralStringResource(R.plurals.downloads_delete_dialog_title, 1),
+            description = "Delete file dialog title",
+            groups = setOf(Group.DELETE_DOWNLOADED_ITEM_DIALOG),
+        )
+
+    val DELETE_FILE_DIALOG_DELETE_FROM_DEVICE_OPTION =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TEXT,
+            value = getStringResource(R.string.download_delete_dialog_from_device),
+            description = "Delete file dialog delete from device option",
+            groups = setOf(Group.DELETE_DOWNLOADED_ITEM_DIALOG),
+        )
+
+    val DELETE_FILE_DIALOG_ONLY_REMOVE_FROM_DOWNLOAD_HISTORY_OPTION =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TEXT,
+            value = getStringResource(R.string.download_delete_dialog_from_history),
+            description = "Delete file dialog only remove from download history option",
+            groups = setOf(Group.DELETE_DOWNLOADED_ITEM_DIALOG),
+        )
+
+    val DELETE_FILE_DIALOG_CANCEL_BUTTON =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TEXT,
+            value = getStringResource(R.string.download_delete_dialog_cancel),
+            description = "Delete file dialog cancel button",
+            groups = setOf(Group.DELETE_DOWNLOADED_ITEM_DIALOG),
+        )
+
+    val DELETE_FILE_DIALOG_CONFIRM_BUTTON =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TEXT,
+            value = getStringResource(R.string.download_delete_dialog_confirm),
+            description = "Delete file dialog confirm button",
+            groups = setOf(Group.DELETE_DOWNLOADED_ITEM_DIALOG),
         )
 }

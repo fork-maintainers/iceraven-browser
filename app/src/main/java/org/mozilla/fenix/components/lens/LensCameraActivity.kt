@@ -139,6 +139,15 @@ class LensCameraActivity : AppCompatActivity() {
         }
 
         supportFragmentManager.setFragmentResultListener(
+            LensCameraFragment.MODE_CHANGED_REQUEST_KEY,
+            this,
+        ) { _, bundle ->
+            CameraMode.fromNameOrNull(bundle.getString(LensCameraFragment.RESULT_CAMERA_MODE))?.let {
+                components.settings.lensCameraLastMode = it
+            }
+        }
+
+        supportFragmentManager.setFragmentResultListener(
             LensCameraFragment.RESULT_REQUEST_KEY,
             this,
         ) { _, bundle ->
@@ -348,9 +357,18 @@ class LensCameraActivity : AppCompatActivity() {
             return
         }
         supportFragmentManager.commit {
-            add(R.id.lens_fragment_container_view, LensCameraFragment::class.java, null)
+            add(
+                R.id.lens_fragment_container_view,
+                LensCameraFragment::class.java,
+                Bundle().apply { putString(LensCameraFragment.ARG_INITIAL_MODE, resolveInitialMode().name) },
+            )
         }
     }
+
+    /** The mode requested through [EXTRA_INITIAL_MODE], falling back to the one the user last selected. */
+    @VisibleForTesting
+    internal fun resolveInitialMode(): CameraMode =
+        CameraMode.fromNameOrNull(intent.getStringExtra(EXTRA_INITIAL_MODE)) ?: components.settings.lensCameraLastMode
 
     private fun launchGalleryPicker() {
         galleryLauncher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
@@ -489,14 +507,20 @@ class LensCameraActivity : AppCompatActivity() {
          */
         internal const val EXTRA_IS_PRIVATE = "lens_is_private"
 
+        @VisibleForTesting internal const val EXTRA_INITIAL_MODE = "lens_initial_mode"
+
         /**
          * Creates an intent to launch [LensCameraActivity].
          *
          * @param context The context to launch the activity from.
          * @param isPrivate Whether an image uploaded by this activity should use the private cookie context.
+         * @param initialMode The [CameraMode] to open in, or null to reopen the mode the user last selected.
          */
-        fun newIntent(context: Context, isPrivate: Boolean): Intent {
-            return Intent(context, LensCameraActivity::class.java).putExtra(EXTRA_IS_PRIVATE, isPrivate)
+        fun newIntent(context: Context, isPrivate: Boolean, initialMode: CameraMode? = null): Intent {
+            return Intent(context, LensCameraActivity::class.java).apply {
+                putExtra(EXTRA_IS_PRIVATE, isPrivate)
+                initialMode?.let { putExtra(EXTRA_INITIAL_MODE, it.name) }
+            }
         }
     }
 }

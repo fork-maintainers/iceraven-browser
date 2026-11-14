@@ -12,6 +12,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import mozilla.components.compose.base.text.Text
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.data.StandardMenuItem
 import mozilla.components.compose.menu.ui.MenuItemIconRes
 import mozilla.components.ui.icons.R as iconsR
@@ -65,7 +66,7 @@ class DownloadsMenuItemProviderTest {
 
     private fun expectedItem(isHighlighted: Boolean) =
         StandardMenuItem(
-            title = Text.Resource(R.string.library_downloads),
+            title = MenuItemTitle(Text.Resource(R.string.library_downloads)),
             icon =
                 MenuItemIconRes(
                     iconsR.drawable.mozac_ic_download_24,

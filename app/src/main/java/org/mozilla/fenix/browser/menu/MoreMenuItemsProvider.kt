@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.stateIn
 import mozilla.components.browser.state.store.BrowserStore
 import mozilla.components.compose.base.text.Text
 import mozilla.components.compose.menu.data.ExpandableMenuItem
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.data.StandardMenuItem
 import mozilla.components.compose.menu.store.MenuEvent
 import mozilla.components.compose.menu.ui.MenuItemIconRes
@@ -58,7 +59,7 @@ class MoreMenuItemsProvider(
 
     private fun moreItem(isNormalTab: Boolean) =
         ExpandableMenuItem(
-            title = Text.Resource(R.string.browser_menu_more_settings),
+            title = MenuItemTitle(Text.Resource(R.string.browser_menu_more_settings)),
             icon = icon(isHighlighted = isNormalTab && summarizationSettings.shouldHighlightOverflowMenuItem),
             subMenuItems = emptyList(),
             onClickEvent = MenuAction.OnMoreMenuClicked,

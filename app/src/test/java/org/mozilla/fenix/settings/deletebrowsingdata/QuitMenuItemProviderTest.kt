@@ -20,6 +20,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
 import mozilla.components.compose.base.text.Text
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.data.StandardMenuItem
 import mozilla.components.compose.menu.ui.MenuItemIconRes
 import mozilla.components.compose.menu.ui.MenuItemState
@@ -42,7 +43,8 @@ class QuitMenuItemProviderTest {
 
         assertEquals(
             StandardMenuItem(
-                title = Text.Resource(R.string.browser_menu_delete_browsing_data_on_quit, listOf(APP_NAME)),
+                title =
+                    MenuItemTitle(Text.Resource(R.string.browser_menu_delete_browsing_data_on_quit, listOf(APP_NAME))),
                 icon = MenuItemIconRes(iconsR.drawable.mozac_ic_cross_circle_fill_24),
                 onClickEvent = MenuAction.DeleteBrowsingDataAndQuit,
                 state = MenuItemState.WARNING,

@@ -26,6 +26,7 @@ import mozilla.components.concept.sync.OAuthAccount
 import mozilla.components.concept.sync.PeriodicSyncConfig
 import mozilla.components.concept.sync.SyncConfig
 import mozilla.components.concept.sync.SyncEngine
+import mozilla.components.feature.accounts.FxaCapability
 import mozilla.components.feature.accounts.push.CloseTabsCommandReceiver
 import mozilla.components.feature.accounts.push.CloseTabsFeature
 import mozilla.components.feature.accounts.push.FxaPushSupportFeature
@@ -38,6 +39,7 @@ import mozilla.components.feature.syncedtabs.storage.SyncedTabsStorage
 import mozilla.components.lib.crash.CrashReporter
 import mozilla.components.lib.state.Middleware
 import mozilla.components.lib.state.Store
+import mozilla.components.service.fxa.FxaService
 import mozilla.components.service.fxa.ServerConfig
 import mozilla.components.service.fxa.manager.FxaAccountManager
 import mozilla.components.service.fxa.manager.SCOPE_SYNC
@@ -133,7 +135,29 @@ class BackgroundServices(
             if (areCredentialsSyncable) SyncEngine.CreditCards else null,
             if (settings.isAddressSyncEnabled) SyncEngine.Addresses else null,
         )
-    private val syncConfig = SyncConfig(supportedEngines, PeriodicSyncConfig(periodMinutes = 240)) // four hours
+    private val syncConfig by lazyMonitored {
+        SyncConfig(
+            supportedEngines = supportedEngines,
+            periodicSyncConfig = PeriodicSyncConfig(periodMinutes = 240), // four hours
+            syncDecouplingEnabled = settings.syncDecouplingEnabled,
+        )
+    }
+
+    /**
+     * A set of [FxaCapability] that Fenix supports, which we use in our
+     * [org.mozilla.fenix.components.accounts.FxaWebChannelIntegration] to communicate client capabilities with firefox
+     * accounts (FxA)
+     */
+    val fxaCapabilities: Set<FxaCapability> by lazyMonitored {
+        buildSet {
+            add(FxaCapability.ChooseWhatToSync)
+            add(FxaCapability.PairingV2)
+            if (syncConfig.syncDecouplingEnabled) {
+                add(FxaCapability.KeysOptional)
+                add(FxaCapability.Services(values = FxaService.entries))
+            }
+        }
+    }
 
     private val creditCardKeyProvider by lazyMonitored { creditCardsStorage.value.crypto }
     private val passwordKeyProvider by lazyMonitored { passwordsStorage.value.crypto }

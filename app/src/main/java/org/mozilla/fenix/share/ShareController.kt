@@ -23,10 +23,8 @@ import androidx.annotation.RequiresApi
 import androidx.annotation.VisibleForTesting
 import androidx.core.net.toUri
 import androidx.navigation.NavController
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import mozilla.components.concept.engine.prompt.ShareData
 import mozilla.components.concept.sync.Device
@@ -93,10 +91,9 @@ interface ShareController {
  * @param sentFromFirefoxManager Instance of [SentFromFirefoxManager] to facilitate "Sent from" nimbus experiment.
  * @param navController [NavController] used for navigation.
  * @param recentAppsStorage Instance of [RecentAppsStorage] for storing and retrieving the most recent apps.
- * @param viewLifecycleScope [CoroutineScope] used for retrieving the most recent apps in the background.
+ * @param scope [CoroutineScope] used for retrieving the most recent apps in the background.
  * @param applicationScope [CoroutineScope] tied to the application lifetime, used for operations that must outlive the
  *   share fragment (e.g. sending tabs to devices after the fragment is dismissed).
- * @param ioDispatcher Dispatcher for executing I/O-bound tasks, like updating local storage.
  * @param fxaEntrypoint The entrypoint if we need to authenticate, it will be reported in telemetry.
  * @param dismiss Callback signalling sharing can be closed.
  */
@@ -112,9 +109,8 @@ class DefaultShareController(
     private val sentFromFirefoxManager: SentFromFirefoxManager,
     private val navController: NavController,
     private val recentAppsStorage: RecentAppsStorage,
-    private val viewLifecycleScope: CoroutineScope,
+    private val scope: CoroutineScope,
     private val applicationScope: CoroutineScope,
-    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
     private val fxaEntrypoint: FxAEntryPoint = FenixFxAEntryPoint.ShareMenu,
     private val dismiss: (ShareController.Result) -> Unit,
 ) : ShareController {
@@ -145,7 +141,7 @@ class DefaultShareController(
             return
         }
 
-        viewLifecycleScope.launch(ioDispatcher) {
+        scope.launch {
             recentAppsStorage.updateRecentApp(app.activityName)
         }
 

@@ -18,6 +18,7 @@ import mozilla.components.browser.state.state.ContentState
 import mozilla.components.browser.state.state.TabSessionState
 import mozilla.components.browser.state.store.BrowserStore
 import mozilla.components.compose.base.text.Text
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.data.StandardMenuItem
 import mozilla.components.compose.menu.ui.MenuItemIconRes
 import mozilla.components.concept.engine.EngineSession.LoadUrlFlags
@@ -48,7 +49,7 @@ class RefreshMenuItemProviderTest {
 
         assertEquals(
             StandardMenuItem(
-                title = Text.Resource(R.string.browser_menu_stop),
+                title = MenuItemTitle(Text.Resource(R.string.browser_menu_stop)),
                 icon = MenuItemIconRes(iconsR.drawable.mozac_ic_cross_24),
                 onClickEvent = MenuAction.Navigate.Stop,
             ),
@@ -63,7 +64,7 @@ class RefreshMenuItemProviderTest {
 
             assertEquals(
                 StandardMenuItem(
-                    title = Text.Resource(R.string.browser_menu_refresh),
+                    title = MenuItemTitle(Text.Resource(R.string.browser_menu_refresh)),
                     icon = MenuItemIconRes(iconsR.drawable.mozac_ic_arrow_clockwise_24),
                     onClickEvent = MenuAction.Navigate.Reload(bypassCache = false),
                     onLongClickEvent = MenuAction.Navigate.Reload(bypassCache = true),

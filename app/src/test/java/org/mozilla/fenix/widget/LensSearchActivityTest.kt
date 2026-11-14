@@ -75,6 +75,14 @@ class LensSearchActivityTest {
     }
 
     @Test
+    fun `WHEN created THEN the lens camera is opened in Google Lens mode`() {
+        controller.create()
+
+        val cameraIntent = shadow.peekNextStartedActivityForResult()
+        assertEquals("LENS", cameraIntent.intent.getStringExtra(LensCameraActivity.EXTRA_INITIAL_MODE))
+    }
+
+    @Test
     fun `GIVEN saved instance state WHEN created THEN the camera is not relaunched`() {
         controller.create(Bundle())
 

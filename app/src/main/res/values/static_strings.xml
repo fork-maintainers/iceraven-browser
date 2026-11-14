@@ -125,6 +125,8 @@
     <string name="preferences_debug_settings_show_toolbar_in_focus_mode" translatable="false">Enable focus mode</string>
     <!-- Label for the option to enable browser menu customization -->
     <string name="preferences_debug_settings_enable_menu_customization" translatable="false">Enable menu customization</string>
+    <!-- Label for the option to enable browser menu customization screen -->
+    <string name="preferences_debug_settings_enable_menu_customization_screen" translatable="false">Enable menu customization screen</string>
     <!-- Label for toggling Remote Crash Pull -->
     <string name="preferences_crash_pull_never_show_again" translatable="false">Never show Crash Pull</string>
     <!-- Label for enabling the Debug Drawer -->
@@ -143,6 +145,8 @@
     <string name="preferences_debug_settings_force_weekly_privacy_report_notification" translatable="false">Force weekly privacy report notification trackers over threshold</string>
     <!-- Label for enabling remote search configuration -->
     <string name="preferences_debug_settings_remote_search_configuration" translatable="false">Enable Remote Search Configuration (requires restart)</string>
+    <!-- Label for selecting the search-config-v3 Remote Settings collection -->
+    <string name="preferences_debug_settings_search_config_v3" translatable="false">Use search-config-v3 (requires restart)</string>
     <!-- Label for enabling Address Sync -->
     <string name="preferences_debug_settings_address_sync" translatable="false">Enable Address Sync for supported regions</string>
     <!-- Label for enabling the DNS over HTTPS settings -->
@@ -226,6 +230,8 @@
 
     <string name="preferences_debug_settings_use_account_settings_new_ui" translatable="false">Use new Account Settings UI</string>
 
+    <string name="preferences_debug_settings_enable_sync_decoupling" translatable="false">Enable accounts - sync decoupling (requires restart)</string>
+
   <!-- Label for the defaults section and reset action in secret settings. -->
     <string name="preferences_debug_settings_reset_defaults" translatable="false">Reset switches to defaults</string>
     <string name="preferences_debug_settings_reset_defaults_message" translatable="false">This will reset all toggle switches to their defaults. Custom Glean Server and Remote Settings Server are not affected.</string>
@@ -292,7 +298,6 @@
     <string name="debug_drawer_ip_protection_uninitialized" translatable="false">IP protection has not initialized yet. Open a tab and wait for the service to warm up.</string>
     <string name="debug_drawer_ip_protection_unavailable" translatable="false">IP protection is not available here. Check the Nimbus configuration and the region.</string>
     <string name="debug_drawer_ip_protection_signed_out" translatable="false">Sign in to your Mozilla account to use IP protection.</string>
-    <string name="debug_drawer_ip_protection_opted_out" translatable="false">IP protection is opted out.</string>
 
   <!-- Debug drawer Listen to Page tools -->
   <string name="debug_drawer_listen_to_page_tools_title">Listen to Page Tools</string>
@@ -370,9 +375,9 @@
 
     <!-- Firefox Labs -->
     <!-- The name of an experimental feature displayed in the Firefox Labs screen. This feature appends a star to the Settings toolbar title. This string is for testing purposes only. -->
-    <string name="firefox_labs_test_lab_title">Add a star to settings</string>
+    <string name="firefox_labs_test_lab_title" tools:ignore="UnusedResources">Add a star to settings</string>
     <!-- The description of the "Add a star to settings" feature in the Firefox Labs screen. This string is for testing purposes only. -->
-    <string name="firefox_labs_test_lab_description">Appends a star to the settings toolbar title. (Experiment is for testing purposes only.)</string>
+    <string name="firefox_labs_test_lab_description" tools:ignore="UnusedResources">Appends a star to the settings toolbar title. (Experiment is for testing purposes only.)</string>
 
     <!-- Debug drawer tab group tools -->
     <!-- The title of the debug drawer tab to help populate tab groups-->

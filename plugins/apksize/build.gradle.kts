@@ -12,6 +12,12 @@ val topobjdir = mozconfig["topobjdir"] as String
 
 layout.buildDirectory.set(file("$topobjdir/gradle/build/mobile/android/fenix/plugins/apksize"))
 
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+    compilerOptions {
+        allWarningsAsErrors.set(true)
+    }
+}
+
 dependencies {
     implementation(libs.android.gradle.plugin)
     implementation(libs.json)

@@ -11,6 +11,7 @@ import mozilla.components.compose.base.text.Text
 import mozilla.components.compose.menu.data.BannerMenuItem
 import mozilla.components.compose.menu.data.MenuItem
 import mozilla.components.compose.menu.data.MenuItemSummary
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.store.MenuEvent
 import mozilla.components.compose.menu.ui.MenuItemIconRes
 import org.mozilla.fenix.R
@@ -37,7 +38,8 @@ class DefaultBrowserMenuItemProvider(
             when (settings.shouldShowMenuBanner && !settings.isDefaultBrowser) {
                 true ->
                     BannerMenuItem(
-                        title = Text.Resource(R.string.browser_menu_default_banner_title, listOf(appName)),
+                        title =
+                            MenuItemTitle(Text.Resource(R.string.browser_menu_default_banner_title, listOf(appName))),
                         summary =
                             MenuItemSummary(
                                 text = Text.Resource(R.string.browser_menu_default_banner_subtitle_2),

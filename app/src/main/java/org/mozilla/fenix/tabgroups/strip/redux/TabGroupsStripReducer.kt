@@ -11,7 +11,21 @@ internal object TabGroupsStripReducer {
         action: TabGroupsStripAction,
     ): TabGroupsStripState =
         when (action) {
+            is TabGroupsStripAction.InitializeDataObservation -> state
+            is TabGroupsStripAction.TabGroupChanged ->
+                TabGroupsStripState.TabGroupStripVisible(
+                    groupId = action.groupId,
+                    groupTitle = action.groupTitle,
+                    tabs = action.tabs,
+                )
+            TabGroupsStripAction.TabGroupCleared -> TabGroupsStripState.TabGroupStripHidden
             is TabGroupsStripAction.TabClicked ->
-                state.copy(tabs = state.tabs.map { it.copy(isFocused = it.id == action.tabId) })
+                if (state is TabGroupsStripState.TabGroupStripVisible) {
+                    state.copy(tabs = state.tabs.map { it.copy(isFocused = it.id == action.tabId) })
+                } else {
+                    state
+                }
+            TabGroupsStripAction.AddTabClicked -> state
+            TabGroupsStripAction.ExpandGroupClicked -> state
         }
 }

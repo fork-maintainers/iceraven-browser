@@ -10,6 +10,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 import mozilla.components.compose.base.text.Text
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.data.StandardMenuItem
 import mozilla.components.compose.menu.ui.MenuItemIconRes
 import mozilla.components.ui.icons.R as iconsR
@@ -30,7 +31,7 @@ class FindInPageMenuItemProviderTest {
 
         assertEquals(
             StandardMenuItem(
-                title = Text.Resource(R.string.browser_menu_find_in_page),
+                title = MenuItemTitle(Text.Resource(R.string.browser_menu_find_in_page)),
                 icon = MenuItemIconRes(iconsR.drawable.mozac_ic_search_24),
                 onClickEvent = MenuAction.FindInPage,
             ),

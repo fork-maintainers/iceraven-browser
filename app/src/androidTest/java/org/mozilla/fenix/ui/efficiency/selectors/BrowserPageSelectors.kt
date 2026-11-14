@@ -5,6 +5,8 @@
 package org.mozilla.fenix.ui.efficiency.selectors
 
 import mozilla.components.feature.app.links.R as applinksR
+import mozilla.components.feature.prompts.R as promptsR
+import mozilla.components.feature.summarize.R as summarizeR
 import org.mozilla.fenix.R
 import org.mozilla.fenix.compose.snackbar.SNACKBAR_BUTTON_TEST_TAG
 import org.mozilla.fenix.compose.snackbar.SNACKBAR_TEST_TAG
@@ -23,6 +25,9 @@ object BrowserPageSelectors : SelectorContainer {
         NOT_TRANSLATED_PAGE_TRANSLATION_SHEET,
         TRANSLATED_PAGE_TRANSLATION_SHEET,
         ADDED_TO_SHORTCUTS_SNACKBAR,
+        SHAKE_TO_SUMMARIZE_CFR,
+        SIGN_IN_TO_SUMMARIZE_BOTTOM_SHEET,
+        TRANSLATION_BANNER,
     }
 
     val ENGINE_VIEW =
@@ -70,6 +75,14 @@ object BrowserPageSelectors : SelectorContainer {
             strategy = SelectorStrategy.UIAUTOMATOR_WITH_COMPOSE_TAG,
             value = SNACKBAR_TEST_TAG,
             description = "Snackbar container",
+        )
+
+    // The summarize sheet's drag handle, present for every outcome (summary, error, or sign-in prompt).
+    val SUMMARIZE_BOTTOM_SHEET =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TAG,
+            value = "shake.to.summarize.bottom.sheet.drag.handle",
+            description = "the Summarize bottom sheet",
         )
 
     val MAIN_MENU_BUTTON =
@@ -131,6 +144,17 @@ object BrowserPageSelectors : SelectorContainer {
             description = "Page content '$text'",
         )
 
+    // PAGE_CONTENT for a long-press. UiObject.longClick() reports failure when no window update lands
+    // inside its acknowledgment timeout, which GeckoView text selection does not reliably produce even
+    // though the selection toolbar opens. UiObject2.longClick() just injects the gesture.
+    @Suppress("FunctionName")
+    fun PAGE_CONTENT_LONG_PRESS_TARGET(text: String = "") =
+        Selector(
+            strategy = SelectorStrategy.UIAUTOMATOR2_BY_TEXT_CONTAINS,
+            value = text,
+            description = "Page content '$text' long-press target",
+        )
+
     // An item on the GeckoView text-selection floating action bar (and the app's paste popup),
     // matched by exact visible text. Mirrors the legacy clickContextMenuItem, which located items
     // with By.text(item) — covers "Select all", "Copy", "Search", "Private Search", "Paste".
@@ -186,6 +210,16 @@ object BrowserPageSelectors : SelectorContainer {
             description = "Snackbar message '$text'",
         )
 
+    // Compose variant of SNACKBAR_MESSAGE, for snackbars whose message is a Compose text node absent
+    // from the UIAutomator text tree (e.g. the "Tab closed" undo snackbar).
+    @Suppress("ktlint:standard:function-naming", "FunctionName")
+    fun SNACKBAR_MESSAGE_COMPOSE(text: String = "") =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TEXT,
+            value = text,
+            description = "Snackbar message '$text' (Compose)",
+        )
+
     val TRANSLATION_SHEET =
         Selector(
             strategy = SelectorStrategy.UIAUTOMATOR2_BY_RES,
@@ -215,7 +249,7 @@ object BrowserPageSelectors : SelectorContainer {
             strategy = SelectorStrategy.COMPOSE_BY_TEXT,
             value = getStringResource(R.string.translations_bottom_sheet_translate_to),
             description = "Translation bottom sheet translate to dropdown",
-            groups = setOf(Group.NOT_TRANSLATED_PAGE_TRANSLATION_SHEET),
+            groups = setOf(Group.NOT_TRANSLATED_PAGE_TRANSLATION_SHEET, Group.TRANSLATED_PAGE_TRANSLATION_SHEET),
         )
 
     val TRANSLATION_SHEET_TRANSLATE_BUTTON =
@@ -223,7 +257,7 @@ object BrowserPageSelectors : SelectorContainer {
             strategy = SelectorStrategy.COMPOSE_BY_TEXT,
             value = getStringResource(R.string.translations_bottom_sheet_positive_button),
             description = "Translation bottom sheet translate button",
-            groups = setOf(Group.NOT_TRANSLATED_PAGE_TRANSLATION_SHEET),
+            groups = setOf(Group.NOT_TRANSLATED_PAGE_TRANSLATION_SHEET, Group.TRANSLATED_PAGE_TRANSLATION_SHEET),
         )
 
     val TRANSLATION_SHEET_NOT_NOW_BUTTON =
@@ -234,12 +268,66 @@ object BrowserPageSelectors : SelectorContainer {
             groups = setOf(Group.NOT_TRANSLATED_PAGE_TRANSLATION_SHEET),
         )
 
-    val TRANSLATION_SHEET_SHOW_ORIGINAL_BUTTON =
+    val TRANSLATED_SHEET_SHOW_ORIGINAL_BUTTON =
         Selector(
             strategy = SelectorStrategy.COMPOSE_BY_TEXT,
             value = getStringResource(R.string.translations_bottom_sheet_negative_button_restore),
-            description = "Translation bottom sheet show original button",
+            description = "Translated bottom sheet show original button",
             groups = setOf(Group.TRANSLATED_PAGE_TRANSLATION_SHEET),
+        )
+
+    @Suppress("ktlint:standard:function-naming", "FunctionName")
+    fun TRANSLATED_SHEET_TITLE(translatedFrom: String, translatedTo: String) =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TEXT,
+            value =
+                getStringResource(
+                    R.string.translations_bottom_sheet_title_translation_completed,
+                    translatedFrom,
+                    translatedTo,
+                ),
+            description = "Translated bottom sheet title translation completed",
+        )
+
+    val TRANSLATED_SHEET_TRANSLATION_OPTIONS_BUTTON =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_CONTENT_DESCRIPTION,
+            value = getStringResource(R.string.translation_option_bottom_sheet_title_heading),
+            description = "Translated bottom sheet translation options button",
+            groups = setOf(Group.NOT_TRANSLATED_PAGE_TRANSLATION_SHEET, Group.TRANSLATED_PAGE_TRANSLATION_SHEET),
+        )
+
+    val TRANSLATED_SHEET_HANDLE =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_CONTENT_DESCRIPTION,
+            value = getStringResource(R.string.translation_option_bottom_sheet_close_content_description),
+            description = "Translated bottom sheet handle",
+            groups = setOf(Group.TRANSLATED_PAGE_TRANSLATION_SHEET),
+        )
+
+    @Suppress("ktlint:standard:function-naming", "FunctionName")
+    fun TRANSLATION_BANNER_TRANSLATED_FROM_TO(translatedFrom: String, translatedTo: String) =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TEXT,
+            value =
+                getStringResource(R.string.translation_toolbar_translated_from_and_to, translatedFrom, translatedTo),
+            description = "Translation banner translated from $translatedFrom to $translatedTo",
+        )
+
+    val TRANSLATION_BANNER_OPEN_TRANSLATION_SHEET_CHEVRON =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_CONTENT_DESCRIPTION,
+            value = getStringResource(R.string.translation_toolbar_expand_action),
+            description = "Translation banner open translation sheet chevron",
+            groups = setOf(Group.TRANSLATION_BANNER),
+        )
+
+    val TRANSLATION_BANNER_DISMISS_BUTTON =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_CONTENT_DESCRIPTION,
+            value = getStringResource(R.string.translation_toolbar_close_action),
+            description = "Translation banner dismiss button",
+            groups = setOf(Group.TRANSLATION_BANNER),
         )
 
     val ADDED_TO_SHORTCUTS_SNACKBAR_TEXT =
@@ -279,6 +367,14 @@ object BrowserPageSelectors : SelectorContainer {
             strategy = SelectorStrategy.UIAUTOMATOR_WITH_COMPOSE_TAG,
             value = "password",
             description = "Web form password field",
+        )
+
+    // Same field via UiObject2 for a coordinate-tap click: UiObject.click() on a GeckoView web input is flaky (A57).
+    val PASSWORD_WEB_FIELD_CLICKABLE =
+        Selector(
+            strategy = SelectorStrategy.UIAUTOMATOR2_BY_RAW_RES,
+            value = "password",
+            description = "Web form password field (clickable)",
         )
 
     val TOGGLE_PASSWORD_WEB_BUTTON =
@@ -488,5 +584,109 @@ object BrowserPageSelectors : SelectorContainer {
                     appName,
                 ),
             description = "Open link in '$appName' app prompt",
+        )
+
+    val PDF_DOWNLOAD_BUTTON =
+        Selector(
+            strategy = SelectorStrategy.UIAUTOMATOR_WITH_RAW_RES_ID_CONTAINING_TEXT,
+            value = "download",
+            secondaryValue = "Download",
+            description = "PDF viewer download button",
+        )
+
+    val SHAKE_TO_SUMMARIZE_CFR_DISMISS_BUTTON =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TAG,
+            value = "cfr.dismiss",
+            description = "Shake to summarize CFR dismiss button",
+            groups = setOf(Group.SHAKE_TO_SUMMARIZE_CFR),
+        )
+
+    val SHAKE_TO_SUMMARIZE_CFR_MESSAGE =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TEXT,
+            value = getStringResource(R.string.browser_toolbar_summarize_cfr_description),
+            description = "Shake to summarize CFR  message",
+            groups = setOf(Group.SHAKE_TO_SUMMARIZE_CFR),
+        )
+
+    // The "Sign in to summarize" bottom sheet shown when an unauthenticated user taps Summarize page.
+    val SIGN_IN_TO_SUMMARIZE_TITLE =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TEXT,
+            value = getStringResource(summarizeR.string.mozac_summarize_fxa_sign_in_title),
+            description = "Sign in to summarize bottom sheet title",
+            groups = setOf(Group.SIGN_IN_TO_SUMMARIZE_BOTTOM_SHEET),
+        )
+
+    // The message and its inline "Learn more" link render as a single text node, so match them joined.
+    val SIGN_IN_TO_SUMMARIZE_MESSAGE =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TEXT,
+            value =
+                getStringResource(summarizeR.string.mozac_summarize_fxa_sign_in_message) +
+                    " " +
+                    getStringResource(summarizeR.string.mozac_summarize_learn_more_link),
+            description = "Sign in to summarize bottom sheet message",
+            groups = setOf(Group.SIGN_IN_TO_SUMMARIZE_BOTTOM_SHEET),
+        )
+
+    val SIGN_IN_TO_SUMMARIZE_SIGN_IN_BUTTON =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TEXT,
+            value = getStringResource(summarizeR.string.mozac_summarize_fxa_sign_in_button_positive),
+            description = "Sign in to summarize bottom sheet Sign in button",
+            groups = setOf(Group.SIGN_IN_TO_SUMMARIZE_BOTTOM_SHEET),
+        )
+
+    val SIGN_IN_TO_SUMMARIZE_DISMISS_BUTTON =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TEXT,
+            value = getStringResource(summarizeR.string.mozac_summarize_error_dissmiss),
+            description = "Sign in to summarize bottom sheet Dismiss button",
+            groups = setOf(Group.SIGN_IN_TO_SUMMARIZE_BOTTOM_SHEET),
+        )
+
+    val SIGN_IN_TO_SUMMARIZE_HANDLE =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TAG,
+            value = "shake.to.summarize.bottom.sheet.drag.handle",
+            description = "Sign in to summarize bottom sheet drag handle",
+            groups = setOf(Group.SIGN_IN_TO_SUMMARIZE_BOTTOM_SHEET),
+        )
+
+    // --- Strong (generated) password prompt ---
+
+    // The "Use strong password" bar above the keyboard; absent on the first engagement, where the sheet auto-opens.
+    val SUGGEST_STRONG_PASSWORD_BAR =
+        Selector(
+            strategy = SelectorStrategy.UIAUTOMATOR2_BY_RES,
+            value = "suggestStrongPasswordBar",
+            description = "Suggest strong password bar",
+        )
+
+    // Title of the generated-password sheet; also distinguishes it from the save/update-login prompt it shares a
+    // container with.
+    val STRONG_PASSWORD_SHEET_TITLE =
+        Selector(
+            strategy = SelectorStrategy.UIAUTOMATOR2_BY_TEXT,
+            value = getStringResource(promptsR.string.mozac_feature_prompts_suggest_strong_password_title),
+            description = "Strong password sheet title",
+        )
+
+    val STRONG_PASSWORD_USE_PASSWORD_BUTTON =
+        Selector(
+            strategy = SelectorStrategy.UIAUTOMATOR2_BY_TEXT,
+            value = getStringResource(promptsR.string.mozac_feature_prompts_suggest_strong_password_use_password),
+            description = "Strong password sheet 'Use password' button",
+        )
+
+    // Save-login headline for the add-username update. The save_message res-id is shared, so the text pins the case.
+    val UPDATE_USERNAME_PROMPT_MESSAGE =
+        Selector(
+            strategy = SelectorStrategy.UIAUTOMATOR_WITH_RES_ID_AND_TEXT,
+            value = "save_message",
+            secondaryValue = getStringResource(promptsR.string.mozac_feature_prompt_login_add_username_headline_2),
+            description = "Update username prompt headline",
         )
 }

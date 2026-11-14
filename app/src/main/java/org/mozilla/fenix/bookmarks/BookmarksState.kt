@@ -8,6 +8,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import mozilla.appservices.places.BookmarkRoot
 import mozilla.components.lib.state.State
+import mozilla.components.support.ktx.util.URLStringUtils
 
 internal sealed class BookmarksListSortOrder {
     abstract val asString: String
@@ -204,6 +205,8 @@ internal data class BookmarksEditBookmarkState(
     val bookmark: BookmarkItem.Bookmark,
     val folder: BookmarkItem.Folder,
     val edited: Boolean = false,
+    /** The URL as shown in the editable field, computed once when the screen opens. */
+    val urlText: String = URLStringUtils.toLosslessEditableUrl(bookmark.url),
 )
 
 internal data class BookmarksAddFolderState(

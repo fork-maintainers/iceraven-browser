@@ -15,6 +15,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import mozilla.components.support.ktx.util.URLStringUtils
 import mozilla.components.ui.icons.R as iconsR
 import org.mozilla.fenix.R
 import org.mozilla.fenix.compose.Favicon
@@ -52,7 +53,7 @@ internal fun BasicTabListItem(
         url = url,
         modifier = modifier,
         faviconShape = faviconShape,
-        description = url,
+        description = URLStringUtils.toLosslessDisplayUrl(url),
         faviconPainter = faviconPainter,
         onClick = onClick,
         iconPainter =

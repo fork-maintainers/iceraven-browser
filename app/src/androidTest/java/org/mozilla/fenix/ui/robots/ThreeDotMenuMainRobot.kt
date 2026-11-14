@@ -635,10 +635,19 @@ class ThreeDotMenuMainRobot(private val composeTestRule: ComposeTestRule) {
         }
     }
 
-    fun verifySummarizePageButton() {
-        Log.i(TAG, "verifySummarizePageButton: Trying to verify that the \"Summarize page\" button exists.")
-        composeTestRule.summarizePageButton().assertIsDisplayed()
-        Log.i(TAG, "verifySummarizePageButton: Verified that the \"Summarize page\" button exists.")
+    fun verifySummarizePageButton(isDisplayed: Boolean = true) {
+        if (isDisplayed) {
+            Log.i(TAG, "verifySummarizePageButton: Trying to verify that the \"Summarize page\" button is displayed.")
+            composeTestRule.summarizePageButton().assertIsDisplayed()
+            Log.i(TAG, "verifySummarizePageButton: Verified that the \"Summarize page\" button is displayed.")
+        } else {
+            Log.i(
+                TAG,
+                "verifySummarizePageButton: Trying to verify that the \"Summarize page\" button is not displayed.",
+            )
+            composeTestRule.summarizePageButton().assertIsNotDisplayed()
+            Log.i(TAG, "verifySummarizePageButton: Verified that the \"Summarize page\" button is not displayed.")
+        }
     }
 
     class Transition(private val composeTestRule: ComposeTestRule) {
@@ -1061,9 +1070,7 @@ class ThreeDotMenuMainRobot(private val composeTestRule: ComposeTestRule) {
             return SettingsSubMenuAddonsManagerRobot.Transition(composeTestRule)
         }
 
-        fun clickSummarizePageButton(
-            interact: SettingsSubMenuPageSummariesRobot.() -> Unit
-        ): SettingsSubMenuPageSummariesRobot.Transition {
+        fun clickSummarizePageButton(interact: BrowserRobot.() -> Unit): BrowserRobot.Transition {
             Log.i(
                 TAG,
                 "clickSummarizePageButton: Trying to click the Summarize Page button from the new main menu design.",
@@ -1074,8 +1081,17 @@ class ThreeDotMenuMainRobot(private val composeTestRule: ComposeTestRule) {
             composeTestRule.waitForIdle()
             Log.i(TAG, "clickSummarizePageButton: Waited for compose test rule to be idle")
 
-            SettingsSubMenuPageSummariesRobot(composeTestRule).interact()
-            return SettingsSubMenuPageSummariesRobot.Transition(composeTestRule)
+            BrowserRobot(composeTestRule).interact()
+            return BrowserRobot.Transition(composeTestRule)
+        }
+
+        fun dismissMainMenu(interact: BrowserRobot.() -> Unit): BrowserRobot.Transition {
+            Log.i(TAG, "dismissMainMenu: Trying to dismiss the main menu from the new main menu design.")
+            mDevice.pressBack()
+            Log.i(TAG, "dismissMainMenu: Dismissed the main menu from the new main menu design.")
+
+            BrowserRobot(composeTestRule).interact()
+            return BrowserRobot.Transition(composeTestRule)
         }
     }
 }

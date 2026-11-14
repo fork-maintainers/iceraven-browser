@@ -36,9 +36,13 @@ import org.mozilla.fenix.R
 import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.helpers.FenixGleanTestRule
 import org.mozilla.fenix.utils.Settings
+import org.mozilla.fenix.widget.glance.CompactSearchBarWidgetReceiver
+import org.mozilla.fenix.widget.glance.SearchBarWidgetReceiver
+import org.mozilla.fenix.widget.glance.SearchBarWithLensWidgetReceiver
 import org.mozilla.gecko.search.SearchWidgetProvider
 import org.mozilla.gecko.search.SearchWidgetProviderSize
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.Shadows.shadowOf
 
 @RunWith(RobolectricTestRunner::class)
 class SearchWidgetProviderTest {
@@ -160,9 +164,8 @@ class SearchWidgetProviderTest {
     @Test
     fun `GIVEN lens integration disabled WHEN createLensSearchIntent is called THEN it returns null`() {
         val widgetProvider = SearchWidgetProvider()
-        val context: Context = mockk {
-            every { components.settings.googleLensIntegrationEnabled } returns false
-        }
+        val context = contextWithDefaultEngine("google-b-1-m")
+        every { context.components.settings.googleLensIntegrationEnabled } returns false
 
         assertNull(widgetProvider.createLensSearchIntent(context))
     }
@@ -170,18 +173,8 @@ class SearchWidgetProviderTest {
     @Test
     fun `GIVEN lens user pref disabled WHEN createLensSearchIntent is called THEN it returns null`() {
         val widgetProvider = SearchWidgetProvider()
-        val context: Context = mockk {
-            every { components.settings.googleLensIntegrationEnabled } returns true
-            every { components.settings.googleLensIntegrationUserEnabled } returns false
-        }
-
-        assertNull(widgetProvider.createLensSearchIntent(context))
-    }
-
-    @Test
-    fun `GIVEN a non-Google default engine WHEN createLensSearchIntent is called THEN it returns null`() {
-        val widgetProvider = SearchWidgetProvider()
-        val context = contextWithDefaultEngine("bing")
+        val context = contextWithDefaultEngine("google-b-1-m")
+        every { context.components.settings.googleLensIntegrationUserEnabled } returns false
 
         assertNull(widgetProvider.createLensSearchIntent(context))
     }
@@ -279,27 +272,28 @@ class SearchWidgetProviderTest {
     @Test
     fun `GIVEN widgets set on screen shown WHEN updateAllWidgets is called THEN it sends a broadcast to update all widgets`() {
         val widgetManager: AppWidgetManager = mockk()
-        val componentNameCaptor = slot<ComponentName>()
         val widgetsToUpdate = intArrayOf(1, 2)
-        every { widgetManager.getAppWidgetIds(capture(componentNameCaptor)) } returns widgetsToUpdate
+        every { widgetManager.getAppWidgetIds(any<ComponentName>()) } returns widgetsToUpdate
         val context: Context = mockk(relaxed = true)
-        val intentCaptor = slot<Intent>()
-        every { context.sendBroadcast(capture(intentCaptor)) } just Runs
+        val intents = mutableListOf<Intent>()
+        every { context.sendBroadcast(capture(intents)) } just Runs
 
         SearchWidgetProvider.updateAllWidgets(context, widgetManager)
 
-        verify { context.sendBroadcast(any()) }
-        assertEquals(SearchWidgetProvider::class.java.name, componentNameCaptor.captured.className)
         assertEquals(
-            SearchWidgetProvider::class.java.name,
-            intentCaptor.captured.component!!.className,
+            listOf(
+                SearchWidgetProvider::class.java.name,
+                SearchBarWidgetReceiver::class.java.name,
+                SearchBarWithLensWidgetReceiver::class.java.name,
+                CompactSearchBarWidgetReceiver::class.java.name,
+            ),
+            intents.map { it.component!!.className },
         )
-        assertEquals(AppWidgetManager.ACTION_APPWIDGET_UPDATE, intentCaptor.captured.action)
-        @Suppress("DEPRECATION")
-        assertEquals(
-            widgetsToUpdate,
-            intentCaptor.captured.extras!!.get(AppWidgetManager.EXTRA_APPWIDGET_IDS),
-        )
+        intents.forEach { intent ->
+            assertEquals(AppWidgetManager.ACTION_APPWIDGET_UPDATE, intent.action)
+            @Suppress("DEPRECATION")
+            assertEquals(widgetsToUpdate, intent.extras!!.get(AppWidgetManager.EXTRA_APPWIDGET_IDS))
+        }
     }
 
     @Test
@@ -323,6 +317,7 @@ class SearchWidgetProviderTest {
         every { testContext.components.settings } returns settings
         val widgetProvider = SearchWidgetProvider()
         assertFalse(settings.searchWidgetInstalled)
+        bindWidget(SearchWidgetProvider::class.java)
 
         widgetProvider.onEnabled(testContext)
 
@@ -344,18 +339,51 @@ class SearchWidgetProviderTest {
     }
 
     @Test
+    fun `GIVEN a new search bar widget is still on the homescreen WHEN the legacy search widget is removed THEN the widget stays installed`() {
+        val settings = Settings(testContext)
+        every { testContext.components.settings } returns settings
+        settings.searchWidgetInstalled = true
+        bindWidget(CompactSearchBarWidgetReceiver::class.java)
+
+        SearchWidgetProvider().onDisabled(testContext)
+
+        assertTrue(settings.searchWidgetInstalled)
+    }
+
+    @Test
+    fun `WHEN a new search bar widget is added on homescreen THEN record telemetry and persist that the widget is installed`() {
+        val settings = Settings(testContext)
+        every { testContext.components.settings } returns settings
+        assertFalse(settings.searchWidgetInstalled)
+        bindWidget(SearchBarWithLensWidgetReceiver::class.java)
+
+        SearchBarWithLensWidgetReceiver().onEnabled(testContext)
+
+        assertTrue(settings.searchWidgetInstalled)
+        assertEquals(true, Metrics.searchWidgetInstalled.testGetValue())
+    }
+
+    @Test
     fun `GIVEN not knowing search widget is installed WHEN a widget is updated THEN record telemetry and persist that the widget is installed`() {
         val settings = Settings(testContext)
         every { testContext.components.settings } returns settings
         every { testContext.components.core.store } returns BrowserStore(BrowserState())
         val widgetProvider = SearchWidgetProvider()
         assertFalse(settings.searchWidgetInstalled)
+        bindWidget(SearchWidgetProvider::class.java)
 
         widgetProvider.onUpdate(testContext, mockk(), intArrayOf())
 
         assertTrue(testContext.components.settings.searchWidgetInstalled)
         assertEquals(true, Metrics.searchWidgetInstalled.testGetValue())
     }
+
+    private fun bindWidget(provider: Class<*>) {
+        val appWidgetManager = shadowOf(AppWidgetManager.getInstance(testContext))
+        appWidgetManager.bindAppWidgetId(nextWidgetId++, ComponentName(testContext, provider))
+    }
+
+    private var nextWidgetId = 1
 }
 
 private const val WIDGET_WIDTH_PX = 800

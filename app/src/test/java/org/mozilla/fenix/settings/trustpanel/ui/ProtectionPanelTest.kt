@@ -50,9 +50,6 @@ class ProtectionPanelTest {
         setProtectionPanel(numberOfTrackersBlocked = 5)
 
         composeTestRule.onNodeWithContentDescription(gradientBannerContentDescription(5)).assertIsDisplayed()
-        composeTestRule
-            .onNodeWithText(resources.getString(R.string.protection_panel_num_trackers_blocked, 5))
-            .assertDoesNotExist()
     }
 
     @Test

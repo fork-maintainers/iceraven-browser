@@ -28,6 +28,7 @@ import org.mozilla.fenix.browser.ForwardMenuItemProvider
 import org.mozilla.fenix.browser.RefreshMenuItemProvider
 import org.mozilla.fenix.browser.ShareMenuItemProvider
 import org.mozilla.fenix.browser.applinks.OpenInAppMenuItemProvider
+import org.mozilla.fenix.browser.applinks.OpenInFirefoxMenuItemProvider
 import org.mozilla.fenix.browser.menu.MoreMenuItemsProvider
 import org.mozilla.fenix.browser.menu.MoveToNormalTabsMenuItemProvider
 import org.mozilla.fenix.browser.readermode.ReaderViewMenuItemProvider
@@ -39,6 +40,7 @@ import org.mozilla.fenix.components.TabCollectionStorage
 import org.mozilla.fenix.components.UseCases
 import org.mozilla.fenix.components.accounts.MozillaAccountMenuItemProvider
 import org.mozilla.fenix.downloads.DownloadsMenuItemProvider
+import org.mozilla.fenix.home.CustomizeHomepageMenuItemProvider
 import org.mozilla.fenix.home.topsites.ShortcutMenuItemProvider
 import org.mozilla.fenix.ipprotection.VpnMenuItemProvider
 import org.mozilla.fenix.library.history.HistoryMenuItemProvider
@@ -93,6 +95,7 @@ class MenuItemProvidersFactory(
     private val menuViewScope: CoroutineScope,
     private val applicationScope: CoroutineScope,
 ) {
+
     /** Build a [MenuItemProvider] for the given [FenixMenuItem]. */
     @Suppress("LongMethod", "CyclomaticComplexMethod")
     fun buildProviderFor(item: FenixMenuItem): MenuItemProvider =
@@ -179,6 +182,7 @@ class MenuItemProvidersFactory(
                     browserStore = browserStore,
                     target = target,
                     goBack = useCases.sessionUseCases.goBack,
+                    settings = settings,
                     scope = menuViewScope,
                 )
 
@@ -266,6 +270,13 @@ class MenuItemProvidersFactory(
                     scope = menuViewScope,
                 )
 
+            FenixMenuItem.OpenInFirefox ->
+                OpenInFirefoxMenuItemProvider(
+                    appName = context.getString(R.string.app_name),
+                    appStore = appStore,
+                    target = target,
+                )
+
             FenixMenuItem.SaveAsPdf ->
                 SaveAsPdfMenuItemProvider(
                     browserStore = browserStore,
@@ -301,6 +312,8 @@ class MenuItemProvidersFactory(
                     accessPoint = accessPoint,
                     scope = menuViewScope,
                 )
+
+            FenixMenuItem.CustomizeHomepage -> CustomizeHomepageMenuItemProvider()
 
             FenixMenuItem.Settings -> SettingsMenuItemProvider()
 

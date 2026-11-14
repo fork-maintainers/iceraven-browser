@@ -8,6 +8,7 @@ import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import mozilla.components.support.ktx.util.URLStringUtils
 import mozilla.components.ui.icons.R as iconsR
 import org.mozilla.fenix.R
 import org.mozilla.fenix.databinding.HistoryMetadataGroupListItemBinding
@@ -48,7 +49,7 @@ class HistoryMetadataGroupItemViewHolder(
     fun bind(item: History.Metadata, isPendingDeletion: Boolean) {
         binding.historyLayout.isVisible = !isPendingDeletion
         binding.historyLayout.titleView.text = item.title
-        binding.historyLayout.urlView.text = item.url
+        binding.historyLayout.urlView.text = URLStringUtils.toLosslessDisplayUrl(item.url)
 
         binding.historyLayout.setSelectionInteractor(item, selectionHolder, interactor)
         binding.historyLayout.changeSelected(item in selectionHolder.selectedItems)

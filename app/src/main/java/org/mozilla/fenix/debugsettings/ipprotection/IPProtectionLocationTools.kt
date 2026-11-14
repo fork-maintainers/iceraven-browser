@@ -161,7 +161,6 @@ private fun IPProtectionLocationToolsContent(
             ServiceState.Uninitialized -> stringResource(R.string.debug_drawer_ip_protection_uninitialized)
             ServiceState.Unavailable -> stringResource(R.string.debug_drawer_ip_protection_unavailable)
             ServiceState.Unauthenticated -> stringResource(R.string.debug_drawer_ip_protection_signed_out)
-            ServiceState.OptedOut -> stringResource(R.string.debug_drawer_ip_protection_opted_out)
             ServiceState.Ready -> null
         }
 

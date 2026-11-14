@@ -156,8 +156,8 @@ class ContextTest {
 
     @Test
     fun `GIVEN context WHEN given a preference key THEN send back the right string`() {
-        val comparisonStr = testContext.getString(R.string.private_browsing_common_myths)
-        val actualStr = testContext.getPreferenceKey(R.string.private_browsing_common_myths)
+        val comparisonStr = testContext.getString(R.string.pref_key_telemetry)
+        val actualStr = testContext.getPreferenceKey(R.string.pref_key_telemetry)
         assertEquals(comparisonStr, actualStr)
     }
 

@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import mozilla.components.concept.engine.prompt.ShareData
+import mozilla.components.support.ktx.util.URLStringUtils
 import org.mozilla.fenix.R
 import org.mozilla.fenix.databinding.ShareTabItemBinding
 import org.mozilla.fenix.ext.components
@@ -35,7 +36,7 @@ class ShareTabsAdapter : ListAdapter<ShareData, ShareTabsAdapter.ShareTabViewHol
                 }
 
                 binding.shareTabTitle.text = item.title
-                binding.shareTabUrl.text = item.url
+                binding.shareTabUrl.text = url?.let { URLStringUtils.toLosslessDisplayUrl(it) }
             }
     }
 

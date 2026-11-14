@@ -62,16 +62,19 @@ import mozilla.components.compose.base.button.IconButton
 import mozilla.components.compose.base.modifier.debouncedToggleable
 import mozilla.components.compose.base.theme.PreviewThemeProvider
 import mozilla.components.compose.base.theme.Theme
-import mozilla.components.concept.engine.ipprotection.IPProtectionHandler
 import mozilla.components.concept.engine.ipprotection.ServiceState
+import mozilla.components.feature.ipprotection.store.state.AccountState
+import mozilla.components.feature.ipprotection.store.state.AccountStatus
 import mozilla.components.feature.ipprotection.store.state.Authorized
 import mozilla.components.feature.ipprotection.store.state.BYTES_PER_GB
 import mozilla.components.feature.ipprotection.store.state.Country
 import mozilla.components.feature.ipprotection.store.state.EligibilityStatus
 import mozilla.components.feature.ipprotection.store.state.IPProtectionState
+import mozilla.components.feature.ipprotection.store.state.IPProtectionStatus
 import mozilla.components.feature.ipprotection.store.state.Location
 import mozilla.components.feature.ipprotection.store.state.Recommended
 import mozilla.components.feature.ipprotection.store.state.Uninitialized
+import mozilla.components.feature.ipprotection.store.state.ipProtectionStatus
 import mozilla.components.feature.ipprotection.store.state.isActivationInFlight
 import mozilla.components.feature.ipprotection.store.state.maxDataGb
 import mozilla.components.feature.ipprotection.store.state.remainingDataGb
@@ -87,10 +90,8 @@ private val PROMO_ILLUSTRATION_SIZE = 60.dp
 /**
  * The main VPN / IP Protection settings screen.
  *
- * @param state Current [IPProtectionHandler.StateInfo] to render.
+ * @param state Current [IPProtectionState] to render.
  * @param snackbarHostState The [SnackbarHostState] used to display snackbars.
- * @param readyToUse Whether the user is entitled to use the service.
- * @param syncingData Whether the data sync is in progress.
  * @param promoDate Locale-formatted end date used by the promo copy when the user is not on a metered plan. `null`
  *   means the promo cannot be rendered (e.g. Nimbus shipped a malformed date) and the header falls back to the plain
  *   description.
@@ -109,8 +110,6 @@ private val PROMO_ILLUSTRATION_SIZE = 60.dp
 fun IPProtectionScreen(
     state: IPProtectionState,
     snackbarHostState: SnackbarHostState,
-    readyToUse: Boolean,
-    syncingData: Boolean,
     promoDate: String?,
     onVpnToggle: (Boolean) -> Unit,
     onLearnMoreClick: () -> Unit,
@@ -122,6 +121,7 @@ fun IPProtectionScreen(
     isLocationSelectionEnabled: Boolean = false,
 ) {
     val screenTitle = stringResource(R.string.ip_protection_settings_title)
+    val status = state.ipProtectionStatus
 
     Scaffold(
         modifier = Modifier.semantics { paneTitle = screenTitle },
@@ -142,23 +142,20 @@ fun IPProtectionScreen(
         ) {
             Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
                 VpnHeader(
-                    isActive = state.proxyStatus is Authorized.Active,
+                    isActive = status == IPProtectionStatus.Enabled,
                     promoDate = promoDate.takeIf { state.maxDataGb <= 0F },
                     onLearnMoreClick = onLearnMoreClick,
                 )
 
                 VpnToggleRow(
-                    checked = state.proxyStatus is Authorized.Active,
-                    enabled =
-                        state.proxyStatus is Authorized &&
-                            state.proxyStatus !is Authorized.DataLimitReached &&
-                            state.proxyStatus !is Authorized.Activating,
+                    checked = status == IPProtectionStatus.Enabled,
+                    enabled = status == IPProtectionStatus.Disabled || status == IPProtectionStatus.Enabled,
                     onToggle = onVpnToggle,
                 )
 
                 HorizontalDivider()
 
-                if (readyToUse) {
+                if (status.isReadyToUse()) {
                     if (state.maxDataBytes > 0) {
                         DataLimitSection(state = state, onLearnMoreClick = onLearnMoreClick)
 
@@ -173,7 +170,7 @@ fun IPProtectionScreen(
                     )
                 } else {
                     GetStartedSection(
-                        syncingData = syncingData,
+                        status = status,
                         onGetStartedClick = onGetStartedClick,
                     )
                 }
@@ -181,6 +178,20 @@ fun IPProtectionScreen(
         }
     }
 }
+
+private fun IPProtectionStatus.isReadyToUse() =
+    when (this) {
+        IPProtectionStatus.Disabled,
+        IPProtectionStatus.Activating,
+        IPProtectionStatus.Enabled,
+        IPProtectionStatus.DataLimitReached,
+        IPProtectionStatus.ConnectionError -> true
+
+        IPProtectionStatus.Unavailable,
+        IPProtectionStatus.Uninitialized,
+        IPProtectionStatus.AuthRequired,
+        IPProtectionStatus.AwaitingService -> false
+    }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -235,7 +246,7 @@ private fun DataLimitSection(
     state: IPProtectionState,
     onLearnMoreClick: () -> Unit,
 ) {
-    val isDataLimitReached = state.proxyStatus is Authorized.DataLimitReached
+    val isDataLimitReached = state.ipProtectionStatus == IPProtectionStatus.DataLimitReached
 
     Column(
         modifier =
@@ -300,21 +311,27 @@ private fun DataLimitSection(
 
 @Composable
 private fun ColumnScope.GetStartedSection(
-    syncingData: Boolean,
+    status: IPProtectionStatus,
     onGetStartedClick: () -> Unit,
 ) {
     Spacer(modifier = Modifier.weight(1f))
 
     val text =
-        if (syncingData) {
-            stringResource(R.string.ip_protection_connecting)
-        } else {
-            stringResource(R.string.ip_protection_get_started)
+        when (status) {
+            IPProtectionStatus.AwaitingService,
+            IPProtectionStatus.Uninitialized -> stringResource(R.string.ip_protection_connecting)
+            IPProtectionStatus.Unavailable,
+            IPProtectionStatus.AuthRequired,
+            IPProtectionStatus.Disabled,
+            IPProtectionStatus.Activating,
+            IPProtectionStatus.Enabled,
+            IPProtectionStatus.DataLimitReached,
+            IPProtectionStatus.ConnectionError -> stringResource(R.string.ip_protection_get_started)
         }
 
     FilledButton(
         text = text,
-        enabled = !syncingData,
+        enabled = status == IPProtectionStatus.AuthRequired,
         modifier = Modifier.padding(horizontal = FirefoxTheme.layout.space.static200).fillMaxWidth(),
         onClick = onGetStartedClick,
     )
@@ -502,12 +519,11 @@ private fun IPProtectionScreenActivePreview(@PreviewParameter(PreviewThemeProvid
                 IPProtectionState(
                     eligibilityStatus = EligibilityStatus.Eligible,
                     proxyStatus = Authorized.Active,
+                    serviceStatus = ServiceState.Ready,
                     remainingDataBytes = 40 * BYTES_PER_GB.toLong(),
                     maxDataBytes = 50 * BYTES_PER_GB.toLong(),
                 ),
             snackbarHostState = SnackbarHostState(),
-            readyToUse = true,
-            syncingData = false,
             promoDate = null,
             onVpnToggle = {},
             onLearnMoreClick = {},
@@ -535,8 +551,6 @@ private fun IPProtectionScreenActivatingPreview(@PreviewParameter(PreviewThemePr
                     maxDataBytes = 50 * BYTES_PER_GB.toLong(),
                 ),
             snackbarHostState = SnackbarHostState(),
-            readyToUse = true,
-            syncingData = false,
             promoDate = null,
             onVpnToggle = {},
             onLearnMoreClick = {},
@@ -560,11 +574,10 @@ private fun IPProtectionScreenNotEnrolledPreview(@PreviewParameter(PreviewThemeP
                 IPProtectionState(
                     eligibilityStatus = EligibilityStatus.Eligible,
                     serviceStatus = ServiceState.Unauthenticated,
+                    accountState = AccountState(AccountStatus.Authenticated),
                     maxDataBytes = 0L,
                 ),
             snackbarHostState = SnackbarHostState(),
-            readyToUse = false,
-            syncingData = true,
             promoDate = "January 31",
             onVpnToggle = {},
             onLearnMoreClick = {},
@@ -587,12 +600,11 @@ private fun IPProtectionScreenPausedPreview(@PreviewParameter(PreviewThemeProvid
                 IPProtectionState(
                     eligibilityStatus = EligibilityStatus.Eligible,
                     proxyStatus = Authorized.DataLimitReached,
+                    serviceStatus = ServiceState.Ready,
                     maxDataBytes = 50 * BYTES_PER_GB.toLong(),
                     remainingDataBytes = 0L,
                 ),
             snackbarHostState = SnackbarHostState(),
-            readyToUse = true,
-            syncingData = false,
             promoDate = null,
             onVpnToggle = {},
             onLearnMoreClick = {},
@@ -619,8 +631,6 @@ private fun IPProtectionScreenConnectingPreview(@PreviewParameter(PreviewThemePr
                     maxDataBytes = 50 * BYTES_PER_GB.toLong(),
                 ),
             snackbarHostState = SnackbarHostState(),
-            readyToUse = false,
-            syncingData = false,
             promoDate = null,
             onVpnToggle = {},
             onLearnMoreClick = {},

@@ -9,6 +9,7 @@ import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 import mozilla.appservices.places.BookmarkRoot
 import mozilla.components.compose.base.text.Text
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.data.StandardMenuItem
 import mozilla.components.compose.menu.ui.MenuItemIconRes
 import mozilla.components.ui.icons.R as iconsR
@@ -26,7 +27,7 @@ class BookmarksScreenMenuItemProviderTest {
 
         assertEquals(
             StandardMenuItem(
-                title = Text.Resource(R.string.library_bookmarks),
+                title = MenuItemTitle(Text.Resource(R.string.library_bookmarks)),
                 icon = MenuItemIconRes(iconsR.drawable.mozac_ic_bookmark_tray_fill_24),
                 onClickEvent = MenuAction.Navigate.Bookmarks,
             ),

@@ -121,4 +121,66 @@ class DownloadTest : BaseTest() {
             .deleteDownloadedFile(downloadFile)
             .mozVerifyElementsByGroup(DownloadsSelectors.Group.EMPTY_DOWNLOADS)
     }
+
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3978402
+    @Critical
+    @Test
+    fun verifyAskWhenIDeleteFilesFirstChoiceTest() {
+        val downloadTestPage = mockWebServer.downloadPageAsset.url.toString()
+        val downloadFile = "zip_small.zip"
+
+        on.browserPage
+            .navigateToPage(downloadTestPage)
+            .clickDownloadLink(downloadFile, downloadTestPage)
+            .verifyDownloadPrompt()
+            .clickDownloadPromptConfirmButton()
+        on.downloads
+            .navigateToPage()
+            .verifyDownloadedFileExistsInDownloadsList(downloadFile)
+            .mozClick(DownloadsSelectors.MORE_OPTIONS_BUTTON)
+            .mozClick(DownloadsSelectors.MORE_OPTIONS_DELETE_BUTTON)
+            .mozVerifyElementsByGroup(DownloadsSelectors.Group.DELETE_DOWNLOADED_ITEM_DIALOG)
+            .mozClick(DownloadsSelectors.DELETE_FILE_DIALOG_CANCEL_BUTTON)
+            .mozVerifyElementsByGroupAbsent(DownloadsSelectors.Group.DELETE_DOWNLOADED_ITEM_DIALOG)
+            .mozClick(DownloadsSelectors.MORE_OPTIONS_BUTTON)
+            .mozClick(DownloadsSelectors.MORE_OPTIONS_DELETE_BUTTON)
+            .mozVerifyElementsByGroup(DownloadsSelectors.Group.DELETE_DOWNLOADED_ITEM_DIALOG)
+            .mozClick(DownloadsSelectors.DELETE_FILE_DIALOG_CONFIRM_BUTTON)
+            .mozVerify(DownloadsSelectors.DELETE_DOWNLOAD_SNACKBAR_MESSAGE(downloadFile))
+            .mozVerifyElementsByGroup(DownloadsSelectors.Group.EMPTY_DOWNLOADS)
+        on.downloads.verifyDownloadedFileIsDeletedFromStorage(downloadFile)
+    }
+
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3978403
+    @Critical
+    @Test
+    fun verifyAskWhenIDeleteFilesSecondChoiceTest() {
+        val downloadTestPage = mockWebServer.downloadPageAsset.url.toString()
+        val downloadFile = "zip_small.zip"
+
+        on.browserPage
+            .navigateToPage(downloadTestPage)
+            .clickDownloadLink(downloadFile, downloadTestPage)
+            .verifyDownloadPrompt()
+            .clickDownloadPromptConfirmButton()
+        on.downloads
+            .navigateToPage()
+            .verifyDownloadedFileExistsInDownloadsList(downloadFile)
+            .mozClick(DownloadsSelectors.MORE_OPTIONS_BUTTON)
+            .mozClick(DownloadsSelectors.MORE_OPTIONS_DELETE_BUTTON)
+            .mozVerifyElementsByGroup(DownloadsSelectors.Group.DELETE_DOWNLOADED_ITEM_DIALOG)
+            .mozClick(DownloadsSelectors.DELETE_FILE_DIALOG_ONLY_REMOVE_FROM_DOWNLOAD_HISTORY_OPTION)
+            .mozClick(DownloadsSelectors.DELETE_FILE_DIALOG_CONFIRM_BUTTON)
+            .mozClick(DownloadsSelectors.UNDO_DELETE_SNACKBAR_BUTTON)
+        on.downloads
+            .verifyDownloadedFileExistsInDownloadsList(downloadFile)
+            .mozClick(DownloadsSelectors.MORE_OPTIONS_BUTTON)
+            .mozClick(DownloadsSelectors.MORE_OPTIONS_DELETE_BUTTON)
+            .mozVerifyElementsByGroup(DownloadsSelectors.Group.DELETE_DOWNLOADED_ITEM_DIALOG)
+            .mozClick(DownloadsSelectors.DELETE_FILE_DIALOG_ONLY_REMOVE_FROM_DOWNLOAD_HISTORY_OPTION)
+            .mozClick(DownloadsSelectors.DELETE_FILE_DIALOG_CONFIRM_BUTTON)
+            .mozVerify(DownloadsSelectors.DELETE_DOWNLOAD_SNACKBAR_MESSAGE(downloadFile))
+            .mozVerifyElementsByGroup(DownloadsSelectors.Group.EMPTY_DOWNLOADS)
+        on.downloads.verifyDownloadedFileStillExistsOnStorage(downloadFile)
+    }
 }

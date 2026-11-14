@@ -34,6 +34,7 @@ import org.mozilla.fenix.ui.efficiency.pageObjects.SettingsAccessibilityPage
 import org.mozilla.fenix.ui.efficiency.pageObjects.SettingsAddonsManagerPage
 import org.mozilla.fenix.ui.efficiency.pageObjects.SettingsAdvancedDownloadSettingsPage
 import org.mozilla.fenix.ui.efficiency.pageObjects.SettingsAdvancedRemoteImprovementsPage
+import org.mozilla.fenix.ui.efficiency.pageObjects.SettingsAiControlsPage
 import org.mozilla.fenix.ui.efficiency.pageObjects.SettingsAppIconPage
 import org.mozilla.fenix.ui.efficiency.pageObjects.SettingsAutofillPage
 import org.mozilla.fenix.ui.efficiency.pageObjects.SettingsCustomizePage
@@ -99,6 +100,7 @@ class PageContext(val composeRule: AndroidComposeTestRule<HomeActivityIntentTest
     val searchBar = SearchBarComponent(composeRule)
     val settings = SettingsPage(composeRule)
     val settingsAbout = SettingsAboutPage(composeRule)
+    val settingsAiControls = SettingsAiControlsPage(composeRule)
     val settingsAccessibility = SettingsAccessibilityPage(composeRule)
     val settingsAddonsManager = SettingsAddonsManagerPage(composeRule)
     val settingsAdvancedDownloadSettings = SettingsAdvancedDownloadSettingsPage(composeRule)

@@ -30,6 +30,7 @@ import org.mozilla.fenix.ext.nav
  * @param runtime see [FxaWebChannelFeature.runtime].
  * @param store see [FxaWebChannelFeature.store].
  * @param serverConfig see [FxaWebChannelFeature.serverConfig].
+ * @param fxaCapabilities see [FxaWebChannelFeature.fxaCapabilities].
  * @param accountManager see [FxaWebChannelFeature.accountManager].
  * @param activityRef a reference to provide the [Activity] to dismiss.
  */
@@ -38,6 +39,7 @@ class FxaWebChannelIntegration(
     runtime: WebExtensionRuntime,
     store: BrowserStore,
     serverConfig: ServerConfig,
+    fxaCapabilities: Set<FxaCapability>,
     private val accountManager: FxaAccountManager,
     private val activityRef: WeakReference<Activity?>,
 ) : LifecycleAwareFeature {
@@ -49,7 +51,7 @@ class FxaWebChannelIntegration(
             store = store,
             accountManager = accountManager,
             serverConfig = serverConfig,
-            fxaCapabilities = setOf(FxaCapability.ChooseWhatToSync, FxaCapability.PairingV2),
+            fxaCapabilities = fxaCapabilities,
             onCommandExecuted = ::commandRouter,
         )
     }

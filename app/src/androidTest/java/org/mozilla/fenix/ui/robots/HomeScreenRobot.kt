@@ -1121,14 +1121,6 @@ class HomeScreenRobot(private val composeTestRule: ComposeTestRule) {
             return BrowserRobot.Transition(composeTestRule)
         }
 
-        fun clickSaveTabsToCollectionButton(interact: TabDrawerRobot.() -> Unit): TabDrawerRobot.Transition {
-            Log.i(TAG, "clickSaveTabsToCollectionButton: Trying to click save tabs to collection button")
-            saveTabsToCollectionButton(composeTestRule).performClick()
-            Log.i(TAG, "clickSaveTabsToCollectionButton: Clicked save tabs to collection button")
-            TabDrawerRobot(composeTestRule).interact()
-            return TabDrawerRobot.Transition(composeTestRule)
-        }
-
         fun expandCollection(title: String, interact: CollectionRobot.() -> Unit): CollectionRobot.Transition {
             Log.i(TAG, "expandCollection: Trying to click collection with title: $title")
             itemContainingText(title).click()
@@ -1228,9 +1220,6 @@ fun homeScreen(composeTestRule: ComposeTestRule, interact: HomeScreenRobot.() ->
     HomeScreenRobot(composeTestRule).interact()
     return HomeScreenRobot.Transition(composeTestRule)
 }
-
-private fun saveTabsToCollectionButton(composeTestRule: ComposeTestRule) =
-    composeTestRule.onNodeWithText(getStringResource(R.string.tabs_menu_save_to_collection1))
 
 private fun tabsCounterFromRedesignedToolbar() = itemWithResId("$packageName:id/counter_box")
 

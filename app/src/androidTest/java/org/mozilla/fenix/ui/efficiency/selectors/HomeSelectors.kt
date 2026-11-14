@@ -23,6 +23,7 @@ object HomeSelectors : SelectorContainer {
         PRIVATE_BROWSING_HOME_SCREEN,
         TOP_SITE_ITEM,
         HOME_SCREEN_UI,
+        ADD_TO_HOMEPAGE_BOTTOM_SHEET,
     }
 
     val TOP_SITES_LIST =
@@ -123,12 +124,29 @@ object HomeSelectors : SelectorContainer {
             groups = setOf(Group.CONTINUE),
         )
 
-    val RECENT_BOOKMARKS_SECTION =
+    val BOOKMARKS_SECTION_TITLE =
         Selector(
-            strategy = SelectorStrategy.UIAUTOMATOR_WITH_TEXT,
+            strategy = SelectorStrategy.COMPOSE_BY_TEXT,
             value = getStringResource(R.string.home_bookmarks_title),
             description = "Bookmarks section header",
             groups = setOf(Group.RECENT_BOOKMARKS_SECTION),
+        )
+
+    val BOOKMARKS_SECTION_SHOW_ALL_BUTTON =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_CONTENT_DESCRIPTION,
+            value = getStringResource(R.string.home_bookmarks_show_all_content_description),
+            description = "Bookmarks section 'Show All' button",
+            groups = setOf(Group.RECENT_BOOKMARKS_SECTION),
+        )
+
+    @Suppress("ktlint:standard:function-naming", "FunctionName")
+    fun BOOKMARKS_SECTION_ITEM(bookmarkTitle: String = "") =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TAG_AND_TEXT,
+            value = "bookmark.title",
+            secondaryValue = bookmarkTitle,
+            description = "Bookmarks item with title: $bookmarkTitle",
         )
 
     val PRIVATE_BROWSING_INFO_CARD_TITLE =
@@ -164,6 +182,83 @@ object HomeSelectors : SelectorContainer {
             secondaryValue = topSiteTitle,
             description = "Top site item with title: $topSiteTitle",
             groups = setOf(Group.TOP_SITE_ITEM),
+        )
+
+    val FIRST_TOP_SITE_ITEM =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_ON_ALL_NODES_BY_TAG_ON_FIRST,
+            value = "top_sites_list.top_site_item",
+            description = "First top site item",
+            groups = setOf(Group.TOP_SITE_ITEM),
+        )
+
+    val ADD_SHORTCUT_BUTTON =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TAG,
+            value = "top_sites_list.add_shortcut_item.add_shortcut_title",
+            description = "Add shortcut button",
+        )
+
+    val ADD_TO_HOMEPAGE_BOTTOM_SHEET_TITLE =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TEXT,
+            value = getStringResource(R.string.homepage_shortcuts_add_to_homepage),
+            description = "Add to homepage bottom sheet title",
+            groups = setOf(Group.ADD_TO_HOMEPAGE_BOTTOM_SHEET),
+        )
+
+    val ADD_TO_HOMEPAGE_BOTTOM_SHEET_ADD_WEBSITE_BUTTON =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TEXT,
+            value = getStringResource(R.string.homepage_shortcuts_add_website),
+            description = "Add to homepage bottom sheet add website button",
+            groups = setOf(Group.ADD_TO_HOMEPAGE_BOTTOM_SHEET),
+        )
+
+    val ADD_TO_HOMEPAGE_BOTTOM_SHEET_POPULAR_SITES_SECTION_TITLE =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TEXT,
+            value = getStringResource(R.string.homepage_shortcuts_popular_sites),
+            description = "Add to homepage bottom sheet popular sites title",
+            groups = setOf(Group.ADD_TO_HOMEPAGE_BOTTOM_SHEET),
+        )
+
+    // All popular-site cells. The suggestions are data-driven (top-ranked Merino manifest domains minus
+    // the current top sites), so their titles are unstable and messy — count the tagged cells instead of
+    // asserting individual titles. There are always POPULAR_SITES_LIMIT of them.
+    val ADD_TO_HOMEPAGE_BOTTOM_SHEET_POPULAR_SITES =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TAG,
+            value = "add.to.home.page.popular.site.item",
+            description = "Add to homepage bottom sheet popular site cells",
+        )
+
+    // A single popular-site cell, identified by its title. Matches the tagged clickable cell whose child
+    // text is the title and resolves the cell container (not the bare title text node), mirroring
+    // TOP_SITE_ITEM — so clicking it fires the cell's onClick.
+    @Suppress("ktlint:standard:function-naming", "FunctionName")
+    fun ADD_TO_HOMEPAGE_BOTTOM_SHEET_POPULAR_SITE_ITEM(popularSiteTitle: String = "") =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_ON_ALL_NODES_BY_TAG_WITH_CHILD_TEXT_ON_FIRST,
+            value = "add.to.home.page.popular.site.item",
+            secondaryValue = popularSiteTitle,
+            description = "Add to homepage bottom sheet popular site cell with title: $popularSiteTitle",
+        )
+
+    val ADD_TO_HOMEPAGE_BOTTOM_SHEET_POPULAR_SITES_ITEM_TITLE =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TAG_AND_TEXT,
+            value = "add.to.home.page.popular.site.item.title",
+            description = "Add to homepage bottom sheet popular site title",
+        )
+
+    // Snackbar shown on the homepage after a shortcut is added (same string as the browser-menu flow in
+    // BrowserPageSelectors). The snackbar is a system-window toast, so it is matched via UIAutomator.
+    val ADDED_TO_SHORTCUTS_SNACKBAR_TEXT =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TEXT,
+            value = getStringResource(R.string.snackbar_added_to_shortcuts),
+            description = "Added to shortcuts snackbar text",
         )
 
     // The legacy robot hardcodes the English literal "Recently visited"; this keys off the string resource

@@ -121,13 +121,17 @@ class SettingsTranslationsRobot(private val composeTestRule: ComposeTestRule) {
 
     fun clickCancelDeleteNeverTranslateThisSiteDialog() {
         Log.i(TAG, "clickCancelDeleteNeverTranslateThisSiteDialog: Trying to click the \"Cancel\" dialog button")
-        composeTestRule.onNodeWithText(getStringResource(R.string.dialog_delete_negative)).performClick()
+        composeTestRule
+            .onNodeWithText(getStringResource(R.string.never_translate_site_dialog_cancel_preference))
+            .performClick()
         Log.i(TAG, "clickCancelDeleteNeverTranslateThisSiteDialog: Clicked the \"Cancel\" dialog button")
     }
 
     fun clickConfirmDeleteNeverTranslateThisSiteDialog() {
         Log.i(TAG, "clickConfirmDeleteNeverTranslateThisSiteDialog: Trying to click the \"Delete\" dialog button")
-        composeTestRule.onNodeWithText(getStringResource(R.string.dialog_delete_positive)).performClick()
+        composeTestRule
+            .onNodeWithText(getStringResource(R.string.never_translate_site_dialog_confirm_delete_preference))
+            .performClick()
         Log.i(TAG, "clickConfirmDeleteNeverTranslateThisSiteDialog: Clicked the \"Delete\" dialog button")
     }
 

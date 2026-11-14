@@ -65,7 +65,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mozilla.fenix.GleanMetrics.Events
 import org.mozilla.fenix.GleanMetrics.Toolbar
-import org.mozilla.fenix.GleanMetrics.ToolbarGoogleLensButton
 import org.mozilla.fenix.NavGraphDirections
 import org.mozilla.fenix.R
 import org.mozilla.fenix.browser.BrowserFragmentDirections
@@ -76,6 +75,7 @@ import org.mozilla.fenix.components.AppStore
 import org.mozilla.fenix.components.Components
 import org.mozilla.fenix.components.appstate.AppAction
 import org.mozilla.fenix.components.appstate.AppAction.LensAction.LensDismissed
+import org.mozilla.fenix.components.appstate.AppAction.LensAction.LensRequestConsumed
 import org.mozilla.fenix.components.appstate.AppAction.LensAction.LensRequested
 import org.mozilla.fenix.components.appstate.AppAction.LensAction.LensResultAvailable
 import org.mozilla.fenix.components.appstate.AppAction.QrScannerAction.QrScannerInputAvailable
@@ -87,6 +87,7 @@ import org.mozilla.fenix.components.appstate.AppState
 import org.mozilla.fenix.components.appstate.VoiceSearchAction.VoiceInputRequested
 import org.mozilla.fenix.components.appstate.search.SearchState as AppSearchState
 import org.mozilla.fenix.components.appstate.search.SelectedSearchEngine
+import org.mozilla.fenix.components.lens.CameraMode
 import org.mozilla.fenix.components.search.BOOKMARKS_SEARCH_ENGINE_ID
 import org.mozilla.fenix.components.search.HISTORY_SEARCH_ENGINE_ID
 import org.mozilla.fenix.components.search.TABS_SEARCH_ENGINE_ID
@@ -103,9 +104,7 @@ import org.mozilla.fenix.search.fixtures.assertSearchSelectorEquals
 import org.mozilla.fenix.search.fixtures.buildExpectedSearchSelector
 import org.mozilla.fenix.settings.SupportUtils
 import org.mozilla.fenix.telemetry.ACTION_CLEAR_CLICKED
-import org.mozilla.fenix.telemetry.ACTION_LENS_CLICKED
 import org.mozilla.fenix.telemetry.ACTION_MICROPHONE_CLICKED
-import org.mozilla.fenix.telemetry.ACTION_QR_CLICKED
 import org.mozilla.fenix.telemetry.ACTION_SEARCH_ENGINE_SELECTOR_CLICKED
 import org.mozilla.fenix.telemetry.SOURCE_ADDRESS_BAR
 import org.mozilla.fenix.telemetry.SURFACE_BROWSER
@@ -128,7 +127,10 @@ class BrowserToolbarSearchMiddlewareTest {
             middleware = listOf(captureBrowserActionsMiddleware),
         )
     val components: Components = mockk()
-    val settings: Settings = mockk(relaxed = true)
+    val settings: Settings =
+        mockk(relaxed = true) {
+            every { lensCameraLastMode } returns CameraMode.LENS
+        }
     val navController: NavController = mockk {
         every { navigate(any<NavDirections>()) } just Runs
         every { navigate(any<Int>()) } just Runs
@@ -210,7 +212,7 @@ class BrowserToolbarSearchMiddlewareTest {
     }
 
     @Test
-    fun `GIVEN a custom search engine WHEN the qr button is clicked THEN start qr recognition and record telemetry`() {
+    fun `GIVEN a custom search engine WHEN the qr button is clicked THEN start qr recognition`() {
         val appStore: AppStore =
             mockk(relaxed = true) {
                 every { state.searchState } returns
@@ -229,7 +231,6 @@ class BrowserToolbarSearchMiddlewareTest {
         assertEquals(expectedQrButton, qrButton)
 
         store.dispatch(qrButton.onClick as BrowserToolbarEvent)
-        assertTelemetryRecorded(ACTION_QR_CLICKED)
         verify { appStore.dispatch(QrScannerRequested) }
     }
 
@@ -1510,6 +1511,25 @@ class BrowserToolbarSearchMiddlewareTest {
     }
 
     @Test
+    fun `GIVEN Google search engine, Lens enabled and QR as the last camera mode WHEN toolbar enters edit mode with blank query THEN a QR button opening the Lens camera is shown`() {
+        every { settings.googleLensIntegrationEnabled } returns true
+        every { settings.googleLensIntegrationUserEnabled } returns true
+        every { settings.lensCameraLastMode } returns CameraMode.QR
+        val appStore: AppStore =
+            mockk(relaxed = true) {
+                every { state.searchState.selectedSearchEngine?.searchEngine } returns googleSearchEngine()
+            }
+        val (_, store) = buildMiddlewareAndAddToStore(appStore = appStore)
+
+        store.dispatch(EnterEditMode(false))
+        store.dispatch(SearchQueryUpdated(BrowserToolbarQuery("")))
+
+        val actions = store.state.editState.editActionsEnd.filterIsInstance<ActionButtonRes>()
+        assertEquals(expectedLensQrButton, actions.find { it.onClick == LensButtonClicked })
+        assertNull(actions.find { it.onClick == QrScannerClicked })
+    }
+
+    @Test
     fun `GIVEN non-Google search engine WHEN toolbar enters edit mode THEN no Lens button is shown`() {
         every { settings.googleLensIntegrationEnabled } returns true
         val (_, store) = buildMiddlewareAndAddToStore()
@@ -1583,7 +1603,7 @@ class BrowserToolbarSearchMiddlewareTest {
     }
 
     @Test
-    fun `WHEN the Lens button is clicked THEN dispatch LensRequested and record telemetry`() {
+    fun `WHEN the Lens button is clicked THEN dispatch LensRequested`() {
         every { settings.googleLensIntegrationEnabled } returns true
         every { settings.googleLensIntegrationUserEnabled } returns true
         val appStore: AppStore =
@@ -1607,9 +1627,45 @@ class BrowserToolbarSearchMiddlewareTest {
             }!!
 
         store.dispatch(lensButton.onClick as BrowserToolbarEvent)
-        assertTelemetryRecorded(ACTION_LENS_CLICKED)
-        assertNotNull(ToolbarGoogleLensButton.tapped.testGetValue())
         verify { appStore.dispatch(LensRequested) }
+    }
+
+    @Test
+    fun `GIVEN the Lens camera was opened WHEN it is dismissed after switching to QR mode THEN the Lens button shows the QR icon`() {
+        val appStore =
+            AppStore(
+                initialState =
+                    AppState(
+                        searchState =
+                            AppSearchState.EMPTY.copy(
+                                selectedSearchEngine =
+                                    SelectedSearchEngine(
+                                        searchEngine = googleSearchEngine(),
+                                        isUserSelected = false,
+                                    )
+                            )
+                    )
+            )
+        every { settings.googleLensIntegrationEnabled } returns true
+        every { settings.googleLensIntegrationUserEnabled } returns true
+        val (_, store) = buildMiddlewareAndAddToStore(appStore = appStore, components = components)
+        store.dispatch(EnterEditMode(false))
+        store.dispatch(SearchQueryUpdated(BrowserToolbarQuery("")))
+        val lensButton =
+            store.state.editState.editActionsEnd.filterIsInstance<ActionButtonRes>().find {
+                it.onClick == LensButtonClicked
+            }!!
+        assertEquals(expectedLensButton, lensButton)
+
+        store.dispatch(lensButton.onClick as BrowserToolbarEvent)
+        appStore.dispatch(LensRequestConsumed)
+        testDispatcher.scheduler.advanceUntilIdle()
+        every { settings.lensCameraLastMode } returns CameraMode.QR
+        appStore.dispatch(LensDismissed)
+        testDispatcher.scheduler.advanceUntilIdle()
+
+        val actions = store.state.editState.editActionsEnd.filterIsInstance<ActionButtonRes>()
+        assertEquals(expectedLensQrButton, actions.find { it.onClick == LensButtonClicked })
     }
 
     @Test
@@ -1798,6 +1854,14 @@ class BrowserToolbarSearchMiddlewareTest {
         ActionButtonRes(
             drawableResId = iconsR.drawable.mozac_ic_logo_google_lens_24,
             contentDescription = R.string.lens_search_content_description,
+            state = ActionButton.State.DEFAULT,
+            onClick = LensButtonClicked,
+        )
+
+    private val expectedLensQrButton =
+        ActionButtonRes(
+            drawableResId = iconsR.drawable.mozac_ic_qr_code_24,
+            contentDescription = qrR.string.mozac_feature_qr_scanner,
             state = ActionButton.State.DEFAULT,
             onClick = LensButtonClicked,
         )

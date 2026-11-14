@@ -4,10 +4,13 @@
 
 package org.mozilla.fenix.ui.efficiency.tests
 
+import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.mozilla.fenix.customannotations.Critical
+import org.mozilla.fenix.customannotations.SkipLeaks
 import org.mozilla.fenix.customannotations.SmokeTest
 import org.mozilla.fenix.helpers.TestAssetHelper.saveLoginAsset
+import org.mozilla.fenix.helpers.TestAssetHelper.signupFormAsset
 import org.mozilla.fenix.ui.efficiency.helpers.BaseTest
 import org.mozilla.fenix.ui.efficiency.selectors.BrowserPageSelectors
 import org.mozilla.fenix.ui.efficiency.selectors.SettingsLoginExceptionsSelectors
@@ -188,5 +191,61 @@ class LoginsTest : BaseTest() {
         on.settingsSavedPasswords.mozClick(SettingsSavedPasswordsSelectors.SAVED_LOGIN_ENTRY("test@example.com"))
         on.settingsSavedPasswords.mozClick(SettingsSavedPasswordsSelectors.REVEAL_PASSWORD_BUTTON)
         on.settingsSavedPasswords.mozVerify(SettingsSavedPasswordsSelectors.LOGIN_DETAILS_PASSWORD("firefox"))
+    }
+
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/2710735
+    // SkipLeaks: known BrowserFragment autofill-bar view-retention leak, bug 1935100, not caused by this test.
+    @Critical
+    @SkipLeaks(reasons = ["https://bugzilla.mozilla.org/show_bug.cgi?id=1935100"])
+    @Test
+    fun verifySuggestedStrongPasswordDoesNotChangeTest() {
+        val signupPage = mockWebServer.signupFormAsset
+
+        // The first engagement auto-opens the generator.
+        on.browserPage.navigateToPage(signupPage.url.toString())
+        on.browserPage.clickPasswordField()
+        on.browserPage.verifyStrongPasswordPromptIsDisplayed()
+        on.browserPage.clickUseStrongPassword()
+        val firstSuggestion = on.browserPage.getGeneratedPassword()
+
+        // On a reload the generator is raised via the bar, not auto-opened. Route back through Home.
+        on.home.navigateToPage()
+        on.browserPage.navigateToPage(signupPage.url.toString(), forceNavigation = true)
+        on.browserPage.clickSuggestStrongPasswordBar()
+        on.browserPage.verifyStrongPasswordPromptIsDisplayed()
+        on.browserPage.clickUseStrongPassword()
+        val secondSuggestion = on.browserPage.getGeneratedPassword()
+
+        // The same password is suggested until used for a new account.
+        assertEquals(firstSuggestion, secondSuggestion)
+    }
+
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/2710736
+    // SkipLeaks: known BrowserFragment autofill-bar view-retention leak, bug 1935100, not caused by this test.
+    @Critical
+    @SkipLeaks(reasons = ["https://bugzilla.mozilla.org/show_bug.cgi?id=1935100"])
+    @Test
+    fun verifyUpdatePromptForGeneratedPasswordTest() {
+        val signupPage = mockWebServer.signupFormAsset
+        val username = "test@example.com"
+
+        // Accept the suggested password: saves the login with no username.
+        on.browserPage.navigateToPage(signupPage.url.toString())
+        on.browserPage.clickPasswordField()
+        on.browserPage.verifyStrongPasswordPromptIsDisplayed()
+        on.browserPage.clickUseStrongPassword()
+        val generatedPassword = on.browserPage.getGeneratedPassword()
+
+        // Adding a username raises a second prompt to update the login.
+        on.browserPage.mozClearAndEnterText(username, BrowserPageSelectors.USERNAME_WEB_FIELD)
+        on.browserPage.clickSubmitLoginButton()
+        on.browserPage.verifyUpdateUsernamePromptIsDisplayed()
+        on.browserPage.mozClick(BrowserPageSelectors.SAVE_LOGIN_PROMPT_CONFIRM_BUTTON)
+
+        // The login now carries the username alongside the generated password.
+        on.settingsSavedPasswords.navigateToPage()
+        on.settingsSavedPasswords.mozClick(SettingsSavedPasswordsSelectors.SAVED_LOGIN_ENTRY(username))
+        on.settingsSavedPasswords.mozClick(SettingsSavedPasswordsSelectors.REVEAL_PASSWORD_BUTTON)
+        on.settingsSavedPasswords.mozVerify(SettingsSavedPasswordsSelectors.LOGIN_DETAILS_PASSWORD(generatedPassword))
     }
 }

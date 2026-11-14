@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import mozilla.components.browser.tabstray.R as tabstrayR
 import mozilla.components.compose.base.RadioCheckmark
+import mozilla.components.compose.draggable.ItemInteractionState
 import mozilla.components.support.base.utils.MAX_URI_LENGTH
 import org.mozilla.fenix.R
 import org.mozilla.fenix.compose.SwipeToDismissBackground
@@ -44,7 +45,6 @@ import org.mozilla.fenix.compose.rememberSwipeToDismissBoxState
 import org.mozilla.fenix.compose.swipeToDismissFade
 import org.mozilla.fenix.ext.toShortUrl
 import org.mozilla.fenix.tabstray.TabsTrayTestTag
-import org.mozilla.fenix.tabstray.browser.compose.ItemInteractionState
 import org.mozilla.fenix.tabstray.data.TabsTrayItem
 import org.mozilla.fenix.tabstray.data.createTab
 import org.mozilla.fenix.theme.FirefoxTheme

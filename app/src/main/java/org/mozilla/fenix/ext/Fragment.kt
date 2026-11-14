@@ -10,7 +10,6 @@ import android.content.res.ColorStateList
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
@@ -28,14 +27,10 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.R as materialR
 import mozilla.components.concept.base.crash.Breadcrumb
-import mozilla.components.support.utils.ext.isLandscape
-import mozilla.components.support.utils.ext.pixelSizeFor
 import mozilla.components.ui.icons.R as iconsR
 import org.mozilla.fenix.NavHostActivity
 import org.mozilla.fenix.R
 import org.mozilla.fenix.components.Components
-import org.mozilla.fenix.components.toolbar.ToolbarContainerView
-import org.mozilla.fenix.components.toolbar.ToolbarPosition
 import org.mozilla.fenix.navigation.DefaultNavControllerProvider
 import org.mozilla.fenix.navigation.NavControllerProvider
 import org.mozilla.fenix.theme.ThemeManager
@@ -231,121 +226,6 @@ fun Fragment.isTallWindow(): Boolean {
 /** Checks whether the app's current window width is at least more than [WIDE_SCREEN_WIDTH_DP]. */
 fun Fragment.isWideWindow(): Boolean {
     return requireContext().isWideWindow()
-}
-
-/**
- * Returns the height of the bottom toolbar.
- *
- * The bottom toolbar can consist of:
- * - a combination of address bar, navigation bar & a microsurvey.
- * - be absent.
- *
- * @param includeTabStripIfAvailable If true and the tab strip feature is enabled it's height will be included in the
- *   calculation.
- * @param includeNavBarIfEnabled If true and the navigation bar feature is enabled it's height will be included in the
- *   calculation.
- * @param includeTabGroupsStrip If true and the tab groups strip is enabled its height will be included in the
- *   calculation.
- */
-fun Fragment.getBottomToolbarHeight(
-    includeTabStripIfAvailable: Boolean = true,
-    includeNavBarIfEnabled: Boolean = true,
-    includeTabGroupsStrip: Boolean = true,
-): Int {
-    val settings = requireComponents.settings
-
-    val isMicrosurveyEnabled = settings.shouldShowMicrosurveyPrompt
-    val isToolbarAtBottom = settings.toolbarPosition == ToolbarPosition.BOTTOM
-    val isNavBarEnabled = settings.shouldUseExpandedToolbar && isTallWindow() && !isWideWindow()
-    val shouldShowTabStrip = includeTabStripIfAvailable && settings.shouldShowTabStripAtBottom
-    val shouldShowTabGroupsStrip = includeTabGroupsStrip && settings.shouldShowTabGroupsStrip
-    val navBarDimen = if (isToolbarAtBottom) R.dimen.browser_navbar_height_small else R.dimen.browser_navbar_height
-
-    val microsurveyHeight =
-        if (isMicrosurveyEnabled) {
-            pixelSizeFor(R.dimen.browser_microsurvey_height)
-        } else {
-            0
-        }
-
-    val toolbarHeight =
-        if (isToolbarAtBottom) {
-            settings.getBrowserToolbarHeight(requireContext())
-        } else {
-            0
-        }
-
-    val tabstripHeight =
-        when (shouldShowTabStrip) {
-            true -> pixelSizeFor(R.dimen.tab_strip_height)
-            else -> 0
-        }
-
-    val navBarHeight =
-        if (includeNavBarIfEnabled && isNavBarEnabled) {
-            pixelSizeFor(navBarDimen)
-        } else {
-            0
-        }
-
-    val tabGroupsStripHeight =
-        when (shouldShowTabGroupsStrip) {
-            true -> pixelSizeFor(R.dimen.tab_groups_strip_height)
-            else -> 0
-        }
-
-    return microsurveyHeight + toolbarHeight + navBarHeight + tabstripHeight + tabGroupsStripHeight
-}
-
-/**
- * Returns the height of the top toolbar.
- *
- * @param includeTabStripIfAvailable If true and the tab strip feature is enabled it's height will be included in the
- *   calculation.
- */
-fun Fragment.getTopToolbarHeight(includeTabStripIfAvailable: Boolean = true): Int {
-    val settings = requireComponents.settings
-    val isToolbarAtTop = settings.toolbarPosition == ToolbarPosition.TOP
-    val shouldShowTabStrip = includeTabStripIfAvailable && settings.shouldShowTabStripAtTop
-
-    val toolbarHeight =
-        when (isToolbarAtTop) {
-            true -> settings.getBrowserToolbarHeight(requireContext())
-            else -> 0
-        }
-
-    val tabStripHeight =
-        when (shouldShowTabStrip) {
-            true -> pixelSizeFor(R.dimen.tab_strip_height)
-            else -> 0
-        }
-
-    return toolbarHeight + tabStripHeight
-}
-
-/**
- * Manages the state of the microsurvey prompt on orientation change.
- *
- * @param parent The top level [ViewGroup] of the fragment, which will be hosting the [bottomToolbarContainerView].
- * @param bottomToolbarContainerView The [ToolbarContainerView] hosting the microsurvey prompt.
- * @param reinitializeMicrosurveyPrompt lambda for re-initializing the microsurvey prompt inside the host [Fragment].
- */
-fun Fragment.updateMicrosurveyPromptForConfigurationChange(
-    parent: ViewGroup,
-    bottomToolbarContainerView: ToolbarContainerView?,
-    reinitializeMicrosurveyPrompt: () -> Unit,
-) {
-    if (!requireContext().isLandscape()) {
-        // Already having a bottomContainer after switching back to portrait mode will happen when address bar is
-        // positioned at bottom and also as an edge case if configurationChange is called after onCreateView with the
-        // same orientation. Observed on a foldable emulator while going from single screen portrait mode to landscape
-        // tablet, back and forth.
-        bottomToolbarContainerView?.let {
-            parent.removeView(it)
-        }
-
-        reinitializeMicrosurveyPrompt()
-    }
 }
 
 /** Opens a [url] in a new tab and navigates to the browser fragment. */

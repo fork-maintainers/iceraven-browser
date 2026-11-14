@@ -6,9 +6,12 @@ package org.mozilla.fenix.ui.efficiency.tests
 
 import org.junit.Ignore
 import org.junit.Test
+import org.mozilla.fenix.customannotations.Critical
 import org.mozilla.fenix.customannotations.SmokeTest
 import org.mozilla.fenix.helpers.TestAssetHelper.getGenericAsset
 import org.mozilla.fenix.ui.efficiency.helpers.BaseTest
+import org.mozilla.fenix.ui.efficiency.selectors.HistorySelectors
+import org.mozilla.fenix.ui.efficiency.selectors.RecentlyClosedTabsSelectors
 
 class RecentlyClosedTabsTest : BaseTest() {
 
@@ -52,5 +55,24 @@ class RecentlyClosedTabsTest : BaseTest() {
         // Tapping the item reopens it as a browser tab.
         on.browserPage.navigateToPage()
         on.browserPage.verifyUrl(website.url.toString())
+    }
+
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/1065413
+    @Critical
+    @Test
+    fun verifyTheRecentlyClosedTabsViewInTheHistoryMenuTest() {
+        val website = mockWebServer.getGenericAsset(1)
+
+        on.history.navigateToPage().mozVerify(HistorySelectors.RECENTLY_CLOSED_TABS_NUMBER_OF_TABS(0))
+        on.browserPage.navigateToPage(website.url.toString())
+        on.tabDrawer.navigateToPage().closeAllTabs()
+        on.home.navigateToPage()
+        on.recentlyClosedTabs
+            .navigateToPage()
+            .mozVerify(RecentlyClosedTabsSelectors.RECENTLY_CLOSED_ITEM(website.title))
+            .mozClick(RecentlyClosedTabsSelectors.SHOW_FULL_HISTORY_BUTTON)
+        on.history
+            .mozVerify(HistorySelectors.RECENTLY_CLOSED_TABS_NUMBER_OF_TABS(1))
+            .mozVerifyElementsByGroup(HistorySelectors.Group.HISTORY_MENU_VIEW_WITH_HISTORY_ITEMS)
     }
 }

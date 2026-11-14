@@ -28,6 +28,7 @@ import org.mozilla.fenix.HomeActivity
 import org.mozilla.fenix.IntentReceiverActivity
 import org.mozilla.fenix.R
 import org.mozilla.fenix.components.LensImageUploader
+import org.mozilla.fenix.components.lens.CameraMode
 import org.mozilla.fenix.components.lens.LensCameraActivity
 import org.mozilla.fenix.components.lens.runLensUpload
 import org.mozilla.fenix.components.showQrScanConfirmationDialog
@@ -62,7 +63,7 @@ class LensSearchActivity : AppCompatActivity() {
         // still delivered to the re-registered launcher above.
         if (savedInstanceState == null) {
             SearchWidget.lensButton.record(NoExtras())
-            cameraLauncher.launch(LensCameraActivity.newIntent(this, isPrivate = false))
+            cameraLauncher.launch(LensCameraActivity.newIntent(this, isPrivate = false, initialMode = CameraMode.LENS))
         }
     }
 

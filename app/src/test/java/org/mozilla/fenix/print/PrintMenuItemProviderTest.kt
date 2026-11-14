@@ -14,6 +14,7 @@ import mozilla.components.browser.state.state.BrowserState
 import mozilla.components.browser.state.state.createTab
 import mozilla.components.browser.state.store.BrowserStore
 import mozilla.components.compose.base.text.Text
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.data.StandardMenuItem
 import mozilla.components.compose.menu.ui.MenuItemIconRes
 import mozilla.components.feature.session.SessionUseCases
@@ -38,7 +39,7 @@ class PrintMenuItemProviderTest {
     fun `GIVEN a non Automotive device WHEN building the menu item THEN return a properly configured menu button`() {
         assertEquals(
             StandardMenuItem(
-                title = Text.Resource(R.string.browser_menu_print_2),
+                title = MenuItemTitle(Text.Resource(R.string.browser_menu_print_2)),
                 icon = MenuItemIconRes(iconsR.drawable.mozac_ic_print_24),
                 onClickEvent = MenuAction.PrintRequested,
             ),

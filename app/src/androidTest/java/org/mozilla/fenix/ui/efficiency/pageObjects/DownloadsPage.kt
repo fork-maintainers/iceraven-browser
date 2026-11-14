@@ -5,6 +5,7 @@
 package org.mozilla.fenix.ui.efficiency.pageObjects
 
 import androidx.compose.ui.test.junit4.AndroidComposeTestRule
+import org.mozilla.fenix.helpers.AppAndSystemHelper
 import org.mozilla.fenix.helpers.HomeActivityIntentTestRule
 import org.mozilla.fenix.helpers.TestAssetHelper.waitingTime
 import org.mozilla.fenix.ui.efficiency.helpers.BasePage
@@ -79,6 +80,18 @@ class DownloadsPage(composeRule: AndroidComposeTestRule<HomeActivityIntentTestRu
     /** Undo the most recent download deletion via the snackbar's Undo action. */
     fun clickUndoDeleteSnackbarButton(): DownloadsPage {
         mozClick(DownloadsSelectors.UNDO_DELETE_SNACKBAR_BUTTON)
+        return this
+    }
+
+    /** Assert [fileName] has been removed from the device's public Downloads directory. */
+    fun verifyDownloadedFileIsDeletedFromStorage(fileName: String): DownloadsPage {
+        AppAndSystemHelper.assertDownloadedFileIsDeletedFromStorage(fileName)
+        return this
+    }
+
+    /** Assert [fileName] still exists in the device's public Downloads directory (not removed from disk). */
+    fun verifyDownloadedFileStillExistsOnStorage(fileName: String): DownloadsPage {
+        AppAndSystemHelper.assertDownloadedFileExistsOnStorage(fileName)
         return this
     }
 }

@@ -5,5 +5,4 @@
 <resources>
     <!-- Home Fragment -->
     <dimen name="wordmark_text_height">28dp</dimen>
-    <dimen name="wordmark_text_margin_top">12dp</dimen>
 </resources>

@@ -407,6 +407,11 @@ class SecretSettingsFragment : PreferenceFragmentCompat(), SystemInsetsPaddedFra
             onPreferenceChangeListener = SharedPreferenceUpdater()
         }
 
+        requirePreference<SwitchPreferenceCompat>(R.string.pref_key_enable_sync_decoupling).apply {
+            isChecked = settings.syncDecouplingEnabled
+            onPreferenceChangeListener = SharedPreferenceUpdater()
+        }
+
         requirePreference<SwitchPreferenceCompat>(R.string.pref_key_enable_homepage_customization).apply {
             isChecked = settings.enableHomepageCustomization
             onPreferenceChangeListener = SharedPreferenceUpdater()
@@ -599,9 +604,37 @@ class SecretSettingsFragment : PreferenceFragmentCompat(), SystemInsetsPaddedFra
         }
 
         requirePreference<SwitchPreferenceCompat>(R.string.pref_key_enable_menu_customization).apply {
-            isVisible = Config.channel.isDebug
+            isVisible = Config.channel.isNightlyOrDebug
             isChecked = context.components.settings.isMenuCustomizationEnabled
-            onPreferenceChangeListener = SharedPreferenceUpdater()
+            onPreferenceChangeListener =
+                object : SharedPreferenceUpdater() {
+                    override fun onPreferenceChange(preference: Preference, newValue: Any?): Boolean {
+                        val enabled = newValue as? Boolean ?: false
+                        requirePreference<SwitchPreferenceCompat>(R.string.pref_key_enable_menu_customization_screen)
+                            .apply {
+                                if (!enabled) {
+                                    isChecked = false
+                                    context.components.settings.isMenuCustomizationScreenEnabled = false
+                                }
+                                isVisible = enabled
+                            }
+                        return super.onPreferenceChange(preference, newValue)
+                    }
+                }
+        }
+
+        requirePreference<SwitchPreferenceCompat>(R.string.pref_key_enable_menu_customization_screen).apply {
+            isVisible = Config.channel.isDebug && context.components.settings.isMenuCustomizationEnabled
+            isChecked = context.components.settings.isMenuCustomizationScreenEnabled
+            onPreferenceChangeListener =
+                object : SharedPreferenceUpdater() {
+                    override fun onPreferenceChange(preference: Preference, newValue: Any?): Boolean {
+                        if (!context.components.settings.isMenuCustomizationEnabled) {
+                            return false
+                        }
+                        return super.onPreferenceChange(preference, newValue)
+                    }
+                }
         }
     }
 

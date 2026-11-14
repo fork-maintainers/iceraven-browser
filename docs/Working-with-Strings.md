@@ -21,7 +21,7 @@ For more information, see [this document](https://mozilla-l10n.github.io/documen
 
 It is possible to preland strings to gain more time for localization. In these cases, make sure to provide additional context in the patch (e.g. Figma designs or screenshots), as localizers may need screenshots or designs to understand the context.
 
-If the prelanded strings are not yet referenced by any code, also add `tools:ignore="UnusedResources"`. Note that this is enforced through a [linter](https://firefox-source-docs.mozilla.org/code-quality/lint/linters/android-expired-strings.html). For example:
+If the prelanded strings are not yet referenced by any code, also add `tools:ignore="UnusedResources"`. Note that this is enforced through a {doc}`linter </code-quality/lint/linters/android-expired-strings>`. For example:
 
 ```xml
 <string name="new_feature_title" tools:ignore="UnusedResources">New Feature</string>

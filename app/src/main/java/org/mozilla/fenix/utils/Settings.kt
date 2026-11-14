@@ -49,6 +49,7 @@ import org.mozilla.fenix.GleanMetrics.TopSites
 import org.mozilla.fenix.R
 import org.mozilla.fenix.autofill.address.RegionAddressFeatureGate
 import org.mozilla.fenix.browser.browsingmode.BrowsingMode
+import org.mozilla.fenix.components.lens.CameraMode
 import org.mozilla.fenix.components.settings.counterPreference
 import org.mozilla.fenix.components.settings.featureFlagBooleanPreference
 import org.mozilla.fenix.components.settings.lazyFeatureFlagBooleanPreference
@@ -2091,6 +2092,13 @@ class Settings(
             default = false,
         )
 
+    /** The app version code that last published the generated search bar widget previews. */
+    var searchBarWidgetPreviewsVersion by
+        intPreference(
+            appContext.getPreferenceKey(R.string.pref_key_search_bar_widget_previews_version),
+            default = 0,
+        )
+
     /** Indicates if the "pocket_recommendations" database has been deleted. */
     private var hasDeletedLegacyPocketDatabase by
         booleanPreference(
@@ -2531,6 +2539,16 @@ class Settings(
             default = { FxNimbus.features.continuousOnboarding.value().enabled },
         )
 
+    /**
+     * Whether the Sync sign-in card can be shown during initial onboarding for users whose Firefox install is
+     * attributed to a pairing campaign link.
+     */
+    var isPairingSignInPromptEnabled by
+        booleanPreference(
+            appContext.getPreferenceKey(R.string.pref_key_is_pairing_sign_in_prompt_enabled),
+            default = { FxNimbus.features.pairingSigninPrompt.value().enabled },
+        )
+
     /** The completion timestamp of the second day of continuous onboarding. */
     var secondDayOnboardingCompletedTimestamp by
         longPreference(
@@ -2563,6 +2581,13 @@ class Settings(
     val continuousOnboardingCompleted: Boolean
         get() = seventhDayOnboardingCompletedTimestamp != -1L
 
+    /** Indicates if the migrate onboarding state feature is enabled. */
+    var migrateOnboardingStateFeatureEnabled by
+        booleanPreference(
+            key = appContext.getPreferenceKey(R.string.pref_key_migrate_onboarding_state_enabled),
+            default = { FxNimbus.features.migrateOnboardingState.value().enabled },
+        )
+
     /** Indicates if the marketing onboarding card should be shown to the user. */
     var shouldShowMarketingOnboarding by
         booleanPreference(
@@ -2581,6 +2606,16 @@ class Settings(
         booleanPreference(
             key = appContext.getPreferenceKey(R.string.pref_key_use_remote_search_configuration),
             default = { FxNimbus.features.remoteSearchConfiguration.value().enabled },
+        )
+
+    /**
+     * Indicates whether to read search configuration from the `search-config-v3` Remote Settings collection instead of
+     * `search-config-v2`.
+     */
+    var useSearchConfigV3 by
+        booleanPreference(
+            key = appContext.getPreferenceKey(R.string.pref_key_use_search_config_v3),
+            default = { FxNimbus.features.searchConfigV3.value().enabled },
         )
 
     /** Get the current mode for how https-only is enabled. */
@@ -3052,13 +3087,6 @@ class Settings(
             default = false,
         )
 
-    /** Indicates if a microsurvey should be shown to the user. */
-    var shouldShowMicrosurveyPrompt by
-        booleanPreference(
-            appContext.getPreferenceKey(R.string.pref_key_should_show_microsurvey_prompt),
-            default = false,
-        )
-
     /** Last time the Set as default Browser prompt has been displayed to the user. */
     var lastSetAsDefaultPromptShownTimeInMillis by
         longPreference(
@@ -3462,6 +3490,22 @@ class Settings(
             default = false,
         )
 
+    private var lensCameraLastModeName by
+        stringPreference(
+            key = appContext.getPreferenceKey(R.string.pref_key_lens_camera_last_mode),
+            default = CameraMode.LENS.name,
+        )
+
+    /**
+     * The [CameraMode] the user last selected on the Google Lens camera screen. The camera screen opens in this mode
+     * and the address bar shows the matching icon.
+     */
+    var lensCameraLastMode: CameraMode
+        get() = CameraMode.fromNameOrNull(lensCameraLastModeName) ?: CameraMode.LENS
+        set(value) {
+            lensCameraLastModeName = value.name
+        }
+
     /** Whether the voice search entry point is shown in the display-mode browser toolbar. */
     var showVoiceSearchInDisplayToolbar by
         booleanPreference(
@@ -3476,10 +3520,17 @@ class Settings(
             default = { FxNimbus.features.addressbarFocusMode.value().enabled },
         )
 
-    /** Whether the customizing the browser menu is allowed. */
+    /** Whether customizing the browser menu is allowed. */
     var isMenuCustomizationEnabled by
         booleanPreference(
             key = appContext.getPreferenceKey(R.string.pref_key_enable_menu_customization),
+            default = { false },
+        )
+
+    /** Whether entering the browser menu customization screen is allowed. */
+    var isMenuCustomizationScreenEnabled by
+        booleanPreference(
+            key = appContext.getPreferenceKey(R.string.pref_key_enable_menu_customization_screen),
             default = { false },
         )
 
@@ -3582,6 +3633,13 @@ class Settings(
         booleanPreference(
             key = appContext.getPreferenceKey(R.string.pref_key_enable_account_settings_new_ui),
             default = { FxNimbus.features.accountSyncDecoupleM1.value().enabled },
+        )
+
+    /** Whether or not accounts & sync decoupling is enabled */
+    var syncDecouplingEnabled by
+        booleanPreference(
+            key = appContext.getPreferenceKey(R.string.pref_key_enable_sync_decoupling),
+            default = { FxNimbus.features.accountSyncDecouple.value().enabled },
         )
 
     private var powerSavingModeAutoPreference by

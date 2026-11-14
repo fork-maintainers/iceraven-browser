@@ -14,6 +14,7 @@ import mozilla.components.browser.state.state.TabSessionState
 import mozilla.components.browser.state.store.BrowserStore
 import mozilla.components.compose.base.text.Text
 import mozilla.components.compose.menu.data.MenuItem
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.data.StandardMenuItem
 import mozilla.components.compose.menu.store.MenuEvent
 import mozilla.components.compose.menu.ui.MenuItemIconRes
@@ -68,7 +69,7 @@ class ReaderViewMenuItemProvider(
     private companion object {
         val CUSTOMIZE_READER_VIEW_ITEM =
             StandardMenuItem(
-                title = Text.Resource(R.string.browser_menu_customize_reader_view_2),
+                title = MenuItemTitle(Text.Resource(R.string.browser_menu_customize_reader_view_2)),
                 icon = MenuItemIconRes(iconsR.drawable.mozac_ic_tool_24),
                 onClickEvent = MenuAction.CustomizeReaderView,
             )

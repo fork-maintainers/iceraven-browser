@@ -43,6 +43,7 @@ import mozilla.components.concept.engine.Engine
 import mozilla.components.concept.engine.EngineSession.LoadUrlFlags
 import mozilla.components.feature.session.SessionUseCases
 import mozilla.components.feature.tabs.TabsUseCases
+import mozilla.components.support.ktx.util.URLStringUtils
 import mozilla.components.support.test.middleware.CaptureActionsMiddleware
 import mozilla.components.support.test.robolectric.testContext
 import mozilla.components.support.utils.ClipboardHandler
@@ -692,6 +693,47 @@ class FenixSearchMiddlewareTest {
     }
 
     @Test
+    fun `WHEN a search or clipboard suggestion is selected for edit THEN keep its text literal`() {
+        val text = "https://example.com/%D1%82%20file?q=%2520"
+        val (_, store) = buildMiddlewareAndAddToSearchStore()
+
+        listOf(emptySet(), setOf(Suggestion.Flag.CLIPBOARD)).forEach { flags ->
+            store.dispatch(SuggestionSelected(Suggestion(provider = mockk(), editSuggestion = text, flags = flags)))
+        }
+
+        verify(exactly = 2) {
+            toolbarStore.dispatch(
+                BrowserEditToolbarAction.SearchQueryUpdated(
+                    query = BrowserToolbarQuery(text),
+                    isQueryPrefilled = true,
+                )
+            )
+        }
+    }
+
+    @Test
+    fun `WHEN a suggestion holding a browser URL is selected for edit THEN make the URL readable`() {
+        val url = "https://example.com/%D1%82%D0%B5%D1%81%D1%82%20file?q=hello%20world"
+        val (_, store) = buildMiddlewareAndAddToSearchStore()
+
+        listOf(Suggestion.Flag.HISTORY, Suggestion.Flag.BOOKMARK, Suggestion.Flag.OPEN_TAB, Suggestion.Flag.SYNC_TAB)
+            .forEach { flag ->
+                store.dispatch(
+                    SuggestionSelected(Suggestion(provider = mockk(), editSuggestion = url, flags = setOf(flag)))
+                )
+            }
+
+        verify(exactly = 4) {
+            toolbarStore.dispatch(
+                BrowserEditToolbarAction.SearchQueryUpdated(
+                    query = BrowserToolbarQuery("https://example.com/тест file?q=hello world"),
+                    isQueryPrefilled = true,
+                )
+            )
+        }
+    }
+
+    @Test
     fun `WHEN choosing to share the current website details THEN share the details of the tab search started for`() {
         stubCurrentNavDestination()
         val currentTab = createTab(url = "https://mozilla.com", title = "Mozilla", private = false)
@@ -786,6 +828,35 @@ class FenixSearchMiddlewareTest {
         store.dispatch(CopyCurrentWebsiteDetailsClicked)
 
         verify(exactly = 0) { appStore.dispatch(URLCopiedToClipboard) }
+    }
+
+    @Test
+    fun `editing an encoded page prefills readable text and leaves copying canonical`() {
+        val url = "https://example.com/%D1%82%D0%B5%D1%81%D1%82%20file?q=hello%20world"
+        val tab = createTab(url = url)
+        stubSearchSourceTab(tab.id)
+        val (_, store) = buildMiddlewareAndAddToSearchStore(browserStore = buildBrowserStore(tab))
+        store.dispatch(EditCurrentWebsiteDetailsClicked)
+        verify {
+            toolbarStore.dispatch(
+                BrowserEditToolbarAction.SearchQueryUpdated(
+                    BrowserToolbarQuery("https://example.com/тест file?q=hello world"),
+                    true,
+                )
+            )
+        }
+        store.dispatch(CopyCurrentWebsiteDetailsClicked)
+        verify { clipboardHandler.text = url }
+    }
+
+    @Test
+    fun `readable current page prefill does not enable search suggestions`() {
+        val url = "https://example.com/a%20b?token=secret%20value"
+        val store =
+            buildStore(initialState = buildEmptySearchState().copy(currentTabData = CurrentTabData("", url, null)))
+        store.dispatch(SearchFragmentAction.UpdateQuery(URLStringUtils.toLosslessEditableUrl(url)))
+        assertFalse(store.state.shouldShowSearchSuggestions)
+        assertFalse(store.state.showSearchSuggestionsHint)
     }
 
     @Test

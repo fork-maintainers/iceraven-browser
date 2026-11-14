@@ -5,14 +5,18 @@
 package org.mozilla.fenix.components.menu
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import io.mockk.every
 import io.mockk.mockk
 import kotlin.reflect.KClass
 import kotlin.test.assertEquals
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.test.StandardTestDispatcher
+import mozilla.components.ExperimentalAndroidComponentsApi
 import mozilla.components.browser.state.store.BrowserStore
 import mozilla.components.feature.ipprotection.store.IPProtectionStore
+import mozilla.components.feature.ipprotection.store.state.EligibilityStatus
+import mozilla.components.feature.ipprotection.store.state.IPProtectionState
 import mozilla.components.service.fxa.store.SyncStore
 import mozilla.components.support.test.robolectric.testContext
 import org.junit.After
@@ -28,6 +32,7 @@ import org.mozilla.fenix.browser.ForwardMenuItemProvider
 import org.mozilla.fenix.browser.RefreshMenuItemProvider
 import org.mozilla.fenix.browser.ShareMenuItemProvider
 import org.mozilla.fenix.browser.applinks.OpenInAppMenuItemProvider
+import org.mozilla.fenix.browser.applinks.OpenInFirefoxMenuItemProvider
 import org.mozilla.fenix.browser.menu.MoreMenuItemsProvider
 import org.mozilla.fenix.browser.menu.MoveToNormalTabsMenuItemProvider
 import org.mozilla.fenix.browser.readermode.ReaderViewMenuItemProvider
@@ -35,7 +40,9 @@ import org.mozilla.fenix.collections.SaveToCollectionMenuItemProvider
 import org.mozilla.fenix.components.AppStore
 import org.mozilla.fenix.components.FindInPageMenuItemProvider
 import org.mozilla.fenix.components.accounts.MozillaAccountMenuItemProvider
+import org.mozilla.fenix.components.menu.fake.reachableEvents
 import org.mozilla.fenix.downloads.DownloadsMenuItemProvider
+import org.mozilla.fenix.home.CustomizeHomepageMenuItemProvider
 import org.mozilla.fenix.home.topsites.ShortcutMenuItemProvider
 import org.mozilla.fenix.ipprotection.VpnMenuItemProvider
 import org.mozilla.fenix.library.history.HistoryMenuItemProvider
@@ -47,6 +54,7 @@ import org.mozilla.fenix.settings.logins.PasswordsMenuItemProvider
 import org.mozilla.fenix.shortcut.AddToHomeScreenMenuItemProvider
 import org.mozilla.fenix.summarization.SummarizePageMenuItemProvider
 import org.mozilla.fenix.translations.TranslationsMenuItemProvider
+import org.mozilla.fenix.utils.Settings
 import org.mozilla.fenix.webcompat.ReportBrokenSiteMenuItemProvider
 
 @RunWith(AndroidJUnit4::class)
@@ -67,6 +75,52 @@ class MenuItemProvidersFactoryTest {
         }
     }
 
+    @OptIn(ExperimentalAndroidComponentsApi::class)
+    @Test
+    fun `WHEN building the home menu THEN show all its items and handle each of their events exactly once`() {
+        val settings: Settings =
+            mockk(relaxed = true) {
+                every { shouldShowMenuBanner } returns true
+                every { isDefaultBrowser } returns false
+                every { isAutofillSupported } returns true
+                every { shouldDeleteBrowsingDataOnQuit } returns true
+            }
+        val eligibleState = IPProtectionState(eligibilityStatus = EligibilityStatus.Eligible)
+        val factory =
+            createFactory(
+                accessPoint = MenuAccessPoint.Home,
+                target = MenuTarget.Home,
+                ipProtectionStore = IPProtectionStore(eligibleState),
+                settings = settings,
+            )
+        val registry =
+            MenuItemsRegistry(configuration = MenuConfigurations.home(), resolver = factory::buildProviderFor)
+
+        val shown = registry.providers.filterValues { it.itemFlow.value != null }.keys
+        assertEquals(
+            listOf(
+                FenixMenuItem.DefaultBrowserBanner,
+                FenixMenuItem.IPProtection,
+                FenixMenuItem.Extensions,
+                FenixMenuItem.History,
+                FenixMenuItem.Bookmarks,
+                FenixMenuItem.Downloads,
+                FenixMenuItem.Passwords,
+                FenixMenuItem.MozillaAccount,
+                FenixMenuItem.CustomizeHomepage,
+                FenixMenuItem.Settings,
+                FenixMenuItem.Quit,
+            ),
+            shown.toList(),
+        )
+        registry.providers.values
+            .mapNotNull { it.itemFlow.value }
+            .flatMap { it.reachableEvents() }
+            .forEach { event ->
+                assertEquals(1, registry.providers.values.count { it.handles(event) }, "Handlers of $event")
+            }
+    }
+
     private fun allMenuItems(): List<FenixMenuItem> =
         FenixMenuItem::class.sealedSubclasses.map { type ->
             type.objectInstance
@@ -76,14 +130,19 @@ class MenuItemProvidersFactoryTest {
                 }
         }
 
-    private fun createFactory() =
+    private fun createFactory(
+        accessPoint: MenuAccessPoint = MenuAccessPoint.Browser,
+        target: MenuTarget = MenuTarget.BrowserTab,
+        ipProtectionStore: IPProtectionStore = IPProtectionStore(),
+        settings: Settings = mockk(relaxed = true),
+    ) =
         MenuItemProvidersFactory(
             context = testContext,
-            accessPoint = MenuAccessPoint.Browser,
-            target = MenuTarget.BrowserTab,
+            accessPoint = accessPoint,
+            target = target,
             browserStore = BrowserStore(),
             appStore = AppStore(),
-            ipProtectionStore = IPProtectionStore(),
+            ipProtectionStore = ipProtectionStore,
             syncStore = SyncStore(),
             httpClient = mockk(relaxed = true),
             historyStorage = mockk(relaxed = true),
@@ -94,7 +153,7 @@ class MenuItemProvidersFactoryTest {
             useCases = mockk(relaxed = true),
             addonManager = mockk(relaxed = true),
             engine = mockk(relaxed = true),
-            settings = mockk(relaxed = true),
+            settings = settings,
             summarizeFeatureSettings = mockk(relaxed = true),
             summarizeEligibilityChecker = mockk(relaxed = true),
             translationsSettings = mockk(relaxed = true),
@@ -124,9 +183,11 @@ class MenuItemProvidersFactoryTest {
             FenixMenuItem.AddToHomeScreen::class to AddToHomeScreenMenuItemProvider::class,
             FenixMenuItem.SaveToCollection::class to SaveToCollectionMenuItemProvider::class,
             FenixMenuItem.OpenInApp::class to OpenInAppMenuItemProvider::class,
+            FenixMenuItem.OpenInFirefox::class to OpenInFirefoxMenuItemProvider::class,
             FenixMenuItem.SaveAsPdf::class to SaveAsPdfMenuItemProvider::class,
             FenixMenuItem.Print::class to PrintMenuItemProvider::class,
             FenixMenuItem.MozillaAccount::class to MozillaAccountMenuItemProvider::class,
+            FenixMenuItem.CustomizeHomepage::class to CustomizeHomepageMenuItemProvider::class,
             FenixMenuItem.Settings::class to SettingsMenuItemProvider::class,
             FenixMenuItem.Quit::class to QuitMenuItemProvider::class,
             FenixMenuItem.Back::class to BackMenuItemProvider::class,

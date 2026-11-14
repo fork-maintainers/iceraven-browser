@@ -8,8 +8,6 @@
     <!-- Layers -->
     <!-- Card background, Menu background, Dialog, Banner -->
     <attr name="layer2" format="reference" />
-    <!-- Search -->
-    <attr name="layer3" format="reference" />
     <attr name="scrim" format="reference" />
 
     <!-- Action -->
@@ -17,14 +15,8 @@
     <attr name="actionPrimaryDisabled" format="reference" />
 
     <!-- Text -->
-    <!-- Text Inverted/On Color -->
-    <attr name="textOnColorPrimary" format="reference" />
     <!-- Action Primary disabled text -->
     <attr name="textActionPrimaryDisabled" format="reference" />
-
-    <!-- Icon -->
-    <!-- Icon inverted (on color) -->
-    <attr name="iconOnColor" format="reference" />
 
     <!-- Material3 extended palettes -->
     <attr name="colorInformation" format="reference" />
@@ -46,25 +38,10 @@
     <attr name="colorSelectedText" format="reference" />
     <attr name="colorIconPrivate" format="reference" />
 
-    <!-- Color palette attributes -->
-    <attr name="accent" format="reference" />
-    <attr name="accentBright" format="reference" />
-    <attr name="accentHighContrast" format="reference" />
-    <attr name="accentUsedOnDarkBackground" format="reference" />
-    <attr name="neutral" format="reference" />
-    <attr name="neutralFaded" format="reference" />
-
     <!-- Misc -->
-    <attr name="bottomBarBackground" format="reference"/>
-    <attr name="bottomBarBackgroundTop" format="reference"/>
     <attr name="fenixLogo" format="reference" />
     <attr name="fenixWordmarkText" format="reference" />
     <attr name="fenixWordmarkLogo" format="reference" />
-    <attr name="toolbarStartGradient" format="reference"/>
-    <attr name="toolbarCenterGradient" format="reference"/>
-    <attr name="toolbarEndGradient" format="reference"/>
-    <attr name="fillLinkFromClipboard" format="reference"/>
-    <attr name="addOnPrivateBrowsingExteriorCircleBackground" format="reference"/>
     <attr name="awesomeBarIndicatorColor" format="reference|color"/>
     <attr name="awesomeBarIndicatorBookmarkColor" format="reference|color"/>
 
@@ -76,10 +53,7 @@
     <declare-styleable name="DeleteBrowsingDataItem">
         <attr name="deleteBrowsingDataItemTitle" format="reference" />
         <attr name="deleteBrowsingDataItemSubtitle" format="reference" />
-        <attr name="deleteBrowsingDataItemIcon" format="reference" />
     </declare-styleable>
-
-    <attr name="selectPromptHeaderTextColor" format="reference"/>
 
     <declare-styleable name="TextPercentageSeekBarPreference">
         <attr format="integer" name="min"/>

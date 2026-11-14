@@ -1576,48 +1576,6 @@ onboarding:
     send_in_pings:
       - onboarding
       - events
-  toolbar_placement_card:
-    type: event
-    description: |
-      User viewed the toolbar placement onboarding card.
-    extra_keys:
-      element_type:
-        type: string
-        description: |
-          Type of element that was viewed.
-      action:
-        type: string
-        description: |
-          Type of action taken by the user.
-      sequence_position:
-        type: string
-        description: |
-          Position of the onboarding card in the onboarding flow.
-      sequence_id:
-        type: string
-        description: |
-          Identifier for the sequence.
-      onboarding_reason:
-        type: string
-        description: The reason the user is being onboarded.
-      install_source:
-        type: string
-        description: The source of installation.
-    bugs:
-      - https://bugzilla.mozilla.org/show_bug.cgi?id=1926956
-    data_sensitivity:
-      - interaction
-    data_reviews:
-      - https://phabricator.services.mozilla.com/D230299
-    notification_emails:
-      - android-probes@mozilla.com
-    expires: never
-    metadata:
-      tags:
-        - Onboarding
-    send_in_pings:
-      - onboarding
-      - events
   set_to_default:
     type: event
     description: |
@@ -1865,181 +1823,6 @@ onboarding:
     data_reviews:
       - https://github.com/mozilla-mobile/firefox-android/pull/1554
       - https://github.com/mozilla-mobile/firefox-android/pull/4039
-    data_sensitivity:
-      - interaction
-    notification_emails:
-      - android-probes@mozilla.com
-    expires: never
-    metadata:
-      tags:
-        - Onboarding
-    send_in_pings:
-      - onboarding
-      - events
-  add_search_widget_card:
-    type: event
-    description: |
-      User viewed onboarding add search widget card.
-    extra_keys:
-      element_type:
-        type: string
-        description: |
-          Type of element that was viewed.
-      action:
-        type: string
-        description: |
-          Type of action taken by the user.
-      sequence_position:
-        type: string
-        description: |
-          Position of the onboarding card in the onboarding flow.
-      sequence_id:
-        type: string
-        description: |
-          Identifier for the sequence.
-      onboarding_reason:
-        type: string
-        description: The reason the user is being onboarded.
-      install_source:
-        type: string
-        description: The source of installation.
-    bugs:
-      - https://bugzilla.mozilla.org/show_bug.cgi?id=1848960
-    data_reviews:
-      - https://github.com/mozilla-mobile/firefox-android/pull/3310
-      - https://github.com/mozilla-mobile/firefox-android/pull/4039
-    data_sensitivity:
-      - interaction
-    notification_emails:
-      - android-probes@mozilla.com
-    expires: never
-    metadata:
-      tags:
-        - Onboarding
-    send_in_pings:
-      - onboarding
-      - events
-  add_search_widget:
-    type: event
-    description: |
-      User tapped on Add Firefox Widget in onboarding.
-    extra_keys:
-      element_type:
-        type: string
-        description: |
-          Type of element that was viewed.
-      action:
-        type: string
-        description: |
-          Type of action taken by the user.
-      sequence_position:
-        type: string
-        description: |
-          Position of the onboarding card in the onboarding flow.
-      sequence_id:
-        type: string
-        description: |
-          Identifier for the sequence.
-      onboarding_reason:
-        type: string
-        description: The reason the user is being onboarded.
-      install_source:
-        type: string
-        description: The source of installation.
-    bugs:
-      - https://bugzilla.mozilla.org/show_bug.cgi?id=1848960
-    data_reviews:
-      - https://github.com/mozilla-mobile/firefox-android/pull/3310
-      - https://github.com/mozilla-mobile/firefox-android/pull/4039
-    data_sensitivity:
-      - interaction
-    notification_emails:
-      - android-probes@mozilla.com
-    expires: never
-    metadata:
-      tags:
-        - Onboarding
-    send_in_pings:
-      - onboarding
-      - events
-  skip_add_search_widget:
-    type: event
-    description: |
-      User tapped on skip add search widget button in onboarding.
-    extra_keys:
-      element_type:
-        type: string
-        description: |
-          Type of element that was viewed.
-      action:
-        type: string
-        description: |
-          Type of action taken by the user.
-      sequence_position:
-        type: string
-        description: |
-          Position of the onboarding card in the onboarding flow.
-      sequence_id:
-        type: string
-        description: |
-          Identifier for the sequence.
-      onboarding_reason:
-        type: string
-        description: The reason the user is being onboarded.
-      install_source:
-        type: string
-        description: The source of installation.
-    bugs:
-      - https://bugzilla.mozilla.org/show_bug.cgi?id=1848960
-    data_reviews:
-      - https://github.com/mozilla-mobile/firefox-android/pull/3310
-      - https://github.com/mozilla-mobile/firefox-android/pull/4039
-    data_sensitivity:
-      - interaction
-    notification_emails:
-      - android-probes@mozilla.com
-    expires: never
-    metadata:
-      tags:
-        - Onboarding
-    send_in_pings:
-      - onboarding
-      - events
-  select_toolbar_placement:
-    type: event
-    description: |
-      User selected a toolbar placement option and tapped on save button for picking toolbar placement in onboarding.
-    extra_keys:
-      toolbar_placement:
-        type: string
-        description: |
-          The type of toolbar placement selected (ie. top or bottom).
-      element_type:
-        type: string
-        description: |
-          Type of element that was viewed.
-      action:
-        type: string
-        description: |
-          Type of action taken by the user.
-      sequence_position:
-        type: string
-        description: |
-          Position of the onboarding card in the onboarding flow.
-      sequence_id:
-        type: string
-        description: |
-          Identifier for the sequence.
-      onboarding_reason:
-        type: string
-        description: The reason the user is being onboarded.
-      install_source:
-        type: string
-        description: The source of installation.
-    bugs:
-      - https://bugzilla.mozilla.org/show_bug.cgi?id=1926956
-    data_reviews:
-      - https://phabricator.services.mozilla.com/D230299
     data_sensitivity:
       - interaction
     notification_emails:
@@ -6118,6 +5901,29 @@ sync_auth:
     metadata:
       tags:
         - Sync
+  pairing_link_opened:
+    type: event
+    description: |
+      A Firefox Accounts pairing link was opened in the app. This happens during the desktop to
+      mobile pairing flow when Firefox is already installed.
+    extra_keys:
+      campaign_attributed:
+        description: |
+          Whether this install was attributed to the pairing campaign marker
+          (`pairing-signin-prompt.campaign-utm-content`).
+        type: boolean
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2068232
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D334605
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+    metadata:
+      tags:
+        - Sync
 
 sync_account:
   opened:
@@ -8514,6 +8320,47 @@ collections:
       tags:
         - Collections
 
+collections_migration:
+  promo_impression:
+    type: event
+    description: |
+      The Collections to Tab Groups migration promo card was shown to the user.
+    extra_keys:
+      source:
+        description: |
+          Where the promo card was shown. Possible values are: `homepage` or
+          `tabs_tray`.
+        type: string
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2078663
+    data_reviews:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2078663
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: 163
+    metadata:
+      tags:
+        - Collections
+  promo_click:
+    type: event
+    description: |
+      The user clicked the "View my tab groups" link on the Collections to Tab
+      Groups migration promo card on the homepage.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2078663
+    data_reviews:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2078663
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: 163
+    metadata:
+      tags:
+        - Collections
+
 search_widget:
   new_tab_button:
     type: event
@@ -9271,6 +9118,552 @@ media_state:
     metadata:
       tags:
         - Media
+
+listen_to_page:
+  play_pressed:
+    type: event
+    description: |
+      The user pressed the play button to resume. Playback starts on its own
+      when the audio icon is tapped, which `requested` records.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D331404
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  pause_pressed:
+    type: event
+    description: |
+      The user pressed the pause button.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D331404
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  skip_back_pressed:
+    type: event
+    description: |
+      The user pressed the skip-back button to jump backward.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D331404
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  skip_forward_pressed:
+    type: event
+    description: |
+      The user pressed the skip-forward button to jump forward.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D331404
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  seek_performed:
+    type: event
+    description: |
+      The user dragged the progress bar to a different position.
+    extra_keys:
+      direction:
+        description: |
+          Whether the seek moved the position `forward` or `backward`.
+        type: string
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D331404
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  voice_list_opened:
+    type: event
+    description: |
+      The user opened the voice list.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D331404
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  voice_list_dismissed:
+    type: event
+    description: |
+      The user dismissed the voice list without picking a voice.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D331404
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  voice_selected:
+    type: event
+    description: |
+      A voice was selected.
+    extra_keys:
+      is_default:
+        description: |
+          Whether the picked voice is the default voice.
+        type: boolean
+      source:
+        description: |
+          Source for the voice selection, either `user_selected` or `fallback`
+          (it was chosen automatically after the saved voice became unavailable).
+        type: string
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D331404
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  speed_list_opened:
+    type: event
+    description: |
+      The user opened the playback speed list.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D331404
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  speed_list_dismissed:
+    type: event
+    description: |
+      The user dismissed the playback speed list without picking a speed.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D331404
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  speed_selected:
+    type: event
+    description: |
+      A playback speed was selected.
+    extra_keys:
+      speed:
+        description: |
+          The selected speed as a multiple of the normal reading speed.
+        type: string
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D331404
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  requested:
+    type: event
+    description: |
+      The user requested to listen to the page.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D331404
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  content_ready:
+    type: event
+    description: |
+      The page was extracted and is ready to read.
+    extra_keys:
+      language:
+        description: |
+          The BCP 47 language the page is read in.
+        type: string
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D331404
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  playback_started:
+    type: event
+    description: |
+      Audio playback started.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D331404
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  playback_ended:
+    type: event
+    description: |
+      Audio playback ended.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D331404
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  stopped:
+    type: event
+    description: |
+      The listening session was stopped.
+    extra_keys:
+      source:
+        description: |
+          Session ended due to either the `close_button` or `tab_closed`
+          (the listened tab was closed or user navigated elsewhere).
+        type: string
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D331404
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  no_offline_voice:
+    type: event
+    description: |
+      No offline voice is available for the page's language.
+    extra_keys:
+      language:
+        description: |
+          The BCP 47 language of the page.
+        type: string
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D331404
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  content_unavailable:
+    type: event
+    description: |
+      The page had no readable content.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D331404
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  synthesis_failed:
+    type: event
+    description: |
+      The speech engine failed to produce audio.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D331404
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  playback_failed:
+    type: event
+    description: |
+      The player failed to read the page.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D331404
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  time_to_first_audio:
+    type: timing_distribution
+    time_unit: millisecond
+    description: |
+      The time between the user asking to listen to a page and the player
+      starting to read it out. Sessions that are stopped or fail before any
+      audio plays are not recorded.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D333059
+    data_sensitivity:
+      - technical
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  extraction_duration:
+    type: timing_distribution
+    time_unit: millisecond
+    description: |
+      The time taken to extract the article text and language from the page.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D333064
+    data_sensitivity:
+      - technical
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  preparation_duration:
+    type: timing_distribution
+    time_unit: millisecond
+    description: |
+      The phase of time_to_first_audio from the article text being ready
+      until the speech engine starts to make the opening audio. It covers
+      loading the voices and binding the speech engine.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D333064
+    data_sensitivity:
+      - technical
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  opening_synthesis_duration:
+    type: timing_distribution
+    time_unit: millisecond
+    description: |
+      The phase of time_to_first_audio in which the speech engine makes the
+      audio of the opening sentence.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D333064
+    data_sensitivity:
+      - technical
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  playback_start_duration:
+    type: timing_distribution
+    time_unit: millisecond
+    description: |
+      The last phase of time_to_first_audio, from the opening audio being made
+      until the player reports reading it out. It covers chunking the rest of
+      the article and starting the player.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D333064
+    data_sensitivity:
+      - technical
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  chunk_synthesis_duration:
+    type: timing_distribution
+    time_unit: millisecond
+    description: |
+      The time the speech engine took to make the audio of one chunk of a
+      page. The first chunk, the opening sentence, is left out every time it
+      is made, because it is far shorter than the chunks after it. It is made
+      again after a voice change or a seek back to the start of the article.
+      See opening_synthesis_duration.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D333060
+    data_sensitivity:
+      - technical
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  tts_engine:
+    type: string
+    lifetime: application
+    description: |
+      The package name of the speech engine the last listening session bound,
+      for example com.google.android.tts.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D333065
+    data_sensitivity:
+      - technical
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  opening_chunk_audio_size:
+    type: memory_distribution
+    memory_unit: kilobyte
+    description: |
+      The size on disk of the audio the speech engine made for the opening
+      chunk of a page, which is a single sentence. It is recorded each time
+      the opening is made, which includes after a voice change or a seek back
+      to the start of the article.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D333066
+    data_sensitivity:
+      - technical
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  chunk_audio_size:
+    type: memory_distribution
+    memory_unit: kilobyte
+    description: |
+      The size on disk of the audio the speech engine made for each chunk of a
+      page after the opening.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D333066
+    data_sensitivity:
+      - technical
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  chunk_gap_duration:
+    type: timing_distribution
+    time_unit: millisecond
+    description: |
+      The time playback was silent between two chunks of a page. Counted from
+      when the player ran out of audio or started to buffer until it played
+      again. Gaps caused by the user seeking, skipping, changing voice or
+      pausing are not recorded.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D333061
+    data_sensitivity:
+      - technical
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  audio_ran_out:
+    type: counter
+    description: |
+      The number of times the listen player finished reading every chunk that
+      had been synthesized before the next chunk was ready, indicating that
+      playback had to wait for new synthesis. Not impacted by user seeks, skips,
+      or changes to the currently selected voice.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D333062
+    data_sensitivity:
+      - technical
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  seek_latency:
+    type: timing_distribution
+    time_unit: millisecond
+    description: |
+      The time between a user seeking until audio played again, for seeks
+      whose chunk had to be synthesized. A seek interrupted by another seek,
+      a voice change or a pause is not recorded.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D334356
+    data_sensitivity:
+      - technical
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  seek_latency_queued:
+    type: timing_distribution
+    time_unit: millisecond
+    description: |
+      The same as seek_latency, for seeks to audio the player already had
+      queued, which need no synthesis.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D334356
+    data_sensitivity:
+      - technical
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  session_max_thermal_status:
+    type: labeled_counter
+    description: |
+      The number of listening sessions grouped by the hottest thermal status
+      the device reported while audio was playing, from the first audio until
+      the article ends, fails or the player is closed. Time spent paused is
+      not observed. Only recorded on Android 11 and later on devices whose
+      thermal HAL can forecast thermal headroom, which indicates devices
+      advanced enough to give accurate measurements.
+    labels:
+      - none
+      - light
+      - moderate
+      - severe
+      - critical
+      - emergency
+      - shutdown
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D333063
+    data_sensitivity:
+      - technical
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+  thermal_throttling_entered:
+    type: counter
+    description: |
+      The number of times the device's thermal status rose to moderate or
+      hotter while a page was being read out, on the same devices and over
+      the same part of the session as session_max_thermal_status.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2064878
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D333063
+    data_sensitivity:
+      - technical
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
 
 logins:
   password_detected:
@@ -10934,6 +11327,25 @@ play_store_attribution:
       tags:
         - Attribution
         - Performance
+  pairing_campaign:
+    type: boolean
+    send_in_pings:
+      - play-store-attribution
+    description: |
+      Whether the install referrer's utm_content matched the pairing campaign marker (`pairing-signin-prompt.campaign-utm-content`).
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2068232
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D334605
+    data_sensitivity:
+      - technical
+      - interaction
+    notification_emails:
+      - android-probes@mozilla.com
+    expires: never
+    metadata:
+      tags:
+        - Attribution
 meta_attribution:
   app:
     type: string
@@ -16285,7 +16697,8 @@ toolbar:
           add_new_tab, add_new_tab_long_press, add_new_private_tab, tab_counter, tab_counter_long_press,
           menu, share, clear, refresh, stop, add_bookmark, edit_bookmark, security_indicator, qr_code,
           home, reader_mode, microphone, open_in_fenix, close, site_custom, search_engine_selector,
-          search_engine_selected, translate, summarize, lens, shortcut_long_press, shortcut_edit_clicked.
+          search_engine_selected, translate, summarize, lens, lens_qr, shortcut_long_press,
+          shortcut_edit_clicked.
         type: string
       extra:
         description: |
@@ -16305,9 +16718,11 @@ toolbar:
     bugs:
       - https://bugzilla.mozilla.org/show_bug.cgi?id=1971857
       - https://bugzilla.mozilla.org/show_bug.cgi?id=2043252
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2075000
     data_reviews:
       - https://phabricator.services.mozilla.com/D264134
       - https://phabricator.services.mozilla.com/D303181
+      - https://phabricator.services.mozilla.com/D328944
     data_sensitivity:
       - interaction
     notification_emails:
@@ -17129,8 +17544,7 @@ vpn:
         description: >
           Service state when the engine reported the failure. Not the state that
           issued the request: the reply is asynchronous, so the two can differ.
-          One of "uninitialized", "unavailable", "unauthenticated", "opted_out",
-          "ready".
+          One of "uninitialized", "unavailable", "unauthenticated", "ready".
         type: string
       proxy_state:
         description: >
@@ -17321,7 +17735,7 @@ vpn:
       service_state:
         description: >
           Service state when the reset was recorded. One of "uninitialized", "unavailable",
-          "unauthenticated", "opted_out", "ready".
+          "unauthenticated", "ready".
         type: string
       proxy_state:
         description: >
@@ -17427,7 +17841,72 @@ native_share_sheet:
     metadata:
       tags:
         - Sharing
-
+share_sheet:
+  share_file_resource_success:
+    type: event
+    description: |
+      Firefox showed the share sheet for a resource that required obtaining resource bytes to share.
+      Unsuccessful shares will be recorded in the share_file_resource_fail metric.
+    extra_keys:
+      share_type:
+        type: string
+        description: |
+          The way the bytes for the shared item was obtained. Possible values are: `direct` when the bytes
+          were already available (such as from the PDF viewer), `internet` when the bytes were
+          downloaded from a URL, and `local` when the bytes were available on device.
+      content_type:
+        type: string
+        description: |
+          The content type of the resource shared. Possible values are: `pdf` and `other`.
+      duration_ms:
+        type: quantity
+        description: |
+          The duration of time from when the resource began sharing until the share sheet was ready to appear.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2075336
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D332123
+    notification_emails:
+      - android-probes@mozilla.com
+    data_sensitivity:
+      - technical
+    expires: never
+    metadata:
+      tags:
+        - Sharing
+  share_file_resource_fail:
+    type: event
+    description: |
+      Firefox could not show the share sheet for a resource that required obtaining resource bytes to share.
+    extra_keys:
+      share_type:
+        type: string
+        description: |
+          The way the bytes for the shared item was obtained. Possible values are: `direct` when the bytes
+          were already available (such as from the PDF viewer), `internet` when the bytes were
+          downloaded from a URL, and `local` when the bytes were available on device.
+      content_type:
+        type: string
+        description: |
+          The content type of the resource shared. Possible values are: `pdf` and `other`.
+      failure_reason:
+        type: string
+        description: |
+          Why sharing did not complete. Possible reasons are: `timeout` when obtaining the bytes took longer
+          than allowed, `cancelled` when sharing was cancelled, and `error`
+          when sharing failed with an error.
+    bugs:
+      - https://bugzilla.mozilla.org/show_bug.cgi?id=2075336
+    data_reviews:
+      - https://phabricator.services.mozilla.com/D332123
+    notification_emails:
+      - android-probes@mozilla.com
+    data_sensitivity:
+      - technical
+    expires: never
+    metadata:
+      tags:
+        - Sharing
 pdf_viewer:
   download_tapped:
     type: event

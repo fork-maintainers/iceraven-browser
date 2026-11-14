@@ -62,7 +62,11 @@
     Title for the settings page
   -->
   <string name="settings">ସେଟିଂସମୂହ</string>
-  <!-- Preference category for general settings -->
+  <!--
+    Preferences
+
+    Preference category for general settings
+  -->
   <string name="preferences_category_general">ସାଧାରଣ</string>
   <!-- Preference for settings related to changing the default search engine -->
   <string name="preferences_default_search_engine">ଡିଫଲ୍ଟ ସନ୍ଧାନ ଇଞ୍ଜିନ୍</string>

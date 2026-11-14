@@ -39,11 +39,7 @@
   <string name="home_screen_shortcut_open_new_tab_2">નવી ટૅબ</string>
   <!-- Shortcut action to open new private tab -->
   <string name="home_screen_shortcut_open_new_private_tab_2">નવી ખાનગી ટેબ</string>
-  <!--
-    Browser Fragment
-
-    Content description (not visible, for screen readers etc.): Navigate backward (browsing history)
-  -->
+  <!-- Content description (not visible, for screen readers etc.): Navigate backward (browsing history) -->
   <string name="browser_menu_back">પાછા જાવ</string>
   <!-- Content description (not visible, for screen readers etc.): Navigate forward (browsing history) -->
   <string name="browser_menu_forward">આગળ વઘારો</string>
@@ -113,7 +109,11 @@
     Title for the settings page
   -->
   <string name="settings">સેટિંગ્સ</string>
-  <!-- Preference category for general settings -->
+  <!--
+    Preferences
+
+    Preference category for general settings
+  -->
   <string name="preferences_category_general">સામાન્ય</string>
   <!-- Preference category for all links about Fenix -->
   <string name="preferences_category_about">વિશે</string>

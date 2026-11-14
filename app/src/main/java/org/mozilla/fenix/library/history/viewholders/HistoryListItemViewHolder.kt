@@ -11,6 +11,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.R as materialR
 import mozilla.components.support.ktx.android.content.getColorFromAttr
+import mozilla.components.support.ktx.util.URLStringUtils
 import mozilla.components.ui.icons.R as iconsR
 import org.mozilla.fenix.R
 import org.mozilla.fenix.databinding.HistoryListItemBinding
@@ -77,8 +78,8 @@ class HistoryListItemViewHolder(
 
         binding.historyLayout.urlView.text =
             when (item) {
-                is History.Regular -> item.url
-                is History.Metadata -> item.url
+                is History.Regular -> URLStringUtils.toLosslessDisplayUrl(item.url)
+                is History.Metadata -> URLStringUtils.toLosslessDisplayUrl(item.url)
                 is History.Group -> {
                     val numChildren = item.items.size - groupPendingDeletionCount
                     val stringId =

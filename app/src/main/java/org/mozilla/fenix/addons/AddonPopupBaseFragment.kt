@@ -13,6 +13,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceManager
+import com.google.android.material.R as materialR
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import mozilla.components.browser.state.action.ContentAction
 import mozilla.components.browser.state.action.CustomTabListAction
@@ -145,12 +146,12 @@ abstract class AddonPopupBaseFragment :
                             shouldWidthMatchParent = true,
                             positiveButtonBackgroundColor =
                                 ThemeManager.resolveAttribute(
-                                    R.attr.accent,
+                                    materialR.attr.colorTertiary,
                                     requireContext(),
                                 ),
                             positiveButtonTextColor =
                                 ThemeManager.resolveAttribute(
-                                    R.attr.textOnColorPrimary,
+                                    materialR.attr.colorOnTertiary,
                                     requireContext(),
                                 ),
                             positiveButtonRadius = pixelSizeFor(R.dimen.tab_corner_radius).toFloat(),

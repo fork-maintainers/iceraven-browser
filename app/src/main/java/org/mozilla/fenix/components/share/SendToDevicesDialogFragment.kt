@@ -32,6 +32,7 @@ import mozilla.components.concept.sync.TabPrivacy
 import mozilla.components.feature.accounts.push.SendTabUseCases
 import mozilla.components.lib.state.helpers.StoreProvider.Companion.fragmentStore
 import mozilla.components.lib.state.helpers.StoreProvider.Companion.storeProvider
+import mozilla.components.service.fxa.FxaService
 import mozilla.components.service.fxa.manager.SCOPE_PROFILE
 import mozilla.components.service.fxa.manager.SCOPE_SYNC
 import mozilla.components.support.utils.ext.isLandscape
@@ -161,9 +162,10 @@ class SendToDevicesDialogFragment : BottomSheetDialogFragment() {
 
     private fun reconnectToSync(context: Context) {
         context.components.services.accountsAuthFeature.beginAuthentication(
-            context,
-            FenixFxAEntryPoint.ShareMenu,
-            setOf(SCOPE_PROFILE, SCOPE_SYNC),
+            context = context,
+            entrypoint = FenixFxAEntryPoint.ShareMenu,
+            service = FxaService.Sync.identifier,
+            scopes = setOf(SCOPE_PROFILE, SCOPE_SYNC),
         )
         SyncAuth.useEmailProblem.record(NoExtras())
     }
@@ -194,7 +196,7 @@ class SendToDevicesDialogFragment : BottomSheetDialogFragment() {
                 },
                 send = send,
             )
-            dismiss()
+            dismissAllowingStateLoss()
         }
     }
 

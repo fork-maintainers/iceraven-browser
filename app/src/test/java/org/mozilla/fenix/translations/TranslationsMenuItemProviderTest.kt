@@ -18,9 +18,11 @@ import mozilla.components.browser.state.state.ReaderState
 import mozilla.components.browser.state.state.TabSessionState
 import mozilla.components.browser.state.state.TranslationsBrowserState
 import mozilla.components.browser.state.state.TranslationsState
+import mozilla.components.browser.state.state.createCustomTab
 import mozilla.components.browser.state.store.BrowserStore
 import mozilla.components.compose.base.text.Text
 import mozilla.components.compose.menu.data.MenuItemBadge
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.data.StandardMenuItem
 import mozilla.components.compose.menu.ui.MenuItemIconRes
 import mozilla.components.compose.menu.ui.MenuItemState
@@ -46,13 +48,36 @@ class TranslationsMenuItemProviderTest {
     }
 
     @Test
+    fun `GIVEN a custom tab WHEN providing the item THEN offer translating it`() = runTest {
+        val customTab = createCustomTab(url = "https://mozilla.org", id = "customTabId")
+        val store =
+            BrowserStore(
+                BrowserState(
+                    customTabs = listOf(customTab),
+                    translationEngine =
+                        TranslationsBrowserState(
+                            isEngineSupported = true,
+                            supportedLanguages =
+                                TranslationSupport(
+                                    toLanguages =
+                                        listOf(Language(code = LANGUAGE_CODE, localizedDisplayName = LANGUAGE_NAME))
+                                ),
+                        ),
+                )
+            )
+        val provider = provider(browserStore = store, target = MenuTarget.CustomTab("customTabId"))
+
+        assertEquals(translatePageItem(), provider.itemFlow.value)
+    }
+
+    @Test
     fun `GIVEN the current page is translated WHEN providing the item THEN show the language it was translated to`() =
         runTest {
             val provider = provider(browserStore = browserStore(translatedTo = LANGUAGE_CODE))
 
             assertEquals(
                 StandardMenuItem(
-                    title = Text.Resource(R.string.browser_menu_translated),
+                    title = MenuItemTitle(Text.Resource(R.string.browser_menu_translated)),
                     icon = MenuItemIconRes(iconsR.drawable.mozac_ic_translate_active_24),
                     onClickEvent = MenuAction.Navigate.Translate,
                     badge = MenuItemBadge(text = Text.String(LANGUAGE_NAME), state = MenuItemState.ACTIVE),
@@ -132,6 +157,21 @@ class TranslationsMenuItemProviderTest {
         }
 
     @Test
+    fun `WHEN tapping translate with a custom tab THEN show the translations dialog for the custom tab`() = runTest {
+        val customTab = createCustomTab(url = "https://mozilla.org", id = CUSTOM_TAB_ID)
+        val store = BrowserStore(BrowserState(customTabs = listOf(customTab)))
+        val menu = FakeMenuHost()
+
+        provider(browserStore = store, target = MenuTarget.CustomTab(CUSTOM_TAB_ID))
+            .onEvent(MenuAction.Navigate.Translate, menu)
+
+        assertEquals(
+            MenuFragmentDirections.actionMenuFragmentToTranslationsDialogFragment(sessionId = CUSTOM_TAB_ID),
+            menu.directions,
+        )
+    }
+
+    @Test
     fun `WHEN the page is translated or not THEN handle all events the item can dispatch and no others`() = runTest {
         listOf(browserStore(), browserStore(translatedTo = LANGUAGE_CODE)).forEach { store ->
             val provider = provider(browserStore = store)
@@ -197,7 +237,7 @@ class TranslationsMenuItemProviderTest {
 
     private fun translatePageItem(canTranslate: Boolean = true) =
         StandardMenuItem(
-            title = Text.Resource(R.string.browser_menu_translate_page_2),
+            title = MenuItemTitle(Text.Resource(R.string.browser_menu_translate_page_2)),
             icon = MenuItemIconRes(iconsR.drawable.mozac_ic_translate_24),
             onClickEvent = MenuAction.Navigate.Translate,
             state =
@@ -209,6 +249,7 @@ class TranslationsMenuItemProviderTest {
 
     private companion object {
         const val TAB_ID = "tab1"
+        const val CUSTOM_TAB_ID = "customTabId"
         const val LANGUAGE_CODE = "fr"
         const val LANGUAGE_NAME = "French"
     }

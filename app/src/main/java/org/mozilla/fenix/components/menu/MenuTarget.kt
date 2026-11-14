@@ -4,6 +4,7 @@
 
 package org.mozilla.fenix.components.menu
 
+import mozilla.components.browser.state.selector.findCustomTab
 import mozilla.components.browser.state.selector.selectedTab
 import mozilla.components.browser.state.state.BrowserState
 import mozilla.components.browser.state.state.SessionState
@@ -21,5 +22,10 @@ sealed interface MenuTarget {
     /** The menu will be shown in the browser screen, so its menu items should target the current tab. */
     data object BrowserTab : MenuTarget {
         override fun browserSessionFrom(state: BrowserState): SessionState? = state.selectedTab
+    }
+
+    /** The menu will be shown for a custom tab, so its menu items should target that custom tab. */
+    data class CustomTab(val customTabId: String, val isSandboxed: Boolean = false) : MenuTarget {
+        override fun browserSessionFrom(state: BrowserState): SessionState? = state.findCustomTab(customTabId)
     }
 }

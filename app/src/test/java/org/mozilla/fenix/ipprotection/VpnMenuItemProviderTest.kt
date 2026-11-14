@@ -24,12 +24,15 @@ import mozilla.components.compose.base.text.Text
 import mozilla.components.compose.menu.data.MenuItemActionButton
 import mozilla.components.compose.menu.data.MenuItemBadge
 import mozilla.components.compose.menu.data.MenuItemSummary
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.data.StandardMenuItem
 import mozilla.components.compose.menu.ui.MenuItemIconRes
 import mozilla.components.compose.menu.ui.MenuItemState
 import mozilla.components.concept.engine.ipprotection.ServiceState
 import mozilla.components.feature.ipprotection.store.IPProtectionAction
 import mozilla.components.feature.ipprotection.store.IPProtectionStore
+import mozilla.components.feature.ipprotection.store.state.AccountState
+import mozilla.components.feature.ipprotection.store.state.AccountStatus
 import mozilla.components.feature.ipprotection.store.state.Authorized
 import mozilla.components.feature.ipprotection.store.state.BYTES_PER_GB
 import mozilla.components.feature.ipprotection.store.state.EligibilityStatus
@@ -92,6 +95,7 @@ class VpnMenuItemProviderTest {
                     IPProtectionState(
                         eligibilityStatus = EligibilityStatus.Eligible,
                         serviceStatus = ServiceState.Unauthenticated,
+                        accountState = AccountState(AccountStatus.NoAccount),
                     )
                 )
             val provider = provider(store)
@@ -108,6 +112,7 @@ class VpnMenuItemProviderTest {
             IPProtectionStore(
                 IPProtectionState(
                     eligibilityStatus = EligibilityStatus.Eligible,
+                    serviceStatus = ServiceState.Ready,
                     proxyStatus = Authorized.DataLimitReached,
                     maxDataBytes = (5 * BYTES_PER_GB).toLong(),
                 )
@@ -168,12 +173,48 @@ class VpnMenuItemProviderTest {
 
     @Test
     fun `GIVEN signing in is needed WHEN toggling IP protection THEN show its settings instead`() = runTest {
-        val store = IPProtectionStore(IPProtectionState(serviceStatus = ServiceState.Unauthenticated))
+        val store =
+            IPProtectionStore(
+                IPProtectionState(
+                    eligibilityStatus = EligibilityStatus.Eligible,
+                    serviceStatus = ServiceState.Unauthenticated,
+                    accountState = AccountState(AccountStatus.NoAccount),
+                )
+            )
 
         provider(store).onEvent(MenuAction.IPProtectionToggle, menu)
 
         assertEquals(settingsDirections, menu.directions)
         assertNotNull(Vpn.menuTryItTapped.testGetValue())
+    }
+
+    @Test
+    fun `GIVEN the service has not accepted the signed-in account yet WHEN toggling IP protection THEN show its settings without recording a try-it tap`() =
+        runTest {
+            val store =
+                IPProtectionStore(
+                    IPProtectionState(
+                        eligibilityStatus = EligibilityStatus.Eligible,
+                        serviceStatus = ServiceState.Unauthenticated,
+                        accountState = AccountState(AccountStatus.Authenticated),
+                    )
+                )
+
+            provider(store).onEvent(MenuAction.IPProtectionToggle, menu)
+
+            assertEquals(settingsDirections, menu.directions)
+            assertNull(Vpn.menuTryItTapped.testGetValue())
+        }
+
+    @Test
+    fun `GIVEN IP protection has not reported its state yet WHEN toggling it THEN nothing happens`() = runTest {
+        val store = spyk(IPProtectionStore(IPProtectionState(eligibilityStatus = EligibilityStatus.Eligible)))
+
+        provider(store).onEvent(MenuAction.IPProtectionToggle, menu)
+
+        verify(exactly = 0) { store.dispatch(IPProtectionAction.Toggle) }
+        assertFalse(menu.isUsed)
+        assertNull(Vpn.menuTurnedOn.testGetValue())
     }
 
     @Test
@@ -204,7 +245,13 @@ class VpnMenuItemProviderTest {
         VpnMenuItemProvider(ipProtectionStore = ipProtectionStore, scope = backgroundScope)
 
     private fun eligibleStore(proxyStatus: ProxyStatus) =
-        IPProtectionStore(IPProtectionState(eligibilityStatus = EligibilityStatus.Eligible, proxyStatus = proxyStatus))
+        IPProtectionStore(
+            IPProtectionState(
+                eligibilityStatus = EligibilityStatus.Eligible,
+                serviceStatus = ServiceState.Ready,
+                proxyStatus = proxyStatus,
+            )
+        )
 
     private fun expectedItem(
         badgeTextRes: Int = R.string.preferences_ip_protection_off,
@@ -212,7 +259,7 @@ class VpnMenuItemProviderTest {
         role: Role = Switch,
     ) =
         StandardMenuItem(
-            title = Text.Resource(R.string.ip_protection_toggle_label),
+            title = MenuItemTitle(Text.Resource(R.string.ip_protection_toggle_label)),
             icon = MenuItemIconRes(iconsR.drawable.mozac_ic_globe_24),
             role = role,
             onClickEvent = MenuAction.IPProtectionToggle,

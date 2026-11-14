@@ -10,6 +10,7 @@ import mozilla.components.browser.state.state.CustomTabSessionState
 import mozilla.components.browser.state.state.SessionState
 import mozilla.components.browser.state.state.TabSessionState
 import mozilla.components.feature.addons.Addon
+import mozilla.components.feature.ipprotection.store.state.IPProtectionStatus
 import mozilla.components.lib.state.State
 import mozilla.components.support.ktx.kotlin.isAboutUrl
 import mozilla.components.support.ktx.kotlin.isContentUrl
@@ -201,35 +202,14 @@ data class TranslationInfo(
     val onTranslatePageMenuClick: () -> Unit,
 )
 
-/** Represents the display states of the IP protection menu item. */
-enum class IPProtectionMenuStatus {
-    /** IP protection is inactive. */
-    Disabled,
-
-    /** IP protection is in the process of activating. */
-    Activating,
-
-    /** IP protection is active. */
-    Enabled,
-
-    /** IP protection is paused until the data limit resets. */
-    DataLimitReached,
-
-    /** IP protection has errored. */
-    ConnectionError,
-
-    /** User needs to authenticate or to authorize ip protection service before IP protection can be used. */
-    AuthRequired,
-}
-
 /**
  * Represents the state of the IP protection menu item.
  *
- * @property status The current [IPProtectionMenuStatus] shown in the badge.
+ * @property status The current [IPProtectionStatus] shown in the badge.
  * @property dataLimitGb The total monthly data allowance in GB.
  */
 @Immutable
 data class IPProtectionMenuState(
-    val status: IPProtectionMenuStatus = IPProtectionMenuStatus.Disabled,
+    val status: IPProtectionStatus = IPProtectionStatus.Uninitialized,
     val dataLimitGb: Int = -1,
 )

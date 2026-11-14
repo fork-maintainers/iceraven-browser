@@ -142,7 +142,7 @@ class PrivacyReportNotificationWorker(
             return PrivacyReportNotificationAvailability.TRACKING_PROTECTION_DISABLED
         }
 
-        return privacyReportNotificationAvailability(applicationContext).takeIf {
+        return privacyReportNotificationAvailability(notificationsDelegate.notificationManagerCompat).takeIf {
             it != PrivacyReportNotificationAvailability.AVAILABLE
         }
     }

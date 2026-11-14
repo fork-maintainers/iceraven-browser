@@ -12,8 +12,8 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.CustomAccessibilityAction
 import androidx.compose.ui.unit.LayoutDirection
+import mozilla.components.compose.draggable.ItemInteractionHandler
 import org.mozilla.fenix.R
-import org.mozilla.fenix.tabstray.controller.ItemInteractionHandler
 import org.mozilla.fenix.tabstray.data.TabsTrayItem
 
 /**

@@ -141,11 +141,7 @@
   <string name="recently_visited_menu_item_remove">Alisin</string>
   <!-- Content description for the button which navigates the user to show all of their history. -->
   <string name="past_explorations_show_all_content_description_2">Ipakita lahat ng mga dating pagtuklas</string>
-  <!--
-    Browser Fragment
-
-    Content description (not visible, for screen readers etc.): Navigate backward (browsing history)
-  -->
+  <!-- Content description (not visible, for screen readers etc.): Navigate backward (browsing history) -->
   <string name="browser_menu_back">Bumalik</string>
   <!-- Content description (not visible, for screen readers etc.): Navigate forward (browsing history) -->
   <string name="browser_menu_forward">Sumulong</string>
@@ -352,7 +348,11 @@
     Title for the settings page
   -->
   <string name="settings">Mga Setting</string>
-  <!-- Preference category for general settings -->
+  <!--
+    Preferences
+
+    Preference category for general settings
+  -->
   <string name="preferences_category_general">Pangkalahatan</string>
   <!-- Preference category for all links about Fenix -->
   <string name="preferences_category_about">Tungkol sa</string>

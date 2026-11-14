@@ -77,7 +77,11 @@
   <string name="about_content" tools:ignore="BrandUsage">%1$s को Mozilla ने बनाया है।</string>
   <!-- Private Browsing -->
   <string name="private_browsing_common_myths">प्राइवेट ब्राउज़िंग से जुड़ी आम गलत धारणाएं</string>
-  <!-- Text to be announced by the accessibility service to inform the user that the private browsing mode is currently active. -->
+  <!--
+    Private Browsing
+
+    Text to be announced by the accessibility service to inform the user that the private browsing mode is currently active.
+  -->
   <string name="private_browsing_a11y_session_announcement">प्राइवेट ब्राउज़िंग सेशन</string>
   <!--
     True Private Browsing Mode
@@ -178,11 +182,7 @@
   <string name="recently_visited_menu_item_remove">हटाएं</string>
   <!-- Content description for the button which navigates the user to show all of their history. -->
   <string name="past_explorations_show_all_content_description_2">पिछली सारी खोजबीन दिखाएं</string>
-  <!--
-    Browser Fragment
-
-    Content description (not visible, for screen readers etc.): Navigate backward (browsing history)
-  -->
+  <!-- Content description (not visible, for screen readers etc.): Navigate backward (browsing history) -->
   <string name="browser_menu_back">वापस</string>
   <!-- Content description (not visible, for screen readers etc.): Navigate forward (browsing history) -->
   <string name="browser_menu_forward">आगे</string>
@@ -713,7 +713,11 @@
     Title for the settings page
   -->
   <string name="settings">सेटिंग</string>
-  <!-- Preference category for general settings -->
+  <!--
+    Preferences
+
+    Preference category for general settings
+  -->
   <string name="preferences_category_general">सामान्य</string>
   <!-- Preference category for all links about Fenix -->
   <string name="preferences_category_about">परिचय</string>
@@ -4592,8 +4596,8 @@
     Content description for the reader mode panel: a group of buttons floating over the content
   -->
   <string name="reader_mode_panel_content_description">रीडर मोड के विकल्प</string>
-  <!-- Content description for the button in reader mode panel that turns on the read aloud feature (playback of content begins when button is pressed) -->
+  <!-- Content description for the button in the reader view panel that turns on the Listen to Page feature (playback of content begins when button is pressed) -->
   <string name="reader_mode_panel_listen_content_description">पढ़कर सुनाएं</string>
-  <!-- Content description for media player displayed in Reader Mode when the Listen to Page (Read Aloud) feature is selected -->
+  <!-- Content description for media player displayed in Reader view when the Listen to Page (Read Aloud) feature is selected -->
   <string name="reader_mode_panel_media_player_content_description">मीडिया प्लेयर</string>
 </resources>

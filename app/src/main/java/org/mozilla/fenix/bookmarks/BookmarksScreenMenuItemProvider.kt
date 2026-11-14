@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.StateFlow
 import mozilla.appservices.places.BookmarkRoot
 import mozilla.components.compose.base.text.Text
 import mozilla.components.compose.menu.data.MenuItem
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.data.StandardMenuItem
 import mozilla.components.compose.menu.store.MenuEvent
 import mozilla.components.compose.menu.ui.MenuItemIconRes
@@ -24,7 +25,7 @@ class BookmarksScreenMenuItemProvider : MenuItemProvider {
     override val itemFlow: StateFlow<MenuItem?> =
         MutableStateFlow(
             StandardMenuItem(
-                title = Text.Resource(R.string.library_bookmarks),
+                title = MenuItemTitle(Text.Resource(R.string.library_bookmarks)),
                 icon = MenuItemIconRes(iconsR.drawable.mozac_ic_bookmark_tray_fill_24),
                 onClickEvent = MenuAction.Navigate.Bookmarks,
             )

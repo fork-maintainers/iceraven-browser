@@ -57,13 +57,13 @@ import org.mozilla.fenix.theme.FirefoxTheme
 private val ShutterButtonSize = 64.dp
 private val ButtonSize = 48.dp
 private val TopBarPadding = 24.dp
+private val TopBarSpacing = 12.dp
 private val CloseButtonStartPadding = 12.dp
 private val TitleHorizontalPadding = ButtonSize + CloseButtonStartPadding
 private val ShutterBorderWidth = 3.dp
 private val ShutterBorderColor = Color.White.copy(alpha = 0.5f)
 
 private val BottomBarPadding = 24.dp
-private val BottomBarSpacing = 12.dp
 
 private val BottomControlsTopPadding = 24.dp
 private val BottomControlsHorizontalPadding = 32.dp
@@ -143,32 +143,37 @@ fun LensCameraScreen(
             QrViewfinderOverlay()
         }
 
-        CameraTopBar(
-            mode = state.mode,
-            onClose = onClose,
-            modifier = Modifier.align(Alignment.TopStart),
-        )
-
         Column(
-            modifier =
-                Modifier.align(Alignment.BottomCenter)
-                    .windowInsetsPadding(WindowInsets.navigationBars)
-                    .padding(bottom = BottomBarPadding),
+            modifier = Modifier.align(Alignment.TopCenter),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(BottomBarSpacing),
+            verticalArrangement = Arrangement.spacedBy(TopBarSpacing),
         ) {
-            when (state.mode) {
-                CameraMode.LENS ->
-                    BottomControls(
-                        onShutter = onShutter,
-                        onGallery = onGallery,
-                    )
-                CameraMode.QR -> QrBottomControls(onGallery = onGallery)
-            }
+            CameraTopBar(
+                mode = state.mode,
+                onClose = onClose,
+            )
             ModeToggle(
                 mode = state.mode,
                 onModeChange = onModeChange,
             )
+        }
+
+        val bottomControlsModifier =
+            Modifier.align(Alignment.BottomCenter)
+                .windowInsetsPadding(WindowInsets.navigationBars)
+                .padding(bottom = BottomBarPadding)
+        when (state.mode) {
+            CameraMode.LENS ->
+                BottomControls(
+                    onShutter = onShutter,
+                    onGallery = onGallery,
+                    modifier = bottomControlsModifier,
+                )
+            CameraMode.QR ->
+                QrBottomControls(
+                    onGallery = onGallery,
+                    modifier = bottomControlsModifier,
+                )
         }
     }
 }

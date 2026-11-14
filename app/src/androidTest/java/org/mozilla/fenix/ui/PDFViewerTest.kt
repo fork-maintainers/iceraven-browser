@@ -9,6 +9,7 @@ import androidx.core.net.toUri
 import org.junit.Rule
 import org.junit.Test
 import org.mozilla.fenix.customannotations.Converted
+import org.mozilla.fenix.customannotations.Critical
 import org.mozilla.fenix.customannotations.SmokeTest
 import org.mozilla.fenix.helpers.AppAndSystemHelper.assertExternalAppOpens
 import org.mozilla.fenix.helpers.AppAndSystemHelper.clickSystemHomeScreenShortcutAddButton
@@ -66,6 +67,12 @@ class PDFViewerTest {
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/2145448
     // Download PDF file using the download toolbar button
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.PDFViewerTest#verifyPDFViewerDownloadButtonTest"],
+        bug = 2083697,
+        since = "2026-10",
+    )
+    @Critical
     @Test
     fun verifyPDFViewerDownloadButtonTest() {
         val genericURL = mockWebServer.getGenericAsset(3)

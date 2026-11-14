@@ -40,6 +40,7 @@ import androidx.compose.ui.unit.dp
 import mozilla.components.browser.icons.compose.Loader
 import mozilla.components.browser.icons.compose.Placeholder
 import mozilla.components.compose.base.utils.inComposePreview
+import mozilla.components.support.ktx.util.URLStringUtils
 import org.mozilla.fenix.components.components
 import org.mozilla.fenix.compose.ContextualMenu
 import org.mozilla.fenix.compose.Favicon
@@ -137,7 +138,7 @@ private fun BookmarkItem(
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
-                text = bookmark.title ?: bookmark.url ?: "",
+                text = bookmark.title ?: bookmark.url?.let(URLStringUtils::toLosslessDisplayUrl) ?: "",
                 modifier =
                     Modifier.padding(horizontal = FirefoxTheme.layout.space.static50).semantics {
                         testTagsAsResourceId = true

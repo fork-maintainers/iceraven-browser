@@ -24,6 +24,7 @@ import org.mozilla.fenix.ui.efficiency.navigation.NavigationOptions
 import org.mozilla.fenix.ui.efficiency.navigation.NavigationStep
 import org.mozilla.fenix.ui.efficiency.selectors.BrowserPageSelectors
 import org.mozilla.fenix.ui.efficiency.selectors.SearchBarSelectors
+import org.mozilla.fenix.ui.efficiency.selectors.TabDrawerSelectors
 import org.mozilla.fenix.ui.efficiency.selectors.ToolbarSelectors
 
 class SearchBarComponent(composeRule: AndroidComposeTestRule<HomeActivityIntentTestRule, *>) : BasePage(composeRule) {
@@ -43,6 +44,13 @@ class SearchBarComponent(composeRule: AndroidComposeTestRule<HomeActivityIntentT
             from = "BrowserPage",
             to = pageName,
             steps = listOf(NavigationStep.Click(ToolbarSelectors.TOOLBAR_URL_BOX_UIAUTOMATOR2)),
+        )
+
+        // The FAB opens a new tab in whichever tray page is selected; only the normal and private pages show it.
+        builder.register(
+            from = "TabDrawerPage",
+            to = pageName,
+            steps = listOf(NavigationStep.Click(TabDrawerSelectors.FAB)),
         )
 
         // Dismiss the search bar (edit mode) back to Home. Without an outbound edge the graph can enter

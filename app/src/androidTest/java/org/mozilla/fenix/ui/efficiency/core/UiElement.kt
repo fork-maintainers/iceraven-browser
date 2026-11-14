@@ -4,6 +4,8 @@
 
 package org.mozilla.fenix.ui.efficiency.core
 
+import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.performClick
@@ -28,6 +30,9 @@ sealed interface UiElement {
     fun isDisplayed(): Boolean
 
     fun click()
+
+    /** The element's visible text, or null if the backend exposes none. */
+    fun text(): String?
 
     companion object {
         /** Wrap a raw located node - whatever backend produced it - into the facade. */
@@ -66,6 +71,13 @@ internal class ComposeUiElement(val node: SemanticsNodeInteraction) : UiElement 
         node.assertIsDisplayed()
         node.performClick()
     }
+
+    override fun text(): String? = runCatching {
+        val config = node.fetchSemanticsNode().config
+        config.getOrNull(SemanticsProperties.EditableText)?.text
+            ?: config.getOrNull(SemanticsProperties.Text)?.joinToString(separator = "") { it.text }
+    }
+        .getOrNull()
 }
 
 internal class EspressoUiElement(val interaction: ViewInteraction) : UiElement {
@@ -84,6 +96,9 @@ internal class EspressoUiElement(val interaction: ViewInteraction) : UiElement {
     override fun click() {
         interaction.perform(ViewActions.click())
     }
+
+    // No caller reads text through Espresso.
+    override fun text(): String? = null
 }
 
 internal class UiObjectUiElement(val obj: UiObject) : UiElement {
@@ -95,6 +110,8 @@ internal class UiObjectUiElement(val obj: UiObject) : UiElement {
         if (!obj.exists()) throw AssertionError("UiObject does not exist")
         if (!obj.click()) throw AssertionError("Failed to click UiObject")
     }
+
+    override fun text(): String? = runCatching { obj.text }.getOrNull()
 }
 
 internal class UiObject2UiElement(val obj: UiObject2) : UiElement {
@@ -105,6 +122,8 @@ internal class UiObject2UiElement(val obj: UiObject2) : UiElement {
     override fun click() {
         obj.click()
     }
+
+    override fun text(): String? = runCatching { obj.text }.getOrNull()
 }
 
 internal fun UiElement.backend(): Any =

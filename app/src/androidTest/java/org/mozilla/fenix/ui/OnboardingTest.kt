@@ -9,6 +9,7 @@ import androidx.test.filters.SdkSuppress
 import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
+import org.mozilla.fenix.customannotations.Converted
 import org.mozilla.fenix.customannotations.SmokeTest
 import org.mozilla.fenix.helpers.AppAndSystemHelper.runWithLauncherIntent
 import org.mozilla.fenix.helpers.FenixTestRule
@@ -35,6 +36,11 @@ class OnboardingTest {
     @get:Rule(order = 2) val memoryLeaksRule = DetectMemoryLeaksRule(composeTestRule = { composeTestRule })
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/3349493
+    @Converted(
+        replacedBy = ["org.mozilla.fenix.ui.efficiency.tests.OnboardingTest#verifyTheTermsOfUseOnboardingCardTest"],
+        bug = 2057054,
+        since = "2026-07",
+    )
     @SdkSuppress(minSdkVersion = 29)
     @SmokeTest
     @Test

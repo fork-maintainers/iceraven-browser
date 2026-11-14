@@ -55,13 +55,24 @@ object HistorySelectors : SelectorContainer {
             readiness = PageReadinessProfiles.READY_CONTENT,
         )
 
-    val RECENTLY_CLOSED_TABS_NUMBER_OF_TABS =
+    // Mirrors HistoryListItemViewHolder: the description reads "1 tab" (singular) but "0 tabs"/"N tabs"
+    // (plural), so the resource is chosen by count. Not a val, so it is never part of a group check;
+    // pass the concrete count and verify it explicitly with mozVerify.
+    @Suppress("FunctionName")
+    fun RECENTLY_CLOSED_TABS_NUMBER_OF_TABS(numberOfRecentlyClosedTabs: Int = 0) =
         Selector(
-            strategy = SelectorStrategy.UIAUTOMATOR_WITH_RES_ID,
+            strategy = SelectorStrategy.UIAUTOMATOR_WITH_RES_ID_AND_TEXT,
             value = "recently_closed_tabs_description",
+            secondaryValue =
+                getStringResource(
+                    if (numberOfRecentlyClosedTabs == 1) {
+                        R.string.recently_closed_tab
+                    } else {
+                        R.string.recently_closed_tabs
+                    },
+                    numberOfRecentlyClosedTabs,
+                ),
             description = "Number of recently closed tabs",
-            groups = setOf(Group.HISTORY_MENU_VIEW_WITH_HISTORY_ITEMS),
-            readiness = PageReadinessProfiles.READY_CONTENT,
         )
 
     val EMPTY_HISTORY_LIST =

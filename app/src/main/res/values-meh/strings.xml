@@ -137,11 +137,7 @@
   <string name="recently_visited_menu_item_remove">Xita</string>
   <!-- Content description for the button which navigates the user to show all of their history. -->
   <string name="past_explorations_show_all_content_description_2">Kutuvi kuaiyo daa exploraciones yata</string>
-  <!--
-    Browser Fragment
-
-    Content description (not visible, for screen readers etc.): Navigate backward (browsing history)
-  -->
+  <!-- Content description (not visible, for screen readers etc.): Navigate backward (browsing history) -->
   <string name="browser_menu_back">Niko yata</string>
   <!-- Content description (not visible, for screen readers etc.): Navigate forward (browsing history) -->
   <string name="browser_menu_forward">Ichi nuu</string>
@@ -272,7 +268,11 @@
     Title for the settings page
   -->
   <string name="settings">Ke´i</string>
-  <!-- Preference category for general settings -->
+  <!--
+    Preferences
+
+    Preference category for general settings
+  -->
   <string name="preferences_category_general">Ntaka</string>
   <!-- Preference category for all links about Fenix -->
   <string name="preferences_category_about">Jiee ya´a</string>

@@ -14,6 +14,7 @@ import mozilla.components.browser.state.state.SessionState
 import mozilla.components.browser.state.store.BrowserStore
 import mozilla.components.compose.base.text.Text
 import mozilla.components.compose.menu.data.MenuItem
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.data.StandardMenuItem
 import mozilla.components.compose.menu.store.MenuEvent
 import mozilla.components.compose.menu.ui.MenuItemIconRes
@@ -103,7 +104,7 @@ private fun SessionState?.reportBrokenSiteItem(): MenuItem? {
     val url = this?.content?.url ?: return null
 
     return StandardMenuItem(
-        title = Text.Resource(R.string.browser_menu_webcompat_reporter_2),
+        title = MenuItemTitle(Text.Resource(R.string.browser_menu_webcompat_reporter_2)),
         icon = MenuItemIconRes(iconsR.drawable.mozac_ic_lightbulb_24),
         onClickEvent = MenuAction.Navigate.WebCompatReporter,
         // There is nothing to report about the pages the browser itself shows.

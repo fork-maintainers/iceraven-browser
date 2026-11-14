@@ -28,12 +28,10 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyItemScope
-import androidx.compose.foundation.lazy.LazyListItemInfo
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
-import androidx.compose.foundation.lazy.grid.LazyGridItemInfo
 import androidx.compose.foundation.lazy.grid.LazyGridItemScope
 import androidx.compose.foundation.lazy.grid.LazyGridScope
 import androidx.compose.foundation.lazy.grid.LazyGridState
@@ -53,7 +51,6 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.runtime.toMutableStateList
@@ -65,7 +62,6 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.layout.LocalPinnableContainer
-import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.dimensionResource
@@ -89,29 +85,29 @@ import mozilla.components.compose.base.modifier.thenConditional
 import mozilla.components.compose.base.theme.Theme
 import mozilla.components.compose.base.theme.ThemedValue
 import mozilla.components.compose.base.theme.ThemedValueProvider
+import mozilla.components.compose.draggable.GridInteractionState
+import mozilla.components.compose.draggable.InteractableDragItemContainer
+import mozilla.components.compose.draggable.InteractionState
+import mozilla.components.compose.draggable.ItemInteractionHandler
+import mozilla.components.compose.draggable.ItemInteractionState
+import mozilla.components.compose.draggable.ListInteractionState
+import mozilla.components.compose.draggable.NoOpItemInteractionHandler
+import mozilla.components.compose.draggable.createGridInteractionState
+import mozilla.components.compose.draggable.createListInteractionState
+import mozilla.components.compose.draggable.detectListPressAndDrag
+import mozilla.components.compose.draggable.interactableGrid
 import org.mozilla.fenix.R
 import org.mozilla.fenix.compose.rememberSwipeToDismissBoxState
 import org.mozilla.fenix.tabgroups.TabGroupCard
 import org.mozilla.fenix.tabgroups.TabGroupRow
 import org.mozilla.fenix.tabstray.TabsTrayTestTag
-import org.mozilla.fenix.tabstray.browser.compose.ItemInteractionState
 import org.mozilla.fenix.tabstray.browser.compose.ReorderableDragItemContainer
 import org.mozilla.fenix.tabstray.browser.compose.createListReorderState
 import org.mozilla.fenix.tabstray.browser.compose.detectListPressAndDrag
-import org.mozilla.fenix.tabstray.browser.compose.interactable.GridInteractionState
-import org.mozilla.fenix.tabstray.browser.compose.interactable.InteractableDragItemContainer
-import org.mozilla.fenix.tabstray.browser.compose.interactable.InteractionState
-import org.mozilla.fenix.tabstray.browser.compose.interactable.ListInteractionState
-import org.mozilla.fenix.tabstray.browser.compose.interactable.createGridInteractionState
-import org.mozilla.fenix.tabstray.browser.compose.interactable.createListInteractionState
-import org.mozilla.fenix.tabstray.browser.compose.interactable.detectGridPressAndDragGestures
-import org.mozilla.fenix.tabstray.browser.compose.interactable.detectListPressAndDrag
 import org.mozilla.fenix.tabstray.browser.compose.legacy.GridReorderState
 import org.mozilla.fenix.tabstray.browser.compose.legacy.ReorderableDragItemContainer
 import org.mozilla.fenix.tabstray.browser.compose.legacy.createGridReorderState
 import org.mozilla.fenix.tabstray.browser.compose.legacy.detectGridPressAndDragGestures
-import org.mozilla.fenix.tabstray.controller.ItemInteractionHandler
-import org.mozilla.fenix.tabstray.controller.NoOpItemInteractionHandler
 import org.mozilla.fenix.tabstray.data.TabGroupTheme
 import org.mozilla.fenix.tabstray.data.TabsTrayItem
 import org.mozilla.fenix.tabstray.data.createTab
@@ -710,7 +706,9 @@ private fun InteractableTabGrid(
         createGridInteractionState(
             gridState = gridState,
             itemInteractionHandler = itemInteractionHandler,
-            onLongPress = rememberReactiveLongPressGrid(tabs = tabs, onItemLongClick = onItemLongClick),
+            onLongPress = { itemInfo ->
+                tabs.firstOrNull { tabItem -> tabItem.id == itemInfo.key }?.let(onItemLongClick)
+            },
             liveReorderEnabled = liveReorderEnabled,
             ignoredItems = ignoredItems,
         )
@@ -743,13 +741,7 @@ private fun InteractableTabGrid(
 
     BoxWithConstraints(
         modifier =
-            Modifier.onGloballyPositioned {
-                    gridInteractionState.updateGridLayoutCoordinates(it)
-                }
-                .detectGridPressAndDragGestures(
-                    reorderState = gridInteractionState,
-                    isInMultiSelectMode = isInMultiSelectMode,
-                )
+            Modifier.interactableGrid(state = gridInteractionState, isInMultiSelectMode = isInMultiSelectMode)
                 .drawVerticalReorderIndicator(gridInteractionState = gridInteractionState)
     ) {
         val columns = numberOfGridColumns
@@ -1239,7 +1231,9 @@ private fun InteractableTabList(
         createListInteractionState(
             listState = state,
             ignoredItems = ignoredItems,
-            onLongPress = rememberReactiveLongPressList(tabs = tabs, onItemLongClick = onItemLongClick),
+            onLongPress = { itemInfo ->
+                tabs.firstOrNull { tabItem -> tabItem.id == itemInfo.key }?.let(onItemLongClick)
+            },
             itemInteractionHandler = itemInteractionHandler,
             dragAndDropEnabled = dragAndDropEnabled,
             liveReorderEnabled = liveReorderEnabled,
@@ -2211,44 +2205,4 @@ private fun Modifier.drawHorizontalReorderIndicator(
             )
         }
     )
-}
-
-/**
- * After a drag and drop creates a new group, the list of tabs updates, so the long-lived onLongPress lambda needs to
- * update its captured argument. Otherwise, the new group will not respond properly to multi-select until recomposition
- * updates the state.
- */
-@Composable
-private fun rememberReactiveLongPressList(
-    tabs: List<TabsTrayItem>,
-    onItemLongClick: (TabsTrayItem) -> Unit,
-): (LazyListItemInfo) -> Unit {
-    val currentTabs by rememberUpdatedState(tabs)
-    val currentLongClick by rememberUpdatedState(onItemLongClick)
-    val onLongPress: (LazyListItemInfo) -> Unit = remember {
-        { itemInfo ->
-            currentTabs.firstOrNull { tabItem -> tabItem.id == itemInfo.key }?.let(currentLongClick)
-        }
-    }
-    return onLongPress
-}
-
-/**
- * After a drag and drop creates a new group, the grid of tabs updates, so the long-lived onLongPress lambda needs to
- * update its captured argument. Otherwise, the new group will not respond properly to multi-select until recomposition
- * updates the state.
- */
-@Composable
-private fun rememberReactiveLongPressGrid(
-    tabs: List<TabsTrayItem>,
-    onItemLongClick: (TabsTrayItem) -> Unit,
-): (LazyGridItemInfo) -> Unit {
-    val currentTabs by rememberUpdatedState(tabs)
-    val currentLongClick by rememberUpdatedState(onItemLongClick)
-    val onLongPress: (LazyGridItemInfo) -> Unit = remember {
-        { itemInfo ->
-            currentTabs.firstOrNull { tabItem -> tabItem.id == itemInfo.key }?.let(currentLongClick)
-        }
-    }
-    return onLongPress
 }

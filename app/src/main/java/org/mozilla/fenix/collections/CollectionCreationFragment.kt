@@ -12,7 +12,6 @@ import android.view.ViewGroup
 import androidx.activity.ComponentDialog
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import mozilla.components.lib.state.ext.consumeFrom
 import mozilla.components.lib.state.helpers.StoreProvider.Companion.storeProvider
@@ -64,7 +63,7 @@ class CollectionCreationFragment : DialogFragment() {
                     requireComponents.core.store,
                     ::dismiss,
                     requireComponents.core.tabCollectionStorage,
-                    scope = lifecycleScope,
+                    scope = requireComponents.applicationScope,
                 )
             )
         collectionCreationView =

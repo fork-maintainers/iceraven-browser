@@ -7,34 +7,52 @@
 -->
 
 <resources xmlns:tools="http://schemas.android.com/tools">
+  <!-- App name for private browsing mode. %s is the name of the app (for example "Firefox"). -->
+  <string name="app_name_private_5">ڈکوئ %s</string>
+  <!-- App name for private browsing mode. %s is the name of the app (for example "Firefox"). -->
+  <string name="app_name_private_4">%s (ڈکوئ)</string>
   <!--
     Home Fragment
 
     Content description (not visible, for screen readers etc.): "Three dot" menu button.
   -->
   <string name="content_description_menu">پین اپشن</string>
+  <!-- Content description (not visible, for screen readers etc.): "Private Browsing" menu button. -->
+  <string name="content_description_private_browsing">ڈکوئ ویبگشت</string>
+  <!-- Content description (not visible, for screen readers etc.): "Normal Browsing" menu button. -->
+  <string name="content_description_normal_browsing">عام ویبگشت</string>
   <!-- Placeholder text shown in the search bar before a user enters text for the default engine -->
-  <string name="search_hint">پٹ یا ویب ڈس اس لکهہ</string>
+  <string name="search_hint">پٹ یا ویب ڈس اس لکهبو</string>
   <!-- Shorter placeholder text shown in the search bar when an additional action (voice search) is rendered alongside the hint. -->
   <string name="search_hint_short">پٹبو</string>
   <!-- Placeholder text shown in the search bar before a user enters text for a general engine -->
   <string name="search_hint_general_engine">ویب اے پٹبو</string>
   <!-- Placeholder text shown in search bar when using history search -->
-  <string name="history_search_hint">پٹ و پول نا تاریخچہ</string>
+  <string name="history_search_hint">تاریخچہ ٹی پٹبو</string>
   <!-- Placeholder text shown in search bar when using bookmarks search -->
-  <string name="bookmark_search_hint">نشانی تیئٹ پٹ</string>
+  <string name="bookmark_search_hint">نشانی تے ٹی پٹبو</string>
   <!-- Placeholder text shown in search bar when using tabs search -->
   <string name="tab_search_hint">ٹیب اتے پٹبو</string>
+  <!-- The header text displayed on the private tabs page when no private tabs are open -->
+  <string name="tab_manager_empty_private_tabs_page_header">ڈکوئ ویبگشت</string>
+  <!-- The supplementary text displayed on the private tabs page when no private tabs are open. %1$s is the name of the app (for example "Firefox") -->
+  <string name="tab_manager_empty_private_tabs_page_description">%1$s نما ہچو تاریخچہ و کوکیز یات تخپک، ولہپوسکنا تشانیک خوندی مریرہ.</string>
+  <!-- The header text displayed on the normal tabs page when no normal tabs are open -->
+  <string name="tab_manager_empty_normal_tabs_page_header">پٹنگ شروع کننگ کن پوسکنو ٹیب اس ملبو</string>
+  <!-- Tab tray multi select title in app bar. %1$d is the number of tabs selected -->
+  <string name="tab_tray_multi_select_title">%1$d گچین مروک</string>
   <!-- Tab tray multi select title in app bar when no tabs are selected -->
   <string name="tab_tray_multi_select_title_empty">ٹیب اتے گچین کبو</string>
   <!-- Label of button in create collection dialog for creating a new collection -->
-  <string name="tab_tray_add_new_collection">پوستنو مچی اس ات</string>
+  <string name="tab_tray_add_new_collection">پوسکنو مچی اس اتبو</string>
   <!-- Label of editable text in create collection dialog for naming a new collection -->
   <string name="tab_tray_add_new_collection_name">پن</string>
   <!-- Label of button in save to collection dialog for selecting a current collection -->
-  <string name="tab_tray_select_collection">مچی ے گچین کر</string>
+  <string name="tab_tray_select_collection">مچی اے گچین کبو</string>
   <!-- The header text displayed on the synced tabs page when the user is not logged into an account. -->
   <string name="tab_manager_empty_synced_tabs_page_header">ہرا ہم ڈیوائس ان ٹیباتے اتبو</string>
+  <!-- The supplementary text displayed on the synced tabs page when the user is not logged into an account. -->
+  <string name="tab_manager_empty_synced_tabs_page_description">تینا کل ڈیوائس اتا ہمگام ٹیباتے نظم کننگ کن سائن ان کبو.</string>
   <!-- The action text displayed on the synced tabs page when the user is not logged into an account, prompting the user to sign into their account. When clicked, it takes the user to the account sign-in flow. -->
   <string name="tab_manager_empty_synced_tabs_page_sign_in_cta">سائن ان</string>
   <!-- Text for the button used to show all stories -->
@@ -46,11 +64,28 @@
   -->
   <string name="home_bookmarks_title">بک مارکاک</string>
   <!-- Content description for the button which navigates the user to show all of their bookmarks. -->
-  <string name="home_bookmarks_show_all_content_description">بک مارکاتے نشان ایت</string>
+  <string name="home_bookmarks_show_all_content_description">نشانی تے نشان ایتبو</string>
   <!-- Text for the menu button to remove a recently saved bookmark from the user's home screen -->
   <string name="home_bookmarks_menu_item_remove">مٹائفبو</string>
   <!-- About content. %1$s is the name of the app (for example "Firefox"). -->
   <string name="about_content" tools:ignore="BrandUsage">%1$s اے Mozilla جوڈ کرینے۔</string>
+  <!--
+    Private Browsing
+
+    Text to be announced by the accessibility service to inform the user that the private browsing mode is currently active.
+  -->
+  <string name="private_browsing_a11y_session_announcement">ڈکوئ ویبگشت سیشن</string>
+  <!--
+    True Private Browsing Mode
+
+    Title for info card on private homescreen in True Private Browsing Mode.
+  -->
+  <string name="felt_privacy_desc_card_title">دا ڈیوائس ٹی ہچ او رند الپہ بو</string>
+  <!--
+    Description of private browsing mode displayed to users on the homepage when they enable private mode.
+    %1$s is the name of the app (for example "Firefox").
+  -->
+  <string name="felt_privacy_info_card_subtitle_3">ارا وخت نم تینا کل ڈکوئ ٹیباتے بند کیرے %1$s نما کل کوکیزاتے، تاریخچہ، و ویب ڈس ڈیٹا اے مٹائفک.</string>
   <!-- Text for the positive action button -->
   <string name="open_in_app_cfr_positive_button_text">سیٹنگ اتے ان</string>
   <!-- Text for the negative action button -->
@@ -72,11 +107,23 @@
   -->
   <string name="home_screen_shortcut_open_new_tab_2">پوسکنو ٹیب اس</string>
   <!-- Shortcut action to open new private tab -->
-  <string name="home_screen_shortcut_open_new_private_tab_2">پوسکنا زاتی ٹیب</string>
+  <string name="home_screen_shortcut_open_new_private_tab_2">پوسکنا ڈکوئ ٹیب</string>
   <!-- Shortcut action to open Passwords screen -->
   <string name="home_screen_shortcut_passwords">کلیت لوزاک</string>
+  <!-- Shortcut action to open uninstall survey -->
+  <string name="home_screen_shortcut_uninstall_survey">انانسٹال، انتئے؟</string>
+  <!--
+    Recent Tabs
+
+    Header text on the homescreen for continuing to browse the most recent browser tab
+  -->
+  <string name="recent_tabs_header_2">برجا</string>
   <!-- Button text for showing all the tabs in the tabs tray -->
   <string name="recent_tabs_show_all">کل اے نشان ایت</string>
+  <!-- Text for button in synced tab card that opens synced tabs tray -->
+  <string name="recent_tabs_see_all_synced_tabs_button_text">کل ہمگام ٹیب اتے اربو</string>
+  <!-- Accessibility description for device icon used for recent synced tab -->
+  <string name="recent_tabs_synced_device_icon_content_description">ہمگام ڈیوائس</string>
   <!-- Text for the dropdown menu to remove a recent synced tab from the homescreen -->
   <string name="recent_synced_tab_menu_item_remove">مٹائفبو</string>
   <!--
@@ -96,11 +143,7 @@
     in the Recently visited section
   -->
   <string name="recently_visited_menu_item_remove">مٹائفبو</string>
-  <!--
-    Browser Fragment
-
-    Content description (not visible, for screen readers etc.): Navigate backward (browsing history)
-  -->
+  <!-- Content description (not visible, for screen readers etc.): Navigate backward (browsing history) -->
   <string name="browser_menu_back">پدا</string>
   <!-- Content description (not visible, for screen readers etc.): Navigate forward (browsing history) -->
   <string name="browser_menu_forward">مونی</string>
@@ -108,6 +151,10 @@
   <string name="browser_menu_refresh">تازہ کبو</string>
   <!-- Content description (not visible, for screen readers etc.): Stop loading current website -->
   <string name="browser_menu_stop">سلیف</string>
+  <!-- Browser menu button that opens the extensions manager -->
+  <string name="browser_menu_extensions">ودنگاک</string>
+  <!-- Browser menu button that opens the extensions manager -->
+  <string name="browser_menu_manage_extensions">ودنگاتے نظم کبو</string>
   <!-- Browser menu group that contains additional settings in collapsed state -->
   <string name="browser_menu_more_settings">پین</string>
   <!--
@@ -132,7 +179,7 @@
   <!-- Browser menu button that opens the translations dialog, which has options to translate the current browser page. -->
   <string name="browser_menu_translations">صفحہ اے مٹ کبو</string>
   <!-- Browser menu button that saves the current tab to a collection -->
-  <string name="browser_menu_save_to_collection_2">مچی ٹی گچین کر</string>
+  <string name="browser_menu_save_to_collection_2">مچی ٹی خوندی کبو</string>
   <!-- Browser menu button that open a share menu to share the current site -->
   <string name="browser_menu_share">بشخبو</string>
   <!-- Browser menu button that goes to the homepage screen -->
@@ -150,18 +197,22 @@
   <string name="browser_menu_open_app_link">ایپ ٹی مل</string>
   <!-- Browser menu label to sign in to sync on the device using Mozilla accounts -->
   <string name="browser_menu_sign_in">سائن ان</string>
+  <!-- Browser menu label that creates a private tab -->
+  <string name="browser_menu_new_private_tab">پوسکنا ڈکوئ ٹیب</string>
   <!-- Browser menu label that navigates to the Password screen -->
   <string name="browser_menu_passwords">کلیت لوزاک</string>
   <!-- Content description (not visible, for screen readers etc.) for the handle used to drag the main menu at the bottom of the screen. -->
   <string name="browser_close_main_menu_handlebar_content_description">مینو اے بند کبو</string>
   <!-- Browser menu label that bookmarks the currently visited page -->
-  <string name="browser_menu_bookmark_this_page_2">صفحہ اے نشانی کہ</string>
+  <string name="browser_menu_bookmark_this_page_2">صفحہ اے نشانی کبو</string>
   <!-- Browser menu label that navigates to the edit bookmark screen for the current bookmarked page -->
   <string name="browser_menu_edit_bookmark">نشانی بدل کبو</string>
   <!-- Browser menu label that the saves the currently visited page as a PDF -->
   <string name="browser_menu_save_as_pdf_2">بطور PDF خوندی کر</string>
   <!-- Browser menu label for navigating to the translation feature, which provides language translation options the current visited page -->
   <string name="browser_menu_translate_page_2">صفحہ اے مٹ کبو</string>
+  <!-- Browser menu label for navigating to the summarization feature, which provides site summarization for the current visited page -->
+  <string name="browser_menu_summarize_page">صفحہ اے گونڈ کبو</string>
   <!-- Browser menu badge text for summarization feature -->
   <string name="browser_menu_summarize_page_badge">پوسکن</string>
   <!-- Browser menu label that is displayed when the current page has been translated by the translation feature. -->
@@ -173,6 +224,8 @@
     %1$s is the name of the app (for example "Firefox").
   -->
   <string name="browser_menu_delete_browsing_data_on_quit">%1$s اے بند کبو</string>
+  <!-- Label text within the set as default banner -->
+  <string name="browser_menu_default_banner_subtitle_2">تیز، خاص و نم کن جوڑ اے.</string>
   <!-- Content description (not visible, for screen readers etc.) for recommended extensions in main menu -->
   <string name="browser_menu_recommended_extensions_content_description">پین معلومات</string>
   <!--
@@ -181,6 +234,8 @@
     Content description for the translate page toolbar button that opens the translations dialog when no translation has occurred.
   -->
   <string name="browser_toolbar_translate">صفحہ اے مٹ کبو</string>
+  <!-- CFR description for the browser toolbar describing the "Shake to summarize feature" -->
+  <string name="browser_toolbar_summarize_cfr_description">دا صفحہ اے سیکنڈ اتے ٹی گونڈ کننگ کن ڈیوائس اے سرفبو. ⚡️</string>
   <!--
     Translation Toolbar
 
@@ -189,10 +244,20 @@
     %2$s is the name of the language which the page was translated to. (For example: French)
   -->
   <string name="translation_toolbar_translated_from_and_to" tools:ignore="UnusedResources">%1$s ان %2$s ٹی مٹ مس</string>
+  <!--
+    Page summaries
+
+    Toolbar title for the Page summaries settings fragment
+  -->
+  <string name="preferences_page_summaries">پنہ غاتا گونڈیک</string>
   <!-- Link text for learning more about AI controls -->
   <string name="ai_controls_learn_more">پین ہیل کبو</string>
+  <!-- Title for the translations AI feature toggle -->
+  <string name="ai_controls_translations_title">مٹ اک</string>
   <!-- Title for the voice search AI feature toggle -->
   <string name="ai_controls_voice_search_title">توارتون پٹبو</string>
+  <!-- Cancel button text in the block AI enhancements confirmation dialog -->
+  <string name="ai_controls_block_dialog_cancel">کینسل</string>
   <!--
     Locale Settings Fragment
 
@@ -204,7 +269,7 @@
   <!-- Placeholder text shown in the search bar before a user enters text -->
   <string name="locale_search_hint">دووی گچین کر</string>
   <!-- Button in the search suggestions onboarding that allows search suggestions in private sessions -->
-  <string name="search_suggestions_onboarding_allow_button">اجازت ایت</string>
+  <string name="search_suggestions_onboarding_allow_button">اجازت ایتبو</string>
   <!-- Button in the search suggestions onboarding that does not allow search suggestions in private sessions -->
   <string name="search_suggestions_onboarding_do_not_allow_button">اجازت تفہ</string>
   <!-- Search engine suggestion title text. %s is the name of the suggested engine. -->
@@ -230,12 +295,16 @@
     Content description (not visible, for screen readers etc.): Close button for the home onboarding dialog
   -->
   <string name="onboarding_home_content_description_close_button">بند</string>
+  <!-- Title for the privacy preferences dialog shown during onboarding. Note: The word "Firefox" should NOT be translated. -->
+  <string name="onboarding_preferences_dialog_title" tools:ignore="BrandUsage">Firefox اے بہتر کننگ کن نن تون کمک کبو</string>
+  <!-- Title for the crash reporting option in the privacy preferences dialog shown during onboarding. -->
+  <string name="onboarding_preferences_dialog_crash_reporting_title">تینٹ پننگ نا رپورٹ اتے رائ کے</string>
   <!-- Learn more link for the crash reporting option in the privacy preferences dialog shown during onboarding. -->
   <string name="onboarding_preferences_dialog_crash_reporting_learn_more_2">پین ہیل کبو</string>
   <!-- Title for the startup crash page. %s is the name of the app (for example "Firefox") -->
   <string name="startup_crash_title">%s اے پدا ملوی تمک</string>
   <!-- Body text for the startup crash page. %s is the name of the app (for example "Firefox") -->
-  <string name="startup_crash_body">%s اے ملنگ ٹے مسعلہ اس مس۔\n\nپننگ نا رپرٹ اے رای کننگ ان براوزر نا مسعلہ گا ے درست و حل کننگ ٹی ننے کمک مریک۔ رپورٹ اتے ٹی زاتی و حساس ڑیٹا مننگ کیک۔\n</string>
+  <string name="startup_crash_body">%s اے ملنگ ٹے مسعلہ اس مس۔\n\nپننگ نا رپرٹ اے رای کننگ ان براوزر نا مسئلہ گا ے درست و حل کننگ ٹی ننے کمک مریک۔ رپورٹ اتے ٹی زاتی و حساس ڈیٹا مننگ کیک۔</string>
   <!-- Button text to submit a startup crash report -->
   <string name="startup_crash_positive">پننگ نا رپورٹ اے رائی کر</string>
   <!-- Button text to continue and not send a startup crash report -->
@@ -247,10 +316,14 @@
   <string name="onboarding_preferences_dialog_positive_button">مس</string>
   <!-- Terms of service onboarding title card label. 'Firefox' intentionally hardcoded here -->
   <string name="onboarding_welcome_to_firefox" tools:ignore="BrandUsage">Firefox ٹی ببوخیرٹ</string>
+  <!-- Sync onboarding redesign title. 'Firefox' is intentionally hardcoded. -->
+  <string name="onboarding_redesign_sync_title" tools:ignore="BrandUsage,UnusedResources">ہر جا کہ Firefox استعمال کیرے ہمگام کبو</string>
   <!-- Sync onboarding redesign negative button text. -->
   <string name="onboarding_redesign_sync_negative_button" tools:ignore="UnusedResources">داسہ نہ</string>
   <!-- Marketing onboarding page title variant. “One last thing” refers to the final step or action in the onboarding process that we’re asking users to take before they can start using the browser. -->
   <string name="onboarding_marketing_title_1" tools:ignore="UnusedResources">اسہ گڈیکو گڑاس</string>
+  <!-- Marketing onboarding page button label variant. Button to confirm choice and start browsing. -->
+  <string name="onboarding_marketing_positive_button_1" tools:ignore="UnusedResources">منبو و ویبگشت شروع کبو</string>
   <!-- "Continue" onboarding button. -->
   <string name="nova_onboarding_continue_button">برجا</string>
   <!-- "Not now" onboarding button. -->
@@ -265,17 +338,45 @@
   <string name="nova_onboarding_theme_selection_title" tools:ignore="UnusedResources">تینا تیم اے گچین کبو</string>
   <!-- Theme selection onboarding "automatic" option label. -->
   <string name="nova_onboarding_theme_selection_automatic_label" tools:ignore="UnusedResources">تینٹ</string>
+  <!-- Theme selection onboarding "light" option label. -->
+  <string name="nova_onboarding_theme_selection_light_label" tools:ignore="UnusedResources">رژنا</string>
   <!-- Theme selection onboarding "dark" option label. -->
   <string name="nova_onboarding_theme_selection_dark_label" tools:ignore="UnusedResources">تہار</string>
+  <!-- Marketing onboarding body link text. -->
+  <string name="nova_onboarding_marketing_body_link_text_1">پین ہیل کبو</string>
+  <!-- Marketing onboarding primary button text. -->
+  <string name="nova_onboarding_marketing_primary_button_text_3">جی آؤ</string>
+  <!-- Marketing onboarding secondary button text. -->
+  <string name="nova_onboarding_marketing_secondary_button_text" tools:ignore="UnusedResources">آ خا منت واری</string>
+  <!-- Marketing onboarding secondary button text. -->
+  <string name="nova_onboarding_marketing_secondary_button_text_2">اخہ</string>
   <!-- Notifications onboarding button. -->
   <string name="nova_onboarding_notifications_button">اعلاناتےملبو</string>
+  <!--
+    Search Widget
+
+    Content description for searching with a widget. %1$s is the name of the app (for example "Firefox").
+  -->
+  <string name="search_widget_content_description_2">پوسکنو %1$s ٹیب اسے ٹی ملبو</string>
   <!-- Text preview for smaller sized widgets -->
   <string name="search_widget_text_short">پٹبو</string>
   <!-- Text preview for larger sized widgets -->
   <string name="search_widget_text_long">ویب اے پٹبو</string>
   <!-- Content description (not visible, for screen readers etc.): Voice search -->
   <string name="search_widget_voice">توارتون پٹبو</string>
-  <!-- Preference category for general settings -->
+  <!-- Content description (not visible, for screen readers etc.): Button in the search widget that starts a search in a private tab -->
+  <string name="search_widget_private_search">ڈکوئ پٹ</string>
+  <!--
+    Preferences
+
+    Title for the settings page
+  -->
+  <string name="settings">سیٹنگاک</string>
+  <!--
+    Preferences
+
+    Preference category for general settings
+  -->
   <string name="preferences_category_general">عام</string>
   <!-- Preference category for all links about Fenix -->
   <string name="preferences_category_about">باروٹ</string>
@@ -292,18 +393,26 @@
   <string name="preferences_about">ئنا باروٹ %1$s</string>
   <!-- Summary of https only preference if https only is set to off -->
   <string name="preferences_https_only_off">بند</string>
+  <!-- Text displayed that links to website containing documentation about "HTTPS-Only" mode -->
+  <string name="preferences_http_only_learn_more">پین ہیل کبو</string>
+  <!-- Preference category for account information -->
+  <string name="preferences_category_account">اکاؤنٹ</string>
   <!-- Preference for changing where the AddressBar is positioned -->
   <string name="preferences_toolbar_2">ڈس بار نا جاگہ</string>
   <!-- Preference for changing default theme to dark or light mode -->
   <string name="preferences_theme">تیم</string>
   <!-- Preference for customizing the home screen -->
-  <string name="preferences_home_2">مون نا پنہ</string>
+  <string name="preferences_home_2">مون پنہ</string>
   <!-- Preference for language -->
   <string name="preferences_language">زبان</string>
   <!-- Preference for translations -->
   <string name="preferences_translations">مٹ اک</string>
+  <!-- Preference for data collection -->
+  <string name="preferences_data_collection">ڈیٹا مچی</string>
   <!-- Preference title for switch preference to suggest bookmarks when searching -->
   <string name="preferences_search_bookmarks">نشانی تیئٹ پٹ</string>
+  <!-- Preference for link sharing -->
+  <string name="preferences_link_sharing">لنک بشخنگ</string>
   <!-- Snackbar message shown when user shares a link -->
   <string name="link_shared_snackbar_message">لنک بشخنگا</string>
   <!-- Preference for open links in third party apps always open in apps option -->
@@ -312,6 +421,10 @@
   <string name="preferences_open_links_in_apps_ask">ملنگ ان مست ارف</string>
   <!-- Preference for open links in third party apps never open in apps option -->
   <string name="preferences_open_links_in_apps_never">ہچ</string>
+  <!-- Preference label for choosing whether links open in the YouTube app -->
+  <string name="preferences_open_links_in_youtube">لنک اتے YouTube ایپ ٹی ملبو</string>
+  <!-- Preference for extensions -->
+  <string name="preferences_extensions">ودنگاک</string>
   <!-- Preference for notifications -->
   <string name="preferences_notifications">اعلاناک</string>
   <!-- Summary for notification preference indicating notifications are allowed -->
@@ -347,12 +460,20 @@
   <string name="alternative_app_icon_option_blue">خرن</string>
   <!-- Title for the "Sunrise" gradient alternative app icon variant in the icon picker screen. The app icon features a soft yellow-to-blue gradient background, resembling the colors of early morning light. -->
   <string name="alternative_app_icon_option_gradient_sunrise">دے ٹک</string>
+  <!-- Title for the "Golden Hour" gradient alternative app icon variant in the icon picker screen. The app icon features a warm golden-to-pink gradient background, resembling the colors of the sunlight shortly before sunset. -->
+  <string name="alternative_app_icon_option_gradient_golden_hour">خیسن گھنٹہ</string>
   <!-- Title for the "Sunset" gradient alternative app icon variant in the icon picker screen. The app icon has a rich red-to-purple gradient background, resembling the tones of a sunset sky. -->
   <string name="alternative_app_icon_option_gradient_sunset">دے شیف</string>
+  <!-- Title for the "Midnight" gradient alternative app icon variant in the icon picker screen. The app icon features a dark gradient background, resembling the deep tones of the night sky. -->
+  <string name="alternative_app_icon_option_gradient_midnight">نن نیمہ</string>
+  <!-- Title for the "Northern Lights" gradient alternative app icon variant in the icon picker screen. The app icon has a dynamic green, blue, and purple gradient background, resembling the aurora borealis. -->
+  <string name="alternative_app_icon_option_gradient_northern_lights">شمالی رشناک</string>
   <!-- Title for the "Cool" themed alternative app icon variant in the icon picker screen. The app icon uses a warm orange-to-yellow gradient background with a sleek, modern twist on the Firefox logo, giving it a fresh and stylish appearance. -->
   <string name="alternative_app_icon_option_cool">یخ</string>
   <!-- Dialog button text for confirming the possible app restart and new icon selection -->
   <string name="restart_warning_dialog_button_positive_2">نشان اے بدل کبو</string>
+  <!-- Dialog button text for cancelling app icon change -->
+  <string name="restart_warning_dialog_button_negative">کینسل</string>
   <!-- Preference for syncing history -->
   <string name="preferences_sync_history">تاریخچہ</string>
   <!-- Preference for syncing bookmarks -->
@@ -363,6 +484,8 @@
   <string name="preferences_sync_tabs_2">ملوکا ٹیبآک</string>
   <!-- Preference displays and allows changing current FxA device name -->
   <string name="preferences_sync_device_name">ڈیوائس نا پن</string>
+  <!-- Preference category for Device name -->
+  <string name="preferences_device_name_category">ڈیوائس نا پن</string>
   <!--
     Text for displaying the default device name.
     %1$s is the name of the app (for example "Firefox"). %2$s is the device manufacturer name
@@ -374,7 +497,7 @@
   <!-- The body for a "closed synced tabs" notification. -->
   <string name="fxa_tabs_closed_text">ہر زوتیاٹ بندمروک ٹیب اتے</string>
   <!-- Title for the crash reporting option in the privacy preferences dialog shown during onboarding. -->
-  <string name="crash_reporting_snack_bar_message">رپرٹ رائ \u0020مس</string>
+  <string name="crash_reporting_snack_bar_message">رپورٹ رائ مس</string>
   <!--
     Turn On Sync Preferences
 
@@ -424,9 +547,9 @@
   -->
   <string name="library_downloads">ڈاونلوڈآک</string>
   <!-- Option in library to open Bookmarks page -->
-  <string name="library_bookmarks">بک مارکاک</string>
+  <string name="library_bookmarks">نشانیک</string>
   <!-- Option in library to open Desktop Bookmarks "menu" page -->
-  <string name="library_desktop_bookmarks_menu">بکمارک مینو</string>
+  <string name="library_desktop_bookmarks_menu">نشانی تا مینو</string>
   <!-- Option in library to open Desktop Bookmarks "unfiled" page -->
   <string name="library_desktop_bookmarks_unfiled">ایلو بکمارکاک</string>
   <!-- Option in Library to open History page -->
@@ -470,7 +593,7 @@
   <!-- Option for auto closing tabs that will auto close tabs after one month -->
   <string name="close_tabs_after_one_month">تو اسے انپد</string>
   <!-- Option for always opening the homepage when re-opening the app -->
-  <string name="opening_screen_homepage">مون نا پنہ</string>
+  <string name="opening_screen_homepage">مون پنہ</string>
   <!-- Option for always opening the user's last-open tab when re-opening the app -->
   <string name="opening_screen_last_tab">گڈیکو ٹیب</string>
   <!-- Text for the tab search bar placeholder -->
@@ -588,7 +711,7 @@
   <!-- Content description (not visible, for screen readers etc.): Opens the collection menu when pressed -->
   <string name="collection_menu_button_content_description">مچی مینو</string>
   <!-- Title for the "select collection" step of the collection creator -->
-  <string name="create_collection_select_collection">مچی ے گچین کر</string>
+  <string name="create_collection_select_collection">مچی اے گچین کبو</string>
   <!-- Title for the "name collection" step of the collection creator -->
   <string name="create_collection_name_collection">مچی نا پن</string>
   <!-- Sub-header in the dialog to share a link to an app from the most-recent sorted list -->
@@ -606,7 +729,7 @@
   <!-- The header for the password for a login -->
   <string name="preferences_passwords_saved_logins_password">کلیت لوز</string>
   <!-- Shown in snackbar to tell user that the password has been copied -->
-  <string name="logins_password_copied">کلیت لوز کلیپبورڈ اٹ کاپی مس</string>
+  <string name="logins_password_copied">کلیت لوز کلپ بورڈ ٹی کاپی مس</string>
   <!-- Content description, used by tools like screenreaders, to press on the save new login button. -->
   <string name="add_login_save_new_login_button_content_description">پوسکن سائن ان اے خوندی کبو</string>
   <!-- Content Description (for screenreaders etc) read for the button to reveal a password in logins -->
@@ -614,7 +737,7 @@
   <!-- Content Description (for screenreaders etc) read for the button to hide a password in logins -->
   <string name="saved_login_hide_password">کلیت لوز اے ڈک</string>
   <!-- Title for recent search suggestions. -->
-  <string name="recent_searches_header">زاتیاٹ پٹنگاک</string>
+  <string name="recent_searches_header">زوتیاٹ پٹنگاک</string>
   <!-- Default dropdown option when initially selecting a language from the translations dialog language selection dropdown. -->
   <string name="translations_bottom_sheet_default_dropdown_selection">دووی اس گچین کر</string>
   <!-- Button text for the button that will take the user to a website to learn more about how translations works in the given app. %1$s is the name of the app (for example "Firefox"). -->
@@ -633,4 +756,6 @@
     Title for a prompt asking the user about their experience using the app. %1$s is the name of the app (for example "Firefox").
   -->
   <string name="review_prompt_pre_prompt_header">%1$s نا باروٹ انت پارے؟</string>
+  <!-- Content description for the button in the reader view panel that turns on the Listen to Page feature (playback of content begins when button is pressed) -->
+  <string name="reader_mode_panel_listen_content_description">توار تون خواننگ</string>
 </resources>

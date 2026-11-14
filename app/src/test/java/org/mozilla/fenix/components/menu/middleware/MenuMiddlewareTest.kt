@@ -12,6 +12,7 @@ import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
 import mozilla.components.compose.base.text.Text
 import mozilla.components.compose.menu.data.MenuItem
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.data.MenuItemsGroup
 import mozilla.components.compose.menu.data.StandardMenuItem
 import mozilla.components.compose.menu.store.MenuAction as MenuStoreAction
@@ -149,7 +150,7 @@ class MenuMiddlewareTest {
 
         val readerViewItem =
             StandardMenuItem(
-                title = Text.String("Customize reader view"),
+                title = MenuItemTitle(Text.String("Customize reader view")),
                 onClickEvent = MenuAction.CustomizeReaderView,
             )
     }

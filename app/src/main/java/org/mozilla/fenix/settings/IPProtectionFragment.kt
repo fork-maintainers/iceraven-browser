@@ -22,10 +22,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import java.time.LocalDate
 import mozilla.components.ExperimentalAndroidComponentsApi
-import mozilla.components.concept.engine.ipprotection.ServiceState
-import mozilla.components.feature.ipprotection.IPProtectionFxaAuthFlow
-import mozilla.components.feature.ipprotection.IPProtectionFxaAuthFlow.Companion.INTENT_ON_COMPLETE
 import mozilla.components.feature.ipprotection.IPProtectionWarningBinding
+import mozilla.components.feature.ipprotection.auth.fxa.IPProtectionFxaAuthFlow
+import mozilla.components.feature.ipprotection.auth.fxa.IPProtectionFxaAuthFlow.Companion.INTENT_ON_COMPLETE
 import mozilla.components.feature.ipprotection.debug.IPProtectionStateDebugContent
 import mozilla.components.feature.ipprotection.store.IPProtectionAction
 import mozilla.components.feature.ipprotection.store.state.AccountStatus
@@ -96,8 +95,6 @@ class IPProtectionFragment : Fragment(), SystemInsetsPaddedFragment {
             IPProtectionScreen(
                 state = state,
                 snackbarHostState = snackbarHostState,
-                readyToUse = state.readyToUse(),
-                syncingData = state.syncingData(),
                 promoDate = promoDate,
                 onVpnToggle = { enabled ->
                     if (enabled) {
@@ -197,28 +194,6 @@ class IPProtectionFragment : Fragment(), SystemInsetsPaddedFragment {
                 R.id.ipProtectionFragment,
                 IPProtectionFragmentDirections.actionIpProtectionFragmentToIpProtectionLocationFragment(),
             )
-    }
-
-    /**
-     * ServiceState is the source of truth for vpn "readiness". Proxy might error out, the data limit might be reached,
-     * but the user is entitled to interrace with it. We also have AccountStatus entitlement, but there is a tiny gap
-     * between as enrolling for IPProtection service, and the service actually becoming active and sending us data - the
-     * gap that should be presented as "connecting" state.
-     */
-    @OptIn(ExperimentalAndroidComponentsApi::class)
-    private fun IPProtectionState.readyToUse() = serviceStatus == ServiceState.Ready
-
-    /**
-     * Syncing state locks the screen from interaction, so we want to be explicit about it: for now, it is specifically
-     * for the enrollment state - when the user has passed the auth flow, but the toolkit service has not been updated
-     * yet. Otherwise, if the ServiceState is not `Ready`, the user gets a "get started" button.
-     */
-    @OptIn(ExperimentalAndroidComponentsApi::class)
-    private fun IPProtectionState.syncingData(): Boolean {
-        return serviceStatus == ServiceState.Unauthenticated &&
-            (accountState.status == AccountStatus.AwaitingEnrollment ||
-                accountState.status == AccountStatus.Authenticated ||
-                accountState.status == AccountStatus.EnrolledAndEntitled)
     }
 
     private fun IPProtectionState.authInProgress() =

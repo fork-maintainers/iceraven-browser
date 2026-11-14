@@ -436,13 +436,15 @@ constructor(
                         }
 
                         if (browserToolbarStore.state.displayState.navigationActions.isNotEmpty()) {
+                            val toolbarGravity =
+                                when (context.components.settings.shouldUseBottomToolbar) {
+                                    true -> ToolbarGravity.Bottom
+                                    false -> ToolbarGravity.Top
+                                }
                             NavigationBar(
                                 actions = browserToolbarStore.state.displayState.navigationActions,
-                                toolbarGravity =
-                                    when (context.components.settings.shouldUseBottomToolbar) {
-                                        true -> ToolbarGravity.Bottom
-                                        false -> ToolbarGravity.Top
-                                    },
+                                toolbarGravity = toolbarGravity,
+                                showDivider = toolbarGravity == ToolbarGravity.Top,
                                 onInteraction = {},
                             )
                         }

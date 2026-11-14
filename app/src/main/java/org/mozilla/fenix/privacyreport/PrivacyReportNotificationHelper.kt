@@ -92,10 +92,11 @@ fun ensurePrivacyReportNotificationChannelExists(context: Context): String {
  * Whether the weekly privacy report notification can currently be sent. If notification cannot be posted, then return
  * the reason.
  *
- * @param context Used to retrieve the [NotificationManager].
+ * @param notificationManager The [NotificationManagerCompat] used to check app-level notification settings.
  */
-internal fun privacyReportNotificationAvailability(context: Context): PrivacyReportNotificationAvailability {
-    val notificationManager = NotificationManagerCompat.from(context)
+internal fun privacyReportNotificationAvailability(
+    notificationManager: NotificationManagerCompat
+): PrivacyReportNotificationAvailability {
     val channel = notificationManager.getNotificationChannelCompat(PRIVACY_REPORT_NOTIFICATION_CHANNEL_ID)
 
     return when {

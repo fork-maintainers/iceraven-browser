@@ -10,7 +10,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import mozilla.components.concept.storage.CreditCard
-import mozilla.components.concept.storage.CreditCardNumber
 import mozilla.components.concept.storage.CreditCardsAddressesStorage
 import mozilla.components.concept.storage.NewCreditCardFields
 import mozilla.components.concept.storage.UpdatableCreditCardFields
@@ -19,7 +18,6 @@ import mozilla.components.lib.state.Store
 import mozilla.components.support.utils.creditCardIIN
 import mozilla.telemetry.glean.private.NoExtras
 import org.mozilla.fenix.GleanMetrics.CreditCards
-import org.mozilla.fenix.settings.creditcards.last4Digits
 import org.mozilla.fenix.settings.creditcards.ui.CreditCardEditorAction.DeleteDialogAction
 
 /**
@@ -101,8 +99,7 @@ internal class CreditCardEditorMiddleware(
             val fields =
                 UpdatableCreditCardFields(
                     billingName = state.nameOnCard,
-                    cardNumber = CreditCardNumber.Plaintext(state.cardNumber),
-                    cardNumberLast4 = state.cardNumber.last4Digits(),
+                    cardNumber = state.cardNumber,
                     expiryMonth = state.selectedExpiryMonthIndex + 1L,
                     expiryYear = state.expiryYears[state.selectedExpiryYearIndex].toLong(),
                     cardType = state.cardNumber.creditCardIIN()?.creditCardIssuerNetwork?.name ?: "",
@@ -122,8 +119,7 @@ internal class CreditCardEditorMiddleware(
             val fields =
                 NewCreditCardFields(
                     billingName = state.nameOnCard,
-                    plaintextCardNumber = CreditCardNumber.Plaintext(state.cardNumber),
-                    cardNumberLast4 = state.cardNumber.last4Digits(),
+                    cardNumber = state.cardNumber,
                     expiryMonth = state.selectedExpiryMonthIndex + 1L,
                     expiryYear = state.expiryYears[state.selectedExpiryYearIndex].toLong(),
                     cardType = state.cardNumber.creditCardIIN()?.creditCardIssuerNetwork?.name ?: "",
@@ -177,13 +173,6 @@ internal class CreditCardEditorMiddleware(
     ) {
         coroutineScope.launch(ioDispatcher) {
             val state = store.state
-            val crypto = storage.getCreditCardCrypto()
-
-            val plainTextCardNumber =
-                crypto.decrypt(
-                    key = crypto.getOrGenerateKey(),
-                    encryptedCardNumber = creditCard.encryptedCardNumber,
-                )
 
             val years = calendarDataProvider.years(creditCard.expiryYear)
 
@@ -193,7 +182,7 @@ internal class CreditCardEditorMiddleware(
                         state.copy(
                             guid = creditCard.guid,
                             nameOnCard = creditCard.billingName,
-                            cardNumber = plainTextCardNumber?.number ?: "",
+                            cardNumber = creditCard.cardNumber,
                             expiryMonths = calendarDataProvider.months(),
                             selectedExpiryMonthIndex = creditCard.expiryMonth.toInt() - 1,
                             expiryYears = years,

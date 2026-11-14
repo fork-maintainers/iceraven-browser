@@ -31,9 +31,10 @@
                 android:layout_marginTop="4dp"
                 android:padding="10dp"
                 android:background="@drawable/favicon_background"
-                android:backgroundTint="?accent"
+                android:backgroundTint="?attr/colorPrimary"
+                android:contentDescription="@string/library_item_selected_content_description"
                 app:srcCompat="@drawable/mozac_ic_checkmark_24"
-                app:tint="?iconOnColor" />
+                app:tint="?attr/colorOnPrimary" />
     </ImageSwitcher>
 
     <TextView

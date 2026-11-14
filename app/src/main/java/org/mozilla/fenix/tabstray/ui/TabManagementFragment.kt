@@ -30,6 +30,7 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
@@ -53,6 +54,7 @@ import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.scene.DialogSceneStrategy
 import androidx.navigation3.ui.NavDisplay
+import com.google.android.material.R as materialR
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
@@ -61,6 +63,7 @@ import mozilla.appservices.places.BookmarkRoot
 import mozilla.components.browser.state.selector.privateTabs
 import mozilla.components.compose.base.modifier.thenConditional
 import mozilla.components.compose.base.snackbar.displaySnackbar
+import mozilla.components.compose.draggable.ItemInteractionHandler
 import mozilla.components.concept.base.crash.Breadcrumb
 import mozilla.components.feature.accounts.push.CloseTabsUseCases
 import mozilla.components.feature.downloads.ui.DownloadCancelDialogFragment
@@ -109,7 +112,6 @@ import org.mozilla.fenix.tabstray.TabsTrayTelemetryMiddleware
 import org.mozilla.fenix.tabstray.binding.SecureTabManagerBinding
 import org.mozilla.fenix.tabstray.controller.DefaultTabManagerController
 import org.mozilla.fenix.tabstray.controller.DefaultTabManagerInteractor
-import org.mozilla.fenix.tabstray.controller.ItemInteractionHandler
 import org.mozilla.fenix.tabstray.controller.TabManagerController
 import org.mozilla.fenix.tabstray.controller.TabManagerInteractor
 import org.mozilla.fenix.tabstray.data.TabData
@@ -168,24 +170,24 @@ class TabManagementFragment : Fragment() {
     private val itemInteractionHandler =
         object : ItemInteractionHandler {
             override fun onMove(
-                sourceKey: String,
-                targetKey: String?,
+                sourceKey: Any,
+                targetKey: Any?,
                 placeAfter: Boolean,
             ) {
                 tabsTrayStore.dispatch(
                     TabsTrayAction.ReorderTabsTrayItem(
-                        sourceId = sourceKey,
-                        destinationId = targetKey,
+                        sourceId = sourceKey as String,
+                        destinationId = targetKey as String?,
                         placeAfter = placeAfter,
                     )
                 )
             }
 
-            override fun onDrop(sourceKey: String, targetKey: String) {
+            override fun onDrop(sourceKey: Any, targetKey: Any) {
                 tabsTrayStore.dispatch(
                     TabGroupAction.DragAndDropInitiated(
-                        sourceId = sourceKey,
-                        destinationId = targetKey,
+                        sourceId = sourceKey as String,
+                        destinationId = targetKey as String,
                     )
                 )
             }
@@ -194,10 +196,10 @@ class TabManagementFragment : Fragment() {
                 tabsTrayStore.dispatch(TabsTrayAction.TabDragCancel)
             }
 
-            override fun onDragStart(sourceKey: String, preserveSelectMode: Boolean) {
+            override fun onDragStart(sourceKey: Any, preserveSelectMode: Boolean) {
                 tabsTrayStore.dispatch(
                     TabsTrayAction.TabDragStart(
-                        sourceId = sourceKey,
+                        sourceId = sourceKey as String,
                         preserveSelectMode = preserveSelectMode,
                     )
                 )
@@ -272,6 +274,12 @@ class TabManagementFragment : Fragment() {
             val state by tabsTrayStore.stateFlow.collectAsState()
             val appState by requireComponents.appStore.stateFlow.collectAsState()
             snackbarHostState = remember { SnackbarHostState() }
+            SideEffect(Unit) {
+                requireComponents.appStore.state.wasLastTabClosedPrivate?.let { isPrivate ->
+                    showUndoSnackbarForTab(isPrivate)
+                    requireComponents.appStore.dispatch(AppAction.TabStripAction.UpdateLastTabClosed(null))
+                }
+            }
             val trackersBlockedCount =
                 when (showPrivacyReport) {
                     true -> appState.blockedTrackersState.trackersBlockedCount
@@ -888,7 +896,7 @@ class TabManagementFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        if (activity?.isChangingConfigurations == false) {
+        if (activity?.isChangingConfigurations == false || isRemoving) {
             requireComponents.appStore.dispatch(AppAction.UpdateTabsTrayVisibility(false))
         }
         super.onDestroyView()
@@ -990,12 +998,12 @@ class TabManagementFragment : Fragment() {
                         shouldWidthMatchParent = true,
                         positiveButtonBackgroundColor =
                             ThemeManager.resolveAttribute(
-                                R.attr.accent,
+                                materialR.attr.colorTertiary,
                                 requireContext(),
                             ),
                         positiveButtonTextColor =
                             ThemeManager.resolveAttribute(
-                                R.attr.textOnColorPrimary,
+                                materialR.attr.colorOnTertiary,
                                 requireContext(),
                             ),
                         positiveButtonRadius = pixelSizeFor(R.dimen.tab_corner_radius).toFloat(),
@@ -1007,7 +1015,8 @@ class TabManagementFragment : Fragment() {
 
     @UiThread
     internal fun showUndoSnackbarForSyncedTab(closeOperation: CloseTabsUseCases.UndoableOperation) {
-        lifecycleScope.launch {
+        val viewLifecycleOwner = viewLifecycleOwnerLiveData.value ?: return
+        viewLifecycleOwner.lifecycleScope.launch {
             snackbarHostState.displaySnackbar(
                 message = getString(R.string.snackbar_tab_closed),
                 actionLabel = getString(R.string.snackbar_deleted_undo),
@@ -1139,7 +1148,8 @@ class TabManagementFragment : Fragment() {
         tabSize: Int,
         parentFolderTitle: String?,
     ) {
-        lifecycleScope.launch {
+        val viewLifecycleOwner = viewLifecycleOwnerLiveData.value ?: return
+        viewLifecycleOwner.lifecycleScope.launch {
             val displayFolderTitle = parentFolderTitle ?: getString(R.string.library_bookmarks)
             val displayResId =
                 when {

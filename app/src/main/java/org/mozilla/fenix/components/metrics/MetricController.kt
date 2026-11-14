@@ -20,6 +20,7 @@ import mozilla.components.feature.awesomebar.provider.HistoryStorageSuggestionPr
 import mozilla.components.feature.awesomebar.provider.SearchSuggestionProvider
 import mozilla.components.feature.awesomebar.provider.SessionSuggestionProvider
 import mozilla.components.feature.contextmenu.facts.ContextMenuFacts
+import mozilla.components.feature.downloads.facts.ShareResourceFacts
 import mozilla.components.feature.fxsuggest.FxSuggestInteractionInfo
 import mozilla.components.feature.fxsuggest.facts.FxSuggestFacts
 import mozilla.components.feature.media.facts.MediaFacts
@@ -67,6 +68,7 @@ import org.mozilla.fenix.GleanMetrics.NativeShareSheet
 import org.mozilla.fenix.GleanMetrics.PerfAwesomebar
 import org.mozilla.fenix.GleanMetrics.Pings
 import org.mozilla.fenix.GleanMetrics.ProgressiveWebApp
+import org.mozilla.fenix.GleanMetrics.ShareSheet
 import org.mozilla.fenix.GleanMetrics.SitePermissions
 import org.mozilla.fenix.GleanMetrics.Sync
 import org.mozilla.fenix.GleanMetrics.SyncedTabs
@@ -540,6 +542,28 @@ internal class ReleaseMetricController(
                 (metadata?.get(BrowserThumbnailsFacts.MetadataKeys.DURATION_MS) as? Long)?.let {
                     BrowserThumbnails.diskWriteDuration.accumulateSamples(listOf(it))
                 } ?: Unit
+            }
+
+            Component.FEATURE_DOWNLOADS to ShareResourceFacts.Items.SHARE_DURATION -> {
+                (metadata?.get(ShareResourceFacts.MetadataKeys.DURATION_MS) as? Long)?.let {
+                    ShareSheet.shareFileResourceSuccess.record(
+                        ShareSheet.ShareFileResourceSuccessExtra(
+                            shareType = metadata?.get(ShareResourceFacts.MetadataKeys.SHARE_TYPE) as? String,
+                            contentType = metadata?.get(ShareResourceFacts.MetadataKeys.CONTENT_TYPE) as? String,
+                            durationMs = it.toInt(),
+                        )
+                    )
+                } ?: Unit
+            }
+
+            Component.FEATURE_DOWNLOADS to ShareResourceFacts.Items.SHARE_FAILED -> {
+                ShareSheet.shareFileResourceFail.record(
+                    ShareSheet.ShareFileResourceFailExtra(
+                        shareType = metadata?.get(ShareResourceFacts.MetadataKeys.SHARE_TYPE) as? String,
+                        contentType = metadata?.get(ShareResourceFacts.MetadataKeys.CONTENT_TYPE) as? String,
+                        failureReason = metadata?.get(ShareResourceFacts.MetadataKeys.FAILURE_REASON) as? String,
+                    )
+                )
             }
 
             else -> {

@@ -18,7 +18,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalViewConfiguration
-import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.isTraversalGroup
@@ -39,7 +38,6 @@ import mozilla.components.feature.listentopage.ArticleProgress
 import mozilla.components.feature.listentopage.ListenAction
 import mozilla.components.feature.listentopage.ListenState
 import mozilla.components.feature.listentopage.ListenStore
-import mozilla.components.feature.listentopage.PlaybackPhase
 import mozilla.components.feature.listentopage.PlayerMode
 import mozilla.components.feature.listentopage.ui.ArticleDetails
 import mozilla.components.feature.listentopage.ui.ListenSheet
@@ -50,8 +48,6 @@ import org.mozilla.fenix.theme.FirefoxTheme
 
 private val ListenState.isArticleReady: Boolean
     get() = tabId != null && languageTag != null
-
-internal const val LISTEN_SHEET_TEST_TAG = "listenSheet"
 
 /**
  * This integration is responsible for showing or hiding the reader mode panel and the Listen to page media player, and
@@ -168,8 +164,17 @@ fun ListenFeatureContent(
     onListenClicked: () -> Unit,
     onCustomizeReaderViewClicked: () -> Unit,
 ) {
+    val modifierWithPadding =
+        if (shouldDisplayPlayer) {
+            Modifier.padding(FirefoxTheme.layout.space.static300)
+        } else {
+            Modifier.padding(
+                horizontal = FirefoxTheme.layout.space.static200,
+                vertical = FirefoxTheme.layout.space.static300,
+            )
+        }
     Box(
-        modifier = Modifier.fillMaxWidth().padding(all = FirefoxTheme.layout.space.static200),
+        modifier = Modifier.fillMaxWidth().then(modifierWithPadding),
         contentAlignment = Alignment.BottomEnd,
     ) {
         if (shouldDisplayPlayer) {
@@ -212,15 +217,15 @@ private fun ListenSheetContent(
     ListenSheet(
         article = ArticleDetails(title = state.value.title, site = state.value.site, url = state.value.url),
         articleProgressState = articleProgressState,
-        playing = playback.phase == PlaybackPhase.Playing || playback.phase == PlaybackPhase.Buffering,
+        playbackPhase = playback.phase,
         speed = playback.speed,
         voiceState = state.value.voiceState,
         onAction = onAction,
         onExpandClicked = { onAction(ListenAction.ModeChanged(PlayerMode.Expanded)) },
         expanded = mode == PlayerMode.Expanded,
+        error = state.value.error,
         modifier =
             Modifier.fillMaxWidth()
-                .testTag(LISTEN_SHEET_TEST_TAG)
                 .semantics(
                     mergeDescendants = false,
                     properties = {

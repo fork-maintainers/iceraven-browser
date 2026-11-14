@@ -1575,4 +1575,23 @@ class SettingsTest {
         assertTrue(settings.powerSavingModeManuallyEnabled)
         assertFalse(settings.powerSavingModeAutoEnabled)
     }
+
+    @Test
+    fun `WHEN reading menu customization preferences THEN default values are false`() {
+        assertFalse(settings.isMenuCustomizationEnabled)
+        assertFalse(settings.isMenuCustomizationScreenEnabled)
+    }
+
+    @Test
+    fun `GIVEN menu customization preferences WHEN modified THEN reflect stored values`() {
+        settings.isMenuCustomizationEnabled = true
+        settings.isMenuCustomizationScreenEnabled = true
+
+        assertTrue(settings.isMenuCustomizationEnabled)
+        assertTrue(settings.isMenuCustomizationScreenEnabled)
+
+        settings.isMenuCustomizationScreenEnabled = false
+
+        assertFalse(settings.isMenuCustomizationScreenEnabled)
+    }
 }

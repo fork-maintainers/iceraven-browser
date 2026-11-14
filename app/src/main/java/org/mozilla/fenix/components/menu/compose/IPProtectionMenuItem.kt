@@ -24,10 +24,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
-import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.tooling.preview.Preview
@@ -36,10 +34,10 @@ import androidx.compose.ui.unit.dp
 import mozilla.components.compose.base.modifier.debouncedClickable
 import mozilla.components.compose.base.theme.ThemedValue
 import mozilla.components.compose.base.theme.ThemedValueProvider
+import mozilla.components.feature.ipprotection.store.state.IPProtectionStatus
 import mozilla.components.ui.icons.R as iconsR
 import org.mozilla.fenix.R
 import org.mozilla.fenix.components.menu.store.IPProtectionMenuState
-import org.mozilla.fenix.components.menu.store.IPProtectionMenuStatus
 import org.mozilla.fenix.compose.list.IconListItem
 import org.mozilla.fenix.theme.FirefoxTheme
 
@@ -63,7 +61,7 @@ internal fun IPProtectionMenuItem(
 ) {
     val statusDescription = badgeText(state.status)
     val role =
-        if (state.status == IPProtectionMenuStatus.AuthRequired) {
+        if (state.status == IPProtectionStatus.AuthRequired || state.status == IPProtectionStatus.AwaitingService) {
             Role.Button
         } else {
             Role.Switch
@@ -78,7 +76,6 @@ internal fun IPProtectionMenuItem(
                 .debouncedClickable(role = role) { onToggle() }
                 .semantics {
                     stateDescription = statusDescription
-                    liveRegion = LiveRegionMode.Polite
                 },
         colors = ListItemDefaults.colors(supportingColor = MaterialTheme.colorScheme.error),
         description = descriptionText(state),
@@ -122,49 +119,58 @@ internal fun IPProtectionMenuItem(
 @Composable
 private fun descriptionText(state: IPProtectionMenuState): String? =
     when (state.status) {
-        IPProtectionMenuStatus.DataLimitReached ->
+        IPProtectionStatus.DataLimitReached ->
             if (state.dataLimitGb > 0) {
                 stringResource(R.string.ip_protection_menu_limit_reached, state.dataLimitGb)
             } else {
                 null
             }
 
-        IPProtectionMenuStatus.Disabled,
-        IPProtectionMenuStatus.Activating,
-        IPProtectionMenuStatus.Enabled,
-        IPProtectionMenuStatus.ConnectionError,
-        IPProtectionMenuStatus.AuthRequired -> null
+        IPProtectionStatus.Unavailable,
+        IPProtectionStatus.Uninitialized,
+        IPProtectionStatus.AuthRequired,
+        IPProtectionStatus.AwaitingService,
+        IPProtectionStatus.Disabled,
+        IPProtectionStatus.Activating,
+        IPProtectionStatus.Enabled,
+        IPProtectionStatus.ConnectionError -> null
     }
 
 @Composable
-private fun badgeText(status: IPProtectionMenuStatus): String =
+private fun badgeText(status: IPProtectionStatus): String =
     when (status) {
-        IPProtectionMenuStatus.Disabled -> stringResource(R.string.preferences_ip_protection_off)
-        IPProtectionMenuStatus.Enabled -> stringResource(R.string.preferences_ip_protection_on)
-        IPProtectionMenuStatus.Activating -> stringResource(R.string.ip_protection_menu_connecting)
-        IPProtectionMenuStatus.DataLimitReached -> stringResource(R.string.ip_protection_menu_paused)
-        IPProtectionMenuStatus.ConnectionError -> stringResource(R.string.ip_protection_menu_error)
-        IPProtectionMenuStatus.AuthRequired -> stringResource(R.string.ip_protection_menu_try_vpn_cta)
+        IPProtectionStatus.Unavailable,
+        IPProtectionStatus.Uninitialized,
+        IPProtectionStatus.Disabled -> stringResource(R.string.preferences_ip_protection_off)
+        IPProtectionStatus.Enabled -> stringResource(R.string.preferences_ip_protection_on)
+        IPProtectionStatus.AwaitingService,
+        IPProtectionStatus.Activating -> stringResource(R.string.ip_protection_menu_connecting)
+        IPProtectionStatus.DataLimitReached -> stringResource(R.string.ip_protection_menu_paused)
+        IPProtectionStatus.ConnectionError -> stringResource(R.string.ip_protection_menu_error)
+        IPProtectionStatus.AuthRequired -> stringResource(R.string.ip_protection_menu_try_vpn_cta)
     }
 
-private fun badgeState(status: IPProtectionMenuStatus): MenuItemState =
+private fun badgeState(status: IPProtectionStatus): MenuItemState =
     when (status) {
-        IPProtectionMenuStatus.Enabled,
-        IPProtectionMenuStatus.Activating -> MenuItemState.ACTIVE
-        IPProtectionMenuStatus.ConnectionError -> MenuItemState.WARNING
-        IPProtectionMenuStatus.DataLimitReached -> MenuItemState.DISABLED
-        IPProtectionMenuStatus.Disabled,
-        IPProtectionMenuStatus.AuthRequired -> MenuItemState.ENABLED
+        IPProtectionStatus.Enabled,
+        IPProtectionStatus.AwaitingService,
+        IPProtectionStatus.Activating -> MenuItemState.ACTIVE
+        IPProtectionStatus.ConnectionError -> MenuItemState.WARNING
+        IPProtectionStatus.DataLimitReached -> MenuItemState.DISABLED
+        IPProtectionStatus.Unavailable,
+        IPProtectionStatus.Uninitialized,
+        IPProtectionStatus.Disabled,
+        IPProtectionStatus.AuthRequired -> MenuItemState.ENABLED
     }
 
 private class IPProtectionMenuStatePreviewProvider :
     ThemedValueProvider<IPProtectionMenuState>(
         baseValues =
-            IPProtectionMenuStatus.entries
+            IPProtectionStatus.entries
                 .map { status ->
                     IPProtectionMenuState(
                         status = status,
-                        dataLimitGb = if (status == IPProtectionMenuStatus.DataLimitReached) 50 else -1,
+                        dataLimitGb = if (status == IPProtectionStatus.DataLimitReached) 50 else -1,
                     )
                 }
                 .asSequence(),

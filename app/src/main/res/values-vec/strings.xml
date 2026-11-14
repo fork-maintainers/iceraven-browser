@@ -25,11 +25,7 @@
   <string name="home_screen_shortcut_open_new_tab_2">Nova scheda</string>
   <!-- Shortcut action to open new private tab -->
   <string name="home_screen_shortcut_open_new_private_tab_2">Nova scheda anonima</string>
-  <!--
-    Browser Fragment
-
-    Content description (not visible, for screen readers etc.): Navigate backward (browsing history)
-  -->
+  <!-- Content description (not visible, for screen readers etc.): Navigate backward (browsing history) -->
   <string name="browser_menu_back">Indrio</string>
   <!-- Content description (not visible, for screen readers etc.): Navigate forward (browsing history) -->
   <string name="browser_menu_forward">Vanti</string>
@@ -99,7 +95,11 @@
     Title for the settings page
   -->
   <string name="settings">Inpostasion</string>
-  <!-- Preference category for general settings -->
+  <!--
+    Preferences
+
+    Preference category for general settings
+  -->
   <string name="preferences_category_general">Generaƚe</string>
   <!-- Preference category for all links about Fenix -->
   <string name="preferences_category_about">Informasion</string>

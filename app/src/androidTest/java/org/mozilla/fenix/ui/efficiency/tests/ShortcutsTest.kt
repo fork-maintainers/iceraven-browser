@@ -5,8 +5,10 @@
 package org.mozilla.fenix.ui.efficiency.tests
 
 import org.junit.Test
+import org.mozilla.fenix.customannotations.Critical
 import org.mozilla.fenix.customannotations.SmokeTest
 import org.mozilla.fenix.helpers.TestAssetHelper.getGenericAsset
+import org.mozilla.fenix.home.topsites.middleware.POPULAR_SITES_LIMIT
 import org.mozilla.fenix.ui.efficiency.helpers.BaseTest
 import org.mozilla.fenix.ui.efficiency.selectors.BrowserPageSelectors
 import org.mozilla.fenix.ui.efficiency.selectors.HomeSelectors
@@ -32,5 +34,29 @@ class ShortcutsTest : BaseTest() {
             .navigateToPage()
             .mozVerifyElementsByGroup(HomeSelectors.Group.TOP_SITES_COMPOSE)
             .mozVerify(HomeSelectors.TOP_SITE_ITEM(defaultWebPage.title))
+    }
+
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/4227423
+    @Critical
+    @Test
+    fun addPopularSiteAsShortcutTest() {
+        on.home
+            .navigateToPage()
+            .mozVerifyElementsByGroup(HomeSelectors.Group.TOP_SITES_COMPOSE)
+            .mozClick(HomeSelectors.ADD_SHORTCUT_BUTTON)
+            .mozVerifyElementsByGroup(HomeSelectors.Group.ADD_TO_HOMEPAGE_BOTTOM_SHEET)
+            .mozVerifyElementCount(
+                HomeSelectors.ADD_TO_HOMEPAGE_BOTTOM_SHEET_POPULAR_SITES,
+                count = POPULAR_SITES_LIMIT,
+            )
+
+        // The suggestions are data-driven, so read the first one's title instead of hardcoding it. Tapping
+        // the cell pins it as a top site and closes the sheet, then it must appear on the homepage.
+        val firstPopularSiteTitle = on.home.getFirstPopularSiteTitle()
+
+        on.home
+            .mozClick(HomeSelectors.ADD_TO_HOMEPAGE_BOTTOM_SHEET_POPULAR_SITE_ITEM(firstPopularSiteTitle))
+            .mozVerify(HomeSelectors.ADDED_TO_SHORTCUTS_SNACKBAR_TEXT)
+            .mozVerify(HomeSelectors.TOP_SITE_ITEM(firstPopularSiteTitle))
     }
 }

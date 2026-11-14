@@ -63,7 +63,11 @@
   <string name="about_content" tools:ignore="BrandUsage">%1$s Mozilla тарафыннан җитештерелә.</string>
   <!-- Private Browsing -->
   <string name="private_browsing_common_myths">Хосусый гизү турында киң таралган мифлар</string>
-  <!-- Text to be announced by the accessibility service to inform the user that the private browsing mode is currently active. -->
+  <!--
+    Private Browsing
+
+    Text to be announced by the accessibility service to inform the user that the private browsing mode is currently active.
+  -->
   <string name="private_browsing_a11y_session_announcement">Хосусый гизү утырышы</string>
   <!--
     True Private Browsing Mode
@@ -154,11 +158,7 @@
   <string name="recently_visited_menu_item_remove">Бетерү</string>
   <!-- Content description for the button which navigates the user to show all of their history. -->
   <string name="past_explorations_show_all_content_description_2">Тарихны тулысынча күрсәтү</string>
-  <!--
-    Browser Fragment
-
-    Content description (not visible, for screen readers etc.): Navigate backward (browsing history)
-  -->
+  <!-- Content description (not visible, for screen readers etc.): Navigate backward (browsing history) -->
   <string name="browser_menu_back">Артка</string>
   <!-- Content description (not visible, for screen readers etc.): Navigate forward (browsing history) -->
   <string name="browser_menu_forward">Алга</string>
@@ -377,7 +377,11 @@
     Title for the settings page
   -->
   <string name="settings">Көйләүләр</string>
-  <!-- Preference category for general settings -->
+  <!--
+    Preferences
+
+    Preference category for general settings
+  -->
   <string name="preferences_category_general">Гомуми</string>
   <!-- Preference category for all links about Fenix -->
   <string name="preferences_category_about">Хакында</string>

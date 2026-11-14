@@ -8,7 +8,6 @@ import java.util.UUID
 import mozilla.components.concept.storage.Address
 import mozilla.components.concept.storage.CreditCard
 import mozilla.components.concept.storage.CreditCardCrypto
-import mozilla.components.concept.storage.CreditCardNumber
 import mozilla.components.concept.storage.CreditCardsAddressesStorage
 import mozilla.components.concept.storage.NewCreditCardFields
 import mozilla.components.concept.storage.UpdatableAddressFields
@@ -183,13 +182,13 @@ internal class FakeCreditCardsAddressesStorage : CreditCardsAddressesStorage {
             )
         private val randomCardTypes = listOf("Visa", "Mastercard", "American Express")
 
+        private const val LAST_4_DIGITS_OF_CARD = 4
+
         fun generateCreditCard(): NewCreditCardFields =
             randomCardNumbers.random().run {
-                val last4DigitsOfCard = 4
                 NewCreditCardFields(
                     billingName = randomNames.random(),
-                    plaintextCardNumber = CreditCardNumber.Plaintext(this),
-                    cardNumberLast4 = this.takeLast(last4DigitsOfCard),
+                    cardNumber = this,
                     expiryMonth = (1L..12L).random(),
                     expiryYear = (2026L..2032L).random(),
                     cardType = randomCardTypes.random(),
@@ -200,11 +199,11 @@ internal class FakeCreditCardsAddressesStorage : CreditCardsAddressesStorage {
             CreditCard(
                 guid = UUID.randomUUID().toString(),
                 billingName = billingName,
-                cardNumberLast4 = cardNumberLast4,
+                cardNumber = cardNumber,
+                cardNumberLast4 = cardNumber.takeLast(LAST_4_DIGITS_OF_CARD),
                 expiryMonth = expiryMonth,
                 expiryYear = expiryYear,
                 cardType = cardType,
-                encryptedCardNumber = CreditCardNumber.Encrypted(plaintextCardNumber.number),
             )
 
         fun UpdatableAddressFields.toAddress() =

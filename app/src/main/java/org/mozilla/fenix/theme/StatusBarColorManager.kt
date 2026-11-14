@@ -96,8 +96,9 @@ class StatusBarColorManager(
      * Observe the wallpaper and search state while on the homepage and show the tab strip gradient accordingly.
      *
      * For edge-to-edge wallpaper, show the tab strip gradient only when a search is active. Otherwise,
-     * [HomepageEdgeToEdgeFeature] allows the wallpaper to show through the status bar. For any other wallpaper, the
-     * gradient is always shown.
+     * [HomepageEdgeToEdgeFeature] allows the wallpaper to show through the status bar. With universal edge-to-edge
+     * wallpapers, show it only when a search is active, as the tab strip has no background of its own and the wallpaper
+     * shows through the status bar otherwise.
      */
     private fun observeHomepageGradient() {
         wallpaperScope =
@@ -107,8 +108,13 @@ class StatusBarColorManager(
             ) { flow ->
                 flow
                     .map { state ->
-                        state.wallpaperState.currentWallpaper != Wallpaper.EdgeToEdge ||
-                            (state.searchState.isSearchActive && state.searchState.sourceTabId != null)
+                        val wallpaper = state.wallpaperState.currentWallpaper
+                        if (settings.enableUniversalEdgeToEdgeWallpapers) {
+                            state.searchState.isSearchActive
+                        } else {
+                            wallpaper != Wallpaper.EdgeToEdge ||
+                                (state.searchState.isSearchActive && state.searchState.sourceTabId != null)
+                        }
                     }
                     .distinctUntilChanged()
                     .collect { shouldShowGradient ->

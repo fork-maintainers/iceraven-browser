@@ -690,7 +690,7 @@ features:
         description: >
           Whether or not to enable the universal edge-to-edge wallpaper treatment.
         type: Boolean
-        default: false
+        default: true
 
   homepage-hide-frecent-top-sites:
     description: Hides frecent top sites on the homepage.
@@ -823,6 +823,15 @@ features:
           Uses search configuration from remote servers .
         type: Boolean
         default: true
+  search-config-v3:
+    description: Feature to read search configuration from the search-config-v3 collection.
+    variables:
+      enabled:
+        description: >
+          Reads search configuration from the `search-config-v3` Remote Settings
+          collection instead of `search-config-v2`.
+        type: Boolean
+        default: false
   same-document-navigation-overrides-load-type:
     description: Control whether the same document navigation overrides the load type.
     variables:
@@ -983,7 +992,7 @@ features:
         description: >
           Whether or not to block LNA requests
         type: Boolean
-        default: false
+        default: true
       block-trackers:
         description: >
           Whether or not to block trackers
@@ -993,7 +1002,7 @@ features:
         description: >
           Whether or not to turn on local network / device access blocking
         type: Boolean
-        default: false
+        default: true
       block-insecure-contexts:
         description: >
           Whether or not LNA requests coming from insecure contexts should be
@@ -1276,16 +1285,18 @@ features:
         default: false
 
   pairing-signin-prompt:
-    description: Controls the day 1 sign-in prompt for users who installed Firefox through a pairing link.
+    description: >
+      Controls the Sync sign-in card shown during initial onboarding to users who installed Firefox
+      through a pairing link.
     variables:
       enabled:
-        description: Whether the day 1 sign-in prompt can be shown.
+        description: Whether the Sync sign-in card can be shown during initial onboarding.
         type: Boolean
         default: false
       campaign-utm-content:
         description: The "utm_content" value used to identify installs from the pairing campaign.
         type: String
-        default: ""
+        default: "DTM_SYNC_PAIR_V2"
 
   pdf-viewer:
     description: Feature for the PDF viewer tools for users on Firefox for Android.
@@ -1323,6 +1334,14 @@ features:
       - channel: developer
         value:
           enabled: true
+
+  account-sync-decouple:
+    description: Control the "sync & account decoupling" feature
+    variables:
+      enabled:
+        description: If true, the flows for enabling sync & account decoupling are enabled.
+        type: Boolean
+        default: false
 
   wayback-machine:
     description: >

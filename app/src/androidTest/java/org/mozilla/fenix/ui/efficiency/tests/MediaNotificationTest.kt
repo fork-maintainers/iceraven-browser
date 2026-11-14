@@ -5,11 +5,16 @@
 package org.mozilla.fenix.ui.efficiency.tests
 
 import mozilla.components.concept.engine.mediasession.MediaSession
+import mozilla.components.feature.media.R as mediaR
 import org.junit.Test
+import org.junit.runner.Description
+import org.mozilla.fenix.customannotations.Critical
 import org.mozilla.fenix.customannotations.SmokeTest
+import org.mozilla.fenix.helpers.DataGenerationHelper.getStringResource
 import org.mozilla.fenix.helpers.TestAssetHelper.audioPageAsset
 import org.mozilla.fenix.helpers.TestAssetHelper.videoPageAsset
 import org.mozilla.fenix.ui.efficiency.helpers.BaseTest
+import org.mozilla.fenix.ui.efficiency.helpers.EfficiencyExecutionRequirements
 import org.mozilla.fenix.ui.efficiency.selectors.NotificationSelectors
 
 /**
@@ -18,6 +23,15 @@ import org.mozilla.fenix.ui.efficiency.selectors.NotificationSelectors
  *   media notifications, not media itself.
  */
 class MediaNotificationTest : BaseTest() {
+
+    // The looping audio player redraws continuously, so UiAutomator never sees an idle screen and every lookup would
+    // wait out the full default idle timeout while it plays.
+    override fun executionRequirements(description: Description): EfficiencyExecutionRequirements =
+        if (description.methodName == "mediaSystemNotificationInPrivateModeTest") {
+            super.executionRequirements(description).copy(uiAutomatorIdleTimeoutMillis = 1_000L)
+        } else {
+            super.executionRequirements(description)
+        }
 
     // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/1347033
     // Converted from legacy MediaNotificationTest.verifyVideoPlaybackSystemNotificationTest
@@ -75,5 +89,38 @@ class MediaNotificationTest : BaseTest() {
             .openNotificationTray()
             .verifyNotificationDoesNotExist(NotificationSelectors.SYSTEM_NOTIFICATION(audioTestPage.title))
             .closeNotificationTray()
+    }
+
+    // TestRail link: https://mozilla.testrail.io/index.php?/cases/view/903595
+    @Critical
+    @Test
+    fun mediaSystemNotificationInPrivateModeTest() {
+        val audioTestPage = mockWebServer.audioPageAsset
+        // Private mode redacts the notification title to a generic string, not the page title.
+        val privateMediaNotification = getStringResource(mediaR.string.mozac_feature_media_notification_private_mode)
+
+        on.home.navigateToPage()
+        on.home.switchToPrivateBrowsingMode()
+
+        on.browserPage
+            .navigateToPage(audioTestPage.url.toString())
+            .clickMediaPlayButton()
+            .verifyMediaPlaybackState(MediaSession.PlaybackState.PLAYING)
+
+        // While playing, the tab carries the "Playing media" indicator.
+        on.tabDrawer.navigateToPage().verifyMediaTabIndicatorDisplayed()
+        on.browserPage.navigateToPage()
+
+        on.notification
+            .openNotificationTray()
+            .verifyNotificationExists(NotificationSelectors.SYSTEM_NOTIFICATION(privateMediaNotification))
+            .clickMediaNotificationControlButton("Pause")
+            .verifyMediaNotificationButtonState("Play")
+            .closeNotificationTray()
+
+        on.browserPage.verifyMediaPlaybackState(MediaSession.PlaybackState.PAUSED)
+
+        // Pausing clears the PLAYING state, so the indicator is gone.
+        on.tabDrawer.navigateToPage().verifyMediaTabIndicatorNotDisplayed()
     }
 }

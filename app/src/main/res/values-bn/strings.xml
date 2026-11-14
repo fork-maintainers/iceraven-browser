@@ -53,11 +53,7 @@
   <string name="home_screen_shortcut_open_new_tab_2">নতুন ট্যাব</string>
   <!-- Shortcut action to open new private tab -->
   <string name="home_screen_shortcut_open_new_private_tab_2">নতুন ব্যক্তিগত ট্যাব</string>
-  <!--
-    Browser Fragment
-
-    Content description (not visible, for screen readers etc.): Navigate backward (browsing history)
-  -->
+  <!-- Content description (not visible, for screen readers etc.): Navigate backward (browsing history) -->
   <string name="browser_menu_back">পিছনে</string>
   <!-- Content description (not visible, for screen readers etc.): Navigate forward (browsing history) -->
   <string name="browser_menu_forward">সামনে</string>
@@ -137,7 +133,11 @@
     Title for the settings page
   -->
   <string name="settings">সেটিংস</string>
-  <!-- Preference category for general settings -->
+  <!--
+    Preferences
+
+    Preference category for general settings
+  -->
   <string name="preferences_category_general">সাধারণ</string>
   <!-- Preference category for all links about Fenix -->
   <string name="preferences_category_about">সম্পর্কে</string>
@@ -783,4 +783,10 @@
   <string name="confirm_clear_permissions_site">আপনি কি নিশ্চিত যে আপনি এই সাইটের জন্য সব অনুমতি সাফ করতে চান?</string>
   <!-- Positive action of a dialog asking to delete -->
   <string name="dialog_delete_positive">মুছে ফেলুন</string>
+  <!--
+    PDF viewer toolbar and buttons
+
+    Content description for accessibility (used by screen readers): Description for the button that triggers the start of a signature workflow on the PDF displayed on the screen.
+  -->
+  <string name="pdf_tools_sign_content_description_2">স্বাক্ষর যোগ করুন</string>
 </resources>

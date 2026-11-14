@@ -21,6 +21,7 @@ pluginManagement {
     includeBuild("./plugins/apksize")
     includeBuild("./plugins/nimbus-gradle-plugin")
     includeBuild("./plugins/gradle-python-envs")
+    includeBuild("./plugins/android-test-keep-rules")
 }
 
 plugins {

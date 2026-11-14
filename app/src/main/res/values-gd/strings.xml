@@ -71,7 +71,11 @@
   <string name="about_content" tools:ignore="BrandUsage">Chaidh %1$s a dhèanamh le Mozilla.</string>
   <!-- Private Browsing -->
   <string name="private_browsing_common_myths">Faoin-sgeulan cumanta mun bhrabhsadh phrìobhaideach</string>
-  <!-- Text to be announced by the accessibility service to inform the user that the private browsing mode is currently active. -->
+  <!--
+    Private Browsing
+
+    Text to be announced by the accessibility service to inform the user that the private browsing mode is currently active.
+  -->
   <string name="private_browsing_a11y_session_announcement">Seisean brabhsaidh prìobhaideach</string>
   <!--
     True Private Browsing Mode
@@ -164,11 +168,7 @@
   <string name="recently_visited_menu_item_remove">Thoir air falbh</string>
   <!-- Content description for the button which navigates the user to show all of their history. -->
   <string name="past_explorations_show_all_content_description_2">Seall na rùraich thu roimhe air fad</string>
-  <!--
-    Browser Fragment
-
-    Content description (not visible, for screen readers etc.): Navigate backward (browsing history)
-  -->
+  <!-- Content description (not visible, for screen readers etc.): Navigate backward (browsing history) -->
   <string name="browser_menu_back">Air ais</string>
   <!-- Content description (not visible, for screen readers etc.): Navigate forward (browsing history) -->
   <string name="browser_menu_forward">Air adhart</string>
@@ -571,7 +571,11 @@
     Title for the settings page
   -->
   <string name="settings">Roghainnean</string>
-  <!-- Preference category for general settings -->
+  <!--
+    Preferences
+
+    Preference category for general settings
+  -->
   <string name="preferences_category_general">Coitcheann</string>
   <!-- Preference category for all links about Fenix -->
   <string name="preferences_category_about">Mu dhèidhinn</string>

@@ -16,6 +16,7 @@ import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.yield
 import mozilla.components.support.test.robolectric.testContext
 import mozilla.telemetry.glean.Glean
+import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
@@ -28,6 +29,8 @@ import org.mozilla.fenix.GleanMetrics.Pings
 import org.mozilla.fenix.GleanMetrics.PlayStoreAttribution
 import org.mozilla.fenix.GleanMetrics.Referrals
 import org.mozilla.fenix.helpers.FenixGleanTestRule
+import org.mozilla.fenix.nimbus.FxNimbus
+import org.mozilla.fenix.nimbus.PairingSigninPrompt
 import org.mozilla.fenix.utils.Settings
 import org.robolectric.RobolectricTestRunner
 
@@ -36,6 +39,11 @@ class InstallReferrerWorkerTest {
     val context: Context = ApplicationProvider.getApplicationContext()
 
     @get:Rule val gleanTestRule = FenixGleanTestRule(testContext)
+
+    @After
+    fun tearDown() {
+        FxNimbus.features.pairingSigninPrompt.withCachedValue(null)
+    }
 
     @Test
     fun `WHEN retrieving minimum UTM params from setting THEN result should match`() {
@@ -828,6 +836,57 @@ class InstallReferrerWorkerTest {
 
         job.join()
         assertEquals("", settings.referralCode)
+    }
+
+    @Test
+    fun `GIVEN a referrer with the pairing campaign WHEN handleSuccess is called THEN pairingCampaign is recorded as true`() {
+        FxNimbus.features.pairingSigninPrompt.withCachedValue(PairingSigninPrompt(campaignUtmContent = "pairing123"))
+
+        val worker = TestListenableWorkerBuilder<InstallReferrerWorker>(context).build()
+        val settings = Settings(context)
+        val referrer = "utm_source=accounts.firefox.com&utm_medium=referral&utm_content=pairing123"
+
+        val job =
+            Pings.playStoreAttribution.testBeforeNextSubmit {
+                assertEquals(true, PlayStoreAttribution.pairingCampaign.testGetValue())
+            }
+
+        worker.handleSuccess(referrer, InstallReferrerClient.InstallReferrerResponse.OK, settings)
+
+        job.join()
+    }
+
+    @Test
+    fun `GIVEN a referrer with a campaign which is not the pairing campaign WHEN handleSuccess is called THEN pairingCampaign is recorded as false`() {
+        FxNimbus.features.pairingSigninPrompt.withCachedValue(PairingSigninPrompt(campaignUtmContent = "pairing123"))
+
+        val worker = TestListenableWorkerBuilder<InstallReferrerWorker>(context).build()
+        val settings = Settings(context)
+        val referrer = "utm_source=google&utm_medium=referral&utm_content=other_campaign"
+
+        val job =
+            Pings.playStoreAttribution.testBeforeNextSubmit {
+                assertEquals(false, PlayStoreAttribution.pairingCampaign.testGetValue())
+            }
+
+        worker.handleSuccess(referrer, InstallReferrerClient.InstallReferrerResponse.OK, settings)
+
+        job.join()
+    }
+
+    @Test
+    fun `GIVEN a null referrer WHEN handleSuccess is called THEN pairingCampaign is not recorded`() {
+        val worker = TestListenableWorkerBuilder<InstallReferrerWorker>(context).build()
+        val settings = Settings(context)
+
+        val job =
+            Pings.playStoreAttribution.testBeforeNextSubmit {
+                assertNull(PlayStoreAttribution.pairingCampaign.testGetValue())
+            }
+
+        worker.handleSuccess(null, InstallReferrerClient.InstallReferrerResponse.OK, settings)
+
+        job.join()
     }
 
     private fun referralReferrer() =

@@ -17,9 +17,11 @@ import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
 import mozilla.components.browser.state.state.BrowserState
+import mozilla.components.browser.state.state.createCustomTab
 import mozilla.components.browser.state.state.createTab
 import mozilla.components.browser.state.store.BrowserStore
 import mozilla.components.compose.base.text.Text
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.data.StandardMenuItem
 import mozilla.components.compose.menu.ui.MenuItemIconRes
 import mozilla.components.compose.menu.ui.MenuItemState
@@ -65,6 +67,24 @@ class BookmarkMenuItemProviderTest {
     }
 
     @Test
+    fun `GIVEN a custom tab page is bookmarked WHEN providing the item THEN offer editing that bookmark`() = runTest {
+        val customTab = createCustomTab(url = TEST_URL, title = TEST_TITLE, id = "customTabId")
+        val browserStore = BrowserStore(BrowserState(customTabs = listOf(customTab)))
+        val provider =
+            provider(
+                browserStore = browserStore,
+                bookmarksStorage = storageWith(bookmark = bookmark),
+                target = MenuTarget.CustomTab("customTabId"),
+            )
+
+        assertEquals(addBookmarkItem, provider.itemFlow.value)
+
+        runCurrent()
+
+        assertEquals(editBookmarkItem, provider.itemFlow.value)
+    }
+
+    @Test
     fun `GIVEN there is no page shown WHEN providing the item THEN don't offer bookmarking`() = runTest {
         val provider = provider(browserStore = BrowserStore(), bookmarksStorage = storageWith(bookmark = null))
 
@@ -92,6 +112,40 @@ class BookmarkMenuItemProviderTest {
             }
             assertTrue(menu.isDismissed)
         }
+
+    @Test
+    fun `GIVEN a custom tab WHEN tapping bookmark THEN bookmark the custom tab page URL`() = runTest {
+        val customUrl = "https://example.com/custom"
+        val customTitle = "Custom Page"
+        val customTabId = "customTabId"
+
+        coEvery { addBookmark(url = customUrl, title = customTitle) } returns
+            BookmarksUseCase.AddBookmarksUseCase.Result(guidToEdit = BOOKMARK_GUID, parentNode = null)
+
+        val customTab = createCustomTab(url = customUrl, title = customTitle, id = customTabId)
+        val store = BrowserStore(BrowserState(customTabs = listOf(customTab)))
+        val provider =
+            provider(
+                browserStore = store,
+                bookmarksStorage = storageWith(bookmark = null),
+                target = MenuTarget.CustomTab(customTabId),
+            )
+
+        provider.onEvent(MenuAction.AddBookmark, menu)
+        runCurrent()
+
+        coVerify { addBookmark(url = customUrl, title = customTitle) }
+        verify {
+            appStore.dispatch(
+                BookmarkAction.BookmarkAdded(
+                    guidToEdit = BOOKMARK_GUID,
+                    parentNode = null,
+                    source = MetricsUtils.BookmarkAction.Source.MENU_DIALOG,
+                )
+            )
+        }
+        assertTrue(menu.isDismissed)
+    }
 
     @Test
     fun `GIVEN no selected tab WHEN clicking the item THEN keep the menu open`() = runTest {
@@ -191,14 +245,14 @@ class BookmarkMenuItemProviderTest {
 
         val addBookmarkItem =
             StandardMenuItem(
-                title = Text.Resource(R.string.browser_menu_bookmark_this_page_2),
+                title = MenuItemTitle(Text.Resource(R.string.browser_menu_bookmark_this_page_2)),
                 icon = MenuItemIconRes(iconsR.drawable.mozac_ic_bookmark_24),
                 onClickEvent = MenuAction.AddBookmark,
             )
 
         val editBookmarkItem =
             StandardMenuItem(
-                title = Text.Resource(R.string.browser_menu_edit_bookmark),
+                title = MenuItemTitle(Text.Resource(R.string.browser_menu_edit_bookmark)),
                 icon = MenuItemIconRes(iconsR.drawable.mozac_ic_bookmark_fill_24),
                 onClickEvent = MenuAction.Navigate.EditBookmark(guidToEdit = BOOKMARK_GUID),
                 state = MenuItemState.ACTIVE,

@@ -52,6 +52,7 @@ import mozilla.components.compose.base.menu.MenuItem
 import mozilla.components.compose.base.text.Text
 import mozilla.components.compose.base.utils.inComposePreview
 import mozilla.components.support.ktx.kotlin.trimmed
+import mozilla.components.support.ktx.util.URLStringUtils
 import mozilla.components.ui.colors.PhotonColors
 import org.mozilla.fenix.components.components
 import org.mozilla.fenix.compose.Image
@@ -153,12 +154,14 @@ private fun RecentTabItem(
 
             Spacer(modifier = Modifier.width(FirefoxTheme.layout.space.static100))
 
+            val displayUrl = URLStringUtils.toLosslessDisplayUrl(tab.state.content.url).trimmed()
+
             Column(
                 modifier = Modifier.fillMaxWidth().wrapContentHeight(),
                 verticalArrangement = Arrangement.SpaceBetween,
             ) {
                 Text(
-                    text = tab.state.content.title.ifEmpty { tab.state.content.url.trimmed() },
+                    text = tab.state.content.title.ifEmpty { displayUrl },
                     modifier =
                         Modifier.semantics {
                             testTagsAsResourceId = true
@@ -181,7 +184,7 @@ private fun RecentTabItem(
                     Spacer(modifier = Modifier.width(8.dp))
 
                     Text(
-                        text = tab.state.content.url.trimmed(),
+                        text = displayUrl,
                         modifier =
                             Modifier.semantics {
                                 testTagsAsResourceId = true

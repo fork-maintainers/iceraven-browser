@@ -9,7 +9,6 @@ import io.mockk.mockk
 import io.mockk.spyk
 import io.mockk.verify
 import mozilla.components.concept.storage.CreditCard
-import mozilla.components.concept.storage.CreditCardNumber
 import mozilla.components.support.utils.CreditCardNetworkType
 import org.junit.Before
 import org.junit.Test
@@ -33,7 +32,7 @@ class DefaultCreditCardsManagementControllerTest {
                 guid = "id",
                 billingName = "Banana Apple",
                 expiryMonth = 1,
-                encryptedCardNumber = CreditCardNumber.Encrypted("4111111111111110"),
+                cardNumber = "4111111111111110",
                 cardNumberLast4 = "1110",
                 expiryYear = 2030,
                 cardType = CreditCardNetworkType.AMEX.cardName,

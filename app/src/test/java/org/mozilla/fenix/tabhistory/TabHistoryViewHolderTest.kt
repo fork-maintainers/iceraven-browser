@@ -76,6 +76,15 @@ class TabHistoryViewHolderTest {
     }
 
     @Test
+    fun `binds a readable caption and loads the icon for the canonical url`() {
+        val url = "https://mozilla.org/%D1%82%D0%B5%D1%81%D1%82%20a"
+        holder.bind(unselectedItem.copy(url = url))
+
+        verify { view.setText(label = "Firefox", caption = "https://mozilla.org/тест%20a") }
+        verify { icons.loadIntoView(view.iconView, IconRequest(url)) }
+    }
+
+    @Test
     fun `binds background`() {
         holder.bind(selectedItem)
         verify { view.setBackgroundColor(any()) }

@@ -46,6 +46,7 @@ object HarnessPreferenceState {
         add("googleLens.enabled", R.string.pref_key_google_lens_integration)
         add("googleLens.userEnabled", R.string.pref_key_google_lens_integration_user_enabled)
         add("googleLens.firstRunAccepted", R.string.pref_key_has_accepted_google_lens_first_run)
+        add("googleLens.lastCameraMode", R.string.pref_key_lens_camera_last_mode)
     }
 
     fun overrideIds(): List<String> {

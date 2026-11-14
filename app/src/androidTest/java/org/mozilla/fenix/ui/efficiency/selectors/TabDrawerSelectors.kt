@@ -5,12 +5,14 @@
 package org.mozilla.fenix.ui.efficiency.selectors
 
 import mozilla.components.compose.base.R as composeBaseR
+import mozilla.components.compose.base.snackbar.SNACKBAR_BUTTON_TEST_TAG
 import org.mozilla.fenix.R
 import org.mozilla.fenix.helpers.DataGenerationHelper.getPluralStringResource
 import org.mozilla.fenix.helpers.DataGenerationHelper.getStringResource
 import org.mozilla.fenix.tabstray.TabsTrayTestTag
 import org.mozilla.fenix.tabstray.TabsTrayTestTag.CLOSE_TAB_GROUP
 import org.mozilla.fenix.tabstray.TabsTrayTestTag.GROUP_NAME
+import org.mozilla.fenix.trackingprotection.PROTECTION_STATUS_PILL_TEST_TAG
 import org.mozilla.fenix.ui.efficiency.helpers.PageReadinessProfiles
 import org.mozilla.fenix.ui.efficiency.helpers.Selector
 import org.mozilla.fenix.ui.efficiency.helpers.SelectorContainer
@@ -83,6 +85,30 @@ object TabDrawerSelectors : SelectorContainer {
             strategy = SelectorStrategy.COMPOSE_BY_TAG,
             value = TabsTrayTestTag.EMPTY_NORMAL_TABS_LIST,
             description = "Empty normal tabs list placeholder",
+        )
+
+    // "Tabs closed: N" base Compose snackbar; its message isn't on the UIAutomator text tree, so read it on Compose.
+    fun TABS_CLOSED_SNACKBAR(count: Int = 2) =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TEXT,
+            value = getStringResource(R.string.snackbar_num_tabs_closed, count.toString()),
+            description = "Tabs closed snackbar for $count tabs",
+        )
+
+    // "Private tab closed" base Compose snackbar shown after closing a single private tab; read on Compose.
+    val PRIVATE_TAB_CLOSED_SNACKBAR =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TEXT,
+            value = getStringResource(R.string.snackbar_private_tab_closed),
+            description = "Private tab closed snackbar",
+        )
+
+    // The base snackbar's action button carries SNACKBAR_BUTTON_TEST_TAG, like the download snackbar's action button.
+    val SNACKBAR_UNDO_BUTTON =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TAG,
+            value = SNACKBAR_BUTTON_TEST_TAG,
+            description = "Snackbar undo action button",
         )
 
     val TAB_ITEM_ROOT =
@@ -199,6 +225,22 @@ object TabDrawerSelectors : SelectorContainer {
             strategy = SelectorStrategy.COMPOSE_BY_TAG,
             value = TabsTrayTestTag.THREE_DOT_BUTTON,
             description = "Tab selection view three dot menu button",
+            groups = setOf(Group.TAB_SELECTION_VIEW),
+        )
+
+    val EXIT_MULTISELECT_BUTTON =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_CONTENT_DESCRIPTION,
+            value = getStringResource(R.string.tab_tray_close_multiselect_content_description),
+            description = "Exit multiselect mode button",
+            groups = setOf(Group.TAB_SELECTION_VIEW),
+        )
+
+    val CLOSE_SELECTED_TABS_BUTTON =
+        Selector(
+            strategy = SelectorStrategy.UIAUTOMATOR2_BY_DESCRIPTION_CONTAINS,
+            value = getStringResource(R.string.tab_manager_multiselect_menu_item_close_content_description),
+            description = "Close selected tabs button",
             groups = setOf(Group.TAB_SELECTION_VIEW),
         )
 
@@ -375,6 +417,15 @@ object TabDrawerSelectors : SelectorContainer {
             groups = setOf(Group.TAB_ITEM),
         )
 
+    // "Playing media" indicator, present only while playbackState == PLAYING. Kept out of Group.TAB_ITEM:
+    // being state-dependent, a group check would wrongly require it on every tab.
+    val TAB_ITEM_MEDIA_INDICATOR =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TAG,
+            value = TabsTrayTestTag.TAB_ITEM_MEDIA_INDICATOR,
+            description = "Tab item media playing indicator",
+        )
+
     fun TAB_ITEM_WITH_TITLE(tabTitle: String = "") =
         Selector(
             strategy = SelectorStrategy.COMPOSE_ON_ALL_NODES_BY_TAG_WITH_CHILD_TEXT_ON_FIRST,
@@ -406,6 +457,14 @@ object TabDrawerSelectors : SelectorContainer {
             strategy = SelectorStrategy.COMPOSE_BY_TAG,
             value = TabsTrayTestTag.TAB_SEARCH_ICON,
             description = "Open tab search button",
+        )
+
+    // Tab-manager footer "widget" (TrackersBlockedCard pill); tapping it opens the protections dashboard.
+    val TRACKERS_BLOCKED_DASHBOARD_PILL =
+        Selector(
+            strategy = SelectorStrategy.COMPOSE_BY_TAG,
+            value = PROTECTION_STATUS_PILL_TEST_TAG,
+            description = "Trackers blocked dashboard pill (tab manager footer widget)",
         )
 
     // The tab search input is a Material3 SearchBar InputField, which exposes no testTag; its default

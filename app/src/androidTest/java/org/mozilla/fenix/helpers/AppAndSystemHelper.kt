@@ -154,6 +154,51 @@ object AppAndSystemHelper {
     }
 
     /**
+     * The [File] handle for [fileName] in the device's public Downloads directory. Different implementation needed for
+     * newer API levels, as Environment.getExternalStorageDirectory() is deprecated starting with API 29.
+     */
+    private fun downloadedFileOnStorage(fileName: String): File =
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) {
+            val storageManager = appContext.getSystemService(Context.STORAGE_SERVICE) as StorageManager
+            File(storageManager.storageVolumes[0].directory!!.path + "/Download/" + fileName)
+        } else {
+            File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), fileName)
+        }
+
+    /**
+     * Assert [fileName] no longer exists in the device's public Downloads directory. Deletion from device can lag the
+     * UI confirmation, so this polls briefly before failing.
+     */
+    fun assertDownloadedFileIsDeletedFromStorage(fileName: String) {
+        val file = downloadedFileOnStorage(fileName)
+        var attempts = 0
+        while (file.exists() && attempts < 5) {
+            Log.i(
+                TAG,
+                "assertDownloadedFileIsDeletedFromStorage: $fileName still present, waiting (try ${attempts + 1})",
+            )
+            Thread.sleep(1000)
+            attempts++
+        }
+        Assert.assertFalse(
+            "$TAG assertDownloadedFileIsDeletedFromStorage: $fileName still exists on device storage",
+            file.exists(),
+        )
+    }
+
+    /**
+     * Assert [fileName] still exists in the device's public Downloads directory. Used by the "only remove from download
+     * history" flow, which removes the list entry but must leave the file on disk.
+     */
+    fun assertDownloadedFileExistsOnStorage(fileName: String) {
+        val file = downloadedFileOnStorage(fileName)
+        Assert.assertTrue(
+            "$TAG assertDownloadedFileExistsOnStorage: $fileName does not exist on device storage",
+            file.exists(),
+        )
+    }
+
+    /**
      * Checks if there are download files inside the device storage and deletes all of them. Different implementation
      * needed for newer API levels, as Environment.getExternalStorageDirectory() is deprecated starting with API 29.
      */

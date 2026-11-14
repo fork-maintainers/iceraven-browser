@@ -316,13 +316,13 @@ class SettingsSubMenuLoginsAndPasswordsSavedLoginsRobot(private val composeTestR
 
     fun clickConfirmDeleteLogin() {
         Log.i(TAG, "clickConfirmDeleteLogin: Trying to click the \"Delete\" dialog button")
-        composeTestRule.onNodeWithText(getStringResource(R.string.dialog_delete_positive)).performClick()
+        composeTestRule.onNodeWithText(getStringResource(R.string.bookmark_menu_delete_button)).performClick()
         Log.i(TAG, "clickConfirmDeleteLogin: Clicked the \"Delete\" dialog button")
     }
 
     fun clickCancelDeleteLogin() {
         Log.i(TAG, "clickCancelDeleteLogin: Trying to click the \"Cancel\" dialog button")
-        composeTestRule.onNodeWithText(getStringResource(R.string.dialog_delete_negative)).performClick()
+        composeTestRule.onNodeWithText(getStringResource(R.string.bookmark_delete_negative)).performClick()
         Log.i(TAG, "clickCancelDeleteLogin: Clicked the \"Cancel\" dialog button")
     }
 

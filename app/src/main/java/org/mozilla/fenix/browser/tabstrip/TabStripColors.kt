@@ -16,6 +16,7 @@ import org.mozilla.fenix.browser.browsingmode.BrowsingModeManager
 import org.mozilla.fenix.theme.FirefoxTheme
 import org.mozilla.fenix.utils.Settings
 import org.mozilla.fenix.wallpapers.Wallpaper
+import org.mozilla.fenix.wallpapers.WallpaperTheme
 
 /**
  * Represents the colors for the tab strip.
@@ -23,10 +24,16 @@ import org.mozilla.fenix.wallpapers.Wallpaper
  * @property backgroundBrush The brush used to paint the tab strip background. Use [SolidColor] with a transparent color
  *   to let edge-to-edge wallpapers show through, or a gradient brush for the standard tab strip background.
  * @property tabItemBackgroundColors The background colors of the tab strip items.
+ * @property tabItemContentColors The colors of the tab strip item titles.
+ * @property closeButtonColors The colors of the tab strip item close buttons.
+ * @property addTabButtonColor The color of the add tab button.
  */
 data class TabStripColors(
     val backgroundBrush: Brush,
     val tabItemBackgroundColors: TabColors,
+    val tabItemContentColors: TabColors,
+    val closeButtonColors: TabColors,
+    val addTabButtonColor: Color,
 ) {
 
     /**
@@ -56,6 +63,8 @@ data class TabStripColors(
          * @param toolbarState The current state of the browser toolbar.
          * @param browsingModeManager The browsing mode manager.
          * @param settings The application settings.
+         * @param isOverEdgeToEdgeWallpaper Whether the tab strip is drawn directly over a universal edge-to-edge
+         *   wallpaper.
          * @return
          */
         @Composable
@@ -63,7 +72,12 @@ data class TabStripColors(
             toolbarState: BrowserToolbarState?,
             browsingModeManager: BrowsingModeManager,
             settings: Settings,
+            isOverEdgeToEdgeWallpaper: Boolean,
         ): TabStripColors {
+            if (isOverEdgeToEdgeWallpaper) {
+                return edgeToEdgeWallpaper()
+            }
+
             val isPrivate = browsingModeManager.mode.isPrivate
             val isEdgeToEdgeBackgroundEnabled =
                 settings.enableHomepageEdgeToEdgeBackgroundFeature &&
@@ -83,6 +97,9 @@ data class TabStripColors(
                             inactiveColor =
                                 colorResource(R.color.homepage_tab_edge_to_edge_tab_strip_item_background_inactive),
                         ),
+                    tabItemContentColors = defaultTabItemContentColors(),
+                    closeButtonColors = defaultCloseButtonColors(),
+                    addTabButtonColor = MaterialTheme.colorScheme.onSurface,
                 )
             } else {
                 default()
@@ -99,6 +116,42 @@ data class TabStripColors(
                         activeColor = MaterialTheme.colorScheme.surface,
                         inactiveColor = Color.Transparent,
                     ),
+                tabItemContentColors = defaultTabItemContentColors(),
+                closeButtonColors = defaultCloseButtonColors(),
+                addTabButtonColor = MaterialTheme.colorScheme.onSurface,
+            )
+
+        /**
+         * Returns the [TabStripColors] used when the tab strip is drawn directly over a universal edge-to-edge
+         * wallpaper: no background of its own, and the content that sits directly on the wallpaper (and the toolbar
+         * scrim, for wallpapers with an image) tinted with the wallpaper text color.
+         */
+        @Composable
+        private fun edgeToEdgeWallpaper(): TabStripColors {
+            val default = default()
+            val onWallpaper = WallpaperTheme.onWallpaper
+            return default.copy(
+                backgroundBrush = SolidColor(Color.Transparent),
+                tabItemContentColors =
+                    TabColors(activeColor = MaterialTheme.colorScheme.onSurface, inactiveColor = onWallpaper),
+                closeButtonColors =
+                    TabColors(activeColor = MaterialTheme.colorScheme.onSurface, inactiveColor = onWallpaper),
+                addTabButtonColor = onWallpaper,
+            )
+        }
+
+        @Composable
+        private fun defaultTabItemContentColors() =
+            TabColors(
+                activeColor = MaterialTheme.colorScheme.onSurface,
+                inactiveColor = MaterialTheme.colorScheme.onSurface,
+            )
+
+        @Composable
+        private fun defaultCloseButtonColors() =
+            TabColors(
+                activeColor = MaterialTheme.colorScheme.onSurface,
+                inactiveColor = MaterialTheme.colorScheme.onSurfaceVariant,
             )
     }
 }

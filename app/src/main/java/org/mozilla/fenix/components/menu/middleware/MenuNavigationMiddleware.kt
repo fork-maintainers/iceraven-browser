@@ -22,7 +22,6 @@ import mozilla.components.feature.session.SessionUseCases
 import mozilla.components.lib.state.Middleware
 import mozilla.components.lib.state.Store
 import mozilla.components.service.fxa.manager.AccountState.Authenticated
-import mozilla.components.service.fxa.manager.AccountState.Authenticating
 import mozilla.components.service.fxa.manager.AccountState.AuthenticationProblem
 import mozilla.components.service.fxa.manager.AccountState.NotAuthenticated
 import mozilla.components.service.fxa.manager.AccountState.Unknown
@@ -106,7 +105,6 @@ class MenuNavigationMiddleware(
                                 ),
                             )
 
-                        is Authenticating,
                         NotAuthenticated,
                         Unknown ->
                             navController.nav(

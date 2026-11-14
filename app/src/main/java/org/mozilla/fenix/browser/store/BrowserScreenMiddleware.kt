@@ -8,6 +8,7 @@ import android.content.Context
 import android.view.Gravity
 import androidx.annotation.VisibleForTesting
 import androidx.fragment.app.FragmentManager
+import com.google.android.material.R as materialR
 import mozilla.components.concept.base.crash.Breadcrumb
 import mozilla.components.feature.downloads.ui.DownloadCancelDialogFragment
 import mozilla.components.lib.crash.CrashReporter
@@ -89,12 +90,12 @@ class BrowserScreenMiddleware(
             shouldWidthMatchParent = true,
             positiveButtonBackgroundColor =
                 ThemeManager.resolveAttribute(
-                    R.attr.accent,
+                    materialR.attr.colorTertiary,
                     context,
                 ),
             positiveButtonTextColor =
                 ThemeManager.resolveAttribute(
-                    R.attr.textOnColorPrimary,
+                    materialR.attr.colorOnTertiary,
                     context,
                 ),
             positiveButtonRadius = context.pixelSizeFor(R.dimen.tab_corner_radius).toFloat(),

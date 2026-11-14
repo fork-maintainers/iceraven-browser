@@ -14,6 +14,7 @@ import kotlinx.coroutines.launch
 import mozilla.components.browser.state.store.BrowserStore
 import mozilla.components.compose.base.text.Text
 import mozilla.components.compose.menu.data.MenuItem
+import mozilla.components.compose.menu.data.MenuItemTitle
 import mozilla.components.compose.menu.data.StandardMenuItem
 import mozilla.components.compose.menu.store.MenuEvent
 import mozilla.components.compose.menu.ui.MenuItemIconRes
@@ -150,14 +151,14 @@ class ShortcutMenuItemProvider(
 
 private val ADD_SHORTCUT_ITEM =
     StandardMenuItem(
-        title = Text.Resource(R.string.browser_menu_add_to_shortcuts),
+        title = MenuItemTitle(Text.Resource(R.string.browser_menu_add_to_shortcuts)),
         icon = MenuItemIconRes(iconsR.drawable.mozac_ic_pin_24),
         onClickEvent = MenuAction.AddShortcut,
     )
 
 private val REMOVE_SHORTCUT_ITEM =
     StandardMenuItem(
-        title = Text.Resource(R.string.browser_menu_remove_from_shortcuts),
+        title = MenuItemTitle(Text.Resource(R.string.browser_menu_remove_from_shortcuts)),
         icon = MenuItemIconRes(iconsR.drawable.mozac_ic_pin_fill_24),
         onClickEvent = MenuAction.RemoveShortcut,
         state = MenuItemState.ACTIVE,

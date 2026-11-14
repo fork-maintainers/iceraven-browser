@@ -118,8 +118,6 @@ import org.mozilla.fenix.components.accounts.FenixFxAEntryPoint
 import org.mozilla.fenix.components.appstate.AppAction
 import org.mozilla.fenix.components.appstate.AppAction.ShareAction
 import org.mozilla.fenix.components.appstate.OrientationMode
-import org.mozilla.fenix.components.ipprotection.ErrorMessages
-import org.mozilla.fenix.components.ipprotection.IPProtectionInfoPrompter
 import org.mozilla.fenix.components.menu.MenuAccessPoint
 import org.mozilla.fenix.components.menu.share.QRCodeDialogFragment
 import org.mozilla.fenix.components.metrics.BreadcrumbsRecorder
@@ -170,6 +168,8 @@ import org.mozilla.fenix.home.intent.OpenSpecificTabIntentProcessor
 import org.mozilla.fenix.home.intent.SpeechProcessingIntentProcessor
 import org.mozilla.fenix.home.intent.StartSearchIntentProcessor
 import org.mozilla.fenix.home.topsites.DefaultPinnedSitesBinding
+import org.mozilla.fenix.ipprotection.store.ErrorMessages
+import org.mozilla.fenix.ipprotection.store.IPProtectionInfoPrompter
 import org.mozilla.fenix.messaging.FenixMessageSurfaceId
 import org.mozilla.fenix.messaging.MessageNotificationWorker
 import org.mozilla.fenix.nimbus.FxNimbus
@@ -612,6 +612,8 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity, Crash
             } else {
                 StartOnHome.enterHomeScreen.record(NoExtras())
             }
+        } else {
+            processLaunchIntentAfterOnboarding()
         }
 
         // This will record an event in Nimbus' internal event store. Used for behavioral targeting
@@ -1590,6 +1592,13 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity, Crash
         if (directions != null) {
             navHost.navController.nav(fragmentId, directions)
         }
+    }
+
+    /**
+     * Onboarding skips processing of the launch intent in [onCreate], so process it once the user completes onboarding.
+     */
+    private fun processLaunchIntentAfterOnboarding() {
+        components.fenixOnboarding.registerOnboardingCompletedListener(this) { processIntent(intent) }
     }
 
     @VisibleForTesting

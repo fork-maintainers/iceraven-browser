@@ -9,6 +9,7 @@ import static org.mozilla.conventions.BuildConfigKt.getBuildId
 plugins {
     id 'com.android.application'
     id 'org.mozilla.conventions.zip-test-reports'
+    id 'org.mozilla.android-test-keep-rules'
     id 'org.mozilla.nimbus-gradle-plugin'
     id 'ApkSizePlugin'
     id 'jacoco'
@@ -83,6 +84,7 @@ android {
         shrinkResources = !project.hasProperty("disableOptimization")
         minifyEnabled = !project.hasProperty("disableOptimization")
         proguardFiles = [getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro']
+        testProguardFiles 'proguard-rules-android-test.pro'
         matchingFallbacks = ['release'] // Use on the "release" build type in dependencies (AARs)
 
         // Present in release builds.
@@ -512,6 +514,7 @@ dependencies {
     implementation project(':components:compose-base')
     implementation project(':components:compose-browser-toolbar')
     implementation project(':components:compose-cfr')
+    implementation project(':components:compose-draggable')
     implementation project(':components:compose-menu')
     implementation project(':components:concept-awesomebar')
     implementation project(':components:concept-base')
@@ -643,6 +646,8 @@ dependencies {
     implementation libs.androidx.exifinterface
     implementation libs.androidx.fragment
     implementation libs.androidx.fragment.compose
+    implementation libs.androidx.glance.appwidget
+    implementation libs.androidx.glance.preview
     implementation libs.androidx.lifecycle.common
     implementation libs.androidx.lifecycle.livedata
     implementation libs.androidx.lifecycle.process
@@ -675,9 +680,17 @@ dependencies {
     ksp libs.androidx.room.compiler
 
     debugImplementation libs.androidx.compose.ui.tooling
+    debugImplementation libs.androidx.glance.appwidget.preview
     debugImplementation libs.leakcanary
     forkDebugImplementation libs.androidx.compose.ui.tooling
     forkDebugImplementation libs.leakcanary
+
+    // Declares androidx.activity.ComponentActivity in the app under test, which the host-less
+    // Compose rules launch. Only added when building a non-debug variant for UI tests, so that
+    // it never reaches a shipping build.
+    if (project.hasProperty("testBuildType") && project.property("testBuildType") != "debug") {
+        addProvider("${project.property('testBuildType')}Implementation", libs.androidx.compose.ui.test.manifest)
+    }
 
     // Exclude Mockito to prevent classpath conflicts with MockK in tests.
     testImplementation (project(':components:support-test')) {

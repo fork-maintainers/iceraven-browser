@@ -80,7 +80,7 @@ import mozilla.components.compose.browser.toolbar.store.ProgressBarConfig
 import mozilla.components.concept.engine.Engine
 import mozilla.components.concept.engine.EngineSession
 import mozilla.components.concept.engine.EngineSession.LoadUrlFlags
-import mozilla.components.concept.engine.ipprotection.IPProtectionHandler.StateInfo
+import mozilla.components.concept.engine.ipprotection.ProxyState
 import mozilla.components.concept.engine.ipprotection.ServiceState
 import mozilla.components.concept.engine.permission.SitePermissionsStorage
 import mozilla.components.concept.engine.prompt.ShareData
@@ -386,6 +386,23 @@ class BrowserToolbarMiddlewareTest {
             assertEqualsOrigin(
                 pageOrigin.copy(url = ""),
                 toolbarStore.state.displayState.pageOrigin,
+            )
+        }
+
+    @Test
+    fun `GIVEN a percent encoded URL WHEN the page origin is set THEN show it losslessly decoded`() =
+        runTest(testDispatcher) {
+            val tab = createTab("https://mozilla.com/%D1%82%D0%B5%D1%81%D1%82%20file?q=hello%20world")
+            val browserStore = BrowserStore(BrowserState(tabs = listOf(tab), selectedTabId = tab.id))
+            val toolbarStore = buildStore(buildMiddleware(browserStore = browserStore))
+
+            assertEquals(
+                "mozilla.com/тест%20file?q=hello%20world",
+                toolbarStore.state.displayState.pageOrigin.url?.toString(),
+            )
+            assertEquals(
+                "https://mozilla.com/%D1%82%D0%B5%D1%81%D1%82%20file?q=hello%20world",
+                browserStore.state.tabs.first().content.url,
             )
         }
 
@@ -2646,14 +2663,8 @@ class BrowserToolbarMiddlewareTest {
         assertEquals(1, toolbarPageActions.size)
         assertIs<ActionButtonRes>(toolbarPageActions[0])
 
-        ipProtectionStore.dispatch(
-            IPProtectionAction.EngineStateChanged(
-                StateInfo(
-                    serviceState = ServiceState.Ready,
-                    proxyState = StateInfo.PROXY_STATE_ACTIVE,
-                )
-            )
-        )
+        ipProtectionStore.dispatch(IPProtectionAction.ServiceStateChanged(ServiceState.Ready))
+        ipProtectionStore.dispatch(IPProtectionAction.ProxyStateChanged(ProxyState.ACTIVE))
         testDispatcher.scheduler.advanceUntilIdle()
 
         toolbarPageActions = toolbarStore.state.displayState.pageActionsStart
@@ -2742,14 +2753,8 @@ class BrowserToolbarMiddlewareTest {
             assertEquals(1, toolbarPageActions.size)
             assertIs<AnimatedPillActionRes>(toolbarPageActions[0])
 
-            ipProtectionStore.dispatch(
-                IPProtectionAction.EngineStateChanged(
-                    StateInfo(
-                        serviceState = ServiceState.Ready,
-                        proxyState = StateInfo.PROXY_STATE_READY,
-                    )
-                )
-            )
+            ipProtectionStore.dispatch(IPProtectionAction.ServiceStateChanged(ServiceState.Ready))
+            ipProtectionStore.dispatch(IPProtectionAction.ProxyStateChanged(ProxyState.READY))
             testDispatcher.scheduler.advanceUntilIdle()
 
             toolbarPageActions = toolbarStore.state.displayState.pageActionsStart
@@ -2792,14 +2797,8 @@ class BrowserToolbarMiddlewareTest {
                 )
             val toolbarStore = buildStore(middleware)
 
-            ipProtectionStore.dispatch(
-                IPProtectionAction.EngineStateChanged(
-                    StateInfo(
-                        serviceState = ServiceState.Ready,
-                        proxyState = StateInfo.PROXY_STATE_READY,
-                    )
-                )
-            )
+            ipProtectionStore.dispatch(IPProtectionAction.ServiceStateChanged(ServiceState.Ready))
+            ipProtectionStore.dispatch(IPProtectionAction.ProxyStateChanged(ProxyState.READY))
             testDispatcher.scheduler.advanceUntilIdle()
             assertIs<AnimatedPillActionRes>(toolbarStore.state.displayState.pageActionsStart[0])
 
@@ -3087,7 +3086,7 @@ class BrowserToolbarMiddlewareTest {
 
         val result = middleware.buildAction(toolbarAction = ToolbarAction.ReaderMode) as ActionButtonRes
 
-        assertEquals(iconsR.drawable.mozac_ic_reader_view_audio_24, result.drawableResId)
+        assertEquals(iconsR.drawable.mozac_ic_reader_view_headphones_24, result.drawableResId)
         assertEquals(R.string.browser_menu_read, result.contentDescription)
         assertEquals(ActionButton.State.DEFAULT, result.state)
         assertEquals(ReaderModeClicked(false), result.onClick)
@@ -3127,7 +3126,7 @@ class BrowserToolbarMiddlewareTest {
 
         val result = middleware.buildAction(toolbarAction = ToolbarAction.ReaderMode) as ActionButtonRes
 
-        assertEquals(iconsR.drawable.mozac_ic_reader_view_audio_fill_24, result.drawableResId)
+        assertEquals(iconsR.drawable.mozac_ic_reader_view_headphones_fill_24, result.drawableResId)
         assertEquals(R.string.browser_menu_read_close, result.contentDescription)
         assertEquals(ActionButton.State.ACTIVE, result.state)
         assertEquals(ReaderModeClicked(true), result.onClick)
