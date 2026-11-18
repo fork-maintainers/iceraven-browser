@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="35dp"
+    android:height="35dp"
+    android:viewportWidth="35"
+    android:viewportHeight="35">
+    <group
+        android:scaleX="0.6846"
+        android:scaleY="0.6846"
+        android:translateX="-0.6744"
+        android:translateY="-2.5081">
+        <path
+            android:pathData="M28.3719,28.26m-19.5905,0a19.5905,19.5905 0,1 1,39.181 0a19.5905,19.5905 0,1 1,-39.181 0"
+            android:strokeWidth="0.52916664"
+            android:fillColor="#3fb6e4"
+            android:strokeColor="#00000000"/>
+        <path
+            android:pathData="m5.5977,16.5538c0.2014,-1.0367 1.2707,-6.9964 6.2074,-9.3502 0.3143,-0.1499 -2.4423,-0.4567 -2.4423,-0.4567 0,0 4.1451,-0.2164 4.5249,-0.3157 0.5581,-0.146 -1.2765,-0.7155 -1.2765,-0.7155 0,0 1.3305,0.1329 2.6028,0.2679 0.4649,0.0494 -0.8314,-0.8593 -0.8314,-0.8593 0,0 2.9055,1.0617 3.0391,1.1162 1.0769,0.4389 2.4513,1.0046 2.9726,2.6058 4.3403,0.0472 8.3695,0.6379 9.5297,3.9432h-9.5297c-4.506,1.7449 -4.6979,3.3341 -2.3175,4.9098 -3.5193,1.5494 -12.4791,-1.1454 -12.4791,-1.1454z"
+            android:strokeLineJoin="miter"
+            android:strokeWidth="0.26458332"
+            android:fillColor="#000080"
+            android:strokeColor="#000080"
+            android:strokeLineCap="butt"/>
+        <path
+            android:pathData="m5.5977,16.5538c-2.9204,2.3027 8.554,34.4432 16.3678,36.7738 4.1443,-4.8153 1.8719,-31.8116 0.1226,-34.0038 -1.7705,-2.2188 -4.0112,-1.6246 -4.0112,-1.6246z"
+            android:strokeLineJoin="miter"
+            android:strokeWidth="0.26458332"
+            android:fillColor="#000080"
+            android:strokeColor="#000080"
+            android:strokeLineCap="butt"/>
+    </group>
+</vector>
